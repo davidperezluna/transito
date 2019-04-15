@@ -90,15 +90,15 @@
                                 </ng-select>
                             </div>
                             <div class="col-xs-12 col-lg-6">
-                                <label>Telefono
-                                    <span class="text-danger"> <b class="text-danger">*</b></span>
-                                </label>
-                                <input class="form-control" [(ngModel)]="ciudadano.telefono" name="telefono" type="number" required>
+                                <label>Telefono celular <b class="text-danger">*</b></label>
+                                <input class="form-control" [(ngModel)]="ciudadano.telefonoCelular" name="telefonoCelular" type="number" required>
                             </div>
                             <div class="col-xs-12 col-lg-6">
-                                <label>Direccion Residencia
-                                    <span class="text-danger"> <b class="text-danger">*</b></span>
-                                </label>
+                                <label>Telefono fijo <b class="text-danger">*</b></label>
+                                <input class="form-control" [(ngModel)]="ciudadano.telefonoFijo" name="telefonoFijo" type="number" required>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Direccion Residencia <b class="text-danger">*</b></label>
                                 <input class="form-control" [(ngModel)]="ciudadano.direccionPersonal" name="direccionPersonal" type="text" required>
                             </div>
                             <div class="col-xs-12 col-lg-6">

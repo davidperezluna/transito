@@ -132,10 +132,15 @@
                                 required>
                             </ng-select>
                         </div>
+
+                        <div class="col-xs-12 col-lg-3" *ngIf="vehiculo.idModalidadTransporte == 2 && (vehiculo.tipoMatricula == 'MATRICULA' || vehiculo.tipoMatricula == 'IMPORTACION')">
+                            <label>Numero ejes</label>
+                            <input class="form-control" type="text" type="text" [(ngModel)]="vehiculo.numeroEjes" name="numeroEjes">
+                        </div>
                         
                         <div class="col-xs-12 col-lg-3" *ngIf='vehiculo.idModalidadTransporte == 1 || vehiculo.idModalidadTransporte == 3'>
                             <label>Numero pasajeros</label>
-                            <input class="form-control" type="text" type="text" [(ngModel)]="vehiculo.numeroPasajeros" name="capacidadCarga">
+                            <input class="form-control" type="text" type="text" [(ngModel)]="vehiculo.numeroPasajeros" name="numeroPasajeros">
                         </div>
                         
                         <div class="col-xs-12 col-lg-3" *ngIf='vehiculo.idModalidadTransporte == 2 || vehiculo.idModalidadTransporte == 3'>

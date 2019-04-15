@@ -39,7 +39,7 @@ constructor(
 ){}
 
   ngOnInit() {
-    this.ciudadano = new UserCiudadano(null,null,null,null,this.identificacion,null,null,null,null,null,null,null,null,null,null,null,null);
+    this.ciudadano = new UserCiudadano(null,null,null,null,this.identificacion,null, null,null,null,null,null,null,null,null,null,null,null,null);
 
     this._TipoIdentificacionService.select().subscribe(
         response => {
@@ -113,7 +113,7 @@ constructor(
                'Genero: <b>'+this.ciudadano.idGenero+'</b><br>'+
                'Grupo Sanguineo: <b>'+this.ciudadano.idGrupoSanguineo+'</b><br>'+
                'Direccion: <b>'+this.ciudadano.direccionPersonal+'</b><br>'+
-               'Telefono: <b>'+this.ciudadano.telefono+'</b><br>';
+               'Telefono: <b>'+this.ciudadano.telefonoCelular+'</b><br>';
 
    swal({
       title: 'Creacion de persona natural',

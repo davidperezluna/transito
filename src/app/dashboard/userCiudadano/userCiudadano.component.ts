@@ -11,12 +11,14 @@ declare var $: any;
   templateUrl: './userCiudadano.component.html',
   providers: [NewCiudadanoComponent],
 })
+
 export class UserCiudadanoComponent implements OnInit {
   public errorMessage;
 	public id;
 	public ciudadanos: any = null;
 	public formNew = false;
 	public formEdit = false;
+	public formShow = false;
 	public formIndex = false;
 	public formSearch = true;
   public table:any = null; 
@@ -68,7 +70,7 @@ export class UserCiudadanoComponent implements OnInit {
           });
           
           let timeoutId = setTimeout(() => {
-            this.iniciarTabla();
+            this.onInitTable();
           }, 100);
         }else{
           this.ciudadanos =null;
@@ -93,7 +95,7 @@ export class UserCiudadanoComponent implements OnInit {
     );
   }
 
-  iniciarTabla() {
+  onInitTable() {
     if (this.table) {
       this.table.destroy();
     }
@@ -128,6 +130,22 @@ export class UserCiudadanoComponent implements OnInit {
         this.formIndex = false;
         this.ngOnInit();
       }
+  }
+
+  onShow(ciudadano:any){
+    this.ciudadano = ciudadano;
+    this.formShow = true;
+    this.formEdit = false;
+    this.formIndex = false;
+    this.formNew = false;
+  }
+
+  onEdit(ciudadano:any){
+    this.ciudadano = ciudadano;
+    this.formEdit = true;
+    this.formShow = false;
+    this.formIndex = false;
+    this.formNew = false;
   }
 
   onDelete(id:any){
@@ -167,13 +185,6 @@ export class UserCiudadanoComponent implements OnInit {
 
         
       }
-    })
-  }
-
-  onEdit(ciudadano:any){
-    this.ciudadano = ciudadano;
-    this.formEdit = true;
-    this.formIndex = false;
-    this.formNew = false;
+    });
   }
 }

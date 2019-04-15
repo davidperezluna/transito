@@ -1,6 +1,6 @@
 <hr>
 <div class="row">
-    <div class="col-xs-12 col-lg-12">
+    <div class="col-xs-12 col-lg-4">
         <div class="card">
             <div class="card-header">
                 <h5 class="text-uppercase">Nuevo caso insumo</h5>
@@ -11,12 +11,12 @@
 
                 <form #formNew="ngForm">
                     <div class="form-group row">
-                        <div class="col-xs-6 col-lg-6">
+                        <div class="col-xs-12 col-lg-12">
                             <label>Valor unitario <strong class="text-danger">*</strong></label>
                             <input class="form-control" [(ngModel)]="imoCfgValor.valor" name="valor" placeholder="" type="number" required>
                         </div> 
-                        <div class="col-xs-6 col-lg-6">
-                            <label>Fecha
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Fecha vigencia
                             </label>
                             <input class="form-control" (blur)="isFecha()" [(ngModel)]="imoCfgValor.fecha" name="fecha" placeholder="" type="date" required>
                         </div>

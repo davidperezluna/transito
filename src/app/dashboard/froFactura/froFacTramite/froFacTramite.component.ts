@@ -198,7 +198,7 @@ export class FroFacTramiteComponent implements OnInit {
     }
   }
 
-  iniciarTabla() {
+  onInitTable() {
     if (this.table) {
       this.table.destroy();
     }

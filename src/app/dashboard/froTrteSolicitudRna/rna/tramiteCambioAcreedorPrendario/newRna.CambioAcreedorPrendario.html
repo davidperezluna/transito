@@ -29,27 +29,6 @@
                 </div>
 
                 <div class="row"><!-- .row -->
-                    <div class="col-xs-12 col-lg-6">
-                        <label>Tipo de identificación
-                            <span class="text-danger">*</span>
-                        </label>
-                        <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionSelectedOld"  name="idTipoIdentificacionOld" required>
-                        </ng-select>
-                    </div>
-
-                    <div class="col-xs-12 col-lg-6">
-                        <label *ngIf="tipoIdentificacionSelectedOld != 4">Identificación</label>
-                        <label *ngIf="tipoIdentificacionSelectedOld == 4">NIT</label>
-                        <div  class="input-group">
-                            <input type="number" class="form-control" [(ngModel)]="identificacionOld" name="identificacionOld" required />
-                            <span class="input-group-btn">
-                                <button (click)="onSearchAcreedorOld()" class="btn btn-md btn-primary" type="button">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </span>
-                        </div>
-                    </div>
-
                     <!--acreedores vehiculo -->
                     <div class="col-xs-12 col-lg-12" *ngIf="acreedor">
                         <table class="table table-bordered table-striped">

@@ -31,7 +31,6 @@ export class NewRncRecategorizacionLicenciaArribaComponent implements OnInit {
     
     public datos = {
         'numero': null,
-        'numeroRunt': null,
         'vigencia': null,
         'idFuncionario': null,
         'idOrganismoTransito': null,

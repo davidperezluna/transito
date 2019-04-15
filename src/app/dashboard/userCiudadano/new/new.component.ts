@@ -30,6 +30,7 @@ export class NewCiudadanoComponent implements OnInit {
   public departamentosNacimiento: any;
   public idDepartamentoNacimiento: any;
   public municipiosNacimiento: any;
+  public idPaisResidencia: any;
   public departamentosResidencia: any;
   public idDepartamentoResidencia: any;
   public municipiosResidencia: any;
@@ -38,18 +39,18 @@ export class NewCiudadanoComponent implements OnInit {
 
 constructor(
   private _UserCiudadanoService: UserCiudadanoService,
-  private _loginService: LoginService,
   private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
   private _GeneroService: UserCfgGeneroService,
-  private _grupoSanguineoService: UserCfgGrupoSanguineoService,
-  private _CfgPaisService: CfgPaisService,
+  private _GrupoSanguineoService: UserCfgGrupoSanguineoService,
+  private _PaisService: CfgPaisService,
   private _MunicipioService: CfgMunicipioService,
   private _DepartamentoService: CfgDepartamentoService,
+  private _LoginService: LoginService,
 
 ){}
 
   ngOnInit() {
-    this.ciudadano = new UserCiudadano(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
+    this.ciudadano = new UserCiudadano(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
 
     this._TipoIdentificacionService.select().subscribe(
       response => {
@@ -78,7 +79,7 @@ constructor(
       }
     );
 
-    this._CfgPaisService.select().subscribe(
+    this._PaisService.select().subscribe(
       response => {
         this.paises = response;
       },
@@ -91,7 +92,7 @@ constructor(
       }
     );
 
-    this._grupoSanguineoService.select().subscribe(
+    this._GrupoSanguineoService.select().subscribe(
       response => {
         this.gruposSanguineos = response;
       },
@@ -112,7 +113,7 @@ constructor(
 
   onChangedPaisNacimiento(id){   
     if (id) {
-      let token = this._loginService.getToken();
+      let token = this._LoginService.getToken();
 
       this._DepartamentoService.selectByPais({ 'idPais': id}, token).subscribe(
         response => {
@@ -131,7 +132,7 @@ constructor(
 
   onChangedDepartamentoNacimiento(id){
     if (id) {
-      let token = this._loginService.getToken();
+      let token = this._LoginService.getToken();
 
       this._MunicipioService.selectByDepartamento({ 'idDepartamento':id }, token).subscribe(
         response => {
@@ -151,7 +152,7 @@ constructor(
 
   onChangedPaisResidencia(id){
     if (id) {
-      let token = this._loginService.getToken();
+      let token = this._LoginService.getToken();
       
       this._DepartamentoService.selectByPais({ 'idPais':id }, token).subscribe(
         response => {
@@ -170,7 +171,7 @@ constructor(
 
   onChangedDepartamentoResidencia(id){
     if (id) {
-      let token = this._loginService.getToken();
+      let token = this._LoginService.getToken();
 
       this._MunicipioService.selectByDepartamento({ 'idDepartamento':id }, token).subscribe(
         response => {
@@ -188,7 +189,7 @@ constructor(
   }
   
   onSearchCiudadano() {
-    let token = this._loginService.getToken();
+    let token = this._LoginService.getToken();
 
     if (this.ciudadano.idTipoIdentificacion) {
       let datos = {
@@ -230,7 +231,7 @@ constructor(
   }
 
   onEnviar() {
-    let token = this._loginService.getToken();
+    let token = this._LoginService.getToken();
 
     var html = 'Se va a registrar el usuario:<br>' +
       'Primer Nombre: <b>' + this.ciudadano.primerNombre + '</b><br>' +
@@ -239,7 +240,7 @@ constructor(
       'Genero: <b>' + this.ciudadano.idGenero + '</b><br>' +
       'Grupo Sanguineo: <b>' + this.ciudadano.idGrupoSanguineo + '</b><br>' +
       'Direccion: <b>' + this.ciudadano.direccionPersonal + '</b><br>' +
-      'Telefono: <b>' + this.ciudadano.telefono + '</b><br>';
+      'Telefono celular: <b>' + this.ciudadano.telefonoCelular + '</b><br>';
 
     swal({
       title: 'Creacion de persona natural',

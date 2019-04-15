@@ -33,7 +33,6 @@ export class NewRncRefrendacionLicenciaComponent implements OnInit {
 
     public datos = {
         'numero': null,
-        'numeroRunt': null,
         'vigencia': null,
         'idFuncionario': null,
         'idOrganismoTransito': null,

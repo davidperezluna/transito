@@ -91,7 +91,8 @@ export class ImoLoteComponent implements OnInit {
         this.ngOnInit();
       }
   }
-  deleteRnaLoteInsumoServicey(id:any){
+  
+  deleteRnaLoteInsumo(id:any){
     swal({
       title: '¿Estás seguro?',
       text: "¡Se eliminara este registro!",

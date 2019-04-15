@@ -30,7 +30,8 @@ export class NewRncComponent implements OnInit {
   public tramites='';
 
   public tramite = false;
-  public sustrato = false;
+  public requiereSustrato = false;
+  public requiereRunt = false;
   
   public cantidadSustrato = 1;
 
@@ -43,7 +44,7 @@ constructor(
 ){}
 
   ngOnInit() {
-    this.tramiteSolicitud = new FroTrteSolicitudRnc(null, true, null, null, null, null);
+    this.tramiteSolicitud = new FroTrteSolicitudRnc(null, true, null, null, null, null, null);
   }
 
   onCancelar(){
@@ -71,7 +72,8 @@ constructor(
               response => {
                 if (response.code == 200) {
                   this.tramitesFactura = response.data.tramitesFactura;
-                  this.sustrato = response.data.sustrato;
+                  this.requiereSustrato = response.data.sustrato;
+                  this.requiereRunt = response.data.numeroRunt;
 
                   swal.close();
                 } else {
@@ -96,7 +98,8 @@ constructor(
           } else {
             this.factura = null;
             this.tramitesFactura = null;
-            this.sustrato = false;
+            this.requiereSustrato = false;
+            this.requiereRunt = false;
 
             swal({
               title: 'Error!',
