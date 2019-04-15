@@ -83,11 +83,12 @@ export class NewComponent implements OnInit {
   public consecutivo: any = null;
 
   public ipatEncontrado: any = null;
-  public vehiculoEncontrado = false;
+  /* public vehiculoEncontrado = false;
   public conductorEncontrado = false;
-  public victimaEncontrada = false;
+  public victimaEncontrada = false; */
 
   public ipats = false;
+  public placasVehiculosIpat: any;
 
   public gravedades: any;
   public clasesAccidente: any;
@@ -265,7 +266,7 @@ export class NewComponent implements OnInit {
     private _CarroceriaService: VhloCfgCarroceriaService,
     private _ModalidadTransporteService: VhloCfgModalidadTransporteService,
     private _RadioAccionService: VhloCfgRadioAccionService,
-    
+
     private _SvIpatConductorService: SvIpatConductorService,
     private _SvIpatVehiculoService: SvIpatVehiculoService,
     private _SvIpatVictimaService: SvIpatVictimaService,
@@ -273,12 +274,12 @@ export class NewComponent implements OnInit {
 
   ngOnInit() {
     this.msvRegistroIpat = new MsvRegistroIpat(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    this.msvIpatConductor = new MsvIpatConductor(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    this.msvIpatVehiculo = new MsvIpatVehiculo(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    this.msvIpatConductor = new MsvIpatConductor(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    this.msvIpatVehiculo = new MsvIpatVehiculo(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     this.msvIpatVictima = new MsvIpatVictima(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 
     /* === inicio consecutivo === */
-    if(this.consecutivo) {
+    if (this.consecutivo) {
       this._ControlViaService.getSenialVerticalSelect().subscribe(
         response => {
           this.senialesVerticales = response;
@@ -983,7 +984,7 @@ export class NewComponent implements OnInit {
         this.anios.push(obj);
       }
     }
-     /* ====fin consecutivo=== */
+    /* ====fin consecutivo=== */
   }
 
   onSearchConsecutivo() {
@@ -1003,7 +1004,7 @@ export class NewComponent implements OnInit {
               swal.showLoading();
             }
           });
-          this._SvIpatConsecutivoService.searchConsecutivo({ 'organismoTransito': this.organismoTransito , 'numeroConsecutivo': this.numeroConsecutivo }, token).subscribe(
+          this._SvIpatConsecutivoService.searchConsecutivo({ 'organismoTransito': this.organismoTransito, 'numeroConsecutivo': this.numeroConsecutivo }, token).subscribe(
             response => {
               if (response.status == 'success') {
                 this.consecutivo = response.data;
@@ -1055,91 +1056,91 @@ export class NewComponent implements OnInit {
   enviarTramite() {
     let token = this._LoginService.getToken();
 
-   /*  this.msvRegistroIpat.tipoIdentificacionConductor = this.tipoIdentificacionConductorSelected;
-    this.msvRegistroIpat.nacionalidadConductor = this.nacionalidadConductorSelected;
-    this.msvRegistroIpat.sexoConductor = this.sexoConductorSelected;
-    this.msvRegistroIpat.idGravedadConductor = this.gravedadConductorSelected;
-    this.msvRegistroIpat.ciudadResidenciaConductor = this.ciudadResidenciaConductorSelected;
-
     this.msvRegistroIpat.tipoIdentificacionPropietario = this.tipoIdentificacionPropietarioSelected;
 
     this.msvRegistroIpat.tipoIdentificacionAgente = this.tipoIdentificacionAgenteSelected;
 
     this.msvRegistroIpat.tipoIdentificacionTestigo = this.tipoIdentificacionTestigoSelected;
     this.msvRegistroIpat.ciudadResidenciaTestigo = this.ciudadResidenciaTestigoSelected;
+    /*  this.msvRegistroIpat.tipoIdentificacionConductor = this.tipoIdentificacionConductorSelected;
 
-    this.msvRegistroIpat.tipoIdentificacionVictima = this.tipoIdentificacionVictimaSelected;
-
-    this.msvRegistroIpat.nacionalidadVictima = this.nacionalidadVictimaSelected;
-    this.msvRegistroIpat.nacionalidadVehiculo = this.nacionalidadVehiculoSelected;
-
-    this.msvRegistroIpat.sexoVictima = this.sexoVictimaSelected;
-
-    this.msvRegistroIpat.ciudadResidenciaVictima = this.ciudadResidenciaVictimaSelected;
-
-    this.msvRegistroIpat.marca = this.marcaSelected;
-    this.msvRegistroIpat.linea = this.lineaSelected;
-    this.msvRegistroIpat.color = this.colorSelected;
-    this.msvRegistroIpat.carroceria = this.carroceriaSelected;
-    this.msvRegistroIpat.clase = this.claseSelected;
-    this.msvRegistroIpat.servicio = this.servicioSelected;
-    this.msvRegistroIpat.modalidadTransporte = this.modalidadTransporteSelected;
-    this.msvRegistroIpat.matriculadoEn = this.matriculadoEnSelected;
-
-    if (this.conductores.length == 0) {
-      let dataConductores = {
-        'identificacion: ': this.msvRegistroIpat.identificacionConductor,
-        'tipo identificacion: ': this.msvRegistroIpat.tipoIdentificacionConductor,
-        'nombres: ': this.msvRegistroIpat.nombresConductor,
-        'apellidos: ': this.msvRegistroIpat.apellidosConductor,
-        'nacionalidad: ': this.nacionalidadConductorSelected,
-        'fecha nacimiento: ': this.msvRegistroIpat.fechaNacimientoConductor,
-        'sexo: ': this.sexoConductorSelected,
-        'gravedad: ': this.gravedadConductorSelected,
-        'direccion: ': this.msvRegistroIpat.direccionResidenciaConductor,
-        'ciudad residencia: ': this.ciudadResidenciaConductorSelected,
-        'teléfono: ': this.msvRegistroIpat.telefonoConductor,
-      };
-      this.conductores.push(dataConductores);
-    }
-
-    if (this.vehiculos.length == 0) {
-      let dataVehiculos = {
-        'placa: ': this.msvRegistroIpat.placa,
-        'nacionalidad: ': this.nacionalidadVehiculoSelected,
-        'marca: ': this.marcaSelected,
-        'linea: ': this.lineaSelected,
-        'color: ': this.colorSelected,
-        'modelo: ': this.msvRegistroIpat.modelo,
-        'carroceria: ': this.carroceriaSelected,
-        'clase vehiculo: ': this.claseSelected,
-        'servicio: ': this.servicioSelected,
-        'modalidad transporte: ': this.modalidadTransporteSelected,
-        'capacidad carga(ton): ': this.msvRegistroIpat.ton,
-        'pasajeros: ': this.msvRegistroIpat.pasajeros,
-        'matriculado en: ': this.matriculadoEnSelected,
-      };
-      this.vehiculos.push(dataVehiculos);
-    }
-
-    if (this.victimas.length == 0) {
-      let dataVictimas = {
-        'tipo victima: ': this.tipoVictimaSelected,
-        'gravedad victima: ': this.gravedadVictimaSelected,
-        'tipo documento: ': this.tipoIdentificacionVictimaSelected,
-        'identificacion: ': this.msvRegistroIpat.identificacionVictima,
-        'nombres: ': this.msvRegistroIpat.nombresVictima,
-        'apellidos: ': this.msvRegistroIpat.apellidosVictima,
-        'nacionalidad: ': this.nacionalidadVictimaSelected,
-        'fecha nacimiento: ': this.msvRegistroIpat.fechaNacimientoVictima,
-        'sexo: ': this.sexoVictimaSelected,
-        'dirección residencia: ': this.msvRegistroIpat.direccionResidenciaVictima,
-        'ciudad residencia: ': this.ciudadResidenciaVictimaSelected,
-        'telefono: ': this.msvRegistroIpat.telefonoVictima,
-        'placa de vehiculo al que pertenece: ': this.msvRegistroIpat.placaVehiculoVictima,
-      };
-      this.victimas.push(dataVictimas);
-    } */
+     this.msvRegistroIpat.nacionalidadConductor = this.nacionalidadConductorSelected;
+     this.msvRegistroIpat.sexoConductor = this.sexoConductorSelected;
+     this.msvRegistroIpat.idGravedadConductor = this.gravedadConductorSelected;
+     this.msvRegistroIpat.ciudadResidenciaConductor = this.ciudadResidenciaConductorSelected;
+ 
+     this.msvRegistroIpat.tipoIdentificacionVictima = this.tipoIdentificacionVictimaSelected;
+ 
+     this.msvRegistroIpat.nacionalidadVictima = this.nacionalidadVictimaSelected;
+     this.msvRegistroIpat.nacionalidadVehiculo = this.nacionalidadVehiculoSelected;
+ 
+     this.msvRegistroIpat.sexoVictima = this.sexoVictimaSelected;
+ 
+     this.msvRegistroIpat.ciudadResidenciaVictima = this.ciudadResidenciaVictimaSelected;
+ 
+     this.msvRegistroIpat.marca = this.marcaSelected;
+     this.msvRegistroIpat.linea = this.lineaSelected;
+     this.msvRegistroIpat.color = this.colorSelected;
+     this.msvRegistroIpat.carroceria = this.carroceriaSelected;
+     this.msvRegistroIpat.clase = this.claseSelected;
+     this.msvRegistroIpat.servicio = this.servicioSelected;
+     this.msvRegistroIpat.modalidadTransporte = this.modalidadTransporteSelected;
+     this.msvRegistroIpat.matriculadoEn = this.matriculadoEnSelected;
+ 
+     if (this.conductores.length == 0) {
+       let dataConductores = {
+         'identificacion: ': this.msvRegistroIpat.identificacionConductor,
+         'tipo identificacion: ': this.msvRegistroIpat.tipoIdentificacionConductor,
+         'nombres: ': this.msvRegistroIpat.nombresConductor,
+         'apellidos: ': this.msvRegistroIpat.apellidosConductor,
+         'nacionalidad: ': this.nacionalidadConductorSelected,
+         'fecha nacimiento: ': this.msvRegistroIpat.fechaNacimientoConductor,
+         'sexo: ': this.sexoConductorSelected,
+         'gravedad: ': this.gravedadConductorSelected,
+         'direccion: ': this.msvRegistroIpat.direccionResidenciaConductor,
+         'ciudad residencia: ': this.ciudadResidenciaConductorSelected,
+         'teléfono: ': this.msvRegistroIpat.telefonoConductor,
+       };
+       this.conductores.push(dataConductores);
+     }
+ 
+     if (this.vehiculos.length == 0) {
+       let dataVehiculos = {
+         'placa: ': this.msvRegistroIpat.placa,
+         'nacionalidad: ': this.nacionalidadVehiculoSelected,
+         'marca: ': this.marcaSelected,
+         'linea: ': this.lineaSelected,
+         'color: ': this.colorSelected,
+         'modelo: ': this.msvRegistroIpat.modelo,
+         'carroceria: ': this.carroceriaSelected,
+         'clase vehiculo: ': this.claseSelected,
+         'servicio: ': this.servicioSelected,
+         'modalidad transporte: ': this.modalidadTransporteSelected,
+         'capacidad carga(ton): ': this.msvRegistroIpat.ton,
+         'pasajeros: ': this.msvRegistroIpat.pasajeros,
+         'matriculado en: ': this.matriculadoEnSelected,
+       };
+       this.vehiculos.push(dataVehiculos);
+     }
+ 
+     if (this.victimas.length == 0) {
+       let dataVictimas = {
+         'tipo victima: ': this.tipoVictimaSelected,
+         'gravedad victima: ': this.gravedadVictimaSelected,
+         'tipo documento: ': this.tipoIdentificacionVictimaSelected,
+         'identificacion: ': this.msvRegistroIpat.identificacionVictima,
+         'nombres: ': this.msvRegistroIpat.nombresVictima,
+         'apellidos: ': this.msvRegistroIpat.apellidosVictima,
+         'nacionalidad: ': this.nacionalidadVictimaSelected,
+         'fecha nacimiento: ': this.msvRegistroIpat.fechaNacimientoVictima,
+         'sexo: ': this.sexoVictimaSelected,
+         'dirección residencia: ': this.msvRegistroIpat.direccionResidenciaVictima,
+         'ciudad residencia: ': this.ciudadResidenciaVictimaSelected,
+         'telefono: ': this.msvRegistroIpat.telefonoVictima,
+         'placa de vehiculo al que pertenece: ': this.msvRegistroIpat.placaVehiculoVictima,
+       };
+       this.victimas.push(dataVictimas);
+     } */
 
     let data = [
       { 'datosLimitacion': this.msvRegistroIpat },
@@ -1225,7 +1226,23 @@ export class NewComponent implements OnInit {
         response => {
 
           if (response.status == 'success') {
-            this.conductorEncontrado = true;
+            /* this.conductorEncontrado = true; */
+
+            /* ================ cargar select placas vehiculos ===================== */
+            this._SvIpatVehiculoService.selectByConsecutivo(this.numeroConsecutivo, token).subscribe(
+              response => {
+                this.placasVehiculosIpat = response;
+              },
+              error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                  console.log(this.errorMessage);
+                  alert("Error en la petición");
+                }
+              }
+            );
+
             if (response.data.tipoIdentificacion != null) {
               this.tipoIdentificacionConductorSelected = [response.data.tipoIdentificacion.id];
             } else {
@@ -1274,7 +1291,7 @@ export class NewComponent implements OnInit {
               confirmButtonText: 'Aceptar'
             }).then((result) => {
               if (result.value) {
-                this.conductorEncontrado = false;
+                /* this.conductorEncontrado = false; */
                 this.tipoIdentificacionConductorSelected = [0];
                 this.msvIpatConductor.nombresConductor = '';
                 this.msvIpatConductor.apellidosConductor = '';
@@ -1284,16 +1301,50 @@ export class NewComponent implements OnInit {
                 this.msvIpatConductor.direccionResidenciaConductor = '';
                 this.ciudadResidenciaConductorSelected = [0];
                 this.msvIpatConductor.telefonoConductor = '';
+
+                if (this.vehiculoIpat) {
+                  swal({
+                    title: 'Cargando Lista de vehículos asociados con el accidente!',
+                    text: 'Solo tardará unos segundos, por favor espere.',
+                    timer: 1500,
+                    onOpen: () => {
+                      swal.showLoading();
+                    }
+                  }).then((result) => {
+                    if (
+                      // Read more about handling dismissals
+                      result.dismiss === swal.DismissReason.timer
+                    ) { }
+                  });
+                  let i = 0;
+                  this.vehiculos.forEach(element => {
+                    i += 1;
+                    let obj = {
+                      value: element.placa,
+                      label: i + '_' + element.placa,
+                    };
+                    this.vehiculosIpat.push(obj);
+                  });
+                  console.log(this.vehiculosIpat);
+                } else {
+                  let obj = {
+                    value: this.msvIpatVehiculo.placa,
+                    label: this.msvIpatVehiculo.placa,
+                  };
+                  this.vehiculosIpat.push(obj);
+                }
+                console.log(this.vehiculosIpat);
               }
             });
-          }
-          error => {
-            this.errorMessage = <any>error;
-            if (this.errorMessage != null) {
-              console.log(this.errorMessage);
-              alert('Error en la petición');
+            error => {
+              this.errorMessage = <any>error;
+              if (this.errorMessage != null) {
+                console.log(this.errorMessage);
+                alert('Error en la petición');
+              }
             }
           }
+
         }
       );
     }
@@ -1307,7 +1358,7 @@ export class NewComponent implements OnInit {
 
         response => {
           if (response.status == 'success') {
-            this.vehiculoEncontrado = true;
+            /* this.vehiculoEncontrado = true; */
             if (response.data.nacionalidad != null) {
               this.nacionalidadVehiculoSelected = [response.data.nacionalidad.id];
             } else {
@@ -1373,7 +1424,7 @@ export class NewComponent implements OnInit {
               confirmButtonText: 'Aceptar'
             }).then((result) => {
               if (result.value) {
-                this.vehiculoEncontrado = false;
+                /* this.vehiculoEncontrado = false; */
                 this.nacionalidadVehiculoSelected = [0];
                 this.marcaSelected = [0];
                 this.lineaSelected = [0];
@@ -1519,7 +1570,7 @@ export class NewComponent implements OnInit {
 
         response => {
           if (response.status == 'success') {
-            this.victimaEncontrada = true;
+            /* this.victimaEncontrada = true; */
             if (response.data.tipoIdentificacion.id != null) {
               this.tipoIdentificacionVictimaSelected = [response.data.tipoIdentificacion.id];
             } else {
@@ -1561,7 +1612,7 @@ export class NewComponent implements OnInit {
               this.msvIpatVictima.telefonoVictima = '';
             }
 
-            if (this.vehiculoIpat) {
+            /* if (this.vehiculoIpat) {
               swal({
                 title: 'Cargando Lista de vehículos asociados con el accidente!',
                 text: 'Solo tardará unos segundos, por favor espere.',
@@ -1594,7 +1645,7 @@ export class NewComponent implements OnInit {
               };
               this.vehiculosIpat.push(obj);
             }
-            console.log(this.vehiculosIpat);
+            console.log(this.vehiculosIpat); */
           } else {
             swal({
               title: 'Alerta!',
@@ -1603,7 +1654,7 @@ export class NewComponent implements OnInit {
               confirmButtonText: 'Aceptar'
             }).then((result) => {
               if (result.value) {
-                this.victimaEncontrada = false;
+                /* this.victimaEncontrada = false; */
                 this.tipoIdentificacionVictimaSelected = [0];
                 this.msvIpatVictima.nombresVictima = '';
                 this.msvIpatVictima.apellidosVictima = '';
@@ -1718,6 +1769,9 @@ export class NewComponent implements OnInit {
         confirmButtonText: 'Aceptar'
       });
     } else {
+      //consecutivo del ipat
+      this.msvIpatConductor.consecutivo = this.numeroConsecutivo;
+
       this.msvIpatConductor.tipoIdentificacionConductor = this.tipoIdentificacionConductorSelected;
       this.msvIpatConductor.nacionalidadConductor = this.nacionalidadConductorSelected;
       this.msvIpatConductor.sexoConductor = this.sexoConductorSelected;
@@ -1793,20 +1847,20 @@ export class NewComponent implements OnInit {
                 this.msvIpatConductor.direccionResidenciaConductor = '';
                 this.msvIpatConductor.telefonoConductor = '';
                 this.msvIpatConductor.sustanciasPsicoactivasConductor = '',
-                this.msvIpatConductor.portaLicencia = '',
-                this.msvIpatConductor.numeroLicenciaConduccion = 0,
-                this.msvIpatConductor.restriccionConductor = '',
-                this.msvIpatConductor.categoriaLicenciaConduccion = '',
-                this.msvIpatConductor.fechaExpedicionLicenciaConduccion = '',
-                this.msvIpatConductor.fechaVencimientoLicenciaConduccion = '',
-                this.msvIpatConductor.organismoTransito = '',
-                this.msvIpatConductor.cinturonConductor = '',
-                this.msvIpatConductor.cascoConductor = '',
-                this.msvIpatConductor.chalecoConductor = '',
-                this.msvIpatConductor.idHospitalConductor = 0,
-                this.msvIpatConductor.descripcionLesionConductor = '',
+                  this.msvIpatConductor.portaLicencia = '',
+                  this.msvIpatConductor.numeroLicenciaConduccion = 0,
+                  this.msvIpatConductor.restriccionConductor = '',
+                  this.msvIpatConductor.categoriaLicenciaConduccion = '',
+                  this.msvIpatConductor.fechaExpedicionLicenciaConduccion = '',
+                  this.msvIpatConductor.fechaVencimientoLicenciaConduccion = '',
+                  this.msvIpatConductor.organismoTransito = '',
+                  this.msvIpatConductor.cinturonConductor = '',
+                  this.msvIpatConductor.cascoConductor = '',
+                  this.msvIpatConductor.chalecoConductor = '',
+                  this.msvIpatConductor.idHospitalConductor = 0,
+                  this.msvIpatConductor.descripcionLesionConductor = '',
 
-                this.contConductores += 1;
+                  this.contConductores += 1;
                 this.msvRegistroIpat.totalConductores = this.contConductores;
                 if (this.gravedadConductorSelected = 'HERIDO') {
                   this.contHeridos += 1;
@@ -1900,8 +1954,8 @@ export class NewComponent implements OnInit {
     }
   }
 
-  registrarCiudadanoEncontrado() {
-    /* let dataConductores = {
+  /* registrarCiudadanoEncontrado() {
+   let dataConductores = {
       'identificacion: ': this.msvRegistroIpat.identificacionConductor,
       'tipo identificacion: ': this.tipoIdentificacionConductorSelected,
       'nombres: ': this.msvRegistroIpat.nombresConductor,
@@ -1951,8 +2005,8 @@ export class NewComponent implements OnInit {
       type: 'success',
       confirmButtonText: 'Aceptar'
     });
-    console.log(this.conductores); */
-  }
+    console.log(this.conductores); 
+  } */
 
   registrarVehiculo() {
     let token = this._LoginService.getToken();
@@ -1965,6 +2019,9 @@ export class NewComponent implements OnInit {
         confirmButtonText: 'Aceptar'
       });
     } else {
+      //consecutivo ipat
+      this.msvIpatVehiculo.consecutivo = this.numeroConsecutivo;
+
       this.msvIpatVehiculo.nacionalidadVehiculo = this.nacionalidadVehiculoSelected;
       this.msvIpatVehiculo.marca = this.marcaSelected;
       this.msvIpatVehiculo.linea = this.lineaSelected;
@@ -2175,8 +2232,8 @@ export class NewComponent implements OnInit {
     }
   }
 
-  registrarVehiculoEncontrado() {
-   /*  let dataVehiculos = {
+  /* registrarVehiculoEncontrado() {
+    let dataVehiculos = {
       'placa: ': this.msvRegistroIpat.placa,
       'nacionalidad: ': this.nacionalidadVehiculoSelected,
       'marca: ': this.marcaSelected,
@@ -2228,13 +2285,13 @@ export class NewComponent implements OnInit {
       text: 'Vehículo agregado con exito',
       type: 'success',
       confirmButtonText: 'Aceptar'
-    }); */
-  }
+    }); 
+  } */
 
   registrarVictima() {
     let token = this._LoginService.getToken();
 
-    /* if (this.msvRegistroIpat.identificacionVictima == null) {
+    if (this.msvIpatVictima.identificacionVictima == null) {
       swal({
         title: 'Alerta!',
         text: "Registre todos los campos de la victima",
@@ -2242,17 +2299,22 @@ export class NewComponent implements OnInit {
         confirmButtonText: 'Aceptar'
       });
     } else {
-      this.msvRegistroIpat.tipoIdentificacionVictima = this.tipoIdentificacionVictimaSelected;
-      this.msvRegistroIpat.nacionalidadVictima = this.nacionalidadVictimaSelected;
-      this.msvRegistroIpat.sexoVictima = this.sexoVictimaSelected;
-      this.msvRegistroIpat.ciudadResidenciaVictima = this.ciudadResidenciaVictimaSelected;
+      //consecutivo ipat
+      this.msvIpatVictima.consecutivo = this.numeroConsecutivo;
+
+      this.msvIpatVictima.tipoIdentificacionVictima = this.tipoIdentificacionVictimaSelected;
+      this.msvIpatVictima.nacionalidadVictima = this.nacionalidadVictimaSelected;
+      this.msvIpatVictima.sexoVictima = this.sexoVictimaSelected;
+      this.msvIpatVictima.ciudadResidenciaVictima = this.ciudadResidenciaVictimaSelected;
+      this.msvIpatVictima.idTipoVictima = this.tipoVictimaSelected;
+      this.msvIpatVictima.idGravedadVictima = this.gravedadVictimaSelected;
 
       var html = 'Se va a registrar el usuario:<br>' +
-        'Nombres: <b>' + this.msvRegistroIpat.nombresVictima + ' ' + this.msvRegistroIpat.apellidosVictima + '</b><br>' +
+        'Nombres: <b>' + this.msvIpatVictima.nombresVictima + ' ' + this.msvIpatVictima.apellidosVictima + '</b><br>' +
         'Tipo Identificación: <b>' + this.tipoIdentificacionVictimaSelected + '</b><br>' +
-        'Identificación: <b>' + this.msvRegistroIpat.identificacionVictima + '</b><br>' +
+        'Identificación: <b>' + this.msvIpatVictima.identificacionVictima + '</b><br>' +
         'Género: <b>' + this.sexoVictimaSelected + '</b><br>' +
-        'Teléfono: <b>' + this.msvRegistroIpat.telefonoVictima + '</b><br>';
+        'Teléfono: <b>' + this.msvIpatVictima.telefonoVictima + '</b><br>';
 
       swal({
         title: 'Creación de persona natural',
@@ -2264,7 +2326,7 @@ export class NewComponent implements OnInit {
         cancelButtonText: 'Agregar una sola victima',
       }).then((result) => {
         if (result.value) {
-          this._MsvRegistroIpatService.registerVictimaIpat(this.msvRegistroIpat, token).subscribe(
+          this._SvIpatVictimaService.register(this.msvIpatVictima, token).subscribe(
             response => {
               if (response.status == 'success') {
                 swal({
@@ -2274,7 +2336,7 @@ export class NewComponent implements OnInit {
                   confirmButtonText: 'Aceptar'
                 });
 
-                let dataVictimas = {
+                /* let dataVictimas = {
                   'tipo victima: ': this.tipoVictimaSelected,
                   'gravedad victima: ': this.gravedadVictimaSelected,
                   'tipo documento: ': this.tipoIdentificacionVictimaSelected,
@@ -2299,8 +2361,8 @@ export class NewComponent implements OnInit {
                   'chaleco: ': this.msvRegistroIpat.chalecoVictima,
                   'descripcion lesiones: ': this.msvRegistroIpat.descripcionLesionVictima,
                 };
-                this.victimas.push(dataVictimas);
-                console.log(this.tipoVictimaSelected);
+                this.victimas.push(dataVictimas); */
+                /* console.log(this.tipoVictimaSelected); */
                 if (this.tipoVictimaSelected = 'PASAJERO') {
                   this.contPasajeros += 1;
                   this.msvRegistroIpat.totalPasajeros = this.contPasajeros;
@@ -2327,26 +2389,26 @@ export class NewComponent implements OnInit {
                 this.victima = false;
                 this.tipoVictimaSelected = [0];
                 this.gravedadVictimaSelected = [0];
-                this.msvRegistroIpat.identificacionVictima = '';
-                this.msvRegistroIpat.tipoIdentificacionVictima = '';
-                this.msvRegistroIpat.nombresVictima = '';
-                this.msvRegistroIpat.apellidosVictima = '';
+                this.msvIpatVictima.identificacionVictima = '';
+                this.msvIpatVictima.tipoIdentificacionVictima = '';
+                this.msvIpatVictima.nombresVictima = '';
+                this.msvIpatVictima.apellidosVictima = '';
                 this.nacionalidadVictimaSelected = [0];
-                this.msvRegistroIpat.fechaNacimientoVictima = '';
+                this.msvIpatVictima.fechaNacimientoVictima = '';
                 this.sexoVictimaSelected = [0];
-                this.msvRegistroIpat.direccionResidenciaVictima = '';
+                this.msvIpatVictima.direccionResidenciaVictima = '';
                 this.ciudadResidenciaVictimaSelected = [0];
-                this.msvRegistroIpat.telefonoVictima = '';
-                this.msvRegistroIpat.idHospitalVictima = '';
-                this.msvRegistroIpat.practicoExamenVictima = '';
-                this.msvRegistroIpat.autorizoVictima = '';
-                this.msvRegistroIpat.idResultadoExamenVictima = '';
-                this.msvRegistroIpat.idGradoExamenVictima = '';
-                this.msvRegistroIpat.sustanciasPsicoactivasVictima = '';
-                this.msvRegistroIpat.cinturonVictima = '';
-                this.msvRegistroIpat.cascoVictima = '';
-                this.msvRegistroIpat.chalecoVictima = '';
-                this.msvRegistroIpat.descripcionLesionVictima = '';
+                this.msvIpatVictima.telefonoVictima = '';
+                this.msvIpatVictima.idHospitalVictima = '';
+                this.msvIpatVictima.practicoExamenVictima = '';
+                this.msvIpatVictima.autorizoVictima = '';
+                this.msvIpatVictima.idResultadoExamenVictima = '';
+                this.msvIpatVictima.idGradoExamenVictima = '';
+                this.msvIpatVictima.sustanciasPsicoactivasVictima = '';
+                this.msvIpatVictima.cinturonVictima = '';
+                this.msvIpatVictima.cascoVictima = '';
+                this.msvIpatVictima.chalecoVictima = '';
+                this.msvIpatVictima.descripcionLesionVictima = '';
               } else {
                 swal({
                   title: 'Alerta!',
@@ -2358,73 +2420,71 @@ export class NewComponent implements OnInit {
             });
         }
         else if (result.dismiss === swal.DismissReason.cancel) {
-          if (result.value) {
-            this._MsvRegistroIpatService.registerCiudadanoIpat(this.msvRegistroIpat, token).subscribe(
-              response => {
-                if (response.status == 'success') {
-                  swal({
-                    title: 'Perfecto!',
-                    text: response.message,
-                    type: 'success',
-                    confirmButtonText: 'Aceptar'
-                  });
+          this._SvIpatVictimaService.register(this.msvIpatVictima, token).subscribe(
+            response => {
+              if (response.status == 'success') {
+                swal({
+                  title: 'Perfecto!',
+                  text: response.message,
+                  type: 'success',
+                  confirmButtonText: 'Aceptar'
+                });
 
-                  let dataVictimas = {
-                    'tipo victima: ': this.tipoVictimaSelected,
-                    'gravedad victima: ': this.gravedadVictimaSelected,
-                    'tipo documento: ': this.tipoIdentificacionVictimaSelected,
-                    'identificacion: ': this.msvRegistroIpat.identificacionVictima,
-                    'nombres: ': this.msvRegistroIpat.nombresVictima,
-                    'apellidos: ': this.msvRegistroIpat.apellidosVictima,
-                    'nacionalidad: ': this.nacionalidadVictimaSelected,
-                    'fecha nacimiento: ': this.msvRegistroIpat.fechaNacimientoVictima,
-                    'sexo: ': this.sexoVictimaSelected,
-                    'dirección residencia: ': this.msvRegistroIpat.direccionResidenciaVictima,
-                    'ciudad residencia: ': this.ciudadResidenciaVictimaSelected,
-                    'telefono: ': this.msvRegistroIpat.telefonoVictima,
-                    'placa de vehiculo al que pertenece: ': this.msvRegistroIpat.placaVehiculoVictima,
-                    'hospital atencion: ': this.msvRegistroIpat.telefonoVictima,
-                    'se practico el examen: ': this.msvRegistroIpat.practicoExamenVictima,
-                    'autorizó: ': this.msvRegistroIpat.autorizoVictima,
-                    'resultado examen: ': this.msvRegistroIpat.idResultadoExamenVictima,
-                    'grado examen: ': this.msvRegistroIpat.idGradoExamenVictima,
-                    'sustancias psicoactivas: ': this.msvRegistroIpat.sustanciasPsicoactivasVictima,
-                    'cinturon: ': this.msvRegistroIpat.cinturonVictima,
-                    'casco: ': this.msvRegistroIpat.cascoVictima,
-                    'chaleco: ': this.msvRegistroIpat.chalecoVictima,
-                    'descripcion lesiones: ': this.msvRegistroIpat.descripcionLesionVictima,
-                  };
-                  this.victimas.push(dataVictimas);
+                /* let dataVictimas = {
+                  'tipo victima: ': this.tipoVictimaSelected,
+                  'gravedad victima: ': this.gravedadVictimaSelected,
+                  'tipo documento: ': this.tipoIdentificacionVictimaSelected,
+                  'identificacion: ': this.msvRegistroIpat.identificacionVictima,
+                  'nombres: ': this.msvRegistroIpat.nombresVictima,
+                  'apellidos: ': this.msvRegistroIpat.apellidosVictima,
+                  'nacionalidad: ': this.nacionalidadVictimaSelected,
+                  'fecha nacimiento: ': this.msvRegistroIpat.fechaNacimientoVictima,
+                  'sexo: ': this.sexoVictimaSelected,
+                  'dirección residencia: ': this.msvRegistroIpat.direccionResidenciaVictima,
+                  'ciudad residencia: ': this.ciudadResidenciaVictimaSelected,
+                  'telefono: ': this.msvRegistroIpat.telefonoVictima,
+                  'placa de vehiculo al que pertenece: ': this.msvRegistroIpat.placaVehiculoVictima,
+                  'hospital atencion: ': this.msvRegistroIpat.telefonoVictima,
+                  'se practico el examen: ': this.msvRegistroIpat.practicoExamenVictima,
+                  'autorizó: ': this.msvRegistroIpat.autorizoVictima,
+                  'resultado examen: ': this.msvRegistroIpat.idResultadoExamenVictima,
+                  'grado examen: ': this.msvRegistroIpat.idGradoExamenVictima,
+                  'sustancias psicoactivas: ': this.msvRegistroIpat.sustanciasPsicoactivasVictima,
+                  'cinturon: ': this.msvRegistroIpat.cinturonVictima,
+                  'casco: ': this.msvRegistroIpat.cascoVictima,
+                  'chaleco: ': this.msvRegistroIpat.chalecoVictima,
+                  'descripcion lesiones: ': this.msvRegistroIpat.descripcionLesionVictima,
+                };
+                this.victimas.push(dataVictimas); */
 
-                  if (this.tipoVictimaSelected = 'PASAJERO') {
-                    this.contPasajeros += 1;
-                    this.msvRegistroIpat.totalPasajeros = this.contPasajeros;
-                  } if (this.tipoVictimaSelected = 'PEATON') {
-                    this.contPeatones += 1;
-                    this.msvRegistroIpat.totalPeatones = this.contPeatones;
-                  } if (this.tipoVictimaSelected = 'ACOMPAÑANTE') {
-                    this.contAcompaniantes += 1;
-                    this.msvRegistroIpat.totalAcompaniantes = this.contAcompaniantes;
-                    console.log(this.contAcompaniantes);
-                  } if (this.gravedadVictimaSelected = 'HERIDO') {
-                    this.contHeridos += 1;
-                    this.msvRegistroIpat.totalHeridos = this.contHeridos;
-                    console.log(this.contHeridos);
-                  } if (this.gravedadVictimaSelected = 'MUERTO') {
-                    this.contMuertos += 1;
-                    this.msvRegistroIpat.totalMuertos = this.contMuertos;
-                    console.log(this.contMuertos);
-                  }
-                } else {
-                  swal({
-                    title: 'Alerta!',
-                    text: response.message,
-                    type: 'error',
-                    confirmButtonText: 'Aceptar'
-                  });
+                if (this.tipoVictimaSelected = 'PASAJERO') {
+                  this.contPasajeros += 1;
+                  this.msvRegistroIpat.totalPasajeros = this.contPasajeros;
+                } if (this.tipoVictimaSelected = 'PEATON') {
+                  this.contPeatones += 1;
+                  this.msvRegistroIpat.totalPeatones = this.contPeatones;
+                } if (this.tipoVictimaSelected = 'ACOMPAÑANTE') {
+                  this.contAcompaniantes += 1;
+                  this.msvRegistroIpat.totalAcompaniantes = this.contAcompaniantes;
+                  console.log(this.contAcompaniantes);
+                } if (this.gravedadVictimaSelected = 'HERIDO') {
+                  this.contHeridos += 1;
+                  this.msvRegistroIpat.totalHeridos = this.contHeridos;
+                  console.log(this.contHeridos);
+                } if (this.gravedadVictimaSelected = 'MUERTO') {
+                  this.contMuertos += 1;
+                  this.msvRegistroIpat.totalMuertos = this.contMuertos;
+                  console.log(this.contMuertos);
                 }
-              });
-          }
+              } else {
+                swal({
+                  title: 'Alerta!',
+                  text: response.message,
+                  type: 'error',
+                  confirmButtonText: 'Aceptar'
+                });
+              }
+            });
         }
       });
 
@@ -2435,11 +2495,11 @@ export class NewComponent implements OnInit {
           alert('Error en la petición');
         }
       }
-    } */
+    }
   }
 
-  registrarVictimaEncontrada() {
-    /* let dataVictimas = {
+  /* registrarVictimaEncontrada() {
+    let dataVictimas = {
       'tipo victima: ': this.tipoVictimaSelected,
       'gravedad victima: ': this.gravedadVictimaSelected,
       'tipo documento: ': this.tipoIdentificacionVictimaSelected,
@@ -2494,8 +2554,8 @@ export class NewComponent implements OnInit {
       text: 'Victima agregada con éxito',
       type: 'success',
       confirmButtonText: 'Aceptar'
-    }); */
-  }
+    }); 
+  } */
 
   imprimirFormatos() {
     alert("formatos policia judicial");

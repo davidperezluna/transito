@@ -445,7 +445,7 @@
                                 [(ngModel)]="modalidadTransporteSelected" required name="modalidadTransporte">
                             </ng-select>
                         </div>
-                        <div class="col-lg-6 col-md-6" *ngIf="msvIpatVehiculo.servicio == 'PUBLICO'">
+                        <div class="col-lg-6 col-md-6" *ngIf="servicioSelected == 2">
                             <label>Radio Acción <strong class="text-danger">*</strong></label>
                             <!-- <input class="form-control" [disabled]="vhl" type="text" [(ngModel)]="msvIpatVehiculo.radioAccion" name="radioAccion"
                                 required> -->
@@ -746,6 +746,10 @@
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6">
+                        <button (click)="registrarVehiculo()" *ngIf="msvIpatVehiculo.portaPlaca == '1'" class="btn btn-primary">
+                            Guardar Vehiculo</button>
+                    </div>
+                    <!-- <div class="col-lg-6 col-md-6">
                         <button (click)="registrarVehiculo()"
                             *ngIf="!vehiculoEncontrado && consecutivo && msvIpatVehiculo.portaPlaca == '1'"
                             class="btn btn-primary">Guardar Vehiculo</button>
@@ -754,7 +758,7 @@
                         *ngIf="vehiculoEncontrado && consecutivo && msvIpatVehiculo.portaPlaca == '1'">
                         <button (click)="registrarVehiculoEncontrado()" class="btn btn-success">Guardar
                             Vehiculo</button>
-                    </div>
+                    </div> -->
                 </div>
             </div>
 
@@ -835,6 +839,12 @@
                             <label>Telefono Conductor</label>
                             <input class="form-control" type="number" min=0 [disabled]="cdnTelefonoConductor"
                                 [(ngModel)]="msvIpatConductor.telefonoConductor" name="telefonoConductor">
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <label>Placa Vehiculo Conductor </label>
+                            <ng-select [multiple]="false" [options]="placasVehiculosIpat" [(ngModel)]="msvIpatConductor.placaVehiculoConductor"
+                                name="placaVehiculoConductor">
+                            </ng-select>
                         </div>
                         <div class="col-lg-6 col-md-6"
                             *ngIf="msvRegistroIpat.idGravedad == 2 || msvRegistroIpat.idGravedad == 3">
@@ -1080,13 +1090,16 @@
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6">
+                        <button (click)="registrarCiudadano()" class="btn btn-primary">Guardar Conductor</button>
+                    </div>
+                    <!-- <div class="col-lg-6 col-md-6">
                         <button (click)="registrarCiudadano()" *ngIf="!conductorEncontrado && consecutivo"
                             class="btn btn-primary">Guardar Conductor</button>
-                    </div>
-                    <div class="col-lg-6 col-md-6" *ngIf="conductorEncontrado && consecutivo">
+                    </div> -->
+                    <!-- <div class="col-lg-6 col-md-6" *ngIf="conductorEncontrado && consecutivo">
                         <button (click)="registrarCiudadanoEncontrado()" class="btn btn-success">Guardar
                             Conductor</button>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="card" *ngIf="consecutivo">
@@ -1375,9 +1388,9 @@
                             </ng-select>
                         </div>
                         <!-- <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.victima == '1' && msvRegistroIpat.idTipoVictima == 'PASAJERO' || msvRegistroIpat.idTipoVictima == 'ACOMPAÑANTE'"> -->
-                        <div class="col-lg-6 col-md-6" *ngIf="vehiculosIpat.length > 0">
+                        <div class="col-lg-6 col-md-6">
                             <label>Placa Vehiculo Victima </label>
-                            <ng-select [multiple]="false" [options]="vehiculosIpat"
+                            <ng-select [multiple]="false" [options]="placasVehiculosIpat"
                                 [(ngModel)]="msvIpatVictima.placaVehiculoVictima" name="placaVehiculoVictima">
                             </ng-select>
                         </div>
@@ -1548,12 +1561,15 @@
                                 [(ngModel)]="msvIpatVictima.descripcionLesionVictima" name="descripcionLesionVictima">
                         </div>
                     </div>
-                    <div class="col-lg-6 col-md-6" *ngIf="!victimaEncontrada && consecutivo">
+                    <div class="col-lg-6 col-md-6">
+                        <button (click)="registrarVictima()" class="btn btn-primary">Guardar Victima</button>
+                    </div>
+                    <!-- <div class="col-lg-6 col-md-6" *ngIf="!victimaEncontrada && consecutivo">
                         <button (click)="registrarVictima()" class="btn btn-primary">Guardar Victima</button>
                     </div>
                     <div class="col-lg-6 col-md-6" *ngIf="victimaEncontrada && consecutivo">
                         <button (click)="registrarVictimaEncontrada()" class="btn btn-success">Guardar Victima</button>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="card" *ngIf="consecutivo && msvRegistroIpat.idGravedad == 2 || msvRegistroIpat.idGravedad == 3">

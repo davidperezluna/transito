@@ -1,5 +1,7 @@
 export class MsvIpatConductor {
     constructor(
+        public consecutivo: string,
+
         public nombresConductor: string,
 		public apellidosConductor: string,
 		public tipoIdentificacionConductor: string,
@@ -11,6 +13,7 @@ export class MsvIpatConductor {
 		public direccionResidenciaConductor: string,
 		public ciudadResidenciaConductor: number,
 		public telefonoConductor: string,
+		public placaVehiculoConductor: string,
 		public practicoExamenConductor: string,
 		public autorizoConductor: string,
 		public idResultadoExamenConductor: string,
