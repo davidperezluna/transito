@@ -1723,9 +1723,8 @@ export class NewComponent implements OnInit {
       );
     }
   }
-  obtenerCorrespondio(e) {
+  obtenerCorrespondio() {
     let token = this._LoginService.getToken();
-    if (e) {
       this._MsvRegistroIpatService.getCorrespondio(this.msvRegistroIpat, token).subscribe(
         response => {
           if (response.status == 'success') {
@@ -1756,7 +1755,7 @@ export class NewComponent implements OnInit {
           }
         }
       );
-    }
+    
   }
 
   registrarCiudadano() {
