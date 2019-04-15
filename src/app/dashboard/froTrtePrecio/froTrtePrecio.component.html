@@ -80,7 +80,7 @@
                                 <td>{{ i + 1 }}</td>
                                 <td>{{ tramitePrecio.tramite.nombre }}</td>
                                 <td>
-                                    <input class="form-control" [(ngModel)]="tramitePrecio.fechaInicio" name="fechaInicio" ptype="date" required 
+                                    <input class="form-control" [(ngModel)]="tramitePrecio.fechaInicial" name="fechaInicial" ptype="date" required 
                                     (click)='onToggleDisable()' (blur)='onValidateDate(tramitePrecio)' [readonly]="disableTextbox">
                                 </td>
                                 <td>

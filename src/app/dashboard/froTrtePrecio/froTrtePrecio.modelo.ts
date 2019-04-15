@@ -2,7 +2,7 @@ export class FroTrtePrecio {
     constructor(
         public nombre: string,
         public valor: number,
-        public fechaInicio: string,
+        public fechaInicial: string,
         public valorConcepto: string,
         public valorTotal: string,
         public conceptos: any,
