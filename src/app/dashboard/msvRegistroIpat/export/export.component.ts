@@ -209,11 +209,17 @@ export class ExportComponent implements OnInit {
             }
         );
     }
-    iniciarTabla() {
+
+    onInitTable() {
+        if(this.table){
+            this.table.destroy();
+        } 
+
         this.date = new Date();
         var datePiper = new DatePipe(this.date);
         this.fecha = datePiper.transform(this.date, 'yyyy-MM-dd');
-        $('#dataTables-example').DataTable({
+
+        this.table = $('#dataTables-example').DataTable({
             responsive: true,
             pageLength: 8,
             sPaginationType: 'full_numbers',
@@ -242,7 +248,6 @@ export class ExportComponent implements OnInit {
                 }
             }
         });
-        this.table = $('#dataTables-example').DataTable();
     }
 
     ready(isCreado: any) {
@@ -290,13 +295,8 @@ export class ExportComponent implements OnInit {
             response => {
                 if(response.status == 'success'){
                     this.ipats = response.data;
-                    console.log(this.ipats);
-                    /* this.conductoresNombresArray = response.conductores.nombres;
-                    this.conductoresApellidosArray = response.conductores.apellidos;
-                    this.victimasNombresArray = response.victimas.nombres;
-                    this.victimasApellidosArray = response.victimas.apellidos; */
                     let timeoutId = setTimeout(() => {
-                        this.iniciarTabla();
+                        this.onInitTable();
                     }, 100);
                 } else {
                     swal({
@@ -332,7 +332,7 @@ export class ExportComponent implements OnInit {
                     //this.victimasNombresArray = response.victimas.nombres;
                     //this.victimasApellidosArray = response.victimas.apellidos;
                     let timeoutId = setTimeout(() => {
-                        this.iniciarTabla();
+                        this.onInitTable();
                     }, 100);
                 } else {
                     swal({
