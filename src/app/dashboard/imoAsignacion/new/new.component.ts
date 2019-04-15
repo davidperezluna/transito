@@ -324,8 +324,8 @@ constructor(
   }
 
   imprimirActa(){
-    this.sedeSelected = [];
     this.lotesSelecionados = [];
+    this.imprimirActa = null;
     this.lotes = null;
 
   }

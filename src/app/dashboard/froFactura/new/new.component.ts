@@ -17,10 +17,16 @@ export class NewComponent implements OnInit {
   public errorMessage;
 
   public organismosTransito: any;
-  public municipio: any = null;
+  public municipio: any = null; 
   public fechaCreacion: any = null;
   public fechaVencimiento: any = null;
   public facturaNumero: any = null;
+  public tramitesValor:any=[];
+  public valorVehiculoId:any;
+  public propietariosVehiculoRetefuente:any;
+  public valorRetefuenteUnitario:any;
+  
+
 
   public apiUrl = environment.apiUrl + 'financiero';
 
@@ -90,7 +96,17 @@ constructor(
 
   
   onEnviar(){
+    
     let token = this._loginService.getToken();
+
+    let datos = {
+      'factura': this.factura,
+      'tramitesValor': this.tramitesValor,
+      'valorVehiculoId': this.valorVehiculoId,
+      'propietarios': this.propietariosVehiculoRetefuente,
+      'retencion': this.valorRetefuenteUnitario,
+      'idTipoRecaudo': 1,
+    }
 
     this.factura.comparendos = this.comparendosSelect;
     //Tipo de recaudo infracciones
@@ -98,7 +114,7 @@ constructor(
     
 		this._FacturaService.register(this.factura, token).subscribe(
 			response => {
-        if(response.status == 'success'){
+        if(response.status == 'success'){ 
           this.factura.id = response.data.id;
           this.municipio = response.data.sedeOperativa.municipio.nombre;
           this.fechaCreacion = response.data.fechaCreacion;
