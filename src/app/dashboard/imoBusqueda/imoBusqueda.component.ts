@@ -23,8 +23,8 @@ export class ImoBusquedaComponent implements OnInit {
   public tipoInsumoSelected:any;
   public organismosTransito:any;
   public tiposInsumos:any = [
-    {'value': 'Sustrato','label':'Sustrato'},
-    {'value': 'Insumo','label':'Insumo'},
+    {'value': 'SUSTRATO','label':'Sustrato'},
+    {'value': 'INSUMO','label':'Insumo'},
   ];
   public loteInsumos:any;
   public loteInsumo:any;
@@ -86,15 +86,15 @@ export class ImoBusquedaComponent implements OnInit {
   onChangedSede(e){
     if (e) {
       let datos={
-        'organismoTransito':this.organismoTransitoSelected,
-        'tipoInsumo':this.tipoInsumoSelected,
+        'idOrganismoTransito':this.organismoTransitoSelected,
+        'tipo':this.tipoInsumoSelected,
       } 
       let token = this._loginService.getToken();
-      console.log(datos);
       this._ImoLoteService.show(datos,token).subscribe(
         response => {
           if (response.status == 'success') {
             this.loteInsumos = response.data;
+            console.log(response.data);
             let timeoutId = setTimeout(() => {  
               this.iniciarTabla();
             }, 100);

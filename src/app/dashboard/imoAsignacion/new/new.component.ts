@@ -323,4 +323,11 @@ constructor(
     this.lotes = null;
   }
 
+  imprimirActa(){
+    this.sedeSelected = [];
+    this.lotesSelecionados = [];
+    this.lotes = null;
+
+  }
+
 }
