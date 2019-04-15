@@ -241,46 +241,55 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
             }
         });
 
-        let token = this._LoginService.getToken();
-
-        let datos = {
-            'identificacion': this.identificacionNew,
-            'idTipoIdentificacion': this.tipoIdentificacionSelectedNew,
-        }
-
-        this._CiudadanoService.searchByIdentificacion(datos, token).subscribe(
-            response => {
-                if (response.code == 200) {
-                    if (response.data.ciudadano) {
-                        this.ciudadano = response.data.ciudadano;
-                        this.datos.idCiudadano = this.ciudadano.id;
-                        this.empresa = null;
-                        this.datos.idEmpresa = null;
-                    } else if (response.data.empresa) {
-                        this.empresa = response.data.empresa;
-                        this.datos.idEmpresa = this.empresa.id;
-                        this.ciudadano = null;
-                        this.datos.idCiudadano = null;
-                    }
-
-                    swal.close();
-                } else {
-                    swal({
-                        title: 'Error!',
-                        text: response.message,
-                        type: 'error',
-                        confirmButtonText: 'Aceptar'
-                    });
-                }
-                error => {
-                    this.errorMessage = <any>error;
-                    if (this.errorMessage != null) {
-                        console.log(this.errorMessage);
-                        alert('Error en la petición');
-                    }
-                }
+        if (this.identificacionNew) {
+            let token = this._LoginService.getToken();
+    
+            let datos = {
+                'identificacion': this.identificacionNew,
+                'idTipoIdentificacion': this.tipoIdentificacionSelectedNew,
             }
-        );
+    
+            this._CiudadanoService.searchByIdentificacion(datos, token).subscribe(
+                response => {
+                    if (response.code == 200) {
+                        if (response.data.ciudadano) {
+                            this.ciudadano = response.data.ciudadano;
+                            this.datos.idCiudadano = this.ciudadano.id;
+                            this.empresa = null;
+                            this.datos.idEmpresa = null;
+                        } else if (response.data.empresa) {
+                            this.empresa = response.data.empresa;
+                            this.datos.idEmpresa = this.empresa.id;
+                            this.ciudadano = null;
+                            this.datos.idCiudadano = null;
+                        }
+    
+                        swal.close();
+                    } else {
+                        swal({
+                            title: 'Error!',
+                            text: response.message,
+                            type: 'error',
+                            confirmButtonText: 'Aceptar'
+                        });
+                    }
+                    error => {
+                        this.errorMessage = <any>error;
+                        if (this.errorMessage != null) {
+                            console.log(this.errorMessage);
+                            alert('Error en la petición');
+                        }
+                    }
+                }
+            );
+        }else{
+            swal({
+                title: 'Alerta!',
+                text: 'La identificación no puede estar vacia.',
+                type: 'warning',
+                confirmButtonText: 'Aceptar'
+            });
+        }
     }
 
     onEnviar() {
