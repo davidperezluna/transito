@@ -2,9 +2,10 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FroTrteSolicitudService } from '../../../../services/froTrteSolicitud.service';
 import { FroFacTramiteService } from '../../../../services/froFacTramite.service';
 import { VhloCfgPlaca } from '../../../vhloCfgPlaca/vhloCfgPlaca.modelo';
+import { VhloAcreedorService } from '../../../../services/vhloAcreedor.service';
+import { VhloPropietarioService } from '../../../../services/vhloPropietario.service';
 import { LoginService } from '../../../../services/login.service';
 import { CfgTipoAlertaService } from '../../../../services/cfgTipoAlerta.service';
-import { VhloAcreedorService } from '../../../../services/vhloAcreedor.service';
 import { UserCiudadanoService } from '../../../../services/userCiudadano.service';
 import { UserEmpresaService } from "../../../../services/userEmpresa.service";
 import { UserCfgTipoIdentificacionService } from '../../../../services/userCfgTipoIdentificacion.service';
@@ -23,6 +24,7 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;
     @Input() tramiteFactura: any = null;
+    @Input() idPropietario: any = null;
     public errorMessage; 
     
     public autorizado: any = false;
@@ -60,6 +62,7 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
         private _TramiteFacturaService: FroFacTramiteService,
         private _CfgTipoAlertaService: CfgTipoAlertaService,
         private _AcreedorService: VhloAcreedorService,
+        private _PropietarioService: VhloPropietarioService,
         private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
         private _CiudadanoService: UserCiudadanoService,
         private _EmpresaService: UserEmpresaService,
@@ -130,6 +133,56 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
                             }
                         );
                     } else {
+                        swal({
+                            title: 'Buscando actual prendario!',
+                            text: 'Solo tardara unos segundos por favor espere.',
+                            onOpen: () => {
+                                swal.showLoading()
+                            }
+                        });
+
+                        this._PropietarioService.show({ 'id': this.idPropietario }, token).subscribe(
+                            response => {
+                                if (response.code == 200) {
+                                    this._AcreedorService.searchByPropietario({ 'id': response.data.id }, token).subscribe(
+                                        response => {
+                                            if (response.code == 200) {
+                                                this.acreedor = response.data;
+                                                this.datos.idAcreedor = this.acreedor.id;
+                                                
+                                                swal.close();
+                                            } else {
+                                                this.acreedor = null;
+            
+                                                swal({
+                                                    title: 'Error!',
+                                                    text: response.message,
+                                                    type: 'error',
+                                                    confirmButtonText: 'Aceptar'
+                                                });
+                                            }
+                                            error => {
+                                                this.errorMessage = <any>error;
+            
+                                                if (this.errorMessage != null) {
+                                                    console.log(this.errorMessage);
+                                                    alert("Error en la petición");
+                                                }
+                                            }
+                                        }
+                                    );
+                                }
+                            },
+                            error => {
+                                this.errorMessage = <any>error;
+
+                                if (this.errorMessage != null) {
+                                    console.log(this.errorMessage);
+                                    alert('Error en la petición');
+                                }
+                            }
+                        );
+
                         this._TipoIdentificacionService.select().subscribe(
                             response => {
                                 this.tiposIdentificacion = response;
@@ -164,104 +217,6 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
                     swal({
                         title: 'Error!',
                         text: 'Usted no tiene permisos para realizar tramites',
-                        type: 'error',
-                        confirmButtonText: 'Aceptar'
-                    });
-                }
-                error => {
-                    this.errorMessage = <any>error;
-                    if (this.errorMessage != null) {
-                        console.log(this.errorMessage);
-                        alert('Error en la petición');
-                    }
-                }
-            }
-        );
-    }
-
-    onSearchAcreedorOld() {
-        swal({
-            title: 'Buscando actual prendario!',
-            text: 'Solo tardara unos segundos por favor espere.',
-            onOpen: () => {
-                swal.showLoading()
-            }
-        });
-
-        let token = this._LoginService.getToken();
-
-        let datos = {
-            'identificacion': this.identificacionOld,
-            'idTipoIdentificacion': this.tipoIdentificacionSelectedOld,
-        }
-
-        this._CiudadanoService.searchByIdentificacion(datos, token).subscribe(
-            response => {
-                if (response.code == 200) {
-                    if (response.data.ciudadano) {
-                        this._AcreedorService.searchByCiudadanoOrEmpresa({ 'id': response.data.ciudadano.id, 'tipo': 'CIUDADANO' },token).subscribe(
-                            response => {
-                                if (response.code == 200) {
-                                    this.acreedor = response.data;
-                                    this.datos.idAcreedor = this.acreedor.id;
-                                    
-                                    swal.close();
-                                } else {
-                                    this.acreedor = null;
-
-                                    swal({
-                                        title: 'Error!',
-                                        text: response.message,
-                                        type: 'error',
-                                        confirmButtonText: 'Aceptar'
-                                    });
-                                }
-                                error => {
-                                    this.errorMessage = <any>error;
-
-                                    if (this.errorMessage != null) {
-                                        console.log(this.errorMessage);
-                                        alert("Error en la petición");
-                                    }
-                                }
-                            }
-                        );
-                    } else if (response.data.empresa) {
-                        this._AcreedorService.searchByCiudadanoOrEmpresa({ 'id': response.data.empresa.id, 'tipo': 'EMPRESA' }, token).subscribe(
-                            response => {
-                                if (response.code == 200) {
-                                    this.acreedor = response.data;
-                                    this.datos.idAcreedor = this.acreedor.id;
-
-                                    swal.close();
-                                } else {
-                                    this.acreedor = null;
-
-                                    swal({
-                                        title: 'Error!',
-                                        text: response.message,
-                                        type: 'error',
-                                        confirmButtonText: 'Aceptar'
-                                    });
-                                }
-                                error => {
-                                    this.errorMessage = <any>error;
-
-                                    if (this.errorMessage != null) {
-                                        console.log(this.errorMessage);
-                                        alert("Error en la petición");
-                                    }
-                                }
-                            }
-                        );
-                    }else{
-                        this.acreedor = null;
-                        this.datos.idAcreedor = null;
-                    }
-                } else {
-                    swal({
-                        title: 'Error!',
-                        text: response.message,
                         type: 'error',
                         confirmButtonText: 'Aceptar'
                     });

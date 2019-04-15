@@ -85,6 +85,10 @@
                       </td>
                       <td>
                         <div class="btn-group">
+                          <button (click)="onShow(ciudadano)" class="btn btn-xs btn-info" type="button" tooltip="Detalles" [tooltipDisabled]="false"
+                            [tooltipAnimation]="true" tooltipPlacement="top">
+                            <i class="fa fa-check"></i>
+                          </button>
                           <button (click)="onEdit(ciudadano)" class="btn btn-xs btn-primary" type="button" tooltip="Editar" [tooltipDisabled]="false"
                             [tooltipAnimation]="true" tooltipPlacement="top">
                             <i class="fa fa-pencil"></i>

@@ -13,6 +13,7 @@ export class RnaPreregistro{
 		public chasis:string,
 		public serie:string,
 		public vin:number,
+		public numeroEjes:number,
 		public numeroPasajeros:number,
 		public tipoMatricula:string,
 		public capacidadCarga:number,

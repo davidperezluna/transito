@@ -34,6 +34,7 @@ export class NewRnaCambioMotorComponent implements OnInit {
         'numeroFactura': null,
         'sijinChequeoNumero': null,
         'sijinChequeoFecha': null,
+        'entidad': null,
         'fecha': null,
         'tipoIdentificacion': null,
         'numeroIdentificacion': null,

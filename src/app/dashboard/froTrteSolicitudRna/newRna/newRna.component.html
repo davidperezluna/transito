@@ -219,8 +219,8 @@
                                 <div class="form-group">
                                     <div class="row" *ngIf="requiereRunt">
                                         <div class="col-xs-12 col-lg-6"> 
-                                            <label>No. solicitud RUNT <b class="text-danger">*</b></label>
-                                            <input type="text" class="form-control" placeholder="No. solicitud RUNT" [(ngModel)]="numeroRunt" name="numeroRunt" required />
+                                            <label>Número de solicitud RUNT <b class="text-danger">*</b></label>
+                                            <input type="text" class="form-control" placeholder="No. solicitud RUNT" [(ngModel)]="tramiteSolicitud.numeroRunt" name="numeroRunt" required />
                                         </div>
                                     </div>
                                     <div class="row">
@@ -314,7 +314,7 @@
                                                 
                                                 <appRna-cambio-acreedor-prendario-propietario *ngIf="tramiteFactura.precio.tramite.id == 24"  [vehiculo]="vehiculo" [tramiteFactura]="tramiteFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-cambio-acreedor-prendario-propietario>
                                                 
-                                                <appRna-cambio-acreedor-prendario *ngIf="tramiteFactura.precio.tramite.id == 25"  [vehiculo]="vehiculo" [tramiteFactura]="tramiteFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-cambio-acreedor-prendario>
+                                                <appRna-cambio-acreedor-prendario *ngIf="tramiteFactura.precio.tramite.id == 25"  [vehiculo]="vehiculo" [tramiteFactura]="tramiteFactura" [idPropietario]='tramiteSolicitud.idPropietario' (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-cambio-acreedor-prendario>
                                                 
                                                 <appRna-cambio-gas *ngIf="tramiteFactura.precio.tramite.id == 26"  [vehiculo]="vehiculo" [tramiteFactura]="tramiteFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-cambio-gas>
                                                 

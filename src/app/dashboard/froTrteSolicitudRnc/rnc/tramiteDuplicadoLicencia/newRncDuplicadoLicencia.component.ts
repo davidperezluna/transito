@@ -33,7 +33,6 @@ export class NewRncDuplicadoLicenciaComponent implements OnInit {
     public datos = {
         'categoria': null,
         'numero': null,
-        'numeroRunt': null,
         'vigencia': null,
         'idFuncionario': null,
         'idOrganismoTransito': null,

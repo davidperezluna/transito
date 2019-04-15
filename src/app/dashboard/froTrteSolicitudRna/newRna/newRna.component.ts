@@ -38,7 +38,6 @@ export class NewRnaComponent implements OnInit {
   public confirmarSolicitante = false;
   public requiereSustrato = false;
   public requiereRunt = false;
-  public numeroRunt: any = null;
 
   public tramites:any;
   public fromApoderado = false;
@@ -220,6 +219,8 @@ export class NewRnaComponent implements OnInit {
                 } else {
                   this.tramitesFactura = null;
                   this.propietarios = null
+                  this.requiereSustrato = false;
+                  this.requiereRunt = false;
 
                   swal({
                     title: 'Error!',

@@ -13,9 +13,6 @@ import swal from 'sweetalert2';
   templateUrl: './newCiudadano.component.html'
 })
 export class NewCiudadanoComponent implements OnInit {
-@Output() readyCiudadano = new EventEmitter<any>();
-@Input() identificacion:any = null;
-@Input() tipoIdentificacion:any = null;
 public ciudadano: UserCiudadano;
 public errorMessage;
 public respuesta;
@@ -40,14 +37,11 @@ constructor(
 ){}
 
   ngOnInit() {
-    this.ciudadano = new UserCiudadano(null, null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
+    this.ciudadano = new UserCiudadano(null,null, null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
 
     this._TipoIdentificacionService.select().subscribe(
         response => {
           this.tiposIdentificacion = response;
-          setTimeout(() => {
-            this.tipoIdentificacionSelected = [this.tipoIdentificacion];
-          });
         },
         error => {
           this.errorMessage = <any>error;
@@ -87,21 +81,19 @@ constructor(
     );
 
     this._MunicipioService.select().subscribe(
-        response => {
-          this.municipios = response;
-        }, 
-        error => {
-          this.errorMessage = <any>error;
-          if(this.errorMessage != null){
-            console.log(this.errorMessage);
-            alert('Error en la petición');
-          }
+      response => {
+        this.municipios = response;
+      }, 
+      error => {
+        this.errorMessage = <any>error;
+        if(this.errorMessage != null){
+          console.log(this.errorMessage);
+          alert('Error en la petición');
         }
-      );
+      }
+    );
   }
-  onCancelar(){
-    this.readyCiudadano.emit(false);
-  }
+
   onEnviar(){
     let token = this._loginService.getToken();
 
@@ -112,7 +104,7 @@ constructor(
                'Genero: <b>'+this.ciudadano.idGenero+'</b><br>'+
                'Grupo Sanguineo: <b>'+this.ciudadano.idGrupoSanguineo+'</b><br>'+
                'Direccion: <b>'+this.ciudadano.direccionPersonal+'</b><br>'+
-               'Telefono: <b>'+this.ciudadano.telefono+'</b><br>';
+               'Telefono: <b>'+this.ciudadano.telefonoCelular+'</b><br>';
 
    swal({
       title: 'Creacion de persona natural',
@@ -133,13 +125,12 @@ constructor(
       response => {
         this.respuesta = response;
         if(this.respuesta.status == 'success'){
-          this.readyCiudadano.emit(true);
           swal({
             title: 'Perfecto!',
             text: 'Registro exitoso!',
             type: 'success',
             confirmButtonText: 'Aceptar'
-          })
+          });
         }else{
           swal({
             title: 'Error!',

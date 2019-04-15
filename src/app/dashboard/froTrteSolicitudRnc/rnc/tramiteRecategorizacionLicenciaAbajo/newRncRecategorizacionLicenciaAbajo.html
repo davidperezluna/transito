@@ -66,16 +66,12 @@
                     <div class="form-group">
                         <div class="row">
                             <div class="col-xs-12 col-lg-4">
-                                <label>Vigencia <b class="text-danger">*</b></label>
-                                <input class="form-control" [(ngModel)]="datos.vigencia" name="vigencia" type="date" required />
+                                <label>Vigencia</label>
+                                <input class="form-control" [(ngModel)]="datos.vigencia" name="vigencia" type="date" />
                             </div>
                             <div class="col-xs-12 col-lg-4">
                                 <label>Número de Licencia <b class="text-danger">*</b></label>
                                 <input class="form-control" [(ngModel)]="solicitante.identificacion" name="numeroLicencia" type="text" required readonly />
-                            </div>
-                            <div class="col-xs-12 col-lg-4">
-                                <label>Número solicitud RUNT <b class="text-danger">*</b></label>
-                                <input class="form-control" [(ngModel)]="datos.numeroRunt" name="numeroRunt" type="text" required />
                             </div>
                         </div>
                     </div>

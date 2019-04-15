@@ -102,7 +102,7 @@ constructor(
   ){}
 
   ngOnInit() {
-    this.vehiculo = new RnaPreregistro(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
+    this.vehiculo = new RnaPreregistro(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
     
     let token = this._LoginService.getToken();
     let identity = this._LoginService.getIdentity();

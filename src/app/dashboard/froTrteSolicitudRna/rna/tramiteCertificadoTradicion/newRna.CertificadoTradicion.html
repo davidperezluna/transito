@@ -8,7 +8,7 @@
             </div>
             <div class="card-body text-center">
                 <!-- {{ tramiteSolicitud.resumen }} -->
-                <a *ngIf="tramiteSolicitud" href="{{ apiUrl }}/{{ tramiteSolicitud.vehiculo.id }}/TRADICIONAL/pdf/certificadotradicion" class="btn btn-primary" target="_blank">
+                <a *ngIf="tramiteSolicitud" href="{{ apiUrl }}/{{ tramiteSolicitud.id }}/TRADICIONAL/pdf/certificadotradicion" class="btn btn-primary" target="_blank">
                     <i class="fa fa-file-pdf-o"></i>
                     Imprimir
                 </a>

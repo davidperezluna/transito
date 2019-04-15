@@ -14,7 +14,7 @@
                         </div>
                         <div class="col-xs-12 col-lg-6">
                             <label>Identificacion*</label>
-                            <input class="form-control" [(ngModel)]="ciudadano.numeroIdentificacionUsuario" name="numeroIdentificacion" placeholder=""
+                            <input class="form-control" [(ngModel)]="ciudadano.identificacion" name="identificacion" placeholder=""
                                 type="number" required>
                         </div>
                         <div class="col-xs-12 col-lg-6">
@@ -29,21 +29,21 @@
                         </div>
                         <div class="col-xs-12 col-lg-6">
                             <label>Primer Nombre*</label>
-                            <input class="form-control" [(ngModel)]="ciudadano.primerNombreUsuario" name="primerNombre" placeholder="" type="text" required>
+                            <input class="form-control" [(ngModel)]="ciudadano.primerNombre" name="primerNombre" type="text" required>
                         </div>
                         <div class="col-xs-12 col-lg-6">
                             <label>Segundo Nombre*</label>
-                            <input class="form-control" [(ngModel)]="ciudadano.segundoNombreUsuario" name="segundoNombre" placeholder="" type="text"
+                            <input class="form-control" [(ngModel)]="ciudadano.segundoNombre" name="segundoNombre" type="text"
                                 required>
                         </div>
                         <div class="col-xs-12 col-lg-6">
                             <label>Primer Apellido*</label>
-                            <input class="form-control" [(ngModel)]="ciudadano.primerApellidoUsuario" name="primerApellido" placeholder="" type="text"
+                            <input class="form-control" [(ngModel)]="ciudadano.primerApellido" name="primerApellido" type="text"
                                 required>
                         </div>
                         <div class="col-xs-12 col-lg-6">
                             <label>Segundo Apellido*</label>
-                            <input class="form-control" [(ngModel)]="ciudadano.segundoApellidoUsuario" name="segundoApellido" placeholder="" type="text"
+                            <input class="form-control" [(ngModel)]="ciudadano.segundoApellido" name="segundoApellido" type="text"
                                 required>
                         </div>
                         <div class="col-xs-12 col-lg-6">
@@ -53,7 +53,7 @@
                         </div>
                         <div class="col-xs-12 col-lg-6">
                             <label>Fecha Nacimiento*</label>
-                            <input class="form-control" [(ngModel)]="ciudadano.fechaNacimiento" name="fechaNacimiento" placeholder="" type="date" required>
+                            <input class="form-control" [(ngModel)]="ciudadano.fechaNacimiento" name="fechaNacimiento" type="date" required>
                         </div>
                         <div class="col-xs-12 col-lg-6">
                             <label>Municipio Nacimiento*</label>
@@ -66,24 +66,24 @@
                             </ng-select>
                         </div>
                         <div class="col-xs-12 col-lg-6">
-                            <label>Edad*</label>
-                            <input class="form-control" [(ngModel)]="ciudadano.edad" name="edad" placeholder="" type="text" required>
+                            <label>Telefono celular*</label>
+                            <input class="form-control" [(ngModel)]="ciudadano.telefonoCelular" name="telefonoCelular" type="text" required>
                         </div>
                         <div class="col-xs-12 col-lg-6">
-                            <label>Telefono*</label>
-                            <input class="form-control" [(ngModel)]="ciudadano.telefonoUsuario" name="telefono" placeholder="" type="text" required>
+                            <label>Telefono fijo</label>
+                            <input class="form-control" [(ngModel)]="ciudadano.telefonoFijo" name="telefonoFijo" type="text" required>
                         </div>
                         <div class="col-xs-12 col-lg-6">
                             <label>Direccion Residencia</label>
-                            <input class="form-control" [(ngModel)]="ciudadano.direccion" name="direccion" placeholder="" type="text" required>
+                            <input class="form-control" [(ngModel)]="ciudadano.direccionPersonal" name="direccionPersonal" type="text" required>
                         </div>
                         <div class="col-xs-12 col-lg-6">
                             <label>Direccion Trabajo</label>
-                            <input class="form-control" [(ngModel)]="ciudadano.direccionTrabajo" name="direccionTrabajo" placeholder="" type="text" required>
+                            <input class="form-control" [(ngModel)]="ciudadano.direccionTrabajo" name="direccionTrabajo" type="text" required>
                         </div>
                         <div class="col-xs-12 col-lg-6">
                             <label>Correo</label>
-                            <input class="form-control" [(ngModel)]="ciudadano.correoUsuario" name="correo" placeholder="" type="email" required>
+                            <input class="form-control" [(ngModel)]="ciudadano.correo" name="correo" type="email" required>
                         </div>
                     </div>
                 </div>

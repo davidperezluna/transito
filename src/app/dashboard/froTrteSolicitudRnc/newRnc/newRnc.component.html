@@ -78,6 +78,12 @@
                 <div class="row">
                     <div class="col-xs-12 col-lg-12">
                         <div class="form-group">
+                            <div class="row" *ngIf="requiereRunt">
+                                <div class="col-xs-12 col-lg-6"> 
+                                    <label>Número de solicitud RUNT <b class="text-danger">*</b></label>
+                                    <input type="text" class="form-control" placeholder="No. solicitud RUNT" [(ngModel)]="tramiteSolicitud.numeroRunt" name="numeroRunt" required />
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-xs-12 col-lg-12">
                                     <div class="custom-control custom-checkbox">
@@ -106,7 +112,7 @@
                                     Realizar trámites
                                 </a>
                             </li>
-                            <li class="nav-item" *ngIf='sustrato'>
+                            <li class="nav-item" *ngIf='requiereSustrato'>
                                 <a class="nav-link " data-toggle="tab" href="#tab-sustrato" role="tab">
                                     Registrar sustrato
                                 </a>

@@ -103,9 +103,11 @@ constructor(
     );
 
   }
+
   onCancelar(){
     this.ready.emit(true);
   }
+
   onEnviar(){
     swal({
       title: 'Enviando datos!',
@@ -113,22 +115,24 @@ constructor(
       onOpen: () => {
         swal.showLoading()
       }
-    })
+    });
+
     let token = this._loginService.getToken();
+
     this.ImoLote.idOrganismoTransito = this.sedeSelected;
+
     if (!this.frmInsumo) {
       this.ImoLote.idEmpresa = this.empresaSelected;
       this.ImoLote.imoCfgTipo = this.insumoSelected;
-     
     }else{
       this.ImoLote.idEmpresa = this.empresaInsumoSelected;
       this.ImoLote.imoCfgTipo = this.insumoInsumoSelected;
     }
+
 		this._ImoLoteService.register(this.ImoLote,token).subscribe(
 			response => {
         this.respuesta = response;
         if(this.respuesta.status == 'success'){
-          swal.close();
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',
@@ -139,7 +143,7 @@ constructor(
         }else{
           swal({
             title: 'Error!',
-            text: this.respuesta.msj,
+            text: this.respuesta.message,
             type: 'error',
             confirmButtonText: 'Aceptar'
           })
