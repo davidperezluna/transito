@@ -27,18 +27,18 @@
                      </div>
                   </div>
                </div>
+               <div class="btn-group pull-right" *ngIf="empresaNoEncontrada">
+                  <button (click)="onNewEmpresa()" class="btn btn-info" type="button">
+                     <span class="text">Agregar Empresa</span>
+                     <i class="ti-save ml-2"></i>
+                  </button>
+               </div>
             </div>
          </div>
          <!-- tabla de detalles de la empresa -->
          <div class="card" *ngIf="empresaEncontrada">
             <div class="card-header">
                <h5 class="text-uppercase">Detalles empresa
-                  <div class="btn-group pull-right" *ngIf="empresaNoEncontrada">
-                     <button (click)="onNewEmpresa()" class="btn btn-info" type="button">
-                        <span class="text">Agregar Empresa</span>
-                        <i class="ti-save ml-2"></i>
-                     </button>
-                  </div>
                </h5>
             </div>
             <div class="card-body">
@@ -421,20 +421,30 @@
                               <div class="row">
                                  <div style="padding-left: 1%; width: 65.2%; border:1px solid #cccccc;">TOTAL</div>
                                  <div style="padding-left: 1%; width: 5.8%; border:1px solid #cccccc;">100.0</div>
-                                 <div style="width: 5.9%; border:1px solid #cccccc; padding:0;" *ngIf="categoriaSelected == 1">
-                                    <span style="padding-left: 20%;">{{ datos2.valorObtenidoFortalecimiento | number:'1.1-2' }}</span>
+                                 <div style="width: 5.9%; border:1px solid #cccccc; padding:0;"
+                                    *ngIf="categoriaSelected == 1">
+                                    <span
+                                       style="padding-left: 20%;">{{ datos2.valorObtenidoFortalecimiento | number:'1.1-2' }}</span>
                                  </div>
-                                 <div style="width: 5.9%; border:1px solid #cccccc; padding:0;" *ngIf="categoriaSelected == 2">
-                                    <span style="padding-left: 20%;">{{ datos2.valorObtenidoComportamiento | number:'1.1-2' }}</span>
+                                 <div style="width: 5.9%; border:1px solid #cccccc; padding:0;"
+                                    *ngIf="categoriaSelected == 2">
+                                    <span
+                                       style="padding-left: 20%;">{{ datos2.valorObtenidoComportamiento | number:'1.1-2' }}</span>
                                  </div>
-                                 <div style="width: 5.9%; border:1px solid #cccccc; padding:0;" *ngIf="categoriaSelected == 3">
-                                    <span style="padding-left: 20%;">{{ datos2.valorObtenidoVehiculoSeguro | number:'1.1-2' }}</span>
+                                 <div style="width: 5.9%; border:1px solid #cccccc; padding:0;"
+                                    *ngIf="categoriaSelected == 3">
+                                    <span
+                                       style="padding-left: 20%;">{{ datos2.valorObtenidoVehiculoSeguro | number:'1.1-2' }}</span>
                                  </div>
-                                 <div style="width: 5.9%; border:1px solid #cccccc; padding:0;" *ngIf="categoriaSelected == 4">
-                                    <span style="padding-left: 20%;">{{ datos2.valorObtenidoInfraestructuraSegura | number:'1.1-2' }}</span>
+                                 <div style="width: 5.9%; border:1px solid #cccccc; padding:0;"
+                                    *ngIf="categoriaSelected == 4">
+                                    <span
+                                       style="padding-left: 20%;">{{ datos2.valorObtenidoInfraestructuraSegura | number:'1.1-2' }}</span>
                                  </div>
-                                 <div style="width: 5.9%; border:1px solid #cccccc; padding:0;" *ngIf="categoriaSelected == 5">
-                                    <span style="padding-left: 20%;">{{ datos2.valorObtenidoAtencionVictima | number:'1.1-2' }}</span>
+                                 <div style="width: 5.9%; border:1px solid #cccccc; padding:0;"
+                                    *ngIf="categoriaSelected == 5">
+                                    <span
+                                       style="padding-left: 20%;">{{ datos2.valorObtenidoAtencionVictima | number:'1.1-2' }}</span>
                                  </div>
                                  <div style="width: 23.1%; border: 1px solid #cccccc;"></div>
                               </div>
@@ -465,27 +475,30 @@
                                        <i class="fa fa-save"></i>
                                        Guardar
                                     </button>
+                                 </div>
+                                 <!-- -->
                               </div>
-                              <!-- -->
                            </div>
-                        </div>
-                     </div><!-- /.categorias -->
+                        </div><!-- /.categorias -->
+                     </div>
+                  </div>
+               </div>
+               <div class="card-footer">
+                  <div class="btn-group">
+                     <button (click)="onFinalizar()" *ngIf="!evaluacion && msvCategorias == null"
+                        class="btn btn-default">
+                        <i class="fa fa-check"></i>
+                        Finalizar y Enviar
+                     </button>
                   </div>
                </div>
             </div>
-            <div class="card-footer">
-               <div class="btn-group">
-                  <button (click)="onFinalizar()" *ngIf="!evaluacion && msvCategorias == null" class="btn btn-default">
-                     <i class="fa fa-check"></i>
-                     Finalizar y Enviar
-                  </button>
-               </div>
-            </div>
+            <!-- fin detalles de la empresa -->
          </div>
-         <!-- fin detalles de la empresa -->
       </div>
    </div>
    <app-new-empresa *ngIf='formNewEmpresa' (ready)="ready($event)"> </app-new-empresa>
-   <app-edit-revision *ngIf='formEditRevision' [miEmpresa]="miEmpresa" [msvRevision]="revision" (ready)="ready($event)"> </app-edit-revision>
-   <app-newRevision *ngIf="formNewRevision" [miEmpresa]="miEmpresa" (ready)="ready($event)"> </app-newRevision>
+   <app-edit-revision *ngIf='formEditRevision' [miEmpresa]="miEmpresa" [msvRevision]="revision" (ready)="ready($event)">
+   </app-edit-revision>
+   <app-new-revision *ngIf="formNewRevision" [miEmpresa]="miEmpresa" (ready)="ready($event)"> </app-new-revision>
 </div>

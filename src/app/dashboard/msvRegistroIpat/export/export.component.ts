@@ -24,13 +24,14 @@ declare var $: any;
     providers: [DatePipe]
 })
 export class ExportComponent implements OnInit {
-    //@Output() ready = new EventEmitter<any>();
     public errorMessage;
     public formNew = false;
     public formEdit = false;
     public formIndex = true;
     public table: any = null;
+    
     public ipat = false;
+    public ipatsEncontrados = false;
     
     public txt: any[] = null;
     public valido = true;
@@ -98,7 +99,6 @@ export class ExportComponent implements OnInit {
         private _ChoqueCon: CfgChoqueConService,
         private _ObjetoFijo: CfgObjetoFijoService,
         private _GeneroService: UserCfgGeneroService,
-        private _MsvRegistroIpat: MsvRegistroIpatService,
     ) { }
 
     ngOnInit() {
@@ -224,15 +224,17 @@ export class ExportComponent implements OnInit {
             pageLength: 8,
             sPaginationType: 'full_numbers',
             dom: 'Bfrtip',
-            /* 'excel', 'pdf', */
             buttons: [
                 {
+                    title: 'Reporte Accidentalidad',
+                    message: 'Gravedad Accidente: ' + this.gravedades,
                     extend: 'excel',
                     text: 'Excel',
-                    title: 'xls',
                     filename: 'Reporte_Accidentalidad_'+ this.fecha,
                 },
                 {
+                    title: 'Reporte Accidentalidad',
+                    messageBottom: 'ssdasdasdasdadadsd',
                     extend: 'pdfHtml5',
                     orientation: 'landscape',
                     pageSize: 'LEGAL',
@@ -241,10 +243,10 @@ export class ExportComponent implements OnInit {
             ],
             oLanguage: {
                 oPaginate: {
-                    sFirst: '<<',
-                    sPrevious: '<',
-                    sNext: '>',
-                    sLast: '>>'
+                    sFirst: '<i class="fa fa-step-backward"></i>',
+                    sPrevious: '<i class="fa fa-chevron-left"></i>',
+                    sNext: '<i class="fa fa-chevron-right"></i>',
+                    sLast: '<i class="fa fa-step-forward"></i>'
                 }
             }
         });
@@ -295,6 +297,8 @@ export class ExportComponent implements OnInit {
             response => {
                 if(response.status == 'success'){
                     this.ipats = response.data;
+                    this.ipatsEncontrados = true;
+
                     let timeoutId = setTimeout(() => {
                         this.onInitTable();
                     }, 100);
@@ -321,7 +325,7 @@ export class ExportComponent implements OnInit {
         this.valido = false;
     } 
 
-    onExportarTotal(){
+    /* onExportarTotal(){
         let token = this._LoginService.getToken();
         this._IpatService.buscarIpatExport({ "file": this.txt, "datos": this.exportIpat }, token).subscribe(
             response => {
@@ -351,5 +355,5 @@ export class ExportComponent implements OnInit {
                 }
             }
         );
-    }
+    } */
 }
