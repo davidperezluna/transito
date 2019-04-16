@@ -132,14 +132,14 @@ export class ImoLoteComponent implements OnInit {
  
   editRnaLoteInsumoSustrato(loteInsumoInsumo:any){
     this.loteInsumoInsumo = loteInsumoInsumo;
-    this.tipoInsumo = 'sustrato';
+    this.tipoInsumo = 'SUSTRATO';
     this.formEdit = true;
     this.formIndex = false;
   }
 
   editRnaLoteInsumoInsumo(loteInsumoInsumo:any){
     this.loteInsumoInsumo = loteInsumoInsumo;
-    this.tipoInsumo = 'insumo';
+    this.tipoInsumo = 'INSUMO';
     this.formEdit = true;
     this.formIndex = false;
   }
