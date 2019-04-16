@@ -16,7 +16,6 @@ export class EditComponent implements OnInit {
     public errorMessage;
 
     public organismosTransito: any;
-    public modulos: any;
     public tiposVehiculos: any;
 
     public sedeOperativaSelected: any;
