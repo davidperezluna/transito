@@ -177,7 +177,7 @@ constructor(
       'retencion': this.valorRetefuenteUnitario,
       'idTipoRecaudo': 1,
     }
-
+ 
     this._FacturaService.register(datos, token).subscribe(
       response => {
         this.respuesta = response;

@@ -424,7 +424,6 @@ export class FroFacTramiteComponent implements OnInit {
             
             //Agrega el trámite seleccionado al arreglo
             this.onCreateArray();
-            
           }
         } else {
           this.tramitePrecio = null;
@@ -661,7 +660,7 @@ export class FroFacTramiteComponent implements OnInit {
 
     this.factura.tramites = this.tramitesPrecioArray;
     //Tipo de recaudo infracciones
-    this.factura.idTipoRecaudo = 1;
+    this.factura.idTipoRecaudo = 1; 
 
     this._FacturaService.register(this.factura, token).subscribe(
       response => {
