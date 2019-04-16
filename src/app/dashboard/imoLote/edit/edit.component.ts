@@ -19,7 +19,7 @@ public errorMessage;
 public respuesta;
 public formReady = false;
 public organismoTransitoSelect:any;
-public insumoSelected:any;
+public insumoSelected;
 public empresaSelected:any;
 public insumos:any;
 public organismosTransito:any;
@@ -56,7 +56,7 @@ constructor(
       response => {
         this.insumos = response;
         setTimeout(() => {
-          this.insumoSelected = [this.loteInsumoInsumo.tipoInsumo.id];
+          this.insumoSelected = Number[this.loteInsumoInsumo.tipoInsumo.id];
         });
       }, 
       error => {
@@ -73,7 +73,7 @@ constructor(
       response => {
         this.sustratos = response;
         setTimeout(() => {
-          this.insumoSelected = [this.loteInsumoInsumo.tipoInsumo.id];
+          this.insumoSelected = Number[this.loteInsumoInsumo.tipoInsumo.id];
         });
       }, 
       error => {
@@ -85,8 +85,8 @@ constructor(
         }
       }
     );
-
-    if (this.tipoInsumo == 'sustrato') {
+      console.log(this.tipoInsumo);
+    if (this.tipoInsumo == 'SUSTRATO') {
       this._OrganismoTransitoService.selectSedes().subscribe(
         response => {
           this.organismosTransito = response;

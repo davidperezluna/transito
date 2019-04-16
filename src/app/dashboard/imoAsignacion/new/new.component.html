@@ -12,7 +12,7 @@
                             [multiple]="false"
                             [options]="sedes"
                             [(ngModel)]="sedeSelected"
-                            (ngModelChange)="changedSedeOperativa($event)"
+                            (ngModelChange)="onChangedOrganismoTransito($event)"
                             name="idSedeOperativa">
                         </ng-select>
                         <br>
@@ -109,7 +109,7 @@
                                             [multiple]="false"
                                             [options]="insumos"
                                             [(ngModel)]="insumoSelectedInsumo"
-                                            (ngModelChange)="changedInsumoInsumo($event)"
+                                            (ngModelChange)="onChangedInsumoInsumo($event)"
                                             required
                                             name="insumoInsumoId">
                                         </ng-select>
@@ -163,10 +163,10 @@
         </div>  
         <div class="card-footer">
             <div class="btn-group"> 
-                <button  (click)="onEnviarArray()" class="btn btn-primary" type="button">Enviar</button>
-                <!-- <button *ngIf="!numeroActa" (click)="onEnviarArray()" class="btn btn-primary" type="button">Enviar</button> -->
+                <!-- <button  (click)="onEnviarArray()" class="btn btn-primary" type="button">Enviar</button> -->
+                <button *ngIf="!numeroActa" (click)="onEnviarArray()" class="btn btn-primary" type="button">Enviar</button>
     
-                <a href="{{ apiUrl }}/pdf/acta/asignacion/{{numeroActa}}/{{sedeSelected}}" (click)="imprimirActa()" *ngIf='numeroActa' class="btn btn-success" target="_blank">
+                <a href="{{ apiUrl }}/pdf/acta/asignacion/{{numeroActa}}/{{sedeSelected}}" (click)="onPrintActa()" *ngIf='numeroActa' class="btn btn-success" target="_blank">
                     <i class="fa fa-file-pdf-o"></i>
                     Imprimir Acta
                 </a>
