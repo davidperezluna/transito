@@ -2,7 +2,7 @@
     <div class="col-md-12">
         <div class="card">
         <div class="card-body">
-            <h5 class="m-0">{{loteInsumo.casoInsumo.nombre}} {{loteInsumo.sedeOperativa.nombre}}</h5>
+            <h5 class="m-0">{{loteInsumo.tipoInsumo.nombre}} {{loteInsumo.sedeOperativa.nombre}}</h5>
             <hr>
             <table class="table " id="dataTables-example-Sustratos">
                 <thead>
@@ -17,7 +17,7 @@
                 <tbody>
                   <tr class="odd" *ngFor="let insumo of insumos; let i = index">
                     <td >{{insumo.estado}}</td>
-                    <td >{{insumo.casoInsumo.nombre}}</td>
+                    <td >{{insumo.tipo.nombre}}</td>
                     <td >{{insumo.numero}}</td>
                     <td >{{insumo.fecha}}</td>
                     <td>
@@ -26,7 +26,6 @@
                   </tr>
                 </tbody>
               </table>
-                
         </div>
     </div>
 </div>
