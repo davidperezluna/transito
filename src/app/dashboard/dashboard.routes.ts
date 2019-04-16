@@ -144,6 +144,7 @@ import { TramitePrecioRoutes } from './tramitePrecio/tramitePrecio.routes';
 import { SvIpatTalonarioRoutes } from './svIpatTalonario/svIpatTalonario.routes';
 import { SvIpatConsecutivoRoutes } from './svIpatConsecutivo/svIpatConsecutivo.routes';
 import { SvIpatAsignacionRoutes } from './svIpatAsignacion/svIpatAsignacion.routes';
+import { SvIpatImpresoBodegaRoutes } from './svIpatImpresoBodega/svIpatImpresoBodega.routes';
 
 import { rnaRegistroInsumosRoutes } from './rnaRegistroInsumos/rnaRegistroInsumos.routes';
 //import { RnaPreasignacionInsumoRoutes } from './rnaPreasignacionInsumo/rnaPreasignacionInsumo.routes';
@@ -429,6 +430,7 @@ export const DashboardRoutes: Route[] = [
       ...SvIpatTalonarioRoutes,
       ...SvIpatConsecutivoRoutes,
       ...SvIpatAsignacionRoutes,
+      ...SvIpatImpresoBodegaRoutes,
       ...ConceptoParametroRoutes,
       ...RnmaPreregistroRoutes,
       ...MsvRegistroIpatRoutes,
