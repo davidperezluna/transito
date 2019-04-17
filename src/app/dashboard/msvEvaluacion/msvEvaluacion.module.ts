@@ -18,8 +18,8 @@ import { NewRevisionComponent } from './newRevision/newRevision.component';
 
 @NgModule({
     imports: [CommonModule, Ng2BootstrapModule.forRoot(),SelectModule],
-    declarations: [MsvEvaluacionComponent, NewComponent, EditComponent, EditRevisionComponent,NewEmpresaComponent,NewRevisionComponent],
-    exports: [MsvEvaluacionComponent, NewComponent, EditComponent, EditRevisionComponent, NewEmpresaComponent,NewRevisionComponent],
+    declarations: [MsvEvaluacionComponent, NewComponent, EditComponent, EditRevisionComponent,NewEmpresaComponent, NewRevisionComponent],
+    exports: [MsvEvaluacionComponent, NewComponent, EditComponent, EditRevisionComponent, NewEmpresaComponent, NewRevisionComponent],
     providers: [MsvRevisionService, MsvEvaluacionService, MsvParametroService, MsvVariableService, MsvCalificacionService, MsvResultadoService]
 })
 

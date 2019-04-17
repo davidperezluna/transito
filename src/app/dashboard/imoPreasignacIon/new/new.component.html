@@ -41,18 +41,19 @@
                               </ng-select>
                           </div>
   
-                          <div class="col-lg-4 col-md-4"> 
+                          <!-- <div class="col-lg-4 col-md-4"> 
                               <label>Cantidad*</label>
                               <input class="form-control" (blur)="isExistencia()" [(ngModel)]="datosAsignacion.cantidad" name="cantidad" placeholder="" type="text" required>
-                          </div> 
+                          </div>  -->
                       </div> 
                     </div>    
                 </div>
+                <div class="card-footer">
+                    <button (click)="onCancelar()" class="btn btn-default">Cancelar</button>
+                    <!-- <button (click)="onEnviar()" [disabled]="isCantidad" class="btn btn-primary pull-right" type="button">Enviar</button> -->
+                    <button (click)="onSearchLote()" [disabled]="newForm.invalid" class="btn btn-primary pull-right" type="button">Buscar</button>
+                </div>    
             </form>
-            <div class="card-footer">
-                <button (click)="onCancelar()" class="btn btn-default">Cancelar</button>
-                <button (click)="onEnviar()" [disabled]="isCantidad" class="btn btn-primary pull-right" type="button">Enviar</button>
-            </div>    
         </div>
     </div>
   </div>

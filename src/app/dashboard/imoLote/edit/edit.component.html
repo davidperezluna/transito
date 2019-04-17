@@ -22,7 +22,7 @@
                                         name="empresaId">
                                     </ng-select>
                                 </div>
-                                <div class="col-lg-4 col-md-4" *ngIf="tipoInsumo =='sustrato'">
+                                <div class="col-lg-4 col-md-4" *ngIf="tipoInsumo =='SUSTRATO'">
                                     <label>Sede <b class="text-danger">*</b></label>
                                     <ng-select
                                         [multiple]="false" 
@@ -31,7 +31,7 @@
                                         name="sedeId">
                                     </ng-select>
                                 </div>
-                                <div class="col-lg-4 col-md-4" *ngIf="tipoInsumo =='insumo'">
+                                <div class="col-lg-4 col-md-4" *ngIf="tipoInsumo =='INSUMO'">
                                     <label>Insumo <b class="text-danger">*</b></label>
                                     <ng-select
                                         [multiple]="false"
@@ -41,7 +41,7 @@
                                         name="insumoId">
                                     </ng-select>
                                 </div>
-                                <div class="col-lg-4 col-md-4" *ngIf="tipoInsumo =='sustrato'">
+                                <div class="col-lg-4 col-md-4" *ngIf="tipoInsumo =='SUSTRATO'">
                                     <label>Insumo <b class="text-danger">*</b></label>
                                     <ng-select
                                         [multiple]="false"
@@ -51,12 +51,12 @@
                                         name="insumoId">
                                     </ng-select>
                                 </div>
-                                <div class="col-lg-4 col-md-4" *ngIf="tipoInsumo =='sustrato'">
+                                <div class="col-lg-4 col-md-4" *ngIf="tipoInsumo =='SUSTRATO'">
                                     <label>Rango Inicio <b class="text-danger">*</b></label>
                                     <input class="form-control" [(ngModel)]="loteInsumoInsumo.rangoInicio" name="rangoInicio" placeholder="" type="text">
                                 </div>
     
-                                <div class="col-lg-4 col-md-4" *ngIf="tipoInsumo =='sustrato'">
+                                <div class="col-lg-4 col-md-4" *ngIf="tipoInsumo =='SUSTRATO'">
                                     <label>Rango Fin <b class="text-danger">*</b></label>
                                     <input class="form-control" (blur)="isFin()" [(ngModel)]="loteInsumoInsumo.rangoFin" name="rangoFin" placeholder="" type="text">
                                 </div>

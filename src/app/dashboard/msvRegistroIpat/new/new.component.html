@@ -17,28 +17,6 @@
                             </span>
                         </div>
                     </div>
-                    <!-- <div class="col-xs-12 col-lg-12">
-                        <div class="col-lg-12 col-md-12">
-                            <table class="table table-bordered table-striped">
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <strong>Organismo de Transito: </strong>
-                                            <br>{{ organismoTransito?.nombre }}
-                                        </td>
-                                        <td>
-                                            <strong>Nro. IPAT: </strong>
-                                            <br>{{ consecutivo?.consecutivo }}
-                                        </td>
-                                        <td>
-                                            <strong>Estado IPAT: </strong>
-                                            <br>{{ consecutivo?.estado }}
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div> -->
                 </div>
             </div>
         </div>
@@ -391,21 +369,18 @@
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvIpatVehiculo.portaPlaca == '1'">
                             <label>Marca <strong class="text-danger">*</strong></label>
-                            <!-- <input class="form-control"  type="text" [(ngModel)]="msvIpatVehiculo.marca" name="marca" required> -->
                             <ng-select [multiple]="false" [disabled]="vhlMarca" [options]="marcas"
                                 [(ngModel)]="marcaSelected" required name="marca">
                             </ng-select>
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvIpatVehiculo.portaPlaca == '1'">
                             <label>Linea <strong class="text-danger">*</strong></label>
-                            <!-- <input class="form-control" [disabled]="vhl" type="text" [(ngModel)]="msvIpatVehiculo.linea" name="linea" required> -->
                             <ng-select [multiple]="false" [disabled]="vhlMarca" [options]="lineas"
                                 [(ngModel)]="lineaSelected" required name="linea">
                             </ng-select>
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvIpatVehiculo.portaPlaca == '1'">
                             <label>Color <strong class="text-danger">*</strong></label>
-                            <!-- <input class="form-control" [disabled]="vhl" type="text" [(ngModel)]="msvIpatVehiculo.color" name="color" required> -->
                             <ng-select [multiple]="false" [disabled]="vhlColor" [options]="colores"
                                 [(ngModel)]="colorSelected" required name="color">
                             </ng-select>
@@ -417,38 +392,30 @@
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvIpatVehiculo.portaPlaca == '1'">
                             <label>Carroceria <strong class="text-danger">*</strong></label>
-                            <!-- <input class="form-control" [disabled]="vhl" type="text" [(ngModel)]="msvIpatVehiculo.carroceria" name="carroceria"
-                                required> -->
                             <ng-select [multiple]="false" [disabled]="vhlCarroceria" [options]="carrocerias"
                                 [(ngModel)]="carroceriaSelected" required name="carroceria">
                             </ng-select>
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvIpatVehiculo.portaPlaca == '1'">
                             <label>Clase Vehiculo <strong class="text-danger">*</strong></label>
-                            <!-- <input class="form-control" [disabled]="vhl" type="text" [(ngModel)]="msvIpatVehiculo.clase" name="clase" required> -->
                             <ng-select [multiple]="false" [disabled]="vhlClase" [options]="clases"
                                 [(ngModel)]="claseSelected" required name="clase">
                             </ng-select>
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvIpatVehiculo.portaPlaca == '1'">
                             <label>Servicio <strong class="text-danger">*</strong></label>
-                            <!-- <input class="form-control" [disabled]="vhl" type="text" [(ngModel)]="msvIpatVehiculo.servicio" name="servicio" required> -->
                             <ng-select [multiple]="false" [disabled]="vhlServicio" [options]="servicios"
                                 [(ngModel)]="servicioSelected" required name="servicio">
                             </ng-select>
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvIpatVehiculo.portaPlaca == '1'">
                             <label>Modalidad Transporte <strong class="text-danger">*</strong></label>
-                            <!-- <input class="form-control" [disabled]="vhl" type="text" [(ngModel)]="msvIpatVehiculo.modalidadTransporte" name="modalidadTransporte"
-                                required> -->
                             <ng-select [multiple]="false" [disabled]="vhlModalidad" [options]="modalidadesTransporte"
                                 [(ngModel)]="modalidadTransporteSelected" required name="modalidadTransporte">
                             </ng-select>
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="servicioSelected == 2">
                             <label>Radio Acción <strong class="text-danger">*</strong></label>
-                            <!-- <input class="form-control" [disabled]="vhl" type="text" [(ngModel)]="msvIpatVehiculo.radioAccion" name="radioAccion"
-                                required> -->
                             <ng-select [multiple]="false" [disabled]="vhlRadioAccion" [options]="radiosAccion"
                                 [(ngModel)]="radioAccionSelected" required name="radioAccion">
                             </ng-select>
@@ -618,7 +585,6 @@
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvIpatVehiculo.portaSoat == '1'">
                             <label>Aseguradora</label>
-                            <!-- <input class="form-control" type="text" [(ngModel)]="msvIpatVehiculo.aseguradoraSoat" name="aseguradoraSoat"> -->
                             <ng-select [multiple]="false" [options]="aseguradoras"
                                 [(ngModel)]="msvIpatVehiculo.aseguradoraSoat" name="aseguradoraSoat">
                             </ng-select>
@@ -749,16 +715,6 @@
                         <button (click)="registrarVehiculo()" *ngIf="msvIpatVehiculo.portaPlaca == '1'" class="btn btn-primary">
                             Guardar Vehiculo</button>
                     </div>
-                    <!-- <div class="col-lg-6 col-md-6">
-                        <button (click)="registrarVehiculo()"
-                            *ngIf="!vehiculoEncontrado && consecutivo && msvIpatVehiculo.portaPlaca == '1'"
-                            class="btn btn-primary">Guardar Vehiculo</button>
-                    </div>
-                    <div class="col-lg-6 col-md-6"
-                        *ngIf="vehiculoEncontrado && consecutivo && msvIpatVehiculo.portaPlaca == '1'">
-                        <button (click)="registrarVehiculoEncontrado()" class="btn btn-success">Guardar
-                            Vehiculo</button>
-                    </div> -->
                 </div>
             </div>
 
@@ -1092,14 +1048,6 @@
                     <div class="col-lg-6 col-md-6">
                         <button (click)="registrarCiudadano()" class="btn btn-primary">Guardar Conductor</button>
                     </div>
-                    <!-- <div class="col-lg-6 col-md-6">
-                        <button (click)="registrarCiudadano()" *ngIf="!conductorEncontrado && consecutivo"
-                            class="btn btn-primary">Guardar Conductor</button>
-                    </div> -->
-                    <!-- <div class="col-lg-6 col-md-6" *ngIf="conductorEncontrado && consecutivo">
-                        <button (click)="registrarCiudadanoEncontrado()" class="btn btn-success">Guardar
-                            Conductor</button>
-                    </div> -->
                 </div>
             </div>
             <div class="card" *ngIf="consecutivo">
@@ -1167,16 +1115,6 @@
                 </div>
                 <div class="card-body">
                     <div class="form-group row">
-                        <!-- <div class="input-group" class="col-lg-6 col-md-6">
-                            <input type="text" class="form-control" placeholder="Identificación Testigo"
-                                [(ngModel)]="msvRegistroIpat.identificacionTestigo" name="identificacionTestigo" />
-                            <span class="input-group-btn">
-                                <button (click)="onBuscarTestigo()" class="col-lg-9 col-md-9"
-                                    class="btn btn-default btn-primary" type="button">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </span>
-                        </div> -->
                         <div class="col-xs-16 col-lg-6" style="margin-top: 2%;">
                             <div class="input-group">
                                 <input type="number" class="form-control" placeholder="Identificación Testigo"
@@ -1234,17 +1172,6 @@
                 </div>
                 <div class="card-body">
                     <div class="form-group row">
-                        <!-- <div class="input-group" class="col-lg-6 col-md-6">
-                            <input type="text" class="form-control" placeholder="Identificación Agente"
-                                [(ngModel)]="msvRegistroIpat.identificacionAgente" required
-                                name="identificacionAgente" />
-                            <span class="input-group-btn">
-                                <button (click)="onBuscarAgente()" class="col-lg-9 col-md-9"
-                                    class="btn btn-default btn-primary" type="button">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </span>
-                        </div> -->
                         <div class="col-xs-16 col-lg-6" style="margin-top: 2%;">
                             <div class="input-group">
                                 <input type="number" class="form-control" placeholder="Identificación Agente"
@@ -1564,12 +1491,6 @@
                     <div class="col-lg-6 col-md-6">
                         <button (click)="registrarVictima()" class="btn btn-primary">Guardar Victima</button>
                     </div>
-                    <!-- <div class="col-lg-6 col-md-6" *ngIf="!victimaEncontrada && consecutivo">
-                        <button (click)="registrarVictima()" class="btn btn-primary">Guardar Victima</button>
-                    </div>
-                    <div class="col-lg-6 col-md-6" *ngIf="victimaEncontrada && consecutivo">
-                        <button (click)="registrarVictimaEncontrada()" class="btn btn-success">Guardar Victima</button>
-                    </div> -->
                 </div>
             </div>
             <div class="card" *ngIf="consecutivo && msvRegistroIpat.idGravedad == 2 || msvRegistroIpat.idGravedad == 3">
