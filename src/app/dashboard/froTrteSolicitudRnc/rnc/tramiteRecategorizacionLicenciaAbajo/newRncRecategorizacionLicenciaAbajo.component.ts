@@ -4,7 +4,6 @@ import { FroTrteSolicitudService } from '../../../../services/froTrteSolicitud.s
 import { FroFacTramiteService } from '../../../../services/froFacTramite.service';
 import { PnalFuncionarioService } from '../../../../services/pnalFuncionario.service';
 import { UserLcCfgCategoriaService } from '../../../../services/userLcCfgCategoria.service';
-import { VhloCfgClaseService } from '../../../../services/vhloCfgClase.service';
 import { VhloCfgServicioService } from '../../../../services/vhloCfgServicio.service';
 import { LoginService } from '../../../../services/login.service';
 
@@ -25,7 +24,6 @@ export class NewRncRecategorizacionLicenciaAbajoComponent implements OnInit {
     public tramiteSolicitud: any = null;
     public funcionario: any = null;
     public paises: any;
-    public clases: any;
     public servicios: any;
     public categorias: any;
 
@@ -39,7 +37,6 @@ export class NewRncRecategorizacionLicenciaAbajoComponent implements OnInit {
         'idCategoriaActual': null,
         'idCategoriaNueva': null,
         'idPais': null,
-        'idClase': null,
         'idServicio': null,
         'idTramiteFactura': null,
         'idSolicitante': null,
@@ -50,8 +47,7 @@ export class NewRncRecategorizacionLicenciaAbajoComponent implements OnInit {
         private _TramiteFacturaService: FroFacTramiteService,
         private _TramiteSolicitudService: FroTrteSolicitudService,
         private _FuncionarioService: PnalFuncionarioService,
-        private _CfgPaisService: CfgPaisService,
-        private _ClaseService: VhloCfgClaseService,
+        private _PaisService: CfgPaisService,
         private _ServicioService: VhloCfgServicioService,
         private _CategoriaService: UserLcCfgCategoriaService,
         private _LoginService: LoginService,
@@ -122,7 +118,7 @@ export class NewRncRecategorizacionLicenciaAbajoComponent implements OnInit {
                             }
                         );
                     }else{
-                        this._CfgPaisService.select().subscribe(
+                        this._PaisService.select().subscribe(
                             response => {
                               this.paises = response;
                             },
@@ -133,20 +129,6 @@ export class NewRncRecategorizacionLicenciaAbajoComponent implements OnInit {
                                 console.log(this.errorMessage);
                                 alert('Error en la petición');
                               }
-                            }
-                        );
-                
-                        this._ClaseService.select().subscribe(
-                            response => {
-                                this.clases = response;
-                            },
-                            error => {
-                                this.errorMessage = <any>error;
-                
-                                if (this.errorMessage != null) {
-                                    console.log(this.errorMessage);
-                                    alert('Error en la petición');
-                                }
                             }
                         );
                 

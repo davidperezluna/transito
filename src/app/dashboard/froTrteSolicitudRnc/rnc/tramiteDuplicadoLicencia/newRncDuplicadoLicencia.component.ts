@@ -3,7 +3,6 @@ import { FroTrteSolicitudService } from '../../../../services/froTrteSolicitud.s
 import { FroFacTramiteService } from '../../../../services/froFacTramite.service';
 import { PnalFuncionarioService } from '../../../../services/pnalFuncionario.service';
 import { UserCiudadanoService } from '../../../../services/userCiudadano.service';
-import { VhloCfgClaseService } from '../../../../services/vhloCfgClase.service';
 import { VhloCfgServicioService } from '../../../../services/vhloCfgServicio.service';
 import { UserLcCfgCategoriaService } from '../../../../services/userLcCfgCategoria.service';
 import { CfgPaisService } from '../../../../services/cfgPais.service';
@@ -25,7 +24,6 @@ export class NewRncDuplicadoLicenciaComponent implements OnInit {
     public autorizado: any = false;
     public tramiteSolicitud: any = null;
     public funcionario: any = null;
-    public clases: any;
     public servicios: any;
     public paises: any;
     public categorias: any;
@@ -37,7 +35,6 @@ export class NewRncDuplicadoLicenciaComponent implements OnInit {
         'idFuncionario': null,
         'idOrganismoTransito': null,
         'idPais': null,
-        'idClase': null,
         'idCategoria': null,
         'idServicio': null,
         'idSolicitante': null,
@@ -49,9 +46,8 @@ export class NewRncDuplicadoLicenciaComponent implements OnInit {
       private _TramiteSolicitudService: FroTrteSolicitudService,
       private _FuncionarioService: PnalFuncionarioService,
       private _CategoriaService: UserLcCfgCategoriaService,
-      private _ClaseService: VhloCfgClaseService,
       private _ServicioService: VhloCfgServicioService,
-      private _CfgPaisService: CfgPaisService,
+      private _PaisService: CfgPaisService,
       private _LoginService: LoginService,
     ) { }
 
@@ -120,20 +116,6 @@ export class NewRncDuplicadoLicenciaComponent implements OnInit {
                             }
                         );
                     }else{
-                      this._ClaseService.select().subscribe(
-                        response => {
-                          this.clases = response;
-                        },
-                        error => {
-                          this.errorMessage = <any>error;
-                  
-                          if(this.errorMessage != null){
-                            console.log(this.errorMessage);
-                            alert('Error en la petición');
-                          }
-                        }
-                      );
-              
                       this._ServicioService.select().subscribe(
                           response => {
                             this.servicios = response;
@@ -148,7 +130,7 @@ export class NewRncDuplicadoLicenciaComponent implements OnInit {
                           }
                       );
               
-                      this._CfgPaisService.select().subscribe(
+                      this._PaisService.select().subscribe(
                           response => {
                             this.paises = response;
                           },

@@ -27,6 +27,12 @@
                 <form>
                     <div class="form-group">
                         <div class="row">
+                            <div class="col-xs-12 col-lg-12">
+                                {{ tramiteFactura.precio.tipoVehiculo.nombre }}
+                            </div>
+                        </div>
+                            
+                        <div class="row">
                             <div class="col-xs-12 col-lg-8">
                                 <label>Conductor</label>
                                 <input type="text" class="form-control" value="{{ solicitante.primerNombre }} {{ solicitante.primerApellido }}" name="solicitante" readonly>
@@ -36,8 +42,7 @@
                                 <input type="text" class="form-control" value="{{ solicitante.identificacion }}" name="solicitante_identificacion" readonly>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group">
+
                         <div class="row">
                             <div class="col-xs-12 col-lg-3">
                                 <label>Categoria actual <b class="text-danger">*</b></label>
@@ -50,26 +55,18 @@
                                 </ng-select>
                             </div>
                         </div>
+
                         <div class="row">
-                            <div class="col-xs-12 col-lg-6">
-                                <label>Clase <b class="text-danger">*</b></label>
-                                <ng-select [multiple]="false" [options]="clases" [(ngModel)]="datos.idClase" name="idClase" required>
-                                </ng-select>
-                            </div>
                             <div class="col-xs-12 col-lg-6">
                                 <label>Servicio <b class="text-danger">*</b></label>
                                 <ng-select [multiple]="false" [options]="servicios" [(ngModel)]="datos.idServicio" name="idServicio" required>
                                 </ng-select>
                             </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
                             <div class="col-xs-12 col-lg-4">
                                 <label>Vigencia</label>
                                 <input class="form-control" [(ngModel)]="datos.vigencia" name="vigencia" type="date" />
                             </div>
-                            <div class="col-xs-12 col-lg-8">
+                            <div class="col-xs-12 col-lg-4">
                                 <label>Número de Licencia <b class="text-danger">*</b></label>
                                 <input class="form-control" [(ngModel)]="solicitante.identificacion" name="numeroLicencia" type="text" required readonly />
                             </div>

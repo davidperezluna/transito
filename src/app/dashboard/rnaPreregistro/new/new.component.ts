@@ -67,7 +67,7 @@ export class NewRnaPreregistroComponent implements OnInit {
   ];
 
   public tiposMatricula = [
-    {'value':'RADICADO','label':"Radicado"},
+    {'value':'RADICADO','label':"Radicado de cuenta"},
     {'value':'MATRICULA','label':"Matricula inicial"},
     {'value':'IMPORTACION','label':"Importación temporal"},
     {'value':'CARPETA','label':"Cargue de carpeta"}

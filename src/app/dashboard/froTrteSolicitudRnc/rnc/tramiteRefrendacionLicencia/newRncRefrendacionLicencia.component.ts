@@ -2,7 +2,6 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FroTrteSolicitudService } from '../../../../services/froTrteSolicitud.service';
 import { FroFacTramiteService } from '../../../../services/froFacTramite.service';
 import { PnalFuncionarioService } from '../../../../services/pnalFuncionario.service';
-import { VhloCfgClaseService } from '../../../../services/vhloCfgClase.service';
 import { VhloCfgServicioService } from '../../../../services/vhloCfgServicio.service';
 import { CfgPaisService } from '../../../../services/cfgPais.service';
 import { UserLcCfgCategoriaService } from '../../../../services/userLcCfgCategoria.service';
@@ -24,7 +23,6 @@ export class NewRncRefrendacionLicenciaComponent implements OnInit {
     public autorizado: any = false;
     public tramiteSolicitud: any = null;
     public funcionario: any = null;
-    public clases: any;
     public servicios: any;
     public paises: any;
     public categorias: any;
@@ -37,7 +35,6 @@ export class NewRncRefrendacionLicenciaComponent implements OnInit {
         'idFuncionario': null,
         'idOrganismoTransito': null,
         'idPais': null,
-        'idClase': null,
         'idServicio': null,
         'idCategoria': null,
         'idTramiteFactura': null,
@@ -48,11 +45,10 @@ export class NewRncRefrendacionLicenciaComponent implements OnInit {
       private _TramiteFacturaService: FroFacTramiteService,
       private _TramiteSolicitudService: FroTrteSolicitudService,
       private _FuncionarioService: PnalFuncionarioService,
-      private _LoginService: LoginService,
-      private _ClaseService: VhloCfgClaseService,
       private _ServicioService: VhloCfgServicioService,
-      private _CfgPaisService: CfgPaisService,
+      private _PaisService: CfgPaisService,
       private _CategoriaService: UserLcCfgCategoriaService,
+      private _LoginService: LoginService,
     ) { }
 
     ngOnInit() {
@@ -120,62 +116,48 @@ export class NewRncRefrendacionLicenciaComponent implements OnInit {
                             }
                         );
                     }else{
-                      this._ClaseService.select().subscribe(
-                        response => {
-                          this.clases = response;
-                        },
-                        error => {
-                          this.errorMessage = <any>error;
-                  
-                          if(this.errorMessage != null){
-                            console.log(this.errorMessage);
-                            alert('Error en la petición');
-                          }
-                        }
-                    );
-            
-                    this._ServicioService.select().subscribe(
-                        response => {
-                          this.servicios = response;
-                        },
-                        error => {
-                          this.errorMessage = <any>error;
-                  
-                          if(this.errorMessage != null){
-                            console.log(this.errorMessage);
-                            alert('Error en la petición');
-                          }
-                        }
-                    );
-            
-                    this._CfgPaisService.select().subscribe(
-                        response => {
-                          this.paises = response;
-                        },
-                        error => {
-                          this.errorMessage = <any>error;
-                  
-                          if(this.errorMessage != null){
-                            console.log(this.errorMessage);
-                            alert('Error en la petición');
-                          }
-                        }
-                    );
-            
-                    this._CategoriaService.select().subscribe(
-                        response => {
-                            this.categorias = response;
-                            //this.datos.idCategoriaActual = [this.tramitePrecio.modulo.id];
-                        },
-                        error => {
+                        this._ServicioService.select().subscribe(
+                            response => {
+                            this.servicios = response;
+                            },
+                            error => {
                             this.errorMessage = <any>error;
-            
-                            if (this.errorMessage != null) {
+                    
+                            if(this.errorMessage != null){
                                 console.log(this.errorMessage);
                                 alert('Error en la petición');
                             }
-                        }
-                    );
+                            }
+                        );
+                
+                        this._PaisService.select().subscribe(
+                            response => {
+                            this.paises = response;
+                            },
+                            error => {
+                            this.errorMessage = <any>error;
+                    
+                            if(this.errorMessage != null){
+                                console.log(this.errorMessage);
+                                alert('Error en la petición');
+                            }
+                            }
+                        );
+                
+                        this._CategoriaService.select().subscribe(
+                            response => {
+                                this.categorias = response;
+                                //this.datos.idCategoriaActual = [this.tramitePrecio.modulo.id];
+                            },
+                            error => {
+                                this.errorMessage = <any>error;
+                
+                                if (this.errorMessage != null) {
+                                    console.log(this.errorMessage);
+                                    alert('Error en la petición');
+                                }
+                            }
+                        );
                     }
                 } else {
                     this.autorizado = false;
