@@ -133,7 +133,7 @@
                             </ng-select>
                         </div>
 
-                        <div class="col-xs-12 col-lg-3" *ngIf="vehiculo.idModalidadTransporte == 2 && (vehiculo.tipoMatricula == 'MATRICULA' || vehiculo.tipoMatricula == 'IMPORTACION')">
+                        <div class="col-xs-12 col-lg-3" *ngIf="vehiculo.idModalidadTransporte && vehiculo.idModalidadTransporte == 2 && (vehiculo.tipoMatricula == 'MATRICULA' || vehiculo.tipoMatricula == 'IMPORTACION' || vehiculo.tipoMatricula == 'RADICADO')">
                             <label>Numero ejes</label>
                             <input class="form-control" type="text" type="text" [(ngModel)]="vehiculo.numeroEjes" name="numeroEjes">
                         </div>

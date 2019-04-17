@@ -56,4 +56,51 @@
             </form>
         </div>
     </div>
-  </div>
+    <div class="card" *ngIf='lotes'>
+        <div class="card-body">
+            <div class="tab-pane active col-lg-12 col-md-12" id="lotes" role="tabpanel" >
+                <br>
+                <br>
+                <table class="table" id="dataTables-example">
+                    <thead>
+                    <tr>
+                        <th>Detalles</th>
+                        <th>Acciones</th> 
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="odd" *ngFor="let lote of lotes; let i = index">
+                        <td >
+                            <b>Proveedor</b>
+                            {{lote.empresa.nombre}}
+                            <br>
+                            <b>Organismo de transito</b>
+                            {{lote.sedeOperativa.nombre}}
+                            <br>
+                            <b>Tipo</b>
+                            {{lote.tipoInsumo.nombre}}
+                            <br> 
+                            <b>Inicio</b>
+                            {{lote.rangoInicio}} 
+                            <b>Fin</b>
+                            {{lote.rangoFin}}
+                            <br>
+                            <b>Cantidad</b>
+                            {{lote.cantidad}}
+                            <br>
+                            <b>Referencia</b>
+                            {{lote.referencia}}
+                            <br>
+                            <b>Fecha</b>
+                            {{lote.fecha}}
+                        </td>
+                        <td>
+                            <button (click)="onAsignarLote(lote)" class="btn btn-success" type="button">Asignar</button> 
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>       
+  </div> 

@@ -5,7 +5,6 @@ import { FroFacTramiteService } from '../../../../services/froFacTramite.service
 import { PnalFuncionarioService } from '../../../../services/pnalFuncionario.service';
 import { UserLcCfgCategoriaService } from '../../../../services/userLcCfgCategoria.service';
 import { CfgPaisService } from '../../../../services/cfgPais.service';
-import { VhloCfgClaseService } from '../../../../services/vhloCfgClase.service';
 import { VhloCfgServicioService } from '../../../../services/vhloCfgServicio.service';
 import { RncLicenciaConduccionService } from '../../../../services/rncLicenciaConduccion.service';
 import { LoginService } from '../../../../services/login.service';
@@ -27,7 +26,6 @@ export class NewRncExpedicionLicenciaComponent implements OnInit {
     public tramiteSolicitud: any = null;
     public funcionario: any = null;
     public paises: any;
-    public clases: any;
     public servicios: any;
     public categorias: any;
     public radio: any;
@@ -39,7 +37,6 @@ export class NewRncExpedicionLicenciaComponent implements OnInit {
         'idFuncionario': null,
         'idPais': null,
         'idCategoria': null,
-        'idClase': null,
         'idServicio': null,
         'idOrganismoTransito': null,
         'idTramiteFactura': null,
@@ -52,7 +49,6 @@ export class NewRncExpedicionLicenciaComponent implements OnInit {
         private _FuncionarioService: PnalFuncionarioService,
         private _CiudadanoService: UserCiudadanoService,
         private _CfgPaisService: CfgPaisService,
-        private _ClaseService: VhloCfgClaseService,
         private _ServicioService: VhloCfgServicioService,
         private _CfgLicenciaConduccionCategoriaService: UserLcCfgCategoriaService,
         private _LicenciaConduccionService: RncLicenciaConduccionService,
@@ -149,20 +145,6 @@ export class NewRncExpedicionLicenciaComponent implements OnInit {
                                 console.log(this.errorMessage);
                                 alert('Error en la petición');
                               }
-                            }
-                        );
-                
-                        this._ClaseService.select().subscribe(
-                            response => {
-                                this.clases = response;
-                            },
-                            error => {
-                                this.errorMessage = <any>error;
-                
-                                if (this.errorMessage != null) {
-                                    console.log(this.errorMessage);
-                                    alert('Error en la petición');
-                                }
                             }
                         );
                 
