@@ -146,6 +146,68 @@ constructor(
   }
 
   onSearchLote(){
+      swal({
+        title: 'Enviando datos!',
+        text: 'Solo tardara unos segundos por favor espere.',
+        onOpen: () => {
+          swal.showLoading()
+        }
+      })
+      if (this.table) {
+        this.table.destroy()
+      }
+      let datos={
+        'tipoInsumo':this.insumoSelected,
+        'idOrganismoTransito':this.sedeOrigenSelected,
+      }
+      let token = this._loginService.getToken();
+      this._ImoLoteService.showReasignacion(datos,token).subscribe( 
+        response => {
+          if (response.status == 'success') {
+            this.lotes = response.data;
+            swal.close()
+            console.log(this.lotes);
+            setTimeout(() => {
+              this.iniciarTabla();
+            });
+          }else{
+            this.lotes = null;
+            swal({
+              title: 'Error!',
+              text: 'No existen sustratos para esta sede',
+              type: 'error',
+              confirmButtonText: 'Aceptar'
+            })
+          }
+        error => {
+            this.errorMessage = <any>error;
+            if(this.errorMessage != null){
+              console.log(this.errorMessage);
+              alert("Error en la petición");
+            }
+          }
+
+      });
+  }
+
+  iniciarTabla(){
+    $('#dataTables-example').DataTable({
+      responsive: true,
+      pageLength: 8,
+      sPaginationType: 'full_numbers',
+      oLanguage: {
+          oPaginate: {
+          sFirst: '<<',
+          sPrevious: '<',
+          sNext: '>',
+          sLast: '>>'
+        }
+      }
+  });
+  this.table = $('#dataTables-example').DataTable();
+  }
+
+  onAsignarLote(lote){
     swal({
       title: 'Enviando datos!',
       text: 'Solo tardara unos segundos por favor espere.',
@@ -153,34 +215,20 @@ constructor(
         swal.showLoading()
       }
     })
-    if (this.table) {
-      this.table.destroy()
+    let datos = {
+      'lote': lote,
+      'sedeOperativaDestino': this.sedeDestinoSelected
     }
-    let datos={
-      'tipoInsumo':this.insumoSelected,
-      'idOrganismoTransito':this.sedeOrigenSelected,
-    }
-    let token = this._loginService.getToken();
-    this._ImoLoteService.show(datos,token).subscribe( 
+    this._ImoInsumoService.reasignacionSustrato(datos).subscribe( 
       response => {
-        
         if (response.status == 'success') {
-          this.lotes = response.data;
+          this.lotes = null;
           swal.close()
           console.log(this.lotes);
           setTimeout(() => {
             this.iniciarTabla();
           });
-        }else{
-          this.lotes = null;
-          swal({
-            title: 'Error!',
-            text: 'No existen sustratos para esta sede',
-            type: 'error',
-            confirmButtonText: 'Aceptar'
-          })
         }
-        
       error => {
           this.errorMessage = <any>error;
           if(this.errorMessage != null){
@@ -190,21 +238,6 @@ constructor(
         }
 
     });
-}
-iniciarTabla(){
-  $('#dataTables-example').DataTable({
-    responsive: true,
-    pageLength: 8,
-    sPaginationType: 'full_numbers',
-    oLanguage: {
-         oPaginate: {
-         sFirst: '<<',
-         sPrevious: '<',
-         sNext: '>',
-         sLast: '>>'
-      }
-    }
- });
- this.table = $('#dataTables-example').DataTable();
-}
+
+  }
 }

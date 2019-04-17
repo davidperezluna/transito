@@ -45,6 +45,13 @@ export class ImoLoteService {
 		return this._http.post(this.url + "/insumo/lote/sede", params, { headers: headers }).map(res => res.json());
 	}
 
+	showReasignacion(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = "data=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/reasignacion/insumo/lote/sede", params, { headers: headers }).map(res => res.json());
+	}
+
 	edit(datos, token) {
 		let json = JSON.stringify(datos);
 		let params = "data=" + json + "&authorization=" + token;
