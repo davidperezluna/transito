@@ -2,8 +2,11 @@ import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@ang
 import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
 import { ImoCfgTipoService } from '../../../services/imoCfgTipo.service';
 import {ImoInsumoService} from '../../../services/imoInsumo.service';
+import { ImoLoteService } from '../../../services/imoLote.service';
+import {LoginService} from '../../../services/login.service';
 import { DatePipe } from '@angular/common';
 import swal from 'sweetalert2';
+declare var $: any;
 
 @Component({
   selector: 'app-new',
@@ -21,6 +24,8 @@ public sedeDestinoSelected:any;
 public sustratos:any;
 public insumoSelected:any;
 public numero:any;
+public lotes:any;
+public table:any;
 public isCantidad=true;
 public datosAsignacion = {
   'sedeOrigen': null,
@@ -33,6 +38,8 @@ constructor(
   private _OrganismoTransitoService: CfgOrganismoTransitoService,
   private _CasoInsumoService: ImoCfgTipoService,
   private _ImoInsumoService: ImoInsumoService,
+  private _ImoLoteService: ImoLoteService,
+  private _loginService: LoginService,
   ){}
 
   ngOnInit() {
@@ -137,4 +144,67 @@ constructor(
 
 		});
   }
+
+  onSearchLote(){
+    swal({
+      title: 'Enviando datos!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    })
+    if (this.table) {
+      this.table.destroy()
+    }
+    let datos={
+      'tipoInsumo':this.insumoSelected,
+      'idOrganismoTransito':this.sedeOrigenSelected,
+    }
+    let token = this._loginService.getToken();
+    this._ImoLoteService.show(datos,token).subscribe( 
+      response => {
+        
+        if (response.status == 'success') {
+          this.lotes = response.data;
+          swal.close()
+          console.log(this.lotes);
+          setTimeout(() => {
+            this.iniciarTabla();
+          });
+        }else{
+          this.lotes = null;
+          swal({
+            title: 'Error!',
+            text: 'No existen sustratos para esta sede',
+            type: 'error',
+            confirmButtonText: 'Aceptar'
+          })
+        }
+        
+      error => {
+          this.errorMessage = <any>error;
+          if(this.errorMessage != null){
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+
+    });
+}
+iniciarTabla(){
+  $('#dataTables-example').DataTable({
+    responsive: true,
+    pageLength: 8,
+    sPaginationType: 'full_numbers',
+    oLanguage: {
+         oPaginate: {
+         sFirst: '<<',
+         sPrevious: '<',
+         sNext: '>',
+         sLast: '>>'
+      }
+    }
+ });
+ this.table = $('#dataTables-example').DataTable();
+}
 }

@@ -107,7 +107,7 @@ constructor(
    this.rnaAsignacionInsumos.numero = parseInt(this.rnaAsignacionInsumos.rangoFin) - parseInt(this.rnaAsignacionInsumos.rangoInicio)+1;
   }
 
-  changedInsumoInsumo(e){
+  onChangedInsumoInsumo(e){
     if (e) {
       swal({
         title: 'Enviando datos!',
@@ -233,7 +233,7 @@ constructor(
   onAsignarLoteInsumo(){
     console.log(this.loteInsumo);
     if (this.loteInsumo) {
-      if(this.numero > this.loteInsumo.cantidad){
+      if(this.numero <= this.loteInsumo.cantidad){
         swal({
           title: 'Error!',
           text: 'Excede el numero de insumo',
@@ -318,16 +318,16 @@ constructor(
     })   
   }
 
-  changedSedeOperativa(){
+  onChangedOrganismoTransito(){
     this.lotesSelecionados = [];
     this.lotes = null;
   }
 
-  imprimirActa(){
+  onPrintActa(){
+    this.numeroActa = null;
     this.lotesSelecionados = [];
-    this.imprimirActa = null;
     this.lotes = null;
-
+    this.ngOnInit();
   }
 
 }
