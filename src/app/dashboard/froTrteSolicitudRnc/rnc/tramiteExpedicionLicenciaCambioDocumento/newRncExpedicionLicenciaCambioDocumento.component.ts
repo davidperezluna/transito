@@ -2,11 +2,9 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FroTrteSolicitudService } from '../../../../services/froTrteSolicitud.service';
 import { FroFacTramiteService } from '../../../../services/froFacTramite.service';
 import { PnalFuncionarioService } from '../../../../services/pnalFuncionario.service';
-import { VhloCfgClaseService } from '../../../../services/vhloCfgClase.service';
 import { VhloCfgServicioService } from '../../../../services/vhloCfgServicio.service';
 import { CfgPaisService } from '../../../../services/cfgPais.service';
 import { UserLcCfgCategoriaService } from '../../../../services/userLcCfgCategoria.service';
-import { UserCiudadanoService } from '../../../../services/userCiudadano.service';
 import { LoginService } from '../../../../services/login.service';
 
 import swal from 'sweetalert2';
@@ -25,7 +23,6 @@ export class NewRncExpedicionLicenciaCambioDocumentoComponent implements OnInit 
     public autorizado: any = false;
     public tramiteSolicitud: any = null;
     public funcionario: any = null;
-    public clases: any;
     public servicios: any;
     public paises: any;
     public categorias: any;
@@ -37,7 +34,6 @@ export class NewRncExpedicionLicenciaCambioDocumentoComponent implements OnInit 
         'vigencia': null,
         'idFuncionario': null,
         'idOrganismoTransito': null,
-        'idClase': null,
         'idServicio': null,
         'idCategoria': null,
         'idTramiteFactura': null,
@@ -48,7 +44,6 @@ export class NewRncExpedicionLicenciaCambioDocumentoComponent implements OnInit 
       private _TramiteFacturaService: FroFacTramiteService,
       private _TramiteSolicitudService: FroTrteSolicitudService,
       private _FuncionarioService: PnalFuncionarioService,
-      private _ClaseService: VhloCfgClaseService,
       private _ServicioService: VhloCfgServicioService,
       private _CfgPaisService: CfgPaisService,
       private _CategoriaService: UserLcCfgCategoriaService,
@@ -121,19 +116,6 @@ export class NewRncExpedicionLicenciaCambioDocumentoComponent implements OnInit 
                         );
                     }else{
                       this.datos.identificacionAnterior = this.solicitante.identificacion;
-
-                      this._ClaseService.select().subscribe(
-                          response => {
-                            this.clases = response;
-                          },
-                          error => {
-                            this.errorMessage = <any>error;
-                            if(this.errorMessage != null){
-                              console.log(this.errorMessage);
-                              alert('Error en la petición');
-                            }
-                          }
-                      );
               
                       this._ServicioService.select().subscribe(
                           response => {
