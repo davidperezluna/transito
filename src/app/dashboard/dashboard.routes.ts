@@ -160,7 +160,7 @@ import { UserCfgEmpresaServicioRoutes } from './userCfgEmpresaServicio/userCfgEm
 
 import { SvCfgClaseAccidenteRoutes } from './svCfgClaseAccidente/svCfgClaseAccidente.routes';
 import { CfgChoqueConRoutes } from './cfgChoqueCon/cfgChoqueCon.routes';
-import { CfgObjetoFijoRoutes } from './cfgObjetoFijo/cfgObjetoFijo.routes';
+import { SvCfgObjetoFijoRoutes } from './svCfgObjetoFijo/svCfgObjetoFijo.routes';
 import { RnrsPreregistroRoutes } from './rnrsPreregistro/rnrsPreregistro.routes';
 import { ReporteRoutes } from './reporte/reporte.routes';
 import { RnaCertificadoTradicionRoutes } from './rnaCertificadoTradicionOficial/rnaCertificadoTradicionOficial.routes';
@@ -426,7 +426,7 @@ export const DashboardRoutes: Route[] = [
       ...VhloCfgLimitacionTipoRoutes,
       ...VhloCfgLimitacionTipoProcesoRoutes,
       ...CfgChoqueConRoutes,
-      ...CfgObjetoFijoRoutes,
+      ...SvCfgObjetoFijoRoutes,
       ...SvIpatTalonarioRoutes,
       ...SvIpatConsecutivoRoutes,
       ...SvIpatAsignacionRoutes,
