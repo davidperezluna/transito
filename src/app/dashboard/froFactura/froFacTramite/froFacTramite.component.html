@@ -243,10 +243,10 @@
                                                         {{propietario.empresa?.nombre}}
                                                     </td>
                                                     <td> 
-                                                        <div class="custom-control custom-checkbox"  >
-                                                            <input (change)="onVendedorSelect($event,propietario.id)" [(ngModel)]="propietario.state" name="{{propietario.id}}" type="checkbox" class="custom-control-input" id="{{propietario.id}}">
-                                                            <label class="custom-control-label" for="{{propietario.id}}"><p *ngIf="propietario.state">${{valorRetefuenteUnitario}}</p><p *ngIf="!propietario.state">$0</p></label>
-                                                        </div>
+                                                            <div class="custom-control custom-checkbox"  >
+                                                                <input (change)="onVendedorSelect($event,propietario.id)" [(ngModel)]="propietario.state" name="{{propietario.id}}" type="checkbox" class="custom-control-input" id="{{propietario.id}}">
+                                                                <label class="custom-control-label" for="{{propietario.id}}"><p *ngIf="propietario.state">${{valorRetefuenteUnitario}}</p><p *ngIf="!propietario.state">$0</p></label>
+                                                            </div>
                                                     </td>
                                                 </tr>
                                             </tbody> 

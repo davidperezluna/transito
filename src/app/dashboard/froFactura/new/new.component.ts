@@ -81,7 +81,6 @@ constructor(
       },
       error => {
         this.errorMessage = <any>error;
-
         if (this.errorMessage != null) {
           console.log(this.errorMessage);
           alert("Error en la petición");
@@ -94,7 +93,6 @@ constructor(
     this.ready.emit(true);
   }
 
-  
   onEnviar(){
     
     let token = this._loginService.getToken();
@@ -142,7 +140,7 @@ constructor(
 					if(this.errorMessage != null){
 						console.log(this.errorMessage);
 						alert("Error en la petición");
-					}
+					} 
 				}
       }
     );

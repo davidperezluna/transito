@@ -1,0 +1,66 @@
+<div class="container">
+  <hr>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title">
+            <b class="text-uppercase">Impresión</b>
+            <br>
+            <small>Acta</small>
+          </h5>
+        </div>
+        <div class="card-body">
+          <div class="col-xs-12 col-lg-12 row">
+            <label>Organismo de tránsito <small>(sedes)</small> <b class="text-danger">*</b></label>
+            <ng-select
+                [multiple]="false"
+                [options]="sedes"
+                [(ngModel)]="data.organismoTransito"
+                name="idSedeOperativa">
+            </ng-select>
+
+            <br>
+
+            <div class="col-lg-6 col-xs-12">
+                <label>Fecha inicio<b class="text-danger">*</b></label>
+                <input class="form-control" [(ngModel)]="data.fechaInicio" name="fechaInicio" placeholder="" type="date" required>
+                <br>
+            </div>
+
+            <div class="col-lg-6 col-xs-12">
+                <label>Fecha Fin<b class="text-danger">*</b></label>
+                <input class="form-control" [(ngModel)]="data.fechaFin" name="fechaFin" placeholder="" type="date" required>
+                <br>
+            </div>
+
+            <div class="custom-control custom-checkbox col-lg-12"  >
+              <input [(ngModel)]="data.anulado" name="anulado" type="checkbox" class="custom-control-input" id="anulado">
+              <label class="custom-control-label" for="anulado"><p>Anulados</p></label>
+            </div>
+            <br>
+            <div class="custom-control custom-checkbox col-lg-12"  >
+              <input [(ngModel)]="data.usado" name="usado" type="checkbox" class="custom-control-input" id="usado">
+              <label class="custom-control-label" for="usado"><p>Usados</p></label>
+            </div>
+            <br>
+            <div class="custom-control custom-checkbox col-lg-12"   >
+              <input [(ngModel)]="data.asignado" name="asignado" type="checkbox" class="custom-control-input" id="asignado">
+              <label class="custom-control-label" for="asignado"><p>Sin usar</p></label>
+            </div>
+
+            <br>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="btn-group"> 
+              <button (click)="onPrintActa()" class="btn btn-success">
+                  <i class="fa fa-file-pdf-o"></i>
+                  Imprimir Acta
+              </button>
+          </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>

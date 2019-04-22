@@ -174,6 +174,8 @@ import { ImoCfgTipoRoutes } from './imoCfgTipo/imoCfgTipo.routes';
 import { ImoLoteRoutes } from "./imoLote/imoLote.routes";
 import { ImoAsignacionRoutes} from './imoAsignacion/imoAsignacion.routes';
 import { ImoPreasignacionRoutes } from './imoPreasignacIon/imoPreasignacion.routes';
+import { ImoActaRoutes } from './imoActa/imoActa.routes';
+
 
 import { BpCfgTipoInsumoRoutes } from './bpCfgTipoInsumo/bpCfgTipoInsumo.routes';
 import { BpProyectoRoutes } from './bpProyecto/bpProyecto.routes';
@@ -415,10 +417,7 @@ export const DashboardRoutes: Route[] = [
       ...GestionTransportePublicoRoutes,
       ...RnaPreregistroRoutes,
       ...rnaRegistroInsumosRoutes,
-      ...ImoPreasignacionRoutes,
       ...TramitePrecioRoutes,
-      ...ImoCfgTipoRoutes,
-      ...ImoLoteRoutes,
       ...CfgComparendoEstadoRoutes,
       ...CfgOrganismoTransitoRoutes,
       ...CfgEntidadJudicialRoutes,
@@ -438,12 +437,16 @@ export const DashboardRoutes: Route[] = [
       ...TramiteLevantamientoLimitacionRoutes,
       ...RnrsTramiteInscripcionLimitacionRoutes,
       ...RnrsTramiteLevantamientoLimitacionRoutes,
-      ...ImoAsignacionRoutes,
       ...CfgValorVehiculoRoutes,
       ...RnrsPreregistroRoutes,
       ...ReporteRoutes,
       ...RpcccInventarioDocumentalRoutes,
       ...ImoBusquedaRoutes,
+      ...ImoAsignacionRoutes,
+      ...ImoCfgTipoRoutes,
+      ...ImoLoteRoutes,
+      ...ImoPreasignacionRoutes,
+      ...ImoActaRoutes,
       ...UserCfgEmpresaTipoRoutes,
       ...UserCfgEmpresaServicioRoutes,
       ...RnaCertificadoTradicionRoutes,
