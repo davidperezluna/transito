@@ -75,6 +75,16 @@ export class ImoInsumoService {
 							  .map(res => res.json());
 	}
 
+	pdfActaInsumo(token,datos){
+		let json = JSON.stringify(datos);
+		let params = "data="+json+"&authorization="+token;
+		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
+		//let headers = new Headers({responseType: 'blob' as 'json'});
+		return this._http.post(this.url+"/pdf/acta/insumos", params, {headers: headers}).map(res => 
+			res, { type: 'application/pdf'}
+		);
+	}
+ 
 	edit(smlmv,token){
 		let json = JSON.stringify(smlmv);
 		let params = "data="+json+"&authorization="+token;

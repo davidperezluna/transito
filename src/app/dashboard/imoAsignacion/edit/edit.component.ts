@@ -29,7 +29,6 @@ public sustratos:any;
 
 constructor(
   private _rnaloteInsumosService: RnaLoteInsumoService,
-  private _rnaRegistroInsumosService: RnaLoteInsumoService,
   private _loginService: LoginService,
   private _EmpresaService: UserEmpresaService,
   private _OrganismoTransitoService: CfgOrganismoTransitoService,

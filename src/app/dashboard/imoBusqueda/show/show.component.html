@@ -21,7 +21,11 @@
                     <td >{{insumo.numero}}</td>
                     <td >{{insumo.fecha}}</td>
                     <td>
-                      <button (click)="deleteInsumo(insumo.id)"  class="btn btn-outline-danger" type="button">Eliminar</button> 
+                      <button (click)="deleteInsumo(insumo.id)"  class="btn btn-danger" type="button">Eliminar</button> 
+                      <a href="{{ apiUrl }}/pdf/acta/asignacion/{{insumo.actaEntrega}}/{{insumo.organismoTransito.id}}" class="btn btn-success" target="_blank">
+                        <i class="fa fa-file-pdf-o"></i>
+                          Imprimir Acta 
+                      </a>
                     </td>
                   </tr>
                 </tbody>

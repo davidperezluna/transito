@@ -46,7 +46,7 @@ export class imoAsignacionComponent implements OnInit {
 		// 		}, 
 		// 		error => {
 		// 			this.errorMessage = <any>error;
-		// 			if(this.errorMessage != null){
+		// 			if(this.errorMessage != null){ 
 		// 				console.log(this.errorMessage);
 		// 				alert("Error en la petición");
 		// 			}
