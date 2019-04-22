@@ -21,19 +21,21 @@
             <thead>
               <tr>
                 <th>Id</th>
+                <th>Clase Choque</th>
                 <th>Nombre</th>
                 <th>Acciones</th>
               </tr>
             </thead>
             <tbody>
-              <tr class="odd" *ngFor="let cfgObjetoFijo of cfgObjetosFijos; let i = index">
-                <td>{{cfgObjetoFijo.id}}</td>
-                <td>{{cfgObjetoFijo.nombre}}</td>
+              <tr class="odd" *ngFor="let  objetoFijo of objetosFijos; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ objetoFijo.claseChoque.nombre }}</td>
+                <td>{{ objetoFijo.nombre }}</td>
                 <td>
-                  <button (click)="editCfgObjetoFijo(cfgObjetoFijo)" class="btn btn-xs btn-info" type="button">Editar
+                  <button (click)="onEdit(objetoFijo)" class="btn btn-xs btn-info" type="button">Editar
                     <i class="fa fa-edit"></i>
                   </button>
-                  <button (click)="deleteCfgObjetoFijo(cfgObjetoFijo)" class="btn btn-xs btn-danger" type="button">Eliminar
+                  <button (click)="onDelete(objetoFijo.id)" class="btn btn-xs btn-danger" type="button">Eliminar
                     <i class="fa fa-trash"></i>
                   </button>
 
@@ -47,6 +49,6 @@
       </div>
     </div>
   </div>
-  <app-edit *ngIf='formEdit' [cfgObjetoFijo]="cfgObjetoFijo" (ready)="ready($event)"></app-edit>
+  <app-edit *ngIf='formEdit' [objetoFijo]="objetoFijo" (ready)="ready($event)"></app-edit>
   <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
 </div>

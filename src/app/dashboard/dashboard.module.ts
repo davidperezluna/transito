@@ -185,7 +185,7 @@ import { CfgEntidadJudicialModule } from './cfgEntidadJudicial/cfgEntidadJudicia
 import { SvCfgGravedadAccidenteModule } from './svCfgGravedadAccidente/svCfgGravedadAccidente.module';
 import { SvCfgClaseAccidenteModule } from './svCfgClaseAccidente/svCfgClaseAccidente.module';
 import { CfgChoqueConModule } from './cfgChoqueCon/cfgChoqueCon.module';
-import { CfgObjetoFijoModule } from './cfgObjetoFijo/cfgObjetoFijo.module';
+import { SvCfgObjetoFijoModule } from './svCfgObjetoFijo/svCfgObjetoFijo.module';
 
 import { TpAlcaldiaModule } from './tpAlcaldia/tpAlcaldia.module';
 // import { SucursalModule } from './empresa/sucursal/new/sucursal.module';
@@ -437,7 +437,7 @@ import {RightsidebarComponent} from '../shared';
     RnaPreregistroModule,
     CfgOrganismoTransitoModule,
     CfgChoqueConModule,
-    CfgObjetoFijoModule,
+    SvCfgObjetoFijoModule,
     CfgEntidadJudicialModule,
     VhloCfgLimitacionCausalModule,
     VhloCfgLimitacionTipoModule,

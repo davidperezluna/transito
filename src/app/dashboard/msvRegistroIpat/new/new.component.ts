@@ -18,7 +18,7 @@ import { SvIpatVictimaService } from '../../../services/svIpatVictima.services'
 import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
 import { SvCfgClaseAccidenteService } from '../../../services/svCfgClaseAccidente.service';
 import { CfgChoqueConService } from '../../../services/cfgChoqueCon.service';
-import { CfgObjetoFijoService } from '../../../services/cfgObjetoFijo.service';
+import { SvCfgObjetoFijoService } from '../../../services/svCfgObjetoFijo.service';
 import { SvCfgAreaService } from "../../../services/svCfgArea.service";
 import { SvCfgSectorService } from "../../../services/svCfgSector.service";
 import { SvCfgZonaService } from "../../../services/svCfgZona.service";
@@ -222,7 +222,7 @@ export class NewComponent implements OnInit {
     private _GravedadService: SvCfgGravedadAccidenteService,
     private _ClaseAccidenteService: SvCfgClaseAccidenteService,
     private _ChoqueConService: CfgChoqueConService,
-    private _ObjetoFijoService: CfgObjetoFijoService,
+    private _ObjetoFijoService: SvCfgObjetoFijoService,
     private _OrganismoTransitoService: CfgOrganismoTransitoService,
     private _AseguradoraService: SvCfgAseguradoraService,
     private _AreaService: SvCfgAreaService,
@@ -373,7 +373,7 @@ export class NewComponent implements OnInit {
           }
         }
       );
-      this._ObjetoFijoService.getObjetoFijoSelect().subscribe(
+      this._ObjetoFijoService.select().subscribe(
         response => {
           this.objetosFijos = response;
         },

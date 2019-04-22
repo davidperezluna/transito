@@ -9,7 +9,7 @@ import { CfgMunicipioService } from '../../../services/cfgMunicipio.service';
 import { VhloCfgClaseService } from '../../../services/vhloCfgClase.service';
 import { SvCfgClaseAccidenteService } from '../../../services/svCfgClaseAccidente.service';
 import { CfgChoqueConService } from '../../../services/cfgChoqueCon.service';
-import { CfgObjetoFijoService } from '../../../services/cfgObjetoFijo.service';
+import { SvCfgObjetoFijoService } from '../../../services/svCfgObjetoFijo.service';
 import { UserCfgGeneroService } from '../../../services/userCfgGenero.service';
 import { DatePipe, CurrencyPipe } from '@angular/common';
 
@@ -97,7 +97,7 @@ export class ExportComponent implements OnInit {
         private _ClaseService: VhloCfgClaseService,
         private _ClaseAccidenteService: SvCfgClaseAccidenteService,
         private _ChoqueCon: CfgChoqueConService,
-        private _ObjetoFijo: CfgObjetoFijoService,
+        private _ObjetoFijo: SvCfgObjetoFijoService,
         private _GeneroService: UserCfgGeneroService,
     ) { }
 
@@ -182,7 +182,7 @@ export class ExportComponent implements OnInit {
                 }
             }
         );
-        this._ObjetoFijo.getObjetoFijoSelect().subscribe(
+        this._ObjetoFijo.select().subscribe(
             response => {
                 this.objetosFijos = response;
             },
@@ -219,6 +219,13 @@ export class ExportComponent implements OnInit {
         var datePiper = new DatePipe(this.date);
         this.fecha = datePiper.transform(this.date, 'yyyy-MM-dd');
 
+        /* let arrayGravedad = [];
+        this.exportIpat.arrayGravedadAccidente.forEach(element => {
+            console.log
+            let obj = element.label;
+            arrayGravedad.push(obj);
+        }); */
+
         this.table = $('#dataTables-example').DataTable({
             responsive: true,
             pageLength: 8,
@@ -227,7 +234,7 @@ export class ExportComponent implements OnInit {
             buttons: [
                 {
                     title: 'Reporte Accidentalidad',
-                    message: 'Gravedad Accidente: ' + this.gravedades,
+                    /* message: 'Gravedad Accidente: ' + arrayGravedad, */
                     extend: 'excel',
                     text: 'Excel',
                     filename: 'Reporte_Accidentalidad_'+ this.fecha,
@@ -324,36 +331,4 @@ export class ExportComponent implements OnInit {
     onCancelar() {
         this.valido = false;
     } 
-
-    /* onExportarTotal(){
-        let token = this._LoginService.getToken();
-        this._IpatService.buscarIpatExport({ "file": this.txt, "datos": this.exportIpat }, token).subscribe(
-            response => {
-                if (response.status == 'success') {
-                    this.ipats = response.data;
-                    //this.conductoresNombresArray = response.conductores.nombres;
-                    //this.conductoresApellidosArray = response.conductores.apellidos;
-                    //this.victimasNombresArray = response.victimas.nombres;
-                    //this.victimasApellidosArray = response.victimas.apellidos;
-                    let timeoutId = setTimeout(() => {
-                        this.onInitTable();
-                    }, 100);
-                } else {
-                    swal({
-                        title: 'Alerta!',
-                        text: response.message,
-                        type: 'error',
-                        confirmButtonText: 'Aceptar'
-                    });
-                    error => {
-                        this.errorMessage = <any>error;
-                        if (this.errorMessage != null) {
-                            console.log(this.errorMessage);
-                            alert('Error en la petición');
-                        }
-                    }
-                }
-            }
-        );
-    } */
 }
