@@ -30,8 +30,7 @@ export class EditComponent implements OnInit {
             response => {
                 this.clasesAccidente = response;
                 setTimeout(() => {
-                    this.claseAccidenteSelected = [this.claseChoque.claseAccidente.nombre];
-                    console.log(this.claseChoque.claseAccidente.nombre);
+                    this.claseAccidenteSelected = [this.claseChoque.claseAccidente.id];
                 });
             },
             error => {
@@ -49,7 +48,7 @@ export class EditComponent implements OnInit {
 
     onEnviar() {
         let token = this._loginService.getToken();
-        this.claseChoque.claseAccidente = this.claseAccidenteSelected;
+        this.claseChoque.idClaseAccidente = this.claseAccidenteSelected;
         this._ClaseChoqueService.edit(this.claseChoque, token).subscribe(
             response => {
                 if (response.status == 'success') {

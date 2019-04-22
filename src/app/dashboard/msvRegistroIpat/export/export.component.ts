@@ -8,10 +8,10 @@ import { SvCfgTipoVictimaService } from '../../../services/svCfgTipoVictima.serv
 import { CfgMunicipioService } from '../../../services/cfgMunicipio.service';
 import { VhloCfgClaseService } from '../../../services/vhloCfgClase.service';
 import { SvCfgClaseAccidenteService } from '../../../services/svCfgClaseAccidente.service';
-import { CfgChoqueConService } from '../../../services/cfgChoqueCon.service';
+import { SvCfgClaseChoqueService } from '../../../services/svCfgClaseChoque.service';
 import { SvCfgObjetoFijoService } from '../../../services/svCfgObjetoFijo.service';
 import { UserCfgGeneroService } from '../../../services/userCfgGenero.service';
-import { DatePipe, CurrencyPipe } from '@angular/common';
+import { DatePipe } from '@angular/common';
 
 
 import swal from 'sweetalert2';
@@ -47,7 +47,7 @@ export class ExportComponent implements OnInit {
     public municipios: any;
     public clases: any;
     public clasesAccidente: any;
-    public choquesCon: any;
+    public clasesChoque: any;
     public objetosFijos: any;
     public generos: any;
     public diasSemana = [ 
@@ -96,7 +96,7 @@ export class ExportComponent implements OnInit {
         private _MunicipioService: CfgMunicipioService,
         private _ClaseService: VhloCfgClaseService,
         private _ClaseAccidenteService: SvCfgClaseAccidenteService,
-        private _ChoqueCon: CfgChoqueConService,
+        private _ClaseChoque: SvCfgClaseChoqueService,
         private _ObjetoFijo: SvCfgObjetoFijoService,
         private _GeneroService: UserCfgGeneroService,
     ) { }
@@ -169,9 +169,9 @@ export class ExportComponent implements OnInit {
                 }
             }
         );
-        this._ChoqueCon.getChoqueConSelect().subscribe(
+        this._ClaseChoque.select().subscribe(
             response => {
-                this.choquesCon = response;
+                this.clasesChoque = response;
             },
             error => {
                 this.errorMessage = <any>error;
@@ -269,12 +269,14 @@ export class ExportComponent implements OnInit {
     }
 
     async onUploadFile() {        
+        let token = this._LoginService.getToken();
+
         const { value: files } = await swal({
             title: 'Seleccione el archivo .csv',
             input: 'file',
             inputAttributes: {
                 'accept': 'txt/*',
-                'aria-label': 'Upload your profile picture'
+                'aria-label': 'Upload'
             }
         })
         if (files) {
@@ -286,7 +288,7 @@ export class ExportComponent implements OnInit {
                 let allTextLines = txt.split(/\r\n|\n/);
                 for (let i = 0; i < allTextLines.length; i++) {
                     let data = allTextLines[i].split(';');
-                    if (data.length < 35) {
+                    if (data.length < 22) {
                         this.valido = false;
                     } else {
                         if (data[0] != '') {
@@ -296,6 +298,39 @@ export class ExportComponent implements OnInit {
                 }
             }
         }
+
+        console.log(files);
+        console.log(this.txt);
+
+        this._IpatService.cargarIpats({ "file": this.txt}, token).subscribe(
+            response => {
+                if (response.status == 'success') {
+                    swal({
+                        title: 'Perfecto!',
+                        text: response.message,
+                        type: 'success',
+                        confirmButtonText: 'Aceptar'
+                    });
+                    let timeoutId = setTimeout(() => {
+                        this.onInitTable();
+                    }, 100);
+                } else {
+                    swal({
+                        title: 'Alerta!',
+                        text: response.message,
+                        type: 'error',
+                        confirmButtonText: 'Aceptar'
+                    });
+                    error => {
+                        this.errorMessage = <any>error;
+                        if (this.errorMessage != null) {
+                            console.log(this.errorMessage);
+                            alert('Error en la petición');
+                        }
+                    }
+                }
+            }
+        );
     }
 
     onEnviar(){

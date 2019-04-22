@@ -13,7 +13,6 @@ export class SvCfgClaseChoqueComponent implements OnInit {
     public errorMessage;
     public table: any;
     public clasesChoque;
-    public respuesta;
     public formNew = false;
     public formEdit = false;
     public formIndex = true;
@@ -42,9 +41,8 @@ export class SvCfgClaseChoqueComponent implements OnInit {
         this._ClaseChoqueService.index().subscribe(
             response => {
                 this.clasesChoque = response.data;
-                console.log(this.clasesChoque);
                 let timeoutId = setTimeout(() => {
-                    this.iniciarTabla();
+                    this.onInitTable();
                 }, 100);
             },
             error => {
@@ -57,21 +55,20 @@ export class SvCfgClaseChoqueComponent implements OnInit {
             }
         );
     }
-    iniciarTabla() {
-        $('#dataTables-example').DataTable({
+    onInitTable() {
+        this.table = $('#dataTables-example').DataTable({
             responsive: true,
             pageLength: 8,
             sPaginationType: 'full_numbers',
             oLanguage: {
                 oPaginate: {
-                    sFirst: '<<',
-                    sPrevious: '<',
-                    sNext: '>',
-                    sLast: '>>'
+                    sFirst: '<i class="fa fa-step-backward"></i>',
+                    sPrevious: '<i class="fa fa-chevron-left"></i>',
+                    sNext: '<i class="fa fa-chevron-right"></i>',
+                    sLast: '<i class="fa fa-step-forward"></i>'
                 }
             }
         });
-        this.table = $('#dataTables-example').DataTable();
     }
 
     onNew() {
@@ -114,7 +111,6 @@ export class SvCfgClaseChoqueComponent implements OnInit {
                             confirmButtonColor: '#15d4be',
                         })
                         this.table.destroy();
-                        this.respuesta = response;
                         this.ngOnInit();
                     },
                     error => {

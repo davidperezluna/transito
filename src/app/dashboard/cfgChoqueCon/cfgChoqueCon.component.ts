@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { CfgChoqueConService } from '../../services/cfgChoqueCon.service';
+import { CfgChoqueConService } from '../../services/svCfgChoqueCon.service';
 import { LoginService } from '../../services/login.service';
 import swal from 'sweetalert2';
 declare var $: any;

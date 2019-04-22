@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CfgChoqueConComponent } from './cfgChoqueCon.component';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
-import { CfgChoqueConService } from '../../services/cfgChoqueCon.service';
+import { CfgChoqueConService } from '../../services/svCfgChoqueCon.service';
 
 import { NewComponent } from './new/new.component';
 import { EditComponent } from './edit/edit.component';

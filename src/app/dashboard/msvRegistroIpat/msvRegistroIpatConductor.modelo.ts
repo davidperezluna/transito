@@ -21,7 +21,7 @@ export class MsvIpatConductor {
 		public sustanciasPsicoactivasConductor: string,
 		public portaLicencia: string,
 		public numeroLicenciaConduccion: number,
-		public categoriaLicenciaConduccion: string,
+		public categoriaLicenciaConduccion: number,
 		public restriccionConductor: string,
 		public fechaExpedicionLicenciaConduccion: string,
 		public fechaVencimientoLicenciaConduccion: string,

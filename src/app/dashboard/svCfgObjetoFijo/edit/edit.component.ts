@@ -53,7 +53,7 @@ export class EditComponent {
   onEnviar() {
     let token = this._LoginService.getToken();
 
-    this.objetoFijo = this.claseChoqueSelected;
+    this.objetoFijo.idClaseChoque = this.claseChoqueSelected;
 
     this._ObjetoFijoService.edit(this.objetoFijo, token).subscribe(
       response => {
