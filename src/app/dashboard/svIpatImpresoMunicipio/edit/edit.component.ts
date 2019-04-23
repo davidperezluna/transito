@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { SvIpatImpresoBodegaService } from '../../../services/svIpatImpresoBodega.service';
+import { SvIpatImpresoMunicipioService } from '../../../services/svIpatImpresoMunicipio.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -9,11 +9,11 @@ import swal from 'sweetalert2';
 })
 export class EditComponent implements OnInit{
   @Output() ready = new EventEmitter<any>();
-  @Input() asignacion:any = null;
+  @Input() municipio:any = null;
   public errorMessage;
 
 constructor(
-  private _ImpresoBodegaService: SvIpatImpresoBodegaService,
+  private _ImpresoMunicipioService: SvIpatImpresoMunicipioService,
   private _LoginService: LoginService,
   ){}
 
@@ -24,16 +24,17 @@ constructor(
   onEnviar(){
     let token = this._LoginService.getToken();
 
-		this._ImpresoBodegaService.edit(this.asignacion, token).subscribe(
+		this._ImpresoMunicipioService.edit(this.municipio, token).subscribe(
 			response => {
         if(response.status == 'success'){
-          this.ready.emit(true);
           swal({
             title: 'Perfecto!',
             text: response.message,
             type: 'success',
             confirmButtonText: 'Aceptar'
-          })
+          });
+          
+          this.ready.emit(true);
         }
 			error => {
 					this.errorMessage = <any>error;

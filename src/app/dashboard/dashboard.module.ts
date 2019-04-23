@@ -153,6 +153,7 @@ import { SvIpatConsecutivoModule } from './svIpatConsecutivo/svIpatConsecutivo.m
 import { SvIpatAsignacionModule } from './svIpatAsignacion/svIpatAsignacion.module';
 import { SvIpatImpresoBodegaModule } from './svIpatImpresoBodega/svIpatImpresoBodega.module';
 import { SvIpatImpresoAsignacionModule } from './svIpatImpresoAsignacion/svIpatImpresoAsignacion.module';
+import { SvIpatImpresoMunicipioModule } from './svIpatImpresoMunicipio/svIpatImpresoMunicipio.module';
 
 import { PqoCfgPatioModule } from './pqoCfgPatio/pqoCfgPatio.module';
 import { PqoCfgGruaModule } from './pqoCfgGrua/pqoCfgGrua.module';
@@ -308,6 +309,7 @@ import {RightsidebarComponent} from '../shared';
     SvIpatAsignacionModule,
     SvIpatImpresoBodegaModule,
     SvIpatImpresoAsignacionModule,
+    SvIpatImpresoMunicipioModule,
     SvCfgFuncionModule,
     SvCfgFuncionCriterioModule,
     SvCfgClaseActorViaModule,

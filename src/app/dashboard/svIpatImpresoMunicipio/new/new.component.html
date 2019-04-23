@@ -1,0 +1,54 @@
+<hr>
+<div class="row">
+    <div class="col-xs-12 col-lg-4">
+        <div class="card">
+            <div class="card-header">
+                <b class="text-uppercase">Nuevo registro de impresos a bodega</b>
+                <br>
+                <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
+            </div>
+            <div class="card-body">
+                <form #formNew="ngForm"> 
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Fecha <b class="text-danger">*</b></label>
+                                <input type="date" class="form-control" [(ngModel)]="municipio.fecha" name="fecha" />
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Cantidad <b class="text-danger">*</b></label>
+                                <input type="text" class="form-control" [(ngModel)]="municipio.cantidad" name="cantidad" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div  class="col-xs-12 col-lg-12">
+                                <label>Organismo de tránsito <small>(Sede operativa)</small> <b class="text-danger">*</b></label>
+                                <ng-select [multiple]="false" [options]="organismosTransito" [(ngModel)]="municipio.idOrganismoTransito" name="idOrganismoTransito">
+                                </ng-select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div  class="col-xs-12 col-lg-12">
+                                <label>Municipio <b class="text-danger">*</b></label>
+                                <ng-select [multiple]="false" [options]="municipios" [(ngModel)]="municipio.idMunicipio" name="idMunicipio">
+                                </ng-select>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <div class="btn-group">
+                    <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
+                        <i class="fa fa-save"></i>
+                        Enviar
+                    </button>
+                    <button (click)="onCancelar()" class="btn btn-default">
+                        <i class="fa fa-times"></i>
+                        Cancelar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
