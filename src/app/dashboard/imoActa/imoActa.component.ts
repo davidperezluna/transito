@@ -69,7 +69,6 @@ export class ImoActaComponent implements OnInit {
         }
       }
     );
-    
     console.log(this.data);
   }
   

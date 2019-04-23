@@ -36,6 +36,7 @@ export class FroFacTramiteComponent implements OnInit {
   public vehiculo: any = null;
   public propietarios: any = null;
   public valorRetefuente: any = 0;
+  public tramitesValor:any=[]; 
 
 
   public tipoIdentificacionSelected: any = null;
@@ -55,7 +56,7 @@ export class FroFacTramiteComponent implements OnInit {
   public formCiudadano = false;
   public formSearch = true;
   public table: any = null;
-  public valorVehiculoId: any = null;
+  public idVehiculoValor: any = null;
 
   public propietariosVehiculoRetefuente:any=[]; 
   public valorRetefuenteUnitario:any=0;
@@ -95,7 +96,6 @@ export class FroFacTramiteComponent implements OnInit {
       response => {
         if (response.status == 'success') {
           this.funcionario = response.data;
-
           this.factura.idOrganismoTransito = this.funcionario.organismoTransito.id;
 
           this.formNew = true;
@@ -364,11 +364,10 @@ export class FroFacTramiteComponent implements OnInit {
       response => {
         if (response.code == 200) {
           this.tramitePrecio = response.data;
-
           if (this.modulo.abreviatura == 'RNC') {
             if (this.tramitesPrecioArray.length < 1) {
               //Agrega el trámite seleccionado al arreglo
-              this.onCreateArray();
+              // this.onCreateArray();
             } else {
               swal({
                 title: 'Error!',
@@ -381,7 +380,8 @@ export class FroFacTramiteComponent implements OnInit {
             //Valida si el tramite seleccionado requiera calcular retefuente
 
             if (this.tramitePrecio.tramite.id == 2 && this.propietarios) {
-              if (this.tramitesPrecioArray.length < 1) {
+              if (this.tramitesPrecioArray.length < 1) { 
+                
                 let datos = {
                   'linea': this.vehiculo.linea.id,
                   'marca': this.vehiculo.linea.marca.id,
@@ -395,8 +395,8 @@ export class FroFacTramiteComponent implements OnInit {
                     if (response.code == 200) {
                       this.valorRetefuente = parseInt(response.data.valor) * 0.01;
                       //Agrega el trámite seleccionado al arreglo
-                      this.onCreateArray();
-                      this.valorVehiculoId = response.data.id;
+                      // this.onCreateArray();
+                      this.idVehiculoValor = response.data.id;
                     } else {
                       swal({
                         title: 'Sin valor!',
@@ -456,170 +456,6 @@ export class FroFacTramiteComponent implements OnInit {
       }
     );
 
-     
-    /*
-    if (this.modulo.abreviatura == 'RNA') {
-      if (!this.propietarios) {
-        this._TramitePrecioService.show({ 'id': this.tramitePrecioSelected }, token).subscribe(
-          response => {
-            this.tramitePrecioSelected = response.data;
-
-            //Valida si el tramite seleccionado es matricula inicial
-            if (this.tramitePrecioSelected.tramite.id == 1) {
-              this.onCreateArray();
-            } else {
-              swal({
-                title: 'Sin propietarios!',
-                text: 'Necesita facturar matricula inicial para este vehiculo',
-                type: 'error',
-                confirmButtonText: 'Aceptar'
-              });
-            }
-
-          },
-          error => {
-            this.errorMessage = <any>error;
-
-            if (this.errorMessage != null) {
-              console.log(this.errorMessage);
-              alert("Error en la petición");
-            }
-          }
-        );
-      } else {
-        this._TramitePrecioService.show({ 'id':this.tramitePrecioSelected }, token).subscribe(
-          response => {
-            this.tramitePrecioSelected = response.data;
-
-            //Valida si el tramite seleccionado es 
-            if (this.tramitePrecioSelected.tramite.id == 6) {
-
-              this.factura.valorBruto = this.factura.valorBruto + parseInt(this.tramitePrecioSelected.valorTotal);
-
-              this.tramitesPrecioArray.push(
-                {
-                  'nombre': this.tramitePrecioSelected.nombre,
-                  'valor': this.tramitePrecioSelected.valorTotal,
-                  'idTramitePrecio': this.tramitePrecioSelected.id,
-                }
-              )
-
-              swal({
-                title: 'Buscando Propietarios!',
-                text: 'Solo tardara unos segundos por favor espere.',
-                onOpen: () => {
-                  swal.showLoading()
-                }
-              }).then((result) => {
-                if (
-                  // Read more about handling dismissals
-                  result.dismiss === swal.DismissReason.timer
-                ) {
-                }
-              })
-
-              this._PropietarioService.searchByFilter(this.vehiculoFiltro, token).subscribe(
-                response => {
-                  let datos = {
-                    'linea': this.vehiculo.linea.id,
-                    'clase': this.vehiculo.clase.id,
-                    'modelo': this.vehiculo.modelo
-                  }
-
-                 /* this._CfgValorVehiculoService.getCfgValorVehiculoVehiculo(datos, token).subscribe(
-                    valorVehiculo => {
-                      if (valorVehiculo.datos != null) {
-                        this.valorRetefuente = parseInt(valorVehiculo.datos.valor) * 0.01;
-                        this.valorVehiculoId = valorVehiculo.datos.id;
-                        this.propietariosVehiculo = response.data;
-                        response.data.forEach(element => {
-                          if (element.ciudadano) {
-                            this.searchByIdentificacionForm = true;
-                          }
-                          if (element.empresa) {
-                            this.isEmpresaForm = true;
-                          }
-                        });
-                        swal.close();
-                      } else {
-                        swal.close();
-                        swal({
-                          title: 'Sin valor!',
-                          text: 'Necesita ingresar el valor del vehiculo',
-                          type: 'error',
-                          confirmButtonText: 'Aceptar'
-                        })
-                        return (0);
-                      }
-                    },
-                    error => {
-                      this.errorMessage = <any>error;
-
-                      if (this.errorMessage != null) {
-                        console.log(this.errorMessage);
-                        alert("Error en la petición");
-                      }
-                    }
-                  );
-                  error => {
-                    this.errorMessage = <any>error;
-                    if (this.errorMessage != null) {
-                      console.log(this.errorMessage);
-                      alert("Error en la petición");
-                    }
-                  }
-                });
-            } else {
-              this.factura.valorBruto = this.factura.valorBruto + parseInt(this.tramitePrecioSelected.valorTotal);
-
-              this.tramitesPrecioArray.push(
-                {
-                  'nombre': this.tramitePrecioSelected.nombre,
-                  'valor': this.tramitePrecioSelected.valorTotal,
-                  'idTramitePrecio': this.tramitePrecioSelected.id,
-                }
-              )
-            }
-
-          },
-          error => {
-            this.errorMessage = <any>error;
-
-            if (this.errorMessage != null) {
-              console.log(this.errorMessage);
-              alert("Error en la petición");
-            }
-          }
-        );
-      }
-    } else {
-      if (this.modulo.abreviatura == 'RNC') {
-        
-      }
-
-      this._TramitePrecioService.show(token, this.tramitePrecioSelected).subscribe(
-        response => {
-          this.tramitePrecioSelected = response.data;
-          this.factura.valorBruto = this.factura.valorBruto + parseInt(this.tramitePrecioSelected.valorTotal);
-          this.tramitesPrecioArray.push(
-            {
-              'nombre': this.tramitePrecioSelected.nombre,
-              'valor': this.tramitePrecioSelected.valorTotal,
-              'idTramitePrecio': this.tramitePrecioSelected.id,
-            }
-          )
-        },
-        error => {
-          this.errorMessage = <any>error;
-
-          if (this.errorMessage != null) {
-            console.log(this.errorMessage);
-            alert("Error en la petición");
-          }
-        }
-      );
-    }
-    */
   }
 
   onVendedorSelect(eve: any,propietarioVehiculo:any){
@@ -672,7 +508,16 @@ export class FroFacTramiteComponent implements OnInit {
     //Tipo de recaudo infracciones
     this.factura.idTipoRecaudo = 1; 
 
-    this._FacturaService.register(this.factura, token).subscribe(
+    let datos = {
+      'factura': this.factura,
+      'tramitesValor': this.tramitesPrecioArray,
+      'propietarios': this.propietariosVehiculoRetefuente,
+      'retencion': this.valorRetefuenteUnitario,
+      'idVehiculoValor': this.idVehiculoValor,
+      'idTipoRecaudo': 1,
+    }
+
+    this._FacturaService.register(datos, token).subscribe(
       response => {
         if (response.status == 'success') {
           this.factura.id = response.data.id;
