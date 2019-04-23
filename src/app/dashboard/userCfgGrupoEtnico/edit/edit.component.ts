@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { SvCfgClaseAccidenteService } from '../../../services/svCfgClaseAccidente.service';
+import { UserCfgGrupoEtnicoService } from '../../../services/userCfgGrupoEtnico.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -10,11 +10,11 @@ import swal from 'sweetalert2';
 })
 export class EditComponent {
   @Output() ready = new EventEmitter<any>();
-  @Input() claseAccidente: any = null;
+  @Input() grupoEtnico: any = null;
   public errorMessage;
 
   constructor(
-    private _CfgClaseAccidenteService: SvCfgClaseAccidenteService,
+    private _GrupoEtnicoService: UserCfgGrupoEtnicoService,
     private _loginService: LoginService,
   ) {
    
@@ -28,7 +28,7 @@ export class EditComponent {
   }
   onEnviar() {
     let token = this._loginService.getToken();
-    this._CfgClaseAccidenteService.edit(this.claseAccidente, token).subscribe(
+    this._GrupoEtnicoService.edit(this.grupoEtnico, token).subscribe(
       response => {
         if (response.status == 'success') {
           this.ready.emit(true);

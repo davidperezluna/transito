@@ -1,25 +1,27 @@
 export class SvCapacitacion {
     constructor(
         public fechaHoraRegistro: string,
-        /* public emailFormador: string,
-        public formador: string,
-        public cedula: string, */
         public fechaActividad: string,
-        /* public semana: string, */
         public municipio: string,
         public funcion: string,
         public funcionCriterio: string,
         public temaCapacitacion: string,
         public descripcionActividad: string,
+
+        public idTipoIdentificacion: number,
+        public numeroCedulaActorVial: string,
         public nombreActorVial: string,
         public apellidoActorVial: string,
-        public numeroCedulaActorVial: string,
-        public claseActorVial: string,
-        public id: number,
-        public identificacion: number,
+        public fechaNacimientoActorVial: string,
+        public emailActorVial: string,
         public genero: number,
+        public idGrupoEtnico: number,
+        public claseActorVial: string,
+        public discapacidad: number,
+        public victima: number,
+
+        public identificacion: number,
         public nit: number,
-        public idTipoIdentificacion: number,
         public documento: string,
         public documentoCapacitados: string,
     ) { }

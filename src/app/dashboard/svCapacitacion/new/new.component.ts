@@ -9,8 +9,11 @@ import { SvCfgFuncionService } from '../../../services/svCfgFuncion.service';
 import { SvCfgFuncionCriterioService } from '../../../services/svCfgFuncionCriterio.service';
 import { SvCfgTemaCapacitacionService } from '../../../services/svCfgTemaCapacitacion.service';
 import { SvCfgClaseActorViaService } from '../../../services/svCfgClaseActorVia.service';
+import { UserCfgTipoIdentificacionService } from '../../../services/userCfgTipoIdentificacion.service';
 import { UserCfgGeneroService } from '../../../services/userCfgGenero.service';
+import { UserCfgGrupoEtnicoService } from '../../../services/userCfgGrupoEtnico.service';
 
+import { environment } from 'environments/environment';
 import { DatePipe, CurrencyPipe } from '@angular/common';
 import swal from 'sweetalert2';
 declare var $: any;
@@ -27,6 +30,7 @@ export class NewComponent implements OnInit {
     @Input() capacitacionInput: any = null;
     public capacitacion: SvCapacitacion;
     public errorMessage;
+    public docsUrl = environment.docsUrl + 'capacitaciones';
     public capacitaciones: any;
 
     public file: any = null;
@@ -44,6 +48,8 @@ export class NewComponent implements OnInit {
     public temasCapacitaciones: any;
     public clasesActoresVia: any;
     public generos: any;
+    public tiposIdentificacion: any;
+    public gruposEtnicos: any;
 
     public municipioSelected: any;
     public funcionSelected: any;
@@ -51,6 +57,8 @@ export class NewComponent implements OnInit {
     public temaCapacitacionSelected: any;
     public claseActorViaSelected: any;
     public generoSelected: any;
+    public tipoIdentificacionSelected: any;
+    public grupoEtnicoSelected: any;
 
     public capacitados = [];
     public table: any = null;
@@ -65,6 +73,8 @@ export class NewComponent implements OnInit {
         private _TemaCapacitacionService: SvCfgTemaCapacitacionService,
         private _SvCfgClaseActorViaService: SvCfgClaseActorViaService,
         private _GeneroService: UserCfgGeneroService,
+        private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
+        private _GrupoEtnicoService: UserCfgGrupoEtnicoService,
 
     ) { }
 
@@ -73,7 +83,7 @@ export class NewComponent implements OnInit {
         var datePiper = new DatePipe(this.date);
         this.fecha = datePiper.transform(this.date, 'yyyy-MM-dd HH:mm:ss a');
 
-        this.capacitacion = new SvCapacitacion(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+        this.capacitacion = new SvCapacitacion(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 
         this._MunicipioService.select().subscribe(
             response => {
@@ -140,23 +150,47 @@ export class NewComponent implements OnInit {
                 }
             }
         );
+        this._TipoIdentificacionService.select().subscribe(
+            response => {
+                this.tiposIdentificacion = response;
+            },
+            error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert("Error en la petición");
+                }
+            }
+        );
+        this._GrupoEtnicoService.select().subscribe(
+            response => {
+                this.gruposEtnicos = response;
+            },
+            error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert("Error en la petición");
+                }
+            }
+        );
     }
 
-    iniciarTabla() {
-        $('#dataTables-example').DataTable({
+    onInitTable() {
+        this.table = $('#dataTables-example').DataTable({
             pageLength: 8,
             sPaginationType: 'full_numbers',
-            dom: 'Bfrtip',
             oLanguage: {
                 oPaginate: {
-                    sFirst: '<<',
-                    sPrevious: '<',
-                    sNext: '>',
-                    sLast: '>>'
+                    sFirst: '<i class="fa fa-step-backward"></i>',
+                    sPrevious: '<i class="fa fa-chevron-left"></i>',
+                    sNext: '<i class="fa fa-chevron-right"></i>',
+                    sLast: '<i class="fa fa-step-forward"></i>'
                 }
             }
         });
-        this.table = $('#dataTables-example').DataTable();
     }
 
     onCancelar() {
@@ -172,6 +206,8 @@ export class NewComponent implements OnInit {
         this.capacitacion.claseActorVial = this.claseActorViaSelected;
         this.capacitacion.temaCapacitacion = this.temaCapacitacionSelected;
         this.capacitacion.genero = this.generoSelected;
+        this.capacitacion.idTipoIdentificacion = this.tipoIdentificacionSelected;
+        this.capacitacion.idGrupoEtnico = this.grupoEtnicoSelected;
 
         if (this.capacitacionInput.idTipoIdentificacion == 1) {
             this.capacitacion.identificacion = this.ciudadano.identificacion;
@@ -181,7 +217,6 @@ export class NewComponent implements OnInit {
         this._CapacitacionService.register(this.file, this.capacitacion, token).subscribe(
             response => {
                 if (response.status == 'success') {
-                    /* this.ready.emit(true); */
                     swal({
                         title: 'Perfecto!',
                         text: response.message,
@@ -347,7 +382,7 @@ export class NewComponent implements OnInit {
                         confirmButtonText: 'Aceptar'
                     });
                     let timeoutId = setTimeout(() => {
-                        this.iniciarTabla();
+                        this.onInitTable();
                     }, 100);
                 } else {
                     swal({

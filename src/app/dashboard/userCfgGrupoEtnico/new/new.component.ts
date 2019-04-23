@@ -1,34 +1,35 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { SvCfgClaseAccidenteService } from '../../../services/svCfgClaseAccidente.service';
+import { UserCfgGrupoEtnico } from '../userCfgGrupoEtnico.modelo';
+import { UserCfgGrupoEtnicoService } from '../../../services/userCfgGrupoEtnico.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
- 
 @Component({
-  selector: 'app-edit',
-  templateUrl: './edit.component.html'
+  selector: 'app-new',
+  templateUrl: './new.component.html'
 })
-export class EditComponent {
+export class NewComponent implements OnInit {
   @Output() ready = new EventEmitter<any>();
-  @Input() claseAccidente: any = null;
+  public grupoEtnico: UserCfgGrupoEtnico;
   public errorMessage;
 
   constructor(
-    private _CfgClaseAccidenteService: SvCfgClaseAccidenteService,
-    private _loginService: LoginService,
-  ) {
-   
+    private _GrupoEtnicoService: UserCfgGrupoEtnicoService,
+    private _LoginService: LoginService,
+  ) { }
+
+  ngOnInit() {
+    this.grupoEtnico = new UserCfgGrupoEtnico(null);
+
+
   }
-
-  ngOnInit() {}
-
-
   onCancelar() {
     this.ready.emit(true);
   }
   onEnviar() {
-    let token = this._loginService.getToken();
-    this._CfgClaseAccidenteService.edit(this.claseAccidente, token).subscribe(
+    let token = this._LoginService.getToken();
+    
+    this._GrupoEtnicoService.register(this.grupoEtnico, token).subscribe(
       response => {
         if (response.status == 'success') {
           this.ready.emit(true);
@@ -36,6 +37,13 @@ export class EditComponent {
             title: 'Perfecto!',
             text: response.message,
             type: 'success',
+            confirmButtonText: 'Aceptar'
+          })
+        } else {
+          swal({
+            title: 'Error!',
+            text: response.message,
+            type: 'error',
             confirmButtonText: 'Aceptar'
           })
         }
