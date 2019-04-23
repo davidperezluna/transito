@@ -1,25 +1,25 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { SvCfgClaseAccidenteService } from '../../services/svCfgClaseAccidente.service';
+import { UserCfgGrupoEtnicoService } from '../../services/userCfgGrupoEtnico.service';
 import { LoginService } from '../../services/login.service';
 import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './svCfgClaseAccidente.component.html'
+  templateUrl: './userCfgGrupoEtnico.component.html'
 })
-export class SvCfgClaseAccidenteComponent implements OnInit {
+export class UserCfgGrupoEtnicoComponent implements OnInit {
   public errorMessage;
   public id;
-  public clasesAccidente;
+  public gruposEtnicos;
   public formNew = false;
   public formEdit = false;
   public formIndex = true;
   public table: any = null;
-  public claseAccidente: any;
+  public grupoEtnico: any;
 
   constructor(
-    private _ClaseAccidenteService: SvCfgClaseAccidenteService,
+    private _GrupoEtnicoService: UserCfgGrupoEtnicoService,
     private _loginService: LoginService,
   ) { }
 
@@ -27,17 +27,18 @@ export class SvCfgClaseAccidenteComponent implements OnInit {
     swal({
       title: 'Cargando Tabla!',
       text: 'Solo tardará unos segundos por favor espere.',
+      timer: 1500,
       onOpen: () => {
         swal.showLoading()
       }
     });
 
-    this._ClaseAccidenteService.index().subscribe(
+    this._GrupoEtnicoService.index().subscribe(
       response => {
         if (response) {
-          this.clasesAccidente = response.data;
+          this.gruposEtnicos = response.data;
           let timeoutId = setTimeout(() => {
-            this.iniciarTabla();
+            this.onInitTable();
           }, 100);
         }
       },
@@ -51,8 +52,9 @@ export class SvCfgClaseAccidenteComponent implements OnInit {
       }
     );
   }
-  iniciarTabla() {
-    $('#dataTables-example').DataTable({
+
+  onInitTable() {
+      this.table = $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,
       sPaginationType: 'full_numbers',
@@ -65,7 +67,6 @@ export class SvCfgClaseAccidenteComponent implements OnInit {
         }
       }
     });
-    this.table = $('#dataTables-example').DataTable();
   }
 
   onNew() {
@@ -99,7 +100,7 @@ export class SvCfgClaseAccidenteComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._ClaseAccidenteService.delete({ 'id': id }, token).subscribe(
+        this._GrupoEtnicoService.delete({ 'id': id }, token).subscribe(
           response => {
             swal({
               title: 'Eliminado!',
@@ -123,8 +124,8 @@ export class SvCfgClaseAccidenteComponent implements OnInit {
     })
   }
 
-  onEdit(claseAccidente: any) {
-    this.claseAccidente = claseAccidente;
+  onEdit(grupoEtnico: any) {
+    this.grupoEtnico = grupoEtnico;
     this.formEdit = true;
     this.formIndex = false;
   }

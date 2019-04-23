@@ -13,6 +13,7 @@ import { UserUsuarioMenuRoutes } from './userUsuarioMenu/userUsuarioMenu.routes'
 import { UserLicenciaConduccionRoutes } from './userLicenciaConduccion/userLicenciaConduccion.routes';
 import { UserLicenciaTransitoRoutes } from './userLicenciaTransito/userLicenciaTransito.routes';
 import { UserLcCfgCategoriaRoutes } from './userLcCfgCategoria/userLcCfgCategoria.routes';
+import { UserCfgGrupoEtnicoRoutes } from './userCfgGrupoEtnico/userCfgGrupoEtnico.routes';
 
 import { CfgValorVehiculoRoutes } from './cfgValorVehiculo/cfgValorVehiculo.routes';
 import { VhloCfgValorRoutes } from './vhloCfgValor/vhloCfgValor.routes';
@@ -307,6 +308,7 @@ export const DashboardRoutes: Route[] = [
       ...CfgSmlmvRoutes,
       ...cfgFestivoRoutes,
       ...UserLcCfgCategoriaRoutes,
+      ...UserCfgGrupoEtnicoRoutes,
       ...CfgTipoClaseRoutes,
       ...CfgModuloRoutes,
       ...PnalCfgCargoRoutes,

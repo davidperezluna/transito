@@ -14,6 +14,7 @@ import { UserCfgRoleModule } from './userCfgRole/userCfgRole.module';
 import { UserUsuarioMenuModule } from './userUsuarioMenu/userUsuarioMenu.module';
 import { UserLicenciaConduccionModule } from './userLicenciaConduccion/userLicenciaConduccion.module';
 import { UserLicenciaTransitoModule } from './userLicenciaTransito/userLicenciaTransito.module';
+import { UserCfgGrupoEtnicoModule } from './userCfgGrupoEtnico/userCfgGrupoEtnico.module';
 
 import { HomeModule } from './home/home.module';
 import { VhloCfgMarcaModule } from './vhloCfgMarca/vhloCfgMarca.module';
@@ -280,6 +281,7 @@ import {RightsidebarComponent} from '../shared';
     UserUsuarioMenuModule,
     UserLicenciaConduccionModule,
     UserLicenciaTransitoModule,
+    UserCfgGrupoEtnicoModule,
     HomeModule,
     VhloCfgMarcaModule,
     VhloCfgLineaModule,

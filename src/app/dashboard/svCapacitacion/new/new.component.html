@@ -90,10 +90,18 @@
             <div class="card-header">
                 <h5 class="card-title">
                     <strong class="text-uppercase">Datos Capacitados</strong>
+                    <div class="btn-group pull-right">
+                        <a href="{{ docsUrl }}/plantilla.csv" class="btn btn-info" target="_blank">Imprimir plantilla</a>
+                    </div>
                 </h5>
             </div>
             <div class="card-body">
                 <div class="form-group row">
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Tipo Identificación <strong class="text-danger">*</strong></label>
+                        <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionSelected" required name="idTipoIdentificacion">
+                        </ng-select>
+                    </div>
                     <div class="col-xs-12 col-lg-6">
                         <label>Número Cédula actor de la vía <strong class="text-danger">*</strong></label>
                         <input type="number" class="form-control" [(ngModel)]="capacitacion.numeroCedulaActorVial"
@@ -110,8 +118,23 @@
                             name="apellidoActorVial" required />
                     </div>
                     <div class="col-xs-12 col-lg-6">
+                        <label>Fecha de nacimiento del actor de la vía <strong class="text-danger">*</strong></label>
+                        <input type="date" class="form-control" [(ngModel)]="capacitacion.fechaNacimientoActorVial"
+                            name="fechaNacimientoActorVial" required />
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Email del actor de la vía <strong class="text-danger">*</strong></label>
+                        <input type="text" class="form-control" [(ngModel)]="capacitacion.emailActorVial"
+                            name="emailActorVial" required />
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
                         <label>Genero <strong class="text-danger">*</strong></label>
                         <ng-select [multiple]="false" [options]="generos" [(ngModel)]="generoSelected" required name="idGenero">
+                        </ng-select>
+                    </div>                    
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Grupo Étnico <strong class="text-danger">*</strong></label>
+                        <ng-select [multiple]="false" [options]="gruposEtnicos" [(ngModel)]="grupoEtnicoSelected" required name="idGrupoEtnico">
                         </ng-select>
                     </div>                    
                     <div class="col-xs-12 col-lg-6">
@@ -119,6 +142,21 @@
                         <ng-select [multiple]="false" [options]="clasesActoresVia" [(ngModel)]="claseActorViaSelected"
                             required name="claseActorVia"></ng-select>
                     </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <div class="row" style="margin: 36px 7px 0px 43px;">
+                            <div class="col-xs-12 col-lg-6 custom-control custom-checkbox">
+                                <input [(ngModel)]="capacitacion.discapacidad" name="discapacidad" type="checkbox" class="custom-control-input"
+                                    id="checkbox-discapacidad">
+                                <label class="custom-control-label" for="checkbox-discapacidad">Discapacidad</label>
+                            </div>
+                            <div class=" col-xs-12 col-lg-6 custom-control custom-checkbox">
+                                <input [(ngModel)]="capacitacion.victima" name="victima" type="checkbox" class="custom-control-input"
+                                    id="checkbox-victima">
+                                <label class="custom-control-label" for="checkbox-victima">Victima del conflicto armado</label>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="col-xs-12 col-lg-6" style="margin-top: 2%">
                         <label>Cargar datos de personas capacitadas</label>
                         <button (click)="onUploadFile()" class="btn btn-default">archivo</button>
@@ -140,21 +178,48 @@
                     <thead>
                         <tr>
                             <th>#</th>
+                            <th>TIPO IDENTIFICACIÓN</th>
                             <th>CEDULA</th>
                             <th>NOMBRE</th>
                             <th>APELLIDO</th>
+                            <th>FECHA NACIMIENTO</th>
+                            <th>EMAIL</th>
                             <th>GENERO</th>
+                            <th>GRUPO ETNICO</th>
                             <th>CLASE ACTOR VIAL</th>
+                            <th>DISCAPACIDAD</th>
+                            <th>VICTIMA CONFLICTO</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr class="odd" *ngFor="let capacitacion of capacitaciones; let i = index">
                             <td>{{ i + 1 }}</td>
+                            <td>{{ capacitacion.tipoIdentificacionActorVial.nombre }}</td>
                             <td>{{ capacitacion.numeroCedulaActorVial }}</td>
                             <td>{{ capacitacion.nombreActorVial }}</td>
                             <td>{{ capacitacion.apellidoActorVial }}</td>
+                            <td>{{ capacitacion.fechaNacimientoActorVial }}</td>
+                            <td>{{ capacitacion.emailActorVial }}</td>
                             <td>{{ capacitacion.genero.sigla }}</td>
+                            <td>{{ capacitacion.grupoEtnicoActorVial.nombre }}</td>
                             <td>{{ capacitacion.claseActorVial.nombre }}</td>
+                            <td>
+                                <span *ngIf="capacitacion.discapacidad">
+                                    <p>Si</p>
+                                </span>
+                                <span *ngIf="!capacitacion.discapacidad">
+                                    <p>No</p>
+                                </span>
+                            </td>
+                                <span *ngIf="capacitacion.victima">
+                                    <p>Si</p>
+                                </span>
+                                <span *ngIf="!capacitacion.victima">
+                                    <p>No</p>
+                                </span>
+                            <td>
+
+                            </td>
                         </tr>
                     </tbody>
                 </table>

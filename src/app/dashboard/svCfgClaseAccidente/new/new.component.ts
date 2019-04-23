@@ -12,8 +12,6 @@ export class NewComponent implements OnInit {
   @Output() ready = new EventEmitter<any>();
   public claseAccidente: SvCfgClaseAccidente;
   public errorMessage;
-  public respuesta;
-  
 
   constructor(
     private _ClaseAccidenteService: SvCfgClaseAccidenteService,
@@ -33,20 +31,18 @@ export class NewComponent implements OnInit {
     
     this._ClaseAccidenteService.register(this.claseAccidente, token).subscribe(
       response => {
-        this.respuesta = response;
-        
-        if (this.respuesta.status == 'success') {
+        if (response.status == 'success') {
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',
-            text: 'Registro exitoso!',
+            text: response.message,
             type: 'success',
             confirmButtonText: 'Aceptar'
           })
         } else {
           swal({
             title: 'Error!',
-            text: 'La clase accidente ya se encuentra registrado',
+            text: response.message,
             type: 'error',
             confirmButtonText: 'Aceptar'
           })
