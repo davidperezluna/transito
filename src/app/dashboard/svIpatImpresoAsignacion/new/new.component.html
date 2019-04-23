@@ -4,6 +4,7 @@
         <div class="card">
             <div class="card-header">
                 <b class="text-uppercase">Nuevo registro de impresos a bodega</b>
+                <br>
                 <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
             </div>
             <div class="card-body">
@@ -12,13 +13,18 @@
                         <div class="row">
                             <div class="col-xs-12 col-lg-6">
                                 <label>Fecha <b class="text-danger">*</b></label>
-                                <input type="date" class="form-control" [(ngModel)]="bodega.fecha" name="fecha" />
+                                <input type="date" class="form-control" [(ngModel)]="asignacion.fecha" name="fecha" />
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Cantidad <b class="text-danger">*</b></label>
+                                <input type="text" class="form-control" [(ngModel)]="asignacion.cantidad" name="cantidad" />
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-xs-12 col-lg-6">
-                                <label>Cantidad <b class="text-danger">*</b></label>
-                                <input type="text" class="form-control" [(ngModel)]="bodega.cantidad" name="cantidad" />
+                            <div  class="col-xs-12 col-lg-12">
+                                <label>Organismo de tránsito <small>(Sede operativa)</small> <b class="text-danger">*</b></label>
+                                <ng-select [multiple]="false" [options]="organismosTransito" [(ngModel)]="asignacion.idOrganismoTransito" name="idOrganismoTransito">
+                                </ng-select>
                             </div>
                         </div>
                     </div>

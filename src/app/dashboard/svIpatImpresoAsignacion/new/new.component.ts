@@ -1,6 +1,7 @@
 import { Component, OnInit,Output,EventEmitter } from '@angular/core';
 import { SvIpatImpresoAsignacion } from '../svIpatImpresoAsignacion.modelo';
 import { SvIpatImpresoAsignacionService } from '../../../services/svIpatImpresoAsignacion.service';
+import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -13,13 +14,32 @@ export class NewComponent implements OnInit {
   public asignacion: SvIpatImpresoAsignacion;
   public errorMessage;
 
+  public organismosTransito: any;
+
 constructor(
   private _ImpresoAsignacionService: SvIpatImpresoAsignacionService,
+  private _OrganismoTransitoService: CfgOrganismoTransitoService,
   private _loginService: LoginService,
   ){}
 
   ngOnInit() {
     this.asignacion = new SvIpatImpresoAsignacion(null, null, null, null);
+
+    this._OrganismoTransitoService.selectSedes().subscribe(
+      response => {
+          this.organismosTransito = response;
+
+          swal.close();
+      },
+      error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+              console.log(this.errorMessage);
+              alert("Error en la petición");
+          }
+      }
+    );
   }
 
   onCancelar(){
