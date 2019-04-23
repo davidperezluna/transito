@@ -70,24 +70,24 @@
                                 [(ngModel)]="msvRegistroIpat.idClaseAccidente" required name="claseAccidente">
                             </ng-select>
                         </div>
-                        <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.idClaseAccidente == 'OTRO'">
+                        <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.idClaseAccidente == 6">
                             <label>Otro (Clase de Accidente)</label>
                             <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.otroClaseAccidente"
                                 name="otroClaseAccidente">
                         </div>
-                        <div class="col-lg-6 col-md-6" *ngIf='msvRegistroIpat.claseAccidente == "CHOQUE"'>
+                        <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.idClaseAccidente == 1">
                             <label>Choque con</label>
                             <ng-select [multiple]="false" [options]="choquesCon"
                                 [(ngModel)]="msvRegistroIpat.idChoqueCon" name="choqueCon">
                             </ng-select>
                         </div>
-                        <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.idChoqueCon == 'OBJETO FIJO'">
+                        <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.idChoqueCon == 4">
                             <label>Objeto Fijo</label>
                             <ng-select [multiple]="false" [options]="objetosFijos"
                                 [(ngModel)]="msvRegistroIpat.idObjetoFijo" name="objetoFijo">
                             </ng-select>
                         </div>
-                        <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.objetoFijo == 'OTRO'">
+                        <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.idObjetoFijo == 11">
                             <label>Otro (Objeto Fijo)</label>
                             <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.otroObjetoFijo"
                                 name="otroObjetoFijo">
@@ -729,8 +729,7 @@
                         <div class="col-xs-16 col-lg-6" style="margin-top: 2%;">
                             <div class="input-group">
                                 <input type="number" class="form-control" placeholder="número de identificación"
-                                    [(ngModel)]="msvIpatConductor.identificacionConductor" required
-                                    name="identificacionConductor" />
+                                    [(ngModel)]="msvIpatConductor.identificacionConductor" name="identificacionConductor" />
                                 <span class="input-group-btn">
                                     <button (click)="onBuscarConductor()" class="btn btn-default btn-primary"
                                         type="button">
@@ -928,9 +927,12 @@
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf='msvIpatConductor.portaLicencia == "1"'>
                             <label>Categoria Lic.Conducción</label>
-                            <input class="form-control" type="text" [disabled]="licencia"
+                            <!-- <input class="form-control" type="text" [disabled]="licencia"
                                 [(ngModel)]="msvIpatConductor.categoriaLicenciaConduccion"
+                                name="categoriaLicenciaConduccion"> -->
+                            <ng-select [multiple]="false" [disabled]="licencia" [options]="categoriasLc" [(ngModel)]="categoriaLcSelected"
                                 name="categoriaLicenciaConduccion">
+                            </ng-select>
                         </div>
                         <div class="form-group row" class="col-lg-6 col-md-6"
                             *ngIf='msvIpatConductor.portaLicencia == "1"'>
@@ -1592,7 +1594,7 @@
         </form>
         <div class="card-footer">
             <button (click)="onCancelar()" class="btn btn-default">Cancelar</button>
-            <button (click)="enviarTramite()" [disabled]="formNew.invalid" *ngIf="consecutivo" class="btn btn-primary">Enviar</button>
+            <button (click)="onEnviar()" [disabled]="formNew.invalid" *ngIf="consecutivo" class="btn btn-primary">Enviar</button>
         </div>
         <!-- /.col -->
     </div>

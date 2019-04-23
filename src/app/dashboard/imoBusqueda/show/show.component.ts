@@ -3,6 +3,7 @@ import { LoginService } from '../../../services/login.service';
 import { ImoInsumoService } from '../../../services/imoInsumo.service';
 import { DatePipe } from '@angular/common';
 import swal from 'sweetalert2';
+import { environment } from 'environments/environment';
 declare var $: any;
 
 @Component({
@@ -14,6 +15,7 @@ export class ShowComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
 @Input() insumos:any = null;
 @Input() loteInsumo:any = null;
+public apiUrl = environment.apiUrl + 'insumo/imolote';
 public errorMessage;
 public respuesta;
 public table:any;

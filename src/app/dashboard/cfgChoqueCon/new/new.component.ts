@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { CfgChoqueCon } from '../cfgChoqueCon.modelo';
-import { CfgChoqueConService } from '../../../services/cfgChoqueCon.service';
+import { CfgChoqueConService } from '../../../services/svCfgChoqueCon.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 

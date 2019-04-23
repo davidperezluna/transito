@@ -159,7 +159,7 @@ import { UserCfgEmpresaServicioRoutes } from './userCfgEmpresaServicio/userCfgEm
 
 import { SvCfgClaseAccidenteRoutes } from './svCfgClaseAccidente/svCfgClaseAccidente.routes';
 import { CfgChoqueConRoutes } from './cfgChoqueCon/cfgChoqueCon.routes';
-import { CfgObjetoFijoRoutes } from './cfgObjetoFijo/cfgObjetoFijo.routes';
+import { SvCfgObjetoFijoRoutes } from './svCfgObjetoFijo/svCfgObjetoFijo.routes';
 import { RnrsPreregistroRoutes } from './rnrsPreregistro/rnrsPreregistro.routes';
 import { ReporteRoutes } from './reporte/reporte.routes';
 import { RnaCertificadoTradicionRoutes } from './rnaCertificadoTradicionOficial/rnaCertificadoTradicionOficial.routes';
@@ -173,6 +173,8 @@ import { ImoCfgTipoRoutes } from './imoCfgTipo/imoCfgTipo.routes';
 import { ImoLoteRoutes } from "./imoLote/imoLote.routes";
 import { ImoAsignacionRoutes} from './imoAsignacion/imoAsignacion.routes';
 import { ImoPreasignacionRoutes } from './imoPreasignacIon/imoPreasignacion.routes';
+import { ImoActaRoutes } from './imoActa/imoActa.routes';
+
 
 import { BpCfgTipoInsumoRoutes } from './bpCfgTipoInsumo/bpCfgTipoInsumo.routes';
 import { BpProyectoRoutes } from './bpProyecto/bpProyecto.routes';
@@ -414,10 +416,7 @@ export const DashboardRoutes: Route[] = [
       ...GestionTransportePublicoRoutes,
       ...RnaPreregistroRoutes,
       ...rnaRegistroInsumosRoutes,
-      ...ImoPreasignacionRoutes,
       ...TramitePrecioRoutes,
-      ...ImoCfgTipoRoutes,
-      ...ImoLoteRoutes,
       ...CfgComparendoEstadoRoutes,
       ...CfgOrganismoTransitoRoutes,
       ...CfgEntidadJudicialRoutes,
@@ -425,7 +424,7 @@ export const DashboardRoutes: Route[] = [
       ...VhloCfgLimitacionTipoRoutes,
       ...VhloCfgLimitacionTipoProcesoRoutes,
       ...CfgChoqueConRoutes,
-      ...CfgObjetoFijoRoutes,
+      ...SvCfgObjetoFijoRoutes,
       ...SvIpatTalonarioRoutes,
       ...SvIpatConsecutivoRoutes,
       ...SvIpatAsignacionRoutes,
@@ -437,12 +436,16 @@ export const DashboardRoutes: Route[] = [
       ...TramiteLevantamientoLimitacionRoutes,
       ...RnrsTramiteInscripcionLimitacionRoutes,
       ...RnrsTramiteLevantamientoLimitacionRoutes,
-      ...ImoAsignacionRoutes,
       ...CfgValorVehiculoRoutes,
       ...RnrsPreregistroRoutes,
       ...ReporteRoutes,
       ...RpcccInventarioDocumentalRoutes,
       ...ImoBusquedaRoutes,
+      ...ImoAsignacionRoutes,
+      ...ImoCfgTipoRoutes,
+      ...ImoLoteRoutes,
+      ...ImoPreasignacionRoutes,
+      ...ImoActaRoutes,
       ...UserCfgEmpresaTipoRoutes,
       ...UserCfgEmpresaServicioRoutes,
       ...RnaCertificadoTradicionRoutes,

@@ -13,7 +13,6 @@ export class NewComponent implements OnInit {
     @Output() ready = new EventEmitter<any>();
     public claseChoque: SvCfgClaseChoque;
     public errorMessage;
-    public respuesta;
 
     public clasesAccidente: any;
     public claseAccidenteSelected: any;
@@ -47,7 +46,7 @@ export class NewComponent implements OnInit {
 
     onEnviar() {
         let token = this._loginService.getToken();
-        this.claseChoque.claseAccidente = this.claseAccidenteSelected;
+        this.claseChoque.idClaseAccidente = this.claseAccidenteSelected;
         this._ClaseChoqueService.register(this.claseChoque, token).subscribe(
             response => {
                 if (response.status == 'success') {

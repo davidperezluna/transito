@@ -14,7 +14,7 @@ export class MsvRevision{
 		public empresaId: number,
 		public personaContacto: string,
 		public cargo: string,
-		public funcionarioId: string,
+		public funcionarioId: number,
 		public correo: string
 
 	){}

@@ -185,7 +185,7 @@ import { CfgEntidadJudicialModule } from './cfgEntidadJudicial/cfgEntidadJudicia
 import { SvCfgGravedadAccidenteModule } from './svCfgGravedadAccidente/svCfgGravedadAccidente.module';
 import { SvCfgClaseAccidenteModule } from './svCfgClaseAccidente/svCfgClaseAccidente.module';
 import { CfgChoqueConModule } from './cfgChoqueCon/cfgChoqueCon.module';
-import { CfgObjetoFijoModule } from './cfgObjetoFijo/cfgObjetoFijo.module';
+import { SvCfgObjetoFijoModule } from './svCfgObjetoFijo/svCfgObjetoFijo.module';
 
 import { TpAlcaldiaModule } from './tpAlcaldia/tpAlcaldia.module';
 // import { SucursalModule } from './empresa/sucursal/new/sucursal.module';
@@ -210,6 +210,13 @@ import { PnalTalonarioModule } from './pnalTalonario/pnalTalonario.module';
 import { PnalAsignacionModule } from './pnalAsignacion/pnalAsignacion.module';
 
 import { ImoPreasignacionModule } from './imoPreasignacIon/imoPreasignacion.module';
+import { ImoActaModule } from './imoActa/imoActa.module';
+import { ImoAsignacionModule } from './imoAsignacion/imoAsignacion.module';
+import { ImoCfgTipoModule } from './imoCfgTipo/imoCfgTipo.module';
+import { ImoBusquedaModule } from './imoBusqueda/imoBusqueda.module';
+import { ImoLoteModule } from "./imoLote/imoLote.module";
+
+
 import { RnrsPreasignacionPlacaModule } from './rnrsPreasignacionPlaca/rnrsPreasignacionPlaca.module';
 import { RnaPreregistroModule } from './rnaPreregistro/RnaPreregistro.module';
 
@@ -219,16 +226,11 @@ import { FroTrteCfgCuentaModule } from './froTrteCfgCuenta/froTrteCfgCuenta.modu
 
 import { GestionTransportePublicoModule } from './gestionTransportePublico/gestionTransportePublico.module';
 import { rnaRegistroInsumosModule } from './rnaRegistroInsumos/rnaRegistroInsumos.module';
-import { ImoAsignacionModule } from './imoAsignacion/imoAsignacion.module';
 //import { RnaPreasignacionInsumoModule } from './rnaPreasignacIonInsumo/rnaPreasignacionInsumo.module';
 import { RnmaPreregistroModule } from './rnmaPreregistro/rnmaPreregistro.module';
 import { RnrsPreregistroModule } from './rnrsPreregistro/rnrsPreregistro.module';
 import { ReporteModule } from './reporte/reporte.module';
 import { RnaCertificadoTradicionOficialModule } from './rnaCertificadoTradicionOficial/rnaCertificadoTradicionOficial.module';
-
-import { ImoCfgTipoModule } from './imoCfgTipo/imoCfgTipo.module';
-import { ImoBusquedaModule } from './imoBusqueda/imoBusqueda.module';
-import { ImoLoteModule } from "./imoLote/imoLote.module";
 
 import { BpCfgTipoInsumoModule } from './bpCfgTipoInsumo/bpCfgTipoInsumo.module';
 import { BpProyectoModule } from './bpProyecto/bpProyecto.module';
@@ -434,15 +436,13 @@ import {RightsidebarComponent} from '../shared';
     TramitePrecioModule,
     RnaPreregistroModule,
     CfgOrganismoTransitoModule,
-    ImoCfgTipoModule,
     CfgChoqueConModule,
-    CfgObjetoFijoModule,
+    SvCfgObjetoFijoModule,
     CfgEntidadJudicialModule,
     VhloCfgLimitacionCausalModule,
     VhloCfgLimitacionTipoModule,
     rnaRegistroInsumosModule,
     RnmaPreregistroModule,
-    ImoAsignacionModule,
     CfgTipoProcesoModule,
     RnmaTramiteInscripcionLimitacionModule,
     RnmaTramiteLevantamientoLimitacionModule,
@@ -454,13 +454,16 @@ import {RightsidebarComponent} from '../shared';
     ReporteModule,
     registroEntregaProductoModule,
     RpcccInventarioDocumentalModule,
-    ImoBusquedaModule,
-    ImoLoteModule,
     FacturaInfraccionModule,
     UserCfgEmpresaTipoModule,
     UserCfgEmpresaServicioModule,
     RnaCertificadoTradicionOficialModule,
     ImoPreasignacionModule,
+    ImoBusquedaModule,
+    ImoAsignacionModule,
+    ImoCfgTipoModule,
+    ImoActaModule,
+    ImoLoteModule,
     CvCfgTipoMedidaCautelarModule,
     CvMedidaCautelarModule,
     BpCfgTipoInsumoModule,

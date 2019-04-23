@@ -1,7 +1,7 @@
 export class MsvRegistroIpat{
 	constructor(
 		public idOrganismoTransito:number,
-		public numeroResolucion:string,
+		public numeroConsecutivo:string,
 
 		public idGravedad:number,
 		public lugar: string,
@@ -11,7 +11,7 @@ export class MsvRegistroIpat{
 		public horaLevantamiento:string,
 		public idClaseAccidente: number,
 		public otroClaseAccidente:string,
-		public idChoqueCon:number,
+		public idClaseChoque:number,
 		public idObjetoFijo:number,
 		public otroObjetoFijo:string,
 		public idArea:number,

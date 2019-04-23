@@ -11,9 +11,6 @@ export class EditComponent implements OnInit {
     @Output() ready = new EventEmitter<any>();
     @Input() nacionalidad: any = null;
     public errorMessage;
-    public respuesta;
-
-    public formReady = false;
 
     constructor(
         private _NacionalidadService: SvCfgNacionalidadService,
