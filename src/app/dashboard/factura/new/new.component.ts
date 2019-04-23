@@ -96,7 +96,6 @@ constructor(
           this.factura.numero = datePiper.transform(this.date, 'hmss');
           this.factura.fechaCreacion = datePiper.transform(this.date, 'yyyy-MM-dd');
           this.factura.sedeOperativaId = this.sedeOperativa.id;
-
           this.formNew = true;
         }else{
           swal({
@@ -375,7 +374,7 @@ constructor(
                 }
               );
 
-              swal.close();
+              swal.close(); 
             } else {
               swal({
                 title: 'Sin propietarios!',

@@ -183,6 +183,8 @@ export class VhloRnaPreasignacionPlacaComponent implements OnInit {
               this._VehiculoService.assign(this.datos, token).subscribe(
                 response => {
                   if(response.status == 'success'){
+                    this.formShow = false; 
+                    
                     swal({
                       title: 'Perfecto!',
                       html: html,
