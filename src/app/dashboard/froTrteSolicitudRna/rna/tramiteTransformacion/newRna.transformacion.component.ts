@@ -27,6 +27,8 @@ export class NewRnaTransformacionComponent implements OnInit {
     public combustibles: any = null;
 
     public datos = {
+        'documentacion': true,
+        'observacion': null,
         'tipoTransformacion': null,
         'modelo': null,
         'ejesActuales': null,
@@ -212,7 +214,15 @@ export class NewRnaTransformacionComponent implements OnInit {
                         if (response.status == 'success') {
                             let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero;
         
-                            this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
+                            this.readyTramite.emit(
+                                {
+                                    'documentacion':this.datos.documentacion, 
+                                    'observacion':this.datos.observacion, 
+                                    'foraneas':this.datos, 
+                                    'resumen':resumen,
+                                    'idTramiteFactura': this.tramiteFactura.id,
+                                }
+                            );
                         }
                         error => {
                             this.errorMessage = <any>error;

@@ -25,8 +25,9 @@ export class NewTrasladoCuentaComponent implements OnInit {
   public tramiteSolicitud: any;
 
   public datos = {
+    'documentacion': true,
+    'observacion': null,
     'fechaSalida': null,
-    'numeroRunt': null,
     'numeroGuia': null,
     'nombreEmpresa': null,
     'campos': null,
@@ -165,7 +166,15 @@ constructor(
       
                   this._TramiteTrasladoService.register(this.datos, token).subscribe(response => {
                     if (response.status == 'success') {
-                      this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
+                      this.readyTramite.emit(
+                        {
+                          'documentacion':this.datos.documentacion, 
+                          'observacion':this.datos.observacion, 
+                          'foraneas':this.datos, 
+                          'resumen':resumen,
+                          'idTramiteFactura': this.tramiteFactura.id,
+                        }
+                      );
                     }
                     error => {
                       this.errorMessage = <any>error;

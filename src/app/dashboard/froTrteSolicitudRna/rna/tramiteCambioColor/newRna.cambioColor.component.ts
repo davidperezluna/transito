@@ -26,6 +26,8 @@ export class NewRnaCambioColorComponent implements OnInit {
     public colorSelected: any;
 
     public datos = {
+        'documentacion': true,
+        'observacion': null,
         'campos': null,
         'idFuncionario': null,
         'idVehiculo': null,
@@ -157,7 +159,15 @@ export class NewRnaCambioColorComponent implements OnInit {
                                 if (response.status == 'success') {
                                     let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero;
         
-                                    this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
+                                    this.readyTramite.emit(
+                                        {
+                                            'documentacion':this.datos.documentacion, 
+                                            'observacion':this.datos.observacion, 
+                                            'foraneas':this.datos, 
+                                            'resumen':resumen,
+                                            'idTramiteFactura': this.tramiteFactura.id,
+                                        }
+                                    );
                                 }
                                 error => {
                                     this.errorMessage = <any>error;

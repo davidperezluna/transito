@@ -38,6 +38,8 @@ export class NewRnaTraspasoIndeterminadaComponent implements OnInit {
   ];
 
   public datos = {
+    'documentacion': true,
+    'observacion': null,
     'permiso': true,
     'fecha': null,
     'fechaActa': null,
@@ -202,7 +204,15 @@ export class NewRnaTraspasoIndeterminadaComponent implements OnInit {
                             if (response.code == 200) {
                               let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero;
     
-                              this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
+                              this.readyTramite.emit(
+                                {
+                                    'documentacion':this.datos.documentacion, 
+                                    'observacion':this.datos.observacion, 
+                                    'foraneas':this.datos, 
+                                    'resumen':resumen,
+                                    'idTramiteFactura': this.tramiteFactura.id,
+                                }
+                              );
                             }else{
                               swal({
                                 title: 'Error!',

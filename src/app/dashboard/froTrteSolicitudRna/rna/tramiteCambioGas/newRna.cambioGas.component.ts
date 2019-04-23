@@ -26,6 +26,8 @@ export class NewRnaCambioGasComponent implements OnInit {
     public combustibles;
      
     public datos = {
+        'documentacion': true,
+        'observacion': null,
         'placa': null,
         'linea': null,
         'marca': null,
@@ -192,7 +194,15 @@ export class NewRnaCambioGasComponent implements OnInit {
                                 '<br><b>Anterior: </b>' + this.vehiculo.combustible.nombre +
                                 '<br><b>Nuevo: </b>' + this.datos.idCombustibleCambio;
         
-                            this.readyTramite.emit({'foraneas':this.datos, 'resumen': resumen});
+                            this.readyTramite.emit(
+                                {
+                                    'documentacion':this.datos.documentacion, 
+                                    'observacion':this.datos.observacion, 
+                                    'foraneas':this.datos, 
+                                    'resumen':resumen,
+                                    'idTramiteFactura': this.tramiteFactura.id,
+                                }
+                            );
                         }
                         error => {
                             this.errorMessage = <any>error;

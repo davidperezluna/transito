@@ -18,11 +18,11 @@ export class NewRnaDuplicadoLicenciaComponent implements OnInit {
     
     public autorizado: any = false;
     public tramiteSolicitud: any = null;
-    public resumen: any = null;
 
     public datos = {
+        'documentacion': true,
+        'observacion': null,
         'motivo': null,
-        'numeroRunt': null,
         'numeroLicenciaActual': null,
         'nuevaLicencia': null,
         'idFuncionario': null,
@@ -156,9 +156,17 @@ export class NewRnaDuplicadoLicenciaComponent implements OnInit {
         this._TramiteSolicitudService.validations(this.datos, token).subscribe(
             response => {
               if (response.code == 200) {
-                this.resumen = "Motivo "+ this.datos.motivo;
+                let resumen = "Motivo "+ this.datos.motivo;
 
-                this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
+                this.readyTramite.emit(
+                    {
+                        'documentacion':this.datos.documentacion, 
+                        'observacion':this.datos.observacion, 
+                        'foraneas':this.datos, 
+                        'resumen':resumen,
+                        'idTramiteFactura': this.tramiteFactura.id,
+                    }
+                );
               }else{
                 swal({
                   title: 'Error!',

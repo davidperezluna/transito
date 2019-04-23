@@ -27,6 +27,23 @@
                     <div class="form-group">
                         <div class="row">
                             <div class="col-xs-12 col-lg-12">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" [(ngModel)]="datos.documentacion" class="custom-control-input" id="documentacion" name="documentacion">
+                                    <label class="custom-control-label" for="documentacion">¿Presenta documentación completa?</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" *ngIf="!datos.documentacion">
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Registre que documentación esta pendiente <b class="text-danger">*</b></label>
+                                <textarea class="form-control" [(ngModel)]="datos.observacion" rows="4" name="observacion" required></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group" *ngIf="datos.documentacion">
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-12">
                                 <label>Tipo de propiedad <span class="text-danger">*</span></label>
                                 <ng-select [multiple]="false" [options]="tiposPropiedad" [(ngModel)]="datos.tipoPropiedad" name="tipoPropiedad" required>
                                 </ng-select>
@@ -200,7 +217,7 @@
                     </div>                  
                 </div>
             </div>
-            <div class="card-footer" *ngIf="ciudadano || empresa">
+            <div class="card-footer">
                 <button (click)="onEnviar()" class="btn btn-primary">
                     <i class="fa fa-save"></i>
                     Enviar

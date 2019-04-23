@@ -28,7 +28,9 @@ export class NewRnaCertificadoTradicionComponent implements OnInit {
     public entregado:any = false;
    
     public datos = {
-        'observacion': null,                  
+        'documentacion': true,
+        'observacion': null,
+        'observaciones': null,                  
         'campos': null,
         'idFuncionario': null,
         'idCiudadano': null,
@@ -136,45 +138,55 @@ export class NewRnaCertificadoTradicionComponent implements OnInit {
             }
         });
 
-        let token = this._LoginService.getToken();
-
-        let datos = {
-            'identificacion': this.identificacion,
-            'idTipoIdentificacion': 1,
-        }
-
-        this._CiudadanoService.searchByIdentificacion(datos, token).subscribe(
-            response => {
-                if (response.code == 200) {
-                    if (response.data.ciudadano) {
-                        this.ciudadano = response.data.ciudadano;
-
+        if (!this.identificacion) {
+            swal({
+                title: 'Error!',
+                text: 'El número de identificación no puede estar vacia.',
+                type: 'error',
+                confirmButtonText: 'Aceptar'
+            });
+        }else{
+            let token = this._LoginService.getToken();
+    
+            let datos = {
+                'identificacion': this.identificacion,
+                'idTipoIdentificacion': 1,
+            }
+    
+            this._CiudadanoService.searchByIdentificacion(datos, token).subscribe(
+                response => {
+                    if (response.code == 200) {
+                        if (response.data.ciudadano) {
+                            this.ciudadano = response.data.ciudadano;
+    
+                            swal({
+                                title: 'Perfecto!',
+                                text: response.message,
+                                type: 'success',
+                                confirmButtonText: 'Aceptar'
+                            });
+                        }
+                    } else {
+                        this.ciudadano = null;
+    
                         swal({
-                            title: 'Perfecto!',
+                            title: 'Error!',
                             text: response.message,
-                            type: 'success',
+                            type: 'error',
                             confirmButtonText: 'Aceptar'
                         });
                     }
-                } else {
-                    this.ciudadano = null;
-
-                    swal({
-                        title: 'Error!',
-                        text: response.message,
-                        type: 'error',
-                        confirmButtonText: 'Aceptar'
-                    });
-                }
-                error => {
-                    this.errorMessage = <any>error;
-                    if (this.errorMessage != null) {
-                        console.log(this.errorMessage);
-                        alert('Error en la petición');
+                    error => {
+                        this.errorMessage = <any>error;
+                        if (this.errorMessage != null) {
+                            console.log(this.errorMessage);
+                            alert('Error en la petición');
+                        }
                     }
                 }
-            }
-        );
+            );
+        }
+
     }
 
     onEnviar() {      
@@ -192,7 +204,15 @@ export class NewRnaCertificadoTradicionComponent implements OnInit {
 
                 this.entregado = true;
 
-                this.readyTramite.emit({'foraneas': this.datos, 'resumen': resumen});
+                this.readyTramite.emit(
+                    {
+                        'documentacion':this.datos.documentacion, 
+                        'observacion':this.datos.observacion, 
+                        'foraneas':this.datos, 
+                        'resumen':resumen,
+                        'idTramiteFactura': this.tramiteFactura.id,
+                    }
+                );
               }else{
                 swal({
                   title: 'Error!',

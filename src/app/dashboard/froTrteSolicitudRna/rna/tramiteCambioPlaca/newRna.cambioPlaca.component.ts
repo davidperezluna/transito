@@ -23,10 +23,10 @@ export class NewRnaCambioPlacaComponent implements OnInit {
     public tipoCambioSelected: any;
 
     public datos = {
+        'documentacion': true,
+        'observacion': null,
         'tipoCambio': null,
-        'numeroRunt': null,
         'nuevaPlaca': null,
-        'documentacion': null,
         'sustrato': null,
         'campos': null,
         'idFuncionario': null,
@@ -145,7 +145,15 @@ export class NewRnaCambioPlacaComponent implements OnInit {
                                         '<br/><b>Placa anterior: </b>'+ this.vehiculo.placa.numero +
                                         '<br/><b>Placa nueva: </b>' + this.datos.nuevaPlaca;
         
-                            this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
+                            this.readyTramite.emit(
+                                {
+                                    'documentacion':this.datos.documentacion, 
+                                    'observacion':this.datos.observacion, 
+                                    'foraneas':this.datos, 
+                                    'resumen':resumen,
+                                    'idTramiteFactura': this.tramiteFactura.id,
+                                }
+                            );
                         }
                         error => {
                             this.errorMessage = <any>error;

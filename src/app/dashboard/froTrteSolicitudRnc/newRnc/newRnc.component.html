@@ -22,12 +22,12 @@
                     </div>
                 </div>
 
-                <div class="form-group" *ngIf='factura'>
+                <div class="form-group" *ngIf="factura && factura.estado != 'FINALIZADA'">
                     <div class="row">
                         <div class="col-xs-12 col-lg-12">
                             <label>Buscar solicitante <strong class="text-danger">*</strong></label>
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Número de identificación" [(ngModel)]="numeroIdentificacion" name="numeroIdentificacion" required
+                                <input type="text" class="form-control" placeholder="Número de identificación" [(ngModel)]="identificacion" name="identificacion" required
                                 />
                                 <span class="input-group-btn">
                                     <button (click)="onSearchCiudadano()" class="btn btn-primary" type="button">
@@ -69,6 +69,18 @@
                     </div>
                 </div>
             </div>
+            <div class="card-footer" *ngIf="tramitesFactura && (tramitesFactura.length == tramitesRealizados.length)">
+                <div class="btn-group">
+                    <button (click)="onEnviar()" class="btn btn-success">
+                        <i class="fa fa-save"></i>
+                        Finalizar
+                    </button>
+                    <a *ngIf="factura.estado == 'PENDIENTE DOCUMENTACION'" href="{{ apiUrl }}/{{ factura.id }}/pdf/documentacion" class="btn btn-default" target="_blank">
+                        <i class="fa fa-file-pdf-o"></i>
+                        Imprimir observaciones
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -84,27 +96,11 @@
                                     <input type="text" class="form-control" placeholder="No. solicitud RUNT" [(ngModel)]="tramiteSolicitud.numeroRunt" name="numeroRunt" required />
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-xs-12 col-lg-12">
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" [(ngModel)]="tramiteSolicitud.documentacion" class="custom-control-input" id="documentacion" name="documentacion">
-                                        <label class="custom-control-label" for="documentacion">¿Presenta documentación completa?</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row" *ngIf="!tramiteSolicitud.documentacion">
-                                <div class="col-xs-12 col-lg-12">
-                                    <label>Registre que documentación esta pendiente
-                                        <b class="text-danger">*</b>
-                                    </label>
-                                    <textarea class="form-control" [(ngModel)]="tramiteSolicitud.observacion" rows="4" name="observacion" required></textarea>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="row" *ngIf="tramiteSolicitud.documentacion && tramitesFactura">
+                <div class="row" *ngIf="tramitesFactura">
                     <div class="col-xs-12 col-lg-12">
                         <ul class="nav nav-tabs" role="tablist">
                             <li class="nav-item">
@@ -130,27 +126,26 @@
 
                                 <div class="row">
                                     <div class="col-xs-12 col-lg-12" *ngIf="tramiteFactura">                        
-                                        <appRnc-expedicion-licencia *ngIf="tramiteFactura.precio.tramite.id == 31" [solicitante]="solicitante" [tramiteFactura]="tramiteFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnc-expedicion-licencia>
+                                        <appRnc-expedicion-licencia *ngIf="tramiteFactura.precio.tramite.id == 31" [solicitante]="solicitante" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)"></appRnc-expedicion-licencia>
                                         
-                                        <appRnc-duplicado-licencia *ngIf="tramiteFactura.precio.tramite.id == 32" [solicitante]="solicitante" [tramiteFactura]="tramiteFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnc-duplicado-licencia>
+                                        <appRnc-duplicado-licencia *ngIf="tramiteFactura.precio.tramite.id == 32" [solicitante]="solicitante" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)"></appRnc-duplicado-licencia>
                                         
-                                        <appRnc-expedicion-licencia-cambio-documento *ngIf="tramiteFactura.precio.tramite.id == 33" [solicitante]="solicitante" [tramiteFactura]="tramiteFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnc-expedicion-licencia-cambio-documento>
+                                        <appRnc-expedicion-licencia-cambio-documento *ngIf="tramiteFactura.precio.tramite.id == 33" [solicitante]="solicitante" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)"></appRnc-expedicion-licencia-cambio-documento>
                                     
-                                        <appRnc-recategorizacion-licencia-arriba *ngIf="tramiteFactura.precio.tramite.id == 34" [solicitante]="solicitante" [tramiteFactura]="tramiteFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnc-recategorizacion-licencia-arriba>
+                                        <appRnc-recategorizacion-licencia-arriba *ngIf="tramiteFactura.precio.tramite.id == 34" [solicitante]="solicitante" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)"></appRnc-recategorizacion-licencia-arriba>
                                 
-                                        <appRnc-recategorizacion-licencia-abajo *ngIf="tramiteFactura.precio.tramite.id == 35" [solicitante]="solicitante" [tramiteFactura]="tramiteFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnc-recategorizacion-licencia-abajo>
+                                        <appRnc-recategorizacion-licencia-abajo *ngIf="tramiteFactura.precio.tramite.id == 35" [solicitante]="solicitante" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)"></appRnc-recategorizacion-licencia-abajo>
                                     
-                                        <appRnc-refrendacion-licencia *ngIf="tramiteFactura.precio.tramite.id == 36" [solicitante]="solicitante" [tramiteFactura]="tramiteFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnc-refrendacion-licencia>
+                                        <appRnc-refrendacion-licencia *ngIf="tramiteFactura.precio.tramite.id == 36" [solicitante]="solicitante" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)"></appRnc-refrendacion-licencia>
                                     </div>
                                 </div>
     
                             </div>
                             <div class="tab-pane" id="tab-sustrato" role="tabpanel">
-                                <appRnc-sustrato [factura]="factura" [solicitante]="solicitante" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnc-sustrato>
+                                <appRnc-sustrato [factura]="factura" [solicitante]="solicitante" (onReadyTramite)="onReadyTramite($event)"></appRnc-sustrato>
                             </div>
                         </div>                   
                     </div>
-
                 </div>
             </div>
         </div>

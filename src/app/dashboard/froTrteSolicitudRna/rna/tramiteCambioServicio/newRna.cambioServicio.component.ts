@@ -24,6 +24,8 @@ export class NewRnaCambioServicioComponent implements OnInit {
     public servicios: any;
     public servicioSelected: any;
     public datos = {
+        'documentacion': true,
+        'observacion': null,
         'campos': null,
         'idFuncionario': null,
         'idVehiculo': null,
@@ -157,7 +159,15 @@ export class NewRnaCambioServicioComponent implements OnInit {
                                         '<br/><b>Servicio anterior </b>' + this.vehiculo.servicio.nombre +
                                         '<br/><b>Servicio nuevo: </b>' + servicioResponse.data.nombre;
         
-                                    this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
+                                    this.readyTramite.emit(
+                                        {
+                                            'documentacion':this.datos.documentacion, 
+                                            'observacion':this.datos.observacion, 
+                                            'foraneas':this.datos, 
+                                            'resumen':resumen,
+                                            'idTramiteFactura': this.tramiteFactura.id,
+                                        }
+                                    );
                                 }
                                 error => {
                                     this.errorMessage = <any>error;

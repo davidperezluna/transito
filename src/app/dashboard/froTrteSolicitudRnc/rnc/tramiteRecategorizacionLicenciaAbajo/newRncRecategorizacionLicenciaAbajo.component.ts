@@ -14,8 +14,7 @@ import swal from 'sweetalert2';
     templateUrl: './newRncRecategorizacionLicenciaAbajo.html'
 })
 export class NewRncRecategorizacionLicenciaAbajoComponent implements OnInit {
-    @Output() readyTramite = new EventEmitter<any>();
-    @Output() cancelarTramite = new EventEmitter<any>();
+    @Output() onReadyTramite = new EventEmitter<any>();
     @Input() solicitante: any = null;
     @Input() tramiteFactura: any = null;
     public errorMessage;
@@ -30,6 +29,8 @@ export class NewRncRecategorizacionLicenciaAbajoComponent implements OnInit {
     public tramiteFacturaSelected: any;
 
     public datos = {
+        'documentacion': true,
+        'observacion': null,
         'numero': null,
         'vigencia': null,
         'idFuncionario': null,
@@ -191,11 +192,14 @@ export class NewRncRecategorizacionLicenciaAbajoComponent implements OnInit {
         
         let resumen = "<b>No. factura<b>" + this.tramiteFactura.factura.numero;
 
-        this.readyTramite.emit({ 'foraneas':this.datos, 'resumen':resumen });
+        this.onReadyTramite.emit(
+            {
+                'documentacion':this.datos.documentacion, 
+                'observacion':this.datos.observacion, 
+                'foraneas':this.datos,
+                'resumen':resumen,
+                'idTramiteFactura': this.tramiteFactura.id,
+            }
+        );
     }
-    
-    onCancelar(){
-        this.cancelarTramite.emit(true);
-    }
-
 }

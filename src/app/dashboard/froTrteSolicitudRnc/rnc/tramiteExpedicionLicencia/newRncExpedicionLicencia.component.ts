@@ -16,8 +16,7 @@ import swal from 'sweetalert2';
     templateUrl: './newRncExpedicionLicencia.html'
 })
 export class NewRncExpedicionLicenciaComponent implements OnInit {
-    @Output() readyTramite = new EventEmitter<any>();
-    @Output() cancelarTramite = new EventEmitter<any>();
+    @Output() onReadyTramite = new EventEmitter<any>();
     @Input() solicitante: any = null;
     @Input() tramiteFactura: any = null;
     public errorMessage;
@@ -31,6 +30,8 @@ export class NewRncExpedicionLicenciaComponent implements OnInit {
     public radio: any;
 
     public datos = {
+        'documentacion': true,
+        'observacion': null,
         'numero': null,
         'restriccion': null,
         'fechaExpedicion': null,
@@ -183,10 +184,6 @@ export class NewRncExpedicionLicenciaComponent implements OnInit {
         );
     }
 
-    onCancelar(){
-        this.cancelarTramite.emit(true);
-    }
-
     onSearchCiudadano(){
         let token = this._LoginService.getToken();
 
@@ -195,28 +192,38 @@ export class NewRncExpedicionLicenciaComponent implements OnInit {
             'idTipoIdentificacion': 1
         }
 
-        this._CiudadanoService.searchByIdentificacion(datos,token).subscribe(
-            response => {
-                if(response.code == 200){
-                    this.solicitante = response.data.ciudadano;
-                }else{
-                    swal({
-                        title: 'Error!',
-                        text: response.message,
-                        type: 'error',
-                        confirmButtonText: 'Aceptar'
-                    });
-                }
-                error => {
-                    this.errorMessage = <any>error;
-                
-                    if(this.errorMessage != null){
-                        console.log(this.errorMessage);
-                        alert("Error en la petición");
+        if (!this.solicitante.identificacion) {
+            swal({
+                title: 'Error!',
+                text: 'El número de identificación no puede estar vacio.',
+                type: 'error',
+                confirmButtonText: 'Aceptar'
+            });
+        }else{
+            this._CiudadanoService.searchByIdentificacion(datos,token).subscribe(
+                response => {
+                    if(response.code == 200){
+                        this.solicitante = response.data.ciudadano;
+                    }else{
+                        swal({
+                            title: 'Error!',
+                            text: response.message,
+                            type: 'error',
+                            confirmButtonText: 'Aceptar'
+                        });
+                    }
+                    error => {
+                        this.errorMessage = <any>error;
+                    
+                        if(this.errorMessage != null){
+                            console.log(this.errorMessage);
+                            alert("Error en la petición");
+                        }
                     }
                 }
-            }
-        ); 
+            ); 
+        }
+
     }
 
     onEnviar() {
@@ -232,7 +239,15 @@ export class NewRncExpedicionLicenciaComponent implements OnInit {
                 if (response.code == 200) {
                     let resumen = "<b>No. factura</b>" + this.tramiteFactura.factura.numero;
 
-                    this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
+                    this.onReadyTramite.emit(
+                        {
+                            'documentacion':this.datos.documentacion, 
+                            'observacion':this.datos.observacion, 
+                            'foraneas':this.datos,
+                            'resumen':resumen,
+                            'idTramiteFactura': this.tramiteFactura.id,
+                        }
+                    );
                 } else {
                     swal({
                         type: 'warning',

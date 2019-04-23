@@ -26,9 +26,10 @@ export class NewRnaRegrabarChasisComponent implements OnInit {
     public motivoSelected: any;
 
     public datos = {
+        'documentacion': true,
+        'observacion': null,
         'motivo': null,
         'nuevoNumero': null,
-        'numeroRunt': null,
         'campos': null,
         'idFuncionario': null,
         'idVehiculo': null,
@@ -146,10 +147,17 @@ export class NewRnaRegrabarChasisComponent implements OnInit {
                                 '<br/>Regrabado (SI)' +
                                 '<br/>Chasis anterior: '+ this.vehiculo.chasis +
                                 '<br/>Chasis nuevo: ' + this.datos.nuevoNumero +
-                                '<br/>Motivo: ' + this.datos.motivo +
-                                '<br/>Numero RUNT: ' + this.datos.numeroRunt;
+                                '<br/>Motivo: ' + this.datos.motivo;
         
-                            this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
+                            this.readyTramite.emit(
+                                {
+                                    'documentacion':this.datos.documentacion, 
+                                    'observacion':this.datos.observacion, 
+                                    'foraneas':this.datos, 
+                                    'resumen':resumen,
+                                    'idTramiteFactura': this.tramiteFactura.id,
+                                }
+                            );
                         }
                         error => {
                             this.errorMessage = <any>error;

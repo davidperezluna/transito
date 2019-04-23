@@ -63,6 +63,8 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
     ];
        
     public datos = {
+        'documentacion': true,
+        'observacion': null,
         'campos': null,
         'gradoAlerta': null,
         'fechaExpedicion':null,
@@ -348,7 +350,15 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
                         if (response.status == 'success') {
                             let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero;
         
-                            this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
+                            this.readyTramite.emit(
+                                {
+                                    'documentacion':this.datos.documentacion, 
+                                    'observacion':this.datos.observacion, 
+                                    'foraneas':this.datos, 
+                                    'resumen':resumen,
+                                    'idTramiteFactura': this.tramiteFactura.id,
+                                }
+                            );
                         } else {
                             swal({
                                 title: 'Error!',

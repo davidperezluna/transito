@@ -29,6 +29,8 @@ export class NewRnaCambioMotorComponent implements OnInit {
     public combustibles: any;
 
     public datos = {
+        'documentacion': true,
+        'observacion': null,
         'numeroMotor': null,
         'numeroAceptacion': null,
         'numeroFactura': null,
@@ -189,7 +191,15 @@ export class NewRnaCambioMotorComponent implements OnInit {
                                 '<br><b>Motor anterior: </b>' + this.vehiculo.motor.nombre +
                                 '<br><b>Motor nuevo: </b>' + this.datos.numeroMotor;
         
-                            this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
+                            this.readyTramite.emit(
+                                {
+                                    'documentacion':this.datos.documentacion, 
+                                    'observacion':this.datos.observacion, 
+                                    'foraneas':this.datos, 
+                                    'resumen':resumen,
+                                    'idTramiteFactura': this.tramiteFactura.id,
+                                }
+                            );
                         }
                         error => {
                             this.errorMessage = <any>error;

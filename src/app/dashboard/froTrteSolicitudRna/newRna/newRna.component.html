@@ -74,6 +74,18 @@
                     </div>
                 </div><!-- /.row -->
             </div>
+            <div class="card-footer" *ngIf="tramitesFactura && (tramitesFactura.length == tramitesRealizados.length)">
+                <div class="btn-group">
+                    <button (click)="onEnviar()" class="btn btn-success">
+                        <i class="fa fa-save"></i>
+                        Finalizar
+                    </button>
+                    <a *ngIf="factura.estado == 'PENDIENTE DOCUMENTACION'" href="{{ apiUrl }}/{{ factura.id }}/pdf/documentacion" class="btn btn-default" target="_blank">
+                        <i class="fa fa-file-pdf-o"></i>
+                        Imprimir observaciones
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -223,27 +235,11 @@
                                             <input type="text" class="form-control" placeholder="No. solicitud RUNT" [(ngModel)]="tramiteSolicitud.numeroRunt" name="numeroRunt" required />
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-xs-12 col-lg-12">
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" [(ngModel)]="tramiteSolicitud.documentacion" class="custom-control-input" id="documentacion" name="documentacion">
-                                                <label class="custom-control-label" for="documentacion">¿Presenta documentación completa?</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row" *ngIf="!tramiteSolicitud.documentacion">
-                                        <div class="col-xs-12 col-lg-12">
-                                            <label>Registre que documentación esta pendiente
-                                                <b class="text-danger">*</b>
-                                            </label>
-                                            <textarea class="form-control" [(ngModel)]="tramiteSolicitud.observacion" rows="4" name="observacion" required></textarea>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="row" *ngIf="tramiteSolicitud.documentacion && tramitesFactura">
+                        <div class="row" *ngIf="tramitesFactura">
                             <div class="col-xs-12 col-lg-12">
                                 <ul class="nav nav-tabs" role="tablist">
                                     <li class="nav-item">
@@ -331,14 +327,6 @@
                                     </div>
                                 </div>   
                             </div>
-                        </div>
-                    </div>
-                    <div class="card-footer" *ngIf="!tramiteSolicitud.documentacion">
-                        <div class="btn-group">
-                            <button (click)="onEnviar()" class="btn btn-primary">
-                                <i class="fa fa-save"></i>
-                                Guardar
-                            </button>
                         </div>
                     </div>
                 </div>

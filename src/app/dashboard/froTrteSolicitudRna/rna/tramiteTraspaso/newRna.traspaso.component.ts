@@ -39,6 +39,8 @@ export class NewRnaTraspasoComponent implements OnInit {
     ];
 
     public datos = {
+        'documentacion': true,
+        'observacion': null,
         'permiso': false,
         'tipoPropiedad': null,
         'idFuncionario': null,
@@ -346,7 +348,15 @@ export class NewRnaTraspasoComponent implements OnInit {
 
                 this._PropietarioService.update(this.datos, token).subscribe(
                     response => {
-                        this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
+                        this.readyTramite.emit(
+                            {
+                                'documentacion':this.datos.documentacion, 
+                                'observacion':this.datos.observacion, 
+                                'foraneas':this.datos, 
+                                'resumen':resumen,
+                                'idTramiteFactura': this.tramiteFactura.id,
+                            }
+                        );
                     },
                     error => {
                         this.errorMessage = <any>error;

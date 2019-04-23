@@ -4,7 +4,6 @@ import { FroFacTramiteService } from '../../../../services/froFacTramite.service
 import { VhloVehiculoService } from '../../../../services/vhloVehiculo.service';
 import { PnalFuncionarioService } from '../../../../services/pnalFuncionario.service';
 import { LoginService } from '../../../../services/login.service';
-
 import swal from 'sweetalert2';
 
 @Component({
@@ -17,7 +16,7 @@ export class NewRnaBlindajeComponent implements OnInit {
     @Input() vehiculo: any = null;
     @Input() tramiteFactura: any = null;
     public errorMessage; 
-    
+
     public autorizado: any = false;
     public tramiteSolicitud: any = null;
     public tipoRegrabacionList: string[];
@@ -27,8 +26,11 @@ export class NewRnaBlindajeComponent implements OnInit {
     public tramitesFactura: any = null;
     public tipoBlindajeSelected: any;
     public nivelBlindajeSelected: any;
+    
 
     public datos = {
+        'documentacion': true,
+        'observacion': null,
         'campos': null,
         'empresaBlindadora': null,
         'numeroRunt': null,
@@ -164,7 +166,15 @@ export class NewRnaBlindajeComponent implements OnInit {
                         if (response.code == 200) {
                             let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero;
         
-                            this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
+                            this.readyTramite.emit(
+                                {
+                                    'documentacion':this.datos.documentacion, 
+                                    'observacion':this.datos.observacion, 
+                                    'foraneas':this.datos, 
+                                    'resumen':resumen,
+                                    'idTramiteFactura': this.tramiteFactura.id,
+                                }
+                            );
                         }else{
                             swal({
                                 title: 'Error!',

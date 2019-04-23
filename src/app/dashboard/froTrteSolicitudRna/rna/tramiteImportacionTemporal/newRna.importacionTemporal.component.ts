@@ -47,9 +47,10 @@ export class NewRnaImportacionTemporalComponent implements OnInit {
     public numeroCuotas: any;
 
     public datos = {
+        'documentacion': true,
+        'observacion': null,
         'propietarios': null,
         'fechaSolicitud': null,
-        'numeroRunt': null,
         'numeroCuotas': null,
         'licenciaConduccion': null,
         'idFuncionario': null,
@@ -210,7 +211,15 @@ export class NewRnaImportacionTemporalComponent implements OnInit {
                     'No. cuotas' + this.numeroCuotas +
                     'Fecha solicitud' + this.datos.fechaSolicitud;
 
-                this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
+                this.readyTramite.emit(
+                    {
+                        'documentacion':this.datos.documentacion, 
+                        'observacion':this.datos.observacion, 
+                        'foraneas':this.datos, 
+                        'resumen':resumen,
+                        'idTramiteFactura': this.tramiteFactura.id,
+                    }
+                );
               }else{
                 swal({
                   title: 'Error!',

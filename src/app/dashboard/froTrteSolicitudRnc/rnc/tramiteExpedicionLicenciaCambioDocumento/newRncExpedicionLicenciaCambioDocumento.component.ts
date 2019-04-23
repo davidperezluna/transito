@@ -14,8 +14,7 @@ import swal from 'sweetalert2';
     templateUrl: './newRncExpedicionLicenciaCambioDocumento.html'
 })
 export class NewRncExpedicionLicenciaCambioDocumentoComponent implements OnInit {
-    @Output() readyTramite = new EventEmitter<any>();
-    @Output() cancelarTramite = new EventEmitter<any>();
+    @Output() onReadyTramite = new EventEmitter<any>();
     @Input() solicitante: any = null;
     @Input() tramiteFactura: any = null;
     public errorMessage;
@@ -29,6 +28,8 @@ export class NewRncExpedicionLicenciaCambioDocumentoComponent implements OnInit 
 
     public datos = {
         'numero': null,
+        'documentacion': true,
+        'observacion': null,
         'identificacionAnterior': null,
         'identificacionActual': null,
         'vigencia': null,
@@ -188,10 +189,14 @@ export class NewRncExpedicionLicenciaCambioDocumentoComponent implements OnInit 
 
         let resumen = "<b>No. factura</b>" + this.tramiteFactura.factura.numero;
         
-        this.readyTramite.emit({'foraneas':this.datos, 'resumen':resumen});
+        this.onReadyTramite.emit(
+            {
+                'documentacion':this.datos.documentacion, 
+                'observacion':this.datos.observacion, 
+                'foraneas':this.datos, 
+                'resumen':resumen,
+                'idTramiteFactura': this.tramiteFactura.id,
+            }
+        );
     }
-    onCancelar(){
-        this.cancelarTramite.emit(true);
-    }
-
 }

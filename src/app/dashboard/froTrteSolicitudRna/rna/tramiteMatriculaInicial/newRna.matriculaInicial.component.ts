@@ -49,6 +49,8 @@ export class NewRnaMatricualaInicialComponent implements OnInit {
     public tipoPropiedadSelected:any;
     
     public datos = {
+        'documentacion': true,
+        'observacion': null,
         'propietarios': [],
         'solidario': false,
         'tipoPropiedad': null,
@@ -405,7 +407,15 @@ export class NewRnaMatricualaInicialComponent implements OnInit {
 
                 this._PropietarioService.register(this.datos, token).subscribe(
                     response => {
-                        this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
+                        this.readyTramite.emit(
+                            {
+                                'documentacion':this.datos.documentacion, 
+                                'observacion':this.datos.observacion, 
+                                'foraneas':this.datos, 
+                                'resumen':resumen,
+                                'idTramiteFactura': this.tramiteFactura.id,
+                            }
+                        );
                     },
                     error => {
                         this.errorMessage = <any>error;

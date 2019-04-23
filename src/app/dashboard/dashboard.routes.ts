@@ -14,7 +14,6 @@ import { UserLicenciaConduccionRoutes } from './userLicenciaConduccion/userLicen
 import { UserLicenciaTransitoRoutes } from './userLicenciaTransito/userLicenciaTransito.routes';
 import { UserLcCfgCategoriaRoutes } from './userLcCfgCategoria/userLcCfgCategoria.routes';
 
-
 import { CfgValorVehiculoRoutes } from './cfgValorVehiculo/cfgValorVehiculo.routes';
 import { VhloCfgValorRoutes } from './vhloCfgValor/vhloCfgValor.routes';
 import { CfgBodegaRoutes } from './cfgBodega/cfgBodega.routes';

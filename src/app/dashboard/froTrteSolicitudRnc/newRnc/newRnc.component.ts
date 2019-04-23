@@ -5,6 +5,7 @@ import { FroFacTramiteService } from '../../../services/froFacTramite.service';
 import { FroFacturaService } from '../../../services/froFactura.service';
 import { UserCiudadanoService } from '../../../services/userCiudadano.service';
 import { LoginService } from '../../../services/login.service';
+import { environment } from 'environments/environment';
 import swal from 'sweetalert2';
 import { forEach } from '@angular/router/src/utils/collection';
 
@@ -17,8 +18,10 @@ export class NewRncComponent implements OnInit {
   public tramiteSolicitud: FroTrteSolicitudRnc;
   public errorMessage;
 
-  public numeroFactura: any;
-  public numeroIdentificacion: any;
+  public apiUrl = environment.apiUrl + 'financiero/frotrtesolicitud';
+  
+  public numeroFactura: any = null;
+  public identificacion: any = null;
 
   public factura: any = null;
   public solicitante: any = null;
@@ -32,8 +35,7 @@ export class NewRncComponent implements OnInit {
   public tramite = false;
   public requiereSustrato = false;
   public requiereRunt = false;
-  
-  public cantidadSustrato = 1;
+  public tramitesRealizados: any = [];
 
 constructor(
   private _SolicitudService: FroTrteSolicitudService,
@@ -44,7 +46,7 @@ constructor(
 ){}
 
   ngOnInit() {
-    this.tramiteSolicitud = new FroTrteSolicitudRnc(null, true, null, null, null, null, null);
+    this.tramiteSolicitud = new FroTrteSolicitudRnc(null, null, null, null);
   }
 
   onCancelar(){
@@ -60,7 +62,14 @@ constructor(
       }
     });
 
-    if (this.numeroFactura) {
+    if (!this.numeroFactura) {
+      swal({
+        title: 'Error!',
+        text: 'Debe digitar un número de factura.',
+        type: 'error',
+        confirmButtonText: 'Aceptar'
+      });
+    }else {
       let token = this._LoginService.getToken();
 
       this._FacturaService.searchByNumero({ 'numeroFactura': this.numeroFactura }, token).subscribe(
@@ -117,13 +126,6 @@ constructor(
           }
         }
       );
-    } else {
-      swal({
-        title: 'Error!',
-        text: 'Debe digitar un número de factura.',
-        type: 'error',
-        confirmButtonText: 'Aceptar'
-      });
     }
   }
 
@@ -136,46 +138,56 @@ constructor(
       }
     });
 
-    let token = this._LoginService.getToken();
+    if (!this.identificacion) {
+      swal({
+        title: 'Error!',
+        text: 'El número de identificación no puede estar vacio.',
+        type: 'error',
+        confirmButtonText: 'Aceptar'
+      });
+    }else{
+      let token = this._LoginService.getToken();
 
-    let datos = {
-      'identificacion': this.numeroIdentificacion,
-      'idTipoIdentificacion': 1,
-    }
+      let datos = {
+        'identificacion': this.identificacion,
+        'idTipoIdentificacion': 1,
+      }
 
-    this._CiudadanoService.searchByIdentificacion(datos, token).subscribe(
-      response => {
-        if (response.code == 200) {
-          if (response.data.ciudadano) {
-            this.solicitante = response.data.ciudadano;
-            this.tramiteSolicitud.idSolicitante = this.solicitante.id;
+      this._CiudadanoService.searchByIdentificacion(datos, token).subscribe(
+        response => {
+          if (response.code == 200) {
+            if (response.data.ciudadano) {
+              this.solicitante = response.data.ciudadano;
+              this.tramiteSolicitud.idSolicitante = this.solicitante.id;
+
+              swal({
+                title: 'Perfecto!',
+                text: response.message,
+                type: 'success',
+                confirmButtonText: 'Aceptar'
+              });
+            }
+          } else {
+            this.solicitante = null;
+            this.tramiteSolicitud.idSolicitante = null;
 
             swal({
-              title: 'Perfecto!',
+              title: 'Error!',
               text: response.message,
-              type: 'success',
+              type: 'error',
               confirmButtonText: 'Aceptar'
             });
           }
-        } else {
-          this.solicitante = null;
-
-          swal({
-            title: 'Error!',
-            text: response.message,
-            type: 'error',
-            confirmButtonText: 'Aceptar'
-          });
-        }
-        error => {
-          this.errorMessage = <any>error;
-          if (this.errorMessage != null) {
-            console.log(this.errorMessage);
-            alert('Error en la petición');
+          error => {
+            this.errorMessage = <any>error;
+            if (this.errorMessage != null) {
+              console.log(this.errorMessage);
+              alert('Error en la petición');
+            }
           }
         }
-      }
-    );
+      );
+    }
   }
 
   onChangedTramiteFactura(idTramiteFactura) {
@@ -220,10 +232,46 @@ constructor(
 
   onEnviar(){
     let token = this._LoginService.getToken();
-    
-    this.tramiteSolicitud.idSolicitante = this.solicitante.id;
 
-		this._SolicitudService.register(this.tramiteSolicitud, token).subscribe(
+    this.tramiteSolicitud.tramitesRealizados = this.tramitesRealizados;
+
+    this._SolicitudService.register(this.tramiteSolicitud, token).subscribe(
+			response => {
+        if(response.code == 200){
+          swal({
+            title: 'Perfecto!',
+            text: response.message,
+            type: 'success',
+            confirmButtonText: 'Aceptar'
+          });
+        }else if(response.code == 401){
+          this.factura = response.data;
+          
+          swal({
+            title: 'Atención!',
+            text: response.message,
+            type: 'warning',
+            confirmButtonText: 'Aceptar'
+          });
+        }else{
+          swal({
+            title: 'Error!',
+            text: response.message,
+            type: 'error',
+            confirmButtonText: 'Aceptar'
+          });
+        }
+			error => {
+					this.errorMessage = <any>error;
+					if(this.errorMessage != null){
+						console.log(this.errorMessage);
+						alert("Error en la petición");
+					}
+				}
+      }
+    );
+
+		/*this._SolicitudService.register(this.tramiteSolicitud, token).subscribe(
 			response => {
         if(response.code == 200){
           swal({
@@ -234,13 +282,22 @@ constructor(
           });
 
           this.onChangedTramiteFactura(response.data.tramiteFactura.id);
+        }else if(response.code == 401){
+          this.tramiteFactura = response.data;
+
+          swal({
+            title: 'Atención!',
+            text: response.message,
+            type: 'warning',
+            confirmButtonText: 'Aceptar'
+          });
         }else{
           swal({
             title: 'Error!',
             text: response.message,
             type: 'error',
             confirmButtonText: 'Aceptar'
-          })
+          });
         }
 			error => {
 					this.errorMessage = <any>error;
@@ -249,12 +306,24 @@ constructor(
 						alert("Error en la petición");
 					}
 				}
-		});
+		});*/
   }
   
-  readyTramite(datos:any){
-    this.tramiteSolicitud.datos = datos;
+  onReadyTramite(datos:any){
+    this.tramitesRealizados.push(
+      {
+        'documentacion': datos.documentacion,
+        'observacion': datos.observacion,
+        'foraneas': datos.foraneas,
+        'resumen': datos.resumen,
+        'idTramiteFactura': datos.idTramiteFactura,
+      }
+    );
+    
+    console.log(this.tramitesRealizados);
+    
 
+    /*this.tramiteSolicitud.datos = datos;
 
     let token = this._LoginService.getToken();
 
@@ -282,7 +351,9 @@ constructor(
             alert("Error en la petición");
           }
         }
-      }); 
+      }
+    );
+    */
   }
 
   cancelarTramite(){
@@ -298,7 +369,7 @@ constructor(
 
     var html = 'Se va a enviar la siguiente solicitud:<br>'+
               'Factura: <b>'+this.factura.numero+'</b><br>'+
-              'Solicitante: <b>'+this.solicitante.usuario.identificacion+'</b><hr>'+
+              'Solicitante: <b>'+this.solicitante.identificacion+'</b><hr>'+
               'Tramites:<br>'+
               this.tramites  
     swal({
@@ -315,8 +386,8 @@ constructor(
       cancelButtonAriaLabel: 'Thumbs down',
     }).then((result) => {
       if (result.value) {
-        this.factura.estado = 'Finalizada';
-        this.factura.sedeOperativaId = this.factura.sedeOperativa.id;
+        this.factura.estado = 'FINALIZADA';
+
         this._FacturaService.edit(this.factura,token).subscribe(
           response => {
             error => {

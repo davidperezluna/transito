@@ -25,7 +25,8 @@ export class NewRnaProrrogaImportacionTemporalComponent implements OnInit {
     public vehiculoProrroga : any;
 
     public datos = {
-        'numeroRunt': null,
+        'documentacion': true,
+        'observacion': null,
         'numeroCuotas': null,
         'licenciaTransito': null,
         'fechaSolicitudProrroga': null,
@@ -153,11 +154,18 @@ export class NewRnaProrrogaImportacionTemporalComponent implements OnInit {
               if (response.code == 200) {
                 let resumen = 'No. factura: ' + this.tramiteFactura.factura.numero +
                     'Fecha solicitud prorroga' + this.datos.fechaSolicitudProrroga +
-                    'No. RUNT' + this.datos.numeroRunt +
                     'No. cuotas' + this.datos.numeroCuotas +
                     'No. licencia transito' + this.datos.licenciaTransito;
 
-                this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
+                this.readyTramite.emit(
+                    {
+                        'documentacion':this.datos.documentacion, 
+                        'observacion':this.datos.observacion, 
+                        'foraneas':this.datos, 
+                        'resumen':resumen,
+                        'idTramiteFactura': this.tramiteFactura.id,
+                    }
+                );
               }else{
                 swal({
                   title: 'Error!',

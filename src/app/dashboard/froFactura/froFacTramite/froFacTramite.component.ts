@@ -227,50 +227,60 @@ export class FroFacTramiteComponent implements OnInit {
       }
     });
 
-    let token = this._LoginService.getToken();
-
-    let datos = {
-      'identificacion': this.identificacion,
-      'idTipoIdentificacion': this.tipoIdentificacionSelected,
-    }
-
-    this._CiudadanoService.searchByIdentificacion(datos, token).subscribe(
-      response => {
-        if (response.code == 200) {
-          if (response.data.ciudadano) {
-            this.ciudadano = response.data.ciudadano;
-            this.factura.idCiudadano = this.ciudadano.id;
-            this.formCiudadano = false;
-            
+    if (!this.identificacion) {
+      swal({
+        title: 'Error!',
+        text: 'El número de identificación no puede estar vacia.',
+        type: 'error',
+        confirmButtonText: 'Aceptar'
+      });
+    }else{
+      let token = this._LoginService.getToken();
+  
+      let datos = {
+        'idTipoIdentificacion': this.tipoIdentificacionSelected,
+        'identificacion': this.identificacion,
+      }
+  
+      this._CiudadanoService.searchByIdentificacion(datos, token).subscribe(
+        response => {
+          if (response.code == 200) {
+            if (response.data.ciudadano) {
+              this.ciudadano = response.data.ciudadano;
+              this.factura.idCiudadano = this.ciudadano.id;
+              this.formCiudadano = false;
+              
+              swal({
+                title: 'Perfecto!',
+                text: response.message,
+                type: 'success',
+                confirmButtonText: 'Aceptar'
+              });
+            }else{
+              this.formCiudadano = true;
+            }
+          } else {
+            this.ciudadano = null;
+            this.formCiudadano = true;
+  
             swal({
-              title: 'Perfecto!',
+              title: 'Error!',
               text: response.message,
-              type: 'success',
+              type: 'error',
               confirmButtonText: 'Aceptar'
             });
-          }else{
-            this.formCiudadano = true;
           }
-        } else {
-          this.ciudadano = null;
-          this.formCiudadano = true;
+          error => {
+            this.errorMessage = <any>error;
+            if (this.errorMessage != null) {
+              console.log(this.errorMessage);
+              alert('Error en la petición');
+            }
+          }
+        }
+      );
+    }
 
-          swal({
-            title: 'Error!',
-            text: response.message,
-            type: 'error',
-            confirmButtonText: 'Aceptar'
-          });
-        }
-        error => {
-          this.errorMessage = <any>error;
-          if (this.errorMessage != null) {
-            console.log(this.errorMessage);
-            alert('Error en la petición');
-          }
-        }
-      }
-    );
   }
 
   onSearchVehiculo() {

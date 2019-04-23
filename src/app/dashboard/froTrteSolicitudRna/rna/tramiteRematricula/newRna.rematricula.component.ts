@@ -27,9 +27,10 @@ export class NewRnaRematriculaComponent implements OnInit {
     public matriculaCancelada: any = null;
 
     public datos = {
+        'documentacion': true,
+        'observacion': null,
         'numeroActa': null,
         'fechaActa': null,
-        'numeroRunt': null,
         'campos': null,
         'fechaEntrega': null,
         'numeroIdentificacionEntrega': null,
@@ -187,7 +188,15 @@ export class NewRnaRematriculaComponent implements OnInit {
         
                             let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero;
                             
-                            this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
+                            this.readyTramite.emit(
+                                {
+                                    'documentacion':this.datos.documentacion, 
+                                    'observacion':this.datos.observacion, 
+                                    'foraneas':this.datos, 
+                                    'resumen':resumen,
+                                    'idTramiteFactura': this.tramiteFactura.id,
+                                }
+                            );
                         }
                         error => {
                             this.errorMessage = <any>error;

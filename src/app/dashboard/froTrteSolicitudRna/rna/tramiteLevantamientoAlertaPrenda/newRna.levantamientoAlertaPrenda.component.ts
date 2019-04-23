@@ -54,6 +54,8 @@ export class NewRnaTramiteLevantamientoAlertaPrendaComponent implements OnInit {
     ];
     
     public datos = {
+        'documentacion': true,
+        'observacion': null,
         'acreedores': [],
         'idAcreedor': null,
         'idFuncionario': null,
@@ -223,7 +225,15 @@ export class NewRnaTramiteLevantamientoAlertaPrendaComponent implements OnInit {
                         if (response.status == 'success') {
                             let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero;
         
-                            this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
+                            this.readyTramite.emit(
+                                {
+                                    'documentacion':this.datos.documentacion, 
+                                    'observacion':this.datos.observacion, 
+                                    'foraneas':this.datos, 
+                                    'resumen':resumen,
+                                    'idTramiteFactura': this.tramiteFactura.id,
+                                }
+                            );
                         } else {
         
                         }
