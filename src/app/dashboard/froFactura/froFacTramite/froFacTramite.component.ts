@@ -34,7 +34,7 @@ export class FroFacTramiteComponent implements OnInit {
   public ciudadano: any = null;
   public empresa: any = null;
   public vehiculo: any = null;
-  public propietarios: any = null;
+  public propietarios: any = [];
   public valorRetefuente: any = 0;
   public tramitesValor:any=[]; 
 
@@ -60,7 +60,6 @@ export class FroFacTramiteComponent implements OnInit {
 
   public propietariosVehiculoRetefuente:any=[]; 
   public valorRetefuenteUnitario:any=0;
-  public vendedores:any=0; 
 
   public apiUrl = environment.apiUrl + 'financiero';
 
@@ -304,7 +303,7 @@ export class FroFacTramiteComponent implements OnInit {
             response => {
               if (response.code == 200) {
                 this.propietarios = response.data;
-
+                                
                 swal.close();
               } else {
                 this.propietarios = null;
@@ -394,8 +393,8 @@ export class FroFacTramiteComponent implements OnInit {
                   response => {
                     if (response.code == 200) {
                       this.valorRetefuente = parseInt(response.data.valor) * 0.01;
-                      //Agrega el trámite seleccionado al arreglo
-                      // this.onCreateArray();
+                      this.valorRetefuenteUnitario = this.valorRetefuente / this.propietarios.length;
+                      console.log(this.valorRetefuenteUnitario);
                       this.idVehiculoValor = response.data.id;
                     } else {
                       swal({
@@ -461,12 +460,10 @@ export class FroFacTramiteComponent implements OnInit {
   onVendedorSelect(eve: any,propietarioVehiculo:any){
     if (eve.target.checked) {
       this.propietariosVehiculoRetefuente.push(propietarioVehiculo);
-      this.vendedores = this.vendedores + 1;
     }else{
-      this.vendedores = this.vendedores - 1;
       this.propietariosVehiculoRetefuente =  this.propietariosVehiculoRetefuente.filter(h => h !== propietarioVehiculo);
     }
-    this.valorRetefuenteUnitario = this.valorRetefuente / this.vendedores;
+    //this.valorRetefuenteUnitario = this.valorRetefuente / this.vendedores;
   }
 
   onCreateArray(){

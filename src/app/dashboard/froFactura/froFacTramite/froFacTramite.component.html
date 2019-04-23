@@ -216,7 +216,7 @@
                     <div class="form-group" *ngIf="tramitePrecio">
                         <!-- .form-group -->
                         <div class="row"><!-- .row -->
-                            <div class="col-xs-12 col-lg-12" *ngIf="tramitePrecio.tramite.id == 2">
+                            <div class="col-xs-12 col-lg-12" *ngIf="valorRetefuenteUnitario">
                                 <div class="card">
                                     <div class="card-header">
                                         <div class="card-title">
@@ -245,7 +245,7 @@
                                                     <td> 
                                                             <div class="custom-control custom-checkbox"  >
                                                                 <input (change)="onVendedorSelect($event,propietario.id)" [(ngModel)]="propietario.state" name="{{propietario.id}}" type="checkbox" class="custom-control-input" id="{{propietario.id}}">
-                                                                <label class="custom-control-label" for="{{propietario.id}}"><p *ngIf="propietario.state">${{valorRetefuenteUnitario}}</p><p *ngIf="!propietario.state">$0</p></label>
+                                                                <label class="custom-control-label" for="{{propietario.id}}"><p>${{valorRetefuenteUnitario}}</p></label>
                                                             </div>
                                                     </td>
                                                 </tr>
