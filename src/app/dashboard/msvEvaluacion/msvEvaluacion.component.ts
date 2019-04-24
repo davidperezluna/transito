@@ -232,6 +232,7 @@ export class MsvEvaluacionComponent implements OnInit {
       this.formIndex = true;
       this.newEmpresa = false;
       this.formNewRevision = false;
+      this.formEditRevision = false;
       this.ngOnInit();
     }
   }

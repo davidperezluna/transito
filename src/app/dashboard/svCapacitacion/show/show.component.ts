@@ -12,23 +12,25 @@ declare var $: any;
 export class ShowComponent implements OnInit {
     @Output() ready = new EventEmitter<any>();
     @Input() capacitacion: any = null;
-    @Input() ciudadano: any = null;
-    @Input() empresa: any = null;
     public errorMessage;
+    
+    public capacitados: any;
     public table: any = null;
 
 
     constructor(
-        private _loginService: LoginService,
+        private _LoginService: LoginService,
         private _CapacitacionService: SvCapacitacionService,
     ) { }
 
     ngOnInit() {
-        let token = this._loginService.getToken();
+        let token = this._LoginService.getToken();
 
-        this._CapacitacionService.showByCapacitacion({'capacitacion': this.capacitacion, 'ciudadano': this.ciudadano, 'empresa': this.empresa}, token).subscribe(
+        this._CapacitacionService.showByCapacitacion(this.capacitacion, token).subscribe(
             response => {
                 if (response.status == 'success') {
+                    this.capacitados = response.data;
+                    console.log(this.capacitados);
                     swal({
                         title: 'Perfecto!',
                         text: response.message,

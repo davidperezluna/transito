@@ -66,7 +66,8 @@ export class SvCapacitacionComponent implements OnInit {
         }
     }
     
-    onShow() {
+    onShow(capacitacion: any) {
+        this.capacitacion = capacitacion;
         this.formShow = true;
         this.formNew = false;
         this.formIndex = false;
@@ -78,6 +79,7 @@ export class SvCapacitacionComponent implements OnInit {
     ready(isCreado: any) {
         if (isCreado) {
             this.formNew = false;
+            this.formShow = false;
             this.formEdit = false;
             this.formIndex = true;
             this.ngOnInit();
