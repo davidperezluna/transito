@@ -1,8 +1,9 @@
 import  {Injectable} from "@angular/core";
-import  {Http, Headers} from "@angular/http";
+import  {Http, Headers, ResponseContentType} from "@angular/http";
 import { LoggerService } from "../logger/services/logger.service";
 import { environment } from 'environments/environment';
 import  "rxjs/add/operator/map";
+import { TestComponentRenderer } from "@angular/core/testing";
 
 @Injectable()
 export class ImoInsumoService {
@@ -75,14 +76,21 @@ export class ImoInsumoService {
 							  .map(res => res.json());
 	}
 
-	pdfActaInsumo(token,datos){
+
+	pdfActaInsumo(token,datos): any{
 		let json = JSON.stringify(datos);
 		let params = "data="+json+"&authorization="+token;
-		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
-		//let headers = new Headers({responseType: 'blob' as 'json'});
-		return this._http.post(this.url+"/pdf/acta/insumos", params, {headers: headers}).map(res => 
-			res, { type: 'application/pdf'}
+
+		let headers = new Headers(
+			{
+				//'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8',
+				'responseType':'arrayBuffer'
+			}
 		);
+
+		return this._http.post(this.url+"/pdf/acta/insumos", params, { responseType: ResponseContentType.Blob }).map(res => 
+			{ return new Blob([res.blob()], { type: 'application/pdf' }) }
+		); 
 	}
  
 	edit(smlmv,token){

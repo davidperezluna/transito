@@ -53,23 +53,32 @@ export class ImoActaComponent implements OnInit {
   
   onPrintActa(){
     let token = this._loginService.getToken();
-    this._ImoInsumoService.pdfActaInsumo(token,this.data).subscribe(
-      response => {
-        var fileURL = window.URL.createObjectURL(response);
-        console.log(fileURL);
-        console.log(response); 
-        window.open(fileURL);
-      },  
-      error => {
-        this.errorMessage = <any>error;
+
+    this._ImoInsumoService.pdfActaInsumo(token, this.data).subscribe((response)=>{
+      //let file = new Blob([response], { type: 'application/pdf' });            
+      var fileURL = URL.createObjectURL(response);
+      window.open(fileURL);
+    })
+
+    
+
+    // this._ImoInsumoService.pdfActaInsumo(token,this.data).subscribe(
+    //   response => {
+    //     var fileURL = window.URL.createObjectURL(response);
+    //     console.log(fileURL);
+    //     console.log(response); 
+    //     window.open(fileURL);
+    //   },  
+    //   error => {
+    //     this.errorMessage = <any>error;
   
-        if(this.errorMessage != null){
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
-    console.log(this.data);
+    //     if(this.errorMessage != null){
+    //       console.log(this.errorMessage);
+    //       alert("Error en la petición");
+    //     }
+    //   }
+    // );
+    // console.log(this.data);
   }
   
 
