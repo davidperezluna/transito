@@ -419,12 +419,23 @@ export class NewSenialUbicacionComponent implements OnInit {
         if (this.senialUbicacion.cantidad > 0) {
             var address;
             if (this.markers.length < this.senialUbicacion.cantidad) {
-                address = this.getAddressLocation($event, (error, result) => (error) ? console.error(error) : console.log(result));
+                this._SvSenialUbicacionService.getAddress($event.coords).subscribe(
+                    result => {
+                        this.__zone.run(() => {    
+                            this.address = result;
+                        });
+                    },
+                    error => console.log(error),
+                    () => console.log('Geocoding completed!')
+                );
+
+                //address = this.getAddressLocation($event, (error, result) => (error) ? console.error(error) : console.log('Dirección:'+result));
+
                 this.markers.push({
                     lat: $event.coords.lat,
                     lng: $event.coords.lng,
                     draggable: true,
-                    label: address
+                    label: this.address
                 });
             } else {
                 swal({

@@ -75,7 +75,7 @@
                                 <h5 class="text-center">Datos de entrega</h5>
                             </div>
                             <div class="col-lg-12 col-md-16">
-                                <label>Tipo identificación *</label>
+                                <label>Tipo identificación <b class="text-danger">*</b></label>
                                 <ng-select 
                                 [multiple]="false" 
                                 [options]="tiposIdentificacion" 
@@ -85,20 +85,19 @@
                                 </ng-select>
                             </div>
                             <div class="col-xs-12 col-lg-6">
-                                <label>Número Identificación</label>
+                                <label>Número Identificación <b class="text-danger">*</b></label>
                                 <input class="form-control" [(ngModel)]="datos.numeroIdentificacionEntrega" name="numeroIdentificacionEntrega" type="text" required />
                             </div>
                             <div class="col-xs-12 col-lg-6">
-                                <label>Nombre</label>
-                                <input class="form-control" [(ngModel)]="datos.nombreEntrega" name="nombreEntrega" type="text" required
-                                />
+                                <label>Nombre <b class="text-danger">*</b></label>
+                                <input class="form-control" [(ngModel)]="datos.nombreEntrega" name="nombreEntrega" type="text" required />
                             </div>
                             <div class="col-lg-6 col-md-6">
-                                <label>Fecha entrega *</label>
+                                <label>Fecha entrega <b class="text-danger">*</b></label>
                                 <input class="form-control" [(ngModel)]="datos.fechaEntrega" name="fechaEntrega" type="date" required />
                             </div>
                             <div class="col-lg-6 col-md-6">
-                                <label>Municipio de entrega *</label>
+                                <label>Municipio de entrega <b class="text-danger">*</b></label>
                                 <ng-select 
                                 [multiple]="false" 
                                 [options]="municipios" 

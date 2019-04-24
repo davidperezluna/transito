@@ -52,7 +52,6 @@ export class NewRnaCancelacionMatriculaComponent implements OnInit {
         { value: 'DESINTEGRACIÓN FISICA TOTAL', label: 'DESINTEGRACIÓN FISICA TOTAL' },
         { value: 'DESTRUCCIÓN O PERDIDA TOTAL POR ACCIDENTE DE TRÁNSITO', label: 'DESTRUCCIÓN O PERDIDA TOTAL POR ACCIDENTE DE TRÁNSITO' },
         { value: 'DESTRUCCIÓN O PERDIDA TOTAL POR CASO FORTUITO O FUERZA MAYOR', label: 'DESTRUCCIÓN O PERDIDA TOTAL POR CASO FORTUITO O FUERZA MAYOR' },
-        { value: 'EXPORTACIÓN O REEXPORTACIÓN', label: 'EXPORTACIÓN O REEXPORTACIÓN' },
         { value: 'HURTO', label: 'HURTO' },
         { value: 'PERDIDA DEFINITIVA', label: 'PERDIDA DEFINITIVA' },
         { value: 'REPOSICIÓN', label: 'REPOSICIÓN' },
