@@ -91,7 +91,9 @@
                 <h5 class="card-title">
                     <strong class="text-uppercase">Datos Capacitados</strong>
                     <div class="btn-group pull-right">
-                        <a href="{{ docsUrl }}/plantilla.csv" class="btn btn-info" target="_blank">Imprimir plantilla</a>
+                        <a href="{{ docsUrl }}/plantilla.xlsx" class="btn btn-success" target="_blank">
+                            <i class="fa fa-file-code-o"></i>Descargar plantilla
+                        </a>
                     </div>
                 </h5>
             </div>
@@ -167,7 +169,7 @@
                 </div>
             </div>
         </div>
-        <div class="card" *ngIf="capacitadosEncontrados">
+        <!-- <div class="card" *ngIf="capacitadosEncontrados">
             <div class="card-header">
                 <h5 class="card-title">
                     <strong class="text-uppercase">Datos Capacitados</strong>
@@ -224,18 +226,18 @@
                     </tbody>
                 </table>
             </div>
+        </div> -->
+        <div class="card-footer">
+            <div class="btn-group">
+                <button (click)="onFinalizar()" class="btn btn-primary" type="button">
+                    <i class="fa fa-save"></i>
+                    Finalizar
+                </button>
+                <button (click)="onCancelar()" class="btn btn-default">
+                    <i class="fa fa-times"></i>
+                    Cancelar
+                </button>
+            </div>
         </div>
     </form>
-    <div class="card-footer">
-        <div class="btn-group">
-            <button (click)="onFinalizar()" class="btn btn-primary" type="button">
-                <i class="fa fa-save"></i>
-                Finalizar
-            </button>
-            <button (click)="onCancelar()" class="btn btn-default">
-                <i class="fa fa-times"></i>
-                Cancelar
-            </button>
-        </div>
-    </div>
 </div>
