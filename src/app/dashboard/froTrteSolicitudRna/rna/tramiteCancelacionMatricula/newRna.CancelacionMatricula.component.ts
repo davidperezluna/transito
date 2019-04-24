@@ -178,7 +178,7 @@ export class NewRnaCancelacionMatriculaComponent implements OnInit {
                     response => {
                         if (response.status == 'success') {
                             let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero;
-        
+                            
                             this.readyTramite.emit(
                                 {
                                     'documentacion':this.datos.documentacion, 
