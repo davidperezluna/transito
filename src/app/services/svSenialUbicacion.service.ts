@@ -67,12 +67,29 @@ export class SvSenialUbicacionService extends GoogleMapsAPIWrapper {
 	}
 
 	getLatLng(address: string) {
-        console.log('Getting Address - ', address);
+        console.log('Getting Coords - ', address);
         let geocoder = new google.maps.Geocoder();
         return Observable.create(observer => {
             geocoder.geocode( { 'address': address}, function(results, status) {
                 if (status == google.maps.GeocoderStatus.OK) {
                     observer.next(results[0].geometry.location);
+                    observer.complete();                    
+                } else {
+                    console.log('Error - ', results, ' & Status - ', status);
+                    observer.next({});
+                    observer.complete();
+                }
+            });
+        })
+	}
+	
+	getAddress(coords: any) {
+		console.log('Getting Address - ', coords);
+        let geocoder = new google.maps.Geocoder();
+        return Observable.create(observer => {
+            geocoder.geocode( { 'location': coords }, function(results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    observer.next(results[0].formatted_address);
                     observer.complete();                    
                 } else {
                     console.log('Error - ', results, ' & Status - ', status);
