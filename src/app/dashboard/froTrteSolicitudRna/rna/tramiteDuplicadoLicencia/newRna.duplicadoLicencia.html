@@ -46,15 +46,15 @@
                     <div class="form-group" *ngIf="datos.documentacion">
                         <div class="row">
                             <div class="col-xs-12 col-lg-12">
-                                <label>Motivo</label>
+                                <label>Motivo <b class="text-danger">*</b></label>
                                 <ng-select [multiple]="false" [options]="motivos" [(ngModel)]="datos.motivo" name="motivo" required></ng-select>
                             </div>
                             <div class="col-xs-12 col-lg-12">
-                                <label>Número de Licencia</label>
+                                <label>Número de Licencia <b class="text-danger">*</b></label>
                                 <input class="form-control" [(ngModel)]="datos.numeroLicenciaActual" name="numeroLicenciaActual" type="text" required />
                             </div>
                             <div class="col-xs-12 col-lg-12">
-                                <label>Nuevo Número Licencia</label>
+                                <label>Nuevo Número Licencia <b class="text-danger">*</b></label>
                                 <input class="form-control" [(ngModel)]="datos.nuevaLicencia" name="nuevaLicencia" type="text" required />
                             </div>
                         </div>

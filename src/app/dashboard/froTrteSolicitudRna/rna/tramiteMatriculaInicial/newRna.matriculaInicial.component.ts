@@ -339,9 +339,9 @@ export class NewRnaMatricualaInicialComponent implements OnInit {
         );
 
         swal({
-            title: 'Error!',
+            title: 'Perfecto!',
             text: 'Ciudadano agregado con éxito.',
-            type: 'error',
+            type: 'success',
             confirmButtonText: 'Aceptar'
         });
 
@@ -363,9 +363,9 @@ export class NewRnaMatricualaInicialComponent implements OnInit {
         );
 
         swal({
-            title: 'Error!',
+            title: 'Perfecto!',
             text: 'Empresa agregada con éxito.',
-            type: 'error',
+            type: 'success',
             confirmButtonText: 'Aceptar'
         });
 
@@ -410,9 +410,9 @@ export class NewRnaMatricualaInicialComponent implements OnInit {
         this.formApoderado = false;
 
         swal({
-            title: 'Error!',
+            title: 'Perfecto!',
             text: 'Apoderado agregado con éxito.',
-            type: 'error',
+            type: 'success',
             confirmButtonText: 'Aceptar'
         });
     }

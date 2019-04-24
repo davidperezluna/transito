@@ -164,7 +164,7 @@ export class NewRnaBlindajeComponent implements OnInit {
                     response => {
                         if (response.code == 200) {
                             let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero;
-        
+                            
                             this.readyTramite.emit(
                                 {
                                     'documentacion':this.datos.documentacion, 
