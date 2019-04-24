@@ -27,6 +27,7 @@ export class NewRnaCambioPlacaComponent implements OnInit {
         'observacion': null,
         'tipoCambio': null,
         'nuevaPlaca': null,
+        'cantidad': null,
         'sustrato': null,
         'campos': null,
         'idFuncionario': null,
@@ -141,9 +142,10 @@ export class NewRnaCambioPlacaComponent implements OnInit {
                 this._VehiculoService.update(this.datos, token).subscribe(
                     response => {
                         if (response.status == 'success') {
-                            let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero +
-                                        '<br/><b>Placa anterior: </b>'+ this.vehiculo.placa.numero +
-                                        '<br/><b>Placa nueva: </b>' + this.datos.nuevaPlaca;
+                            let resumen = "No. factura:" + this.tramiteFactura.factura.numero +
+                                        ', Placa anterior:'+ this.vehiculo.placa.numero +
+                                        ', Placa nueva:' + this.datos.nuevaPlaca +
+                                        ', Cantidad:' + this.datos.cantidad;
         
                             this.readyTramite.emit(
                                 {

@@ -368,8 +368,13 @@ export class NewRnaComponent implements OnInit {
         'idTramiteFactura': datos.idTramiteFactura,
       }
     );
-    
-    console.log(this.tramitesRealizados);
+
+    swal({
+      title: 'Perfecto!',
+      text: 'Trámite realizado con exito.',
+      type: 'success',
+      confirmButtonText: 'Aceptar'
+    });
   }
 
   /*readyTramite(datos: any) {

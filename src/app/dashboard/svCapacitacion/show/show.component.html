@@ -1,0 +1,34 @@
+<hr>
+<div class="row">
+    <div class="col-xs-12 col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="text-uppercase">Datos de personal</h5>
+            </div>
+            <div class="card-body">
+                <form #formShow="ngForm">
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Tipo identificación:
+                                    <strong>SSSS</strong>
+                                </label>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Identificación: 
+                                    <strong>Sqwewew</strong>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="btn-group">
+                                <button (click)="onCancelar()" (ready)="ready($event)" class="btn btn-default">
+                                    <i class="fa fa-times"></i>
+                                    Cancelar
+                                </button>
+                            </div>
+                        </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

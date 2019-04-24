@@ -45,9 +45,7 @@
                     <div class="form-group" *ngIf="datos.documentacion">
                         <div class="row">
                             <div class="col-xs-12 col-lg-6">
-                                <label>Tipo de Ingreso
-                                    <b class="text-danger">*</b>
-                                </label>
+                                <label>Tipo de Ingreso <b class="text-danger">*</b></label>
                                 <ng-select [multiple]="false" [options]="tiposIngreso" [(ngModel)]="datos.idTipoIngreso" name="idTipoIngreso" required>
                                 </ng-select>
                             </div>
@@ -63,23 +61,23 @@
                                 <input class="form-control" [(ngModel)]="datos.numeroAceptacion" name="numeroAceptacion" type="text" required />
                             </div>
                             <div class="col-xs-12 col-lg-6">
-                                <label>Número de factura</label>
+                                <label>Número de factura <b class="text-danger">*</b></label>
                                 <input class="form-control" [(ngModel)]="datos.numeroFactura" name="numeroFactura" type="text" required />
                             </div>
                         </div>
 
                         <div class="row" id="tipo-ingreso-usado" *ngIf="datos.idTipoIngreso == 'USADO'">
                             <div class="col-xs-12 col-lg-6">
-                                <label>Tipo identificación </label>
+                                <label>Tipo identificación <b class="text-danger">*</b></label>
                                 <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="datos.tipoIdentificacion" name="tipoIdentificacion" required>
                                 </ng-select>
                             </div>
                             <div class="col-xs-12 col-lg-6">
-                                <label>Número identificación</label>
+                                <label>Número identificación <b class="text-danger">*</b></label>
                                 <input class="form-control" [(ngModel)]="datos.numeroIdentificacion" name="numeroIdentificacion" type="text" required />
                             </div>
                             <div class="col-xs-12 col-lg-6">
-                                <label>Número de cto. compra venta *</label>
+                                <label>Número de cto. compra venta <b class="text-danger">*</b></label>
                                 <input class="form-control" [(ngModel)]="datos.numeroFactura" name="datos.numeroFactura" type="text" required />
                             </div>
                         </div>

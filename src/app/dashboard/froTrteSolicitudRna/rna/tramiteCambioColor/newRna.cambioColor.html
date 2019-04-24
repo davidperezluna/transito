@@ -16,13 +16,13 @@
 <div class="row" *ngIf="!tramiteFactura.realizado && autorizado"><!-- .row -->
     <div class="col-xs-12 col-lg-12"><!-- .col -->
         <div class="card">
-            <div class="card-body">
-                <b class="text-primary">
-                    Nuevo color
-                </b>
+            <div class="card-header">
+                <b class="text-primary">Nuevo color</b>
+                <br>
                 <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
-                <hr>
-                <div class="row container">
+            </div>
+            <div class="card-body">
+                <div class="container">
                     <div class="form-group">
                         <div class="row">
                             <div class="col-xs-12 col-lg-12">
@@ -43,11 +43,11 @@
                     <div class="form-group" *ngIf="datos.documentacion">
                         <div class="row">
                             <div class="col-xs-12 col-lg-12">
-                                <b>
-                                    Color actual: {{ vehiculo.color.nombre }}
-                                </b>
+                                <b>Color actual:</b> {{ vehiculo.color.nombre }}
                             </div>
+                        </div>
 
+                        <div class="row">
                             <div class="col-xs-12 col-lg-12">
                                 <label>Colores disponibles <span class="text-danger">*</span></label>
                                 <ng-select [multiple]="false" [options]="colores" [(ngModel)]="colorSelected" name="idColor" required></ng-select>
@@ -56,7 +56,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card-footer">
+            <div class="card-footer" *ngIf="!realizado">
                 <button (click)="onEnviar()" class="btn btn-primary">
                     <i class="fa fa-save"></i>
                     Enviar

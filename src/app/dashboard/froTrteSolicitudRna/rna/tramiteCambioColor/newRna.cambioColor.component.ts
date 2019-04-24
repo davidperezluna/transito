@@ -20,6 +20,7 @@ export class NewRnaCambioColorComponent implements OnInit {
     public errorMessage; 
     
     public autorizado: any = false;
+    public realizado: any = false;
     public tramiteSolicitud: any = null;
     public colores: any;
     public tramitesFactura: any = null;
@@ -158,6 +159,8 @@ export class NewRnaCambioColorComponent implements OnInit {
                             response => {
                                 if (response.status == 'success') {
                                     let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero;
+
+                                    this.realizado = true;
         
                                     this.readyTramite.emit(
                                         {

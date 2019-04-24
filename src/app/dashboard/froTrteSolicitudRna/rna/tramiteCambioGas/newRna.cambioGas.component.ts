@@ -45,7 +45,6 @@ export class NewRnaCambioGasComponent implements OnInit {
         'numeroSerial': null,
         'fechaFabricacion': null,
         'presion': null,
-        'numeroRunt': null,
         'campos': null,
         'idFuncionario': null,
         'idVehiculo': null,

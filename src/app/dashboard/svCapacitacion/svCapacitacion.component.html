@@ -98,36 +98,38 @@
                             <tr>
                                 <th>#</th>
                                 <th>Fecha y Hora Registro</th>
-                                <th>Formador</th>
-                                <th>Cédula</th>
                                 <th>Fecha Actividad</th>
                                 <th>Municipio</th>
                                 <th>Función de Seg. Víal</th>
                                 <th>Clase de Actividad</th>
                                 <th>Tema de Capacitación</th>
                                 <th>Descripción actividades</th>
-                                <th>Nombres Actor de la vía</th>
+                                <th>Acciones</th>
+                                <!-- <th>Nombres Actor de la vía</th>
                                 <th>Apellidos Actor de la vía</th>
                                 <th>No. cédula Actor de la vía</th>
-                                <th>Clase Actor de la vía</th>
+                                <th>Clase Actor de la vía</th> -->
                             </tr>
                         </thead>
                         <tbody>
                             <tr class="odd" *ngFor="let capacitacion of capacitaciones; let i = index">
                                 <td>{{ i + 1 }}</td>
                                 <td>{{ capacitacion.fechaHoraRegistro }}</td>
-                                <td>{{ capacitacion.ciudadano.primerNombre }} {{ capacitacion.ciudadano.primerApellido }}</td>
-                                <td>{{ capacitacion.ciudadano.identificacion }}</td>
                                 <td>{{ capacitacion.fechaActividad }}</td>
                                 <td>{{ capacitacion.municipio.nombre }}</td>
                                 <td>{{ capacitacion.funcion.nombre }}</td>
                                 <td>{{ capacitacion.funcionCriterio.nombre }}</td>
                                 <td>{{ capacitacion.temaCapacitacion.nombre }}</td>
                                 <td>{{ capacitacion.descripcionActividad }}</td>
-                                <td>{{ capacitacion.nombreActorVial }}</td>
+                                <td>
+                                    <div class="btn-group">
+                                        <button (click)="onShowByCapacitacion()" class="btn btn-light"><i class="fa fa-eye"></i></button>
+                                    </div>
+                                </td>
+                                <!-- <td>{{ capacitacion.nombreActorVial }}</td>
                                 <td>{{ capacitacion.apellidoActorVial }}</td>
                                 <td>{{ capacitacion.numeroCedulaActorVial }}</td>
-                                <td>{{ capacitacion.claseActorVial.nombre }}</td>
+                                <td>{{ capacitacion.claseActorVial.nombre }}</td> -->
                             </tr>
                         </tbody>
                     </table>
@@ -138,7 +140,7 @@
                 </div>
             </div>
         </div>
-        <app-new *ngIf='formNew' [capacitacionInput]="capacitacion" [ciudadano]="ciudadano" [empresa]="empresa"
-            (ready)="ready($event)"></app-new>
+        <app-new *ngIf='formNew' [capacitacionInput]="capacitacion" [ciudadano]="ciudadano" [empresa]="empresa" (ready)="ready($event)"></app-new>
+        <app-show *ngIf='formShow' [capacitacion]="capacitacion" [ciudadano]="ciudadano" [empresa]="empresa" (ready)="ready($event)"></app-show>
     </div>
 </div>

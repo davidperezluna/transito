@@ -193,6 +193,7 @@ export class NewRnaMatricualaInicialComponent implements OnInit {
                 if (response.code == 200) {
                     if (response.data.ciudadano) {
                         this.ciudadano = response.data.ciudadano;
+                        this.empresa = null;
 
                         swal({
                             title: 'Perfecto!',
@@ -287,6 +288,7 @@ export class NewRnaMatricualaInicialComponent implements OnInit {
                 if (response.code == 200) {
                     if (response.data.empresa) {
                         this.empresa = response.data.empresa;
+                        this.ciudadano = null;
                     }else{
                         this.empresa = null;
                     }
@@ -335,6 +337,15 @@ export class NewRnaMatricualaInicialComponent implements OnInit {
                 'apoderado.Nombre':null,
             }   
         );
+
+        swal({
+            title: 'Error!',
+            text: 'Ciudadano agregado con éxito.',
+            type: 'error',
+            confirmButtonText: 'Aceptar'
+        });
+
+        this.ciudadano = null;
     }
 
     onAddEmpresa(){
@@ -350,6 +361,15 @@ export class NewRnaMatricualaInicialComponent implements OnInit {
                 'apoderado.Nombre':null,
             }
         );
+
+        swal({
+            title: 'Error!',
+            text: 'Empresa agregada con éxito.',
+            type: 'error',
+            confirmButtonText: 'Aceptar'
+        });
+
+        this.empresa = null;
     }
 
     onDeletePropietario(propietario:any): void {
@@ -369,7 +389,7 @@ export class NewRnaMatricualaInicialComponent implements OnInit {
         if (agregado) {
             swal({
                 title: 'Error!',
-                text: 'El registro seleccionado ya se encuentra agregado como propietario.s',
+                text: 'El registro seleccionado ya se encuentra agregado como propietario.',
                 type: 'error',
                 confirmButtonText: 'Aceptar'
             });
@@ -385,7 +405,16 @@ export class NewRnaMatricualaInicialComponent implements OnInit {
 
         this.datos.propietarios[posicion].idApoderado = apoderado.id;
         this.datos.propietarios[posicion].apoderadoIdentificacion = apoderado.identificacion;
-        this.datos.propietarios[posicion].apoderadoNombre = apoderado.primerNombre + " " + apoderado.primerApellido;        
+        this.datos.propietarios[posicion].apoderadoNombre = apoderado.primerNombre + " " + apoderado.primerApellido;
+
+        this.formApoderado = false;
+
+        swal({
+            title: 'Error!',
+            text: 'Apoderado agregado con éxito.',
+            type: 'error',
+            confirmButtonText: 'Aceptar'
+        });
     }
 
     onCancelarApoderado(){
