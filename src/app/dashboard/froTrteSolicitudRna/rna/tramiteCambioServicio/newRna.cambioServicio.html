@@ -16,12 +16,12 @@
 <div class="row" *ngIf="!tramiteFactura.realizado && autorizado"><!-- .row -->
     <div class="col-xs-12 col-lg-12"><!-- .col -->
         <div class="card">
-            <div class="card-body">
-                <b class="text-primary">
-                    Registrar nuevo servicio
-                </b>
+            <div class="card-header">
+                <b class="text-primary">Registrar nuevo servicio</b>
+                <br>
                 <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
-                <hr>
+            </div>
+            <div class="card-body">
                 <div class="container">
                     <div class="form-group">
                         <div class="row">
@@ -43,9 +43,13 @@
                     <div class="form-group" *ngIf="datos.documentacion">
                         <div class="row">
                             <div class="col-xs-12 col-lg-12">
-                                <label>Servicios disponibles <span class="text-danger">*</span></label>
+                                <label>Servicios disponibles <b class="text-danger">*</b></label>
                                 <ng-select [multiple]="false" [options]="servicios" [(ngModel)]="servicioSelected" required name="servicioId">
                                 </ng-select>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Cantidad <b class="text-danger">*</b></label>
+                                <input type="numeric" class="form-control" [(ngModel)]="datos.cantidad" name="cantidad" required>
                             </div>
                         </div>
                     </div>

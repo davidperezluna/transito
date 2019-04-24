@@ -47,13 +47,14 @@
                 <div class="row" *ngIf="datos.tipoTransformacion == 1 && datos.documentacion"><!-- .row -->
                     <div class="col-xs-12 col-lg-12"><!-- .col -->
                         <div class="card">
-                            <div class="card-body">
+                            <div class="card-header">
                                 <b class="text-primary">
                                     Registrar cambio de carrocería
                                 </b>
                                 <br>
                                 <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
-                                <hr>
+                            </div>
+                            <div class="card-body">
                                 <div class="row">
                                     <div class="col-xs-12 col-lg-6">
                                         <label>Carrocerias disponibles <span class="text-danger">*</span></label>
@@ -82,13 +83,14 @@
                 <div class="row" *ngIf="datos.tipoTransformacion == 2 && datos.documentacion"><!-- .row -->
                     <div class="col-xs-12 col-lg-12"><!-- .col -->
                         <div class="card">
-                            <div class="card-body">
+                            <div class="card-header">
                                 <b class="text-primary">
                                     Registrar cambio de combustible
                                 </b>
                                 <br>
                                 <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
-                                <hr>
+                            </div>
+                            <div class="card-body">
                                 <div class="row">
                                     <div class="col-xs-12 col-lg-6">
                                         <label>Combustibles disponibles <span class="text-danger">*</span></label>
@@ -112,13 +114,14 @@
                 <div class="row" *ngIf="datos.tipoTransformacion == 3 && datos.documentacion"><!-- .row -->
                     <div class="col-xs-12 col-lg-12"><!-- .col -->
                         <div class="card">
-                            <div class="card-body">
+                            <div class="card-header">
                                 <b class="text-primary">
                                     Registrar cambio de conjunto
                                 </b>
                                 <br>
                                 <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
-                                <hr>
+                            </div>
+                            <div class="card-body">
                                 <div class="row">
                                     <div class="col-xs-12 col-lg-6">
                                         <label>Nuevo Modelo <span class="text-danger">*</span></label>
@@ -145,13 +148,14 @@
                 <div class="row" *ngIf="datos.tipoTransformacion == 4 && datos.documentacion"><!-- .row -->
                     <div class="col-xs-12 col-lg-12"><!-- .col -->
                         <div class="card">
-                            <div class="card-body">
+                            <div class="card-header">
                                 <b class="text-primary">
                                     Repotenciación
                                 </b>
                                 <br>
                                 <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
-                                <hr>
+                            </div>
+                            <div class="card-body">
                                 <div class="row">
                                     <div class="col-xs-12 col-lg-4">
                                         <label>Año de repotenciación <span class="text-danger">*</span></label>
@@ -190,29 +194,43 @@
                 <div class="row" *ngIf="datos.tipoTransformacion == 5 && datos.documentacion"><!-- .row -->
                     <div class="col-xs-12 col-lg-12"><!-- .col -->
                         <div class="card">
-                            <div class="card-body">
+                            <div class="card-header">
                                 <b class="text-primary">
                                     Cambio de ejes
                                 </b>
                                 <br>
                                 <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-xs-12 col-lg-6">
-                                        <label>Año de repotenciación <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" [(ngModel)]="datos.modelo" name="modelo" minlength="4" maxlength="4" required />
-                                    </div>
-                                </div>
+                            </div>
+                            <div class="card-body">
                                 <div class="row">
                                     <div class="col-xs-12 col-lg-6">
                                         <label>Cantidad ejes actuales <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" [(ngModel)]="datos.ejesActuales" name="ejesActuales" minlength="4" maxlength="4" required />
+                                        <input type="text" class="form-control" [(ngModel)]="datos.ejesActuales" name="ejesActuales" minlength="1" required />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12 col-lg-12">
+                                        <label>Tipo de cambio <span class="text-danger">*</span></label>
+                                        <ng-select [multiple]="false" [options]="cambiosEje" [(ngModel)]="datos.ejesTipoCambio" name="ejesTipoCambio" required>
+                                        </ng-select>
+                                    </div>
+                                </div>
+                                <div class="row" *ngIf="datos.ejesTipoCambio && datos.ejesTipoCambio == 1">
+                                    <div class="col-xs-12 col-lg-6">
+                                        <label>Cantidad ejes agregar <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" (blur)="onCalcularTotal()" [(ngModel)]="datos.ejesCantidad" name="ejesCantidad" minlength="1" required />
+                                    </div>
+                                </div>
+                                <div class="row" *ngIf="datos.ejesTipoCambio && datos.ejesTipoCambio == 2">
+                                    <div class="col-xs-12 col-lg-6">
+                                        <label>Cantidad ejes agregar <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" (blur)="onCalcularTotal()" [(ngModel)]="datos.ejesCantidad" name="ejesCantidad" minlength="1" required />
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-xs-12 col-lg-6">
-                                        <label>Cantidad ejes agregar <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" [(ngModel)]="datos.ejesNuevos" name="ejesNuevos" minlength="4" maxlength="4" required />
+                                        <label>Total ejes <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" [(ngModel)]="datos.ejesTotal" name="ejesTotal" minlength="1" required readonly />
                                     </div>
                                 </div>
                             </div>

@@ -33,7 +33,6 @@ export class NewRnaBlindajeComponent implements OnInit {
         'observacion': null,
         'campos': null,
         'empresaBlindadora': null,
-        'numeroRunt': null,
         'nivelBlindaje': null,
         'tipoBlindaje': null,
         'idFuncionario': null,

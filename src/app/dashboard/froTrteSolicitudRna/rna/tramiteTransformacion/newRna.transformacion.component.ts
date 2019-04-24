@@ -20,11 +20,15 @@ export class NewRnaTransformacionComponent implements OnInit {
     @Input() tramiteFactura: any = null;
     public errorMessage; 
     
-    
     public autorizado: any = false;
     public tramiteSolicitud: any = null;
     public carrocerias: any = null;
     public combustibles: any = null;
+
+    public cambiosEje = [
+        {'value': 1, 'label': 'Agregar'},
+        {'value': 2, 'label': 'Restar'},
+    ];
 
     public datos = {
         'documentacion': true,
@@ -32,7 +36,9 @@ export class NewRnaTransformacionComponent implements OnInit {
         'tipoTransformacion': null,
         'modelo': null,
         'ejesActuales': null,
-        'ejesNuevos': null,
+        'ejesTipoCambio': null,
+        'ejesCantidad': 0,
+        'ejesTotal': null,
         'decripcionModelo': null,
         'tallerRepotenciacion': null,
         'fechaRepotenciacion': null,
@@ -52,7 +58,7 @@ export class NewRnaTransformacionComponent implements OnInit {
         {'value': 2, 'label': 'Cambio combustible'},
         {'value': 3, 'label': 'Cambio conjunto'},
         {'value': 4, 'label': 'Repotenciación'},
-        {'value': 5, 'label': 'Cambio de troques'},
+        {'value': 5, 'label': 'Cambio de ejes'},
     ];
 
     constructor(
@@ -154,6 +160,9 @@ export class NewRnaTransformacionComponent implements OnInit {
                                 }
                             }
                         );
+
+                        this.datos.ejesActuales = this.vehiculo.numeroEjes;
+                        this.datos.ejesTotal = this.vehiculo.numeroEjes;
                     }
                 } else {
                     this.autorizado = false;
@@ -174,11 +183,37 @@ export class NewRnaTransformacionComponent implements OnInit {
                 }
             }
         );
-     }
+    }
 
     onChangedTipoTransformacion() {
         this.datos.campos = null;
     }
+
+    onCalcularTotal() {   
+        if (this.datos.ejesCantidad > 0) {
+          if (this.datos.ejesTipoCambio == 1) {
+            this.datos.ejesTotal = this.datos.ejesActuales + this.datos.ejesCantidad;
+          }else if(this.datos.ejesTipoCambio == 2){
+            if (this.datos.ejesCantidad <= this.datos.ejesActuales) {
+                this.datos.ejesTotal = this.datos.ejesActuales - this.datos.ejesCantidad;
+            }else{
+                swal({
+                    title: 'Error!',
+                    text: 'La cantidad de ejes a restar no puede ser mayor a la cantidad de ejes actuales.',
+                    type: 'error',
+                    confirmButtonText: 'Aceptar'
+                });
+            }
+          }
+        }else{
+          swal({
+            title: 'Error!',
+            text: 'El la cantidad e ejes no puede ser igual o menor a 0.',
+            type: 'error',
+            confirmButtonText: 'Aceptar'
+          });
+        }
+      }
     
     onEnviar(){
         let token = this._LoginService.getToken();
@@ -199,7 +234,7 @@ export class NewRnaTransformacionComponent implements OnInit {
                         this.datos.campos = ['repotenciacion'];
                     }else{
                         if (this.datos.tipoTransformacion == 5) {
-                            this.datos.campos = ['troques'];
+                            this.datos.campos = ['ejes'];
                         }
                     }
                 }

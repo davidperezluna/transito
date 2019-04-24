@@ -107,7 +107,7 @@ export class VhloRnaPreasignacionPlacaComponent implements OnInit {
           this.formShow = false; 
 
           let timeoutId = setTimeout(() => {  
-            this.iniciarTabla();
+            this.onInitTable();
           }, 100);
 
           swal.close();
@@ -132,7 +132,7 @@ export class VhloRnaPreasignacionPlacaComponent implements OnInit {
     );
   }
 
-  iniciarTabla(){
+  onInitTable(){
     this.table = $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,
@@ -151,8 +151,20 @@ export class VhloRnaPreasignacionPlacaComponent implements OnInit {
   onShow(vehiculo:any){
     this.vehiculo = vehiculo;
     this.datos.idVehiculo = this.vehiculo.id;
-    this.formIndex = false;
-    this.formShow = true;
+
+    if (this.vehiculo.placa) {
+      this.formIndex = false;
+      this.formShow = true;
+    }else{
+      this.formIndex = false;
+
+      swal({
+        title: 'Error!',
+        text: 'El vehiculo seleccionado ya tiene una placa asignada.',
+        type: 'error',
+        confirmButtonText: 'Aceptar'
+      });
+    }
   }
 
   onEnviar(){
@@ -195,6 +207,15 @@ export class VhloRnaPreasignacionPlacaComponent implements OnInit {
                         this.onCancelar();
                       }
                     });          
+                  }else{
+                    this.formShow = false;
+
+                    swal({
+                      title: 'Error!',
+                      text: response.message,
+                      type: 'error',
+                      confirmButtonText: 'Aceptar'
+                    });
                   }
                 error => {
                     this.errorMessage = <any>error;

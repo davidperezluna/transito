@@ -26,6 +26,7 @@ export class NewRnaCambioServicioComponent implements OnInit {
     public datos = {
         'documentacion': true,
         'observacion': null,
+        'cantidad': null,
         'campos': null,
         'idFuncionario': null,
         'idVehiculo': null,
@@ -155,9 +156,10 @@ export class NewRnaCambioServicioComponent implements OnInit {
                         this._VehiculoService.update(this.datos, token).subscribe(
                             response => {
                                 if (response.status == 'success') {
-                                    let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero +
-                                        '<br/><b>Servicio anterior </b>' + this.vehiculo.servicio.nombre +
-                                        '<br/><b>Servicio nuevo: </b>' + servicioResponse.data.nombre;
+                                    let resumen = "No. factura: " + this.tramiteFactura.factura.numero +
+                                        ', Servicio anterior ' + this.vehiculo.servicio.nombre +
+                                        ', Servicio nuevo: ' + servicioResponse.data.nombre +
+                                        ', Cantidad: ' + this.datos.cantidad;
         
                                     this.readyTramite.emit(
                                         {
