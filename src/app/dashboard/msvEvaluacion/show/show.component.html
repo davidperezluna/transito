@@ -1,58 +1,9 @@
 <hr>
 <div class="row">
     <div class="col-xs-12 col-lg-12">
-        <div class="card">
+        <div class="card" *ngIf="calificaciones">
             <div class="card-header">
-                <h5 class="text-uppercase">Detalles Evaluación
-                    <button (click)="onEnviar()" class="btn btn-success  btn-round " data-target="#themepicker" data-toggle="modal">
-                        <i class="fa fa-plus"></i>
-                        <span class="text">Enviar</span>
-                    </button>
-                </h5>
-            </div>
-            <!-- <div class="card-body">
-                <div class="form-group row">
-                    <div class="col-xs-12 col-lg-12">
-                        <div class="col-lg-12 col-md-12">
-                            <table class="table table-bordered table-striped">
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <strong>Fecha y hora de registro: </strong>
-                                            <br>{{ capacitacion.fechaHoraRegistro }}
-                                        </td>
-                                        <td>
-                                            <strong>Fecha Actividad: </strong>
-                                            <br>{{ capacitacion.fechaActividad }}
-                                        </td>
-                                        <td>
-                                            <strong>Descripción Actividad: </strong>
-                                            <br>{{ capacitacion.descripcionActividad }}
-                                        </td>
-
-                                        <td>
-                                            <strong>Municipio: </strong>
-                                            <br>{{ capacitacion.municipio.nombre }}
-                                        </td>
-                                        <td>
-                                            <strong>Función Seguridad Víal: </strong>
-                                            <br>{{ capacitacion.funcion.nombre }}
-                                        </td>
-                                        <td>
-                                            <strong>Función Criterio Seguridad Víal: </strong>
-                                            <br>{{ capacitacion.funcionCriterio.nombre }}
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-        </div>
-        <!-- <div class="card" *ngIf="capacitados">
-            <div class="card-header">
-                <h5 class="card-title">Datos <small>Capacitados</small>
+                <h5 class="card-title">Datos <small>Evaluación</small>
                 </h5>
             </div>
             <div class="card-body">
@@ -60,39 +11,32 @@
                     <thead>
                         <tr>
                             <th><b>#</b></th>
-                            <th><b>Tipo Identificación</b></th>
-                            <th><b>No. cédula</b></th>
-                            <th><b>Nombres</b></th>
-                            <th><b>Apellidos</b></th>
-                            <th><b>Fecha Nacimiento</b></th>
-                            <th><b>Email</b></th>
-                            <th><b>Género</b></th>
-                            <th><b>Grupo Étnico</b></th>
-                            <th><b>Clase</b></th>
-                            <th><b>Discapacidad</b></th>
-                            <th><b>Víctima</b></th>
+                            <th><b>Criterio</b></th>
+                            <th><b>Aplica</b></th>
+                            <th><b>Evidencia</b></th>
+                            <th><b>Responde</b></th>
+                            <th><b>Valor Obtenido</b></th>
+                            <th><b>Observacion</b></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="odd" *ngFor="let capacitado of capacitados; let i = index">
+                        <tr class="odd" *ngFor="let calificacion of calificaciones; let i = index">
                             <td>{{ i + 1 }}</td>
-                            <td>{{ capacitado.tipoIdentificacionActorVial.nombre }}</td>
-                            <td>{{ capacitado.numeroCedulaActorVial }}</td>
-                            <td>{{ capacitado.nombreActorVial }}</td>
-                            <td>{{ capacitado.apellidoActorVial }}</td>
-                            <td>{{ capacitado.fechaNacimientoActorVial }}</td>
-                            <td>{{ capacitado.emailActorVial }}</td>
-                            <td>{{ capacitado.genero.sigla }}</td>
-                            <td>{{ capacitado.grupoEtnicoActorVial.nombre }}</td>
-                            <td>{{ capacitado.claseActorVial.nombre }}</td>
+                            <td>{{ calificacion.criterio.nombre }}</td>
                             <td>
-                                <span *ngIf="capacitado.discapacidad">Si</span>
-                                <span *ngIf="!capacitado.discapacidad">No</span>
+                                <span *ngIf="calificacion.aplica">Si</span>
+                                <span *ngIf="!calificacion.aplica">No</span>
                             </td>
                             <td>
-                                <span *ngIf="capacitado.victima">Si</span>
-                                <span *ngIf="!capacitado.victima">No</span>
+                                <span *ngIf="calificacion.evidencia">Si</span>
+                                <span *ngIf="!calificacion.evidencia">No</span>
                             </td>
+                            <td>
+                                <span *ngIf="calificacion.responde">Si</span>
+                                <span *ngIf="!calificacion.responde">No</span>
+                            </td>
+                            <td>{{ calificacion.valorObtenido | number:'1.1-2' }}</td>
+                            <td>{{ calificacion.observacion }}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -105,6 +49,6 @@
                     </button>
                 </div>
             </div>
-        </div> -->
+        </div>
     </div>
 </div>

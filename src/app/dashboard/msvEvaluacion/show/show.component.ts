@@ -24,15 +24,26 @@ export class ShowComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-    }
-
-    onEnviar() {
         let token = this._LoginService.getToken();
 
-        this._EvaluacionService.showCalificacionByEvaluacion(this.revision, token).subscribe(
+        swal({
+            title: 'Cargando datos de la evaluación!',
+            text: 'Solo tardará unos segundos, por favor espere.',
+            timer: 3000,
+            onOpen: () => {
+                swal.showLoading()
+            }
+        }).then((result) => {
+            if (
+                // Read more about handling dismissals
+                result.dismiss === swal.DismissReason.timer
+            ) {
+            }
+        })
+
+        this._EvaluacionService.showCalificacionByEvaluacion({ 'id': this.revision.id }, token).subscribe(
             response => {
                 if (response.status == 'success') {
-                    this.ready.emit(true);
                     this.calificaciones = response.data;
                     swal({
                         title: 'Perfecto!',
@@ -40,6 +51,9 @@ export class ShowComponent implements OnInit {
                         type: 'success',
                         confirmButtonText: 'Aceptar'
                     });
+                    let timeoutId = setTimeout(() => {
+                        this.onInitTable();
+                    }, 100);
                 } else {
                     swal({
                         title: 'Error!',
@@ -58,11 +72,32 @@ export class ShowComponent implements OnInit {
             }
         );
     }
-    iniciarTabla() {
-        $('#dataTables-example').DataTable({
+
+    onInitTable() {
+        if (this.table) {
+            this.table.destroy();
+        } 
+
+        this.table = $('#dataTables-example').DataTable({
             responsive: true,
             pageLength: 8,
             sPaginationType: 'full_numbers',
+            dom: 'Bfrtip',
+            buttons: [
+                {
+                    title: 'Evaluacion',
+                    extend: 'excel',
+                    text: 'Excel',
+                    filename: 'Evaluacion',
+                },
+                {
+                    title: 'Evaluacion',
+                    extend: 'pdfHtml5',
+                    orientation: 'landscape',
+                    pageSize: 'LEGAL',
+                    filename: 'EvaluacionPDF',
+                }
+            ],
             oLanguage: {
                 oPaginate: {
                     sFirst: '<<',
@@ -72,7 +107,6 @@ export class ShowComponent implements OnInit {
                 }
             }
         });
-        this.table = $('#dataTables-example').DataTable();
     }
 
     onCancelar() {
