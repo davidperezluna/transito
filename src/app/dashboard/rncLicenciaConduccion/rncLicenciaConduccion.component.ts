@@ -92,46 +92,55 @@ export class RncLicenciaConduccionComponent implements OnInit {
   onSearchCiudadano(){
     let token = this._loginService.getToken();
 
-    this._UserCiudadanoService.searchByIdentificacion({ 'numeroIdentificacion': this.identificacion }, token).subscribe(
+    let datos = {
+      'idTipoIdentificacion': this.tipoIdentificacionSelected,
+      'identificacion': this.identificacion,
+    }
+
+    this._UserCiudadanoService.searchByIdentificacion(datos, token).subscribe(
 			response => {
         this.respuesta = response;
-        if(this.respuesta.status == 'success'){
-          this.ciudadano = response.data;
-
-          this._LicenciaConduccionService.recordByCiudadanoId({ 'ciudadanoId': this.ciudadano.id },token).subscribe(
-            response => {
-              this.respuesta = response;
-              if (this.respuesta.status == 'success') {
-                this.licencias = response.data;
-
-                this.iniciarTabla();
-                this.formIndex = true;
-
-                swal({
-                  title: 'Perfecto',
-                  text: response.message,
-                  type: 'info'
-                });
-              }else{
-                swal({
-                  title: 'Alerta',
-                  text: response.message,
-                  type: 'warning'
-                });
-              }
-              error => {
-                this.errorMessage = <any>error;
-                if (this.errorMessage != null) {
-                  console.log(this.errorMessage);
-                  alert("Error en la petición");
+        if(this.respuesta.code == 200){
+          if (response.data.ciudadano) {
+            this.ciudadano = response.data.ciudadano;
+  
+            this._LicenciaConduccionService.recordByCiudadanoId({ 'ciudadanoId': this.ciudadano.id },token).subscribe(
+              response => {
+                this.respuesta = response;
+                if (this.respuesta.status == 'success') {
+                  this.licencias = response.data;
+  
+                  this.iniciarTabla();
+                  this.formIndex = true;
+  
+                  swal({
+                    title: 'Perfecto',
+                    text: response.message,
+                    type: 'info'
+                  });
+                }else{
+                  swal({
+                    title: 'Alerta',
+                    text: response.message,
+                    type: 'warning'
+                  });
+                }
+                error => {
+                  this.errorMessage = <any>error;
+                  if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert("Error en la petición");
+                  }
                 }
               }
-          }); 
-          
+            ); 
+          }else{
+            this.ciudadano = null;
+          }
         }else{
           swal({
             title: 'Alerta',
-            text: response.msj,
+            text: response.message,
             type: 'warning'
           });
         }

@@ -1,17 +1,17 @@
 <div class="row">
     <div class="col-xs-12 col-lg-12">
         <div class="card">
+            <div class="card-header">
+                <b class="text-uppercase">
+                    Registrar limitaciones a la propiedad
+                </b>
+                <br>
+                <small>Todos los campos con  <b class="text-danger">*</b> son obligatorios</small>
+            </div>
             <div class="card-body">
                 <div class="form-group">
                     <div class="row"><!-- .row -->
-                        <div class="col-xs-12 col-lg-12">
-                            <b class="text-primary">
-                                Registrar limitaciones a la propiedad
-                            </b>
-                            <small>Todos los campos con  <b class="text-danger">*</b> son obligatorios</small>
-                        </div>
-
-                        <div class="col-xs-12 col-lg-6">
+                        <div class="col-xs-12 col-lg-4">
                             <form #formSearchVehiculo="ngForm">
                                 <label>Placa</label>
                                 <div class="input-group">
@@ -50,54 +50,71 @@
                         </div>
                     </div><!-- /.row -->
 
-                    <div class="row" *ngIf="datos.vehiculos.length > 0"><!-- .row -->
+                    <div class="row" *ngIf="datos.vehiculos && datos.vehiculos.length > 0"><!-- .row -->
                         <div class="col-xs-12 col-lg-6" >
-                            <b class="text-uppercase">
-                                Registrar demandante
-                            </b>
-                            <label>Tipo de identificación
-                                <span class="text-danger">*</span>
-                            </label>
-                            <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="idTipoIdentificacionDemandante" name="idTipoIdentificacionDemandante" required>
-                            </ng-select>
-
-                            <label>Identificación</label>
-                            <div class="input-group">
-                                <input type="number" class="form-control" [(ngModel)]="identificacionDemandante" name="identificacionDemandante"
-                                    required />
-                                <span class="input-group-btn">
-                                    <button (click)="onSearchDemandante()" class="btn btn-primary" type="button">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                </span>
-                            </div>
+                            <form #formSearchDemandante="ngForm">
+                                <div class="row">
+                                    <div class="col-xs-12 col-lg-12">
+                                        <b class="text-uppercase">
+                                            Registrar demandante
+                                        </b>
+                                    </div>
+                                    <div class="col-xs-12 col-lg-12">
+                                        <label>Tipo de identificación <b class="text-danger">*</b></label>
+                                        <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="idTipoIdentificacionDemandante" name="idTipoIdentificacionDemandante" required>
+                                        </ng-select>
+                                    </div>
+                                    
+                                    <div class="col-xs-12 col-lg-12">
+                                        <label>Identificación <b class="text-danger">*</b></label>
+                                        <div class="input-group">
+                                            <input type="number" class="form-control" [(ngModel)]="identificacionDemandante" name="identificacionDemandante" required />
+                                            <span class="input-group-btn">
+                                                <button (click)="onSearchDemandante()" [disabled]="formSearchDemandante.invalid" class="btn btn-primary" type="button">
+                                                    <i class="fa fa-search"></i>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
 
                         <div class="col-xs-12 col-lg-6" >
-                            <b class="text-uppercase">
-                                Registrar demandado
-                            </b>
-                            <label>Tipo de identificación
-                                <span class="text-danger">*</span>
-                            </label>
-                            <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="idTipoIdentificacionDemandado" name="idTipoIdentificacionDemandado" required>
-                            </ng-select>
+                            <form #formSearchDemandado="ngForm">
+                                <div class="row">
+                                    <div class="col-xs-12 col-lg-12">
+                                        <b class="text-uppercase">
+                                            Registrar demandado
+                                        </b>
+                                    </div>
 
-                            <label>Identificación</label>
-                            <div class="input-group">
-                                <input type="number" class="form-control" [(ngModel)]="identificacionDemandado" name="identificacionDemandado"
-                                    required />
-                                <span class="input-group-btn">
-                                    <button (click)="onSearchDemandado()" class="btn btn-primary" type="button">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                </span>
-                            </div>
+                                    <div class="col-xs-12 col-lg-12">
+                                        <label>Tipo de identificación <b class="text-danger">*</b></label>
+                                        <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="idTipoIdentificacionDemandado" name="idTipoIdentificacionDemandado" required>
+                                        </ng-select>
+                                    </div>
+
+                                    <div class="col-xs-12 col-lg-12">
+                                        <label>Identificación <b class="text-danger">*</b></label>
+                                        <div class="input-group">
+                                            <input type="number" class="form-control" [(ngModel)]="identificacionDemandado" name="identificacionDemandado"
+                                                required />
+                                            <span class="input-group-btn">
+                                                <button (click)="onSearchDemandado()" [disabled]="formSearchDemandado.invalid" class="btn btn-primary" type="button">
+                                                    <i class="fa fa-search"></i>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+
                         </div>
                     </div><!-- /.row -->
 
                     <div class="row"><!-- .row -->
-                        <div class="col-xs-12 col-lg-6" *ngIf="datos.demandantes.length > 0">
+                        <div class="col-xs-12 col-lg-6" *ngIf="datos.demandantes && datos.demandantes.length > 0">
                             <table class="table table-bordered table-striped">
                                 <tbody>
                                     <tr *ngFor="let demandante of datos.demandantes; let i = index">
@@ -110,14 +127,14 @@
                                             {{ demandante.identificacion }}
                                         </td>
                                         <td>
-                                            <button (click)="onRemoveDemandado(demandante)" class="btn btn-danger">Eliminar</button>
+                                            <button (click)="onRemoveDemandante(demandante)" class="btn btn-danger">Eliminar</button>
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                         
-                        <div class="col-xs-12 col-lg-6" *ngIf="datos.demandados.length > 0">
+                        <div class="col-xs-12 col-lg-6" *ngIf="datos.demandados && datos.demandados.length > 0">
                             <table class="table table-bordered table-striped">
                                 <tbody>
                                     <tr *ngFor="let demandado of datos.demandados; let i = index">

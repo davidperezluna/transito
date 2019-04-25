@@ -11,7 +11,7 @@
                     <div class="col-xs-12 col-lg-12">
                         <div class="form-group">
                             <label>Número Placa</label>
-                            <input class="form-control" [(ngModel)]="datos.numeroPlaca" name="numeroPlaca" type="text" required />
+                            <input class="form-control text-uppercase" [(ngModel)]="datos.numeroPlaca" name="numeroPlaca" type="text" required />
                         </div>
                     </div>
                     <div class="col-xs-12 col-lg-12">
@@ -53,6 +53,10 @@
                                     <button (click)="onSearchVehiculo()" class="btn btn-default btn-primary" type="button">
                                         <i class="fa fa-search"></i>
                                         Buscar
+                                    </button>
+                                    <button (click)="onClose()" class="btn btn-default" type="button">
+                                        <i class="fa fa-times"></i>
+                                        Cancelar
                                     </button>
                                 </div>
                             </div>

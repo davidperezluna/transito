@@ -365,8 +365,7 @@ export class FroFacTramiteComponent implements OnInit {
           this.tramitePrecio = response.data;
           if (this.modulo.abreviatura == 'RNC') {
             if (this.tramitesPrecioArray.length < 1) {
-              //Agrega el trámite seleccionado al arreglo
-              // this.onCreateArray();
+              this.onCreateArray();
             } else {
               swal({
                 title: 'Error!',

@@ -28,7 +28,7 @@ export class NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent implements
 
     public ciudadano:any = null;
     public empresa:any = null;
-    public acreedor:any = null;
+    public acreedoresActuales:any = null;
     public propietarioOld:any = null;
     public propietarioNew:any = null;
    
@@ -43,6 +43,8 @@ export class NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent implements
     public formCiudadano = false;
     
     public datos = {
+        'documentacion': true,
+        'observacion': null,
         'tipo': 'PROPIETARIO',
         'idFuncionario': null,
         'idPropietarioOld': null,
@@ -139,6 +141,31 @@ export class NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent implements
                                 }
                             }
                         );
+
+                        this._AcreedorService.searchByVehiculo({ 'idVehiculo': this.vehiculo.id }, token).subscribe(
+                            response => {
+                                if (response.code == 200) {
+                                    this.acreedoresActuales = response.data;
+                                }else{
+                                    this.acreedoresActuales = null;
+
+                                    swal({
+                                        title: 'Error!',
+                                        text: response.message,
+                                        type: 'error',
+                                        confirmButtonText: 'Aceptar'
+                                    });
+                                }
+                            },
+                            error => {
+                                this.errorMessage = <any>error;
+
+                                if (this.errorMessage != null) {
+                                    console.log(this.errorMessage);
+                                    alert('Error en la petición');
+                                }
+                            }
+                        );
                     }
                 } else {
                     this.autorizado = false;
@@ -159,163 +186,6 @@ export class NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent implements
                 }
             }
         );        
-    }
-
-    onSearchPropietarioOld() {
-        swal({
-            title: 'Buscando propietario con prenda actual!',
-            text: 'Solo tardara unos segundos por favor espere.',
-            onOpen: () => {
-                swal.showLoading()
-            }
-        });
-
-        let token = this._LoginService.getToken();
-
-        let datos = {
-            'identificacion': this.identificacionOld,
-            'idTipoIdentificacion': this.tipoIdentificacionSelectedOld,
-        }
-
-        this._CiudadanoService.searchByIdentificacion(datos, token).subscribe(
-            response => {
-                if (response.code == 200) {
-                    if (response.data.ciudadano) {
-                        this._PropietarioService.searchByCiudadanoOrEmpresaAndVehiculo({ 'id': response.data.ciudadano.id, 'tipo': 'CIUDADANO', 'idVehiculo': this.vehiculo.id }, token).subscribe(
-                            response => {
-                                if (response.code == 200) {
-                                    this.propietarioOld = response.data;
-                                    this.datos.idPropietarioOld = this.propietarioOld.id;
-
-                                    this._AcreedorService.searchByPropietario({ 'id':  response.data.ciudadano.id }, token).subscribe(
-                                        response => {
-                                            if (response.code == 200) {
-                                                this.acreedor = response.data;
-                                                this.datos.idAcreedor = this.acreedor.id;
-            
-                                                swal.close();
-                                            } else {
-                                                this.acreedor = null;
-                                                this.datos.idAcreedor = null;
-
-                                                swal({
-                                                    title: 'Error!',
-                                                    text: response.message,
-                                                    type: 'error',
-                                                    confirmButtonText: 'Aceptar'
-                                                });
-                                            }
-                                            error => {
-                                                this.errorMessage = <any>error;
-                                                if (this.errorMessage != null) {
-                                                    console.log(this.errorMessage);
-                                                    alert('Error en la petición');
-                                                }
-                                            }
-                                        }
-                                    );
-
-                                    swal.close();
-                                } else {
-                                    this.propietarioOld = null;
-                                    this.datos.idPropietarioOld = null;
-
-                                    swal({
-                                        title: 'Error!',
-                                        text: response.message,
-                                        type: 'error',
-                                        confirmButtonText: 'Aceptar'
-                                    });
-                                }
-                                error => {
-                                    this.errorMessage = <any>error;
-                                    if (this.errorMessage != null) {
-                                        console.log(this.errorMessage);
-                                        alert('Error en la petición');
-                                    }
-                                }
-                            }
-                        ); 
-                    } else if (response.data.empresa) {
-                        this._PropietarioService.searchByCiudadanoOrEmpresaAndVehiculo({ 'id': response.data.empresa.id, 'tipo': 'EMPRESA', 'idVehiculo': this.vehiculo.id }, token).subscribe(
-                            response => {
-                                if (response.code == 200) {
-                                    this.propietarioOld = response.data;
-                                    this.datos.idPropietarioOld = this.propietarioOld.id;
-
-                                    this._AcreedorService.searchByPropietario({ 'id': this.propietarioOld.id }, token).subscribe(
-                                        response => {
-                                            if (response.code == 200) {
-                                                this.acreedor = response.data;
-                                                this.datos.idAcreedor = this.acreedor.id;
-            
-                                                swal.close();
-                                            } else {
-                                                this.acreedor = null;
-                                                this.datos.idAcreedor = null;
-
-                                                swal({
-                                                    title: 'Error!',
-                                                    text: response.message,
-                                                    type: 'error',
-                                                    confirmButtonText: 'Aceptar'
-                                                });
-                                            }
-                                            error => {
-                                                this.errorMessage = <any>error;
-                                                if (this.errorMessage != null) {
-                                                    console.log(this.errorMessage);
-                                                    alert('Error en la petición');
-                                                }
-                                            }
-                                        }
-                                    );
-
-                                    swal.close();
-                                } else {
-                                    this.propietarioOld = null;
-                                    this.datos.idPropietarioOld = null;
-
-                                    swal({
-                                        title: 'Error!',
-                                        text: response.message,
-                                        type: 'error',
-                                        confirmButtonText: 'Aceptar'
-                                    });
-                                }
-                                error => {
-                                    this.errorMessage = <any>error;
-                                    if (this.errorMessage != null) {
-                                        console.log(this.errorMessage);
-                                        alert('Error en la petición');
-                                    }
-                                }
-                            }
-                        );
-                    }else {
-                        this.acreedor = null;
-                        this.datos.idAcreedor = null;
-                    }
-                } else {
-                    this.propietarioOld = null;
-                    this.datos.idPropietarioOld = null;
-
-                    swal({
-                        title: 'Error!',
-                        text: response.message,
-                        type: 'error',
-                        confirmButtonText: 'Aceptar'
-                    });
-                }
-                error => {
-                    this.errorMessage = <any>error;
-                    if (this.errorMessage != null) {
-                        console.log(this.errorMessage);
-                        alert('Error en la petición');
-                    }
-                }
-            }
-        );
     }
     
     onSearchPropietarioNew(){
@@ -432,7 +302,13 @@ export class NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent implements
                             if (response.code == 200) {
                                 let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero;
             
-                                this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
+                                this.readyTramite.emit({ 
+                                    'documentacion':this.datos.documentacion, 
+                                    'observacion':this.datos.observacion, 
+                                    'foraneas':this.datos, 
+                                    'resumen':resumen,
+                                    'idTramiteFactura': this.tramiteFactura.id,
+                                });
                             }else{
                                 swal({
                                     title: 'Error!',
