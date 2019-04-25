@@ -232,6 +232,7 @@ export class MsvEvaluacionComponent implements OnInit {
       this.formIndex = true;
       this.newEmpresa = false;
       this.formNewRevision = false;
+      this.formEditRevision = false;
       this.ngOnInit();
     }
   }
@@ -367,8 +368,6 @@ export class MsvEvaluacionComponent implements OnInit {
               this._MsvParametroService.getParametroByCategoriaId(token, e).subscribe(
                 response => {
                   this.msvParametros = response.data;
-                  console.log(this.msvParametros);
-
                   if (this.datosFortalecimiento.parametros != null && this.categoriaSelected == 1) {
                     this.msvParametros = this.datosFortalecimiento.parametros;
                   }
@@ -414,6 +413,7 @@ export class MsvEvaluacionComponent implements OnInit {
   }
 
   onEnviar(categoriaSelected) {
+    console.log(this.revision);
     let token = this._loginService.getToken();
     swal({
       title: '¡Atención!',
@@ -825,7 +825,7 @@ export class MsvEvaluacionComponent implements OnInit {
     this.datos2.idRevision = revision.id;
   }
 
-  onEnviarTablaValorAgregado() {
-    console.log(this.datosTablaValorAgregado);
+  onVisualizarEvaluacion(revision: any) {
+    console.log("ssssss");
   }
 }

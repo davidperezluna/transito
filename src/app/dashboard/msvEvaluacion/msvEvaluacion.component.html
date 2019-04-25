@@ -21,7 +21,7 @@
                         <input type="number" class="form-control" placeholder="NIT" [(ngModel)]="datos.parametro2"
                            name="parametro2" required />
                         <span class="input-group-btn">
-                           <button (click)="onKeyValidateEvaluacion()" class="btn btn-default btn-success"
+                           <button (click)="onKeyValidateEvaluacion()" class="btn btn-default btn-primary"
                               type="button"><i class="fa fa-search"></i></button>
                         </span>
                      </div>
@@ -148,18 +148,12 @@
                                  </td>
                                  <td>
                                     <div class="btn-group">
-                                       <button (click)="editRevision(revision)" class="btn btn-xs btn-primary"
-                                          type="button">
-                                          <i class="fa fa-edit"></i>
-                                       </button>
-                                       <button *ngIf="!revision.evaluacion" (click)="iniciarEvaluacion(revision)"
-                                          class="btn btn-success">
-                                          <i class="fa fa-plus"></i>
-
-                                       </button>
-                                       <a href="{{ apiUrl }}/{{ idUsuario }}/{{ revision.evaluacion.id }}/aval/pdf"
-                                          class="btn btn-info" target="_blank" *ngIf="revision.evaluacion"><i
-                                             class="fa fa-file-pdf-o"></i></a>
+                                       <button (click)="onVisualizarEvaluacion(revision)" class="btn btn-light"><i class="fa fa-eye"></i></button>
+                                       <button (click)="editRevision(revision)" class="btn btn-xs btn-primary" type="button"> <i class="fa fa-edit"></i></button>
+                                       <button *ngIf="!revision.evaluacion" (click)="iniciarEvaluacion(revision)" class="btn btn-success"><i class="fa fa-plus"></i></button>
+                                       <a href="{{ apiUrl }}/{{ idUsuario }}/{{ revision.evaluacion.id }}/aval/pdf" class="btn btn-info" target="_blank" *ngIf="revision.evaluacion">
+                                          <i class="fa fa-file-pdf-o"></i>
+                                       </a>
                                     </div>
                                  </td>
                               </tr>
@@ -498,7 +492,6 @@
       </div>
    </div>
    <app-new-empresa *ngIf='formNewEmpresa' (ready)="ready($event)"> </app-new-empresa>
-   <app-edit-revision *ngIf='formEditRevision' [miEmpresa]="miEmpresa" [msvRevision]="revision" (ready)="ready($event)">
-   </app-edit-revision>
    <app-new-revision *ngIf="formNewRevision" [miEmpresa]="miEmpresa" (ready)="ready($event)"> </app-new-revision>
+   <app-edit-revision *ngIf='formEditRevision' [miEmpresa]="miEmpresa" [msvRevision]="revision" (ready)="ready($event)"></app-edit-revision>
 </div>

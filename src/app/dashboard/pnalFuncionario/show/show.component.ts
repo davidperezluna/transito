@@ -1,5 +1,5 @@
 import { Component, OnInit,Input, Output, EventEmitter } from '@angular/core';
-import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
+import { PnalFuncionarioService } from '../../../services/pnalFuncionario.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 declare var $: any;
@@ -19,7 +19,7 @@ export class ShowComponent implements OnInit {
 
 constructor(
   private _loginService: LoginService,
-  private _FuncionarioService: MpersonalFuncionarioService,
+  private _FuncionarioService: PnalFuncionarioService,
   ){}
 
   ngOnInit() {

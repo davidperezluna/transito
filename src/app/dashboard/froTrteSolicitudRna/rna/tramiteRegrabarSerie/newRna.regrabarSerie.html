@@ -45,16 +45,14 @@
                     <div class="form-group" *ngIf="datos.documentacion">
                         <div class="row">
                             <div class="col-xs-12 col-lg-6">
-                                <label>Motivo
-                                    <span class="text-danger">*</span>
-                                </label>
+                                <label>Motivo <b class="text-danger">*</b></label>
                                 <select class="form-control" name="motivoSelected" [(ngModel)]="motivoSelected" required>
                                     <option *ngFor="let motivo of motivoList" [value]="motivo"> {{motivo}}
                                     </option>
                                 </select>
                             </div>
                             <div class="col-xs-12 col-lg-6">
-                                <label>Nuevo número {{ tipoRegrabacionSelected }}</label>
+                                <label>Nuevo número {{ tipoRegrabacionSelected }} <b class="text-danger">*</b></label>
                                 <input class="form-control" [(ngModel)]="datos.nuevoNumero" name="nuevoNumero" type="text" required />
                             </div>                      
                         </div>

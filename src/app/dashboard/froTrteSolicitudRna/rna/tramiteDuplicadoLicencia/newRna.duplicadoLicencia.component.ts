@@ -157,7 +157,7 @@ export class NewRnaDuplicadoLicenciaComponent implements OnInit {
             response => {
               if (response.code == 200) {
                 let resumen = "Motivo "+ this.datos.motivo;
-
+                
                 this.readyTramite.emit(
                     {
                         'documentacion':this.datos.documentacion, 

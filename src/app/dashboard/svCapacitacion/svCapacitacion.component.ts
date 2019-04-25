@@ -27,6 +27,7 @@ export class SvCapacitacionComponent implements OnInit {
     public table: any;
     public formNew = false;
     public formEdit = false;
+    public formShow = false;
     public formIndex = true;
 
     constructor(
@@ -64,10 +65,21 @@ export class SvCapacitacionComponent implements OnInit {
             this.table.destroy();
         }
     }
+    
+    onShow(capacitacion: any) {
+        this.capacitacion = capacitacion;
+        this.formShow = true;
+        this.formNew = false;
+        this.formIndex = false;
+        if (this.table) {
+            this.table.destroy();
+        }
+    }
 
     ready(isCreado: any) {
         if (isCreado) {
             this.formNew = false;
+            this.formShow = false;
             this.formEdit = false;
             this.formIndex = true;
             this.ngOnInit();
@@ -203,5 +215,37 @@ export class SvCapacitacionComponent implements OnInit {
         this.capacitacion = capacitacion;
         this.formEdit = true;
         this.formIndex = false;
+    }
+
+    onShowByCapacitacion()
+    {
+        let token = this._loginService.getToken();
+        /* this._CapacitacionService.onShowByCapacitacion().subscribe(
+            response => {
+                if (response.status == 'success') {
+                    swal({
+                        title: 'Perfecto!',
+                        text: response.message,
+                        type: 'success',
+                        confirmButtonText: 'Aceptar'
+                    })
+                } else {
+                    swal({
+                        title: 'Error!',
+                        text: response.message,
+                        type: 'error',
+                        confirmButtonText: 'Aceptar'
+                    })
+                }
+                error => {
+                    this.errorMessage = <any>error;
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                    }
+                }
+
+            }
+        ); */
     }
 }

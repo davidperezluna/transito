@@ -38,7 +38,7 @@ export class NewRnaTransformacionComponent implements OnInit {
         'ejesActuales': null,
         'ejesTipoCambio': null,
         'ejesCantidad': 0,
-        'ejesTotal': null,
+        'ejesTotal': 0,
         'decripcionModelo': null,
         'tallerRepotenciacion': null,
         'fechaRepotenciacion': null,
@@ -192,10 +192,10 @@ export class NewRnaTransformacionComponent implements OnInit {
     onCalcularTotal() {   
         if (this.datos.ejesCantidad > 0) {
           if (this.datos.ejesTipoCambio == 1) {
-            this.datos.ejesTotal = this.datos.ejesActuales + this.datos.ejesCantidad;
+            this.datos.ejesTotal = Number(this.datos.ejesActuales) + Number(this.datos.ejesCantidad);
           }else if(this.datos.ejesTipoCambio == 2){
             if (this.datos.ejesCantidad <= this.datos.ejesActuales) {
-                this.datos.ejesTotal = this.datos.ejesActuales - this.datos.ejesCantidad;
+                this.datos.ejesTotal = Number(this.datos.ejesActuales) - Number(this.datos.ejesCantidad);
             }else{
                 swal({
                     title: 'Error!',

@@ -190,7 +190,7 @@ export class NewRnaCambioMotorComponent implements OnInit {
                             let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero +
                                 '<br><b>Motor anterior: </b>' + this.vehiculo.motor.nombre +
                                 '<br><b>Motor nuevo: </b>' + this.datos.numeroMotor;
-        
+
                             this.readyTramite.emit(
                                 {
                                     'documentacion':this.datos.documentacion, 
