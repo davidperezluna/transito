@@ -63,4 +63,11 @@ export class MsvEvaluacionService {
 	getAvalPDF(){
 		return this._http.get(this.url +"/aval/pdf").map(res => res.json());
 	}
+
+	showCalificacionByEvaluacion(datos, token){
+		let json = JSON.stringify(datos);
+		let params = "data=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/show/calificacion/evaluacion", params, { headers: headers }).map(res => res.json());
+	}
 }

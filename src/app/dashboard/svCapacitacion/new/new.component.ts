@@ -83,7 +83,7 @@ export class NewComponent implements OnInit {
         var datePiper = new DatePipe(this.date);
         this.fecha = datePiper.transform(this.date, 'yyyy-MM-dd HH:mm:ss a');
 
-        this.capacitacion = new SvCapacitacion(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+        this.capacitacion = new SvCapacitacion(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 
         this._MunicipioService.select().subscribe(
             response => {
@@ -223,11 +223,22 @@ export class NewComponent implements OnInit {
                         type: 'success',
                         confirmButtonText: 'Aceptar'
                     });
+                    
+                    this.tipoIdentificacionSelected = [0];
                     this.capacitacion.numeroCedulaActorVial = '';
                     this.capacitacion.nombreActorVial = '';
                     this.capacitacion.apellidoActorVial = '';
+                    this.capacitacion.fechaNacimientoActorVial = '';
+                    this.capacitacion.cargoActorVial = '';
+                    this.capacitacion.emailActorVial = '';
+                    this.capacitacion.telefonoActorVial = '';
                     this.generoSelected = [0];
+                    this.grupoEtnicoSelected = [0];
                     this.claseActorViaSelected = [0];
+                    this.capacitacion.discapacidad = 0;
+                    this.capacitacion.victima = 0;
+                    this.capacitacion.comunidad = 0;
+
                 } else {
                     swal({
                         title: 'Error!',

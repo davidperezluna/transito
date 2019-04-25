@@ -3,10 +3,14 @@
     <div class="col-xs-12 col-lg-12">
         <div class="card">
             <div class="card-header">
-                <h5 class="text-uppercase">Detalles Capacitación
+                <h5 class="text-uppercase">Detalles Evaluación
+                    <button (click)="onEnviar()" class="btn btn-success  btn-round " data-target="#themepicker" data-toggle="modal">
+                        <i class="fa fa-plus"></i>
+                        <span class="text">Enviar</span>
+                    </button>
                 </h5>
             </div>
-            <div class="card-body">
+            <!-- <div class="card-body">
                 <div class="form-group row">
                     <div class="col-xs-12 col-lg-12">
                         <div class="col-lg-12 col-md-12">
@@ -25,7 +29,7 @@
                                             <strong>Descripción Actividad: </strong>
                                             <br>{{ capacitacion.descripcionActividad }}
                                         </td>
-        
+
                                         <td>
                                             <strong>Municipio: </strong>
                                             <br>{{ capacitacion.municipio.nombre }}
@@ -44,9 +48,9 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
-        <div class="card" *ngIf="capacitados">
+        <!-- <div class="card" *ngIf="capacitados">
             <div class="card-header">
                 <h5 class="card-title">Datos <small>Capacitados</small>
                 </h5>
@@ -61,15 +65,12 @@
                             <th><b>Nombres</b></th>
                             <th><b>Apellidos</b></th>
                             <th><b>Fecha Nacimiento</b></th>
-                            <th><b>Cargo</b></th>
                             <th><b>Email</b></th>
-                            <th><b>Teléfono/Celular</b></th>
                             <th><b>Género</b></th>
                             <th><b>Grupo Étnico</b></th>
                             <th><b>Clase</b></th>
                             <th><b>Discapacidad</b></th>
                             <th><b>Víctima</b></th>
-                            <th><b>Comunidad LGTBI</b></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -80,9 +81,7 @@
                             <td>{{ capacitado.nombreActorVial }}</td>
                             <td>{{ capacitado.apellidoActorVial }}</td>
                             <td>{{ capacitado.fechaNacimientoActorVial }}</td>
-                            <td>{{ capacitado.cargoActorVial }}</td>
                             <td>{{ capacitado.emailActorVial }}</td>
-                            <td>{{ capacitado.telefonoActorVial }}</td>
                             <td>{{ capacitado.genero.sigla }}</td>
                             <td>{{ capacitado.grupoEtnicoActorVial.nombre }}</td>
                             <td>{{ capacitado.claseActorVial.nombre }}</td>
@@ -93,10 +92,6 @@
                             <td>
                                 <span *ngIf="capacitado.victima">Si</span>
                                 <span *ngIf="!capacitado.victima">No</span>
-                            </td>
-                            <td>
-                                <span *ngIf="capacitado.comunidad">Si</span>
-                                <span *ngIf="!capacitado.comunidad">No</span>
                             </td>
                         </tr>
                     </tbody>
@@ -110,6 +105,6 @@
                     </button>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </div>
