@@ -78,6 +78,13 @@ constructor(
 
   onClose(){
     this.formShow = false;
-    this.formIndex = true;
+    this.formIndex = false;
+
+    this.datos.numeroPlaca =  null;
+    this.datos.numeroVin =  null;
+    this.datos.numeroSerie =  null;
+    this.datos.numeroMotor =  null;
+    this.datos.numeroChasis =  null;
+    this.datos.propietario =  null;
   }
 }

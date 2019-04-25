@@ -80,9 +80,13 @@
                         <i class="fa fa-save"></i>
                         Finalizar
                     </button>
-                    <a *ngIf="factura.estado == 'PENDIENTE DOCUMENTACION'" href="{{ apiUrl }}/{{ factura.id }}/pdf/documentacion" class="btn btn-default" target="_blank">
+                    <a *ngIf="factura && factura.estado == 'PENDIENTE DOCUMENTACION'" href="{{ apiUrl }}/{{ factura.id }}/pdf/documentacion" class="btn btn-default" target="_blank">
                         <i class="fa fa-file-pdf-o"></i>
                         Imprimir observaciones
+                    </a>
+                    <a *ngIf="vehiculo && factura && factura.estado == 'FINALIZADA'" href="{{ apiUrl }}/{{ vehiculo.id }}/TRADICIONAL/pdf/certificadotradicion" class="btn btn-primary" target="_blank">
+                        <i class="fa fa-file-pdf-o"></i>
+                        Imprimir Certificado de tradicion
                     </a>
                 </div>
             </div>
