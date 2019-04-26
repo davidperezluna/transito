@@ -79,24 +79,27 @@
                             <td>{{ capacitado.numeroCedulaActorVial }}</td>
                             <td>{{ capacitado.nombreActorVial }}</td>
                             <td>{{ capacitado.apellidoActorVial }}</td>
-                            <td>{{ capacitado.fechaNacimientoActorVial }}</td>
-                            <td>{{ capacitado.cargoActorVial }}</td>
-                            <td>{{ capacitado.emailActorVial }}</td>
-                            <td>{{ capacitado.telefonoActorVial }}</td>
-                            <td>{{ capacitado.genero.sigla }}</td>
-                            <td>{{ capacitado.grupoEtnicoActorVial.nombre }}</td>
-                            <td>{{ capacitado.claseActorVial.nombre }}</td>
+                            <td>{{ capacitado?.fechaNacimientoActorVial }}</td>
+                            <td>{{ capacitado?.cargoActorVial }}</td>
+                            <td>{{ capacitado?.emailActorVial }}</td>
+                            <td>{{ capacitado?.telefonoActorVial }}</td>
+                            <td>{{ capacitado.genero?.sigla }}</td>
+                            <td>{{ capacitado.grupoEtnicoActorVial?.nombre }}</td>
+                            <td>{{ capacitado.claseActorVial?.nombre }}</td>
                             <td>
                                 <span *ngIf="capacitado.discapacidad">Si</span>
                                 <span *ngIf="!capacitado.discapacidad">No</span>
+                                <span *ngIf="capacitado.discapacidad == NULL">Registra</span>
                             </td>
                             <td>
                                 <span *ngIf="capacitado.victima">Si</span>
                                 <span *ngIf="!capacitado.victima">No</span>
+                                <span *ngIf="capacitado.victima == NULL">Registra</span>
                             </td>
                             <td>
                                 <span *ngIf="capacitado.comunidad">Si</span>
                                 <span *ngIf="!capacitado.comunidad">No</span>
+                                <span *ngIf="capacitado.comunidad == NULL">Registra</span>
                             </td>
                         </tr>
                     </tbody>

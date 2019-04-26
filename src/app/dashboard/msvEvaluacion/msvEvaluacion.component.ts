@@ -509,7 +509,15 @@ export class MsvEvaluacionComponent implements OnInit {
         if (this.categoriaSelected == 2) {
           this.datosComportamiento.parametros = this.msvParametros;
           this.botonEnviarComportamiento = true;
-          this._MsvCalificacionService.register({ 'parametro': this.datosComportamiento.parametros, 'empresa': this.miEmpresa.id, 'revision': this.datos2.idRevision}, token).subscribe(
+          let dataComportamiento = {
+            'parametros': [],
+            'empresa': this.miEmpresa.id,
+            'revision': this.datos2.idRevision
+          };
+
+          dataComportamiento.parametros.push(this.datosComportamiento.parametros);
+
+          this._MsvCalificacionService.register(dataComportamiento, token).subscribe(
             response => {
               if (response.status == 'success') {
                 this.ready2.emit(true);
@@ -563,7 +571,15 @@ export class MsvEvaluacionComponent implements OnInit {
         if (this.categoriaSelected == 3) {
           this.datosVehiculoSeguro.parametros = this.msvParametros;
           this.botonEnviarVehiculoSeguro = true;
-          this._MsvCalificacionService.register({ 'parametro': this.datosComportamiento.parametros, 'empresa': this.miEmpresa.id, 'revision': this.datos2.idRevision }, token).subscribe(
+          let dataVehiculoSeguro = {
+            'parametros': [],
+            'empresa': this.miEmpresa.id,
+            'revision': this.datos2.idRevision
+          };
+
+          dataVehiculoSeguro.parametros.push(this.datosVehiculoSeguro.parametros);
+
+          this._MsvCalificacionService.register(dataVehiculoSeguro, token).subscribe(
             response => {
               if (response.status == 'success') {
                 this.ready2.emit(true);
@@ -618,7 +634,15 @@ export class MsvEvaluacionComponent implements OnInit {
         if (this.categoriaSelected == 4) {
           this.datosInfraestructuraSegura.parametros = this.msvParametros;
           this.botonEnviarInfraestructuraSegura = true;
-          this._MsvCalificacionService.register({ 'parametro': this.datosComportamiento.parametros, 'empresa': this.miEmpresa.id, 'revision': this.datos2.idRevision }, token).subscribe(
+          let dataInfraestructuraSegura = {
+            'parametros': [],
+            'empresa': this.miEmpresa.id,
+            'revision': this.datos2.idRevision
+          };
+
+          dataInfraestructuraSegura.parametros.push(this.datosInfraestructuraSegura.parametros);
+
+          this._MsvCalificacionService.register(dataInfraestructuraSegura, token).subscribe(
             response => {
               if (response.status == 'success') {
                 this.ready2.emit(true);
@@ -673,7 +697,15 @@ export class MsvEvaluacionComponent implements OnInit {
         if (this.categoriaSelected == 5) {
           this.datosAtencionVictimas.parametros = this.msvParametros;
           this.botonEnviarAtencionVictimas = true;
-          this._MsvCalificacionService.register({ 'parametro': this.datosComportamiento.parametros, 'empresa': this.miEmpresa.id, 'revision': this.datos2.idRevision }, token).subscribe(
+          let dataAtencionVictimas = {
+            'parametros': [],
+            'empresa': this.miEmpresa.id,
+            'revision': this.datos2.idRevision
+          };
+
+          dataAtencionVictimas.parametros.push(this.datosAtencionVictimas.parametros);
+
+          this._MsvCalificacionService.register(dataAtencionVictimas, token).subscribe(
             response => {
               if (response.status == 'success') {
                 this.ready2.emit(true);
