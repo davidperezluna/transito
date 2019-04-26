@@ -312,7 +312,7 @@ export class MsvEvaluacionComponent implements OnInit {
           this.empresaEncontrada = true;
           this.miEmpresa = response.data;
 
-          this._RevisionService.show(this.miEmpresa.id, token).subscribe(
+          this._RevisionService.showRevisionByEmpresa({'id': this.miEmpresa.id} , token).subscribe(
             response => {
               if (response.status == 'success') {
                 this.miRevision = true;
