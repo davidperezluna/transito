@@ -61,7 +61,7 @@ export class FroFacTramiteComponent implements OnInit {
   public propietariosVehiculoRetefuente:any=[]; 
   public valorRetefuenteUnitario:any=0;
 
-  public apiUrl = environment.apiUrl + 'financiero';
+  public apiUrl = environment.apiUrl;
 
   constructor(
     private _FuncionarioService: PnalFuncionarioService,
@@ -516,8 +516,8 @@ export class FroFacTramiteComponent implements OnInit {
     this._FacturaService.register(datos, token).subscribe(
       response => {
         if (response.status == 'success') {
-          this.factura.id = response.data.id;
-          this.factura.numero = response.data.numero;
+          this.factura = response.data;
+          //this.factura.numero = response.data.numero;
           this.formNew = false;
 
           swal({
