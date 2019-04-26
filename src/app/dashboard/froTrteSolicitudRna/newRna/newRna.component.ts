@@ -381,7 +381,7 @@ export class NewRnaComponent implements OnInit {
           let tramiteFactura = { 'value': response.data.id, 'label': response.data.precio.nombre };
           this.tramitesFactura = this.tramitesFactura.filter(h => h !== tramiteFactura);
           console.log(this.tramitesFactura);
-          
+          this.tramiteSolicitud.idTramiteFactura = null;
         } else {
           swal({
             title: 'Error!',
