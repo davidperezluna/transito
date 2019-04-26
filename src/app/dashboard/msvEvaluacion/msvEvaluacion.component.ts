@@ -445,7 +445,7 @@ export class MsvEvaluacionComponent implements OnInit {
       if (result.value) {
         if (this.categoriaSelected == 1) {
           this.datosFortalecimiento.parametros = this.msvParametros;
-          /* this.botonEnviarFortalecimiento = true; */
+          this.botonEnviarFortalecimiento = true;
           let dataFortalecimiento = {
             'parametros': [],
             'empresa': this.miEmpresa.id, 
@@ -460,7 +460,7 @@ export class MsvEvaluacionComponent implements OnInit {
                 this.ready2.emit(true);
 
                 //para recargar lista
-                /* this._MsvCategoriaService.editEstadoCategoria({'id':this.categoriaSelected}, token). subscribe(
+                this._MsvCategoriaService.editEstadoCategoria({'id':this.categoriaSelected}, token). subscribe(
                   response => {
                     if (response.status == 'success') {
                       this._MsvCategoriaService.select().subscribe(
@@ -480,7 +480,7 @@ export class MsvEvaluacionComponent implements OnInit {
                       );
                     }
                   }
-                ); */
+                );
 
                 swal({
                   title: 'Perfecto!',
