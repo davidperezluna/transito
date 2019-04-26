@@ -33,7 +33,7 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
     public tramiteSolicitud: any = null;
     public ciudadano: any = null;
     public empresa: any = null;
-    public acreedor: any = null;
+    public acreedoresActuales: any = null;
 
     public identificacionOld: any;
     public identificacionNew: any;
@@ -134,43 +134,28 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
                         );
                     } else {
                         swal({
-                            title: 'Buscando actual prendario!',
+                            title: 'Cargando prendarios actuales!',
                             text: 'Solo tardara unos segundos por favor espere.',
                             onOpen: () => {
                                 swal.showLoading()
                             }
                         });
 
-                        this._PropietarioService.show({ 'id': this.idPropietario }, token).subscribe(
+                        this._AcreedorService.searchByVehiculo({ 'idVehiculo': this.vehiculo.id }, token).subscribe(
                             response => {
                                 if (response.code == 200) {
-                                    this._AcreedorService.searchByPropietario({ 'id': response.data.id }, token).subscribe(
-                                        response => {
-                                            if (response.code == 200) {
-                                                this.acreedor = response.data;
-                                                this.datos.idAcreedor = this.acreedor.id;
-                                                
-                                                swal.close();
-                                            } else {
-                                                this.acreedor = null;
-            
-                                                swal({
-                                                    title: 'Error!',
-                                                    text: response.message,
-                                                    type: 'error',
-                                                    confirmButtonText: 'Aceptar'
-                                                });
-                                            }
-                                            error => {
-                                                this.errorMessage = <any>error;
-            
-                                                if (this.errorMessage != null) {
-                                                    console.log(this.errorMessage);
-                                                    alert("Error en la petición");
-                                                }
-                                            }
-                                        }
-                                    );
+                                    this.acreedoresActuales = response.data;
+
+                                    swal.close();
+                                }else{
+                                    this.acreedoresActuales = null;
+
+                                    swal({
+                                        title: 'Error!',
+                                        text: response.message,
+                                        type: 'error',
+                                        confirmButtonText: 'Aceptar'
+                                    });
                                 }
                             },
                             error => {

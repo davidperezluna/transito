@@ -323,9 +323,33 @@
     <div class="col-xs-12 col-lg-12" *ngIf="factura.id">
         <div class="card"><!-- .card -->
             <div class="card-header">
-                <b class="text-uppercase">Factura # {{ factura.numero }}</b>
+                <b class="text-uppercase">Detalles de factura</b>
             </div>
             <div class="card-body">
+                <table style="border:none;">
+                    <tr>
+                        <td>
+                            <img src="{{ apiUrl }}/img/logo-entidad.png" height="40px" />
+                        </td>
+                        <td>
+                            <img src="{{ apiUrl }}/img/logo-banco.png" height="40px" />
+                        </td>
+                        <td style="text-align:right;">
+                            <span style="border:1px solid #000;text-align:center;background-color: #ccc;padding:5px;font-size:20px">
+                                <b>{{ factura.numero }}</b>
+                            </span>
+                        </td>
+                    </tr>
+                </table>
+                <table style="padding:2px;margin-bottom:10px;border:1px solid #cccccc;width:50%">
+                    <tr>
+                        <td><b>Ciudad:</b><br>  {{ factura.organismoTransito.municipio }}</td> 
+                        <td><b>Fec. Creación:</b><br> {{ factura.fechaCreacion }}</td>
+                        <td><b>Fec. Vencimiento:</b><br> {{ factura.fechaVencimiento }}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="card-footer">
                 <a href="{{ apiUrl }}/froFactura/1/{{ factura.id }}/pdf" class="btn btn-success" target="_blank">
                     <i class="fa fa-file-pdf-o"></i>
                     Generar PDF
