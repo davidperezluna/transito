@@ -31,10 +31,11 @@ export class MsvRevisionService {
 							  .map(res => res.json());
 	}
 
-	show(id, token){
-		let params ="authorization=" + token;
+	show(datos, token){
+		let json = JSON.stringify(datos);
+		let params = "data=" + json + "&authorization=" + token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
-		return this._http.post(this.url+"/"+ id + "/show", params, {headers: headers})
+		return this._http.post(this.url+"/show", params, {headers: headers})
 							  .map(res => res.json());
 	}
 
@@ -57,5 +58,13 @@ export class MsvRevisionService {
 		return this._http.post(this.url + "/get/fecha/devolucion", params, { headers: headers }).map(
 			res => res.json()
 		);
+	}
+
+	showRevisionByEmpresa(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = "data=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/show/revision/empresa", params, { headers: headers })
+			.map(res => res.json());
 	}
 }
