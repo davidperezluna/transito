@@ -2,7 +2,7 @@ import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@
 import { FroTrteSolicitudService } from '../../../../services/froTrteSolicitud.service';
 import { FroFacTramiteService } from '../../../../services/froFacTramite.service';
 import { VhloCfgCombustibleService } from '../../../../services/vhloCfgCombustible.service';
-import { VehiculoService } from '../../../../services/vehiculo.service';
+import { VhloVehiculoService } from '../../../../services/vhloVehiculo.service';
 import { PnalFuncionarioService } from '../../../../services/pnalFuncionario.service';
 import { LoginService } from '../../../../services/login.service';
 
@@ -56,7 +56,7 @@ export class NewRnaCambioGasComponent implements OnInit {
     constructor(
         private _TramiteSolicitudService: FroTrteSolicitudService,
         private _TramiteFacturaService: FroFacTramiteService,
-        private _VehiculoService: VehiculoService,
+        private _VehiculoService: VhloVehiculoService,
         private _CombustibleService: VhloCfgCombustibleService,
         private _FuncionarioService: PnalFuncionarioService,
         private _LoginService: LoginService,
@@ -180,8 +180,8 @@ export class NewRnaCambioGasComponent implements OnInit {
         );
 
         this.datos.campos = ['gas'];
-        this.datos.idTramiteFactura = this.tramiteFactura.id;
         this.datos.idVehiculo = this.vehiculo.id;
+        this.datos.idTramiteFactura = this.tramiteFactura.id;
 
         this._TramiteSolicitudService.validations(this.datos, token).subscribe(
             response => {
