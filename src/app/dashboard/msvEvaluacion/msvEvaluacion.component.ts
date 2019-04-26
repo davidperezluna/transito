@@ -541,7 +541,7 @@ export class MsvEvaluacionComponent implements OnInit {
                   text: response.message,
                   type: 'success',
                   confirmButtonText: 'Aceptar'
-                })
+                });
               } else {
                 swal({
                   title: 'Error!',
