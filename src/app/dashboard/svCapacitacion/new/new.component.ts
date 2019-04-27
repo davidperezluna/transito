@@ -59,10 +59,31 @@ export class NewComponent implements OnInit {
     public generoSelected: any;
     public tipoIdentificacionSelected: any;
     public grupoEtnicoSelected: any;
+    public discapacidadSelected: any;
+    public victimaSelected: any;
+    public comunidadSelected: any;
 
     public capacitados = [];
     public table: any = null;
     public capacitadosEncontrados = false;
+
+    public discapacidades = [
+        { value: '3', label: 'NO REGISTRA' }, 
+        { value: '1', label: 'SI' }, 
+        { value: '0', label: 'NO' }, 
+    ];
+
+    public victimas = [
+        { value: '3', label: 'NO REGISTRA' }, 
+        { value: '1', label: 'SI' }, 
+        { value: '0', label: 'NO' }, 
+    ];
+
+    public comunidades = [
+        { value: '3', label: 'NO REGISTRA' }, 
+        { value: '1', label: 'SI' }, 
+        { value: '0', label: 'NO' }, 
+    ];
 
     constructor(
         private _CapacitacionService: SvCapacitacionService,
@@ -208,6 +229,9 @@ export class NewComponent implements OnInit {
         this.capacitacion.genero = this.generoSelected;
         this.capacitacion.idTipoIdentificacion = this.tipoIdentificacionSelected;
         this.capacitacion.idGrupoEtnico = this.grupoEtnicoSelected;
+        this.capacitacion.discapacidad = this.discapacidadSelected;
+        this.capacitacion.victima = this.victimaSelected;
+        this.capacitacion.comunidad = this.comunidadSelected;
 
         if (this.capacitacionInput.idTipoIdentificacion == 1) {
             this.capacitacion.identificacion = this.ciudadano.identificacion;

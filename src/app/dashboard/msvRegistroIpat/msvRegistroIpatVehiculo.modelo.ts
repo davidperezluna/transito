@@ -3,51 +3,51 @@ export class MsvIpatVehiculo {
     constructor(
         public consecutivo: string,
         //campos vehiculo
-        public portaPlaca: string,
+        public portaPlaca: number,
         public placa: string,
         public placaRemolque: string,
-        public nacionalidadVehiculo: string,
-        public marca: string,
-        public linea: string,
-        public color: string,
-        public modelo: string,
-        public carroceria: string,
-        public ton: string,
-        public pasajeros: string,
+        public nacionalidadVehiculo: number,
+        public marca: number,
+        public linea: number,
+        public color: number,
+        public modelo: number,
+        public carroceria: number,
+        public ton: number,
+        public pasajeros: number,
 
         public empresa: string,
         public nitEmpresa: number,
 
-        public matriculadoEn: string,
+        public matriculadoEn: number,
         public inmovilizado: string,
-        public inmovilizadoEn: string,
-        public aDisposicionDe: string,
-        public portaTarjetaRegistro: string,
-        public tarjetaRegistro: string,
+        public inmovilizadoEn: number,
+        public aDisposicionDe: number,
+        public portaTarjetaRegistro: number,
+        public tarjetaRegistro: number,
         public organismoTransitoTarjetaRegistro: string,
 
         //revision tecnomecanica
-        public revisionTecnomecanica: string,
+        public revisionTecnomecanica: number,
         public numeroTecnoMecanica: number,
         public cantidadAcompaniantes: number,
 
         //soat
-        public portaSoat: string,
+        public portaSoat: number,
         public soat: number,
         public numeroPoliza: number,
-        public aseguradoraSoat: string,
+        public aseguradoraSoat: number,
         public fechaVencimientoSoat: string,
 
         //seguro de responsabilidad civil contractual
-        public portaSeguroResponsabilidadCivil: string,
+        public portaSeguroResponsabilidadCivil: number,
         public numeroSeguroResponsabilidadCivil: number,
-        public idAseguradoraSeguroResponsabilidadCivil: string,
+        public idAseguradoraSeguroResponsabilidadCivil: number,
         public fechaVencimientoSeguroResponsabilidadCivil: string,
 
         //seguro de responsabilidad extracontractual
-        public portaSeguroExtracontractual: string,
+        public portaSeguroExtracontractual: number,
         public numeroSeguroExtracontractual: number,
-        public idAseguradoraSeguroExtracontractual: string,
+        public idAseguradoraSeguroExtracontractual: number,
         public fechaVencimientoSeguroExtracontractual: string,
 
         public clase: number,

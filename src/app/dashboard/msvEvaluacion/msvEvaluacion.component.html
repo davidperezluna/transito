@@ -148,7 +148,10 @@
                                  </td>
                                  <td>
                                     <div class="btn-group">
-                                       <button (click)="onShow(revision)" class="btn btn-light"><i class="fa fa-eye"></i></button>
+                                       <!-- <button (click)="onShow(revision)" class="btn btn-light"><i class="fa fa-eye"></i></button> -->
+                                       <a href="{{ apiUrl }}/{{ revision.id }}/calificacion/pdf" class="btn btn-light" target="_blank">
+                                          <i class="fa fa-eye"></i>
+                                       </a>
                                        <button (click)="editRevision(revision)" class="btn btn-xs btn-primary" type="button"> <i class="fa fa-edit"></i></button>
                                        <button *ngIf="!revision.evaluacion" (click)="iniciarEvaluacion(revision)" class="btn btn-success"><i class="fa fa-plus"></i></button>
                                        <a href="{{ apiUrl }}/{{ idUsuario }}/{{ revision.evaluacion.id }}/aval/pdf" class="btn btn-info" target="_blank" *ngIf="revision.evaluacion">
