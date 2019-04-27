@@ -1278,7 +1278,7 @@ export class NewComponent implements OnInit {
             if (response.data.modelo != null) {
               this.msvIpatVehiculo.modelo = response.data.modelo;
             } else {
-              this.msvIpatVehiculo.modelo = "";
+              this.msvIpatVehiculo.modelo = 0;
             }
             if (response.data.carroceria != null) {
               this.carroceriaSelected = [response.data.carroceria.id];
@@ -1288,7 +1288,7 @@ export class NewComponent implements OnInit {
             if (response.data.numeroPasajeros != null) {
               this.msvIpatVehiculo.pasajeros = response.data.numeroPasajeros;
             } else {
-              this.msvIpatVehiculo.pasajeros = "";
+              this.msvIpatVehiculo.pasajeros = 0;
             }
             if (response.data.municipio != null) {
               this.matriculadoEnSelected = [response.data.municipio.id];
@@ -1327,9 +1327,9 @@ export class NewComponent implements OnInit {
                 this.marcaSelected = [0];
                 this.lineaSelected = [0];
                 this.colorSelected = [0];
-                this.msvIpatVehiculo.modelo = '';
+                this.msvIpatVehiculo.modelo = 0;
                 this.carroceriaSelected = [0];
-                this.msvIpatVehiculo.pasajeros = '';
+                this.msvIpatVehiculo.pasajeros = 0;
                 this.matriculadoEnSelected = [0];
                 this.claseSelected = [0];
                 this.servicioSelected = [0];
@@ -1810,36 +1810,36 @@ export class NewComponent implements OnInit {
                 this.marcaSelected = [0];
                 this.lineaSelected = [0];
                 this.colorSelected = [0];
-                this.msvIpatVehiculo.modelo = '';
+                this.msvIpatVehiculo.modelo = 0;
                 this.carroceriaSelected = [0];
                 this.claseSelected = [0];
                 this.servicioSelected = [0];
                 this.radioAccionSelected = [0];
                 this.modalidadTransporteSelected = [0];
-                this.msvIpatVehiculo.ton = '';
-                this.msvIpatVehiculo.pasajeros = '';
-                this.msvIpatVehiculo.matriculadoEn = '';
+                this.msvIpatVehiculo.ton = 0;
+                this.msvIpatVehiculo.pasajeros = 0;
+                this.msvIpatVehiculo.matriculadoEn = 0;
                 this.msvIpatVehiculo.empresa = '';
                 this.msvIpatVehiculo.nitEmpresa = 0;
                 this.msvIpatVehiculo.inmovilizado = '';
-                this.msvIpatVehiculo.inmovilizadoEn = '';
-                this.msvIpatVehiculo.aDisposicionDe = '';
-                this.msvIpatVehiculo.portaTarjetaRegistro = '';
-                this.msvIpatVehiculo.revisionTecnomecanica = '';
+                this.msvIpatVehiculo.inmovilizadoEn = 0;
+                this.msvIpatVehiculo.aDisposicionDe = 0;
+                this.msvIpatVehiculo.portaTarjetaRegistro = 0;
+                this.msvIpatVehiculo.revisionTecnomecanica = 0;
                 this.msvIpatVehiculo.numeroTecnoMecanica = 0;
                 this.msvIpatVehiculo.cantidadAcompaniantes = 0;
-                this.msvIpatVehiculo.portaSoat = '';
+                this.msvIpatVehiculo.portaSoat = 0;
                 this.msvIpatVehiculo.soat = 0;
                 this.msvIpatVehiculo.numeroPoliza = 0;
-                this.msvIpatVehiculo.aseguradoraSoat = '';
+                this.msvIpatVehiculo.aseguradoraSoat = 0;
                 this.msvIpatVehiculo.fechaVencimientoSoat = '';
-                this.msvIpatVehiculo.portaSeguroResponsabilidadCivil = '';
+                this.msvIpatVehiculo.portaSeguroResponsabilidadCivil = 0;
                 this.msvIpatVehiculo.numeroSeguroResponsabilidadCivil = 0;
-                this.msvIpatVehiculo.idAseguradoraSeguroResponsabilidadCivil = '';
+                this.msvIpatVehiculo.idAseguradoraSeguroResponsabilidadCivil = 0;
                 this.msvIpatVehiculo.fechaVencimientoSeguroResponsabilidadCivil = '';
-                this.msvIpatVehiculo.portaSeguroExtracontractual = '';
+                this.msvIpatVehiculo.portaSeguroExtracontractual = 0;
                 this.msvIpatVehiculo.numeroSeguroExtracontractual = 0;
-                this.msvIpatVehiculo.idAseguradoraSeguroExtracontractual = '';
+                this.msvIpatVehiculo.idAseguradoraSeguroExtracontractual = 0;
                 this.msvIpatVehiculo.fechaVencimientoSeguroExtracontractual = '';
                 this.msvIpatVehiculo.descripcionDanios = '';
                 this.msvIpatVehiculo.arrayFallas = '';
