@@ -12,8 +12,6 @@ import { UserCfgGrupoSanguineoModule } from './userCfgGrupoSanguineo/userCfgGrup
 import { UserCfgMenuModule } from './userCfgMenu/userCfgMenu.module';
 import { UserCfgRoleModule } from './userCfgRole/userCfgRole.module';
 import { UserUsuarioMenuModule } from './userUsuarioMenu/userUsuarioMenu.module';
-import { UserLicenciaConduccionModule } from './userLicenciaConduccion/userLicenciaConduccion.module';
-import { UserLicenciaTransitoModule } from './userLicenciaTransito/userLicenciaTransito.module';
 import { UserCfgGrupoEtnicoModule } from './userCfgGrupoEtnico/userCfgGrupoEtnico.module';
 
 import { HomeModule } from './home/home.module';
@@ -132,7 +130,8 @@ import { InfraccionModule } from './infraccion/infraccion.module';
 import { registroEntregaProductoModule } from './registroEntregaProducto/registroEntregaProducto.module';
 
 import { UserLcCfgCategoriaModule } from './userLcCfgCategoria/userLcCfgCategoria.module';
-import { RncLicenciaConduccionModule } from './rncLicenciaConduccion/rncLicenciaConduccion.module';
+import { UserLicenciaConduccionModule } from './userLicenciaConduccion/userLicenciaConduccion.module';
+import { UserLicenciaTransitoModule } from './userLicenciaTransito/userLicenciaTransito.module';
 
 import { CfgComparendoEstadoModule } from './cfgComparendoEstado/cfgComparendoEstado.module';
 import { CfgAuditoriaModule } from './cfgAuditoria/cfgAuditoria.module';
@@ -304,7 +303,6 @@ import {RightsidebarComponent} from '../shared';
     cfgFestivoModule,
     CfgTipoClaseModule,
     UserLcCfgCategoriaModule,
-    RncLicenciaConduccionModule,
     SvCapacitacionModule,
     SvIpatTalonarioModule,
     SvIpatConsecutivoModule,

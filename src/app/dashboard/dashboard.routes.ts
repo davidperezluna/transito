@@ -115,7 +115,6 @@ import { VehiculoTecnoMecanicaRoutes } from './vehiculoTecnoMecanica/vehiculoTec
 import { SoatRoutes } from './soat/soat.routes';
 import { ComparendoRoutes } from './comparendo/comparendo.routes';
 import { InfraccionRoutes } from './infraccion/infraccion.routes';
-import { RncLicenciaConduccionRoutes } from './rncLicenciaConduccion/rncLicenciaConduccion.routes';
 import { registroEntregaProductoRoutes } from './registroEntregaProducto/registroEntregaProducto.routes';
 
 import { CfgCargoRoutes } from './cfgCargo/cfgCargo.routes';
@@ -320,7 +319,6 @@ export const DashboardRoutes: Route[] = [
       ...CfgAdmFormatoRoutes,
       ...CfgAdmFormatoTipoRoutes,
       ...registroEntregaProductoRoutes,
-      ...RncLicenciaConduccionRoutes,
       ...MsvCaracterizacionRoutes,
       ...MsvEvaluacionRoutes,
       ...MsvCategoriaRoutes,

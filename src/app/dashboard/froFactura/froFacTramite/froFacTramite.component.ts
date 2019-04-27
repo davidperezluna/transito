@@ -364,19 +364,9 @@ export class FroFacTramiteComponent implements OnInit {
         if (response.code == 200) {
           this.tramitePrecio = response.data;
           if (this.modulo.abreviatura == 'RNC') {
-            if (this.tramitesPrecioArray.length < 1) {
               this.onCreateArray();
-            } else {
-              swal({
-                title: 'Error!',
-                text: 'Ya tiene un trámite registrado.',
-                type: 'error',
-                confirmButtonText: 'Aceptar'
-              });
-            }
           } else if (this.modulo.abreviatura == 'RNA' || this.modulo.abreviatura == 'RNMA' || this.modulo.abreviatura == 'RNRS') {
-            //Valida si el tramite seleccionado requiera calcular retefuente
-
+            //Valida si el tramite seleccionado requiere calcular retefuente
             if (this.tramitePrecio.tramite.id == 2 && this.propietarios) {
               if (this.tramitesPrecioArray.length < 1) { 
                 
@@ -388,7 +378,7 @@ export class FroFacTramiteComponent implements OnInit {
                   'cilindraje': this.vehiculo.cilindraje
                 }
 
-                this._VhloValorService.getCfgValorVehiculoVehiculo(datos, token).subscribe(
+                this._VhloValorService.getValorVehiculoVehiculo(datos, token).subscribe(
                   response => {
                     if (response.code == 200) {
                       this.valorRetefuente = parseInt(response.data.valor) * 0.01;

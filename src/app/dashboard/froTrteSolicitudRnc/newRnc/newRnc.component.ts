@@ -36,6 +36,7 @@ export class NewRncComponent implements OnInit {
   public requiereSustrato = false;
   public requiereRunt = false;
   public tramitesRealizados: any = [];
+  public documentacionPendiente: any = [];
 
 constructor(
   private _SolicitudService: FroTrteSolicitudService,
@@ -46,7 +47,7 @@ constructor(
 ){}
 
   ngOnInit() {
-    this.tramiteSolicitud = new FroTrteSolicitudRnc(null, null, null, null);
+    this.tramiteSolicitud = new FroTrteSolicitudRnc(null, null, null, null, null);
   }
 
   onCancelar(){
@@ -234,6 +235,7 @@ constructor(
     let token = this._LoginService.getToken();
 
     this.tramiteSolicitud.tramitesRealizados = this.tramitesRealizados;
+    this.tramiteSolicitud.documentacionPendiente = this.documentacionPendiente;
 
     this._SolicitudService.register(this.tramiteSolicitud, token).subscribe(
 			response => {
@@ -310,15 +312,24 @@ constructor(
   }
   
   onReadyTramite(datos:any){
-    this.tramitesRealizados.push(
-      {
-        'documentacion': datos.documentacion,
-        'observacion': datos.observacion,
-        'foraneas': datos.foraneas,
-        'resumen': datos.resumen,
-        'idTramiteFactura': datos.idTramiteFactura,
-      }
-    );
+    if (datos.documentacion) {
+      this.tramitesRealizados.push(
+        {
+          'foraneas': datos.foraneas,
+          'resumen': datos.resumen,
+          'idTramiteFactura': datos.idTramiteFactura,
+        }
+      );
+    }else{
+      this.documentacionPendiente.push(
+        {
+          'documentacion': datos.documentacion,
+          'observacion': datos.observacion,
+          'idTramiteFactura': datos.idTramiteFactura,
+        }
+      );
+    }
+
     
     console.log(this.tramitesRealizados);
     

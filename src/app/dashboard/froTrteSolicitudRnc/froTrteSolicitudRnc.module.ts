@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FroTrteSolicitudRncComponent } from './froTrteSolicitudRnc.component';
-import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { FroTrteSolicitudService } from '../../services/froTrteSolicitud.service';
 
 import { NewRncSustratoComponent } from './newRncSustrato/newRncSustrato.component';
@@ -12,9 +11,10 @@ import { NewRncExpedicionLicenciaCambioDocumentoComponent } from './rnc/tramiteE
 import { NewRncRecategorizacionLicenciaAbajoComponent } from './rnc/tramiteRecategorizacionLicenciaAbajo/newRncRecategorizacionLicenciaAbajo.component';
 import { NewRncRecategorizacionLicenciaArribaComponent } from './rnc/tramiteRecategorizacionLicenciaArriba/newRncRecategorizacionLicenciaArriba.component';
 import { NewRncRefrendacionLicenciaComponent } from './rnc/tramiteRefrendacionLicencia/newRncRefrendacionLicencia.component';
-
 import { NewRncComponent } from './newRnc/newRnc.component';
 import { EditComponent } from './edit/edit.component';
+
+import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { SelectModule } from 'angular2-select';
 import { TooltipModule } from "ngx-tooltip";
 

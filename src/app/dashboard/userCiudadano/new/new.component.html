@@ -71,7 +71,7 @@
                             </div>
                             <div class="col-xs-12 col-lg-4">
                                 <label>Municipio Nacimiento <b class="text-danger">*</b></label>
-                                <ng-select [multiple]="false" [options]="municipiosNacimiento" [(ngModel)]="ciudadano.idMunicipioNacimiento" required name="idMunicipioNacimiento">
+                                <ng-select (ngModelChange)="onChangedMunicipioNacimiento($event)" [multiple]="false" [options]="municipiosNacimiento" [(ngModel)]="ciudadano.idMunicipioNacimiento" required name="idMunicipioNacimiento">
                                 </ng-select>
                             </div>
                             <div class="col-xs-12 col-lg-4">
@@ -90,8 +90,8 @@
                                 </ng-select>
                             </div>
                             <div class="col-xs-12 col-lg-6">
-                                <label>Telefono celular <b class="text-danger">*</b></label>
-                                <input class="form-control" [(ngModel)]="ciudadano.telefonoCelular" name="telefonoCelular" type="number" required>
+                                <label>Telefono celular</label>
+                                <input class="form-control" [(ngModel)]="ciudadano.telefonoCelular" name="telefonoCelular" type="number">
                             </div>
                             <div class="col-xs-12 col-lg-6">
                                 <label>Telefono fijo</label>
@@ -99,7 +99,7 @@
                             </div>
                             <div class="col-xs-12 col-lg-6">
                                 <label>Direccion Residencia <b class="text-danger">*</b></label>
-                                <input class="form-control" [(ngModel)]="ciudadano.direccionPersonal" name="direccionPersonal" type="text" required>
+                                <input class="form-control" [(ngModel)]="ciudadano.direccionPersonal" name="direccionPersonal" type="text">
                             </div>
                             <div class="col-xs-12 col-lg-6">
                                 <label>Direccion Trabajo</label>
