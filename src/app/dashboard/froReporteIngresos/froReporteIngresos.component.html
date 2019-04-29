@@ -9,9 +9,9 @@
                     </ng-select>
                 </div>
                 <div class="col-xs-12 col-lg-4" *ngIf="tipoRecaudoSelected == 1 || tipoRecaudoSelected == 3">
-                    <label>Seleccionar sede operativa</label>
-                    <ng-select [multiple]="false" [options]="sedes" [(ngModel)]="sedeOperativaSelected" required
-                        name="idSedeOperativa">
+                    <label>Seleccionar OrganismoTransito</label>
+                    <ng-select [multiple]="false" [options]="organismosTransito" [(ngModel)]="organismoTransitoSelected" required
+                        name="idOrganismoTransito">
                     </ng-select>
                 </div>
                 <div class="col-xs-12 col-lg-4" *ngIf="tipoRecaudoSelected == 3">
@@ -29,13 +29,13 @@
                     <input class="form-control" type="date" [(ngModel)]="froReporteIngresos.fechaHasta" name="fechaHasta" required>
                 </div>
             </div>
-        </div>
-        <div class="card-footer">
-            <div class="btn-group">
-                <button (click)="onEnviar()" class="btn btn-primary" type="button">
-                    <i class="fa fa-save"></i>
-                    Enviar
-                </button>
+            <div class="card-footer">
+                <div class="btn-group">
+                    <button (click)="onEnviar()" class="btn btn-primary" type="button">
+                        <i class="fa fa-save"></i>
+                        Enviar
+                    </button>
+                </div>
             </div>
         </div>
     </div>

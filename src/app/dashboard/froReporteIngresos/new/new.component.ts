@@ -15,11 +15,11 @@ export class NewComponent implements OnInit {
     public froReporteIngresos: FroReporteIngresos;
     public errorMessage;
     public organismosTransito: any;
-    public sedeOperativaSelected: any;
+    public organismoTransitoSelected: any;
 
     constructor(
         private _FroReporteIngresosService: FroReporteIngresosService,
-        private _loginService: LoginService,
+        private _LoginService: LoginService,
         private _OrganismoTransitoService: CfgOrganismoTransitoService,
         private _FroFacturaServiceService: FroFacturaService,
     ) { }

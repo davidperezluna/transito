@@ -1,4 +1,4 @@
-export class MsvExportIpat {
+export class SvIpatExport {
     constructor(
         public documento: string,
         public arrayGravedadAccidente: number,

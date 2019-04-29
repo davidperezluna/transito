@@ -38,10 +38,11 @@ export class FroReporteIngresosService {
         );
     }
 
-    show(token, id) {
-        let params = "authorization=" + token;
+    show(datos, token) {
+        let json = JSON.stringify(datos);
+        let params = "data=" + json + "&authorization=" + token;
         let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-        return this._http.post(this.url + "/" + id + "/show", params, { headers: headers })
+        return this._http.post(this.url + "/show", params, { headers: headers })
             .map(res => res.json());
     }
 
@@ -57,5 +58,42 @@ export class FroReporteIngresosService {
 
     select() {
         return this._http.get(this.url + "/select").map(res => res.json());
+    }
+
+    getTramitePorFecha(datos, token) {
+        let json = JSON.stringify(datos);
+        let params = "data=" + json + "&authorization=" + token;
+        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+        return this._http.post(this.url + "/tramite/fecha", params, { headers: headers }).map(
+            res => res.json(),
+        );
+    }
+
+    getComparendoByFecha(datos, token) {
+        let json = JSON.stringify(datos);
+        let params = "data=" + json + "&authorization=" + token;
+        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+        return this._http.post(this.url + "/comparendo/fecha", params, { headers: headers }).map(res => res.json());
+    }
+
+    getAcuerdoPagoByFecha(datos, token) {
+        let json = JSON.stringify(datos);
+        let params = "data=" + json + "&authorization=" + token;
+        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+        return this._http.post(this.url + "/acuerdoPago/fecha", params, { headers: headers }).map(res => res.json());
+    }
+
+    getParqueaderoByFecha(datos, token) {
+        let json = JSON.stringify(datos);
+        let params = "data=" + json + "&authorization=" + token;
+        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+        return this._http.post(this.url + "/parqueadero/fecha", params, { headers: headers }).map(res => res.json());
+    }
+
+    getRetefuenteByFecha(datos, token) {
+        let json = JSON.stringify(datos);
+        let params = "data=" + json + "&authorization=" + token;
+        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+        return this._http.post(this.url + "/retefuente/fecha", params, { headers: headers }).map(res => res.json());
     }
 }

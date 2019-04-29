@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { LoginService } from '../../../services/login.service';
-import { MsvRegistroIpatService } from '../../../services/msvRegistroIpat.service';
-import { MsvExportIpat } from '../msvExportIpat.modelo';
+import { SvIpatService } from '../../../services/svIpat.service';
+import { SvIpatExport } from '../svIpatExport.modelo';
 
 import { SvCfgGravedadAccidenteService } from '../../../services/svCfgGravedadAccidente.service';
 import { SvCfgTipoVictimaService } from '../../../services/svCfgTipoVictima.service';
@@ -12,7 +12,6 @@ import { SvCfgClaseChoqueService } from '../../../services/svCfgClaseChoque.serv
 import { SvCfgObjetoFijoService } from '../../../services/svCfgObjetoFijo.service';
 import { UserCfgGeneroService } from '../../../services/userCfgGenero.service';
 import { DatePipe } from '@angular/common';
-
 
 import swal from 'sweetalert2';
 import { Utils } from 'ng2-bootstrap';
@@ -39,7 +38,7 @@ export class ExportComponent implements OnInit {
     public date: any;
     public fecha: any;
     
-    public exportIpat: MsvExportIpat;
+    public exportIpat: SvIpatExport;
 
     public ipats: any;
     public gravedades: any;
@@ -89,7 +88,7 @@ export class ExportComponent implements OnInit {
     public victimasApellidosArray : any;
 
     constructor(
-        private _IpatService: MsvRegistroIpatService,
+        private _IpatService: SvIpatService,
         private _LoginService: LoginService,
         private _GravedadService: SvCfgGravedadAccidenteService,
         private _TipoVictimaService: SvCfgTipoVictimaService,
@@ -102,7 +101,7 @@ export class ExportComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.exportIpat = new MsvExportIpat(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+        this.exportIpat = new SvIpatExport(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
         
         this._GravedadService.select().subscribe(
             response => {
@@ -298,9 +297,6 @@ export class ExportComponent implements OnInit {
                 }
             }
         }
-
-        console.log(files);
-        console.log(this.txt);
 
         this._IpatService.cargarIpats({ "file": this.txt}, token).subscribe(
             response => {

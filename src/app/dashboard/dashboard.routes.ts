@@ -32,6 +32,7 @@ import { CvCfgInteresRoutes } from './cvCfgInteres/cvCfgInteres.routes';
 import { CvCfgPorcentajeInicialRoutes } from './cvCfgPorcentajeInicial/cvCfgPorcentajeInicial.routes';
 import { CvLcCfgMotivoRoutes } from './cvLcCfgMotivo/cvLcCfgMotivo.routes';
 
+import { SvIpatRoutes } from './svIpat/svIpat.routes';
 import { SvCfgSenialUnidadMedidaRoutes } from './svCfgSenialUnidadMedida/svCfgSenialUnidadMedida.routes';
 import { SvCfgSenialTipoRoutes } from './svCfgSenialTipo/svCfgSenialTipo.routes';
 import { SvCfgSenialColorRoutes } from './svCfgSenialColor/svCfgSenialColor.routes';
@@ -60,6 +61,7 @@ import { SvCfgEstadoViaRoutes } from './svCfgEstadoVia/svCfgEstadoVia.routes';
 import { SvCfgFallaRoutes } from './svCfgFalla/svCfgFalla.routes';
 import { SvCfgGeometriaRoutes } from './svCfgGeometria/svCfgGeometria.routes';
 import { SvCfgGradoExamenRoutes } from './svCfgGradoExamen/svCfgGradoExamen.routes';
+import { SvCfgGravedadAccidenteRoutes } from './svCfgGravedadAccidente/svCfgGravedadAccidente.routes';
 import { SvCfgGravedadVictimaRoutes } from './svCfgGravedadVictima/svCfgGravedadVictima.routes';
 import { SvCfgHipotesisRoutes } from './svCfgHipotesis/svCfgHipotesis.routes';
 import { SvCfgHospitalRoutes } from './svCfgHospital/svCfgHospital.routes';
@@ -134,7 +136,6 @@ import { ConceptoParametroRoutes } from './conceptoParametro/conceptoParametro.r
 import { TpAlcaldiaRoutes } from './tpAlcaldia/tpAlcaldia.routes';
 import { RpcccInventarioDocumentalRoutes } from './rpcccInventarioDocumental/rpcccInventarioDocumental.routes';
 import { RnrsPreasignacionPlacaRoutes } from './rnrsPreasignacionPlaca/rnrsPreasignacionPlaca.routes';
-import { SvCfgGravedadAccidenteRoutes } from './svCfgGravedadAccidente/svCfgGravedadAccidente.routes';
 import { RnaPreregistroRoutes } from './rnaPreregistro/rnaPreregistro.routes';
 
 // import { SucursalRoutes } from './empresa/sucursal/sucursal.routes';
@@ -150,7 +151,6 @@ import { SvIpatImpresoMunicipioRoutes } from './svIpatImpresoMunicipio/svIpatImp
 import { rnaRegistroInsumosRoutes } from './rnaRegistroInsumos/rnaRegistroInsumos.routes';
 //import { RnaPreasignacionInsumoRoutes } from './rnaPreasignacionInsumo/rnaPreasignacionInsumo.routes';
 import { RnmaPreregistroRoutes } from './rnmaPreregistro/rnmaPreregistro.routes'; 
-import { MsvRegistroIpatRoutes } from './msvRegistroIpat/msvRegistroIpat.routes';
 import { TramiteInscripcionLimitacionRoutes } from './rnmaTramiteInscripcionLimitacion/rnmaTramiteInscripcionLimitacion.routes';
 import { TramiteLevantamientoLimitacionRoutes } from './rnmaTramiteLevantamientoLimitacion/rnmaTramiteLevantamientoLimitacion.routes';
 import { RnrsTramiteInscripcionLimitacionRoutes } from './rnrsTramiteInscripcionLimitacion/rnrsTramiteInscripcionLimitacion.routes';
@@ -435,7 +435,7 @@ export const DashboardRoutes: Route[] = [
       ...SvIpatImpresoMunicipioRoutes,
       ...ConceptoParametroRoutes,
       ...RnmaPreregistroRoutes,
-      ...MsvRegistroIpatRoutes,
+      ...SvIpatRoutes,
       ...TramiteInscripcionLimitacionRoutes,
       ...TramiteLevantamientoLimitacionRoutes,
       ...RnrsTramiteInscripcionLimitacionRoutes,

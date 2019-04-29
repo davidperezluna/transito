@@ -1,4 +1,4 @@
-export class MsvIpatConductor {
+export class SvIpatConductor {
     constructor(
         public consecutivo: string,
 

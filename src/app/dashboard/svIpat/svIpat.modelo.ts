@@ -1,4 +1,4 @@
-export class MsvRegistroIpat{
+export class SvIpat{
 	constructor(
 		public idOrganismoTransito:number,
 		public numeroConsecutivo:string,
