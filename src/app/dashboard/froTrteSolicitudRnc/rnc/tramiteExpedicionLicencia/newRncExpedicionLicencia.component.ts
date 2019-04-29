@@ -6,9 +6,7 @@ import { PnalFuncionarioService } from '../../../../services/pnalFuncionario.ser
 import { UserLcCfgCategoriaService } from '../../../../services/userLcCfgCategoria.service';
 import { CfgPaisService } from '../../../../services/cfgPais.service';
 import { VhloCfgServicioService } from '../../../../services/vhloCfgServicio.service';
-import { RncLicenciaConduccionService } from '../../../../services/rncLicenciaConduccion.service';
 import { LoginService } from '../../../../services/login.service';
-
 import swal from 'sweetalert2';
 
 @Component({
@@ -52,7 +50,6 @@ export class NewRncExpedicionLicenciaComponent implements OnInit {
         private _CfgPaisService: CfgPaisService,
         private _ServicioService: VhloCfgServicioService,
         private _CfgLicenciaConduccionCategoriaService: UserLcCfgCategoriaService,
-        private _LicenciaConduccionService: RncLicenciaConduccionService,
         private _LoginService: LoginService,
     ) { }
 
@@ -223,7 +220,6 @@ export class NewRncExpedicionLicenciaComponent implements OnInit {
                 }
             ); 
         }
-
     }
 
     onEnviar() {
@@ -234,34 +230,15 @@ export class NewRncExpedicionLicenciaComponent implements OnInit {
         this.datos.idTramiteFactura = this.tramiteFactura.id;
         this.datos.idSolicitante = this.solicitante.id;
 
-        this._LicenciaConduccionService.register(this.datos, token).subscribe(
-            response => {
-                if (response.code == 200) {
-                    let resumen = "<b>No. factura</b>" + this.tramiteFactura.factura.numero;
+        let resumen = "<b>No. factura</b>" + this.tramiteFactura.factura.numero;
 
-                    this.onReadyTramite.emit(
-                        {
-                            'documentacion':this.datos.documentacion, 
-                            'observacion':this.datos.observacion, 
-                            'foraneas':this.datos,
-                            'resumen':resumen,
-                            'idTramiteFactura': this.tramiteFactura.id,
-                        }
-                    );
-                } else {
-                    swal({
-                        type: 'warning',
-                        title: 'Alerta!',
-                        text: "No se registro el trámite."
-                    });
-                }
-                error => {
-                    this.errorMessage = <any>error;
-                    if (this.errorMessage != null) {
-                        console.log(this.errorMessage);
-                        alert('Error en la petición');
-                    }
-                }
+        this.onReadyTramite.emit(
+            {
+                'documentacion':this.datos.documentacion, 
+                'observacion':this.datos.observacion, 
+                'foraneas':this.datos,
+                'resumen':resumen,
+                'idTramiteFactura': this.tramiteFactura.id,
             }
         );
     }

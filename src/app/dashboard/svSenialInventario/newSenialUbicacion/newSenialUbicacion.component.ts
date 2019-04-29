@@ -399,7 +399,6 @@ export class NewSenialUbicacionComponent implements OnInit {
 
     mapClicked($event: MouseEvent) {
         if (this.senialUbicacion.cantidad > 0) {
-            var address;
             if (this.markers.length < this.senialUbicacion.cantidad) {
                 this._SvSenialUbicacionService.getAddress($event.coords).subscribe(
                     result => {
@@ -410,7 +409,7 @@ export class NewSenialUbicacionComponent implements OnInit {
                                 lat: $event.coords.lat,
                                 lng: $event.coords.lng,
                                 draggable: true,
-                                label: result
+                                label: result + "<br>(" + this.senial.tipoSenial.nombre + ")" + "<br>(" + this.senial.nombre + ")"
                             });
                         });
                     },
