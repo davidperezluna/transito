@@ -47,6 +47,13 @@ export class SvSenialUbicacionService extends GoogleMapsAPIWrapper {
 		return this._http.post(this.url + "/search/destino", params, { headers: headers }).map(res => res.json());
 	}
 
+	searchByFechasAndMunicipio(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = "data=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/search/fechas/municipio", params, { headers: headers }).map(res => res.json());
+	}
+
 	export() {
 		window.location.href = this.url + "/export";
 	}

@@ -5,7 +5,6 @@ import { CfgMunicipioService } from '../../services/cfgMunicipio.service';
 import { SvCfgSenialTipoService } from '../../services/svCfgSenialTipo.service';
 import { LoginService } from '../../services/login.service';
 
-
 import swal from 'sweetalert2';
 declare var $: any;
 
@@ -49,11 +48,11 @@ export class SvSenialInventarioComponent implements OnInit {
     };
     
     constructor(
-        private _LoginService: LoginService,
         private _SenialInventarioService: SvSenialInventarioService,
         private _BodegaService : CfgBodegaService,
         private _MunicipioService : CfgMunicipioService,
         private _TipoSenialService: SvCfgSenialTipoService,
+        private _LoginService: LoginService,
     ) { }
 
     ngOnInit() {

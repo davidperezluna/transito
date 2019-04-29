@@ -1,4 +1,4 @@
-<div class="row" *ngIf="tramiteFactura.realizado && autorizado">
+<div class="row" *ngIf="tramiteFactura && tramiteFactura.realizado && autorizado">
     <!-- .row -->
     <div class="col-xs-12 col-lg-12">
         <!-- .col -->
@@ -13,14 +13,14 @@
     </div>
 </div>
 
-<div class="row" *ngIf="!tramiteFactura.realizado && autorizado">
+<div class="row" *ngIf="tramiteFactura && !tramiteFactura.realizado && autorizado">
     <!-- .row -->
     <div class="col-xs-12 col-lg-12">
         <!-- .col -->
         <div class="card">
             <div class="card-header">
                 <b class="text-uppercase">
-                    Expedicion de licencia
+                    Expedición de licencia
                 </b>
                 <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
             </div>

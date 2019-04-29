@@ -70,7 +70,7 @@
                 </div>
             </div>
             <div class="card-footer">
-                <div class="form-group" *ngIf="tramiteSolicitud.documentacionPendiente.length > 0">
+                <div class="form-group" *ngIf="documentacionPendiente.length > 0">
                     <div class="row">
                         <div class="col-xs-12 col-lg-12">
                             <div class="form-group">
@@ -81,7 +81,7 @@
                                                 <i class="fa fa-save"></i>
                                                 Guardar observaciones
                                             </button>
-                                            <a *ngIf="tramiteSolicitud.documentacionPendiente.length > 0" href="{{ apiUrl }}/{{ factura.id }}/pdf/documentacion" class="btn btn-default" target="_blank">
+                                            <a *ngIf="factura && factura.estado == 'PENDIENTE DOCUMENTACION'" href="{{ apiUrl }}/{{ factura.id }}/pdf/documentacion" class="btn btn-default" target="_blank">
                                                 <i class="fa fa-file-pdf-o"></i>
                                                 Imprimir observaciones
                                             </a>
@@ -93,7 +93,7 @@
                     </div>
                 </div>
 
-                <div class="form-group" *ngIf="tramiteSolicitud.documentacionPendiente.length == 0">
+                <div class="form-group" *ngIf="tramitesFactura && tramitesRealizados.length == tramitesFactura.length && documentacionPendiente.length == 0">
                     <div class="row">
                         <div class="col-xs-12 col-lg-12">
                             <div class="form-group">
@@ -104,9 +104,9 @@
                                     </div>
                                 </div>
 
-                                <div class="row">
+                                <div class="row" *ngIf="factura && factura.estado == 'FINALIZADA'">
                                     <div class="col-xs-12 col-lg-12">
-                                        <button (click)="onEnviar()" class="btn btn-success" [disabled]="tramitesFactura && (tramitesFactura.length == tramitesRealizados.length)">
+                                        <button (click)="onEnviar()" class="btn btn-success">
                                             <i class="fa fa-save"></i>
                                             Guardar información
                                         </button>

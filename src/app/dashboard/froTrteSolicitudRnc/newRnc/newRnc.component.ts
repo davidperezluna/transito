@@ -6,8 +6,8 @@ import { FroFacturaService } from '../../../services/froFactura.service';
 import { UserCiudadanoService } from '../../../services/userCiudadano.service';
 import { LoginService } from '../../../services/login.service';
 import { environment } from 'environments/environment';
-import swal from 'sweetalert2';
 import { forEach } from '@angular/router/src/utils/collection';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-new',
@@ -240,6 +240,8 @@ constructor(
     this._SolicitudService.register(this.tramiteSolicitud, token).subscribe(
 			response => {
         if(response.code == 200){
+          this.factura = response.data.factura;
+          
           swal({
             title: 'Perfecto!',
             text: response.message,
@@ -247,7 +249,7 @@ constructor(
             confirmButtonText: 'Aceptar'
           });
         }else if(response.code == 401){
-          this.factura = response.data;
+          this.factura = response.data.factura;
           
           swal({
             title: 'Atención!',
