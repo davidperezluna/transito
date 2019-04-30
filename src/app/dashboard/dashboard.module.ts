@@ -179,7 +179,7 @@ import { RnmaTramiteInscripcionLimitacionModule } from './rnmaTramiteInscripcion
 import { RnmaTramiteLevantamientoLimitacionModule } from './rnmaTramiteLevantamientoLimitacion/rnmaTramiteLevantamientoLimitacion.module';
 import { RnrsTramiteInscripcionLimitacionModule } from './rnrsTramiteInscripcionLimitacion/rnrsTramiteInscripcionLimitacion.module';
 import { RnrsTramiteLevantamientoLimitacionModule } from './rnrsTramiteLevantamientoLimitacion/rnrsTramiteLevantamientoLimitacion.module';
-import { MsvRegistroIpatModule } from './msvRegistroIpat/msvRegistroIpat.module';
+import { SvIpatModule } from './svIpat/svIpat.module';
 
 import { CfgOrganismoTransitoModule } from './cfgOrganismoTransito/cfgOrganismoTransito.module';
 import { CfgTipoProcesoModule } from './vhloCfgLimitacionTipoProceso/vhloCfgLimitacionTipoProceso.module';
@@ -452,7 +452,7 @@ import {RightsidebarComponent} from '../shared';
     RnmaTramiteLevantamientoLimitacionModule,
     RnrsTramiteInscripcionLimitacionModule,
     RnrsTramiteLevantamientoLimitacionModule,
-    MsvRegistroIpatModule,
+    SvIpatModule,
     CfgValorVehiculoModule,
     RnrsPreregistroModule,
     ReporteModule,

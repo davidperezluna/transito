@@ -4,7 +4,7 @@ import { environment } from 'environments/environment';
 import  'rxjs/add/operator/map';
 
 @Injectable()
-export class MsvRegistroIpatService {
+export class SvIpatService {
 	private url = environment.apiUrl + "seguridadvial/svregistroipat";
 	public identity;
 	public token;

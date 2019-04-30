@@ -1,5 +1,5 @@
 
-export class MsvIpatVehiculo {
+export class SvIpatVehiculo {
     constructor(
         public consecutivo: string,
         //campos vehiculo

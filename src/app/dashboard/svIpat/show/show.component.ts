@@ -18,13 +18,13 @@ export class ShowComponent implements OnInit {
 
 
     constructor(
-        private _loginService: LoginService,
+        private _LoginService: LoginService,
         private _ConsecutivoService: SvIpatConsecutivoService,
     ) { }
 
     ngOnInit() {
-        let token = this._loginService.getToken();
-        let identity = this._loginService.getIdentity();
+        let token = this._LoginService.getToken();
+        let identity = this._LoginService.getIdentity();
         let datos = {
             'identificacionUsuario': identity.identificacion,
         };
@@ -32,7 +32,7 @@ export class ShowComponent implements OnInit {
             response => {
                 this.consecutivos = response.data;
                 let timeoutId = setTimeout(() => {
-                    this.iniciarTabla();
+                    this.onInitTable();
                 }, 100);
             },
             error => {
@@ -46,21 +46,20 @@ export class ShowComponent implements OnInit {
         );
     }
 
-    iniciarTabla() {
-        $('#dataTables-example').DataTable({
+    onInitTable() {
+        this.table = $('#dataTables-example').DataTable({
             responsive: true,
             pageLength: 8,
             sPaginationType: 'full_numbers',
             oLanguage: {
                 oPaginate: {
-                    sFirst: '<<',
-                    sPrevious: '<',
-                    sNext: '>',
-                    sLast: '>>'
+                    sFirst: '<i class="fa fa-step-backward"></i>',
+                    sPrevious: '<i class="fa fa-chevron-left"></i>',
+                    sNext: '<i class="fa fa-chevron-right"></i>',
+                    sLast: '<i class="fa fa-step-forward"></i>'
                 }
             }
         });
-        this.table = $('#dataTables-example').DataTable();
     }
 
     onCancelar() {
