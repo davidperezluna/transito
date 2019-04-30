@@ -1,137 +1,65 @@
 <div class="card">
     <div class="card-header">
         <h5>
-            <b class="text-uppercase">Inventario</b> 
-            <small *ngIf="inventario.municipio">{{ inventario.municipio.nombre }}</small>
+            <b class="text-uppercase">Georeferenciación</b> 
+            <small>Mapa general</small>
         </h5>
     </div>
     <div class="card-body">
-        <div class="row" *ngIf="inventarios && formIndex"><!-- .row -->
-            <div class="col-xs-12 col-lg-12"><!-- .col -->
-                <table class="table table-bordered table-striped table-hover" id="dataTables-example">
-                    <thead>
-                        <tr style="text-align: center;">
-                            <th>#</th>
-                            <th>Señal</th>
-                            <th>Detalles</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="odd" style="text-align: center;" *ngFor="let inventario of inventarios; let i = index">
-                            <td>{{ i + 1}}</td>
-                            <td>
-                                {{ inventario.senial.codigo }} - {{ inventario.senial.nombre }}
-                                <br>
-                                {{ inventario.senial.tipoSenial.nombre }}
-                                <div *ngIf="inventario.logo">
-                                    <img height="30px" src="{{ uploadUrl }}seniales/logos/{{ inventario.senial.logo }}" name="logo">
+        <div class="row"><!-- .row -->
+            <div class="col-xs-12 col-lg-3" *ngIf="formSearch"><!-- .col -->
+                <form #formSearch="ngForm">
+                    <div class="form-group">
+                        <div class="row"><!-- .row -->
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Fecha inicial:</label>
+                                <input type="date" class="form-control" [(ngModel)]="filtros.fechaInicial" name="fechaInicial" required />
+                            </div>
+                                        
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Fecha final:</label><br>
+                                <input type="date" class="form-control" [(ngModel)]="filtros.fechaFinal" name="fechaFinal" required />
+                            </div>
+
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Municipio:</label>
+                                <ng-select (ngModelChange)="onChangedMunicipio($event)" [multiple]="false" [options]="municipios" [(ngModel)]="filtros.idMunicipio" name="idMunicipio" required>
+                                </ng-select>
+                            </div>
+                            
+                            <!--
+                                <div class="col-xs-12 col-lg-12">
+                                    <label>Tipo de señal:</label><br>
+                                    <ng-select [multiple]="false" [options]="tiposSenial" [(ngModel)]="filtros.idTipoSenial" name="idTipoSenial" required>
+                                    </ng-select>
                                 </div>
-                                <div *ngIf="inventario.proveedorNombre">
-                                    <br>
-                                    <b>{{ inventario.proveedorNombre }}</b>
-                                </div>
-                            </td>
-                            <td>
-                                <b>Disponibles:</b> {{ inventario.senial.cantidad }}
-                                <br>
-                                <span *ngIf='inventario.municipio'><b>Instalados:</b> {{ inventario.cantidad }}</span>
-                                <span *ngIf='!inventario.municipio'><b>Entregado por proveedor:</b> {{ inventario.cantidad }}</span>
-                            </td>
-                            <td>
+                            -->
+
+                            <div class="col-xs-12 col-lg-12">
                                 <div class="btn-group">
-                                    <!--
-                                        <button (click)='onRecord(inventario)' (ready)="ready($event)" class="btn btn-info"
-                                            type="button">
-                                            <i class="fa fa-list"></i>
-                                        </button>
-                                    -->
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                                    <button (click)="onSearch()" [disabled]="formSearch.invalid" class="btn btn-primary" type="button">
+                                      <i class="fa fa-search"></i>
+                                      Buscar
+                                    </button>
+                                  </div>
+                            </div>
+                        </div><!-- /.row -->
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-xs-12 col-lg-9" *ngIf="formGeo"><!-- .col -->
+                <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [disableDefaultUI]="false" [zoomControl]="false" [usePanning] = "true">
+                            
+                    <agm-marker *ngFor="let marker of markers; let i = index" [latitude]="marker.lat" [longitude]="marker.lng" [markerDraggable]="false">                            
+                    
+                        <agm-info-window>
+                            <strong>{{ marker.label }}</strong>
+                        </agm-info-window>
+                    </agm-marker>
+                
+                </agm-map>
             </div><!-- /.col -->
         </div><!-- /.row -->
-
-        <div class="row" *ngIf="formRecord"><!-- .row -->
-            <div class="col-xs-12 col-lg-12">
-                <!-- .col -->
-                <table class="table table-bordered table-striped table-hovers" id="dataTables-example">
-                    <thead>
-                        <tr style="text-align: center;">
-                            <th>#</th>
-                            <th>Registro</th>
-                            <th>Señal</th>
-                            <th>Detalles</th>
-                            <th *ngIf="inventario.geolocalizacion">Georeferenciación</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="odd" style="text-align: center;" *ngFor="let inventario of inventarios; let i = index">
-                            <td>{{ i + 1}}</td>
-                            <td>
-                                <b>
-                                    <i class="fa fa-calendar"></i>
-                                </b> {{ inventario.fecha }}
-                                <br>
-                                <b>
-                                    <i class="fa fa-clock-o"></i>
-                                </b> {{ inventario.hora }}
-                                <div *ngIf="inventario.proveedor">
-                                    <br>
-                                    <b>{{ inventario.proveedor.nombre }}</b>
-                                </div>
-                            </td>
-                            <td>
-                                {{ inventario.senial.codigo }} - {{ inventario.senial.nombre }}
-                                <br> {{ inventario.senial.tipoSenial.nombre }}
-                                <div *ngIf="inventario.senial.logo">
-                                    <img height="30px" src="{{ uploadUrl }}seniales/logos/{{ inventario.senial.logo }}" name="logo">
-                                </div>
-                                <div *ngIf="inventario.proveedor">
-                                    <br>
-                                    <b>{{ inventario.proveedor.nombre }}</b>
-                                </div>
-                            </td>
-                            <td>
-                                <b>Disponibles:</b> {{ inventario.senial.cantidad }}
-                                <br>
-                                <span *ngIf='inventario.municipio'><b>Instalados:</b> {{ inventario.cantidad }}</span>
-                                <span *ngIf='!inventario.municipio'><b>Entregado por proveedor:</b> {{ inventario.cantidad }}</span>
-                                <br>
-                                <b>Estado:</b> {{ inventario.estado.nombre }}
-                            </td>
-                            <td *ngIf="inventario.geolocalizacion">
-                                <!--
-                                    <button (click)='onGeo(inventario)' (ready)="ready($event)" class="btn btn-primary" type="button">
-                                        <i class="fa fa-eye"></i>
-                                    </button>
-                                -->
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <!-- /.col -->
-        </div><!-- /.row -->
-
-        <div class="row" *ngIf="formGeo">
-            <!-- .row -->
-            <div class="col-md-12 col-sm-12">
-                <label>Georeferenciación</label>
-                <!---
-                    <div align="center">
-                        <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [disableDefaultUI]="false" [zoomControl]="false" [usePanning]="true">
-            
-                            <agm-marker *ngFor="let marker of markers; let i = index" [latitude]="marker.lat" [longitude]="marker.lng" [markerDraggable]="false">
-                            </agm-marker>
-            
-                        </agm-map>
-                    </div>
-                -->
-            </div>
-        </div>
-        <!-- /.row -->
     </div>
 </div>

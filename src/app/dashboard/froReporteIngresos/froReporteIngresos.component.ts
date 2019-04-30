@@ -5,10 +5,6 @@ import { FroReporteIngresos } from "./froReporteIngresos.modelo";
 import { FroCfgTipoRecaudoService } from "../../services/froCfgTipoRecaudo.service";
 import { CfgOrganismoTransitoService } from "../../services/cfgOrganismoTransito.service";
 
-import { FroTramiteService } from "../../services/froTramite.service";
-import { ComparendoService } from "../../services/comparendo.service";
-import { FroAcuerdoPagoService } from "../../services/froAcuerdoPago.service";
-
 import swal from 'sweetalert2';
 
 import { DatePipe, CurrencyPipe } from '@angular/common';
@@ -22,7 +18,6 @@ declare var $: any;
 })
 export class FroReporteIngresosComponent implements OnInit {
     public errorMessage;
-    public respuesta;
     public reporteIngresoss;
     public formNew = false;
     public formEdit = false;
@@ -39,8 +34,8 @@ export class FroReporteIngresosComponent implements OnInit {
     public tablaCobroCoactivo = false;
     public tablaAcuerdosPago = false;
     
-    public sedeOperativaSelected;
-    public sedes;
+    public organismoTransitoSelected;
+    public organismosTransito;
     
     public tramites;
     public cant;
@@ -67,10 +62,6 @@ export class FroReporteIngresosComponent implements OnInit {
         private _FroReporteIngresosService: FroReporteIngresosService,
         private _FroCfgTipoRecaudoService: FroCfgTipoRecaudoService,
         private _OrganismoTransitoService: CfgOrganismoTransitoService,
-
-        private _FroTramiteService: FroTramiteService,
-        private _ComparendoService: ComparendoService,
-        private _FroAcuerdoPagoServie: FroAcuerdoPagoService,
 
         private _LoginService: LoginService,
     ) { }
@@ -111,7 +102,7 @@ export class FroReporteIngresosComponent implements OnInit {
         );
         this._OrganismoTransitoService.selectSedes().subscribe(
             response => {
-                this.sedes = response;
+                this.organismosTransito = response;
             },
             error => {
                 this.errorMessage = <any>error;
@@ -124,9 +115,9 @@ export class FroReporteIngresosComponent implements OnInit {
         );
     }
 
-    iniciarTabla(estado) {
+    onInitTable(estado) {
         if (estado) {
-            $('#' + estado).DataTable({
+            this.table = $('#' + estado).DataTable({
                 responsive: true,
                 pageLength: 8,
                 sPaginationType: 'full_numbers',
@@ -153,7 +144,6 @@ export class FroReporteIngresosComponent implements OnInit {
                     }
                 }
             });
-            this.table = $('#' + estado).DataTable();
         }
     }
 
@@ -176,20 +166,20 @@ export class FroReporteIngresosComponent implements OnInit {
 
     onEnviar(){
         let token = this._LoginService.getToken();
-        this.froReporteIngresos.idSedeOperativa = this.sedeOperativaSelected;
+        this.froReporteIngresos.idOrganismoTransito = this.organismoTransitoSelected;
         this.froReporteIngresos.idTipoPersona = this.tipoPersonaSelected;
+        this.froReporteIngresos.idTipoRecaudo = this.tipoRecaudoSelected;
         if(this.tipoRecaudoSelected == 1){
-            this._FroTramiteService.getTramitePorFecha(this.froReporteIngresos, token).subscribe(
+            this._FroReporteIngresosService.getTramitePorFecha(this.froReporteIngresos, token).subscribe(
                 response => {
                     if (response.status == 'success') {
                         this.tramites = response.data;
                         this.cant = response.cant;
                         this.tablaTramites = true;
-                        console.log(this.tramites);
                         
                         let estado = "dataTables-tablaTramites";
                         let timeoutId = setTimeout(() => {
-                            this.iniciarTabla(estado);
+                            this.onInitTable(estado);
                         }, 100);
                         swal({
                             title: 'Perfecto!',
@@ -215,7 +205,7 @@ export class FroReporteIngresosComponent implements OnInit {
                 }
             );
         } else if(this.tipoRecaudoSelected == 2) {
-            this._ComparendoService.getComparendoByFecha(this.froReporteIngresos, token).subscribe(
+            this._FroReporteIngresosService.getComparendoByFecha(this.froReporteIngresos, token).subscribe(
                 response => {
                     if (response.status == 'success') {
                         this.comparendos = response.data;
@@ -225,7 +215,7 @@ export class FroReporteIngresosComponent implements OnInit {
 
                         let estado = "dataTables-tablaComparendos";
                         let timeoutId = setTimeout(() => {
-                            this.iniciarTabla(estado);
+                            this.onInitTable(estado);
                         }, 100);
                         swal({
                             title: 'Perfecto!',
@@ -255,17 +245,16 @@ export class FroReporteIngresosComponent implements OnInit {
         } else if (this.tipoRecaudoSelected == 4) {
             alert("cobro coactivo")
         } else if (this.tipoRecaudoSelected == 5) {
-            this._FroAcuerdoPagoServie.getAcuerdoPagoByFecha(this.froReporteIngresos, token).subscribe(
+            this._FroReporteIngresosService.getAcuerdoPagoByFecha(this.froReporteIngresos, token).subscribe(
                 response => {
                     if (response.status == 'success') {
                         this.acuerdosPago = response.data;
                         this.totalAcuerdosPago = response.totalAcuerdoPago;
-                        console.log(response.data);
                         this.tablaAcuerdosPago = true;
 
                         let estado = "dataTables-tablaComparendos";
                         let timeoutId = setTimeout(() => {
-                            this.iniciarTabla(estado);
+                            this.onInitTable(estado);
                         }, 100);
                         swal({
                             title: 'Perfecto!',

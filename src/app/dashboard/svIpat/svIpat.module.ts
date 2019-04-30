@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MsvRegistroIpatComponent } from './msvRegistroIpat.component';
+import { SvIpatComponent } from './svIpat.component';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
-import { MsvRegistroIpatService } from '../../services/msvRegistroIpat.service';
+import { SvIpatService } from '../../services/svIpat.service';
 import { SvIpatConductorService } from '../../services/svIpatConductor.services';
 import { SvIpatVehiculoService } from '../../services/svIpatVehiculo.services';
 import { SvIpatVictimaService } from '../../services/svIpatVictima.services';
@@ -16,9 +16,9 @@ import { ToolTipModule } from 'angular2-tooltip';
 
 @NgModule({
     imports: [CommonModule, Ng2BootstrapModule.forRoot(), SelectModule, SortableModule.forRoot(), ToolTipModule],
-    declarations: [MsvRegistroIpatComponent, NewComponent, ShowComponent, ExportComponent],
-    exports: [MsvRegistroIpatComponent, NewComponent, ShowComponent, ExportComponent],
-    providers: [MsvRegistroIpatService, SvIpatConductorService, SvIpatVehiculoService, SvIpatVictimaService]
+    declarations: [SvIpatComponent, NewComponent, ShowComponent, ExportComponent],
+    exports: [SvIpatComponent, NewComponent, ShowComponent, ExportComponent],
+    providers: [SvIpatService, SvIpatConductorService, SvIpatVehiculoService, SvIpatVictimaService]
 })
 
-export class MsvRegistroIpatModule { }
+export class SvIpatModule { }

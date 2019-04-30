@@ -105,7 +105,7 @@
                         </ng-select>
                     </div>
                     <div class="col-xs-12 col-lg-6">
-                        <label>Número Cédula actor de la vía <strong class="text-danger">*</strong></label>
+                        <label>Número Identificación actor de la vía <strong class="text-danger">*</strong></label>
                         <input type="number" class="form-control" [(ngModel)]="capacitacion.numeroCedulaActorVial"
                             name="numeroCedulaActorVial" required />
                     </div>
@@ -120,23 +120,33 @@
                             name="apellidoActorVial" required />
                     </div>
                     <div class="col-xs-12 col-lg-6">
-                        <label>Fecha de nacimiento del actor de la vía <strong class="text-danger">*</strong></label>
+                        <label>Fecha de nacimiento del actor de la vía</label>
                         <input type="date" class="form-control" [(ngModel)]="capacitacion.fechaNacimientoActorVial"
-                            name="fechaNacimientoActorVial" required />
+                            name="fechaNacimientoActorVial" />
                     </div>
                     <div class="col-xs-12 col-lg-6">
-                        <label>Email del actor de la vía <strong class="text-danger">*</strong></label>
+                        <label>Cargo actor de la vía</label>
+                        <input type="text" class="form-control" [(ngModel)]="capacitacion.cargoActorVial"
+                            name="cargoActorVial" />
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Email del actor de la vía</label>
                         <input type="text" class="form-control" [(ngModel)]="capacitacion.emailActorVial"
-                            name="emailActorVial" required />
+                            name="emailActorVial" />
                     </div>
                     <div class="col-xs-12 col-lg-6">
-                        <label>Genero <strong class="text-danger">*</strong></label>
-                        <ng-select [multiple]="false" [options]="generos" [(ngModel)]="generoSelected" required name="idGenero">
+                        <label>Teléfono/Celular del actor de la vía</label>
+                        <input type="number" class="form-control" [(ngModel)]="capacitacion.telefonoActorVial"
+                            name="telefonoActorVial" />
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Genero</label>
+                        <ng-select [multiple]="false" [options]="generos" [(ngModel)]="generoSelected" name="idGenero">
                         </ng-select>
                     </div>                    
                     <div class="col-xs-12 col-lg-6">
-                        <label>Grupo Étnico <strong class="text-danger">*</strong></label>
-                        <ng-select [multiple]="false" [options]="gruposEtnicos" [(ngModel)]="grupoEtnicoSelected" required name="idGrupoEtnico">
+                        <label>Grupo Étnico</label>
+                        <ng-select [multiple]="false" [options]="gruposEtnicos" [(ngModel)]="grupoEtnicoSelected" name="idGrupoEtnico">
                         </ng-select>
                     </div>                    
                     <div class="col-xs-12 col-lg-6">
@@ -145,16 +155,21 @@
                             required name="claseActorVia"></ng-select>
                     </div>
                     <div class="col-xs-12 col-lg-6">
-                        <div class="row" style="margin: 36px 7px 0px 43px;">
-                            <div class="col-xs-12 col-lg-6 custom-control custom-checkbox">
-                                <input [(ngModel)]="capacitacion.discapacidad" name="discapacidad" type="checkbox" class="custom-control-input"
-                                    id="checkbox-discapacidad">
-                                <label class="custom-control-label" for="checkbox-discapacidad">Discapacidad</label>
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-4">
+                                <label>Discapacidad <strong class="text-danger">*</strong></label>
+                                <ng-select [multiple]="false" [options]="discapacidades" [(ngModel)]="discapacidadSelected" required
+                                    name="discapacidad"></ng-select>
                             </div>
-                            <div class=" col-xs-12 col-lg-6 custom-control custom-checkbox">
-                                <input [(ngModel)]="capacitacion.victima" name="victima" type="checkbox" class="custom-control-input"
-                                    id="checkbox-victima">
-                                <label class="custom-control-label" for="checkbox-victima">Victima del conflicto armado</label>
+                            <div class="col-xs-12 col-lg-4">
+                                <label>Victima conflicto armado <strong class="text-danger">*</strong></label>
+                                <ng-select [multiple]="false" [options]="victimas" [(ngModel)]="victimaSelected" required
+                                    name="victima"></ng-select>
+                            </div>
+                            <div class="col-xs-12 col-lg-4">
+                                <label>Comunidad LGBTI<strong class="text-danger">*</strong></label>
+                                <ng-select [multiple]="false" [options]="comunidades" [(ngModel)]="comunidadSelected" required
+                                    name="comunidad"></ng-select>
                             </div>
                         </div>
                     </div>

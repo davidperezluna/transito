@@ -1,7 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { MsvRegistroIpatService } from '../../services/msvRegistroIpat.service';
 import { SvIpatConsecutivoService } from '../../services/svIpatConsecutivo.service';
-import { MsvRegistroIpat } from './msvRegistroIpat.modelo';
+import { SvIpat } from './svIpat.modelo';
 import { LoginService } from '../../services/login.service';
 import { SvIpatConsecutivo } from '../svIpatConsecutivo/svIpatConsecutivo.modelo';
 import swal from 'sweetalert2';
@@ -9,21 +8,18 @@ declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './msvRegistroIpat.component.html'
+  templateUrl: './svIpat.component.html'
 })
-export class MsvRegistroIpatComponent implements OnInit {
-  public msvRegistroIpat: MsvRegistroIpat;
-  public TramiteLimitacionService:any;
+export class SvIpatComponent implements OnInit {
+  public ipat: SvIpat;
   public errorMessage;
 
-  public tramitesInscripcion;
   public consecutivos;
   public formNew = false;
   public formEdit = false;
   public formIndex = true;
   public formShow = false;
   public table: any = null;
-  public tramiteInscripcion: any;
   public consecutivo: SvIpatConsecutivo;
 
   constructor(
@@ -76,10 +72,10 @@ export class MsvRegistroIpatComponent implements OnInit {
       sPaginationType: 'full_numbers',
       oLanguage: {
         oPaginate: {
-          sFirst: '<<',
-          sPrevious: '<',
-          sNext: '>',
-          sLast: '>>'
+          sFirst: '<i class="fa fa-step-backward"></i>',
+          sPrevious: '<i class="fa fa-chevron-left"></i>',
+          sNext: '<i class="fa fa-chevron-right"></i>',
+          sLast: '<i class="fa fa-step-forward"></i>'
         }
       }
     });

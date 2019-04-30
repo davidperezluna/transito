@@ -153,9 +153,9 @@ export class NewRnaBlindajeComponent implements OnInit {
     onEnviar() {
         let token = this._LoginService.getToken();
 
+        this.datos.campos = ['blindaje'];
         this.datos.idTramiteFactura = this.tramiteFactura.id;
         this.datos.idVehiculo = this.vehiculo.id;
-        this.datos.campos = ['blindaje'];
 
         this._TramiteSolicitudService.validations(this.datos, token).subscribe(
             response => {

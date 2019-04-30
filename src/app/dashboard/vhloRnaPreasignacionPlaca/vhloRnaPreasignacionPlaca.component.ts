@@ -152,11 +152,12 @@ export class VhloRnaPreasignacionPlacaComponent implements OnInit {
     this.vehiculo = vehiculo;
     this.datos.idVehiculo = this.vehiculo.id;
 
-    if (this.vehiculo.placa) {
+    if (!this.vehiculo.placa) {
       this.formIndex = false;
       this.formShow = true;
     }else{
       this.formIndex = false;
+      this.formShow = false;
 
       swal({
         title: 'Error!',

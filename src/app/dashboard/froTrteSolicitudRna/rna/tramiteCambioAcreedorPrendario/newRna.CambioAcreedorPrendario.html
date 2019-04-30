@@ -24,13 +24,13 @@
             <div class="card-body">
                 <div class="row">
                     <h6 class="text-center">
-                        <b class="text-uppercase">Buscar prendario a modificar</b>
+                        <b class="text-uppercase">Seleccionar prendario a modificar</b>
                     </h6>
                 </div>
 
                 <div class="row"><!-- .row -->
                     <!--acreedores vehiculo -->
-                    <div class="col-xs-12 col-lg-12" *ngIf="acreedor">
+                    <div class="col-xs-12 col-lg-12" *ngIf="acreedoresActuales">
                         <table class="table table-bordered table-striped">
                             <br>
                             <thead>
@@ -41,28 +41,34 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>                    
-                                    <td *ngIf="acreedor.ciudadano">
+                                <tr *ngFor="let acreedorActual of acreedoresActuales; let i = index">                    
+                                    <td *ngIf="acreedorActual.ciudadano">
                                         <b>Identificación:</b>
                                         <br>
-                                        {{  acreedor.ciudadano.identificacion }}
+                                        {{  acreedorActual.ciudadano.identificacion }}
                                         <br> 
                                         <b>Nombre:</b>
                                         <br>
-                                        {{ acreedor.ciudadano.primerNombre }} {{ acreedor.ciudadano.primerApellido }}
+                                        {{ acreedorActual.ciudadano.primerNombre }} {{ acreedorActual.ciudadano.primerApellido }}
                                     </td>
-                                    <td *ngIf="acreedor.empresa">
+                                    <td *ngIf="acreedorActual.empresa">
                                         <b>Identificación:</b>
-                                        <br>{{ acreedor.empresa.nit }}
+                                        <br>{{ acreedorActual.empresa.nit }}
                                         <br>
                                         <b>Nombre:</b>
                                         <br>
-                                        {{ acreedor.empresa.nombre }}
+                                        {{ acreedorActual.empresa.nombre }}
                                     </td>
                                     <td>
-                                        <b>Tipo alerta:</b> {{ acreedor.tipoAlerta.nombre }}
+                                        <b>Tipo alerta:</b> {{ acreedorActual.tipoAlerta.nombre }}
                                         <br>
-                                        <b>Grado:</b> {{ acreedor.gradoAlerta }}
+                                        <b>Grado:</b> {{ acreedorActual.gradoAlerta }}
+                                    </td>
+                                    <td>
+                                        <div class="custom-control custom-radio">
+                                            <input [(ngModel)]="datos.idAcreedor" value="{{ acreedorActual.id }}" type="radio" id="radio{{ i }}" name="radio" class="custom-control-input">
+                                            <label class="custom-control-label" for="radio{{ i }}">Seleccionar</label>
+                                        </div>
                                     </td>
                                 </tr>
                             </tbody>
@@ -70,13 +76,13 @@
                     </div>
                 </div><!-- .row -->
 
-                <div class="row" *ngIf="acreedor"><!-- .row -->
+                <div class="row" *ngIf="acreedoresActuales"><!-- .row -->
                     <h6 class="text-center">
                         <b class="text-uppercase">Buscar nuevo acreedor</b>
                     </h6>
                 </div><!-- /.row -->
 
-                <div class="row" *ngIf="acreedor"><!-- .row -->
+                <div class="row" *ngIf="acreedoresActuales"><!-- .row -->
                     <div class="col-xs-12 col-lg-6">
                         <label>Tipo de identificación
                             <span class="text-danger">*</span>

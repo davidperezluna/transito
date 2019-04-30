@@ -59,10 +59,31 @@ export class NewComponent implements OnInit {
     public generoSelected: any;
     public tipoIdentificacionSelected: any;
     public grupoEtnicoSelected: any;
+    public discapacidadSelected: any;
+    public victimaSelected: any;
+    public comunidadSelected: any;
 
     public capacitados = [];
     public table: any = null;
     public capacitadosEncontrados = false;
+
+    public discapacidades = [
+        { value: '3', label: 'NO REGISTRA' }, 
+        { value: '1', label: 'SI' }, 
+        { value: '0', label: 'NO' }, 
+    ];
+
+    public victimas = [
+        { value: '3', label: 'NO REGISTRA' }, 
+        { value: '1', label: 'SI' }, 
+        { value: '0', label: 'NO' }, 
+    ];
+
+    public comunidades = [
+        { value: '3', label: 'NO REGISTRA' }, 
+        { value: '1', label: 'SI' }, 
+        { value: '0', label: 'NO' }, 
+    ];
 
     constructor(
         private _CapacitacionService: SvCapacitacionService,
@@ -83,7 +104,7 @@ export class NewComponent implements OnInit {
         var datePiper = new DatePipe(this.date);
         this.fecha = datePiper.transform(this.date, 'yyyy-MM-dd HH:mm:ss a');
 
-        this.capacitacion = new SvCapacitacion(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+        this.capacitacion = new SvCapacitacion(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 
         this._MunicipioService.select().subscribe(
             response => {
@@ -208,6 +229,9 @@ export class NewComponent implements OnInit {
         this.capacitacion.genero = this.generoSelected;
         this.capacitacion.idTipoIdentificacion = this.tipoIdentificacionSelected;
         this.capacitacion.idGrupoEtnico = this.grupoEtnicoSelected;
+        this.capacitacion.discapacidad = this.discapacidadSelected;
+        this.capacitacion.victima = this.victimaSelected;
+        this.capacitacion.comunidad = this.comunidadSelected;
 
         if (this.capacitacionInput.idTipoIdentificacion == 1) {
             this.capacitacion.identificacion = this.ciudadano.identificacion;
@@ -223,11 +247,22 @@ export class NewComponent implements OnInit {
                         type: 'success',
                         confirmButtonText: 'Aceptar'
                     });
+                    
+                    this.tipoIdentificacionSelected = [0];
                     this.capacitacion.numeroCedulaActorVial = '';
                     this.capacitacion.nombreActorVial = '';
                     this.capacitacion.apellidoActorVial = '';
+                    this.capacitacion.fechaNacimientoActorVial = '';
+                    this.capacitacion.cargoActorVial = '';
+                    this.capacitacion.emailActorVial = '';
+                    this.capacitacion.telefonoActorVial = '';
                     this.generoSelected = [0];
+                    this.grupoEtnicoSelected = [0];
                     this.claseActorViaSelected = [0];
+                    this.capacitacion.discapacidad = 0;
+                    this.capacitacion.victima = 0;
+                    this.capacitacion.comunidad = 0;
+
                 } else {
                     swal({
                         title: 'Error!',

@@ -397,46 +397,25 @@ export class NewSenialUbicacionComponent implements OnInit {
         console.log('clicked right the marker:'+this.markers[index]);
     }
 
-    getAddressLocation($event, callback){
-        if (!this.geocoder) {
-            this.initGeocoder();
-        }else{
-            this.geocoder.geocode({ 'location': $event.coords }, function (results, status) {
-                if (status == google.maps.GeocoderStatus.OK) {
-                    if (results[0]) {
-                        //let timeoutId = setTimeout(() => {
-                            return callback(null, results[0].formatted_address);
-                        //}, 1000);
-                    }else{
-                        return callback('Sin resultados', null);
-                    }
-                }
-            });
-        }
-    }
-
     mapClicked($event: MouseEvent) {
         if (this.senialUbicacion.cantidad > 0) {
-            var address;
             if (this.markers.length < this.senialUbicacion.cantidad) {
                 this._SvSenialUbicacionService.getAddress($event.coords).subscribe(
                     result => {
                         this.__zone.run(() => {    
                             this.address = result;
+
+                            this.markers.push({
+                                lat: $event.coords.lat,
+                                lng: $event.coords.lng,
+                                draggable: true,
+                                label: result + "<br>(" + this.senial.tipoSenial.nombre + ")" + "<br>(" + this.senial.nombre + ")"
+                            });
                         });
                     },
                     error => console.log(error),
                     () => console.log('Geocoding completed!')
                 );
-
-                //address = this.getAddressLocation($event, (error, result) => (error) ? console.error(error) : console.log('Dirección:'+result));
-
-                this.markers.push({
-                    lat: $event.coords.lat,
-                    lng: $event.coords.lng,
-                    draggable: true,
-                    label: this.address
-                });
             } else {
                 swal({
                     title: 'Atención!',

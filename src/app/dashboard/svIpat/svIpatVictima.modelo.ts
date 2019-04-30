@@ -1,4 +1,4 @@
-export class MsvIpatVictima {
+export class SvIpatVictima {
     constructor(
         public consecutivo: string,
         

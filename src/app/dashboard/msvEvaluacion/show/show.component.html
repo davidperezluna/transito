@@ -1,0 +1,54 @@
+<hr>
+<div class="row">
+    <div class="col-xs-12 col-lg-12">
+        <div class="card" *ngIf="calificaciones">
+            <div class="card-header">
+                <h5 class="card-title">Datos <small>Evaluación</small>
+                </h5>
+            </div>
+            <div class="card-body">
+                <table class="table " id="dataTables-example">
+                    <thead>
+                        <tr>
+                            <th><b>#</b></th>
+                            <th><b>Criterio</b></th>
+                            <th><b>Aplica</b></th>
+                            <th><b>Evidencia</b></th>
+                            <th><b>Responde</b></th>
+                            <th><b>Valor Obtenido</b></th>
+                            <th><b>Observacion</b></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="odd" *ngFor="let calificacion of calificaciones; let i = index">
+                            <td>{{ i + 1 }}</td>
+                            <td>{{ calificacion.criterio.nombre }}</td>
+                            <td>
+                                <span *ngIf="calificacion.aplica">Si</span>
+                                <span *ngIf="!calificacion.aplica">No</span>
+                            </td>
+                            <td>
+                                <span *ngIf="calificacion.evidencia">Si</span>
+                                <span *ngIf="!calificacion.evidencia">No</span>
+                            </td>
+                            <td>
+                                <span *ngIf="calificacion.responde">Si</span>
+                                <span *ngIf="!calificacion.responde">No</span>
+                            </td>
+                            <td>{{ calificacion.valorObtenido | number:'1.1-2' }}</td>
+                            <td>{{ calificacion.observacion }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-footer">
+                <div class="btn-group">
+                    <button (click)="onCancelar()" class="btn btn-default">
+                        <i class="fa fa-times"></i>
+                        Cancelar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

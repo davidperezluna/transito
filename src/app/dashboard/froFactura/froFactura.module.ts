@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FroFacturaComponent } from './froFactura.component';
-import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { FroFacturaService } from '../../services/froFactura.service';
+import { Ng2BootstrapModule } from 'ng2-bootstrap';
 
 import { NewComponent } from './new/new.component';
 import { EditComponent } from './edit/edit.component';

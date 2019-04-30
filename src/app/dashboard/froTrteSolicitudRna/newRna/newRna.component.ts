@@ -43,6 +43,7 @@ export class NewRnaComponent implements OnInit {
   public requiereRunt = false;
 
   public tramites:any;
+  public certificadoTradicion = false;
   public fromApoderado = false;
   public identificacionApoderado = false;
   public apoderado: any = null;
@@ -324,6 +325,9 @@ export class NewRnaComponent implements OnInit {
     this._TramiteSolicitudService.register(this.tramiteSolicitud, token).subscribe(
 			response => {
         if(response.code == 200){
+          this.factura = response.data.factura;
+          this.certificadoTradicion = response.data.certificadoTradicion;
+
           swal({
             title: 'Perfecto!',
             text: response.message,
@@ -331,7 +335,7 @@ export class NewRnaComponent implements OnInit {
             confirmButtonText: 'Aceptar'
           });
         }else if(response.code == 401){
-          this.factura = response.data;
+          this.factura = response.data.factura;
           
           swal({
             title: 'Atención!',
@@ -366,6 +370,34 @@ export class NewRnaComponent implements OnInit {
         'foraneas': datos.foraneas,
         'resumen': datos.resumen,
         'idTramiteFactura': datos.idTramiteFactura,
+      }
+    );
+
+    let token = this._LoginService.getToken();
+
+    this._TramiteFacturaService.show({ 'id': datos.idTramiteFactura }, token).subscribe(
+      response => {
+        if (response.code == 200) {
+          let tramiteFactura = { 'value': response.data.id, 'label': response.data.precio.nombre };
+          this.tramitesFactura = this.tramitesFactura.filter(h => h !== tramiteFactura);
+          console.log(this.tramitesFactura);
+          console.log(this.tramitesRealizados);
+          this.tramiteSolicitud.idTramiteFactura = null;
+        } else {
+          swal({
+            title: 'Error!',
+            text: response.message,
+            type: 'error',
+            confirmButtonText: 'Aceptar'
+          });
+        }
+        error => {
+          this.errorMessage = <any>error;
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
       }
     );
 

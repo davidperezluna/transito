@@ -115,6 +115,8 @@ constructor(
     if (id) {
       let token = this._LoginService.getToken();
 
+      this.idPaisResidencia = id;
+
       this._DepartamentoService.selectByPais({ 'idPais': id}, token).subscribe(
         response => {
           this.departamentosNacimiento = response;
@@ -134,6 +136,8 @@ constructor(
     if (id) {
       let token = this._LoginService.getToken();
 
+      this.idDepartamentoResidencia = id;
+
       this._MunicipioService.selectByDepartamento({ 'idDepartamento':id }, token).subscribe(
         response => {
           this.municipiosNacimiento = response;
@@ -147,7 +151,14 @@ constructor(
         }
       );
     }
-  
+  }
+
+  onChangedMunicipioNacimiento(id){
+    if (id) {
+      let token = this._LoginService.getToken();
+
+      this.ciudadano.idMunicipioResidencia = id;
+    }
   }
 
   onChangedPaisResidencia(id){

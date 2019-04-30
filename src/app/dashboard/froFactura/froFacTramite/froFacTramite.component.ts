@@ -61,7 +61,7 @@ export class FroFacTramiteComponent implements OnInit {
   public propietariosVehiculoRetefuente:any=[]; 
   public valorRetefuenteUnitario:any=0;
 
-  public apiUrl = environment.apiUrl + 'financiero';
+  public apiUrl = environment.apiUrl;
 
   constructor(
     private _FuncionarioService: PnalFuncionarioService,
@@ -364,20 +364,9 @@ export class FroFacTramiteComponent implements OnInit {
         if (response.code == 200) {
           this.tramitePrecio = response.data;
           if (this.modulo.abreviatura == 'RNC') {
-            if (this.tramitesPrecioArray.length < 1) {
-              //Agrega el trámite seleccionado al arreglo
-              // this.onCreateArray();
-            } else {
-              swal({
-                title: 'Error!',
-                text: 'Ya tiene un trámite registrado.',
-                type: 'error',
-                confirmButtonText: 'Aceptar'
-              });
-            }
+              this.onCreateArray();
           } else if (this.modulo.abreviatura == 'RNA' || this.modulo.abreviatura == 'RNMA' || this.modulo.abreviatura == 'RNRS') {
-            //Valida si el tramite seleccionado requiera calcular retefuente
-
+            //Valida si el tramite seleccionado requiere calcular retefuente
             if (this.tramitePrecio.tramite.id == 2 && this.propietarios) {
               if (this.tramitesPrecioArray.length < 1) { 
                 
@@ -389,7 +378,7 @@ export class FroFacTramiteComponent implements OnInit {
                   'cilindraje': this.vehiculo.cilindraje
                 }
 
-                this._VhloValorService.getCfgValorVehiculoVehiculo(datos, token).subscribe(
+                this._VhloValorService.getValorVehiculoVehiculo(datos, token).subscribe(
                   response => {
                     if (response.code == 200) {
                       this.valorRetefuente = parseInt(response.data.valor) * 0.01;
@@ -517,8 +506,8 @@ export class FroFacTramiteComponent implements OnInit {
     this._FacturaService.register(datos, token).subscribe(
       response => {
         if (response.status == 'success') {
-          this.factura.id = response.data.id;
-          this.factura.numero = response.data.numero;
+          this.factura = response.data;
+          //this.factura.numero = response.data.numero;
           this.formNew = false;
 
           swal({

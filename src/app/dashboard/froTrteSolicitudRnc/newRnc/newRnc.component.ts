@@ -6,8 +6,8 @@ import { FroFacturaService } from '../../../services/froFactura.service';
 import { UserCiudadanoService } from '../../../services/userCiudadano.service';
 import { LoginService } from '../../../services/login.service';
 import { environment } from 'environments/environment';
-import swal from 'sweetalert2';
 import { forEach } from '@angular/router/src/utils/collection';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-new',
@@ -36,6 +36,7 @@ export class NewRncComponent implements OnInit {
   public requiereSustrato = false;
   public requiereRunt = false;
   public tramitesRealizados: any = [];
+  public documentacionPendiente: any = [];
 
 constructor(
   private _SolicitudService: FroTrteSolicitudService,
@@ -46,7 +47,7 @@ constructor(
 ){}
 
   ngOnInit() {
-    this.tramiteSolicitud = new FroTrteSolicitudRnc(null, null, null, null);
+    this.tramiteSolicitud = new FroTrteSolicitudRnc(null, null, null, null, null);
   }
 
   onCancelar(){
@@ -234,10 +235,13 @@ constructor(
     let token = this._LoginService.getToken();
 
     this.tramiteSolicitud.tramitesRealizados = this.tramitesRealizados;
+    this.tramiteSolicitud.documentacionPendiente = this.documentacionPendiente;
 
     this._SolicitudService.register(this.tramiteSolicitud, token).subscribe(
 			response => {
         if(response.code == 200){
+          this.factura = response.data.factura;
+          
           swal({
             title: 'Perfecto!',
             text: response.message,
@@ -245,7 +249,7 @@ constructor(
             confirmButtonText: 'Aceptar'
           });
         }else if(response.code == 401){
-          this.factura = response.data;
+          this.factura = response.data.factura;
           
           swal({
             title: 'Atención!',
@@ -310,15 +314,24 @@ constructor(
   }
   
   onReadyTramite(datos:any){
-    this.tramitesRealizados.push(
-      {
-        'documentacion': datos.documentacion,
-        'observacion': datos.observacion,
-        'foraneas': datos.foraneas,
-        'resumen': datos.resumen,
-        'idTramiteFactura': datos.idTramiteFactura,
-      }
-    );
+    if (datos.documentacion) {
+      this.tramitesRealizados.push(
+        {
+          'foraneas': datos.foraneas,
+          'resumen': datos.resumen,
+          'idTramiteFactura': datos.idTramiteFactura,
+        }
+      );
+    }else{
+      this.documentacionPendiente.push(
+        {
+          'documentacion': datos.documentacion,
+          'observacion': datos.observacion,
+          'idTramiteFactura': datos.idTramiteFactura,
+        }
+      );
+    }
+
     
     console.log(this.tramitesRealizados);
     

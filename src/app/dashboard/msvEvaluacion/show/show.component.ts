@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { SvCapacitacionService } from '../../../services/svCapacitacion.service';
+import { MsvEvaluacionService } from '../../../services/msvEvaluacion.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 declare var $: any;
@@ -11,32 +11,49 @@ declare var $: any;
 
 export class ShowComponent implements OnInit {
     @Output() ready = new EventEmitter<any>();
-    @Input() capacitacion: any = null;
+    @Input() revision: any = null;
     public errorMessage;
-    
-    public capacitados: any;
+
+    public calificaciones: any;
     public table: any = null;
 
 
     constructor(
         private _LoginService: LoginService,
-        private _CapacitacionService: SvCapacitacionService,
+        private _EvaluacionService: MsvEvaluacionService,
     ) { }
 
     ngOnInit() {
         let token = this._LoginService.getToken();
 
-        this._CapacitacionService.showByCapacitacion(this.capacitacion, token).subscribe(
+        swal({
+            title: 'Cargando datos de la evaluación!',
+            text: 'Solo tardará unos segundos, por favor espere.',
+            timer: 3000,
+            onOpen: () => {
+                swal.showLoading()
+            }
+        }).then((result) => {
+            if (
+                // Read more about handling dismissals
+                result.dismiss === swal.DismissReason.timer
+            ) {
+            }
+        })
+
+        this._EvaluacionService.showCalificacionByEvaluacion({ 'id': this.revision.id }, token).subscribe(
             response => {
                 if (response.status == 'success') {
-                    this.capacitados = response.data;
-                    console.log(this.capacitados);
+                    this.calificaciones = response.data;
                     swal({
                         title: 'Perfecto!',
-                        text: response.message,
+                        html: response.message,
                         type: 'success',
                         confirmButtonText: 'Aceptar'
-                    })
+                    });
+                    let timeoutId = setTimeout(() => {
+                        this.onInitTable();
+                    }, 100);
                 } else {
                     swal({
                         title: 'Error!',
@@ -52,16 +69,35 @@ export class ShowComponent implements OnInit {
                         alert("Error en la petición");
                     }
                 }
-
             }
         );
     }
 
-    iniciarTabla() {
-        $('#dataTables-example').DataTable({
+    onInitTable() {
+        if (this.table) {
+            this.table.destroy();
+        } 
+
+        this.table = $('#dataTables-example').DataTable({
             responsive: true,
             pageLength: 8,
             sPaginationType: 'full_numbers',
+            dom: 'Bfrtip',
+            buttons: [
+                {
+                    title: 'Evaluacion',
+                    extend: 'excel',
+                    text: 'Excel',
+                    filename: 'Evaluacion',
+                },
+                {
+                    title: 'Evaluacion',
+                    extend: 'pdfHtml5',
+                    orientation: 'landscape',
+                    pageSize: 'LEGAL',
+                    filename: 'EvaluacionPDF',
+                }
+            ],
             oLanguage: {
                 oPaginate: {
                     sFirst: '<<',
@@ -71,7 +107,6 @@ export class ShowComponent implements OnInit {
                 }
             }
         });
-        this.table = $('#dataTables-example').DataTable();
     }
 
     onCancelar() {

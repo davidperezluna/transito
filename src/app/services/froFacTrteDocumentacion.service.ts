@@ -5,8 +5,8 @@ import { environment } from 'environments/environment';
 import  "rxjs/add/operator/map";
 
 @Injectable()
-export class FroAcuerdoPagoService {
-	private url = environment.apiUrl + 'financiero/froacuerdopago';
+export class FroFacTrteDocumentacionService {
+	private url = environment.apiUrl + 'financiero/frofactrtedocumentacion';
 	public identity;
 	public token;
 
@@ -21,7 +21,7 @@ export class FroAcuerdoPagoService {
 
 	register(datos, token) {
 		let json = JSON.stringify(datos);
-		let params = "json=" + json + "&authorization=" + token;
+		let params = "data=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/new", params, { headers: headers }).map(
 			res => res.json(),
@@ -31,7 +31,7 @@ export class FroAcuerdoPagoService {
 
 	delete(datos, token) {
 		let json = JSON.stringify(datos);
-		let params = "json=" + json + "&authorization=" + token;
+		let params = "data=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/delete", params, { headers: headers }).map(
 			res => res.json(),
@@ -48,7 +48,7 @@ export class FroAcuerdoPagoService {
 
 	edit(datos, token) {
 		let json = JSON.stringify(datos);
-		let params = "json=" + json + "&authorization=" + token;
+		let params = "data=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/edit", params, { headers: headers }).map(
 			res => res.json(),
@@ -58,33 +58,5 @@ export class FroAcuerdoPagoService {
 
 	select() {
 		return this._http.get(this.url + "/select").map(res => res.json());
-	}
-
-	calculateValue(datos, token) {
-		let json = JSON.stringify(datos);
-		let params = "json=" + json + "&authorization=" + token;
-		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-		return this._http.post(this.url + "/calculate/value", params, { headers: headers }).map(res => res.json());
-	}
-
-	calculateDateEnd(datos, token) {
-		let json = JSON.stringify(datos);
-		let params = "json=" + json + "&authorization=" + token;
-		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-		return this._http.post(this.url + "/calculate/date/end", params, { headers: headers }).map(res => res.json());
-	}
-
-	calculateDues(datos, token) {
-		let json = JSON.stringify(datos);
-		let params = "json=" + json + "&authorization=" + token;
-		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-		return this._http.post(this.url + "/calculate/dues", params, { headers: headers }).map(res => res.json());
-	}
-
-	searchByFiltros(datos, token) {
-		let json = JSON.stringify(datos);
-		let params = "json=" + json + "&authorization=" + token;
-		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-		return this._http.post(this.url + "/search/filtros", params, { headers: headers }).map(res => res.json());
 	}
 }
