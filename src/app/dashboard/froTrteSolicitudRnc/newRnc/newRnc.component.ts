@@ -47,7 +47,7 @@ constructor(
 ){}
 
   ngOnInit() {
-    this.tramiteSolicitud = new FroTrteSolicitudRnc(null, null, null, null, null);
+    this.tramiteSolicitud = new FroTrteSolicitudRnc(null, null, null, null, null, null);
   }
 
   onCancelar(){
@@ -332,8 +332,39 @@ constructor(
       );
     }
 
-    
-    console.log(this.tramitesRealizados);
+    /*let token = this._LoginService.getToken();
+
+    this._TramiteFacturaService.show({ 'id': datos.idTramiteFactura }, token).subscribe(
+      response => {
+        if (response.code == 200) {
+          let tramiteFactura = { 'value': response.data.id, 'label': response.data.precio.nombre };
+
+          this.tramitesFactura = this.tramitesFactura.filter(h => h !== tramiteFactura);
+          this.tramiteSolicitud.idTramiteFactura = null;
+        } else {
+          swal({
+            title: 'Error!',
+            text: response.message,
+            type: 'error',
+            confirmButtonText: 'Aceptar'
+          });
+        }
+        error => {
+          this.errorMessage = <any>error;
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      }
+    );*/
+
+    swal({
+      title: 'Perfecto!',
+      text: 'Trámite realizado con exito.',
+      type: 'success',
+      confirmButtonText: 'Aceptar'
+    });
     
 
     /*this.tramiteSolicitud.datos = datos;
