@@ -17,9 +17,11 @@ export class NewRncRecategorizacionLicenciaAbajoComponent implements OnInit {
     @Output() onReadyTramite = new EventEmitter<any>();
     @Input() solicitante: any = null;
     @Input() tramiteFactura: any = null;
+    @Input() tramitesRealizados: any = null;
     public errorMessage;
 
     public autorizado: any = false;
+    public realizado: any = false;
     public tramiteSolicitud: any = null;
     public funcionario: any = null;
     public paises: any;
@@ -42,7 +44,6 @@ export class NewRncRecategorizacionLicenciaAbajoComponent implements OnInit {
         'idTramiteFactura': null,
         'idSolicitante': null,
     };
-    
 
     constructor(
         private _TramiteFacturaService: FroFacTramiteService,
@@ -66,59 +67,23 @@ export class NewRncRecategorizacionLicenciaAbajoComponent implements OnInit {
                     this.datos.idFuncionario = response.data.id;
                     this.autorizado = true;
 
-                    this._TramiteFacturaService.show({ 'id': this.tramiteFactura.id }, token).subscribe(
-                        response => {
-                            if (response.code == 200) {
-                                this.tramiteFactura = response.data;
+                    if ( this.tramitesRealizados.length > 0) {
+                        this.tramitesRealizados.forEach(tramiteRealizado => {
+                            tramiteRealizado = Object.keys(tramiteRealizado).map(function(key) {
+                                return tramiteRealizado[key];
+                            });
+                            this.realizado = tramiteRealizado.includes(this.tramiteFactura.id, 2);
+                        });
+                    }
 
-                                swal.close();
-                            } else {
-                                this.tramiteFactura = null;
-
-                                swal({
-                                    title: 'Error!',
-                                    text: response.message,
-                                    type: 'error',
-                                    confirmButtonText: 'Aceptar'
-                                });
-                            }
-                            error => {
-                                this.errorMessage = <any>error;
-                                if (this.errorMessage != null) {
-                                    console.log(this.errorMessage);
-                                    alert("Error en la petición");
-                                }
-                            }
-                        }
-                    );
-
-                    if (this.tramiteFactura.realizado) {
-                        let token = this._LoginService.getToken();
-
-                        this._TramiteSolicitudService.showByTamiteFactura({ 'idTramiteFactura': this.tramiteFactura.id }, token).subscribe(
-                            response => {
-                                if (response.code == 200) {
-                                    this.tramiteSolicitud = response.data;
-                                } else {
-                                    this.tramiteSolicitud = null;
-
-                                    swal({
-                                        title: 'Error!',
-                                        text: response.message,
-                                        type: 'error',
-                                        confirmButtonText: 'Aceptar'
-                                    });
-                                }
-                                error => {
-                                    this.errorMessage = <any>error;
-                                    if (this.errorMessage != null) {
-                                        console.log(this.errorMessage);
-                                        alert("Error en la petición");
-                                    }
-                                }
-                            }
-                        );
-                    }else{
+                    if (this.realizado) {
+                        swal({
+                            title: 'Atención!',
+                            text: 'El trámite seleccionado ya fue realizado.',
+                            type: 'warning',
+                            confirmButtonText: 'Aceptar'
+                        });
+                    } else {
                         this._PaisService.select().subscribe(
                             response => {
                               this.paises = response;
