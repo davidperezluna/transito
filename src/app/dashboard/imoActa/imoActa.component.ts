@@ -19,9 +19,9 @@ export class ImoActaComponent implements OnInit {
 
   public data = {
     'organismoTransito':null,
-    'usado':false,
+    'disponibles':false,
     'anulado':false,
-    'asignado':false,
+    'asignado':false, 
     'fechaInicio':false,
     'fechaFin':false,
   };

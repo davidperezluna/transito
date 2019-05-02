@@ -83,12 +83,11 @@ export class ImoInsumoService {
 
 		let headers = new Headers(
 			{
-				// 'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8',
-				'responseType':ResponseContentType.Blob
+				'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'
 			}
 		);
 
-		return this._http.post(this.url+"/pdf/acta/insumos", params, { 'responseType': ResponseContentType.Blob }).map(res => 
+		return this._http.post(this.url+"/pdf/acta/insumos", params, { 'responseType': ResponseContentType.Blob, headers: headers }).map(res => 
 			{ return new Blob([res.blob()], { type: 'application/pdf' }) }
 		); 
 	}
