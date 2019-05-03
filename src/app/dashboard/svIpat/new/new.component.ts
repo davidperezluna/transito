@@ -1692,10 +1692,11 @@ export class NewComponent implements OnInit {
 
                   this.contConductores += 1;
                 this.ipat.totalConductores = this.contConductores;
-                if (this.gravedadConductorSelected = 'HERIDO') {
+
+                if (this.gravedadConductorSelected == 1) {
                   this.contHeridos += 1;
                   this.ipat.totalHeridos = this.contHeridos;
-                } if (this.gravedadConductorSelected = 'MUERTO') {
+                } if (this.gravedadConductorSelected == 2) {
                   this.contMuertos += 1;
                   this.ipat.totalMuertos = this.contMuertos;
                 }
@@ -1722,11 +1723,10 @@ export class NewComponent implements OnInit {
 
                 this.contConductores += 1;
                 this.ipat.totalConductores = this.contConductores;
-
-                if (this.gravedadConductorSelected = 'HERIDO') {
+                if (this.gravedadConductorSelected == 1) {
                   this.contHeridos += 1;
                   this.ipat.totalHeridos = this.contHeridos;
-                } if (this.gravedadConductorSelected = 'MUERTO') {
+                } if (this.gravedadConductorSelected == 2) {
                   this.contMuertos += 1;
                   this.ipat.totalMuertos = this.contMuertos;
                 }
@@ -1931,19 +1931,19 @@ export class NewComponent implements OnInit {
                   type: 'success',
                   confirmButtonText: 'Aceptar'
                 });
-                if (this.tipoVictimaSelected = 'PASAJERO') {
+                if (this.tipoVictimaSelected == 1) {
                   this.contPasajeros += 1;
                   this.ipat.totalPasajeros = this.contPasajeros;
-                } if (this.tipoVictimaSelected = 'PEATON') {
+                } if (this.tipoVictimaSelected == 2) {
                   this.contPeatones += 1;
                   this.ipat.totalPeatones = this.contPeatones;
-                } if (this.tipoVictimaSelected = 'ACOMPAÑANTE') {
+                } if (this.tipoVictimaSelected == 3) {
                   this.contAcompaniantes += 1;
                   this.ipat.totalAcompaniantes = this.contAcompaniantes;
-                } if (this.gravedadVictimaSelected = 'HERIDO') {
+                } if (this.gravedadVictimaSelected == 1) {
                   this.contHeridos += 1;
                   this.ipat.totalHeridos = this.contHeridos;
-                } if (this.gravedadVictimaSelected = 'MUERTO') {
+                } if (this.gravedadVictimaSelected == 2) {
                   this.contMuertos += 1;
                   this.ipat.totalMuertos = this.contMuertos;
                 }
@@ -1991,20 +1991,19 @@ export class NewComponent implements OnInit {
                   type: 'success',
                   confirmButtonText: 'Aceptar'
                 });
-
-                if (this.tipoVictimaSelected = 'PASAJERO') {
+                if (this.tipoVictimaSelected == 1) {
                   this.contPasajeros += 1;
                   this.ipat.totalPasajeros = this.contPasajeros;
-                } if (this.tipoVictimaSelected = 'PEATON') {
+                } if (this.tipoVictimaSelected == 2) {
                   this.contPeatones += 1;
                   this.ipat.totalPeatones = this.contPeatones;
-                } if (this.tipoVictimaSelected = 'ACOMPAÑANTE') {
+                } if (this.tipoVictimaSelected == 3) {
                   this.contAcompaniantes += 1;
                   this.ipat.totalAcompaniantes = this.contAcompaniantes;
-                } if (this.gravedadVictimaSelected = 'HERIDO') {
+                } if (this.gravedadVictimaSelected == 1) {
                   this.contHeridos += 1;
                   this.ipat.totalHeridos = this.contHeridos;
-                } if (this.gravedadVictimaSelected = 'MUERTO') {
+                } if (this.gravedadVictimaSelected == 2) {
                   this.contMuertos += 1;
                   this.ipat.totalMuertos = this.contMuertos;
                 }
