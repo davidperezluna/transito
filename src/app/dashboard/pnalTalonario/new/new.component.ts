@@ -14,7 +14,7 @@ export class NewComponent implements OnInit {
 public talonario: PnalTalonario;
 public organismosTransito: any;
 public sedeOperativaSelected: any;
-public sedeOperativa: any = null;
+public organismoTransito: any = null;
 public errorMessage;
 public respuesta: any = null;
 
@@ -65,12 +65,12 @@ constructor(
     }
   }
 
-  onChangedSedeOperativa(e) {
+  onChangedOrganismoTransito(e) {
     if (e) {
       let token = this._loginService.getToken();
       this._OrganismoTransitoService.show(token, e).subscribe(
         response => {
-            this.sedeOperativa = response.data;
+            this.organismoTransito = response.data;
         },
         error => {
           this.errorMessage = <any>error;
@@ -90,8 +90,6 @@ constructor(
   
   onEnviar(){
     let token = this._loginService.getToken();
-    
-    this.talonario.sedeOperativaId = this.sedeOperativaSelected;
 
     this._FuncionarioService.register(this.talonario,token).subscribe(
       response => {

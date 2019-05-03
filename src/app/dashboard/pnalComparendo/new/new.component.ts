@@ -1,4 +1,4 @@
-import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { PnalComparendo } from '../pnalComparendo.modelo';
 import { PnalComparendoService } from '../../../services/pnalComparendo.service';
 import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
@@ -48,7 +48,7 @@ constructor(
   onEnviar(){
     let token = this._loginService.getToken();
     
-    this.comparendo.funcionarioId = this.funcionarioSelected;
+    this.comparendo.idFuncionario = this.funcionarioSelected;
 
     this._ComparendoService.register(this.comparendo,token).subscribe(
       response => {

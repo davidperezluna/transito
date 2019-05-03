@@ -2,7 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {LoginService} from '../../services/login.service';
 import { MpersonalFuncionarioService } from '../../services/mpersonalFuncionario.service';
 import { CfgComparendoEstadoService } from '../../services/cfgComparendoEstado.service';
-import { ComparendoService } from '../../services/comparendo.service';
+import { CvCdoComparendoService } from '../../services/cvCdoComparendo.service';
 import { DatePipe, CurrencyPipe } from '@angular/common';
 
 import swal from 'sweetalert2';
@@ -50,7 +50,7 @@ export class rpcccInventarioDocumentalComponent implements OnInit {
     private _loginService: LoginService,
     private _MpersonalFuncionarioService: MpersonalFuncionarioService,
     private _CfgComparendoEstadoService: CfgComparendoEstadoService,
-    private _ComparendoService: ComparendoService,
+    private _ComparendoService: CvCdoComparendoService,
     ){}
     
   ngOnInit() {

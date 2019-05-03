@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ComparendoService } from '../../../services/comparendo.service';
+import { CvCdoComparendoService } from '../../../services/cvCdoComparendo.service';
 import { FroFacturaService } from '../../../services/froFactura.service';
 import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
 import { FroFacInfraccion } from './froFacInfraccion.modelo';
 import { LoginService } from '../../../services/login.service';
+import { environment } from 'environments/environment'
 import swal from 'sweetalert2';
 declare var $: any;
-import { environment } from 'environments/environment'
 
 @Component({
   selector: 'app-index',
@@ -46,7 +46,7 @@ export class FroFacInfraccionComponent implements OnInit {
 
 
   constructor(
-    private _ComparendoService: ComparendoService,
+    private _ComparendoService: CvCdoComparendoService,
     private _FacturaService: FroFacturaService,
     private _OrganismoTransitoService: CfgOrganismoTransitoService,
     private _LoginService: LoginService,

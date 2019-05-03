@@ -9,27 +9,25 @@ import swal from 'sweetalert2';
 })
 export class EditComponent implements OnInit{
 @Output() ready = new EventEmitter<any>();
-@Input() talonario:any = null;
+@Input() comparendo:any = null;
 public errorMessage;
-public respuesta;
+
 public formReady = false;
 
 constructor(
-  private _talonarioService: PnalTalonarioService,
+  private _TalonarioService: PnalTalonarioService,
   private _loginService: LoginService,
   ){}
 
-  ngOnInit(){ console.log(this.talonario);  }
+  ngOnInit(){ console.log(this.comparendo);  }
 
   onCancelar(){ this.ready.emit(true); }
 
   onEnviar(){
     let token = this._loginService.getToken();
-		this._talonarioService.edit(this.talonario,token).subscribe(
+		this._TalonarioService.edit(this.comparendo,token).subscribe(
 			response => {
-        this.respuesta = response;
-        console.log(this.respuesta);
-        if(this.respuesta.status == 'success'){
+        if(response.status == 'success'){
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',

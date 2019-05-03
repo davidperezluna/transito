@@ -6,7 +6,7 @@ export class PnalTalonario{
 		public rangos: number,
 		public fechaAsignacion: string,
 		public numeroResolucion: string,
-		public sedeOperativaId: number,
+		public idOrganismoTransito: number,
 		public id:number
 	){}
 }

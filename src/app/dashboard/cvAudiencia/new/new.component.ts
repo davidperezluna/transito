@@ -1,7 +1,7 @@
 import { Component, OnInit,Output,EventEmitter } from '@angular/core';
 import { CvAudiencia } from '../cvAudiencia.modelo';
 import { CvAudienciaService } from '../../../services/cvAudiencia.service';
-import { ComparendoService } from '../../../services/comparendo.service';
+import { CvCdoComparendoService } from '../../../services/cvCdoComparendo.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -18,7 +18,7 @@ export class NewComponent implements OnInit {
 
 constructor(
   private _AudienciaService: CvAudienciaService,
-  private _ComparendoService: ComparendoService,
+  private _ComparendoService: CvCdoComparendoService,
   private _LoginService: LoginService,
   ){}
 

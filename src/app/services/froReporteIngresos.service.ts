@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Http, Headers } from "@angular/http";
+import { Http, Headers, ResponseContentType } from "@angular/http";
 import { LoggerService } from "../logger/services/logger.service";
 import { environment } from 'environments/environment';
 import "rxjs/add/operator/map";
@@ -60,12 +60,17 @@ export class FroReporteIngresosService {
         return this._http.get(this.url + "/select").map(res => res.json());
     }
 
-    getTramitePorFecha(datos, token) {
+    pdfTramiteByFecha(datos, token): any {
         let json = JSON.stringify(datos);
         let params = "data=" + json + "&authorization=" + token;
-        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-        return this._http.post(this.url + "/tramite/fecha", params, { headers: headers }).map(
-            res => res.json(),
+
+        let headers = new Headers(
+            {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            }
+        );
+
+        return this._http.post(this.url + "/pdf/tramite/fecha", params, { 'responseType': ResponseContentType.Blob, headers: headers }).map(res => { return new Blob([res.blob()], { type: 'application/pdf' }) }
         );
     }
 

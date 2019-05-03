@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CvCdoTrazabilidadService } from '../../services/cvCdoTrazabilidad.service';
-import { ComparendoService } from '../../services/comparendo.service';
+import { CvCdoComparendoService } from '../../services/cvCdoComparendo.service';
 import { CfgComparendoEstadoService } from '../../services/cfgComparendoEstado.service';
 import { LoginService } from '../../services/login.service';
 import { CvCdoTrazabilidad } from './cvCdoTrazabilidad.modelo';
@@ -29,7 +29,7 @@ export class CvCdoTrazabilidadComponent implements OnInit {
 
   constructor(
     private _TrazabilidadService: CvCdoTrazabilidadService,
-    private _ComparendoService: ComparendoService,
+    private _ComparendoService: CvCdoComparendoService,
     private _EstadoService: CfgComparendoEstadoService,
 		private _LoginService: LoginService,
     ){}

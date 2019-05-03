@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { FroReporteIngresosService } from '../../services/froReporteIngresos.service';
 import { LoginService } from '../../services/login.service';
 import { FroReporteIngresos } from "./froReporteIngresos.modelo";
@@ -37,8 +37,11 @@ export class FroReporteIngresosComponent implements OnInit {
     public organismoTransitoSelected;
     public organismosTransito;
     
-    public tramites;
-    public cant;
+    public tramitesPagados;
+    public tramitesNoPagados;
+    public dataTramites = [];
+    public cantPagados;
+    public cantNoPagados;
     
     public comparendos;
     public totalComparendos;
@@ -117,6 +120,10 @@ export class FroReporteIngresosComponent implements OnInit {
 
     onInitTable(estado) {
         if (estado) {
+            if(this.table) {
+                this.table.destroy();
+            }
+
             this.table = $('#' + estado).DataTable({
                 responsive: true,
                 pageLength: 8,
@@ -170,113 +177,38 @@ export class FroReporteIngresosComponent implements OnInit {
         this.froReporteIngresos.idTipoPersona = this.tipoPersonaSelected;
         this.froReporteIngresos.idTipoRecaudo = this.tipoRecaudoSelected;
         if(this.tipoRecaudoSelected == 1){
-            this._FroReporteIngresosService.getTramitePorFecha(this.froReporteIngresos, token).subscribe(
+            this._FroReporteIngresosService.pdfTramiteByFecha(this.froReporteIngresos, token).subscribe(
                 response => {
-                    if (response.status == 'success') {
-                        this.tramites = response.data;
-                        this.cant = response.cant;
-                        this.tablaTramites = true;
-                        
-                        let estado = "dataTables-tablaTramites";
-                        let timeoutId = setTimeout(() => {
-                            this.onInitTable(estado);
-                        }, 100);
-                        swal({
-                            title: 'Perfecto!',
-                            text: response.message,
-                            type: 'success',
-                            confirmButtonText: 'Aceptar'
-                        })
-                    } else {
-                        swal({
-                            title: 'Error!',
-                            text: response.message,
-                            type: 'error',
-                            confirmButtonText: 'Aceptar'
-                        })
-                    }
-                    error => {
-                        this.errorMessage = <any>error;
-                        if (this.errorMessage != null) {
-                            console.log(this.errorMessage);
-                            alert("Error en la petición");
-                        }
-                    }
-                }
-            );
+                    var fileURL = URL.createObjectURL(response);
+                    window.open(fileURL);
+                } 
+            ); 
         } else if(this.tipoRecaudoSelected == 2) {
             this._FroReporteIngresosService.getComparendoByFecha(this.froReporteIngresos, token).subscribe(
                 response => {
-                    if (response.status == 'success') {
-                        this.comparendos = response.data;
-                        this.totalComparendos = response.totalComparendos;
-                        console.log(response.data);
-                        this.tablaComparendos = true;
-
-                        let estado = "dataTables-tablaComparendos";
-                        let timeoutId = setTimeout(() => {
-                            this.onInitTable(estado);
-                        }, 100);
-                        swal({
-                            title: 'Perfecto!',
-                            text: response.message,
-                            type: 'success',
-                            confirmButtonText: 'Aceptar'
-                        })
-                    } else {
-                        swal({
-                            title: 'Error!',
-                            text: response.message,
-                            type: 'error',
-                            confirmButtonText: 'Aceptar'
-                        })
-                    }
-                    error => {
-                        this.errorMessage = <any>error;
-                        if (this.errorMessage != null) {
-                            console.log(this.errorMessage);
-                            alert("Error en la petición");
-                        }
-                    }
+                    var fileURL = URL.createObjectURL(response);
+                    window.open(fileURL);
                 }
             );
         } else if (this.tipoRecaudoSelected == 3) {
-            alert("retefuente");
-        } else if (this.tipoRecaudoSelected == 4) {
-            alert("cobro coactivo")
-        } else if (this.tipoRecaudoSelected == 5) {
             this._FroReporteIngresosService.getAcuerdoPagoByFecha(this.froReporteIngresos, token).subscribe(
                 response => {
-                    if (response.status == 'success') {
-                        this.acuerdosPago = response.data;
-                        this.totalAcuerdosPago = response.totalAcuerdoPago;
-                        this.tablaAcuerdosPago = true;
-
-                        let estado = "dataTables-tablaComparendos";
-                        let timeoutId = setTimeout(() => {
-                            this.onInitTable(estado);
-                        }, 100);
-                        swal({
-                            title: 'Perfecto!',
-                            text: response.message,
-                            type: 'success',
-                            confirmButtonText: 'Aceptar'
-                        })
-                    } else {
-                        swal({
-                            title: 'Error!',
-                            text: response.message,
-                            type: 'error',
-                            confirmButtonText: 'Aceptar'
-                        })
-                    }
-                    error => {
-                        this.errorMessage = <any>error;
-                        if (this.errorMessage != null) {
-                            console.log(this.errorMessage);
-                            alert("Error en la petición");
-                        }
-                    }
+                    var fileURL = URL.createObjectURL(response);
+                    window.open(fileURL);
+                }
+            );
+        } else if (this.tipoRecaudoSelected == 4) {
+            this._FroReporteIngresosService.getParqueaderoByFecha(this.froReporteIngresos, token).subscribe(
+                response => {
+                    var fileURL = URL.createObjectURL(response);
+                    window.open(fileURL);
+                }
+            );
+        } else if (this.tipoRecaudoSelected == 5) {
+            this._FroReporteIngresosService.getRetefuenteByFecha(this.froReporteIngresos, token).subscribe(
+                response => {
+                    var fileURL = URL.createObjectURL(response);
+                    window.open(fileURL);
                 }
             );
         }

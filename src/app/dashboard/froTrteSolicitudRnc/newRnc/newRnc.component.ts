@@ -332,6 +332,8 @@ constructor(
       );
     }
 
+    this.onChangedTramiteFactura(datos.idTramiteFactura);
+
     /*let token = this._LoginService.getToken();
 
     this._TramiteFacturaService.show({ 'id': datos.idTramiteFactura }, token).subscribe(

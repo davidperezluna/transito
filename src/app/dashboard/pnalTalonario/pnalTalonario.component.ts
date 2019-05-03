@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { PnalTalonarioService } from '../../services/pnalTalonario.service';
 import { PnalTalonario } from './pnalTalonario.modelo';
+import { PnalTalonarioService } from '../../services/pnalTalonario.service';
 import { LoginService } from '../../services/login.service';
 import swal from 'sweetalert2';
 declare var $: any;
@@ -41,24 +41,26 @@ export class PnalTalonarioComponent implements OnInit {
       ) {
       }
     })
+    
     this._TalonarioService.index().subscribe(
-				response => {
-          this.talonarios = response.data;
-          let timeoutId = setTimeout(() => {
-            this.iniciarTabla();
-          }, 100);
-				}, 
-				error => {
-					this.errorMessage = <any>error;
+      response => {
+        this.talonarios = response.data;
+        let timeoutId = setTimeout(() => {
+          this.onInitTable();
+        }, 100);
+      }, 
+      error => {
+        this.errorMessage = <any>error;
 
-					if(this.errorMessage != null){
-						console.log(this.errorMessage);
-						alert("Error en la petición");
-					}
-				}
-      );
+        if(this.errorMessage != null){
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
   }
-  iniciarTabla(){
+
+  onInitTable(){
     $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,
@@ -74,6 +76,7 @@ export class PnalTalonarioComponent implements OnInit {
    });
    this.table = $('#dataTables-example').DataTable();
   }
+
   onNew(){
     this.formNew = true;
     this.formIndex = false;
