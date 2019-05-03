@@ -12,6 +12,15 @@
         </div>
         <div class="card-body">
           <div class="col-xs-12 col-lg-12 row">
+
+            <label>Tipo acta <b class="text-danger">*</b></label>
+            <ng-select
+                [multiple]="false"
+                [options]="tiposActas"
+                [(ngModel)]="data.tipoActa"
+                name="tipoActa">
+            </ng-select>
+
             <label>Organismo de tránsito <small>(sedes)</small> <b class="text-danger">*</b></label>
             <ng-select
                 [multiple]="false"

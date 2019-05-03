@@ -16,6 +16,10 @@ export class ImoActaComponent implements OnInit {
   public respuesta;
   public sedes:any;
   public sedeSelected:any;
+  public tiposActas = [
+    {value:'subTotales',label:'Subtotal'} ,
+    {value:'totales',label:'Totales'} ,
+  ]
 
   public data = {
     'organismoTransito':null,
@@ -24,6 +28,7 @@ export class ImoActaComponent implements OnInit {
     'asignado':false, 
     'fechaInicio':false,
     'fechaFin':false,
+    'tipoActa':null,
   };
 
   constructor(
