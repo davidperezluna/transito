@@ -20,7 +20,7 @@ constructor(
   ){}
 
   ngOnInit() {
-    this.patio = new PqoCfgPatio(null, null, null);
+    this.patio = new PqoCfgPatio(null, null, null, null, null, null, null);
   }
   onCancelar(){
     this.ready.emit(true);

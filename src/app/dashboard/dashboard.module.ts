@@ -45,6 +45,7 @@ import { SvCfgSenialProveedorModule } from './svCfgSenialProveedor/svCfgSenialPr
 import { SvCfgSenialModule } from './svCfgSenial/svCfgSenial.module';
 import { SvSenialInventarioModule } from './svSenialInventario/svSenialInventario.module';
 
+import { CvCdoComparendoModule } from './cvCdoComparendo/cvCdoComparendo.module';
 import { CvCdoTrazabilidadModule } from './cvCdoTrazabilidad/cvCdoTrazabilidad.module';
 import { CvCdoNotificacionModule } from './cvCdoNotificacion/cvCdoNotificacion.module';
 import { CvCdoCfgInteresModule } from './cvCdoCfgInteres/cvCdoCfgInteres.module';
@@ -125,8 +126,6 @@ import { SvCfgZonaModule } from "./svCfgZona/svCfgZona.module";
 import { SvCfgClaseActorViaModule } from './svCfgClaseActorVia/svCfgClaseActorVia.module';
 import { SvCfgTemaCapacitacionModule } from './svCfgTemaCapacitacion/svCfgTemaCapacitacion.module';
 
-import { ComparendoModule } from './comparendo/comparendo.module';
-import { InfraccionModule } from './infraccion/infraccion.module';
 import { registroEntregaProductoModule } from './registroEntregaProducto/registroEntregaProducto.module';
 
 import { UserLcCfgCategoriaModule } from './userLcCfgCategoria/userLcCfgCategoria.module';
@@ -199,9 +198,10 @@ import { GdTrazabilidadModule } from './gdTrazabilidad/gdTrazabilidad.module';
 import { GdCfgTipoCorrespondenciaModule } from './gdCfgTipoCorrespondencia/gdCfgTipoCorrespondencia.module';
 import { GdCfgMedioCorrespondenciaModule } from './gdCfgMedioCorrespondencia/gdCfgMedioCorrespondencia.module';
 
-import { MflInfraccionModule } from './mflInfraccion/mflInfraccion.module';
-import { MflInfraccionCategoriaModule } from './mflInfraccionCategoria/mflInfraccionCategoria.module';
+import { FroInfraccionModule } from './froInfraccion/froInfraccion.module';
+import { FroInfrCfgCategoriaModule } from './froInfrCfgCategoria/froInfrCfgCategoria.module';
 
+import { PnalComparendoModule } from './pnalComparendo/pnalComparendo.module';
 import { PnalCfgCargoModule } from './pnalCfgCargo/pnalCfgCargo.module';
 import { PnalCfgTipoNombramientoModule } from './pnalCfgTipoNombramiento/pnalCfgTipoNombramiento.module';
 import { PnalFuncionarioModule } from './pnalFuncionario/pnalFuncionario.module';
@@ -365,13 +365,14 @@ import {RightsidebarComponent} from '../shared';
     GdTrazabilidadModule,
     GdCfgTipoCorrespondenciaModule,
     GdCfgMedioCorrespondenciaModule,
-    MflInfraccionModule,
-    MflInfraccionCategoriaModule,
+    FroInfraccionModule,
+    FroInfrCfgCategoriaModule,
     PqoCfgPatioModule,
     PqoCfgGruaModule,
     PqoGruaCiudadanoModule,
     PqoInmovilizacionModule,
     MparqCostoTrayectoModule,
+    PnalComparendoModule,
     PnalCfgCargoModule,
     PnalCfgTipoNombramientoModule,
     PnalFuncionarioModule,
@@ -385,7 +386,6 @@ import {RightsidebarComponent} from '../shared';
     VhloVehiculoModule,
     VhloPropietarioModule,
     VhloCfgCarroceriaModule,
-    ComparendoModule,
     CfgAdmFormatoModule,
     CfgAdmFormatoTipoModule,
     CfgBodegaModule,
@@ -398,6 +398,7 @@ import {RightsidebarComponent} from '../shared';
     SvCfgSenialModule,
     SvSenialInventarioModule,
     SvCfgGravedadAccidenteModule,
+    CvCdoComparendoModule,
     CvCdoTrazabilidadModule,
     CvCdoNotificacionModule,
     CvCdoCfgInteresModule,
@@ -431,7 +432,6 @@ import {RightsidebarComponent} from '../shared';
     VehiculoTecnoMecanicaModule,
     SoatModule,
     CfgComparendoEstadoModule,
-    InfraccionModule,
     FacturaModule,
     TramiteFacturaModule,
     SustratoModule,

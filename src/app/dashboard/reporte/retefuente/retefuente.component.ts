@@ -1,14 +1,14 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import {Reporte} from '../reporte.modelo';
-import {LoginService} from '../../../services/login.service';
-import {ComparendoService} from '../../../services/comparendo.service';
-
+import { CvCdoComparendoService } from '../../../services/cvCdoComparendo.service';
+import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 declare var $: any;
+
 @Component({
   selector: 'app-retefuente',
   templateUrl: './retefuente.component.html'
 })
+
 export class RetefuenteComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
 
@@ -33,7 +33,7 @@ public retefuentes =[
 ]
 
 constructor(
-  private _ComparendoService: ComparendoService,
+  private _ComparendoService: CvCdoComparendoService,
   private _loginService: LoginService,
 
 ){}

@@ -1,45 +1,48 @@
 <div class="row">
-    <div class="col-xs-12 col-lg-6">
+    <div class="col-xs-12 col-lg-4">
         <div class="card">
             <div class="card-header">
-                <h5 class="text-uppercase">Nuevo talonario</h5>
+                <b class="text-uppercase">Nuevo talonario</b>
+                <br>
                 <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
             </div>
             <div class="card-body">
                 <form #formNew="ngForm">
                     <div class="form-group row">
                         <div  class="col-xs-12 col-lg-12">
-                            <label>Sede operativa <b class="text-center">*</b></label>
-                            <ng-select [multiple]="false" [options]="organismosTransito" [(ngModel)]="sedeOperativaSelected" name="organismosTransito" (ngModelChange)="onChangedSedeOperativa($event)">
+                            <label>Organismo tránsito <small>(Sede operativa)</small> <b class="text-danger">*</b></label>
+                            <ng-select [multiple]="false" [options]="organismosTransito" [(ngModel)]="talonario.idOrganismoTransito" name="organismosTransito" (ngModelChange)="onChangedOrganismoTransito($event)">
                             </ng-select>
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <div  class="col-xs-12 col-lg-12 alert alert-info" *ngIf='sedeOperativa?.asignacionRango'>
-                            <strong>El codigo DIVIPO: {{ sedeOperativa.codigoDivipo }} se concatena al rango</strong>
+                    <div class="form-group">
+                        <div class="row">
+                            <div  class="col-xs-12 col-lg-12 alert alert-info" *ngIf='organismoTransito?.asignacionRango'>
+                                <strong>El codigo DIVIPO: {{ organismoTransito.codigoDivipo }} se concatena al rango</strong>
+                            </div>
+                            <div  class="col-xs-12 col-lg-4">
+                                <label>Desde <b class="text-danger">*</b></label>
+                                <input class="form-control" [(ngModel)]="talonario.desde" name="desde" type="numeric" required>
+                            </div>
+                            <div  class="col-xs-12 col-lg-4">
+                                <label>Hasta <b class="text-danger">*</b></label>
+                                <input class="form-control" (blur)="onCalcularTotal()" [(ngModel)]="talonario.hasta" name="hasta" type="numeric" required>
+                            </div>
+                            <div  class="col-xs-12 col-lg-4">
+                                <label>Unidades entregadas <b class="text-danger">*</b></label>
+                                <input class="form-control" [(ngModel)]="talonario.rangos" name="rangos" type="numeric" required readonly>
+                            </div>
                         </div>
-                        <div  class="col-xs-12 col-lg-3">
-                            <label>Desde <b class="text-center">*</b></label>
-                            <input class="form-control" (blur)="onCalcularTotal()" [(ngModel)]="talonario.desde" name="desde" type="numeric" required>
-                        </div>
-                        <div  class="col-xs-12 col-lg-3">
-                            <label>Hasta <b class="text-center">*</b></label>
-                            <input class="form-control" (blur)="onCalcularTotal()" [(ngModel)]="talonario.hasta" name="hasta" type="numeric" required>
-                        </div>
-                        <div  class="col-xs-12 col-lg-4">
-                            <label>Unidades entregadas <b class="text-center">*</b></label>
-                            <input class="form-control" [(ngModel)]="talonario.rangos" name="rangos" type="numeric" required readonly>
-                        </div>
-                    </div>
 
-                    <div class="form-group row">
-                        <div  class="col-xs-12 col-lg-4">
-                            <label>Fecha asignación MT <b class="text-center">*</b></label>
-                            <input class="form-control" [(ngModel)]="talonario.fechaAsignacion" name="fechaAsignacion" type="date" required>
-                        </div>
-                        <div  class="col-xs-12 col-lg-8">
-                            <label>Asignación de MT <b class="text-center">*</b></label>
-                            <input class="form-control" [(ngModel)]="talonario.numeroResolucion" name="numeroResolucion" type="text" required>
+                        <div class="row">
+                            <div  class="col-xs-12 col-lg-4">
+                                <label>Fecha asignación MT <b class="text-danger">*</b></label>
+                                <input class="form-control" [(ngModel)]="talonario.fechaAsignacion" name="fechaAsignacion" type="date" required>
+                            </div>
+                            <div  class="col-xs-12 col-lg-8">
+                                <label>Asignación de MT <b class="text-danger">*</b></label>
+                                <input class="form-control" [(ngModel)]="talonario.numeroResolucion" name="numeroResolucion" type="text" required>
+                            </div>
                         </div>
                     </div>
                 </form>

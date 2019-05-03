@@ -4,19 +4,16 @@
       <div class="col-md-12 col-lg-12">
           <div class="card">
                 <div class="card-header">
-                    <h5 class="card-title">
-                        <strong class="text-uppercase">Modulo Personal</strong>
-                        <small>Gestión de talonarios</small>
-                        <div class="btn-group pull-right">
+                    <b class="text-uppercase">Gestión de talonarios</b>
+                    <div class="btn-group pull-right">
                         <button (click)="onNew()" class="btn btn-default">
                             <i class="fa fa-plus"></i>
                             Nuevo
                         </button>
-                        </div>
-                    </h5>
+                    </div>
                 </div>
                 <div class="card-body">
-                <table class="table " id="dataTables-example">
+                <table class="table" id="dataTables-example">
                     <thead>
                     <tr>
                         <th>Id</th>
@@ -31,7 +28,7 @@
                     <tbody>
                     <tr class="odd" *ngFor="let talonario of talonarios; let i = index">
                         <td >{{ talonario.id }}</td>
-                        <td >{{ talonario.sedeOperativa.nombre }}</td>
+                        <td >{{ talonario.organismoTransito.nombre }}</td>
                         <td >{{ talonario.desde }}</td>
                         <td >{{ talonario.hasta }}</td>
                         <td >{{ talonario.rangos }}</td>

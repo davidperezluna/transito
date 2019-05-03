@@ -24,6 +24,8 @@ import { VhloCfgLimitacionCausalRoutes } from './vhloCfgLimitacionCausal/vhloCfg
 import { CvAudienciaRoutes } from './cvAudiencia/cvAudiencia.routes';
 import { CvAuCfgAtencionRoutes } from './cvAuCfgAtencion/cvAuCfgAtencion.routes';
 import { CvAuCfgHorarioRoutes } from './cvAuCfgHorario/cvAuCfgHorario.routes';
+
+import { CvCdoComparendoRoutes } from './cvCdoComparendo/cvCdoComparendo.routes';
 import { CvCdoTrazabilidadRoutes } from './cvCdoTrazabilidad/cvCdoTrazabilidad.routes';
 import { CvCdoNotificacionRoutes } from './cvCdoNotificacion/cvCdoNotificacion.routes';
 import { CvCdoCfgInteresRoutes } from './cvCdoCfgInteres/cvCdoCfgInteres.routes';
@@ -98,8 +100,8 @@ import { GdTrazabilidadRoutes } from './gdTrazabilidad/gdTrazabilidad.routes';
 import { GdCfgTipoCorrespondenciaRoutes } from './gdCfgTipoCorrespondencia/gdCfgTipoCorrespondencia.routes';
 import { GdCfgMedioCorrespondenciaRoutes } from './gdCfgMedioCorrespondencia/gdCfgMedioCorrespondencia.routes';
 
-import { MflInfraccionRoutes } from './mflInfraccion/mflInfraccion.routes';
-import { MflInfraccionCategoriaRoutes } from './mflInfraccionCategoria/mflInfraccionCategoria.routes';
+import { FroInfraccionRoutes } from './froInfraccion/froInfraccion.routes';
+import { FroInfrCfgCategoriaRoutes } from './froInfrCfgCategoria/froInfrCfgCategoria.routes';
 
 import { PqoCfgPatioRoutes } from './pqoCfgPatio/pqoCfgPatio.routes';
 import { PqoCfgGruaRoutes } from './pqoCfgGrua/pqoCfgGrua.routes';
@@ -107,6 +109,7 @@ import { PqoGruaCiudadanoRoutes } from './pqoGruaCiudadano/pqoGruaCiudadano.rout
 import { PqoInmovilizacionRoutes } from './pqoInmovilizacion/pqoInmovilizacion.routes';
 import { MparqCostoTrayectoRoutes } from './mparqCostoTrayecto/mparqCostoTrayecto.routes';
 
+import { PnalComparendoRoutes } from './pnalComparendo/pnalComparendo.routes';
 import { PnalCfgCargoRoutes } from './pnalCfgCargo/pnalCfgCargo.routes';
 import { PnalCfgTipoNombramientoRoutes } from './pnalCfgTipoNombramiento/pnalCfgTipoNombramiento.routes';
 import { PnalFuncionarioRoutes } from './pnalFuncionario/pnalFuncionario.routes';
@@ -115,8 +118,6 @@ import { BancoRoutes } from './banco/banco.routes';
 import { ConsumibleRoutes } from './consumible/consumible.routes';
 import { VehiculoTecnoMecanicaRoutes } from './vehiculoTecnoMecanica/vehiculoTecnoMecanica.routes';
 import { SoatRoutes } from './soat/soat.routes';
-import { ComparendoRoutes } from './comparendo/comparendo.routes';
-import { InfraccionRoutes } from './infraccion/infraccion.routes';
 import { registroEntregaProductoRoutes } from './registroEntregaProducto/registroEntregaProducto.routes';
 
 import { CfgCargoRoutes } from './cfgCargo/cfgCargo.routes';
@@ -311,6 +312,7 @@ export const DashboardRoutes: Route[] = [
       ...UserCfgGrupoEtnicoRoutes,
       ...CfgTipoClaseRoutes,
       ...CfgModuloRoutes,
+      ...PnalComparendoRoutes,
       ...PnalCfgCargoRoutes,
       ...PnalCfgTipoNombramientoRoutes,
       ...PnalFuncionarioRoutes,
@@ -329,8 +331,8 @@ export const DashboardRoutes: Route[] = [
       ...GdTrazabilidadRoutes,
       ...GdCfgTipoCorrespondenciaRoutes,
       ...GdCfgMedioCorrespondenciaRoutes,
-      ...MflInfraccionRoutes,
-      ...MflInfraccionCategoriaRoutes,
+      ...FroInfraccionRoutes,
+      ...FroInfrCfgCategoriaRoutes,
       ...PqoCfgPatioRoutes,
       ...PqoCfgGruaRoutes,
       ...PqoGruaCiudadanoRoutes,
@@ -342,7 +344,7 @@ export const DashboardRoutes: Route[] = [
       ...FroFacTramiteRoutes,
       ...FroTrteCfgCuentaRoutes,
       ...TramiteRoutes,
-      ...ComparendoRoutes,
+      ...CvCdoComparendoRoutes,
       ...CvCdoTrazabilidadRoutes,
       ...CvCdoNotificacionRoutes,
       ...CvCdoCfgInteresRoutes,
@@ -410,7 +412,6 @@ export const DashboardRoutes: Route[] = [
       ...SvCfgVisualDisminuidaRoutes,
       ...SvCfgZonaRoutes,
       ...SvCfgGravedadAccidenteRoutes,
-      ...InfraccionRoutes,
       ...FacturaRoutes,
       ...FacturaInfraccionRoutes,
       ...TramiteFacturaRoutes,

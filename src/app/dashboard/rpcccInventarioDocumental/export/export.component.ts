@@ -1,9 +1,9 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { LoginService } from '../../../services/login.service';
 import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
 import { CfgComparendoEstadoService } from '../../../services/cfgComparendoEstado.service';
-import { ComparendoService } from '../../../services/comparendo.service';
 import { CfgOrganismoTransitoService } from "../../../services/cfgOrganismoTransito.service";
+import { CvCdoComparendoService } from '../../../services/cvCdoComparendo.service';
+import { LoginService } from '../../../services/login.service';
 import { DatePipe, CurrencyPipe } from '@angular/common';
 import { Utils } from 'ng2-bootstrap';
 import swal from 'sweetalert2';
@@ -14,6 +14,7 @@ declare var $: any;
     templateUrl: './export.component.html',
     providers: [DatePipe]
 })
+
 export class ExportComponent implements OnInit {
     @Output() ready = new EventEmitter<any>();
     public errorMessage;
@@ -45,7 +46,7 @@ export class ExportComponent implements OnInit {
         private _loginService: LoginService,
         private _MpersonalFuncionarioService: MpersonalFuncionarioService,
         private _CfgComparendoEstadoService: CfgComparendoEstadoService,
-        private _ComparendoService: ComparendoService,
+        private _ComparendoService: CvCdoComparendoService,
         private _OrganismoTransitoService: CfgOrganismoTransitoService,
     ) { }
 

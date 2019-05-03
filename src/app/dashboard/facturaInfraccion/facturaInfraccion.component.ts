@@ -5,7 +5,7 @@ import { LoginService } from '../../services/login.service';
 import { FacturaInfraccion } from './facturaInfraccion.modelo';
 import { UserCfgTipoIdentificacionService } from '../../services/userCfgTipoIdentificacion.service';
 import { UserCiudadanoService } from '../../services/userCiudadano.service';
-import { ComparendoService } from '../../services/comparendo.service';
+import { CvCdoComparendoService } from '../../services/cvCdoComparendo.service';
 import swal from 'sweetalert2';
 declare var $: any;
 
@@ -13,6 +13,7 @@ declare var $: any;
   selector: 'app-index',
   templateUrl: './facturaInfraccion.component.html'
 })
+
 export class FacturaInfraccionComponent implements OnInit {
   public tipo: any;
   public sub: any;
@@ -34,7 +35,7 @@ export class FacturaInfraccionComponent implements OnInit {
     private _loginService: LoginService,
     private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
     private _UserCiudadanoService: UserCiudadanoService,
-    private _ComparendoService: ComparendoService,
+    private _ComparendoService: CvCdoComparendoService,
   ){}
     
   ngOnInit() {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../../services/login.service';
-import { ComparendoService } from '../../services/comparendo.service';
+import { CvCdoComparendoService } from '../../services/cvCdoComparendo.service';
 import swal from 'sweetalert2';
 declare var $: any;
 
@@ -36,7 +36,7 @@ export class FroAcuerdoPagoComponent implements OnInit {
 
   constructor(
     private _loginService: LoginService,
-    private _ComparendoService: ComparendoService,
+    private _ComparendoService: CvCdoComparendoService,
   ){}
     
   ngOnInit() {  }
