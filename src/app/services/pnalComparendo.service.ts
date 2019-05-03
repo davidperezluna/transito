@@ -6,7 +6,7 @@ import  "rxjs/add/operator/map";
 
 @Injectable()
 export class PnalComparendoService {
-	private url = environment.apiUrl + 'personal/pnalcomparendo';
+	private url = environment.apiUrl + 'personal/pnalcfgcdoconsecutivo';
 	public identity;
 	public token;
 

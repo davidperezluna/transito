@@ -1,7 +1,7 @@
 import { Component, OnInit,Output,EventEmitter } from '@angular/core';
 import { CvCdoComparendo } from '../cvCdoComparendo.modelo';
 import { CvCdoComparendoService } from '../../../services/cvCdoComparendo.service';
-import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
+import { PnalFuncionarioService } from '../../../services/pnalFuncionario.service';
 import { PnalComparendoService } from '../../../services/pnalComparendo.service';
 import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
 import { CfgMunicipioService } from '../../../services/cfgMunicipio.service';
@@ -120,7 +120,7 @@ export class NewComponent implements OnInit {
 
 constructor(
   private _ComparendoService: CvCdoComparendoService,
-  private _MpersonalFuncionarioService: MpersonalFuncionarioService,
+  private _FuncionarioService: PnalFuncionarioService,
   private _PnalComparendoService: PnalComparendoService,
   private _OrganismoTransitoService: CfgOrganismoTransitoService,
   private _MunicipioService: CfgMunicipioService,
@@ -139,12 +139,20 @@ constructor(
   private _ClaseService: VhloCfgClaseService,
   private _ServicioService: VhloCfgServicioService,
   private _FroInfraccionService: FroInfraccionService,
-  private _CfgTipoInfractorService: CfgTipoInfractorService,
+  private _TipoInfractorService: CfgTipoInfractorService,
   private _CfgLicenciaConduccionCategoriaService: UserLcCfgCategoriaService,
   private _LoginService: LoginService,
   ){}
   
   ngOnInit() {
+    swal({
+      title: 'Cargando agentes!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+
     this.placa = {
       'placa': this.placa,
     };
@@ -155,210 +163,16 @@ constructor(
 
     this.comparendo = new CvCdoComparendo(null,null,null,null,null,null,null,null,null,null,null,null,false,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
 
-    this._MpersonalFuncionarioService.selectAgentes().subscribe(
+    this._FuncionarioService.selectAgentes().subscribe(
       response => {
         this.agentesTransito = response;
+
+        swal.close();
       }, 
       error => {
         this.errorMessage = <any>error;
 
         if(this.errorMessage != null){
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
-
-    this._MunicipioService.select().subscribe(
-      response => {
-        this.municipios = response;
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
-
-    this._OrganismoTransitoService.selectSedes().subscribe(
-      response => {
-        this.organismosTransito = response;
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
-
-    this._PqoCfgPatioService.select().subscribe(
-      response => {
-        this.patios = response;
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
-
-    this._PqoCfgGruaService.select().subscribe(
-      response => {
-        this.gruas = response;
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
-
-    this._FroInfraccionService.select().subscribe(
-      response => {
-        this.infracciones = response;
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
-
-    this._CfgTipoInfractorService.select().subscribe(
-      response => {
-        this.infractorTipos = response;
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
-
-    this._CfgLicenciaConduccionCategoriaService.select().subscribe(
-      response => {
-        this.categorias = response;
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
-
-    this._RadioAccionService.select().subscribe(
-      response => {
-        this.radiosAccion = response;
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
-
-    this._ModalidadTransporteService.select().subscribe(
-      response => {
-        this.modalidadesTransporte = response;
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
-
-    this._TransportePasajeroService.select().subscribe(
-      response => {
-        this.transportesPasajero = response;
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
-
-    this._TransporteEspecialService.select().subscribe(
-      response => {
-        this.transportesEspecial = response;
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
-
-    this._ServicioService.select().subscribe(
-      response => {
-        this.servicios = response;
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
-
-    this._ClaseService.select().subscribe(
-      response => {
-        this.tiposVehiculo = response;
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
-
-    this._TipoIdentificacionService.select().subscribe(
-      response => {
-        this.tiposIdentificacion = response;
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if (this.errorMessage != null) {
           console.log(this.errorMessage);
           alert("Error en la petición");
         }
@@ -432,7 +246,7 @@ constructor(
         }
       });
 
-      this._MpersonalFuncionarioService.show({ 'id': this.agenteTransitoSelected }, token).subscribe(
+      this._FuncionarioService.show({ 'id': this.agenteTransitoSelected }, token).subscribe(
         response => {
           if (response.status == 'success') {
             this.funcionario = response.data;
@@ -447,6 +261,202 @@ constructor(
                   this.comparendo.idConsecutivo = this.consecutivo.id;
   
                   this.consecutivo = response.data;
+
+                  this._MunicipioService.select().subscribe(
+                    response => {
+                      this.municipios = response;
+                    },
+                    error => {
+                      this.errorMessage = <any>error;
+              
+                      if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                      }
+                    }
+                  );
+              
+                  this._OrganismoTransitoService.selectSedes().subscribe(
+                    response => {
+                      this.organismosTransito = response;
+                    },
+                    error => {
+                      this.errorMessage = <any>error;
+              
+                      if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                      }
+                    }
+                  );
+              
+                  this._PqoCfgPatioService.select().subscribe(
+                    response => {
+                      this.patios = response;
+                    },
+                    error => {
+                      this.errorMessage = <any>error;
+              
+                      if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                      }
+                    }
+                  );
+              
+                  this._PqoCfgGruaService.select().subscribe(
+                    response => {
+                      this.gruas = response;
+                    },
+                    error => {
+                      this.errorMessage = <any>error;
+              
+                      if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                      }
+                    }
+                  );
+              
+                  this._FroInfraccionService.select().subscribe(
+                    response => {
+                      this.infracciones = response;
+                    },
+                    error => {
+                      this.errorMessage = <any>error;
+              
+                      if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                      }
+                    }
+                  );
+              
+                  this._TipoInfractorService.select().subscribe(
+                    response => {
+                      this.infractorTipos = response;
+                    },
+                    error => {
+                      this.errorMessage = <any>error;
+              
+                      if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                      }
+                    }
+                  );
+              
+                  this._CfgLicenciaConduccionCategoriaService.select().subscribe(
+                    response => {
+                      this.categorias = response;
+                    },
+                    error => {
+                      this.errorMessage = <any>error;
+              
+                      if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                      }
+                    }
+                  );
+              
+                  this._RadioAccionService.select().subscribe(
+                    response => {
+                      this.radiosAccion = response;
+                    },
+                    error => {
+                      this.errorMessage = <any>error;
+              
+                      if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                      }
+                    }
+                  );
+              
+                  this._ModalidadTransporteService.select().subscribe(
+                    response => {
+                      this.modalidadesTransporte = response;
+                    },
+                    error => {
+                      this.errorMessage = <any>error;
+              
+                      if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                      }
+                    }
+                  );
+              
+                  this._TransportePasajeroService.select().subscribe(
+                    response => {
+                      this.transportesPasajero = response;
+                    },
+                    error => {
+                      this.errorMessage = <any>error;
+              
+                      if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                      }
+                    }
+                  );
+              
+                  this._TransporteEspecialService.select().subscribe(
+                    response => {
+                      this.transportesEspecial = response;
+                    },
+                    error => {
+                      this.errorMessage = <any>error;
+              
+                      if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                      }
+                    }
+                  );
+              
+                  this._ServicioService.select().subscribe(
+                    response => {
+                      this.servicios = response;
+                    },
+                    error => {
+                      this.errorMessage = <any>error;
+              
+                      if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                      }
+                    }
+                  );
+              
+                  this._ClaseService.select().subscribe(
+                    response => {
+                      this.tiposVehiculo = response;
+                    },
+                    error => {
+                      this.errorMessage = <any>error;
+              
+                      if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                      }
+                    }
+                  );
+              
+                  this._TipoIdentificacionService.select().subscribe(
+                    response => {
+                      this.tiposIdentificacion = response;
+                    },
+                    error => {
+                      this.errorMessage = <any>error;
+              
+                      if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                      }
+                    }
+                  );
                 }else{
                   swal({
                     title: 'Error!',
@@ -553,7 +563,12 @@ constructor(
   onSearchPropietario(){
     let token = this._LoginService.getToken();
 
-    this._UserCiudadanoService.searchByIdentificacion({ 'numeroIdentificacion': this.propietario.identificacion }, token).subscribe(
+    let datos = { 
+      'identificacion': this.propietario.identificacion, 
+      'idTipoIdentificacion': 1,
+    }
+
+    this._UserCiudadanoService.searchByIdentificacion(datos, token).subscribe(
       response => {
         if (response.status == "success") {
           this.ciudadano = response.data;
@@ -592,7 +607,12 @@ constructor(
   onSearchInfractor() {
     let token = this._LoginService.getToken();
 
-    this._UserCiudadanoService.searchByIdentificacion({ 'numeroIdentificacion': this.infractor.identificacion }, token).subscribe(
+    let datos = { 
+      'identificacion': this.infractor.identificacion, 
+      'idTipoIdentificacion': 1,
+    }
+
+    this._UserCiudadanoService.searchByIdentificacion(datos, token).subscribe(
       response => {
         if (response.status == "success") {
           this.ciudadano = response.data;
@@ -681,7 +701,13 @@ constructor(
     });
 
     let token = this._LoginService.getToken();
-    this._UserCiudadanoService.searchByIdentificacion(token, { 'numeroIdentificacion': this.testigo.identificacion} ).subscribe(
+
+    let datos = { 
+      'identificacion': this.testigo.identificacion, 
+      'idTipoIdentificacion': 1,
+    }
+
+    this._UserCiudadanoService.searchByIdentificacion(datos, token).subscribe(
       response => {
         if (response.status == "success") {
           this.testigo = response.data;

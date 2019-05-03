@@ -19,9 +19,9 @@ export class PnalAsignacionService {
 		return this._http.get(this.url+"/").map(res => res.json());
 	}
 
-	register(asignacion,token){
-		let json = JSON.stringify(asignacion);
-		let params = "json="+json+"&authorization="+token;
+	register(datos, token){
+		let json = JSON.stringify(datos);
+		let params = "data="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/new", params, {headers: headers}).map(
 			res => res.json(),
@@ -43,9 +43,9 @@ export class PnalAsignacionService {
 							  .map(res => res.json());
 	}
 
-	edit(asignacion,token){
-		let json = JSON.stringify(asignacion);
-		let params = "json="+json+"&authorization="+token;
+	edit(datos, token){
+		let json = JSON.stringify(datos);
+		let params = "data="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
  		return this._http.post(this.url+"/edit", params, {headers: headers}).map(
 			res => res.json(),
@@ -57,16 +57,16 @@ export class PnalAsignacionService {
 		return this._http.get(this.url+"/select").map(res => res.json());
 	}
 
-	searchFuncionarioAgente(datos,token){
+	searchFuncionarioAgente(datos, token){
 		let json = JSON.stringify(datos);
-		let params = "json="+json+"&authorization="+token;
+		let params = "data="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
  		return this._http.post(this.url+"/search/funcionario/agente", params, {headers: headers}).map(res => res.json());
 	}
 
-	recordByFuncionario(datos,token){
+	recordByFuncionario(datos, token){
 		let json = JSON.stringify(datos);
-		let params = "json="+json+"&authorization="+token;
+		let params = "data="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
  		return this._http.post(this.url+"/record/funcionario", params, {headers: headers}).map(res => res.json());
 	}

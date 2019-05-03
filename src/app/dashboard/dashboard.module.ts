@@ -205,11 +205,10 @@ import { PnalComparendoModule } from './pnalComparendo/pnalComparendo.module';
 import { PnalCfgCargoModule } from './pnalCfgCargo/pnalCfgCargo.module';
 import { PnalCfgTipoNombramientoModule } from './pnalCfgTipoNombramiento/pnalCfgTipoNombramiento.module';
 import { PnalFuncionarioModule } from './pnalFuncionario/pnalFuncionario.module';
-
-import { CfgCargoModule } from './cfgCargo/cfgCargo.module';
-
 import { PnalTalonarioModule } from './pnalTalonario/pnalTalonario.module';
 import { PnalAsignacionModule } from './pnalAsignacion/pnalAsignacion.module';
+
+import { CfgCargoModule } from './cfgCargo/cfgCargo.module';
 
 import { ImoPreasignacionModule } from './imoPreasignacIon/imoPreasignacion.module';
 import { ImoActaModule } from './imoActa/imoActa.module';

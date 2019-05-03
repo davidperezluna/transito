@@ -6,19 +6,19 @@
                 <h5 class="text-uppercase">
                     Historico de comparendos asignados
                     <div class="btn-group pull-right">
-                        <button (click)="onCancelar()" class="btn btn-default">
-                            <i class="fa fa-times"></i>
-                            Cancel
-                        </button>
-                        <button (click)="onNew(funcionario)" class="btn btn-primary" type="button">
+                        <button (click)="onNew(funcionario)" class="btn btn-xs btn-primary" type="button">
                             <i class="fa fa-plus"></i>
                             Nuevo
+                        </button>
+                        <button (click)="onCancelar()" class="btn btn btn-xs-default">
+                            <i class="fa fa-times"></i>
+                            Cancelar
                         </button>
                     </div>
                 </h5>
             </div>
             <div class="card-body">
-                <div class="btn-group" *ngIf='comparendos?.length > 0'>
+                <div class="btn-group" *ngIf='consecutivos?.length > 0'>
                     <a href="{{ apiUrl }}/planilla/{{ funcionario.id }}/pdf" class="btn btn-success" target="_blank">
                         <i class="fa fa-file-pdf-o"></i>
                         Imprimir Planilla
@@ -35,12 +35,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                    <tr class="odd" *ngFor="let comparendo of comparendos; let i = index">
+                    <tr class="odd" *ngFor="let consecutivo of consecutivos; let i = index">
                         <td>{{ i + 1 }}</td>
-                        <td>{{ comparendo.consecutivo }}</td>
-                        <td>{{ comparendo.fechaAsignacion }}</td>
-                        <td>{{ comparendo.estado }}</td>
-                        <td>{{ comparendo.sedeOperativa.nombre }}</td>
+                        <td>{{ consecutivo.numero }}</td>
+                        <td>{{ consecutivo.fechaAsignacion }}</td>
+                        <td>{{ consecutivo.estado }}</td>
+                        <td>{{ consecutivo.organismoTransito.nombre }}</td>
                     </tr>
                     </tbody>
                 </table>

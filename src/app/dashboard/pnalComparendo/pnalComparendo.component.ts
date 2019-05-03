@@ -1,6 +1,6 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { PnalComparendoService } from '../../services/pnalComparendo.service';
+import { Component, OnInit } from '@angular/core';
 import { PnalComparendo } from './pnalComparendo.modelo';
+import { PnalComparendoService } from '../../services/pnalComparendo.service';
 import { LoginService } from '../../services/login.service';
 import swal from 'sweetalert2';
 declare var $: any;
@@ -13,8 +13,8 @@ declare var $: any;
 export class PnalComparendoComponent implements OnInit {
   public errorMessage;
 	public id;
-	public respuesta;
-	public talonarios;
+
+	public comparendos;
 	public formNew = false;
 	public formEdit = false;
   public formIndex = true;
@@ -43,9 +43,10 @@ export class PnalComparendoComponent implements OnInit {
     })
     this._PersonalComparendoService.index().subscribe(
 				response => {
-          this.talonarios = response.data;
+          this.comparendos = response.data;
+          
           let timeoutId = setTimeout(() => {
-            this.iniciarTabla();
+            this.onInitTable();
           }, 100);
 				}, 
 				error => {
@@ -58,8 +59,9 @@ export class PnalComparendoComponent implements OnInit {
 				}
       );
   }
-  iniciarTabla(){
-    $('#dataTables-example').DataTable({
+
+  onInitTable(){
+    this.table = $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,
       sPaginationType: 'full_numbers',
@@ -71,8 +73,7 @@ export class PnalComparendoComponent implements OnInit {
           sLast: '<i class="fa fa-step-forward"></i>'
         }
       }
-   });
-   this.table = $('#dataTables-example').DataTable();
+    });
   }
   onNew(){
     this.formNew = true;
@@ -111,7 +112,6 @@ export class PnalComparendoComponent implements OnInit {
                       confirmButtonColor: '#15d4be',
                     })
                   this.table.destroy();
-                  this.respuesta= response;
                   this.ngOnInit();
               }, 
             error => {

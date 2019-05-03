@@ -13,7 +13,7 @@ declare var $: any;
 export class PnalAsignacionComponent implements OnInit {
   public errorMessage;
 	public id;
-	public respuesta;
+
 	public funcionarios;
 	public funcionario: any;
 	public formNew = false;
@@ -32,27 +32,10 @@ export class PnalAsignacionComponent implements OnInit {
 		private _loginService: LoginService,
     ){}
     
-  ngOnInit() {
-    swal({
-      title: 'Cargando Tabla!',
-      text: 'Solo tardara unos segundos por favor espere.',
-      timer: 1500,
-      onOpen: () => {
-        swal.showLoading()
-      }
-    }).then((result) => {
-      if (
-        // Read more about handling dismissals
-        result.dismiss === swal.DismissReason.timer
-      ) {
-      }
-    });
-
-    $('[data-toggle="tooltip"]').tooltip();
-  }
+  ngOnInit() {  }
   
-  iniciarTabla(){
-    $('#dataTables-example').DataTable({
+  onInitTable(){
+    this.table = $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,
       sPaginationType: 'full_numbers',
@@ -64,8 +47,7 @@ export class PnalAsignacionComponent implements OnInit {
           sLast: '<i class="fa fa-step-forward"></i>'
         }
       }
-   });
-   this.table = $('#dataTables-example').DataTable();
+    });
   }
 
   onShow(funcionario: any){
@@ -117,7 +99,7 @@ export class PnalAsignacionComponent implements OnInit {
                       confirmButtonColor: '#15d4be',
                     })
                   this.table.destroy();
-                  this.respuesta= response;
+
                   this.ngOnInit();
               }, 
             error => {
@@ -136,34 +118,35 @@ export class PnalAsignacionComponent implements OnInit {
   }
 
   onSearch(){   
+    swal({
+      title: 'Buscando registros!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+
     let token = this._loginService.getToken();
     
     this.datos.parametro = this.parametro;
 
 		this._AsignacionService.searchFuncionarioAgente(this.datos,token).subscribe(
 			response => {
-        this.respuesta = response;
-        if(this.respuesta.status == 'success'){
+        if(response.status == 'success'){
           this.funcionarios = response.data;
-          this.iniciarTabla();
+
+          this.onInitTable();
 
           swal({
             title: 'Perfecto',
-            text: response.msj,
+            text: response.message,
             type: 'info',
-            showCloseButton: true,
-            focusConfirm: false,
-            confirmButtonText:
-              '<i class="fa fa-thumbs-up"></i> OK!',
-            confirmButtonAriaLabel: 'Thumbs up, great!',
-            cancelButtonText:
-            '<i class="fa fa-thumbs-down"></i>',
-            cancelButtonAriaLabel: 'Thumbs down',
+            confirmButtonText: 'Aceptar'
           });
         }else{
           swal({
             title: 'Atención',
-            text: response.msj,
+            text: response.message,
             type:'warning',
             confirmButtonColor: '#15d4be',
           });

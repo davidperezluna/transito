@@ -15,11 +15,11 @@
                         </div>
                         <div  class="col-xs-12 col-lg-4">
                             <label>Hasta</label>
-                            <input class="form-control" [(ngModel)]="asignacion.hasta" name="hasta" type="numeric" required>
+                            <input class="form-control" (blur)="onCalcularTotal()" [(ngModel)]="asignacion.hasta" name="hasta" type="numeric" required>
                         </div>
                         <div  class="col-xs-12 col-lg-4">
                             <label>Rangos</label>
-                            <input class="form-control" [(ngModel)]="asignacion.rangos" name="rangos" type="numeric" required>
+                            <input class="form-control" [(ngModel)]="asignacion.rangos" name="rangos" type="numeric" required readonly>
                         </div>
                     </div>
 
@@ -32,13 +32,13 @@
                 </form>
             </div>
             <div class="card-footer">
-                <button (click)="onCancelar()" class="btn btn-default" type="button">
-                    <i class="fa fa-times"></i>
-                    Cancelar
-                </button>
                 <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
                     <i class="fa fa-save"></i>
                     Guardar
+                </button>
+                <button (click)="onCancelar()" class="btn btn-default" type="button">
+                    <i class="fa fa-times"></i>
+                    Cancelar
                 </button>
             </div>
         </div>

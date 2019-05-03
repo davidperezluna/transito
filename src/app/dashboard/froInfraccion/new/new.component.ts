@@ -48,8 +48,6 @@ constructor(
   onEnviar(){
     let token = this._loginService.getToken();
 
-    this.infraccion.infraccionCategoriaId = this.infraccionCategoriaSelected;
-
 		this._InfraccionService.register(this.infraccion,token).subscribe(
 			response => {
         this.respuesta = response;

@@ -3,7 +3,8 @@
     <div class="col-xs-12 col-lg-4">
         <div class="card">
             <div class="card-header">
-                <h5 class="text-uppercase">Nueva Categoria de Infracción</h5>
+                <b class="text-uppercase">Nueva infracción</b>
+                <br>
                 <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
             </div>
             <div class="card-body">
@@ -27,9 +28,9 @@
                                 <ng-select 
                                     [multiple]="false" 
                                     [options]="infraccionCategorias" 
-                                    [(ngModel)]="infraccionCategoriaSelected" 
+                                    [(ngModel)]="infraccion.idInfraccionCategoria" 
                                     required 
-                                    name="infraccionCategorias" required>
+                                    name="idInfraccionCategoria" required>
                                 </ng-select>
                             </div>
                         </div>

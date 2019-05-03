@@ -61,7 +61,11 @@ export class PnalTalonarioComponent implements OnInit {
   }
 
   onInitTable(){
-    $('#dataTables-example').DataTable({
+    if (this.table) {
+      this.table.destroy();
+    }
+    
+    this.table = $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,
       sPaginationType: 'full_numbers',
@@ -73,14 +77,12 @@ export class PnalTalonarioComponent implements OnInit {
           sLast: '<i class="fa fa-step-forward"></i>'
         }
       }
-   });
-   this.table = $('#dataTables-example').DataTable();
+    });
   }
 
   onNew(){
     this.formNew = true;
     this.formIndex = false;
-    this.table.destroy();
   }
 
   ready(isCreado:any){

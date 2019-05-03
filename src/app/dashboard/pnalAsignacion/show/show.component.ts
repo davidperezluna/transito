@@ -14,10 +14,10 @@ export class ShowComponent implements OnInit{
 @Output() ready = new EventEmitter<any>();
 @Output() readyNew = new EventEmitter<any>();
 @Input() funcionario:any = null;
-public apiUrl = environment.apiUrl + 'mpersonalasignacion';
+public apiUrl = environment.apiUrl + 'personal/pnalasignacion';
 public errorMessage;
 public respuesta;
-public comparendos: any;
+public consecutivos: any;
 public table: any;
 
 constructor(
@@ -27,13 +27,23 @@ constructor(
   ){}
 
   ngOnInit(){
+    swal({
+      title: 'Buscando registros!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+
     let token = this._loginService.getToken();
 
     this._ComparendoService.record(this.funcionario, token).subscribe(
       response => {
-        this.comparendos = response.data;
+        this.consecutivos = response.data;
+
         let timeoutId = setTimeout(() => {
-          this.iniciarTabla();
+          this.onInitTable();
+          swal.close();
         }, 100);
       }, 
       error => {
@@ -47,7 +57,7 @@ constructor(
     );
   }
 
-  iniciarTabla(){
+  onInitTable(){
     $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,

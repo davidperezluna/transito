@@ -6,7 +6,7 @@ export class FroInfraccion{
 		public retiene: boolean,
 		public inmoviliza: boolean,
 		public dias: number,
+		public idInfraccionCategoria: number,
 		public id:number,
-		public infraccionCategoriaId: number,
 	){}
 }

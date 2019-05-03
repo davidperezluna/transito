@@ -6,7 +6,7 @@ import  "rxjs/add/operator/map";
 
 @Injectable()
 export class CfgTipoInfractorService {
-	private url = environment.apiUrl + 'cfgtipoinfractor';
+	private url = environment.apiUrl + 'contravencional/cvcdocfgtipoinfractor';
 	public identity;
 	public token;
 

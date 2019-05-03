@@ -11,6 +11,7 @@ import swal from 'sweetalert2';
 export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
 @Input() funcionario:any = null;
+
 public asignacion: PnalAsignacion;
 public organismosTransito: any;
 public sedeOperativaSelected: any;
@@ -29,8 +30,40 @@ constructor(
   onCancelar(){
     this.ready.emit(true);
   }
+
+  onCalcularTotal() {
+    let ini, fin, rangos;
+    ini = this.asignacion.desde;
+    fin = this.asignacion.hasta;
+
+    if (fin > ini) {
+      rangos = (fin - ini) + 1;
+
+      if (rangos < 0) {
+        rangos = 0;
+      }
+      this.asignacion.rangos = rangos;
+    }else{
+      swal({
+        title: 'Alerta!',
+        text: 'El número de inicio no puede ser superior o igual al número de finalización',
+        type: 'error',
+        confirmButtonText: 'Aceptar'
+      });
+
+      this.asignacion.rangos = null;
+    }
+  }
   
   onEnviar(){
+    swal({
+      title: 'Asignando consecutivos!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+
     let token = this._LoginService.getToken();
     
     this.asignacion.idFuncionario = this.funcionario.id;
