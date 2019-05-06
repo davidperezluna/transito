@@ -128,6 +128,7 @@ constructor(
 
           if (response.status == 'success') {
             this.numero = this.loteInsumo.cantidad;
+
             swal.close()
           }else{
             this.numero = 0;
@@ -139,7 +140,6 @@ constructor(
               confirmButtonText: 'Aceptar'
             })
           }
-          
         error => {
             this.errorMessage = <any>error;
 
@@ -161,23 +161,28 @@ constructor(
           swal.showLoading()
         }
       })
+
       if (this.table) {
         this.table.destroy()
       }
+
       let datos={
         'tipoInsumo':this.insumoSelected,
         'idOrganismoTransito':this.sedeSelected,
       }
+
       let token = this._loginService.getToken();
+
       this._ImoLoteService.show(datos,token).subscribe( 
         response => {
           
           if (response.status == 'success') {
             this.lotes = response.data;
+
             swal.close()
-            console.log(this.lotes);
+
             setTimeout(() => {
-              this.iniciarTabla();
+              this.onInitTable();
             });
           }else{
             this.lotes = null;
@@ -201,8 +206,8 @@ constructor(
   }
 
 
-  iniciarTabla(){
-    $('#dataTables-example').DataTable({
+  onInitTable(){
+    this.table = $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,
       sPaginationType: 'full_numbers',
@@ -214,8 +219,7 @@ constructor(
            sLast: '>>'
         }
       }
-   });
-   this.table = $('#dataTables-example').DataTable();
+    });
   }
 
   onAsignarLote(lote){
@@ -231,7 +235,7 @@ constructor(
   }
 
   onAsignarLoteInsumo(){
-    console.log(this.loteInsumo);
+    console.log(this.numero);
     if (this.loteInsumo) {
       if(this.numero <= this.loteInsumo.cantidad){
         swal({
