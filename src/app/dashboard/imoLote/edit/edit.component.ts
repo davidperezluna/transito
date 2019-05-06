@@ -50,13 +50,13 @@ constructor(
           console.log(this.errorMessage);
           alert("Error en la petición");
         }
-      }
+      } 
     );
     this._CasoInsumoService.getCasoInsumoInsumoSelect().subscribe(
       response => {
-        this.insumos = response;
+        this.insumos = response; 
         setTimeout(() => {
-          this.insumoSelected = Number[this.loteInsumoInsumo.tipoInsumo.id];
+          this.insumoSelected = [this.loteInsumoInsumo.tipoInsumo.id];
         });
       }, 
       error => {
