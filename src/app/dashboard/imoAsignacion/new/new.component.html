@@ -166,7 +166,7 @@
                 <!-- <button  (click)="onEnviarArray()" class="btn btn-primary" type="button">Enviar</button> -->
                 <button *ngIf="!numeroActa" (click)="onEnviarArray()" class="btn btn-primary" type="button">Enviar</button>
     
-                <a href="{{ apiUrl }}/pdf/acta/asignacion/{{numeroActa}}/{{sedeSelected}}" (click)="onPrintActa()" *ngIf='numeroActa' class="btn btn-success" target="_blank">
+                <a href="{{ apiUrl }}/{{numeroActa}}/{{sedeSelected}}/pdf/acta/asignacion" (click)="onPrintActa()" *ngIf='numeroActa' class="btn btn-success" target="_blank">
                     <i class="fa fa-file-pdf-o"></i>
                     Imprimir Acta
                 </a>
