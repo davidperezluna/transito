@@ -122,7 +122,7 @@ constructor(
 
       let token = this._loginService.getToken();
 
-      this._ImoLoteService.show(datos,token).subscribe(
+      this._ImoLoteService.show(datos,token).subscribe( 
         response => {
           this.loteInsumo = response.data;
 
@@ -131,7 +131,7 @@ constructor(
 
             swal.close()
           }else{
-            this.numero = 0;
+            this.numero = 0; 
 
             swal({
               title: 'Error!',
@@ -223,7 +223,10 @@ constructor(
   }
 
   onAsignarLote(lote){
-   
+    let isLote = this.lotesSelecionados.filter(h => h !== lote)
+    console.log(isLote.length);
+
+    if (isLote.length == 0) {
     this.lotesSelecionados.push(
         {
           'idLote':lote.id,
@@ -232,10 +235,13 @@ constructor(
           'cantidad':lote.cantidad,
         }   
     );
-  }
+    }
+   
 
+  }
   onAsignarLoteInsumo(){
     console.log(this.numero);
+    console.log(this.loteInsumo.cantidad);
     if (this.loteInsumo) {
       if(this.numero <= this.loteInsumo.cantidad){
         swal({

@@ -224,6 +224,12 @@ constructor(
         if (response.status == 'success') {
           this.lotes = null;
           swal.close()
+          swal({
+            title: 'Perfecto!',
+            text: 'Registro exitoso!',
+            type: 'success',
+            confirmButtonText: 'Aceptar'
+          })
           console.log(this.lotes);
           setTimeout(() => {
             this.iniciarTabla();
