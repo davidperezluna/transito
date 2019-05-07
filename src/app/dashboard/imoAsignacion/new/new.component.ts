@@ -1,13 +1,13 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import {rnaAsignacionInsumos} from '../imoAsignacion.modelo';
+import { DatePipe } from '@angular/common';
+import { rnaAsignacionInsumos } from '../imoAsignacion.modelo';
 import { ImoLoteService } from '../../../services/imoLote.service';
-import {LoginService} from '../../../services/login.service';
 import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
 import { ImoCfgTipoService } from '../../../services/imoCfgTipo.service';
-import {ImoInsumoService} from '../../../services/imoInsumo.service';
-import { DatePipe } from '@angular/common';
-import swal from 'sweetalert2';
+import { ImoInsumoService } from '../../../services/imoInsumo.service';
+import { LoginService } from '../../../services/login.service';
 import { environment } from 'environments/environment';
+import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
@@ -15,15 +15,16 @@ declare var $: any;
   templateUrl: './new.component.html',
   providers: [DatePipe]
 })
+
 export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
 public apiUrl = environment.apiUrl + 'insumo/imolote';
 public rnaAsignacionInsumos: rnaAsignacionInsumos;
 public errorMessage;
-public respuesta;
+
 public empresas:any;
 public empresaSelected:any;
-public sedes:any;
+public organismosTransito:any;
 public sedeSelected:any;
 public sedeSelectedInsumo:any;
 public frmInsumoSelectInsumo:any=true;
@@ -32,13 +33,19 @@ public sustratos:any;
 public insumoSelect:any;
 public loteInsumo:any;
 public insumoSelected:any;
-public lotes:any;
+public lotes:any = null;
 public lotesSelecionados:any = [];
 public insumoSelectedInsumo:any;
 public date:any;
 public numero:any;
 public numeroActa: any = null;
 public table:any;
+
+public tipoInsumo: any = null;
+public tiposInsumo = [
+  {'value': 1, 'label': 'SUSTRATO'},
+  {'value': 2, 'label': 'INSUMO'},
+];
 
 constructor(
   private _ImoLoteService: ImoLoteService,
@@ -84,7 +91,7 @@ constructor(
 
     this._OrganismoTransitoService.selectSedes().subscribe(
       response => {
-        this.sedes = response;
+        this.organismosTransito = response;
       }, 
       error => {
         this.errorMessage = <any>error;
@@ -166,7 +173,7 @@ constructor(
         this.table.destroy()
       }
 
-      let datos={
+      let datos = {
         'tipoInsumo':this.insumoSelected,
         'idOrganismoTransito':this.sedeSelected,
       }
@@ -175,7 +182,6 @@ constructor(
 
       this._ImoLoteService.show(datos,token).subscribe( 
         response => {
-          
           if (response.status == 'success') {
             this.lotes = response.data;
 
@@ -186,12 +192,13 @@ constructor(
             });
           }else{
             this.lotes = null;
+
             swal({
               title: 'Error!',
               text: 'No existen sustratos para esta sede',
               type: 'error',
               confirmButtonText: 'Aceptar'
-            })
+            });
           }
           
         error => {
@@ -240,28 +247,27 @@ constructor(
 
   }
   onAsignarLoteInsumo(){
-    console.log(this.numero);
-    console.log(this.loteInsumo.cantidad);
     if (this.loteInsumo) {
-      if(this.numero <= this.loteInsumo.cantidad){
+      if(Number(this.numero) <= Number(this.loteInsumo.cantidad)){
+        this.lotesSelecionados.push(
+          {
+            'idLote':this.loteInsumo.id,
+            'tipo':this.loteInsumo.tipoInsumo.nombre,
+            'idTipo':this.loteInsumo.tipoInsumo.id,
+            'cantidad':this.numero,
+          }   
+        );
+
+        this.insumoSelectedInsumo = [];
+        this.numero = 0;
+        this.loteInsumo = false;
+      }else{
         swal({
           title: 'Error!',
           text: 'Excede el numero de insumo',
           type: 'error',
           confirmButtonText: 'Aceptar'
-        })
-      }else{
-        this.lotesSelecionados.push(
-            {
-              'idLote':this.loteInsumo.id,
-              'tipo':this.loteInsumo.tipoInsumo.nombre,
-              'idTipo':this.loteInsumo.tipoInsumo.id,
-              'cantidad':this.numero,
-            }   
-        );
-        this.insumoSelectedInsumo = [];
-        this.numero = 0;
-        this.loteInsumo = false;
+        });
       }
     }
   }
@@ -300,18 +306,16 @@ constructor(
           'array': this.lotesSelecionados
         };
         
-        this._ImoInsumoService.register(datos,token).subscribe(
+        this._ImoInsumoService.register(datos, token).subscribe(
           response => {
-            this.respuesta = response;
-            if(this.respuesta.status == 'success'){
+            if(response.status == 'success'){
+              this.numeroActa = response.data;
 
               swal.close();
-
-              this.numeroActa = this.respuesta.data;
             }else{
               swal({
                 title: 'Error!',
-                text: 'El codigo ya se encuentra registrado',
+                text: response.message,
                 type: 'error',
                 confirmButtonText: 'Aceptar'
               })
