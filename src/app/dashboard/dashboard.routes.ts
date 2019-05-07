@@ -103,13 +103,13 @@ import { GdCfgMedioCorrespondenciaRoutes } from './gdCfgMedioCorrespondencia/gdC
 import { FroInfraccionRoutes } from './froInfraccion/froInfraccion.routes';
 import { FroInfrCfgCategoriaRoutes } from './froInfrCfgCategoria/froInfrCfgCategoria.routes';
 
+import { PqoCfgTarifaRoutes } from './pqoCfgTarifa/pqoCfgTarifa.routes';
 import { PqoCfgPatioRoutes } from './pqoCfgPatio/pqoCfgPatio.routes';
 import { PqoCfgGruaRoutes } from './pqoCfgGrua/pqoCfgGrua.routes';
 import { PqoGruaCiudadanoRoutes } from './pqoGruaCiudadano/pqoGruaCiudadano.routes';
 import { PqoInmovilizacionRoutes } from './pqoInmovilizacion/pqoInmovilizacion.routes';
-import { MparqCostoTrayectoRoutes } from './mparqCostoTrayecto/mparqCostoTrayecto.routes';
 
-import { PnalComparendoRoutes } from './pnalComparendo/pnalComparendo.routes';
+import { PnalCfgCdoConsecutivoRoutes } from './pnalCfgCdoConsecutivo/pnalCfgCdoConsecutivo.routes';
 import { PnalCfgCargoRoutes } from './pnalCfgCargo/pnalCfgCargo.routes';
 import { PnalCfgTipoNombramientoRoutes } from './pnalCfgTipoNombramiento/pnalCfgTipoNombramiento.routes';
 import { PnalFuncionarioRoutes } from './pnalFuncionario/pnalFuncionario.routes';
@@ -312,7 +312,7 @@ export const DashboardRoutes: Route[] = [
       ...UserCfgGrupoEtnicoRoutes,
       ...CfgTipoClaseRoutes,
       ...CfgModuloRoutes,
-      ...PnalComparendoRoutes,
+      ...PnalCfgCdoConsecutivoRoutes,
       ...PnalCfgCargoRoutes,
       ...PnalCfgTipoNombramientoRoutes,
       ...PnalFuncionarioRoutes,
@@ -333,11 +333,11 @@ export const DashboardRoutes: Route[] = [
       ...GdCfgMedioCorrespondenciaRoutes,
       ...FroInfraccionRoutes,
       ...FroInfrCfgCategoriaRoutes,
+      ...PqoCfgTarifaRoutes,
       ...PqoCfgPatioRoutes,
       ...PqoCfgGruaRoutes,
       ...PqoGruaCiudadanoRoutes,
       ...PqoInmovilizacionRoutes,
-      ...MparqCostoTrayectoRoutes,
       ...PnalTalonarioRoutes,
       ...PnalAsignacionRoutes,
       ...FroTrteSolicitudRncRoutes,

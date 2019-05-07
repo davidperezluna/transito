@@ -1,6 +1,5 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { MparqCostoTrayecto } from '../mparqCostoTrayecto.modelo';
-import { MparqCostoTrayectoService } from '../../../services/mparqCostoTrayecto.service';
+import { CfgSmlmvService } from '../../../services/cfgSmlmv.service';
 import {LoginService} from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -10,31 +9,29 @@ import swal from 'sweetalert2';
 })
 export class EditComponent implements OnInit{
 @Output() ready = new EventEmitter<any>();
-@Input() costoTrayecto:any = null;
+@Input() tarifa:any = null;
 public errorMessage;
-public respuesta;
+
 public formReady = false;
 
 constructor(
-  private _costoTrayectoService: MparqCostoTrayectoService,
+  private _SmlmvService: CfgSmlmvService,
   private _loginService: LoginService,
   ){}
 
-  ngOnInit(){ console.log(this.costoTrayecto);  }
+  ngOnInit(){  }
 
   onCancelar(){ this.ready.emit(true); }
 
   onEnviar(){
     let token = this._loginService.getToken();
-		this._costoTrayectoService.editCostoTrayecto(this.costoTrayecto,token).subscribe(
+		this._SmlmvService.edit(this.tarifa,token).subscribe(
 			response => {
-        this.respuesta = response;
-        console.log(this.respuesta);
-        if(this.respuesta.status == 'success'){
+        if(response.status == 'success'){
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',
-            text: 'El registro se ha modificado con exito',
+            text: response.message,
             type: 'success',
             confirmButtonText: 'Aceptar'
           })

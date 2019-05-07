@@ -12,8 +12,7 @@ declare var $: any;
 export class PqoGruaCiudadanoComponent implements OnInit {
   @Input() grua:any = null;
   public errorMessage;
-	public id;
-	public respuesta;
+
 	public gruas;
 	public formNew = false;
 	public formEdit = false;
@@ -52,6 +51,7 @@ export class PqoGruaCiudadanoComponent implements OnInit {
 				}
       );
   }
+  
   iniciarTabla(){
     $('#dataTables-example').DataTable({
       responsive: true,
@@ -106,7 +106,6 @@ export class PqoGruaCiudadanoComponent implements OnInit {
                       confirmButtonColor: '#15d4be',
                     })
                   this.table.destroy();
-                  this.respuesta= response;
                   this.ngOnInit();
               }, 
             error => {

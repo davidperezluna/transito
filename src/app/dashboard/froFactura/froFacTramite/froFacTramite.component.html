@@ -344,8 +344,8 @@
                 <table style="padding:2px;margin-bottom:10px;border:1px solid #cccccc;width:50%">
                     <tr>
                         <td><b>Ciudad:</b><br>  {{ factura.organismoTransito.municipio }}</td> 
-                        <td><b>Fec. Creación:</b><br> {{ factura.fechaCreacion }}</td>
-                        <td><b>Fec. Vencimiento:</b><br> {{ factura.fechaVencimiento }}</td>
+                        <td><b>Fec. Creación:</b><br> {{date | date: 'dd'}}/{{date | date:'MM'}}/{{date | date: 'yyyy'}}</td>
+                        <td><b>Fec. Vencimiento:</b><br> {{ date | date:'dd/MM/yyyy' }}</td>
                     </tr>
                 </table>
             </div>

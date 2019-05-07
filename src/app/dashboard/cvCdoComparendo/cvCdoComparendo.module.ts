@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CvCdoComparendoComponent } from './cvCdoComparendo.component';
 import { CvCdoComparendoService } from '../../services/cvCdoComparendo.service';
 import { CfgOrganismoTransitoService } from '../../services/cfgOrganismoTransito.service';
-import { MpersonalFuncionarioService } from '../../services/mpersonalFuncionario.service';
+import { PnalFuncionarioService } from '../../services/pnalFuncionario.service';
 import { CiudadanoVehiculoService } from '../../services/ciudadanoVehiculo.service';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 
@@ -39,7 +39,7 @@ import { SelectModule } from 'angular2-select';
         DocumentComponent,
         ExportComponent
     ],
-    providers:[MpersonalFuncionarioService,CvCdoComparendoService,CfgOrganismoTransitoService,CiudadanoVehiculoService]
+    providers:[PnalFuncionarioService,CvCdoComparendoService,CfgOrganismoTransitoService,CiudadanoVehiculoService]
 })
 
 export class CvCdoComparendoModule { }

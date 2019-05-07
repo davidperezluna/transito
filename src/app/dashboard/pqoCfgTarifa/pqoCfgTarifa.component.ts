@@ -1,27 +1,27 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { MparqCostoTrayectoService } from '../../services/mparqCostoTrayecto.service';
-import {LoginService} from '../../services/login.service';
-import { MparqCostoTrayecto } from './mparqCostoTrayecto.modelo';
+import { PqoCfgTarifa } from './pqoCfgTarifa.modelo';
+import { PqoCfgTarifaService } from '../../services/pqoCfgTarifa.service';
+import { LoginService } from '../../services/login.service';
 import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './mparqCostoTrayecto.component.html'
+  templateUrl: './pqoCfgTarifa.component.html'
 })
-export class MparqCostoTrayectoComponent implements OnInit {
+
+export class PqoCfgTarifaComponent implements OnInit {
   public errorMessage;
-	public id;
-	public respuesta;
-	public costoTrayectos;
+
+	public tarifas;
 	public formNew = false;
 	public formEdit = false;
   public formIndex = true;
   public table:any; 
-  public costoTrayecto: MparqCostoTrayecto;
+  public tarifa: PqoCfgTarifa;
 
   constructor(
-    private _CostoTrayectoService: MparqCostoTrayectoService,
+    private _TarifaService: PqoCfgTarifaService,
 		private _loginService: LoginService,
     ){}
     
@@ -40,10 +40,10 @@ export class MparqCostoTrayectoComponent implements OnInit {
       ) {
       }
     })
-    this._CostoTrayectoService.getCostoTrayecto().subscribe(
+    this._TarifaService.index().subscribe(
 				response => {
-          this.costoTrayectos = response.data;
-          let timeoutId = setTimeout(() => {
+          this.tarifas = response.data;
+          let timeoutId = setTimeout(() => {  
             this.iniciarTabla();
           }, 100);
 				}, 
@@ -73,6 +73,7 @@ export class MparqCostoTrayectoComponent implements OnInit {
    });
    this.table = $('#dataTables-example').DataTable();
   }
+  
   onNew(){
     this.formNew = true;
     this.formIndex = false;
@@ -87,7 +88,8 @@ export class MparqCostoTrayectoComponent implements OnInit {
       this.ngOnInit();
     }
   }
-  deleteCostoTrayecto(id:any){
+
+  onDelete(id:any){
     swal({
       title: '¿Estás seguro?',
       text: "¡Se eliminara este registro!",
@@ -100,35 +102,33 @@ export class MparqCostoTrayectoComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._CostoTrayectoService.deleteCostoTrayecto(token,id).subscribe(
-            response => {
-                swal({
-                      title: 'Eliminado!',
-                      text:'Registro eliminado correctamente.',
-                      type:'success',
-                      confirmButtonColor: '#15d4be',
-                    })
-                  this.table.destroy();
-                  this.respuesta= response;
-                  this.ngOnInit();
-              }, 
-            error => {
-              this.errorMessage = <any>error;
 
-              if(this.errorMessage != null){
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
+        this._TarifaService.delete(token,id).subscribe(
+          response => {
+              swal({
+                    title: 'Eliminado!',
+                    text:'Registro eliminado correctamente.',
+                    type:'success',
+                    confirmButtonColor: '#15d4be',
+                  })
+                this.table.destroy();
+                this.ngOnInit();
+            }, 
+          error => {
+            this.errorMessage = <any>error;
+
+            if(this.errorMessage != null){
+              console.log(this.errorMessage);
+              alert("Error en la petición");
             }
-          );
-
-        
+          }
+        );
       }
-    })
+    });
   }
 
-  editCostoTrayecto(costoTrayecto:any){
-    this.costoTrayecto = costoTrayecto;
+  onEdit(tarifa:any){
+    this.tarifa = tarifa;
     this.formEdit = true;
     this.formIndex = false;
   }

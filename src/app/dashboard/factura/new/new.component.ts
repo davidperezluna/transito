@@ -4,7 +4,7 @@ import { FacturaService } from '../../../services/factura.service';
 import { LoginService } from '../../../services/login.service';
 import { UserCiudadanoService } from '../../../services/userCiudadano.service';
 import { UserCfgTipoIdentificacionService } from '../../../services/userCfgTipoIdentificacion.service';
-import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
+import { PnalFuncionarioService } from '../../../services/pnalFuncionario.service';
 import { CiudadanoVehiculoService } from '../../../services/ciudadanoVehiculo.service';
 import { ModuloService } from '../../../services/modulo.service';
 import { TramitePrecioService } from '../../../services/tramitePrecio.service';
@@ -69,7 +69,7 @@ constructor(
   private _UserCiudadanoService: UserCiudadanoService,
   private _LoginService: LoginService,
   private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
-  private _FuncionarioService: MpersonalFuncionarioService,
+  private _FuncionarioService: PnalFuncionarioService,
   private _ciudadanoVehiculoService: CiudadanoVehiculoService,
   private _ModuloService: ModuloService,
   private _CfgValorVehiculoService: CfgValorVehiculoService,

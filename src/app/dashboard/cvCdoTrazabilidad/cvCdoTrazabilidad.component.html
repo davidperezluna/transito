@@ -63,9 +63,12 @@
                     <div *ngIf="trazabilidad.estado.id == 4 && acuerdoPago">
                       <br>
                       <b>No. 
-                        <button (click)="onAcuerdoPago(acuerdoPago)" class="btn btn-xs btn-default">
-                          {{ acuerdoPago.numero }}
-                        </button>
+                        {{ acuerdoPago.numero }}
+                        <!-- 
+                          <button (click)="onAcuerdoPago(acuerdoPago)" class="btn btn-xs btn-default">
+                            {{ acuerdoPago.numero }}
+                          </button>
+                        -->
                       </b>
                     </div>
                   </td>
@@ -74,10 +77,12 @@
                     <span *ngIf="trazabilidad.actoAdministrativo">
                       {{ trazabilidad.actoAdministrativo }}
                     </span>
-                    <button *ngIf="!trazabilidad.actoAdministrativo" (click)="onDocument(trazabilidad)" class="btn btn-xs btn-primary" type="button">
-                      <i class="fa fa-file-text"></i>
-                      Crear Acto Administrativo
-                    </button>
+                    <!--
+                      <button *ngIf="!trazabilidad.actoAdministrativo" (click)="onDocument(trazabilidad)" class="btn btn-xs btn-primary" type="button">
+                        <i class="fa fa-file-text"></i>
+                        Crear Acto Administrativo
+                      </button>
+                    -->
                   </td>
                 </tr>
               </tbody>

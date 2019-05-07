@@ -1,7 +1,7 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import { SvIpatConsecutivo } from '../svIpatConsecutivo.modelo';
-import { PnalComparendoService } from '../../../services/pnalComparendo.service';
-import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
+import { PnalCfgCdoConsecutivoService } from '../../../services/pnalCfgCdoConsecutivo.service';
+import { PnalFuncionarioService } from '../../../services/pnalFuncionario.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -9,17 +9,19 @@ import swal from 'sweetalert2';
   selector: 'app-new',
   templateUrl: './new.component.html'
 })
+
 export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
 public consecutivo: SvIpatConsecutivo;
+
 public funcionarios: any;
 public funcionarioSelected: any;
 public errorMessage;
 public respuesta: any = null;
 
 constructor(
-  private _ComparendoService: PnalComparendoService,
-  private _FuncionarioService: MpersonalFuncionarioService,
+  private _ComparendoService: PnalCfgCdoConsecutivoService,
+  private _FuncionarioService: PnalFuncionarioService,
   private _LoginService: LoginService,
   ){}
 

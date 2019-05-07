@@ -16,22 +16,36 @@
                 <table class="table" id="dataTables-example">
                     <thead>
                     <tr>
-                        <th>Id</th>
-                        <th>Sede operativa</th>
-                        <th>Desde</th>
-                        <th>Hasta</th>
+                        <th>#</th>
+                        <th>Organismo tránsito</th>
                         <th>Rangos</th>
+                        <th>Inventario</th>
                         <th>Asignación de MT</th>
                         <!-- <th>Acciones</th> -->
                     </tr>
                     </thead>
                     <tbody>
                     <tr class="odd" *ngFor="let talonario of talonarios; let i = index">
-                        <td >{{ talonario.id }}</td>
+                        <td >{{ i + 1 }}</td>
                         <td >{{ talonario.organismoTransito.nombre }}</td>
-                        <td >{{ talonario.desde }}</td>
-                        <td >{{ talonario.hasta }}</td>
-                        <td >{{ talonario.rangos }}</td>
+                        <td >
+                            <b>Desde</b>
+                            <br>
+                            {{ talonario.desde }}
+                            <br>
+                            <b>Hasta</b>
+                            <br>
+                            {{ talonario.hasta }}
+                        </td>
+                        <td >
+                            <b>Cant. Disponible</b>
+                            <br>
+                            {{ talonario.cantidadDisponible }}
+                            <br>
+                            <b>Cant. recibida</b>
+                            <br>
+                            {{ talonario.cantidadRecibida }}
+                        </td>
                         <td >{{ talonario.numeroResolucion }}</td>
                         <!--
                             <td>

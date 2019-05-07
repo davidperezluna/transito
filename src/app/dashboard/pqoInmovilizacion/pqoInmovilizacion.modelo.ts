@@ -3,7 +3,7 @@ export class PqoInmovilizacion{
 		public placa: string,
 		public numeroComparendo: number,
 		public numeroInventario: number,
-		public costoTrayecto: number,
+		public costoGrua: number,
 		public hora: string,
 		public lugar: string,
 		public observaciones: string,

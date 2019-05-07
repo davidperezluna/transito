@@ -21,6 +21,7 @@
                     <th>Cantidad recibida</th>
                     <th>Cantidad disponible</th>
                     <th>No. acta</th>
+                    <th>Municipio</th>
                     <th>Acciones</th>
                 </tr>
               </thead>
@@ -31,6 +32,7 @@
                   <td>{{ municipio.cantidadRecibida }}</td>
                   <td>{{ municipio.cantidadDisponible }}</td>
                   <td>{{ municipio.numeroActa }}</td>
+                  <td>{{ municipio.municipio.nombre }}</td>
                   <td>
                     <div class="btn-group">
                       <button (click)="onEdit(municipio)" class="btn btn-xs btn-primary" type="button" tooltip="Editar" [tooltipDisabled]="false" [tooltipAnimation]="true"

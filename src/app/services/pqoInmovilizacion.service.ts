@@ -55,4 +55,14 @@ export class PqoInmovilizacionService {
 			this._loogerService.registerLog(token, 'UPDATE', json, this.url)
 		);
 	}
+
+	exit(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = "data=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/exit", params, { headers: headers }).map(
+			res => res.json(),
+			this._loogerService.registerLog(token, 'UPDATE', json, this.url)
+		);
+	}
 }

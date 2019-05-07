@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { PnalComparendo } from '../pnalComparendo.modelo';
-import { PnalComparendoService } from '../../../services/pnalComparendo.service';
-import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
+import { PnalCfgCdoConsecutivo } from '../pnalCfgCdoConsecutivo.modelo';
+import { PnalCfgCdoConsecutivoService } from '../../../services/pnalCfgCdoConsecutivo.service';
+import { PnalFuncionarioService } from '../../../services/pnalFuncionario.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -9,24 +9,25 @@ import swal from 'sweetalert2';
   selector: 'app-new',
   templateUrl: './new.component.html'
 })
+
 export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
-public comparendo: PnalComparendo;
+public consecutivo: PnalCfgCdoConsecutivo;
+
 public funcionarios: any;
 public funcionarioSelected: any;
 public errorMessage;
-public respuesta: any = null;
 
 constructor(
-  private _ComparendoService: PnalComparendoService,
-  private _FuncionarioService: MpersonalFuncionarioService,
-  private _loginService: LoginService,
+  private _ConsecutivoService: PnalCfgCdoConsecutivoService,
+  private _FuncionarioService: PnalFuncionarioService,
+  private _LoginService: LoginService,
   ){}
 
   ngOnInit() {
-    this.comparendo = new PnalComparendo(null, null, null);
+    this.consecutivo = new PnalCfgCdoConsecutivo(null, null, null, null, null, null);
 
-    this._FuncionarioService.select().subscribe(
+    this._FuncionarioService.selectAgentes().subscribe(
       response => {
         this.funcionarios = response;
       },
@@ -46,26 +47,25 @@ constructor(
   }
   
   onEnviar(){
-    let token = this._loginService.getToken();
-    
-    this.comparendo.idFuncionario = this.funcionarioSelected;
+    let token = this._LoginService.getToken();
 
-    this._ComparendoService.register(this.comparendo,token).subscribe(
+    this._ConsecutivoService.register(this.consecutivo,token).subscribe(
       response => {
-        this.respuesta = response;
-        
-        if(this.respuesta.status == 'success'){
+        if(response.status == 'success'){
           this.ready.emit(true);
+
           swal({
             title: 'Perfecto!',
-            text: 'El registro se ha realizado con exito',
+            text: response.message,
             type: 'success',
             confirmButtonText: 'Aceptar'
           });
+
+          //this.consecutivo = response.data;
         }else{
           swal({
             title: 'Error!',
-            text: 'El comparendo ya se encuentra registrado',
+            text: 'El consecutivo ya se encuentra registrado',
             type: 'error',
             confirmButtonText: 'Aceptar'
           })

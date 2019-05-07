@@ -17,7 +17,8 @@ declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './froFacTramite.component.html'
+  templateUrl: './froFacTramite.component.html',
+  providers: [DatePipe]
 })
 
 export class FroFacTramiteComponent implements OnInit {
@@ -37,7 +38,6 @@ export class FroFacTramiteComponent implements OnInit {
   public propietarios: any = [];
   public valorRetefuente: any = 0;
   public tramitesValor:any=[]; 
-
 
   public tipoIdentificacionSelected: any = null;
   public identificacion: any;
@@ -147,10 +147,6 @@ export class FroFacTramiteComponent implements OnInit {
         }
       }
     );
-
-    this.date = new Date();
-
-    var datePiper = new DatePipe(this.date);
   }
 
   onChangedModulo(e) {
@@ -507,7 +503,19 @@ export class FroFacTramiteComponent implements OnInit {
       response => {
         if (response.status == 'success') {
           this.factura = response.data;
-          //this.factura.numero = response.data.numero;
+          var datePiper = new DatePipe('es_CO');
+          var date = new Date();
+          date.setTime(response.data.fechaCreacion.timestamp * 1000);
+
+          console.log(date.toUTCString());
+          
+          /*this.fechaCreacion = datePiper.transform(
+            date, 'dd/MM/yyyy'
+          );
+          this.fechaVencimiento = datePiper.transform(
+            date, 'dd/MM/yyyy'
+          );*/
+
           this.formNew = false;
 
           swal({
@@ -515,7 +523,7 @@ export class FroFacTramiteComponent implements OnInit {
             text: response.message,
             type: 'success',
             confirmButtonText: 'Aceptar'
-          })
+          });
         } else {
           this.factura.id = null;
           this.factura.numero = null;

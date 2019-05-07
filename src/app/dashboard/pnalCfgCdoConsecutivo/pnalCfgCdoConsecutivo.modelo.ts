@@ -1,12 +1,10 @@
-export class PnalTalonario{
+export class PnalCfgCdoConsecutivo{
 	constructor(
-		public cargo: string,
 		public desde: number,
 		public hasta: number,
 		public cantidadRecibida: number,
 		public fechaAsignacion: string,
-		public numeroResolucion: string,
-		public idOrganismoTransito: number,
+		public idFuncionario: number,
 		public id:number
 	){}
 }

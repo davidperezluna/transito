@@ -1,0 +1,68 @@
+<hr>
+<div class="row">
+    <div class="col-xs-12 col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="text-uppercase">Nuevo talonario</h5>
+                <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
+            </div>
+            <div class="card-body">
+                <form #formNew="ngForm">
+                    <div class="form-group">
+                        <div class="row">
+                            <div  class="col-xs-12 col-lg-4">
+                                <label>Agente</label>
+                                <ng-select [multiple]="false" [options]="funcionarios" [(ngModel)]="consecutivo.idFuncionario" name="idFuncionario">
+                                </ng-select>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div  class="col-xs-12 col-lg-4">
+                                <label>Desde</label>
+                                <input class="form-control" [(ngModel)]="consecutivo.desde" name="desde" type="numeric" required>
+                            </div>
+                            <div  class="col-xs-12 col-lg-4">
+                                <label>Hasta</label>
+                                <input class="form-control" [(ngModel)]="consecutivo.hasta" name="hasta" type="numeric" required>
+                            </div>
+                            <div  class="col-xs-12 col-lg-4">
+                                <label>Rangos</label>
+                                <input class="form-control" [(ngModel)]="consecutivo.cantidadRecibida" name="cantidadRecibida" type="numeric" required>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div  class="col-xs-12 col-lg-4">
+                                <label>Fecha asignación</label>
+                                <input class="form-control" [(ngModel)]="consecutivo.fechaAsignacion" name="fechaAsignacion" type="date" required>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-info" type="button">
+                <i class="fa fa-plus"></i>
+                Guardar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--
+
+    <div class="row" *ngIf="consecutivo && consecutivo.id">
+            <div class="col-xs-12 col-lg-12">
+                <a href="{{ apiUrl }}/acta/{{ consecutivo.fechaAsignacion }}/pdf" class="btn btn-success" target="_blank">
+                    <i class="fa fa-file-pdf-o"></i>
+                    Imprimir acta
+                </a>
+                <button (click)="onCancelar()" class="btn btn-default" type="button">
+                    <i class="fa fa-times"></i>
+                    Cancelar
+                </button>
+            </div>
+        </div>
+-->

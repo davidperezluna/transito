@@ -5,7 +5,7 @@ import { environment } from 'environments/environment';
 import  "rxjs/add/operator/map";
 
 @Injectable()
-export class PnalComparendoService {
+export class PnalCfgCdoConsecutivoService {
 	private url = environment.apiUrl + 'personal/pnalcfgcdoconsecutivo';
 	public identity;
 	public token;
@@ -76,5 +76,12 @@ export class PnalComparendoService {
 		let params = "data=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/search/last/funcionario", params, { headers: headers }).map(res => res.json());
+	}
+
+	searchByFuncionario(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = "data=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/search/funcionario", params, { headers: headers }).map(res => res.json());
 	}
 }

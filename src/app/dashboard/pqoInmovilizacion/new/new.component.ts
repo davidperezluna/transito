@@ -3,7 +3,7 @@ import { PqoInmovilizacion } from '../pqoInmovilizacion.modelo';
 import { PqoInmovilizacionService } from '../../../services/pqoInmovilizacion.service';
 import { PqoCfgPatioService } from '../../../services/pqoCfgPatio.service';
 import { PqoCfgGruaService } from '../../../services/pqoCfgGrua.service';
-import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
+import { PnalFuncionarioService } from '../../../services/pnalFuncionario.service';
 import { VhloCfgMarcaService } from '../../../services/vhloCfgMarca.service';
 import { VhloCfgLineaService } from '../../../services/vhloCfgLinea.service';
 import { VhloCfgClaseService } from '../../../services/vhloCfgClase.service';
@@ -32,7 +32,7 @@ constructor(
   private _InmovilizacionService: PqoInmovilizacionService,
   private _PqoCfgPatioService: PqoCfgPatioService,
   private _PqoCfgGruaService: PqoCfgGruaService,
-  private _FuncionarioService: MpersonalFuncionarioService,
+  private _FuncionarioService: PnalFuncionarioService,
   private _MarcaService: VhloCfgMarcaService,
   private _LineaService: VhloCfgLineaService,
   private _ClaseService: VhloCfgClaseService,
@@ -44,6 +44,7 @@ constructor(
     this.inmovilizacion = new PqoInmovilizacion(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     this.date = new Date();
 
+    /*
     this._FuncionarioService.selectAgentes().subscribe(
       response => {
         this.agentesTransito = response;
@@ -57,6 +58,7 @@ constructor(
         }
       }
     );
+    */
 
     this._MarcaService.getMarcaSelect().subscribe(
       response => {
@@ -151,6 +153,7 @@ constructor(
   onCancelar(){
     this.ready.emit(true);
   }
+  
   onEnviar(){
     let token = this._loginService.getToken();
     

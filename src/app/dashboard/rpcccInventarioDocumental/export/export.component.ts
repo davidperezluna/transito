@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
+import { PnalFuncionarioService } from '../../../services/pnalFuncionario.service';
 import { CfgComparendoEstadoService } from '../../../services/cfgComparendoEstado.service';
 import { CfgOrganismoTransitoService } from "../../../services/cfgOrganismoTransito.service";
 import { CvCdoComparendoService } from '../../../services/cvCdoComparendo.service';
@@ -44,7 +44,7 @@ export class ExportComponent implements OnInit {
 
     constructor(
         private _loginService: LoginService,
-        private _MpersonalFuncionarioService: MpersonalFuncionarioService,
+        private _PnalFuncionarioService: PnalFuncionarioService,
         private _CfgComparendoEstadoService: CfgComparendoEstadoService,
         private _ComparendoService: CvCdoComparendoService,
         private _OrganismoTransitoService: CfgOrganismoTransitoService,
@@ -66,7 +66,7 @@ export class ExportComponent implements OnInit {
             }
         })
 
-        this._MpersonalFuncionarioService.selectAgentes().subscribe(
+        this._PnalFuncionarioService.selectAgentes().subscribe(
             response => {
                 this.agentes = response;
             },

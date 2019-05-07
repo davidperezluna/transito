@@ -11,12 +11,12 @@ import swal from 'sweetalert2';
 })
 export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
+public errorMessage;
+
 public talonario: PnalTalonario;
 public organismosTransito: any;
 public sedeOperativaSelected: any;
 public organismoTransito: any = null;
-public errorMessage;
-public respuesta: any = null;
 
 constructor(
   private _FuncionarioService: PnalTalonarioService,
@@ -42,17 +42,18 @@ constructor(
   }
 
   onCalcularTotal() {
-    let ini, fin, rangos;
-    ini = this.talonario.desde;
-    fin = this.talonario.hasta;
-
+    let ini, fin, cantidad;
+    ini = Number(this.talonario.desde);
+    fin = Number(this.talonario.hasta);
+    
     if (fin > ini) {
-      rangos = (fin - ini) + 1;
+      cantidad = (fin - ini) + 1;
 
-      if (rangos < 0) {
-        rangos = 0;
+      if (cantidad < 0) {
+        cantidad = 0;
       }
-      this.talonario.rangos = rangos;
+
+      this.talonario.cantidadRecibida = cantidad;
     }else{
       swal({
         title: 'Alerta!',
@@ -61,14 +62,15 @@ constructor(
         confirmButtonText: 'Aceptar'
       });
 
-      this.talonario.rangos = null;
+      this.talonario.cantidadRecibida = null;
     }
   }
 
   onChangedOrganismoTransito(e) {
     if (e) {
       let token = this._loginService.getToken();
-      this._OrganismoTransitoService.show(token, e).subscribe(
+
+      this._OrganismoTransitoService.show({ 'id':e },token).subscribe(
         response => {
             this.organismoTransito = response.data;
         },
@@ -89,20 +91,29 @@ constructor(
   }
   
   onEnviar(){
+    swal({
+      title: 'Generando consecutivos!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+
+    this.talonario.idOrganismoTransito = this.organismoTransito.id;
+
     let token = this._loginService.getToken();
 
-    this._FuncionarioService.register(this.talonario,token).subscribe(
-      response => {
-        this.respuesta = response;
-        
-        if(this.respuesta.status == 'success'){
-          this.ready.emit(true);
+    this._FuncionarioService.register(this.talonario, token).subscribe(
+      response => {      
+        if(response.status == 'success'){
           swal({
             title: 'Perfecto!',
             text: response.message,
             type: 'success',
             confirmButtonText: 'Aceptar'
           });
+          
+          this.ready.emit(true);
         }else{
           swal({
             title: 'Error!',

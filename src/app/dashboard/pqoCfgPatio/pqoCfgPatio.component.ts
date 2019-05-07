@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { PqoCfgPatio } from './pqoCfgPatio.modelo';
 import { PqoCfgPatioService } from '../../services/pqoCfgPatio.service';
 import { LoginService } from '../../services/login.service';
-import { PqoCfgPatio } from './pqoCfgPatio.modelo';
 import swal from 'sweetalert2';
 declare var $: any;
 

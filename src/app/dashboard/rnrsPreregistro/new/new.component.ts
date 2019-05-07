@@ -8,7 +8,7 @@ import { VhloCfgLineaService } from '../../../services/vhloCfgLinea.service';
 import { VhloCfgOrigenRegistroService } from '../../../services/vhloCfgOrigenRegistro.service';
 import { VhloCfgCondicionIngresoService } from '../../../services/vhloCfgCondicionIngreso.service';
 import { VhloCfgClaseService } from '../../../services/vhloCfgClase.service';
-import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
+import { PnalFuncionarioService } from '../../../services/pnalFuncionario.service';
 import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
 import swal from 'sweetalert2';
 
@@ -47,7 +47,7 @@ constructor(
   private _CarroceriaService: VhloCfgCarroceriaService,
   private _OrigenRegistroService: VhloCfgOrigenRegistroService,
   private _CondicionIngresoService: VhloCfgCondicionIngresoService,
-  private _FuncionarioService: MpersonalFuncionarioService,
+  private _FuncionarioService: PnalFuncionarioService,
   private _loginService: LoginService,
   private _OrganismoTransitoService: CfgOrganismoTransitoService
 ){}

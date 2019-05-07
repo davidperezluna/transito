@@ -154,11 +154,11 @@ import { SvIpatImpresoBodegaModule } from './svIpatImpresoBodega/svIpatImpresoBo
 import { SvIpatImpresoAsignacionModule } from './svIpatImpresoAsignacion/svIpatImpresoAsignacion.module';
 import { SvIpatImpresoMunicipioModule } from './svIpatImpresoMunicipio/svIpatImpresoMunicipio.module';
 
+import { PqoCfgTarifaModule } from './pqoCfgTarifa/pqoCfgTarifa.module';
 import { PqoCfgPatioModule } from './pqoCfgPatio/pqoCfgPatio.module';
 import { PqoCfgGruaModule } from './pqoCfgGrua/pqoCfgGrua.module';
 import { PqoGruaCiudadanoModule } from './pqoGruaCiudadano/pqoGruaCiudadano.module';
 import { PqoInmovilizacionModule } from './pqoInmovilizacion/pqoInmovilizacion.module';
-import { MparqCostoTrayectoModule } from './mparqCostoTrayecto/mparqCostoTrayecto.module';
 
 import { VhloBuscarModule } from './vhloBuscar/vhloBuscar.module';
 import { VhloVehiculoModule } from './vhloVehiculo/vhloVehiculo.module';
@@ -201,7 +201,7 @@ import { GdCfgMedioCorrespondenciaModule } from './gdCfgMedioCorrespondencia/gdC
 import { FroInfraccionModule } from './froInfraccion/froInfraccion.module';
 import { FroInfrCfgCategoriaModule } from './froInfrCfgCategoria/froInfrCfgCategoria.module';
 
-import { PnalComparendoModule } from './pnalComparendo/pnalComparendo.module';
+import { PnalCfgCdoConsecutivoModule } from './pnalCfgCdoConsecutivo/pnalCfgCdoConsecutivo.module';
 import { PnalCfgCargoModule } from './pnalCfgCargo/pnalCfgCargo.module';
 import { PnalCfgTipoNombramientoModule } from './pnalCfgTipoNombramiento/pnalCfgTipoNombramiento.module';
 import { PnalFuncionarioModule } from './pnalFuncionario/pnalFuncionario.module';
@@ -366,12 +366,12 @@ import {RightsidebarComponent} from '../shared';
     GdCfgMedioCorrespondenciaModule,
     FroInfraccionModule,
     FroInfrCfgCategoriaModule,
+    PqoCfgTarifaModule,
     PqoCfgPatioModule,
     PqoCfgGruaModule,
     PqoGruaCiudadanoModule,
     PqoInmovilizacionModule,
-    MparqCostoTrayectoModule,
-    PnalComparendoModule,
+    PnalCfgCdoConsecutivoModule,
     PnalCfgCargoModule,
     PnalCfgTipoNombramientoModule,
     PnalFuncionarioModule,

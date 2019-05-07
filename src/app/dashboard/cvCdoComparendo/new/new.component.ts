@@ -2,7 +2,7 @@ import { Component, OnInit,Output,EventEmitter } from '@angular/core';
 import { CvCdoComparendo } from '../cvCdoComparendo.modelo';
 import { CvCdoComparendoService } from '../../../services/cvCdoComparendo.service';
 import { PnalFuncionarioService } from '../../../services/pnalFuncionario.service';
-import { PnalComparendoService } from '../../../services/pnalComparendo.service';
+import { PnalCfgCdoConsecutivoService } from '../../../services/pnalCfgCdoConsecutivo.service';
 import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
 import { CfgMunicipioService } from '../../../services/cfgMunicipio.service';
 import { CfgTipoInfractorService } from '../../../services/cfgTipoInfractor.service';
@@ -121,7 +121,7 @@ export class NewComponent implements OnInit {
 constructor(
   private _ComparendoService: CvCdoComparendoService,
   private _FuncionarioService: PnalFuncionarioService,
-  private _PnalComparendoService: PnalComparendoService,
+  private _PnalCfgCdoConsecutivoService: PnalCfgCdoConsecutivoService,
   private _OrganismoTransitoService: CfgOrganismoTransitoService,
   private _MunicipioService: CfgMunicipioService,
   private _VechiculoService: VehiculoService,
@@ -252,7 +252,7 @@ constructor(
             this.funcionario = response.data;
             this.comparendo.idFuncionario = this.funcionario.id;
   
-            this._PnalComparendoService.searchLastByFuncionario({ 'funcionario': this.funcionario }, token).subscribe(
+            this._PnalCfgCdoConsecutivoService.searchLastByFuncionario({ 'funcionario': this.funcionario }, token).subscribe(
               response => {
                 if (response.status == 'success') {
                   swal.close();
