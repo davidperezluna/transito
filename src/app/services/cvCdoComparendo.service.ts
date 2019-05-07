@@ -5,7 +5,7 @@ import { environment } from 'environments/environment';
 
 @Injectable()
 export class CvCdoComparendoService {
-	private url = environment.apiUrl + "comparendo";
+	private url = environment.apiUrl + "contravencional/cvcdocomparendo";
 	public identity;
 	public token;
 
@@ -18,7 +18,7 @@ export class CvCdoComparendoService {
 
 	register(datos,token){
 		let json = JSON.stringify(datos);
-		let params = "json="+json+"&authorization="+token;
+		let params = "data="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/new", params, {headers: headers})
 							  .map(res => res.json());
@@ -43,7 +43,7 @@ export class CvCdoComparendoService {
 	editComparendo(datos,token){
 
 		let json = JSON.stringify(datos);
-		let params = "json="+json+"&authorization="+token;
+		let params = "data="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
  			return this._http.post(this.url+"/edit", params, {headers: headers})
 							  .map(res => res.json());
@@ -52,7 +52,7 @@ export class CvCdoComparendoService {
 
 	setComparendoArchivo(datoss,polca,token){
 		let json = JSON.stringify(datoss);
-		let params = "json="+json+"&authorization="+token;
+		let params = "data="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
  			return this._http.post(this.url+"/"+polca+"/archivo", params, {headers: headers})
 							  .map(res => res.json());
@@ -60,21 +60,21 @@ export class CvCdoComparendoService {
 	
 	searchByInfractor(datos, token) {
 		let json = JSON.stringify(datos);	
-		let params = "json=" + json + "&authorization=" + token;
+		let params = "data=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/search/infractor", params, { headers: headers }).map(res => res.json());
 	}
 
 	searchByState(datos, token) {
 		let json = JSON.stringify(datos);
-		let params = "json=" + json + "&authorization=" + token;
+		let params = "data=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/search/estado", params, { headers: headers }).map(res => res.json());
 	}
 
 	searchByParametros(datos, token) {
 		let json = JSON.stringify(datos);
-		let params = "json=" + json + "&authorization=" + token;
+		let params = "data=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/search/parametros", params, { headers: headers }).map(res => res.json());
 	}

@@ -20,7 +20,7 @@
                                     </div>
                                     <div class="col-xs-12 col-lg-12">
                                         <div class="btn-group">
-                                            <button (click)="onChangedMpersonalFuncionario()" class="btn btn-primary">
+                                            <button (click)="onChangedFuncionario()" class="btn btn-primary">
                                                 Diligenciar
                                             </button>
                                         </div>
@@ -357,15 +357,15 @@
                                 <b>14. Datos de la empresa</b>
                             </h6>
                         </div>
-                        <div class="col-xs-12 col-lg-4" *ngIf="comparendo.vehiculoServicio == 4">
+                        <div class="col-xs-12 col-lg-4" *ngIf="comparendo.vehiculoServicio == 2">
                             <label>NIT</label>
                             <input class="form-control" (blur)='onSearchEmpresa()' [(ngModel)]="empresa.nit" name="empresaNit" type="text">
                         </div>
-                        <div class="col-xs-12 col-lg-4" *ngIf="comparendo.vehiculoServicio == 4">
+                        <div class="col-xs-12 col-lg-4" *ngIf="comparendo.vehiculoServicio == 2">
                             <label>Nombre</label>
                             <input class="form-control" [(ngModel)]="empresa.nombre" name="empresaNombre" type="text">
                         </div>
-                        <div class="col-xs-12 col-lg-4" *ngIf="comparendo.vehiculoServicio == 4">
+                        <div class="col-xs-12 col-lg-4" *ngIf="comparendo.vehiculoServicio == 2">
                             <label>Tarjeta de operación</label>
                             <input class="form-control" [(ngModel)]="empresa.tarjeta" name="empresaTarjeta" type="text">
                         </div>
@@ -379,7 +379,7 @@
                         </div>
                         <div class="col-xs-12 col-lg-4">
                             <label>Apellidos y Nombres completos</label>
-                            <input class="form-control" type="text" name="funcionarioNombres" value="{{ funcionario.ciudadano.usuario.primerNombre }} {{ funcionario.ciudadano.usuario.primerApellido }}" readonly>
+                            <input class="form-control" type="text" name="funcionarioNombres" value="{{ funcionario.ciudadano.primerNombre }} {{ funcionario.ciudadano.primerApellido }}" readonly>
                         </div>
                         <div class="col-xs-12 col-lg-4">
                             <label>Placa</label>
@@ -399,12 +399,14 @@
                         </div>
                         <div class="col-xs-12 col-lg-6">
                             <label>Patio</label>
-                            <ng-select [multiple]="false" [options]="patios" [(ngModel)]="inmovilizacion.idPatio" name="patio" required></ng-select>
+                            <ng-select *ngIf="!inmovilizacionOld" [multiple]="false" [options]="patios" [(ngModel)]="inmovilizacion.idPatio" name="patio" required></ng-select>
+                            <span *ngIf="inmovilizacionOld">{{ inmovilizacionOld.patio.nombre }}</span>
                         </div>
                         <div class="col-xs-12 col-lg-6">
                             <div class="form-group">
                                 <label>Grúa</label>
-                                <ng-select [multiple]="false" [options]="gruas" [(ngModel)]="inmovilizacion.idGrua" name="grua" required></ng-select>
+                                <ng-select *ngIf="!inmovilizacionOld" [multiple]="false" [options]="gruas" [(ngModel)]="inmovilizacion.idGrua" name="grua" required></ng-select>
+                                <span *ngIf="inmovilizacionOld">{{ inmovilizacionOld.grua.codigo }} - {{ inmovilizacionOld.grua.placa }}</span>
                             </div>
                         </div>
                     </div>

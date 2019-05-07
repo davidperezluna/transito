@@ -45,6 +45,30 @@ constructor(
   onCancelar(){
     this.ready.emit(true);
   }
+
+  onCalcularTotal() {
+    let ini, fin, cantidad;
+    ini = Number(this.consecutivo.desde);
+    fin = Number(this.consecutivo.hasta);
+
+    if (fin > ini) {
+      cantidad = (fin - ini) + 1;
+
+      if (cantidad < 0) {
+        cantidad = 0;
+      }
+      this.consecutivo.cantidadRecibida = cantidad;
+    }else{
+      swal({
+        title: 'Alerta!',
+        text: 'El número de inicio no puede ser superior o igual al número de finalización',
+        type: 'error',
+        confirmButtonText: 'Aceptar'
+      });
+
+      this.consecutivo.cantidadRecibida = null;
+    }
+  }
   
   onEnviar(){
     let token = this._LoginService.getToken();

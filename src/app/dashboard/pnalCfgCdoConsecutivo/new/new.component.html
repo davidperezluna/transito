@@ -24,11 +24,11 @@
                             </div>
                             <div  class="col-xs-12 col-lg-4">
                                 <label>Hasta</label>
-                                <input class="form-control" [(ngModel)]="consecutivo.hasta" name="hasta" type="numeric" required>
+                                <input class="form-control" (blur)="onCalcularTotal()" [(ngModel)]="consecutivo.hasta" name="hasta" type="numeric" required>
                             </div>
                             <div  class="col-xs-12 col-lg-4">
                                 <label>Rangos</label>
-                                <input class="form-control" [(ngModel)]="consecutivo.cantidadRecibida" name="cantidadRecibida" type="numeric" required>
+                                <input class="form-control" [(ngModel)]="consecutivo.cantidadRecibida" name="cantidadRecibida" type="numeric" readonly required>
                             </div>
                         </div>
                         

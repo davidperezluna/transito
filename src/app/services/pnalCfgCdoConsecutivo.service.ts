@@ -21,7 +21,7 @@ export class PnalCfgCdoConsecutivoService {
 
 	register(comparendo,token){
 		let json = JSON.stringify(comparendo);
-		let params = "json="+json+"&authorization="+token;
+		let params = "data="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/new", params, {headers: headers}).map(
 			res => res.json(),
@@ -45,7 +45,7 @@ export class PnalCfgCdoConsecutivoService {
 
 	edit(comparendo,token){
 		let json = JSON.stringify(comparendo);
-		let params = "json="+json+"&authorization="+token;
+		let params = "data="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
  		return this._http.post(this.url+"/edit", params, {headers: headers}).map(
 			res => res.json(),
@@ -59,14 +59,14 @@ export class PnalCfgCdoConsecutivoService {
 
 	search(datos,token){
 		let json = JSON.stringify(datos);
-		let params = "json="+json+"&authorization="+token;
+		let params = "data="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
  		return this._http.post(this.url+"/search", params, {headers: headers}).map(res => res.json());
 	}
 
 	record(datos,token){
 		let json = JSON.stringify(datos);
-		let params = "json="+json+"&authorization="+token;
+		let params = "data="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
  		return this._http.post(this.url+"/record/funcionario", params, {headers: headers}).map(res => res.json());
 	}

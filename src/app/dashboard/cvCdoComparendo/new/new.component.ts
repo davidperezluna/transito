@@ -14,6 +14,7 @@ import { CiudadanoVehiculoService } from '../../../services/ciudadanoVehiculo.se
 import { UserCfgTipoIdentificacionService } from '../../../services/userCfgTipoIdentificacion.service';
 import { PqoCfgPatioService } from '../../../services/pqoCfgPatio.service';
 import { PqoCfgGruaService } from '../../../services/pqoCfgGrua.service';
+import { PqoInmovilizacionService } from '../../../services/pqoInmovilizacion.service';
 import { CfgComparendoEstadoService } from '../../../services/cfgComparendoEstado.service';
 import { VhloCfgRadioAccionService } from '../../../services/vhloCfgRadioAccion.service';
 import { VhloCfgModalidadTransporteService } from '../../../services/vhloCfgModalidadTransporte.service';
@@ -51,6 +52,7 @@ export class NewComponent implements OnInit {
   public placa: any;
   public identificacion: any;
   public propietariosVehiculo: any;
+  public inmovilizacionOld: any;
 
   public searchByIdentificacion = false;
   public isEmpresa = false;
@@ -131,6 +133,7 @@ constructor(
   private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
   private _PqoCfgPatioService: PqoCfgPatioService,
   private _PqoCfgGruaService: PqoCfgGruaService,
+  private _InmovilizacionService: PqoInmovilizacionService,
   private _CfgComparendoEstadoService: CfgComparendoEstadoService,
   private _RadioAccionService: VhloCfgRadioAccionService,
   private _ModalidadTransporteService: VhloCfgModalidadTransporteService,
@@ -234,7 +237,7 @@ constructor(
 		}); 
   }
 
-  onChangedMpersonalFuncionario(){
+  onChangedFuncionario(){
     if (this.agenteTransitoSelected) {
      let token = this._LoginService.getToken();
 
@@ -261,6 +264,22 @@ constructor(
                   this.comparendo.idConsecutivo = this.consecutivo.id;
   
                   this.consecutivo = response.data;
+
+                  this._InmovilizacionService.findByComparendo({ 'numero':this.consecutivo.numero }, token).subscribe(
+                    response => {
+                      if (response.code == 200) {
+                        this.inmovilizacionOld = response.data;
+                      }
+                    },
+                    error => {
+                      this.errorMessage = <any>error;
+              
+                      if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                      }
+                    }
+                  );
 
                   this._MunicipioService.select().subscribe(
                     response => {
@@ -571,7 +590,7 @@ constructor(
     this._UserCiudadanoService.searchByIdentificacion(datos, token).subscribe(
       response => {
         if (response.status == "success") {
-          this.ciudadano = response.data;
+          this.ciudadano = response.data.ciudadano;
 
           this.propietario.nombres = this.ciudadano.primerNombre + ' ' + this.ciudadano.primerApellido;
         }
@@ -615,7 +634,7 @@ constructor(
     this._UserCiudadanoService.searchByIdentificacion(datos, token).subscribe(
       response => {
         if (response.status == "success") {
-          this.ciudadano = response.data;
+          this.ciudadano = response.data.ciudadano;
 
           this._UserCiudadanoService.calculateAge({ 'fechaNacimiento': this.ciudadano.fechaNacimiento }, token).subscribe(
             response => {
