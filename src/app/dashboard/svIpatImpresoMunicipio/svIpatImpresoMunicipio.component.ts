@@ -3,6 +3,7 @@ import { SvIpatImpresoMunicipio } from './svIpatImpresoMunicipio.modelo';
 import { SvIpatImpresoMunicipioService } from '../../services/svIpatImpresoMunicipio.service';
 import { PnalFuncionarioService } from '../../services/pnalFuncionario.service';
 import { LoginService } from '../../services/login.service';
+import { environment } from 'environments/environment';
 import swal from 'sweetalert2';
 declare var $: any;
 
@@ -13,6 +14,9 @@ declare var $: any;
 
 export class SvIpatImpresoMunicipioComponent implements OnInit {
   public errorMessage;
+
+  public apiUrl = environment.apiUrl + 'seguridadvial/svipatimpresomunicipio';
+
   public municipios: any;
 	public cantidadDisponible: any;
 	public formNew = false;

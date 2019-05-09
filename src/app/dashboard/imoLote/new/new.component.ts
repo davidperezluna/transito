@@ -158,14 +158,15 @@ constructor(
 				}
 		}); 
   }
+  
   isFin() {
    this.ImoLote.cantidad = parseInt(this.ImoLote.rangoFin) - parseInt(this.ImoLote.rangoInicio)+1;
   }
 
-  onInsumo() {
+  /*onInsumo() {
     this.frmInsumo = true;
   }
   onSustrato() {
     this.frmInsumo = false;
-  }
+  }*/
 }

@@ -50,7 +50,10 @@
                   <td>
                     <b>No. acta</b>
                     <br>
-                    {{ municipio.numeroActa }}
+                    <a href="{{ apiUrl }}/acta/{{ municipio.id }}/pdf" class="btn btn-success" target="_blank">
+                      <i class="fa fa-file-pdf-o"></i>
+                      {{ municipio.numeroActa }}
+                    </a>
                     <br>
                     <b>Municipio</b>
                     <br>

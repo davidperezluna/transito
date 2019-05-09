@@ -34,7 +34,7 @@ public insumoSelect:any;
 public loteInsumo:any;
 public insumoSelected:any;
 public lotes:any = null;
-public lotesSelecionados:any = [];
+public lotesSeleccionados:any = [];
 public insumoSelectedInsumo:any;
 public date:any;
 public numero:any;
@@ -230,26 +230,30 @@ constructor(
   }
 
   onAsignarLote(lote){
-    //let isLote = this.lotesSelecionados.filter(h => h !== lote)
+    //let isLote = this.lotesSeleccionados.filter(h => h !== lote)
     console.log(lote);
     
-
+    let validacion = false;
     let asignado = false;
     //Verifica que el arreglo de lotes tenga datos registrados
-    if ( this.lotesSelecionados.length > 0) {
+    if ( this.lotesSeleccionados.length > 0) {
       //Recorre todos los lotes seleccionados
-      this.lotesSelecionados.forEach(loteAsignado => {
+      this.lotesSeleccionados.forEach(loteAsignado => {
           loteAsignado = Object.keys(loteAsignado).map(function(key) {
               return loteAsignado[key];
           });
           //Valida si el lote seleccionado actual ya se encuentra en el arreglo general de lotes
-          asignado = loteAsignado.includes(lote.id, 0);
+          validacion = loteAsignado.includes(lote.id, 0);
+          //Si la validación es TRUE cambia de estado la bandera de asignado
+          if (validacion) {
+            asignado = true;
+          }
       });
     }
 
     //Si el lote no esta asignado lo inserta
     if (!asignado) {
-      this.lotesSelecionados.push(
+      this.lotesSeleccionados.push(
         {
           'idLote':lote.id,
           'tipo':lote.tipoInsumo.nombre,
@@ -270,7 +274,7 @@ constructor(
   onAsignarLoteInsumo(){  
     if (this.loteInsumo) {
       if(Number(this.numero) <= Number(this.loteInsumo.cantidad)){
-        this.lotesSelecionados.push(
+        this.lotesSeleccionados.push(
           {
             'idLote':this.loteInsumo.id,
             'tipo':this.loteInsumo.tipoInsumo.nombre,
@@ -294,7 +298,7 @@ constructor(
   }
 
   onEliminarLoteSelecionado(lote){
-    this.lotesSelecionados = this.lotesSelecionados.filter(h => h !== lote);
+    this.lotesSeleccionados = this.lotesSeleccionados.filter(h => h !== lote);
   }
 
 
@@ -324,7 +328,7 @@ constructor(
 
         let datos={
           'asignacionInsumos' : this.rnaAsignacionInsumos,
-          'array': this.lotesSelecionados
+          'array': this.lotesSeleccionados
         };
         
         this._ImoInsumoService.register(datos, token).subscribe(
@@ -354,13 +358,13 @@ constructor(
   }
 
   onChangedOrganismoTransito(){
-    this.lotesSelecionados = [];
+    this.lotesSeleccionados = [];
     this.lotes = null;
   }
 
   onPrintActa(){
     this.numeroActa = null;
-    this.lotesSelecionados = [];
+    this.lotesSeleccionados = [];
     this.lotes = null;
     this.ngOnInit();
   }

@@ -11,14 +11,16 @@ declare var $: any;
 })
 export class PqoCfgPatioComponent implements OnInit {
   public errorMessage;
-	public id;
-	public respuesta;
-	public patios;
+
+  public patios;
+  
 	public formNew = false;
 	public formEdit = false;
+  public formShow = false;
   public formIndex = true;
+
   public table:any; 
-  public smlmv: PqoCfgPatio;
+  public patio: any;
 
   constructor(
     private _PatioService: PqoCfgPatioService,
@@ -29,35 +31,33 @@ export class PqoCfgPatioComponent implements OnInit {
     swal({
       title: 'Cargando Tabla!',
       text: 'Solo tardara unos segundos por favor espere.',
-      timer: 1500,
       onOpen: () => {
         swal.showLoading()
       }
-    }).then((result) => {
-      if (
-        // Read more about handling dismissals
-        result.dismiss === swal.DismissReason.timer
-      ) {
-      }
-    })
-    this._PatioService.index().subscribe(
-				response => {
-          this.patios = response.data;
-          let timeoutId = setTimeout(() => {  
-            this.iniciarTabla();
-          }, 100);
-				}, 
-				error => {
-					this.errorMessage = <any>error;
+    });
 
-					if(this.errorMessage != null){
-						console.log(this.errorMessage);
-						alert("Error en la petición");
-					}
-				}
-      );
+    this._PatioService.index().subscribe(
+      response => {
+        this.patios = response.data;
+
+        let timeoutId = setTimeout(() => {  
+          this.onInitTable();
+        }, 100);
+
+        swal.close();
+      }, 
+      error => {
+        this.errorMessage = <any>error;
+
+        if(this.errorMessage != null){
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
   }
-  iniciarTabla(){
+
+  onInitTable(){
     $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,
@@ -88,7 +88,8 @@ export class PqoCfgPatioComponent implements OnInit {
       this.ngOnInit();
     }
   }
-  deleteInfraccionCategoria(id:any){
+
+  onDelete(id:any){
     swal({
       title: '¿Estás seguro?',
       text: "¡Se eliminara este registro!",
@@ -110,7 +111,6 @@ export class PqoCfgPatioComponent implements OnInit {
                       confirmButtonColor: '#15d4be',
                     })
                   this.table.destroy();
-                  this.respuesta= response;
                   this.ngOnInit();
               }, 
             error => {
@@ -128,9 +128,19 @@ export class PqoCfgPatioComponent implements OnInit {
     })
   }
 
-  onEdit(smlmv:any){
-    this.smlmv = smlmv;
+  onEdit(patio:any){
+    this.patio = patio;
+
     this.formEdit = true;
     this.formIndex = false;
+    this.formShow = false;
+  }
+  
+  onShow(patio:any){
+    this.patio = patio;
+
+    this.formEdit = false;
+    this.formIndex = false;
+    this.formShow = true;
   }
 }

@@ -1,22 +1,26 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { CfgSmlmvService } from '../../../services/cfgSmlmv.service';
-import {LoginService} from '../../../services/login.service';
+import { PqoCfgPatioService } from '../../../services/pqoCfgPatio.service';
+import { LoginService } from '../../../services/login.service';
+import { environment } from 'environments/environment';
 import swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-edit',
-  templateUrl: './edit.component.html'
+  selector: 'app-show',
+  templateUrl: './show.component.html'
 })
-export class EditComponent implements OnInit{
+
+export class ShowComponent implements OnInit{
 @Output() ready = new EventEmitter<any>();
 @Input() patio:any = null;
 public errorMessage;
 
+public docsUrl = environment.docsUrl;
+
 public formReady = false;
 
 constructor(
-  private _SmlmvService: CfgSmlmvService,
-  private _loginService: LoginService,
+  private _PatioService: PqoCfgPatioService,
+  private _LoginService: LoginService,
   ){}
 
   ngOnInit(){  }
@@ -24,17 +28,19 @@ constructor(
   onCancelar(){ this.ready.emit(true); }
 
   onEnviar(){
-    let token = this._loginService.getToken();
-		this._SmlmvService.edit(this.patio,token).subscribe(
+    let token = this._LoginService.getToken();
+
+		this._PatioService.edit(this.patio, token).subscribe(
 			response => {
         if(response.status == 'success'){
-          this.ready.emit(true);
           swal({
             title: 'Perfecto!',
-            text: 'El registro se ha modificado con exito',
+            text: response.message,
             type: 'success',
             confirmButtonText: 'Aceptar'
-          })
+          });
+
+          this.ready.emit(true);
         }
 			error => {
 					this.errorMessage = <any>error;
@@ -44,8 +50,8 @@ constructor(
 						alert("Error en la petición");
 					}
 				}
-
-		}); 
+      }
+    ); 
   }
 
 }

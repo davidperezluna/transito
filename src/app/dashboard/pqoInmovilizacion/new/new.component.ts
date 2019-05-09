@@ -55,12 +55,14 @@ constructor(
 
     let identity = this._LoginService.getIdentity();
 
-    this._PqoCfgPatioService.searchByCiudadano({ 'identificacion': identity}, token).subscribe(
+    this._PqoCfgPatioService.searchByCiudadano({ 'identificacion': identity.identificacion }, token).subscribe(
       response => {
         if (response.code == 200) {
           this.patio = response.data.patio;
 
           this.inmovilizacion.idPatio = this.patio.id;
+
+          swal.close();
         } else {
           swal({
             title: 'Error!',

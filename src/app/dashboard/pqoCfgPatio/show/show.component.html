@@ -1,0 +1,109 @@
+<hr>
+<div class="row">
+    <div class="col-xs-12 col-lg-4">
+        <div class="card">
+            <div class="card-header">
+                <b class="text-uppercase">Detalles de patio</b>
+            </div>
+            <div class="card-body">
+                <form #formEdit="ngForm"> 
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-12">
+                            <b>Nombre</b>
+                            <br>
+                            {{ patio.nombre }}
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <b>Dirección</b>
+                            <br>
+                            {{ patio.direccion }}
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <b>Correo</b>
+                            <br>
+                            {{ patio.correo }}
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <b>Telefono</b>
+                            <br>
+                            {{ patio.telefono }}
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <b>Nombre administrador</b>
+                            <br>
+                            {{ patio.administrador }}
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <b>Nombre popietario</b>
+                            <br>
+                            {{ patio.propietario }}
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <b>No resolución / Autorización</b>
+                            <br>
+                            {{ patio.numeroResolucion }}
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <a href="{{ docsUrl }}{{ patio.archivo }}" target="_blank">
+                                <i class="fa fa-file"></i>
+                                Ver archivo
+                            </a>
+                        </div>
+                        <p class="text-center text-uppercase">
+                            <b>Plazo de autorización</b>
+                        </p>
+                        <div class="col-xs-12 col-lg-6">
+                            <b>Fecha inicial</b>
+                            <br>
+                            {{ patio.fechaInicial }}
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <b>Fecha final</b>
+                            <br>
+                            {{ patio.fechaFinal }}
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-lg-8">
+            <div class="card">
+                <div class="card-header">
+                    <b class="text-uppercase">Registrar ciudadanos</b>
+                    <br>
+                    <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
+                </div>
+                <div class="card-body">
+                    <form #formEdit="ngForm"> 
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Nombre <b class="text-danger">*</b></label>
+                                <br>
+                                {{ patio.nombre }}
+                            </div>
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Dirección <b class="text-danger">*</b></label>
+                                <br>
+                                {{ patio.direccion }}
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer">
+                    <div class="btn-group">
+                        <button (click)="onEnviar()" [disabled]="formEdit.invalid" class="btn btn-primary" type="button">
+                            <i class="fa fa-save"></i>
+                            Enviar
+                        </button>
+                        <button (click)="onCancelar()" class="btn btn-default">
+                            <i class="fa fa-times"></i>
+                            Cancelar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
