@@ -58,10 +58,10 @@ export class ImoActaComponent implements OnInit {
   
   onPrintActa(){
     let token = this._loginService.getToken();
-    console.log(this.data);
     this._ImoInsumoService.pdfActaInsumo(token, this.data).subscribe((response)=>{
       //let file = new Blob([response], { type: 'application/pdf' });            
       var fileURL = URL.createObjectURL(response);
+      console.log(fileURL);
       window.open(fileURL);
     })
 

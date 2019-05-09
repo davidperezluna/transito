@@ -57,7 +57,7 @@ constructor(
         this.insumos = response; 
         setTimeout(() => {
           this.insumoSelected = [this.loteInsumoInsumo.tipoInsumo.id];
-        });
+        },100);
       }, 
       error => {
         this.errorMessage = <any>error;
