@@ -118,13 +118,11 @@ export class FroReporteIngresosComponent implements OnInit {
         );
     }
 
-    onInitTable(estado) {
-        if (estado) {
+    onInitTable() {
             if(this.table) {
                 this.table.destroy();
-            }
 
-            this.table = $('#' + estado).DataTable({
+            this.table = $('#DateTables').DataTable({
                 responsive: true,
                 pageLength: 8,
                 sPaginationType: 'full_numbers',
@@ -173,11 +171,13 @@ export class FroReporteIngresosComponent implements OnInit {
 
     onEnviar(){
         let token = this._LoginService.getToken();
+        let identity = this._LoginService.getIdentity();
+
         this.froReporteIngresos.idOrganismoTransito = this.organismoTransitoSelected;
         this.froReporteIngresos.idTipoPersona = this.tipoPersonaSelected;
         this.froReporteIngresos.idTipoRecaudo = this.tipoRecaudoSelected;
         if(this.tipoRecaudoSelected == 1){
-            this._FroReporteIngresosService.pdfTramiteByFecha(this.froReporteIngresos, token).subscribe(
+            this._FroReporteIngresosService.pdfTramiteByFecha({ 'identificacionUsuario': identity.identificacion, 'filtros':this.froReporteIngresos }, token).subscribe(
                 response => {
                     var fileURL = URL.createObjectURL(response);
                     window.open(fileURL);

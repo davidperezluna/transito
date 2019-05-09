@@ -34,6 +34,11 @@ export class NewComponent implements OnInit {
     public servicioSelected: any;
     public ciudadanoSelected: any;
     public paisSelected: any;
+    public estados = [
+        { label: 'ACTIVA', value: 'ACTIVA' },
+        { label: 'INACTIVA', value: 'INACTIVA' },
+        { label: 'SUSPENDIDA', value: 'SUSPENDIDAD' },
+    ];
 
     constructor(
         private _LicenciaConduccionService: UserLicenciaConduccionService,

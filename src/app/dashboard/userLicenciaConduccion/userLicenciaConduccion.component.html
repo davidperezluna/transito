@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <hr>
     <div class="row" *ngIf='formIndex'>
-        <div class="col-xs-12 col-lg-3">
+        <div class="col-xs-12 col-lg-4">
             <div class="card">
                 <div class="card-body">
                     <h5 class="text-uppercase">Historial de licencias de conducción</h5>
@@ -40,7 +40,7 @@
             </div>
         </div>
 
-        <div class="col-xs-12 col-lg-9" *ngIf='formIndex'>
+        <div class="col-xs-12 col-lg-8" *ngIf='formIndex'>
             <div class="row" *ngIf='licenciasConduccion?.length > 0'>
                 <div class="col-xs-12">
                     <div class="card">
@@ -72,11 +72,11 @@
                                         <td>{{ licenciaConduccion.organismoTransito.nombre }}</td>
                                         <td>{{ licenciaConduccion.fechaExpedicion }}</td>
                                         <td>{{ licenciaConduccion.fechaVencimiento }}</td>
-                                        <td>
-                                            <label class="label label-success text-success"
+                                        <td>{{ licenciaConduccion.estado }}
+                                            <!-- <label class="label label-success text-success"
                                                 *ngIf="licenciaConduccion.activo">Activo</label>
                                             <label class="label label-danger text-danger"
-                                                *ngIf="!licenciaConduccion.activo">Inactivo</label>
+                                                *ngIf="!licenciaConduccion.activo">Inactivo</label> -->
                                         </td>
                                         <td>
                                             <div class="btn-group">
