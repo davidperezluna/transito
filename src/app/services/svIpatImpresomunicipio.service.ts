@@ -15,8 +15,11 @@ export class SvIpatImpresoMunicipioService {
 		private _loogerService: LoggerService
 	){}
 
-	index(){
-		return this._http.get(this.url+"/").map(res => res.json());
+	index(datos){
+		let json = JSON.stringify(datos);
+		let params = "data=" + json;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/", params, { headers: headers }).map(res => res.json());
 	}
 
 	register(datos, token) {

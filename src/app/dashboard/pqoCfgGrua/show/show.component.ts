@@ -44,11 +44,11 @@ constructor(
       }
     );
 
-    this._GruaUserCiudadanoService.index(this.grua.id).subscribe(
+    this._GruaUserCiudadanoService.index({ 'idGrua': this.grua.id }).subscribe(
       response => {
         this.gruaCiudadanos = response.data;
         let timeoutId = setTimeout(() => {
-          this.iniciarTabla();
+          this.onInitTable();
         }, 100);
       }, 
       error => {
@@ -62,8 +62,8 @@ constructor(
     );
   }
 
-  iniciarTabla(){
-    $('#dataTables-example').DataTable({
+  onInitTable(){
+    this.table = $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,
       sPaginationType: 'full_numbers',
@@ -75,8 +75,7 @@ constructor(
           sLast: '<i class="fa fa-step-forward"></i>'
         }
       }
-   });
-   this.table = $('#dataTables-example').DataTable();
+    });
   }
   
   onCancelar(){

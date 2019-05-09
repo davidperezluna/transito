@@ -1,0 +1,75 @@
+<div class="container-fluid" >
+        <hr>
+        <div class="row">
+            <div class="col-xs-12 col-lg-12">
+                <div class="row" *ngIf='formSearch'>
+                    <div class="col-xs-12 col-lg-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <b class="text-uppercase">Asignación de rangos a funcionario</b>
+                                <br>
+                                <small>Buscar agente</small>
+                            </div>
+                            <div class="card-body">
+                                <form>     
+                                    <div class="form-group row">
+                                        <div class="col-xs-12 col-lg-12">
+                                            <label>Parametro de búsqueda</label>
+                                            <input class="form-control" [(ngModel)]="parametro" placeholder="Nombre, Apellido o No. de placa" name="parametro" type="text">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="card-footer">
+                                <button (click)="onNew()" (ready)="ready($event)" class="btn btn-primary" type="button">
+                                    <i class="fa fa-plus"></i>
+                                    Nuevo
+                                </button>
+                                <button (click)="onSearch()" (ready)="ready($event)" class="btn btn-default" type="button">
+                                    <i class="fa fa-search"></i>
+                                    Buscar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="col-md-12 col-lg-8" *ngIf='consecutivos && consecutivos?.length > 0'>
+                        <div class="card">
+                            <div class="card-body">
+                                <table class="table " id="dataTables-example">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Funcionario</th>
+                                            <th>Identificación</th>
+                                            <th>No. placa</th>
+                                            <th>Sede operativa</th>
+                                            <th>Consecutivo</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr class="odd" *ngFor="let consecutivo of consecutivos; let i = index">
+                                        <td>{{ i + 1 }}</td>
+                                        <td>
+                                            {{ consecutivo.funcionario.ciudadano.primerNombre }}
+                                            {{ consecutivo.funcionario.ciudadano.segundoNombre }}
+                                            {{ consecutivo.funcionario.ciudadano.primerApellido }}
+                                            {{ consecutivo.funcionario.ciudadano.segundoApellido }}
+                                        </td>
+                                        <td>{{ consecutivo.funcionario.ciudadano.identificacion }}</td>
+                                        <td>{{ consecutivo.funcionario.numeroPlaca }}</td>
+                                        <td>{{ consecutivo.funcionario.organismoTransito.nombre }}</td>
+                                        <td>{{ consecutivo.numero }}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <!-- /.table-responsive --> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+    </div>

@@ -5,7 +5,7 @@ import { environment } from 'environments/environment';
 import  "rxjs/add/operator/map";
 
 @Injectable()
-export class PnalComparendoService {
+export class PnalCfgCdoConsecutivoService {
 	private url = environment.apiUrl + 'personal/pnalcfgcdoconsecutivo';
 	public identity;
 	public token;
@@ -21,7 +21,7 @@ export class PnalComparendoService {
 
 	register(comparendo,token){
 		let json = JSON.stringify(comparendo);
-		let params = "json="+json+"&authorization="+token;
+		let params = "data="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/new", params, {headers: headers}).map(
 			res => res.json(),
@@ -45,7 +45,7 @@ export class PnalComparendoService {
 
 	edit(comparendo,token){
 		let json = JSON.stringify(comparendo);
-		let params = "json="+json+"&authorization="+token;
+		let params = "data="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
  		return this._http.post(this.url+"/edit", params, {headers: headers}).map(
 			res => res.json(),
@@ -59,14 +59,14 @@ export class PnalComparendoService {
 
 	search(datos,token){
 		let json = JSON.stringify(datos);
-		let params = "json="+json+"&authorization="+token;
+		let params = "data="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
  		return this._http.post(this.url+"/search", params, {headers: headers}).map(res => res.json());
 	}
 
 	record(datos,token){
 		let json = JSON.stringify(datos);
-		let params = "json="+json+"&authorization="+token;
+		let params = "data="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
  		return this._http.post(this.url+"/record/funcionario", params, {headers: headers}).map(res => res.json());
 	}
@@ -76,5 +76,12 @@ export class PnalComparendoService {
 		let params = "data=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/search/last/funcionario", params, { headers: headers }).map(res => res.json());
+	}
+
+	searchByFuncionario(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = "data=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/search/funcionario", params, { headers: headers }).map(res => res.json());
 	}
 }

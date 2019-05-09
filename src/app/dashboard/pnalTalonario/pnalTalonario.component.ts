@@ -12,8 +12,7 @@ declare var $: any;
 
 export class PnalTalonarioComponent implements OnInit {
   public errorMessage;
-	public id;
-	public respuesta;
+
 	public talonarios;
 	public formNew = false;
 	public formEdit = false;
@@ -30,23 +29,18 @@ export class PnalTalonarioComponent implements OnInit {
     swal({
       title: 'Cargando Tabla!',
       text: 'Solo tardara unos segundos por favor espere.',
-      timer: 1500,
       onOpen: () => {
         swal.showLoading()
       }
-    }).then((result) => {
-      if (
-        // Read more about handling dismissals
-        result.dismiss === swal.DismissReason.timer
-      ) {
-      }
-    })
+    });
     
     this._TalonarioService.index().subscribe(
       response => {
         this.talonarios = response.data;
+
         let timeoutId = setTimeout(() => {
           this.onInitTable();
+          swal.close();
         }, 100);
       }, 
       error => {
@@ -116,7 +110,6 @@ export class PnalTalonarioComponent implements OnInit {
                       confirmButtonColor: '#15d4be',
                     })
                   this.table.destroy();
-                  this.respuesta= response;
                   this.ngOnInit();
               }, 
             error => {
@@ -128,8 +121,6 @@ export class PnalTalonarioComponent implements OnInit {
               }
             }
           );
-
-        
       }
     })
   }

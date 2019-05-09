@@ -1,63 +1,83 @@
 import { Component, OnInit } from '@angular/core';
-import { PnalComparendo } from './pnalComparendo.modelo';
-import { PnalComparendoService } from '../../services/pnalComparendo.service';
+import { PnalCfgCdoConsecutivo } from './pnalCfgCdoConsecutivo.modelo';
+import { PnalCfgCdoConsecutivoService } from '../../services/pnalCfgCdoConsecutivo.service';
+import { PnalFuncionarioService } from '../../services/pnalFuncionario.service';
 import { LoginService } from '../../services/login.service';
 import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './pnalComparendo.component.html'
+  templateUrl: './pnalCfgCdoConsecutivo.component.html'
 })
 
-export class PnalComparendoComponent implements OnInit {
+export class PnalCfgCdoConsecutivoComponent implements OnInit {
   public errorMessage;
-	public id;
 
-	public comparendos;
+	public consecutivos;
+	public funcionario: any;
 	public formNew = false;
 	public formEdit = false;
-  public formIndex = true;
-  public table:any; 
-  public talonario: PnalComparendo;
+  public formShow = false;
+  public formSearch = true;
+  public table: any;
+  public parametro: any;
+  
+  public datos = {
+    'parametro' : null
+  }
 
   constructor(
-    private _PersonalComparendoService: PnalComparendoService,
-		private _loginService: LoginService,
+    private _ConsecutivoService: PnalCfgCdoConsecutivoService,
+    private _FuncionarioService: PnalFuncionarioService,
+		private _LoginService: LoginService,
     ){}
     
-  ngOnInit() {
+  ngOnInit() {}
+
+  onSearch(){   
     swal({
-      title: 'Cargando Tabla!',
+      title: 'Buscando registros!',
       text: 'Solo tardara unos segundos por favor espere.',
-      timer: 1500,
       onOpen: () => {
         swal.showLoading()
       }
-    }).then((result) => {
-      if (
-        // Read more about handling dismissals
-        result.dismiss === swal.DismissReason.timer
-      ) {
-      }
-    })
-    this._PersonalComparendoService.index().subscribe(
-				response => {
-          this.comparendos = response.data;
-          
-          let timeoutId = setTimeout(() => {
-            this.onInitTable();
-          }, 100);
-				}, 
-				error => {
-					this.errorMessage = <any>error;
+    });
 
+    let token = this._LoginService.getToken();
+    
+    this.datos.parametro = this.parametro;
+
+		this._ConsecutivoService.searchByFuncionario(this.datos, token).subscribe(
+			response => {
+        if(response.status == 'success'){
+          this.consecutivos = response.data;
+
+          this.onInitTable();
+
+          swal({
+            title: 'Perfecto',
+            text: response.message,
+            type: 'info',
+            confirmButtonText: 'Aceptar'
+          });
+        }else{
+          swal({
+            title: 'Atención',
+            text: response.message,
+            type:'warning',
+            confirmButtonColor: '#15d4be',
+          });
+        }
+			error => {
+					this.errorMessage = <any>error;
 					if(this.errorMessage != null){
 						console.log(this.errorMessage);
 						alert("Error en la petición");
 					}
 				}
-      );
+
+		}); 
   }
 
   onInitTable(){
@@ -75,17 +95,17 @@ export class PnalComparendoComponent implements OnInit {
       }
     });
   }
+
   onNew(){
     this.formNew = true;
-    this.formIndex = false;
-    this.table.destroy();
+    this.formSearch = false;
   }
 
   ready(isCreado:any){
     if(isCreado) {
       this.formNew = false;
       this.formEdit = false;
-      this.formIndex = true;
+      this.formSearch = true;
       this.ngOnInit();
     }
   }
@@ -102,8 +122,8 @@ export class PnalComparendoComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.value) {
-        let token = this._loginService.getToken();
-        this._PersonalComparendoService.delete(token,id).subscribe(
+        let token = this._LoginService.getToken();
+        this._ConsecutivoService.delete(token,id).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',
@@ -126,12 +146,6 @@ export class PnalComparendoComponent implements OnInit {
 
         
       }
-    })
-  }
-
-  edit(talonario:any){
-    this.talonario = talonario;
-    this.formEdit = true;
-    this.formIndex = false;
+    });
   }
 }

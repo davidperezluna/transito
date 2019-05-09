@@ -3,7 +3,7 @@
     <div class="col-xs-12 col-lg-4">
         <div class="card">
             <div class="card-header">
-                <b class="text-uppercase">Nuevo registro de impresos a bodega</b>
+                <b class="text-uppercase">Nuevo registro de impresos a radio de acción <small>(Municipio)</small></b>
                 <br>
                 <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
             </div>
@@ -13,25 +13,49 @@
                         <div class="row">
                             <div class="col-xs-12 col-lg-6">
                                 <label>Fecha <b class="text-danger">*</b></label>
-                                <input type="date" class="form-control" [(ngModel)]="municipio.fecha" name="fecha" />
+                                <input type="date" class="form-control" [(ngModel)]="municipio.fecha" name="fecha" value="{{ date }}" required />
                             </div>
                             <div class="col-xs-12 col-lg-6">
                                 <label>Cantidad <b class="text-danger">*</b></label>
-                                <input type="text" class="form-control" [(ngModel)]="municipio.cantidad" name="cantidad" />
+                                <input type="number" class="form-control" [(ngModel)]="municipio.cantidad" name="cantidad" required />
                             </div>
                         </div>
+
                         <div class="row">
                             <div  class="col-xs-12 col-lg-12">
-                                <label>Organismo de tránsito <small>(Sede operativa)</small> <b class="text-danger">*</b></label>
-                                <ng-select [multiple]="false" [options]="organismosTransito" [(ngModel)]="municipio.idOrganismoTransito" name="idOrganismoTransito">
+                                <label>Sede operativa <b class="text-danger">*</b></label>
+                                <ng-select [multiple]="false" [options]="organismosTransito" [(ngModel)]="municipio.idOrganismoTransito" name="idOrganismoTransito" required>
                                 </ng-select>
                             </div>
                         </div>
+
                         <div class="row">
                             <div  class="col-xs-12 col-lg-12">
                                 <label>Municipio <b class="text-danger">*</b></label>
-                                <ng-select [multiple]="false" [options]="municipios" [(ngModel)]="municipio.idMunicipio" name="idMunicipio">
+                                <ng-select [multiple]="false" [options]="municipios" [(ngModel)]="municipio.idMunicipio" name="idMunicipio" required>
                                 </ng-select>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Corregimiento <b class="text-danger">*</b></label>
+                                <input type="text" class="form-control" [(ngModel)]="municipio.corregimiento" name="corregimiento" required />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <h5 class="text-center text-uppercase">
+                                <b>Datos de responsable</b>
+                            </h5>
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Nombre <b class="text-danger">*</b></label>
+                                <input type="text" class="form-control" [(ngModel)]="municipio.responsableNombre" name="responsableNombre" required />
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Identificación <b class="text-danger">*</b></label>
+                                <input type="text" class="form-control" [(ngModel)]="municipio.responsableIdentificacion" name="responsableIdentificacion" required />
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Cargo <b class="text-danger">*</b></label>
+                                <input type="text" class="form-control" [(ngModel)]="municipio.responsableCargo" name="responsableCargo" required />
                             </div>
                         </div>
                     </div>

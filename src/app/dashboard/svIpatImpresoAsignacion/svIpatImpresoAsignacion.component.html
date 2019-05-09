@@ -21,6 +21,7 @@
                     <th>Cantidad recibida</th>
                     <th>Cantidad disponible</th>
                     <th>No. acta</th>
+                    <th>Sede operativa</th>
                     <th>Acciones</th>
                 </tr>
               </thead>
@@ -31,6 +32,7 @@
                   <td>{{ asignacion.cantidadRecibida }}</td>
                   <td>{{ asignacion.cantidadDisponible }}</td>
                   <td>{{ asignacion.numeroActa }}</td>
+                  <td>{{ asignacion.organismoTransito.nombre }}</td>
                   <td>
                     <div class="btn-group">
                       <button (click)="onEdit(asignacion)" class="btn btn-xs btn-primary" type="button" tooltip="Editar" [tooltipDisabled]="false" [tooltipAnimation]="true"

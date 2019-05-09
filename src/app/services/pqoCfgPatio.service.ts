@@ -19,11 +19,11 @@ export class PqoCfgPatioService {
         return this._http.get(this.url + "/").map(res => res.json());
     }
 
-    register(datos, token) {
+    register(formData, datos, token) {
         let json = JSON.stringify(datos);
-        let params = "data=" + json + "&authorization=" + token;
-        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-        return this._http.post(this.url + "/new", params, { headers: headers }).map(
+        formData.append('data', json);
+        formData.append('authorization', token);
+        return this._http.post(this.url + "/new", formData).map(
             res => res.json(),
             this._loogerService.registerLog(token, 'INSERT', json, this.url)
         );
@@ -58,5 +58,12 @@ export class PqoCfgPatioService {
 
     select() {
         return this._http.get(this.url + "/select").map(res => res.json());
+    }
+
+    searchByCiudadano(datos, token) {
+        let json = JSON.stringify(datos);
+        let params = "data=" + json + "&authorization=" + token;
+        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+        return this._http.post(this.url + "/search/ciudadano", params, { headers: headers }).map(res => res.json());
     }
 }

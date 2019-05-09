@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PnalAsignacion } from './pnalAsignacion.modelo';
 import { PnalAsignacionService } from '../../services/pnalAsignacion.service';
 import { LoginService } from '../../services/login.service';
+import { environment } from 'environments/environment';
 import swal from 'sweetalert2';
 declare var $: any;
 
@@ -12,27 +13,52 @@ declare var $: any;
 
 export class PnalAsignacionComponent implements OnInit {
   public errorMessage;
-	public id;
 
-	public funcionarios;
-	public funcionario: any;
+  public apiUrl = environment.apiUrl + 'personal/pnalasignacion';
+  public asignaciones;
+  
 	public formNew = false;
 	public formEdit = false;
-  public formShow = false;
-  public formSearch = true;
+  public formIndex = true;
+
   public table: any;
-  public parametro: any;
-  public resumen = {};     public datos = {
-    'parametro' : null
-  }
+  
   public asignacion: PnalAsignacion;
 
   constructor(
     private _AsignacionService: PnalAsignacionService,
-		private _loginService: LoginService,
+		private _LoginService: LoginService,
     ){}
     
-  ngOnInit() {  }
+  ngOnInit() { 
+    swal({
+      title: 'Cargando Tabla!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+    
+    this._AsignacionService.index().subscribe(
+      response => {
+          this.asignaciones = response.data;
+
+          swal.close();
+
+          let timeoutId = setTimeout(() => {
+            this.onInitTable();
+          }, 100);
+      }, 
+      error => {
+        this.errorMessage = <any>error;
+
+        if(this.errorMessage != null){
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+  }
   
   onInitTable(){
     this.table = $('#dataTables-example').DataTable({
@@ -50,31 +76,18 @@ export class PnalAsignacionComponent implements OnInit {
     });
   }
 
-  onShow(funcionario: any){
-    this.funcionario = funcionario;
-    this.formNew = false;
-    this.formSearch = false;
-    this.formShow = true;
-    this.table.destroy();
+  onNew(){
+    this.formNew = true;
+    this.formIndex = false;
   }
 
   ready(isCreado:any){
     if(isCreado) {
       this.formNew = false;
       this.formEdit = false;
-      this.formShow = false;
-      this.formSearch = true;
+      this.formIndex = true;
       this.ngOnInit();
     }
-  }
-
-  readyNew(funcionario:any){
-    this.funcionario = funcionario;
-    this.formNew = true;
-    this.formEdit = false;
-    this.formShow = false;
-    this.formSearch = false;
-    this.ngOnInit();
   }
 
   delete(id:any){
@@ -89,7 +102,7 @@ export class PnalAsignacionComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.value) {
-        let token = this._loginService.getToken();
+        let token = this._LoginService.getToken();
         this._AsignacionService.delete(token,id).subscribe(
             response => {
                 swal({
@@ -115,50 +128,5 @@ export class PnalAsignacionComponent implements OnInit {
         
       }
     })
-  }
-
-  onSearch(){   
-    swal({
-      title: 'Buscando registros!',
-      text: 'Solo tardara unos segundos por favor espere.',
-      onOpen: () => {
-        swal.showLoading()
-      }
-    });
-
-    let token = this._loginService.getToken();
-    
-    this.datos.parametro = this.parametro;
-
-		this._AsignacionService.searchFuncionarioAgente(this.datos,token).subscribe(
-			response => {
-        if(response.status == 'success'){
-          this.funcionarios = response.data;
-
-          this.onInitTable();
-
-          swal({
-            title: 'Perfecto',
-            text: response.message,
-            type: 'info',
-            confirmButtonText: 'Aceptar'
-          });
-        }else{
-          swal({
-            title: 'Atención',
-            text: response.message,
-            type:'warning',
-            confirmButtonColor: '#15d4be',
-          });
-        }
-			error => {
-					this.errorMessage = <any>error;
-					if(this.errorMessage != null){
-						console.log(this.errorMessage);
-						alert("Error en la petición");
-					}
-				}
-
-		}); 
   }
 }

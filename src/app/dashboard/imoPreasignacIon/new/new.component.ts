@@ -16,7 +16,7 @@ declare var $: any;
 export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
 public errorMessage;
-public respuesta;
+
 public empresaSelected:any;
 public sedes:any;
 public sedeOrigenSelected:any;
@@ -76,21 +76,22 @@ constructor(
   onCancelar(){
     this.ready.emit(true);
   }
+
   onEnviar(){
     this.datosAsignacion.sedeDestino = this.sedeDestinoSelected;
     this.datosAsignacion.sedeOrigen = this.sedeOrigenSelected;
-    this.datosAsignacion.casoInsumo = this.insumoSelected;    
+    this.datosAsignacion.casoInsumo = this.insumoSelected;
+
 		this._ImoInsumoService.reasignacionSustrato(this.datosAsignacion).subscribe(
 			response => {
-        this.respuesta = response;
-        if(this.respuesta.status == 'success'){
+        if(response.status == 'success'){
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',
-            text: this.respuesta.msj,
+            text: response.message,
             type: 'success',
             confirmButtonText: 'Aceptar'
-          })
+          });
         }
 			error => {
 					this.errorMessage = <any>error;
@@ -116,13 +117,12 @@ constructor(
     this.datosAsignacion.casoInsumo = this.insumoSelected;
     this._ImoInsumoService.isExistencia(this.datosAsignacion).subscribe(
 			response => {
-        this.respuesta = response;
-        if(this.respuesta.status == 'success'){
+        if(response.status == 'success'){
           this.isCantidad = false;
           swal({
             title: 'Registro encontrado!',
             type: 'success',
-            text: this.respuesta.msj,
+            text: response.message,
             confirmButtonText: 'Aceptar'
           })
         }else{
@@ -130,7 +130,7 @@ constructor(
           swal({
             title: 'Error!',
             type: 'error',
-            text: this.respuesta.msj,
+            text: response.message,
             confirmButtonText: 'Aceptar'
           })
         }
@@ -152,7 +152,8 @@ constructor(
         onOpen: () => {
           swal.showLoading()
         }
-      })
+      });
+
       if (this.table) {
         this.table.destroy()
       }
@@ -161,17 +162,19 @@ constructor(
         'idOrganismoTransito':this.sedeOrigenSelected,
       }
       let token = this._loginService.getToken();
+
       this._ImoLoteService.showReasignacion(datos,token).subscribe( 
         response => {
           if (response.status == 'success') {
             this.lotes = response.data;
             swal.close()
-            console.log(this.lotes);
+
             setTimeout(() => {
-              this.iniciarTabla();
+              this.onInitTable();
             });
           }else{
             this.lotes = null;
+
             swal({
               title: 'Error!',
               text: 'No existen sustratos para esta sede',
@@ -186,11 +189,11 @@ constructor(
               alert("Error en la petición");
             }
           }
-
-      });
+        }
+      );
   }
 
-  iniciarTabla(){
+  onInitTable(){
     $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,
@@ -214,36 +217,44 @@ constructor(
       onOpen: () => {
         swal.showLoading()
       }
-    })
+    });
+
     let datos = {
       'lote': lote,
       'sedeOperativaDestino': this.sedeDestinoSelected
     }
+    
     this._ImoInsumoService.reasignacionSustrato(datos).subscribe( 
       response => {
         if (response.status == 'success') {
           this.lotes = null;
-          swal.close()
+
           swal({
             title: 'Perfecto!',
-            text: 'Registro exitoso!',
+            text: response.message,
             type: 'success',
             confirmButtonText: 'Aceptar'
-          })
-          console.log(this.lotes);
+          });
+
           setTimeout(() => {
-            this.iniciarTabla();
+            this.onInitTable();
+          });
+        }else{
+          swal({
+            title: 'Error!',
+            text: response.message,
+            type: 'error',
+            confirmButtonText: 'Aceptar'
           });
         }
-      error => {
+        error => {
           this.errorMessage = <any>error;
           if(this.errorMessage != null){
             console.log(this.errorMessage);
             alert("Error en la petición");
           }
         }
-
-    });
-
+      }
+    );
   }
 }

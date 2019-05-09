@@ -5,6 +5,8 @@
         <div class="card">
           <div class="card-header">
             <b class="text-uppercase">Asignación de impresos a municipio (radio de acción)</b>
+            <br>
+            <b class="text-danger">TOTAL DISPONIBLES POR SEDE OPERATIVA {{ cantidadDisponible }}</b>
             <div class="btn-group pull-right">
               <button (click)="onNew()" class="btn btn-default">
                 <i class="fa fa-plus"></i>
@@ -18,29 +20,44 @@
                 <tr>
                     <th>#</th>
                     <th>Fecha</th>
-                    <th>Cantidad recibida</th>
-                    <th>Cantidad disponible</th>
-                    <th>No. acta</th>
-                    <th>Acciones</th>
+                    <th>Cantidades</th>
+                    <th>Responsable</th>
+                    <th>Detalles</th>
                 </tr>
               </thead>
               <tbody>
                 <tr class="odd" *ngFor="let municipio of municipios; let i = index">
                   <td>{{ i + 1 }}</td>
                   <td>{{ municipio.fecha }}</td>
-                  <td>{{ municipio.cantidadRecibida }}</td>
-                  <td>{{ municipio.cantidadDisponible }}</td>
-                  <td>{{ municipio.numeroActa }}</td>
                   <td>
-                    <div class="btn-group">
-                      <button (click)="onEdit(municipio)" class="btn btn-xs btn-primary" type="button" tooltip="Editar" [tooltipDisabled]="false" [tooltipAnimation]="true"
-                        tooltipPlacement="top">
-                        <i class="fa fa-pencil"></i>
-                      </button>
-                      <button (click)="onDelete(municipio.id)" class="btn btn-xs btn-danger" type="button" tooltip="Eliminar" [tooltipDisabled]="false" [tooltipAnimation]="true" tooltipPlacement="top">
-                        <i class="fa fa-trash"></i>
-                      </button>
-                    </div>
+                    <b>Impresos entregados: </b>
+                    {{ municipio.cantidadEntregada }}
+                    <br>
+                    <b>Impresos disponibles</b>
+                    {{ municipio.cantidadDisponible }}
+                  </td>
+                  <td>
+                    <b>Nombre</b>
+                    <br>
+                    {{ municipio.responsableNombre }}
+                    <b>Identificación</b>
+                    <br>
+                    {{ municipio.responsableIdentificacion }}
+                    <b>Cargo</b>
+                    <br>
+                    {{ municipio.responsableCargo }}
+                  </td>
+                  <td>
+                    <b>No. acta</b>
+                    <br>
+                    {{ municipio.numeroActa }}
+                    <br>
+                    <b>Municipio</b>
+                    <br>
+                    {{ municipio.municipio.nombre }}
+                    <b>Corregimiento</b>
+                    <br>
+                    {{ municipio.corregimiento }}
                   </td>
                 </tr>
               </tbody>

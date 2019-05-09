@@ -314,6 +314,8 @@ constructor(
   }
   
   onReadyTramite(datos:any){
+    console.log(datos);
+    
     if (datos.documentacion) {
       this.tramitesRealizados.push(
         {
@@ -331,6 +333,18 @@ constructor(
         }
       );
     }
+
+    console.log(this.tramitesRealizados.length);
+    console.log(this.tramitesRealizados);
+    console.log(this.tramitesFactura);
+    console.log(this.tramitesFactura.length);
+    
+    swal({
+      title: 'Perfecto!',
+      text: 'Trámite realizado con exito.',
+      type: 'success',
+      confirmButtonText: 'Aceptar'
+    });
 
     this.onChangedTramiteFactura(datos.idTramiteFactura);
 
@@ -360,14 +374,6 @@ constructor(
         }
       }
     );*/
-
-    swal({
-      title: 'Perfecto!',
-      text: 'Trámite realizado con exito.',
-      type: 'success',
-      confirmButtonText: 'Aceptar'
-    });
-    
 
     /*this.tramiteSolicitud.datos = datos;
 

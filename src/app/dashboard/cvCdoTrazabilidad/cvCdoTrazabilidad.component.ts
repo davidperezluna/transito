@@ -24,6 +24,7 @@ export class CvCdoTrazabilidadComponent implements OnInit {
 	public formEdit = false;
   public formIndex = false;
   public formSearch = true;
+  public formAcuerdoPago = false;
   public table:any; 
   public trazabilidad: CvCdoTrazabilidad;
 
@@ -131,7 +132,6 @@ export class CvCdoTrazabilidadComponent implements OnInit {
             alert("Error en la petición");
           }
         }
-
       });
   }
   

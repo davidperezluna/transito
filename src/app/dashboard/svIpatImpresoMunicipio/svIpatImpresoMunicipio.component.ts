@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SvIpatImpresoMunicipio } from './svIpatImpresoMunicipio.modelo';
 import { SvIpatImpresoMunicipioService } from '../../services/svIpatImpresoMunicipio.service';
+import { PnalFuncionarioService } from '../../services/pnalFuncionario.service';
 import { LoginService } from '../../services/login.service';
 import swal from 'sweetalert2';
 declare var $: any;
@@ -12,15 +13,18 @@ declare var $: any;
 
 export class SvIpatImpresoMunicipioComponent implements OnInit {
   public errorMessage;
-	public municipios;
+  public municipios: any;
+	public cantidadDisponible: any;
 	public formNew = false;
 	public formEdit = false;
   public formIndex = true;
   public table:any = null; 
+  public organismoTransito:any = null; 
   public municipio: SvIpatImpresoMunicipio;
 
   constructor(
     private _ImpresoMunicipioService: SvIpatImpresoMunicipioService,
+    private _FuncionarioService: PnalFuncionarioService,
 		private _LoginService: LoginService,
     ){}
     
@@ -33,26 +37,60 @@ export class SvIpatImpresoMunicipioComponent implements OnInit {
       }
     });
 
-    this._ImpresoMunicipioService.index().subscribe(
-				response => {
-          this.municipios = response.data;
-          let timeoutId = setTimeout(() => {  
-            this.iniciarTabla();
-          }, 100);
-          swal.close();
-				}, 
-				error => {
-					this.errorMessage = <any>error;
+    let token = this._LoginService.getToken();
 
-					if(this.errorMessage != null){
-						console.log(this.errorMessage);
-						alert("Error en la petición");
-					}
-				}
-      );
+    let identity = this._LoginService.getIdentity();
+
+    this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
+      response => {
+        if (response.status == 'success') {
+          this.organismoTransito = response.data.organismoTransito;
+
+          this._ImpresoMunicipioService.index({ 'idOrganismoTransito': this.organismoTransito.id }).subscribe(
+            response => {
+              this.cantidadDisponible = response.data.cantidadDisponible;
+              this.municipios = response.data.municipios;
+
+              let timeoutId = setTimeout(() => {
+                this.onInitTable();
+              }, 100);
+
+              this.formIndex = true;
+
+              swal.close();
+            },
+            error => {
+              this.errorMessage = <any>error;
+
+              if (this.errorMessage != null) {
+                console.log(this.errorMessage);
+                alert("Error en la petición");
+              }
+            }
+          );
+
+        } else {
+          this.formIndex = false;
+
+          swal({
+            title: 'Error!',
+            text: 'Su usuario no tiene autorización para realizar esta operación!',
+            type: 'error',
+            confirmButtonText: 'Aceptar'
+          });
+        }
+        error => {
+          this.errorMessage = <any>error;
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert('Error en la petición');
+          }
+        }
+      }
+    );
   }
 
-  iniciarTabla(){
+  onInitTable(){
     if (this.table) {
       this.table.destroy();
     }

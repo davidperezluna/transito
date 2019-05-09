@@ -70,6 +70,7 @@ export class PqoInmovilizacionComponent implements OnInit {
       }
     });
   }
+
   onNew(){
     this.formNew = true;
     this.formIndex = false;
@@ -128,5 +129,40 @@ export class PqoInmovilizacionComponent implements OnInit {
     this.entrada = entrada;
     this.formEdit = true;
     this.formIndex = false;
+  }
+
+  onExit(inmovilizacion:any){
+    let token = this._loginService.getToken();
+
+    this._InmovilizacionService.exit({ 'id':inmovilizacion.id }, token).subscribe(
+      response => {
+        if (response.code == 200) {
+          swal({
+            title: 'Perfecto!',
+            text: response.message,
+            type:'success',
+            confirmButtonText: 'Aceptar'
+          });
+
+          this.table.destroy();
+          this.ngOnInit();
+        }else{
+          swal({
+            title: 'Error!',
+            text: response.message,
+            type:'error',
+            confirmButtonText: 'Aceptar'
+          });
+        }
+      }, 
+      error => {
+        this.errorMessage = <any>error;
+
+        if(this.errorMessage != null){
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
   }
 }

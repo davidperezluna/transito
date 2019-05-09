@@ -1,10 +1,13 @@
 export class PqoInmovilizacion{
 	constructor(
 		public placa: string,
+		public motor: string,
+		public chasis: string,
+		public fechaInmovilizacion: string,
+		public horaInmovilizacion: string,
 		public numeroComparendo: number,
 		public numeroInventario: number,
-		public costoTrayecto: number,
-		public hora: string,
+		public costoGrua: number,
 		public lugar: string,
 		public observaciones: string,
 		public idMarca: number,

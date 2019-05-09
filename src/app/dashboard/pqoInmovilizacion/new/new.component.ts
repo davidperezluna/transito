@@ -3,7 +3,6 @@ import { PqoInmovilizacion } from '../pqoInmovilizacion.modelo';
 import { PqoInmovilizacionService } from '../../../services/pqoInmovilizacion.service';
 import { PqoCfgPatioService } from '../../../services/pqoCfgPatio.service';
 import { PqoCfgGruaService } from '../../../services/pqoCfgGrua.service';
-import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
 import { VhloCfgMarcaService } from '../../../services/vhloCfgMarca.service';
 import { VhloCfgLineaService } from '../../../services/vhloCfgLinea.service';
 import { VhloCfgClaseService } from '../../../services/vhloCfgClase.service';
@@ -26,34 +25,56 @@ export class NewComponent implements OnInit {
   public colores: any;
   public gruas: any;
   public patios: any;
-  public agentesTransito: any;
+  public ciudadano: any;
+  public patio: any;
 
 constructor(
   private _InmovilizacionService: PqoInmovilizacionService,
   private _PqoCfgPatioService: PqoCfgPatioService,
   private _PqoCfgGruaService: PqoCfgGruaService,
-  private _FuncionarioService: MpersonalFuncionarioService,
   private _MarcaService: VhloCfgMarcaService,
   private _LineaService: VhloCfgLineaService,
   private _ClaseService: VhloCfgClaseService,
   private _ColorService: VhloCfgColorService,
-  private _loginService: LoginService,
+  private _LoginService: LoginService,
   ){}
 
   ngOnInit() {
-    this.inmovilizacion = new PqoInmovilizacion(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    swal({
+      title: 'Cargando Datos!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+
+    this.inmovilizacion = new PqoInmovilizacion(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     this.date = new Date();
 
-    this._FuncionarioService.selectAgentes().subscribe(
-      response => {
-        this.agentesTransito = response;
-      },
-      error => {
-        this.errorMessage = <any>error;
+    let token = this._LoginService.getToken();
 
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert("Error en la petición");
+    let identity = this._LoginService.getIdentity();
+
+    this._PqoCfgPatioService.searchByCiudadano({ 'identificacion': identity}, token).subscribe(
+      response => {
+        if (response.code == 200) {
+          this.patio = response.data.patio;
+
+          this.inmovilizacion.idPatio = this.patio.id;
+        } else {
+          swal({
+            title: 'Error!',
+            text: 'Su usuario no tiene autorización para realizar inmovilización!',
+            type: 'error',
+            confirmButtonText: 'Aceptar'
+          });
+        }
+        error => {
+          this.errorMessage = <any>error;
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert('Error en la petición');
+          }
         }
       }
     );
@@ -131,7 +152,7 @@ constructor(
 
   onChangedMarca(e) {
     if (e) {
-      let token = this._loginService.getToken()
+      let token = this._LoginService.getToken()
       this._LineaService.selectByMarca({ 'idMarca': e }, token).subscribe(
         response => {
           this.lineas = response;
@@ -151,8 +172,9 @@ constructor(
   onCancelar(){
     this.ready.emit(true);
   }
+  
   onEnviar(){
-    let token = this._loginService.getToken();
+    let token = this._LoginService.getToken();
     
 		this._InmovilizacionService.register(this.inmovilizacion,token).subscribe(
 			response => {

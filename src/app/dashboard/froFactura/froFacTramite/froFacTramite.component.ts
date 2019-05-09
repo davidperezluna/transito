@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { DatePipe, CurrencyPipe } from '@angular/common';
+import { DatePipe } from '@angular/common';
 import { FroFacTramite } from './froFacTramite.modelo';
 import { FroFacturaService } from '../../../services/froFactura.service';
 import { FroTrtePrecioService } from '../../../services/froTrtePrecio.service';
+import { FroFacTramiteService } from '../../../services/froFacTramite.service';
 import { PnalFuncionarioService } from '../../../services/pnalFuncionario.service';
 import { CfgModuloService } from '../../../services/cfgModulo.service';
 import { UserCfgTipoIdentificacionService } from '../../../services/userCfgTipoIdentificacion.service';
@@ -17,7 +18,8 @@ declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './froFacTramite.component.html'
+  templateUrl: './froFacTramite.component.html',
+  providers: [DatePipe]
 })
 
 export class FroFacTramiteComponent implements OnInit {
@@ -38,7 +40,6 @@ export class FroFacTramiteComponent implements OnInit {
   public valorRetefuente: any = 0;
   public tramitesValor:any=[]; 
 
-
   public tipoIdentificacionSelected: any = null;
   public identificacion: any;
   public vehiculoFiltro: any;
@@ -49,7 +50,7 @@ export class FroFacTramiteComponent implements OnInit {
   public fechaCreacion: any = null;
   public fechaVencimiento: any = null;
   public facturaNumero: any = null;
-  public date: any;
+  public date: any = new Date();
   
   public formIndex = false;
   public formNew = false;
@@ -72,8 +73,9 @@ export class FroFacTramiteComponent implements OnInit {
     private _PropietarioService: VhloPropietarioService,
     private _VehiculoService: VhloVehiculoService,
     private _TramitePrecioService: FroTrtePrecioService,
-    private _LoginService: LoginService,
+    private _FacturaTramiteService: FroFacTramiteService,
     private _VhloValorService: VhloValorService,
+    private _LoginService: LoginService,
   ){}
     
   ngOnInit() {
@@ -147,10 +149,6 @@ export class FroFacTramiteComponent implements OnInit {
         }
       }
     );
-
-    this.date = new Date();
-
-    var datePiper = new DatePipe(this.date);
   }
 
   onChangedModulo(e) {
@@ -402,7 +400,6 @@ export class FroFacTramiteComponent implements OnInit {
                     }
                   }
                 );
-                
               } else {
                 swal({
                   title: 'Error!',
@@ -491,8 +488,8 @@ export class FroFacTramiteComponent implements OnInit {
     let token = this._LoginService.getToken();
 
     this.factura.tramites = this.tramitesPrecioArray;
-    //Tipo de recaudo infracciones
-    this.factura.idTipoRecaudo = 1; 
+    //Tipo de recaudo trámites
+    this.factura.idTipoRecaudo = 1;
 
     let datos = {
       'factura': this.factura,
@@ -500,14 +497,27 @@ export class FroFacTramiteComponent implements OnInit {
       'propietarios': this.propietariosVehiculoRetefuente,
       'retencion': this.valorRetefuenteUnitario,
       'idVehiculoValor': this.idVehiculoValor,
-      'idTipoRecaudo': 1,
     }
 
     this._FacturaService.register(datos, token).subscribe(
       response => {
         if (response.status == 'success') {
           this.factura = response.data;
-          //this.factura.numero = response.data.numero;
+
+          var datePiper = new DatePipe('en-US');
+
+          var date = new Date();
+          date.setTime(response.data.fechaCreacion.timestamp * 1000);
+
+          this.fechaCreacion = datePiper.transform(
+            date, 'dd/MM/yyyy'
+          );
+
+          date.setTime(response.data.fechaVencimiento.timestamp * 1000);
+          this.fechaVencimiento = datePiper.transform(
+            date, 'dd/MM/yyyy'
+          );
+          
           this.formNew = false;
 
           swal({
@@ -515,7 +525,7 @@ export class FroFacTramiteComponent implements OnInit {
             text: response.message,
             type: 'success',
             confirmButtonText: 'Aceptar'
-          })
+          });
         } else {
           this.factura.id = null;
           this.factura.numero = null;

@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" *ngIf="patio">
     <div class="col-xs-12 col-lg-6">
         <div class="card">
             <div class="card-header">
@@ -6,114 +6,130 @@
                 <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
             </div>
             <div class="card-body">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th colspan="2" class="text-uppercase text-center">
+                                <b>Datos de patio</b>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="odd">
+                            <td>
+                                <strong>Nombre</strong>
+                                <br>{{ patio.nombre }}
+                            </td>
+                            <td>
+                                <strong>Dirección</strong>
+                                <br>{{ patio.direccion }}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
                 <form #formNew="ngForm"> 
-                    <div class="form-group row">
-                        <div class="col-xs-12 col-lg-6">
-                            <label>Fecha ingreso <strong class="text-danger">*</strong></label>
-                            <br>
-                            <b>{{ date|date:('dd/MM/yyyy') }}</b>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Fecha inmovilización <strong class="text-danger">*</strong></label>
+                                <input class="form-control" [(ngModel)]="inmovilizacion.fechaInmovilizacion" name="fechaInmovilizacion" type="date" required />
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Hora inmovilización <strong class="text-danger">*</strong></label>
+                                <input class="form-control" [(ngModel)]="inmovilizacion.horaInmovilizacion" name="horaInmovilizacion" type="date" required />
+                            </div>
                         </div>
-                        <div class="col-xs-12 col-lg-6">
-                            <label>Hora ingreso <strong class="text-danger">*</strong></label>
-                            <br>
-                            <b>{{ date|date:('HH:mm:ss a') }}</b>
-                        </div>
-                    </div>
 
-                    <div class="form-group row">
-                        <div class="col-xs-12 col-lg-6">
-                            <label>No. comparendo <strong class="text-danger">*</strong></label>
-                            <input class="form-control" [(ngModel)]="inmovilizacion.numeroComparendo" name="numeroComparendo" type="text" required />
-                        </div>
-                        <div class="col-xs-12 col-lg-6">
-                            <label>Placa <strong class="text-danger">*</strong></label>
-                            <input class="form-control" [(ngModel)]="inmovilizacion.placa" name="placa" type="text" required />
-                        </div>
-                        <div class="col-lg-6">
-                            <label>Marca <strong class="text-danger">*</strong></label>
-                            <ng-select [multiple]="false" [options]="marcas" [(ngModel)]="inmovilizacion.idMarca" (ngModelChange)="onChangedMarca($event)" required
-                                name="idMarca">
-                            </ng-select>
-                        </div>
-                        <div class="col-lg-6">
-                            <label>Linea <strong class="text-danger">*</strong></label>
-                            <ng-select [multiple]="false" [options]="lineas" [(ngModel)]="inmovilizacion.idLinea" required name="idLinea">
-                            </ng-select>
-                        </div>
-                        <div class="col-lg-6">
-                            <label>Clase <strong class="text-danger">*</strong></label>
-                            <ng-select [multiple]="false" [options]="clases" [(ngModel)]="inmovilizacion.idClase" required name="idClase">
-                            </ng-select>
-                        </div>
-                        <div class="col-lg-6">
-                            <label>Color <strong class="text-danger">*</strong></label>
-                            <ng-select [multiple]="false" [options]="colores" [(ngModel)]="inmovilizacion.idColor" required name="idColor">
-                            </ng-select>
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <div class="col-xs-12 col-lg-3">
-                            <label>No. inventario <strong class="text-danger">*</strong></label>
-                            <input class="form-control" [(ngModel)]="inmovilizacion.numeroInventario" name="numeroInventario" type="text" required />
-                        </div>
-                        <div class="col-xs-12 col-lg-3">
-                            <label>Grúa <strong class="text-danger">*</strong></label>
-                            <ng-select [multiple]="false" [options]="gruas" [(ngModel)]="inmovilizacion.idGrua" name="idGrua" required>
-                            </ng-select>
-                        </div>
-                        <div class="col-xs-12 col-lg-6">
-                            <label>Patio <strong class="text-danger">*</strong></label>
-                            <ng-select [multiple]="false" [options]="patios" [(ngModel)]="inmovilizacion.idPatio" name="idPatio" required>
-                            </ng-select>
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <div class="col-xs-12 col-lg-4">
-                            <label>Hora inmovilizacion <strong class="text-danger">*</strong></label>
-                            <input class="form-control" [(ngModel)]="inmovilizacion.hora" name="hora" type="time" required />
-                        </div>
-                        <div class="col-xs-12 col-lg-8">
-                            <label>Lugar inmovilizacion <strong class="text-danger">*</strong></label>
-                            <input class="form-control" [(ngModel)]="inmovilizacion.lugar" name="lugar" type="text" required />
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <div class="col-xs-12 col-lg-6">
-                            <label>Quien realizo comparendo <strong class="text-danger">*</strong></label>
-                            <ng-select [multiple]="false" [options]="agentesTransito" [(ngModel)]="inmovilizacion.idFuncionario" name="idFuncionario" required>
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-6">
+                                <label>No. comparendo <strong class="text-danger">*</strong></label>
+                                <input class="form-control" [(ngModel)]="inmovilizacion.numeroComparendo" name="numeroComparendo" type="text" required />
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Placa</label>
+                                <input class="form-control" [(ngModel)]="inmovilizacion.placa" name="placa" type="text" />
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Motor</label>
+                                <input class="form-control" [(ngModel)]="inmovilizacion.motor" name="motor" type="text" />
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Chasis</label>
+                                <input class="form-control" [(ngModel)]="inmovilizacion.chasis" name="chasis" type="text" />
+                            </div>
+                            <div class="col-lg-6">
+                                <label>Marca</label>
+                                <ng-select [multiple]="false" [options]="marcas" [(ngModel)]="inmovilizacion.idMarca" (ngModelChange)="onChangedMarca($event)"
+                                    name="idMarca">
                                 </ng-select>
+                            </div>
+                            <div class="col-lg-6">
+                                <label>Linea</label>
+                                <ng-select [multiple]="false" [options]="lineas" [(ngModel)]="inmovilizacion.idLinea" name="idLinea">
+                                </ng-select>
+                            </div>
+                            <div class="col-lg-6">
+                                <label>Color</label>
+                                <ng-select [multiple]="false" [options]="colores" [(ngModel)]="inmovilizacion.idColor" name="idColor">
+                                </ng-select>
+                            </div>
+                            <div class="col-lg-6">
+                                <label>Clase <strong class="text-danger">*</strong></label>
+                                <ng-select [multiple]="false" [options]="clases" [(ngModel)]="inmovilizacion.idClase" required name="idClase">
+                                </ng-select>
+                            </div>
                         </div>
-                        <div class="col-xs-12 col-lg-6">
-                            <label>Costo trayecto <strong class="text-danger">*</strong></label>
-                            <input class="form-control" [(ngModel)]="inmovilizacion.costoTrayecto" name="costoTrayecto" type="numeric" required />
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-4">
+                                <label>No. inventario <strong class="text-danger">*</strong></label>
+                                <input class="form-control" [(ngModel)]="inmovilizacion.numeroInventario" name="numeroInventario" type="text" required />
+                            </div>
+                            <div class="col-xs-12 col-lg-4">
+                                <label>Grúa</label>
+                                <ng-select [multiple]="false" [options]="gruas" [(ngModel)]="inmovilizacion.idGrua" name="idGrua">
+                                </ng-select>
+                            </div>
+                            <div class="col-xs-12 col-lg-4">
+                                <label>Costo grúa</label>
+                                <input class="form-control" [(ngModel)]="inmovilizacion.costoGrua" name="costoGrua" type="numeric" />
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <div class="col-xs-12 col-lg-12">
-                            <label>Observaciones
-                                <strong class="text-danger">*</strong>
-                            </label>
-                            <textarea class="form-control" [(ngModel)]="inmovilizacion.observaciones" name="observaciones" rows="4"></textarea>
+    
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Observaciones
+                                    <strong class="text-danger">*</strong>
+                                </label>
+                                <textarea class="form-control" [(ngModel)]="inmovilizacion.observaciones" name="observaciones" rows="4"></textarea>
+                            </div>
                         </div>
                     </div>
                 </form>
             </div>
             <div class="card-footer">
                 <div class="btn-group">
-                    <button (click)="onCancelar()" (ready)="ready($event)" class="btn btn-default">
-                        <i class="fa fa-times"></i>
-                        Cancelar
-                    </button>
-                    <button (click)="onEnviar()" (ready)="ready($event)" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
+                    <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
                         <i class="fa fa-save"></i>
                         Enviar
+                    </button>
+                    <button (click)="onCancelar()" class="btn btn-default">
+                        <i class="fa fa-times"></i>
+                        Cancelar
                     </button>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<div class="row" *ngIf="!patio">
+    <div class="col-xs-12 col-lg-6">
+        <div class="card">
+            <div class="card-body">
+                <span class="badge badge-danger">Usuario no autorizado para realizar inmovilizaciones.</span>
+            </div>
+        </div>
+    </div>
+</div>
+

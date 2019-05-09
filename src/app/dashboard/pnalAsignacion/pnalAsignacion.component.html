@@ -1,76 +1,80 @@
-<div class="container-fluid" >
+<div class="container" >
     <hr>
-    <div class="row">
-        <div class="col-xs-12 col-lg-12">
-            <div class="row" *ngIf='formSearch'>
-                <div class="col-xs-12 col-lg-4">
-                    <div class="card">
-                        <div class="card-header">
-                            <b class="text-uppercase">Gestión de rangos</b>
-                            <br>
-                            <small>Buscar agente</small>
-                        </div>
-                        <div class="card-body">
-                            <form>     
-                                <div class="form-group row">
-                                    <div class="col-xs-12 col-lg-12">
-                                        <label>Parametro de búsqueda</label>
-                                        <input class="form-control" [(ngModel)]="parametro" placeholder="Nombre, Apellido o No. de placa" name="parametro" type="text">
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="card-footer">
-                            <button (click)="onSearch()" (ready)="ready($event)" class="btn btn-primary" type="button">
-                                <i class="fa fa-search"></i>
-                                Buscar
-                            </button>
-                        </div>
+    <div class="row" *ngIf='formIndex'>
+        <div class="col-md-12 col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <b class="text-uppercase">Asignación de rangos a organismo de tránsito</b>
+                    <div class="btn-group pull-right">
+                        <button (click)="onNew()" class="btn btn-default">
+                            <i class="fa fa-plus"></i>
+                            Nuevo
+                        </button>
                     </div>
                 </div>
-
-                <div class="col-md-12 col-lg-8" *ngIf='funcionarios && funcionarios?.length > 0'>
-                    <div class="card">
-                        <div class="card-body">
-                            <table class="table " id="dataTables-example">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Funcionario</th>
-                                        <th>Identificación</th>
-                                        <th>No. placa</th>
-                                        <th>Sede operativa</th>
-                                        <th>Seleccionar</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                <tr class="odd" *ngFor="let funcionario of funcionarios; let i = index">
-                                    <td>{{ i + 1 }}</td>
-                                    <td>
-                                        {{ funcionario.ciudadano.primerNombre }}
-                                        {{ funcionario.ciudadano.segundoNombre }}
-                                        {{ funcionario.ciudadano.primerApellido }}
-                                        {{ funcionario.ciudadano.segundoApellido }}
-                                    </td>
-                                    <td>{{ funcionario.ciudadano.identificacion }}</td>
-                                    <td>{{ funcionario.numeroPlaca }}</td>
-                                    <td>{{ funcionario.organismoTransito.nombre }}</td>
-                                    <td>
-                                        <button (click)="onShow(funcionario)"  class="btn btn-xs btn-primary" type="button">
-                                            <i class="fa fa-check"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                            <!-- /.table-responsive --> 
-                        </div>
-                    </div>
+                <div class="card-body">
+                    <table class="table" id="dataTables-example">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Sede operativa</th>
+                            <th>Rangos</th>
+                            <th>Inventario</th>
+                            <th>No. acta</th>
+                            <!-- <th>Acciones</th> -->
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="odd" *ngFor="let asignacion of asignaciones; let i = index">
+                            <td >{{ i + 1 }}</td>
+                            <td >{{ asignacion.organismoTransito.nombre }}</td>
+                            <td >
+                                <b>Desde</b>
+                                <br>
+                                {{ asignacion.desde }}
+                                <br>
+                                <b>Hasta</b>
+                                <br>
+                                {{ asignacion.hasta }}
+                            </td>
+                            <td >
+                                <b>Cant. Disponible</b>
+                                <br>
+                                {{ asignacion.cantidadDisponible }}
+                                <br>
+                                <b>Cant. recibida</b>
+                                <br>
+                                {{ asignacion.cantidadRecibida }}
+                            </td>
+                            <td >
+                                <a href="{{ apiUrl }}/acta/{{ asignacion.id }}/pdf" class="btn btn-success" target="_blank">
+                                    <i class="fa fa-file-pdf-o"></i>
+                                    {{ asignacion.numeroActa}}
+                                </a>
+                            </td>
+                            <!--
+                                <td>
+                                    <button (click)="edit(asignacion)" class="btn btn-xs btn-info" type="button">
+                                        <i class="fa fa-edit"></i>
+                                        Editar
+                                    </button> 
+                                    <button (click)="delete(asignacion.id)"  class="btn btn-xs btn-danger" type="button">
+                                        <i class="fa fa-trash"></i>
+                                        Eliminar
+                                    </button> 
+                                </td>
+                            -->
+                        </tr>
+                        </tbody>
+                    </table>
+                    <!-- /.table-responsive --> 
                 </div>
             </div>
         </div>
     </div>
 
-    <app-new *ngIf='formNew' [funcionario]="funcionario" (ready)="ready($event)"></app-new>
-    <app-show *ngIf='formShow' [funcionario]="funcionario" (ready)="ready($event)" (readyNew)="readyNew($event)"></app-show>
+    <!--
+        <app-edit *ngIf='formEdit' [asignacion]="asignacion" (ready)="ready($event)"></app-edit>
+    -->
+    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
 </div>

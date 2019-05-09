@@ -3,7 +3,7 @@ export class PnalTalonario{
 		public cargo: string,
 		public desde: number,
 		public hasta: number,
-		public rangos: number,
+		public cantidadRecibida: number,
 		public fechaAsignacion: string,
 		public numeroResolucion: string,
 		public idOrganismoTransito: number,

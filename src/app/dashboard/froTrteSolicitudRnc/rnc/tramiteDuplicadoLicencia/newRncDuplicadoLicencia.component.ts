@@ -1,8 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FroTrteSolicitudService } from '../../../../services/froTrteSolicitud.service';
-import { FroFacTramiteService } from '../../../../services/froFacTramite.service';
 import { PnalFuncionarioService } from '../../../../services/pnalFuncionario.service';
-import { UserCiudadanoService } from '../../../../services/userCiudadano.service';
 import { VhloCfgServicioService } from '../../../../services/vhloCfgServicio.service';
 import { UserLcCfgCategoriaService } from '../../../../services/userLcCfgCategoria.service';
 import { CfgPaisService } from '../../../../services/cfgPais.service';
@@ -33,7 +30,6 @@ export class NewRncDuplicadoLicenciaComponent implements OnInit {
         'documentacion': true,
         'observacion': null,
         'categoria': null,
-        'numero': null,
         'vigencia': null,
         'idFuncionario': null,
         'idOrganismoTransito': null,
@@ -45,8 +41,6 @@ export class NewRncDuplicadoLicenciaComponent implements OnInit {
     };
 
     constructor(
-      private _TramiteFacturaService: FroFacTramiteService,
-      private _TramiteSolicitudService: FroTrteSolicitudService,
       private _FuncionarioService: PnalFuncionarioService,
       private _CategoriaService: UserLcCfgCategoriaService,
       private _ServicioService: VhloCfgServicioService,
@@ -72,6 +66,8 @@ export class NewRncDuplicadoLicenciaComponent implements OnInit {
                                 return tramiteRealizado[key];
                             });
                             this.realizado = tramiteRealizado.includes(this.tramiteFactura.id, 2);
+                            
+                            console.log(this.realizado);
                         });
                     }
 
@@ -148,8 +144,7 @@ export class NewRncDuplicadoLicenciaComponent implements OnInit {
     
     onEnviar() {
         let token = this._LoginService.getToken();
-        
-        this.datos.numero = this.solicitante.identificacion;
+    
         this.datos.idOrganismoTransito = this.funcionario.organismoTransito.id;
         this.datos.idTramiteFactura = this.tramiteFactura.id;
         this.datos.idSolicitante = this.solicitante.id;

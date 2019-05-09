@@ -139,8 +139,7 @@
                                         <b>9.1. Transporte Pasajeros</b>
                                     </h6>
                                     <div class="col-xs-12 col-lg-12">
-                                        <ng-select [multiple]="false" [options]="transportesPasajero" [(ngModel)]="comparendo.vehiculoTransportePasajero" name="transportePasajero"
-                                            required></ng-select>
+                                        
                                     </div>
                                 </div>
                             
@@ -149,7 +148,7 @@
                                         <b>9.2. Transporte Especial</b>
                                     </h6>
                                     <div class="col-xs-12 col-lg-12">
-                                        <ng-select [multiple]="false" [options]="transportesEspecial" [(ngModel)]="comparendo.vehiculoTransporteEspecial" name="transporteEspecial"></ng-select>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -162,59 +161,56 @@
                                 </div>
                                 <div class="col-xs-12 col-lg-3">
                                     <label>No. Licencia conducción</label>
-                                    <input class="form-control" [(ngModel)]="infractor.licenciaConduccion" name="infractorLicenciaConduccion" type="text" required>
+                                    
                                 </div>
                                 <div class="col-xs-12 col-lg-3">
                                     <label>Categoria
                                         <b class="text-danger">*</b>
                                     </label>
-                                    <ng-select [multiple]="false" [options]="categorias" [(ngModel)]="infractor.idCategoriaLicenciaConduccion" name="infractorCategoria"></ng-select>
+                                    
                                 </div>
                                 <div class="col-xs-12 col-lg-3">
                                     <label>EXP</label>
-                                    <input class="form-control" [(ngModel)]="infractor.fechaExpedicion" name="fechaExpedicion" type="date">
+                                    
                                 </div>
                                 <div class="col-xs-12 col-lg-3">
                                     <label>VEN</label>
-                                    <input class="form-control" [(ngModel)]="infractor.fechaVencimiento" name="fechaVencimiento" type="date">
+                                    
                                 </div>
                             </div>
                             
                             <div class="row">
                                 <div class="col-xs-12 col-lg-4">
                                     <label>Tipo Identificación</label>
-                                    <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="infractor.idTipoIdentificacion" name="infractorTipoIdentificacion"
-                                        required></ng-select>
+                                    
                                 </div>
                                 <div class="col-xs-12 col-lg-8">
                                     <label>Número documento identidad</label>
-                                    <input class="form-control" (blur)='onSearchInfractor()' [(ngModel)]="infractor.identificacion" name="infractorIdentificacion"
-                                        type="text">
+                                    
                                 </div>
                                 <div class="col-xs-12 col-lg-6">
                                     <label>Nombres y apellidos completos</label>
-                                    <input class="form-control" [(ngModel)]="infractor.nombres" name="infractorNombres" type="text">
+                                    
                                 </div>
                                 <div class="col-xs-12 col-lg-4">
                                     <label>Dirección</label>
-                                    <input class="form-control" [(ngModel)]="infractor.direccion" name="infractorDireccion" type="text">
+                                    
                                 </div>
                                 <div class="col-xs-12 col-lg-2">
                                     <label>Edad</label>
-                                    <input class="form-control" [(ngModel)]="infractor.edad" name="infractorEdad" type="text">
+                                    
                                 </div>
                                 <div class="col-xs-12 col-lg-4">
                                     <label>Telefono fijo/celular</label>
-                                    <input class="form-control" [(ngModel)]="infractor.telefono" name="infractorTelefono" type="text">
+                                    
                                 </div>
                                 <div class="col-xs-12 col-lg-4">
                                     <label>Municipio</label>
-                                    <ng-select [multiple]="false" [options]="municipios" [(ngModel)]="infractor.idMunicipio" name="infractorMunicipio" required>
-                                    </ng-select>
+                                    
                                 </div>
                                 <div class="col-xs-12 col-lg-4">
                                     <label>Correo</label>
-                                    <input class="form-control" [(ngModel)]="infractor.correo" name="infractorCorreo" type="text">
+                                    
                                 </div>
                             </div>
                             
@@ -228,7 +224,7 @@
                                             <label>Tipo
                                                 <b class="text-danger">*</b>
                                             </label>
-                                            <ng-select [multiple]="false" [options]="infractorTipos" [(ngModel)]="infractor.idTipoInfractor" name="tipoInfractor" required></ng-select>
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -240,12 +236,11 @@
                                     <div class="row">
                                         <div class="col-xs-12 col-lg-6">
                                             <label>Org.de T.</label>
-                                            <ng-select [multiple]="false" [options]="organismosTransito" [(ngModel)]="comparendo.idOrganismoTransitoLicencia" name="organismoTransitoLicencia"
-                                                required></ng-select>
+                                            
                                         </div>
                                         <div class="col-xs-12 col-lg-6">
                                             <label>No. del documento</label>
-                                            <input class="form-control" [(ngModel)]="comparendo.licenciaTransitoNumero" name="licenciaTransitoNumero" type="text" required>
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -260,17 +255,15 @@
                                 </div>
                                 <div class="col-xs-12 col-lg-3">
                                     <label>Tipo Identificación</label>
-                                    <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="propietario.idTipoIdentificacion" name="propietarioTipoIdentificacion"
-                                        required></ng-select>
+
                                 </div>
                                 <div class="col-xs-12 col-lg-4">
                                     <label>Número documento identidad</label>
-                                    <input class="form-control" (blur)='onSearchPropietario()' [(ngModel)]="propietario.identificacion" name="propietarioIdentificacion"
-                                        type="text">
+                                    
                                 </div>
                                 <div class="col-xs-12 col-lg-5">
                                     <label>Nombres y apellidos completos</label>
-                                    <input class="form-control" [(ngModel)]="propietario.nombres" name="propietarioNombres" type="text">
+                                    
                                 </div>
                             </div>
                             
@@ -282,15 +275,15 @@
                                 </div>
                                 <div class="col-xs-12 col-lg-4" *ngIf="comparendo.vehiculoServicio == 4">
                                     <label>NIT</label>
-                                    <input class="form-control" (blur)='onSearchEmpresa()' [(ngModel)]="empresa.nit" name="empresaNit" type="text">
+                                    
                                 </div>
                                 <div class="col-xs-12 col-lg-4" *ngIf="comparendo.vehiculoServicio == 4">
                                     <label>Nombre</label>
-                                    <input class="form-control" [(ngModel)]="empresa.nombre" name="empresaNombre" type="text">
+                                    
                                 </div>
                                 <div class="col-xs-12 col-lg-4" *ngIf="comparendo.vehiculoServicio == 4">
                                     <label>Tarjeta de operación</label>
-                                    <input class="form-control" [(ngModel)]="empresa.tarjeta" name="empresaTarjeta" type="text">
+                                    
                                 </div>
                             </div>
                             
@@ -302,16 +295,15 @@
                                 </div>
                                 <div class="col-xs-12 col-lg-4">
                                     <label>Apellidos y Nombres completos</label>
-                                    <input class="form-control" type="text" name="funcionarioNombres" value="{{ funcionario.ciudadano.usuario.primerNombre }} {{ funcionario.ciudadano.usuario.primerApellido }}"
-                                        readonly>
+                                    
                                 </div>
                                 <div class="col-xs-12 col-lg-4">
                                     <label>Placa</label>
-                                    <input type="text" class="form-control" [(ngModel)]="funcionario.numeroPlaca" name="funcionarioNumeroPlaca" readonly>
+                                    
                                 </div>
                                 <div class="col-xs-12 col-lg-4">
                                     <label>Entidad</label>
-                                    <input type="text" class="form-control" [(ngModel)]="funcionario.sedeOperativa.nombre" name="funcionarioEntidad" readonly>
+                                    
                                 </div>
                             </div>
                             
@@ -323,12 +315,12 @@
                                 </div>
                                 <div class="col-xs-12 col-lg-6">
                                     <label>Patio</label>
-                                    <ng-select [multiple]="false" [options]="patios" [(ngModel)]="inmovilizacion.idPatio" name="patio" required></ng-select>
+                                    
                                 </div>
                                 <div class="col-xs-12 col-lg-6">
                                     <div class="form-group">
                                         <label>Grúa</label>
-                                        <ng-select [multiple]="false" [options]="gruas" [(ngModel)]="inmovilizacion.idGrua" name="grua" required></ng-select>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -352,19 +344,19 @@
                                 </div>
                                 <div class="col-xs-12 col-lg-4">
                                     <label>Nombres y apellidos completos</label>
-                                    <input class="form-control" [(ngModel)]="testigo.nombres" name="testigoNombres" type="text">
+                                    
                                 </div>
                                 <div class="col-xs-12 col-lg-3">
                                     <label>CC. No.</label>
-                                    <input class="form-control" [(ngModel)]="testigo.identificacion" name="testigoIdentificacion" type="text">
+                                    
                                 </div>
                                 <div class="col-xs-12 col-lg-3">
                                     <label>Dirección</label>
-                                    <input class="form-control" [(ngModel)]="testigo.direccion" name="testigoDireccion" type="text">
+                                    
                                 </div>
                                 <div class="col-xs-12 col-lg-2">
                                     <label>Teléfono</label>
-                                    <input class="form-control" [(ngModel)]="testigo.telefono" name="testigoTelefono" type="text">
+                                    
                                 </div>
                             </div>
                             

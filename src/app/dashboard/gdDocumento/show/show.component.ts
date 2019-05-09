@@ -5,6 +5,7 @@ import { CfgMunicipioService } from '../../../services/cfgMunicipio.service';
 import { GdCfgTipoCorrespondenciaService } from '../../../services/gdCfgTipoCorrespondencia.service';
 import { GdCfgMedioCorrespondenciaService } from '../../../services/gdCfgMedioCorrespondencia.service';
 import { LoginService } from '../../../services/login.service';
+import { environment } from 'environments/environment';
 import swal from 'sweetalert2';
 
 @Component({
@@ -12,14 +13,16 @@ import swal from 'sweetalert2';
   templateUrl: './show.component.html',
 })
 export class ShowComponent implements OnInit {
-@Output() ready = new EventEmitter<any>();
-@Input() documento: any = null;
-public errorMessage;
+  @Output() ready = new EventEmitter<any>();
+  @Input() documento: any = null;
+  public errorMessage;
 
-public date: any;
+  public docsUrl = environment.docsUrl;
 
-public file: any = null;
-public fileSelected: File = null;
+  public date: any;
+
+  public file: any = null;
+  public fileSelected: File = null;
 
   public editable = false;
 
@@ -28,12 +31,12 @@ public fileSelected: File = null;
   public departamentoSelected: any;
   public tiposCorrespondencia: any;
   public mediosCorrespondencia: any;
- 
-public datos = {
-  'observaciones': null,
-  'idFuncionario': null,
-  'documento': null
-};
+  
+  public datos = {
+    'observaciones': null,
+    'idFuncionario': null,
+    'documento': null
+  };
 
 constructor(
   private _DocumentoService: GdDocumentoService,

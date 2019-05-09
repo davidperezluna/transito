@@ -2,6 +2,8 @@ import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { PnalAsignacion } from '../pnalAsignacion.modelo';
 import { PnalAsignacionService } from '../../../services/pnalAsignacion.service';
 import { LoginService } from '../../../services/login.service';
+import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
+import { environment } from 'environments/environment';
 import swal from 'sweetalert2';
 
 @Component({
@@ -12,19 +14,33 @@ export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
 @Input() funcionario:any = null;
 
+public apiUrl = environment.apiUrl + 'personal/pnalasignacion';
 public asignacion: PnalAsignacion;
-public organismosTransito: any;
-public sedeOperativaSelected: any;
 public errorMessage;
-public respuesta: any = null;
+
+public organismosTransito: any;
 
 constructor(
   private _AsignacionService: PnalAsignacionService,
+  private _OrganismoTransitoService: CfgOrganismoTransitoService,
   private _LoginService: LoginService,
   ){}
 
   ngOnInit() {
-    this.asignacion = new PnalAsignacion(null, null, null, null, null, null, null, null);
+    this.asignacion = new PnalAsignacion(null, null, null, null, null, null, null);
+
+    this._OrganismoTransitoService.selectSedes().subscribe(
+      response => {
+        this.organismosTransito = response;
+      },
+      error => {
+        this.errorMessage = <any>error;
+        if(this.errorMessage != null){
+          console.log(this.errorMessage);
+          alert('Error en la petición');
+        }
+      }
+    );
   }
   
   onCancelar(){
@@ -32,17 +48,17 @@ constructor(
   }
 
   onCalcularTotal() {
-    let ini, fin, rangos;
-    ini = this.asignacion.desde;
-    fin = this.asignacion.hasta;
+    let ini, fin, cantidad;
+    ini = Number(this.asignacion.desde);
+    fin = Number(this.asignacion.hasta);
 
     if (fin > ini) {
-      rangos = (fin - ini) + 1;
+      cantidad = (fin - ini) + 1;
 
-      if (rangos < 0) {
-        rangos = 0;
+      if (cantidad < 0) {
+        cantidad = 0;
       }
-      this.asignacion.rangos = rangos;
+      this.asignacion.cantidadRecibida = cantidad;
     }else{
       swal({
         title: 'Alerta!',
@@ -51,7 +67,7 @@ constructor(
         confirmButtonText: 'Aceptar'
       });
 
-      this.asignacion.rangos = null;
+      this.asignacion.cantidadRecibida = null;
     }
   }
   
@@ -65,25 +81,22 @@ constructor(
     });
 
     let token = this._LoginService.getToken();
-    
-    this.asignacion.idFuncionario = this.funcionario.id;
 
-    this._AsignacionService.register(this.asignacion,token).subscribe(
-      response => {
-        this.respuesta = response;
-        
-        if(this.respuesta.status == 'success'){
-          this.ready.emit(true);
+    this._AsignacionService.register(this.asignacion, token).subscribe(
+      response => {        
+        if(response.status == 'success'){
+          this.asignacion = response.data;
+          
           swal({
             title: 'Perfecto!',
-            text: 'El registro se ha realizado con exito',
+            text: response.message,
             type: 'success',
             confirmButtonText: 'Aceptar'
           });
         }else{
           swal({
             title: 'Error!',
-            text: 'El asignacion ya se encuentra registrado',
+            text: response.message,
             type: 'error',
             confirmButtonText: 'Aceptar'
           })

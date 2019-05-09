@@ -6,6 +6,9 @@ export class PqoCfgPatio{
 		public telefono: string,
 		public administrador: string,
 		public propietario: string,
+		public numeroResolucion: string,
+		public fechaInicial: string,
+		public fechaFinal: string,
 		public id:number
 	){}
 }

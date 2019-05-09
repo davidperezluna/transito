@@ -47,7 +47,7 @@ export class PqoCfgGruaComponent implements OnInit {
 				response => {
           this.gruas = response.data;
           let timeoutId = setTimeout(() => {
-            this.iniciarTabla();
+            this.onInitTable();
           }, 100);
 				}, 
 				error => {
@@ -61,8 +61,8 @@ export class PqoCfgGruaComponent implements OnInit {
       );
   }
 
-  iniciarTabla(){
-    $('#dataTables-example').DataTable({
+  onInitTable(){
+    this.table = $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,
       sPaginationType: 'full_numbers',
@@ -74,8 +74,7 @@ export class PqoCfgGruaComponent implements OnInit {
           sLast: '<i class="fa fa-step-forward"></i>'
         }
       }
-   });
-   this.table = $('#dataTables-example').DataTable();
+    });
   }
 
   onNew(){
@@ -105,7 +104,7 @@ export class PqoCfgGruaComponent implements OnInit {
     }
   }
   
-  delete(id:any){
+  onDelete(id:any){
     swal({
       title: '¿Estás seguro?',
       text: "¡Se eliminara este registro!",
@@ -145,7 +144,7 @@ export class PqoCfgGruaComponent implements OnInit {
     })
   }
 
-  edit(grua:any){
+  onEdit(grua:any){
     this.grua = grua;
     this.formEdit = true;
     this.formIndex = false;
