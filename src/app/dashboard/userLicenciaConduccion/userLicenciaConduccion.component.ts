@@ -1,6 +1,8 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { UserLicenciaConduccion } from './userLicenciaConduccion.modelo';
+import { UserCfgTipoIdentificacionService } from "../../services/userCfgTipoIdentificacion.service";
 import { UserLicenciaConduccionService } from '../../services/userLicenciaConduccion.service';
+import { UserCiudadanoService } from "../../services/userCiudadano.service";
 import { LoginService } from '../../services/login.service';
 
 import swal from 'sweetalert2';
@@ -15,6 +17,13 @@ export class UserLicenciaConduccionComponent implements OnInit {
     public id;
 
     public licenciasConduccion;
+
+    public identificacion;
+    public ciudadano;
+
+    public tiposIdentificacion: any;
+    public tipoIdentificacionSelected: any;
+
     public formNew = false;
     public formEdit = false;
     public formIndex = true;
@@ -24,6 +33,8 @@ export class UserLicenciaConduccionComponent implements OnInit {
 
     constructor(
         private _LicenciaConduccionService: UserLicenciaConduccionService,
+        private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
+        private _UserCiudadanoService: UserCiudadanoService,
         private _loginService: LoginService,
     ) { }
 
@@ -42,28 +53,26 @@ export class UserLicenciaConduccionComponent implements OnInit {
             ) {
             }
         })
-        this._LicenciaConduccionService.index().subscribe(
+        this._TipoIdentificacionService.select().subscribe(
             response => {
-                this.licenciasConduccion = response.data;
-                let timeoutId = setTimeout(() => {
-                    this.iniciarTabla();
-                }, 100);
+                this.tiposIdentificacion = response;
             },
             error => {
                 this.errorMessage = <any>error;
 
                 if (this.errorMessage != null) {
                     console.log(this.errorMessage);
-                    alert("Error en la petición");
+                    alert('Error en la petición');
                 }
-            }
-        );
+            });
     }
-    iniciarTabla() {
-        $('#dataTables-example').DataTable({
+
+    onInitTable() {
+        this.table = $('#dataTables-example').DataTable({
             responsive: false,
             pageLength: 6,
             sPaginationType: 'full_numbers',
+            buttons: 'excel',
             oLanguage: {
                 oPaginate: {
                     sFirst: '<i class="fa fa-step-backward"></i>',
@@ -73,13 +82,15 @@ export class UserLicenciaConduccionComponent implements OnInit {
                 }
             }
         });
-        this.table = $('#dataTables-example').DataTable();
     }
+
     onNew() {
         this.formNew = true;
         this.formIndex = false;
         this.formEdit = false;
-        this.table.destroy();
+        if(this.table) {
+            this.table.destroy();
+        }
     }
 
     ready(isCreado: any) {
@@ -91,9 +102,8 @@ export class UserLicenciaConduccionComponent implements OnInit {
             this.ngOnInit();
         }
     }
-    
-    onDelete(id: any) {
 
+    onDelete(id: any) {
         swal({
             title: '¿Estás seguro?',
             text: "¡Se eliminara este registro!",
@@ -107,7 +117,7 @@ export class UserLicenciaConduccionComponent implements OnInit {
             if (result.value) {
                 let token = this._loginService.getToken();
 
-                this._LicenciaConduccionService.delete({'id': id}, token).subscribe(
+                this._LicenciaConduccionService.delete({ 'id': id }, token).subscribe(
                     response => {
                         swal({
                             title: 'Eliminado!',
@@ -135,5 +145,62 @@ export class UserLicenciaConduccionComponent implements OnInit {
         this.licenciaConduccion = licenciaConduccion;
         this.formEdit = true;
         this.formIndex = false;
+    }
+
+    onSearchCiudadano() {
+        let token = this._loginService.getToken();
+
+        this._UserCiudadanoService.searchByIdentificacion({ 'idTipoIdentificacion': this.tipoIdentificacionSelected,'identificacion': this.identificacion }, token).subscribe(
+            response => {
+                if (response.status == 'success') {
+                    this.ciudadano = response.data.ciudadano;
+                    this._LicenciaConduccionService.searchByCiudadanoId({ 'idCiudadano': this.ciudadano.id }, token).subscribe(
+                        response => {
+                            if (response.status == 'success') {
+                                this.licenciasConduccion = response.data;
+                                console.log(this.licenciasConduccion);
+                                
+                                swal({
+                                    title: 'Perfecto!',
+                                    text: response.message,
+                                    type: 'success',
+                                    confirmButtonText: 'Aceptar'
+                                });
+                                let timeoutId = setTimeout(() => {
+                                    this.onInitTable();
+                                }, 100);
+                            } else {
+                                swal({
+                                    title: 'Alerta!',
+                                    text: response.message,
+                                    type: 'error',
+                                    confirmButtonText: 'Aceptar'
+                                });
+                            error => {
+                                this.errorMessage = <any>error;
+                                if (this.errorMessage != null) {
+                                    console.log(this.errorMessage);
+                                    alert("Error en la petición");
+                                }
+                            }
+                        }
+                    }
+                );
+                } else {
+                    swal({
+                        title: 'Alerta!',
+                        text: response.message,
+                        type: 'error',
+                        confirmButtonText: 'Aceptar'
+                    });
+                    error => {
+                        this.errorMessage = <any>error;
+                        if (this.errorMessage != null) {
+                            console.log(this.errorMessage);
+                            alert("Error en la petición");
+                        }
+                    }
+                }
+        });       
     }
 }
