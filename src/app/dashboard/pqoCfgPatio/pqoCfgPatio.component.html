@@ -48,6 +48,10 @@
         </div>
       </div>
     </div>
+
     <app-edit *ngIf='formEdit' [patio]="patio" (ready)="ready($event)"></app-edit>
+    
     <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+
+    <app-edit *ngIf='formShow' [patio]="patio" (ready)="ready($event)"></app-edit>
 </div>
