@@ -23,32 +23,51 @@
 
                         <div class="row">
                             <div class="col-xs-12 col-lg-6">
+                                <label>Fecha inmovilización <strong class="text-danger">*</strong></label>
+                                <input class="form-control" [(ngModel)]="inmovilizacion.numeroComparendo" name="fechaInmovilizacion" type="date" required />
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Hora inmovilización <strong class="text-danger">*</strong></label>
+                                <input class="form-control" [(ngModel)]="inmovilizacion.numeroComparendo" name="horaInmovilizacion" type="date" required />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-6">
                                 <label>No. comparendo <strong class="text-danger">*</strong></label>
                                 <input class="form-control" [(ngModel)]="inmovilizacion.numeroComparendo" name="numeroComparendo" type="text" required />
                             </div>
                             <div class="col-xs-12 col-lg-6">
-                                <label>Placa <strong class="text-danger">*</strong></label>
-                                <input class="form-control" [(ngModel)]="inmovilizacion.placa" name="placa" type="text" required />
+                                <label>Placa</label>
+                                <input class="form-control" [(ngModel)]="inmovilizacion.placa" name="placa" type="text" />
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Motor</label>
+                                <input class="form-control" [(ngModel)]="inmovilizacion.placa" name="placa" type="text" />
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Chasis</label>
+                                <input class="form-control" [(ngModel)]="inmovilizacion.placa" name="placa" type="text" />
                             </div>
                             <div class="col-lg-6">
-                                <label>Marca <strong class="text-danger">*</strong></label>
-                                <ng-select [multiple]="false" [options]="marcas" [(ngModel)]="inmovilizacion.idMarca" (ngModelChange)="onChangedMarca($event)" required
+                                <label>Marca</label>
+                                <ng-select [multiple]="false" [options]="marcas" [(ngModel)]="inmovilizacion.idMarca" (ngModelChange)="onChangedMarca($event)"
                                     name="idMarca">
                                 </ng-select>
                             </div>
                             <div class="col-lg-6">
-                                <label>Linea <strong class="text-danger">*</strong></label>
-                                <ng-select [multiple]="false" [options]="lineas" [(ngModel)]="inmovilizacion.idLinea" required name="idLinea">
+                                <label>Linea</label>
+                                <ng-select [multiple]="false" [options]="lineas" [(ngModel)]="inmovilizacion.idLinea" name="idLinea">
+                                </ng-select>
+                            </div>
+                            <div class="col-lg-6">
+                                <label>Color</label>
+                                <ng-select [multiple]="false" [options]="colores" [(ngModel)]="inmovilizacion.idColor" name="idColor">
                                 </ng-select>
                             </div>
                             <div class="col-lg-6">
                                 <label>Clase <strong class="text-danger">*</strong></label>
                                 <ng-select [multiple]="false" [options]="clases" [(ngModel)]="inmovilizacion.idClase" required name="idClase">
-                                </ng-select>
-                            </div>
-                            <div class="col-lg-6">
-                                <label>Color <strong class="text-danger">*</strong></label>
-                                <ng-select [multiple]="false" [options]="colores" [(ngModel)]="inmovilizacion.idColor" required name="idColor">
                                 </ng-select>
                             </div>
                         </div>

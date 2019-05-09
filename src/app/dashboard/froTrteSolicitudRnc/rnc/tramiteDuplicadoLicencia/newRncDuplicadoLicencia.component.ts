@@ -66,6 +66,8 @@ export class NewRncDuplicadoLicenciaComponent implements OnInit {
                                 return tramiteRealizado[key];
                             });
                             this.realizado = tramiteRealizado.includes(this.tramiteFactura.id, 2);
+                            
+                            console.log(this.realizado);
                         });
                     }
 

@@ -5,6 +5,8 @@
         <div class="card">
           <div class="card-header">
             <b class="text-uppercase">Asignación de impresos a municipio (radio de acción)</b>
+            <br>
+            <b class="text-danger">TOTAL DISPONIBLES POR SEDE OPERATIVA</b>
             <div class="btn-group pull-right">
               <button (click)="onNew()" class="btn btn-default">
                 <i class="fa fa-plus"></i>
@@ -18,11 +20,10 @@
                 <tr>
                     <th>#</th>
                     <th>Fecha</th>
-                    <th>Cantidad recibida</th>
-                    <th>Cantidad disponible</th>
+                    <th>Cantidad entregada</th>
+                    <th>Impresos disponibles</th>
                     <th>No. acta</th>
                     <th>Municipio</th>
-                    <th>Acciones</th>
                 </tr>
               </thead>
               <tbody>
@@ -33,17 +34,6 @@
                   <td>{{ municipio.cantidadDisponible }}</td>
                   <td>{{ municipio.numeroActa }}</td>
                   <td>{{ municipio.municipio.nombre }}</td>
-                  <td>
-                    <div class="btn-group">
-                      <button (click)="onEdit(municipio)" class="btn btn-xs btn-primary" type="button" tooltip="Editar" [tooltipDisabled]="false" [tooltipAnimation]="true"
-                        tooltipPlacement="top">
-                        <i class="fa fa-pencil"></i>
-                      </button>
-                      <button (click)="onDelete(municipio.id)" class="btn btn-xs btn-danger" type="button" tooltip="Eliminar" [tooltipDisabled]="false" [tooltipAnimation]="true" tooltipPlacement="top">
-                        <i class="fa fa-trash"></i>
-                      </button>
-                    </div>
-                  </td>
                 </tr>
               </tbody>
             </table>

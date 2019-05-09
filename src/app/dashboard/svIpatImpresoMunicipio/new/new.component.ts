@@ -1,4 +1,5 @@
 import { Component, OnInit,Output,EventEmitter } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import { SvIpatImpresoMunicipio } from '../svIpatImpresoMunicipio.modelo';
 import { SvIpatImpresoMunicipioService } from '../../../services/svIpatImpresoMunicipio.service';
 import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
@@ -8,7 +9,8 @@ import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-new',
-  templateUrl: './new.component.html'
+  templateUrl: './new.component.html',
+  providers: [DatePipe]
 })
 export class NewComponent implements OnInit {
   @Output() ready = new EventEmitter<any>();
@@ -17,6 +19,7 @@ export class NewComponent implements OnInit {
 
   public organismosTransito: any;
   public municipios: any;
+  public date: any;
 
 constructor(
   private _ImpresoMunicipioService: SvIpatImpresoMunicipioService,
@@ -27,6 +30,10 @@ constructor(
 
   ngOnInit() {
     this.municipio = new SvIpatImpresoMunicipio(null, null, null, null, null);
+
+    this.date = new Date();
+    var datePiper = new DatePipe(this.date);
+    this.date = datePiper.transform(this.date,'yyyy-MM-dd');
 
     this._OrganismoTransitoService.selectSedes().subscribe(
       response => {

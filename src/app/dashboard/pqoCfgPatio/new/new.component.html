@@ -33,6 +33,25 @@
                             <label>Nombre popietario</label>
                             <input class="form-control" [(ngModel)]="patio.propietario" name="propietario" type="text" />
                         </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <label>No resolución / Autorización <b class="text-danger">*</b></label>
+                            <input class="form-control" [(ngModel)]="patio.correo" name="correo" type="text" required />
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Cargar archivo <b class="text-danger">*</b></label>
+                            
+                        </div>
+                        <h5 class="text-center text-uppercase">
+                            <b>Plazo de autorización</b>
+                        </h5>
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Fecha inicial <b class="text-danger">*</b></label>
+                            <input class="form-control" [(ngModel)]="patio.correo" name="correo" type="date" required />
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Fecha final <b class="text-danger">*</b></label>
+                            <input class="form-control" [(ngModel)]="patio.correo" name="correo" type="date" required />
+                        </div>
                     </div>
                 </form>
             </div>
