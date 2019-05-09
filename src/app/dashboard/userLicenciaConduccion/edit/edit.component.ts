@@ -34,6 +34,12 @@ export class EditComponent implements OnInit {
     public ciudadanoSelected: any;
     public paisSelected: any;
 
+    public estados = [
+        { label: 'ACTIVA', value: 'ACTIVA' },
+        { label: 'INACTIVA', value: 'INACTIVA' },
+        { label: 'SUSPENDIDA', value: 'SUSPENDIDAD' },
+    ];
+
     public formReady = false;
 
     constructor(
