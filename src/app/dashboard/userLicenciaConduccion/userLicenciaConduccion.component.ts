@@ -72,7 +72,7 @@ export class UserLicenciaConduccionComponent implements OnInit {
             responsive: false,
             pageLength: 6,
             sPaginationType: 'full_numbers',
-            buttons: 'excel',
+            buttons: 'Excel',
             oLanguage: {
                 oPaginate: {
                     sFirst: '<i class="fa fa-step-backward"></i>',
@@ -158,8 +158,6 @@ export class UserLicenciaConduccionComponent implements OnInit {
                         response => {
                             if (response.status == 'success') {
                                 this.licenciasConduccion = response.data;
-                                console.log(this.licenciasConduccion);
-                                
                                 swal({
                                     title: 'Perfecto!',
                                     text: response.message,
@@ -168,7 +166,7 @@ export class UserLicenciaConduccionComponent implements OnInit {
                                 });
                                 let timeoutId = setTimeout(() => {
                                     this.onInitTable();
-                                }, 100);
+                                }, 200);
                             } else {
                                 swal({
                                     title: 'Alerta!',
