@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SvIpatImpresoAsignacion } from './svIpatImpresoAsignacion.modelo';
 import { SvIpatImpresoAsignacionService } from '../../services/svIpatImpresoAsignacion.service';
 import { LoginService } from '../../services/login.service';
+import { environment } from 'environments/environment';
 import swal from 'sweetalert2';
 declare var $: any;
 
@@ -12,6 +13,9 @@ declare var $: any;
 
 export class SvIpatImpresoAsignacionComponent implements OnInit {
   public errorMessage;
+
+  public apiUrl = environment.apiUrl + 'seguridadvial/svipatimpresoasignacion';
+
 	public asignaciones;
 	public formNew = false;
 	public formEdit = false;

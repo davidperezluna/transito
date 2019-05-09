@@ -31,7 +31,12 @@
                   <td>{{ asignacion.fecha }}</td>
                   <td>{{ asignacion.cantidadRecibida }}</td>
                   <td>{{ asignacion.cantidadDisponible }}</td>
-                  <td>{{ asignacion.numeroActa }}</td>
+                  <td>
+                    <a href="{{ apiUrl }}/acta/{{ asignacion.id }}/pdf" class="btn btn-success" target="_blank">
+                      <i class="fa fa-file-pdf-o"></i>
+                      {{ asignacion.numeroActa }}
+                    </a>
+                  </td>
                   <td>{{ asignacion.organismoTransito.nombre }}</td>
                   <td>
                     <div class="btn-group">

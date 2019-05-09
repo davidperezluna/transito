@@ -1,7 +1,6 @@
 export class UserLicenciaConduccion {
     constructor(
         public numero: number,
-        public numeroRunt: number,
         public fechaExpedicion: string,
         public fechaVencimiento: string,
         public estado: string,
