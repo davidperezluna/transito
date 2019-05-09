@@ -25,7 +25,8 @@ export class NewComponent implements OnInit {
   public colores: any;
   public gruas: any;
   public patios: any;
-  public agentesTransito: any;
+  public ciudadano: any;
+  public patio: any;
 
 constructor(
   private _InmovilizacionService: PqoInmovilizacionService,
@@ -35,12 +36,48 @@ constructor(
   private _LineaService: VhloCfgLineaService,
   private _ClaseService: VhloCfgClaseService,
   private _ColorService: VhloCfgColorService,
-  private _loginService: LoginService,
+  private _LoginService: LoginService,
   ){}
 
   ngOnInit() {
+    swal({
+      title: 'Cargando Datos!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+
     this.inmovilizacion = new PqoInmovilizacion(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     this.date = new Date();
+
+    let token = this._LoginService.getToken();
+
+    let identity = this._LoginService.getIdentity();
+
+    this._PqoCfgPatioService.searchByCiudadano({ 'identificacion': identity}, token).subscribe(
+      response => {
+        if (response.code == 200) {
+          this.patio = response.data.patio;
+
+          this.inmovilizacion.idPatio = this.patio.id;
+        } else {
+          swal({
+            title: 'Error!',
+            text: 'Su usuario no tiene autorización para realizar inmovilización!',
+            type: 'error',
+            confirmButtonText: 'Aceptar'
+          });
+        }
+        error => {
+          this.errorMessage = <any>error;
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert('Error en la petición');
+          }
+        }
+      }
+    );
 
     this._MarcaService.getMarcaSelect().subscribe(
       response => {
@@ -115,7 +152,7 @@ constructor(
 
   onChangedMarca(e) {
     if (e) {
-      let token = this._loginService.getToken()
+      let token = this._LoginService.getToken()
       this._LineaService.selectByMarca({ 'idMarca': e }, token).subscribe(
         response => {
           this.lineas = response;
@@ -137,7 +174,7 @@ constructor(
   }
   
   onEnviar(){
-    let token = this._loginService.getToken();
+    let token = this._LoginService.getToken();
     
 		this._InmovilizacionService.register(this.inmovilizacion,token).subscribe(
 			response => {

@@ -9,10 +9,12 @@ import swal from 'sweetalert2';
   templateUrl: './new.component.html'
 })
 export class NewComponent implements OnInit {
-@Output() ready = new EventEmitter<any>();
-public patio: PqoCfgPatio;
-public errorMessage;
-public respuesta;
+  @Output() ready = new EventEmitter<any>();
+  public patio: PqoCfgPatio;
+  public errorMessage;
+
+  public file: any = null;
+  public fileSelected: File = null;
 
 constructor(
   private _PatioService: PqoCfgPatioService,
@@ -20,42 +22,60 @@ constructor(
   ){}
 
   ngOnInit() {
-    this.patio = new PqoCfgPatio(null, null, null, null, null, null, null);
+    this.patio = new PqoCfgPatio(null, null, null, null, null, null, null, null, null, null);
   }
+
   onCancelar(){
     this.ready.emit(true);
+  }
+
+  onFileChange(event) {
+    if (event.target.files.length > 0) {
+      this.fileSelected = event.target.files[0];
+
+      this.file = new FormData();
+      this.file.append('file', this.fileSelected);
+    }
   }
   
   onEnviar(){
     let token = this._loginService.getToken();
-    
-		this._PatioService.register(this.patio,token).subscribe(
-			response => {
-        if(response.status == 'success'){
-          this.ready.emit(true);
-          swal({
-            title: 'Perfecto!',
-            text: response.message,
-            type: 'success',
-            confirmButtonText: 'Aceptar'
-          })
-        }else{
-          swal({
-            title: 'Error!',
-            text: response.message,
-            type: 'error',
-            confirmButtonText: 'Aceptar'
-          })
+    if (this.fileSelected) {
+      this._PatioService.register(this.file, this.patio, token).subscribe(
+        response => {
+          if (response.status == 'success') {
+            this.ready.emit(true);
+            swal({
+              title: 'Perfecto!',
+              text: response.message,
+              type: 'success',
+              confirmButtonText: 'Aceptar'
+            })
+          } else {
+            swal({
+              title: 'Error!',
+              text: response.message,
+              type: 'error',
+              confirmButtonText: 'Aceptar'
+            })
+          }
+          error => {
+            this.errorMessage = <any>error;
+            if (this.errorMessage != null) {
+              console.log(this.errorMessage);
+              alert("Error en la petición");
+            }
+          }
         }
-			error => {
-					this.errorMessage = <any>error;
-					if(this.errorMessage != null){
-						console.log(this.errorMessage);
-						alert("Error en la petición");
-					}
-				}
-
-		}); 
+      );
+    } else {
+      swal({
+        title: 'Error!',
+        text: 'Debe adjuntar el documento de autorización.',
+        type: 'error',
+        confirmButtonText: 'Aceptar'
+      });
+    } 
   }
 
 }
