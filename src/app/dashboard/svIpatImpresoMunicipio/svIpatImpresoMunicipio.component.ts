@@ -36,8 +36,9 @@ export class SvIpatImpresoMunicipioComponent implements OnInit {
     this._ImpresoMunicipioService.index().subscribe(
 				response => {
           this.municipios = response.data;
+          
           let timeoutId = setTimeout(() => {  
-            this.iniciarTabla();
+            this.onInitTable();
           }, 100);
           swal.close();
 				}, 
@@ -52,7 +53,7 @@ export class SvIpatImpresoMunicipioComponent implements OnInit {
       );
   }
 
-  iniciarTabla(){
+  onInitTable(){
     if (this.table) {
       this.table.destroy();
     }

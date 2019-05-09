@@ -29,7 +29,7 @@ constructor(
   ){}
 
   ngOnInit() {
-    this.municipio = new SvIpatImpresoMunicipio(null, null, null, null, null);
+    this.municipio = new SvIpatImpresoMunicipio(null, null, null, null, null, null, null, null, null);
 
     this.date = new Date();
     var datePiper = new DatePipe(this.date);

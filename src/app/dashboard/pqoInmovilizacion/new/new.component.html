@@ -24,11 +24,11 @@
                         <div class="row">
                             <div class="col-xs-12 col-lg-6">
                                 <label>Fecha inmovilización <strong class="text-danger">*</strong></label>
-                                <input class="form-control" [(ngModel)]="inmovilizacion.numeroComparendo" name="fechaInmovilizacion" type="date" required />
+                                <input class="form-control" [(ngModel)]="inmovilizacion.fechaInmovilizacion" name="fechaInmovilizacion" type="date" required />
                             </div>
                             <div class="col-xs-12 col-lg-6">
                                 <label>Hora inmovilización <strong class="text-danger">*</strong></label>
-                                <input class="form-control" [(ngModel)]="inmovilizacion.numeroComparendo" name="horaInmovilizacion" type="date" required />
+                                <input class="form-control" [(ngModel)]="inmovilizacion.horaInmovilizacion" name="horaInmovilizacion" type="date" required />
                             </div>
                         </div>
 
@@ -43,11 +43,11 @@
                             </div>
                             <div class="col-xs-12 col-lg-6">
                                 <label>Motor</label>
-                                <input class="form-control" [(ngModel)]="inmovilizacion.placa" name="placa" type="text" />
+                                <input class="form-control" [(ngModel)]="inmovilizacion.motor" name="motor" type="text" />
                             </div>
                             <div class="col-xs-12 col-lg-6">
                                 <label>Chasis</label>
-                                <input class="form-control" [(ngModel)]="inmovilizacion.placa" name="placa" type="text" />
+                                <input class="form-control" [(ngModel)]="inmovilizacion.chasis" name="chasis" type="text" />
                             </div>
                             <div class="col-lg-6">
                                 <label>Marca</label>
@@ -89,10 +89,6 @@
                         </div>
     
                         <div class="row">
-                            <div class="col-xs-12 col-lg-4">
-                                <label>Hora inmovilizacion <strong class="text-danger">*</strong></label>
-                                <input class="form-control" [(ngModel)]="inmovilizacion.hora" name="hora" type="time" required />
-                            </div>
                             <div class="col-xs-12 col-lg-6">
                                 <label>Costo grúa</label>
                                 <input class="form-control" [(ngModel)]="inmovilizacion.costoGrua" name="costoGrua" type="numeric" />
