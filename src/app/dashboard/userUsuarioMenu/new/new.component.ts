@@ -18,7 +18,6 @@ export class NewComponent implements OnInit {
 
   public menus: any = null;
 
-
 constructor(
   private _MenuService: UserCfgMenuService,
   private _UserUsuarioMenuService: UserUsuarioMenuService,

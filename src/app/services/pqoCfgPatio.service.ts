@@ -66,4 +66,28 @@ export class PqoCfgPatioService {
         let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
         return this._http.post(this.url + "/search/ciudadano", params, { headers: headers }).map(res => res.json());
     }
+
+    searchCiudadanos(datos, token) {
+        let json = JSON.stringify(datos);
+        let params = "data=" + json + "&authorization=" + token;
+        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+        return this._http.post(this.url + "/search/ciudadanos", params, { headers: headers }).map(res => res.json());
+    }
+
+    assign(datos, token) {
+        let json = JSON.stringify(datos);
+        let params = "data=" + json + "&authorization=" + token;
+        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+        return this._http.post(this.url + "/assign", params, { headers: headers }).map(res => res.json());
+    }
+
+    deleteCiudadano(datos, token) {
+        let json = JSON.stringify(datos);
+        let params = "data=" + json + "&authorization=" + token;
+        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+        return this._http.post(this.url + "/delete/ciudadano", params, { headers: headers }).map(
+            res => res.json(),
+            this._loogerService.registerLog(token, 'DELETE', json, this.url)
+        );
+    }
 }

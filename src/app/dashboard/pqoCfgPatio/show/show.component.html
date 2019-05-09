@@ -69,41 +69,68 @@
     </div>
 
     <div class="col-xs-12 col-lg-8">
-            <div class="card">
-                <div class="card-header">
-                    <b class="text-uppercase">Registrar ciudadanos</b>
-                    <br>
-                    <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
-                </div>
-                <div class="card-body">
-                    <form #formEdit="ngForm"> 
-                        <div class="form-group row">
-                            <div class="col-xs-12 col-lg-12">
-                                <label>Nombre <b class="text-danger">*</b></label>
-                                <br>
-                                {{ patio.nombre }}
+        <div class="row">
+            <div class="col-xs-12 col-lg-6">
+                <div class="card">
+                    <div class="card-header">
+                        <b class="text-uppercase">Registrar ciudadanos</b>
+                        <br>
+                        <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
+                    </div>
+                    <div class="card-body">
+                        <form #formSearch="ngForm"> 
+                            <div class="form-group row">
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
+                                    <label>No. de identificación</label>
+                                    <input class="form-control text-uppercase" [(ngModel)]="identificacion" name="identificacion" type="numeric" required>
+                                </div>
                             </div>
-                            <div class="col-xs-12 col-lg-12">
-                                <label>Dirección <b class="text-danger">*</b></label>
-                                <br>
-                                {{ patio.direccion }}
-                            </div>
-
+                        </form>
+                    </div>
+                    <div class="card-footer">
+                        <div class="btn-group">
+                            <button (click)="onEnviar()" [disabled]="formSearch.invalid" class="btn btn-primary" type="button">
+                                <i class="fa fa-save"></i>
+                                Enviar
+                            </button>
+                            <button (click)="onCancelar()" class="btn btn-default">
+                                <i class="fa fa-times"></i>
+                                Cancelar
+                            </button>
                         </div>
-                    </form>
-                </div>
-                <div class="card-footer">
-                    <div class="btn-group">
-                        <button (click)="onEnviar()" [disabled]="formEdit.invalid" class="btn btn-primary" type="button">
-                            <i class="fa fa-save"></i>
-                            Enviar
-                        </button>
-                        <button (click)="onCancelar()" class="btn btn-default">
-                            <i class="fa fa-times"></i>
-                            Cancelar
-                        </button>
                     </div>
                 </div>
             </div>
         </div>
+
+        <div class="row">
+            <div class="col-xs-12 col-lg-12" *ngIf="patioCiudadanos && patioCiudadanos.length > 0">
+                <table class="table " id="dataTables-example">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nombre</th>
+                            <th>Identificación</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="odd" *ngFor="let patioCiudadano of patioCiudadanos; let i = index">
+                        <td >{{ i + 1 }}</td>
+                        <td >{{ patioCiudadano.ciudadano.primerNombre }} {{ patioCiudadano.ciudadano.primerApellido }}</td>
+                        <td >{{ patioCiudadano.ciudadano.identificacion }}</td>
+                        <td>
+                            <div class="btn-group">
+                                <button (click)="onDelete(patioCiudadano.id)"  class="btn btn-xs btn-danger" type="button">
+                                    <i class="fa fa-trash"></i>
+                                    Eliminar
+                                </button> 
+                            </div>
+                        </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
