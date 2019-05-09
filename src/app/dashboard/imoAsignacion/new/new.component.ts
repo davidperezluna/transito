@@ -230,23 +230,44 @@ constructor(
   }
 
   onAsignarLote(lote){
-    let isLote = this.lotesSelecionados.filter(h => h !== lote)
-    console.log(isLote.length);
+    //let isLote = this.lotesSelecionados.filter(h => h !== lote)
+    console.log(lote);
+    
 
-    if (isLote.length == 0) {
-    this.lotesSelecionados.push(
+    let asignado = false;
+    //Verifica que el arreglo de lotes tenga datos registrados
+    if ( this.lotesSelecionados.length > 0) {
+      //Recorre todos los lotes seleccionados
+      this.lotesSelecionados.forEach(loteAsignado => {
+          loteAsignado = Object.keys(loteAsignado).map(function(key) {
+              return loteAsignado[key];
+          });
+          //Valida si el lote seleccionado actual ya se encuentra en el arreglo general de lotes
+          asignado = loteAsignado.includes(lote.id, 0);
+      });
+    }
+
+    //Si el lote no esta asignado lo inserta
+    if (!asignado) {
+      this.lotesSelecionados.push(
         {
           'idLote':lote.id,
           'tipo':lote.tipoInsumo.nombre,
           'idTipo':lote.tipoInsumo.id,
           'cantidad':lote.cantidad,
         }   
-    );
+      );
+    }else{
+      swal({
+        title: 'Atención!',
+        text: 'El lote seleccionado ya fue asignado.',
+        type: 'warning',
+        confirmButtonText: 'Aceptar'
+      });
     }
-   
-
   }
-  onAsignarLoteInsumo(){
+
+  onAsignarLoteInsumo(){  
     if (this.loteInsumo) {
       if(Number(this.numero) <= Number(this.loteInsumo.cantidad)){
         this.lotesSelecionados.push(
