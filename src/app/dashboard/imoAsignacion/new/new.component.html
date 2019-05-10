@@ -2,7 +2,7 @@
     <div class="col-xs-12 col-lg-8">
         <div class="card">
             <div class="card-header">
-                <b>Asignación de sustratos e insumos a sedes</b>
+                <b class="text-uppercase">Asignar sustratos e insumos a sede operativa</b>
             </div>
             <div class="card-body">
                 <form #newForm="ngForm">
@@ -12,20 +12,20 @@
                                 <label>Organismo de tránsito <small>(sedes)</small> <b class="text-danger">*</b></label>
                                 <ng-select [multiple]="false" [options]="organismosTransito" [(ngModel)]="sedeSelected" (ngModelChange)="onChangedOrganismoTransito($event)" name="idSedeOperativa"></ng-select>
                             </div>
-                            <div class="col-xs-12 col-lg-12"> 
+                            <div class="col-xs-12 col-lg-6"> 
                                 <label>Tipo <b class="text-danger">*</b></label>
                                 <ng-select [multiple]="false" [options]="tiposInsumo" [(ngModel)]="tipoInsumo" name="tipoInsumo"></ng-select>
                             </div>
                         </div>
                         
                         <div class="row" *ngIf="tipoInsumo && tipoInsumo == 1">
-                            <div class="col-xs-12 col-lg-12">                         
+                            <div class="col-xs-12 col-lg-6">                         
                                 <label>Insumo <b class="text-danger">*</b></label>
                                 <ng-select [multiple]="false" [options]="sustratos" [(ngModel)]="insumoSelected" name="idInsumoSustrato" required></ng-select>
                             </div>
 
                             <div class="col-xs-12 col-lg-6">
-                                <label>Fecha <b class="text-danger">*</b></label>
+                                <label>Fecha registro <b class="text-danger">*</b></label>
                                 <input class="form-control" [(ngModel)]="rnaAsignacionInsumos.fecha" name="fecha" type="date" required>
                             </div>
                             

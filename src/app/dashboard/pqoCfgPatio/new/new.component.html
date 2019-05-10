@@ -8,49 +8,54 @@
             </div>
             <div class="card-body">
                 <form #formNew="ngForm"> 
-                    <div class="form-group row">
-                        <div class="col-xs-12 col-lg-12">
-                            <label>Nombre <b class="text-danger">*</b></label>
-                            <input class="form-control" [(ngModel)]="patio.nombre" name="nombre" type="text" required />
-                        </div>
-                        <div class="col-xs-12 col-lg-12">
-                            <label>Dirección <b class="text-danger">*</b></label>
-                            <input class="form-control" [(ngModel)]="patio.direccion" name="direccion" type="text" required />
-                        </div>
-                        <div class="col-xs-12 col-lg-12">
-                            <label>Correo <b class="text-danger">*</b></label>
-                            <input class="form-control" [(ngModel)]="patio.correo" name="correo" type="email" required />
-                        </div>
-                        <div class="col-xs-12 col-lg-12">
-                            <label>Telefono <b class="text-danger">*</b></label>
-                            <input class="form-control" [(ngModel)]="patio.telefono" name="telefono" type="text" required />
-                        </div>
-                        <div class="col-xs-12 col-lg-12">
-                            <label>Nombre administrador</label>
-                            <input class="form-control" [(ngModel)]="patio.administrador" name="administrador" type="text" />
-                        </div>
-                        <div class="col-xs-12 col-lg-12">
-                            <label>Nombre popietario</label>
-                            <input class="form-control" [(ngModel)]="patio.propietario" name="propietario" type="text" />
-                        </div>
-                        <div class="col-xs-12 col-lg-12">
-                            <label>No resolución / Autorización <b class="text-danger">*</b></label>
-                            <input class="form-control" [(ngModel)]="patio.numeroResolucion" name="numeroResolucion" type="text" required />
-                        </div>
-                        <div class="col-xs-12 col-lg-12">
-                            <label>Cargar archivo <b class="text-danger">*</b></label>
-                            <input class="form-control" type="file" (change)="onFileChange($event)" required>
-                        </div>
-                        <p class="text-center text-uppercase">
-                            <b>Plazo de autorización</b>
-                        </p>
-                        <div class="col-xs-12 col-lg-6">
-                            <label>Fecha inicial <b class="text-danger">*</b></label>
-                            <input class="form-control" [(ngModel)]="patio.fechaInicial" name="fechaInicial" type="date" required />
-                        </div>
-                        <div class="col-xs-12 col-lg-6">
-                            <label>Fecha final <b class="text-danger">*</b></label>
-                            <input class="form-control" [(ngModel)]="patio.fechaFinal" name="fechaFinal" type="date" required />
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Nombre <b class="text-danger">*</b></label>
+                                <input class="form-control text-uppercase" [(ngModel)]="patio.nombre" name="nombre" type="text" required />
+                            </div>
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Dirección <b class="text-danger">*</b></label>
+                                <input class="form-control" [(ngModel)]="patio.direccion" name="direccion" type="text" required />
+                            </div>
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Correo <b class="text-danger">*</b></label>
+                                <input class="form-control" [(ngModel)]="patio.correo" name="correo" type="email" required />
+                            </div>
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Telefono <b class="text-danger">*</b></label>
+                                <input class="form-control" [(ngModel)]="patio.telefono" name="telefono" type="text" required />
+                            </div>
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Nombre administrador</label>
+                                <input class="form-control text-uppercase" [(ngModel)]="patio.administrador" name="administrador" type="text" />
+                            </div>
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Nombre popietario</label>
+                                <input class="form-control text-uppercase" [(ngModel)]="patio.propietario" name="propietario" type="text" />
+                            </div>
+                            <div class="col-xs-12 col-lg-12">
+                                <label>No resolución / Autorización <b class="text-danger">*</b></label>
+                                <input class="form-control" [(ngModel)]="patio.numeroResolucion" name="numeroResolucion" type="text" required />
+                            </div>
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Cargar archivo <b class="text-danger">*</b></label>
+                                <input class="form-control" type="file" (change)="onFileChange($event)" required>
+                            </div>
+                            <hr>
+                            <div class="col-xs-12 col-lg-12">
+                                <p class="text-center text-uppercase">
+                                    <b>Plazo de autorización</b>
+                                </p>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Fecha inicial <b class="text-danger">*</b></label>
+                                <input class="form-control" [(ngModel)]="patio.fechaInicial" name="fechaInicial" type="date" required />
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Fecha final <b class="text-danger">*</b></label>
+                                <input class="form-control" [(ngModel)]="patio.fechaFinal" name="fechaFinal" type="date" required />
+                            </div>
                         </div>
                     </div>
                 </form>

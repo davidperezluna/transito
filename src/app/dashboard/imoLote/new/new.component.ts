@@ -31,6 +31,12 @@ public insumoInsumoSelected:any;
 public frmInsumo:any=false;
 public date:any;
 
+public tipoInsumo: any = null;
+public tiposInsumo = [
+  {'value': 1, 'label': 'SUSTRATO'},
+  {'value': 2, 'label': 'INSUMO'},
+];
+
 constructor(
   private datePipe: DatePipe,
   private _ImoLoteService: ImoLoteService,

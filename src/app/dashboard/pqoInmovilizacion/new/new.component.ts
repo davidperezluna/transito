@@ -49,18 +49,93 @@ constructor(
     });
 
     this.inmovilizacion = new PqoInmovilizacion(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    
     this.date = new Date();
 
     let token = this._LoginService.getToken();
 
     let identity = this._LoginService.getIdentity();
 
-    this._PqoCfgPatioService.searchByCiudadano({ 'identificacion': identity.identificacion }, token).subscribe(
+    let datos = {
+      'identificacion': identity.identificacion
+    }
+
+    this._PqoCfgPatioService.searchByCiudadano(datos, token).subscribe(
       response => {
         if (response.code == 200) {
           this.patio = response.data.patio;
 
           this.inmovilizacion.idPatio = this.patio.id;
+
+          this._MarcaService.getMarcaSelect().subscribe(
+            response => {
+              this.marcas = response;
+            },
+            error => {
+              this.errorMessage = <any>error;
+      
+              if (this.errorMessage != null) {
+                console.log(this.errorMessage);
+                alert("Error en la petición");
+              }
+            }
+          );
+      
+          this._ClaseService.select().subscribe(
+            response => {
+              this.clases = response;
+            },
+            error => {
+              this.errorMessage = <any>error;
+      
+              if (this.errorMessage != null) {
+                console.log(this.errorMessage);
+                alert("Error en la petición");
+              }
+            }
+          );
+      
+          this._ColorService.select().subscribe(
+            response => {
+              this.colores = response;
+            },
+            error => {
+              this.errorMessage = <any>error;
+      
+              if (this.errorMessage != null) {
+                console.log(this.errorMessage);
+                alert("Error en la petición");
+              }
+            }
+          );
+      
+          this._PqoCfgPatioService.select().subscribe(
+            response => {
+              this.patios = response;
+            },
+            error => {
+              this.errorMessage = <any>error;
+      
+              if (this.errorMessage != null) {
+                console.log(this.errorMessage);
+                alert("Error en la petición");
+              }
+            }
+          );
+      
+          this._PqoCfgGruaService.select().subscribe(
+            response => {
+              this.gruas = response;
+            },
+            error => {
+              this.errorMessage = <any>error;
+      
+              if (this.errorMessage != null) {
+                console.log(this.errorMessage);
+                alert("Error en la petición");
+              }
+            }
+          );
 
           swal.close();
         } else {
@@ -77,76 +152,6 @@ constructor(
             console.log(this.errorMessage);
             alert('Error en la petición');
           }
-        }
-      }
-    );
-
-    this._MarcaService.getMarcaSelect().subscribe(
-      response => {
-        this.marcas = response;
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
-
-    this._ClaseService.select().subscribe(
-      response => {
-        this.clases = response;
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
-
-    this._ColorService.select().subscribe(
-      response => {
-        this.colores = response;
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
-
-    this._PqoCfgPatioService.select().subscribe(
-      response => {
-        this.patios = response;
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
-
-    this._PqoCfgGruaService.select().subscribe(
-      response => {
-        this.gruas = response;
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert("Error en la petición");
         }
       }
     );

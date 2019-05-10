@@ -1,4 +1,5 @@
-import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import { PqoCfgPatioService } from '../../../services/pqoCfgPatio.service';
 import { LoginService } from '../../../services/login.service';
 import { environment } from 'environments/environment';
@@ -7,7 +8,8 @@ declare var $: any;
 
 @Component({
   selector: 'app-show',
-  templateUrl: './show.component.html'
+  templateUrl: './show.component.html',
+  providers: [DatePipe]
 })
 
 export class ShowComponent implements OnInit{
@@ -21,6 +23,8 @@ public identificacion: any = null;
 public table: any = null;
 public patioCiudadanos: any = null;
 public formReady = false;
+public fechaInicial: any = null;
+public fechaFinal: any = null;
 
 constructor(
   private _PatioService: PqoCfgPatioService,
@@ -36,6 +40,20 @@ constructor(
       }
     });
 
+    var datePiper = new DatePipe('en-US');
+
+    var date = new Date();
+    date.setTime(this.patio.fechaInicial.timestamp * 1000);
+
+    this.fechaInicial = datePiper.transform(
+      date, 'dd/MM/yyyy'
+    );
+
+    date.setTime(this.patio.fechaFinal.timestamp * 1000);
+    this.fechaFinal = datePiper.transform(
+      date, 'dd/MM/yyyy'
+    );
+
     let token = this._LoginService.getToken();
 
     this._PatioService.searchCiudadanos({ 'id': this.patio.id }, token).subscribe(
@@ -48,6 +66,13 @@ constructor(
           }, 100);
 
           swal.close();
+        }else{
+          swal({
+            title: 'Atención!',
+            text: response.message,
+            type: 'warning',
+            confirmButtonText: 'Aceptar'
+          });
         }
 			error => {
 					this.errorMessage = <any>error;
@@ -62,6 +87,10 @@ constructor(
   }
 
   onInitTable(){
+    if (this.table) {
+      this.table.destroy();
+    }
+
     this.table = $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,
@@ -105,7 +134,7 @@ constructor(
             confirmButtonText: 'Aceptar'
           });
 
-          this.ready.emit(true);
+          this.ngOnInit();
         }
 			error => {
 					this.errorMessage = <any>error;

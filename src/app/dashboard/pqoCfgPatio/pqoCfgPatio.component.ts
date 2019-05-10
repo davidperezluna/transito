@@ -58,7 +58,11 @@ export class PqoCfgPatioComponent implements OnInit {
   }
 
   onInitTable(){
-    $('#dataTables-example').DataTable({
+    if (this.table) {
+      this.table.destroy();
+    }
+    
+    this.table = $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,
       sPaginationType: 'full_numbers',
@@ -70,8 +74,7 @@ export class PqoCfgPatioComponent implements OnInit {
           sLast: '<i class="fa fa-step-forward"></i>'
         }
       }
-   });
-   this.table = $('#dataTables-example').DataTable();
+    });
   }
   
   onNew(){

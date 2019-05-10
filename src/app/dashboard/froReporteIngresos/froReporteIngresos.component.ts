@@ -176,8 +176,9 @@ export class FroReporteIngresosComponent implements OnInit {
         this.froReporteIngresos.idOrganismoTransito = this.organismoTransitoSelected;
         this.froReporteIngresos.idTipoPersona = this.tipoPersonaSelected;
         this.froReporteIngresos.idTipoRecaudo = this.tipoRecaudoSelected;
+
         if(this.tipoRecaudoSelected == 1){
-            this._FroReporteIngresosService.pdfTramiteByFecha({ 'identificacionUsuario': identity.identificacion, 'filtros':this.froReporteIngresos }, token).subscribe(
+            this._FroReporteIngresosService.pdfTramiteByFecha({ 'identificacion': identity.identificacion, 'filtros':this.froReporteIngresos }, token).subscribe(
                 response => {
                     var fileURL = URL.createObjectURL(response);
                     window.open(fileURL);
