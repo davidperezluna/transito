@@ -127,7 +127,7 @@ constructor(
 
     this.ImoLote.idOrganismoTransito = this.sedeSelected;
 
-    if (this.tipoInsumo == 1) {
+    if (this.tipoInsumo == '1') {
       this.ImoLote.idEmpresa = this.empresaSelected;
       this.ImoLote.imoCfgTipo = this.insumoSelected;
     }else{
