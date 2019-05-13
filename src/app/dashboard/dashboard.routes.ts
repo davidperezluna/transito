@@ -174,7 +174,7 @@ import { ImoBusquedaRoutes } from './imoBusqueda/imoBusqueda.routes';
 import { ImoCfgTipoRoutes } from './imoCfgTipo/imoCfgTipo.routes';
 import { ImoLoteRoutes } from "./imoLote/imoLote.routes";
 import { ImoAsignacionRoutes} from './imoAsignacion/imoAsignacion.routes';
-import { ImoPreasignacionRoutes } from './imoPreasignacIon/imoPreasignacion.routes';
+import { ImoReasignacionRoutes } from './imoReasignacIon/imoReasignacion.routes';
 import { ImoActaRoutes } from './imoActa/imoActa.routes';
 
 
@@ -449,7 +449,7 @@ export const DashboardRoutes: Route[] = [
       ...ImoAsignacionRoutes,
       ...ImoCfgTipoRoutes,
       ...ImoLoteRoutes,
-      ...ImoPreasignacionRoutes,
+      ...ImoReasignacionRoutes,
       ...ImoActaRoutes,
       ...UserCfgEmpresaTipoRoutes,
       ...UserCfgEmpresaServicioRoutes,

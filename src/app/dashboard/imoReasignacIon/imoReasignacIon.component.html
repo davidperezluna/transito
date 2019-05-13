@@ -1,0 +1,59 @@
+<div class="container" >
+    <div class="row" *ngIf='formIndex'>
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="btn-group pull-right">
+                        <button (click)="onNew()" class="btn btn-default">
+                        <i class="fa fa-plus"></i>
+                        <span class="text">Nuevo</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form #newForm="ngForm">
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-12"> 
+                                <table class="table " id="dataTables-example-Sustratos">
+                                <thead>
+                                <tr>
+                                    <th>Sede</th>
+                                    <th>Fecha</th>
+                                    <th>Estado</th>
+                                    <th>Descripcion</th>
+                                    <th>Acciones</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr class="odd" *ngFor="let reasignacion of reasignaciones; let i = index">
+                                    <td >{{reasignacion.organismoTransito.nombre}}</td>
+                                    <td >{{reasignacion.fecha}}</td>
+                                    <td >{{reasignacion.estado}}</td>
+                                    <td >{{reasignacion.descripcion}}</td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <button (click)="onShow(reasignacion.id)"  class="btn btn-xs btn-primary" type="button">
+                                                Listar
+                                            </button> 
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            </div>    
+                        </div>
+                    </form>
+                    <!--
+                        <div class="card-footer">
+                            <button (click)="onCancelar()" class="btn btn-default">Cancelar</button>
+                            <button (click)="onEnviar()" [disabled]="isCantidad" class="btn btn-primary pull-right" type="button">Enviar</button>
+                        </div>    
+                    -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+    <app-show *ngIf='formShow' [idReasignacion]="idReasignacion" (ready)="ready($event)"></app-show>
+</div>

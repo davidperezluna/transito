@@ -52,7 +52,7 @@ export class ImoInsumoService {
 		);
 	}
 
-	showLote(loteInsumoId,token){
+	showLote(loteInsumoId, token){
 		let json = JSON.stringify(loteInsumoId);
 		let params = "data="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});

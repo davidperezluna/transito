@@ -211,7 +211,7 @@ import { PnalAsignacionModule } from './pnalAsignacion/pnalAsignacion.module';
 
 import { CfgCargoModule } from './cfgCargo/cfgCargo.module';
 
-import { ImoPreasignacionModule } from './imoPreasignacIon/imoPreasignacion.module';
+import { ImoReasignacionModule } from './imoReasignacIon/imoReasignacion.module';
 import { ImoActaModule } from './imoActa/imoActa.module';
 import { ImoAsignacionModule } from './imoAsignacion/imoAsignacion.module';
 import { ImoCfgTipoModule } from './imoCfgTipo/imoCfgTipo.module';
@@ -461,7 +461,7 @@ import {RightsidebarComponent} from '../shared';
     UserCfgEmpresaTipoModule,
     UserCfgEmpresaServicioModule,
     RnaCertificadoTradicionOficialModule,
-    ImoPreasignacionModule,
+    ImoReasignacionModule,
     ImoBusquedaModule,
     ImoAsignacionModule,
     ImoCfgTipoModule,

@@ -15,29 +15,31 @@ export class ShowComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
 @Input() insumos:any = null;
 @Input() loteInsumo:any = null;
-public apiUrl = environment.apiUrl + 'insumo/imolote';
 public errorMessage;
-public respuesta;
+
+public apiUrl = environment.apiUrl + 'insumo/imolote';
+
 public table:any;
 
 constructor(
-  private _loginService: LoginService,
+  private _LoginService: LoginService,
   private _ImoInsumoService: ImoInsumoService,
   ){}
 
   ngOnInit() {
     let timeoutId = setTimeout(() => {  
-      this.iniciarTabla();
+      this.onInitTable();
     }, 100);
   }
-  iniciarTabla(){
+
+  onInitTable(){
      // Setup - add a text input to each footer cell
-     $('#dataTables-example-Sustratos thead th.filter').each( function () {
+     $('#dataTables-example-sustratos thead th.filter').each( function () {
       var title = $(this).text();
       $(this).html( '<input type="text" class="form-control" placeholder="'+title+'" />' );
     } );
 
-    $('#dataTables-example-Sustratos').DataTable({
+    this.table = $('#dataTables-example-sustratos').DataTable({
       responsive: true,
       pageLength: 8,
       sPaginationType: 'full_numbers',
@@ -50,7 +52,7 @@ constructor(
         }
       }
     });
-    this.table = $('#dataTables-example-Sustratos').DataTable();
+
     // Apply the search
     this.table.columns().every( function () {
       var that = this;
@@ -80,7 +82,7 @@ constructor(
       if (result.value) {
         this.table.destroy();
         this.insumos = null;
-        let token = this._loginService.getToken();
+        let token = this._LoginService.getToken();
         this._ImoInsumoService.delete(token,id).subscribe(
             response => {
                 swal({
@@ -90,12 +92,10 @@ constructor(
                       confirmButtonColor: '#15d4be',
                     })
 
-                    this._ImoInsumoService.showLote(this.loteInsumo.id,token).subscribe(
+                    this._ImoInsumoService.showLote(this.loteInsumo.id, token).subscribe(
                       response => {
-                        this.respuesta = response;
-                        if(this.respuesta.status == 'success'){
-                          this.insumos = this.respuesta.datos;
-                          this.respuesta= response;
+                        if(response.status == 'success'){
+                          this.insumos = response.data;
                           this.ngOnInit();
                         }
                         error => {
