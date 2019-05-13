@@ -15,39 +15,33 @@ export class UserEmpresaService {
 		return this._http.get(this.url+"/").map(res => res.json());
 	}
 
-	register(empresa,token){
-		
-		let json = JSON.stringify(empresa);
+	register(datos,token){
+		let json = JSON.stringify(datos);
 		let params = "data="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
-		return this._http.post(this.url+"/new", params, {headers: headers})
-							  .map(res => res.json());
+		return this._http.post(this.url+"/new", params, {headers: headers}).map(res => res.json());
 	}
 
-	delete(token,id){
-
-		let params = "authorization="+token;
+	delete(datos, token){
+		let json = JSON.stringify(datos);
+		let params = "data=" + json + "&authorization=" + token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
-		return this._http.post(this.url+"/"+id+"/delete", params, {headers: headers})
-							  .map(res => res.json());
+		return this._http.post(this.url+"/delete", params, {headers: headers}).map(res => res.json());
 	}
 
-	show(token,id){
-		
-		let params = "authorization="+token;
+	show(datos, token){
+		let json = JSON.stringify(datos);
+		let params = "data=" + json + "&authorization=" + token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
-		return this._http.post(this.url+"/show/"+id, params, {headers: headers})
-							  .map(res => res.json());
-
+		return this._http.post(this.url+"/show/", params, {headers: headers}).map(res => res.json());
 	}
 
 	edit(empresa,token){
 
 		let json = JSON.stringify(empresa);
-		let params = "json="+json+"&authorization="+token;
+		let params = "data="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
- 			return this._http.post(this.url+"/edit", params, {headers: headers})
-							  .map(res => res.json());
+ 			return this._http.post(this.url+"/edit", params, {headers: headers}).map(res => res.json());
 	}
 
 	select(){
@@ -62,16 +56,16 @@ export class UserEmpresaService {
 		return this._http.get(this.url + "/index/empresaAlcaldia").map(res => res.json());
 	}
 
-	showByNit(token, nit) {
-		let json = JSON.stringify(nit);
-		let params = "json=" + json + "&authorization=" + token;
+	showByNit(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = "data=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/show/empresa", params, { headers: headers }).map(res => res.json())
 	}
 
 	showByNitOrNombre(datos, token) {
 		let json = JSON.stringify(datos);
-		let params = "json=" + json + "&authorization=" + token;
+		let params = "data=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/show/nit/nombre", params, { headers: headers }).map(res => res.json())
 	}

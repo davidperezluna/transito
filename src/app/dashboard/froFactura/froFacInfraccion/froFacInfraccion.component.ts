@@ -256,7 +256,7 @@ export class FroFacInfraccionComponent implements OnInit {
     //Tipo de recaudo infracciones
     this.factura.idTipoRecaudo = 2;
 
-    this._FacturaService.register(this.factura, token).subscribe(
+    this._FacturaService.register({'factura':this.factura}, token).subscribe(
       response => {
         if (response.status == 'success') {
           this.factura.id = response.data.id;

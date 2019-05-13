@@ -6,7 +6,7 @@ import { UserCfgEmpresaTipoService } from '../../../services/userCfgEmpresaTipo.
 import { UserCiudadanoService } from '../../../services/userCiudadano.service';
 import { UserCfgEmpresaTipoSociedadService } from '../../../services/userCfgEmpresaTipoSociedad.service';
 import { UserCfgTipoIdentificacionService } from '../../../services/userCfgTipoIdentificacion.service';
-import { RepresentanteUserEmpresaService } from '../../../services/representanteEmpresa.service';
+import { UserEmpresaRepresentanteService } from '../../../services/userEmpresaRepresentante.service';
 import { UserCfgEmpresaServicioService } from '../../../services/userCfgEmpresaServicio.service';
 import { VhloCfgModalidadTransporteService } from '../../../services/vhloCfgModalidadTransporte.service';
 
@@ -70,7 +70,7 @@ export class EditComponent implements OnInit {
     private _TipoSociedadService: UserCfgEmpresaTipoSociedadService,
     private _CiudadanoService: UserCiudadanoService,
     private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
-    private _RepresentanteUserEmpresaService: RepresentanteUserEmpresaService,
+    private _RepresentanteEmpresaService: UserEmpresaRepresentanteService,
     private _EmpresaServicioService: UserCfgEmpresaServicioService,
     private _loginService: LoginService,
     private _UserCfgEmpresaTipoService: UserCfgEmpresaTipoService,
@@ -134,7 +134,7 @@ export class EditComponent implements OnInit {
       }
     );
 
-    this._RepresentanteUserEmpresaService.showRepresentanteEmpresa(this.empresa.id, token).subscribe(
+    this._RepresentanteEmpresaService.show(this.empresa.id, token).subscribe(
       response => {
         if (response.status == "success") {
           this.representanteVigente = response.representanteVigente;
@@ -256,7 +256,7 @@ export class EditComponent implements OnInit {
         if (response.status == 'success') {
           swal({
             title: 'Perfecto!',
-            text: 'El registro se ha modificado con exito',
+            text: response.message,
             type: 'success',
             confirmButtonText: 'Aceptar'
           })
@@ -273,14 +273,14 @@ export class EditComponent implements OnInit {
       });
 
   }
-  nuevoRepresentante() {
+  /* nuevoRepresentante() {
     let token = this._loginService.getToken();
     let datos = {
       'empresa': this.empresa,
       'ciudadanoId': this.ciudadanoSelected,
       'fechaFinal': this.empresa.fechaFinal,
     }
-    this._RepresentanteUserEmpresaService.register(datos, token).subscribe(
+    this._RepresentanteEmpresaService.register(datos, token).subscribe(
       response => {
         if (response.status == 'success') {
           this.ngOnInit();
@@ -302,6 +302,6 @@ export class EditComponent implements OnInit {
 
       });
 
-  }
+  } */
 
 }

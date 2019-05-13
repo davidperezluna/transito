@@ -124,9 +124,10 @@ export class UserLicenciaConduccionComponent implements OnInit {
                             text: response.message,
                             type: 'success',
                             confirmButtonColor: '#15d4be',
-                        })
-                        this.table.destroy();
+                        });
                         this.ngOnInit();
+                        this.table.destroy();
+                        this.onSearchCiudadano();
                     },
                     error => {
                         this.errorMessage = <any>error;
