@@ -78,27 +78,27 @@ export class FroReporteIngresosService {
         let json = JSON.stringify(datos);
         let params = "data=" + json + "&authorization=" + token;
         let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-        return this._http.post(this.url + "/comparendo/fecha", params, { headers: headers }).map(res => res.json());
+        return this._http.post(this.url + "/pdf/comparendo/fecha", params, { headers: headers }).map(res => res.json());
     }
 
     getAcuerdoPagoByFecha(datos, token) {
         let json = JSON.stringify(datos);
         let params = "data=" + json + "&authorization=" + token;
         let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-        return this._http.post(this.url + "/acuerdoPago/fecha", params, { headers: headers }).map(res => res.json());
+        return this._http.post(this.url + "/pdf/acuerdoPago/fecha", params, { headers: headers }).map(res => res.json());
     }
 
     getParqueaderoByFecha(datos, token) {
         let json = JSON.stringify(datos);
         let params = "data=" + json + "&authorization=" + token;
         let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-        return this._http.post(this.url + "/parqueadero/fecha", params, { headers: headers }).map(res => res.json());
+        return this._http.post(this.url + "/pdf/parqueadero/fecha", params, { headers: headers }).map(res => res.json());
     }
 
     getRetefuenteByFecha(datos, token) {
         let json = JSON.stringify(datos);
         let params = "data=" + json + "&authorization=" + token;
         let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-        return this._http.post(this.url + "/retefuente/fecha", params, { headers: headers }).map(res => res.json());
+        return this._http.post(this.url + "/pdf/retefuente/fecha", params, { headers: headers }).map(res => res.json());
     }
 }
