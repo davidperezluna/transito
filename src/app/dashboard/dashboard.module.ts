@@ -160,6 +160,7 @@ import { PqoCfgGruaModule } from './pqoCfgGrua/pqoCfgGrua.module';
 import { PqoGruaCiudadanoModule } from './pqoGruaCiudadano/pqoGruaCiudadano.module';
 import { PqoInmovilizacionModule } from './pqoInmovilizacion/pqoInmovilizacion.module';
 
+import { VhloRnaPreregistroModule } from './vhloRnaPreregistro/vhloRnaPreregistro.module';
 import { VhloBuscarModule } from './vhloBuscar/vhloBuscar.module';
 import { VhloVehiculoModule } from './vhloVehiculo/vhloVehiculo.module';
 import { VhloPropietarioModule } from './vhloPropietario/vhloPropietario.module';
@@ -219,7 +220,6 @@ import { ImoLoteModule } from "./imoLote/imoLote.module";
 
 
 import { RnrsPreasignacionPlacaModule } from './rnrsPreasignacionPlaca/rnrsPreasignacionPlaca.module';
-import { RnaPreregistroModule } from './rnaPreregistro/RnaPreregistro.module';
 
 import { FroTrteSolicitudRncModule } from './froTrteSolicitudRnc/froTrteSolicitudRnc.module';
 import { FroFacTramiteModule } from './froFacTramite/froFacTramite.module';
@@ -408,6 +408,9 @@ import {RightsidebarComponent} from '../shared';
     CvRestriccionModule,
     CvCfgInteresModule,
     CvCfgPorcentajeInicialModule,
+    VhloRnaPreregistroModule,
+    VhloCfgLimitacionCausalModule,
+    VhloCfgLimitacionTipoModule,
     VhloCfgTipoVehiculoModule,
     VhloCfgTipoAlertaModule,
     VhloCfgCdaModule,
@@ -437,13 +440,10 @@ import {RightsidebarComponent} from '../shared';
     GestionTransportePublicoModule,
     CvCfgTipoRestriccionModule,
     TramitePrecioModule,
-    RnaPreregistroModule,
     CfgOrganismoTransitoModule,
     CfgChoqueConModule,
     SvCfgObjetoFijoModule,
     CfgEntidadJudicialModule,
-    VhloCfgLimitacionCausalModule,
-    VhloCfgLimitacionTipoModule,
     rnaRegistroInsumosModule,
     RnmaPreregistroModule,
     CfgTipoProcesoModule,

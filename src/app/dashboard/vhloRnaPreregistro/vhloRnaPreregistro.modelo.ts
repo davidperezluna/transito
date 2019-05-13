@@ -1,4 +1,4 @@
-export class RnaPreregistro{
+export class VhloRnaPreregistro{
 	constructor(
 		public numeroLicencia:number,
 		public numeroFactura:string,

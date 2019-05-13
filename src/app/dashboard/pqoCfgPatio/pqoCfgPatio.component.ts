@@ -79,6 +79,8 @@ export class PqoCfgPatioComponent implements OnInit {
   
   onNew(){
     this.formNew = true;
+    this.formEdit = false;
+    this.formShow = false;
     this.formIndex = false;
     this.table.destroy();
   }
@@ -87,6 +89,7 @@ export class PqoCfgPatioComponent implements OnInit {
     if(isCreado) {
       this.formNew = false;
       this.formEdit = false;
+      this.formShow = false;
       this.formIndex = true;
       this.ngOnInit();
     }
@@ -106,29 +109,27 @@ export class PqoCfgPatioComponent implements OnInit {
       if (result.value) {
         let token = this._loginService.getToken();
         this._PatioService.delete(token,id).subscribe(
-            response => {
-                swal({
-                      title: 'Eliminado!',
-                      text:'Registro eliminado correctamente.',
-                      type:'success',
-                      confirmButtonColor: '#15d4be',
-                    })
-                  this.table.destroy();
-                  this.ngOnInit();
-              }, 
-            error => {
-              this.errorMessage = <any>error;
+          response => {
+              swal({
+                    title: 'Eliminado!',
+                    text:'Registro eliminado correctamente.',
+                    type:'success',
+                    confirmButtonColor: '#15d4be',
+                  })
+                this.table.destroy();
+                this.ngOnInit();
+            }, 
+          error => {
+            this.errorMessage = <any>error;
 
-              if(this.errorMessage != null){
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
+            if(this.errorMessage != null){
+              console.log(this.errorMessage);
+              alert("Error en la petición");
             }
-          );
-
-        
+          }
+        );
       }
-    })
+    });
   }
 
   onEdit(patio:any){

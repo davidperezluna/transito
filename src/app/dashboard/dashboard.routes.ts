@@ -137,7 +137,6 @@ import { ConceptoParametroRoutes } from './conceptoParametro/conceptoParametro.r
 import { TpAlcaldiaRoutes } from './tpAlcaldia/tpAlcaldia.routes';
 import { RpcccInventarioDocumentalRoutes } from './rpcccInventarioDocumental/rpcccInventarioDocumental.routes';
 import { RnrsPreasignacionPlacaRoutes } from './rnrsPreasignacionPlaca/rnrsPreasignacionPlaca.routes';
-import { RnaPreregistroRoutes } from './rnaPreregistro/rnaPreregistro.routes';
 
 // import { SucursalRoutes } from './empresa/sucursal/sucursal.routes';
 import { TramitePrecioRoutes } from './tramitePrecio/tramitePrecio.routes';
@@ -198,6 +197,7 @@ import { FroTrteSolicitudRncRoutes } from './froTrteSolicitudRnc/froTrteSolicitu
 import { FroFacTramiteRoutes } from './froFacTramite/froFacTramite.routes';
 import { FroTrteCfgCuentaRoutes } from './froTrteCfgCuenta/froTrteCfgCuenta.routes';
 
+import { VhloRnaPreregistroRoutes } from './vhloRnaPreregistro/vhloRnaPreregistro.routes';
 import { VhloCfgMarcaRoutes } from './vhloCfgMarca/vhloCfgMarca.routes';
 import { VhloCfgLineaRoutes } from './vhloCfgLinea/vhloCfgLinea.routes';
 import { VhloCfgClaseRoutes } from './vhloCfgClase/vhloCfgClase.routes';
@@ -271,6 +271,10 @@ export const DashboardRoutes: Route[] = [
       ...UserLicenciaTransitoRoutes,
       ...HomeRoutes,
       ...BancoRoutes,
+      ...VhloRnaPreregistroRoutes,
+      ...VhloCfgLimitacionCausalRoutes,
+      ...VhloCfgLimitacionTipoRoutes,
+      ...VhloCfgLimitacionTipoProcesoRoutes,
       ...VhloBuscarRoutes,
       ...VhloVehiculoRoutes,
       ...VhloPropietarioRoutes,
@@ -417,15 +421,11 @@ export const DashboardRoutes: Route[] = [
       ...TramiteFacturaRoutes,
       ...SustratoRoutes,
       ...GestionTransportePublicoRoutes,
-      ...RnaPreregistroRoutes,
       ...rnaRegistroInsumosRoutes,
       ...TramitePrecioRoutes,
       ...CfgComparendoEstadoRoutes,
       ...CfgOrganismoTransitoRoutes,
       ...CfgEntidadJudicialRoutes,
-      ...VhloCfgLimitacionCausalRoutes,
-      ...VhloCfgLimitacionTipoRoutes,
-      ...VhloCfgLimitacionTipoProcesoRoutes,
       ...CfgChoqueConRoutes,
       ...SvCfgObjetoFijoRoutes,
       ...SvIpatTalonarioRoutes,

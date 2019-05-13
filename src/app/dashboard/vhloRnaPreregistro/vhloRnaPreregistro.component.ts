@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { RnaPreregistro } from './rnaPreregistro.modelo';
-import { RnaPreregistroService } from '../../services/rnaPreregistro.service';
+import { VhloRnaPreregistro } from './vhloRnaPreregistro.modelo';
+import { VhloRnaPreregistroService } from '../../services/vhloRnaPreregistro.service';
 import { VhloVehiculoService } from '../../services/vhloVehiculo.service';
 import { LoginService } from '../../services/login.service';
 declare var $: any;
@@ -8,22 +8,22 @@ import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-index',
-  templateUrl: './rnaPreregistro.component.html'
+  templateUrl: './vhloRnaPreregistro.component.html'
 })
-export class RnaPreregistroComponent implements OnInit {
+
+export class VhloRnaPreregistroComponent implements OnInit {
   public errorMessage;
-	public id;
-	public respuesta;
+
 	public vehiculos;
   public formIndex = true;
   public formNew = false;
   public formEdit= false;
   public table:any; 
-  public vehiculo: RnaPreregistro;
+  public vehiculo: VhloRnaPreregistro;
 
   constructor(
     private _VehiculoService: VhloVehiculoService,
-		private _RnaPreregistroService: RnaPreregistroService,
+		private _RnaPreregistroService: VhloRnaPreregistroService,
 		private _loginService: LoginService,
 	
 		
@@ -97,7 +97,6 @@ export class RnaPreregistroComponent implements OnInit {
   }
   
   deleteVehiculo(id:any){
-    console.log(this.id);
     swal({
       title: '¿Estás seguro?',
       text: "¡Se eliminara este registro!",
@@ -121,7 +120,6 @@ export class RnaPreregistroComponent implements OnInit {
                       confirmButtonColor: '#15d4be',
                     })
                   this.table.destroy();
-                  this.respuesta= response;
                   this.ngOnInit();
               }, 
             error => {

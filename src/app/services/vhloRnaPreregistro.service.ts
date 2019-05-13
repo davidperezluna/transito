@@ -4,7 +4,7 @@ import  "rxjs/add/operator/map";
 import { environment } from 'environments/environment';
 
 @Injectable()
-export class RnaPreregistroService {
+export class VhloRnaPreregistroService {
 	private url = environment.apiUrl + "vehiculo/vhlovehiculo";
 	public identity;
 	public token;
@@ -23,7 +23,6 @@ export class RnaPreregistroService {
 	}
 
 	delete(token,id){
-
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/"+id+"/delete", params, {headers: headers})

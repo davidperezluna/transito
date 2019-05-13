@@ -1,5 +1,5 @@
 import { Component, OnInit,Output,EventEmitter } from '@angular/core';
-import { RnaPreregistro } from '../rnaPreregistro.modelo';
+import { VhloRnaPreregistro } from '../vhloRnaPreregistro.modelo';
 import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
 import { VhloCfgLineaService } from '../../../services/vhloCfgLinea.service';
 import { VhloCfgClaseService } from '../../../services/vhloCfgClase.service';
@@ -15,19 +15,21 @@ import { UserCiudadanoService } from '../../../services/userCiudadano.service';
 import { UserEmpresaService } from "../../../services/userEmpresa.service";
 import { PnalFuncionarioService } from '../../../services/pnalFuncionario.service';
 import { VhloPropietarioService } from '../../../services/vhloPropietario.service';
-import { RnaPreregistroService } from '../../../services/rnaPreregistro.service';
+import { VhloRnaPreregistroService } from '../../../services/vhloRnaPreregistro.service';
 import { LoginService } from '../../../services/login.service';
 
 import swal from 'sweetalert2';
+
 @Component({
   selector: 'app-new',
   templateUrl: './new.component.html'
 })
-export class NewRnaPreregistroComponent implements OnInit {
+
+export class NewComponent implements OnInit {
   @Output() ready = new EventEmitter<any>();
   public errorMessage:any;
 
-  public vehiculo: RnaPreregistro;
+  public vehiculo: VhloRnaPreregistro;
 
   public lineas:any;
   public clases:any;
@@ -92,7 +94,7 @@ constructor(
   private _CombustibleService: VhloCfgCombustibleService,
   private _CfgRadioAccionService: VhloCfgRadioAccionService,
   private _ModalidadTransporteService: VhloCfgModalidadTransporteService,
-  private _RnaPreregistroService: RnaPreregistroService,
+  private _RnaPreregistroService: VhloRnaPreregistroService,
   private _OrganismoTransitoService: CfgOrganismoTransitoService,
   private _FuncionarioService: PnalFuncionarioService,
   private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
@@ -102,7 +104,7 @@ constructor(
   ){}
 
   ngOnInit() {
-    this.vehiculo = new RnaPreregistro(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
+    this.vehiculo = new VhloRnaPreregistro(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
     
     let token = this._LoginService.getToken();
     let identity = this._LoginService.getIdentity();
