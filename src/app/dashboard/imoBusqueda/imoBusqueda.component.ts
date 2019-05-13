@@ -10,31 +10,36 @@ declare var $: any;
   selector: 'app-index',
   templateUrl: './imoBusqueda.component.html'
 })
+
 export class ImoBusquedaComponent implements OnInit {
   public errorMessage;
-	public id;
-	public respuesta;
-	public colors;
+
 	public formNew = false;
   public formShow = false;
   public table:any; 
-  public color:any; 
-  public organismoTransitoSelected:any;
+
   public tipoInsumoSelected:any;
   public organismosTransito:any;
+
   public tiposInsumos:any = [
     {'value': 'SUSTRATO','label':'Sustrato'},
     {'value': 'INSUMO','label':'Insumo'},
   ];
+
+  public datos = {
+    'idOrganismoTransito': null,
+    'tipo': null,
+  }
+
   public loteInsumos:any;
   public loteInsumo:any;
   public insumos:any;
 
   constructor(
 		private _ImoInsumoService: ImoInsumoService,
-		private _loginService: LoginService,
     private _OrganismoTransitoService: CfgOrganismoTransitoService,
     private _ImoLoteService: ImoLoteService,
+		private _LoginService: LoginService,
     ){}
     
   ngOnInit() {
@@ -50,24 +55,10 @@ export class ImoBusquedaComponent implements OnInit {
         }
       }
     );
-    swal({
-      title: 'Cargando Tabla!',
-      text: 'Solo tardara unos segundos por favor espere.',
-      timer: 1500,
-      onOpen: () => {
-        swal.showLoading()
-      }
-    }).then((result) => {
-      if (
-        // Read more about handling dismissals
-        result.dismiss === swal.DismissReason.timer
-      ) {
-      }
-    })
-	
   }
-  iniciarTabla(){
-    $('#dataTables-example').DataTable({
+
+  onInitTable(){
+    this.table = $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,
       sPaginationType: 'full_numbers',
@@ -79,66 +70,67 @@ export class ImoBusquedaComponent implements OnInit {
           sLast: '<i class="fa fa-step-forward"></i>'
         }
       }
-   });
-   this.table = $('#dataTables-example').DataTable();
+    });
   }
 
-  onChangedSede(e){
-    if (e) {
-      let datos={
-        'idOrganismoTransito':this.organismoTransitoSelected,
-        'tipo':this.tipoInsumoSelected,
-      } 
-      let token = this._loginService.getToken();
-      this._ImoLoteService.show(datos,token).subscribe(
-        response => {
-          if (response.status == 'success') {
-            this.loteInsumos = response.data;
-            console.log(response.data);
-            let timeoutId = setTimeout(() => {  
-              this.iniciarTabla();
-            }, 100);
-          }else{
-            swal({
-              title: 'Error!',
-              text: 'No existen sustratos para esta sede',
-              type: 'error',
-              confirmButtonText: 'Aceptar'
-            })
-          }
+  onSearch(){
+    swal({
+      title: 'Buscando registros!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+
+    let token = this._LoginService.getToken();
+
+    this._ImoLoteService.show(this.datos, token).subscribe(
+      response => {
+        if (response.status == 'success') {
+          this.loteInsumos = response.data;
+
+          let timeoutId = setTimeout(() => {  
+            this.onInitTable();
+          }, 100);
           
-        error => {
-            this.errorMessage = <any>error;
-
-            if(this.errorMessage != null){
-              console.log(this.errorMessage);
-              alert("Error en la petición");
-            }
-          }
-
-      });
-    } 
-  }
-  showLoteInsumoSustrato(e){
-    this.loteInsumo = e;
-    let token = this._loginService.getToken();
-    this._ImoInsumoService.showLote(this.loteInsumo.id,token).subscribe(
-			response => {
-        this.respuesta = response;
-        if(this.respuesta.status == 'success'){
-          this.insumos = this.respuesta.datos;
-          this.formShow = true;
-          // console.log(this.insumos);    
+          swal.close();
+        }else{
+          swal({
+            title: 'Error!',
+            text: response.message,
+            type: 'error',
+            confirmButtonText: 'Aceptar'
+          })
         }
         error => {
-            this.errorMessage = <any>error;
-            if(this.errorMessage != null){
-              console.log(this.errorMessage);
-              alert("Error en la petición");
-            }
-          }
+          this.errorMessage = <any>error;
 
-      }); 
+          if(this.errorMessage != null){
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      }
+    );
   }
 
+  onShow(e){
+    let token = this._LoginService.getToken();
+
+    this._ImoInsumoService.showLote(e, token).subscribe(
+			response => {
+        if(response.status == 'success'){
+          this.insumos = response.datos;
+          this.formShow = true;
+        }
+        error => {
+          this.errorMessage = <any>error;
+          if(this.errorMessage != null){
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      }
+    ); 
+  }
 }

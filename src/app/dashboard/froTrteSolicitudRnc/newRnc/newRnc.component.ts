@@ -313,9 +313,7 @@ constructor(
 		});*/
   }
   
-  onReadyTramite(datos:any){
-    console.log(datos);
-    
+  onReadyTramite(datos:any){    
     if (datos.documentacion) {
       this.tramitesRealizados.push(
         {
@@ -333,11 +331,6 @@ constructor(
         }
       );
     }
-
-    console.log(this.tramitesRealizados.length);
-    console.log(this.tramitesRealizados);
-    console.log(this.tramitesFactura);
-    console.log(this.tramitesFactura.length);
     
     swal({
       title: 'Perfecto!',

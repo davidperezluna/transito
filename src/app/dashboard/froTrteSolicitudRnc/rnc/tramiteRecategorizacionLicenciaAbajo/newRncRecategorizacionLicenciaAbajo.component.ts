@@ -72,7 +72,10 @@ export class NewRncRecategorizacionLicenciaAbajoComponent implements OnInit {
                             tramiteRealizado = Object.keys(tramiteRealizado).map(function(key) {
                                 return tramiteRealizado[key];
                             });
-                            this.realizado = tramiteRealizado.includes(this.tramiteFactura.id, 2);
+                            
+                            if (tramiteRealizado.includes(this.tramiteFactura.id, 2)) {
+                                this.realizado = true;
+                            }
                         });
                     }
 

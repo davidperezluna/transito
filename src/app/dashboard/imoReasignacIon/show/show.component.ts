@@ -11,11 +11,12 @@ declare var $: any;
   templateUrl: './show.component.html',
   providers: [DatePipe]
 })
+
 export class ShowComponent implements OnInit {
-@Input() reasignacionId:any = null;
+@Input() idReasignacion:any = null;
 @Output() ready = new EventEmitter<any>();
 public errorMessage;
-public respuesta;
+
 public reasignaciones:any;
 public insumoSelected:any;
 public table: any = null;
@@ -41,7 +42,7 @@ constructor(
 
     let token = this._LoginService.getToken();
 
-    this._ImoAsignacionService.showTrazabilidad(token,this.reasignacionId).subscribe(
+    this._ImoAsignacionService.showTrazabilidad(token,this.idReasignacion).subscribe(
       response => {
         this.reasignaciones = response.data;
         let timeoutId = setTimeout(() => {

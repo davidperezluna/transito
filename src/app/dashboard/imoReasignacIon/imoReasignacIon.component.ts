@@ -5,16 +5,17 @@ import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
-  selector: 'app-rnaPreasignacionInsumo',
-  templateUrl: './imoPreasignacion.component.html',
+  selector: 'app-reasignacion-insumo',
+  templateUrl: './imoReasignacion.component.html',
   providers: [DatePipe] 
 })
-export class ImoPreasignacionComponent implements OnInit {
+
+export class ImoReasignacionComponent implements OnInit {
+  public errorMessage;
 public formIndex = true;
 public formNew = false;
 public formShow = false;
-public errorMessage;
-public respuesta;
+
 public reasignaciones:any;
 public table: any = null;
 public isCantidad=true;
