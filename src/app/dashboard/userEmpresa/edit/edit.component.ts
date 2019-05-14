@@ -56,6 +56,9 @@ export class EditComponent implements OnInit {
   public servicios: any;
 
   public tipoEntidadSelected: any;
+  
+  public identificacion;
+  public ciudadano;
 
   public tiposEntidad = [
     { value: 'EMPRESA DEL ESTADO', label: 'EMPRESA DEL ESTADO' },
@@ -72,17 +75,20 @@ export class EditComponent implements OnInit {
     private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
     private _RepresentanteEmpresaService: UserEmpresaRepresentanteService,
     private _EmpresaServicioService: UserCfgEmpresaServicioService,
-    private _loginService: LoginService,
+    private _LoginService: LoginService,
     private _UserCfgEmpresaTipoService: UserCfgEmpresaTipoService,
-    private _modalidadTransporteService: VhloCfgModalidadTransporteService
+    private _ModalidadTransporteService: VhloCfgModalidadTransporteService
   ) { }
 
   ngOnInit() {
-    let token = this._loginService.getToken();
+    let token = this._LoginService.getToken();
 
     this._UserCfgEmpresaTipoService.select().subscribe(
       response => {
         this.tipoEmpresas = response;
+        setTimeout(() => {
+          this.tipoEmpresaSelected = [this.empresa.tipoEmpresa.id];
+        });
       },
       error => {
         this.errorMessage = <any>error;
@@ -93,9 +99,16 @@ export class EditComponent implements OnInit {
       }
     );
 
-    this._modalidadTransporteService.select().subscribe(
+    this._ModalidadTransporteService.select().subscribe(
       response => {
         this.modalidadTransportes = response;
+        setTimeout(() => {
+          if(this.empresa.modalidadTransporte == null){
+            this.modalidadTransporteSelect = [0];
+          } else {
+            this.modalidadTransporteSelect = [this.empresa.modalidadTransporte.id];
+          }
+        });
       },
       error => {
         this.errorMessage = <any>error;
@@ -107,33 +120,7 @@ export class EditComponent implements OnInit {
     );
 
     this.tipoEntidadSelected = [this.empresa.tipoEntidad];
-    swal({
-      title: 'Cargando Formulario!',
-      text: 'Solo tardara unos segundos por favor espere.',
-      timer: 2000,
-      onOpen: () => {
-        swal.showLoading()
-      }
-    }).then((result) => {
-      if (
-        // Read more about handling dismissals
-        result.dismiss === swal.DismissReason.timer
-      ) {
-      }
-    })
-    this._EmpresaTipoService.select().subscribe(
-      response => {
-        this.tipoEmpresas = response;
-      },
-      error => {
-        this.errorMessage = <any>error;
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert('Error en la petición');
-        }
-      }
-    );
-
+    
     this._RepresentanteEmpresaService.show(this.empresa.id, token).subscribe(
       response => {
         if (response.status == "success") {
@@ -241,19 +228,25 @@ export class EditComponent implements OnInit {
     this.ready.emit(true);
   }
   onEnviar() {
+    let token = this._LoginService.getToken();
+    this.empresa.idMunicipio = this.municipioSelected;
+    this.empresa.idTipoSociedad = this.tipoSociedadSelected;
+    this.empresa.idTipoIdentificacion = 4;
 
-    let token = this._loginService.getToken();
-    this.empresa.municipioId = this.municipioSelected;
-    this.empresa.tipoSociedadId = this.tipoSociedadSelected;
-    this.empresa.tipoIdentificacionId = this.tipoIdentificacionSelected;
-    this.empresa.ciudadanoId = this.ciudadanoSelected;
-    this.empresa.cfgEmpresaServicioId = this.servicioSelected;
+    if(this.ciudadano){
+      this.empresa.idCiudadano = this.ciudadano.id;
+    } else{
+      this.empresa.idCiudadano = this.representanteVigente.ciudadano.id;
+    }
+
+    this.empresa.idEmpresaServicio = this.servicioSelected;
     this.empresa.idTipoEmpresa = this.tipoEmpresaSelected;
     this.empresa.idModalidadTransporte = this.modalidadTransporteSelect;
 
-    this._EmpresaService.edit(this.empresa, token).subscribe(
+    this._EmpresaService.edit({'empresa':this.empresa}, token).subscribe(
       response => {
         if (response.status == 'success') {
+          this.ready.emit(true);
           swal({
             title: 'Perfecto!',
             text: response.message,
@@ -273,8 +266,9 @@ export class EditComponent implements OnInit {
       });
 
   }
+
   /* nuevoRepresentante() {
-    let token = this._loginService.getToken();
+    let token = this._LoginService.getToken();
     let datos = {
       'empresa': this.empresa,
       'ciudadanoId': this.ciudadanoSelected,
@@ -303,5 +297,30 @@ export class EditComponent implements OnInit {
       });
 
   } */
+
+  onSearchCiudadano() {
+    let token = this._LoginService.getToken();
+    this._EmpresaService.getBuscarCiudadano({ 'identificacion': this.identificacion }, token).subscribe(
+      response => {
+        if (response.status == 'success') {
+          this.ciudadano = response.data;
+        } else {
+          swal({
+            title: 'Alerta!',
+            text: response.message,
+            type: 'error',
+            confirmButtonText: 'Aceptar'
+          })
+        }
+        error => {
+          this.errorMessage = <any>error;
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert('Error en la petición');
+          }
+        }
+      }
+    );
+  }
 
 }

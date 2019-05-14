@@ -54,10 +54,10 @@
                   </td>
                   <td>
                     <div class="btn-group">
-                      <button (click)="editEmpresa(empresa)" class="btn btn-primary btn-xs" type="button">
+                      <button (click)="onEdit(empresa)" class="btn btn-primary btn-xs" type="button">
                         <i class="fa fa-pencil"></i>
                       </button> 
-                      <button (click)="deleteEmpresa(empresa.id)" class="btn btn-danger btn-xs" type="button">
+                      <button (click)="onDelete(empresa.id)" class="btn btn-danger btn-xs" type="button">
                         <i class="fa fa-trash"></i>
                       </button>
                       <button (click)="getSucursal(empresa)" class="btn btn-info" type="button" title="Tramites">

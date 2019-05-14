@@ -29,7 +29,6 @@ export class EditComponent implements OnInit {
         console.log(this.area);
         this._TipoAreaService.getTipoAreaSelect().subscribe(
             response => {
-                console.log(response);
                 this.tiposAreas = response;
                 setTimeout(() => {
                     this.tipoAreaSelected = [this.area.tipoArea.id];

@@ -2,14 +2,12 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { UserEmpresa } from './userEmpresa.modelo';
 import { UserEmpresaService } from '../../services/userEmpresa.service';
 import { LoginService } from '../../services/login.service';
-// import { NewEmpresaComponent } from './new/new.component';
 import swal from 'sweetalert2';
 declare var $: any;
  
 @Component({
   selector: 'app-index',
   templateUrl: './userEmpresa.component.html',
-  // providers: [NewEmpresaComponent],
 })
 export class UserEmpresaComponent implements OnInit {
   public errorMessage;
@@ -25,7 +23,7 @@ export class UserEmpresaComponent implements OnInit {
 
   constructor(
 		private _EmpresaService: UserEmpresaService,
-		private _loginService: LoginService,
+		private _LoginService: LoginService,
     ){}
     
   ngOnInit() {
@@ -47,7 +45,7 @@ export class UserEmpresaComponent implements OnInit {
 				response => {
           this.empresas = response.data;
           let timeoutId = setTimeout(() => {  
-            this.iniciarTabla();
+            this.onInitTable();
           }, 100);
 				}, 
 				error => {
@@ -60,8 +58,8 @@ export class UserEmpresaComponent implements OnInit {
 				}
       );
   }
-  iniciarTabla(){
-    $('#dataTables-example').DataTable({
+  onInitTable(){
+    this.table = $('#dataTables-example').DataTable({
       responsive: false,
       pageLength: 6,
       sPaginationType: 'full_numbers',
@@ -74,12 +72,13 @@ export class UserEmpresaComponent implements OnInit {
         }
       }
    });
-   this.table = $('#dataTables-example').DataTable();
   }
+
   onNew(){
     this.formNew = true;
     this.formIndex = false;
     this.formEdit = false;
+    this.formShow = false;
     this.table.destroy();
   }
 
@@ -92,11 +91,11 @@ export class UserEmpresaComponent implements OnInit {
         this.ngOnInit();
       }
   }
-  deleteEmpresa(id:any){
 
+  onDelete(id:any){
     swal({
       title: '¿Estás seguro?',
-      text: "¡Se eliminara este registro!",
+      text: "¡Se eliminará este registro!",
       type: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#15d4be',
@@ -105,13 +104,13 @@ export class UserEmpresaComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.value) {
-        let token = this._loginService.getToken();
+        let token = this._LoginService.getToken();
 
         this._EmpresaService.delete(token,id).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',
-                      text:'Registro eliminado correctamente.',
+                      text: response.message,
                       type:'success',
                       confirmButtonColor: '#15d4be',
                     })
@@ -131,7 +130,7 @@ export class UserEmpresaComponent implements OnInit {
     })
   }
 
-  editEmpresa(empresa:any){
+  onEdit(empresa:any){
     this.empresa = empresa;
     this.formEdit = true;
     this.formIndex = false;
@@ -142,9 +141,4 @@ export class UserEmpresaComponent implements OnInit {
     this.formShow = true;
     this.formIndex = false;
   }
-
-  onNewSucursal(){
-    
-  }
-
 }

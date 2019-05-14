@@ -31,7 +31,7 @@
                     </thead>
                     <tbody>
                       <tr>
-                        <td>Nr. NIT</td>
+                        <td>NIT</td>
                         <th class="text-right">{{empresa.nit}}</th>
                       </tr>
                       <tr>
@@ -48,7 +48,10 @@
                       </tr> 
                       <tr>
                         <td>Empresa prestadora</td>
-                        <td class="text-right">{{ empresa.empresaPrestadora }}</td>                        
+                        <td class="text-right">
+                            <span *ngIf="empresa.empresaPrestadora">Si</span>
+                            <span *ngIf="!empresa.empresaPrestadora">No</span>
+                        </td>                        
                       </tr> 
                       <tr>
                         <td>Municipio</td>
@@ -65,7 +68,10 @@
                  <!-- fin de la tablar de empresa -->
                 <hr>                
                 <div class="card-footer">
-                    <button (click)="onCancelar()" class="btn btn-outline-secondary" type="button">Cancelar</button>
+                    <button (click)="onCancelar()" class="btn btn-default">
+                        <i class="fa fa-times"></i>
+                        Cancelar
+                    </button>
                 </div>
             </div>
         </div>

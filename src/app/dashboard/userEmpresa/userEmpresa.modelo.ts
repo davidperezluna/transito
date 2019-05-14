@@ -18,7 +18,7 @@ export class UserEmpresa{
 		public certificadoExistencial: string,
 		public empresaPrestadora: boolean,
 		public nroRegistroMercantil: string,
-		public fechaVencimientoRegistroMercantil:string,
+		public fechaVencimientoRegistroMercantil: string,
 		public direccionTrabajo: string,
 		public fechaInicial: string,
 		public idTipoEmpresa: string,

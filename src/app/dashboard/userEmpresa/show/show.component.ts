@@ -35,10 +35,7 @@ public cargar = true;
 public checked:any;
 
 constructor(
-  private _EmpresaService: UserEmpresaService,
-  private _MunicipioService: CfgMunicipioService,
   private _SucursalService: SucursalService,
-  private _TipoSociedadService: UserCfgEmpresaTipoSociedadService,
   private _loginService: LoginService,
   
   ){}
