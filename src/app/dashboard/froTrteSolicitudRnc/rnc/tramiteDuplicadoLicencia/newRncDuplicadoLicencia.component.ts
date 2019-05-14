@@ -26,6 +26,7 @@ export class NewRncDuplicadoLicenciaComponent implements OnInit {
     public categorias: any;
     
     public datos = {
+        'campos': null,
         'documentacion': true,
         'observacion': null,
         'categoria': null,
@@ -115,6 +116,7 @@ export class NewRncDuplicadoLicenciaComponent implements OnInit {
     }
     
     onEnviar() {
+        this.datos.campos = ['duplicado'];
         this.datos.idOrganismoTransito = this.funcionario.organismoTransito.id;
         this.datos.idTramiteFactura = this.tramiteFactura.id;
         this.datos.idSolicitante = this.solicitante.id;

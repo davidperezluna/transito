@@ -28,6 +28,7 @@ export class NewRncExpedicionLicenciaCambioDocumentoComponent implements OnInit 
     public categorias: any;
 
     public datos = {
+        'campos': null,
         'numero': null,
         'documentacion': true,
         'observacion': null,
@@ -122,6 +123,7 @@ export class NewRncExpedicionLicenciaCambioDocumentoComponent implements OnInit 
     } 
     
     onEnviar() {
+        this.datos.campos = ['cambioDocumento'];
         this.datos.numero = this.datos.identificacionActual;
         this.datos.idOrganismoTransito = this.funcionario.organismoTransito.id;
         this.datos.idTramiteFactura = this.tramiteFactura.factura.id;

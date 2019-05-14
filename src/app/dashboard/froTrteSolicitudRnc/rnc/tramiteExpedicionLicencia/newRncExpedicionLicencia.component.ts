@@ -29,6 +29,7 @@ export class NewRncExpedicionLicenciaComponent implements OnInit {
     public radio: any;
 
     public datos = {
+        'campos': null,
         'documentacion': true,
         'observacion': null,
         'numero': null,
@@ -163,6 +164,7 @@ export class NewRncExpedicionLicenciaComponent implements OnInit {
     }
 
     onEnviar() {
+        this.datos.campos = ['expedicion'];
         this.datos.numero = this.solicitante.identificacion;
         this.datos.idOrganismoTransito = this.funcionario.organismoTransito.id;
         this.datos.idTramiteFactura = this.tramiteFactura.id;

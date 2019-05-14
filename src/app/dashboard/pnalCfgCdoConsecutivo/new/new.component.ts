@@ -73,7 +73,7 @@ constructor(
   onEnviar(){
     let token = this._LoginService.getToken();
 
-    this._ConsecutivoService.register(this.consecutivo,token).subscribe(
+    this._ConsecutivoService.register(this.consecutivo, token).subscribe(
       response => {
         if(response.status == 'success'){
           this.ready.emit(true);

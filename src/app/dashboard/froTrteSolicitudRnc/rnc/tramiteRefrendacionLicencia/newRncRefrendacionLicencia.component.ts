@@ -30,6 +30,7 @@ export class NewRncRefrendacionLicenciaComponent implements OnInit {
     public tramiteFacturaSelected: any;
 
     public datos = {
+        'campos': null,
         'documentacion': true,
         'observacion': null,
         'numero': null,
@@ -122,6 +123,7 @@ export class NewRncRefrendacionLicenciaComponent implements OnInit {
     }
     
     onEnviar() {
+        this.datos.campos = ['refrendacion'];
         this.datos.numero = this.solicitante.identificacion;
         this.datos.idTramiteFactura = this.tramiteFactura.factura.id;
         this.datos.idSolicitante = this.solicitante.id;

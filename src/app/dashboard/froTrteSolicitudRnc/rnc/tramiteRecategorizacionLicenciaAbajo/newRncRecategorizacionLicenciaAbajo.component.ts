@@ -30,6 +30,7 @@ export class NewRncRecategorizacionLicenciaAbajoComponent implements OnInit {
     public tramiteFacturaSelected: any;
 
     public datos = {
+        'campos': null,
         'documentacion': true,
         'observacion': null,
         'numero': null,
@@ -122,8 +123,7 @@ export class NewRncRecategorizacionLicenciaAbajoComponent implements OnInit {
     }
     
     onEnviar() {
-        let token = this._LoginService.getToken();
-        
+        this.datos.campos = ['recategorizacionAbajo'];        
         this.datos.numero = this.solicitante.identificacion;
         this.datos.idOrganismoTransito = this.funcionario.organismoTransito.id;
         this.datos.idTramiteFactura = this.tramiteFactura.factura

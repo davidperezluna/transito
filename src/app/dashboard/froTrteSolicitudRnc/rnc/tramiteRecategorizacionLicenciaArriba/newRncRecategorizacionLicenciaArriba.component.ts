@@ -28,6 +28,7 @@ export class NewRncRecategorizacionLicenciaArribaComponent implements OnInit {
     public categorias: any;
     
     public datos = {
+        'campos': null,
         'documentacion': true,
         'observacion': null,
         'numero': null,
@@ -120,7 +121,8 @@ export class NewRncRecategorizacionLicenciaArribaComponent implements OnInit {
         }
     }
     
-    onEnviar() {       
+    onEnviar() {  
+        this.datos.campos = ['recategorizacionArriba'];     
         this.datos.numero = this.solicitante.identificacion;
         this.datos.idOrganismoTransito = this.funcionario.organismoTransito.id;
         this.datos.idTramiteFactura = this.tramiteFactura.factura.id;
