@@ -1,5 +1,16 @@
+<div class="row" *ngIf="realizado">
+    <!-- .row -->
+    <div class="col-xs-12 col-lg-12">
+        <!-- .col -->
+        <div class="card">
+            <div class="card-header">
+                <span class="badge badge-success">Insumo Asignado</span>
+            </div>
+        </div>
+    </div>
+</div>
 
-<div class="row"><!-- .row -->
+<div class="row" *ngIf="!realizado"><!-- .row -->
     <div class="col-xs-12 col-lg-12"><!-- .col -->
         <div class="card">
             <div class="card-header">
@@ -14,9 +25,9 @@
                             <div class="col-xs-12 col-lg-6">
                                 <label>Buscar sustrato</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Numero" [(ngModel)]="consecutivo" name="consecutivo" required />
+                                    <input type="text" class="form-control" placeholder="Numero" [(ngModel)]="numero" name="numero" required />
                                     <span class="input-group-btn">
-                                        <button (click)="onSearchSustrato()" type="button">
+                                        <button (click)="onSearchSustrato()" type="button" class="btn btn-default">
                                             <i class="fa fa-search"></i>
                                         </button>
                                     </span>
@@ -24,14 +35,7 @@
                             </div>
                         </div>
 
-                        <div class="row" *ngIf="sustrato">
-                            <!-- digitar la nueva licencia de transito  -->
-                            <div class="col-xs-12 col-lg-12">
-                                <div class="custom-control " >
-                                    <label>No. Licencia de conducción</label>
-                                    <input class="form-control"  type="text" [(ngModel)]="datos.licenciaConduccion" name="licenciaConduccion" required>
-                                </div>
-                            </div>
+                        <div class="row" *ngIf="insumo">
                             <!-- Aquien se entrega documento -->
                             <div class="col-xs-12 col-lg-12" >
                                 <div class="custom-control custom-checkbox">
@@ -39,6 +43,18 @@
                                     <label class="custom-control-label" for="check-entregda">Entregada</label>
                                 </div>
                             </div>
+
+                            <!-- digitar la nueva licencia de transito  -->
+                            <div class="col-xs-12 col-lg-6">
+                                <label>No. Licencia de conducción <b class="text-danger">*</b></label>
+                                <input class="form-control"  type="text" [(ngModel)]="datos.licenciaConduccion" name="licenciaConduccion" required>
+                            </div>
+                            
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Observaciones </label>
+                                <textarea class="form-control" [(ngModel)]="datos.descripcion" name="descripcion" rows="4"></textarea>
+                            </div>
+                                
                             <!--tipo identificacion ciudadano -->
                             <div class="col-xs-12 col-lg-12" *ngIf="datos.entregada">
                                 <label>Identificación</label>
@@ -55,7 +71,7 @@
                         </div>
 
                         <!--si existe un ciudadano -->
-                        <div class="row" *ngIf="ciudadano && datos.entregada && sustrato">
+                        <div class="row" *ngIf="ciudadano && datos.entregada && insumo">
                             <b class="text-uppercase">
                                 Detalles de ciudadano
                             </b>
@@ -86,9 +102,9 @@
             </div>
             <div class="card-footer">
                 <div class="btn-group">
-                    <button (click)="onEnviar()"  [disabled]="formInsumo.invalid" class="btn btn-primary">
+                    <button (click)="onEnviar()"  [disabled]="formInsumo.invalid && !insumo" class="btn btn-primary">
                         <i class="fa fa-save"></i>
-                        Enviar
+                        Guardar
                     </button>
                 </div>
             </div>

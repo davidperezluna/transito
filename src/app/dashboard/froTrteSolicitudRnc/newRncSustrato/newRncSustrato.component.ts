@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { UserCiudadanoService } from '../../../services/userCiudadano.service';
 import { ImoInsumoService } from '../../../services/imoInsumo.service';
+import { PnalFuncionarioService } from '../../../services/pnalFuncionario.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 import { log } from 'util';
@@ -13,18 +14,20 @@ import { log } from 'util';
 export class NewRncSustratoComponent implements OnInit {
     @Output() onReadyInsumo = new EventEmitter<any>();
     @Input() factura: any = null;
-    @Input() funcionario: any = null;
     @Input() solicitante: any = null;
     public errorMessage;
 
+    public realizado: any = false;
+    public funcionario: any = null;
     public ciudadano: any = null;
-    public sustrato: any = null;
+    public insumo: any = null;
     public identificacion: any = null;
-    public consecutivo: any = null;
+    public numero: any = null;
     
     public datos = {
         'entregada': false,
         'licenciaConduccion': null,
+        'descripcion': null,
         'idInsumo': null,
         'idCiudadano': null,
     }
@@ -32,10 +35,41 @@ export class NewRncSustratoComponent implements OnInit {
     constructor(
         private _InsumoService: ImoInsumoService,
         private _CiudadanoService: UserCiudadanoService,
+        private _FuncionarioService: PnalFuncionarioService,
         private _LoginService: LoginService,
     ) { } 
 
-    ngOnInit() { }
+    ngOnInit() { 
+        let token = this._LoginService.getToken();
+
+    let identity = this._LoginService.getIdentity();
+
+    this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
+        response => {
+            if (response.status == 'success') {
+              this.funcionario = response.data; 
+              
+              swal.close();
+            } else {
+              this.funcionario = null;
+
+              swal({
+                  title: 'Error!',
+                  text: response.message,
+                  type: 'error',
+                  confirmButtonText: 'Aceptar'
+              });
+            }
+            error => {
+                this.errorMessage = <any>error;
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert('Error en la petición');
+                }
+            }
+        }
+    );
+    }
 
     onSearchSustrato(){
         swal({
@@ -49,18 +83,20 @@ export class NewRncSustratoComponent implements OnInit {
         let token = this._LoginService.getToken();
 
         let datos = {
-            'numero': this.consecutivo,
+            'numero': this.numero,
             'idModulo': 1,
-            'idOrganismoTransito': this.funcionario.organismotransito.id
+            'idOrganismoTransito': this.funcionario.organismoTransito.id
         }
 
         this._InsumoService.searchByNumeroAndModulo(datos, token).subscribe(
             response => {
                 if (response.status == 'success') {
+                    this.insumo = response.data;
                     this.datos.idInsumo = response.data.id;
 
                     swal.close();
                 }else{
+                    this.insumo = null;
                     this.datos.idInsumo = null;
 
                     swal({
@@ -133,6 +169,8 @@ export class NewRncSustratoComponent implements OnInit {
     }
    
     onEnviar(){
+        this.realizado = true;
+        
         this.onReadyInsumo.emit(this.datos);
     }
 }

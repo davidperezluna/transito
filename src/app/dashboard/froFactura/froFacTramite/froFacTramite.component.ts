@@ -505,6 +505,7 @@ export class FroFacTramiteComponent implements OnInit {
       response => {
         if (response.status == 'success') {
           this.factura = response.data;
+          this.municipio = response.data.organismoTransito.municipio;
 
           var datePiper = new DatePipe('en-US');
 

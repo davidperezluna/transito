@@ -33,6 +33,7 @@ constructor(
 			response => {
         if(response.status == 'success'){
           this.ready.emit(true);
+          
           swal({
             title: 'Perfecto!',
             text: response.message,

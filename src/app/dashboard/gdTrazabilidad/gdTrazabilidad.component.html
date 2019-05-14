@@ -97,11 +97,10 @@
     </div>
     <div class="row" *ngIf='!formIndex && !trazabilidades'>
         <div class="col-xs-12 col-lg-12">
-            <div class="alert alert-warning text-uppercase text-center">
-                <i class="fa fa-exclamation-triangle fa-2x"></i>
-                <b>
-                    Usted no tiene documentos asignados pendientes por tramitar.
-                </b>
+            <div class="card">
+                <div class="card-body text-center">
+                    <span class="badge badge-danger text-uppercase">Usted no tiene documentos asignados pendientes por tramitar.</span>
+                </div>
             </div>
         </div>
     </div>

@@ -11,7 +11,9 @@ import swal from 'sweetalert2';
 export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
 @Input() trazabilidad: any = null;
+
 public uploadUrl = environment.uploadUrl;
+
 public errorMessage;
 
 public file: any;
@@ -53,6 +55,7 @@ constructor(
         response => {
           if(response.status == 'success'){
             this.ready.emit(response.data);
+
             swal({
               title: 'Perfecto!',
               text: response.message,
@@ -62,7 +65,7 @@ constructor(
           }else{
             swal({
               title: 'Error!',
-              text: 'El trazabilidad ya se encuentra registrado',
+              text: response.message,
               type: 'error',
               confirmButtonText: 'Aceptar'
             })
