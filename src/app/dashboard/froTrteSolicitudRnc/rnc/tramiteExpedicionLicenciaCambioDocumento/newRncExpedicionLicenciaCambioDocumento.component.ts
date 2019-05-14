@@ -21,7 +21,6 @@ export class NewRncExpedicionLicenciaCambioDocumentoComponent implements OnInit 
     @Input() tramitesRealizados: any = null;
     public errorMessage;
 
-    public autorizado: any = false;
     public realizado: any = false;
     public tramiteSolicitud: any = null;
     public servicios: any;
@@ -29,6 +28,7 @@ export class NewRncExpedicionLicenciaCambioDocumentoComponent implements OnInit 
     public categorias: any;
 
     public datos = {
+        'campos': null,
         'numero': null,
         'documentacion': true,
         'observacion': null,
@@ -54,93 +54,84 @@ export class NewRncExpedicionLicenciaCambioDocumentoComponent implements OnInit 
     ) { }
 
     ngOnInit() {
-        if (this.funcionario) {
-            this.datos.idFuncionario = this.funcionario.id;
-            this.autorizado = true;
-
-            if ( this.tramitesRealizados.length > 0) {
-                this.tramitesRealizados.forEach(tramiteRealizado => {
-                    tramiteRealizado = Object.keys(tramiteRealizado).map(function(key) {
-                        return tramiteRealizado[key];
-                    });
-                    
-                    if (tramiteRealizado.includes(this.tramiteFactura.id, 2)) {
-                        this.realizado = true;
-                    }
+        this.datos.idFuncionario  = this.funcionario.id;
+        
+        if ( this.tramitesRealizados.length > 0) {
+            this.tramitesRealizados.forEach(tramiteRealizado => {
+                tramiteRealizado = Object.keys(tramiteRealizado).map(function(key) {
+                    return tramiteRealizado[key];
                 });
-            }
+                
+                if (tramiteRealizado.includes(this.tramiteFactura.id, 2)) {
+                    this.realizado = true;
+                }
+            });
+        }
 
-            if (this.realizado) {
-                swal({
-                    title: 'Atención!',
-                    text: 'El trámite seleccionado ya fue realizado.',
-                    type: 'warning',
-                    confirmButtonText: 'Aceptar'
-                });
-            } else {
-                this.datos.identificacionAnterior = this.solicitante.identificacion;
-        
-                this._ServicioService.select().subscribe(
-                    response => {
-                    this.servicios = response;
-                    },
-                    error => {
-                    this.errorMessage = <any>error;
-            
-                    if(this.errorMessage != null){
-                        console.log(this.errorMessage);
-                        alert('Error en la petición');
-                    }
-                    }
-                );
-        
-                this._CfgPaisService.select().subscribe(
-                    response => {
-                    this.paises = response;
-                    },
-                    error => {
-                    this.errorMessage = <any>error;
-            
-                    if(this.errorMessage != null){
-                        console.log(this.errorMessage);
-                        alert('Error en la petición');
-                    }
-                    }
-                );
-        
-                this._CategoriaService.select().subscribe(
-                    response => {
-                        this.categorias = response;
-                    },
-                    error => {
-                        this.errorMessage = <any>error;
-        
-                        if (this.errorMessage != null) {
-                            console.log(this.errorMessage);
-                            alert('Error en la petición');
-                        }
-                    }
-                );
-            }
-        }else{
-            this.autorizado = false;
-
+        if (this.realizado) {
             swal({
-                title: 'Error!',
-                text: 'Usted no tiene permisos para realizar tramites',
-                type: 'error',
+                title: 'Atención!',
+                text: 'El trámite seleccionado ya fue realizado.',
+                type: 'warning',
                 confirmButtonText: 'Aceptar'
             });
+        } else {
+            this.datos.identificacionAnterior = this.solicitante.identificacion;
+    
+            this._ServicioService.select().subscribe(
+                response => {
+                this.servicios = response;
+                },
+                error => {
+                this.errorMessage = <any>error;
+        
+                if(this.errorMessage != null){
+                    console.log(this.errorMessage);
+                    alert('Error en la petición');
+                }
+                }
+            );
+    
+            this._CfgPaisService.select().subscribe(
+                response => {
+                this.paises = response;
+                },
+                error => {
+                this.errorMessage = <any>error;
+        
+                if(this.errorMessage != null){
+                    console.log(this.errorMessage);
+                    alert('Error en la petición');
+                }
+                }
+            );
+    
+            this._CategoriaService.select().subscribe(
+                response => {
+                    this.categorias = response;
+                },
+                error => {
+                    this.errorMessage = <any>error;
+    
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert('Error en la petición');
+                    }
+                }
+            );
         }
     } 
     
     onEnviar() {
+        this.datos.campos = ['cambioDocumento'];
         this.datos.numero = this.datos.identificacionActual;
         this.datos.idOrganismoTransito = this.funcionario.organismoTransito.id;
         this.datos.idTramiteFactura = this.tramiteFactura.factura.id;
         this.datos.idSolicitante = this.solicitante.id;
 
         let resumen = "<b>No. factura</b>" + this.tramiteFactura.factura.numero;
+
+        this.realizado = true;
         
         this.onReadyTramite.emit(
             {

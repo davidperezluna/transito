@@ -64,13 +64,14 @@ export class NewComponent implements OnInit {
   }
   onEnviar() {
     let token = this._loginService.getToken();
+
     this.cfgPlaca.idTipoVehiculo = this.tipoVehiculoSelected;
     this.cfgPlaca.idOrganismoTransito = this.organismoTransitoSelected;
-    console.log(this.cfgPlaca);
+
     this._CfgPlacaService.register(this.cfgPlaca, token).subscribe(
       response => {
         this.respuesta = response;
-        console.log(this.respuesta);
+
         if (this.respuesta.status == 'success') {
           this.ready.emit(true);
           swal({

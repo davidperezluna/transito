@@ -50,6 +50,14 @@ constructor(
 ){}
 
   ngOnInit() {
+    swal({
+      title: 'Cargando información!',
+      text: 'Solo tardará unos segundos, por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+
     this.tramiteSolicitud = new FroTrteSolicitudRnc(null, null, null, null, null, null, null);
 
     let token = this._LoginService.getToken();
@@ -59,7 +67,9 @@ constructor(
     this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
         response => {
             if (response.status == 'success') {
-              this.funcionario = response.data;             
+              this.funcionario = response.data; 
+              
+              swal.close();
             } else {
               this.funcionario = null;
 
@@ -261,6 +271,44 @@ constructor(
       );
     }
   }
+  
+  onReadyTramite(datos:any){
+    if (datos.documentacion) {
+      this.tramitesRealizados.push(
+        {
+          'foraneas': datos.foraneas,
+          'resumen': datos.resumen,
+          'idTramiteFactura': datos.idTramiteFactura,
+        }
+      );
+    }else{
+      this.documentacionPendiente.push(
+        {
+          'documentacion': datos.documentacion,
+          'observacion': datos.observacion,
+          'idTramiteFactura': datos.idTramiteFactura,
+        }
+      );
+    }
+
+    swal({
+      title: 'Perfecto!',
+      text: 'Trámite realizado con exito.',
+      type: 'success',
+      confirmButtonText: 'Aceptar'
+    });
+  }
+
+  onReadyInsumo(datos:any){    
+    this.tramiteSolicitud.insumoEntregado = datos;
+
+    swal({
+      title: 'Perfecto!',
+      text: 'Insumo asignado con exito.',
+      type: 'success',
+      confirmButtonText: 'Aceptar'
+    });
+  }
 
   onEnviar(){
     let token = this._LoginService.getToken();
@@ -305,50 +353,6 @@ constructor(
 				}
       }
     );
-  }
-  
-  onReadyTramite(datos:any){    
-    if (datos.documentacion) {
-      this.tramitesRealizados.push(
-        {
-          'foraneas': datos.foraneas,
-          'resumen': datos.resumen,
-          'idTramiteFactura': datos.idTramiteFactura,
-        }
-      );
-    }else{
-      this.documentacionPendiente.push(
-        {
-          'documentacion': datos.documentacion,
-          'observacion': datos.observacion,
-          'idTramiteFactura': datos.idTramiteFactura,
-        }
-      );
-    }
-    
-    swal({
-      title: 'Perfecto!',
-      text: 'Trámite realizado con exito.',
-      type: 'success',
-      confirmButtonText: 'Aceptar'
-    });
-
-    this.onChangedTramiteFactura(datos.idTramiteFactura);
-  }
-
-  onReadyInsumo(datos:any){    
-    this.tramiteSolicitud.insumoEntregado = datos;
-
-    swal({
-      title: 'Perfecto!',
-      text: 'Insumo asignado con exito.',
-      type: 'success',
-      confirmButtonText: 'Aceptar'
-    });
-  }
-
-  cancelarTramite(){
-    this.tramiteSelected = false;
   }
 
   finalizarSolicitud(){
