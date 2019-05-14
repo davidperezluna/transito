@@ -8,7 +8,7 @@
                         name="idTipoRecaudo">
                     </ng-select>
                 </div>
-                <div class="col-xs-12 col-lg-12" *ngIf="tipoRecaudoSelected == 1 || tipoRecaudoSelected == 3">
+                <div class="col-xs-12 col-lg-12" *ngIf="tipoRecaudoSelected == 1 || tipoRecaudoSelected == 2 || tipoRecaudoSelected == 3">
                     <label>Seleccionar OrganismoTransito</label>
                     <ng-select [multiple]="false" [options]="organismosTransito" [(ngModel)]="organismoTransitoSelected" required
                         name="idOrganismoTransito">

@@ -9,14 +9,14 @@ import { UserCfgEmpresaTipoSociedadService } from '../../services/userCfgEmpresa
 import { NewConvenioComponent } from './convenio/new/newConvenio.component';
 import { ShowConvenioComponent } from './show/show.component';
 import {SelectModule} from 'angular2-select';
-import { RepresentanteUserEmpresaService } from '../../services/representanteEmpresa.service';
+import { UserEmpresaRepresentanteService } from '../../services/userEmpresaRepresentante.service';
 
 
 @NgModule({
     imports: [CommonModule, Ng2BootstrapModule.forRoot(),SelectModule],
     declarations: [TpAlcaldiaComponent,NewConvenioComponent,ShowConvenioComponent],
     exports: [TpAlcaldiaComponent,NewConvenioComponent,ShowConvenioComponent],
-    providers:[UserEmpresaService,VhloTpConvenioService,UserCfgEmpresaTipoSociedadService, SucursalService,RepresentanteUserEmpresaService]
+    providers:[UserEmpresaService,VhloTpConvenioService,UserCfgEmpresaTipoSociedadService, SucursalService,UserEmpresaRepresentanteService]
 })
 
 export class TpAlcaldiaModule { }

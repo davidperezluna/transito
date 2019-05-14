@@ -185,28 +185,28 @@ export class FroReporteIngresosComponent implements OnInit {
                 } 
             ); 
         } else if(this.tipoRecaudoSelected == 2) {
-            this._FroReporteIngresosService.getComparendoByFecha(this.froReporteIngresos, token).subscribe(
+            this._FroReporteIngresosService.pdfInfraccionByFecha(this.froReporteIngresos, token).subscribe(
                 response => {
                     var fileURL = URL.createObjectURL(response);
                     window.open(fileURL);
                 }
             );
         } else if (this.tipoRecaudoSelected == 3) {
-            this._FroReporteIngresosService.getAcuerdoPagoByFecha(this.froReporteIngresos, token).subscribe(
+            this._FroReporteIngresosService.pdfAcuerdoPagoByFecha(this.froReporteIngresos, token).subscribe(
                 response => {
                     var fileURL = URL.createObjectURL(response);
                     window.open(fileURL);
                 }
             );
         } else if (this.tipoRecaudoSelected == 4) {
-            this._FroReporteIngresosService.getParqueaderoByFecha(this.froReporteIngresos, token).subscribe(
+            this._FroReporteIngresosService.pdfParqueaderoByFecha(this.froReporteIngresos, token).subscribe(
                 response => {
                     var fileURL = URL.createObjectURL(response);
                     window.open(fileURL);
                 }
             );
         } else if (this.tipoRecaudoSelected == 5) {
-            this._FroReporteIngresosService.getRetefuenteByFecha(this.froReporteIngresos, token).subscribe(
+            this._FroReporteIngresosService.pdfRetefuenteByFecha(this.froReporteIngresos, token).subscribe(
                 response => {
                     var fileURL = URL.createObjectURL(response);
                     window.open(fileURL);
