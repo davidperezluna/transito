@@ -1,10 +1,10 @@
-import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { UserEmpresaService } from '../../../services/userEmpresa.service';
 import { LoginService } from '../../../services/login.service';
 
 
-import { Sucursal } from '../sucursal/new/sucursal.modelo';
-import { SucursalService } from '../../../services/sucursal.service';
+import { UserEmpresaSucursal } from '../sucursal/new/userEmpresaSucursal.modelo';
+import { UserEmpresaSucursalService } from '../../../services/userEmpresaSucursal.service';
 import { CfgMunicipioService } from '../../../services/cfgMunicipio.service';
 import { UserCfgEmpresaTipoSociedadService } from '../../../services/userCfgEmpresaTipoSociedad.service';
 
@@ -18,38 +18,39 @@ declare var $: any;
   templateUrl: './show.component.html'
 })
 export class ShowComponent implements OnInit {
-@Output() ready = new EventEmitter<any>();
-@Input() empresa:any = null;
-public errorMessage;
-public respuesta;
-public sucursal: Sucursal;
-public municipio: any;
-public sucursales: any;
-public municipioSelected: any;
-public tipoSociedadSelected :any;
+  @Output() ready = new EventEmitter<any>();
+  @Input() empresa: any = null;
+  public errorMessage;
+  public respuesta;
+  public sucursal: UserEmpresaSucursal;
+  public municipio: any;
+  public sucursales: any;
+  public municipioSelected: any;
+  public tipoSociedadSelected: any;
 
-public formListaSucursales = false;
-public table:any; 
-public formNewSucursal = false;
-public cargar = true;
-public checked:any;
+  public formListaSucursales = false;
+  public table: any;
+  public formNewSucursal = false;
+  public cargar = true;
+  public checked: any;
 
-constructor(
-  private _SucursalService: SucursalService,
-  private _loginService: LoginService,
-  
-  ){}
+  constructor(
+    private _SucursalService: UserEmpresaSucursalService,
+    private _LoginService: LoginService,
+
+  ) { }
 
   ngOnInit() {
-    this._SucursalService.getSucursalEmpresa(this.empresa.id).subscribe(
+    let token = this._LoginService.getToken();
+    this._SucursalService.getSucursalEmpresa(this.empresa.id, token).subscribe(
       response => {
-        if(response.status == "success"){
-       this.sucursales=response.data;
-       this.formListaSucursales = true;
-        }else{
+        if (response.status == "success") {
+          this.sucursales = response.data;
+          this.formListaSucursales = true;
+        } else {
           this.formNewSucursal = true;
         }
-      }, 
+      },
       error => {
         this.errorMessage = <any>error;
         if (this.errorMessage != null) {
@@ -58,25 +59,25 @@ constructor(
         }
       }
     );
-    
+
   }
-  
-  onCancelar(){
+
+  onCancelar() {
     this.ready.emit(true);
   }
 
-  readySucursal(respuesta:any){
+  readySucursal(respuesta: any) {
     this.ngOnInit();
-    this.formListaSucursales=false;
-    this.formNewSucursal=false;
+    this.formListaSucursales = false;
+    this.formNewSucursal = false;
   }
 
-  onNewSucursal(){
-      this.formListaSucursales=false;
-      this.formNewSucursal=true;
+  onNewSucursal() {
+    this.formListaSucursales = false;
+    this.formNewSucursal = true;
   }
-  
-  iniciarTabla(){
+
+  iniciarTabla() {
     $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,
@@ -89,11 +90,11 @@ constructor(
           sLast: '<i class="fa fa-step-forward"></i>'
         }
       }
-   });
-   this.table = $('#dataTables-example').DataTable();
+    });
+    this.table = $('#dataTables-example').DataTable();
   }
 
-  deleteSucursal(id:any){
+  deleteSucursal(id: any) {
     swal({
       title: '¿Estás seguro?',
       text: "¡Se eliminara este registro!",
@@ -105,27 +106,27 @@ constructor(
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.value) {
-        let token = this._loginService.getToken();
-        this._SucursalService.deleteSucursal({'id': id}, token).subscribe(
-            response => {
-                swal({
-                      title: 'Eliminado!',
-                      text:'Registro eliminado correctamente.',
-                      type:'success',
-                      confirmButtonColor: '#15d4be',
-                    })
-                  this.formListaSucursales=false;
-                  this.ngOnInit();
-              }, 
-            error => {
-              this.errorMessage = <any>error;
+        let token = this._LoginService.getToken();
+        this._SucursalService.delete({ 'id': id }, token).subscribe(
+          response => {
+            swal({
+              title: 'Eliminado!',
+              text: 'Registro eliminado correctamente.',
+              type: 'success',
+              confirmButtonColor: '#15d4be',
+            })
+            this.formListaSucursales = false;
+            this.ngOnInit();
+          },
+          error => {
+            this.errorMessage = <any>error;
 
-              if(this.errorMessage != null){
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
+            if (this.errorMessage != null) {
+              console.log(this.errorMessage);
+              alert("Error en la petición");
             }
-          );
+          }
+        );
       }
     });
   }

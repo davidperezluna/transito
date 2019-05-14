@@ -1,16 +1,16 @@
-export class Sucursal{
+export class UserEmpresaSucursal{
 	constructor(
 		public id: number,
 		public nombre: string,
 		public sigla: string,
-		public municipioId: number,
+		public idMunicipio: number,
 		public direccion: string,
 		public telefono: number,
 		public celular: number,
 		public correo: string,
 		public fax: number,
 		public estado: number,
-		public empresaId: number,
+		public idEmpresa: number,
 		
 				
 	){}

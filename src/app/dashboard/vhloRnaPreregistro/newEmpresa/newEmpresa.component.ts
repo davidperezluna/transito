@@ -8,7 +8,6 @@ import { UserCfgEmpresaTipoService } from '../../../services/userCfgEmpresaTipo.
 import { UserCiudadanoService } from '../../../services/userCiudadano.service';
 import { UserCfgEmpresaTipoSociedadService } from '../../../services/userCfgEmpresaTipoSociedad.service';
 import { UserCfgTipoIdentificacionService } from '../../../services/userCfgTipoIdentificacion.service';
-import { SucursalService } from '../../../services/sucursal.service';
 
 import swal from 'sweetalert2';
  
@@ -23,7 +22,6 @@ export class NewEmpresaComponent implements OnInit {
 public empresa: UserEmpresa;
 public errorMessage;
 public btnVisible=false;
-public respuesta;
 public municipios: any;
 public ciudadanos: any;
 public generos: any;
@@ -143,14 +141,14 @@ constructor(
           this.readyEmpresa.emit(true);
           swal({
             title: 'Perfecto!',
-            text: 'Registro exitoso!',
+            text: response.message,
             type: 'success',
             confirmButtonText: 'Aceptar'
           })
         }else{
           swal({
             title: 'Error!',
-            text: 'El empresa ya se encuentra registrado',
+            text: response.message,
             type: 'error',
             confirmButtonText: 'Aceptar'
           })
@@ -184,22 +182,17 @@ constructor(
 
     this.tablaSucursal=true;
     this.formNewSucursal = false;
-
-    console.log(this.sucursales);
-    
   }
 
   onNewSucursal(){
     this.formNewSucursal = true;
     this.btnVisible=true;
-    // this.formIndexSucursal = false;
-    // this.table.destroy();
   }
   cancelarNewFormulario()
-{
-  this.btnVisible=false;
-  this.formNewSucursal=false
-}
+  {
+    this.btnVisible=false;
+    this.formNewSucursal=false
+  }
 
   deleteSucursal(sucursal:any)
   {
@@ -209,7 +202,4 @@ constructor(
       this.tablaSucursal=false;
     }
   }
-
- 
-
 }
