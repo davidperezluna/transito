@@ -4,6 +4,7 @@ import { FroTrteSolicitudService } from '../../../services/froTrteSolicitud.serv
 import { FroFacTramiteService } from '../../../services/froFacTramite.service';
 import { FroFacturaService } from '../../../services/froFactura.service';
 import { UserCiudadanoService } from '../../../services/userCiudadano.service';
+import { PnalFuncionarioService } from '../../../services/pnalFuncionario.service';
 import { LoginService } from '../../../services/login.service';
 import { environment } from 'environments/environment';
 import { forEach } from '@angular/router/src/utils/collection';
@@ -23,6 +24,7 @@ export class NewRncComponent implements OnInit {
   public numeroFactura: any = null;
   public identificacion: any = null;
 
+  public funcionario: any = null;
   public factura: any = null;
   public solicitante: any = null;
 
@@ -43,11 +45,40 @@ constructor(
   private _TramiteFacturaService: FroFacTramiteService,
   private _FacturaService: FroFacturaService,
   private _CiudadanoService: UserCiudadanoService,
+  private _FuncionarioService: PnalFuncionarioService,
   private _LoginService: LoginService,
 ){}
 
   ngOnInit() {
-    this.tramiteSolicitud = new FroTrteSolicitudRnc(null, null, null, null, null, null);
+    this.tramiteSolicitud = new FroTrteSolicitudRnc(null, null, null, null, null, null, null);
+
+    let token = this._LoginService.getToken();
+
+    let identity = this._LoginService.getIdentity();
+
+    this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
+        response => {
+            if (response.status == 'success') {
+              this.funcionario = response.data;             
+            } else {
+              this.funcionario = null;
+
+              swal({
+                  title: 'Error!',
+                  text: 'Usted no tiene permisos para realizar tramites',
+                  type: 'error',
+                  confirmButtonText: 'Aceptar'
+              });
+            }
+            error => {
+                this.errorMessage = <any>error;
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert('Error en la petición');
+                }
+            }
+        }
+    );
   }
 
   onCancelar(){
@@ -274,43 +305,6 @@ constructor(
 				}
       }
     );
-
-		/*this._SolicitudService.register(this.tramiteSolicitud, token).subscribe(
-			response => {
-        if(response.code == 200){
-          swal({
-            title: 'Perfecto!',
-            text: response.message,
-            type: 'success',
-            confirmButtonText: 'Aceptar'
-          });
-
-          this.onChangedTramiteFactura(response.data.tramiteFactura.id);
-        }else if(response.code == 401){
-          this.tramiteFactura = response.data;
-
-          swal({
-            title: 'Atención!',
-            text: response.message,
-            type: 'warning',
-            confirmButtonText: 'Aceptar'
-          });
-        }else{
-          swal({
-            title: 'Error!',
-            text: response.message,
-            type: 'error',
-            confirmButtonText: 'Aceptar'
-          });
-        }
-			error => {
-					this.errorMessage = <any>error;
-					if(this.errorMessage != null){
-						console.log(this.errorMessage);
-						alert("Error en la petición");
-					}
-				}
-		});*/
   }
   
   onReadyTramite(datos:any){    
@@ -340,65 +334,17 @@ constructor(
     });
 
     this.onChangedTramiteFactura(datos.idTramiteFactura);
+  }
 
-    /*let token = this._LoginService.getToken();
+  onReadyInsumo(datos:any){    
+    this.tramiteSolicitud.insumoEntregado = datos;
 
-    this._TramiteFacturaService.show({ 'id': datos.idTramiteFactura }, token).subscribe(
-      response => {
-        if (response.code == 200) {
-          let tramiteFactura = { 'value': response.data.id, 'label': response.data.precio.nombre };
-
-          this.tramitesFactura = this.tramitesFactura.filter(h => h !== tramiteFactura);
-          this.tramiteSolicitud.idTramiteFactura = null;
-        } else {
-          swal({
-            title: 'Error!',
-            text: response.message,
-            type: 'error',
-            confirmButtonText: 'Aceptar'
-          });
-        }
-        error => {
-          this.errorMessage = <any>error;
-          if (this.errorMessage != null) {
-            console.log(this.errorMessage);
-            alert("Error en la petición");
-          }
-        }
-      }
-    );*/
-
-    /*this.tramiteSolicitud.datos = datos;
-
-    let token = this._LoginService.getToken();
-
-    this._SolicitudService.register(this.tramiteSolicitud, token).subscribe(
-      response => {
-        if (response.code == 200) {
-          swal({
-            title: 'Perfecto!',
-            text: response.message,
-            type: 'success',
-            confirmButtonText: 'Aceptar'
-          });
-        } else {
-          swal({
-            title: 'Error!',
-            text: response.message,
-            type: 'error',
-            confirmButtonText: 'Aceptar'
-          });
-        }
-        error => {
-          this.errorMessage = <any>error;
-          if (this.errorMessage != null) {
-            console.log(this.errorMessage);
-            alert("Error en la petición");
-          }
-        }
-      }
-    );
-    */
+    swal({
+      title: 'Perfecto!',
+      text: 'Insumo asignado con exito.',
+      type: 'success',
+      confirmButtonText: 'Aceptar'
+    });
   }
 
   cancelarTramite(){

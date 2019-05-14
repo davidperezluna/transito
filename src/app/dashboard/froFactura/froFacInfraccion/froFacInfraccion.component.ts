@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FroFacInfraccion } from './froFacInfraccion.modelo';
 import { CvCdoComparendoService } from '../../../services/cvCdoComparendo.service';
 import { FroFacturaService } from '../../../services/froFactura.service';
 import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
-import { FroFacInfraccion } from './froFacInfraccion.modelo';
 import { LoginService } from '../../../services/login.service';
 import { environment } from 'environments/environment'
 import swal from 'sweetalert2';

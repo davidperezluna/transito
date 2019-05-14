@@ -1,5 +1,5 @@
 
-<div class="row"><!-- .row -->
+<div class="row" *ngIf="funcionario"><!-- .row -->
     <div class="col-xs-12 col-lg-4">
         <div class="card">
             <div class="card-header">
@@ -112,14 +112,16 @@
                                     </div>
                                 </div>
 
-                                <div class="row" *ngIf="factura && tramiteSolicitud.numeroRunt">
-                                    <div class="col-xs-12 col-lg-12">
-                                        <button (click)="onEnviar()" class="btn btn-success">
-                                            <i class="fa fa-save"></i>
-                                            Guardar información
-                                        </button>
+                                <ng-container *ngIf="(requiereSustrato && tramiteSolicitud.insumoEntregado) || !requiereSustrato">
+                                    <div class="row" *ngIf="factura && tramiteSolicitud.numeroRunt">
+                                        <div class="col-xs-12 col-lg-12">
+                                            <button (click)="onEnviar()" class="btn btn-success">
+                                                <i class="fa fa-save"></i>
+                                                Guardar información
+                                            </button>
+                                        </div>
                                     </div>
-                                </div>
+                                </ng-container>
                             </div>
                         </div>
                     </div>
@@ -157,23 +159,22 @@
 
                                 <div class="row">
                                     <div class="col-xs-12 col-lg-12" *ngIf="tramiteFactura">                        
-                                        <appRnc-expedicion-licencia *ngIf="tramiteFactura.precio.tramite.id == 31" [tramitesRealizados]="tramitesRealizados" [solicitante]="solicitante" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)"></appRnc-expedicion-licencia>
+                                        <appRnc-expedicion-licencia *ngIf="tramiteFactura.precio.tramite.id == 31" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [solicitante]="solicitante" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)"></appRnc-expedicion-licencia>
                                         
-                                        <appRnc-duplicado-licencia *ngIf="tramiteFactura.precio.tramite.id == 32" [tramitesRealizados]="tramitesRealizados" [solicitante]="solicitante" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)"></appRnc-duplicado-licencia>
+                                        <appRnc-duplicado-licencia *ngIf="tramiteFactura.precio.tramite.id == 32" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [solicitante]="solicitante" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)"></appRnc-duplicado-licencia>
                                         
-                                        <appRnc-expedicion-licencia-cambio-documento *ngIf="tramiteFactura.precio.tramite.id == 33" [tramitesRealizados]="tramitesRealizados" [solicitante]="solicitante" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)"></appRnc-expedicion-licencia-cambio-documento>
+                                        <appRnc-expedicion-licencia-cambio-documento *ngIf="tramiteFactura.precio.tramite.id == 33" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [solicitante]="solicitante" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)"></appRnc-expedicion-licencia-cambio-documento>
                                     
-                                        <appRnc-recategorizacion-licencia-arriba *ngIf="tramiteFactura.precio.tramite.id == 34" [tramitesRealizados]="tramitesRealizados" [solicitante]="solicitante" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)"></appRnc-recategorizacion-licencia-arriba>
+                                        <appRnc-recategorizacion-licencia-arriba *ngIf="tramiteFactura.precio.tramite.id == 34" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [solicitante]="solicitante" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)"></appRnc-recategorizacion-licencia-arriba>
                                 
-                                        <appRnc-recategorizacion-licencia-abajo *ngIf="tramiteFactura.precio.tramite.id == 35" [tramitesRealizados]="tramitesRealizados" [solicitante]="solicitante" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)"></appRnc-recategorizacion-licencia-abajo>
+                                        <appRnc-recategorizacion-licencia-abajo *ngIf="tramiteFactura.precio.tramite.id == 35" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [solicitante]="solicitante" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)"></appRnc-recategorizacion-licencia-abajo>
                                     
-                                        <appRnc-refrendacion-licencia *ngIf="tramiteFactura.precio.tramite.id == 36" [tramitesRealizados]="tramitesRealizados" [solicitante]="solicitante" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)"></appRnc-refrendacion-licencia>
+                                        <appRnc-refrendacion-licencia *ngIf="tramiteFactura.precio.tramite.id == 36" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [solicitante]="solicitante" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)"></appRnc-refrendacion-licencia>
                                     </div>
                                 </div>
-    
                             </div>
                             <div class="tab-pane" id="tab-sustrato" role="tabpanel">
-                                <appRnc-sustrato [factura]="factura" [solicitante]="solicitante" (onReadyTramite)="onReadyTramite($event)"></appRnc-sustrato>
+                                <appRnc-sustrato [factura]="factura" [funcionario]="funcionario" [solicitante]="solicitante" (onReadyInsumo)="onReadyInsumo($event)"></appRnc-sustrato>
                             </div>
                         </div>                   
                     </div>
@@ -182,3 +183,13 @@
         </div>
     </div>
 </div><!-- /.row -->
+
+<div class="row"  *ngIf="!funcionario">
+    <div class="col-xs-12 col-lg-12">
+        <div class="card">
+            <div class="card-body text-center">
+                <span class="badge badge-danger text-uppercase">Usted no tiene permisos para realizar trámites</span>
+            </div>
+        </div>
+    </div>
+</div>

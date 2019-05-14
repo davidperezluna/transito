@@ -15,16 +15,7 @@ import { UserUsuarioMenuModule } from './userUsuarioMenu/userUsuarioMenu.module'
 import { UserCfgGrupoEtnicoModule } from './userCfgGrupoEtnico/userCfgGrupoEtnico.module';
 
 import { HomeModule } from './home/home.module';
-import { VhloCfgMarcaModule } from './vhloCfgMarca/vhloCfgMarca.module';
-import { VhloCfgLineaModule } from './vhloCfgLinea/vhloCfgLinea.module';
 import { BancoModule } from './banco/banco.module';
-import { VhloCfgClaseModule } from './vhloCfgClase/vhloCfgClase.module';
-import { VhloCfgColorModule } from './vhloCfgColor/vhloCfgColor.module';
-import { ConpetoParametroModule } from './conceptoParametro/conceptoParametro.module';
-import { VhloCfgCombustibleModule } from './vhloCfgCombustible/vhloCfgCombustible.module';
-import { ConsumibleModule } from './consumible/consumible.module';
-import { VhloCfgServicioModule } from './vhloCfgServicio/vhloCfgServicio.module';
-import { TramiteModule } from './tramite/tramite.module'; 
 import { CfgTipoInfractorModule } from './cfgTipoInfractor/cfgTipoInfractor.module';
 import { RpcccInventarioDocumentalModule } from './rpcccInventarioDocumental/rpcccInventarioDocumental.module';
 
@@ -78,8 +69,26 @@ import { VhloCfgClaseMaquinariaModule } from './vhloCfgClaseMaquinaria/vhloCfgCl
 import { VhloCfgSubpartidaArancelariaModule } from './vhloCfgSubpartidaArancelaria/vhloCfgSubpartidaArancelaria.module';
 import { VhloCfgCondicionIngresoModule } from './vhloCfgCondicionIngreso/vhloCfgCondicionIngreso.module';
 import { VhloPlacaSedeModule } from './vhloPlacaSede/vhloPlacaSede.module';
-import { VehiculoTecnoMecanicaModule } from './vehiculoTecnoMecanica/vehiculoTecnoMecanica.module';
-import { SoatModule } from './soat/soat.module';
+import { VhloSoatModule } from './vhloSoat/vhloSoat.module';
+import { VhloTecnoMecanicaModule } from './vhloTecnoMecanica/vhloTecnoMecanica.module';
+import { VhloCfgMarcaModule } from './vhloCfgMarca/vhloCfgMarca.module';
+import { VhloCfgLineaModule } from './vhloCfgLinea/vhloCfgLinea.module';
+import { VhloCfgClaseModule } from './vhloCfgClase/vhloCfgClase.module';
+import { VhloCfgColorModule } from './vhloCfgColor/vhloCfgColor.module';
+import { VhloCfgCombustibleModule } from './vhloCfgCombustible/vhloCfgCombustible.module';
+import { VhloCfgServicioModule } from './vhloCfgServicio/vhloCfgServicio.module';
+import { VhloCfgValorModule } from './vhloCfgValor/vhloCfgValor.module';
+import { VhloRnaPreregistroModule } from './vhloRnaPreregistro/vhloRnaPreregistro.module';
+import { VhloBuscarModule } from './vhloBuscar/vhloBuscar.module';
+import { VhloVehiculoModule } from './vhloVehiculo/vhloVehiculo.module';
+import { VhloPropietarioModule } from './vhloPropietario/vhloPropietario.module';
+import { VhloCfgCarroceriaModule } from './vhloCfgCarroceria/vhloCfgCarroceria.module';
+import { VhloCfgPlacaModule } from './vhloCfgPlaca/vhloCfgPlaca.module';
+import { VhloRnaPreasignacionPlacaModule } from './vhloRnaPreasignacionPlaca/vhloRnaPreasignacionPlaca.module';
+import { VhloRnaTramiteInscripcionLimitacionModule } from './vhloRnaTramiteInscripcionLimitacion/vhloRnaTramiteInscripcionLimitacion.module';
+import { VhloRnaTramiteLevantamientoLimitacionModule } from './vhloRnaTramiteLevantamientoLimitacion/vhloRnaTramiteLevantamientoLimitacion.module';
+import { VhloCfgLimitacionCausalModule } from './vhloCfgLimitacionCausal/vhloCfgLimitacionCausal.module';
+import { VhloCfgLimitacionTipoModule } from './vhloCfgLimitacionTipo/vhloCfgLimitacionTipo.module';
 
 import { SvCapacitacionModule } from "./svCapacitacion/svCapacitacion.module";
 import { SvCfgFuncionModule } from "./svCfgFuncion/svCfgFuncion.module";
@@ -135,7 +144,6 @@ import { UserLicenciaTransitoModule } from './userLicenciaTransito/userLicenciaT
 import { CfgComparendoEstadoModule } from './cfgComparendoEstado/cfgComparendoEstado.module';
 import { CfgAuditoriaModule } from './cfgAuditoria/cfgAuditoria.module';
 import { CfgValorVehiculoModule } from './cfgValorVehiculo/cfgValorVehiculo.module'; 
-import { VhloCfgValorModule } from './vhloCfgValor/vhloCfgValor.module'; 
 import { CfgSmlmvModule } from './cfgSmlmv/cfgSmlmv.module';
 import { cfgFestivoModule } from './cfgFestivo/cfgFestivo.module';
 import { CfgTipoClaseModule } from './cfgTipoClase/cfgTipoClase.module';
@@ -160,21 +168,8 @@ import { PqoCfgGruaModule } from './pqoCfgGrua/pqoCfgGrua.module';
 import { PqoGruaCiudadanoModule } from './pqoGruaCiudadano/pqoGruaCiudadano.module';
 import { PqoInmovilizacionModule } from './pqoInmovilizacion/pqoInmovilizacion.module';
 
-import { VhloRnaPreregistroModule } from './vhloRnaPreregistro/vhloRnaPreregistro.module';
-import { VhloBuscarModule } from './vhloBuscar/vhloBuscar.module';
-import { VhloVehiculoModule } from './vhloVehiculo/vhloVehiculo.module';
-import { VhloPropietarioModule } from './vhloPropietario/vhloPropietario.module';
-import { VhloCfgCarroceriaModule } from './vhloCfgCarroceria/vhloCfgCarroceria.module';
-import { VhloCfgPlacaModule } from './vhloCfgPlaca/vhloCfgPlaca.module';
-import { VhloRnaPreasignacionPlacaModule } from './vhloRnaPreasignacionPlaca/vhloRnaPreasignacionPlaca.module';
-import { VhloRnaTramiteInscripcionLimitacionModule } from './vhloRnaTramiteInscripcionLimitacion/vhloRnaTramiteInscripcionLimitacion.module';
-import { VhloRnaTramiteLevantamientoLimitacionModule } from './vhloRnaTramiteLevantamientoLimitacion/vhloRnaTramiteLevantamientoLimitacion.module';
-import { VhloCfgLimitacionCausalModule } from './vhloCfgLimitacionCausal/vhloCfgLimitacionCausal.module';
-import { VhloCfgLimitacionTipoModule } from './vhloCfgLimitacionTipo/vhloCfgLimitacionTipo.module';
-
 import { FacturaModule } from './factura/factura.module';
 import { FacturaInfraccionModule } from './facturaInfraccion/facturaInfraccion.module';
-import { TramiteFacturaModule } from './tramiteFactura/tramiteFactura.module';
 import { RnmaTramiteInscripcionLimitacionModule } from './rnmaTramiteInscripcionLimitacion/rnmaTramiteInscripcionLimitacion.module';
 import { RnmaTramiteLevantamientoLimitacionModule } from './rnmaTramiteLevantamientoLimitacion/rnmaTramiteLevantamientoLimitacion.module';
 import { RnrsTramiteInscripcionLimitacionModule } from './rnrsTramiteInscripcionLimitacion/rnrsTramiteInscripcionLimitacion.module';
@@ -191,8 +186,6 @@ import { SvCfgObjetoFijoModule } from './svCfgObjetoFijo/svCfgObjetoFijo.module'
 
 import { TpAlcaldiaModule } from './tpAlcaldia/tpAlcaldia.module';
 // import { SucursalModule } from './empresa/sucursal/new/sucursal.module';
-import { SustratoModule } from './sustrato/sustrato.module';
-import { TramitePrecioModule } from './tramitePrecio/tramitePrecio.module';
 
 import { GdDocumentoModule } from './gdDocumento/gdDocumento.module';
 import { GdTrazabilidadModule } from './gdTrazabilidad/gdTrazabilidad.module';
@@ -265,7 +258,6 @@ import {RightsidebarComponent} from '../shared';
 @NgModule({
   imports: [
     CvLcCfgTipoRestriccionModule,
-    ConpetoParametroModule,
     CommonModule,
     RouterModule,
     Ng2BootstrapModule.forRoot(),
@@ -282,16 +274,7 @@ import {RightsidebarComponent} from '../shared';
     UserLicenciaTransitoModule,
     UserCfgGrupoEtnicoModule,
     HomeModule,
-    VhloCfgMarcaModule,
-    VhloCfgLineaModule,
-    VhloCfgValorModule,
     BancoModule,
-    VhloCfgClaseModule,
-    VhloCfgColorModule,
-    VhloCfgCombustibleModule,
-    ConsumibleModule,
-    VhloCfgServicioModule,
-    TramiteModule,
     CfgPaisModule,
     CfgDepartamentoModule,
     CfgMunicipioModule,
@@ -381,10 +364,6 @@ import {RightsidebarComponent} from '../shared';
     FroTrteSolicitudRncModule,
     FroFacTramiteModule,
     FroTrteCfgCuentaModule,
-    VhloBuscarModule,
-    VhloVehiculoModule,
-    VhloPropietarioModule,
-    VhloCfgCarroceriaModule,
     CfgAdmFormatoModule,
     CfgAdmFormatoTipoModule,
     CfgBodegaModule,
@@ -431,15 +410,23 @@ import {RightsidebarComponent} from '../shared';
     VhloRnaPreasignacionPlacaModule,
     VhloRnaTramiteInscripcionLimitacionModule,
     VhloRnaTramiteLevantamientoLimitacionModule,
-    VehiculoTecnoMecanicaModule,
-    SoatModule,
+    VhloSoatModule,
+    VhloTecnoMecanicaModule,
+    VhloBuscarModule,
+    VhloVehiculoModule,
+    VhloPropietarioModule,
+    VhloCfgCarroceriaModule,
+    VhloCfgMarcaModule,
+    VhloCfgLineaModule,
+    VhloCfgValorModule,
+    VhloCfgClaseModule,
+    VhloCfgColorModule,
+    VhloCfgCombustibleModule,
+    VhloCfgServicioModule,
     CfgComparendoEstadoModule,
     FacturaModule,
-    TramiteFacturaModule,
-    SustratoModule,
     GestionTransportePublicoModule,
     CvCfgTipoRestriccionModule,
-    TramitePrecioModule,
     CfgOrganismoTransitoModule,
     CfgChoqueConModule,
     SvCfgObjetoFijoModule,

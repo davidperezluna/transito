@@ -13,6 +13,7 @@ import swal from 'sweetalert2';
 })
 export class NewRncDuplicadoLicenciaComponent implements OnInit {
     @Output() onReadyTramite = new EventEmitter<any>();
+    @Input() funcionario: any = null;
     @Input() solicitante: any = null;
     @Input() tramiteFactura: any = null;
     @Input() tramitesRealizados: any = null;
@@ -21,7 +22,6 @@ export class NewRncDuplicadoLicenciaComponent implements OnInit {
     public autorizado: any = false;
     public realizado: any = false;
     public tramiteSolicitud: any = null;
-    public funcionario: any = null;
     public servicios: any;
     public paises: any;
     public categorias: any;
@@ -49,98 +49,82 @@ export class NewRncDuplicadoLicenciaComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-      let token = this._LoginService.getToken();
+        if (this.funcionario) {
+            this.datos.idFuncionario = this.funcionario.id;
+            this.autorizado = true;
 
-        let identity = this._LoginService.getIdentity();
-
-        this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
-            response => {
-                if (response.status == 'success') {
-                    this.funcionario = response.data;
-                    this.datos.idFuncionario = response.data.id;
-                    this.autorizado = true;
-
-                    if ( this.tramitesRealizados.length > 0) {
-                        this.tramitesRealizados.forEach(tramiteRealizado => {
-                            tramiteRealizado = Object.keys(tramiteRealizado).map(function(key) {
-                                return tramiteRealizado[key];
-                            });
-                            
-                            if (tramiteRealizado.includes(this.tramiteFactura.id, 2)) {
-                                this.realizado = true;
-                            }
-                        });
-                    }
-
-                    if (this.realizado) {
-                        swal({
-                            title: 'Atención!',
-                            text: 'El trámite seleccionado ya fue realizado.',
-                            type: 'warning',
-                            confirmButtonText: 'Aceptar'
-                        });
-                    } else {
-                        this._ServicioService.select().subscribe(
-                            response => {
-                                this.servicios = response;
-                            },
-                            error => {
-                                this.errorMessage = <any>error;
-                        
-                                if(this.errorMessage != null){
-                                console.log(this.errorMessage);
-                                alert('Error en la petición');
-                                }
-                            }
-                        );
-                
-                        this._PaisService.select().subscribe(
-                            response => {
-                                this.paises = response;
-                            },
-                            error => {
-                                this.errorMessage = <any>error;
-                        
-                                if(this.errorMessage != null){
-                                console.log(this.errorMessage);
-                                alert('Error en la petición');
-                                }
-                            }
-                        );
-                
-                        this._CategoriaService.select().subscribe(
-                            response => {
-                                this.categorias = response;
-                            },
-                            error => {
-                                this.errorMessage = <any>error;
-                
-                                if (this.errorMessage != null) {
-                                    console.log(this.errorMessage);
-                                    alert('Error en la petición');
-                                }
-                            }
-                        );
-                    }
-                } else {
-                    this.autorizado = false;
-
-                    swal({
-                        title: 'Error!',
-                        text: 'Usted no tiene permisos para realizar tramites',
-                        type: 'error',
-                        confirmButtonText: 'Aceptar'
+            if ( this.tramitesRealizados.length > 0) {
+                this.tramitesRealizados.forEach(tramiteRealizado => {
+                    tramiteRealizado = Object.keys(tramiteRealizado).map(function(key) {
+                        return tramiteRealizado[key];
                     });
-                }
-                error => {
-                    this.errorMessage = <any>error;
-                    if (this.errorMessage != null) {
+                    
+                    if (tramiteRealizado.includes(this.tramiteFactura.id, 2)) {
+                        this.realizado = true;
+                    }
+                });
+            }
+
+            if (this.realizado) {
+                swal({
+                    title: 'Atención!',
+                    text: 'El trámite seleccionado ya fue realizado.',
+                    type: 'warning',
+                    confirmButtonText: 'Aceptar'
+                });
+            } else {
+                this._ServicioService.select().subscribe(
+                    response => {
+                        this.servicios = response;
+                    },
+                    error => {
+                        this.errorMessage = <any>error;
+                
+                        if(this.errorMessage != null){
                         console.log(this.errorMessage);
                         alert('Error en la petición');
+                        }
                     }
-                }
+                );
+        
+                this._PaisService.select().subscribe(
+                    response => {
+                        this.paises = response;
+                    },
+                    error => {
+                        this.errorMessage = <any>error;
+                
+                        if(this.errorMessage != null){
+                        console.log(this.errorMessage);
+                        alert('Error en la petición');
+                        }
+                    }
+                );
+        
+                this._CategoriaService.select().subscribe(
+                    response => {
+                        this.categorias = response;
+                    },
+                    error => {
+                        this.errorMessage = <any>error;
+        
+                        if (this.errorMessage != null) {
+                            console.log(this.errorMessage);
+                            alert('Error en la petición');
+                        }
+                    }
+                );
             }
-        );
+        }else{
+            this.autorizado = false;
+
+            swal({
+                title: 'Error!',
+                text: 'Usted no tiene permisos para realizar tramites',
+                type: 'error',
+                confirmButtonText: 'Aceptar'
+            });
+        }
     }
     
     onEnviar() {

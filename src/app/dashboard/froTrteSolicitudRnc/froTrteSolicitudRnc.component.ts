@@ -64,7 +64,7 @@ export class FroTrteSolicitudRncComponent implements OnInit {
           this.tramitesSolicitud = response.data;
         
           let timeoutId = setTimeout(() => {
-            this.iniciarTabla();
+            this.onInitTable();
           }, 100);
 
           swal({
@@ -73,6 +73,8 @@ export class FroTrteSolicitudRncComponent implements OnInit {
             type: 'success',
             confirmButtonText: 'Aceptar'
           });
+
+          this.formIndex = true;
         }else{
           swal({
             title: 'Error!',
@@ -80,6 +82,8 @@ export class FroTrteSolicitudRncComponent implements OnInit {
             type: 'error',
             confirmButtonText: 'Aceptar'
           });
+          
+          this.formIndex = false;
         }
       },
       error => {
@@ -92,7 +96,7 @@ export class FroTrteSolicitudRncComponent implements OnInit {
     );
   }
 
-  iniciarTabla(){
+  onInitTable(){
     if (this.table) {
       this.table.destroy();
     }

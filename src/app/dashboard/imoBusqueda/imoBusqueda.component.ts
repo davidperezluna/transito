@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { ImoInsumoService } from '../../services/imoInsumo.service';
 import { CfgOrganismoTransitoService } from '../../services/cfgOrganismoTransito.service';
+import { ImoInsumoService } from '../../services/imoInsumo.service';
 import { ImoLoteService } from '../../services/imoLote.service';
 import { LoginService } from '../../services/login.service';
 import swal from 'sweetalert2';

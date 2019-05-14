@@ -5,4 +5,5 @@ export * from './froFactura.component';
 export * from './froFacAcuerdoPago/froFacAcuerdoPago.component';
 export * from './froFacInfraccion/froFacInfraccion.component';
 export * from './froFacTramite/froFacTramite.component';
+export * from './froFacParqueadero/froFacParqueadero.component';
 export * from './froFactura.routes';

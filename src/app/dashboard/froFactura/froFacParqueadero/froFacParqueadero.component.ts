@@ -1,30 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
-import { FroFacTramite } from './froFacTramite.modelo';
+import { FroFacParqueadero } from './froFacParqueadero.modelo';
 import { FroFacturaService } from '../../../services/froFactura.service';
-import { FroTrtePrecioService } from '../../../services/froTrtePrecio.service';
-import { FroFacTramiteService } from '../../../services/froFacTramite.service';
-import { PnalFuncionarioService } from '../../../services/pnalFuncionario.service';
-import { CfgModuloService } from '../../../services/cfgModulo.service';
-import { UserCfgTipoIdentificacionService } from '../../../services/userCfgTipoIdentificacion.service';
-import { UserCiudadanoService } from '../../../services/userCiudadano.service';
-import { VhloPropietarioService } from '../../../services/vhloPropietario.service';
-import { VhloVehiculoService } from '../../../services/vhloVehiculo.service';
 import { LoginService } from '../../../services/login.service';
-import { VhloValorService } from '../../../services/vholCfgValor.service';
 import { environment } from 'environments/environment'
 import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './froFacTramite.component.html',
+  templateUrl: './froFacParqueadero.component.html',
   providers: [DatePipe]
 })
 
-export class FroFacTramiteComponent implements OnInit {
+export class FroFacParqueaderoComponent implements OnInit {
   public errorMessage;
-  public factura: FroFacTramite;
+  public factura: FroFacParqueadero;
 
   public organismosTransito: any;
   public modulos: any;
@@ -54,6 +45,7 @@ export class FroFacTramiteComponent implements OnInit {
   
   public formIndex = false;
   public formNew = false;
+  public formCiudadano = false;
   public formSearch = true;
   public table: any = null;
   public idVehiculoValor: any = null;
@@ -64,21 +56,12 @@ export class FroFacTramiteComponent implements OnInit {
   public apiUrl = environment.apiUrl;
 
   constructor(
-    private _FuncionarioService: PnalFuncionarioService,
     private _FacturaService: FroFacturaService,
-    private _ModuloService: CfgModuloService,
-    private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
-    private _CiudadanoService: UserCiudadanoService,
-    private _PropietarioService: VhloPropietarioService,
-    private _VehiculoService: VhloVehiculoService,
-    private _TramitePrecioService: FroTrtePrecioService,
-    private _FacturaTramiteService: FroFacTramiteService,
-    private _VhloValorService: VhloValorService,
     private _LoginService: LoginService,
   ){}
     
   ngOnInit() {
-    this.factura = new FroFacTramite(null, 0, null, null, null, null, null, null, null, null); 
+    this.factura = new FroFacParqueadero(null, 0, null, null, null, null, null, null, null, null); 
 
     swal({
       title: 'Cargando Datos!',
@@ -92,7 +75,7 @@ export class FroFacTramiteComponent implements OnInit {
 
     let identity = this._LoginService.getIdentity();
 
-    this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
+    /*this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
       response => {
         if (response.status == 'success') {
           this.funcionario = response.data;
@@ -117,37 +100,7 @@ export class FroFacTramiteComponent implements OnInit {
           }
         }
       }
-    );
-
-    this._ModuloService.select().subscribe(
-      response => {
-        this.modulos = response;
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
-
-    this._TipoIdentificacionService.select().subscribe(
-      response => {
-        this.tiposIdentificacion = response;
-
-        swal.close();
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert('Error en la petición');
-        }
-      }
-    );
+    );*/
   }
 
   onChangedModulo(e) {
@@ -162,7 +115,7 @@ export class FroFacTramiteComponent implements OnInit {
     if (e) {
       let token = this._LoginService.getToken();
 
-      this._ModuloService.show({ 'id': this.factura.idModulo }, token).subscribe(
+      /*this._ModuloService.show({ 'id': this.factura.idModulo }, token).subscribe(
         response => {
           this.modulo = response.data;
 
@@ -190,7 +143,7 @@ export class FroFacTramiteComponent implements OnInit {
             alert("Error en la petición");
           }
         }
-      );
+      );*/
     }
   }
 
@@ -238,13 +191,14 @@ export class FroFacTramiteComponent implements OnInit {
         'identificacion': this.identificacion,
       }
   
-      this._CiudadanoService.searchByIdentificacion(datos, token).subscribe(
+      /*this._CiudadanoService.searchByIdentificacion(datos, token).subscribe(
         response => {
           if (response.code == 200) {
             if (response.data.ciudadano) {
               this.ciudadano = response.data.ciudadano;
               this.factura.idCiudadano = this.ciudadano.id;
-
+              this.formCiudadano = false;
+              
               swal({
                 title: 'Perfecto!',
                 text: response.message,
@@ -252,15 +206,11 @@ export class FroFacTramiteComponent implements OnInit {
                 confirmButtonText: 'Aceptar'
               });
             }else{
-              swal({
-                title: 'Error!',
-                text: response.message + " Debe registrarlo en persona natural.",
-                type: 'error',
-                confirmButtonText: 'Aceptar'
-              });
+              this.formCiudadano = true;
             }
           } else {
             this.ciudadano = null;
+            this.formCiudadano = true;
   
             swal({
               title: 'Error!',
@@ -277,7 +227,7 @@ export class FroFacTramiteComponent implements OnInit {
             }
           }
         }
-      );
+      );*/
     }
 
   }
@@ -293,7 +243,7 @@ export class FroFacTramiteComponent implements OnInit {
 
     let token = this._LoginService.getToken();
 
-    this._VehiculoService.searchByPlaca({ 'numero': this.vehiculoFiltro }, token).subscribe(
+    /*this._VehiculoService.searchByPlaca({ 'numero': this.vehiculoFiltro }, token).subscribe(
       response => {
         if (response.code == 200) {
           this.vehiculo = response.data;
@@ -345,7 +295,7 @@ export class FroFacTramiteComponent implements OnInit {
           }
         }
       }
-    );
+    );*/
   }
 
   onAddTramite() {
@@ -359,7 +309,7 @@ export class FroFacTramiteComponent implements OnInit {
 
     let token = this._LoginService.getToken();
 
-    this._TramitePrecioService.show({ 'id': this.tramitePrecioSelected }, token).subscribe(
+    /*this._TramitePrecioService.show({ 'id': this.tramitePrecioSelected }, token).subscribe(
       response => {
         if (response.code == 200) {
           this.tramitePrecio = response.data;
@@ -441,7 +391,7 @@ export class FroFacTramiteComponent implements OnInit {
           alert("Error en la petición");
         }
       }
-    );
+    );*/
 
   }
 

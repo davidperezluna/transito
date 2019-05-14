@@ -5,7 +5,7 @@ import { LoginService } from '../../../services/login.service';
 import { VehiculoService } from '../../../services/vehiculo.service';
 import { UserCiudadanoService } from '../../../services/userCiudadano.service';
 import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
-import { TramiteFactura } from '../../tramiteFactura/tramiteFactura.modelo';
+//import { TramiteFactura } from '../../tramiteFactura/tramiteFactura.modelo';
 import { TramiteFacturaService } from '../../../services/tramiteFactura.service';
 import { TramiteService } from '../../../services/tramite.service';
 import swal from 'sweetalert2';
@@ -22,7 +22,7 @@ export class ShowComponent implements OnInit {
 public errorMessage;
 public respuesta;
 public vehiculos: any;
-public tramiteFactura: TramiteFactura;
+//public tramiteFactura: TramiteFactura;
 public ciudadanos: any;
 public organismosTransito: any;
 public vehiculoSelected: any;

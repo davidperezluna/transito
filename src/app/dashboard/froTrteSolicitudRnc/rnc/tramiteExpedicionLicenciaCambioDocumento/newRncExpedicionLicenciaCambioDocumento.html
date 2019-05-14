@@ -18,12 +18,14 @@
     <div class="col-xs-12 col-lg-12">
         <!-- .col -->
         <div class="card" *ngIf='solicitante.tipoIdentificacion.id == 7'>
-            <div class="card-body">
-                <h5 class="m-0">
+            <div class="card-header">
+                <b class="text-primary">
                     Expedicion de licencia cambio de documento
-                </h5>
+                </b>
+                <br>
                 <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
-                <hr>
+            </div>
+            <div class="card-body">
                 <form>
                     <div class="form-group">
                         <div class="row">
@@ -55,36 +57,29 @@
                                 <input type="text" class="form-control" value="{{ solicitante.primerNombre }} {{ solicitante.primerApellido }}" name="solicitante" readonly>
                             </div>
                             <div class="col-xs-12 col-lg-4">
-                                <label>Identificación actual <b class="text-danger">*</b></label>
-                                <input type="text" class="form-control" [(ngModel)]="datos.identificacionActual" name="identificacionActual" required>
-                            </div>
-                            <div class="col-xs-12 col-lg-4">
                                 <label>Identificación anterior</label>
                                 <input type="text" class="form-control" [(ngModel)]="datos.identificacionAnterior" name="identificacionAnterior" readonly>
+                            </div>
+                            <div class="col-xs-12 col-lg-4">
+                                <label>Identificación actual <b class="text-danger">*</b></label>
+                                <input type="text" class="form-control" [(ngModel)]="datos.identificacionActual" name="identificacionActual" required>
                             </div>
                         </div>
 
                         <div class="row">
-                            <div class="col-xs-12 col-lg-6">
+                            <div class="col-xs-12 col-lg-4">
                                 <label>Categoria <b class="text-danger">*</b></label>
                                 <ng-select [multiple]="false" [options]="categorias" [(ngModel)]="datos.idCategoria" name="categoria" required>
                                 </ng-select>
                             </div>
-                            <div class="col-xs-12 col-lg-6">
+                            <div class="col-xs-12 col-lg-4">
                                 <label>Servicio <b class="text-danger">*</b></label>
                                 <ng-select [multiple]="false" [options]="servicios" [(ngModel)]="datos.idServicio" name="servicio" required>
                                 </ng-select>
                             </div>
-                        </div>
-                        
-                        <div class="row">
                             <div class="col-xs-12 col-lg-4">
                                 <label>Vigencia</label>
                                 <input class="form-control" [(ngModel)]="datos.vigencia" name="vigencia" type="date" />
-                            </div>
-                            <div class="col-xs-12 col-lg-4">
-                                <label>Número de Licencia <b class="text-danger">*</b></label>
-                                <input class="form-control" [(ngModel)]="datos.identificacionActual" name="numeroLicencia" type="text" required/>
                             </div>
                         </div>
                     </div>

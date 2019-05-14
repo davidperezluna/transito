@@ -22,6 +22,7 @@
                 <b class="text-uppercase">
                     Expedición de licencia
                 </b>
+                <br>
                 <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
             </div>
             <div class="card-body">
@@ -50,20 +51,13 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-xs-12 col-lg-8">
-                                <label>Identificación</label>
-                                <div  class="input-group">
-                                    <input type="number"  [(ngModel)]="solicitante.identificacion" class="form-control" placeholder="identificacion" name="solicitante_identificacion" required />
-                                    <span class="input-group-btn">
-                                        <button (click)="onSearchCiudadano()" class="btn btn-default"type="button">
-                                            <i class="fa fa-search"></i>
-                                        </button>
-                                    </span>
-                                </div>
-                            </div>
                             <div class="col-xs-12 col-lg-4">
                                 <label>Conductor</label>
                                 <input type="text" class="form-control" value="{{ solicitante.primerNombre }} {{ solicitante.primerApellido }}" name="solicitante" readonly>
+                            </div>
+                            <div class="col-xs-12 col-lg-8">
+                                <label>Identificación</label>
+                                <input type="number"  [(ngModel)]="solicitante.identificacion" class="form-control" placeholder="identificacion" name="solicitante_identificacion" required readonly />
                             </div>
                         </div>
                         <br>
