@@ -5,10 +5,7 @@
       <!-- .col -->
       <div class="card">
         <div class="card-header">
-          <h5 class="text-uppercase">
-            <strong>Audiencias</strong>
-            <small>Buscar</small>
-          </h5>
+          <b class="text-uppercase">Buscar Audiencias</b>
         </div>
         <div class="card-body">
           <!-- .card-body -->
@@ -32,10 +29,16 @@
         </div>
         <!-- /.card-body -->
         <div class="card-footer">
-          <button (click)="onSearch()" (ready)="ready($event)" [disabled]="formSearch.invalid" class="btn btn-primary" type="button">
-            <i class="fa fa-search"></i>
-            Buscar
-          </button>
+          <div class="btn-group">
+            <button (click)="onSearch()" (ready)="ready($event)" [disabled]="formSearch.invalid" class="btn btn-primary" type="button">
+              <i class="fa fa-search"></i>
+              Buscar
+            </button>
+            <button (click)="onNew()" class="btn btn-default">
+              <i class="fa fa-plus"></i>
+              <span class="text">Nuevo</span>
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -69,7 +72,7 @@
               <tbody>
                 <tr class="odd" *ngFor="let audiencia of audiencias; let i = index">
                   <td>{{ i + 1 }}</td>
-                  <td>{{ audiencia.comparendo.consecutivo.consecutivo }}</td>
+                  <td>{{ audiencia.comparendo.consecutivo.numero }}</td>
                   <td>
                     <b>Fecha:</b> {{ audiencia.fecha }}
                     <br>
@@ -92,8 +95,12 @@
     </div>
     
     <app-edit *ngIf='formEdit' [audiencia]="audiencia" (ready)="ready($event)"></app-edit>
+    
     <div class="col-xs-12 col-lg-8" *ngIf='formShow'>
       <app-show [audiencia]="audiencia" (ready)="ready($event)"></app-show>
     </div>
-    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+
+    <div class="col-xs-12 col-lg-8" *ngIf='formNew'>
+      <app-new (ready)="ready($event)"></app-new>
+    </div>
 </div>

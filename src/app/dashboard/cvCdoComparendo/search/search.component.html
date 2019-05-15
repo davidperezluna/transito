@@ -61,7 +61,7 @@
                                     <tr class="odd" *ngFor="let comparendo of comparendos; let i = index">
                                         <td>{{ i + 1 }}</td>
                                         <td>
-                                            <a (click)="onRecord(comparendo)" class="text-primary">
+                                            <a (click)="onRecord(comparendo)" class="text-primary" style="cursor: pointer;">
                                                 <b>{{ comparendo.consecutivo.numero }}</b>
                                             </a>
                                         </td>
@@ -94,7 +94,7 @@
                 </h5>
             </div>
             <div class="card-body container">
-                <table class="table" id="dataTables-example" *ngIf="trazabilidades">
+                <table class="table" *ngIf="trazabilidades">
                     <thead>
                         <tr>
                             <th>No.</th>
@@ -107,24 +107,14 @@
                         <tr class="odd" *ngFor="let trazabilidad of trazabilidades; let i = index">
                             <td>{{ i + 1 }}</td>
                             <td>
-                                {{ trazabilidad.estado.nombre }}
+                                {{ trazabilidad.estado.nombre }} 
+                                <a href="{{ apiUrl }}/minuta/estados/{{ trazabilidad.id }}/pdf" *ngIf="trazabilidad.estado.id == 14" class="btn btn-primary" target="_blank">
+                                    <i class="fa fa-file-pdf-o"></i>
+                                </a>
                                 <span *ngIf="trazabilidad.estado.id == 4 && acuerdoPago">
-                                    <br>
-                                    <b>No.
-                                        <button (click)="onAcuerdoPago()" class="btn btn-xs btn-default">
-                                            {{ acuerdoPago.numero }}
-                                        </button>
-                                    </b>
-                                </span>
-
-                                <span *ngIf="trazabilidad.estado.id == 14">
-                                    <br>
-                                    <b>
-                                        <a href="{{ apiUrl }}/minuta/estados/{{ trazabilidad.id }}/pdf" class="btn btn-success" target="_blank">
-                                            <i class="fa fa-file-pdf-o"></i>
-                                            Minuta Estados
-                                        </a>
-                                    </b>
+                                    <button (click)="onAcuerdoPago()" class="btn btn-xs btn-default">
+                                        {{ acuerdoPago.numero }}
+                                    </button>
                                 </span>
                                 <br>
                                 {{ trazabilidad.fecha }}
@@ -135,9 +125,9 @@
                             </td>
                             <td>
                                 <span *ngIf="trazabilidad.actoAdministrativo">
+                                    {{ trazabilidad.actoAdministrativo.numero }}
                                     <a href="{{ apiUrl }}/cfgadmactoadministrativo/{{ trazabilidad.id }}/pdf" class="btn btn-success" target="_blank">
                                         <i class="fa fa-file-pdf-o"></i>
-                                        {{ trazabilidad.actoAdministrativo.numero }}
                                     </a>
                                     <br>
                                      {{ trazabilidad.actoAdministrativo.fecha }}

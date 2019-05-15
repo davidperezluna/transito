@@ -72,4 +72,11 @@ export class CvAudienciaService {
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/search/last", params, { headers: headers }).map(res => res.json());
 	}
+
+	updateBorrador(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = "data=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/update/borrador", params, { headers: headers }).map(res => res.json());
+	}
 }

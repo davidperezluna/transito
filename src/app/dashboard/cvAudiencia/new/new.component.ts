@@ -4,6 +4,7 @@ import { CvAudienciaService } from '../../../services/cvAudiencia.service';
 import { CvCdoComparendoService } from '../../../services/cvCdoComparendo.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
+declare var $: any;
 
 @Component({
   selector: 'app-new',
@@ -13,6 +14,7 @@ export class NewComponent implements OnInit {
   @Output() ready = new EventEmitter<any>();
   public audiencia: CvAudiencia;
   public errorMessage;
+  
   public numeroComparendo: any = null;
   public comparendo: any = null;
   public audienciaLast: any = null;
@@ -75,7 +77,12 @@ constructor(
           this.comparendo = response.data;
           this.audiencia.idComparendo = this.comparendo.id;
 
-          swal.close();
+          swal({
+            title: 'Perfecto!',
+            text: response.message,
+            type: 'success',
+            confirmButtonText: 'Aceptar'
+          });
         } else {
           this.comparendo = null;
 
@@ -84,7 +91,7 @@ constructor(
             text: response.message,
             type: 'warning',
             confirmButtonText: 'Aceptar'
-          })
+          });
         }
         error => {
           this.errorMessage = <any>error;
@@ -107,6 +114,7 @@ constructor(
 			response => {
         if(response.status == 'success'){
           this.ready.emit(true);
+          
           swal({
             title: 'Perfecto!',
             text: response.message,

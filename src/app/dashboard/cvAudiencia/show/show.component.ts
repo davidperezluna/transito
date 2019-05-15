@@ -19,7 +19,7 @@ export class ShowComponent implements OnInit {
     public datos = {
         'borrador': null,
         'idFormato': null,
-        'idAudiencia': null,
+        'id': null,
     }
 
     constructor(
@@ -99,17 +99,36 @@ export class ShowComponent implements OnInit {
     }
 
     onEnviar() {
+        swal({
+        title: 'Actualizando registros!',
+        text: 'Solo tardara unos segundos por favor espere.',
+        onOpen: () => {
+            swal.showLoading()
+        }
+        });
+
         let token = this._LoginService.getToken();
-        this._AudienciaService.edit(this.audiencia, token).subscribe(
+
+        this.datos.id = this.audiencia.id;
+
+        this._AudienciaService.updateBorrador(this.datos, token).subscribe(
             response => {
                 if (response.status == 'success') {
                     this.ready.emit(true);
+
                     swal({
                         title: 'Perfecto!',
                         text: response.message,
                         type: 'success',
                         confirmButtonText: 'Aceptar'
-                    })
+                    });
+                }else{
+                    swal({
+                        title: 'Error!',
+                        text: response.message,
+                        type: 'error',
+                        confirmButtonText: 'Aceptar'
+                    });
                 }
                 error => {
                     this.errorMessage = <any>error;
