@@ -1,18 +1,18 @@
-
 <div class="row ">
     <div class="col-xs-12 col-lg-12 ">
         <div class="card">
             <div class="card-body ">
-                <h5 class="m-0">Nueva sucursal</h5>
+                <h5 class="m-0">Editar sucursal</h5>
                 <hr>
-                <form #formNewSucursal="ngForm">
+                <form #formEditSucursal="ngForm">
                     <div class="row justify-content-center container">
                         <div class="form-group row">
                             <div class="col-xs-12 col-lg-4">
                                 <label>Nombre
                                     <span class="text-danger">*</span>
                                 </label>
-                                <input class="form-control" [(ngModel)]="sucursal.nombre" name="nombre" type="text" required>
+                                <input class="form-control" [(ngModel)]="sucursal.nombre" name="nombre" type="text"
+                                    required>
                             </div>
                             <div class="col-xs-12 col-lg-4">
                                 <label>Sigla</label>
@@ -22,13 +22,15 @@
                                 <label>Municipio
                                     <span class="text-danger">*</span>
                                 </label>
-                                <ng-select [multiple]="false" [options]="municipios" [(ngModel)]="municipioSelected" required name="municipioId">
+                                <ng-select [multiple]="false" [options]="municipios" [(ngModel)]="municipioSelected"
+                                    required name="municipioId">
                                 </ng-select>
                             </div>
                             <hr>
                             <div class="col-xs-12 col-lg-6">
                                 <label>Dirección <span class="text-danger">*</span></label>
-                                <input class="form-control" [(ngModel)]="sucursal.direccion" name="direccion" type="text" required>
+                                <input class="form-control" [(ngModel)]="sucursal.direccion" name="direccion"
+                                    type="text" required>
                             </div>
                             <div class="col-xs-12 col-lg-6">
                                 <label>Correo electrónico</label>
@@ -36,30 +38,33 @@
                             </div>
                             <div class="col-xs-12 col-lg-4">
                                 <label>Telefono</label>
-                                <input class="form-control" [(ngModel)]="sucursal.telefono" name="telefono" type="number" min="0">
+                                <input class="form-control" [(ngModel)]="sucursal.telefono" name="telefono"
+                                    type="number" min="0">
                             </div>
                             <div class="col-xs-12 col-lg-4">
                                 <label>Celular</label>
-                                <input class="form-control" [(ngModel)]="sucursal.celular" name="celular" type="number" min="0">
+                                <input class="form-control" [(ngModel)]="sucursal.celular" name="celular" type="number"
+                                    min="0">
                             </div>
                             <div class="col-xs-12 col-lg-4">
                                 <label>Fax</label>
                                 <input class="form-control" [(ngModel)]="sucursal.fax" name="fax" type="email">
-                            </div> 
+                            </div>
                         </div>
                     </div>
                     <div class="btn-group pull-right">
-                        <button (click)="onEnviar()" [disabled]="formNewSucursal.invalid" class="btn btn-primary" type="button">
+                        <button (click)="onEnviar()" [disabled]="formEditSucursal.invalid" class="btn btn-primary"
+                            type="button">
                             <i class="fa fa-floppy-o"></i>
                             Guardar
                         </button>
                         <button (click)="onCancelar()" class="btn btn-default">
                             <i class="fa fa-times"></i>
-                           Cancelar
+                            Cancelar
                         </button>
                     </div>
-                </form>    
+                </form>
             </div>
         </div>
     </div>
-</div> 
+</div>

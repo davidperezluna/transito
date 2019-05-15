@@ -3,7 +3,7 @@ import { UserEmpresaService } from '../../../services/userEmpresa.service';
 import { LoginService } from '../../../services/login.service';
 
 
-import { UserEmpresaSucursal } from '../sucursal/new/userEmpresaSucursal.modelo';
+import { UserEmpresaSucursal } from '../sucursal/userEmpresaSucursal.modelo';
 import { UserEmpresaSucursalService } from '../../../services/userEmpresaSucursal.service';
 import { CfgMunicipioService } from '../../../services/cfgMunicipio.service';
 import { UserCfgEmpresaTipoSociedadService } from '../../../services/userCfgEmpresaTipoSociedad.service';
@@ -21,7 +21,6 @@ export class ShowComponent implements OnInit {
   @Output() ready = new EventEmitter<any>();
   @Input() empresa: any = null;
   public errorMessage;
-  public respuesta;
   public sucursal: UserEmpresaSucursal;
   public municipio: any;
   public sucursales: any;
@@ -31,6 +30,7 @@ export class ShowComponent implements OnInit {
   public formListaSucursales = false;
   public table: any;
   public formNewSucursal = false;
+  public formEditSucursal = false;
   public cargar = true;
   public checked: any;
 
@@ -48,7 +48,13 @@ export class ShowComponent implements OnInit {
           this.sucursales = response.data;
           this.formListaSucursales = true;
         } else {
-          this.formNewSucursal = true;
+          /* this.formNewSucursal = true; */
+          swal({
+            title: 'Error!',
+            text: response.message,
+            type: 'error',
+            confirmButtonColor: '#15d4be',
+          })
         }
       },
       error => {
@@ -70,6 +76,7 @@ export class ShowComponent implements OnInit {
     this.ngOnInit();
     this.formListaSucursales = false;
     this.formNewSucursal = false;
+    this.formEditSucursal = false;
   }
 
   onNewSucursal() {
@@ -94,7 +101,7 @@ export class ShowComponent implements OnInit {
     this.table = $('#dataTables-example').DataTable();
   }
 
-  deleteSucursal(id: any) {
+  onDelete(id: any) {
     swal({
       title: '¿Estás seguro?',
       text: "¡Se eliminara este registro!",
@@ -111,7 +118,7 @@ export class ShowComponent implements OnInit {
           response => {
             swal({
               title: 'Eliminado!',
-              text: 'Registro eliminado correctamente.',
+              text: response.message,
               type: 'success',
               confirmButtonColor: '#15d4be',
             })
@@ -129,5 +136,13 @@ export class ShowComponent implements OnInit {
         );
       }
     });
+  }
+
+  onEdit(sucursal: any) {
+    this.sucursal = sucursal;
+    this.formEditSucursal = true;
+    this.formNewSucursal = false;
+    this.formNewSucursal = false;
+    this.formListaSucursales = false;
   }
 }

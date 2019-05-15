@@ -7,6 +7,7 @@ import { UserEmpresaSucursalService } from '../../services/userEmpresaSucursal.s
 import { UserCfgEmpresaTipoService } from '../../services/userCfgEmpresaTipo.service';
 import { UserCfgEmpresaTipoSociedadService } from '../../services/userCfgEmpresaTipoSociedad.service';
 import { NewSucursalComponent } from './sucursal/new/new.component';
+import { EditSucursalComponent } from './sucursal/edit/edit.component';
 import { NewEmpresaComponent } from './new/new.component';
 import { ShowComponent } from './show/show.component';
 import { EditComponent } from './edit/edit.component';
@@ -16,8 +17,8 @@ import { UserEmpresaRepresentanteService } from '../../services/userEmpresaRepre
 
 @NgModule({
     imports: [CommonModule, Ng2BootstrapModule.forRoot(),SelectModule],
-    declarations: [UserEmpresaComponent,NewEmpresaComponent,EditComponent,NewSucursalComponent,ShowComponent],
-    exports: [UserEmpresaComponent, NewEmpresaComponent,EditComponent,NewSucursalComponent,ShowComponent],
+    declarations: [UserEmpresaComponent,NewEmpresaComponent,EditComponent,NewSucursalComponent, EditSucursalComponent, ShowComponent],
+    exports: [UserEmpresaComponent, NewEmpresaComponent, EditComponent, NewSucursalComponent, EditSucursalComponent, ShowComponent],
     providers: [UserEmpresaService, UserCfgEmpresaTipoService, UserCfgEmpresaTipoSociedadService, UserEmpresaSucursalService, UserEmpresaRepresentanteService]
 })
 
