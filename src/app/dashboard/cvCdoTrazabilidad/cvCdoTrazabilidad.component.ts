@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { CvCdoTrazabilidad } from './cvCdoTrazabilidad.modelo';
 import { CvCdoTrazabilidadService } from '../../services/cvCdoTrazabilidad.service';
 import { CvCdoComparendoService } from '../../services/cvCdoComparendo.service';
-import { CfgComparendoEstadoService } from '../../services/cfgComparendoEstado.service';
+import { CvCdoCfgEstadoService } from '../../services/cvCdoCfgEstado.service';
 import { LoginService } from '../../services/login.service';
-import { CvCdoTrazabilidad } from './cvCdoTrazabilidad.modelo';
+import { environment } from 'environments/environment'
 import swal from 'sweetalert2';
 declare var $: any;
 
@@ -11,9 +12,11 @@ declare var $: any;
   selector: 'app-index',
   templateUrl: './cvCdoTrazabilidad.component.html'
 })
+
 export class CvCdoTrazabilidadComponent implements OnInit {
   public errorMessage;
-	public id;
+  
+  public apiUrl = environment.apiUrl;
 
   public numero: any = null;
   public comparendo: any = null;
@@ -31,7 +34,7 @@ export class CvCdoTrazabilidadComponent implements OnInit {
   constructor(
     private _TrazabilidadService: CvCdoTrazabilidadService,
     private _ComparendoService: CvCdoComparendoService,
-    private _EstadoService: CfgComparendoEstadoService,
+    private _EstadoService: CvCdoCfgEstadoService,
 		private _LoginService: LoginService,
     ){}
     
@@ -51,8 +54,12 @@ export class CvCdoTrazabilidadComponent implements OnInit {
     );
   }
 
-  iniciarTabla(){
-    $('#dataTables-example').DataTable({
+  onInitTable(){
+    if (this.table) {
+      this.table.destroy();
+    }
+    
+    this.table = $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,
       sPaginationType: 'full_numbers',
@@ -64,8 +71,7 @@ export class CvCdoTrazabilidadComponent implements OnInit {
           sLast: '<i class="fa fa-step-forward"></i>'
         }
       }
-   });
-   this.table = $('#dataTables-example').DataTable();
+    });
   }
 
   onSearch() {
@@ -75,6 +81,7 @@ export class CvCdoTrazabilidadComponent implements OnInit {
       response => {
         if (response.status == 'success') {
           this.comparendo = response.data;
+          this.formIndex = true;
 
           swal({
             title: 'Buscando trazabilidad!',
@@ -91,7 +98,7 @@ export class CvCdoTrazabilidadComponent implements OnInit {
                 this.acuerdoPago = response.data.acuerdoPago;
 
                 let timeoutId = setTimeout(() => {
-                  this.iniciarTabla();
+                  this.onInitTable();
                 }, 100);
 
                 swal.close();
@@ -117,6 +124,8 @@ export class CvCdoTrazabilidadComponent implements OnInit {
           );
         }else {
           this.comparendo = null;
+          this.formIndex = false;
+
           swal({
             title: 'Alerta!',
             text: response.message,

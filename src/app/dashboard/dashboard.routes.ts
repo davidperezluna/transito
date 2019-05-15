@@ -26,7 +26,9 @@ import { CvAuCfgHorarioRoutes } from './cvAuCfgHorario/cvAuCfgHorario.routes';
 import { CvCdoComparendoRoutes } from './cvCdoComparendo/cvCdoComparendo.routes';
 import { CvCdoTrazabilidadRoutes } from './cvCdoTrazabilidad/cvCdoTrazabilidad.routes';
 import { CvCdoNotificacionRoutes } from './cvCdoNotificacion/cvCdoNotificacion.routes';
+import { CvCdoCfgDescuentoRoutes } from './cvCdoCfgDescuento/cvCdoCfgDescuento.routes';
 import { CvCdoCfgInteresRoutes } from './cvCdoCfgInteres/cvCdoCfgInteres.routes';
+import { CvCdoCfgEstadoRoutes } from './cvCdoCfgEstado/cvCdoCfgEstado.routes';
 import { CvRestriccionRoutes } from './cvRestriccion/cvRestriccion.routes';
 import { CvCfgInteresRoutes } from './cvCfgInteres/cvCfgInteres.routes';
 import { CvCfgPorcentajeInicialRoutes } from './cvCfgPorcentajeInicial/cvCfgPorcentajeInicial.routes';
@@ -230,7 +232,6 @@ import { CfgMunicipioRoutes } from './cfgMunicipio/cfgMunicipio.routes';
 import { CfgTipoInfractorRoutes } from './cfgTipoInfractor/cfgTipoInfractor.routes';
 import { CfgAdmFormatoRoutes } from './cfgAdmFormato/cfgAdmFormato.routes';
 import { CfgAdmFormatoTipoRoutes } from './cfgAdmFormatoTipo/cfgAdmFormatoTipo.routes';
-import { CfgComparendoEstadoRoutes } from './cfgComparendoEstado/cfgComparendoEstado.routes';
 import { CfgAuditoriaRoutes } from './cfgAuditoria/cfgAuditoria.routes';
 import { CfgSmlmvRoutes } from './cfgSmlmv/cfgSmlmv.routes';
 import { CfgModuloRoutes } from './cfgModulo/cfgModulo.routes';
@@ -345,7 +346,9 @@ export const DashboardRoutes: Route[] = [
       ...CvCdoComparendoRoutes,
       ...CvCdoTrazabilidadRoutes,
       ...CvCdoNotificacionRoutes,
+      ...CvCdoCfgDescuentoRoutes,
       ...CvCdoCfgInteresRoutes,
+      ...CvCdoCfgEstadoRoutes,
       ...CvAudienciaRoutes,
       ...CvAuCfgAtencionRoutes,
       ...CvAuCfgHorarioRoutes,
@@ -412,7 +415,6 @@ export const DashboardRoutes: Route[] = [
       ...FacturaInfraccionRoutes,
       ...GestionTransportePublicoRoutes,
       ...rnaRegistroInsumosRoutes,
-      ...CfgComparendoEstadoRoutes,
       ...CfgOrganismoTransitoRoutes,
       ...CfgEntidadJudicialRoutes,
       ...CfgChoqueConRoutes,

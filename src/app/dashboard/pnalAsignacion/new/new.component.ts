@@ -19,6 +19,7 @@ public asignacion: PnalAsignacion;
 public errorMessage;
 
 public organismosTransito: any;
+public numeroActa: any = null;
 
 constructor(
   private _AsignacionService: PnalAsignacionService,
@@ -86,6 +87,7 @@ constructor(
       response => {        
         if(response.status == 'success'){
           this.asignacion = response.data;
+          this.numeroActa = response.data.numeroActa;
           
           swal({
             title: 'Perfecto!',

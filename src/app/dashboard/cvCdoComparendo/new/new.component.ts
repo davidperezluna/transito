@@ -15,7 +15,7 @@ import { UserCfgTipoIdentificacionService } from '../../../services/userCfgTipoI
 import { PqoCfgPatioService } from '../../../services/pqoCfgPatio.service';
 import { PqoCfgGruaService } from '../../../services/pqoCfgGrua.service';
 import { PqoInmovilizacionService } from '../../../services/pqoInmovilizacion.service';
-import { CfgComparendoEstadoService } from '../../../services/cfgComparendoEstado.service';
+import { CvCdoCfgEstadoService } from '../../../services/cvCdoCfgEstado.service';
 import { VhloCfgRadioAccionService } from '../../../services/vhloCfgRadioAccion.service';
 import { VhloCfgModalidadTransporteService } from '../../../services/vhloCfgModalidadTransporte.service';
 import { VhloCfgTransportePasajeroService } from '../../../services/vhloCfgTransportePasajero.service';
@@ -81,6 +81,11 @@ export class NewComponent implements OnInit {
   public tiposIdentificacion: any;
   public comparendoEstados: any;
 
+  public search = {
+    'idFuncionario': null,
+    'numero': null,
+  }
+
   public infractor = {
     'idTipoIdentificacion': null,
     'idCategoriaLicenciaConduccion': null,
@@ -135,7 +140,7 @@ constructor(
   private _PqoCfgPatioService: PqoCfgPatioService,
   private _PqoCfgGruaService: PqoCfgGruaService,
   private _InmovilizacionService: PqoInmovilizacionService,
-  private _CfgComparendoEstadoService: CfgComparendoEstadoService,
+  private _CvCdoCfgEstadoService: CvCdoCfgEstadoService,
   private _RadioAccionService: VhloCfgRadioAccionService,
   private _ModalidadTransporteService: VhloCfgModalidadTransporteService,
   private _TransportePasajeroService: VhloCfgTransportePasajeroService,
@@ -211,7 +216,8 @@ constructor(
 		this._ComparendoService.register(datos,token).subscribe(
 			response => {
         if(response.status == 'success'){
-          this.ready.emit(true);
+          this.consecutivo = null;
+
           swal({
             title: 'Perfecto!',
             text: response.message,
@@ -238,8 +244,8 @@ constructor(
 		}); 
   }
 
-  onChangedFuncionario(){
-    if (this.agenteTransitoSelected) {
+  onSearchComparendo(){
+    if (this.search.idFuncionario) {
      let token = this._LoginService.getToken();
 
       swal({
@@ -250,13 +256,13 @@ constructor(
         }
       });
 
-      this._FuncionarioService.show({ 'id': this.agenteTransitoSelected }, token).subscribe(
+      this._FuncionarioService.show({ 'id': this.search.idFuncionario }, token).subscribe(
         response => {
           if (response.status == 'success') {
             this.funcionario = response.data;
             this.comparendo.idFuncionario = this.funcionario.id;
   
-            this._PnalCfgCdoConsecutivoService.searchLastByFuncionario({ 'funcionario': this.funcionario }, token).subscribe(
+            this._PnalCfgCdoConsecutivoService.searchByNumeroAndFuncionario(this.search, token).subscribe(
               response => {
                 if (response.status == 'success') {
                   swal.close();

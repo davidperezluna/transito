@@ -1,17 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { rpcccInventarioDocumentalComponent } from './rpcccInventarioDocumental.component';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
+import { CvCdoCfgEstadoComponent } from './cvCdoCfgEstado.component';
 import { CvCdoCfgEstadoService } from '../../services/cvCdoCfgEstado.service';
 
+import { NewComponent } from './new/new.component';
+import { EditComponent } from './edit/edit.component';
 import { SelectModule } from 'angular2-select';
-import { ExportComponent } from './export/export.component';
 
 @NgModule({
     imports: [CommonModule, Ng2BootstrapModule.forRoot(),SelectModule],
-    declarations: [rpcccInventarioDocumentalComponent, ExportComponent],
-    exports: [rpcccInventarioDocumentalComponent, ExportComponent],
+    declarations: [CvCdoCfgEstadoComponent,NewComponent,EditComponent],
+    exports: [CvCdoCfgEstadoComponent, NewComponent,EditComponent],
     providers:[CvCdoCfgEstadoService]
 })
 
-export class RpcccInventarioDocumentalModule { }
+export class CvCdoCfgEstadoModule { }

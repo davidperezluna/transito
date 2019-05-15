@@ -5,8 +5,8 @@ import { environment } from 'environments/environment';
 import  "rxjs/add/operator/map";
 
 @Injectable()
-export class CvAudienciaService {
-	private url = environment.apiUrl + 'contravencional/cvaudiencia';
+export class CvCdoCfgEstadoService {
+	private url = environment.apiUrl + 'contravencional/cvcdocfgestado';
 	public identity;
 	public token;
 
@@ -21,7 +21,7 @@ export class CvAudienciaService {
 
 	register(datos, token) {
 		let json = JSON.stringify(datos);
-		let params = "data=" + json + "&authorization=" + token;
+		let params = "json=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/new", params, { headers: headers }).map(
 			res => res.json(),
@@ -29,13 +29,11 @@ export class CvAudienciaService {
 		);
 	}
 
-	delete(datos, token) {
-		let json = JSON.stringify(datos);
-		let params = "data=" + json + "&authorization=" + token;
+	delete(token, id) {
+		let params = "authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-		return this._http.post(this.url + "/delete", params, { headers: headers }).map(
-			res => res.json(),
-			this._loogerService.registerLog(token, 'DELETE', json, this.url)
+		return this._http.post(this.url + "/" + id + "/delete", params, { headers: headers }).map(
+			res => res.json()
 		);
 	}
 
@@ -48,7 +46,7 @@ export class CvAudienciaService {
 
 	edit(datos, token) {
 		let json = JSON.stringify(datos);
-		let params = "data=" + json + "&authorization=" + token;
+		let params = "json=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/edit", params, { headers: headers }).map(
 			res => res.json(),
@@ -58,18 +56,5 @@ export class CvAudienciaService {
 
 	select() {
 		return this._http.get(this.url + "/select").map(res => res.json());
-	}
-
-	searchByFiltros(datos, token) {
-		let json = JSON.stringify(datos);
-		let params = "data=" + json + "&authorization=" + token;
-		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-		return this._http.post(this.url + "/search/filtros", params, { headers: headers }).map(res => res.json());
-	}
-
-	searchLast(token) {
-		let params = "&authorization=" + token;
-		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-		return this._http.post(this.url + "/search/last", params, { headers: headers }).map(res => res.json());
 	}
 }

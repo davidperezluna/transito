@@ -1,4 +1,4 @@
-export class CfgComparendoEstado{
+export class CvCdoCfgEstado{
 	constructor(
 		public nombre: string,
 		public sigla: string,

@@ -1,4 +1,4 @@
-<div class="container" >
+<div class="container-fluid">
   <hr>
   <div class="row" *ngIf='formSearch'>
     <div class="card">
@@ -64,6 +64,17 @@
                       <br>
                       <b>No. 
                         {{ acuerdoPago.numero }}
+                        <!-- 
+                          <button (click)="onAcuerdoPago(acuerdoPago)" class="btn btn-xs btn-default">
+                            {{ acuerdoPago.numero }}
+                          </button>
+                        -->
+                      </b>
+                    </div>
+                    <div *ngIf="trazabilidad.estado.id == 14">
+                      <br>
+                      <b>
+                        {{ trazabilidad.estado.nombre }}
                         <!-- 
                           <button (click)="onAcuerdoPago(acuerdoPago)" class="btn btn-xs btn-default">
                             {{ acuerdoPago.numero }}

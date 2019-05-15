@@ -1,6 +1,6 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import { CvCdoComparendoService } from '../../../services/cvCdoComparendo.service';
-import { CfgComparendoEstadoService } from '../../../services/cfgComparendoEstado.service';
+import { CvCdoCfgEstadoService } from '../../../services/cvCdoCfgEstado.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 declare var $: any;
@@ -21,7 +21,7 @@ export class StateComponent implements OnInit {
 constructor(
   private _LoginService: LoginService,
   private _ComparendoService: CvCdoComparendoService,
-  private _EstadoService: CfgComparendoEstadoService,
+  private _EstadoService: CvCdoCfgEstadoService,
 ){}
 
   ngOnInit() { 

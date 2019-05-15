@@ -15,6 +15,7 @@ export class NewComponent implements OnInit {
   public errorMessage;
   public numeroComparendo: any = null;
   public comparendo: any = null;
+  public audienciaLast: any = null;
 
 constructor(
   private _AudienciaService: CvAudienciaService,
@@ -24,6 +25,33 @@ constructor(
 
   ngOnInit() {
     this.audiencia = new CvAudiencia(null, null, null, null);
+
+    let token = this._LoginService.getToken();
+
+    this._AudienciaService.searchLast(token).subscribe(
+      response => {
+        if (response.status == 'success') {
+          this.audienciaLast = response.data;
+
+          swal({
+            title: 'Perfecto!',
+            text: response.message,
+            type: 'success',
+            confirmButtonText: 'Aceptar'
+          });
+        } else {
+          this.audienciaLast = null;
+        }
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      }
+    );
   }
 
   onCancelar(){

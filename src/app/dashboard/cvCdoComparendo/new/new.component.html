@@ -11,46 +11,56 @@
             <div class="card-body"><!-- .card-body -->
                 <div class="row">
                     <form #comparendoForm="ngForm">
-                            <div class="form-group">   
-                                <div class="row"><!-- .row -->
-                                    <div class="col-xs-12 col-lg-12">
-                                        <label>Agente de transito <b class="text-danger">*</b></label>
-                                        <ng-select [multiple]="false" [options]="agentesTransito" [(ngModel)]="agenteTransitoSelected" name="idFuncionario" required>
-                                            </ng-select>
-                                    </div>
-                                    <div class="col-xs-12 col-lg-12">
-                                        <div class="btn-group">
-                                            <button (click)="onChangedFuncionario()" class="btn btn-primary">
-                                                Diligenciar
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12" *ngIf='consecutivo'>
-                                        <table class="table table-bordered table-striped">
-                                            <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <strong>Organismo de Transito: </strong>
-                                                        <br>{{ funcionario.organismoTransito.nombre }}
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <strong>Nro. consecutivo: </strong>
-                                                        <br>{{ consecutivo?.numero }}
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <strong>Estado: </strong>
-                                                        <br>{{ consecutivo?.estado }}
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div><!-- /.row -->                
+                        <div class="form-group">   
+                            <div class="row"><!-- .row -->
+                                <div class="col-xs-12 col-lg-12">
+                                    <label>Agente de transito <b class="text-danger">*</b></label>
+                                    <ng-select [multiple]="false" [options]="agentesTransito" [(ngModel)]="search.idFuncionario" name="idFuncionario" required>
+                                        </ng-select>
+                                </div>
+                                <div class="col-xs-12 col-lg-12">
+                                    <label>No. comparendo</label>
+                                    <input class="form-control text-uppercase" [(ngModel)]="search.numero" name="numero" type="text" required>
+                                </div>
                             </div>
+
+                            <div class="row"><!-- .row -->
+                                <div class="col-xs-12 col-lg-12">
+                                    <div class="btn-group">
+                                        <button (click)="onSearchComparendo()" class="btn btn-primary">
+                                            Diligenciar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row"><!-- .row -->
+                                <div class="col-xs-12 col-lg-12" *ngIf='consecutivo'>
+                                    <table class="table table-bordered table-striped">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <strong>Organismo de Transito: </strong>
+                                                    <br>{{ funcionario.organismoTransito.nombre }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <strong>Nro. consecutivo: </strong>
+                                                    <br>{{ consecutivo?.numero }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <strong>Estado: </strong>
+                                                    <br>{{ consecutivo?.estado }}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div><!-- /.row -->                
+                        </div>
                     </form>     
                 </div>
             </div><!-- /.card-body -->
@@ -318,7 +328,7 @@
                             <div class="row">
                                 <div class="col-xs-12 col-lg-6">
                                     <label>Org.de T.</label>
-                                    <ng-select [multiple]="false" [options]="organismosTransito" [(ngModel)]="comparendo.idOrganismoTransitoLicencia" name="organismoTransitoLicencia"
+                                    <ng-select [multiple]="false" [options]="organismosTransitoNacional" [(ngModel)]="comparendo.idOrganismoTransitoLicencia" name="organismoTransitoLicencia"
                                         required></ng-select>
                                 </div>
                                 <div class="col-xs-12 col-lg-6">
@@ -397,16 +407,24 @@
                                 <b>16. Datos de la inmovilización</b>
                             </h6>
                         </div>
-                        <div class="col-xs-12 col-lg-6">
-                            <label>Patio</label>
-                            <ng-select *ngIf="!inmovilizacionOld" [multiple]="false" [options]="patios" [(ngModel)]="inmovilizacion.idPatio" name="patio" required></ng-select>
-                            <span *ngIf="inmovilizacionOld">{{ inmovilizacionOld.patio.nombre }}</span>
-                        </div>
-                        <div class="col-xs-12 col-lg-6">
-                            <div class="form-group">
-                                <label>Grúa</label>
-                                <ng-select *ngIf="!inmovilizacionOld" [multiple]="false" [options]="gruas" [(ngModel)]="inmovilizacion.idGrua" name="grua" required></ng-select>
-                                <span *ngIf="inmovilizacionOld">{{ inmovilizacionOld.grua.codigo }} - {{ inmovilizacionOld.grua.placa }}</span>
+                        <div class="col-xs-12 col-lg-12">
+                            <div class="row" *ngIf="inmovilizacionOld">
+                                <div class="col-xs-12 col-lg-6">
+                                    <label>Patio</label>
+                                    <span>{{ inmovilizacionOld.patio.nombre }}</span>
+                                </div>
+                                <div class="col-xs-12 col-lg-6">
+                                    <div class="form-group">
+                                        <label>Grúa</label>
+                                        <span>{{ inmovilizacionOld.grua.codigo }} - {{ inmovilizacionOld.grua.placa }}</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-12 col-lg-12">
+                                    <span class="badge badge-success">No se realizo registro de inmovilización</span>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -2,7 +2,7 @@ import { Component, OnInit,Output,EventEmitter } from '@angular/core';
 import { CvAuCfgHorario } from '../cvAuCfgHorario.modelo';
 import { CvAuCfgHorarioService } from '../../../services/cvAuCfgHorario.service';
 import { CfgCargoService } from '../../../services/cfgCargo.service';
-import { CfgComparendoEstadoService } from '../../../services/cfgComparendoEstado.service';
+import { CvCdoCfgEstadoService } from '../../../services/cvCdoCfgEstado.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
