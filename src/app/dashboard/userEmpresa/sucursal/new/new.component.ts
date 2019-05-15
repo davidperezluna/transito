@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { UserEmpresaSucursal } from './userEmpresaSucursal.modelo';
+import { UserEmpresaSucursal } from '../userEmpresaSucursal.modelo';
 
 import { UserEmpresaSucursalService } from '../../../../services/userEmpresaSucursal.service';
 import { LoginService } from '../../../../services/login.service';
@@ -26,7 +26,7 @@ export class NewSucursalComponent implements OnInit {
   constructor(
     private _SucursalService: UserEmpresaSucursalService,
     private _MunicipioService: CfgMunicipioService,
-    private _loginService: LoginService,
+    private _LoginService: LoginService,
 
   ) { }
 
@@ -53,7 +53,7 @@ export class NewSucursalComponent implements OnInit {
   }
 
   onEnviar() {
-    let token = this._loginService.getToken();
+    let token = this._LoginService.getToken();
 
     this.sucursal.idMunicipio = this.municipioSelected;
     this.sucursal.idEmpresa = this.empresa.id;
@@ -88,12 +88,12 @@ export class NewSucursalComponent implements OnInit {
 
   onNewSucursal() {
     this.formNewSucursal = true;
-    this.btnVisible = true;
+    /* this.btnVisible = true; */
     this.formIndexSucursal = false;
   }
 
-  cancelarNewFormulario1() {
+  /* cancelarNewFormulario1() {
     this.btnVisible = false;
     this.formNewSucursal = false
-  }
+  } */
 }

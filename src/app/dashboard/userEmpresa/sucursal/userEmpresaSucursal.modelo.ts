@@ -11,7 +11,5 @@ export class UserEmpresaSucursal{
 		public fax: number,
 		public estado: number,
 		public idEmpresa: number,
-		
-				
 	){}
 }

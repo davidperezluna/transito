@@ -72,6 +72,10 @@
                         <i class="fa fa-times"></i>
                         Cancelar
                     </button>
+                    <button (click)="onNewSucursal()" class="btn btn-primary">
+                        <i class="fa fa-plus"></i>
+                        Nuevo
+                    </button>
                 </div>
             </div>
         </div>
@@ -81,9 +85,9 @@
             <div class="card" *ngIf='formListaSucursales'>
                 <div class="card-header">
                     <h5 >
-                        <b class="text-center">Sucursales</b>
+                        Sucursales
                         <div class="btn-group pull-right">
-                            <button (click)="onNewSucursal()" class="btn btn-outline-success  btn-round pull-left "  data-target="#themepicker" data-toggle="modal"><span class="text">Nuevo</span> <i class="ti-save ml-2"></i></button>
+                            <button (click)="onNewSucursal()" class="btn btn-success  btn-round pull-left "  data-target="#themepicker" data-toggle="modal"><span class="text">Nuevo</span> <i class="ti-save ml-2"></i></button>
                         </div>
                     </h5>
                 </div>
@@ -107,8 +111,8 @@
                                 <td>{{sucursal.direccion}}</td>
                                 <td>{{sucursal.municipio.nombre}}</td>
                                 <td>
-                                    <!-- <button (click)="editSucursal(sucursal)"       class="btn btn-outline-info btn-xs" type="button">Editar</button>  -->
-                                    <button (click)="deleteSucursal(sucursal.id)"  class="btn btn-outline-danger btn-xs" type="button">Eliminar</button>
+                                    <button (click)="onEdit(sucursal)" class="btn btn-info btn-xs" type="button">Editar</button> 
+                                    <button (click)="onDelete(sucursal.id)"  class="btn btn-danger btn-xs" type="button">Eliminar</button>
                                 </td>
                             </tr>
                         </tbody>
@@ -119,6 +123,7 @@
         <!-- fin de lista de sucursales -->
         <!--formulario de nueva sucursal-->
         <app-new-sucursal *ngIf='formNewSucursal' [empresa]="empresa" (readySucursal)="readySucursal($event)"></app-new-sucursal>
+        <app-edit-sucursal *ngIf='formEditSucursal' [sucursal]="sucursal" (readySucursal)="readySucursal($event)"></app-edit-sucursal>
  
         <!-- fin formulario -->
      </div> 
