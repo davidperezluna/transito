@@ -1,4 +1,4 @@
-<div class="row" *ngIf="asignacion && !asignacion.id">
+<div class="row" *ngIf="!numeroActa">
     <div class="col-xs-12 col-lg-6">
         <div class="card">
             <div class="card-header">
@@ -53,11 +53,11 @@
     </div>
 </div>
 
-<div class="row" *ngIf="asignacion && asignacion.id">
+<div class="row" *ngIf="numeroActa">
     <div class="col-xs-12 col-lg-12">
         <a href="{{ apiUrl }}/acta/{{ asignacion.id }}/pdf" class="btn btn-success" target="_blank">
             <i class="fa fa-file-pdf-o"></i>
-            {{ asignacion.numeroActa}}
+            {{ numeroActa }}
         </a>
         <button (click)="onCancelar()" class="btn btn-default" type="button">
             <i class="fa fa-times"></i>

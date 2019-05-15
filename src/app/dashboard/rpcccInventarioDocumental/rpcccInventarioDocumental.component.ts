@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {LoginService} from '../../services/login.service';
 import { PnalFuncionarioService } from '../../services/pnalFuncionario.service';
-import { CfgComparendoEstadoService } from '../../services/cfgComparendoEstado.service';
+import { CvCdoCfgEstadoService } from '../../services/cvCdoCfgEstado.service';
 import { CvCdoComparendoService } from '../../services/cvCdoComparendo.service';
 import { DatePipe, CurrencyPipe } from '@angular/common';
 
@@ -49,7 +49,7 @@ export class rpcccInventarioDocumentalComponent implements OnInit {
   constructor(
     private _loginService: LoginService,
     private _PnalFuncionarioService: PnalFuncionarioService,
-    private _CfgComparendoEstadoService: CfgComparendoEstadoService,
+    private _CvCdoCfgEstadoService: CvCdoCfgEstadoService,
     private _ComparendoService: CvCdoComparendoService,
     ){}
     
@@ -83,7 +83,7 @@ export class rpcccInventarioDocumentalComponent implements OnInit {
     }
     );
 
-    this._CfgComparendoEstadoService.select().subscribe(
+    this._CvCdoCfgEstadoService.select().subscribe(
       response=>{
         this.tipoComparendos = response;
       },

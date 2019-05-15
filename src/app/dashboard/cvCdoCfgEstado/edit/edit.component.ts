@@ -1,30 +1,27 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { CfgComparendoEstado } from '../cfgComparendoEstado.modelo';
-import { CfgComparendoEstadoService } from '../../../services/cfgComparendoEstado.service';
+import { CvCdoCfgEstadoService } from '../../../services/cvCdoCfgEstado.service';
 import { CfgAdmFormatoService } from '../../../services/cfgAdmFormato.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-new',
-  templateUrl: './new.component.html'
+  selector: 'app-edit',
+  templateUrl: './edit.component.html'
 })
-export class NewComponent implements OnInit {
-@Output() ready = new EventEmitter<any>();
-public estado: CfgComparendoEstado;
-public errorMessage;
-public formatos;
+export class EditComponent implements OnInit{
+  @Output() ready = new EventEmitter<any>();
+  @Input() estado:any = null;
+  public errorMessage;
+  public formReady = false;
+  public formatos;
 
 constructor(
-  private _EstadoService: CfgComparendoEstadoService,
+  private _EstadoService: CvCdoCfgEstadoService,
   private _FormatoService: CfgAdmFormatoService,
   private _loginService: LoginService,
   ){}
 
-  ngOnInit() {
-    this.estado = new CfgComparendoEstado(null, null, null, null, null, null, null, null);
-
-
+  ngOnInit(){ 
     this._FormatoService.select().subscribe(
       response => {
         this.formatos = response;
@@ -39,15 +36,12 @@ constructor(
       }
     );
   }
-  
-  onCancelar(){
-    this.ready.emit(true);
-  }
-  
+
+  onCancelar(){ this.ready.emit(true); }
+
   onEnviar(){
     let token = this._loginService.getToken();
-    
-		this._EstadoService.register(this.estado,token).subscribe(
+		this._EstadoService.edit(this.estado,token).subscribe(
 			response => {
         if(response.status == 'success'){
           this.ready.emit(true);
@@ -57,16 +51,10 @@ constructor(
             type: 'success',
             confirmButtonText: 'Aceptar'
           })
-        }else{
-          swal({
-            title: 'Error!',
-            text: response.message,
-            type: 'error',
-            confirmButtonText: 'Aceptar'
-          })
         }
 			error => {
 					this.errorMessage = <any>error;
+
 					if(this.errorMessage != null){
 						console.log(this.errorMessage);
 						alert("Error en la petición");

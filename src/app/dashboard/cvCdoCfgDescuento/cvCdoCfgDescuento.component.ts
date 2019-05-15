@@ -1,51 +1,46 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { CfgComparendoEstadoService } from '../../services/cfgComparendoEstado.service';
+import { Component, OnInit } from '@angular/core';
+import { CvCdoCfgDescuento } from './cvCdoCfgDescuento.modelo';
+import { CvCdoCfgDescuentoService } from '../../services/cvCdoCfgDescuento.service';
 import { LoginService } from '../../services/login.service';
-import { CfgComparendoEstado } from './cfgComparendoEstado.modelo';
 import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './cfgComparendoEstado.component.html'
+  templateUrl: './cvCdoCfgDescuento.component.html'
 })
-export class CfgComparendoEstadoComponent implements OnInit {
+
+export class CvCdoCfgDescuentoComponent implements OnInit {
   public errorMessage;
-	public id;
-	public respuesta;
-	public estados;
+
+	public descuentos;
 	public formNew = false;
 	public formEdit = false;
   public formIndex = true;
-  public table: any;
-  public estado: CfgComparendoEstado;
+  public table:any; 
+  public descuento: CvCdoCfgDescuento;
 
   constructor(
-    private _EstadoService: CfgComparendoEstadoService,
+    private _DescuentoService: CvCdoCfgDescuentoService,
 		private _LoginService: LoginService,
-    ) {}
+    ){}
     
   ngOnInit() {
     swal({
       title: 'Cargando Tabla!',
       text: 'Solo tardara unos segundos por favor espere.',
-      timer: 1500,
       onOpen: () => {
         swal.showLoading()
       }
-    }).then((result) => {
-      if (
-        // Read more about handling dismissals
-        result.dismiss === swal.DismissReason.timer
-      ) {
-      }
-    })
-    this._EstadoService.index().subscribe(
+    });
+
+    this._DescuentoService.index().subscribe(
 				response => {
-          this.estados = response.data;
+          this.descuentos = response.data;
           let timeoutId = setTimeout(() => {  
             this.iniciarTabla();
           }, 100);
+          swal.close();
 				}, 
 				error => {
 					this.errorMessage = <any>error;
@@ -57,6 +52,7 @@ export class CfgComparendoEstadoComponent implements OnInit {
 				}
       );
   }
+
   iniciarTabla(){
     $('#dataTables-example').DataTable({
       responsive: true,
@@ -88,8 +84,8 @@ export class CfgComparendoEstadoComponent implements OnInit {
       this.ngOnInit();
     }
   }
-  
-  deleteInfraccionCategoria(id:any){
+
+  onDelete(id:any){
     swal({
       title: '¿Estás seguro?',
       text: "¡Se eliminara este registro!",
@@ -102,7 +98,8 @@ export class CfgComparendoEstadoComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._LoginService.getToken();
-        this._EstadoService.delete(token,id).subscribe(
+        
+        this._DescuentoService.delete({'id':id}, token).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',
@@ -111,7 +108,6 @@ export class CfgComparendoEstadoComponent implements OnInit {
                       confirmButtonColor: '#15d4be',
                     })
                   this.table.destroy();
-                  this.respuesta= response;
                   this.ngOnInit();
               }, 
             error => {
@@ -129,8 +125,8 @@ export class CfgComparendoEstadoComponent implements OnInit {
     })
   }
 
-  onEdit(estado:any){
-    this.estado = estado;
+  onEdit(descuento:any){
+    this.descuento = descuento;
     this.formEdit = true;
     this.formIndex = false;
   }

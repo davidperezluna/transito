@@ -59,10 +59,10 @@
                                 </thead>
                                 <tbody>
                                     <tr class="odd" *ngFor="let comparendo of comparendos; let i = index">
-                                        <td>{{ i }}</td>
+                                        <td>{{ i + 1 }}</td>
                                         <td>
                                             <a (click)="onRecord(comparendo)" class="text-primary">
-                                                <b>{{ comparendo.consecutivo.consecutivo }}</b>
+                                                <b>{{ comparendo.consecutivo.numero }}</b>
                                             </a>
                                         </td>
                                         <td>{{ comparendo.placa }}</td>
@@ -114,6 +114,16 @@
                                         <button (click)="onAcuerdoPago()" class="btn btn-xs btn-default">
                                             {{ acuerdoPago.numero }}
                                         </button>
+                                    </b>
+                                </span>
+
+                                <span *ngIf="trazabilidad.estado.id == 14">
+                                    <br>
+                                    <b>
+                                        <a href="{{ apiUrl }}/minuta/estados/{{ trazabilidad.id }}/pdf" class="btn btn-success" target="_blank">
+                                            <i class="fa fa-file-pdf-o"></i>
+                                            Minuta Estados
+                                        </a>
                                     </b>
                                 </span>
                                 <br>
@@ -179,13 +189,13 @@
             </div>
             <div class="card-footer">
                 <div class="btn-group">
-                    <button (click)="onSearch()" class="btn btn-default">
-                        <i class="fa fa-times"></i>
-                        Cancelar
-                    </button>
                     <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
                         <i class="fa fa-save"></i>
                         Enviar
+                    </button>
+                    <button (click)="onSearch()" class="btn btn-default">
+                        <i class="fa fa-times"></i>
+                        Cancelar
                     </button>
                 </div>
             </div>

@@ -1,0 +1,41 @@
+<hr>
+<div class="row">
+    <div class="col-xs-12 col-lg-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="text-uppercase"><b>Nuevo descuento</b></h5>
+                <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
+            </div>
+            <div class="card-body">
+                <form #formNew="ngForm"> 
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Porcentaje <strong class="text-danger">*</strong></label>
+                            <input type="numeric" class="form-control" [(ngModel)]="descuento.porcentaje" name="porcentaje" />
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Fecha inicial <strong class="text-danger">*</strong></label>
+                            <input type="date" class="form-control" [(ngModel)]="descuento.fechaInicial" name="fechaInicial" />
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Fecha final <strong class="text-danger">*</strong></label>
+                            <input type="date" class="form-control" [(ngModel)]="descuento.fechaFinal" name="fechaFinal" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <div class="btn-group">
+                    <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
+                        <i class="fa fa-save"></i>
+                        Enviar
+                    </button>
+                    <button (click)="onCancelar()" class="btn btn-default">
+                        <i class="fa fa-times"></i>
+                        Cancelar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

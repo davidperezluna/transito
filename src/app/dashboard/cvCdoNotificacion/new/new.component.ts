@@ -2,7 +2,7 @@ import { Component, OnInit,Output,EventEmitter } from '@angular/core';
 import { CvCdoNotificacion } from '../cvCdoNotificacion.modelo';
 import { CvCdoNotificacionService } from '../../../services/cvCdoNotificacion.service';
 import { CfgCargoService } from '../../../services/cfgCargo.service';
-import { CfgComparendoEstadoService } from '../../../services/cfgComparendoEstado.service';
+import { CvCdoCfgEstadoService } from '../../../services/cvCdoCfgEstado.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -29,7 +29,7 @@ export class NewComponent implements OnInit {
 constructor(
   private _NotificacionService: CvCdoNotificacionService,
   private _CargoService: CfgCargoService,
-  private _EstadoService: CfgComparendoEstadoService,
+  private _EstadoService: CvCdoCfgEstadoService,
   private _loginService: LoginService,
   ){}
 

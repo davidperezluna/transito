@@ -2,7 +2,7 @@ import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@ang
 import { CvCdoComparendoService } from '../../../services/cvCdoComparendo.service';
 import { CfgAdmFormatoService } from '../../../services/cfgAdmFormato.service';
 import { CvCdoTrazabilidadService } from '../../../services/cvCdoTrazabilidad.service';
-import { CfgComparendoEstadoService } from '../../../services/cfgComparendoEstado.service';
+import { CvCdoCfgEstadoService } from '../../../services/cvCdoCfgEstado.service';
 import { LoginService } from '../../../services/login.service';
 import { environment } from 'environments/environment'
 import swal from 'sweetalert2';
@@ -66,7 +66,7 @@ constructor(
   private _ComparendoService: CvCdoComparendoService,
   private _FormatoService: CfgAdmFormatoService,
   private _TrazabilidadService: CvCdoTrazabilidadService,
-  private _EstadoService: CfgComparendoEstadoService,
+  private _EstadoService: CvCdoCfgEstadoService,
   private _LoginService: LoginService,
   ){}
 

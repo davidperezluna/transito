@@ -39,11 +39,12 @@ import { SvSenialInventarioModule } from './svSenialInventario/svSenialInventari
 import { CvCdoComparendoModule } from './cvCdoComparendo/cvCdoComparendo.module';
 import { CvCdoTrazabilidadModule } from './cvCdoTrazabilidad/cvCdoTrazabilidad.module';
 import { CvCdoNotificacionModule } from './cvCdoNotificacion/cvCdoNotificacion.module';
+import { CvCdoCfgDescuentoModule } from './cvCdoCfgDescuento/cvCdoCfgDescuento.module';
 import { CvCdoCfgInteresModule } from './cvCdoCfgInteres/cvCdoCfgInteres.module';
+import { CvCdoCfgEstadoModule } from './cvCdoCfgEstado/cvCdoCfgEstado.module';
 import { CvAudienciaModule } from './cvAudiencia/cvAudiencia.module';
 import { CvAuCfgAtencionModule } from './cvAuCfgAtencion/cvAuCfgAtencion.module';
 import { CvAuCfgHorarioModule } from './cvAuCfgHorario/cvAuCfgHorario.module';
-
 import { CvLcCfgMotivoModule } from './cvLcCfgMotivo/cvLcCfgMotivo.module';
 import { CvRestriccionModule } from './cvRestriccion/cvRestriccion.module';
 import { CvCfgInteresModule } from './cvCfgInteres/cvCfgInteres.module';
@@ -141,7 +142,6 @@ import { UserLcCfgCategoriaModule } from './userLcCfgCategoria/userLcCfgCategori
 import { UserLicenciaConduccionModule } from './userLicenciaConduccion/userLicenciaConduccion.module';
 import { UserLicenciaTransitoModule } from './userLicenciaTransito/userLicenciaTransito.module';
 
-import { CfgComparendoEstadoModule } from './cfgComparendoEstado/cfgComparendoEstado.module';
 import { CfgAuditoriaModule } from './cfgAuditoria/cfgAuditoria.module';
 import { CfgValorVehiculoModule } from './cfgValorVehiculo/cfgValorVehiculo.module'; 
 import { CfgSmlmvModule } from './cfgSmlmv/cfgSmlmv.module';
@@ -379,7 +379,10 @@ import {RightsidebarComponent} from '../shared';
     CvCdoComparendoModule,
     CvCdoTrazabilidadModule,
     CvCdoNotificacionModule,
+    CvCdoCfgDescuentoModule,
     CvCdoCfgInteresModule,
+    CvCdoCfgEstadoModule,
+    CvCfgTipoRestriccionModule,
     CvAudienciaModule,
     CvAuCfgAtencionModule,
     CvAuCfgHorarioModule,
@@ -423,10 +426,8 @@ import {RightsidebarComponent} from '../shared';
     VhloCfgColorModule,
     VhloCfgCombustibleModule,
     VhloCfgServicioModule,
-    CfgComparendoEstadoModule,
     FacturaModule,
     GestionTransportePublicoModule,
-    CvCfgTipoRestriccionModule,
     CfgOrganismoTransitoModule,
     CfgChoqueConModule,
     SvCfgObjetoFijoModule,

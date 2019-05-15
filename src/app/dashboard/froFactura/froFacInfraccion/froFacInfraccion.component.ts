@@ -97,7 +97,7 @@ export class FroFacInfraccionComponent implements OnInit {
             confirmButtonText: 'Aceptar'
           });
           let timeoutId = setTimeout(() => {
-            this.iniciarTabla();
+            this.onInitTable();
           }, 100);
         } else {
           this.comparendos = null;
@@ -141,12 +141,12 @@ export class FroFacInfraccionComponent implements OnInit {
     }
   }
 
-  iniciarTabla(){
+  onInitTable(){
     if (this.table) {
       this.table.destroy();
     }
 
-    $('#dataTables-example').DataTable({
+    this.table = $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,
       sPaginationType: 'full_numbers',
@@ -158,9 +158,7 @@ export class FroFacInfraccionComponent implements OnInit {
           sLast: '<i class="fa fa-step-forward"></i>'
         }
       }
-   });
-
-   this.table = $('#dataTables-example').DataTable();
+    });
   }
 
   onNew() {
