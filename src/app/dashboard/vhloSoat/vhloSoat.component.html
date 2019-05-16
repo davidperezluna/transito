@@ -1,46 +1,57 @@
-<div class="container">
-    <hr>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    <b class="text-uppercase">Filtro de búsqueda</b>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-xs-12 col-lg-4">
-                            <div class="input-group">
-                                <input type="text" class="form-control text-uppercase" placeholder="Número de placa" [(ngModel)]="placa" required name="numeroPlaca"/>
-                                <span class="input-group-btn">
-                                    <button (click)="onSearch()" class="btn btn-default btn-primary" type="button">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                </span>
-                            </div>
+<div class="container row">
+    <div class="col-xs-12 col-lg-4">
+        <div class="card">
+            <div class="card-header">
+                <b class="text-uppercase">Filtro de búsqueda</b>
+            </div>
+            <div class="card-body">
+                <!-- <div class="row"> -->
+                    <div class="col-xs-12 col-lg-12">
+                        <div class="input-group">
+                            <input type="text" class="form-control text-uppercase" placeholder="Número de placa"
+                                [(ngModel)]="placa" required name="numeroPlaca" />
+                            <span class="input-group-btn">
+                                <button (click)="onSearch()" class="btn btn-default btn-primary" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
                         </div>
                     </div>
+                <!-- </div> -->
 
-                    <div class="row" *ngIf="vehiculo">
-                        <br>
-                        <div class="col-xs-12 col-lg-12">
-                            <table class="table table-bordered">
-                                <tbody>
-                                    <tr>
-                                        <td><strong>No. Placa:</strong> {{ vehiculo.placa.numero }}</td>
-                                        <td><strong>Servicio:</strong> {{ vehiculo.servicio.nombre }}</td>
-                                        <td><strong>Clase:</strong> {{ vehiculo.clase.nombre }}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                <!-- <div class="row" >
+                    <br> -->
+                    <div *ngIf="vehiculo" class="col-xs-12 col-lg-12">
+                        <table class="table table-bordered table-striped">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <b>No. Placa:</b><br>
+                                        {{ vehiculo.placa.numero }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <b>Servicio:</b><br>
+                                        {{ vehiculo.servicio?.nombre }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <b>Clase:</b><br>
+                                        {{ vehiculo.clase?.nombre }}
+                                    </td>
+                                </tr>    
+                            </tbody>
+                        </table>
+                    <!-- </div> -->
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-xs-12 col-lg-12" *ngIf='formIndex && vehiculo'>
+    <div class="col-xs-12 col-lg-8">
+        <div class="row">
             <div class="card">
                 <div class="card-header">
                     <b class="text-uppercase">Historial</b>
@@ -51,8 +62,9 @@
                         </button>
                     </div>
                 </div>
-                <div class="card-body">
-                    <table class="table " id="dataTables-example" *ngIf="soats">
+                <div class="card-body" *ngIf='formHistorial'>
+                    <!-- <table class="table " id="dataTables-example" *ngIf="soats"> -->
+                    <table class="table " id="dataTables-example">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -61,31 +73,24 @@
                                 <th>Fecha Expedición</th>
                                 <th>Fecha Vigencia</th>
                                 <th>Fecha Vencimiento</th>
+                                <th>Estado</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr class="odd" *ngFor="let soat of soats; let i = index">
                                 <td>{{ i + 1 }}</td>
                                 <td>{{ soat.numeroPoliza }}</td>
-                                <td>{{ soat.nombreEmpresa }}</td>
+                                <td>{{ soat.empresa.nombre }}</td>
                                 <td>{{ soat.fechaExpedicion }}</td>
                                 <td>{{ soat.fechaVigencia }}</td>
                                 <td>{{ soat.fechaVencimiento }}</td>
+                                <td>{{ soat.estado }}</td>
                             </tr>
                         </tbody>
                     </table>
-                    <div class="alert alert-danger text-center" *ngIf="!soats">
-                        <span class="badge badge-danger text-uppercase">
-                            <i class="fa fa-exclamation-triangle fa-3x"></i>
-                            Ningún registro encontrado
-                        </span>
-                    </div>
                 </div>
             </div>
+            <app-new *ngIf='formNew' [vehiculo]="vehiculo" (ready)="ready($event)"></app-new>
         </div>
-
-        <app-new *ngIf='formNew' [vehiculo]="vehiculo" (ready)="ready($event)"></app-new>
     </div>
-
-
 </div>

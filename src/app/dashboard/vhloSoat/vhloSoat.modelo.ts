@@ -5,7 +5,7 @@ export class VhloSoat{
         public fechaVigencia: string,
         public fechaVencimiento: string,
         public numeroPoliza: string,
-        public nombreEmpresa: string,
+        public idEmpresa: number,
         public idMunicipio: number,
         public id: number,
     ){}

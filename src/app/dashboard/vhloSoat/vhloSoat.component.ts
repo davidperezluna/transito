@@ -18,6 +18,7 @@ export class VhloSoatComponent implements OnInit {
     public soats: any = null;
     public formNew = false;
     public formEdit = false;
+    public formHistorial = false;
     public formIndex = true;
 
     constructor(
@@ -28,20 +29,33 @@ export class VhloSoatComponent implements OnInit {
 
     ngOnInit() { }
 
+    /* onInitForms() {
+        this.formIndex = false;
+        this.formNew = false;
+        this.formEdit = false;
+
+        return true;
+    } */
+
     onNew() {
+        /* this.onInitForms(); */
         this.formNew = true;
         this.formIndex = false;
+        this.formHistorial = false;
     }
 
     ready(isCreado: any) {
         if (isCreado) {
             this.formNew = false;
+            this.formHistorial = false;
             this.formIndex = true;
             this.ngOnInit();
         }
     }
 
     onSearch() {
+        let token = this._LoginService.getToken();
+
         swal({
             title: 'Buscando vehículo',
             text: 'Solo tardará unos segundos, por favor espere.',
@@ -49,8 +63,6 @@ export class VhloSoatComponent implements OnInit {
                 swal.showLoading()
             }
         });
-
-        let token = this._LoginService.getToken();
 
         let datos = {
             'numero': this.placa
@@ -60,12 +72,11 @@ export class VhloSoatComponent implements OnInit {
             response => {
                 if (response.status == 'success') {
                     this.vehiculo = response.data;
-                    //Busca el historial de SOAT por vehiculo encontrado
                     this._SoatService.index({ 'idVehiculo': this.vehiculo.id }, token).subscribe(
                         response => {
                             if (response.status == 'success') {
                                 this.soats = response.data;
-
+                                this.formHistorial = true;
                                 swal.close();
                             } else {
                                 swal({

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { VhloSoat } from '../vhloSoat.modelo';
 import { VhloSoatService } from '../../../services/vhloSoat.service';
+import { UserEmpresaService } from "../../../services/userEmpresa.service";
 import { LoginService } from '../../../services/login.service';
 
 import { CfgMunicipioService } from '../../../services/cfgMunicipio.service';
@@ -20,10 +21,13 @@ export class NewComponent implements OnInit {
     public soats: any;
     public municipios: any;
     public municipioSelected: any;
+    public empresas: any;
+    public empresaSelected: any;
 
     constructor(
         private _SoatService: VhloSoatService,
         private _MunicipioService: CfgMunicipioService,
+        private _EmpresaService : UserEmpresaService,
         private _LoginService: LoginService,
 
     ) { }
@@ -34,6 +38,19 @@ export class NewComponent implements OnInit {
         this._MunicipioService.select().subscribe(
             response => {
                 this.municipios = response;
+            },
+            error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert("Error en la petición");
+                }
+            }
+        );
+        this._EmpresaService.getEmpresasAseguradoras().subscribe(
+            response => {
+                this.empresas = response;
             },
             error => {
                 this.errorMessage = <any>error;
@@ -55,6 +72,7 @@ export class NewComponent implements OnInit {
 
         this.soat.idMunicipio = this.municipioSelected;
         this.soat.idVehiculo = this.vehiculo.id;
+        this.soat.idEmpresa = this.empresaSelected;
 
         swal({
             title: '¿Está seguro?',
