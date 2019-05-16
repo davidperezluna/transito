@@ -6,6 +6,7 @@ import { FroFacturaService } from '../../../services/froFactura.service';
 import { UserCiudadanoService } from '../../../services/userCiudadano.service';
 import { VhloAcreedorService } from '../../../services/vhloAcreedor.service';
 import { VhloPropietarioService } from '../../../services/vhloPropietario.service';
+import { PnalFuncionarioService } from '../../../services/pnalFuncionario.service';
 import { VhloVehiculoService } from '../../../services/vhloVehiculo.service';
 import { LoginService } from '../../../services/login.service';
 import { environment } from 'environments/environment';
@@ -30,6 +31,7 @@ export class NewRnaComponent implements OnInit {
   public propietarios: any = null;
   public acreedores: any = null;
   public ciudadano: any = false;
+  public funcionario: any = null;
 
   public vehiculoFiltro: any;
 
@@ -39,17 +41,18 @@ export class NewRnaComponent implements OnInit {
   public facturas: any;
 
   public confirmarSolicitante = false;
-  public requiereSustrato = false;
-  public requiereRunt = false;
-
+  
   public tramites:any;
   public certificadoTradicion = false;
   public fromApoderado = false;
   public identificacionApoderado = false;
   public apoderado: any = null;
   public placa: any = null;
-
+  
+  public requiereSustrato = false;
+  public requiereRunt = false;
   public tramitesRealizados: any = [];
+  public documentacionPendiente: any = [];
 
   constructor(
     private _TramiteSolicitudService: FroTrteSolicitudService,
@@ -59,11 +62,50 @@ export class NewRnaComponent implements OnInit {
     private _AcreedorService: VhloAcreedorService,
     private _PropietarioService: VhloPropietarioService,
     private _VehiculoService: VhloVehiculoService,
+    private _FuncionarioService: PnalFuncionarioService,
     private _LoginService: LoginService,
   ) { }
 
   ngOnInit() {
-    this.tramiteSolicitud = new FroTrteSolicitudRna(null, null, null, null, null, null, null);
+    swal({
+      title: 'Cargando información!',
+      text: 'Solo tardará unos segundos, por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+
+    this.tramiteSolicitud = new FroTrteSolicitudRna(null, null, null, null, null, null, null, null, null);
+
+    let token = this._LoginService.getToken();
+
+    let identity = this._LoginService.getIdentity();
+
+    this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
+      response => {
+        if (response.status == 'success') {
+          this.funcionario = response.data; 
+          
+          swal.close();
+        } else {
+          this.funcionario = null;
+
+          swal({
+              title: 'Error!',
+              text: 'Usted no tiene permisos para realizar tramites',
+              type: 'error',
+              confirmButtonText: 'Aceptar'
+          });
+        }
+        error => {
+            this.errorMessage = <any>error;
+            if (this.errorMessage != null) {
+                console.log(this.errorMessage);
+                alert('Error en la petición');
+            }
+        }
+      }
+    );
   }
 
   onCancelar() {
@@ -80,6 +122,30 @@ export class NewRnaComponent implements OnInit {
     });
 
     let token = this._LoginService.getToken();
+
+    //Validar si se requiere validaciones sobre el vehiculo en particular
+    /* this._TramiteSolicitudService.validations(this.datos, token).subscribe(
+      response => {
+        if (response.code == 200) {
+          
+        }else{
+          swal({
+            title: 'Error!',
+            text: response.message,
+            type: 'error',
+            confirmButtonText: 'Aceptar'
+          });
+        }
+      },
+      error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+              console.log(this.errorMessage);
+              alert('Error en la petición');
+          }
+      }
+    );*/
 
     this._VehiculoService.searchByPlaca({'numero': this.placa }, token).subscribe(
       response => {
@@ -362,48 +428,39 @@ export class NewRnaComponent implements OnInit {
     );
   }
 
-  readyTramite(datos:any){
-    this.tramitesRealizados.push(
-      {
-        'documentacion': datos.documentacion,
-        'observacion': datos.observacion,
-        'foraneas': datos.foraneas,
-        'resumen': datos.resumen,
-        'idTramiteFactura': datos.idTramiteFactura,
-      }
-    );
-
-    let token = this._LoginService.getToken();
-
-    this._TramiteFacturaService.show({ 'id': datos.idTramiteFactura }, token).subscribe(
-      response => {
-        if (response.code == 200) {
-          let tramiteFactura = { 'value': response.data.id, 'label': response.data.precio.nombre };
-          this.tramitesFactura = this.tramitesFactura.filter(h => h !== tramiteFactura);
-          console.log(this.tramitesFactura);
-          console.log(this.tramitesRealizados);
-          this.tramiteSolicitud.idTramiteFactura = null;
-        } else {
-          swal({
-            title: 'Error!',
-            text: response.message,
-            type: 'error',
-            confirmButtonText: 'Aceptar'
-          });
+  onReadyTramite(datos:any){
+    if (datos.documentacion) {
+      this.tramitesRealizados.push(
+        {
+          'foraneas': datos.foraneas,
+          'resumen': datos.resumen,
+          'idTramiteFactura': datos.idTramiteFactura,
         }
-        error => {
-          this.errorMessage = <any>error;
-          if (this.errorMessage != null) {
-            console.log(this.errorMessage);
-            alert("Error en la petición");
-          }
+      );
+    }else{
+      this.documentacionPendiente.push(
+        {
+          'documentacion': datos.documentacion,
+          'observacion': datos.observacion,
+          'idTramiteFactura': datos.idTramiteFactura,
         }
-      }
-    );
+      );
+    }
 
     swal({
       title: 'Perfecto!',
       text: 'Trámite realizado con exito.',
+      type: 'success',
+      confirmButtonText: 'Aceptar'
+    });
+  }
+
+  onReadyInsumo(datos:any){    
+    this.tramiteSolicitud.insumoEntregado = datos;
+
+    swal({
+      title: 'Perfecto!',
+      text: 'Insumo asignado con exito.',
       type: 'success',
       confirmButtonText: 'Aceptar'
     });

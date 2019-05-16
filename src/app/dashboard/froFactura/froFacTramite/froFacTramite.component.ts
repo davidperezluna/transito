@@ -150,6 +150,12 @@ export class FroFacTramiteComponent implements OnInit {
     );
   }
 
+  ready(isCreado:any){
+    if(isCreado) {
+      this.ngOnInit();
+    }
+  }
+
   onChangedModulo(e) {
     swal({
       title: 'Cargando trámites disponibles!',

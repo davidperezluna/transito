@@ -14,14 +14,16 @@ import swal from 'sweetalert2';
     templateUrl: './newRna.cambioMotor.html'
 })
 export class NewRnaCambioMotorComponent implements OnInit {
-    @Output() readyTramite = new EventEmitter<any>();
-    @Output() cancelarTramite = new EventEmitter<any>();
+    @Output() onReadyTramite = new EventEmitter<any>();
+    
     @Input() vehiculo: any = null;
     @Input() tramitesFactura: any = null;
     @Input() tramiteFactura: any = null;
+    @Input() funcionario: any = null;
+    @Input() tramitesRealizados: any = null;
     public errorMessage; 
     
-    public autorizado: any = false;
+    public realizado: any = false;
     public tramiteSolicitud: any = null;
 
     public tiposIdentificacion: any;
@@ -72,7 +74,7 @@ export class NewRnaCambioMotorComponent implements OnInit {
             response => {
                 if (response.status == 'success') {
                     this.datos.idFuncionario = response.data.id;
-                    this.autorizado = true;
+                    this.realizado = true;
 
                     this._TramiteFacturaService.show({ 'id': this.tramiteFactura.id }, token).subscribe(
                         response => {
@@ -154,7 +156,7 @@ export class NewRnaCambioMotorComponent implements OnInit {
                         );
                     }
                 } else {
-                    this.autorizado = false;
+                    this.realizado = false;
 
                     swal({
                         title: 'Error!',
@@ -191,7 +193,7 @@ export class NewRnaCambioMotorComponent implements OnInit {
                                 '<br><b>Motor anterior: </b>' + this.vehiculo.motor.nombre +
                                 '<br><b>Motor nuevo: </b>' + this.datos.numeroMotor;
 
-                            this.readyTramite.emit(
+                            this.onReadyTramite.emit(
                                 {
                                     'documentacion':this.datos.documentacion, 
                                     'observacion':this.datos.observacion, 
@@ -230,8 +232,4 @@ export class NewRnaCambioMotorComponent implements OnInit {
             }
         );            
     }
-    onCancelar(){
-        this.cancelarTramite.emit(true);
-    }
-
 }

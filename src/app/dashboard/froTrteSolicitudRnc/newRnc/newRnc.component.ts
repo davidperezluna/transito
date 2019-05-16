@@ -65,29 +65,29 @@ constructor(
     let identity = this._LoginService.getIdentity();
 
     this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
-        response => {
-            if (response.status == 'success') {
-              this.funcionario = response.data; 
-              
-              swal.close();
-            } else {
-              this.funcionario = null;
+      response => {
+        if (response.status == 'success') {
+          this.funcionario = response.data; 
+          
+          swal.close();
+        } else {
+          this.funcionario = null;
 
-              swal({
-                  title: 'Error!',
-                  text: 'Usted no tiene permisos para realizar tramites',
-                  type: 'error',
-                  confirmButtonText: 'Aceptar'
-              });
-            }
-            error => {
-                this.errorMessage = <any>error;
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert('Error en la petición');
-                }
+          swal({
+              title: 'Error!',
+              text: 'Usted no tiene permisos para realizar tramites',
+              type: 'error',
+              confirmButtonText: 'Aceptar'
+          });
+        }
+        error => {
+            this.errorMessage = <any>error;
+            if (this.errorMessage != null) {
+                console.log(this.errorMessage);
+                alert('Error en la petición');
             }
         }
+      }
     );
   }
 

@@ -91,6 +91,8 @@ export class ShowComponent implements OnInit {
     this.formEditRepresentante = false;
     this.formNewSucursal = false;
     this.formEditSucursal = false;
+
+    return true;
   }
 
   onCancelar() {

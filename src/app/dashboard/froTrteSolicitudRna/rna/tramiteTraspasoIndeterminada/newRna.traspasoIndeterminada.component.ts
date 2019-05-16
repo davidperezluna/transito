@@ -16,13 +16,15 @@ import swal from 'sweetalert2';
     providers: [DatePipe]
 })
 export class NewRnaTraspasoIndeterminadaComponent implements OnInit {
-  @Output() readyTramite = new EventEmitter<any>();
+  @Output() onReadyTramite = new EventEmitter<any>();
   @Input() vehiculo: any = null; 
   @Input() tramiteFactura: any = null;
+    @Input() funcionario: any = null;
+    @Input() tramitesRealizados: any = null;
   @Input() idPropietario: any = null;
   public errorMessage; 
   
-  public autorizado: any = false;
+  public realizado: any = false;
   public tramiteSolicitud: any = null;
 
   public date:any;
@@ -75,7 +77,7 @@ export class NewRnaTraspasoIndeterminadaComponent implements OnInit {
         response => {
             if (response.status == 'success') {
                 this.datos.idFuncionario = response.data.id;
-                this.autorizado = true;
+                this.realizado = true;
 
                 this._TramiteFacturaService.show({ 'id': this.tramiteFactura.id }, token).subscribe(
                     response => {
@@ -147,7 +149,7 @@ export class NewRnaTraspasoIndeterminadaComponent implements OnInit {
                   this.datos.fecha = datePiper.transform(this.date,'yyyy-MM-dd');
                 }
             } else {
-                this.autorizado = false;
+                this.realizado = false;
 
                 swal({
                     title: 'Error!',
@@ -204,7 +206,7 @@ export class NewRnaTraspasoIndeterminadaComponent implements OnInit {
                             if (response.code == 200) {
                               let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero;
     
-                              this.readyTramite.emit(
+                              this.onReadyTramite.emit(
                                 {
                                     'documentacion':this.datos.documentacion, 
                                     'observacion':this.datos.observacion, 

@@ -14,13 +14,15 @@ import swal from 'sweetalert2';
     templateUrl: './newRna.transformacion.html'
 })
 export class NewRnaTransformacionComponent implements OnInit {
-    @Output() readyTramite = new EventEmitter<any>();
-    @Output() cancelarTramite = new EventEmitter<any>();
+    @Output() onReadyTramite = new EventEmitter<any>();
+    
     @Input() vehiculo: any = null;
     @Input() tramiteFactura: any = null;
+    @Input() funcionario: any = null;
+    @Input() tramitesRealizados: any = null;
     public errorMessage; 
     
-    public autorizado: any = false;
+    public realizado: any = false;
     public tramiteSolicitud: any = null;
     public carrocerias: any = null;
     public combustibles: any = null;
@@ -80,7 +82,7 @@ export class NewRnaTransformacionComponent implements OnInit {
             response => {
                 if (response.status == 'success') {
                     this.datos.idFuncionario = response.data.id;
-                    this.autorizado = true;
+                    this.realizado = true;
 
                     this._TramiteFacturaService.show({ 'id': this.tramiteFactura.id }, token).subscribe(
                         response => {
@@ -165,7 +167,7 @@ export class NewRnaTransformacionComponent implements OnInit {
                         this.datos.ejesTotal = this.vehiculo.numeroEjes;
                     }
                 } else {
-                    this.autorizado = false;
+                    this.realizado = false;
 
                     swal({
                         title: 'Error!',
@@ -249,7 +251,7 @@ export class NewRnaTransformacionComponent implements OnInit {
                         if (response.status == 'success') {
                             let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero;
         
-                            this.readyTramite.emit(
+                            this.onReadyTramite.emit(
                                 {
                                     'documentacion':this.datos.documentacion, 
                                     'observacion':this.datos.observacion, 

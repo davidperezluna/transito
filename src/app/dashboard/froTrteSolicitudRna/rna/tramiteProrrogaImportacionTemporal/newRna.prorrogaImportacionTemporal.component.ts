@@ -11,13 +11,15 @@ import swal from 'sweetalert2';
     templateUrl: './newRna.prorrogaImportacionTemporal.component.html'
 })
 export class NewRnaProrrogaImportacionTemporalComponent implements OnInit {
-    @Output() readyTramite = new EventEmitter<any>();
-    @Output() cancelarTramite = new EventEmitter<any>();
+    @Output() onReadyTramite = new EventEmitter<any>();
+    
     @Input() vehiculo: any = null;
     @Input() tramiteFactura: any = null;
+    @Input() funcionario: any = null;
+    @Input() tramitesRealizados: any = null;
     public errorMessage; 
     
-    public autorizado: any = false;
+    public realizado: any = false;
     public tramiteSolicitud:any = null;
 
     public date: any;
@@ -52,7 +54,7 @@ export class NewRnaProrrogaImportacionTemporalComponent implements OnInit {
                 response => {
                     if (response.status == 'success') {
                         this.datos.idFuncionario = response.data.id;
-                        this.autorizado = true;
+                        this.realizado = true;
     
                         this._TramiteFacturaService.show({ 'id': this.tramiteFactura.id }, token).subscribe(
                             response => {
@@ -113,7 +115,7 @@ export class NewRnaProrrogaImportacionTemporalComponent implements OnInit {
                             this.datos.fechaSolicitudProrroga = datePiper.transform(this.date, 'yyyy-MM-dd');
                         }
                     } else {
-                        this.autorizado = false;
+                        this.realizado = false;
     
                         swal({
                             title: 'Error!',
@@ -132,7 +134,7 @@ export class NewRnaProrrogaImportacionTemporalComponent implements OnInit {
                 }
             );
         }else{
-            this.autorizado = false;
+            this.realizado = false;
 
             swal({
                 title: 'Error!',
@@ -157,7 +159,7 @@ export class NewRnaProrrogaImportacionTemporalComponent implements OnInit {
                     'No. cuotas' + this.datos.numeroCuotas +
                     'No. licencia transito' + this.datos.licenciaTransito;
 
-                this.readyTramite.emit(
+                this.onReadyTramite.emit(
                     {
                         'documentacion':this.datos.documentacion, 
                         'observacion':this.datos.observacion, 

@@ -1,4 +1,4 @@
-<div class="row"><!-- .row -->
+<div class="row" *ngIf="funcionario"><!-- .row -->
     <div class="col-xs-12 col-lg-4">
         <div class="card">
             <div class="card-header">
@@ -75,19 +75,53 @@
                 </div><!-- /.row -->
             </div>
             <div class="card-footer" *ngIf="tramitesFactura && (tramitesFactura.length == tramitesRealizados.length)">
-                <div class="btn-group">
-                    <button (click)="onEnviar()" class="btn btn-success">
-                        <i class="fa fa-save"></i>
-                        Finalizar
-                    </button>
-                    <a *ngIf="factura && factura.estado == 'PENDIENTE DOCUMENTACION'" href="{{ apiUrl }}/{{ factura.id }}/pdf/documentacion" class="btn btn-default" target="_blank">
-                        <i class="fa fa-file-pdf-o"></i>
-                        Imprimir observaciones
-                    </a>
-                    <a *ngIf="vehiculo && factura && factura.estado == 'FINALIZADA'" href="{{ apiUrl }}/{{ vehiculo.id }}/TRADICIONAL/pdf/certificadotradicion" class="btn btn-primary" target="_blank">
-                        <i class="fa fa-file-pdf-o"></i>
-                        Imprimir Certificado de tradicion
-                    </a>
+                <div class="form-group" *ngIf="documentacionPendiente.length > 0">
+                    <div class="row">
+                        <div class="col-xs-12 col-lg-12">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-xs-12 col-lg-12">
+                                        <div class="btn-group">
+                                            <button (click)="onEnviar()" class="btn btn-success" [disabled]="tramitesFactura && (tramitesFactura.length == tramitesRealizados.length)">
+                                                <i class="fa fa-save"></i>
+                                                Guardar observaciones
+                                            </button>
+                                            <a *ngIf="factura && factura.estado == 'PENDIENTE DOCUMENTACION'" href="{{ apiUrl }}/{{ factura.id }}/pdf/documentacion" class="btn btn-default" target="_blank">
+                                                <i class="fa fa-file-pdf-o"></i>
+                                                Imprimir observaciones
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group" *ngIf="factura && factura.estado != 'FINALIZADA' && tramitesFactura && tramitesRealizados.length == tramitesFactura.length && documentacionPendiente.length == 0">
+                    <div class="row">
+                        <div class="col-xs-12 col-lg-12">
+                            <div class="form-group">
+                                <div class="row" *ngIf="requiereRunt">
+                                    <div class="col-xs-12 col-lg-12"> 
+                                        <label>Número de solicitud RUNT <b class="text-danger">*</b></label>
+                                        <input type="text" class="form-control" placeholder="No. solicitud RUNT" [(ngModel)]="tramiteSolicitud.numeroRunt" name="numeroRunt" required />
+                                    </div>
+                                </div>
+
+                                <ng-container *ngIf="(requiereSustrato && tramiteSolicitud.insumoEntregado) || !requiereSustrato">
+                                    <div class="row" *ngIf="factura && tramiteSolicitud.numeroRunt">
+                                        <div class="col-xs-12 col-lg-12">
+                                            <button (click)="onEnviar()" class="btn btn-success">
+                                                <i class="fa fa-save"></i>
+                                                Guardar información
+                                            </button>
+                                        </div>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -221,6 +255,14 @@
                                 </span>
                             </div>
                         </div>
+
+                        <div class="row" *ngIf='factura'>
+                            <div class="col-xs-12 col-lg-12">
+                                <span class="badge badge-success" *ngIf="factura.estado == 'PAGADA'">{{ factura.estado }}</span>
+                                <span class="badge badge-danger" *ngIf="factura.estado == 'PENDIENTE DOCUMENTACION'">{{ factura.estado }}</span>
+                                <span class="badge badge-warning" *ngIf="factura.estado == 'FINALIZADA'">{{ factura.estado }}</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -269,60 +311,60 @@
                                         
                                         <div class="row">
                                             <div class="col-xs-12 col-lg-12" *ngIf="tramiteFactura">                                                
-                                                <appRna-matricula-inicial *ngIf="tramiteFactura.precio.tramite.id == 1" [vehiculo]="vehiculo" [tramiteFactura]="tramiteFactura" (readyTramite)="readyTramite($event)"  (cancelarTramite)="cancelarTramite($event)"></appRna-matricula-inicial>
+                                                <appRna-matricula-inicial *ngIf="tramiteFactura.precio.tramite.id == 1" [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)" ></appRna-matricula-inicial>
                                             
-                                                <appRna-traspaso *ngIf="tramiteFactura.precio.tramite.id == 2" [vehiculo]="vehiculo" [tramiteFactura]="tramiteFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-traspaso>
+                                                <appRna-traspaso *ngIf="tramiteFactura.precio.tramite.id == 2" [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)"></appRna-traspaso>
                                                 
-                                                <app-new-traslado-cuenta *ngIf="tramiteFactura.precio.tramite.id == 3" [vehiculo]="vehiculo" [tramiteFactura]="tramiteFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></app-new-traslado-cuenta>
+                                                <app-new-traslado-cuenta *ngIf="tramiteFactura.precio.tramite.id == 3" [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)"></app-new-traslado-cuenta>
                                             
-                                                <appRna-radicado-cuenta *ngIf="tramiteFactura.precio.tramite.id == 4" [vehiculo]="vehiculo" [tramiteFactura]="tramiteFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-radicado-cuenta>
+                                                <appRna-radicado-cuenta *ngIf="tramiteFactura.precio.tramite.id == 4" [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)"></appRna-radicado-cuenta>
                                             
-                                                <appRna-cambio-color *ngIf="tramiteFactura.precio.tramite.id == 5" [vehiculo]="vehiculo" [tramiteFactura]="tramiteFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-cambio-color>
+                                                <appRna-cambio-color *ngIf="tramiteFactura.precio.tramite.id == 5" [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)"></appRna-cambio-color>
                                             
-                                                <appRna-cambio-servicio *ngIf="tramiteFactura.precio.tramite.id == 6" [vehiculo]="vehiculo" [tramiteFactura]="tramiteFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-cambio-servicio>
+                                                <appRna-cambio-servicio *ngIf="tramiteFactura.precio.tramite.id == 6" [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)"></appRna-cambio-servicio>
                                             
-                                                <appRna-regrabar-motor *ngIf="tramiteFactura.precio.tramite.id == 7" [vehiculo]="vehiculo" [tramiteFactura]="tramiteFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-regrabar-motor>
+                                                <appRna-regrabar-motor *ngIf="tramiteFactura.precio.tramite.id == 7" [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)"></appRna-regrabar-motor>
                                                 
-                                                <appRna-regrabar-chasis *ngIf="tramiteFactura.precio.tramite.id == 8" [vehiculo]="vehiculo" [tramiteFactura]="tramiteFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-regrabar-chasis>
+                                                <appRna-regrabar-chasis *ngIf="tramiteFactura.precio.tramite.id == 8" [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)"></appRna-regrabar-chasis>
                                                 
-                                                <appRna-transformacion *ngIf="tramiteFactura.precio.tramite.id == 9" [vehiculo]="vehiculo" [tramiteFactura]="tramiteFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-transformacion>
+                                                <appRna-transformacion *ngIf="tramiteFactura.precio.tramite.id == 9" [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)"></appRna-transformacion>
                                                 
-                                                <appRna-duplicado-licencia *ngIf="tramiteFactura.precio.tramite.id == 10" [tramiteFactura]="tramiteFactura" [idPropietario]='tramiteSolicitud.idPropietario' (readyTramite)="readyTramite($event)"></appRna-duplicado-licencia>
+                                                <appRna-duplicado-licencia *ngIf="tramiteFactura.precio.tramite.id == 10" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" [idPropietario]='tramiteSolicitud.idPropietario' (onReadyTramite)="onReadyTramite($event)"></appRna-duplicado-licencia>
                                             
-                                                <appRna-inscripcion-alerta-prenda *ngIf="tramiteFactura.precio.tramite.id == 11" [vehiculo]="vehiculo" [tramiteFactura]="tramiteFactura" [idPropietario]='tramiteSolicitud.idPropietario' (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-inscripcion-alerta-prenda>
+                                                <appRna-inscripcion-alerta-prenda *ngIf="tramiteFactura.precio.tramite.id == 11" [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" [idPropietario]='tramiteSolicitud.idPropietario' (onReadyTramite)="onReadyTramite($event)"></appRna-inscripcion-alerta-prenda>
                                                 
-                                                <appRna-levantamiento-alerta-prenda *ngIf="tramiteFactura.precio.tramite.id == 12" [vehiculo]="vehiculo" [tramiteFactura]="tramiteFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-levantamiento-alerta-prenda>
+                                                <appRna-levantamiento-alerta-prenda *ngIf="tramiteFactura.precio.tramite.id == 12" [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)"></appRna-levantamiento-alerta-prenda>
                                                 
-                                                <appRna-cancelacion-matricula *ngIf="tramiteFactura.precio.tramite.id == 13" [vehiculo]="vehiculo" [tramiteFactura]="tramiteFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-cancelacion-matricula>
+                                                <appRna-cancelacion-matricula *ngIf="tramiteFactura.precio.tramite.id == 13" [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)"></appRna-cancelacion-matricula>
                                                     
-                                                <appRna-cambio-placa *ngIf="tramiteFactura.precio.tramite.id == 14" [vehiculo]="vehiculo" [tramiteFactura]="tramiteFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-cambio-placa>
+                                                <appRna-cambio-placa *ngIf="tramiteFactura.precio.tramite.id == 14" [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)"></appRna-cambio-placa>
                                                 
-                                                <appRna-duplicado-placa *ngIf="tramiteFactura.precio.tramite.id == 15" [tramiteFactura]="tramiteFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-duplicado-placa>
+                                                <appRna-duplicado-placa *ngIf="tramiteFactura.precio.tramite.id == 15" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)"></appRna-duplicado-placa>
                                                 
-                                                <appRna-blindaje *ngIf="tramiteFactura.precio.tramite.id == 16" [vehiculo]="vehiculo" [tramiteFactura]="tramiteFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-blindaje>
+                                                <appRna-blindaje *ngIf="tramiteFactura.precio.tramite.id == 16" [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)"></appRna-blindaje>
                                                 
-                                                <appRna-cambio-motor *ngIf="tramiteFactura.precio.tramite.id == 17" [vehiculo]="vehiculo" [tramiteFactura]="tramiteFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-cambio-motor>
+                                                <appRna-cambio-motor *ngIf="tramiteFactura.precio.tramite.id == 17" [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)"></appRna-cambio-motor>
                                                 
-                                                <appRna-rematricula *ngIf="tramiteFactura.precio.tramite.id == 18" [vehiculo]="vehiculo" [tramiteFactura]="tramiteFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-rematricula>
+                                                <appRna-rematricula *ngIf="tramiteFactura.precio.tramite.id == 18" [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)"></appRna-rematricula>
                                                 
-                                                <appRna-regrabar-serie *ngIf="tramiteFactura.precio.tramite.id == 19" [vehiculo]="vehiculo" [tramiteFactura]="tramiteFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-regrabar-serie>
+                                                <appRna-regrabar-serie *ngIf="tramiteFactura.precio.tramite.id == 19" [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)"></appRna-regrabar-serie>
                                                 
                                                 <!-- tramites sin id -->
-                                                <appRna-importacion-temporal *ngIf="tramiteFactura.precio.tramite.id == 22"  [vehiculo]="vehiculo" [tramiteFactura]="tramiteFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-importacion-temporal>
+                                                <appRna-importacion-temporal *ngIf="tramiteFactura.precio.tramite.id == 22"  [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)"></appRna-importacion-temporal>
                                                 
-                                                <appRna-prorroga-importacion-temporal *ngIf="tramiteFactura.precio.tramite.id == 23"  [vehiculo]="vehiculo" [tramiteFactura]="tramiteFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-prorroga-importacion-temporal>
+                                                <appRna-prorroga-importacion-temporal *ngIf="tramiteFactura.precio.tramite.id == 23"  [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)"></appRna-prorroga-importacion-temporal>
                                                 
-                                                <appRna-cambio-acreedor-prendario-propietario *ngIf="tramiteFactura.precio.tramite.id == 24"  [vehiculo]="vehiculo" [tramiteFactura]="tramiteFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-cambio-acreedor-prendario-propietario>
+                                                <appRna-cambio-acreedor-prendario-propietario *ngIf="tramiteFactura.precio.tramite.id == 24"  [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)"></appRna-cambio-acreedor-prendario-propietario>
                                                 
-                                                <appRna-cambio-acreedor-prendario *ngIf="tramiteFactura.precio.tramite.id == 25"  [vehiculo]="vehiculo" [tramiteFactura]="tramiteFactura" [idPropietario]='tramiteSolicitud.idPropietario' (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-cambio-acreedor-prendario>
+                                                <appRna-cambio-acreedor-prendario *ngIf="tramiteFactura.precio.tramite.id == 25"  [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" [idPropietario]='tramiteSolicitud.idPropietario' (onReadyTramite)="onReadyTramite($event)"></appRna-cambio-acreedor-prendario>
                                                 
-                                                <appRna-cambio-gas *ngIf="tramiteFactura.precio.tramite.id == 26"  [vehiculo]="vehiculo" [tramiteFactura]="tramiteFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-cambio-gas>
+                                                <appRna-cambio-gas *ngIf="tramiteFactura.precio.tramite.id == 26"  [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)"></appRna-cambio-gas>
                                                 
-                                                <appRna-regrabar-vin *ngIf="tramiteFactura.precio.tramite.id == 28"  [vehiculo]="vehiculo" [tramiteFactura]="tramiteFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-regrabar-vin>
+                                                <appRna-regrabar-vin *ngIf="tramiteFactura.precio.tramite.id == 28"  [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)"></appRna-regrabar-vin>
                                                 
-                                                <appRna-traspaso-indeterminada *ngIf="tramiteFactura.precio.tramite.id == 29"  [vehiculo]="vehiculo" [tramiteFactura]="tramiteFactura" [idPropietario]='tramiteSolicitud.idPropietario' (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-traspaso-indeterminada>
+                                                <appRna-traspaso-indeterminada *ngIf="tramiteFactura.precio.tramite.id == 29"  [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" [idPropietario]='tramiteSolicitud.idPropietario' (onReadyTramite)="onReadyTramite($event)"></appRna-traspaso-indeterminada>
                                             
-                                                <appRna-certificado-tradicion *ngIf="tramiteFactura.precio.tramite.id == 30"  [vehiculo]="vehiculo" [tramiteFactura]="tramiteFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-certificado-tradicion>
+                                                <appRna-certificado-tradicion *ngIf="tramiteFactura.precio.tramite.id == 30"  [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)"></appRna-certificado-tradicion>
                                             </div>
                                         </div>
                                     </div>
@@ -338,3 +380,13 @@
         </div><!-- /.row -->
     </div><!-- /.col -->
 </div><!-- /.row -->
+
+<div class="row"  *ngIf="!funcionario">
+    <div class="col-xs-12 col-lg-12">
+        <div class="card">
+            <div class="card-body text-center">
+                <span class="badge badge-danger text-uppercase">Usted no tiene permisos para realizar trámites</span>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,6 +1,8 @@
 <hr>
 <div class="row">
     <div class="col-xs-12 col-lg-12" *ngIf="formNew">
+        <app-new-ciudadano (ready)="ready($event)"></app-new-ciudadano>
+
         <form #facturaForm="ngForm">
             <div class="card">
                 <!-- .card -->

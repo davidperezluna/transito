@@ -48,6 +48,8 @@ export class UserCiudadanoComponent implements OnInit {
     this.formEdit = false;
     this.formShow = false;
     this.formIndex = false;
+
+    return true;
   }
 
   onSearch() {
@@ -124,6 +126,7 @@ export class UserCiudadanoComponent implements OnInit {
   
   onNew(){
     this.onInitForms();
+
     this.formNew = true;
   }
 

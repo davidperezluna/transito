@@ -13,13 +13,15 @@ import swal from 'sweetalert2';
     templateUrl: './newRna.radicadoCuenta.html'
 })
 export class NewRnaRadicadoCuentaComponent implements OnInit {
-    @Output() readyTramite = new EventEmitter<any>();
-    @Output() cancelarTramite = new EventEmitter<any>();
+    @Output() onReadyTramite = new EventEmitter<any>();
+    
     @Input() vehiculo: any = null;
     @Input() tramiteFactura: any = null;
+    @Input() funcionario: any = null;
+    @Input() tramitesRealizados: any = null;
     public errorMessage; 
     
-    public autorizado: any = false;
+    public realizado: any = false;
     public tramiteSolicitud: any = null;
     public municipios:any;
     public tiposIdentificacion: any;
@@ -53,7 +55,7 @@ export class NewRnaRadicadoCuentaComponent implements OnInit {
         response => {
           if (response.status == 'success') {
             this.datos.idFuncionario = response.data.id;
-            this.autorizado = true;
+            this.realizado = true;
 
             if (this.vehiculo.tipoMatricula == 'RADICADO') {
 
@@ -136,7 +138,7 @@ export class NewRnaRadicadoCuentaComponent implements OnInit {
                 );
               }
             } else {
-              this.autorizado = false;
+              this.realizado = false;
               
               swal({
                 title: 'Error!',
@@ -146,7 +148,7 @@ export class NewRnaRadicadoCuentaComponent implements OnInit {
               });
             }
           } else {
-            this.autorizado = false;
+            this.realizado = false;
 
             swal({
               title: 'Error!',
@@ -177,7 +179,7 @@ export class NewRnaRadicadoCuentaComponent implements OnInit {
           if (response.code == 200) {
             let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero;
 
-            this.readyTramite.emit({'foraneas':this.datos, 'resumen': resumen});
+            this.onReadyTramite.emit({'foraneas':this.datos, 'resumen': resumen});
           }else{
             swal({
               title: 'Error!',

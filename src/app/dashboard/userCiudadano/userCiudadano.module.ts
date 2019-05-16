@@ -12,8 +12,18 @@ import { TooltipModule } from "ngx-tooltip";
 
 @NgModule({
     imports: [CommonModule, Ng2BootstrapModule.forRoot(), SelectModule, TooltipModule],
-    declarations: [UserCiudadanoComponent,NewCiudadanoComponent,EditComponent, ShowComponent],
-    exports: [UserCiudadanoComponent, NewCiudadanoComponent,EditComponent, ShowComponent],
+    declarations: [
+        UserCiudadanoComponent,
+        NewCiudadanoComponent,
+        EditComponent,
+        ShowComponent
+    ],
+    exports: [
+        UserCiudadanoComponent,
+        NewCiudadanoComponent,
+        EditComponent,
+        ShowComponent
+    ],
     providers:[UserCiudadanoService]
 })
 

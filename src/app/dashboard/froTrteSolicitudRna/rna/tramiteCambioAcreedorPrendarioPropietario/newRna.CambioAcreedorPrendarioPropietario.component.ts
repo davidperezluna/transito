@@ -16,13 +16,15 @@ import swal from 'sweetalert2';
     templateUrl: './newRna.CambioAcreedorPrendarioPropietario.html'
 })
 export class NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent implements OnInit {
-    @Output() readyTramite = new EventEmitter<any>();
-    @Output() cancelarTramite = new EventEmitter<any>();
+    @Output() onReadyTramite = new EventEmitter<any>();
+    
     @Input() vehiculo: any = null;
     @Input() tramiteFactura: any = null;
+    @Input() funcionario: any = null;
+    @Input() tramitesRealizados: any = null;
     public errorMessage; 
     
-    public autorizado: any = false;
+    public realizado: any = false;
     public tramiteSolicitud: any = null;
     public tipoPropiedadSelected:any;
 
@@ -75,7 +77,7 @@ export class NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent implements
             response => {
                 if (response.status == 'success') {
                     this.datos.idFuncionario = response.data.id;
-                    this.autorizado = true;
+                    this.realizado = true;
 
                     this._TramiteFacturaService.show({ 'id': this.tramiteFactura.id }, token).subscribe(
                         response => {
@@ -168,7 +170,7 @@ export class NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent implements
                         );
                     }
                 } else {
-                    this.autorizado = false;
+                    this.realizado = false;
 
                     swal({
                         title: 'Error!',
@@ -302,7 +304,7 @@ export class NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent implements
                             if (response.code == 200) {
                                 let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero;
             
-                                this.readyTramite.emit({ 
+                                this.onReadyTramite.emit({ 
                                     'documentacion':this.datos.documentacion, 
                                     'observacion':this.datos.observacion, 
                                     'foraneas':this.datos, 

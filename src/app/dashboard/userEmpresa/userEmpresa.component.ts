@@ -90,6 +90,7 @@ export class UserEmpresaComponent implements OnInit {
         this.formEdit = false;
         this.formIndex = true;
         this.formShow = false;
+        
         this.ngOnInit();
       }
   }

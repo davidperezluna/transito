@@ -11,12 +11,14 @@ import swal from 'sweetalert2';
     templateUrl: './newRna.duplicadoPlaca.html'
 })
 export class NewRnaDuplicadoPlacaComponent implements OnInit {
-    @Output() readyTramite = new EventEmitter<any>();
-    @Output() cancelarTramite = new EventEmitter<any>();
+    @Output() onReadyTramite = new EventEmitter<any>();
+    
     @Input() tramiteFactura: any = null;
+    @Input() funcionario: any = null;
+    @Input() tramitesRealizados: any = null;
     public errorMessage; 
     
-    public autorizado: any = false;
+    public realizado: any = false;
     public tramiteSolicitud: any = null;
     public motivoList: string[];
     public motivoSelected: any;
@@ -46,7 +48,7 @@ export class NewRnaDuplicadoPlacaComponent implements OnInit {
             response => {
                 if (response.status == 'success') {
                     this.datos.idFuncionario = response.data.id;
-                    this.autorizado = true;
+                    this.realizado = true;
 
                     this._TramiteFacturaService.show({ 'id': this.tramiteFactura.id }, token).subscribe(
                         response => {
@@ -102,7 +104,7 @@ export class NewRnaDuplicadoPlacaComponent implements OnInit {
                         this.motivoList = ['Destrucción', 'Deterioro', 'Hurto', 'Pérdida'];
                     }
                 } else {
-                    this.autorizado = false;
+                    this.realizado = false;
 
                     swal({
                         title: 'Error!',
@@ -135,7 +137,7 @@ export class NewRnaDuplicadoPlacaComponent implements OnInit {
                 let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero +
                 '<br><b>Motivo: </b>' + this.motivoSelected;
 
-                this.readyTramite.emit(
+                this.onReadyTramite.emit(
                     {
                         'documentacion':this.datos.documentacion, 
                         'observacion':this.datos.observacion, 

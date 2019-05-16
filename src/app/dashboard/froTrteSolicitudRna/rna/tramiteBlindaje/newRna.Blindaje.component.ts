@@ -11,13 +11,14 @@ import swal from 'sweetalert2';
     templateUrl: './newRna.Blindaje.html'
 })
 export class NewRnaBlindajeComponent implements OnInit {
-    @Output() readyTramite = new EventEmitter<any>();
-    @Output() cancelarTramite = new EventEmitter<any>();
+    @Output() onReadyTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;
     @Input() tramiteFactura: any = null;
+    @Input() funcionario: any = null;
+    @Input() tramitesRealizados: any = null;
     public errorMessage; 
 
-    public autorizado: any = false;
+    public realizado: any = false;
     public tramiteSolicitud: any = null;
     public tipoRegrabacionList: string[];
     public tipoRegrabacionSelected: any;
@@ -74,7 +75,7 @@ export class NewRnaBlindajeComponent implements OnInit {
             response => {
                 if (response.status == 'success') {
                     this.datos.idFuncionario = response.data.id;
-                    this.autorizado = true;
+                    this.realizado = true;
 
                     this._TramiteFacturaService.show({ 'id': this.tramiteFactura.id }, token).subscribe(
                         response => {
@@ -130,7 +131,7 @@ export class NewRnaBlindajeComponent implements OnInit {
                         );
                     }
                 } else {
-                    this.autorizado = false;
+                    this.realizado = false;
 
                     swal({
                         title: 'Error!',
@@ -157,62 +158,16 @@ export class NewRnaBlindajeComponent implements OnInit {
         this.datos.idTramiteFactura = this.tramiteFactura.id;
         this.datos.idVehiculo = this.vehiculo.id;
 
-        this._TramiteSolicitudService.validations(this.datos, token).subscribe(
-            response => {
-              if (response.code == 200) {
-                this._VehiculoService.update(this.datos, token).subscribe(
-                    response => {
-                        if (response.code == 200) {
-                            let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero;
+        let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero;
                             
-                            this.readyTramite.emit(
-                                {
-                                    'documentacion':this.datos.documentacion, 
-                                    'observacion':this.datos.observacion, 
-                                    'foraneas':this.datos, 
-                                    'resumen':resumen,
-                                    'idTramiteFactura': this.tramiteFactura.id,
-                                }
-                            );
-                        }else{
-                            swal({
-                                title: 'Error!',
-                                text: response.message,
-                                type: 'error',
-                                confirmButtonText: 'Aceptar'
-                            });
-                        }
-                        error => {
-                            this.errorMessage = <any>error;
-        
-                            if (this.errorMessage != null) {
-                                console.log(this.errorMessage);
-                                alert("Error en la petición");
-                            }
-                        }
-                    }
-                );
-              }else{
-                swal({
-                  title: 'Error!',
-                  text: response.message,
-                  type: 'error',
-                  confirmButtonText: 'Aceptar'
-                });
-              }
-            },
-            error => {
-                this.errorMessage = <any>error;
-
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert('Error en la petición');
-                }
+        this.onReadyTramite.emit(
+            {
+                'documentacion':this.datos.documentacion, 
+                'observacion':this.datos.observacion, 
+                'foraneas':this.datos, 
+                'resumen':resumen,
+                'idTramiteFactura': this.tramiteFactura.id,
             }
         );
-    }
-
-    onCancelar(){
-        this.cancelarTramite.emit(true);
     }
 }

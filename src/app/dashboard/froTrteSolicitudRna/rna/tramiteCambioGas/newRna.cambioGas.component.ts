@@ -13,13 +13,15 @@ import swal from 'sweetalert2';
     templateUrl: './newRna.cambioGas.html'
 })
 export class NewRnaCambioGasComponent implements OnInit {
-    @Output() readyTramite = new EventEmitter<any>();
-    @Output() cancelarTramite = new EventEmitter<any>();
+    @Output() onReadyTramite = new EventEmitter<any>();
+    
     @Input() vehiculo: any = null;
     @Input() tramiteFactura: any = null;
+    @Input() funcionario: any = null;
+    @Input() tramitesRealizados: any = null;
     public errorMessage; 
     
-    public autorizado: any = false;
+    public realizado: any = false;
     public tramiteSolicitud: any = null;
     public colores: any;
     public colorSelected: any;
@@ -71,7 +73,7 @@ export class NewRnaCambioGasComponent implements OnInit {
             response => {
                 if (response.status == 'success') {
                     this.datos.idFuncionario = response.data.id;
-                    this.autorizado = true;
+                    this.realizado = true;
 
                     this.datos.placa = this.vehiculo.placa.numero;
                     this.datos.linea = this.vehiculo.linea.nombre;
@@ -136,7 +138,7 @@ export class NewRnaCambioGasComponent implements OnInit {
                         );
                     }
                 } else {
-                    this.autorizado = false;
+                    this.realizado = false;
 
                     swal({
                         title: 'Error!',
@@ -193,7 +195,7 @@ export class NewRnaCambioGasComponent implements OnInit {
                                 '<br><b>Anterior: </b>' + this.vehiculo.combustible.nombre +
                                 '<br><b>Nuevo: </b>' + this.datos.idCombustibleCambio;
         
-                            this.readyTramite.emit(
+                            this.onReadyTramite.emit(
                                 {
                                     'documentacion':this.datos.documentacion, 
                                     'observacion':this.datos.observacion, 
@@ -232,8 +234,4 @@ export class NewRnaCambioGasComponent implements OnInit {
             }
         );
     }
-    onCancelar(){
-        this.cancelarTramite.emit(true);
-    }
-
 }

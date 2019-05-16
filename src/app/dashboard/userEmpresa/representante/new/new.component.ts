@@ -58,7 +58,7 @@ export class NewRepresentanteComponent implements OnInit {
       response => {
         if (response.status == 'success') {
           if (response.data.ciudadano) {
-            this.ciudadano = response.data;
+            this.ciudadano = response.data.ciudadano;
             this.representante.idCiudadano = this.ciudadano.id;
           }
 
@@ -67,12 +67,7 @@ export class NewRepresentanteComponent implements OnInit {
           this.ciudadano = null;
           this.representante.idCiudadano = null;
 
-          swal({
-            title: 'Error!',
-            text: response.message,
-            type: 'error',
-            confirmButtonText: 'Aceptar'
-          })
+          swal.close();
         }
         error => {
           this.errorMessage = <any>error;
