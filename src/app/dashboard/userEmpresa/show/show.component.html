@@ -1,134 +1,208 @@
-
-<div class="container">
-    <div class="row align-items-center justify-content-between">
-         <div class="col-11 col-sm-12 page-title">
-            <!-- <h5>
-                <b>Módulo RNC.</b>
-                <small>Inscripción de sucursal</small>
-            </h5> 
-         </div> -->
-         <!-- <div class="col text-left ">
-             <div class="btn-group pull-left"><br>
-                   
-             </div>
-         </div> -->
-     </div>
-     
 <div class="container row">
-    <div class="col-md-4 col-lg-4">
+    <div class="col-xs-12 col-lg-4">
         <div class="card">
-            <div class="card-header align-items-start justify-content-between flex">
-                <h5 class=" pull-left">Empresa</h5>
+            <div class="card-header">
+                <b class="text-uppercase">Empresa</b>
             </div>
             <div class="card-body">
-                <!-- tabla donde se muestra la empresa agregar sucursal -->
-                <table class="table table-hover">
-                    <thead>
-                      <tr>
-                        <th>Nombre</th>
-                        <th class="text-right">{{empresa.nombre}}</th>
-                      </tr>
-                    </thead>
+                <table class="table table-bordered table-striped">
                     <tbody>
+                        <tr>
+                            <td>
+                                <b>Nombre</b>
+                                <br>
+                                {{empresa.nombre}}
+                            </td>
+                        </tr>
                       <tr>
-                        <td>NIT</td>
-                        <th class="text-right">{{empresa.nit}}</th>
+                        <td>
+                            <b>NIT</b>
+                            <br>
+                            {{empresa.nit}}
+                        </td>
                       </tr>
                       <tr>
-                        <td>Dirección</td>
-                        <td class="text-right">{{empresa.direccion}}</td>
+                        <td>
+                            <b>Dirección</b>
+                            <br>
+                            {{empresa.direccion}}
+                        </td>
                       </tr>
                       <tr>
-                        <td>Tipo entidad</td>                        
-                        <td class="text-right">{{empresa.tipoEntidad}}</td>
+                        <td>
+                            <b>Tipo entidad</b>
+                            <br>
+                            {{empresa.tipoEntidad}}
+                        </td>
                       </tr> 
                       <tr>
-                        <td>Tipo sociedad</td>
-                        <td class="text-right">{{ empresa.tipoSociedad.nombre }}</td>                        
+                        <td>
+                            <b>Tipo sociedad</b>
+                            <br>
+                            {{ empresa.tipoSociedad.nombre }}
+                        </td>                   
                       </tr> 
                       <tr>
-                        <td>Empresa prestadora</td>
-                        <td class="text-right">
+                        <td>
+                            <b>Empresa prestadora</b>
+                            <br>
                             <span *ngIf="empresa.empresaPrestadora">Si</span>
                             <span *ngIf="!empresa.empresaPrestadora">No</span>
                         </td>                        
                       </tr> 
                       <tr>
-                        <td>Municipio</td>
-                        <td class="text-right">{{empresa.municipio.nombre}}</td>
+                        <td>
+                            <b>Municipio</b>
+                            <br>
+                            {{empresa.municipio.nombre}}
+                        </td>
                       </tr>
                       <tr>
-                        <td>Telefono</td>
-                        <td class="text-right">{{empresa.telefono}}</td>
+                        <td>
+                            <b>Telefono</b>
+                            <br>
+                            {{empresa.telefono}}
+                        </td>
                       </tr>
-                      
                     </tbody>
-                    
-                 </table> 
-                 <!-- fin de la tablar de empresa -->
-                <hr>                
-                <div class="card-footer">
-                    <button (click)="onCancelar()" class="btn btn-default">
-                        <i class="fa fa-times"></i>
-                        Cancelar
-                    </button>
-                    <button (click)="onNewSucursal()" class="btn btn-primary">
-                        <i class="fa fa-plus"></i>
-                        Nuevo
-                    </button>
-                </div>
+                </table>               
+            </div>
+            <div class="card-footer">
+                <button (click)="onCancelar()" class="btn btn-default">
+                    <i class="fa fa-times"></i>
+                    Cancelar
+                </button>
             </div>
         </div>
     </div>
-    <div class="col-md-11 col-lg-8">
-        <div class="table-responsive">
-            <div class="card" *ngIf='formListaSucursales'>
-                <div class="card-header">
-                    <h5 >
-                        Sucursales
-                        <div class="btn-group pull-right">
-                            <button (click)="onNewSucursal()" class="btn btn-success  btn-round pull-left "  data-target="#themepicker" data-toggle="modal"><span class="text">Nuevo</span> <i class="ti-save ml-2"></i></button>
+    
+    <div class="col-xs-12 col-lg-8">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="representantes-tab" data-toggle="tab" href="#representantes" role="tab" aria-controls="representantes" aria-selected="true">
+                    <i class="fa fa-users"></i>
+                    Representantes
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="sucursales-tab" data-toggle="tab" href="#sucursales" role="tab" aria-controls="sucursales" aria-selected="false">
+                    <i class="fa fa-building"></i>
+                    Sucursales
+                </a>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="representantes" role="tabpanel" aria-labelledby="representantes-tab">
+                <div class="row">
+                    <div class="col-xs-12 col-lg-12">
+                        <div class="card">
+                            <div class="card-header text-center">
+                                <b class="text-uppercase">Representantes</b>
+                                <div class="btn-group pull-right">
+                                    <button (click)="onNewRepresentante()" class="btn btn-default">
+                                        <i class="fa fa-plus"></i>
+                                        Nuevo
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-bordered" *ngIf='sucursales && sucursales.length > 0'>
+                                    <thead>
+                                        <tr>
+                                            <th>Nombre</th>
+                                            <th>Fechas</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let representante of representantes; let i = index">
+                                            <td>
+                                                {{ representante.ciudadano.primerNombre }} {{ representante.ciudadano?.segundoNombre }} {{ representante.ciudadano?.primerApellido }} {{ representante.ciudadano?.segundoApellido }}
+                                            </td>
+                                            <td>
+                                                <b>Fecha Inicial: </b>
+                                                {{ representante.fechaInicial }}
+                                                <br>
+                                                <b>Fecha Final:</b>
+                                                {{ representante.fechaFinal }}</td>
+                                            <td>
+                                                <div class="btn-group">
+                                                    <button (click)="onEditRepresentante(sucursal)" class="btn btn-xs btn-info" type="button">
+                                                        <i class="fa fa-pencil"></i>
+                                                    </button> 
+                                                    <button (click)="onDeleteRepresentante(sucursal.id)"  class="btn btn-xs btn-danger" type="button">
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <app-new-representante *ngIf='formNewRepresentante' [empresa]="empresa" (onReady)="onReady($event)"></app-new-representante>
+                
+                            <app-edit-representante *ngIf='formEditRepresentante' [representante]="representante" (onReady)="onReady($event)"></app-edit-representante>
                         </div>
-                    </h5>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <table class="table " id="dataTables-example">
-                        <thead>
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Sigla</th>
-                                <th>Dirección</th>
-                                <th>Municipio</th>
-                                <th>Acción</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="odd" *ngFor="let sucursal of sucursales; let i = index">
-                               
-                                <td>{{sucursal.nombre}}</td>
-                                <td>{{sucursal.sigla}}</td>
-                                <td>{{sucursal.direccion}}</td>
-                                <td>{{sucursal.municipio.nombre}}</td>
-                                <td>
-                                    <button (click)="onEdit(sucursal)" class="btn btn-info btn-xs" type="button">Editar</button> 
-                                    <button (click)="onDelete(sucursal.id)"  class="btn btn-danger btn-xs" type="button">Eliminar</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>               
-            </div>          
+            </div>
+            <div class="tab-pane fade" id="sucursales" role="tabpanel" aria-labelledby="sucursales-tab">
+                <div class="row">
+                    <div class="col-xs-12 col-lg-12">
+                        <div class="card" >
+                            <div class="card-header">
+                                <b class="text-uppercase">Sucursales</b>
+                                <div class="btn-group pull-right">
+                                    <button (click)="onNewSucursal()" class="btn btn-default">
+                                        <i class="fa fa-plus"></i>
+                                        Nuevo
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-bordered" id="dataTables-example" *ngIf='sucursales && sucursales.length > 0'>
+                                    <thead>
+                                        <tr>
+                                            <th>Nombre</th>
+                                            <th>Sigla</th>
+                                            <th>Dirección</th>
+                                            <th>Municipio</th>
+                                            <th>Acción</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="odd" *ngFor="let sucursal of sucursales; let i = index">
+                                            
+                                            <td>{{sucursal.nombre}}</td>
+                                            <td>{{sucursal.sigla}}</td>
+                                            <td>{{sucursal.direccion}}</td>
+                                            <td>{{sucursal.municipio.nombre}}</td>
+                                            <td>
+                                                <div class="btn-group">
+                                                    <button (click)="onEditSucursal(sucursal)" class="btn btn-xs btn-info" type="button">
+                                                        <i class="fa fa-pencil"></i>
+                                                    </button> 
+                                                    <button (click)="onDeleteSucursal(sucursal.id)"  class="btn btn-xs btn-danger" type="button">
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>               
+                        </div>          
+                
+                        <app-new-sucursal *ngIf='formNewSucursal' [empresa]="empresa" (onReady)="onReady($event)"></app-new-sucursal>
+                
+                        <app-edit-sucursal *ngIf='formEditSucursal' [sucursal]="sucursal" (onReady)="onReady($event)"></app-edit-sucursal>
+                    </div>
+                </div>
+            </div>
         </div>
-        <!-- fin de lista de sucursales -->
-        <!--formulario de nueva sucursal-->
-        <app-new-sucursal *ngIf='formNewSucursal' [empresa]="empresa" (readySucursal)="readySucursal($event)"></app-new-sucursal>
-        <app-edit-sucursal *ngIf='formEditSucursal' [sucursal]="sucursal" (readySucursal)="readySucursal($event)"></app-edit-sucursal>
- 
-        <!-- fin formulario -->
-     </div> 
-     
-</div>
+     </div>
 </div>
 
 

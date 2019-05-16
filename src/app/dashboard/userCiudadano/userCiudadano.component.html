@@ -52,15 +52,13 @@
         <div class="col-xs-12 col-lg-12">
           <div class="card">
             <div class="card-header">
-              <h5 class="card-title">
-                <b class="text-uppercase">Inscripción de persona natural</b>
-                <div class="btn-group pull-right">
-                  <button (click)="onNew()" class="btn btn-xs btn-default">
-                    <i class="fa fa-plus"></i>
-                    <span class="text">Nuevo</span>
-                  </button>
-                </div>
-              </h5>
+              <b class="text-uppercase">Inscripción de persona natural</b>
+              <div class="btn-group pull-right">
+                <button (click)="onNew()" class="btn btn-xs btn-default">
+                  <i class="fa fa-plus"></i>
+                  <span class="text">Nuevo</span>
+                </button>
+              </div>
             </div>
             <div class="card-body">
               <table class="table" id="dataTables-example">
@@ -85,7 +83,7 @@
                       </td>
                       <td>
                         <div class="btn-group">
-                          <button (click)="onShow(ciudadano)" class="btn btn-xs btn-info" type="button" tooltip="Detalles" [tooltipDisabled]="false"
+                          <button (click)="onShow(ciudadano)" class="btn btn-xs btn-success" type="button" tooltip="Detalles" [tooltipDisabled]="false"
                             [tooltipAnimation]="true" tooltipPlacement="top">
                             <i class="fa fa-check"></i>
                           </button>

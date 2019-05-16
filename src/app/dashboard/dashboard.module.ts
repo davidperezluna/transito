@@ -253,8 +253,6 @@ import {SidebarComponent} from '../shared';
 import {FooterComponent} from '../shared';
 import {RightsidebarComponent} from '../shared';
 
-
-
 @NgModule({
   imports: [
     CvLcCfgTipoRestriccionModule,

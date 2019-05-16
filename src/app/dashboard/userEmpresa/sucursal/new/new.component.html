@@ -2,12 +2,15 @@
 <div class="row ">
     <div class="col-xs-12 col-lg-12 ">
         <div class="card">
+            <div class="card-header">
+                <b class="text-uppercase">Nueva sucursal</b>
+                <br>
+                <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
+            </div>
             <div class="card-body ">
-                <h5 class="m-0">Nueva sucursal</h5>
-                <hr>
-                <form #formNewSucursal="ngForm">
-                    <div class="row justify-content-center container">
-                        <div class="form-group row">
+                <form #formNew="ngForm">
+                    <div class="form-group">
+                        <div class="row">
                             <div class="col-xs-12 col-lg-4">
                                 <label>Nombre
                                     <span class="text-danger">*</span>
@@ -19,9 +22,7 @@
                                 <input class="form-control" [(ngModel)]="sucursal.sigla" name="sigla" type="text">
                             </div>
                             <div class="col-xs-8 col-lg-4">
-                                <label>Municipio
-                                    <span class="text-danger">*</span>
-                                </label>
+                                <label>Municipio <span class="text-danger">*</span></label>
                                 <ng-select [multiple]="false" [options]="municipios" [(ngModel)]="municipioSelected" required name="municipioId">
                                 </ng-select>
                             </div>
@@ -48,17 +49,19 @@
                             </div> 
                         </div>
                     </div>
-                    <div class="btn-group pull-right">
-                        <button (click)="onEnviar()" [disabled]="formNewSucursal.invalid" class="btn btn-primary" type="button">
-                            <i class="fa fa-floppy-o"></i>
-                            Guardar
-                        </button>
-                        <button (click)="onCancelar()" class="btn btn-default">
-                            <i class="fa fa-times"></i>
-                           Cancelar
-                        </button>
-                    </div>
                 </form>    
+            </div>
+            <div class="card-footer">
+                <div class="btn-group">
+                    <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
+                        <i class="fa fa-floppy-o"></i>
+                        Guardar
+                    </button>
+                    <button (click)="onCancelar()" class="btn btn-default">
+                        <i class="fa fa-times"></i>
+                        Cancelar
+                    </button>
+                </div>
             </div>
         </div>
     </div>

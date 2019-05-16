@@ -6,7 +6,6 @@ import { UserCfgEmpresaTipoService } from '../../../services/userCfgEmpresaTipo.
 import { UserCiudadanoService } from '../../../services/userCiudadano.service';
 import { UserCfgEmpresaTipoSociedadService } from '../../../services/userCfgEmpresaTipoSociedad.service';
 import { UserCfgTipoIdentificacionService } from '../../../services/userCfgTipoIdentificacion.service';
-import { UserEmpresaRepresentanteService } from '../../../services/userEmpresaRepresentante.service';
 import { UserCfgEmpresaServicioService } from '../../../services/userCfgEmpresaServicio.service';
 import { VhloCfgModalidadTransporteService } from '../../../services/vhloCfgModalidadTransporte.service';
 
@@ -16,18 +15,14 @@ import swal from 'sweetalert2';
   selector: 'app-edit',
   templateUrl: './edit.component.html'
 })
+
 export class EditComponent implements OnInit {
   @Output() ready = new EventEmitter<any>();
   @Input() empresa: any = null;
 
   public errorMessage;
   public formReady = false;
-  public formListaRepresentanteVigente = false;
-  public formListaRepresentantes = false;
-  public formNewRepresentante = true;
-  
-  public representantes;
-  public representanteVigente;
+
 
   public modalidadTransporteSelect;
   public modalidadTransportes;
@@ -73,7 +68,6 @@ export class EditComponent implements OnInit {
     private _TipoSociedadService: UserCfgEmpresaTipoSociedadService,
     private _CiudadanoService: UserCiudadanoService,
     private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
-    private _RepresentanteEmpresaService: UserEmpresaRepresentanteService,
     private _EmpresaServicioService: UserCfgEmpresaServicioService,
     private _LoginService: LoginService,
     private _UserCfgEmpresaTipoService: UserCfgEmpresaTipoService,
@@ -121,23 +115,6 @@ export class EditComponent implements OnInit {
 
     this.tipoEntidadSelected = [this.empresa.tipoEntidad];
     
-    this._RepresentanteEmpresaService.show(this.empresa.id, token).subscribe(
-      response => {
-        if (response.status == "success") {
-          this.representanteVigente = response.representanteVigente;
-          this.representantes = response.representantes;
-          this.formListaRepresentanteVigente = true;
-
-          if (this.representantes.length != 0) {
-            this.formListaRepresentantes = true;
-          }
-        } else {
-          this.formListaRepresentanteVigente = false;
-          this.formNewRepresentante = true;
-        }
-      },
-    );
-
     this._EmpresaServicioService.select().subscribe(
       response => {
         this.servicios = response;
@@ -227,6 +204,7 @@ export class EditComponent implements OnInit {
   onCancelar() {
     this.ready.emit(true);
   }
+  
   onEnviar() {
     let token = this._LoginService.getToken();
     this.empresa.idMunicipio = this.municipioSelected;
@@ -235,15 +213,13 @@ export class EditComponent implements OnInit {
 
     if(this.ciudadano){
       this.empresa.idCiudadano = this.ciudadano.id;
-    } else{
-      this.empresa.idCiudadano = this.representanteVigente.ciudadano.id;
     }
 
     this.empresa.idEmpresaServicio = this.servicioSelected;
     this.empresa.idTipoEmpresa = this.tipoEmpresaSelected;
     this.empresa.idModalidadTransporte = this.modalidadTransporteSelect;
 
-    this._EmpresaService.edit({'empresa':this.empresa}, token).subscribe(
+    this._EmpresaService.edit(this.empresa, token).subscribe(
       response => {
         if (response.status == 'success') {
           this.ready.emit(true);
@@ -322,5 +298,4 @@ export class EditComponent implements OnInit {
       }
     );
   }
-
 }

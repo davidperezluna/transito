@@ -30,38 +30,40 @@ export class UserEmpresaComponent implements OnInit {
     swal({
       title: 'Cargando Tabla!',
       text: 'Solo tardara unos segundos por favor espere.',
-      timer: 1500,
       onOpen: () => {
         swal.showLoading()
       }
-    }).then((result) => {
-      if (
-        // Read more about handling dismissals
-        result.dismiss === swal.DismissReason.timer
-      ) {
-      }
-    }) 
-		this._EmpresaService.index().subscribe(
-				response => {
-          this.empresas = response.data;
-          let timeoutId = setTimeout(() => {  
-            this.onInitTable();
-          }, 100);
-				}, 
-				error => {
-					this.errorMessage = <any>error;
+    });
 
-					if(this.errorMessage != null){
-						console.log(this.errorMessage);
-						alert("Error en la petición");
-					}
-				}
-      );
+		this._EmpresaService.index().subscribe(
+      response => {
+        this.empresas = response.data;
+
+        let timeoutId = setTimeout(() => {  
+          this.onInitTable();
+        }, 100);
+
+        swal.close();
+      }, 
+      error => {
+        this.errorMessage = <any>error;
+
+        if(this.errorMessage != null){
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
   }
+
   onInitTable(){
+    if (this.table) {
+      this.table.destroy();
+    }
+
     this.table = $('#dataTables-example').DataTable({
       responsive: false,
-      pageLength: 6,
+      pageLength: 10,
       sPaginationType: 'full_numbers',
       oLanguage: {
         oPaginate: {
@@ -71,7 +73,7 @@ export class UserEmpresaComponent implements OnInit {
           sLast: '<i class="fa fa-step-forward"></i>'
         }
       }
-   });
+    });
   }
 
   onNew(){
@@ -136,7 +138,7 @@ export class UserEmpresaComponent implements OnInit {
     this.formIndex = false;
   }
 
-  getSucursal(empresa:any){
+  onShow(empresa:any){
     this.empresa = empresa;
     this.formShow = true;
     this.formIndex = false;

@@ -1,67 +1,68 @@
-<div class="container" >
+<div class="container-fluid" >
   <hr>
   <div class="row" *ngIf='formIndex'>
     <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-              <h5>
-                <b>Módulo RNC</b>
-                <small>Inscripción de persona jurídica</small>
-                <div class="btn-group pull-right">
-                  <button (click)="onNew()" class="btn btn-success btn-round" data-target="#themepicker" data-toggle="modal"><span class="text">Nuevo</span> <i class="ti-save ml-2"></i></button>
-                </div>
-              </h5>
+            <b class="text-uppercase">Inscripción de persona jurídica</b>
+            <div class="btn-group pull-right">
+              <button (click)="onNew()" class="btn btn-default">
+                <i class="fa fa-plus"></i>
+                Nuevo
+              </button>
+            </div>
           </div>
           <div class="card-body responsive">
           	<div class="table-responsive">
             <table class="table" id="dataTables-example">
               <thead>
                 <tr>
-                    <th>Id</th>
-                    <th>Nombre</th>
+                    <th>#</th>
+                    <th>Empresa</th>
                     <th>Tipo de sociedad</th>
-                    <th>Municipio</th>                    
-                    <th>NIT</th>
-                    <th>Teléfono</th>
-                    <th>Dirección</th>
-                    <th>Correo</th>                    
+                    <th>Detalles</th>                   
                     <th>Acciones</th>                    
                 </tr>
               </thead>
               <tbody>
                 <tr class="odd" *ngFor="let empresa of empresas; let i = index">
-                  <td>{{ empresa.id }}</td>
+                  <td>{{ i + 1 }}</td>
                   <td>
+                    <b>Nombre</b>
+                    <br>
                     {{ empresa.nombre }}
-                  </td>
-                  <td>  
-                    {{ empresa.tipoSociedad.nombre }}                  
-                  </td>
+                    <br>
+                    <b>NIT</b>
+                    <br>
+                    {{ empresa.nit }}</td>
+                  <td>{{ empresa.tipoSociedad.nombre }}</td>
                   <td>
+                    <b>Dirección</b>
+                    <br>
+                    {{ empresa.direccion }}
+                    <br>
+                    <b>Municipio</b>
+                    <br>
                     {{ empresa.municipio.nombre }}
-                  </td>
-                  <td>
-                      {{ empresa.nit }}
-                  </td>
-                  <td>
-                      {{ empresa.telefono }}
-                  </td>
-                  <td>
-                      {{ empresa.direccion }}
-                  </td>
-                  <td>
-                      {{ empresa.correo }}
+                    <br>
+                    <b>Teléfono</b>
+                    <br>
+                    {{ empresa.telefono }}
+                    <br>
+                    <b>Correo</b> 
+                    <br>
+                    {{ empresa.correo }}
                   </td>
                   <td>
                     <div class="btn-group">
-                      <button (click)="onEdit(empresa)" class="btn btn-primary btn-xs" type="button">
+                      <button (click)="onShow(empresa)" class="btn btn-xs btn-success" type="button" tooltip="Detalles" [tooltipDisabled]="false" [tooltipAnimation]="true" tooltipPlacement="top">
+                        <i class="fa fa-check"></i>
+                      </button>
+                      <button (click)="onEdit(empresa)" class="btn btn-xs btn-primary" type="button" tooltip="Editar" [tooltipDisabled]="false" [tooltipAnimation]="true" tooltipPlacement="top">
                         <i class="fa fa-pencil"></i>
                       </button> 
-                      <button (click)="onDelete(empresa.id)" class="btn btn-danger btn-xs" type="button">
+                      <button (click)="onDelete(empresa.id)" class="btn btn-xs btn-danger" type="button" tooltip="Eliminar" [tooltipDisabled]="false" [tooltipAnimation]="true" tooltipPlacement="top">
                         <i class="fa fa-trash"></i>
-                      </button>
-                      <button (click)="getSucursal(empresa)" class="btn btn-warning" type="button">
-                        Sucursal
                       </button>
                     </div>
                   </td>
@@ -74,7 +75,10 @@
         </div>
       </div>
     </div>
+
     <app-edit *ngIf='formEdit' [empresa]="empresa" (ready)="ready($event)"></app-edit>
+
     <app-new-empresa *ngIf='formNew' (ready)="ready($event)"></app-new-empresa>
+
     <sucursal-show *ngIf='formShow' [empresa]="empresa" (ready)="ready($event)"></sucursal-show>
 </div>

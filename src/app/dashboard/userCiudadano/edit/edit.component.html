@@ -2,12 +2,12 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                <h5 class="text-uppercase">Editar persona natural</h5>
+                <b class="text-uppercase">Editar persona natural</b>
+                <br>
                 <small>Los campos con <b class="text-danger"> <b class="text-danger">*</b></b> son obligatorios</small>
             </div>
             <div class="card-body">
                 <form #editForm="ngForm">
-                
                     <div class="form-group">
                         <div class="row">
                             <div class="col-xs-12 col-lg-4">
@@ -91,43 +91,33 @@
                                 </ng-select>
                             </div>
                             <div class="col-xs-12 col-lg-4">
-                                <label>Pais Residencia
-                                    <b class="text-danger">*</b>
-                                </label>
+                                <label>Pais Residencia <b class="text-danger">*</b></label>
                                 <ng-select (ngModelChange)="onChangedPaisResidencia($event)" [multiple]="false" [options]="paises" [(ngModel)]="idPaisResidencia"
                                     name="idPaisResidencia" required>
                                 </ng-select>
                             </div>
                             <div class="col-xs-12 col-lg-4">
-                                <label>Departamento Residencia
-                                    <b class="text-danger">*</b>
-                                </label>
+                                <label>Departamento Residencia <b class="text-danger">*</b></label>
                                 <ng-select (ngModelChange)="onChangedDepartamentoResidencia($event)" [multiple]="false" [options]="departamentosResidencia"
                                     [(ngModel)]="idDepartamentoResidencia" name="idDepartamentoResidencia" required>
                                 </ng-select>
                             </div>
                             <div class="col-xs-12 col-lg-4">
-                                <label>Municipio Residencia
-                                    <b class="text-danger">*</b>
-                                </label>
+                                <label>Municipio Residencia <b class="text-danger">*</b></label>
                                 <ng-select [multiple]="false" [options]="municipiosResidencia" [(ngModel)]="ciudadano.idMunicipioResidencia" name="idMunicipioResidencia"
                                     required>
                                 </ng-select>
                             </div>
                             <div class="col-xs-12 col-lg-6">
-                                <label>Telefono
-                                    <span class="text-danger">
-                                        <b class="text-danger">*</b>
-                                    </span>
-                                </label>
-                                <input class="form-control" [(ngModel)]="ciudadano.telefono" name="telefono" type="number" required>
+                                <label>Telefono celular</label>
+                                <input class="form-control" [(ngModel)]="ciudadano.telefonoCelular" name="telefonoCelular" type="number">
                             </div>
                             <div class="col-xs-12 col-lg-6">
-                                <label>Direccion Residencia
-                                    <span class="text-danger">
-                                        <b class="text-danger">*</b>
-                                    </span>
-                                </label>
+                                <label>Telefono fijo</label>
+                                <input class="form-control" [(ngModel)]="ciudadano.telefonoFijo" name="telefonoFijo" type="number">
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Direccion Residencia <b class="text-danger">*</b></label>
                                 <input class="form-control" [(ngModel)]="ciudadano.direccionPersonal" name="direccionPersonal" type="text" required>
                             </div>
                             <div class="col-xs-12 col-lg-6">

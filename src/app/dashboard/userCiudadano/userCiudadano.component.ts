@@ -16,11 +16,11 @@ export class UserCiudadanoComponent implements OnInit {
   public errorMessage;
 	public id;
 	public ciudadanos: any = null;
-	public formNew = false;
-	public formEdit = false;
-	public formShow = false;
-	public formIndex = false;
-	public formSearch = true;
+	public formNew: any;
+	public formEdit: any;
+	public formShow: any;
+	public formIndex: any;
+	public formSearch: any = true;
   public table:any = null; 
   public ciudadano: UserCiudadano;
 
@@ -39,12 +39,19 @@ export class UserCiudadanoComponent implements OnInit {
 		private _LoginService: LoginService,
     ){}
     
-  ngOnInit() { }
+  ngOnInit() { 
+    this.onInitForms();
+  }
 
-  onSearch() {
-    this.formIndex = false;
+  onInitForms(){
     this.formNew = false;
     this.formEdit = false;
+    this.formShow = false;
+    this.formIndex = false;
+  }
+
+  onSearch() {
+    this.onInitForms();
 
     swal({
       title: 'Buscando registros!',
@@ -100,7 +107,7 @@ export class UserCiudadanoComponent implements OnInit {
       this.table.destroy();
     }
 
-    $('#dataTables-example').DataTable({
+    this.table = $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,
       sPaginationType: 'full_numbers',
@@ -113,39 +120,29 @@ export class UserCiudadanoComponent implements OnInit {
         }
       }
     });
-
-    this.table = $('#dataTables-example').DataTable();
   }
   
   onNew(){
+    this.onInitForms();
     this.formNew = true;
-    this.formEdit = false;
-    this.formIndex = false;
   }
 
   ready(isCreado:any){
-      if(isCreado) {
-        this.formNew = false;
-        this.formEdit = false;
-        this.formIndex = false;
-        this.ngOnInit();
-      }
+    if(isCreado) {
+      this.ngOnInit();
+    }
   }
 
   onShow(ciudadano:any){
     this.ciudadano = ciudadano;
+    this.onInitForms();
     this.formShow = true;
-    this.formEdit = false;
-    this.formIndex = false;
-    this.formNew = false;
   }
 
   onEdit(ciudadano:any){
     this.ciudadano = ciudadano;
+    this.onInitForms();
     this.formEdit = true;
-    this.formShow = false;
-    this.formIndex = false;
-    this.formNew = false;
   }
 
   onDelete(id:any){
@@ -163,27 +160,25 @@ export class UserCiudadanoComponent implements OnInit {
         let token = this._LoginService.getToken();
 
         this._UserCiudadanoService.delete({ 'id':id }, token).subscribe(
-            response => {
-                swal({
-                  title: 'Eliminado!',
-                  text:response.message,
-                  type:'success',
-                  confirmButtonColor: '#15d4be',
-                });
+          response => {
+              swal({
+                title: 'Eliminado!',
+                text:response.message,
+                type:'success',
+                confirmButtonColor: '#15d4be',
+              });
 
-                this.ngOnInit();
-              }, 
-            error => {
-              this.errorMessage = <any>error;
+              this.ngOnInit();
+            }, 
+          error => {
+            this.errorMessage = <any>error;
 
-              if(this.errorMessage != null){
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
+            if(this.errorMessage != null){
+              console.log(this.errorMessage);
+              alert("Error en la petición");
             }
-          );
-
-        
+          }
+        );
       }
     });
   }

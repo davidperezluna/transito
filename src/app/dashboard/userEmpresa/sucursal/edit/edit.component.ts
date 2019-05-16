@@ -15,7 +15,7 @@ export class EditSucursalComponent implements OnInit {
     @Output() readySucursal = new EventEmitter<any>();
     @Input() sucursal: any = null;
     public errorMessage;
-    public cerrarFormulario = true;
+    
     public municipios: any;
     public municipioSelected: any;
     public formNewSucursal = false;
@@ -32,6 +32,7 @@ export class EditSucursalComponent implements OnInit {
         this._MunicipioService.select().subscribe(
             response => {
                 this.municipios = response;
+                
                 setTimeout(() => {
                     this.municipioSelected = [this.sucursal.municipio.id];
                 });

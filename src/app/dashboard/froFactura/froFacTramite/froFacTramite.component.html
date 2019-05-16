@@ -72,6 +72,9 @@
                         <!-- /.row -->
 
                         <div class="row">
+                            <div class="col-xs-12 col-lg-12" *ngIf='!ciudadano'>
+                                <app-new-ciudadano></app-new-ciudadano>
+                            </div>
                             <!-- .row -->
                             <div class="col-xs-12 col-lg-12" *ngIf='ciudadano'>
                                 <table class="table table-bordered table-striped">

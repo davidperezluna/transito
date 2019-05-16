@@ -12,11 +12,11 @@ import swal from 'sweetalert2';
   templateUrl: './new.component.html'
 })
 export class NewSucursalComponent implements OnInit {
-  @Output() readySucursal = new EventEmitter<any>();
+  @Output() onReady = new EventEmitter<any>();
   @Input() empresa: any = null;
   public sucursal: UserEmpresaSucursal;
   public errorMessage;
-  public cerrarFormulario = true;
+
   public municipios: any;
   public municipioSelected: any;
   public btnVisible = false;
@@ -48,7 +48,7 @@ export class NewSucursalComponent implements OnInit {
   }
 
   onCancelar() {
-    this.readySucursal.emit(true);
+    this.onReady.emit(true);
 
   }
 
@@ -61,7 +61,7 @@ export class NewSucursalComponent implements OnInit {
     this._SucursalService.register(this.sucursal, token).subscribe(
       response => {
         if (response.status == 'success') {
-          this.readySucursal.emit(true);
+          this.onReady.emit(true);
           swal({
             title: 'Perfecto!',
             text: response.message,

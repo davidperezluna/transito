@@ -1,0 +1,67 @@
+
+<div class="row ">
+    <div class="col-xs-12 col-lg-4">
+        <div class="card">
+            <div class="card-header">
+                <b class="text-uppercase">Nuevo representante</b>
+            </div>
+            <div class="card-body ">
+                <form #formNew="ngForm">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Fecha de inicio <b class="text-danger">*</b></label>
+                                <input class="form-control" [(ngModel)]="representante.fechaInicio" name="fechaInicio" type="date" required />
+                            </div>
+
+                            <div class="col-xs-12 col-lg-6">
+                                <label>No. identificación <b class="text-danger">*</b></label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" placeholder="Nro. identificación" [(ngModel)]="identificacion" name="identificacion" />
+                                    <span class="input-group-btn">
+                                        <button (click)="onSearchCiudadano()" class="btn btn-default btn-primary" type="button">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row" *ngIf="ciudadano">
+                            <div class="col-xs-12 col-lg-12">
+                                <table class="table table-bordered table-striped">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <b>Tipo de identificación</b>
+                                                <br> {{ ciudadano.tipoIdentificacion?.nombre }}
+                                            </td>
+                                            <td>
+                                                <b>Numero de identificación</b>
+                                                <br> {{ ciudadano.identificacion }}
+                                            </td>
+                                            <td>
+                                                <b>Ciudadano</b>
+                                                <br> {{ ciudadano.primerNombre }} {{ ciudadano.primerApellido }}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="btn-group">
+                        <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
+                            <i class="fa fa-floppy-o"></i>
+                            Guardar
+                        </button>
+                        <button (click)="onCancelar()" class="btn btn-default">
+                            <i class="fa fa-times"></i>
+                           Cancelar
+                        </button>
+                    </div>
+                </form>    
+            </div>
+        </div>
+    </div>
+</div> 

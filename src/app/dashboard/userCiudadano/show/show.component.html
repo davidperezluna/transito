@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-xs-12 col-lg-12">
         <div class="card">
             <div class="card-header">
                 <b class="text-uppercase">Datos persona natural</b>
@@ -8,83 +8,83 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-xs-12 col-lg-4">
-                            <label>Tipo Identificacion</label>
+                            <b>Tipo Identificacion</b>
                             {{ ciudadano.tipoIdentificacion.nombre }}
                         </div>
                         <div class="col-xs-12 col-lg-4">
-                            <label>Identificacion</label>
+                            <b>Identificacion</b>
                             {{ ciudadano.identificacion }}
                         </div>
                         <div class="col-xs-12 col-lg-4">
-                            <label>Fecha Expedición Documento</label>
+                            <b>Fecha Expedición Documento</b>
                             {{ ciudadano.fechaExpedicionDocumento }}
                         </div>
                         <div class="col-xs-12 col-lg-3">
-                            <label>Primer Nombre</label>
+                            <b>Primer Nombre</b>
                             {{ ciudadano.primerNombre }}
                         </div>
                         <div class="col-xs-12 col-lg-3">
-                            <label>Segundo Nombre</label>
+                            <b>Segundo Nombre</b>
                             {{ ciudadano.segundoNombre }}
                         </div>
                         <div class="col-xs-12 col-lg-3">
-                            <label>Primer Apellido</label>
+                            <b>Primer Apellido</b>
                             {{ ciudadano.primerApellido }}
                         </div>
                         <div class="col-xs-12 col-lg-3">
-                            <label>Segundo Apellido</label>
+                            <b>Segundo Apellido</b>
                             {{ ciudadano.segundoApellido }}
                         </div>
                         <div class="col-xs-12 col-lg-4">
-                            <label>Genero</label>
+                            <b>Genero</b>
                             {{ ciudadano.genero.nombre }}
                         </div>
                         <div class="col-xs-12 col-lg-4">
-                            <label>Grupo Sanguineo</label>
+                            <b>Grupo Sanguineo</b>
                             {{ ciudadano.grupoSanguineo.sigla }}
                         </div>
                         <div class="col-xs-12 col-lg-4">
-                            <label>Fecha Nacimiento</label>
+                            <b>Fecha Nacimiento</b>
                             {{ ciudadano.fechaNacimiento }}
                         </div>
                         <div class="col-xs-12 col-lg-4" *ngIf="ciudadano.municipioNacimiento.departamento.pais">
-                            <label>Pais Nacimiento</label>
+                            <b>Pais Nacimiento</b>
                             {{ ciudadano.municipioNacimiento.departamento.pais.nombre }}
                         </div>
                         <div class="col-xs-12 col-lg-4">
-                            <label>Departamento Nacimiento</label>
+                            <b>Departamento Nacimiento</b>
                             {{ ciudadano.municipioNacimiento.departamento.nombre }}
                         </div>
                         <div class="col-xs-12 col-lg-4">
-                            <label>Municipio Nacimiento</label>
+                            <b>Municipio Nacimiento</b>
                             {{ ciudadano.municipioNacimiento.nombre }}
                         </div>
                         <div class="col-xs-12 col-lg-4" *ngIf="ciudadano.municipioResidencia.departamento.pais">
-                            <label>Pais Residencia</label>
+                            <b>Pais Residencia</b>
                             {{ ciudadano.municipioResidencia.departamento.pais.nombre }}
                         </div>
                         <div class="col-xs-12 col-lg-4">
-                            <label>Departamento Residencia</label>
+                            <b>Departamento Residencia</b>
                             {{ ciudadano.municipioResidencia.departamento.nombre }}
                         </div>
                         <div class="col-xs-12 col-lg-4">
-                            <label>Municipio Residencia</label>
+                            <b>Municipio Residencia</b>
                             {{ ciudadano.municipioResidencia.nombre }}
                         </div>
                         <div class="col-xs-12 col-lg-6" *ngIf="ciudadano.telefonoCelular">
-                            <label>Telefono celular</label>
+                            <b>Telefono celular</b>
                             {{ ciudadano.telefonoCelular }}
                         </div>
                         <div class="col-xs-12 col-lg-6">
-                            <label>Direccion Residencia</label>
+                            <b>Direccion Residencia</b>
                             {{ ciudadano.direccionPersonal }}
                         </div>
                         <div class="col-xs-12 col-lg-6">
-                            <label>Direccion Trabajo</label>
+                            <b>Direccion Trabajo</b>
                             {{ ciudadano.direccionTrabajo }}
                         </div>
                         <div class="col-xs-12 col-lg-6">
-                            <label>Correo</label>
+                            <b>Correo</b>
                             {{ ciudadano.correo }}
                         </div>
                     </div>

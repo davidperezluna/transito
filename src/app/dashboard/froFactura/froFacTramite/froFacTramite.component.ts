@@ -252,6 +252,9 @@ export class FroFacTramiteComponent implements OnInit {
                 confirmButtonText: 'Aceptar'
               });
             }else{
+              this.ciudadano = null;
+              this.factura.idCiudadano = null;
+
               swal({
                 title: 'Error!',
                 text: response.message + " Debe registrarlo en persona natural.",
@@ -261,10 +264,11 @@ export class FroFacTramiteComponent implements OnInit {
             }
           } else {
             this.ciudadano = null;
+            this.factura.idCiudadano = null;
   
             swal({
               title: 'Error!',
-              text: response.message,
+              text: response.message + " Debe registrarlo en persona natural.",
               type: 'error',
               confirmButtonText: 'Aceptar'
             });

@@ -18,8 +18,8 @@ export class DocumentComponent implements OnInit {
     public datos = {
         'numero': null,
         'cuerpo': null,
-        'id': this.trazabilidad.id,
         'idFormato': null,
+        'id': this.trazabilidad.id,
     }
 
     constructor(

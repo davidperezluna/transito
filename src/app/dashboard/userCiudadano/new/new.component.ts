@@ -20,7 +20,6 @@ export class NewCiudadanoComponent implements OnInit {
   @Input() tipoIdentificacion:any = null;
   public ciudadano: UserCiudadano;
   public errorMessage;
-  public respuesta;
 
   public tiposIdentificacion: any;
   public generos: any;
@@ -114,8 +113,8 @@ constructor(
   onChangedPaisNacimiento(id){   
     if (id) {
       let token = this._LoginService.getToken();
-
-      this.idPaisResidencia = id;
+      
+      this.idPaisResidencia = [id];
 
       this._DepartamentoService.selectByPais({ 'idPais': id}, token).subscribe(
         response => {
@@ -136,7 +135,7 @@ constructor(
     if (id) {
       let token = this._LoginService.getToken();
 
-      this.idDepartamentoResidencia = id;
+      this.idDepartamentoResidencia = [id];
 
       this._MunicipioService.selectByDepartamento({ 'idDepartamento':id }, token).subscribe(
         response => {
@@ -155,9 +154,7 @@ constructor(
 
   onChangedMunicipioNacimiento(id){
     if (id) {
-      let token = this._LoginService.getToken();
-
-      this.ciudadano.idMunicipioResidencia = id;
+      this.ciudadano.idMunicipioResidencia = Number[id];
     }
   }
 

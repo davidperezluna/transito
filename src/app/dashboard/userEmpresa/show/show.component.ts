@@ -1,12 +1,7 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { UserEmpresaService } from '../../../services/userEmpresa.service';
-import { LoginService } from '../../../services/login.service';
-
-
-import { UserEmpresaSucursal } from '../sucursal/userEmpresaSucursal.modelo';
+import { UserEmpresaRepresentanteService } from '../../../services/userEmpresaRepresentante.service';
 import { UserEmpresaSucursalService } from '../../../services/userEmpresaSucursal.service';
-import { CfgMunicipioService } from '../../../services/cfgMunicipio.service';
-import { UserCfgEmpresaTipoSociedadService } from '../../../services/userCfgEmpresaTipoSociedad.service';
+import { LoginService } from '../../../services/login.service';
 
 
 import swal from 'sweetalert2';
@@ -21,20 +16,24 @@ export class ShowComponent implements OnInit {
   @Output() ready = new EventEmitter<any>();
   @Input() empresa: any = null;
   public errorMessage;
-  public sucursal: UserEmpresaSucursal;
+  
+  public sucursales: any = null;
+  public sucursal: any = null;
+  public representantes: any = null;
+  public representante: any = null;
+
   public municipio: any;
-  public sucursales: any;
   public municipioSelected: any;
   public tipoSociedadSelected: any;
 
-  public formListaSucursales = false;
   public table: any;
-  public formNewSucursal = false;
-  public formEditSucursal = false;
-  public cargar = true;
-  public checked: any;
+  public formNewRepresentante: any;
+  public formEditRepresentante: any;
+  public formNewSucursal: any;
+  public formEditSucursal: any;
 
   constructor(
+    private _RepresentanteService: UserEmpresaRepresentanteService,
     private _SucursalService: UserEmpresaSucursalService,
     private _LoginService: LoginService,
 
@@ -42,19 +41,37 @@ export class ShowComponent implements OnInit {
 
   ngOnInit() {
     let token = this._LoginService.getToken();
+
+    this._RepresentanteService.index({ 'idEmpresa': this.empresa.id }, token).subscribe(
+      response => {
+        if (response.status == "success") {
+          this.representantes = response.data;
+        } else {
+          this.representantes = null;
+
+          swal({
+            title: response.title,
+            text: response.message,
+            type: response.type,
+            confirmButtonText: 'Aceptar'
+          });
+        }
+      },
+    );
+
     this._SucursalService.getSucursalEmpresa(this.empresa.id, token).subscribe(
       response => {
         if (response.status == "success") {
           this.sucursales = response.data;
-          this.formListaSucursales = true;
         } else {
-          /* this.formNewSucursal = true; */
+          this.sucursales = null;
+
           swal({
             title: 'Error!',
             text: response.message,
             type: 'error',
-            confirmButtonColor: '#15d4be',
-          })
+            confirmButtonText: 'Aceptar'
+          });
         }
       },
       error => {
@@ -66,42 +83,50 @@ export class ShowComponent implements OnInit {
       }
     );
 
+    this.onInitForms();
+  }
+
+  onInitForms(){
+    this.formNewRepresentante = false;
+    this.formEditRepresentante = false;
+    this.formNewSucursal = false;
+    this.formEditSucursal = false;
   }
 
   onCancelar() {
     this.ready.emit(true);
   }
 
-  readySucursal(respuesta: any) {
+  onReady(respuesta: any) {
     this.ngOnInit();
-    this.formListaSucursales = false;
-    this.formNewSucursal = false;
-    this.formEditSucursal = false;
   }
 
   onNewSucursal() {
-    this.formListaSucursales = false;
+    this.onInitForms();
+
     this.formNewSucursal = true;
   }
 
-  iniciarTabla() {
-    $('#dataTables-example').DataTable({
-      responsive: true,
-      pageLength: 8,
-      sPaginationType: 'full_numbers',
-      oLanguage: {
-        oPaginate: {
-          sFirst: '<i class="fa fa-step-backward"></i>',
-          sPrevious: '<i class="fa fa-chevron-left"></i>',
-          sNext: '<i class="fa fa-chevron-right"></i>',
-          sLast: '<i class="fa fa-step-forward"></i>'
-        }
-      }
-    });
-    this.table = $('#dataTables-example').DataTable();
+  onEditSucursal(sucursal: any) {
+    this.sucursal = sucursal;
+
+    this.onInitForms();
+    this.formNewSucursal = false;
   }
 
-  onDelete(id: any) {
+  onNewRepresentante() {
+    this.onInitForms();
+    this.formNewRepresentante = true;
+  }
+
+  onEditRepresentante(representante: any) {
+    this.representante = representante;
+
+    this.onInitForms();
+    this.formNewRepresentante = false;
+  }
+
+  onDeleteSucursal(id: any) {
     swal({
       title: '¿Estás seguro?',
       text: "¡Se eliminara este registro!",
@@ -114,6 +139,7 @@ export class ShowComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._LoginService.getToken();
+
         this._SucursalService.delete({ 'id': id }, token).subscribe(
           response => {
             swal({
@@ -121,8 +147,8 @@ export class ShowComponent implements OnInit {
               text: response.message,
               type: 'success',
               confirmButtonColor: '#15d4be',
-            })
-            this.formListaSucursales = false;
+            });
+
             this.ngOnInit();
           },
           error => {
@@ -138,11 +164,41 @@ export class ShowComponent implements OnInit {
     });
   }
 
-  onEdit(sucursal: any) {
-    this.sucursal = sucursal;
-    this.formEditSucursal = true;
-    this.formNewSucursal = false;
-    this.formNewSucursal = false;
-    this.formListaSucursales = false;
+  onDeleteRepresentante(id: any) {
+    swal({
+      title: '¿Estás seguro?',
+      text: "¡Se eliminara este registro!",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#15d4be',
+      cancelButtonColor: '#ff6262',
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.value) {
+        let token = this._LoginService.getToken();
+
+        this._RepresentanteService.delete({ 'id': id }, token).subscribe(
+          response => {
+            swal({
+              title: 'Eliminado!',
+              text: response.message,
+              type: 'success',
+              confirmButtonColor: '#15d4be',
+            });
+
+            this.ngOnInit();
+          },
+          error => {
+            this.errorMessage = <any>error;
+
+            if (this.errorMessage != null) {
+              console.log(this.errorMessage);
+              alert("Error en la petición");
+            }
+          }
+        );
+      }
+    });
   }
 }
