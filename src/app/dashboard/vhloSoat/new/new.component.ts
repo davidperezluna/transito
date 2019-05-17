@@ -23,6 +23,11 @@ export class NewComponent implements OnInit {
     public municipioSelected: any;
     public empresas: any;
     public empresaSelected: any;
+    public estadoSelected: any;
+    public estados = [
+        { value: 'UTILIZADO', label: 'UTILIZADO' },
+        { value: 'VENCIDO', label: 'VENCIDO' },
+    ];
 
     constructor(
         private _SoatService: VhloSoatService,
@@ -33,7 +38,7 @@ export class NewComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.soat = new VhloSoat(null, null, null, null, null, null, null, null);
+        this.soat = new VhloSoat(null, null, null, null, null, null, null, null, null);
 
         this._MunicipioService.select().subscribe(
             response => {
@@ -71,7 +76,18 @@ export class NewComponent implements OnInit {
         let token = this._LoginService.getToken();
 
         this.soat.idMunicipio = this.municipioSelected;
-        this.soat.idVehiculo = this.vehiculo.id;
+        this.soat.estado = this.estadoSelected;
+        if(this.vehiculo == null) {
+            console.log("error-----------------------------------");
+            swal({
+                title: 'Error!',
+                text: 'No se ha digitado el número de la placa del vehículo',
+                type: 'error',
+                confirmButtonText: 'Aceptar'
+            });
+        } else {
+            this.soat.idVehiculo = this.vehiculo.id;
+        }
         this.soat.idEmpresa = this.empresaSelected;
 
         swal({

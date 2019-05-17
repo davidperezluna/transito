@@ -2,6 +2,7 @@ export class VhloSoat{
     constructor(
         public idVehiculo: string,
         public fechaExpedicion: string,
+        public estado: string,
         public fechaVigencia: string,
         public fechaVencimiento: string,
         public numeroPoliza: string,

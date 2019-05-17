@@ -49,48 +49,60 @@
             </div>
         </div>
     </div>
-
     <div class="col-xs-12 col-lg-8">
         <div class="row">
-            <div class="card">
-                <div class="card-header">
-                    <b class="text-uppercase">Historial</b>
-                    <div class="btn-group pull-right">
-                        <button (click)="onNew()" class="btn btn-primary btn-round">
-                            <i class="fa fa-plus"></i>
-                            Nuevo
-                        </button>
+            <div class="col-xs-12 col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <b class="text-uppercase">Historial</b>
+                        <div class="btn-group pull-right">
+                            <button (click)="onNew()" class="btn btn-primary btn-round">
+                                <i class="fa fa-plus"></i>
+                                Nuevo
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body" *ngIf='formHistorial && soats'>
+                        <table class="table " id="dataTables-example">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>No. de Poliza</th>
+                                    <th>Nombre Empresa</th>
+                                    <th>Fecha Expedición</th>
+                                    <th>Fecha Vigencia</th>
+                                    <th>Fecha Vencimiento</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="odd" *ngFor="let soat of soats; let i = index">
+                                    <td>{{ i + 1 }}</td>
+                                    <td>{{ soat.numeroPoliza }}</td>
+                                    <td>{{ soat.empresa.nombre }}</td>
+                                    <td>{{ soat.fechaExpedicion }}</td>
+                                    <td>{{ soat.fechaVigencia }}</td>
+                                    <td>{{ soat.fechaVencimiento }}</td>
+                                    <td>{{ soat.estado }}</td>
+                                    <td>
+                                        <button (click)="onEdit(soat)" class="btn btn-xs btn-info" type="button">
+                                            <i class="fa fa-edit"></i>
+                                            Editar
+                                        </button>
+                                        <button (click)="onDelete(soat.id)" class="btn btn-xs btn-danger" type="button">
+                                            <i class="fa fa-trash"></i>
+                                            Eliminar
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-                <div class="card-body" *ngIf='formHistorial'>
-                    <!-- <table class="table " id="dataTables-example" *ngIf="soats"> -->
-                    <table class="table " id="dataTables-example">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>No. de Poliza</th>
-                                <th>Nombre Empresa</th>
-                                <th>Fecha Expedición</th>
-                                <th>Fecha Vigencia</th>
-                                <th>Fecha Vencimiento</th>
-                                <th>Estado</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="odd" *ngFor="let soat of soats; let i = index">
-                                <td>{{ i + 1 }}</td>
-                                <td>{{ soat.numeroPoliza }}</td>
-                                <td>{{ soat.empresa.nombre }}</td>
-                                <td>{{ soat.fechaExpedicion }}</td>
-                                <td>{{ soat.fechaVigencia }}</td>
-                                <td>{{ soat.fechaVencimiento }}</td>
-                                <td>{{ soat.estado }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                <app-new *ngIf='formNew' [vehiculo]="vehiculo" (ready)="ready($event)"></app-new>
+                <app-edit *ngIf='formEdit' [soat]="soat" (ready)="ready($event)"></app-edit>
             </div>
-            <app-new *ngIf='formNew' [vehiculo]="vehiculo" (ready)="ready($event)"></app-new>
         </div>
     </div>
 </div>

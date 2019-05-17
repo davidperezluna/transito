@@ -16,7 +16,8 @@ export class VhloTecnoMecanicaComponent implements OnInit {
 	public placa: any;
 	public vehiculo: any = null;
 	public tecnoMecanicas: any = null;
-	public formNew = false;
+  public formNew = false;
+  public formHistorial = false;
 	public formEdit = false;
   public formIndex = true;
 
@@ -31,11 +32,13 @@ export class VhloTecnoMecanicaComponent implements OnInit {
   onNew(){
     this.formNew = true;
     this.formIndex = false;
+    this.formHistorial = false;
   }
 
   ready(isCreado:any){
     if(isCreado) {
       this.formNew = false;
+      this.formHistorial = false;
       this.formIndex = true;
       this.ngOnInit();
     }
