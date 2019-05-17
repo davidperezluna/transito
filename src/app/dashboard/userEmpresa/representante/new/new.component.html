@@ -9,13 +9,11 @@
                 <form #formNew="ngForm">
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-xs-12 col-lg-4">
+                            <div class="col-xs-12 col-lg-6">
                                 <label>Fecha de inicio <b class="text-danger">*</b></label>
-                                <input class="form-control" [(ngModel)]="representante.fechaInicio" name="fechaInicio" type="date" required />
+                                <input class="form-control" [(ngModel)]="representante.fechaInicial" name="fechaInicial" type="date" required />
                             </div>
-                        </div>
 
-                        <div class="row">
                             <div class="col-xs-12 col-lg-6">
                                 <label>No. identificación <b class="text-danger">*</b></label>
                                 <div class="input-group">
@@ -59,10 +57,6 @@
                     <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
                         <i class="fa fa-floppy-o"></i>
                         Guardar
-                    </button>
-                    <button (click)="onCancelar()" class="btn btn-default">
-                        <i class="fa fa-times"></i>
-                        Cancelar
                     </button>
                 </div>
             </div>

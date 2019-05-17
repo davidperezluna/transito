@@ -168,11 +168,59 @@ export class UserCiudadanoComponent implements OnInit {
                 title: 'Eliminado!',
                 text:response.message,
                 type:'success',
-                confirmButtonColor: '#15d4be',
+                confirmButtonText: 'Aceptar'
               });
 
               this.ngOnInit();
             }, 
+          error => {
+            this.errorMessage = <any>error;
+
+            if(this.errorMessage != null){
+              console.log(this.errorMessage);
+              alert("Error en la petición");
+            }
+          }
+        );
+      }
+    });
+  }
+
+  onActive(id:any){
+    swal({
+      title: '¿Estás seguro?',
+      text: "¡Se activara este registro!",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#15d4be',
+      cancelButtonColor: '#ff6262',
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.value) {
+        let token = this._LoginService.getToken();
+
+        this._UserCiudadanoService.active({ 'id':id }, token).subscribe(
+          response => { 
+            if (response.code == 200) {
+              swal({
+                title: response.title,
+                text:response.message,
+                type: response.status,
+                confirmButtonText: 'Aceptar'
+              });
+              
+              this.ngOnInit();
+            }else{
+              swal({
+                title: response.title,
+                text:response.message,
+                type: response.status,
+                confirmButtonText: 'Aceptar'
+              });
+            }
+
+          }, 
           error => {
             this.errorMessage = <any>error;
 

@@ -1,7 +1,50 @@
 <div class="container-fluid" >
   <hr>
-  <div class="row" *ngIf='formIndex'>
-    <div class="col-md-12">
+  <div class="row">
+    <div class="col-xs-12 col-lg-3" *ngIf='formSearch'>
+      <!-- .col -->
+      <div class="card">
+        <div class="card-header">
+          <b class="text-uppercase">
+              Buscar ciudadanos
+          </b>
+        </div>
+        <div class="card-body">
+          <form #formSearch="ngForm">
+            <div class="form-group">
+              <div class="row">
+                <!-- .row -->
+                <div class="col-xs-12 col-lg-12">
+                  <label>Tipo de filtro</label>
+                  <ng-select [multiple]="false" [options]="tiposFiltro" [(ngModel)]="search.tipoFiltro" name="tipoFiltro" required></ng-select>
+                </div>
+                <div class="col-xs-12 col-lg-12">
+                  <label>Filtro</label>
+                  <input class="form-control text-uppercase" [(ngModel)]="search.filtro" name="filtro" type="text" required>
+                </div>
+              </div>
+            </div>
+            <!-- /.row -->
+          </form>
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
+          <div class="btn-group">
+            <button (click)="onSearch()" (ready)="ready($event)" [disabled]="formSearch.invalid" class="btn btn-primary" type="button">
+              <i class="fa fa-search"></i>
+              Buscar
+            </button>
+            <button (click)="onNew()" class="btn btn-default">
+              <i class="fa fa-plus"></i>
+              <span class="text">Nuevo</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- /.col -->
+    <div class="col-xs-12 col-lg-9" *ngIf='formIndex'>
         <div class="card">
           <div class="card-header">
             <b class="text-uppercase">Inscripción de persona jurídica</b>
@@ -20,7 +63,8 @@
                     <th>#</th>
                     <th>Empresa</th>
                     <th>Tipo de sociedad</th>
-                    <th>Detalles</th>                   
+                    <th>Ubicación</th>                 
+                    <th>Contacto</th>                 
                     <th>Acciones</th>                    
                 </tr>
               </thead>
@@ -44,7 +88,8 @@
                     <b>Municipio</b>
                     <br>
                     {{ empresa.municipio.nombre }}
-                    <br>
+                  </td>
+                  <td>
                     <b>Teléfono</b>
                     <br>
                     {{ empresa.telefono }}
@@ -74,11 +119,18 @@
           </div>
         </div>
       </div>
+      
+      <div class="col-xs-12 col-lg-12" *ngIf='formNew'>
+        <app-new-empresa (ready)="ready($event)"></app-new-empresa>
+      </div>
+  
+      <div class="col-xs-12 col-lg-12" *ngIf='formEdit'>
+        <app-edit [empresa]="empresa" (ready)="ready($event)"></app-edit>
+      </div>
+  
+      <div class="col-xs-12 col-lg-12" *ngIf='formShow'>
+        <sucursal-show [empresa]="empresa" (ready)="ready($event)"></sucursal-show>
+      </div>
     </div>
-
-    <app-edit *ngIf='formEdit' [empresa]="empresa" (ready)="ready($event)"></app-edit>
-
-    <app-new-empresa *ngIf='formNew' (ready)="ready($event)"></app-new-empresa>
-
-    <sucursal-show *ngIf='formShow' [empresa]="empresa" (ready)="ready($event)"></sucursal-show>
+    
 </div>

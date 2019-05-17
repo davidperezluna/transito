@@ -1,7 +1,8 @@
 export class UserEmpresaRepresentante{
 	constructor(
-		public fechaInicio: string,
+		public fechaInicial: string,
 		public idCiudadano: number,
+		public idEmpresa: number,
 		public id: number,
 	){}
 }

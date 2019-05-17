@@ -48,13 +48,6 @@ export class ShowComponent implements OnInit {
           this.representantes = response.data;
         } else {
           this.representantes = null;
-
-          swal({
-            title: response.title,
-            text: response.message,
-            type: response.type,
-            confirmButtonText: 'Aceptar'
-          });
         }
       },
     );
@@ -65,13 +58,6 @@ export class ShowComponent implements OnInit {
           this.sucursales = response.data;
         } else {
           this.sucursales = null;
-
-          swal({
-            title: 'Error!',
-            text: response.message,
-            type: 'error',
-            confirmButtonText: 'Aceptar'
-          });
         }
       },
       error => {

@@ -6,13 +6,11 @@
       <!-- .col -->
       <div class="card">
         <div class="card-header">
-          <h5 class="text-uppercase">
-            <strong>Ciudadanos</strong>
-            <small>Buscar</small>
-          </h5>
+          <b class="text-uppercase">
+              Buscar ciudadanos
+          </b>
         </div>
         <div class="card-body">
-          <!-- .card-body -->
           <form #formSearch="ngForm">
             <div class="form-group">
               <div class="row">
@@ -71,7 +69,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr class="odd" *ngFor="let ciudadano of ciudadanos; let i = index">
+                    <tr *ngFor="let ciudadano of ciudadanos; let i = index">
                       <td>{{ i + 1 }}</td>
                       <td>
                         {{ ciudadano.tipoIdentificacion.nombre }}
@@ -80,20 +78,26 @@
                       </td>
                       <td>
                         {{ ciudadano.primerNombre }} {{ ciudadano.segundoNombre }} {{ ciudadano.primerApellido }} {{ ciudadano.segundoApellido }}
+                        <br>
+                        <span class="badge badge-success" *ngIf="ciudadano.activo">Activo</span>
+                        <span class="badge badge-danger" *ngIf="!ciudadano.activo">Inactivo</span>
                       </td>
                       <td>
                         <div class="btn-group">
-                          <button (click)="onShow(ciudadano)" class="btn btn-xs btn-success" type="button" tooltip="Detalles" [tooltipDisabled]="false"
+                          <button (click)="onShow(ciudadano)" class="btn btn-xs btn-info" type="button" tooltip="Detalles" [tooltipDisabled]="false"
                             [tooltipAnimation]="true" tooltipPlacement="top">
-                            <i class="fa fa-check"></i>
+                            <i class="fa fa-info"></i>
                           </button>
                           <button (click)="onEdit(ciudadano)" class="btn btn-xs btn-primary" type="button" tooltip="Editar" [tooltipDisabled]="false"
                             [tooltipAnimation]="true" tooltipPlacement="top">
                             <i class="fa fa-pencil"></i>
                           </button>
-                          <button (click)="onDelete(ciudadano.id)" class="btn btn-xs btn-danger" type="button" tooltip="Eliminar" [tooltipDisabled]="false"
+                          <button *ngIf="ciudadano.activo" (click)="onDelete(ciudadano.id)" class="btn btn-xs btn-danger" type="button" tooltip="Eliminar" [tooltipDisabled]="false"
                             [tooltipAnimation]="true" tooltipPlacement="top">
                             <i class="fa fa-trash"></i>
+                          </button>
+                          <button *ngIf="!ciudadano.activo" (click)="onActive(ciudadano.id)" class="btn btn-xs btn-success" type="button" tooltip="Activar" [tooltipDisabled]="false" [tooltipAnimation]="true" tooltipPlacement="top">
+                            <i class="fa fa-check"></i>
                           </button>
                         </div>
                       </td>

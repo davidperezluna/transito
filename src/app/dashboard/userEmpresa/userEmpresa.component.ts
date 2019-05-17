@@ -10,16 +10,28 @@ declare var $: any;
   templateUrl: './userEmpresa.component.html',
 })
 export class UserEmpresaComponent implements OnInit {
-  public errorMessage;
-	public id;
-
-	public empresas;
-	public formNew = false;
-	public formEdit = false;
-  public formIndex = true;
-  public formShow = false;
-  public table:any; 
   public empresa: UserEmpresa;
+  public errorMessage;
+
+  public empresas;
+  
+	public formNew: any;
+	public formEdit: any;
+  public formIndex: any;
+  public formShow: any;
+  public formSearch: any;
+
+  public table:any; 
+
+  public search: any = {
+    'tipoFiltro': null,
+    'filtro': null,
+  }
+
+  public tiposFiltro = [
+    { 'value': '1', 'label': 'NIT' },
+    { 'value': '2', 'label': 'Nombre' },
+  ];
 
   constructor(
 		private _EmpresaService: UserEmpresaService,
@@ -27,28 +39,66 @@ export class UserEmpresaComponent implements OnInit {
     ){}
     
   ngOnInit() {
+    this.onInitForms();
+
+    this.formSearch = true;
+  }
+
+  onInitForms(){
+    this.formNew = false;
+    this.formEdit = false;
+    this.formShow = false;
+    this.formIndex = false;
+    this.formSearch = false;
+
+    return true;
+  }
+
+  onSearch() {
     swal({
-      title: 'Cargando Tabla!',
+      title: 'Buscando registros!',
       text: 'Solo tardara unos segundos por favor espere.',
       onOpen: () => {
         swal.showLoading()
       }
     });
 
-		this._EmpresaService.index().subscribe(
+    let token = this._LoginService.getToken();
+
+    this._EmpresaService.searchByFiltros(this.search, token).subscribe(
       response => {
-        this.empresas = response.data;
+        if (response.status == 'success') {
+          this.empresas = response.data;
 
-        let timeoutId = setTimeout(() => {  
-          this.onInitTable();
-        }, 100);
+          swal({
+            title: response.title,
+            text:response.message,
+            type: response.status,
+            confirmButtonText: 'Aceptar'
+          });
+          
+          this.onInitForms();
+          this.formIndex = true;
 
-        swal.close();
-      }, 
+          let timeoutId = setTimeout(() => {
+            this.onInitTable();
+          }, 100);
+        }else{
+          this.empresas = null;
+
+          swal({
+            title: response.title,
+            text:response.message,
+            type: response.status,
+            confirmButtonText: 'Aceptar'
+          });
+        }
+
+      },
       error => {
         this.errorMessage = <any>error;
 
-        if(this.errorMessage != null){
+        if (this.errorMessage != null) {
           console.log(this.errorMessage);
           alert("Error en la petición");
         }
@@ -77,20 +127,12 @@ export class UserEmpresaComponent implements OnInit {
   }
 
   onNew(){
+    this.onInitForms();
     this.formNew = true;
-    this.formIndex = false;
-    this.formEdit = false;
-    this.formShow = false;
-    this.table.destroy();
   }
 
   ready(isCreado:any){
       if(isCreado) {
-        this.formNew = false;
-        this.formEdit = false;
-        this.formIndex = true;
-        this.formShow = false;
-        
         this.ngOnInit();
       }
   }
@@ -112,13 +154,13 @@ export class UserEmpresaComponent implements OnInit {
         this._EmpresaService.delete(token,id).subscribe(
             response => {
                 swal({
-                      title: 'Eliminado!',
-                      text: response.message,
-                      type:'success',
-                      confirmButtonColor: '#15d4be',
-                    })
-                  this.table.destroy();
-                  this.ngOnInit();
+                  title: 'Eliminado!',
+                  text: response.message,
+                  type:'success',
+                  confirmButtonColor: '#15d4be',
+                });
+
+                this.onSearch();
               }, 
             error => {
               this.errorMessage = <any>error;
@@ -135,13 +177,13 @@ export class UserEmpresaComponent implements OnInit {
 
   onEdit(empresa:any){
     this.empresa = empresa;
+    this.onInitForms();
     this.formEdit = true;
-    this.formIndex = false;
   }
 
   onShow(empresa:any){
     this.empresa = empresa;
+    this.onInitForms();
     this.formShow = true;
-    this.formIndex = false;
   }
 }

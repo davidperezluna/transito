@@ -31,7 +31,7 @@ export class NewRepresentanteComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.representante = new UserEmpresaRepresentante(null, null, null);
+    this.representante = new UserEmpresaRepresentante(null, null, null, null);
   }
 
   onCancelar() {
@@ -82,6 +82,8 @@ export class NewRepresentanteComponent implements OnInit {
 
   onEnviar() {
     let token = this._LoginService.getToken();
+
+    this.representante.idEmpresa = this.empresa.id;
 
     this._RepresentanteService.register(this.representante, token).subscribe(
       response => {

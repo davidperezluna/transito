@@ -49,7 +49,6 @@ export class NewSucursalComponent implements OnInit {
 
   onCancelar() {
     this.onReady.emit(true);
-
   }
 
   onEnviar() {

@@ -75,8 +75,6 @@ export class EditComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    let token = this._LoginService.getToken();
-
     this._UserCfgEmpresaTipoService.select().subscribe(
       response => {
         this.tipoEmpresas = response;
@@ -204,78 +202,10 @@ export class EditComponent implements OnInit {
   onCancelar() {
     this.ready.emit(true);
   }
-  
-  onEnviar() {
-    let token = this._LoginService.getToken();
-    this.empresa.idMunicipio = this.municipioSelected;
-    this.empresa.idTipoSociedad = this.tipoSociedadSelected;
-    this.empresa.idTipoIdentificacion = 4;
-
-    if(this.ciudadano){
-      this.empresa.idCiudadano = this.ciudadano.id;
-    }
-
-    this.empresa.idEmpresaServicio = this.servicioSelected;
-    this.empresa.idTipoEmpresa = this.tipoEmpresaSelected;
-    this.empresa.idModalidadTransporte = this.modalidadTransporteSelect;
-
-    this._EmpresaService.edit(this.empresa, token).subscribe(
-      response => {
-        if (response.status == 'success') {
-          this.ready.emit(true);
-          swal({
-            title: 'Perfecto!',
-            text: response.message,
-            type: 'success',
-            confirmButtonText: 'Aceptar'
-          })
-        }
-        error => {
-          this.errorMessage = <any>error;
-
-          if (this.errorMessage != null) {
-            console.log(this.errorMessage);
-            alert("Error en la petición");
-          }
-        }
-
-      });
-
-  }
-
-  /* nuevoRepresentante() {
-    let token = this._LoginService.getToken();
-    let datos = {
-      'empresa': this.empresa,
-      'ciudadanoId': this.ciudadanoSelected,
-      'fechaFinal': this.empresa.fechaFinal,
-    }
-    this._RepresentanteEmpresaService.register(datos, token).subscribe(
-      response => {
-        if (response.status == 'success') {
-          this.ngOnInit();
-          swal({
-            title: 'Perfecto!',
-            text: 'El registro se ha modificado con exito',
-            type: 'success',
-            confirmButtonText: 'Aceptar'
-          })
-        }
-        error => {
-          this.errorMessage = <any>error;
-
-          if (this.errorMessage != null) {
-            console.log(this.errorMessage);
-            alert("Error en la petición");
-          }
-        }
-
-      });
-
-  } */
 
   onSearchCiudadano() {
     let token = this._LoginService.getToken();
+    
     this._EmpresaService.getBuscarCiudadano({ 'identificacion': this.identificacion }, token).subscribe(
       response => {
         if (response.status == 'success') {
@@ -293,6 +223,45 @@ export class EditComponent implements OnInit {
           if (this.errorMessage != null) {
             console.log(this.errorMessage);
             alert('Error en la petición');
+          }
+        }
+      }
+    );
+  }
+  
+  onEnviar() {
+    let token = this._LoginService.getToken();
+
+    this.empresa.idMunicipio = this.municipioSelected;
+    this.empresa.idTipoSociedad = this.tipoSociedadSelected;
+    this.empresa.idTipoIdentificacion = 4;
+
+    if(this.ciudadano){
+      this.empresa.idCiudadano = this.ciudadano.id;
+    }
+
+    this.empresa.idEmpresaServicio = this.servicioSelected;
+    this.empresa.idTipoEmpresa = this.tipoEmpresaSelected;
+    this.empresa.idModalidadTransporte = this.modalidadTransporteSelect;
+
+    this._EmpresaService.edit(this.empresa, token).subscribe(
+      response => {
+        if (response.status == 'success') {
+          this.ready.emit(true);
+
+          swal({
+            title: 'Perfecto!',
+            text: response.message,
+            type: 'success',
+            confirmButtonText: 'Aceptar'
+          });
+        }
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
           }
         }
       }
