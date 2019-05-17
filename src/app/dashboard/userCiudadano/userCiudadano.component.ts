@@ -165,9 +165,9 @@ export class UserCiudadanoComponent implements OnInit {
         this._UserCiudadanoService.delete({ 'id':id }, token).subscribe(
           response => {
               swal({
-                title: 'Eliminado!',
-                text:response.message,
-                type:'success',
+                title: response.title,
+                text: response.message,
+                type: response.status,
                 confirmButtonText: 'Aceptar'
               });
 

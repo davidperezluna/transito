@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { FroFacTramite } from './froFacTramite.modelo';
 import { FroFacturaService } from '../../../services/froFactura.service';
@@ -13,6 +13,7 @@ import { VhloVehiculoService } from '../../../services/vhloVehiculo.service';
 import { LoginService } from '../../../services/login.service';
 import { VhloValorService } from '../../../services/vholCfgValor.service';
 import { environment } from 'environments/environment'
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import swal from 'sweetalert2';
 declare var $: any;
 
@@ -23,6 +24,8 @@ declare var $: any;
 })
 
 export class FroFacTramiteComponent implements OnInit {
+  @ViewChild('userModal') userTemplate; 
+  modalRef: BsModalRef;
   public errorMessage;
   public factura: FroFacTramite;
 
@@ -52,14 +55,16 @@ export class FroFacTramiteComponent implements OnInit {
   public facturaNumero: any = null;
   public date: any = new Date();
   
-  public formIndex = false;
-  public formNew = false;
-  public formSearch = true;
+  public formIndex: any;
+  public formNew: any;
+  public formSearch: any;
+  public formNewCiudadano: any;
+
   public table: any = null;
   public idVehiculoValor: any = null;
 
   public propietariosVehiculoRetefuente:any=[]; 
-  public valorRetefuenteUnitario:any=0;
+  public valorRetefuenteUnitario:any = 0;
 
   public apiUrl = environment.apiUrl;
 
@@ -75,10 +80,13 @@ export class FroFacTramiteComponent implements OnInit {
     private _FacturaTramiteService: FroFacTramiteService,
     private _VhloValorService: VhloValorService,
     private _LoginService: LoginService,
+    private _ModalService: BsModalService
   ){}
     
   ngOnInit() {
-    this.factura = new FroFacTramite(null, 0, null, null, null, null, null, null, null, null); 
+    this.factura = new FroFacTramite(null, 0, null, null, null, null, null, null, null, null);
+
+    this.onInitForms();
 
     swal({
       title: 'Cargando Datos!',
@@ -148,6 +156,16 @@ export class FroFacTramiteComponent implements OnInit {
         }
       }
     );
+  }
+
+  onOpenModal() {
+    this.modalRef = this._ModalService.show(this.userTemplate);
+  }
+
+  onInitForms(){
+    this.formIndex = false;
+    this.formSearch = false;
+    this.formNewCiudadano = false;
   }
 
   ready(isCreado:any){
@@ -260,6 +278,8 @@ export class FroFacTramiteComponent implements OnInit {
             }else{
               this.ciudadano = null;
               this.factura.idCiudadano = null;
+              this.formNewCiudadano = true;
+              this.onOpenModal();
 
               swal({
                 title: 'Error!',
