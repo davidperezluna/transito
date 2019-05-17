@@ -1,8 +1,6 @@
 <hr>
 <div class="row">
     <div class="col-xs-12 col-lg-12" *ngIf="formNew">
-        <app-new-ciudadano (ready)="ready($event)"></app-new-ciudadano>
-
         <form #facturaForm="ngForm">
             <div class="card">
                 <!-- .card -->
@@ -74,9 +72,35 @@
                         <!-- /.row -->
 
                         <div class="row">
-                            <div class="col-xs-12 col-lg-12" *ngIf='!ciudadano'>
-                                <app-new-ciudadano></app-new-ciudadano>
-                            </div>
+                            
+                                <div bsModal #childModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <ng-template #userModal>
+                                    <div class="modal-header">
+                                        <h4 class="modal-title pull-left">First modal</h4>
+                                        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <app-new-ciudadano (ready)="ready($event)"></app-new-ciudadano>
+                                    </div>
+                                </ng-template>
+                                    
+
                             <!-- .row -->
                             <div class="col-xs-12 col-lg-12" *ngIf='ciudadano'>
                                 <table class="table table-bordered table-striped">

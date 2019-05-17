@@ -137,6 +137,18 @@ export class UserEmpresaComponent implements OnInit {
       }
   }
 
+  onEdit(empresa:any){
+    this.empresa = empresa;
+    this.onInitForms();
+    this.formEdit = true;
+  }
+
+  onShow(empresa:any){
+    this.empresa = empresa;
+    this.onInitForms();
+    this.formShow = true;
+  }
+
   onDelete(id:any){
     swal({
       title: '¿Estás seguro?',
@@ -151,39 +163,65 @@ export class UserEmpresaComponent implements OnInit {
       if (result.value) {
         let token = this._LoginService.getToken();
 
-        this._EmpresaService.delete(token,id).subscribe(
-            response => {
-                swal({
-                  title: 'Eliminado!',
-                  text: response.message,
-                  type:'success',
-                  confirmButtonColor: '#15d4be',
-                });
+        this._EmpresaService.delete({ 'id':id }, token).subscribe(
+          response => {
+              swal({
+                title: 'Eliminado!',
+                text: response.message,
+                type:'success',
+                confirmButtonText: 'Aceptar'
+              });
 
-                this.onSearch();
-              }, 
-            error => {
-              this.errorMessage = <any>error;
+              this.onSearch();
+            }, 
+          error => {
+            this.errorMessage = <any>error;
 
-              if(this.errorMessage != null){
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
+            if(this.errorMessage != null){
+              console.log(this.errorMessage);
+              alert("Error en la petición");
             }
-          );
+          }
+        );
       }
-    })
+    });
   }
 
-  onEdit(empresa:any){
-    this.empresa = empresa;
-    this.onInitForms();
-    this.formEdit = true;
-  }
+  onActive(id:any){
+    swal({
+      title: '¿Estás seguro?',
+      text: "¡Se activara este registro!",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#15d4be',
+      cancelButtonColor: '#ff6262',
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.value) {
+        let token = this._LoginService.getToken();
 
-  onShow(empresa:any){
-    this.empresa = empresa;
-    this.onInitForms();
-    this.formShow = true;
+        this._EmpresaService.active({ 'id':id }, token).subscribe(
+          response => {
+              swal({
+                title: response.title,
+                text: response.message,
+                type: response.status,
+                confirmButtonText: 'Aceptar'
+              });
+
+              this.onSearch();
+            }, 
+          error => {
+            this.errorMessage = <any>error;
+
+            if(this.errorMessage != null){
+              console.log(this.errorMessage);
+              alert("Error en la petición");
+            }
+          }
+        );
+      }
+    });
   }
 }

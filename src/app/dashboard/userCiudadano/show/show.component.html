@@ -1,100 +1,103 @@
-<div class="row">
-    <div class="col-xs-12 col-lg-12">
-        <div class="card">
-            <div class="card-header">
-                <b class="text-uppercase">Datos persona natural</b>
-            </div>
-            <div class="card-body">
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-xs-12 col-lg-4">
-                            <b>Tipo Identificacion</b>
-                            {{ ciudadano.tipoIdentificacion.nombre }}
+<div class="container">
+
+    <div class="row">
+        <div class="col-xs-12 col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <b class="text-uppercase">Detalles persona natural</b>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-4">
+                                <b>Tipo Identificacion</b>
+                                {{ ciudadano.tipoIdentificacion.nombre }}
+                            </div>
+                            <div class="col-xs-12 col-lg-4">
+                                <b>Identificacion</b>
+                                {{ ciudadano.identificacion }}
+                            </div>
+                            <div class="col-xs-12 col-lg-4">
+                                <b>Fecha Expedición Documento</b>
+                                {{ ciudadano.fechaExpedicionDocumento }}
+                            </div>
+                            <div class="col-xs-12 col-lg-3">
+                                <b>Primer Nombre</b>
+                                {{ ciudadano.primerNombre }}
+                            </div>
+                            <div class="col-xs-12 col-lg-3">
+                                <b>Segundo Nombre</b>
+                                {{ ciudadano.segundoNombre }}
+                            </div>
+                            <div class="col-xs-12 col-lg-3">
+                                <b>Primer Apellido</b>
+                                {{ ciudadano.primerApellido }}
+                            </div>
+                            <div class="col-xs-12 col-lg-3">
+                                <b>Segundo Apellido</b>
+                                {{ ciudadano.segundoApellido }}
+                            </div>
+                            <div class="col-xs-12 col-lg-4">
+                                <b>Genero</b>
+                                {{ ciudadano.genero.nombre }}
+                            </div>
+                            <div class="col-xs-12 col-lg-4">
+                                <b>Grupo Sanguineo</b>
+                                {{ ciudadano.grupoSanguineo.sigla }}
+                            </div>
+                            <div class="col-xs-12 col-lg-4">
+                                <b>Fecha Nacimiento</b>
+                                {{ ciudadano.fechaNacimiento }}
+                            </div>
+                            <div class="col-xs-12 col-lg-4" *ngIf="ciudadano.municipioNacimiento.departamento.pais">
+                                <b>Pais Nacimiento</b>
+                                {{ ciudadano.municipioNacimiento.departamento.pais.nombre }}
+                            </div>
+                            <div class="col-xs-12 col-lg-4">
+                                <b>Departamento Nacimiento</b>
+                                {{ ciudadano.municipioNacimiento.departamento.nombre }}
+                            </div>
+                            <div class="col-xs-12 col-lg-4">
+                                <b>Municipio Nacimiento</b>
+                                {{ ciudadano.municipioNacimiento.nombre }}
+                            </div>
+                            <div class="col-xs-12 col-lg-4" *ngIf="ciudadano.municipioResidencia.departamento.pais">
+                                <b>Pais Residencia</b>
+                                {{ ciudadano.municipioResidencia.departamento.pais.nombre }}
+                            </div>
+                            <div class="col-xs-12 col-lg-4">
+                                <b>Departamento Residencia</b>
+                                {{ ciudadano.municipioResidencia.departamento.nombre }}
+                            </div>
+                            <div class="col-xs-12 col-lg-4">
+                                <b>Municipio Residencia</b>
+                                {{ ciudadano.municipioResidencia.nombre }}
+                            </div>
+                            <div class="col-xs-12 col-lg-6" *ngIf="ciudadano.telefonoCelular">
+                                <b>Telefono celular</b>
+                                {{ ciudadano.telefonoCelular }}
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <b>Direccion Residencia</b>
+                                {{ ciudadano.direccionPersonal }}
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <b>Direccion Trabajo</b>
+                                {{ ciudadano.direccionTrabajo }}
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <b>Correo</b>
+                                {{ ciudadano.correo }}
+                            </div>
                         </div>
-                        <div class="col-xs-12 col-lg-4">
-                            <b>Identificacion</b>
-                            {{ ciudadano.identificacion }}
-                        </div>
-                        <div class="col-xs-12 col-lg-4">
-                            <b>Fecha Expedición Documento</b>
-                            {{ ciudadano.fechaExpedicionDocumento }}
-                        </div>
-                        <div class="col-xs-12 col-lg-3">
-                            <b>Primer Nombre</b>
-                            {{ ciudadano.primerNombre }}
-                        </div>
-                        <div class="col-xs-12 col-lg-3">
-                            <b>Segundo Nombre</b>
-                            {{ ciudadano.segundoNombre }}
-                        </div>
-                        <div class="col-xs-12 col-lg-3">
-                            <b>Primer Apellido</b>
-                            {{ ciudadano.primerApellido }}
-                        </div>
-                        <div class="col-xs-12 col-lg-3">
-                            <b>Segundo Apellido</b>
-                            {{ ciudadano.segundoApellido }}
-                        </div>
-                        <div class="col-xs-12 col-lg-4">
-                            <b>Genero</b>
-                            {{ ciudadano.genero.nombre }}
-                        </div>
-                        <div class="col-xs-12 col-lg-4">
-                            <b>Grupo Sanguineo</b>
-                            {{ ciudadano.grupoSanguineo.sigla }}
-                        </div>
-                        <div class="col-xs-12 col-lg-4">
-                            <b>Fecha Nacimiento</b>
-                            {{ ciudadano.fechaNacimiento }}
-                        </div>
-                        <div class="col-xs-12 col-lg-4" *ngIf="ciudadano.municipioNacimiento.departamento.pais">
-                            <b>Pais Nacimiento</b>
-                            {{ ciudadano.municipioNacimiento.departamento.pais.nombre }}
-                        </div>
-                        <div class="col-xs-12 col-lg-4">
-                            <b>Departamento Nacimiento</b>
-                            {{ ciudadano.municipioNacimiento.departamento.nombre }}
-                        </div>
-                        <div class="col-xs-12 col-lg-4">
-                            <b>Municipio Nacimiento</b>
-                            {{ ciudadano.municipioNacimiento.nombre }}
-                        </div>
-                        <div class="col-xs-12 col-lg-4" *ngIf="ciudadano.municipioResidencia.departamento.pais">
-                            <b>Pais Residencia</b>
-                            {{ ciudadano.municipioResidencia.departamento.pais.nombre }}
-                        </div>
-                        <div class="col-xs-12 col-lg-4">
-                            <b>Departamento Residencia</b>
-                            {{ ciudadano.municipioResidencia.departamento.nombre }}
-                        </div>
-                        <div class="col-xs-12 col-lg-4">
-                            <b>Municipio Residencia</b>
-                            {{ ciudadano.municipioResidencia.nombre }}
-                        </div>
-                        <div class="col-xs-12 col-lg-6" *ngIf="ciudadano.telefonoCelular">
-                            <b>Telefono celular</b>
-                            {{ ciudadano.telefonoCelular }}
-                        </div>
-                        <div class="col-xs-12 col-lg-6">
-                            <b>Direccion Residencia</b>
-                            {{ ciudadano.direccionPersonal }}
-                        </div>
-                        <div class="col-xs-12 col-lg-6">
-                            <b>Direccion Trabajo</b>
-                            {{ ciudadano.direccionTrabajo }}
-                        </div>
-                        <div class="col-xs-12 col-lg-6">
-                            <b>Correo</b>
-                            {{ ciudadano.correo }}
-                        </div>
-                    </div>
-                </div> 
-            </div>
-            <div class="card-footer">
-                <button (click)="onCancelar()" class="btn btn-default">
-                    <i class="fa fa-times"></i>
-                    Cancelar
-                </button>
+                    </div> 
+                </div>
+                <div class="card-footer">
+                    <button (click)="onCancelar()" class="btn btn-default">
+                        <i class="fa fa-times"></i>
+                        Cancelar
+                    </button>
+                </div>
             </div>
         </div>
     </div>
