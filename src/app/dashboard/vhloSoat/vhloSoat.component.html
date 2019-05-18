@@ -6,44 +6,44 @@
             </div>
             <div class="card-body">
                 <!-- <div class="row"> -->
-                    <div class="col-xs-12 col-lg-12">
-                        <div class="input-group">
-                            <input type="text" class="form-control text-uppercase" placeholder="Número de placa"
-                                [(ngModel)]="placa" required name="numeroPlaca" />
-                            <span class="input-group-btn">
-                                <button (click)="onSearch()" class="btn btn-default btn-primary" type="button">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </span>
-                        </div>
+                <div class="col-xs-12 col-lg-12">
+                    <div class="input-group">
+                        <input type="text" class="form-control text-uppercase" placeholder="Número de placa"
+                            [(ngModel)]="placa" required name="numeroPlaca" />
+                        <span class="input-group-btn">
+                            <button (click)="onSearch()" class="btn btn-default btn-primary" type="button">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </span>
                     </div>
+                </div>
                 <!-- </div> -->
 
                 <!-- <div class="row" >
                     <br> -->
-                    <div *ngIf="vehiculo" class="col-xs-12 col-lg-12">
-                        <table class="table table-bordered table-striped">
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <b>No. Placa:</b><br>
-                                        {{ vehiculo.placa.numero }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>Servicio:</b><br>
-                                        {{ vehiculo.servicio?.nombre }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>Clase:</b><br>
-                                        {{ vehiculo.clase?.nombre }}
-                                    </td>
-                                </tr>    
-                            </tbody>
-                        </table>
+                <div *ngIf="vehiculo" class="col-xs-12 col-lg-12">
+                    <table class="table table-bordered table-striped">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <b>No. Placa:</b><br>
+                                    {{ vehiculo.placa.numero }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <b>Servicio:</b><br>
+                                    {{ vehiculo.servicio?.nombre }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <b>Clase:</b><br>
+                                    {{ vehiculo.clase?.nombre }}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                     <!-- </div> -->
                 </div>
             </div>

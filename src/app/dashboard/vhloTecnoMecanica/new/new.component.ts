@@ -13,10 +13,16 @@ export class NewComponent implements OnInit {
   @Output() ready = new EventEmitter<any>();
   @Input() vehiculo: any = null;
 
-  public cda: VhloTecnoMecanica;
+  public tecnomecanica: VhloTecnoMecanica;
   public errorMessage;
   public cdas: any;
   public cdaSelected: any;
+
+  public estadoSelected: any;
+  public estados = [
+    { value: 'UTILIZADO', label: 'UTILIZADO' },
+    { value: 'VENCIDO', label: 'VENCIDO' },
+  ];
 
 constructor(
   private _TecnoMecanicaService: VhloTecnoMecanicaService,
@@ -25,7 +31,7 @@ constructor(
   ){}
 
   ngOnInit() {
-    this.cda = new VhloTecnoMecanica(null, null, null, null, null, null);
+    this.tecnomecanica = new VhloTecnoMecanica(null, null, null, null, null, null, null);
 
     this._CdaService.select().subscribe(
       response => {
@@ -49,8 +55,9 @@ constructor(
   onEnviar(){
     let token = this._loginService.getToken();
 
-    this.cda.idCda = this.cdaSelected;
-    this.cda.idVehiculo = this.vehiculo.id;
+    this.tecnomecanica.idCda = this.cdaSelected;
+    this.tecnomecanica.idVehiculo = this.vehiculo.id;
+    this.tecnomecanica.estado = this.estadoSelected;
 
     swal({
       title: '¿Está seguro?',
@@ -63,7 +70,7 @@ constructor(
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.value) {
-        this._TecnoMecanicaService.register(this.cda, token).subscribe(
+        this._TecnoMecanicaService.register(this.tecnomecanica, token).subscribe(
           response => {
             if (response.status == 'success') {
               this.ready.emit(true);
@@ -99,11 +106,11 @@ constructor(
   onCalcularVencimiento() {
     let token = this._loginService.getToken();
     
-    if (this.cda.fechaExpedicion) {
-      this._TecnoMecanicaService.getFechaVencimiento({'fechaExpedicion':this.cda.fechaExpedicion}, token).subscribe(
+    if (this.tecnomecanica.fechaExpedicion) {
+      this._TecnoMecanicaService.getFechaVencimiento({'fechaExpedicion':this.tecnomecanica.fechaExpedicion}, token).subscribe(
         response => {
           if (response.status == 'success') {
-            this.cda.fechaVencimiento = response.data;
+            this.tecnomecanica.fechaVencimiento = response.data;
             //swal.close();
           } else {
             swal({

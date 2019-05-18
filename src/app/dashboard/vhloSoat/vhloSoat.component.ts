@@ -92,11 +92,11 @@ export class VhloSoatComponent implements OnInit {
             response => {
                 if (response.status == 'success') {
                     this.vehiculo = response.data;
+                    this.formHistorial = true;
                     this._SoatService.index({ 'idVehiculo': this.vehiculo.id }, token).subscribe(
                         response => {
                             if (response.status == 'success') {
                                 this.soats = response.data;
-                                this.formHistorial = true;
                                 swal.close();
 
                                 /* let timeoutId = setTimeout(() => {

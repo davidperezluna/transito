@@ -17,7 +17,7 @@ export class VhloTecnoMecanicaService {
 
 	index(datos, token){
 		let json = JSON.stringify(datos);
-		let params = "json=" + json + "&authorization=" + token;
+		let params = "data=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/", params, { headers: headers }).map(
 			res => res.json()
@@ -26,7 +26,7 @@ export class VhloTecnoMecanicaService {
 
 	register(datos, token) {
 		let json = JSON.stringify(datos);
-		let params = "json=" + json + "&authorization=" + token;
+		let params = "data=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/new", params, { headers: headers }).map(
 			res => res.json(),
@@ -36,7 +36,7 @@ export class VhloTecnoMecanicaService {
 
 	delete(datos, token) {
 		let json = JSON.stringify(datos);
-		let params = "json=" + json + "&authorization=" + token;
+		let params = "data=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/delete", params, { headers: headers }).map(
 			res => res.json(),
@@ -53,7 +53,7 @@ export class VhloTecnoMecanicaService {
 
 	edit(datos, token) {
 		let json = JSON.stringify(datos);
-		let params = "json=" + json + "&authorization=" + token;
+		let params = "data=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/edit", params, { headers: headers }).map(
 			res => res.json(),
@@ -67,7 +67,7 @@ export class VhloTecnoMecanicaService {
 
 	getFechaVencimiento(datos, token) {
 		let json = JSON.stringify(datos);
-		let params = "json=" + json + "&authorization=" + token;
+		let params = "data=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/get/fecha/vencimiento", params, { headers: headers }).map(
 			res => res.json()

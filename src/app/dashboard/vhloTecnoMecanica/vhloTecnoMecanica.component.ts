@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { VhloTecnoMecanica } from "./vhloTecnoMecanica.modelo";
 import { VhloTecnoMecanicaService } from '../../services/vhloTecnoMecanica.service';
 import { VhloVehiculoService } from '../../services/vhloVehiculo.service';
 import { LoginService } from '../../services/login.service';
@@ -21,6 +22,8 @@ export class VhloTecnoMecanicaComponent implements OnInit {
 	public formEdit = false;
   public formIndex = true;
 
+  public tecnoMecanica = VhloTecnoMecanica;
+
   constructor(
     private _TecnoMecanicaService: VhloTecnoMecanicaService,
     private _VehiculoService: VhloVehiculoService,
@@ -38,9 +41,10 @@ export class VhloTecnoMecanicaComponent implements OnInit {
   ready(isCreado:any){
     if(isCreado) {
       this.formNew = false;
+      this.formEdit = false;
       this.formHistorial = false;
       this.formIndex = true;
-      this.ngOnInit();
+      this.onSearch();
     }
   }
 
@@ -55,20 +59,17 @@ export class VhloTecnoMecanicaComponent implements OnInit {
 
     let token = this._LoginService.getToken();
 
-    let datos = {
-      'numero': this.placa
-    }
-
-    this._VehiculoService.searchByPlaca(datos, token).subscribe(
+    this._VehiculoService.searchByPlaca({ 'numero': this.placa }, token).subscribe(
       response => {
         if (response.status == 'success') {
           this.vehiculo = response.data;
+          this.formHistorial = true;
           //Busca el historial de tecno mecanicas por vehiculo encontrado
           this._TecnoMecanicaService.index({'idVehiculo': this.vehiculo.id}, token).subscribe(
             response => {
               if (response.status == 'success') {
+                console.log(this.formHistorial);
                 this.tecnoMecanicas = response.data;
-
                 swal.close();
               } else {
                 swal({
@@ -105,5 +106,51 @@ export class VhloTecnoMecanicaComponent implements OnInit {
         }
       }
     );
+  }
+
+  onDelete(id: any) {
+    swal({
+      title: '¿Estás seguro?',
+      text: "¡Se eliminará este registro!",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#15d4be',
+      cancelButtonColor: '#ff6262',
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.value) {
+        let token = this._LoginService.getToken();
+
+        this._TecnoMecanicaService.delete({ 'id': id }, token).subscribe(
+          response => {
+            swal({
+              title: 'Eliminado!',
+              text: response.message,
+              type: 'success',
+              confirmButtonColor: '#15d4be',
+            })
+            this.onSearch();
+            /* this.table.destroy(); */
+          },
+          error => {
+            this.errorMessage = <any>error;
+
+            if (this.errorMessage != null) {
+              console.log(this.errorMessage);
+              alert("Error en la petición");
+            }
+          }
+        );
+      }
+    });
+  }
+
+  onEdit(tecnoMecanica: any) {
+    this.tecnoMecanica = tecnoMecanica;
+    this.formEdit = true;
+    this.formNew = false;
+    this.formIndex = false;
+    this.formHistorial = false;
   }
 }
