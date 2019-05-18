@@ -118,19 +118,25 @@
                                         <tr *ngFor="let representante of representantes; let i = index">
                                             <td>
                                                 {{ representante.ciudadano.primerNombre }} {{ representante.ciudadano?.segundoNombre }} {{ representante.ciudadano?.primerApellido }} {{ representante.ciudadano?.segundoApellido }}
+                                                <br>
+                                                <span class="badge badge-success" *ngIf="representante.activo">Activo</span>
+                                                <span class="badge badge-danger" *ngIf="!representante.activo">Inactivo</span>
                                             </td>
                                             <td>
                                                 <b>Fecha Inicial: </b>
                                                 {{ representante.fechaInicial }}
                                                 <br>
-                                                <b>Fecha Final:</b>
-                                                {{ representante.fechaFinal }}</td>
+                                                <ng-container *ngIf="representante.fechaFinal">
+                                                    <b>Fecha Final:</b>
+                                                    {{ representante.fechaFinal }}
+                                                </ng-container>
+                                            </td>
                                             <td>
                                                 <div class="btn-group">
-                                                    <button (click)="onEditRepresentante(sucursal)" class="btn btn-xs btn-info" type="button">
+                                                    <button (click)="onEditRepresentante(representante)" class="btn btn-xs btn-info" type="button">
                                                         <i class="fa fa-pencil"></i>
                                                     </button> 
-                                                    <button (click)="onDeleteRepresentante(sucursal.id)"  class="btn btn-xs btn-danger" type="button">
+                                                    <button *ngIf="representante.activo" (click)="onDeleteRepresentante(representante.id)"  class="btn btn-xs btn-danger" type="button">
                                                         <i class="fa fa-trash"></i>
                                                     </button>
                                                 </div>
@@ -164,20 +170,33 @@
                                 <table class="table table-bordered" id="dataTables-example" *ngIf='sucursales && sucursales.length > 0'>
                                     <thead>
                                         <tr>
-                                            <th>Nombre</th>
-                                            <th>Sigla</th>
-                                            <th>Dirección</th>
-                                            <th>Municipio</th>
+                                            <th>Sucursal</th>
+                                            <th>Ubicación</th>
                                             <th>Acción</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr class="odd" *ngFor="let sucursal of sucursales; let i = index">
-                                            
-                                            <td>{{sucursal.nombre}}</td>
-                                            <td>{{sucursal.sigla}}</td>
-                                            <td>{{sucursal.direccion}}</td>
-                                            <td>{{sucursal.municipio.nombre}}</td>
+                                            <td>
+                                                <b>Nombre</b>
+                                                <br>
+                                                {{sucursal.nombre}}
+                                                <br>
+                                                <b>Sigla</b>
+                                                <br>
+                                                {{sucursal.sigla}}
+                                                <br>
+                                                <span class="badge badge-success" *ngIf="sucursal.activo">Activo</span>
+                                                <span class="badge badge-danger" *ngIf="!sucursal.activo">Inactivo</span>
+                                            </td>
+                                            <td>
+                                                <b>Dirección</b>
+                                                <br>
+                                                {{sucursal.direccion}}
+                                                <br>
+                                                <b>Municipio</b>
+                                                <br>
+                                                {{sucursal.municipio.nombre}}</td>
                                             <td>
                                                 <div class="btn-group">
                                                     <button (click)="onEditSucursal(sucursal)" class="btn btn-xs btn-info" type="button">

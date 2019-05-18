@@ -6,7 +6,7 @@
       <div class="card">
         <div class="card-header">
           <b class="text-uppercase">
-              Buscar ciudadanos
+              Buscar empresas
           </b>
         </div>
         <div class="card-body">
@@ -78,10 +78,11 @@
                     <br>
                     <b>NIT</b>
                     <br>
-                    {{ empresa.nit }}</td>
+                    {{ empresa.nit }}
                     <br>
                     <span class="badge badge-success" *ngIf="empresa.activo">Activo</span>
                     <span class="badge badge-danger" *ngIf="!empresa.activo">Inactivo</span>
+                  </td>
                   <td>{{ empresa.tipoSociedad.nombre }}</td>
                   <td>
                     <b>Dirección</b>

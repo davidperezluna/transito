@@ -305,7 +305,7 @@
                                         <div class="row">
                                             <div class="col-xs-12 col-lg-12"><!-- .col -->
                                                 <b class="text-uppercase">Trámite a realizar</b>
-                                                <ng-select (ngModelChange)="onChangedTramiteFactura($event)" [(ngModel)]="tramiteSolicitud.idTramiteFactura" [multiple]="false" [options]="tramitesFactura" name="idTramiteFactura" required></ng-select>
+                                                <ng-select (ngModelChange)="onChangedTramiteFactura($event)" [(ngModel)]="idTramiteFactura" [multiple]="false" [options]="tramitesFactura" name="idTramiteFactura" required></ng-select>
                                             </div><!-- /.col -->
                                         </div>
                                         
@@ -369,7 +369,7 @@
                                         </div>
                                     </div>
                                     <div class="tab-pane" id="tab-sustrato" role="tabpanel" *ngIf="requiereSustrato">
-                                        <appRna-sustrato [factura]="factura" [vehiculo]="vehiculo" [idPropietario]='tramiteSolicitud.idPropietario'></appRna-sustrato>
+                                        <appRna-sustrato [factura]="factura" [idPropietario]='tramiteSolicitud.idPropietario' (onReadyInsumo)="onReadyInsumo($event)"></appRna-sustrato>
                                     </div>
                                 </div>   
                             </div>

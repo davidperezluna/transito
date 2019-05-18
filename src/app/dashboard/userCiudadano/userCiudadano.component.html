@@ -1,9 +1,7 @@
-<div class="container" >
+<div class="container-fluid" >
   <hr>
   <div class="row">
-    <!-- .row -->
     <div class="col-xs-12 col-lg-3" *ngIf='formSearch'>
-      <!-- .col -->
       <div class="card">
         <div class="card-header">
           <b class="text-uppercase">
@@ -14,7 +12,6 @@
           <form #formSearch="ngForm">
             <div class="form-group">
               <div class="row">
-                <!-- .row -->
                 <div class="col-xs-12 col-lg-12">
                   <label>Tipo de filtro</label>
                   <ng-select [multiple]="false" [options]="tiposFiltro" [(ngModel)]="search.tipoFiltro" name="tipoFiltro" required></ng-select>
@@ -25,10 +22,8 @@
                 </div>
               </div>
             </div>
-            <!-- /.row -->
           </form>
         </div>
-        <!-- /.card-body -->
         <div class="card-footer">
           <div class="btn-group">
             <button (click)="onSearch()" (ready)="ready($event)" [disabled]="formSearch.invalid" class="btn btn-primary" type="button">
@@ -43,7 +38,6 @@
         </div>
       </div>
     </div>
-    <!-- /.col -->
 
     <div class="col-xs-12 col-lg-9" *ngIf='formIndex'>
       <div class="row">

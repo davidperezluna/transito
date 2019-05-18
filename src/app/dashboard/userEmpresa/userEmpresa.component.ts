@@ -79,6 +79,7 @@ export class UserEmpresaComponent implements OnInit {
           
           this.onInitForms();
           this.formIndex = true;
+          this.formSearch = true;
 
           let timeoutId = setTimeout(() => {
             this.onInitTable();

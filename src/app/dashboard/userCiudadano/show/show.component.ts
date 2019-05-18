@@ -1,11 +1,10 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { UserCiudadanoService } from '../../../services/userCiudadano.service';
-import { LoginService } from '../../../services/login.service';
-import swal from 'sweetalert2';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-show',
-  templateUrl: './show.component.html'
+  templateUrl: './show.component.html',
+  providers: [DatePipe]
 })
 
 export class ShowComponent implements OnInit{
@@ -13,11 +12,7 @@ export class ShowComponent implements OnInit{
 @Input() ciudadano:any = null;
 public errorMessage;
 
-constructor(
-  private _CiudadanoService: UserCiudadanoService,
-  private _LoginService: LoginService,
-
-  ){}
+constructor(){}
 
   ngOnInit(){ }
 

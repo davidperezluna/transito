@@ -91,7 +91,6 @@ export class ShowComponent implements OnInit {
 
   onNewSucursal() {
     this.onInitForms();
-
     this.formNewSucursal = true;
   }
 
@@ -99,7 +98,7 @@ export class ShowComponent implements OnInit {
     this.sucursal = sucursal;
 
     this.onInitForms();
-    this.formNewSucursal = false;
+    this.formEditSucursal = true;
   }
 
   onNewRepresentante() {
@@ -111,7 +110,7 @@ export class ShowComponent implements OnInit {
     this.representante = representante;
 
     this.onInitForms();
-    this.formNewRepresentante = false;
+    this.formEditRepresentante = true;
   }
 
   onDeleteSucursal(id: any) {

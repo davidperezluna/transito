@@ -37,7 +37,7 @@ export class NewRnaComponent implements OnInit {
 
   public tramitesFactura: any = null;
   public tramiteFactura: any = null;
-  public tramiteSelected: any = null;
+  public idTramiteFactura: any = null;
   public facturas: any;
 
   public confirmarSolicitante = false;
@@ -273,6 +273,7 @@ export class NewRnaComponent implements OnInit {
         response => {
           if (response.code == 200) {
             this.factura = response.data;
+            this.tramiteSolicitud.idFactura = this.factura.id;
 
             this._TramiteFacturaService.searchTramitesByFactura({ 'idFactura': this.factura.id, 'idVehiculo': this.vehiculo.id }, token).subscribe(
               response => {
@@ -506,11 +507,10 @@ export class NewRnaComponent implements OnInit {
   }*/
 
   cancelarTramite() {
-    this.tramiteSelected = null;
+    this.idTramiteFactura = null;
   }
 
   finalizarSolicitud() {
-
     let token = this._LoginService.getToken();
     this.tramites = '';
     this.tramitesFactura.forEach(tramiteFactura => {
