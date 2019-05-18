@@ -12,20 +12,23 @@
                         <input type="text" class="form-control" [(ngModel)]="soat.numeroPoliza" name="numeroPoliza" required/>
                     </div>
                     <div class="col-xs-12 col-lg-6">
+                        <label>Estado <strong class="text-danger">*</strong></label>
+                        <ng-select [multiple]="false" [options]="estados" [(ngModel)]="estadoSelected" required name="idEstado"></ng-select>
+                    </div>
+                    <div class="col-xs-12 col-lg-4">
                         <label>Fecha de Expedición <strong class="text-danger">*</strong></label>
                         <input type="date" class="form-control" (blur)="onCalcularVencimiento()" [(ngModel)]="soat.fechaExpedicion" name="fechaExpedicion" required autofocus/>
                     </div>
-                    <div class="col-xs-12 col-lg-6">
+                    <div class="col-xs-12 col-lg-4">
                         <label>Fecha de Vigencia <strong class="text-danger">*</strong></label>
                         <input type="date" class="form-control" [(ngModel)]="soat.fechaVigencia" name="fechaVigencia" required/>
                     </div>
-                    <div class="col-xs-12 col-lg-6">
+                    <div class="col-xs-12 col-lg-4">
                         <label>Fecha Vencimiento<strong class="text-danger">*</strong></label>
                         <input type="date" class="form-control" [(ngModel)]="soat.fechaVencimiento" name="fechaVencimiento" required />
                     </div> 
                     <div class="col-xs-12 col-lg-6">
                         <label>Nombre Empresa <strong class="text-danger">*</strong></label>
-                        <!-- <input type="text" class="form-control" [(ngModel)]="soat.nombreEmpresa" name="nombreEmpresa" required /> -->
                         <ng-select [multiple]="false" [options]="empresas" [(ngModel)]="empresaSelected" required name="idEmpresa"></ng-select>
                     </div>
                     <div class="col-xs-12 col-lg-6">
@@ -37,13 +40,13 @@
         </div>
         <div class="card-footer">
             <div class="btn-group">
-                <button (click)="onCancelar()" class="btn btn-default">
-                    <i class="fa fa-times"></i>
-                    Cancel
-                </button>
                 <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
                     <i class="fa fa-save"></i>
                     Enviar
+                </button>
+                <button (click)="onCancelar()" class="btn btn-default">
+                    <i class="fa fa-times"></i>
+                    Cancelar
                 </button>
             </div>
         </div>

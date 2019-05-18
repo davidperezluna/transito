@@ -1,7 +1,5 @@
-<div class="container" >
-  <hr>
-  <div class="row">
-    <div class="col-md-12">
+<div class="container row">
+    <div class="col-xs-12 col-lg-4">
         <div class="card">
           <div class="card-header">
             <h5 class="card-title">
@@ -9,8 +7,8 @@
             </h5>
           </div>
           <div class="card-body">
-            <div class="row">
-              <div class="col-xs-12 col-lg-4">
+            <!-- <div class="row"> -->
+              <div class="col-xs-12 col-lg-12">
                 <div class="input-group">
                   <input type="text" class="form-control" placeholder="Número de placa" [(ngModel)]="placa" name="numeroPlaca"
                   required />
@@ -21,62 +19,74 @@
                   </span>
                 </div>
               </div>
-            </div>
-            <div class="row" *ngIf="vehiculo">
-              <br>
-              <div class="col-xs-12 col-lg-12">
-                <table class="table table-bordered">
+            <!-- </div> -->
+            <!-- <div class="row">
+              <br> -->
+              <div  *ngIf="vehiculo" class="col-xs-12 col-lg-12">
+                <table class="table table-bordered table-striped">
                   <tbody>
                     <tr>
-                      <td><strong>No. Placa:</strong> {{ vehiculo.placa.numero }}</td>
-                      <td><strong>Servicio:</strong> {{ vehiculo.servicio.nombre }}</td>
-                      <td><strong>Clase:</strong> {{ vehiculo.clase.nombre }}</td>
+                      <td>
+                        <b>No. Placa:</b><br>
+                        {{ vehiculo.placa.numero }}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <b>Servicio:</b><br>
+                        {{ vehiculo.servicio.nombre }}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <b>Clase:</b><br>
+                        {{ vehiculo.clase.nombre }}
+                      </td>
                     </tr>
                   </tbody>
                 </table>
               </div>
             </div>
           </div>
-        </div>
-      </div>
     </div>
 
-    <div class="row" >
-      <div class="col-xs-12 col-lg-12" *ngIf='formIndex && vehiculo'>
-        <div class="card">
-          <div class="card-header">
-            <h5 class="card-title">Historial <small>revisiones técnico mécanicas</small>
-              <div class="btn-group pull-right">
-                <button (click)="onNew()" class="btn btn-primary btn-round">
-                  <i class="fa fa-plus"></i>
-                  Nuevo
-                </button>
-              </div>
-            </h5>
-          </div>
-          <div class="card-body">
-            <table class="table " id="dataTables-example" *ngIf="tecnoMecanicas">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>CDA</th>
-                  <th>Fecha expedición</th>
-                  <th>Fecha vencimiento</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="odd" *ngFor="let tecnoMecanica of tecnoMecanicas; let i = index">
-                  <td>{{ i + 1 }}</td>
-                  <td>{{ tecnoMecanica.cda.nombre }}</td>
-                  <td>{{ tecnoMecanica.fechaExpedicion }}</td>
-                  <td>{{ tecnoMecanica.fechaVencimiento }}</td>
-                </tr>
-              </tbody>
-            </table>
+    <div class="col-xs-12 col-lg-8" *ngIf='formIndex && vehiculo'>
+      <div class="row" >
+        <div class="col-xs-12 col-lg-12">
+          <div class="card">
+            <div class="card-header">
+              <h5 class="card-title">Historial <small>revisiones técnico mécanicas</small>
+                <div class="btn-group pull-right">
+                  <button (click)="onNew()" class="btn btn-primary btn-round">
+                    <i class="fa fa-plus"></i>
+                    Nuevo
+                  </button>
+                </div>
+              </h5>
+            </div>
+            <div class="card-body">
+              <table class="table " id="dataTables-example" *ngIf="tecnoMecanicas">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>CDA</th>
+                    <th>Fecha expedición</th>
+                    <th>Fecha vencimiento</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="odd" *ngFor="let tecnoMecanica of tecnoMecanicas; let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ tecnoMecanica.cda.nombre }}</td>
+                    <td>{{ tecnoMecanica.fechaExpedicion }}</td>
+                    <td>{{ tecnoMecanica.fechaVencimiento }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
-
       <app-new *ngIf='formNew' [vehiculo]="vehiculo" (ready)="ready($event)"></app-new>
     </div>
     

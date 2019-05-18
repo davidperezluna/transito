@@ -5,32 +5,56 @@
             <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
         </div>
         <div class="card-body">
-            <form #formNew="ngForm">
+            <form #formEdit="ngForm">
                 <div class="form-group row">
                     <div class="col-xs-12 col-lg-6">
-                        <label>Nro. de poliza <strong class="text-danger">*</strong></label>
-                        <input type="text" class="form-control" [(ngModel)]="soat.numeroPoliza" name="numeroPoliza" required autofocus />
+                        <label>No. de poliza <strong class="text-danger">*</strong></label>
+                        <!-- <input type="text" class="form-control" [(ngModel)]="soat.numeroPoliza" name="numeroPoliza"
+                            required /> -->
+                        <p>{{ soat.numeroPoliza }}</p>
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Estado <strong class="text-danger">*</strong></label>
+                        <ng-select [multiple]="false" [options]="estados" [(ngModel)]="estadoSelected" required
+                            name="idEstado"></ng-select>
+                    </div>
+                    <div class="col-xs-12 col-lg-4">
+                        <label>Fecha de Expedición <strong class="text-danger">*</strong></label>
+                        <input type="date" class="form-control" (blur)="onCalcularVencimiento()"
+                            [(ngModel)]="soat.fechaExpedicion" name="fechaExpedicion" required autofocus />
+                    </div>
+                    <div class="col-xs-12 col-lg-4">
+                        <label>Fecha de Vigencia <strong class="text-danger">*</strong></label>
+                        <input type="date" class="form-control" [(ngModel)]="soat.fechaVigencia" name="fechaVigencia"
+                            required />
+                    </div>
+                    <div class="col-xs-12 col-lg-4">
+                        <label>Fecha Vencimiento<strong class="text-danger">*</strong></label>
+                        <input type="date" class="form-control" [(ngModel)]="soat.fechaVencimiento"
+                            name="fechaVencimiento" required />
                     </div>
                     <div class="col-xs-12 col-lg-6">
                         <label>Nombre Empresa <strong class="text-danger">*</strong></label>
-                        <input type="text" class="form-control" [(ngModel)]="soat.nombreEmpresa" name="nombreEmpresa" required />
+                        <ng-select [multiple]="false" [options]="empresas" [(ngModel)]="empresaSelected" required
+                            name="idEmpresa"></ng-select>
                     </div>
                     <div class="col-xs-12 col-lg-6">
                         <label>Ciudad Expedición <strong class="text-danger">*</strong></label>
-                        <input type="text" class="form-control" [(ngModel)]="soat.ciudadExpedicion" name="ciudadExpedicion" required />
+                        <ng-select [multiple]="false" [options]="municipios" [(ngModel)]="municipioSelected" required
+                            name="municipio"></ng-select>
                     </div>
                 </div>
             </form>
         </div>
         <div class="card-footer">
             <div class="btn-group">
-                <button (click)="onCancelar()" class="btn btn-default">
-                    <i class="fa fa-times"></i>
-                    Cancel
-                </button>
-                <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
+                <button (click)="onEnviar()" [disabled]="formEdit.invalid" class="btn btn-primary" type="button">
                     <i class="fa fa-save"></i>
                     Enviar
+                </button>
+                <button (click)="onCancelar()" class="btn btn-default">
+                    <i class="fa fa-times"></i>
+                    Cancelar
                 </button>
             </div>
         </div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { VhloSoat } from "./vhloSoat.modelo";
 import { VhloSoatService } from '../../services/vhloSoat.service';
 import { VhloVehiculoService } from '../../services/vhloVehiculo.service';
 import { LoginService } from '../../services/login.service';
@@ -20,6 +21,8 @@ export class VhloSoatComponent implements OnInit {
     public formEdit = false;
     public formHistorial = false;
     public formIndex = true;
+    public soat: VhloSoat;
+    public table: any;
 
     constructor(
         private _SoatService: VhloSoatService,
@@ -29,17 +32,36 @@ export class VhloSoatComponent implements OnInit {
 
     ngOnInit() { }
 
-    /* onInitForms() {
-        this.formIndex = false;
-        this.formNew = false;
-        this.formEdit = false;
+    /* onInitTable() {
+        if (this.table) {
+            this.table.destroy();
+        }
 
-        return true;
+        this.table = $('#dataTables-example').DataTable({
+            responsive: false,
+            pageLength: 10,
+            sPaginationType: 'full_numbers',
+            oLanguage: {
+                oPaginate: {
+                    sFirst: '<i class="fa fa-step-backward"></i>',
+                    sPrevious: '<i class="fa fa-chevron-left"></i>',
+                    sNext: '<i class="fa fa-chevron-right"></i>',
+                    sLast: '<i class="fa fa-step-forward"></i>'
+                }
+            }
+        });
     } */
 
     onNew() {
-        /* this.onInitForms(); */
         this.formNew = true;
+        this.formIndex = false;
+        this.formHistorial = false;
+    }
+    
+    onEdit(soat: any) {
+        this.soat = soat;
+        this.formEdit = true;
+        this.formNew = false;
         this.formIndex = false;
         this.formHistorial = false;
     }
@@ -47,9 +69,10 @@ export class VhloSoatComponent implements OnInit {
     ready(isCreado: any) {
         if (isCreado) {
             this.formNew = false;
+            this.formEdit = false;
             this.formHistorial = false;
             this.formIndex = true;
-            this.ngOnInit();
+            this.onSearch();
         }
     }
 
@@ -64,11 +87,8 @@ export class VhloSoatComponent implements OnInit {
             }
         });
 
-        let datos = {
-            'numero': this.placa
-        };
         
-        this._VehiculoService.searchByPlaca(datos, token).subscribe(
+        this._VehiculoService.searchByPlaca({'numero': this.placa}, token).subscribe(
             response => {
                 if (response.status == 'success') {
                     this.vehiculo = response.data;
@@ -78,6 +98,11 @@ export class VhloSoatComponent implements OnInit {
                                 this.soats = response.data;
                                 this.formHistorial = true;
                                 swal.close();
+
+                                /* let timeoutId = setTimeout(() => {
+                                    this.onInitTable();
+                                }, 200); */
+
                             } else {
                                 swal({
                                     title: 'Alerta!',
@@ -113,5 +138,43 @@ export class VhloSoatComponent implements OnInit {
                 }
             }
         );
+    }
+
+    onDelete(id: any) {
+        swal({
+            title: '¿Estás seguro?',
+            text: "¡Se eliminará este registro!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#15d4be',
+            cancelButtonColor: '#ff6262',
+            confirmButtonText: 'Confirmar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.value) {
+                let token = this._LoginService.getToken();
+
+                this._SoatService.delete({ 'id': id }, token).subscribe(
+                    response => {
+                        swal({
+                            title: 'Eliminado!',
+                            text: response.message,
+                            type: 'success',
+                            confirmButtonColor: '#15d4be',
+                        })
+                        this.onSearch();
+                        /* this.table.destroy(); */
+                    },
+                    error => {
+                        this.errorMessage = <any>error;
+
+                        if (this.errorMessage != null) {
+                            console.log(this.errorMessage);
+                            alert("Error en la petición");
+                        }
+                    }
+                );
+            }
+        });
     }
 }
