@@ -61,6 +61,7 @@ export class NewSucursalComponent implements OnInit {
       response => {
         if (response.status == 'success') {
           this.onReady.emit(true);
+          
           swal({
             title: 'Perfecto!',
             text: response.message,

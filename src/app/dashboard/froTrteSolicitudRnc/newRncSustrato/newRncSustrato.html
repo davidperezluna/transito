@@ -36,14 +36,6 @@
                         </div>
 
                         <div class="row" *ngIf="insumo">
-                            <!-- Aquien se entrega documento -->
-                            <div class="col-xs-12 col-lg-12" >
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" [(ngModel)]="datos.entregada" class="custom-control-input" id="check-entregda" name="datos.entregada" checked="">
-                                    <label class="custom-control-label" for="check-entregda">Entregada</label>
-                                </div>
-                            </div>
-
                             <!-- digitar la nueva licencia de transito  -->
                             <div class="col-xs-12 col-lg-6">
                                 <label>No. Licencia de conducción <b class="text-danger">*</b></label>
@@ -53,6 +45,16 @@
                             <div class="col-xs-12 col-lg-12">
                                 <label>Observaciones </label>
                                 <textarea class="form-control" [(ngModel)]="datos.descripcion" name="descripcion" rows="4"></textarea>
+                            </div>
+
+                            <hr>
+
+                            <!-- Aquien se entrega documento -->
+                            <div class="col-xs-12 col-lg-12" >
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" [(ngModel)]="datos.entregada" class="custom-control-input" id="check-entregda" name="datos.entregada" checked="">
+                                    <label class="custom-control-label" for="check-entregda">Entregada</label>
+                                </div>
                             </div>
                                 
                             <!--tipo identificacion ciudadano -->
@@ -67,7 +69,7 @@
                                         </button>
                                     </span>
                                 </div>
-                            </div> 
+                            </div>
                         </div>
 
                         <!--si existe un ciudadano -->

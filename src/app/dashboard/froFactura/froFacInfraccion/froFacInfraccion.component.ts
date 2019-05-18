@@ -259,7 +259,7 @@ export class FroFacInfraccionComponent implements OnInit {
       response => {
         if (response.status == 'success') {
           this.factura.id = response.data.id;
-          this.municipio = response.data.sedeOperativa.municipio.nombre;
+          this.municipio = response.data.organismoTransito.municipio;
           this.fechaCreacion = response.data.fechaCreacion;
           this.fechaVencimiento = response.data.fechaVencimiento;
           this.facturaNumero = response.data.numero;

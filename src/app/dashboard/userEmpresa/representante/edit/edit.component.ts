@@ -19,7 +19,7 @@ export class EditRepresentanteComponent implements OnInit {
     public identificacion: any = null;
 
     public datos = {
-        'fechaInicio': null,
+        'fechaInicial': null,
         'idCiudadano': null,
         'id': null,
     }
@@ -59,7 +59,7 @@ export class EditRepresentanteComponent implements OnInit {
             response => {
             if (response.status == 'success') {
                 if (response.data.ciudadano) {
-                    this.ciudadano = response.data;
+                    this.ciudadano = response.data.ciudadano;
                     this.datos.idCiudadano = this.ciudadano.id;
                 }
 

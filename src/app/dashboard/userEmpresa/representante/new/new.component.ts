@@ -12,7 +12,7 @@ import swal from 'sweetalert2';
 })
 
 export class NewRepresentanteComponent implements OnInit {
-  @Output() ready = new EventEmitter<any>();
+  @Output() onReady = new EventEmitter<any>();
   @Input() empresa: any = null;
   public representante: UserEmpresaRepresentante;
   public errorMessage;
@@ -35,7 +35,7 @@ export class NewRepresentanteComponent implements OnInit {
   }
 
   onCancelar() {
-    this.ready.emit(true);
+    this.onReady.emit(true);
   }
 
   onSearchCiudadano() {
@@ -88,7 +88,7 @@ export class NewRepresentanteComponent implements OnInit {
     this._RepresentanteService.register(this.representante, token).subscribe(
       response => {
         if (response.status == 'success') {
-          this.ready.emit(true);
+          this.onReady.emit(true);
 
           swal({
             title: 'Perfecto!',

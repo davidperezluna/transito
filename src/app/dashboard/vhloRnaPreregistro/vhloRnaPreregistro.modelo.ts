@@ -12,7 +12,7 @@ export class VhloRnaPreregistro{
 		public motor:string,
 		public chasis:string,
 		public serie:string,
-		public vin:number,
+		public vin:string,
 		public numeroEjes:number,
 		public numeroPasajeros:number,
 		public tipoMatricula:string,

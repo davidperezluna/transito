@@ -19,8 +19,8 @@ export class NewRnaTraspasoIndeterminadaComponent implements OnInit {
   @Output() onReadyTramite = new EventEmitter<any>();
   @Input() vehiculo: any = null; 
   @Input() tramiteFactura: any = null;
-    @Input() funcionario: any = null;
-    @Input() tramitesRealizados: any = null;
+  @Input() funcionario: any = null;
+  @Input() tramitesRealizados: any = null;
   @Input() idPropietario: any = null;
   public errorMessage; 
   
@@ -69,104 +69,46 @@ export class NewRnaTraspasoIndeterminadaComponent implements OnInit {
     ){}
     
   ngOnInit() {
-    let token = this._LoginService.getToken();
-
-    let identity = this._LoginService.getIdentity();
-
-    this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
-        response => {
-            if (response.status == 'success') {
-                this.datos.idFuncionario = response.data.id;
+    this.datos.idFuncionario  = this.funcionario.id;
+        
+    if ( this.tramitesRealizados.length > 0) {
+        this.tramitesRealizados.forEach(tramiteRealizado => {
+            tramiteRealizado = Object.keys(tramiteRealizado).map(function(key) {
+                return tramiteRealizado[key];
+            });
+            
+            if (tramiteRealizado.includes(this.tramiteFactura.id, 2)) {
                 this.realizado = true;
-
-                this._TramiteFacturaService.show({ 'id': this.tramiteFactura.id }, token).subscribe(
-                    response => {
-                        if (response.code == 200) {
-                            this.tramiteFactura = response.data;
-
-                            swal.close();
-                        } else {
-                            this.tramiteFactura = null;
-
-                            swal({
-                                title: 'Error!',
-                                text: response.message,
-                                type: 'error',
-                                confirmButtonText: 'Aceptar'
-                            });
-                        }
-                        error => {
-                            this.errorMessage = <any>error;
-                            if (this.errorMessage != null) {
-                                console.log(this.errorMessage);
-                                alert("Error en la petición");
-                            }
-                        }
-                    }
-                );
-
-                if (this.tramiteFactura.realizado) {
-                    this._TramiteSolicitudService.showByTamiteFactura({ 'idTramiteFactura': this.tramiteFactura.id }, token).subscribe(
-                        response => {
-                            if (response.code == 200) {
-                                this.tramiteSolicitud = response.data;
-                            } else {
-                                this.tramiteSolicitud = null;
-
-                                swal({
-                                    title: 'Error!',
-                                    text: response.message,
-                                    type: 'error',
-                                    confirmButtonText: 'Aceptar'
-                                });
-                            }
-                            error => {
-                                this.errorMessage = <any>error;
-                                if (this.errorMessage != null) {
-                                    console.log(this.errorMessage);
-                                    alert("Error en la petición");
-                                }
-                            }
-                        }
-                    );
-                } else {
-                  this._CfgEntidadJudicialService.select().subscribe( 
-                    response => {
-                      this.entidadesJudiciales = response;
-                    },
-                    error => {
-                      this.errorMessage = <any>error;
-              
-                      if (this.errorMessage != null) {
-                        console.log(this.errorMessage);
-                        alert("Error en la petición");
-                      }
-                    }
-                  );
-                  
-                  this.date = new Date();
-                  var datePiper = new DatePipe(this.date);
-                  this.datos.fecha = datePiper.transform(this.date,'yyyy-MM-dd');
-                }
-            } else {
-                this.realizado = false;
-
-                swal({
-                    title: 'Error!',
-                    text: 'Usted no tiene permisos para realizar tramites',
-                    type: 'error',
-                    confirmButtonText: 'Aceptar'
-                });
             }
-            error => {
-                this.errorMessage = <any>error;
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert('Error en la petición');
-                }
-            }
+        });
+    }
+
+    if (this.realizado) {
+        swal({
+            title: 'Atención!',
+            text: 'El trámite seleccionado ya fue realizado.',
+            type: 'warning',
+            confirmButtonText: 'Aceptar'
+        });
+    }else{
+      this._CfgEntidadJudicialService.select().subscribe( 
+        response => {
+          this.entidadesJudiciales = response;
+        },
+        error => {
+          this.errorMessage = <any>error;
+  
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
         }
-    );
+      );
+      
+      this.date = new Date();
+      var datePiper = new DatePipe(this.date);
+      this.datos.fecha = datePiper.transform(this.date,'yyyy-MM-dd');
+    }
   }
   
 

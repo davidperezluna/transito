@@ -293,20 +293,26 @@ constructor(
   onChangedClase(e){
     if (e) {
       let token = this._LoginService.getToken()
-        this._CarroceriaService.selectByClase({'idClase':e}, token).subscribe(
-          response => {
-            this.carrocerias = response;
-          }, 
-          error => { 
-            this.errorMessage = <any>error;
-    
-            if(this.errorMessage != null){
-              console.log(this.errorMessage);
-              alert("Error en la petición");
-            }
+
+      this._CarroceriaService.selectByClase({'idClase':e}, token).subscribe(
+        response => {
+          this.carrocerias = response;
+        }, 
+        error => { 
+          this.errorMessage = <any>error;
+  
+          if(this.errorMessage != null){
+            console.log(this.errorMessage);
+            alert("Error en la petición");
           }
-        );
+        }
+      );
     }
+  }
+
+  onUpdate(){
+    this.vehiculo.vin = this.vehiculo.chasis;
+    this.vehiculo.serie = this.vehiculo.chasis;
   }
 
   onSearchCiudadano() {

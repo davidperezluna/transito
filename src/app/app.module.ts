@@ -10,15 +10,12 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { LoginModule } from './login/login.module';
 import { LoggerModule } from './logger/logger.module';
 
-import { ModalModule, BsModalRef } from 'ngx-bootstrap/modal';
-
 @NgModule({
   declarations: [
     AppComponent
   ],
   exports: [],
   imports: [
-    ModalModule.forRoot(),
     BrowserModule,
     FormsModule,
     HttpModule,
@@ -27,9 +24,7 @@ import { ModalModule, BsModalRef } from 'ngx-bootstrap/modal';
     DashboardModule,
     LoggerModule
   ],
-  providers: [
-    BsModalRef
-  ],
+  providers: [],
   bootstrap: [AppComponent],
   schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
 })

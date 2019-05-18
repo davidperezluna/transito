@@ -21,7 +21,7 @@
                         <div class="col-lg-6"  *ngIf="vehiculo.tipoMatricula != 'MATRICULA'">
                             <label>Placa <b class="text-danger">*</b></label>
                             <input class="form-control text-uppercase" [(ngModel)]="vehiculo.placa" name="placa" type="text" required>
-                        </div> 
+                        </div>
                         <div class="col-lg-6">
                             <label>Valor</label>
                             <input class="form-control" [(ngModel)]="vehiculo.valor" type="text"  name="valor" required>
@@ -104,7 +104,7 @@
                         </div>
                         <div class="col-xs-12 col-lg-3">
                             <label>Chasis</label>
-                            <input class="form-control" type="text" [(ngModel)]="vehiculo.chasis" name="chasis">
+                            <input (blur)="onUpdate()" class="form-control" type="text" [(ngModel)]="vehiculo.chasis" name="chasis">
                         </div>
                         <div class="col-xs-12 col-lg-3">
                             <label>Serie</label>
@@ -133,7 +133,7 @@
                             </ng-select>
                         </div>
 
-                        <div class="col-xs-12 col-lg-3" *ngIf="vehiculo.idModalidadTransporte && vehiculo.idModalidadTransporte == 2 && (vehiculo.tipoMatricula == 'MATRICULA' || vehiculo.tipoMatricula == 'IMPORTACION' || vehiculo.tipoMatricula == 'RADICADO')">
+                        <div class="col-xs-12 col-lg-3">
                             <label>Numero ejes</label>
                             <input class="form-control" type="text" type="text" [(ngModel)]="vehiculo.numeroEjes" name="numeroEjes">
                         </div>
@@ -192,8 +192,8 @@
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-xs-12 col-lg-12" *ngIf="vehiculo.tipoMatricula == 'RADICADO' || vehiculo.tipoMatricula == 'IMPORTACION'">
+                    <div class="row" *ngIf="vehiculo.tipoMatricula == 'RADICADO' || vehiculo.tipoMatricula == 'IMPORTACION'">
+                        <div class="col-xs-12 col-lg-12">
                             <label>Tipo de propiedad
                                 <span class="text-danger">
                                     <b class="text-danger">*</b>
@@ -442,13 +442,13 @@
         </div>
         <div class="card-footer">
             <div class="btn-group">
-                <button (click)="onCancelar()" class="btn btn-default">
-                    <i class="fa fa-times"></i>
-                    Cancelar
-                </button>
                 <button (click)="onEnviar()" class="btn btn-primary">
                     <i class="fa fa-save"></i>
                     Enviar
+                </button>
+                <button (click)="onCancelar()" class="btn btn-default">
+                    <i class="fa fa-times"></i>
+                    Cancelar
                 </button>
             </div>
         </div>    

@@ -148,6 +148,7 @@ constructor(
             );
           } else {
             this.factura = null;
+            this.tramiteSolicitud.idFactura = null;
             this.tramitesFactura = null;
             this.requiereSustrato = false;
             this.requiereRunt = false;
@@ -315,6 +316,7 @@ constructor(
 
     this.tramiteSolicitud.tramitesRealizados = this.tramitesRealizados;
     this.tramiteSolicitud.documentacionPendiente = this.documentacionPendiente;
+    this.tramiteSolicitud.idFactura = this.factura.id;
 
     this._SolicitudService.register(this.tramiteSolicitud, token).subscribe(
 			response => {
