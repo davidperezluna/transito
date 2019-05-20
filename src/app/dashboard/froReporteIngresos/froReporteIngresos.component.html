@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-xs-12 col-lg-4">
+    <div class="col-xs-12 col-lg-12">
         <div class="card">
             <div class="card-body">
                 <div class="col-xs-12 col-lg-12">
@@ -60,105 +60,116 @@
                 </div>
             </div>
         </div>
-        <div class="card">
+        <div class="card" *ngIf="arrayRetefuentes">
             <div class="card-header">
                 <h5 class="card-title">
-                    <strong class="text-uppercase">Zona</strong>
-                    <small>Lista de Zonas</small>
+                    <strong class="text-uppercase">Retefuente</strong>
                 </h5>
             </div>
             <div class="card-body">
                 <table class="table" id="dataTables-example">
                     <thead>
                         <tr>
-                            <td>
-                                <b>Concepto</b>
-                            </td>
-                            <td>
-                                <b>Tipo Documento</b>
-                            </td>
-                            <td>
-                                <b>Identificación</b>
-                            </td>
-                            <td>
+                            <th>
+                                <b>CONCEPTO</b>
+                            </th>
+                            <th>
+                                <b>TIPO DOCUMENTO</b>
+                            </th>
+                            <th>
+                                <b>NRO. DE IDENTIFICACIÓN</b>
+                            </th>
+                            <th>
                                 <b>DV</b>
-                            </td>
-                            <td>
-                                <b>Primer Apellido</b>
-                            </td>
-                            <td>
-                                <b>Segundo Apellido</b>
-                            </td>
-                            <td>
-                                <b>Primer Nombre</b>
-                            </td>
-                            <td>
-                                <b>Otros Nombres</b>
-                            </td>
-                            <td>
-                                <b>Razón Social del informado</b>
-                            </td>
-                            <td>
+                            </th>
+                            <th>
+                                <b>PRIMER APELLIDO</b>
+                            </th>
+                            <th>
+                                <b>SEGUNDO APELLIDO</b>
+                            </th>
+                            <th>
+                                <b>PRIMER NOMBRE</b>
+                            </th>
+                            <th>
+                                <b>OTROS NOMBRES DEL INFORMADO</b>
+                            </th>
+                            <th>
+                                <b>RAZÓN SOCIAL DEL INFORMADO</b>
+                            </th>
+                            <th>
                                 <b>DIRECCIÓN</b>
-                            </td>
-                            <td>
+                            </th>
+                            <th>
                                 <b>DEPARTAMENTO</b>
-                            </td>
-                            <td>
+                            </th>
+                            <th>
                                 <b>MUNICIPIO</b>
-                            </td>
-                            <td>
-                                <b>PAIS</b>
-                            </td>
-                            <td>
+                            </th>
+                            <th>
+                                <b>PAÍS</b>
+                            </th>
+                            <th>
                                 <b>PAGO O ABANDONO EN CUENTA DEDUCIBLE</b>
-                            </td>
-                            <td>
+                            </th>
+                            <th>
                                 <b>PAGO O ABONO EN CUENTA NO DEDUCIBLE</b>
-                            </td>
-                            <td>
+                            </th>
+                            <th>
                                 <b>IVA MAYOR DEL COSTO O GASTO DEDUCIBLE</b>
-                            </td>
-                            <td>
+                            </th>
+                            <th>
                                 <b>IVA MAYOR DEL COSTO O GASTO NO DEDUCIBLE</b>
-                            </td>
-                            <td>
-                                <b>RETENCION EN LA FUENTE PRACTICADA RENTA</b>
-                            </td>
-                            <td>
-                                <b>RETENCION EN LA FUENTE ASUMIDA RENTA</b>
-                            </td>
-                            <td>
-                                <b>RETENCION EN LA FUENTE PRACTICADA IVA REGIMEN COMUN</b>
-                            </td>
-                            <td>
-                                <b>RETENCION EN LA FUENTE PRACTICADA IVA REGIMEN SIMPLIFICADO</b>
-                            </td>
-                            <td>
-                                <b>RETENCION EN LA FUENTE PRACTICADA IVA NO DOMICILIADOS</b>
-                            </td>
-                            <td>
-                                <b>RETENCION EN LA FUENTE PRACTICADA CREE</b>
-                            </td>
-                            <td>
-                                <b>RETENCION EN LA FUENTE ASUMIDA CREE</b>
-                            </td>
+                            </th>
+                            <th>
+                                <b>RETENCIÓN EN LA FUENTE PRACTICADA RENTA</b>
+                            </th>
+                            <th>
+                                <b>RETENCIÓN EN LA FUENTE ASUMIDA RENTA</b>
+                            </th>
+                            <th>
+                                <b>RETENCIÓN EN LA FUENTE PRACTICADA IVA REGIMEN COMUN</b>
+                            </th>
+                            <th>
+                                <b>RETENCIÓN EN LA FUENTE PRACTICADA IVA REGIMEN SIMPLIFICADO</b>
+                            </th>
+                            <th>
+                                <b>RETENCIÓN EN LA FUENTE PRACTICADA IVA NO DOMICILIADOS</b>
+                            </th>
+                            <th>
+                                <b>RETENCIÓN EN LA FUENTE PRACTICADA CREE</b>
+                            </th>
+                            <th>
+                                <b>RETENCIÓN EN LA FUENTE ASUMIDA CREE</b>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="odd" *ngFor="let zona of zonas; let i = index">
-                            <td>{{ i + 1 }}</td>
-                            <td>{{ zona.nombre }}</td>
-                            <td>
-                                <button (click)="onEdit(zona)" class="btn btn-xs btn-info" type="button">
-                                    <i class="fa fa-edit"></i>
-                                    Editar
-                                </button>
-                                <button (click)="onDelete(zona.id)" class="btn btn-xs btn-danger" type="button">
-                                    <i class="fa fa-trash"></i>
-                                    Eliminar
-                                </button>
-                            </td>
+                        <tr class="odd" *ngFor="let retefuente of arrayRetefuentes; let i = index">
+                            <td>{{ 5046 }}</td>
+                            <td>{{ retefuente.tipoDocumento }}</td>
+                            <td>{{ retefuente.identificacion }}</td>
+                            <td>{{ 52354001 }}</td>
+                            <td>{{ retefuente.primerApellido }}</td>
+                            <td>{{ retefuente?.segundoApellido }}</td>
+                            <td>{{ retefuente.primerNombre }}</td>
+                            <td>{{ retefuente?.segundoNombre }}</td>
+                            <td>{{ retefuente.razonSocial }}</td>
+                            <td>{{ retefuente.direccion }}</td>
+                            <td>{{ retefuente.departamento }}</td>
+                            <td>{{ retefuente.municipio }}</td>
+                            <td>{{ retefuente.pais }}</td>
+                            <td>{{ retefuente.valorVehiculo }}</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>{{ retefuente.retencion }}</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
                         </tr>
                     </tbody>
                 </table>

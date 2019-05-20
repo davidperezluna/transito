@@ -130,17 +130,10 @@ export class FroReporteIngresosService {
         ); 
     }
 
-    pdfRetefuenteByFecha(datos, token): any {
+    pdfRetefuenteByFecha(datos, token) {
         let json = JSON.stringify(datos);
         let params = "data=" + json + "&authorization=" + token;
-
-        let headers = new Headers(
-            {
-                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-            }
-        );
-
-        return this._http.post(this.url + "/pdf/retefuente/fecha", params, { 'responseType': ResponseContentType.Blob, headers: headers }).map(res => { return new Blob([res.blob()], { type: 'application/pdf' }) }
-        ); 
+        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+            return this._http.post(this.url + "/pdf/retefuente/fecha", params, { headers: headers }).map(res => res.json());   
     }
 }
