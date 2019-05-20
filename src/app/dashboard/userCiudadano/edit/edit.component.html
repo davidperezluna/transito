@@ -87,7 +87,7 @@
                                 <label>Municipio Nacimiento
                                     <b class="text-danger">*</b>
                                 </label>
-                                <ng-select [multiple]="false" [options]="municipiosNacimiento" [(ngModel)]="ciudadano.idMunicipioNacimiento" required name="idMunicipioNacimiento">
+                                <ng-select (ngModelChange)="onChangedMunicipioNacimiento($event)" [multiple]="false" [options]="municipiosNacimiento" [(ngModel)]="ciudadano.idMunicipioNacimiento" required name="idMunicipioNacimiento">
                                 </ng-select>
                             </div>
                             <div class="col-xs-12 col-lg-4">

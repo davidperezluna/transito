@@ -15,11 +15,9 @@ export class EditSucursalComponent implements OnInit {
     @Output() readySucursal = new EventEmitter<any>();
     @Input() sucursal: any = null;
     public errorMessage;
-    
+
     public municipios: any;
     public municipioSelected: any;
-    public formNewSucursal = false;
-    public formIndexSucursal = true;
 
     constructor(
         private _SucursalService: UserEmpresaSucursalService,
@@ -55,7 +53,7 @@ export class EditSucursalComponent implements OnInit {
     onEnviar() {
         let token = this._LoginService.getToken();
 
-        this.sucursal.idMunicipio = this.municipioSelected;
+        this.sucursal.municipio.id = this.municipioSelected;
 
         this._SucursalService.edit(this.sucursal, token).subscribe(
             response => {
@@ -82,17 +80,7 @@ export class EditSucursalComponent implements OnInit {
                         alert('Error en la petición');
                     }
                 }
-            });
+            }
+        );
     }
-
-    onNewSucursal() {
-        this.formNewSucursal = true;
-        /* this.btnVisible = true; */
-        this.formIndexSucursal = false;
-    }
-
-    /* cancelarNewFormulario1() {
-      this.btnVisible = false;
-      this.formNewSucursal = false
-    } */
 }

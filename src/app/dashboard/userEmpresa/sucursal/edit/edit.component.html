@@ -5,7 +5,7 @@
                 <b class="text-uppercase">Editar sucursal</b>
             </div>
             <div class="card-body">
-                <form #formEditSucursal="ngForm">
+                <form #formEdit="ngForm">
                     <div class="row">
                         <div class="form-group">
                             <div class="row">
@@ -22,7 +22,7 @@
                                 </div>
                                 <div class="col-xs-8 col-lg-4">
                                     <label>Municipio <span class="text-danger">*</span></label>
-                                    <ng-select [multiple]="false" [options]="municipios" [(ngModel)]="sucursal.idMunicipio" name="idMunicipio" required>
+                                    <ng-select [multiple]="false" [options]="municipios" [(ngModel)]="municipioSelected" name="idMunicipio" required>
                                     </ng-select>
                                 </div>
                                 <hr>
@@ -53,7 +53,7 @@
             </div>
             <div class="card-footer">
                 <div class="btn-group">
-                    <button (click)="onEnviar()" [disabled]="formEditSucursal.invalid" class="btn btn-primary"
+                    <button (click)="onEnviar()" [disabled]="formEdit.invalid" class="btn btn-primary"
                         type="button">
                         <i class="fa fa-floppy-o"></i>
                         Guardar
