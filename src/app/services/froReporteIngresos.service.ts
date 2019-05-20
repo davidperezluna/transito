@@ -102,6 +102,20 @@ export class FroReporteIngresosService {
         ); 
     }
 
+    pdfCobroCoactivoByFecha(datos, token): any {
+        let json = JSON.stringify(datos);
+        let params = "data=" + json + "&authorization=" + token;
+
+        let headers = new Headers(
+            {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            }
+        );
+
+        return this._http.post(this.url + "/pdf/cobrocoactivo/fecha", params, { 'responseType': ResponseContentType.Blob, headers: headers }).map(res => { return new Blob([res.blob()], { type: 'application/pdf' }) }
+        ); 
+    }
+
     pdfParqueaderoByFecha(datos, token): any {
         let json = JSON.stringify(datos);
         let params = "data=" + json + "&authorization=" + token;

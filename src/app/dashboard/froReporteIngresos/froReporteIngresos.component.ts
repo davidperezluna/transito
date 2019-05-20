@@ -47,7 +47,13 @@ export class FroReporteIngresosComponent implements OnInit {
     public totalComparendos;
     
     public retefuentes;
+    public tipoArchivo;
     public totalRetefuente;
+
+    //variables para retefuente
+    public arrayRetefuentes;
+    public nombreOrganismoTransito;
+    public totalRetefuentes;
     
     public cobrosCoactivos;
     public totalCobroCoactivo;
@@ -199,19 +205,50 @@ export class FroReporteIngresosComponent implements OnInit {
                 }
             );
         } else if (this.tipoRecaudoSelected == 4) {
-            this._FroReporteIngresosService.pdfParqueaderoByFecha(this.froReporteIngresos, token).subscribe(
+            this._FroReporteIngresosService.pdfCobroCoactivoByFecha(this.froReporteIngresos, token).subscribe(
                 response => {
                     var fileURL = URL.createObjectURL(response);
                     window.open(fileURL);
                 }
             );
         } else if (this.tipoRecaudoSelected == 5) {
-            this._FroReporteIngresosService.pdfRetefuenteByFecha(this.froReporteIngresos, token).subscribe(
+            this._FroReporteIngresosService.pdfParqueaderoByFecha(this.froReporteIngresos, token).subscribe(
                 response => {
                     var fileURL = URL.createObjectURL(response);
                     window.open(fileURL);
                 }
-            );
+            );     
+        } else if (this.tipoRecaudoSelected == 6) {
+            this._FroReporteIngresosService.pdfRetefuenteByFecha({'datos': this.froReporteIngresos, 'tipoArchivo': this.tipoArchivo}, token).subscribe(
+                response => {
+                    if (response.status == 'success') {
+                        this.arrayRetefuentes = response.data.arrayRetefuente;
+                        this.nombreOrganismoTransito = response.data.organismoTransito.nombre;
+                        this.totalRetefuentes = response.data.totalRetefuentes;
+
+                        swal({
+                            title: 'Perfecto!',
+                            text: response.message,
+                            type: 'success',
+                            confirmButtonText: 'Aceptar'
+                        })
+                    } else {
+                        swal({
+                            title: 'Error!',
+                            text: response.message,
+                            type: 'error',
+                            confirmButtonText: 'Aceptar'
+                        })
+                    }
+                    error => {
+                        this.errorMessage = <any>error;
+                        if (this.errorMessage != null) {
+                            console.log(this.errorMessage);
+                            alert("Error en la petición");
+                        }
+                    }
+                }
+            );  
         }
     }
 }
