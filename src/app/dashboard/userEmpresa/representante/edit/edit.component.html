@@ -8,10 +8,34 @@
                 <div class="card-body ">
                     <form #formEdit="ngForm">
                         <div class="form-group">
+                            <div class="row" *ngIf="representante">
+                                <div class="col-xs-12 col-lg-12">
+                                    <p class="text-center text-uppercase"><b>Representante actual</b></p>
+                                    <table class="table table-bordered table-striped">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <b>Tipo de identificación</b>
+                                                    <br> {{ representante.tipoIdentificacion?.nombre }}
+                                                </td>
+                                                <td>
+                                                    <b>Numero de identificación</b>
+                                                    <br> {{ representante.identificacion }}
+                                                </td>
+                                                <td>
+                                                    <b>Ciudadano</b>
+                                                    <br> {{ representante.primerNombre }} {{ representante.primerApellido }}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
                             <div class="row">
                                 <div class="col-xs-12 col-lg-6">
                                     <label>Fecha de inicio <b class="text-danger">*</b></label>
-                                    <input class="form-control" [(ngModel)]="datos.fechaInicial" name="fechaInicial" type="date" required />
+                                    <input value="{{ (representante.fechaInicial.timestamp * 1000) | date: 'dd/MM/yyyy' }}" class="form-control" [(ngModel)]="datos.fechaInicial" name="fechaInicial" type="date" required />
                                 </div>
     
                                 <div class="col-xs-12 col-lg-6">
@@ -29,6 +53,7 @@
     
                             <div class="row" *ngIf="ciudadano">
                                 <div class="col-xs-12 col-lg-12">
+                                    <p class="text-center text-uppercase"><b>Representante encontrado</b></p>
                                     <table class="table table-bordered table-striped">
                                         <tbody>
                                             <tr>

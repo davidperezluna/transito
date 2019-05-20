@@ -261,7 +261,6 @@ constructor(
       this._MunicipioService.selectByDepartamento({ 'idDepartamento':id }, token).subscribe(
         response => {
           this.municipiosNacimiento = response;
-
         },
         error => {
           this.errorMessage = <any>error;
@@ -271,6 +270,12 @@ constructor(
           }
         }
       );
+    }
+  }
+
+  onChangedMunicipioNacimiento(id){
+    if (id) {
+      this.ciudadano.idMunicipioResidencia = id;
     }
   }
 

@@ -57,31 +57,31 @@ export class EditRepresentanteComponent implements OnInit {
 
         this._CiudadanoService.searchByIdentificacion(datos, token).subscribe(
             response => {
-            if (response.status == 'success') {
-                if (response.data.ciudadano) {
-                    this.ciudadano = response.data.ciudadano;
-                    this.datos.idCiudadano = this.ciudadano.id;
-                }
+                if (response.status == 'success') {
+                    if (response.data.ciudadano) {
+                        this.ciudadano = response.data.ciudadano;
+                        this.datos.idCiudadano = this.ciudadano.id;
+                    }
 
-                swal.close();
-            } else {
-                this.ciudadano = null;
-                this.datos.idCiudadano = null;
+                    swal.close();
+                } else {
+                    this.ciudadano = null;
+                    this.datos.idCiudadano = null;
 
-                swal({
-                title: 'Error!',
-                text: response.message,
-                type: 'error',
-                confirmButtonText: 'Aceptar'
-                })
-            }
-            error => {
-                this.errorMessage = <any>error;
-                if (this.errorMessage != null) {
-                console.log(this.errorMessage);
-                alert('Error en la petición');
+                    swal({
+                        title: 'Error!',
+                        text: response.message,
+                        type: 'error',
+                        confirmButtonText: 'Aceptar'
+                    })
                 }
-            }
+                error => {
+                    this.errorMessage = <any>error;
+                    if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert('Error en la petición');
+                    }
+                }
             }
         );
     }
