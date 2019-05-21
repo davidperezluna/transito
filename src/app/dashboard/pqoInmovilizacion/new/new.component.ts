@@ -48,7 +48,7 @@ constructor(
       }
     });
 
-    this.inmovilizacion = new PqoInmovilizacion(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    this.inmovilizacion = new PqoInmovilizacion(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     
     this.date = new Date();
 

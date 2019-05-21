@@ -8,6 +8,7 @@ export class PqoInmovilizacion{
 		public numeroComparendo: number,
 		public numeroInventario: number,
 		public costoGrua: number,
+		public numeroRecibo: string,
 		public lugar: string,
 		public observaciones: string,
 		public idMarca: number,

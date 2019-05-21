@@ -10,8 +10,8 @@ import { UserCfgTipoIdentificacionService } from '../../../services/userCfgTipoI
 import { UserCiudadanoService } from '../../../services/userCiudadano.service';
 import { VhloPropietarioService } from '../../../services/vhloPropietario.service';
 import { VhloVehiculoService } from '../../../services/vhloVehiculo.service';
-import { LoginService } from '../../../services/login.service';
 import { VhloValorService } from '../../../services/vholCfgValor.service';
+import { LoginService } from '../../../services/login.service';
 import { environment } from 'environments/environment'
 import swal from 'sweetalert2';
 declare var $: any;
@@ -304,7 +304,6 @@ export class FroFacTramiteComponent implements OnInit {
         }
       );
     }
-
   }
 
   onSearchVehiculo() {

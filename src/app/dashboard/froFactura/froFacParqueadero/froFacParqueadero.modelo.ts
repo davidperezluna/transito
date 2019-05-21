@@ -1,12 +1,14 @@
 export class FroFacParqueadero{
 	constructor(
-		public valor: number,
+		public valorParqueadero: number,
+		public valorGrua: number,
+		public valorTotal: number,
 		public interes: number,
-		public tramites: string,
 		public numero: string,
-		public idModulo: boolean,
+		public fechaSalida: string,
+		public horaSalida: string,
 		public idTipoRecaudo: number,
-		public idVehiculo: number,
+		public idInmovilizacion: number,
 		public idOrganismoTransito: number,
 		public idCiudadano: number,
 		public id: number,

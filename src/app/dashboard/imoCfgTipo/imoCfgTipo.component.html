@@ -24,17 +24,17 @@
                 <th>Módulo</th>
                 <th>Nombre</th>
                 <th>Referencia</th>
-                <th>Tipo</th>
+                <th>Categoria</th>
                 <th>Acciones</th>
               </tr>
             </thead>
             <tbody>
               <tr class="odd" *ngFor="let cfgCasoInsumo of cfgCasoInsumos; let i = index">
-                <td>{{cfgCasoInsumo.id}}</td>
-                <td>{{cfgCasoInsumo.modulo?.nombre}}</td>
-                <td>{{cfgCasoInsumo.nombre}}</td>
-                <td>{{cfgCasoInsumo.tipo}}</td>
-                <td>{{cfgCasoInsumo.referencia}}</td>
+                <td>{{ cfgCasoInsumo.id }}</td>
+                <td>{{ cfgCasoInsumo.modulo?.nombre }}</td>
+                <td>{{ cfgCasoInsumo.nombre }}</td>
+                <td>{{ cfgCasoInsumo.categoria }}</td>
+                <td>{{ cfgCasoInsumo.referencia }}</td>
                 <td>
                   <div class="btn-group">
                     <button (click)="onEdit(cfgCasoInsumo)" class="btn btn-xs btn-primary" type="button" tooltip="Configurar" [tooltipDisabled]="false" [tooltipAnimation]="true"

@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CvCdoComparendoService } from '../../../services/cvCdoComparendo.service';
+import { FroFacInfraccion } from './froFacInfraccion.modelo';
 import { FroFacturaService } from '../../../services/froFactura.service';
 import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
-import { FroFacInfraccion } from './froFacInfraccion.modelo';
+import { UserCfgTipoIdentificacionService } from '../../../services/userCfgTipoIdentificacion.service';
+import { UserCiudadanoService } from '../../../services/userCiudadano.service';
 import { LoginService } from '../../../services/login.service';
 import { environment } from 'environments/environment'
 import swal from 'sweetalert2';
@@ -22,11 +24,16 @@ export class FroFacInfraccionComponent implements OnInit {
   public comparendosSelect: any = [];
   public numeroIdentificacion: any;
   public organismosTransito: any;
+  public tiposIdentificacion: any;
+  public tipoIdentificacionSelected: any = null;
+  public identificacion: any = null;
+  public ciudadano: any = null;
   
   public formIndex = false;
   public formNew = false;
   public formSearch = true;
   public table: any = null;
+
   public sedeOperativa: any = null;
   public municipio: any = null;
   public fechaCreacion: any = null;
@@ -50,12 +57,105 @@ export class FroFacInfraccionComponent implements OnInit {
     private _ComparendoService: CvCdoComparendoService,
     private _FacturaService: FroFacturaService,
     private _OrganismoTransitoService: CfgOrganismoTransitoService,
+    private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
+    private _CiudadanoService: UserCiudadanoService,
     private _LoginService: LoginService,
   ){}
     
   ngOnInit() { 
     if (this.comparendosSelect.length > 0) {
       this.comparendosSelect.splice(0, this.comparendosSelect.length);
+    }
+
+    this._TipoIdentificacionService.select().subscribe(
+      response => {
+        this.tiposIdentificacion = response;
+
+        swal.close();
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert('Error en la petición');
+        }
+      }
+    );
+  }
+
+  onSearchCiudadano() {
+    swal({
+      title: 'Buscando ciudadano!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+
+    if (!this.identificacion) {
+      swal({
+        title: 'Error!',
+        text: 'El número de identificación no puede estar vacia.',
+        type: 'error',
+        confirmButtonText: 'Aceptar'
+      });
+    }else{
+      let token = this._LoginService.getToken();
+  
+      let datos = {
+        'idTipoIdentificacion': this.tipoIdentificacionSelected,
+        'identificacion': this.identificacion,
+      }
+  
+      this._CiudadanoService.searchByIdentificacion(datos, token).subscribe(
+        response => {
+          if (response.code == 200) {
+            if (response.data.ciudadano) {
+              this.ciudadano = response.data.ciudadano;
+              this.factura.idCiudadano = this.ciudadano.id;
+
+              swal({
+                title: 'Perfecto!',
+                text: response.message,
+                type: 'success',
+                confirmButtonText: 'Aceptar'
+              });
+              
+              //this.onInitForms();
+              this.formNew = true;
+            }else{
+              this.ciudadano = null;
+              this.factura.idCiudadano = null;
+              this.formNew = false;
+
+              swal({
+                title: 'Error!',
+                text: response.message,
+                type: 'error',
+                confirmButtonText: 'Aceptar'
+              });
+            }
+          } else {
+            this.ciudadano = null;
+            this.factura.idCiudadano = null;
+  
+            swal({
+              title: 'Error!',
+              text: response.message + " Debe registrarlo en persona natural.",
+              type: 'error',
+              confirmButtonText: 'Aceptar'
+            });
+          }
+          error => {
+            this.errorMessage = <any>error;
+            if (this.errorMessage != null) {
+              console.log(this.errorMessage);
+              alert('Error en la petición');
+            }
+          }
+        }
+      );
     }
   }
 
@@ -166,7 +266,7 @@ export class FroFacInfraccionComponent implements OnInit {
     this.formIndex = false;
     this.formSearch = false;
 
-    this.factura = new FroFacInfraccion(0, 0, null, null, null, null);
+    this.factura = new FroFacInfraccion(0, 0, null, null, null, null, null);
 
     swal({
       title: 'Calculando valores!',

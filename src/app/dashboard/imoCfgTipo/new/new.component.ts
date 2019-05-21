@@ -15,12 +15,11 @@ export class NewComponent implements OnInit {
   public errorMessage;
   public respuesta;
   public modulos: any;
-  public moduloSelected: any;
-  public tipoCasoInsumos = [
-    { 'value': "Insumo", 'label': "Insumo" },
-    { 'value': "Sustrato", 'label': "Sustrato" }
+
+  public categorias = [
+    { 'value': "INSUMO", 'label': "INSUMO" },
+    { 'value': "SUSTRATO", 'label': "SUSTRATO" }
   ];
-  public tipoCasoInsumoSelected: any;
 
   constructor(
     private _TipoInsumoService: ImoCfgTipoService,
@@ -51,8 +50,6 @@ export class NewComponent implements OnInit {
   }
   onEnviar() {
     let token = this._loginService.getToken();
-    this.cfgCasoInsumo.moduloId = this.moduloSelected;
-    this.cfgCasoInsumo.tipo = this.tipoCasoInsumoSelected;
     
     this._TipoInsumoService.register(this.cfgCasoInsumo, token).subscribe(
       response => {

@@ -14,7 +14,7 @@
                             <label>Modulo
                                 <strong class="text-danger">*</strong>
                             </label>
-                            <ng-select [multiple]="false" [options]="modulos" [(ngModel)]="moduloSelected" required name="moduloId">
+                            <ng-select [multiple]="false" [options]="modulos" [(ngModel)]="cfgCasoInsumo.idModulo" required name="idModulo">
                             </ng-select>
                         </div>
                         <div class="col-xs-12 col-lg-12">
@@ -29,10 +29,10 @@
                             <input class="form-control" [(ngModel)]="cfgCasoInsumo.referencia" name="referencia" placeholder="" type="text">
                         </div>
                         <div class="col-xs-12 col-lg-12">
-                            <label>Tipo
+                            <label>Categoria
                                 <strong class="text-danger">*</strong>
                             </label>
-                            <ng-select [multiple]="false" [options]="tipoCasoInsumos" [(ngModel)]="tipoCasoInsumoSelected" required name="tipoCasoInsumoId">
+                            <ng-select [multiple]="false" [options]="categorias" [(ngModel)]="cfgCasoInsumo.categoria" required name="tipoCasoInsumoId">
                             </ng-select>
                         </div>
                     </div>

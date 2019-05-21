@@ -81,18 +81,22 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-xs-12 col-lg-4">
+                            <div class="col-xs-12 col-lg-6">
                                 <label>No. inventario <strong class="text-danger">*</strong></label>
                                 <input class="form-control" [(ngModel)]="inmovilizacion.numeroInventario" name="numeroInventario" type="text" required />
                             </div>
-                            <div class="col-xs-12 col-lg-4">
+                            <div class="col-xs-12 col-lg-6">
                                 <label>Grúa</label>
                                 <ng-select [multiple]="false" [options]="gruas" [(ngModel)]="inmovilizacion.idGrua" name="idGrua">
                                 </ng-select>
                             </div>
-                            <div class="col-xs-12 col-lg-4">
+                            <div class="col-xs-12 col-lg-6">
                                 <label>Costo grúa</label>
                                 <input class="form-control" [(ngModel)]="inmovilizacion.costoGrua" name="costoGrua" type="numeric" />
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>No. recibo grúa</label>
+                                <input class="form-control" [(ngModel)]="inmovilizacion.numeroRecibo" name="numeroRecibo" type="text" />
                             </div>
                         </div>
     

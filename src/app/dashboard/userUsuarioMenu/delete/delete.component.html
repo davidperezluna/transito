@@ -1,0 +1,56 @@
+<hr>
+<div class="row">
+    <div class="col-xs-12 col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="text-uppercase"><b>Eliminar menús</b></h5>
+                <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered table-striped" id="dataTables-example">
+                    <tbody>
+                        <tr class="odd">
+                            <td>
+                                <b>Tipo de identificación</b>
+                                <br> {{ usuario.ciudadano.tipoIdentificacion?.nombre }}
+                                <br>
+                                <b>Numero de identificación</b>
+                                {{ usuario.ciudadano.identificacion }}
+                            </td>
+                            <td>
+                                <b>Nombres</b>
+                                <br> {{ usuario.ciudadano.primerNombre }} {{ usuario.ciudadano.segundoNombre }}
+                                <br>
+                                <b>Apellidos</b>
+                                {{ usuario.ciudadano.primerApellido }} {{ usuario.ciudadano.segundoApellido }}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <form #formNew="ngForm"> 
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Menu <strong class="text-danger">*</strong></label>
+                                <ng-select [multiple]="true" [options]="menus" [(ngModel)]="usuarioMenu.menus" name="menus" required>
+                                </ng-select>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <div class="btn-group">
+                    <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
+                        <i class="fa fa-save"></i>
+                        Enviar
+                    </button>
+                    <button (click)="onCancelar()" class="btn btn-default">
+                        <i class="fa fa-times"></i>
+                        Cancelar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

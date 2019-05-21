@@ -113,31 +113,77 @@
             <!-- .col -->
             <div class="card">
                 <div class="card-header">
-                    <h5 class="text-uppercase">Nueva factura de infracciones</h5>
-                    <small>Los campos con
-                        <b class="text-danger">*</b> son obligatorios</small>
+                    <b class="text-uppercase">Factura de infracciones</b>
+                    <br>
+                    <small>Los campos con  <b class="text-danger">*</b> son obligatorios</small>
                 </div>
                 <div class="card-body">
                     <form #formNew="ngForm">
-                        <div class="form-group row">
-                            <div class="col-xs-12 col-lg-12">
-                                <label>Sede operativa
-                                    <strong class="text-danger">*</strong>
-                                </label>
-                                <ng-select [multiple]="false" [options]="organismosTransito" [(ngModel)]="factura.idOrganismoTransito" required name="sedesOperativa">
-                                </ng-select>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-xs-12 col-lg-12">
+                                    <b class="text-uppercase">Buscar solicitante</b>
+                                    <div class="row">
+                                        <div class="col-xs-12 col-lg-4">
+                                            <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionSelected" name="idTipoIdentificacion" required></ng-select>
+                                        </div>
+                                        <div class="col-xs-12 col-lg-3">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" placeholder="Identificacion" [(ngModel)]="identificacion" name="identificacion" required />
+                                                <span class="input-group-btn">
+                                                    <button (click)="onSearchCiudadano()" class="btn btn-default btn-success"
+                                                        type="button">
+                                                        <i class="fa fa-search"></i>
+                                                    </button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+        
+                                <div class="col-xs-12 col-lg-12" *ngIf='ciudadano'>
+                                    <table class="table table-bordered table-striped">
+                                        <tbody>
+                                            <tr class="odd">
+                                                <td>
+                                                    <b>Tipo de identificación</b>
+                                                    <br> {{ ciudadano.tipoIdentificacion.nombre }}
+                                                </td>
+                                                <td>
+                                                    <b>Numero de identificación</b>
+                                                    <br> {{ ciudadano.identificacion }}
+                                                </td>
+                                                <td>
+                                                    <b>Ciudadano</b>
+                                                    <br> {{ ciudadano.primerNombre }} {{ ciudadano.segundoNombre }} {{ ciudadano.primerApellido
+                                                    }} {{ ciudadano.segundoApellido }}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>    
+                                </div>
                             </div>
-                            <div class="col-xs-12 col-lg-12">
-                                <label>Interes
-                                    <strong class="text-danger">*</strong>
-                                </label>
-                                <input type="numeric" class="form-control" [(ngModel)]="factura.interes" name="interes" readonly required />
-                            </div>
-                            <div class="col-xs-12 col-lg-12">
-                                <label>Valor a pagar
-                                    <strong class="text-danger">*</strong>
-                                </label>
-                                <input type="numeric" class="form-control" [(ngModel)]="factura.valor" name="valor" readonly required />
+
+                            <div class="row">
+                                <div class="col-xs-12 col-lg-12">
+                                    <label>Sede operativa
+                                        <strong class="text-danger">*</strong>
+                                    </label>
+                                    <ng-select [multiple]="false" [options]="organismosTransito" [(ngModel)]="factura.idOrganismoTransito" required name="sedesOperativa">
+                                    </ng-select>
+                                </div>
+                                <div class="col-xs-12 col-lg-12">
+                                    <label>Interes
+                                        <strong class="text-danger">*</strong>
+                                    </label>
+                                    <input type="numeric" class="form-control" [(ngModel)]="factura.interes" name="interes" readonly required />
+                                </div>
+                                <div class="col-xs-12 col-lg-12">
+                                    <label>Valor a pagar
+                                        <strong class="text-danger">*</strong>
+                                    </label>
+                                    <input type="numeric" class="form-control" [(ngModel)]="factura.valor" name="valor" readonly required />
+                                </div>
                             </div>
                         </div>
                     </form>

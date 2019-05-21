@@ -9,6 +9,7 @@ export class PqoCfgPatio{
 		public numeroResolucion: string,
 		public fechaInicial: string,
 		public fechaFinal: string,
+		public idOrganismoTransito:number,
 		public id:number
 	){}
 }

@@ -5,6 +5,7 @@ export class FroFacInfraccion{
 		public comparendos: string,
 		public idOrganismoTransito: number,
 		public idTipoRecaudo: number,
+		public idCiudadano: number,
 		public id: number
 	){}
 }

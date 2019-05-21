@@ -24,6 +24,10 @@
               <i class="fa fa-search"></i>
               Buscar
             </button>
+            <button (click)="onDelete(usuario)" class="btn btn-danger">
+              <i class="fa fa-ban"></i>
+              <span class="text">Eliminar</span>
+            </button>
           </div>
         </div>
       </div>
@@ -75,6 +79,7 @@
           </div>
         </div>
         <app-new *ngIf='formNew' [usuario]="usuario" (ready)="ready($event)"></app-new>
+        <app-delete *ngIf='formDelete' [usuario]="usuario" (ready)="ready($event)"></app-delete>
       </div>
     </div>
     <app-edit *ngIf='formEdit' [usuarioMenu]="usuarioMenu" (ready)="ready($event)"></app-edit>
