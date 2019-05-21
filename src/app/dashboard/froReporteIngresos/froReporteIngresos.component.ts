@@ -47,6 +47,7 @@ export class FroReporteIngresosComponent implements OnInit {
     public totalComparendos;
 
     
+    public tipoArchivoTramite;
     //variables para retefuente
     public tipoArchivo;
     public arrayRetefuentesExogena: any = null;
@@ -177,7 +178,7 @@ export class FroReporteIngresosComponent implements OnInit {
         this.froReporteIngresos.idTipoRecaudo = this.tipoRecaudoSelected;
 
         if (this.tipoRecaudoSelected == 1) {
-            this._FroReporteIngresosService.pdfTramiteByFecha({ 'identificacion': identity.identificacion, 'filtros': this.froReporteIngresos }, token).subscribe(
+            this._FroReporteIngresosService.pdfTramiteByFecha({ 'identificacion': identity.identificacion, 'filtros': this.froReporteIngresos, 'tipoArchivoTramite': this.tipoArchivoTramite }, token).subscribe(
                 response => {
                     var fileURL = URL.createObjectURL(response);
                     window.open(fileURL);

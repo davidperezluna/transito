@@ -25,7 +25,6 @@
                         <input class="form-control" type="date" [(ngModel)]="froReporteIngresos.fechaHasta"
                             name="fechaHasta" required>
                     </div>
-
                     <div class="col-xs-12 col-lg-12" *ngIf="tipoRecaudoSelected == 6">
                         <label>Tipo archivo</label>
                         <div class="form-group row">
@@ -41,6 +40,25 @@
                                     <input id="tesoreria" name="tesoreria" [(ngModel)]="tipoArchivo" value="0" type="radio"
                                         id="customTesoreria" name="customTesoreria" class="custom-control-input">
                                     <label class="custom-control-label" for="customTesoreria">Tesorería</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-lg-12" *ngIf="tipoRecaudoSelected == 1">
+                        <label>Tipo archivo</label>
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-lg-6">
+                                <div class="custom-control custom-radio">
+                                    <input id="general" name="general" [(ngModel)]="tipoArchivoTramite" value="1" type="radio"
+                                        id="customGeneral" name="customGeneral" class="custom-control-input">
+                                    <label class="custom-control-label" for="customGeneral">General</label>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <div class="custom-control custom-radio">
+                                    <input id="detallado" name="detallado" [(ngModel)]="tipoArchivoTramite" value="0" type="radio"
+                                        id="customDetallado" name="customDetallado" class="custom-control-input">
+                                    <label class="custom-control-label" for="customDetallado">Detallado</label>
                                 </div>
                             </div>
                         </div>
