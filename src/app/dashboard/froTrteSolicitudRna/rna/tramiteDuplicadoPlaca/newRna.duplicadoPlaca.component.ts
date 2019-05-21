@@ -67,43 +67,22 @@ export class NewRnaDuplicadoPlacaComponent implements OnInit {
     }
 
    
-    onEnviar() {
-        let token = this._LoginService.getToken();
-        
+    onEnviar() {      
         this.datos.motivo = this.motivoSelected;
         this.datos.idTramiteFactura = this.tramiteFactura.id;
 
-        this._TramiteSolicitudService.validations(this.datos, token).subscribe(
-            response => {
-              if (response.code == 200) {
-                let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero +
+        let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero +
                 '<br><b>Motivo: </b>' + this.motivoSelected;
 
-                this.onReadyTramite.emit(
-                    {
-                        'documentacion':this.datos.documentacion, 
-                        'observacion':this.datos.observacion, 
-                        'foraneas':this.datos, 
-                        'resumen':resumen,
-                        'idTramiteFactura': this.tramiteFactura.id,
-                    }
-                );
-              }else{
-                swal({
-                  title: 'Error!',
-                  text: response.message,
-                  type: 'error',
-                  confirmButtonText: 'Aceptar'
-                });
-              }
-            },
-            error => {
-                this.errorMessage = <any>error;
+        this.realizado = true;
 
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert('Error en la petición');
-                }
+        this.onReadyTramite.emit(
+            {
+                'documentacion':this.datos.documentacion, 
+                'observacion':this.datos.observacion, 
+                'foraneas':this.datos, 
+                'resumen':resumen,
+                'idTramiteFactura': this.tramiteFactura.id,
             }
         );
     }

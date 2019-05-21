@@ -364,28 +364,31 @@ export class NewRnaMatricualaInicialComponent implements OnInit {
     }
 
     onEnviar() {
-        let token = this._LoginService.getToken();
-
         this.datos.idVehiculo = this.vehiculo.id;
         this.datos.idTramiteFactura = this.tramiteFactura.id;
         this.datos.tipoPropiedad = this.tipoPropiedadSelected;
 
-        this._TramiteSolicitudService.validations(this.datos, token).subscribe(
+        let resumen = "<b>No. factura: " + this.tramiteFactura.factura.numero;
+
+        this.realizado = true;
+
+        this.onReadyTramite.emit(
+            {
+                'documentacion':this.datos.documentacion, 
+                'observacion':this.datos.observacion, 
+                'foraneas':this.datos, 
+                'resumen':resumen,
+                'idTramiteFactura': this.tramiteFactura.id,
+            }
+        );
+
+        /*this._TramiteSolicitudService.validations(this.datos, token).subscribe(
             response => {
               if (response.code == 200) {
-                let resumen = "<b>No. factura: " + this.tramiteFactura.factura.numero;
 
                 this._PropietarioService.register(this.datos, token).subscribe(
                     response => {
-                        this.onReadyTramite.emit(
-                            {
-                                'documentacion':this.datos.documentacion, 
-                                'observacion':this.datos.observacion, 
-                                'foraneas':this.datos, 
-                                'resumen':resumen,
-                                'idTramiteFactura': this.tramiteFactura.id,
-                            }
-                        );
+                        
                     },
                     error => {
                         this.errorMessage = <any>error;
@@ -413,6 +416,6 @@ export class NewRnaMatricualaInicialComponent implements OnInit {
                     alert('Error en la petición');
                 }
             }
-        );
+        );*/
     }
 }

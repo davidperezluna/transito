@@ -158,28 +158,30 @@ export class NewRnaTramiteLevantamientoAlertaPrendaComponent implements OnInit {
     }
       
     onEnviar() {
-        let token = this._LoginService.getToken();
-
         this.datos.idVehiculo = this.vehiculo.id;
         this.datos.idTramiteFactura = this.tramiteFactura.id;
 
-        this._TramiteSolicitudService.validations(this.datos, token).subscribe(
+        let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero;
+
+        this.realizado = true;
+        
+        this.onReadyTramite.emit(
+            {
+                'documentacion':this.datos.documentacion, 
+                'observacion':this.datos.observacion, 
+                'foraneas':this.datos, 
+                'resumen':resumen,
+                'idTramiteFactura': this.tramiteFactura.id,
+            }
+        );
+
+        /*this._TramiteSolicitudService.validations(this.datos, token).subscribe(
             response => {
               if (response.code == 200) {
                 this._VehiculoAcreedorService.delete({ 'id': this.datos.idAcreedor }, token).subscribe(
                     response => {
                         if (response.status == 'success') {
-                            let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero;
-        
-                            this.onReadyTramite.emit(
-                                {
-                                    'documentacion':this.datos.documentacion, 
-                                    'observacion':this.datos.observacion, 
-                                    'foraneas':this.datos, 
-                                    'resumen':resumen,
-                                    'idTramiteFactura': this.tramiteFactura.id,
-                                }
-                            );
+                            
                         } else {
         
                         }
@@ -210,7 +212,7 @@ export class NewRnaTramiteLevantamientoAlertaPrendaComponent implements OnInit {
                     alert('Error en la petición');
                 }
             }
-        );
+        );*/
     }
 
 }

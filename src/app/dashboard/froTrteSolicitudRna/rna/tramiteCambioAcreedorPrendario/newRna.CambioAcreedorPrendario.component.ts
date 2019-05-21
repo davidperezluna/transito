@@ -46,6 +46,7 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
 
     public datos = {
         'tipo': 'ACREEDOR',
+        'campos': null,
         'idFuncionario': null,
         'idAcreedor': null,
         'idCiudadano': null,
@@ -224,20 +225,23 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
     }
 
     onEnviar() {
-        let token = this._LoginService.getToken();
-        
+        this.datos.campos = ['cambioAcreedor'];
         this.datos.idVehiculo = this.vehiculo.id;
         this.datos.idTramiteFactura = this.tramiteFactura.id;
 
-        this._TramiteSolicitudService.validations(this.datos, token).subscribe(
+        let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero;
+
+        this.realizado = true;
+            
+        this.onReadyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
+
+        /*this._TramiteSolicitudService.validations(this.datos, token).subscribe(
             response => {
                 if (response.code == 200) {
                     this._AcreedorService.update(this.datos, token).subscribe(
                         response => {
                             if (response.code == 200) {
-                                let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero;
-            
-                                this.onReadyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
+                                
                             }else{
                                 swal({
                                     title: 'Error!',
@@ -273,6 +277,6 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
                     alert('Error en la petición');
                 }
             }
-        );
+        );*/
     }
 }

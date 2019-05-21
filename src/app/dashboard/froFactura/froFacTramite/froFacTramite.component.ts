@@ -102,7 +102,37 @@ export class FroFacTramiteComponent implements OnInit {
           this.funcionario = response.data;
           this.factura.idOrganismoTransito = this.funcionario.organismoTransito.id;
 
+          this._ModuloService.select().subscribe(
+            response => {
+              this.modulos = response;
+            },
+            error => {
+              this.errorMessage = <any>error;
+      
+              if (this.errorMessage != null) {
+                console.log(this.errorMessage);
+                alert("Error en la petición");
+              }
+            }
+          );
+      
+          this._TipoIdentificacionService.select().subscribe(
+            response => {
+              this.tiposIdentificacion = response;
+            },
+            error => {
+              this.errorMessage = <any>error;
+      
+              if (this.errorMessage != null) {
+                console.log(this.errorMessage);
+                alert('Error en la petición');
+              }
+            }
+          );
+
           this.formNew = true;
+
+          swal.close();
         } else {
           swal({
             title: 'Error!',
@@ -119,36 +149,6 @@ export class FroFacTramiteComponent implements OnInit {
             console.log(this.errorMessage);
             alert('Error en la petición');
           }
-        }
-      }
-    );
-
-    this._ModuloService.select().subscribe(
-      response => {
-        this.modulos = response;
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
-
-    this._TipoIdentificacionService.select().subscribe(
-      response => {
-        this.tiposIdentificacion = response;
-
-        swal.close();
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert('Error en la petición');
         }
       }
     );
@@ -267,13 +267,9 @@ export class FroFacTramiteComponent implements OnInit {
                 type: 'success',
                 confirmButtonText: 'Aceptar'
               });
-              
-              this.onInitForms();
-              this.formNew = true;
             }else{
               this.ciudadano = null;
               this.factura.idCiudadano = null;
-              this.formNew = false;
               this.formNewCiudadano = true;
 
               swal({
@@ -511,6 +507,14 @@ export class FroFacTramiteComponent implements OnInit {
   }
 
   onEnviar() {
+    swal({
+      title: 'Generando factura!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+
     let token = this._LoginService.getToken();
 
     this.factura.tramites = this.tramitesPrecioArray;

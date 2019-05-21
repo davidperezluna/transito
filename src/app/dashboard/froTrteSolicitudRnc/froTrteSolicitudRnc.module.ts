@@ -4,7 +4,6 @@ import { FroTrteSolicitudRncComponent } from './froTrteSolicitudRnc.component';
 import { FroTrteSolicitudService } from '../../services/froTrteSolicitud.service';
 
 import { NewRncSustratoComponent } from './newRncSustrato/newRncSustrato.component';
-import { NewRncCiudadanoComponent } from './newRncCiudadano/newRncCiudadano.component';
 import { NewRncExpedicionLicenciaComponent } from './rnc/tramiteExpedicionLicencia/newRncExpedicionLicencia.component';
 import { NewRncDuplicadoLicenciaComponent } from './rnc/tramiteDuplicadoLicencia/newRncDuplicadoLicencia.component';
 import { NewRncExpedicionLicenciaCambioDocumentoComponent } from './rnc/tramiteExpedicionLicenciaCambioDocumento/newRncExpedicionLicenciaCambioDocumento.component';
@@ -18,14 +17,21 @@ import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { SelectModule } from 'angular2-select';
 import { TooltipModule } from "ngx-tooltip";
 
+import { UserCiudadanoModule } from '../userCiudadano/userCiudadano.module';
+
 @NgModule({
-    imports: [CommonModule, Ng2BootstrapModule.forRoot(), SelectModule, TooltipModule],
+    imports: [
+        CommonModule,
+        Ng2BootstrapModule.forRoot(),
+        SelectModule,
+        TooltipModule,
+        UserCiudadanoModule
+    ],
     declarations: [
         FroTrteSolicitudRncComponent,
         NewRncComponent,
         EditComponent,
         NewRncSustratoComponent,
-        NewRncCiudadanoComponent,
         NewRncExpedicionLicenciaComponent,
         NewRncDuplicadoLicenciaComponent,
         NewRncExpedicionLicenciaCambioDocumentoComponent,
@@ -38,7 +44,6 @@ import { TooltipModule } from "ngx-tooltip";
         NewRncComponent,
         EditComponent,
         NewRncSustratoComponent,
-        NewRncCiudadanoComponent,
         NewRncExpedicionLicenciaComponent,
         NewRncDuplicadoLicenciaComponent,
         NewRncExpedicionLicenciaCambioDocumentoComponent,

@@ -12,12 +12,14 @@ import swal from 'sweetalert2';
     templateUrl: './edit.component.html'
 })
 export class EditSucursalComponent implements OnInit {
-    @Output() readySucursal = new EventEmitter<any>();
+    @Output() onReady = new EventEmitter<any>();
     @Input() sucursal: any = null;
     public errorMessage;
 
     public municipios: any;
     public municipioSelected: any;
+
+    public formEdit: any = true;
 
     constructor(
         private _SucursalService: UserEmpresaSucursalService,
@@ -46,8 +48,7 @@ export class EditSucursalComponent implements OnInit {
     }
 
     onCancelar() {
-        this.readySucursal.emit(true);
-
+        this.formEdit = false;
     }
 
     onEnviar() {
@@ -58,7 +59,9 @@ export class EditSucursalComponent implements OnInit {
         this._SucursalService.edit(this.sucursal, token).subscribe(
             response => {
                 if (response.status == 'success') {
-                    this.readySucursal.emit(true);
+                    this.formEdit = false;
+                    this.onReady.emit(true);
+
                     swal({
                         title: 'Perfecto!',
                         text: response.message,

@@ -262,42 +262,46 @@ export class NewRnaTraspasoComponent implements OnInit {
     }
 
     onEnviar() {
-        let token = this._LoginService.getToken();
-
         this.datos.idVehiculo = this.vehiculo.id;
         this.datos.idTramiteFactura = this.tramiteFactura.id;
 
-        this._TramiteSolicitudService.validations(this.datos, token).subscribe(
+        let propietarioActual = null;
+        if (this.propietario.ciudadano) {
+            propietarioActual = this.propietario.ciudadano.primerNombre + ' '+ this.propietario.ciudadano.primerApellido;
+        }else if (this.propietario.empresa) {
+            propietarioActual = this.propietario.empresa.nombre;
+        }
+
+        let propietarioNuevo = null;
+        if (this.ciudadano) {
+            propietarioNuevo = this.ciudadano.primerNombre + ' '+ this.ciudadano.primerApellido;
+        }else if (this.empresa) {
+            propietarioNuevo = this.empresa.nombre;
+        }
+
+        let resumen = "No. factura: " + this.tramiteFactura.factura.numero +
+                    ", Traspaso de " + propietarioActual +
+                    "a " + propietarioNuevo;
+
+        this.realizado = true;
+                    
+        this.onReadyTramite.emit(
+            {
+                'documentacion':this.datos.documentacion, 
+                'observacion':this.datos.observacion, 
+                'foraneas':this.datos, 
+                'resumen':resumen,
+                'idTramiteFactura': this.tramiteFactura.id,
+            }
+        );
+
+        /*this._TramiteSolicitudService.validations(this.datos, token).subscribe(
             response => {
               if (response.code == 200) {
-                let propietarioActual = null;
-                if (this.propietario.ciudadano) {
-                    propietarioActual = this.propietario.ciudadano.primerNombre + ' '+ this.propietario.ciudadano.primerApellido;
-                }else if (this.propietario.empresa) {
-                    propietarioActual = this.propietario.empresa.nombre;
-                }
-
-                let propietarioNuevo = null;
-                if (this.ciudadano) {
-                    propietarioNuevo = this.ciudadano.primerNombre + ' '+ this.ciudadano.primerApellido;
-                }else if (this.empresa) {
-                    propietarioNuevo = this.empresa.nombre;
-                }
-                let resumen = "No. factura: " + this.tramiteFactura.factura.numero +
-                            ", Traspaso de " + propietarioActual +
-                            "a " + propietarioNuevo;
+                
 
                 this._PropietarioService.update(this.datos, token).subscribe(
                     response => {
-                        this.onReadyTramite.emit(
-                            {
-                                'documentacion':this.datos.documentacion, 
-                                'observacion':this.datos.observacion, 
-                                'foraneas':this.datos, 
-                                'resumen':resumen,
-                                'idTramiteFactura': this.tramiteFactura.id,
-                            }
-                        );
                     },
                     error => {
                         this.errorMessage = <any>error;
@@ -325,6 +329,6 @@ export class NewRnaTraspasoComponent implements OnInit {
                     alert('Error en la petición');
                 }
             }
-        );
+        );*/
     }
 }

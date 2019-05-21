@@ -247,7 +247,9 @@ export class NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent implements
                         response => {
                             if (response.code == 200) {
                                 let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero;
-            
+                                
+                                this.realizado = true;
+                                
                                 this.onReadyTramite.emit({ 
                                     'documentacion':this.datos.documentacion, 
                                     'observacion':this.datos.observacion, 

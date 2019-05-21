@@ -27,10 +27,16 @@
                             <span class="badge badge-danger" *ngIf="factura.estado == 'PENDIENTE DOCUMENTACION'">{{ factura.estado }}</span>
                             <span class="badge badge-warning" *ngIf="factura.estado == 'FINALIZADA'">{{ factura.estado }}</span>
                         </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <a *ngIf="factura && factura.estado == 'PENDIENTE DOCUMENTACION'" href="{{ apiUrl }}/{{ factura.id }}/pdf/documentacion" class="btn btn-default" target="_blank">
+                                <i class="fa fa-file-pdf-o"></i>
+                                Imprimir observaciones
+                            </a>
+                        </div>
                     </div>
                 </div>
 
-                <div class="form-group" *ngIf="factura && factura.estado != 'FINALIZADA'">
+                <div class="form-group" *ngIf="factura && factura.estado != 'FINALIZADA' && factura.estado == 'PENDIENTE DOCUMENTACION'">
                     <div class="row">
                         <div class="col-xs-12 col-lg-12">
                             <label>Buscar solicitante <strong class="text-danger">*</strong></label>
@@ -75,6 +81,10 @@
                             </table>
                         </div>
                     </div>
+
+                    <div class="col-xs-12 col-lg-12" *ngIf="!solicitante && formNewCiudadano">
+                        <app-new-ciudadano></app-new-ciudadano>
+                    </div>
                 </div>
             </div>
             <div class="card-footer">
@@ -89,10 +99,6 @@
                                                 <i class="fa fa-save"></i>
                                                 Guardar observaciones
                                             </button>
-                                            <a *ngIf="factura && factura.estado == 'PENDIENTE DOCUMENTACION'" href="{{ apiUrl }}/{{ factura.id }}/pdf/documentacion" class="btn btn-default" target="_blank">
-                                                <i class="fa fa-file-pdf-o"></i>
-                                                Imprimir observaciones
-                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -101,7 +107,7 @@
                     </div>
                 </div>
 
-                <div class="form-group" *ngIf="factura && factura.estado != 'FINALIZADA' && tramitesFactura && tramitesRealizados.length == tramitesFactura.length && documentacionPendiente.length == 0">
+                <div class="form-group" *ngIf="factura && factura.estado != 'FINALIZADA' && factura.estado == 'PENDIENTE DOCUMENTACION' && tramitesFactura && tramitesRealizados.length == tramitesFactura.length && documentacionPendiente.length == 0">
                     <div class="row">
                         <div class="col-xs-12 col-lg-12">
                             <div class="form-group">
@@ -130,7 +136,7 @@
         </div>
     </div>
 
-    <div class="col-xs-12 col-lg-8" *ngIf="factura && factura.estado != 'FINALIZADA' && solicitante">
+    <div class="col-xs-12 col-lg-8" *ngIf="factura && factura.estado != 'FINALIZADA' && factura.estado == 'PENDIENTE DOCUMENTACION' && solicitante">
         <div class="card">
             <div class="card-body">
                 <div class="row" *ngIf="tramitesFactura">

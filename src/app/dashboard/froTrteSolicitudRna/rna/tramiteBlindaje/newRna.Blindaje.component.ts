@@ -92,13 +92,13 @@ export class NewRnaBlindajeComponent implements OnInit {
      }
 
     onEnviar() {
-        let token = this._LoginService.getToken();
-
         this.datos.campos = ['blindaje'];
         this.datos.idTramiteFactura = this.tramiteFactura.id;
         this.datos.idVehiculo = this.vehiculo.id;
 
         let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero;
+
+        this.realizado = true;
                             
         this.onReadyTramite.emit(
             {

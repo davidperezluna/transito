@@ -140,45 +140,24 @@ export class NewRnaImportacionTemporalComponent implements OnInit {
         }
     }
 
-    onEnviar() {
-        let token = this._LoginService.getToken();
-        
+    onEnviar() {        
         this.datos.idVehiculo = this.vehiculo.id;
         this.datos.idTramiteFactura = this.tramiteFactura.id;
 
-        this._TramiteSolicitudService.validations(this.datos, token).subscribe(
-            response => {
-              if (response.code == 200) {
-                let resumen = "No. factura: " + this.tramiteFactura.factura.numero +
-                    'No. solicitud RUNT' + this.numeroRunt +
-                    'No. cuotas' + this.numeroCuotas +
-                    'Fecha solicitud' + this.datos.fechaSolicitud;
+        let resumen = "No. factura: " + this.tramiteFactura.factura.numero +
+                'No. solicitud RUNT' + this.numeroRunt +
+                'No. cuotas' + this.numeroCuotas +
+                'Fecha solicitud' + this.datos.fechaSolicitud;
 
-                this.onReadyTramite.emit(
-                    {
-                        'documentacion':this.datos.documentacion, 
-                        'observacion':this.datos.observacion, 
-                        'foraneas':this.datos, 
-                        'resumen':resumen,
-                        'idTramiteFactura': this.tramiteFactura.id,
-                    }
-                );
-              }else{
-                swal({
-                  title: 'Error!',
-                  text: response.message,
-                  type: 'error',
-                  confirmButtonText: 'Aceptar'
-                });
-              }
-            },
-            error => {
-                this.errorMessage = <any>error;
+        this.realizado = true;
 
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert('Error en la petición');
-                }
+        this.onReadyTramite.emit(
+            {
+                'documentacion':this.datos.documentacion, 
+                'observacion':this.datos.observacion, 
+                'foraneas':this.datos, 
+                'resumen':resumen,
+                'idTramiteFactura': this.tramiteFactura.id,
             }
         );
     }

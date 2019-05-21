@@ -33,12 +33,14 @@ export class NewRncComponent implements OnInit {
   public tramiteFacturaSelected: any;
   public tramiteSelected: any;
   public tramites='';
-
+  
   public tramite = false;
   public requiereSustrato = false;
   public requiereRunt = false;
   public tramitesRealizados: any = [];
   public documentacionPendiente: any = [];
+  
+  public formNewCiudadano: any = false;
 
 constructor(
   private _SolicitudService: FroTrteSolicitudService,
@@ -147,7 +149,7 @@ constructor(
               }
             );
           } else {
-            this.factura = null;
+            this.factura = response.data;
             this.tramiteSolicitud.idFactura = null;
             this.tramitesFactura = null;
             this.requiereSustrato = false;

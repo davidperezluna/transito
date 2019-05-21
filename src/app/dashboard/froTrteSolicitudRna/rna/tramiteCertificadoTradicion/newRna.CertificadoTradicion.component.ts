@@ -133,46 +133,24 @@ export class NewRnaCertificadoTradicionComponent implements OnInit {
 
     }
 
-    onEnviar() {      
-        let token = this._LoginService.getToken();
-        
+    onEnviar() {
         this.datos.idTramiteFactura = this.tramiteFactura.id;
         this.datos.idVehiculo = this.vehiculo.id;
         this.datos.idCiudadano = this.ciudadano.id;
 
-        this._TramiteSolicitudService.validations(this.datos, token).subscribe(
-            response => {
-              if (response.code == 200) {
-                let resumen = "No. factura: " + this.tramiteFactura.factura.numero + 
+        let resumen = "No. factura: " + this.tramiteFactura.factura.numero + 
                 ", Ciudadano que recibe: " + this.ciudadano.primerNombre + " " + this.ciudadano.primerApellido;
 
-                this.entregado = true;
+        this.entregado = true;
+        this.realizado = true;
 
-                this.onReadyTramite.emit(
-                    {
-                        'documentacion':this.datos.documentacion, 
-                        'observacion':this.datos.observacion, 
-                        'foraneas':this.datos, 
-                        'resumen':resumen,
-                        'idTramiteFactura': this.tramiteFactura.id,
-                    }
-                );
-              }else{
-                swal({
-                  title: 'Error!',
-                  text: response.message,
-                  type: 'error',
-                  confirmButtonText: 'Aceptar'
-                });
-              }
-            },
-            error => {
-                this.errorMessage = <any>error;
-
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert('Error en la petición');
-                }
+        this.onReadyTramite.emit(
+            {
+                'documentacion':this.datos.documentacion, 
+                'observacion':this.datos.observacion, 
+                'foraneas':this.datos, 
+                'resumen':resumen,
+                'idTramiteFactura': this.tramiteFactura.id,
             }
         );
     }

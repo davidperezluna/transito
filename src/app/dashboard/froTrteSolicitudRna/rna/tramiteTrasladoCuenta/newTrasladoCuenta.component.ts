@@ -89,36 +89,41 @@ constructor(
     }
   }
   
-  onEnviar(){
-    let token = this._LoginService.getToken();
-    
+  onEnviar(){  
     this.datos.campos = ['organismoTransito'];
     this.datos.idVehiculo = this.vehiculo.id;
     this.datos.idOrganismoTransitoOld = this.vehiculo.organismoTransito.id;
     this.datos.idTramiteFactura = this.tramiteFactura.id;
 
-    this._TramiteSolicitudService.validations(this.datos, token).subscribe(
+    let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero +
+    '<br/><b>Organismo transito anterior: </b>' + this.vehiculo.organismoTransito.nombre +
+    '<br/><b>Organismo transito nuevo: </b>' + this.datos.idOrganismoTransitoNew;
+
+    this.realizado = true;
+
+    this.onReadyTramite.emit(
+      {
+        'documentacion':this.datos.documentacion, 
+        'observacion':this.datos.observacion, 
+        'foraneas':this.datos, 
+        'resumen':resumen,
+        'idTramiteFactura': this.tramiteFactura.id,
+      }
+    );
+
+    /*this._TramiteSolicitudService.validations(this.datos, token).subscribe(
       response => {
         if (response.code == 200) {
           this._VehiculoService.update(this.datos,token).subscribe(
             response => {
                 response = response; 
                 if(response.status == 'success'){
-                  let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero +
-                    '<br/><b>Organismo transito anterior: </b>' + this.vehiculo.organismoTransito.nombre +
-                    '<br/><b>Organismo transito nuevo: </b>' + this.datos.idOrganismoTransitoNew;
-      
-                  this._TramiteTrasladoService.register(this.datos, token).subscribe(response => {
+                  
+                  
+                  
+                    this._TramiteTrasladoService.register(this.datos, token).subscribe(response => {
                     if (response.status == 'success') {
-                      this.onReadyTramite.emit(
-                        {
-                          'documentacion':this.datos.documentacion, 
-                          'observacion':this.datos.observacion, 
-                          'foraneas':this.datos, 
-                          'resumen':resumen,
-                          'idTramiteFactura': this.tramiteFactura.id,
-                        }
-                      );
+                      
                     }
                     error => {
                       this.errorMessage = <any>error;
@@ -150,7 +155,7 @@ constructor(
               alert('Error en la petición');
           }
       }
-    ); 
+    ); */
   }
 
 }

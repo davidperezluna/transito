@@ -113,28 +113,14 @@ export class NewRnaRadicadoCuentaComponent implements OnInit {
 
       this.datos.idTramiteFactura = this.tramiteFactura.id;
 
-      this._TramiteSolicitudService.validations(this.datos, token).subscribe(
-        response => {
-          if (response.code == 200) {
-            let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero;
+      let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero;
 
-            this.onReadyTramite.emit({'foraneas':this.datos, 'resumen': resumen});
-          }else{
-            swal({
-              title: 'Error!',
-              text: response.message,
-              type: 'error',
-              confirmButtonText: 'Aceptar'
-            });
-          }
-        },
-        error => {
-            this.errorMessage = <any>error;
+      this.realizado = true;
 
-            if (this.errorMessage != null) {
-                console.log(this.errorMessage);
-                alert('Error en la petición');
-            }
+      this.onReadyTramite.emit(
+        {
+          'foraneas':this.datos, 
+          'resumen': resumen
         }
       );
     }

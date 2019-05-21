@@ -84,54 +84,21 @@ export class NewRnaRegrabarVinComponent implements OnInit {
         this.datos.idTramiteFactura = this.tramiteFactura.id;
         this.datos.idVehiculo = this.vehiculo.id;
 
-        this._TramiteSolicitudService.validations(this.datos, token).subscribe(
-            response => {
-              if (response.code == 200) {
-                this._VehiculoService.update(this.datos, token).subscribe(
-                    response => {
-                        if (response.status == 'success') {
-                            let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero +
-                                '<br/>Regrabado (SI)' +
-                                '<br/>Vin anterior: ' + this.vehiculo.vin +
-                                '<br/>Vin nuevo: ' + this.datos.nuevoNumero +
-                                '<br/>Motivo: ' + this.datos.motivo;
+        let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero +
+            '<br/>Regrabado (SI)' +
+            '<br/>Vin anterior: ' + this.vehiculo.vin +
+            '<br/>Vin nuevo: ' + this.datos.nuevoNumero +
+            '<br/>Motivo: ' + this.datos.motivo;
         
-                            this.onReadyTramite.emit(
-                                {
-                                    'documentacion':this.datos.documentacion, 
-                                    'observacion':this.datos.observacion, 
-                                    'foraneas':this.datos, 
-                                    'resumen':resumen,
-                                    'idTramiteFactura': this.tramiteFactura.id,
-                                }
-                            );
-                        }
-                        error => {
-                            this.errorMessage = <any>error;
-        
-                            if (this.errorMessage != null) {
-                                console.log(this.errorMessage);
-                                alert("Error en la petición");
-                            }
-                        }
-                    }
-                );
-              }else{
-                swal({
-                  title: 'Error!',
-                  text: response.message,
-                  type: 'error',
-                  confirmButtonText: 'Aceptar'
-                });
-              }
-            },
-            error => {
-                this.errorMessage = <any>error;
+        this.realizado = true;
 
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert('Error en la petición');
-                }
+        this.onReadyTramite.emit(
+            {
+                'documentacion':this.datos.documentacion, 
+                'observacion':this.datos.observacion, 
+                'foraneas':this.datos, 
+                'resumen':resumen,
+                'idTramiteFactura': this.tramiteFactura.id,
             }
         );
     }

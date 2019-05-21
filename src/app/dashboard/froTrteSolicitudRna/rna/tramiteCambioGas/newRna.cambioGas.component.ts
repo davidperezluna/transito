@@ -101,6 +101,7 @@ export class NewRnaCambioGasComponent implements OnInit {
    
     onEnviar(){
         let token = this._LoginService.getToken();
+
         this._CombustibleService.index().subscribe(
             response => {
                 this.combustibles = response;
@@ -124,26 +125,31 @@ export class NewRnaCambioGasComponent implements OnInit {
         this.datos.campos = ['gas'];
         this.datos.idVehiculo = this.vehiculo.id;
         this.datos.idTramiteFactura = this.tramiteFactura.id;
+        
+        let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero +
+        '<br><b>Anterior: </b>' + this.vehiculo.combustible.nombre +
+        '<br><b>Nuevo: </b>' + this.datos.idCombustibleCambio;
 
-        this._TramiteSolicitudService.validations(this.datos, token).subscribe(
+        this.realizado = true;
+
+        this.onReadyTramite.emit(
+            {
+                'documentacion':this.datos.documentacion, 
+                'observacion':this.datos.observacion, 
+                'foraneas':this.datos, 
+                'resumen':resumen,
+                'idTramiteFactura': this.tramiteFactura.id,
+            }
+        );
+
+
+        /*this._TramiteSolicitudService.validations(this.datos, token).subscribe(
             response => {
               if (response.code == 200) {
                 this._VehiculoService.update(this.datos, token).subscribe(
                     response => {
                         if(response.status == 'success'){
-                            let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero +
-                                '<br><b>Anterior: </b>' + this.vehiculo.combustible.nombre +
-                                '<br><b>Nuevo: </b>' + this.datos.idCombustibleCambio;
-        
-                            this.onReadyTramite.emit(
-                                {
-                                    'documentacion':this.datos.documentacion, 
-                                    'observacion':this.datos.observacion, 
-                                    'foraneas':this.datos, 
-                                    'resumen':resumen,
-                                    'idTramiteFactura': this.tramiteFactura.id,
-                                }
-                            );
+                            
                         }
                         error => {
                             this.errorMessage = <any>error;
@@ -172,6 +178,6 @@ export class NewRnaCambioGasComponent implements OnInit {
                     alert('Error en la petición');
                 }
             }
-        );
+        );*/
     }
 }

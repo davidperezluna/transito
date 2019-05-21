@@ -8,7 +8,6 @@ import { UserEmpresaService } from '../../services/userEmpresa.service';
 import { DefaultService } from '../../services/default.service';
 import { CfgTipoAlertaService } from '../../services/cfgTipoAlerta.service';
 import { VhloAcreedorService } from '../../services/vhloAcreedor.service';
-import { PnalFuncionarioService } from '../../services/pnalFuncionario.service';
 import { NewRnaComponent } from './newRna/newRna.component'; 
 import { NewRnaDuplicadoPlacaComponent } from './rna/tramiteDuplicadoPlaca/newRna.duplicadoPlaca.component';
 import { NewRnaDuplicadoLicenciaComponent } from './rna/tramiteDuplicadoLicencia/newRna.duplicadoLicencia.component';
@@ -24,7 +23,6 @@ import { NewRnaRematriculaComponent } from './rna/tramiteRematricula/newRna.rema
 import { NewRnaCancelacionMatriculaComponent } from './rna/tramiteCancelacionMatricula/newRna.cancelacionMatricula.component';
 import { NewRnaCertificadoTradicionComponent } from './rna/tramiteCertificadoTradicion/newRna.certificadoTradicion.component';
 import { NewRnaBlindajeComponent } from './rna/tramiteBlindaje/newRna.blindaje.component';
-import { NewRnaCiudadanoComponent } from './newRnaCiudadano/newRnaCiudadano.component';
 import { NewRnaAcreedorComponent } from './newRnaAcreedor/newRnaAcreedor.component';
 import { NewRnaInsumoComponent } from './newRnaSustrato/newRnaSustrato.component';
 import { NewRnaTraspasoComponent } from './rna/tramiteTraspaso/newRna.traspaso.component';
@@ -41,12 +39,21 @@ import { NewRnaTransformacionComponent } from './rna/tramiteTransformacion/newRn
 import { EditComponent } from './edit/edit.component';
 import { NewRnaImportacionTemporalComponent } from "./rna/tramiteImportacionTemporal/newRna.importacionTemporal.component";
 import { NewRnaProrrogaImportacionTemporalComponent } from "./rna/tramiteProrrogaImportacionTemporal/newRna.prorrogaImportacionTemporal.component";
+
 import { SelectModule } from 'angular2-select';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { TooltipModule, Tooltip } from "ngx-tooltip";
 
+import { UserCiudadanoModule } from '../userCiudadano/userCiudadano.module';
+
 @NgModule({
-    imports: [CommonModule, Ng2BootstrapModule.forRoot(),SelectModule, TooltipModule],
+    imports: [
+        CommonModule,
+        Ng2BootstrapModule.forRoot(),
+        SelectModule,
+        TooltipModule,
+        UserCiudadanoModule
+    ],
     declarations: [
         FroTrteSolicitudRnaComponent,
         NewRnaComponent,
@@ -69,7 +76,6 @@ import { TooltipModule, Tooltip } from "ngx-tooltip";
         NewRnaTraspasoIndeterminadaComponent,
         NewRnaTramiteInscripcionAlertaPrendaComponent,
         NewRnaTramiteLevantamientoAlertaPrendaComponent,
-        NewRnaCiudadanoComponent,
         NewRnaAcreedorComponent,
         NewRnaInsumoComponent,
         NewRnaMatricualaInicialComponent,
@@ -104,7 +110,6 @@ import { TooltipModule, Tooltip } from "ngx-tooltip";
         NewRnaTraspasoIndeterminadaComponent,
         NewRnaTramiteInscripcionAlertaPrendaComponent,
         NewRnaTramiteLevantamientoAlertaPrendaComponent,
-        NewRnaCiudadanoComponent,
         NewRnaAcreedorComponent,
         NewRnaInsumoComponent,
         NewRnaMatricualaInicialComponent,

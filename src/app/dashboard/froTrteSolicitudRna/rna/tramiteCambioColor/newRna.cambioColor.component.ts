@@ -86,63 +86,22 @@ export class NewRnaCambioColorComponent implements OnInit {
     }
    
     onEnviar() {
-        let token = this._LoginService.getToken();
+        this.datos.campos = ['color'];
+        this.datos.idColor = this.colorSelected;
+        this.datos.idVehiculo = this.vehiculo.id;
+        this.datos.idTramiteFactura = this.tramiteFactura.id;
 
-        this._ColorService.show({ 'id': this.colorSelected }, token).subscribe(
-            colorResponse => {
-                this.datos.campos = ['color'];
-                this.datos.idColor = this.colorSelected;
-                this.datos.idVehiculo = this.vehiculo.id;
-                this.datos.idTramiteFactura = this.tramiteFactura.id;
+        let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero;
 
-                this._TramiteSolicitudService.validations(this.datos, token).subscribe(
-                    response => {
-                      if (response.code == 200) {
-                        this._VehiculoService.update(this.datos, token).subscribe(
-                            response => {
-                                if (response.status == 'success') {
-                                    let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero;
+        this.realizado = true;
 
-                                    this.realizado = true;
-        
-                                    this.onReadyTramite.emit(
-                                        {
-                                            'documentacion':this.datos.documentacion, 
-                                            'observacion':this.datos.observacion, 
-                                            'foraneas':this.datos, 
-                                            'resumen':resumen,
-                                            'idTramiteFactura': this.tramiteFactura.id,
-                                        }
-                                    );
-                                }
-                                error => {
-                                    this.errorMessage = <any>error;
-        
-                                    if (this.errorMessage != null) {
-                                        console.log(this.errorMessage);
-                                        alert("Error en la petición");
-                                    }
-                                }
-                            }
-                        );
-                      }else{
-                        swal({
-                          title: 'Error!',
-                          text: response.message,
-                          type: 'error',
-                          confirmButtonText: 'Aceptar'
-                        });
-                      }
-                    },
-                    error => {
-                        this.errorMessage = <any>error;
-        
-                        if (this.errorMessage != null) {
-                            console.log(this.errorMessage);
-                            alert('Error en la petición');
-                        }
-                    }
-                );
+        this.onReadyTramite.emit(
+            {
+                'documentacion':this.datos.documentacion, 
+                'observacion':this.datos.observacion, 
+                'foraneas':this.datos, 
+                'resumen':resumen,
+                'idTramiteFactura': this.tramiteFactura.id,
             }
         );
     }

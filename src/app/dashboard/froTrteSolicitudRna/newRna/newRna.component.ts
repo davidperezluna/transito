@@ -44,7 +44,6 @@ export class NewRnaComponent implements OnInit {
   
   public tramites:any;
   public certificadoTradicion = false;
-  public fromApoderado = false;
   public identificacionApoderado = false;
   public apoderado: any = null;
   public placa: any = null;
@@ -53,7 +52,10 @@ export class NewRnaComponent implements OnInit {
   public requiereRunt = false;
   public tramitesRealizados: any = [];
   public documentacionPendiente: any = [];
-
+  
+  public fromApoderado = false;
+  public formNewCiudadano: any = false;
+  
   constructor(
     private _TramiteSolicitudService: FroTrteSolicitudService,
     private _TramiteFacturaService: FroFacTramiteService,

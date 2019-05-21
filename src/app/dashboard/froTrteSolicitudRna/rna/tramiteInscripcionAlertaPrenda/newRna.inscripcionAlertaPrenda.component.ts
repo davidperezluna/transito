@@ -281,64 +281,22 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
     }
 
     onEnviar() {
-        this.datos.idVehiculo = this.vehiculo.id;
-        let token = this._LoginService.getToken();
-
         this.datos.campos = ['pignorado'];
+        this.datos.idVehiculo = this.vehiculo.id;
         this.datos.idPropietario = this.propietario.id;
         this.datos.idTramiteFactura = this.tramiteFactura.id;
 
-        this._TramiteSolicitudService.validations(this.datos, token).subscribe(
-            response => {
-              if (response.code == 200) {
-                this._AcreedorService.register(this.datos, token).subscribe(
-                    response => {
-                        if (response.status == 'success') {
-                            let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero;
+        let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero;
         
-                            this.onReadyTramite.emit(
-                                {
-                                    'documentacion':this.datos.documentacion, 
-                                    'observacion':this.datos.observacion, 
-                                    'foraneas':this.datos, 
-                                    'resumen':resumen,
-                                    'idTramiteFactura': this.tramiteFactura.id,
-                                }
-                            );
-                        } else {
-                            swal({
-                                title: 'Error!',
-                                text: response.message,
-                                type: 'error',
-                                confirmButtonText: 'Aceptar'
-                            });
-                        }
-                        error => {
-                            this.errorMessage = <any>error;
+        this.realizado = true;
         
-                            if (this.errorMessage != null) {
-                                console.log(this.errorMessage);
-                                alert("Error en la petición");
-                            }
-                        }
-                    }
-                );
-              }else{
-                swal({
-                  title: 'Error!',
-                  text: response.message,
-                  type: 'error',
-                  confirmButtonText: 'Aceptar'
-                });
-              }
-            },
-            error => {
-                this.errorMessage = <any>error;
-
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert('Error en la petición');
-                }
+        this.onReadyTramite.emit(
+            {
+                'documentacion':this.datos.documentacion, 
+                'observacion':this.datos.observacion, 
+                'foraneas':this.datos, 
+                'resumen':resumen,
+                'idTramiteFactura': this.tramiteFactura.id,
             }
         );
     }

@@ -79,53 +79,20 @@ export class NewRnaCambioPlacaComponent implements OnInit {
         this.datos.idTramiteFactura = this.tramiteFactura.id;
         this.datos.idVehiculo = this.vehiculo.id;
 
-        this._TramiteSolicitudService.validations(this.datos, token).subscribe(
-            response => {
-              if (response.code == 200) {
-                this._VehiculoService.update(this.datos, token).subscribe(
-                    response => {
-                        if (response.status == 'success') {
-                            let resumen = "No. factura:" + this.tramiteFactura.factura.numero +
-                                        ', Placa anterior:'+ this.vehiculo.placa.numero +
-                                        ', Placa nueva:' + this.datos.nuevaPlaca +
-                                        ', Cantidad:' + this.datos.cantidad;
-        
-                            this.onReadyTramite.emit(
-                                {
-                                    'documentacion':this.datos.documentacion, 
-                                    'observacion':this.datos.observacion, 
-                                    'foraneas':this.datos, 
-                                    'resumen':resumen,
-                                    'idTramiteFactura': this.tramiteFactura.id,
-                                }
-                            );
-                        }
-                        error => {
-                            this.errorMessage = <any>error;
-        
-                            if (this.errorMessage != null) {
-                                console.log(this.errorMessage);
-                                alert("Error en la petición");
-                            }
-                        }
-                    }
-                );
-              }else{
-                swal({
-                  title: 'Error!',
-                  text: response.message,
-                  type: 'error',
-                  confirmButtonText: 'Aceptar'
-                });
-              }
-            },
-            error => {
-                this.errorMessage = <any>error;
+        let resumen = "No. factura:" + this.tramiteFactura.factura.numero +
+                    ', Placa anterior:'+ this.vehiculo.placa.numero +
+                    ', Placa nueva:' + this.datos.nuevaPlaca +
+                    ', Cantidad:' + this.datos.cantidad;
 
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert('Error en la petición');
-                }
+        this.realizado = true;
+
+        this.onReadyTramite.emit(
+            {
+                'documentacion':this.datos.documentacion, 
+                'observacion':this.datos.observacion, 
+                'foraneas':this.datos, 
+                'resumen':resumen,
+                'idTramiteFactura': this.tramiteFactura.id,
             }
         );
     }

@@ -98,7 +98,7 @@
                     </div>
 
 
-                    <div class="form-group" *ngIf="modulo && modulo.vehiculo">
+                    <div class="form-group" *ngIf="modulo && modulo.vehiculo && ciudadano">
                         <!-- .form-group -->
                         <div class="row">
                             <!-- .row -->
@@ -122,44 +122,20 @@
                                                 <tbody>
                                                     <tr>
                                                         <td>
-                                                            <b>Nro.Factura: </b>
-                                                            {{ vehiculo.numeroFactura }}
+                                                            <b>Modelo: </b>
+                                                            {{ vehiculo.modelo }}
                                                         </td>
                                                         <td>
-                                                            <b>Servicio: </b>
-                                                            {{ vehiculo.servicio?.nombre }}
-                                                        </td>
-                                                        <td>
-                                                            <b>Clase de vehículo: </b>
+                                                            <b>Clase: </b>
                                                             {{ vehiculo.clase?.nombre }}
                                                         </td>
-                                                    </tr>
-                                                    <tr>
                                                         <td>
-                                                            <b>Nro.Motor: </b>
-                                                            {{ vehiculo.motor }}
+                                                            <b>Marca: </b>
+                                                            {{ vehiculo.marca?.nombre }}
                                                         </td>
                                                         <td>
-                                                            <b>Nro.Chasis: </b>
-                                                            {{ vehiculo.chasis }}
-                                                        </td>
-                                                        <td>
-                                                            <b>Nro.Serie: </b>
-                                                            {{ vehiculo.serie }}
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <b>Nro.VIN: </b>
-                                                            {{ vehiculo.vin }}
-                                                        </td>
-                                                        <td>
-                                                            <b>Nro.Factura compra venta</b>
-                                                            {{ vehiculo.numeroFactura }}
-                                                        </td>
-                                                        <td>
-                                                            <b>Fecha compra venta</b>
-                                                            {{ vehiculo.fechaFactura }}
+                                                            <b>Línea: </b>
+                                                            {{ vehiculo.linea?.nombre }}
                                                         </td>
                                                     </tr>
                                                 </tbody>
