@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-xs-12 col-lg-4">
+    <div class="col-xs-12 col-lg-12">
         <div class="card">
             <div class="card-body">
                 <div class="col-xs-12 col-lg-12">
@@ -8,25 +8,47 @@
                         name="idTipoRecaudo">
                     </ng-select>
                 </div>
-                <div class="col-xs-12 col-lg-12" *ngIf="tipoRecaudoSelected == 1 || tipoRecaudoSelected == 2 || tipoRecaudoSelected == 3">
+                <div class="col-xs-12 col-lg-12" *ngIf="tipoRecaudoSelected">
                     <label>Seleccionar OrganismoTransito</label>
-                    <ng-select [multiple]="false" [options]="organismosTransito" [(ngModel)]="organismoTransitoSelected" required
-                        name="idOrganismoTransito">
+                    <ng-select [multiple]="false" [options]="organismosTransito" [(ngModel)]="organismoTransitoSelected"
+                        required name="idOrganismoTransito">
                     </ng-select>
                 </div>
-                <div class="col-xs-12 col-lg-12" *ngIf="tipoRecaudoSelected == 3">
+                <!-- <div class="col-xs-12 col-lg-12" *ngIf="tipoRecaudoSelected == 3">
                     <label>Seleccionar Tipo Persona</label>
                     <ng-select [multiple]="false" [options]="tiposPersona" [(ngModel)]="tipoPersonaSelected" required
                         name="idTipoPersona">
                     </ng-select>
-                </div>
+                </div> -->
                 <div class="col-xs-12 col-lg-12">
                     <label>Desde<strong class="text-danger">*</strong></label>
-                    <input class="form-control" type="date" [(ngModel)]="froReporteIngresos.fechaDesde" name="fechaDesde" required>
+                    <input class="form-control" type="date" [(ngModel)]="froReporteIngresos.fechaDesde"
+                        name="fechaDesde" required>
                 </div>
                 <div class="col-xs-12 col-lg-12">
                     <label>Hasta<strong class="text-danger">*</strong></label>
-                    <input class="form-control" type="date" [(ngModel)]="froReporteIngresos.fechaHasta" name="fechaHasta" required>
+                    <input class="form-control" type="date" [(ngModel)]="froReporteIngresos.fechaHasta"
+                        name="fechaHasta" required>
+                </div>
+
+                <div class="col-xs-12 col-lg-12" *ngIf="tipoRecaudoSelected == 6">
+                    <label>Tipo archivo</label>
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-6">
+                            <div class="custom-control custom-radio">
+                                <input id="exogena" name="exogena" [(ngModel)]="tipoArchivo" value="1" type="radio"
+                                    id="customExogena" name="customRadioPlaca" class="custom-control-input">
+                                <label class="custom-control-label" for="customExogena">Exógena</label>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <div class="custom-control custom-radio">
+                                <input id="tesoreria" name="tesoreria" [(ngModel)]="tipoArchivo" value="0" type="radio"
+                                    id="customTesoreria" name="customTesoreria" class="custom-control-input">
+                                <label class="custom-control-label" for="customTesoreria">Tesorería</label>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="card-footer">
@@ -36,6 +58,122 @@
                         Enviar
                     </button>
                 </div>
+            </div>
+        </div>
+        <div class="card" *ngIf="arrayRetefuentes">
+            <div class="card-header">
+                <h5 class="card-title">
+                    <strong class="text-uppercase">Retefuente</strong>
+                </h5>
+            </div>
+            <div class="card-body">
+                <table class="table" id="dataTables-example">
+                    <thead>
+                        <tr>
+                            <th>
+                                <b>CONCEPTO</b>
+                            </th>
+                            <th>
+                                <b>TIPO DOCUMENTO</b>
+                            </th>
+                            <th>
+                                <b>NRO. DE IDENTIFICACIÓN</b>
+                            </th>
+                            <th>
+                                <b>DV</b>
+                            </th>
+                            <th>
+                                <b>PRIMER APELLIDO</b>
+                            </th>
+                            <th>
+                                <b>SEGUNDO APELLIDO</b>
+                            </th>
+                            <th>
+                                <b>PRIMER NOMBRE</b>
+                            </th>
+                            <th>
+                                <b>OTROS NOMBRES DEL INFORMADO</b>
+                            </th>
+                            <th>
+                                <b>RAZÓN SOCIAL DEL INFORMADO</b>
+                            </th>
+                            <th>
+                                <b>DIRECCIÓN</b>
+                            </th>
+                            <th>
+                                <b>DEPARTAMENTO</b>
+                            </th>
+                            <th>
+                                <b>MUNICIPIO</b>
+                            </th>
+                            <th>
+                                <b>PAÍS</b>
+                            </th>
+                            <th>
+                                <b>PAGO O ABANDONO EN CUENTA DEDUCIBLE</b>
+                            </th>
+                            <th>
+                                <b>PAGO O ABONO EN CUENTA NO DEDUCIBLE</b>
+                            </th>
+                            <th>
+                                <b>IVA MAYOR DEL COSTO O GASTO DEDUCIBLE</b>
+                            </th>
+                            <th>
+                                <b>IVA MAYOR DEL COSTO O GASTO NO DEDUCIBLE</b>
+                            </th>
+                            <th>
+                                <b>RETENCIÓN EN LA FUENTE PRACTICADA RENTA</b>
+                            </th>
+                            <th>
+                                <b>RETENCIÓN EN LA FUENTE ASUMIDA RENTA</b>
+                            </th>
+                            <th>
+                                <b>RETENCIÓN EN LA FUENTE PRACTICADA IVA REGIMEN COMUN</b>
+                            </th>
+                            <th>
+                                <b>RETENCIÓN EN LA FUENTE PRACTICADA IVA REGIMEN SIMPLIFICADO</b>
+                            </th>
+                            <th>
+                                <b>RETENCIÓN EN LA FUENTE PRACTICADA IVA NO DOMICILIADOS</b>
+                            </th>
+                            <th>
+                                <b>RETENCIÓN EN LA FUENTE PRACTICADA CREE</b>
+                            </th>
+                            <th>
+                                <b>RETENCIÓN EN LA FUENTE ASUMIDA CREE</b>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="odd" *ngFor="let retefuente of arrayRetefuentes; let i = index">
+                            <td>{{ 5046 }}</td>
+                            <td>{{ retefuente.tipoDocumento }}</td>
+                            <td>{{ retefuente.identificacion }}</td>
+                            <td>{{ 52354001 }}</td>
+                            <td>{{ retefuente.primerApellido }}</td>
+                            <td>{{ retefuente?.segundoApellido }}</td>
+                            <td>{{ retefuente.primerNombre }}</td>
+                            <td>{{ retefuente?.segundoNombre }}</td>
+                            <td>{{ retefuente.razonSocial }}</td>
+                            <td>{{ retefuente.direccion }}</td>
+                            <td>{{ retefuente.departamento }}</td>
+                            <td>{{ retefuente.municipio }}</td>
+                            <td>{{ retefuente.pais }}</td>
+                            <td>{{ retefuente.valorVehiculo }}</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>{{ retefuente.retencion }}</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- /.table-responsive -->
             </div>
         </div>
     </div>
