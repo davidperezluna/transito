@@ -18,6 +18,8 @@ export class EditRepresentanteComponent implements OnInit {
     public ciudadano: any = null;
     public identificacion: any = null;
 
+    public formEdit: any = true;
+
     public datos = {
         'fechaInicial': null,
         'idCiudadano': null,
@@ -36,7 +38,7 @@ export class EditRepresentanteComponent implements OnInit {
      }
 
     onCancelar() {
-        this.onReady.emit(true);
+        this.formEdit = false;
     }
 
     onSearchCiudadano() {
@@ -92,13 +94,15 @@ export class EditRepresentanteComponent implements OnInit {
         this._RepresentanteService.edit(this.datos, token).subscribe(
             response => {
                 if (response.status == 'success') {
+                    this.formEdit = false;
                     this.onReady.emit(true);
+
                     swal({
                         title: 'Perfecto!',
                         text: response.message,
                         type: 'success',
                         confirmButtonText: 'Aceptar'
-                    })
+                    });
                 } else {
                     swal({
                         title: 'Error!',

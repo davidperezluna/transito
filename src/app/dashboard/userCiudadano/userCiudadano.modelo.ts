@@ -14,7 +14,7 @@ export class UserCiudadano{
 		public direccionTrabajo: string,
 		public idTipoIdentificacion: number,
 		public idMunicipioNacimiento: number,
-		public idMunicipioResidencia: number,
+		public idMunicipioResidencia: any,
 		public idGenero: number,
 		public idGrupoSanguineo: number,
 		public id: number,

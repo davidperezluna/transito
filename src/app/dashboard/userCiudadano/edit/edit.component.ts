@@ -1,4 +1,5 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import { UserCiudadanoService } from '../../../services/userCiudadano.service';
 import { UserCfgTipoIdentificacionService } from '../../../services/userCfgTipoIdentificacion.service';
 import { UserCfgRoleService } from '../../../services/userCfgRole.service';
@@ -12,7 +13,8 @@ import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-edit',
-  templateUrl: './edit.component.html'
+  templateUrl: './edit.component.html',
+  providers: [DatePipe]
 })
 export class EditComponent implements OnInit{
 @Output() ready = new EventEmitter<any>();
@@ -55,6 +57,20 @@ constructor(
         swal.showLoading()
       }
     });
+
+    var datePiper = new DatePipe('en-US');
+
+    var date = new Date();
+    date.setTime(this.ciudadano.fechaNacimiento.timestamp * 1000);
+
+    this.ciudadano.fechaNacimiento = datePiper.transform(
+      date, 'yyyy-MM-dd'
+    );
+
+    date.setTime(this.ciudadano.fechaExpedicionDocumento.timestamp * 1000);
+    this.ciudadano.fechaExpedicionDocumento = datePiper.transform(
+      date, 'yyyy-MM-dd'
+    );
   
     this.correo = this.ciudadano.usuario.correo;
 

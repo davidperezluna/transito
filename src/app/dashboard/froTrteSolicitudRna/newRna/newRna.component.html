@@ -26,7 +26,8 @@
                             <span class="badge badge-success" *ngIf="factura.estado == 'PAGADA'">{{ factura.estado }}</span>
                             <span class="badge badge-danger" *ngIf="factura.estado == 'PENDIENTE DOCUMENTACION'">{{ factura.estado }}</span>
                             <span class="badge badge-warning" *ngIf="factura.estado == 'FINALIZADA'">{{ factura.estado }}</span>
-
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
                             <a *ngIf="factura && factura.estado == 'PENDIENTE DOCUMENTACION'" href="{{ apiUrl }}/{{ factura.id }}/pdf/documentacion" class="btn btn-default" target="_blank">
                                 <i class="fa fa-file-pdf-o"></i>
                                 Imprimir observaciones
@@ -262,7 +263,7 @@
                 </div><!-- /.row -->
 
 
-                <div class="row" *ngIf="tramitesFactura && factura && factura.estado != 'FINALIZADA' && tramiteSolicitud.idSolicitante">
+                <div class="row" *ngIf="confirmarSolicitante && tramitesFactura && factura && factura.estado != 'FINALIZADA'">
                     <div class="col-xs-12 col-lg-12">
                         <ul class="nav nav-tabs" role="tablist">
                             <li class="nav-item">
@@ -283,7 +284,7 @@
                                     <div class="col-xs-12 col-lg-12"><!-- .col -->
                                         <b class="text-uppercase">Trámite a realizar</b>
                                         <ng-select (ngModelChange)="onChangedTramiteFactura($event)" [(ngModel)]="idTramiteFactura" [multiple]="false" [options]="tramitesFactura" name="idTramiteFactura" required></ng-select>
-                                    </div><!-- /.col -->
+                                    </div>
                                 </div>
 
                                 <div class="row">

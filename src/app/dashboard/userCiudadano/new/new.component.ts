@@ -154,7 +154,7 @@ constructor(
 
   onChangedMunicipioNacimiento(id){
     if (id) {
-      this.ciudadano.idMunicipioResidencia = id;
+      this.ciudadano.idMunicipioResidencia = [id];
     }
   }
 
