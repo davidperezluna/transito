@@ -39,7 +39,7 @@ export class ImoCfgTipoComponent implements OnInit {
           console.log(response);
           this.cfgCasoInsumos = response.data;
           let timeoutId = setTimeout(() => {
-            this.iniciarTabla();
+            this.onInitTable();
           }, 100);
           swal.close()
         }
@@ -53,21 +53,21 @@ export class ImoCfgTipoComponent implements OnInit {
       }
     );
   }
-  iniciarTabla() {
-    $('#dataTables-example').DataTable({
+
+  onInitTable() {
+    this.table = $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,
       sPaginationType: 'full_numbers',
       oLanguage: {
         oPaginate: {
-          sFirst: '<<',
-          sPrevious: '<',
-          sNext: '>',
-          sLast: '>>'
+          sFirst: '<i class="fa fa-step-backward"></i>',
+          sPrevious: '<i class="fa fa-chevron-left"></i>',
+          sNext: '<i class="fa fa-chevron-right"></i>',
+          sLast: '<i class="fa fa-step-forward"></i>'
         }
       }
     });
-    this.table = $('#dataTables-example').DataTable();
   }
   onNew() {
     this.formNew = true;
