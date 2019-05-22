@@ -26,12 +26,23 @@
                             <span class="badge badge-success" *ngIf="factura.estado == 'PAGADA'">{{ factura.estado }}</span>
                             <span class="badge badge-danger" *ngIf="factura.estado == 'PENDIENTE DOCUMENTACION'">{{ factura.estado }}</span>
                             <span class="badge badge-warning" *ngIf="factura.estado == 'FINALIZADA'">{{ factura.estado }}</span>
+                            <span class="badge badge-info" *ngIf="factura.estado == 'COMPLETAR TRAMITES'">{{ factura.estado }}</span>
                         </div>
                         <div class="col-xs-12 col-lg-12">
-                            <a *ngIf="factura && factura.estado == 'PENDIENTE DOCUMENTACION'" href="{{ apiUrl }}/{{ factura.id }}/pdf/documentacion" class="btn btn-default" target="_blank">
-                                <i class="fa fa-file-pdf-o"></i>
-                                Imprimir observaciones
-                            </a>
+                            <div class="btn-group">
+                                <a *ngIf="factura && factura.estado == 'PENDIENTE DOCUMENTACION'" href="{{ apiUrl }}/{{ factura.id }}/pdf/documentacion" class="btn btn-primary" target="_blank">
+                                    <i class="fa fa-file-pdf-o"></i>
+                                    Observaciones
+                                </a>
+                                <button *ngIf="factura && factura.estado == 'PENDIENTE DOCUMENTACION'" (click)="onComplete()" class="btn btn-default btn-success" type="button">
+                                    <i class="fa fa-save"></i>
+                                    Completar trámites
+                                </button>
+                                <a *ngIf="factura && factura.estado == 'FINALIZADA' && certificadoTradicion" href="{{ apiUrl }}/{{ vehiculo.id }}/pdf/certificadotradicion" class="btn btn-primary" target="_blank">
+                                    <i class="fa fa-file-pdf-o"></i>
+                                    Certificado de tradición
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -307,7 +318,7 @@
                                         
                                         <appRna-transformacion *ngIf="tramiteFactura.precio.tramite.id == 9" [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)"></appRna-transformacion>
                                         
-                                        <appRna-duplicado-licencia *ngIf="tramiteFactura.precio.tramite.id == 10" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" [idPropietario]='tramiteSolicitud.idPropietario' (onReadyTramite)="onReadyTramite($event)"></appRna-duplicado-licencia>
+                                        <appRna-duplicado-licencia *ngIf="tramiteFactura.precio.tramite.id == 10" [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" [idPropietario]='tramiteSolicitud.idPropietario' (onReadyTramite)="onReadyTramite($event)"></appRna-duplicado-licencia>
                                     
                                         <appRna-inscripcion-alerta-prenda *ngIf="tramiteFactura.precio.tramite.id == 11" [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" [idPropietario]='tramiteSolicitud.idPropietario' (onReadyTramite)="onReadyTramite($event)"></appRna-inscripcion-alerta-prenda>
                                         
@@ -317,7 +328,7 @@
                                             
                                         <appRna-cambio-placa *ngIf="tramiteFactura.precio.tramite.id == 14" [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)"></appRna-cambio-placa>
                                         
-                                        <appRna-duplicado-placa *ngIf="tramiteFactura.precio.tramite.id == 15" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)"></appRna-duplicado-placa>
+                                        <appRna-duplicado-placa *ngIf="tramiteFactura.precio.tramite.id == 15" [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)"></appRna-duplicado-placa>
                                         
                                         <appRna-blindaje *ngIf="tramiteFactura.precio.tramite.id == 16" [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)"></appRna-blindaje>
                                         

@@ -17,7 +17,6 @@ import swal from 'sweetalert2';
 })
 export class NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent implements OnInit {
     @Output() onReadyTramite = new EventEmitter<any>();
-    
     @Input() vehiculo: any = null;
     @Input() tramiteFactura: any = null;
     @Input() funcionario: any = null;

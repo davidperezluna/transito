@@ -20,12 +20,11 @@ import swal from 'sweetalert2';
 })
 export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
     @Output() onReadyTramite = new EventEmitter<any>();
-    
-    @Input() idPropietario: any = null;
     @Input() vehiculo: any = null;
     @Input() tramiteFactura: any = null;
     @Input() funcionario: any = null;
     @Input() tramitesRealizados: any = null;
+    @Input() idPropietario: any = null;
     public errorMessage; 
       
     public realizado: any = false;
@@ -281,7 +280,7 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
     }
 
     onEnviar() {
-        this.datos.campos = ['pignorado'];
+        this.datos.campos = ['registrarPignorado'];
         this.datos.idVehiculo = this.vehiculo.id;
         this.datos.idPropietario = this.propietario.id;
         this.datos.idTramiteFactura = this.tramiteFactura.id;

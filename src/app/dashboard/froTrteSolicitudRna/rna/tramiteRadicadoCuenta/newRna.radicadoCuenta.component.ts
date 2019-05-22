@@ -14,7 +14,6 @@ import swal from 'sweetalert2';
 })
 export class NewRnaRadicadoCuentaComponent implements OnInit {
     @Output() onReadyTramite = new EventEmitter<any>();
-    
     @Input() vehiculo: any = null;
     @Input() tramiteFactura: any = null;
     @Input() funcionario: any = null;
@@ -32,6 +31,7 @@ export class NewRnaRadicadoCuentaComponent implements OnInit {
       'guiaLlegada': null,
       'empresaEnvio': null,
       'idFuncionario': null,
+      'idVehiculo': null,
       'idMunicipio': null,
       'idTipoIdentificacion': null,
       'idTramiteFactura': null,
@@ -112,6 +112,7 @@ export class NewRnaRadicadoCuentaComponent implements OnInit {
       let token = this._LoginService.getToken();
 
       this.datos.idTramiteFactura = this.tramiteFactura.id;
+      this.datos.idVehiculo = this.vehiculo.id;
 
       let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero;
 
