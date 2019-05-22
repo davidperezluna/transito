@@ -53,7 +53,7 @@ constructor(
 
     this.usuarioMenu.idUsuario = this.usuario.id;
     
-		this._UserUsuarioMenuService.register(this.usuarioMenu,token).subscribe(
+		this._UserUsuarioMenuService.delete(this.usuarioMenu,token).subscribe(
 			response => {
         if(response.status == 'success'){
           swal({

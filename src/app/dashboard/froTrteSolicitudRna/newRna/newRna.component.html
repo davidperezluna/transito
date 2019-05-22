@@ -36,7 +36,7 @@
                     </div>
                 </div>
 
-                <div class="form-group" *ngIf="factura && factura.estado != 'FINALIZADA' && factura.estado == 'PENDIENTE DOCUMENTACION'">
+                <div class="form-group" *ngIf="factura && factura.estado != 'FINALIZADA' && factura.estado != 'PENDIENTE DOCUMENTACION'">
                     <div class="row">
                         <div class="col-xs-12 col-lg-12">
                             <label>Buscar por placa</label>
@@ -125,7 +125,7 @@
                     </div>
                 </div>
 
-                <div class="form-group" *ngIf="factura && factura.estado != 'FINALIZADA' && factura.estado == 'PENDIENTE DOCUMENTACION' && tramitesFactura && tramitesRealizados.length == tramitesFactura.length && documentacionPendiente.length == 0">
+                <div class="form-group" *ngIf="factura && factura.estado != 'FINALIZADA' && factura.estado != 'PENDIENTE DOCUMENTACION' && tramitesFactura && tramitesRealizados.length == tramitesFactura.length && documentacionPendiente.length == 0">
                     <div class="row">
                         <div class="col-xs-12 col-lg-12">
                             <div class="form-group">
@@ -154,7 +154,7 @@
         </div>
     </div>
 
-    <div class="col-xs-12 col-lg-8" *ngIf="factura && factura.estado != 'FINALIZADA' && factura.estado == 'PENDIENTE DOCUMENTACION' && vehiculo">
+    <div class="col-xs-12 col-lg-8" *ngIf="factura && factura.estado != 'FINALIZADA' && factura.estado != 'PENDIENTE DOCUMENTACION' && vehiculo">
         <div class="card">
             <div class="card-body">
                 <div class="row"  *ngIf="propietarios">

@@ -46,21 +46,26 @@ export class FroReporteIngresosComponent implements OnInit {
     public comparendos;
     public totalComparendos;
 
-    
-    public tipoArchivoTramite;
-    //variables para retefuente
+    public retefuentes;
     public tipoArchivo;
-    public arrayRetefuentesExogena: any = null;
+    public totalRetefuente;
+
+    //variables para retefuente
+    public arrayRetefuentes;
     public nombreOrganismoTransito;
-    public totalRetefuentesExogena;
-    public arrayRetefuentesTesoreria: any = null;
-    public totalRetefuentesTesoreria;
+    public totalRetefuentes;
 
     public cobrosCoactivos;
     public totalCobroCoactivo;
 
     public acuerdosPago;
     public totalAcuerdosPago;
+
+    public tipoPersonaSelected;
+    public tiposPersona = [
+        { value: 'PERSONA NATURAL', label: 'PERSONA NATURAL' },
+        { value: 'PERSONA JURIDICA', label: 'PERSONA JURIDICA' },
+    ];
 
     constructor(
         private _FroReporteIngresosService: FroReporteIngresosService,
@@ -71,7 +76,7 @@ export class FroReporteIngresosComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.froReporteIngresos = new FroReporteIngresos(null, null, null, null);
+        this.froReporteIngresos = new FroReporteIngresos(null, null, null, null, null);
 
         this.date = new Date();
         var datePiper = new DatePipe(this.date);
@@ -119,7 +124,7 @@ export class FroReporteIngresosComponent implements OnInit {
         );
     }
 
-    onInitTable(archivo:any) {
+    onInitTable() {
         if (this.table) {
             this.table.destroy();
         }
@@ -128,19 +133,26 @@ export class FroReporteIngresosComponent implements OnInit {
         var datePiper = new DatePipe(this.date);
         this.fecha = datePiper.transform(this.date, 'yyyy-MM-dd');
 
-        this.table = $('#dataTables-'+ archivo).DataTable({
+        this.table = $('#dataTables-example').DataTable({
             responsive: true,
             pageLength: 8,
             sPaginationType: 'full_numbers',
             dom: 'Bfrtip',
             buttons: [
                 {
-                    title: 'Reporte Exógena_' + this.nombreOrganismoTransito,
-                    messageBottom: 'TOTAL: ' + this.totalRetefuentesTesoreria, 
+                    title: 'Reporte Exógena' + this.nombreOrganismoTransito,
+                    /* message: 'Gravedad Accidente: ' + arrayGravedad, */
                     extend: 'excel',
                     text: 'Excel',
-                    filename: 'Reporte_Exógena_' + this.nombreOrganismoTransito + '_' + this.fecha,
+                    filename: 'Reporte_Exogena_' + this.nombreOrganismoTransito + this.fecha,
                 },
+                {
+                    title: 'Reporte Exógena',
+                    extend: 'pdfHtml5',
+                    orientation: 'landscape',
+                    pageSize: 'LEGAL',
+                    filename: 'Reporte_ExogenaPDF_' + this.nombreOrganismoTransito + this.fecha,
+                }
             ],
             oLanguage: {
                 oPaginate: {
@@ -175,10 +187,11 @@ export class FroReporteIngresosComponent implements OnInit {
         let identity = this._LoginService.getIdentity();
 
         this.froReporteIngresos.idOrganismoTransito = this.organismoTransitoSelected;
+        this.froReporteIngresos.idTipoPersona = this.tipoPersonaSelected;
         this.froReporteIngresos.idTipoRecaudo = this.tipoRecaudoSelected;
 
         if (this.tipoRecaudoSelected == 1) {
-            this._FroReporteIngresosService.pdfTramiteByFecha({ 'identificacion': identity.identificacion, 'filtros': this.froReporteIngresos, 'tipoArchivoTramite': this.tipoArchivoTramite }, token).subscribe(
+            this._FroReporteIngresosService.pdfTramiteByFecha({ 'identificacion': identity.identificacion, 'filtros': this.froReporteIngresos }, token).subscribe(
                 response => {
                     var fileURL = URL.createObjectURL(response);
                     window.open(fileURL);
@@ -216,43 +229,9 @@ export class FroReporteIngresosComponent implements OnInit {
             this._FroReporteIngresosService.pdfRetefuenteByFecha({ 'datos': this.froReporteIngresos, 'tipoArchivo': this.tipoArchivo }, token).subscribe(
                 response => {
                     if (response.status == 'success') {
-                        if(response.dataExogena){
-                            //reinicio de variables
-                            this.nombreOrganismoTransito = null;
-                            this.arrayRetefuentesTesoreria = null;
-                            this.totalRetefuentesTesoreria = null;
-                            
-                            //reporte para retención exógena
-                            this.nombreOrganismoTransito = response.dataExogena.organismoTransito.nombre;
-                            this.arrayRetefuentesExogena = response.dataExogena.arrayRetefuentesExogena;
-                            this.totalRetefuentesExogena = response.dataExogena.totalRetefuentesExogena;
-
-                            if(this.table){
-                                this.table.destroy();
-                            }
-                                
-                            let timeoutId = setTimeout(() => {
-                                this.onInitTable('exogena');
-                            }, 100);
-                        } else {
-                            //reinicio de variables
-                            this.nombreOrganismoTransito = null;
-                            this.arrayRetefuentesExogena = null;
-                            this.totalRetefuentesExogena = null; 
-
-                            //para reporte tesoreria
-                            this.nombreOrganismoTransito = response.dataTesoreria.organismoTransito.nombre;
-                            this.arrayRetefuentesTesoreria = response.dataTesoreria.arrayRetefuentesTesoreria;
-                            this.totalRetefuentesTesoreria = response.dataTesoreria.totalRetefuentesTesoreria;
-
-                            if (this.table) {
-                                this.table.destroy();
-                            }
-                            let timeoutId = setTimeout(() => {
-                                this.onInitTable('tesoreria');
-                            }, 100);
-
-                        }
+                        this.arrayRetefuentes = response.data.arrayRetefuentes;
+                        this.nombreOrganismoTransito = response.data.organismoTransito.nombre;
+                        this.totalRetefuentes = response.data.totalRetefuentes;
 
                         swal({
                             title: 'Perfecto!',
@@ -261,20 +240,16 @@ export class FroReporteIngresosComponent implements OnInit {
                             confirmButtonText: 'Aceptar'
                         });
 
+                        let timeoutId = setTimeout(() => {
+                            this.onInitTable();
+                        }, 100);
                     } else {
-                        if (this.table) {
-                            this.table.destroy();
-                        }
-
-                        this.arrayRetefuentesExogena = null;
-                        this.arrayRetefuentesTesoreria = null;
-
                         swal({
                             title: 'Error!',
                             text: response.message,
                             type: 'error',
                             confirmButtonText: 'Aceptar'
-                        });
+                        })
                     }
                     error => {
                         this.errorMessage = <any>error;

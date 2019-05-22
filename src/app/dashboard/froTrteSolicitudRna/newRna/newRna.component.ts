@@ -77,7 +77,7 @@ export class NewRnaComponent implements OnInit {
       }
     });
 
-    this.tramiteSolicitud = new FroTrteSolicitudRna(null, null, null, null, null, null, null, null, null);
+    this.tramiteSolicitud = new FroTrteSolicitudRna(null, null, null, null, null, null, null, null, null, null);
 
     let token = this._LoginService.getToken();
 
@@ -87,6 +87,7 @@ export class NewRnaComponent implements OnInit {
       response => {
         if (response.status == 'success') {
           this.funcionario = response.data; 
+          this.tramiteSolicitud.idFuncionario = this.funcionario.id;
           
           swal.close();
         } else {
@@ -153,6 +154,7 @@ export class NewRnaComponent implements OnInit {
       response => {
         if (response.code == 200) {
           this.vehiculo = response.data;
+          this.tramiteSolicitud.idVehiculo = this.vehiculo.id;
 
           this._TramiteFacturaService.searchTramitesByFactura({ 'idFactura': this.factura.id, 'idVehiculo': this.vehiculo.id }, token).subscribe(
             response => {

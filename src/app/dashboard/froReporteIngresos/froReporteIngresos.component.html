@@ -1,194 +1,179 @@
-<div class="container row">
-    <div class="col-xs-12 col-lg-4">
+<div class="row">
+    <div class="col-xs-12 col-lg-12">
         <div class="card">
             <div class="card-body">
-                <form #formFiltros="ngForm">
-                    <div class="col-xs-12 col-lg-12">
-                        <label>Seleccionar tipo reporte</label>
-                        <ng-select [multiple]="false" [options]="tiposRecaudo" [(ngModel)]="tipoRecaudoSelected" required
-                            name="idTipoRecaudo">
-                        </ng-select>
-                    </div>
-                    <div class="col-xs-12 col-lg-12" *ngIf="tipoRecaudoSelected">
-                        <label>Seleccionar OrganismoTransito</label>
-                        <ng-select [multiple]="false" [options]="organismosTransito" [(ngModel)]="organismoTransitoSelected"
-                            required name="idOrganismoTransito">
-                        </ng-select>
-                    </div>
-                    <div class="col-xs-12 col-lg-12">
-                        <label>Desde<strong class="text-danger">*</strong></label>
-                        <input class="form-control" type="date" [(ngModel)]="froReporteIngresos.fechaDesde"
-                            name="fechaDesde" required>
-                    </div>
-                    <div class="col-xs-12 col-lg-12">
-                        <label>Hasta<strong class="text-danger">*</strong></label>
-                        <input class="form-control" type="date" [(ngModel)]="froReporteIngresos.fechaHasta"
-                            name="fechaHasta" required>
-                    </div>
-                    <div class="col-xs-12 col-lg-12" *ngIf="tipoRecaudoSelected == 6">
-                        <label>Tipo archivo</label>
-                        <div class="form-group row">
-                            <div class="col-xs-12 col-lg-6">
-                                <div class="custom-control custom-radio">
-                                    <input id="exogena" name="exogena" [(ngModel)]="tipoArchivo" value="1" type="radio"
-                                        id="customExogena" name="customRadioPlaca" class="custom-control-input">
-                                    <label class="custom-control-label" for="customExogena">Exógena</label>
-                                </div>
+                <div class="col-xs-12 col-lg-12">
+                    <label>Seleccionar tipo reporte</label>
+                    <ng-select [multiple]="false" [options]="tiposRecaudo" [(ngModel)]="tipoRecaudoSelected" required
+                        name="idTipoRecaudo">
+                    </ng-select>
+                </div>
+                <div class="col-xs-12 col-lg-12" *ngIf="tipoRecaudoSelected">
+                    <label>Seleccionar OrganismoTransito</label>
+                    <ng-select [multiple]="false" [options]="organismosTransito" [(ngModel)]="organismoTransitoSelected"
+                        required name="idOrganismoTransito">
+                    </ng-select>
+                </div>
+                <!-- <div class="col-xs-12 col-lg-12" *ngIf="tipoRecaudoSelected == 3">
+                    <label>Seleccionar Tipo Persona</label>
+                    <ng-select [multiple]="false" [options]="tiposPersona" [(ngModel)]="tipoPersonaSelected" required
+                        name="idTipoPersona">
+                    </ng-select>
+                </div> -->
+                <div class="col-xs-12 col-lg-12">
+                    <label>Desde<strong class="text-danger">*</strong></label>
+                    <input class="form-control" type="date" [(ngModel)]="froReporteIngresos.fechaDesde"
+                        name="fechaDesde" required>
+                </div>
+                <div class="col-xs-12 col-lg-12">
+                    <label>Hasta<strong class="text-danger">*</strong></label>
+                    <input class="form-control" type="date" [(ngModel)]="froReporteIngresos.fechaHasta"
+                        name="fechaHasta" required>
+                </div>
+
+                <div class="col-xs-12 col-lg-12" *ngIf="tipoRecaudoSelected == 6">
+                    <label>Tipo archivo</label>
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-6">
+                            <div class="custom-control custom-radio">
+                                <input id="exogena" name="exogena" [(ngModel)]="tipoArchivo" value="1" type="radio"
+                                    id="customExogena" name="customRadioPlaca" class="custom-control-input">
+                                <label class="custom-control-label" for="customExogena">Exógena</label>
                             </div>
-                            <div class="col-xs-12 col-lg-6">
-                                <div class="custom-control custom-radio">
-                                    <input id="tesoreria" name="tesoreria" [(ngModel)]="tipoArchivo" value="0" type="radio"
-                                        id="customTesoreria" name="customTesoreria" class="custom-control-input">
-                                    <label class="custom-control-label" for="customTesoreria">Tesorería</label>
-                                </div>
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <div class="custom-control custom-radio">
+                                <input id="tesoreria" name="tesoreria" [(ngModel)]="tipoArchivo" value="0" type="radio"
+                                    id="customTesoreria" name="customTesoreria" class="custom-control-input">
+                                <label class="custom-control-label" for="customTesoreria">Tesorería</label>
                             </div>
                         </div>
                     </div>
-                    <div class="col-xs-12 col-lg-12" *ngIf="tipoRecaudoSelected == 1">
-                        <label>Tipo archivo</label>
-                        <div class="form-group row">
-                            <div class="col-xs-12 col-lg-6">
-                                <div class="custom-control custom-radio">
-                                    <input id="general" name="general" [(ngModel)]="tipoArchivoTramite" value="1" type="radio"
-                                        id="customGeneral" name="customGeneral" class="custom-control-input">
-                                    <label class="custom-control-label" for="customGeneral">General</label>
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-lg-6">
-                                <div class="custom-control custom-radio">
-                                    <input id="detallado" name="detallado" [(ngModel)]="tipoArchivoTramite" value="0" type="radio"
-                                        id="customDetallado" name="customDetallado" class="custom-control-input">
-                                    <label class="custom-control-label" for="customDetallado">Detallado</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
+                </div>
             </div>
             <div class="card-footer">
                 <div class="btn-group">
-                    <button (click)="onEnviar()" [disabled]="formFiltros.invalid" class="btn btn-primary" type="button">
+                    <button (click)="onEnviar()" class="btn btn-primary" type="button">
                         <i class="fa fa-save"></i>
                         Enviar
                     </button>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="col-xs-12 col-lg-8">
-        <div class="row">
-            <div class="col-xs-12 col-lg-12">
-                <div class="card" *ngIf="arrayRetefuentesExogena || arrayRetefuentesTesoreria">
-                    <div class="card-header">
-                        <h5 class="card-title">
-                            <strong class="text-uppercase">Retefuente</strong>
-                        </h5>
-                    </div>
-                    <div class="card-body">
-                        <table class="table" id="dataTables-exogena"  *ngIf="arrayRetefuentesExogena && arrayRetefuentesExogena.length > 0">
-                            <thead>
-                                <tr>
-                                    <th><b>CONCEPTO</b></th>
-                                    <th><b>TIPO DOCUMENTO</b></th>
-                                    <th><b>NRO. DE IDENTIFICACIÓN</b></th>
-                                    <th><b>DV</b></th>
-                                    <th><b>PRIMER APELLIDO</b></th>
-                                    <th><b>SEGUNDO APELLIDO</b></th>
-                                    <th><b>PRIMER NOMBRE</b></th>
-                                    <th><b>OTROS NOMBRES DEL INFORMADO</b></th>
-                                    <th><b>RAZÓN SOCIAL DEL INFORMADO</b></th>
-                                    <th><b>DIRECCIÓN</b></th>
-                                    <th><b>DEPARTAMENTO</b></th>
-                                    <th><b>MUNICIPIO</b></th>
-                                    <th><b>PAÍS</b></th>
-                                    <th><b>PAGO O ABANDONO EN CUENTA DEDUCIBLE</b></th>
-                                    <th><b>PAGO O ABONO EN CUENTA NO DEDUCIBLE</b></th>
-                                    <th><b>IVA MAYOR DEL COSTO O GASTO DEDUCIBLE</b></th>
-                                    <th><b>IVA MAYOR DEL COSTO O GASTO NO DEDUCIBLE</b></th>
-                                    <th><b>RETENCIÓN EN LA FUENTE PRACTICADA RENTA</b></th>
-                                    <th><b>RETENCIÓN EN LA FUENTE ASUMIDA RENTA</b></th>
-                                    <th><b>RETENCIÓN EN LA FUENTE PRACTICADA IVA REGIMEN COMUN</b></th>
-                                    <th><b>RETENCIÓN EN LA FUENTE PRACTICADA IVA REGIMEN SIMPLIFICADO</b></th>
-                                    <th><b>RETENCIÓN EN LA FUENTE PRACTICADA IVA NO DOMICILIADOS</b></th>
-                                    <th><b>RETENCIÓN EN LA FUENTE PRACTICADA CREE</b></th>
-                                    <th><b>RETENCIÓN EN LA FUENTE ASUMIDA CREE</b></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="odd" *ngFor="let retefuenteExogena of arrayRetefuentesExogena; let i = index">
-                                    <td>{{ 5046 }}</td>
-                                    <td>{{ retefuenteExogena.tipoDocumento }}</td>
-                                    <td>{{ retefuenteExogena.identificacion }}</td>
-                                    <td>{{ 52354001 }}</td>
-                                    <td>{{ retefuenteExogena.primerApellido }}</td>
-                                    <td>{{ retefuenteExogena?.segundoApellido }}</td>
-                                    <td>{{ retefuenteExogena.primerNombre }}</td>
-                                    <td>{{ retefuenteExogena?.segundoNombre }}</td>
-                                    <td>{{ retefuenteExogena.razonSocial }}</td>
-                                    <td>{{ retefuenteExogena.direccion }}</td>
-                                    <td>{{ retefuenteExogena.departamento }}</td>
-                                    <td>{{ retefuenteExogena.municipio }}</td>
-                                    <td>{{ retefuenteExogena.pais }}</td>
-                                    <td>{{ retefuenteExogena.valorVehiculo }}</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>{{ retefuenteExogena.retencion }}</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <table class="table" id="dataTables-tesoreria" *ngIf="arrayRetefuentesTesoreria && arrayRetefuentesTesoreria.length > 0">
-                            <thead>
-                                <tr>
-                                    <th><b>FECHA</b></th>
-                                    <th><b>PLACA</b></th>
-                                    <th><b>RECIBO DE CAJA</b></th>
-                                    <th><b>ESTADO FACTURA</b></th>
-                                    <th><b>MARCA</b></th>
-                                    <th><b>CLASE</b></th>
-                                    <th><b>MODELO</b></th>
-                                    <th><b>PRIMER APELLIDO</b></th>
-                                    <th><b>SEGUNDO APELLIDO</b></th>
-                                    <th><b>PRIMER NOMBRE</b></th>
-                                    <th><b>SEGUNDO NOMBRE</b></th>
-                                    <th><b>IDENTIFICACIÓN</b></th>
-                                    <th><b>DIRECCIÓN</b></th>
-                                    <th><b>MUNICIPIO</b></th>
-                                    <th><b>TELÉFONO</b></th>
-                                    <th><b>AVALUAO</b></th>
-                                    <th><b>RETENCIÓN</b></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="odd" *ngFor="let retefuenteTesoreria of arrayRetefuentesTesoreria; let i = index">
-                                    <td>{{ retefuenteTesoreria.fechaFactura }}</td>
-                                    <td>{{ retefuenteTesoreria.placa }}</td>
-                                    <td>{{ retefuenteTesoreria.reciboCaja }}</td>
-                                    <td>{{ retefuenteTesoreria.estadoFactura }}</td>
-                                    <td>{{ retefuenteTesoreria.marca }}</td>
-                                    <td>{{ retefuenteTesoreria.clase }}</td>
-                                    <td>{{ retefuenteTesoreria.modelo }}</td>
-                                    <td>{{ retefuenteTesoreria.primerApellido }}</td>
-                                    <td>{{ retefuenteTesoreria?.segundoApellido }}</td>
-                                    <td>{{ retefuenteTesoreria.primerNombre }}</td>
-                                    <td>{{ retefuenteTesoreria?.segundoNombre }}</td>
-                                    <td>{{ retefuenteTesoreria.identificacion }}</td>
-                                    <td>{{ retefuenteTesoreria.direccion }}</td>
-                                    <td>{{ retefuenteTesoreria.municipio }}</td>
-                                    <td>{{ retefuenteTesoreria.telefono }}</td>
-                                    <td>{{ retefuenteTesoreria.valorVehiculo }}</td>
-                                    <td>{{ retefuenteTesoreria.retencion }}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+        <div class="card" *ngIf="arrayRetefuentes">
+            <div class="card-header">
+                <h5 class="card-title">
+                    <strong class="text-uppercase">Retefuente</strong>
+                </h5>
+            </div>
+            <div class="card-body">
+                <table class="table" id="dataTables-example">
+                    <thead>
+                        <tr>
+                            <th>
+                                <b>CONCEPTO</b>
+                            </th>
+                            <th>
+                                <b>TIPO DOCUMENTO</b>
+                            </th>
+                            <th>
+                                <b>NRO. DE IDENTIFICACIÓN</b>
+                            </th>
+                            <th>
+                                <b>DV</b>
+                            </th>
+                            <th>
+                                <b>PRIMER APELLIDO</b>
+                            </th>
+                            <th>
+                                <b>SEGUNDO APELLIDO</b>
+                            </th>
+                            <th>
+                                <b>PRIMER NOMBRE</b>
+                            </th>
+                            <th>
+                                <b>OTROS NOMBRES DEL INFORMADO</b>
+                            </th>
+                            <th>
+                                <b>RAZÓN SOCIAL DEL INFORMADO</b>
+                            </th>
+                            <th>
+                                <b>DIRECCIÓN</b>
+                            </th>
+                            <th>
+                                <b>DEPARTAMENTO</b>
+                            </th>
+                            <th>
+                                <b>MUNICIPIO</b>
+                            </th>
+                            <th>
+                                <b>PAÍS</b>
+                            </th>
+                            <th>
+                                <b>PAGO O ABANDONO EN CUENTA DEDUCIBLE</b>
+                            </th>
+                            <th>
+                                <b>PAGO O ABONO EN CUENTA NO DEDUCIBLE</b>
+                            </th>
+                            <th>
+                                <b>IVA MAYOR DEL COSTO O GASTO DEDUCIBLE</b>
+                            </th>
+                            <th>
+                                <b>IVA MAYOR DEL COSTO O GASTO NO DEDUCIBLE</b>
+                            </th>
+                            <th>
+                                <b>RETENCIÓN EN LA FUENTE PRACTICADA RENTA</b>
+                            </th>
+                            <th>
+                                <b>RETENCIÓN EN LA FUENTE ASUMIDA RENTA</b>
+                            </th>
+                            <th>
+                                <b>RETENCIÓN EN LA FUENTE PRACTICADA IVA REGIMEN COMUN</b>
+                            </th>
+                            <th>
+                                <b>RETENCIÓN EN LA FUENTE PRACTICADA IVA REGIMEN SIMPLIFICADO</b>
+                            </th>
+                            <th>
+                                <b>RETENCIÓN EN LA FUENTE PRACTICADA IVA NO DOMICILIADOS</b>
+                            </th>
+                            <th>
+                                <b>RETENCIÓN EN LA FUENTE PRACTICADA CREE</b>
+                            </th>
+                            <th>
+                                <b>RETENCIÓN EN LA FUENTE ASUMIDA CREE</b>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="odd" *ngFor="let retefuente of arrayRetefuentes; let i = index">
+                            <td>{{ 5046 }}</td>
+                            <td>{{ retefuente.tipoDocumento }}</td>
+                            <td>{{ retefuente.identificacion }}</td>
+                            <td>{{ 52354001 }}</td>
+                            <td>{{ retefuente.primerApellido }}</td>
+                            <td>{{ retefuente?.segundoApellido }}</td>
+                            <td>{{ retefuente.primerNombre }}</td>
+                            <td>{{ retefuente?.segundoNombre }}</td>
+                            <td>{{ retefuente.razonSocial }}</td>
+                            <td>{{ retefuente.direccion }}</td>
+                            <td>{{ retefuente.departamento }}</td>
+                            <td>{{ retefuente.municipio }}</td>
+                            <td>{{ retefuente.pais }}</td>
+                            <td>{{ retefuente.valorVehiculo }}</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>{{ retefuente.retencion }}</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- /.table-responsive -->
             </div>
         </div>
     </div>

@@ -24,10 +24,6 @@
               <i class="fa fa-search"></i>
               Buscar
             </button>
-            <button (click)="onDelete(usuario)" class="btn btn-danger">
-              <i class="fa fa-ban"></i>
-              <span class="text">Eliminar</span>
-            </button>
           </div>
         </div>
       </div>
@@ -42,6 +38,10 @@
                 <button (click)="onNew(usuario)" class="btn btn-default">
                   <i class="fa fa-plus"></i>
                   <span class="text">Nuevo</span>
+                </button>
+                <button (click)="onDelete(usuario)" class="btn btn-danger">
+                  <i class="fa fa-ban"></i>
+                  <span class="text">Eliminar</span>
                 </button>
               </div>
             </h5>

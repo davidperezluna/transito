@@ -93,6 +93,10 @@
                                     </tbody>
                                 </table>    
                             </div>
+
+                            <div class="col-xs-12 col-lg-12" *ngIf="!ciudadano && formNewCiudadano">
+                                <app-new-ciudadano (ready)="ready($event)"></app-new-ciudadano>
+                            </div>
                         </div>
                         <!-- /.row -->
                     </div>
@@ -131,7 +135,7 @@
                                                         </td>
                                                         <td>
                                                             <b>Marca: </b>
-                                                            {{ vehiculo.marca?.nombre }}
+                                                            {{ vehiculo.linea?.marca.nombre }}
                                                         </td>
                                                         <td>
                                                             <b>Línea: </b>
@@ -291,10 +295,6 @@
             </div>
             <!-- /.card -->
         </form>
-    </div>
-
-    <div class="col-xs-12 col-lg-12" *ngIf="!ciudadano && formNewCiudadano">
-        <app-new-ciudadano (ready)="ready($event)"></app-new-ciudadano>
     </div>
 
     <div class="col-xs-12 col-lg-6" *ngIf="factura.id">

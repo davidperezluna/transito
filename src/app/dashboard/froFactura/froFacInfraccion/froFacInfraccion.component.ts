@@ -31,6 +31,7 @@ export class FroFacInfraccionComponent implements OnInit {
   
   public formIndex = false;
   public formNew = false;
+  public formNewCiudadano = false;
   public formSearch = true;
   public table: any = null;
 
@@ -128,6 +129,7 @@ export class FroFacInfraccionComponent implements OnInit {
               this.ciudadano = null;
               this.factura.idCiudadano = null;
               this.formNew = false;
+              this.formNewCiudadano = true;
 
               swal({
                 title: 'Error!',

@@ -41,7 +41,6 @@ export class NewRnaDuplicadoLicenciaComponent implements OnInit {
         private _TramiteSolicitudService: FroTrteSolicitudService,
         private _TramiteFacturaService: FroFacTramiteService,
         private _LicenciaTransitoService: UserLicenciaTransitoService,
-        private _FuncionarioService: PnalFuncionarioService,
         private _LoginService: LoginService,
     ) { }
 
@@ -72,7 +71,9 @@ export class NewRnaDuplicadoLicenciaComponent implements OnInit {
                 'idPropietario': this.idPropietario
             }
 
-            /*this._LicenciaTransitoService.searchActual(datos, token).subscribe(
+            let token = this._LoginService.getToken();
+
+            this._LicenciaTransitoService.searchActual(datos, token).subscribe(
                 response => {
                     if (response.status == 'success') {
                         this.datos.numeroLicenciaActual = response.data.numero;
@@ -88,7 +89,7 @@ export class NewRnaDuplicadoLicenciaComponent implements OnInit {
                         }
                     }
                 }
-            );*/
+            );
         }
      }
     

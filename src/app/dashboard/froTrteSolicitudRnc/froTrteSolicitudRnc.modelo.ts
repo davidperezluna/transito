@@ -4,6 +4,7 @@ export class FroTrteSolicitudRnc{
 		public tramitesRealizados: any,
 		public documentacionPendiente: any,
 		public insumoEntregado: any,
+		public idFuncionario: number,
 		public idFactura: number,
 		public idSolicitante: number,
 		public id: number,

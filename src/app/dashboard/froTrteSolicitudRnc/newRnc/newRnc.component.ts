@@ -60,7 +60,7 @@ constructor(
       }
     });
 
-    this.tramiteSolicitud = new FroTrteSolicitudRnc(null, null, null, null, null, null, null);
+    this.tramiteSolicitud = new FroTrteSolicitudRnc(null, null, null, null, null, null, null, null);
 
     let token = this._LoginService.getToken();
 
@@ -70,6 +70,7 @@ constructor(
       response => {
         if (response.status == 'success') {
           this.funcionario = response.data; 
+          this.tramiteSolicitud.idFuncionario = this.funcionario.id;
           
           swal.close();
         } else {

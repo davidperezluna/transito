@@ -167,46 +167,48 @@ export class FroFacTramiteComponent implements OnInit {
   }
 
   onChangedModulo(e) {
-    swal({
-      title: 'Cargando trámites disponibles!',
-      text: 'Solo tardara unos segundos por favor espere.',
-      onOpen: () => {
-        swal.showLoading()
-      }
-    });
-
-    if (e) {
-      let token = this._LoginService.getToken();
-
-      this._ModuloService.show({ 'id': this.factura.idModulo }, token).subscribe(
-        response => {
-          this.modulo = response.data;
-
-          this._TramitePrecioService.selectByModulo({ 'idModulo': this.factura.idModulo }, token).subscribe(
-            response => {
-              this.tramitesPrecio = response;
-            },
-            error => {
-              this.errorMessage = <any>error;
-
-              if (this.errorMessage != null) {
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
-            }
-          );
-
-          swal.close();
-        },
-        error => {
-          this.errorMessage = <any>error;
-
-          if (this.errorMessage != null) {
-            console.log(this.errorMessage);
-            alert("Error en la petición");
-          }
+    if(e){
+      swal({
+        title: 'Cargando trámites disponibles!',
+        text: 'Solo tardara unos segundos por favor espere.',
+        onOpen: () => {
+          swal.showLoading()
         }
-      );
+      });
+  
+      if (e) {
+        let token = this._LoginService.getToken();
+  
+        this._ModuloService.show({ 'id': this.factura.idModulo }, token).subscribe(
+          response => {
+            this.modulo = response.data;
+  
+            this._TramitePrecioService.selectByModulo({ 'idModulo': this.factura.idModulo }, token).subscribe(
+              response => {
+                this.tramitesPrecio = response;
+              },
+              error => {
+                this.errorMessage = <any>error;
+  
+                if (this.errorMessage != null) {
+                  console.log(this.errorMessage);
+                  alert("Error en la petición");
+                }
+              }
+            );
+  
+            swal.close();
+          },
+          error => {
+            this.errorMessage = <any>error;
+  
+            if (this.errorMessage != null) {
+              console.log(this.errorMessage);
+              alert("Error en la petición");
+            }
+          }
+        );
+      }
     }
   }
 
@@ -282,10 +284,11 @@ export class FroFacTramiteComponent implements OnInit {
           } else {
             this.ciudadano = null;
             this.factura.idCiudadano = null;
+            this.formNewCiudadano = true;
   
             swal({
               title: 'Error!',
-              text: response.message + " Debe registrarlo en persona natural.",
+              text: response.message,
               type: 'error',
               confirmButtonText: 'Aceptar'
             });

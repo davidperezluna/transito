@@ -25,7 +25,7 @@ export class NewRnaCambioGasComponent implements OnInit {
     public tramiteSolicitud: any = null;
     public colores: any;
     public colorSelected: any;
-    public combustibles;
+    public combustible;
      
     public datos = {
         'documentacion': true,
@@ -58,9 +58,7 @@ export class NewRnaCambioGasComponent implements OnInit {
     constructor(
         private _TramiteSolicitudService: FroTrteSolicitudService,
         private _TramiteFacturaService: FroFacTramiteService,
-        private _VehiculoService: VhloVehiculoService,
         private _CombustibleService: VhloCfgCombustibleService,
-        private _FuncionarioService: PnalFuncionarioService,
         private _LoginService: LoginService,
     ) { }
   
@@ -102,15 +100,12 @@ export class NewRnaCambioGasComponent implements OnInit {
     onEnviar(){
         let token = this._LoginService.getToken();
 
-        this._CombustibleService.index().subscribe(
+        this._CombustibleService.show({ 'id': 4 }, token).subscribe(
             response => {
-                this.combustibles = response;
-
-                this.combustibles.data.forEach(element => { 
-                    if(element.id == 4 ){
-                        this.datos.idCombustibleCambio = element.id;
-                    }
-                });
+                if (response.code == 200) {
+                    this.combustible = response.data;
+                    this.datos.idCombustibleCambio = this.combustible.id;
+                }
                 error => {
                     this.errorMessage = <any>error;
 
@@ -126,9 +121,9 @@ export class NewRnaCambioGasComponent implements OnInit {
         this.datos.idVehiculo = this.vehiculo.id;
         this.datos.idTramiteFactura = this.tramiteFactura.id;
         
-        let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero +
-        '<br><b>Anterior: </b>' + this.vehiculo.combustible.nombre +
-        '<br><b>Nuevo: </b>' + this.datos.idCombustibleCambio;
+        let resumen = "No. factura: " + this.tramiteFactura.factura.numero +
+        ',Anterior: ' + this.vehiculo.combustible.nombre +
+        ',Nuevo: ' + this.datos.idCombustibleCambio;
 
         this.realizado = true;
 
