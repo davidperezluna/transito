@@ -1,4 +1,5 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
+import { DatePipe, CurrencyPipe } from '@angular/common';
 import { ImoLoteService } from '../../../services/imoLote.service';
 import { UserEmpresaService } from '../../../services/userEmpresa.service';
 import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
@@ -8,7 +9,8 @@ import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-edit',
-  templateUrl: './edit.component.html'
+  templateUrl: './edit.component.html',
+  providers: [DatePipe]
 })
 export class EditComponent implements OnInit{
 @Output() ready = new EventEmitter<any>();
@@ -16,7 +18,6 @@ export class EditComponent implements OnInit{
 @Input() tipoInsumo:any = null;
 
 public errorMessage;
-public respuesta;
 public formReady = false;
 public organismoTransitoSelect:any;
 public insumoSelected;
@@ -35,6 +36,8 @@ constructor(
   ){}
 
   ngOnInit(){ 
+    var datePiper = new DatePipe(this.loteInsumoInsumo.fecha.timestamp);
+    this.loteInsumoInsumo.fecha = datePiper.transform(this.loteInsumoInsumo.fecha.timestamp, 'yyyy-MM-dd');
 
     this._EmpresaService.select().subscribe(
       response => {
@@ -115,8 +118,7 @@ constructor(
     let token = this._loginService.getToken();
 		this._rnaloteInsumosService.edit(this.loteInsumoInsumo,token).subscribe(
 			response => {
-        this.respuesta = response;
-        if(this.respuesta.status == 'success'){
+        if(response.status == 'success'){
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',

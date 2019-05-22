@@ -13,9 +13,8 @@ declare var $: any;
 })
 export class EditComponent {
   @Output() ready = new EventEmitter<any>();
-  @Input() cfgCasoInsumo: any = null;
+  @Input() tipoInsumo: any = null;
   public errorMessage;
-  public respuesta;
   public formNewValor: any=false;
   public modulos: any;
   public table: any;
@@ -23,12 +22,11 @@ export class EditComponent {
   public valores: any; 
   
   
-  public tipoCasoInsumos = [
-    { 'value': "Insumo", 'label': "Insumo" },
-    { 'value': "Sustrato", 'label': "Sustrato" }
+  public categorias = [
+    { 'value': "INSUMO", 'label': "INSUMO" },
+    { 'value': "SUSTRATO", 'label': "SUSTRATO" }
   ];
-  public tipoCasoInsumoSelected: any;
-  // public tipoIdentificacion: Array<any>
+  public categoriaSelected: any;
 
   constructor(
     private _ImoCfgTipoService: ImoCfgTipoService,
@@ -38,11 +36,15 @@ export class EditComponent {
   ) {}
 
   ngOnInit() {
+    let token = this._loginService.getToken();
+
+    this.categoriaSelected = this.tipoInsumo.categoria;
+
     this._ModuloService.select().subscribe(
       response => {
         this.modulos = response;
         setTimeout(() => {
-          this.moduloSelected = [this.cfgCasoInsumo.modulo.id];
+          this.moduloSelected = [this.tipoInsumo.modulo.id];
         });
       },
       error => {
@@ -54,12 +56,11 @@ export class EditComponent {
         }
       }
     );
-    let token = this._loginService.getToken();
-    this._ImoCfgValorService.showCasoInsumo(token,this.cfgCasoInsumo.id).subscribe(
+    this._ImoCfgValorService.show(this.tipoInsumo.id, token).subscribe(
       response => {
         this.valores = response.data;
         let timeoutId = setTimeout(() => {
-          this.iniciarTabla();
+          this.onInitTable();
         }, 100);
       },
       error => {
@@ -74,27 +75,24 @@ export class EditComponent {
    
   }
 
-
   onCancelar() {
-    if (this.table) {
-      this.table.destroy();
-    }
     this.ready.emit(true);
   }
+
   onEnviar() {
     let token = this._loginService.getToken();
-    this.cfgCasoInsumo.moduloId = this.moduloSelected;
-    this._ImoCfgTipoService.edit(this.cfgCasoInsumo, token).subscribe(
+    
+    this.tipoInsumo.idModulo = this.moduloSelected;
+    this.tipoInsumo.categoria = this.categoriaSelected;
+
+    this._ImoCfgTipoService.edit(this.tipoInsumo, token).subscribe(
       response => {
-        //console.log(response);
-        this.respuesta = response;
-        console.log(this.respuesta);
-        if (this.respuesta.status == 'success') {
+        if (response.code == 200) {
           this.ready.emit(true);
           swal({
-            title: 'Perfecto!',
-            text: 'El registro se ha modificado con exito',
-            type: 'success',
+            title: response.title,
+            text: response.message,
+            type: response.status,
             confirmButtonText: 'Aceptar'
           })
         }
@@ -110,21 +108,20 @@ export class EditComponent {
       });
   }
 
-  iniciarTabla() {
-    $('#dataTables-example-valor').DataTable({
+  onInitTable() {
+    this.table = $('#dataTables-example-valor').DataTable({
       responsive: true,
       pageLength: 8,
       sPaginationType: 'full_numbers',
       oLanguage: {
         oPaginate: {
-          sFirst: '<<',
-          sPrevious: '<',
-          sNext: '>',
-          sLast: '>>'
+          sFirst: '<i class="fa fa-step-backward"></i>',
+          sPrevious: '<i class="fa fa-chevron-left"></i>',
+          sNext: '<i class="fa fa-chevron-right"></i>',
+          sLast: '<i class="fa fa-step-forward"></i>'
         }
       }
     });
-    this.table = $('#dataTables-example-valor').DataTable();
   }
 
   onNew(){
@@ -135,5 +132,4 @@ export class EditComponent {
     this.formNewValor = false;
     this.ngOnInit();
   }
-
 }

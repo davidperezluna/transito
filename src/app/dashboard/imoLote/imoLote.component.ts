@@ -11,7 +11,6 @@ declare var $: any;
 export class ImoLoteComponent implements OnInit {
   public errorMessage;
 	public id;
-	public respuesta;
 	public loteInsumoSustratos;
 	public loteInsumoInsumos;
 	public formNew = false;
@@ -40,11 +39,12 @@ export class ImoLoteComponent implements OnInit {
 		this._LoteInsumoService.index().subscribe(
 				response => {
           this.loteInsumoSustratos = response.data.loteSustratos;
+          console.log(this.loteInsumoSustratos);
           this.loteInsumoInsumos = response.data.loteInsumos; 
+          console.log(this.loteInsumoInsumos);
           this.totalesTipo = response.data.totalesTipo; 
-          console.log(this.totalesTipo);
           let timeoutId = setTimeout(() => {  
-            this.iniciarTabla();
+            this.onInitTable();
             swal.close();
           }, 100); 
 				}, 
@@ -59,8 +59,8 @@ export class ImoLoteComponent implements OnInit {
       );
   }
   
-  iniciarTabla(){
-    $('#dataTables-example-Sustratos').DataTable({
+  onInitTable(){
+    this.table = $('#dataTables-example-Sustratos').DataTable({
       responsive: true,
       pageLength: 8,
       sPaginationType: 'full_numbers',
@@ -73,9 +73,7 @@ export class ImoLoteComponent implements OnInit {
         }
       }
    });
-   this.table = $('#dataTables-example').DataTable();
   }
-
  
   onNew(){
     this.formNew = true;
@@ -114,7 +112,6 @@ export class ImoLoteComponent implements OnInit {
                       confirmButtonColor: '#15d4be',
                     })
                   this.table.destroy();
-                  this.respuesta= response;
                   this.ngOnInit();
               }, 
             error => {

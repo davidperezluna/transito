@@ -45,16 +45,16 @@
                     </thead>
                     <tbody>
                       <tr class="odd" *ngFor="let loteInsumoSustrato of loteInsumoSustratos; let i = index">
-                        <td >{{loteInsumoSustrato.numeroActa}}</td>
-                        <td >{{loteInsumoSustrato.empresa.nombre}}</td>
-                        <td >{{loteInsumoSustrato.sedeOperativa.nombre}}</td>
-                        <td >{{loteInsumoSustrato.tipoInsumo.nombre}}</td>
-                        <td >{{loteInsumoSustrato.rangoInicio}}</td>
-                        <td >{{loteInsumoSustrato.rangoFin}}</td>
-                        <td >{{loteInsumoSustrato.cantidad}}</td>
-                        <td >{{loteInsumoSustrato.referencia}}</td>
-                        <td >{{loteInsumoSustrato.fecha}}</td>
-                        <td >{{loteInsumoSustrato.estado}}</td>
+                        <td >{{ loteInsumoSustrato.numeroActa }}</td>
+                        <td >{{ loteInsumoSustrato.empresa.nombre }}</td>
+                        <td >{{ loteInsumoSustrato.sedeOperativa.nombre }}</td>
+                        <td >{{ loteInsumoSustrato.tipoInsumo.nombre }}</td>
+                        <td >{{ loteInsumoSustrato.rangoInicio }}</td>
+                        <td >{{ loteInsumoSustrato.rangoFin }}</td>
+                        <td >{{ loteInsumoSustrato.cantidad }}</td>
+                        <td >{{ loteInsumoSustrato.referencia }}</td>
+                        <td >{{ (loteInsumoSustrato.fecha.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td>
+                        <td >{{ loteInsumoSustrato.estado }}</td>
                         <td>
                           <div class="btn-group">
                             <button (click)="editRnaLoteInsumoSustrato(loteInsumoSustrato)" class="btn btn-xs btn-primary" type="button">
@@ -86,12 +86,12 @@
                         </thead>
                         <tbody>
                           <tr class="odd" *ngFor="let loteInsumoInsumo of loteInsumoInsumos; let i = index">
-                            <td >{{loteInsumoInsumo.numeroActa}}</td>
-                            <td >{{loteInsumoInsumo.empresa.nombre}}</td>
-                            <td >{{loteInsumoInsumo.tipoInsumo.nombre}}</td>
-                            <td >{{loteInsumoInsumo.cantidad}}</td>
-                            <td >{{loteInsumoInsumo.referencia}}</td>
-                            <td >{{loteInsumoInsumo.fecha}}</td>
+                            <td >{{ loteInsumoInsumo.numeroActa }}</td>
+                            <td >{{ loteInsumoInsumo.empresa.nombre }}</td>
+                            <td >{{ loteInsumoInsumo.tipoInsumo.nombre }}</td>
+                            <td >{{ loteInsumoInsumo.cantidad }}</td>
+                            <td >{{ loteInsumoInsumo.referencia }}</td>
+                            <td >{{ (loteInsumoInsumo.fecha.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td>
                             <td>
                               <button (click)="editRnaLoteInsumoInsumo(loteInsumoInsumo)" class="btn btn-xs btn-primary" type="button">
                                   <i class="fa fa-pencil"></i>

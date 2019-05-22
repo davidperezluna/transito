@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { ImoCfgValor } from './imoCfgValor.modelo';
+import { ImoCfgValor } from './value.modelo';
 import { ImoCfgValorService } from '../../../services/imoCfgValor.service';
 import { LoginService } from '../../../services/login.service';
 import { DatePipe  } from '@angular/common';
@@ -7,19 +7,20 @@ import { DatePipe  } from '@angular/common';
 import swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-new-valor',
-  templateUrl: './newValor.component.html',
+  selector: 'app-value',
+  templateUrl: './value.component.html',
   providers: [DatePipe]
 })
-export class NewValorComponent implements OnInit {
+export class ValueComponent implements OnInit {
   @Output() readyValor = new EventEmitter<any>();
-  @Input() cfgCasoInsumo: any = null;
+  @Input() tipoInsumo: any = null;
   public errorMessage;
-  public imoCfgValor: ImoCfgValor;
-  public respuesta;
+  public valor: ImoCfgValor;
+
   public modulos: any;
   public moduloSelected: any;
   public isFechaEnviar: boolean = false;
+
   public date:any;
   public tipoCasoInsumos = [
     { 'value': "Insumo", 'label': "Insumo" },
@@ -32,33 +33,34 @@ export class NewValorComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.imoCfgValor = new ImoCfgValor(null, null,null);
+    this.valor = new ImoCfgValor(null, null,null);
   }
   onCancelar() {
     this.readyValor.emit(true);
   }
   onEnviar() {
     let token = this._loginService.getToken();
-    this.imoCfgValor.idCasoInsumo = this.cfgCasoInsumo.id;     
-    this._ImoCfgValorService.register(this.imoCfgValor, token).subscribe(
-      response => {
-        this.respuesta = response;
-        
-        if (this.respuesta.status == 'success') {
+
+    this.valor.idTipoInsumo = this.tipoInsumo.id;  
+
+    this._ImoCfgValorService.register(this.valor, token).subscribe(
+      response => {       
+        if (response.code == 200) {
           this.readyValor.emit(true);
+
           swal({
-            title: 'Perfecto!',
-            text: 'Registro exitoso!',
-            type: 'success',
+            title: response.title,
+            text: response.message,
+            type: response.status,
             confirmButtonText: 'Aceptar'
-          })
+          });
         } else {
           swal({
-            title: 'Error!',
-            text: 'El Caso Insumo ya se encuentra registrado',
-            type: 'error',
+            title: response.title,
+            text: response.message,
+            type: response.status,
             confirmButtonText: 'Aceptar'
-          })
+          });
         }
         error => {
           this.errorMessage = <any>error;
@@ -74,7 +76,7 @@ export class NewValorComponent implements OnInit {
     this.date = new Date();
     var datePiper = new DatePipe(this.date);
     this.date = datePiper.transform(this.date,'yyyy-MM-dd');
-    if (this.imoCfgValor.fecha <= this.date) {
+    if (this.valor.fecha <= this.date) {
       swal({
         title: 'Error!',
         text: 'La fecha no puede ser menor o igual a la actual!',
@@ -84,7 +86,5 @@ export class NewValorComponent implements OnInit {
     }else{
       this.isFechaEnviar = true;   
     }
-
   }
-
 }

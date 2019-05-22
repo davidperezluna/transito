@@ -1,8 +1,8 @@
 export class ImoCfgValor{
 	constructor(
 		public fecha:string,
-		public valor:string,
-		public idCasoInsumo:string,
+		public valorUnitario:string,
+		public idTipoInsumo:string,
 		
 	){}
 }

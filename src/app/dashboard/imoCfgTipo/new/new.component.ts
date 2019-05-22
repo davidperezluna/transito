@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { CfgCasoInsumo } from '../imoCfgTipo.modelo';
+import { TipoInsumo } from '../imoCfgTipo.modelo';
 import { ImoCfgTipoService } from '../../../services/imoCfgTipo.service';
 import { LoginService } from '../../../services/login.service';
 import { CfgModuloService } from '../../../services/cfgModulo.service';
@@ -11,9 +11,8 @@ import swal from 'sweetalert2';
 })
 export class NewComponent implements OnInit {
   @Output() ready = new EventEmitter<any>();
-  public cfgCasoInsumo: CfgCasoInsumo;
+  public tipoInsumo: TipoInsumo;
   public errorMessage;
-  public respuesta;
   public modulos: any;
 
   public categorias = [
@@ -28,7 +27,7 @@ export class NewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.cfgCasoInsumo = new CfgCasoInsumo(null, null, null, null, null, null);
+    this.tipoInsumo = new TipoInsumo(null, null, null, null, null, null);
 
     this._CfgModuloService.select().subscribe(
       response => {
@@ -51,25 +50,23 @@ export class NewComponent implements OnInit {
   onEnviar() {
     let token = this._loginService.getToken();
     
-    this._TipoInsumoService.register(this.cfgCasoInsumo, token).subscribe(
+    this._TipoInsumoService.register(this.tipoInsumo, token).subscribe(
       response => {
-        this.respuesta = response;
-        
-        if (this.respuesta.status == 'success') {
+        if (response.code == 200) {
           this.ready.emit(true);
           swal({
-            title: 'Perfecto!',
-            text: 'Registro exitoso!',
-            type: 'success',
+            title: response.title,
+            text: response.message,
+            type: response.status,
             confirmButtonText: 'Aceptar'
-          })
+          });
         } else {
           swal({
-            title: 'Error!',
-            text: 'El Caso Insumo ya se encuentra registrado',
-            type: 'error',
+            title: response.title,
+            text: response.message,
+            type: response.status,
             confirmButtonText: 'Aceptar'
-          })
+          });
         }
         error => {
           this.errorMessage = <any>error;
@@ -79,8 +76,6 @@ export class NewComponent implements OnInit {
             alert("Error en la petición");
           }
         }
-
       });
   }
-
 }
