@@ -139,6 +139,7 @@ export class NewRncSustratoComponent implements OnInit {
                 if (response.code == 200) {
                     if (response.data.ciudadano) {
                         this.ciudadano = response.data.ciudadano;
+                        this.datos.idCiudadano = this.ciudadano.id;
 
                         swal({
                             title: 'Perfecto!',
@@ -149,6 +150,7 @@ export class NewRncSustratoComponent implements OnInit {
                     }
                 } else {
                     this.ciudadano = null;
+                    this.datos.idCiudadano = null;
 
                     swal({
                         title: 'Error!',

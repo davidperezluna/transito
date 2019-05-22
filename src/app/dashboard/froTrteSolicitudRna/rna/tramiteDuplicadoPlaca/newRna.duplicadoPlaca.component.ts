@@ -12,8 +12,8 @@ import swal from 'sweetalert2';
 })
 export class NewRnaDuplicadoPlacaComponent implements OnInit {
     @Output() onReadyTramite = new EventEmitter<any>();
-    
     @Input() tramiteFactura: any = null;
+    @Input() vehiculo: any = null;
     @Input() funcionario: any = null;
     @Input() tramitesRealizados: any = null;
     public errorMessage; 
@@ -28,6 +28,7 @@ export class NewRnaDuplicadoPlacaComponent implements OnInit {
         'observacion': null,
         'motivo': null,
         'cantidad': null,
+        'idVehiculo': null,
         'idFuncionario': null,
         'idTramiteFactura': null,
     };
@@ -70,9 +71,10 @@ export class NewRnaDuplicadoPlacaComponent implements OnInit {
     onEnviar() {      
         this.datos.motivo = this.motivoSelected;
         this.datos.idTramiteFactura = this.tramiteFactura.id;
+        this.datos.idVehiculo = this.vehiculo.id;
 
-        let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero +
-                '<br><b>Motivo: </b>' + this.motivoSelected;
+        let resumen = "No. factura: " + this.tramiteFactura.factura.numero +
+                ',Motivo: ' + this.motivoSelected;
 
         this.realizado = true;
 

@@ -18,7 +18,6 @@ import swal from 'sweetalert2';
 })
 export class NewRnaTramiteLevantamientoAlertaPrendaComponent implements OnInit {
     @Output() onReadyTramite = new EventEmitter<any>();
-    
     @Input() vehiculo: any = null;
     @Input() tramiteFactura: any = null;
     @Input() funcionario: any = null;
@@ -58,6 +57,7 @@ export class NewRnaTramiteLevantamientoAlertaPrendaComponent implements OnInit {
     public datos = {
         'documentacion': true,
         'observacion': null,
+        'campos': null,
         'acreedores': [],
         'idAcreedor': null,
         'idFuncionario': null,
@@ -158,10 +158,11 @@ export class NewRnaTramiteLevantamientoAlertaPrendaComponent implements OnInit {
     }
       
     onEnviar() {
+        this.datos.campos = ['eliminarPignorado'];
         this.datos.idVehiculo = this.vehiculo.id;
         this.datos.idTramiteFactura = this.tramiteFactura.id;
 
-        let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero;
+        let resumen = "No. factura: " + this.tramiteFactura.factura.numero;
 
         this.realizado = true;
         

@@ -134,8 +134,10 @@ export class NewRnaInsumoComponent implements OnInit {
                 if(response.status == 'success'){
                     if (response.data.ciudadano) {
                         this.ciudadano = response.data.ciudadano;
+                        this.datos.idCiudadano = this.ciudadano.id;
                     }else{
                         this.ciudadano = null;
+                        this.datos.idCiudadano = null;
                     }
                 }else{
                     this.ciudadano = null;

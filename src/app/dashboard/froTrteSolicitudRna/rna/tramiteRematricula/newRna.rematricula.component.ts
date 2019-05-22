@@ -15,11 +15,10 @@ import swal from 'sweetalert2';
 })
 export class NewRnaRematriculaComponent implements OnInit {
     @Output() onReadyTramite = new EventEmitter<any>();
-    
+    @Input() vehiculo: any = null;
     @Input() tramiteFactura: any = null;
     @Input() funcionario: any = null;
     @Input() tramitesRealizados: any = null;
-    @Input() vehiculo: any = null;
     public errorMessage; 
     
     public realizado: any = false;

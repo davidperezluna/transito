@@ -6,7 +6,7 @@ import  "rxjs/add/operator/map";
 
 @Injectable()
 export class FroFacturaService {
-	private url = environment.apiUrl + "financiero/froFactura";
+	private url = environment.apiUrl + "financiero/frofactura";
 	public identity;
 	public token;
 
@@ -94,5 +94,12 @@ export class FroFacturaService {
 		let params = "data=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/new/amortizacion", params, { headers: headers }).map(res => res.json());
+	}
+
+	complete(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = "data=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/complete", params, { headers: headers }).map(res => res.json());
 	}
 }

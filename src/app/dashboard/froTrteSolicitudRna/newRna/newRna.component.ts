@@ -350,6 +350,39 @@ export class NewRnaComponent implements OnInit {
     }
   }
 
+  onComplete() {
+    let token = this._LoginService.getToken();
+
+    this._FacturaService.complete({ 'id': this.factura.id }, token).subscribe(
+			response => {
+        if(response.code == 200){
+          this.factura = response.data;
+
+          swal({
+            title: response.title,
+            text: response.message,
+            type: response.status,
+            confirmButtonText: 'Aceptar'
+          });
+        }else{
+          swal({
+            title: response.title,
+            text: response.message,
+            type: response.status,
+            confirmButtonText: 'Aceptar'
+          });
+        }
+			error => {
+					this.errorMessage = <any>error;
+					if(this.errorMessage != null){
+						console.log(this.errorMessage);
+						alert("Error en la petición");
+					}
+				}
+      }
+    );
+  }
+
   onChangedTramiteFactura(idTramiteFactura) {
     swal({
       title: 'Cargando trámite!',
@@ -388,6 +421,44 @@ export class NewRnaComponent implements OnInit {
         }
       );     
     }
+  }
+
+  onReadyTramite(datos:any){
+    if (datos.documentacion) {
+      this.tramitesRealizados.push(
+        {
+          'foraneas': datos.foraneas,
+          'resumen': datos.resumen,
+          'idTramiteFactura': datos.idTramiteFactura,
+        }
+      );
+    }else{
+      this.documentacionPendiente.push(
+        {
+          'documentacion': datos.documentacion,
+          'observacion': datos.observacion,
+          'idTramiteFactura': datos.idTramiteFactura,
+        }
+      );
+    }
+
+    swal({
+      title: 'Perfecto!',
+      text: 'Trámite realizado con exito.',
+      type: 'success',
+      confirmButtonText: 'Aceptar'
+    });
+  }
+
+  onReadyInsumo(datos:any){    
+    this.tramiteSolicitud.insumoEntregado = datos;
+
+    swal({
+      title: 'Perfecto!',
+      text: 'Insumo asignado con exito.',
+      type: 'success',
+      confirmButtonText: 'Aceptar'
+    });
   }
 
   onEnviar() {
@@ -435,48 +506,6 @@ export class NewRnaComponent implements OnInit {
 				}
       }
     );
-  }
-
-  onReadyTramite(datos:any){
-    if (datos.documentacion) {
-      this.tramitesRealizados.push(
-        {
-          'foraneas': datos.foraneas,
-          'resumen': datos.resumen,
-          'idTramiteFactura': datos.idTramiteFactura,
-        }
-      );
-    }else{
-      this.documentacionPendiente.push(
-        {
-          'documentacion': datos.documentacion,
-          'observacion': datos.observacion,
-          'idTramiteFactura': datos.idTramiteFactura,
-        }
-      );
-    }
-
-    swal({
-      title: 'Perfecto!',
-      text: 'Trámite realizado con exito.',
-      type: 'success',
-      confirmButtonText: 'Aceptar'
-    });
-  }
-
-  onReadyInsumo(datos:any){    
-    this.tramiteSolicitud.insumoEntregado = datos;
-
-    swal({
-      title: 'Perfecto!',
-      text: 'Insumo asignado con exito.',
-      type: 'success',
-      confirmButtonText: 'Aceptar'
-    });
-  }
-
-  cancelarTramite() {
-    this.idTramiteFactura = null;
   }
 
   finalizarSolicitud() {

@@ -16,11 +16,12 @@
 <div class="row" *ngIf="!realizado"><!-- .row -->
     <div class="col-xs-12 col-lg-12"><!-- .col -->
         <div class="card">
-            <div class="card-body">
+            <div class="card-header">
                 <b class="text-primary">Registrar incripción de alerta o prenda</b>
                 <br>
                 <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
-                <hr>
+            </div>
+            <div class="card-body">
                 <div class="container">
                     <div class="form-group">
                         <div class="row">
@@ -89,16 +90,14 @@
                                 <label>Fecha expedición</label>
                                 <input class="form-control" [(ngModel)]="datos.fechaExpedicion" name="fechaExpedicion" type="date" required />
                             </div>
-                        </div><!-- .row -->
 
-                        <div class="row" *ngIf="datos.idTipoAlerta"><!-- .row -->
-                            <div class="col-xs-12 col-lg-12">
+                            <div class="col-xs-12 col-lg-6" *ngIf="datos.idTipoAlerta">
                                 <label>Grados de alerta <b class="text-danger">*</b></label>
                                 <ng-select [multiple]="false" [options]="gradosAlerta" [(ngModel)]="datos.gradoAlerta" required name="gradoAlerta">
                                 </ng-select>
                             </div>
 
-                            <div class="ol-xs-12 col-lg-12"><!-- .col -->
+                            <div class="col-xs-12 col-lg-12"><!-- .col -->
                                 <h6 class="text-center">
                                     <b class="text-uppercase">Buscar prendario</b>
                                 </h6>
@@ -129,7 +128,7 @@
                                 <table class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th class="text-center">
+                                            <th colspan="2" class="text-center">
                                                 <b class="text-uppercase">Prendario</b>
                                             </th>
                                         </tr>

@@ -13,6 +13,7 @@ import swal from 'sweetalert2';
 export class NewRnaDuplicadoLicenciaComponent implements OnInit {
     @Output() onReadyTramite = new EventEmitter<any>();
     @Input() tramiteFactura: any = null;
+    @Input() vehiculo: any = null;
     @Input() funcionario: any = null;
     @Input() tramitesRealizados: any = null;
     @Input() idPropietario: any = null;
@@ -27,6 +28,7 @@ export class NewRnaDuplicadoLicenciaComponent implements OnInit {
         'motivo': null,
         'numeroLicenciaActual': null,
         'nuevaLicencia': null,
+        'idVehiculo': null,
         'idFuncionario': null,
         'idTramiteFactura': null,
     };
@@ -95,6 +97,7 @@ export class NewRnaDuplicadoLicenciaComponent implements OnInit {
     
     onEnviar() {        
         this.datos.idTramiteFactura = this.tramiteFactura.id;
+        this.datos.idVehiculo = this.vehiculo.id;
 
         let resumen = "Motivo "+ this.datos.motivo;
 

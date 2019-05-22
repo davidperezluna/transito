@@ -15,7 +15,6 @@ import swal from 'sweetalert2';
 })
 export class NewRnaCambioMotorComponent implements OnInit {
     @Output() onReadyTramite = new EventEmitter<any>();
-    
     @Input() vehiculo: any = null;
     @Input() tramitesFactura: any = null;
     @Input() tramiteFactura: any = null;

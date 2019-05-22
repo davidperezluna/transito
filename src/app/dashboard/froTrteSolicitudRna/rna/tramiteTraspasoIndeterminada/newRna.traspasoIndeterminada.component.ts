@@ -139,7 +139,6 @@ export class NewRnaTraspasoIndeterminadaComponent implements OnInit {
               if (response.code == 200) {
                 if (response.data.ciudadano) {
                   this.datos.idCiudadano = response.data.ciudadano.id;
-
                   let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero;
 
                   this.realizado = true;
