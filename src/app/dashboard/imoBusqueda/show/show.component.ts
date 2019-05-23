@@ -52,6 +52,9 @@ constructor(
           extend: 'pdfHtml5',
           pageSize: 'LEGAL',
           filename: 'ActaEntrega',
+          exportOptions: {
+            columns: [0, 1, 2, 3]
+          }
         }
       ],
       oLanguage: {
@@ -97,9 +100,9 @@ constructor(
         this._ImoInsumoService.delete(token,id).subscribe(
             response => {
                 swal({
-                      title: 'Modificado!',
-                      text:'Registro modificado correctamente.',
-                      type:'success',
+                      title: 'Perfecto!',
+                      text: response.message,
+                      type: 'success',
                       confirmButtonColor: '#15d4be',
                     })
 

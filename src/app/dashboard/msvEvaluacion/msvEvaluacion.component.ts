@@ -10,7 +10,6 @@ import { MsvParametroService } from '../../services/msvParametro.service';
 import { MsvCalificacionService } from '../../services/msvCalificacion.service';
 import { LoginService } from '../../services/login.service';
 import { environment } from 'environments/environment';
-import { DecimalPipe } from '@angular/common';
 
 import swal from 'sweetalert2';
 declare var $: any;

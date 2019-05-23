@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { ImoLote } from "../imoLote/imoLote.modelo";
 import { CfgOrganismoTransitoService } from '../../services/cfgOrganismoTransito.service';
 import { ImoInsumoService } from '../../services/imoInsumo.service';
 import { ImoLoteService } from '../../services/imoLote.service';
@@ -30,9 +31,8 @@ export class ImoBusquedaComponent implements OnInit {
     'idOrganismoTransito': null,
     'tipo': null,
   }
-
   public loteInsumos:any;
-  public loteInsumo:any;
+  public loteInsumo: ImoLote;
   public insumos:any;
 
   constructor(
@@ -114,14 +114,19 @@ export class ImoBusquedaComponent implements OnInit {
     );
   }
 
-  onShow(e){
+  onShow(loteInsumo: any){
     let token = this._LoginService.getToken();
+    
+    this.loteInsumo = loteInsumo;
 
-    this._ImoInsumoService.showLote(e, token).subscribe(
+    this._ImoInsumoService.showLote(loteInsumo.id, token).subscribe(
 			response => {
         if(response.status == 'success'){
           this.insumos = response.data;
-          this.formShow = true;
+          this.formShow = false;
+          let timeoutId = setTimeout(() => {
+            this.formShow = true;
+          }, 100);
         }
         error => {
           this.errorMessage = <any>error;

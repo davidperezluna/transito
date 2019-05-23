@@ -22,13 +22,13 @@ export class ImoActaComponent implements OnInit {
   ]
 
   public data = {
-    'organismoTransito':null,
     'disponibles':false,
     'anulado':false,
     'asignado':false, 
     'fechaInicio':false,
     'fechaFin':false,
     'tipoActa':null,
+    'idOrganismoTransito':null,
   };
 
   constructor(
