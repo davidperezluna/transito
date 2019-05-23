@@ -65,6 +65,20 @@ export class NewComponent implements OnInit {
 
   ngOnInit() {
     this.inscripcionLimitacion = new VhloRnaTramiteInscripcionLimitacion(null, null, null, null, null, null, null, null, null, null, null, null, null);
+
+    this._TipoIdentificacionService.select().subscribe(
+      response => {
+        this.tiposIdentificacion = response;
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert('Error en la petición');
+        }
+      }
+    );
   }
 
   onCancelar() {
@@ -102,20 +116,6 @@ export class NewComponent implements OnInit {
               this._CausalLimitacionService.select().subscribe(
                 response => {
                   this.causalesLimitacion = response;
-                },
-                error => {
-                  this.errorMessage = <any>error;
-          
-                  if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert('Error en la petición');
-                  }
-                }
-              );
-          
-              this._TipoIdentificacionService.select().subscribe(
-                response => {
-                  this.tiposIdentificacion = response;
                 },
                 error => {
                   this.errorMessage = <any>error;

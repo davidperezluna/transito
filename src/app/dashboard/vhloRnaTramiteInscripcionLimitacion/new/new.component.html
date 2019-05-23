@@ -12,7 +12,7 @@
                 <div class="form-group">
                     <div class="row"><!-- .row -->
                         <div class="col-xs-12 col-lg-12">
-                            <form #formSearchDemandado="ngForm">
+                            <form #formSearch="ngForm">
                                 <div class="row">
                                     <div class="col-xs-12 col-lg-12">
                                         <h6 class="text-center"><b class="text-uppercase">Buscar demandado</b></h6>
@@ -29,7 +29,7 @@
                                         <div class="input-group">
                                             <input type="number" class="form-control" [(ngModel)]="identificacionDemandado" name="identificacionDemandado" required />
                                             <span class="input-group-btn">
-                                                <button (click)="onSearchDemandado()" [disabled]="formSearchDemandado.invalid" class="btn btn-default" type="button">
+                                                <button (click)="onSearchDemandado()" [disabled]="!idTipoIdentificacionDemandado && identificacionDemandado" class="btn btn-default" type="button">
                                                     <i class="fa fa-search"></i>
                                                 </button>
                                             </span>

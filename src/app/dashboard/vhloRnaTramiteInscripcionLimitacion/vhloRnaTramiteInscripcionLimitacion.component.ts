@@ -31,10 +31,12 @@ export class VhloRnaTramiteInscripcionLimitacionComponent implements OnInit {
 
   ngOnInit() {
     this.onInitForms();
+
+    this.formSearch = true;
   }
 
   onInitForms(){
-    this.formSearch = true;
+    this.formSearch = false;
     this.formIndex = false;
     this.formNew = false;
   }
