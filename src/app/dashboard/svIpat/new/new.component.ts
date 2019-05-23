@@ -84,6 +84,7 @@ export class NewComponent implements OnInit {
   public consecutivo: any = null;
 
   public ipatEncontrado: any = null;
+  public ipatCreado: any = null;
 
   public ipats = false;
   public placasVehiculosIpat: any;
@@ -1079,7 +1080,8 @@ export class NewComponent implements OnInit {
     this._SvIpatService.register(this.ipat, token).subscribe(
       response => {
         if (response.status == 'success') {
-          this.ready.emit(true);
+          /* this.ready.emit(true); */
+          this.ipatCreado = response.data;
           swal({
             title: 'Perfecto!',
             text: response.message,
@@ -1087,6 +1089,7 @@ export class NewComponent implements OnInit {
             confirmButtonText: 'Aceptar'
           });
         } else {
+          this.ipatCreado = null;
           swal({
             title: 'Error!',
             text: response.message,
@@ -2031,5 +2034,9 @@ export class NewComponent implements OnInit {
 
   imprimirFormatos() {
     alert("formatos policia judicial");
+  }
+
+  onShow(ipatCreado: any) {
+    this.ipatCreado = ipatCreado;
   }
 }
