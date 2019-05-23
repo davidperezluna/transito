@@ -45,18 +45,6 @@ constructor(
       responsive: true,
       pageLength: 8,
       sPaginationType: 'full_numbers',
-      dom: 'Bfrtip',
-      buttons: [
-        {
-          title: 'Acta Entrega Nro. 1',
-          extend: 'pdfHtml5',
-          pageSize: 'LEGAL',
-          filename: 'ActaEntrega',
-          exportOptions: {
-            columns: [0, 1, 2, 3]
-          }
-        }
-      ],
       oLanguage: {
         oPaginate: {
           sFirst: '<i class="fa fa-step-backward"></i>',
