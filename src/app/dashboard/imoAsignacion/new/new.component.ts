@@ -230,23 +230,13 @@ constructor(
   }
 
   onAsignarLote(lote){
-    console.log(lote);
-    
-    let validacion = false;
+
     let asignado = false;
     //Verifica que el arreglo de lotes tenga datos registrados
     if ( this.lotesSeleccionados.length > 0) {
       //Recorre todos los lotes seleccionados
       this.lotesSeleccionados.forEach(loteAsignado => {
-          loteAsignado = Object.keys(loteAsignado).map(function(key) {
-              return loteAsignado[key];
-          });
-          console.log(loteAsignado);
-          
-          //Valida si el lote seleccionado actual ya se encuentra en el arreglo general de lotes
-          validacion = loteAsignado.includes(lote.id, 0);
-          //Si la validación es TRUE cambia de estado la bandera de asignado
-          if (validacion) {
+        if (lote.id == loteAsignado['idLote']){
             asignado = true;
           }
       });
