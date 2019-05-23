@@ -230,7 +230,6 @@ constructor(
   }
 
   onAsignarLote(lote){
-    //let isLote = this.lotesSeleccionados.filter(h => h !== lote)
     console.log(lote);
     
     let validacion = false;
@@ -242,6 +241,8 @@ constructor(
           loteAsignado = Object.keys(loteAsignado).map(function(key) {
               return loteAsignado[key];
           });
+          console.log(loteAsignado);
+          
           //Valida si el lote seleccionado actual ya se encuentra en el arreglo general de lotes
           validacion = loteAsignado.includes(lote.id, 0);
           //Si la validación es TRUE cambia de estado la bandera de asignado
