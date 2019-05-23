@@ -25,16 +25,11 @@ export class NewRnaTraspasoComponent implements OnInit {
     public realizado: any = false;
     public tramiteSolicitud: any  = null;
 
-    public retenciones: any;
     public tiposIdentificacion: any;
     public identificacionOld: any;
     public identificacionNew: any;
     public tipoIdentificacionSelectedOld: any = null;
     public tipoIdentificacionSelectedNew: any = null;
-
-    public ciudadano: any = null;
-    public empresa: any = null;
-    public propietario: any = null;
 
     public tiposPropiedad = [
         {'value':1,'label':"Leasing"},
@@ -48,10 +43,9 @@ export class NewRnaTraspasoComponent implements OnInit {
         'permiso': false,
         'tipoPropiedad': null,
         'retenciones': null,
+        'propietarios': [],
         'idFuncionario': null,
         'idVehiculo': null,
-        'idCiudadano': null,
-        'idEmpresa': null,
         'idTramiteFactura': null,
     };
 
@@ -117,12 +111,10 @@ export class NewRnaTraspasoComponent implements OnInit {
             this._RetefuenteService.searchByFactura({ 'idfactura': this.tramiteFactura.factura.id }, token).subscribe(
                 response => {
                     if (response.code == 200) {
-                        this.retenciones = response.data;
-                        this.datos.retenciones = this.retenciones;
+                        this.datos.retenciones = response.data;
 
                         swal.close();
                     }else{
-                        this.retenciones = null;
                         this.datos.retenciones = null;
 
                         swal({
@@ -165,22 +157,38 @@ export class NewRnaTraspasoComponent implements OnInit {
             response => {
                 if (response.code == 200) {
                     if (response.data.ciudadano) {
-                        this.ciudadano = response.data.ciudadano;
-                        this.datos.idCiudadano = this.ciudadano.id;
-                        this.empresa = null;
-                        this.datos.idEmpresa = null;
+                        this.datos.propietarios.push(
+                            {
+                                'id': response.data.ciudadano.id,
+                                'identificacion': response.data.ciudadano.identificacion,
+                                'nombre': response.data.ciudadano.primerNombre +" "+ response.data.ciudadano.segundoNombre,
+                                'permiso': this.datos.permiso,
+                                'tipo': 'CIUDADANO',
+                            }   
+                        );
+                
+                        swal({
+                            title: 'Perfecto!',
+                            text: 'Ciudadano agregado con éxito.',
+                            type: 'success',
+                            confirmButtonText: 'Aceptar'
+                        });
+                        
                     } else if (response.data.empresa){
-                        this.empresa = response.data.empresa;
-                        this.datos.idEmpresa = this.empresa.id;
-                        this.ciudadano = null;
-                        this.datos.idCiudadano = null;
+                        this.datos.propietarios.push(
+                            {
+                                'id': response.data.empresa.id,
+                                'identificacion': response.data.empresa.identificacion,
+                                'nombre': response.data.empresa.nombre,
+                                'permiso': this.datos.permiso,
+                                'tipo': 'EMPRESA',
+                            }   
+                        );
+                       
                     }
 
                     swal.close();
                 } else {
-                    this.datos.idCiudadano = null;
-                    this.datos.idEmpresa = null;
-
                     swal({
                         title: 'Error!',
                         text: response.message,
@@ -199,6 +207,10 @@ export class NewRnaTraspasoComponent implements OnInit {
         );
     }
 
+    onDeletePropietario(propietario:any): void {
+        this.datos.propietarios =  this.datos.propietarios.filter(h => h !== propietario);
+    }
+
     goEmpresa(){
         this.router.navigate(['/dashboard/empresa']);
     }
@@ -208,23 +220,10 @@ export class NewRnaTraspasoComponent implements OnInit {
         this.datos.idVehiculo = this.vehiculo.id;
         this.datos.idTramiteFactura = this.tramiteFactura.id;
 
-        let propietarioActual = null;
-        if (this.propietario.ciudadano) {
-            propietarioActual = this.propietario.ciudadano.primerNombre + ' '+ this.propietario.ciudadano.primerApellido;
-        }else if (this.propietario.empresa) {
-            propietarioActual = this.propietario.empresa.nombre;
-        }
-
-        let propietarioNuevo = null;
-        if (this.ciudadano) {
-            propietarioNuevo = this.ciudadano.primerNombre + ' '+ this.ciudadano.primerApellido;
-        }else if (this.empresa) {
-            propietarioNuevo = this.empresa.nombre;
-        }
 
         let resumen = "No. factura: " + this.tramiteFactura.factura.numero +
-            ", Traspaso de " + propietarioActual +
-            "a " + propietarioNuevo;
+            ", Traspaso de " + this.datos.retenciones +
+            "a " + this.datos.propietarios;
 
         this.realizado = true;
                     
@@ -240,29 +239,6 @@ export class NewRnaTraspasoComponent implements OnInit {
 
         /*this._TramiteSolicitudService.validations(this.datos, token).subscribe(
             response => {
-              if (response.code == 200) {
-                
-
-                this._PropietarioService.update(this.datos, token).subscribe(
-                    response => {
-                    },
-                    error => {
-                        this.errorMessage = <any>error;
-
-                        if (this.errorMessage != null) {
-                            console.log(this.errorMessage);
-                            alert('Error en la petición');
-                        }
-                    }
-                );
-              }else{
-                swal({
-                  title: 'Error!',
-                  text: response.message,
-                  type: 'error',
-                  confirmButtonText: 'Aceptar'
-                });
-              }
             },
             error => {
                 this.errorMessage = <any>error;

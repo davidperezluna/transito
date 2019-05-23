@@ -48,174 +48,110 @@
                             <ng-select [multiple]="false" [options]="tiposPropiedad" [(ngModel)]="datos.tipoPropiedad" name="tipoPropiedad" required>
                             </ng-select>
                         </div>
+
+                        <div class="col-xs-12 col-lg-12">
+                            <h6 class="text-center">
+                                <b class="text-uppercase">Propietarios que realizarán el traspaso</b>
+                            </h6>
+                        </div>
+
+                        <!-- retenciones -->
+                        <div class="row" *ngIf="datos.retenciones.length > 0">
+                            <table class="table table-bordered table-striped">
+                                <tbody>
+                                    <tr *ngFor="let retencion of datos.retenciones; let i = index">
+                                        <td *ngIf="retencion.propietario.ciudadano">
+                                            <b>Identificación:</b>
+                                            <br>
+                                            {{  retencion.propietario.ciudadano.identificacion }}
+                                            <br> 
+                                            <b>Nombre y apellido:</b>
+                                            <br>
+                                            {{ retencion.propietario.ciudadano.primerNombre }} {{ retencion.propietario.ciudadano.primerApellido }}
+                                        </td>
+                                        <td *ngIf="retencion.empresa.propietario">
+                                            <b>Identificación (NIT):</b>
+                                            <br>
+                                            {{ retencion.empresa.propietario.nit }}
+                                            <br>
+                                            <b>Nombre:</b>
+                                            <br>
+                                            {{ retencion.empresa.propietario.nombre }}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
 
-                    <div class="form-group" *ngIf="datos.tipoPropiedad"><!-- .form-group -->
-                        <div class="row">
-                            <div class="col-xs-12 col-lg-12">
-                                <h6 class="text-center">
-                                    <b class="text-uppercase">Buscar propietario actual</b>
-                                </h6>
+                    <div class="row" *ngIf="datos.tipoPropiedad">
+                        <div class="col-xs-12 col-lg-12">
+                            <h6 class="text-center">
+                                <b class="text-uppercase">Buscar propietarios nuevos</b>
+                            </h6>
+                        </div>
+
+                        <div class="col-xs-12 col-lg-12">
+                            <div class="custom-control custom-checkbox">
+                                <input [(ngModel)]="datos.permiso" name="permiso" type="checkbox" class="custom-control-input" id="permiso" checked="">
+                                <label class="custom-control-label" for="permiso">¿Tiene permisos para hacer tramites?</label>
                             </div>
                         </div>
 
-                        <div class="row"><!-- .row -->
-                            <div class="col-xs-12 col-lg-6">
-                                <label>Tipo de identificación
-                                    <span class="text-danger">*</span>
-                                </label>
-                                <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionSelectedOld" name="idTipoIdentificacionOld"
-                                    required>
-                                </ng-select>
-                            </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Tipo de identificación
+                                <span class="text-danger">*</span>
+                            </label>
+                            <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionSelectedNew" name="idTipoIdentificacionNew"
+                                required>
+                            </ng-select>
+                        </div>
 
-                            <div class="col-xs-12 col-lg-6">
-                                <label *ngIf="tipoIdentificacionSelectedOld != 4">Identificación</label>
-                                <label *ngIf="tipoIdentificacionSelectedOld == 4">NIT</label>
-                                <div class="input-group">
-                                    <input type="number" class="form-control" placeholder="identificacion" [(ngModel)]="identificacionOld" name="identificacionOld"
-                                        required />
-                                    <span class="input-group-btn">
-                                        <button (click)="onSearchPropietarioOld()" class="btn btn-default" type="button">
-                                            <i class="fa fa-search"></i>
-                                        </button>
-                                    </span>
-                                </div>
-                            </div>
-
-                            <!-- Ciudadano -->
-                            <div class="row" *ngIf="retenciones && retenciones.length > 0">
-                                <div class="col-xs-12 col-lg-12">
-                                    <table class="table table-bordered table-striped">
-                                        <tbody>
-                                            <tr *ngFor="let retencion of retenciones; let i = index">
-                                                <ng-container *ngIf="retencion.propietario.ciudadano">
-                                                    <td>
-                                                        <b>Tipo de identificación: </b>
-                                                        <br> {{ retencion.propietario.ciudadano.tipoIdentificacion.nombre }}
-                                                        <br>
-                                                        <b>Numero de identificación: </b>
-                                                        <br> {{ retencion.propietario.ciudadano.identificacion }}
-                                                    </td>
-                                                    <td>
-                                                        <b>Nombres y apellidos: </b>
-                                                        <br>
-                                                        {{ retencion.propietario.ciudadano.primerNombre }} {{ retencion.propietario.ciudadano.segundoNombre }} {{ retencion.propietario.ciudadano.primerApellido }} {{ retencion.propietario.ciudadano.segundoApellido
-                                                        }}
-                                                    </td>
-                                                </ng-container>
-                                                <ng-container *ngIf="retencion.propietario.empresa">
-                                                    <td>
-                                                        <b>Tipo de identificación: </b>
-                                                        <br> {{ retencion.propietario.empresa.tipoIdentificacion.nombre }}
-                                                        <br>
-                                                        <b>Identificación: </b>
-                                                        <br> 
-                                                        {{ retencion.propietario.empresa.nit }}
-                                                    </td>
-                                                    <td>
-                                                        <b>Nombre: </b>
-                                                        <br>
-                                                        {{ retencion.propietario.empresa.nombre }}
-                                                    </td>
-                                                </ng-container>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div><!-- /.row -->
-
-                        <div class="row" *ngIf="propietario">
-                            <div class="col-xs-12 col-lg-12">
-                                <h6 class="text-center">
-                                    <b class="text-uppercase">Buscar propietario nuevo</b>
-                                </h6>
-                            </div>
-
-                            <div class="col-xs-12 col-lg-12">
-                                    <div class="custom-control custom-checkbox">
-                                        <input [(ngModel)]="datos.permiso" name="permiso" type="checkbox" class="custom-control-input" id="permiso" checked="">
-                                        <label class="custom-control-label" for="permiso">¿Tiene permisos para hacer tramites?</label>
-                                    </div>
-                                </div>
-
-                            <div class="col-xs-12 col-lg-6">
-                                <label>Tipo de identificación
-                                    <span class="text-danger">*</span>
-                                </label>
-                                <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionSelectedNew" name="idTipoIdentificacionNew"
-                                    required>
-                                </ng-select>
-                            </div>
-
-                            <div class="col-xs-12 col-lg-6">
-                                <label *ngIf="tipoIdentificacionSelectedNew != 4">Identificación</label>
-                                <label *ngIf="tipoIdentificacionSelectedNew == 4">NIT</label>
-                                <div class="input-group">
-                                    <input type="number" class="form-control" [(ngModel)]="identificacionNew" name="identificacionNew"
-                                        required />
-                                    <span class="input-group-btn">
-                                        <button (click)="onSearchPropietarioNew()" class="btn btn-default" type="button">
-                                            <i class="fa fa-search"></i>
-                                        </button>
-                                    </span>
-                                </div>
-                            </div>
-
-                            <!-- Ciudadano -->
-                            <div class="row" *ngIf="ciudadano || empresa">
-                                <table class="table table-bordered table-striped">
-                                    <tbody>
-                                        <tr *ngIf="ciudadano">
-                                            <td>
-                                                <b>Tipo de identificación: </b>
-                                                <br> {{ ciudadano.tipoIdentificacion.nombre }}
-                                                <br>
-                                                <b>Numero de identificación: </b>
-                                                <br> {{ ciudadano.identificacion }}
-                                            </td>
-                                            <td>
-                                                <b>Nombres y apellidos: </b>
-                                                <br>
-                                                {{ ciudadano.primerNombre }} {{ ciudadano.segundoNombre }} {{ ciudadano.primerApellido }} {{ ciudadano.segundoApellido
-                                                }}
-                                                <br>
-                                                <span *ngIf="propietario.permiso" class="text-success">
-                                                    <b>Autorizado</b> para realizar trámites.
-                                                </span>
-                                                <span *ngIf="!propietario.permiso" class="text-danger">
-                                                    <b>No realizado</b> para realizar trámites.
-                                                </span>
-                                            </td>
-                                        </tr>
-                                        <tr *ngIf="empresa">
-                                            <td>
-                                                <b>Tipo de identificación: </b>
-                                                <br> {{ empresa.tipoIdentificacion.nombre }}
-                                                <br>
-                                                <b>Identificación: </b>
-                                                <br> 
-                                                {{ empresa.identificacion }}
-                                            </td>
-                                            <td>
-                                                <b>Nombre: </b>
-                                                <br>
-                                                {{ empresa.nombre }}
-                                                <br>
-                                                <span *ngIf="propietario.permiso" class="text-success">
-                                                    <b>Autorizado</b> para realizar trámites.
-                                                </span>
-                                                <span *ngIf="!propietario.permiso" class="text-danger">
-                                                    <b>No realizado</b> para realizar trámites.
-                                                </span>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                        <div class="col-xs-12 col-lg-6">
+                            <label *ngIf="tipoIdentificacionSelectedNew != 4">Identificación</label>
+                            <label *ngIf="tipoIdentificacionSelectedNew == 4">NIT</label>
+                            <div class="input-group">
+                                <input type="number" class="form-control" [(ngModel)]="identificacionNew" name="identificacionNew"
+                                    required />
+                                <span class="input-group-btn">
+                                    <button (click)="onSearchPropietarioNew()" class="btn btn-default" type="button">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
                             </div>
                         </div>
-                    </div><!-- /.form-group -->                        
+
+                        <!-- propietarios -->
+                        <div class="row" *ngIf="datos.propietarios.length > 0">
+                            <table class="table table-bordered table-striped">
+                                <tbody>
+                                    <tr *ngFor="let propietario of datos.propietarios; let i = index">
+                                        <td>
+                                            <b>Numero de identificación: </b>
+                                            <br> {{ propietario.identificacion }}
+                                        </td>
+                                        <td>
+                                            <b *ngIf="propietario.tipo == 'CIUDADANO'">Nombres y apellidos: </b>
+                                            <b *ngIf="propietario.tipo == 'EMPRESA'">Nombres y apellidos: </b>
+                                            <br>
+                                            {{ propietario.Nombre }}
+                                            <span *ngIf="propietario.permiso" class="badge badge-success">
+                                                <b>Autorizado</b> para realizar trámites.
+                                            </span>
+                                            <span *ngIf="!propietario.permiso" class="badge badge-danger">
+                                                <b>No autorizado</b> para realizar trámites.
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <button (click)="onDeletePropietario(propietario)" class="btn btn-xs btn-danger">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>                      
                 </div>                  
             </div>
             <div class="card-footer">

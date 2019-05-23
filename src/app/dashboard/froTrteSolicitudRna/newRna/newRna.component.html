@@ -148,7 +148,7 @@
                                 </div>
 
                                 <ng-container *ngIf="(requiereSustrato && tramiteSolicitud.insumoEntregado) || !requiereSustrato">
-                                    <div class="row" *ngIf="factura && tramiteSolicitud.numeroRunt">
+                                    <div class="row" *ngIf="factura && (tramiteSolicitud.numeroRunt || !requiereRunt)">
                                         <div class="col-xs-12 col-lg-12">
                                             <button (click)="onEnviar()" class="btn btn-success">
                                                 <i class="fa fa-save"></i>
