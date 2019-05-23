@@ -1,6 +1,7 @@
 import { Component, OnInit,Output,EventEmitter } from '@angular/core';
-import { CvAuCfgHorario } from '../cvAuCfgHorario.modelo';
-import { CvAuCfgHorarioService } from '../../../services/cvAuCfgHorario.service';
+import { CvAuCfgTipo } from '../cvAuCfgTipo.modelo';
+import { CvAuCfgTipoService } from '../../../services/cvAuCfgTipo.service';
+import { CfgAdmFormatoService } from '../../../services/cfgAdmFormato.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -10,16 +11,32 @@ import swal from 'sweetalert2';
 })
 export class NewComponent implements OnInit {
   @Output() ready = new EventEmitter<any>();
-  public horario: CvAuCfgHorario;
+  public tipo: CvAuCfgTipo;
   public errorMessage;
 
+  public formatos: any = null;
+
 constructor(
-  private _HorarioService: CvAuCfgHorarioService,
-  private _loginService: LoginService,
+  private _TipoService: CvAuCfgTipoService,
+  private _FormatoService: CfgAdmFormatoService,
+  private _LoginService: LoginService,
   ){}
 
   ngOnInit() {
-    this.horario = new CvAuCfgHorario(null, null, null, null, null);
+    this.tipo = new CvAuCfgTipo(null, null, null);
+    
+		this._FormatoService.select().subscribe(
+			response => {
+        this.formatos = response;
+			error => {
+					this.errorMessage = <any>error;
+					if(this.errorMessage != null){
+						console.log(this.errorMessage);
+						alert("Error en la petición");
+					}
+				}
+      }
+    );
   }
 
   onCancelar(){
@@ -27,24 +44,24 @@ constructor(
   }
   
   onEnviar(){
-    let token = this._loginService.getToken();
+    let token = this._LoginService.getToken();
     
-		this._HorarioService.register(this.horario, token).subscribe(
+		this._TipoService.register(this.tipo, token).subscribe(
 			response => {
         if(response.status == 'success'){
           this.ready.emit(true);
 
           swal({
-            title: 'Perfecto!',
+            title: response.title,
             text: response.message,
-            type: 'success',
+            type: response.status,
             confirmButtonText: 'Aceptar'
           });
         }else{
           swal({
-            title: 'Error!',
+            title: response.title,
             text: response.message,
-            type: 'error',
+            type: response.status,
             confirmButtonText: 'Aceptar'
           });
         }

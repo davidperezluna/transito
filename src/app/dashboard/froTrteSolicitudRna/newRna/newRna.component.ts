@@ -318,6 +318,9 @@ export class NewRnaComponent implements OnInit {
 
             swal.close();
           } else {
+            if (response.data) {
+              this.factura = response.data;
+            }
             this.factura = null;
             this.tramitesFactura = null;
             this.propietarios = null;

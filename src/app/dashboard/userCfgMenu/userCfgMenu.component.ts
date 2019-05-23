@@ -57,6 +57,10 @@ export class UserCfgMenuComponent implements OnInit {
   }
 
   onInitTable(){
+    if (this.table) {
+      this.table.destroy();
+    }
+    
     this.table = $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,
@@ -102,15 +106,24 @@ export class UserCfgMenuComponent implements OnInit {
         let token = this._LsoginService.getToken();
         this._UserCfgMenuService.delete({ 'id': id }, token).subscribe(
           response => {
+            if (response.code == 200) {
               swal({
-                title: 'Eliminado!',
-                text:'Registro eliminado correctamente.',
-                type:'success',
-                confirmButtonColor: '#15d4be',
+                title: response.title,
+                text: response.message,
+                type: response.status,
+                confirmButtonText: 'Aceptar'
               });
-              this.table.destroy();
+
               this.ngOnInit();
-            }, 
+            }else{
+              swal({
+                title: response.title,
+                text: response.message,
+                type: response.status,
+                confirmButtonText: 'Aceptar'
+              });
+            }
+          }, 
           error => {
             this.errorMessage = <any>error;
 

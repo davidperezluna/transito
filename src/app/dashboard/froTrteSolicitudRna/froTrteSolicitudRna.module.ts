@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TramiteTrasladoService } from '../../services/tramiteTraslado.service';
-import { FacturaInsumoService } from '../../services/facturaInsumo.service';
 import { FroTrteSolicitudRnaComponent } from './froTrteSolicitudRna.component';
 import { FroTrteSolicitudRnaService } from '../../services/froTrteSolicitudRna.service';
 import { UserEmpresaService } from '../../services/userEmpresa.service';
 import { DefaultService } from '../../services/default.service';
 import { CfgTipoAlertaService } from '../../services/cfgTipoAlerta.service';
 import { VhloAcreedorService } from '../../services/vhloAcreedor.service';
+import { FroFacRetefuenteService } from '../../services/froFacRetefuente.service';
 import { NewRnaComponent } from './newRna/newRna.component'; 
 import { NewRnaDuplicadoPlacaComponent } from './rna/tramiteDuplicadoPlaca/newRna.duplicadoPlaca.component';
 import { NewRnaDuplicadoLicenciaComponent } from './rna/tramiteDuplicadoLicencia/newRna.duplicadoLicencia.component';
@@ -123,11 +123,11 @@ import { UserCiudadanoModule } from '../userCiudadano/userCiudadano.module';
         NewRnaProrrogaImportacionTemporalComponent,
     ],
     providers: [
-        FacturaInsumoService, 
         FroTrteSolicitudRnaService, 
         CfgTipoAlertaService, 
         TramiteTrasladoService, 
-        VhloAcreedorService, 
+        VhloAcreedorService,
+        FroFacRetefuenteService,
         UserEmpresaService,
         DefaultService
     ]

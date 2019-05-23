@@ -2,6 +2,7 @@ import { Component , OnInit, Input, AfterViewInit, Output, EventEmitter } from '
 import { Router } from "@angular/router";
 import { FroTrteSolicitudService } from '../../../../services/froTrteSolicitud.service';
 import { FroFacTramiteService } from '../../../../services/froFacTramite.service';
+import { FroFacRetefuenteService } from '../../../../services/froFacRetefuente.service';
 import { VhloPropietarioService } from '../../../../services/vhloPropietario.service';
 import { UserCiudadanoService } from '../../../../services/userCiudadano.service';
 import { UserCfgTipoIdentificacionService } from '../../../../services/userCfgTipoIdentificacion.service';
@@ -24,6 +25,7 @@ export class NewRnaTraspasoComponent implements OnInit {
     public realizado: any = false;
     public tramiteSolicitud: any  = null;
 
+    public retenciones: any;
     public tiposIdentificacion: any;
     public identificacionOld: any;
     public identificacionNew: any;
@@ -40,13 +42,14 @@ export class NewRnaTraspasoComponent implements OnInit {
     ];
 
     public datos = {
+        'campos': null,
         'documentacion': true,
         'observacion': null,
         'permiso': false,
         'tipoPropiedad': null,
+        'retenciones': null,
         'idFuncionario': null,
         'idVehiculo': null,
-        'idPropietario': null,
         'idCiudadano': null,
         'idEmpresa': null,
         'idTramiteFactura': null,
@@ -56,6 +59,7 @@ export class NewRnaTraspasoComponent implements OnInit {
         private _PropietarioService: VhloPropietarioService,
         private _TramiteSolicitudService: FroTrteSolicitudService,
         private _TramiteFacturaService: FroFacTramiteService,
+        private _RetefuenteService: FroFacRetefuenteService,
         private _CiudadanoService: UserCiudadanoService,
         private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
         private _FuncionarioService: PnalFuncionarioService,
@@ -64,6 +68,14 @@ export class NewRnaTraspasoComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+        swal({
+            title: 'cargando información!',
+            text: 'Solo tardara unos segundos por favor espere.',
+            onOpen: () => {
+                swal.showLoading()
+            }
+        });
+
         this.datos.idFuncionario  = this.funcionario.id;
         
         if ( this.tramitesRealizados.length > 0) {
@@ -99,109 +111,40 @@ export class NewRnaTraspasoComponent implements OnInit {
                     }
                 }
             );
-        }       
-    }
-    
-    onSearchPropietarioOld() {
-        swal({
-            title: 'Buscando propietario actual!',
-            text: 'Solo tardara unos segundos por favor espere.',
-            onOpen: () => {
-                swal.showLoading()
-            }
-        });
 
-        let token = this._LoginService.getToken();
+            let token = this._LoginService.getToken();
 
-        let datos = {
-            'identificacion': this.identificacionOld,
-            'idTipoIdentificacion': this.tipoIdentificacionSelectedOld,
-        }
+            this._RetefuenteService.searchByFactura({ 'idfactura': this.tramiteFactura.factura.id }, token).subscribe(
+                response => {
+                    if (response.code == 200) {
+                        this.retenciones = response.data;
+                        this.datos.retenciones = this.retenciones;
 
-        this._CiudadanoService.searchByIdentificacion(datos, token).subscribe(
-            response => {
-                if (response.code == 200) {
-                    if (response.data.ciudadano) {
-                        this._PropietarioService.searchByCiudadanoOrEmpresaAndVehiculo({ 'id': response.data.ciudadano.id, 'tipo': 'CIUDADANO', 'idVehiculo': this.vehiculo.id }, token).subscribe(
-                            response => {
-                                if (response.code == 200) {
-                                    this.propietario = response.data;
-                                    this.datos.idPropietario = this.propietario.id;
+                        swal.close();
+                    }else{
+                        this.retenciones = null;
+                        this.datos.retenciones = null;
 
-                                    swal.close();
-                                } else {
-                                    this.propietario = null;
-                                    this.datos.idPropietario = null;
-
-                                    swal({
-                                        title: 'Error!',
-                                        text: response.message,
-                                        type: 'error',
-                                        confirmButtonText: 'Aceptar'
-                                    });
-                                }
-                                error => {
-                                    this.errorMessage = <any>error;
-                                    if (this.errorMessage != null) {
-                                        console.log(this.errorMessage);
-                                        alert('Error en la petición');
-                                    }
-                                }
-                            }
-                        ); 
-                    } else if (response.data.empresa){
-                        this._PropietarioService.searchByCiudadanoOrEmpresaAndVehiculo({ 'id': response.data.empresa.id, 'tipo': 'EMPRESA', 'idVehiculo': this.vehiculo.id }, token).subscribe(
-                            response => {
-                                if (response.code == 200) {
-                                    this.propietario = response.data;
-                                    this.datos.idPropietario = this.propietario.id;
-
-                                    swal.close();
-                                } else {
-                                    this.propietario = null;
-                                    this.datos.idPropietario = null;
-
-                                    swal({
-                                        title: 'Error!',
-                                        text: response.message,
-                                        type: 'error',
-                                        confirmButtonText: 'Aceptar'
-                                    });
-                                }
-                                error => {
-                                    this.errorMessage = <any>error;
-                                    if (this.errorMessage != null) {
-                                        console.log(this.errorMessage);
-                                        alert('Error en la petición');
-                                    }
-                                }
-                            }
-                        );
+                        swal({
+                            title: response.title,
+                            text: response.message,
+                            type: response.status,
+                            confirmButtonText: 'Aceptar'
+                        });
                     }
-
-                    swal.close();
-                } else {
-                    this.propietario = null;
-                    this.datos.idPropietario = null;
-
-                    swal({
-                        title: 'Error!',
-                        text: response.message,
-                        type: 'error',
-                        confirmButtonText: 'Aceptar'
-                    });
-                }
+                },
                 error => {
                     this.errorMessage = <any>error;
+
                     if (this.errorMessage != null) {
                         console.log(this.errorMessage);
                         alert('Error en la petición');
                     }
                 }
-            }
-        ); 
+            );
+        }       
     }
-
+    
     onSearchPropietarioNew() {
         swal({
             title: 'Buscando propietario nuevo!',
@@ -261,6 +204,7 @@ export class NewRnaTraspasoComponent implements OnInit {
     }
 
     onEnviar() {
+        this.datos.campos = ['traspaso'];
         this.datos.idVehiculo = this.vehiculo.id;
         this.datos.idTramiteFactura = this.tramiteFactura.id;
 
@@ -279,8 +223,8 @@ export class NewRnaTraspasoComponent implements OnInit {
         }
 
         let resumen = "No. factura: " + this.tramiteFactura.factura.numero +
-                    ", Traspaso de " + propietarioActual +
-                    "a " + propietarioNuevo;
+            ", Traspaso de " + propietarioActual +
+            "a " + propietarioNuevo;
 
         this.realizado = true;
                     

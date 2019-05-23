@@ -468,13 +468,12 @@ export class FroFacTramiteComponent implements OnInit {
 
   }
 
-  onVendedorSelect(eve: any,propietarioVehiculo:any){
-    if (eve.target.checked) {
+  onSeller(e: any, propietarioVehiculo:any){
+    if (e.target.checked) {
       this.propietariosVehiculoRetefuente.push(propietarioVehiculo);
     }else{
       this.propietariosVehiculoRetefuente =  this.propietariosVehiculoRetefuente.filter(h => h !== propietarioVehiculo);
     }
-    //this.valorRetefuenteUnitario = this.valorRetefuente / this.vendedores;
   }
 
   onCreateArray(){
@@ -526,7 +525,6 @@ export class FroFacTramiteComponent implements OnInit {
 
     let datos = {
       'factura': this.factura,
-      'tramitesValor': this.tramitesPrecioArray,
       'propietarios': this.propietariosVehiculoRetefuente,
       'retencion': this.valorRetefuenteUnitario,
       'idVehiculoValor': this.idVehiculoValor,

@@ -3,6 +3,7 @@ import { ActivatedRoute } from "@angular/router";
 import { FroTrteSolicitudRna } from './froTrteSolicitudRna.modelo';
 import { FroTrteSolicitudService } from '../../services/froTrteSolicitud.service';
 import { LoginService } from '../../services/login.service';
+import { environment } from 'environments/environment';
 import swal from 'sweetalert2';
 declare var $: any;
 
@@ -13,7 +14,8 @@ declare var $: any;
 export class FroTrteSolicitudRnaComponent implements OnInit {
   public tipo: any;
   public errorMessage;
-	public id;
+  
+  public apiUrl = environment.apiUrl + 'financiero/frotrtesolicitud';
 	public tramitesSolicitud;
 	public formNew = false;
 	public formEdit = false;
@@ -69,6 +71,8 @@ export class FroTrteSolicitudRnaComponent implements OnInit {
           let timeoutId = setTimeout(() => {
             this.iniciarTabla();
           }, 100);
+
+          this.formIndex = true;
 
           swal({
             title: 'Perfecto!',

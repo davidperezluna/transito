@@ -285,7 +285,7 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
         this.datos.idPropietario = this.propietario.id;
         this.datos.idTramiteFactura = this.tramiteFactura.id;
 
-        let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero;
+        let resumen = "No. factura: " + this.tramiteFactura.factura.numero;
         
         this.realizado = true;
         

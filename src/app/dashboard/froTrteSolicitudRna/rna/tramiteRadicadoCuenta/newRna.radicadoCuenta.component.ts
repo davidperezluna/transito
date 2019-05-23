@@ -109,8 +109,6 @@ export class NewRnaRadicadoCuentaComponent implements OnInit {
     
    
     onEnviar(){     
-      let token = this._LoginService.getToken();
-
       this.datos.idTramiteFactura = this.tramiteFactura.id;
       this.datos.idVehiculo = this.vehiculo.id;
 
