@@ -11,41 +11,64 @@ declare var $: any;
 export class VhloRnaTramiteInscripcionLimitacionComponent implements OnInit {
   public errorMessage;
 
-  public tramitesInscripcion;
-  public formNew = false;
-  public formEdit = false;
-  public formIndex = true;
+  public inscripciones;
+  
+  public formSearch: any;
+  public formIndex: any;
+  public formNew: any;
+
   public table: any = null;
-  public tramiteInscripcion: any;
+
+  public search: any = {
+    'numero': null,
+    'idModulo': 2
+  }
 
   constructor(
-    private _VehiculoLimitacionService: VhloLimitacionService,
+    private _LimitacionService: VhloLimitacionService,
     private _LoginService: LoginService,
   ) { }
 
   ngOnInit() {
-    let datos = {
-      'idModulo': 1,
-    };
-    
+    this.onInitForms();
+  }
+
+  onInitForms(){
+    this.formSearch = true;
+    this.formIndex = false;
+    this.formNew = false;
+  }
+
+  onSearch() {
     swal({
-      title: 'Cargando Tabla!',
+      title: 'Buscando registros!',
       text: 'Solo tardara unos segundos por favor espere.',
       onOpen: () => {
         swal.showLoading()
       }
     });
+
+    let token = this._LoginService.getToken();
     
-    this._VehiculoLimitacionService.index(datos).subscribe(
+    this._LimitacionService.searchByPlaca(this.search, token).subscribe(
       response => {
-        if (response) {
-          this.tramitesInscripcion = response.data;
+        if (response.code == 200) {
+          this.inscripciones = response.data;
           
           let timeoutId = setTimeout(() => {
-            this.iniciarTabla();
+            this.onInitTable();
           }, 100);
 
+          this.formIndex = true;
+
           swal.close();
+        }else{
+          swal({
+            title: response.title,
+            text: response.message,
+            type: response.status,
+            confirmButtonText: 'Aceptar'
+          });
         }
       },
       error => {
@@ -59,43 +82,35 @@ export class VhloRnaTramiteInscripcionLimitacionComponent implements OnInit {
     );
   }
 
-  iniciarTabla() {
+  onInitTable() {
+    if (this.table) {
+      this.table.destroy();
+    }
+
     this.table = $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,
       sPaginationType: 'full_numbers',
       oLanguage: {
         oPaginate: {
-          sFirst: '<<',
-          sPrevious: '<',
-          sNext: '>',
-          sLast: '>>'
+          sFirst: '<i class="fa fa-step-backward"></i>',
+          sPrevious: '<i class="fa fa-chevron-left"></i>',
+          sNext: '<i class="fa fa-chevron-right"></i>',
+          sLast: '<i class="fa fa-step-forward"></i>'
         }
       }
     });
   }
 
   onNew() {
+    this.onInitForms();
+
     this.formNew = true;
-    this.formIndex = false;
-    if (this.table) {
-      this.table.destroy();
-    }
   }
 
-  ready(isCreado: any) {
+  onReady(isCreado: any) {
     if (isCreado) {
-      this.formNew = false;
-      this.formEdit = false;
-      this.formIndex = true;
-      this.ngOnInit();
+      this.onInitForms();
     }
   }
-
-  edit(tramiteInscripcion: any) {
-    this.tramiteInscripcion = tramiteInscripcion;
-    this.formEdit = true;
-    this.formIndex = false;
-  }
-
 }

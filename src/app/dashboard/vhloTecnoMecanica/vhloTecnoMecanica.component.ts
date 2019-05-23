@@ -68,7 +68,6 @@ export class VhloTecnoMecanicaComponent implements OnInit {
           this._TecnoMecanicaService.index({'idVehiculo': this.vehiculo.id}, token).subscribe(
             response => {
               if (response.status == 'success') {
-                console.log(this.formHistorial);
                 this.tecnoMecanicas = response.data;
                 swal.close();
               } else {
