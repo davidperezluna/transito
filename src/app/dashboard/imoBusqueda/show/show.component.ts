@@ -27,9 +27,11 @@ constructor(
   ){}
 
   ngOnInit() {
+    console.log(this.loteInsumo);
+
     let timeoutId = setTimeout(() => {  
       this.onInitTable();
-    }, 100);
+    }, 200);
   }
 
   onInitTable(){
@@ -43,6 +45,15 @@ constructor(
       responsive: true,
       pageLength: 8,
       sPaginationType: 'full_numbers',
+      dom: 'Bfrtip',
+      buttons: [
+        {
+          title: 'Acta Entrega Nro. 1',
+          extend: 'pdfHtml5',
+          pageSize: 'LEGAL',
+          filename: 'ActaEntrega',
+        }
+      ],
       oLanguage: {
         oPaginate: {
           sFirst: '<i class="fa fa-step-backward"></i>',

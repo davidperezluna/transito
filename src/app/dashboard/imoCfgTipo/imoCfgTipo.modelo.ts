@@ -1,4 +1,4 @@
-export class CfgCasoInsumo{
+export class TipoInsumo{
 	constructor(
 		public nombre:string,
 		public referencia: string,

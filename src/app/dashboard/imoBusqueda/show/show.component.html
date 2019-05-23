@@ -2,7 +2,7 @@
     <div class="col-xs-12 col-lg-12">
         <div class="card">
         <div class="card-body">
-            <h5 class="m-0">{{loteInsumo.tipoInsumo.nombre}} {{loteInsumo.sedeOperativa.nombre}}</h5>
+            <!-- <h5 class="m-0">{{loteInsumo.tipoInsumo.nombre}} {{loteInsumo.sedeOperativa.nombre}}</h5> -->
             <hr>
             <table class="table" id="dataTables-example-sustratos">
                 <thead>
@@ -16,16 +16,16 @@
                 </thead>
                 <tbody>
                   <tr class="odd" *ngFor="let insumo of insumos; let i = index">
-                    <td >{{insumo.estado}}</td>
-                    <td >{{insumo.tipo.nombre}}</td>
-                    <td >{{insumo.numero}}</td>
-                    <td >{{insumo.fecha}}</td>
+                    <td >{{ insumo.estado }}</td>
+                    <td >{{ insumo.tipo.nombre }}</td>
+                    <td >{{ insumo.numero }}</td>
+                    <td >{{ (insumo.fecha* 1000) | date: 'dd/MM/yyyy' }}</td>
                     <td>
                       <button (click)="deleteInsumo(insumo.id)"  class="btn btn-danger" type="button">Eliminar</button>
-                      <a href="{{ apiUrl }}/{{insumo.actaEntrega}}/{{insumo.organismoTransito.id}}/pdf/acta/asignacion" class="btn btn-success" target="_blank">
+                      <!-- <a href="{{ apiUrl }}/{{insumo.actaEntrega}}/{{insumo.organismoTransito.id}}/pdf/acta/asignacion" class="btn btn-success" target="_blank">
                         <i class="fa fa-file-pdf-o"></i>
                           Imprimir Acta 
-                      </a>
+                      </a> -->
                     </td>
                   </tr>
                 </tbody>

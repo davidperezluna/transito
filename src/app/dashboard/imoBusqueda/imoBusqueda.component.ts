@@ -22,8 +22,8 @@ export class ImoBusquedaComponent implements OnInit {
   public organismosTransito:any;
 
   public tiposInsumos:any = [
-    {'value': 'SUSTRATO','label':'Sustrato'},
-    {'value': 'INSUMO','label':'Insumo'},
+    { 'value': 'SUSTRATO', 'label':'SUSTRATO'},
+    { 'value': 'INSUMO', 'label':'INSUMO'},
   ];
 
   public datos = {
@@ -120,7 +120,7 @@ export class ImoBusquedaComponent implements OnInit {
     this._ImoInsumoService.showLote(e, token).subscribe(
 			response => {
         if(response.status == 'success'){
-          this.insumos = response.datos;
+          this.insumos = response.data;
           this.formShow = true;
         }
         error => {

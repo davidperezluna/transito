@@ -1,4 +1,4 @@
-<div class="container" >
+<div class="container-fluid" >
   <div class="row">
     <div class="col-xs-12 col-md-6 col-lg-4">
         <div class="card">
@@ -65,7 +65,7 @@
                   <td >{{ loteInsumo.rangoFin }}</td>
                   <td >{{ loteInsumo.cantidad }}</td>
                   <td >{{ loteInsumo.referencia }}</td>
-                  <td >{{ loteInsumo.fecha }}</td>
+                  <td >{{ (loteInsumo.fecha* 1000) | date: 'dd/MM/yyyy' }}</td>
                   <td>
                     <div class="btn-group">
                       <button (click)="onShow(loteInsumo.id)" class="btn btn-xs btn-primary" type="button">

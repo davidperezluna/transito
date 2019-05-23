@@ -1,11 +1,10 @@
-<hr>
 <div class="row">
     <div class="col-xs-12 col-lg-4">
         <div class="card">
             <div class="card-header">
-                <h5 class="text-uppercase">Nuevo caso insumo</h5>
-                <small>Los campos con
-                    <b class="text-danger">*</b> son obligatorios</small>
+                <b class="text-uppercase">Nuevo tipo de insumo</b>
+                <br>
+                <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
             </div>
             <div class="card-body">
                 <form #formNew="ngForm">
@@ -14,25 +13,25 @@
                             <label>Modulo
                                 <strong class="text-danger">*</strong>
                             </label>
-                            <ng-select [multiple]="false" [options]="modulos" [(ngModel)]="cfgCasoInsumo.idModulo" required name="idModulo">
+                            <ng-select [multiple]="false" [options]="modulos" [(ngModel)]="tipoInsumo.idModulo" required name="idModulo">
                             </ng-select>
                         </div>
                         <div class="col-xs-12 col-lg-12">
                             <label>Nombre
                                 <strong class="text-danger">*</strong>
                             </label>
-                            <input class="form-control" [(ngModel)]="cfgCasoInsumo.nombre" name="nombre" placeholder="" type="text" required>
+                            <input class="form-control" [(ngModel)]="tipoInsumo.nombre" name="nombre" type="text" required>
                         </div>
                         <div class="col-xs-12 col-lg-12">
                             <label>Referencia
                             </label>
-                            <input class="form-control" [(ngModel)]="cfgCasoInsumo.referencia" name="referencia" placeholder="" type="text">
+                            <input class="form-control" [(ngModel)]="tipoInsumo.referencia" name="referencia" type="text">
                         </div>
                         <div class="col-xs-12 col-lg-12">
                             <label>Categoria
                                 <strong class="text-danger">*</strong>
                             </label>
-                            <ng-select [multiple]="false" [options]="categorias" [(ngModel)]="cfgCasoInsumo.categoria" required name="tipoCasoInsumoId">
+                            <ng-select [multiple]="false" [options]="categorias" [(ngModel)]="tipoInsumo.categoria" required name="idTipoInsumo">
                             </ng-select>
                         </div>
                     </div>

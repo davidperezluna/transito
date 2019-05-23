@@ -11,17 +11,16 @@ declare var $: any;
 export class ImoCfgTipoComponent implements OnInit {
   public errorMessage;
   public id;
-  public respuesta;
-  public cfgCasoInsumos;
+  public tiposInsumo;
   public formNew = false;
   public formEdit = false;
   public formIndex = true;
   public table: any = null;
-  public cfgCasoInsumo: any;
+  public tipoInsumo: any;
 
   constructor(
     private _TipoService: ImoCfgTipoService,
-    private _loginService: LoginService,
+    private _LoginService: LoginService,
   ) { }
 
   ngOnInit() {
@@ -36,8 +35,7 @@ export class ImoCfgTipoComponent implements OnInit {
     this._TipoService.index().subscribe(
       response => {
         if (response) {
-          console.log(response);
-          this.cfgCasoInsumos = response.data;
+          this.tiposInsumo = response.data;
           let timeoutId = setTimeout(() => {
             this.onInitTable();
           }, 100);
@@ -87,8 +85,8 @@ export class ImoCfgTipoComponent implements OnInit {
   }
  
 
-  onEdit(cfgCasoInsumo: any) {
-    this.cfgCasoInsumo = cfgCasoInsumo;
+  onEdit(tipoInsumo: any) {
+    this.tipoInsumo = tipoInsumo;
     this.formEdit = true;
     this.formIndex = false;
   }
