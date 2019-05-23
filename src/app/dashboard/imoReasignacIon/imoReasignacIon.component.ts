@@ -19,7 +19,7 @@ public formShow = false;
 public reasignaciones:any;
 public table: any = null;
 public isCantidad=true;
-public reasignacionId:any;
+public idReasignacion:any;
 
 
 constructor(
@@ -56,9 +56,9 @@ constructor(
     );
   }
   onShow(id:any){
-    this.reasignacionId = id;
+    this.idReasignacion = id;
     this.formIndex = false;
-    this.formNew = false;
+    this.formNew = false; 
     this.formShow = true;
     this.table.destroy();
   }
