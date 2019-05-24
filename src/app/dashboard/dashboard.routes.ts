@@ -122,8 +122,6 @@ import { CfgCargoRoutes } from './cfgCargo/cfgCargo.routes';
 import { PnalTalonarioRoutes } from './pnalTalonario/pnalTalonario.routes';
 import { PnalAsignacionRoutes } from './pnalAsignacion/pnalAsignacion.routes';
 
-import { FacturaRoutes } from './factura/factura.routes';
-import { FacturaInfraccionRoutes } from './facturaInfraccion/facturaInfraccion.routes';
 import { GestionTransportePublicoRoutes } from './gestionTransportePublico/gestionTransportePublico.routes';
 
 import { TpAlcaldiaRoutes } from './tpAlcaldia/tpAlcaldia.routes';
@@ -179,12 +177,11 @@ import { FroAcuerdoPagoRoutes } from './froAcuerdoPago/froAcuerdoPago.routes';
 import { FroTramiteRoutes } from './froTramite/froTramite.routes';
 import { FroTrteCfgConceptoRoutes } from './froTrteCfgConcepto/froTrteCfgConcepto.routes';
 import { FroTrtePrecioRoutes } from './froTrtePrecio/froTrtePrecio.routes';
+import { FroTrteSolicitudRoutes } from './froTrteSolicitud/froTrteSolicitud.routes';
+import { FroTrteSolicitudRncRoutes } from './froTrteSolicitudRnc/froTrteSolicitudRnc.routes';
 import { FroTrteSolicitudRnaRoutes } from './froTrteSolicitudRna/froTrteSolicitudRna.routes';
-import { FroTrteSolicitudRnmaRoutes } from './froTrteSolicitudRnma/froTrteSolicitudRnma.routes';
-import { FroTrteSolicitudRnrsRoutes } from './froTrteSolicitudRnrs/froTrteSolicitudRnrs.routes';
 import { FroReporteIngresosRoutes } from './froReporteIngresos/froReporteIngresos.routes';
 import { FroCfgTipoRecaudoRoutes } from './froCfgTipoRecaudo/froCfgTipoRecaudo.routes';
-import { FroTrteSolicitudRncRoutes } from './froTrteSolicitudRnc/froTrteSolicitudRnc.routes';
 import { FroFacTramiteRoutes } from './froFacTramite/froFacTramite.routes';
 import { FroTrteCfgCuentaRoutes } from './froTrteCfgCuenta/froTrteCfgCuenta.routes';
 
@@ -340,7 +337,9 @@ export const DashboardRoutes: Route[] = [
       ...PqoInmovilizacionRoutes,
       ...PnalTalonarioRoutes,
       ...PnalAsignacionRoutes,
+      ...FroTrteSolicitudRoutes,
       ...FroTrteSolicitudRncRoutes,
+      ...FroTrteSolicitudRnaRoutes,
       ...FroFacTramiteRoutes,
       ...FroTrteCfgCuentaRoutes,
       ...CvCdoComparendoRoutes,
@@ -411,8 +410,6 @@ export const DashboardRoutes: Route[] = [
       ...SvCfgVisualDisminuidaRoutes,
       ...SvCfgZonaRoutes,
       ...SvCfgGravedadAccidenteRoutes,
-      ...FacturaRoutes,
-      ...FacturaInfraccionRoutes,
       ...GestionTransportePublicoRoutes,
       ...rnaRegistroInsumosRoutes,
       ...CfgOrganismoTransitoRoutes,
@@ -457,9 +454,6 @@ export const DashboardRoutes: Route[] = [
       ...FroTramiteRoutes,
       ...FroTrteCfgConceptoRoutes,
       ...FroTrtePrecioRoutes,
-      ...FroTrteSolicitudRnaRoutes,
-      ...FroTrteSolicitudRnmaRoutes,
-      ...FroTrteSolicitudRnrsRoutes,
       ...FroReporteIngresosRoutes,
       ...FroCfgTipoRecaudoRoutes
     ]

@@ -1,0 +1,166 @@
+<div class="row" *ngIf="realizado">
+    <!-- .row -->
+    <div class="col-xs-12 col-lg-12">
+        <!-- .col -->
+        <div class="card">
+            <div class="card-header">
+                <span class="badge badge-success">Tramite realizado</span>
+            </div>
+            <div class="card-body text-center">
+                <!-- {{ tramiteSolicitud.resumen }} -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" *ngIf="!realizado"><!-- .row -->
+    <div class="col-xs-12 col-lg-12"><!-- .col -->
+        <div class="card">
+            <div class="card-header">
+                <b class="text-primary">
+                    Registrar traspaso
+                </b>
+                <br>
+                <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-12 col-lg-12">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" [(ngModel)]="datos.documentacion" class="custom-control-input" id="documentacion" name="documentacion">
+                                <label class="custom-control-label" for="documentacion">¿Presenta documentación completa?</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="!datos.documentacion">
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Registre que documentación esta pendiente <b class="text-danger">*</b></label>
+                            <textarea class="form-control" [(ngModel)]="datos.observacion" rows="4" name="observacion" required></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group" *ngIf="datos.documentacion">
+                    <div class="row">
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Tipo de propiedad <span class="text-danger">*</span></label>
+                            <ng-select [multiple]="false" [options]="tiposPropiedad" [(ngModel)]="datos.tipoPropiedad" name="tipoPropiedad" required>
+                            </ng-select>
+                        </div>
+
+                        <div class="col-xs-12 col-lg-12">
+                            <h6 class="text-center">
+                                <b class="text-uppercase">Propietarios que realizarán el traspaso</b>
+                            </h6>
+                        </div>
+
+                        <!-- retenciones -->
+                        <div class="row" *ngIf="datos.retenciones.length > 0">
+                            <table class="table table-bordered table-striped">
+                                <tbody>
+                                    <tr *ngFor="let retencion of datos.retenciones; let i = index">
+                                        <td *ngIf="retencion.propietario.ciudadano">
+                                            <b>Identificación:</b>
+                                            <br>
+                                            {{  retencion.propietario.ciudadano.identificacion }}
+                                            <br> 
+                                            <b>Nombre y apellido:</b>
+                                            <br>
+                                            {{ retencion.propietario.ciudadano.primerNombre }} {{ retencion.propietario.ciudadano.primerApellido }}
+                                        </td>
+                                        <td *ngIf="retencion.empresa.propietario">
+                                            <b>Identificación (NIT):</b>
+                                            <br>
+                                            {{ retencion.empresa.propietario.nit }}
+                                            <br>
+                                            <b>Nombre:</b>
+                                            <br>
+                                            {{ retencion.empresa.propietario.nombre }}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="row" *ngIf="datos.tipoPropiedad">
+                        <div class="col-xs-12 col-lg-12">
+                            <h6 class="text-center">
+                                <b class="text-uppercase">Buscar propietarios nuevos</b>
+                            </h6>
+                        </div>
+
+                        <div class="col-xs-12 col-lg-12">
+                            <div class="custom-control custom-checkbox">
+                                <input [(ngModel)]="datos.permiso" name="permiso" type="checkbox" class="custom-control-input" id="permiso" checked="">
+                                <label class="custom-control-label" for="permiso">¿Tiene permisos para hacer tramites?</label>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Tipo de identificación
+                                <span class="text-danger">*</span>
+                            </label>
+                            <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionSelectedNew" name="idTipoIdentificacionNew"
+                                required>
+                            </ng-select>
+                        </div>
+
+                        <div class="col-xs-12 col-lg-6">
+                            <label *ngIf="tipoIdentificacionSelectedNew != 4">Identificación</label>
+                            <label *ngIf="tipoIdentificacionSelectedNew == 4">NIT</label>
+                            <div class="input-group">
+                                <input type="number" class="form-control" [(ngModel)]="identificacionNew" name="identificacionNew"
+                                    required />
+                                <span class="input-group-btn">
+                                    <button (click)="onSearchPropietarioNew()" class="btn btn-default" type="button">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- propietarios -->
+                        <div class="row" *ngIf="datos.propietarios.length > 0">
+                            <table class="table table-bordered table-striped">
+                                <tbody>
+                                    <tr *ngFor="let propietario of datos.propietarios; let i = index">
+                                        <td>
+                                            <b>Numero de identificación: </b>
+                                            <br> {{ propietario.identificacion }}
+                                        </td>
+                                        <td>
+                                            <b *ngIf="propietario.tipo == 'CIUDADANO'">Nombres y apellidos: </b>
+                                            <b *ngIf="propietario.tipo == 'EMPRESA'">Nombres y apellidos: </b>
+                                            <br>
+                                            {{ propietario.Nombre }}
+                                            <span *ngIf="propietario.permiso" class="badge badge-success">
+                                                <b>Autorizado</b> para realizar trámites.
+                                            </span>
+                                            <span *ngIf="!propietario.permiso" class="badge badge-danger">
+                                                <b>No autorizado</b> para realizar trámites.
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <button (click)="onDeletePropietario(propietario)" class="btn btn-xs btn-danger">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>                      
+                </div>                  
+            </div>
+            <div class="card-footer">
+                <button (click)="onEnviar()" class="btn btn-primary">
+                    <i class="fa fa-save"></i>
+                    Enviar
+                </button>
+            </div>
+        </div>
+    </div><!-- /.col -->
+</div><!-- /.row -->
+

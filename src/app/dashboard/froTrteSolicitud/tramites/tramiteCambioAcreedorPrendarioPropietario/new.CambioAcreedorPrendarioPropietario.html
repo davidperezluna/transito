@@ -1,0 +1,163 @@
+<div class="row" *ngIf="realizado">
+    <!-- .row -->
+    <div class="col-xs-12 col-lg-12">
+        <!-- .col -->
+        <div class="card">
+            <div class="card-header">
+                <span class="badge badge-success">Tramite realizado</span>
+            </div>
+            <div class="card-body text-center">
+                <!-- {{ tramiteSolicitud.resumen }} -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" *ngIf="!realizado"><!-- .row -->
+    <div class="col-xs-12 col-lg-12"><!-- .col -->
+        <div class="card">
+            <div class="card-header">
+                <b class="text-primary">Registrar modificación Acreedor Prendario por propietario</b>
+                <br>
+                <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
+            </div>
+            <div class="card-body">
+                <div class="container">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-12">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" [(ngModel)]="datos.documentacion" class="custom-control-input" id="documentacion" name="documentacion">
+                                    <label class="custom-control-label" for="documentacion">¿Presenta documentación completa?</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" *ngIf="!datos.documentacion">
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Registre que documentación esta pendiente <b class="text-danger">*</b></label>
+                                <textarea class="form-control" [(ngModel)]="datos.observacion" rows="4" name="observacion" required></textarea>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="form-group" *ngIf="datos.documentacion">
+                        <div class="row">
+                            <h6 class="text-center">
+                                <b class="text-uppercase">Seleccionar propietario actual</b>
+                            </h6>
+                        </div>
+
+                        <div class="row">                          
+                            <div class="col-xs-12 col-lg-12" *ngIf="acreedoresActuales">
+                                <table class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th colspan="2" class="text-center">
+                                                <b class="text-uppercase">Propietario actual encontrado</b>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let acreedorActual of acreedoresActuales; let i = index">
+                                            <td *ngIf="acreedorActual.propietario.ciudadano">
+                                                <b>Identificación:</b> {{ acreedorActual.propietario.ciudadano.identificacion }}
+                                                <br>
+                                                <b>Nombre:</b> {{ acreedorActual.propietario.ciudadano.primerNombre }} {{ acreedorActual.propietario.ciudadano.primerApellido }}
+                                            </td>
+                                            <td *ngIf="acreedorActual.propietario.empresa">
+                                                <b>NIT:</b> {{ acreedorActual.propietario.empresa.nit }}
+                                                <br>
+                                                <b>Nombre:</b> {{ acreedorActual.propietario.empresa.nombre }}
+                                            </td>
+                                            <td>
+                                                <b>Tipo alerta:</b> {{ acreedorActual.propietario.tipoAlerta.nombre }}
+                                                <br>
+                                                <b>Grado:</b> {{ acreedorActual.propietario.gradoAlerta }}
+                                            </td>
+                                            <td>
+                                                <div class="custom-control custom-radio">
+                                                    <input [(ngModel)]="datos.idPropietarioOld" value="{{ acreedorActual.propietario.id }}" type="radio" id="radio{{ i }}" name="radio" class="custom-control-input">
+                                                    <label class="custom-control-label" for="radio{{ i }}">Seleccionar</label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>    
+                    </div>
+
+                    <div class="form-group" *ngIf="datos.documentacion && datos.idPropietarioOld">
+                        <div class="row">
+                            <h6 class="text-center">
+                                <b class="text-uppercase">Buscar propietario nuevo</b>
+                            </h6>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Tipo de identificación <span class="text-danger">*</span>
+                                </label>
+                                <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionSelectedNew"  name="idTipoIdentificacionNew" required>
+                                </ng-select>
+                            </div>
+
+                            <div class="col-xs-12 col-lg-6">
+                                <label  *ngIf="tipoIdentificacionSelectedNew != 4">Identificación</label>
+                                <label  *ngIf="tipoIdentificacionSelectedNew == 4">NIT</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" [(ngModel)]="identificacionNew" name="identificacionNew" required />
+                                    <span class="input-group-btn">
+                                        <button (click)="onSearchPropietarioNew()" class="btn btn-md btn-primary" type="button">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-lg-12" *ngIf="propietarioNew">
+                                <table class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">
+                                                <b class="text-uppercase">Propietario nuevo encontrado</b>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td *ngIf="propietarioNew.ciudadano">
+                                                <b>Identificación:</b> {{ propietarioNew.ciudadano.identificacion }}
+                                                <br>
+                                                <b>Nombre:</b> 
+                                                <br>
+                                                {{ propietarioNew.ciudadano.primerNombre }} {{ propietarioNew.ciudadano.primerApellido }}
+                                            </td>
+                                            <td *ngIf="propietarioNew.empresa">
+                                                <b>NIT:</b> 
+                                                <br>
+                                                {{ propietarioNew.empresa.nit }}
+                                                <br>
+                                                <b>Nombre:</b> 
+                                                <br>
+                                                {{ propietarioNew.empresa.nombre }}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>    
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button (click)="onEnviar()" class="btn btn-primary">
+                    <i class="fa fa-save"></i>
+                    Enviar
+                </button>
+            </div>
+        </div>
+    </div><!-- /.col -->
+</div><!-- /.row -->
+<!-- Button trigger modal -->
+

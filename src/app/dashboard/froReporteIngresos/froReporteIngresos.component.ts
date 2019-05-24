@@ -144,6 +144,13 @@ export class FroReporteIngresosComponent implements OnInit {
                     text: 'Excel',
                     filename: 'Reporte_Exógena_' + this.nombreOrganismoTransito + '_' + this.fecha,
                 },
+                {
+                    title: 'jhsjdhjasd',
+                    extend: 'csvHtml5',
+                    fieldSeparator: '|',
+                    text: 'csv',
+                    filename: 'Ipat_',
+                },
             ],
             oLanguage: {
                 oPaginate: {

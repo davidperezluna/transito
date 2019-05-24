@@ -1,0 +1,82 @@
+<div class="row" *ngIf="realizado">
+    <!-- .row -->
+    <div class="col-xs-12 col-lg-12">
+        <!-- .col -->
+        <div class="card">
+            <div class="card-header">
+                <span class="badge badge-success">Tramite realizado</span>
+            </div>
+            <div class="card-body text-center">
+                <!-- {{ tramiteSolicitud.resumen }} -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" *ngIf="!realizado">
+    <!-- .row -->
+    <div class="col-xs-12 col-lg-12">
+        <!-- .col -->
+        <form #newForm="ngForm">
+            <div class="card">
+                <div class="card-header">
+                    <b class="text-primary">
+                        Registrar importación temporal
+                    </b>
+                    <br>
+                    <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-12">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" [(ngModel)]="datos.documentacion" class="custom-control-input" id="documentacion" name="documentacion">
+                                    <label class="custom-control-label" for="documentacion">¿Presenta documentación completa?</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" *ngIf="!datos.documentacion">
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Registre que documentación esta pendiente <b class="text-danger">*</b></label>
+                                <textarea class="form-control" [(ngModel)]="datos.observacion" rows="4" name="observacion" required></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group" *ngIf="datos.documentacion">
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Fecha Solicitud <b class="text-danger">*</b></label>
+                                <input class="form-control" [(ngModel)]="datos.fechaSolicitud" name="fechaSolicitud" type="date"
+                                    required disabled />
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Nro. Cuotas (Meses) <b class="text-danger">*</b></label>
+                                <input class="form-control" [(ngModel)]="datos.numeroCuotas" name="numeroCuotas" type="number"
+                                    required />
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Pais <b class="text-danger">*</b></label>
+                                <ng-select [multiple]="false" [options]="paises" [(ngModel)]="datos.idPais" name="idPais"
+                                    required>
+                                </ng-select>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Licencia de Tránsito <b class="text-danger">*</b></label>
+                                <input class="form-control" [(ngModel)]="datos.licenciaConduccion" name="datos.licenciaConduccion"
+                                    type="number" required />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="card-footer">
+            <button (click)="onEnviar()" class="btn btn-primary">
+                <i class="fa fa-save"></i>
+                Enviar
+            </button>
+        </div>
+    </div>
+</div><!-- /.row -->

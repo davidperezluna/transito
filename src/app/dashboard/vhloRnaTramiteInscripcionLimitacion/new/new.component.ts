@@ -113,93 +113,98 @@ export class NewComponent implements OnInit {
         response => {
           if (response.code == 200) {
             if (response.data.ciudadano) {
-              this._CausalLimitacionService.select().subscribe(
-                response => {
-                  this.causalesLimitacion = response;
-                },
-                error => {
-                  this.errorMessage = <any>error;
-          
-                  if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert('Error en la petición');
-                  }
-                }
-              );
-          
-              this._DepartamentoService.select().subscribe(
-                response => {
-                  this.departamentos = response;
-                },
-                error => {
-                  this.errorMessage = <any>error;
-          
-                  if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert("Error en la petición");
-                  }
-                }
-              );
-          
-              this._EntidadJuducialService.select().subscribe( 
-                response => {
-                  this.entidadesJudiciales = response;
-                },
-                error => {
-                  this.errorMessage = <any>error;
-          
-                  if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert("Error en la petición");
-                  }
-                }
-              );
-          
-              this._TipoLimitacionService.select().subscribe(
-                response => {
-                  this.limitaciones = response;
-                },
-                error => {
-                  this.errorMessage = <any>error;
-          
-                  if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert("Error en la petición");
-                  }
-                }
-              );
-          
-              this._TipoProcesoLimitacionService.select().subscribe(
-                response => {
-                  this.tiposProceso = response;
-                },
-                error => {
-                  this.errorMessage = <any>error;
-          
-                  if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert("Error en la petición");
-                  }
-                }
-              );
-
               this.demandado = response.data.ciudadano;
               this.datos.idDemandado = response.data.ciudadano.id;
 
               this._VehiculoService.searchByParameters({ 'propietario': response.data.ciudadano.identificacion }, token).subscribe(
                 response => {
                     if (response.code == 200) {
-                      this.datos.vehiculos = response.data;
+                      this.vehiculos = response.data;
 
-                      swal.close();
+                      this._CausalLimitacionService.select().subscribe(
+                        response => {
+                          this.causalesLimitacion = response;
+                        },
+                        error => {
+                          this.errorMessage = <any>error;
+                  
+                          if (this.errorMessage != null) {
+                            console.log(this.errorMessage);
+                            alert('Error en la petición');
+                          }
+                        }
+                      );
+                  
+                      this._DepartamentoService.select().subscribe(
+                        response => {
+                          this.departamentos = response;
+                        },
+                        error => {
+                          this.errorMessage = <any>error;
+                  
+                          if (this.errorMessage != null) {
+                            console.log(this.errorMessage);
+                            alert("Error en la petición");
+                          }
+                        }
+                      );
+                  
+                      this._EntidadJuducialService.select().subscribe( 
+                        response => {
+                          this.entidadesJudiciales = response;
+                        },
+                        error => {
+                          this.errorMessage = <any>error;
+                  
+                          if (this.errorMessage != null) {
+                            console.log(this.errorMessage);
+                            alert("Error en la petición");
+                          }
+                        }
+                      );
+                  
+                      this._TipoLimitacionService.select().subscribe(
+                        response => {
+                          this.limitaciones = response;
+                        },
+                        error => {
+                          this.errorMessage = <any>error;
+                  
+                          if (this.errorMessage != null) {
+                            console.log(this.errorMessage);
+                            alert("Error en la petición");
+                          }
+                        }
+                      );
+                  
+                      this._TipoProcesoLimitacionService.select().subscribe(
+                        response => {
+                          this.tiposProceso = response;
+                        },
+                        error => {
+                          this.errorMessage = <any>error;
+                  
+                          if (this.errorMessage != null) {
+                            console.log(this.errorMessage);
+                            alert("Error en la petición");
+                          }
+                        }
+                      );
+
+                      swal({
+                        title: 'Perfecto!',
+                        text: response.message,
+                        type: 'success',
+                        confirmButtonText: 'Aceptar'
+                      });
                     } else {
-                      this.datos.vehiculos = null;
+                      this.vehiculos = null;
                       
                       swal({
-                          title: 'Error!',
-                          text: response.message,
-                          type: 'error',
-                          confirmButtonText: 'Aceptar'
+                        title: 'Error!',
+                        text: response.message,
+                        type: 'error',
+                        confirmButtonText: 'Aceptar'
                       });
                     }
                     error => {
@@ -248,8 +253,8 @@ export class NewComponent implements OnInit {
     }
   }
 
-  onVehiculoSelect(idVehiculo: any){
-    if (idVehiculo.target.checked) {
+  onVehiculoSelect(e: any, idVehiculo: any){
+    if (e.target.checked) {
       this.datos.vehiculos.push(idVehiculo);
     }else{
       this.datos.vehiculos =  this.datos.vehiculos.filter(h => h !== idVehiculo);

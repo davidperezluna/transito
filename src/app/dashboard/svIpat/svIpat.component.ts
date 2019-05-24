@@ -11,7 +11,7 @@ declare var $: any;
   templateUrl: './svIpat.component.html'
 })
 export class SvIpatComponent implements OnInit {
-  public ipat: SvIpat;
+  public ipatCreado: SvIpat;
   public errorMessage;
 
   public consecutivos;
@@ -83,6 +83,15 @@ export class SvIpatComponent implements OnInit {
 
   onNew() {
     this.formNew = true;
+    this.formIndex = false;
+    if (this.table) {
+      this.table.destroy();
+    }
+  }
+  onShow(ipatCreado: any) {
+    this.ipatCreado = ipatCreado;
+    this.formShow = true;
+    this.formNew = false;
     this.formIndex = false;
     if (this.table) {
       this.table.destroy();

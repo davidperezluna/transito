@@ -11,39 +11,19 @@ declare var $: any;
 
 export class ShowComponent implements OnInit {
     @Output() ready = new EventEmitter<any>();
-    @Input() consecutivo: any = null;
-    public consecutivos: any = null ;
+    @Input() ipat: any = null;
     public errorMessage;
     public table: any = null;
 
 
     constructor(
         private _LoginService: LoginService,
-        private _ConsecutivoService: SvIpatConsecutivoService,
     ) { }
 
     ngOnInit() {
-        let token = this._LoginService.getToken();
-        let identity = this._LoginService.getIdentity();
-        let datos = {
-            'identificacionUsuario': identity.identificacion,
-        };
-        this._ConsecutivoService.showBySede(token, datos).subscribe(
-            response => {
-                this.consecutivos = response.data;
-                let timeoutId = setTimeout(() => {
-                    this.onInitTable();
-                }, 100);
-            },
-            error => {
-                this.errorMessage = <any>error;
-
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert('Error en la petición');
-                }
-            }
-        );
+        let timeoutId = setTimeout(() => {
+            this.onInitTable();
+        }, 100);
     }
 
     onInitTable() {
@@ -51,6 +31,16 @@ export class ShowComponent implements OnInit {
             responsive: true,
             pageLength: 8,
             sPaginationType: 'full_numbers',
+            buttons: [
+                {
+                    title: 'jhsjdhjasd',
+                    extend: 'csvHtml5',
+                    fieldSeparator: '|',
+                    text: 'csv',
+                    filename: 'Ipat_' + this.ipat.consecutivo.numero,
+                },
+                
+            ],
             oLanguage: {
                 oPaginate: {
                     sFirst: '<i class="fa fa-step-backward"></i>',
