@@ -1,0 +1,126 @@
+<div class="row" *ngIf="realizado">
+    <!-- .row -->
+    <div class="col-xs-12 col-lg-12">
+        <!-- .col -->
+        <div class="card">
+            <div class="card-header">
+                <span class="badge badge-success">Tramite realizado</span>
+            </div>
+            <div class="card-body text-center">
+                <!-- {{ tramiteSolicitud.resumen }} -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" *ngIf="!realizado">
+    <!-- .row -->
+    <div class="col-xs-12 col-lg-12">
+        <!-- .col -->
+        <div class="card">
+            <div class="card-body">
+                <b class="text-primary">
+                    Cancelacion de matricula 
+                </b>
+                <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
+                <hr>
+                <form #formTramite="ngForm">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-12">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" [(ngModel)]="datos.documentacion" class="custom-control-input" id="documentacion" name="documentacion">
+                                    <label class="custom-control-label" for="documentacion">¿Presenta documentación completa?</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" *ngIf="!datos.documentacion">
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Registre que documentación esta pendiente <b class="text-danger">*</b></label>
+                                <textarea class="form-control" [(ngModel)]="datos.observacion" rows="4" name="observacion" required></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group" *ngIf="datos.documentacion">
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Motivo de cancelación 
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <ng-select [multiple]="false" [options]="motivosCancelacion" name="motivoCancelacionSelected" [(ngModel)]="datos.idMotivoCancelacion" required>
+                                </ng-select>
+                            </div>
+                   
+                            <div class="col-xs-6 col-lg-12" *ngIf="datos.idMotivoCancelacion !='EXPORTACIÓN O REEXPORTACIÓN' && datos.idMotivoCancelacion !='DESTRUCCIÓN O PERDIDA TOTAL'"><br>
+                                <label> Entidad judicial
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <ng-select [multiple]="false" [options]="entidadesJudiciales" [(ngModel)]="datos.idEntidadJudicial" required name="idEntidadJudicial">
+                                </ng-select>
+                            </div>
+
+                            <div class="col-xs-6 col-lg-12">
+                                <label> Numero de oficio</label>
+                                <input class="form-control" [(ngModel)]="datos.numeroOficio" name="numeroOficio" type="number" required />
+                            </div>
+
+                            <div class="col-xs-12 col-lg-6">
+                                <label> Fecha de oficio</label>
+                                <input class="form-control" [(ngModel)]="datos.fechaOficio" name="fechaOficio" type="date" required />
+                            </div>
+
+                            <div class="col-xs-12 col-lg-6" *ngIf="datos.idMotivoCancelacion =='EXPORTACIÓN O REEXPORTACIÓN'"><br>
+                                <label>Nro. declaración importación
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input class="form-control" [(ngModel)]="datos.declaracion" name="declaracion" type="text" required />
+                            </div>
+
+                            <div class="col-xs-12 col-lg-6" *ngIf="datos.idMotivoCancelacion =='EXPORTACIÓN O REEXPORTACIÓN'"><br>
+                                <label> Fecha declaración importación
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input class="form-control" [(ngModel)]="datos.fechaDeclaracion" name="fechaDeclaracion" type="date" min="0"
+                                    required />
+                            </div>
+
+                            <div class="col-xs-12 col-lg-12" *ngIf="datos.idMotivoCancelacion =='DESTRUCCIÓN O PERDIDA TOTAL' "><br>
+                                <label> Nro. de IPAT</label>
+                                <input class="form-control" [(ngModel)]="datos.ipat" name="ipat" type="text" />
+                            </div>
+
+                            <div class="col-xs-8 col-lg-6" *ngIf="datos.idMotivoCancelacion =='DESTRUCCIÓN O PERDIDA TOTAL'"><br>
+                                <label> Fecha de los hechos
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input class="form-control" [(ngModel)]="datos.fechaHechos" name="fechaHechos" type="date" min="0" required />
+                            </div>
+
+                            <div class="col-lg-6 col-md-6 " style="padding-top: 12%;" *ngIf="datos.idMotivoCancelacion =='DESTRUCCIÓN O PERDIDA TOTAL'">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" [(ngModel)]="datos.recuperarMotor" class="custom-control-input" id="recuperarMotor"
+                                        name="recuperarMotor" checked="">
+                                    <label class="custom-control-label" for="recuperarMotor">Recuperar Motor</label>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Observaciones</label>
+                                <textarea class="form-control" [(ngModel)]="datos.observaciones" rows="4" name="observaciones"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <button (click)="onEnviar()" class="btn btn-primary"  [disabled]="formTramite.invalid" >
+                    <i class="fa fa-save"></i>
+                    Enviar
+                </button>
+            </div>
+        </div>
+    </div> 
+    <!-- /.col -->
+</div>
+<!-- /.row -->

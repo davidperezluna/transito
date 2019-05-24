@@ -168,8 +168,6 @@ import { PqoCfgGruaModule } from './pqoCfgGrua/pqoCfgGrua.module';
 import { PqoGruaCiudadanoModule } from './pqoGruaCiudadano/pqoGruaCiudadano.module';
 import { PqoInmovilizacionModule } from './pqoInmovilizacion/pqoInmovilizacion.module';
 
-import { FacturaModule } from './factura/factura.module';
-import { FacturaInfraccionModule } from './facturaInfraccion/facturaInfraccion.module';
 import { RnmaTramiteInscripcionLimitacionModule } from './rnmaTramiteInscripcionLimitacion/rnmaTramiteInscripcionLimitacion.module';
 import { RnmaTramiteLevantamientoLimitacionModule } from './rnmaTramiteLevantamientoLimitacion/rnmaTramiteLevantamientoLimitacion.module';
 import { RnrsTramiteInscripcionLimitacionModule } from './rnrsTramiteInscripcionLimitacion/rnrsTramiteInscripcionLimitacion.module';
@@ -214,7 +212,6 @@ import { ImoLoteModule } from "./imoLote/imoLote.module";
 
 import { RnrsPreasignacionPlacaModule } from './rnrsPreasignacionPlaca/rnrsPreasignacionPlaca.module';
 
-import { FroTrteSolicitudRncModule } from './froTrteSolicitudRnc/froTrteSolicitudRnc.module';
 import { FroFacTramiteModule } from './froFacTramite/froFacTramite.module';
 import { FroTrteCfgCuentaModule } from './froTrteCfgCuenta/froTrteCfgCuenta.module';
 
@@ -234,9 +231,9 @@ import { FroRecaudoModule } from './froRecaudo/froRecaudo.module';
 import { FroTramiteModule } from './froTramite/froTramite.module';
 import { FroTrteCfgConceptoModule } from './froTrteCfgConcepto/froTrteCfgConcepto.module';
 import { FroTrtePrecioModule } from './froTrtePrecio/froTrtePrecio.module';
+import { FroTrteSolicitudModule } from './froTrteSolicitud/froTrteSolicitud.module';
+import { FroTrteSolicitudRncModule } from './froTrteSolicitudRnc/froTrteSolicitudRnc.module';
 import { FroTrteSolicitudRnaModule } from './froTrteSolicitudRna/froTrteSolicitudRna.module';
-import { FroTrteSolicitudRnmaModule } from './froTrteSolicitudRnma/froTrteSolicitudRnma.module';
-import { FroTrteSolicitudRnrsModule } from './froTrteSolicitudRnrs/froTrteSolicitudRnrs.module';
 import { FroReporteIngresosModule } from './froReporteIngresos/froReporteIngresos.module';
 import { FroCfgTipoRecaudoModule } from './froCfgTipoRecaudo/froCfgTipoRecaudo.module';
 import { FroAcuerdoPagoModule } from './froAcuerdoPago/froAcuerdoPago.module';
@@ -359,7 +356,6 @@ import {RightsidebarComponent} from '../shared';
     CfgCargoModule,
     PnalTalonarioModule,
     PnalAsignacionModule,
-    FroTrteSolicitudRncModule,
     FroFacTramiteModule,
     FroTrteCfgCuentaModule,
     CfgAdmFormatoModule,
@@ -424,7 +420,6 @@ import {RightsidebarComponent} from '../shared';
     VhloCfgColorModule,
     VhloCfgCombustibleModule,
     VhloCfgServicioModule,
-    FacturaModule,
     GestionTransportePublicoModule,
     CfgOrganismoTransitoModule,
     CfgChoqueConModule,
@@ -443,7 +438,6 @@ import {RightsidebarComponent} from '../shared';
     ReporteModule,
     registroEntregaProductoModule,
     RpcccInventarioDocumentalModule,
-    FacturaInfraccionModule,
     UserCfgEmpresaTipoModule,
     UserCfgEmpresaServicioModule,
     RnaCertificadoTradicionOficialModule,
@@ -466,9 +460,9 @@ import {RightsidebarComponent} from '../shared';
     FroTramiteModule,
     FroTrteCfgConceptoModule,
     FroTrtePrecioModule,
-    FroTrteSolicitudRnaModule, 
-    FroTrteSolicitudRnmaModule,
-    FroTrteSolicitudRnrsModule,
+    FroTrteSolicitudModule,
+    FroTrteSolicitudRncModule,
+    FroTrteSolicitudRnaModule,
     FroReporteIngresosModule,
     FroCfgTipoRecaudoModule,
   ],
