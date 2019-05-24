@@ -14,6 +14,7 @@ export class NewInsumoComponent implements OnInit {
     @Output() onReadyInsumo = new EventEmitter<any>();
     @Input() factura: any = null;
     @Input() idPropietario: any = null;
+    @Input() idModulo: any = null;
     public errorMessage;
 
     public realizado: any = false;
@@ -46,18 +47,18 @@ export class NewInsumoComponent implements OnInit {
         this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
             response => {
                 if (response.status == 'success') {
-                this.funcionario = response.data; 
-                
-                swal.close();
+                    this.funcionario = response.data; 
+                    
+                    swal.close();
                 } else {
-                this.funcionario = null;
+                    this.funcionario = null;
 
-                swal({
-                    title: 'Error!',
-                    text: response.message,
-                    type: 'error',
-                    confirmButtonText: 'Aceptar'
-                });
+                    swal({
+                        title: 'Error!',
+                        text: response.message,
+                        type: 'error',
+                        confirmButtonText: 'Aceptar'
+                    });
                 }
                 error => {
                     this.errorMessage = <any>error;
@@ -83,7 +84,7 @@ export class NewInsumoComponent implements OnInit {
 
         let datos = {
             'numero': this.numero,
-            'idModulo': 2,
+            'idModulo': this.idModulo,
             'idOrganismoTransito': this.funcionario.organismoTransito.id
         }
 
