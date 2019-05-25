@@ -71,6 +71,7 @@ import { VhloCfgRadioAccionService } from '../../../services/vhloCfgRadioAccion.
 })
 export class NewComponent implements OnInit {
   @Output() ready = new EventEmitter<any>();
+  @Input() consecutivo: any = null;
   public ipat: SvIpat;
   public ipatConductor: SvIpatConductor;
   public ipatVehiculo: SvIpatVehiculo;
@@ -81,10 +82,8 @@ export class NewComponent implements OnInit {
   public nroIpat: any;
 
   public numeroConsecutivo: any;
-  public consecutivo: any = null;
 
   public ipatEncontrado: any = null;
-  public ipatCreado: any = null;
 
   public ipats = false;
   public placasVehiculosIpat: any;
@@ -274,7 +273,9 @@ export class NewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.ipat = new SvIpat(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    console.log(this.consecutivo);
+
+    this.ipat = new SvIpat(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     this.ipatConductor = new SvIpatConductor(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     this.ipatVehiculo = new SvIpatVehiculo(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     this.ipatVictima = new SvIpatVictima(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
@@ -1081,7 +1082,6 @@ export class NewComponent implements OnInit {
       response => {
         if (response.status == 'success') {
           /* this.ready.emit(true); */
-          this.ipatCreado = response.data;
           swal({
             title: 'Perfecto!',
             text: response.message,
@@ -1089,7 +1089,6 @@ export class NewComponent implements OnInit {
             confirmButtonText: 'Aceptar'
           });
         } else {
-          this.ipatCreado = null;
           swal({
             title: 'Error!',
             text: response.message,
@@ -2034,9 +2033,5 @@ export class NewComponent implements OnInit {
 
   imprimirFormatos() {
     alert("formatos policia judicial");
-  }
-
-  onShow(ipatCreado: any) {
-    this.ipatCreado = ipatCreado;
   }
 }

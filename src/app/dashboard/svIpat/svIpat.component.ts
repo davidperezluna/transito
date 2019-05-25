@@ -3,6 +3,7 @@ import { SvIpatConsecutivoService } from '../../services/svIpatConsecutivo.servi
 import { SvIpat } from './svIpat.modelo';
 import { LoginService } from '../../services/login.service';
 import { SvIpatConsecutivo } from '../svIpatConsecutivo/svIpatConsecutivo.modelo';
+import { SvIpatService } from '../../services/svIpat.service';
 import swal from 'sweetalert2';
 declare var $: any;
 
@@ -24,6 +25,7 @@ export class SvIpatComponent implements OnInit {
 
   constructor(
     private _ConsecutivoService: SvIpatConsecutivoService,
+    private _IpatService: SvIpatService,
     private _LoginService: LoginService,
   ) { }
 
@@ -47,7 +49,6 @@ export class SvIpatComponent implements OnInit {
       response => {
         if (response) {
           this.consecutivos = response.data;
-          console.log(this.consecutivos);
           let timeoutId = setTimeout(() => {
             this.onInitTable();
           }, 100);
@@ -81,21 +82,61 @@ export class SvIpatComponent implements OnInit {
     });
   }
 
-  onNew() {
+  onNew(consecutivo: any) {
+    this.consecutivo = consecutivo;
+
     this.formNew = true;
     this.formIndex = false;
     if (this.table) {
       this.table.destroy();
     }
   }
-  onShow(ipatCreado: any) {
-    this.ipatCreado = ipatCreado;
-    this.formShow = true;
-    this.formNew = false;
-    this.formIndex = false;
-    if (this.table) {
-      this.table.destroy();
-    }
+
+  onShow(consecutivo: any) {
+    let token = this._LoginService.getToken();
+
+    this._IpatService.getIpatByConsecutivo(consecutivo, token).subscribe(
+      response => {
+        console.log(response.data);
+        if (response.code = 200) {
+          this.ipatCreado = response.data;
+          swal({
+            title: response.title,
+            text: response.message,
+            type: response.status,
+            confirmButtonText: 'Aceptar'
+          });
+          let timeoutId = setTimeout(() => {
+            this.onInitTable();
+          }, 100);
+          swal.close();
+
+          this.formShow = true;
+          this.formNew = false;
+          this.formIndex = false;
+          if (this.table) {
+            this.table.destroy();
+          }
+
+        }
+        else {
+          swal({
+            title: response.title,
+            text: response.message,
+            type: response.status,
+            confirmButtonText: 'Aceptar'
+          });
+        }
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
   }
 
   ready(isCreado: any) {

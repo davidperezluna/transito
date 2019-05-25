@@ -3,16 +3,8 @@
     <div class="col-md-12">
       <div class="card">
         <div class="card-header">
-          <h5 class="card-title">
             <b class="text-uppercase">Seguridad Vial</b>
             <small>Listado de IPAT</small>
-            <div class="btn-group pull-right">
-              <button (click)="onNew()" class="btn btn-default">
-                <i class="fa fa-plus"></i>
-                Nuevo
-              </button>
-            </div>
-          </h5>
         </div>
         <div class="card-body">
           <table class="table " id="dataTables-example">
@@ -22,7 +14,7 @@
                 <th>No. Consecutivo</th>
                 <th>Organismo Transito</th>
                 <th>Estado</th>
-                <!--<th>Acciones</th>-->
+                <th>Acciones</th>
               </tr>
             </thead>
             <tbody>
@@ -31,11 +23,14 @@
                 <td>{{ consecutivo.numero }}</td>
                 <td>{{ consecutivo.talonario.organismoTransito?.nombre }}</td>
                 <td>{{ consecutivo.estado }}</td>
-                <!--<td><div class="btn-group">
-                  <button (click)="onShow(consecutivo)" (ready)="ready($event)" class="btn btn-xs btn-default" type="button">
-                    <i class="fa fa-eye"></i>
+                <td>
+                  <button (click)="onShow(consecutivo)" *ngIf="consecutivo.estado == 'UTILIZADO'" (ready)="ready($event)" class="btn btn-xs btn-primary" type="button">
+                    Ver
                   </button>
-                </div></td>-->
+                  <button (click)="onNew(consecutivo)" *ngIf="consecutivo.estado == 'ASIGNADO'" (ready)="ready($event)" class="btn btn-xs btn-success" type="button">
+                    <!-- <i class="fa fa-plus">Nuevo Ipat</i> -->Nuevo Ipat {{ consecutivo.estado }}
+                  </button>
+                </td>
               </tr>
             </tbody>
           </table>
@@ -44,5 +39,6 @@
       </div>
     </div>
   </div>
-  <app-new *ngIf='formNew' (ready)="ready($event)"></app-new> 
+  <app-new *ngIf='formNew' [consecutivo]="consecutivo" (ready)="ready($event)"></app-new> 
+  <app-show *ngIf='formShow' [ipatCreado]="ipatCreado" (ready)="ready($event)"></app-show>
 </div>

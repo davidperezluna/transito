@@ -33,7 +33,7 @@ export class SvIpat{
 		public idVisual:number,
 		public idVisualDisminuida:number,
 		public otraVisualDisminuida: string,
-		public semaforo: string,
+		public haySemaforo: string,
 		
 		public idEstadoSemaforo: number,
 		public arraySenialesVerticales: number,
@@ -184,7 +184,9 @@ export class SvIpat{
 		public totalHeridos: number,
 		public totalMuertos: number,
 
+
 		// información testigo
+		public hayTestigo: number,
 		public tipoIdentificacionTestigo: number,
 		public identificacionTestigo: number,
 		public nombresTestigo: string,

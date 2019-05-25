@@ -5,7 +5,7 @@ import  'rxjs/add/operator/map';
 
 @Injectable()
 export class SvIpatService {
-	private url = environment.apiUrl + "seguridadvial/svregistroipat";
+	private url = environment.apiUrl + "seguridadvial/svipat";
 	public identity;
 	public token;
 
@@ -129,6 +129,15 @@ export class SvIpatService {
 		let params = "data=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/cargar/ipats", params, { headers: headers }).map(
+			res => res.json()
+		);
+	}
+
+	getIpatByConsecutivo(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = "data=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/ipat/by/consecutivo", params, { headers: headers }).map(
 			res => res.json()
 		);
 	}

@@ -1,6 +1,4 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { SvIpatConsecutivoService } from '../../../services/svIpatConsecutivo.service';
-import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 declare var $: any;
 
@@ -11,22 +9,25 @@ declare var $: any;
 
 export class ShowComponent implements OnInit {
     @Output() ready = new EventEmitter<any>();
-    @Input() ipat: any = null;
+    @Input() ipatCreado: any = null;
     public errorMessage;
     public table: any = null;
 
 
     constructor(
-        private _LoginService: LoginService,
     ) { }
 
     ngOnInit() {
+        console.log(this.ipatCreado);
         let timeoutId = setTimeout(() => {
             this.onInitTable();
         }, 100);
     }
 
     onInitTable() {
+        if(this.table) {
+            this.table.destroy();
+        }
         this.table = $('#dataTables-example').DataTable({
             responsive: true,
             pageLength: 8,
@@ -37,7 +38,7 @@ export class ShowComponent implements OnInit {
                     extend: 'csvHtml5',
                     fieldSeparator: '|',
                     text: 'csv',
-                    filename: 'Ipat_' + this.ipat.consecutivo.numero,
+                    filename: 'Ipat_' + this.ipatCreado.consecutivo.numero,
                 },
                 
             ],

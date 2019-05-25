@@ -1,36 +1,19 @@
-<div class="col-xs-12 col-lg-12">
+<div class="col-xs-12 col-lg-8">
     <div class="card">
         <div class="card-body">
             <div class="row">
-                <div class="col-xs-16 col-lg-6" style="margin-top: 2%;">
-                    <div class="input-group">
-                        <input type="number" class="form-control" placeholder="número de consecutivo"
-                            [(ngModel)]="numeroConsecutivo" required name="numeroConsecutivo" />
-                        <span class="input-group-btn">
-                            <button (click)="onSearchConsecutivo()" class="btn btn-default btn-primary" type="button">
-                                <i class="fa fa-search"></i>
-                            </button>
-                        </span>
-                    </div>
-                </div>
-                <div *ngIf="consecutivo" class="col-xs-12 col-lg-6">
+                <div *ngIf="consecutivo" class="col-xs-12 col-lg-12">
                     <table class="table table-bordered table-striped">
                         <tbody>
                             <tr>
                                 <th><b>Numero</b></th>
+                                <th><b>OrganismoTranto</b></th>
                                 <th><b>Estado</b></th>
-                                <th *ngIf="ipatCreado"><b>Acciones</b></th>
                             </tr>
                             <tr>
                                 <td>{{ consecutivo.numero }}</td>
+                                <td>{{ consecutivo.talonario.organismoTransito.nombre }}</td>
                                 <td>{{ consecutivo.estado }}</td>
-                                <td *ngIf="ipatCreado">
-                                    <div class="btn-group">
-                                        <button (click)="onShow(ipatCreado)" (ready)="ready($event)" class="btn btn-xs btn-default" type="button">
-                                            <i class="fa fa-eye"></i>
-                                        </button>
-                                    </div>
-                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -112,7 +95,7 @@
                         <div class="form-group row">
                             <div class="col-xs-12 col-lg-6">
                                 <div class="custom-control custom-radio">
-                                    <input id="radioTestigoSi" name="testigo" [(ngModel)]="ipat.testigo" value="1"
+                                    <input id="radioTestigoSi" name="testigo" [(ngModel)]="ipat.hayTestigo" value="1"
                                         type="radio" id="customRadioTestigo1" name="customRadioTestigo"
                                         class="custom-control-input">
                                     <label class="custom-control-label" for="customRadioTestigo1">Si</label>
@@ -120,7 +103,7 @@
                             </div>
                             <div class="col-xs-12 col-lg-6">
                                 <div class="custom-control custom-radio">
-                                    <input id="radioTestigoNo" name="testigo" [(ngModel)]="ipat.testigo" value="0"
+                                    <input id="radioTestigoNo" name="testigo" [(ngModel)]="ipat.hayTestigo" value="0"
                                         type="radio" id="customRadioTestigo2" name="customRadioTestigo"
                                         class="custom-control-input">
                                     <label class="custom-control-label" for="customRadioTestigo2">No</label>
@@ -263,7 +246,7 @@
                         <div class="form-group row">
                             <div class="col-xs-12 col-lg-6">
                                 <div class="custom-control custom-radio">
-                                    <input id="radioSemaforoSi" name="semaforo" [(ngModel)]="ipat.semaforo" value="1"
+                                    <input id="radioSemaforoSi" name="semaforo" [(ngModel)]="ipat.haySemaforo" value="1"
                                         type="radio" id="customRadioSemaforo1" name="customRadioSemaforo"
                                         class="custom-control-input">
                                     <label class="custom-control-label" for="customRadioSemaforo1">Si</label>
@@ -271,7 +254,7 @@
                             </div>
                             <div class="col-xs-12 col-lg-6">
                                 <div class="custom-control custom-radio">
-                                    <input id="radioSemaforoNo" name="semaforo" [(ngModel)]="ipat.semaforo" value="0"
+                                    <input id="radioSemaforoNo" name="semaforo" [(ngModel)]="ipat.haySemaforo" value="0"
                                         type="radio" id="customRadioSemaforo2" name="customRadioSemaforo"
                                         class="custom-control-input">
                                     <label class="custom-control-label" for="customRadioSemaforo2">No</label>
@@ -279,7 +262,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6 col-md-6" *ngIf="ipat.semaforo == '1'">
+                    <div class="col-lg-6 col-md-6" *ngIf="ipat.haySemaforo == '1'">
                         <label>Estado Semaforo</label>
                         <ng-select [multiple]="false" [options]="estadosSemaforo" [(ngModel)]="ipat.idEstadoSemaforo"
                             name="estadoSemaforo">
@@ -1094,7 +1077,7 @@
                 </div>
             </div>
         </div>
-        <div class="card" *ngIf="consecutivo && ipat.testigo == '1'">
+        <div class="card" *ngIf="consecutivo && ipat.hayTestigo == '1'">
             <div class="card-header">
                 <h5 class="card-title">
                     <strong class="text-uppercase">Información General Testigo</strong>
@@ -1561,5 +1544,5 @@
                 class="btn btn-primary">Enviar</button>
         </div>
     </form>
-    <app-show *ngIf='ipatCreado' [ipat]="ipatCreado" (ready)="ready($event)"></app-show>
+    <!-- <app-show *ngIf='ipatCreado' [ipat]="ipatCreado" (ready)="ready($event)"></app-show> -->
 </div>
