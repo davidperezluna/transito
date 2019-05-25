@@ -29,7 +29,7 @@ public datos = {
   'observaciones': null,
   'numeroCarpeta': null,
   'idMedioCorrespondenciaEnvio': null,
-  'idSedeOperativa': null,
+  'idOrganismoTransito': null,
   'idDocumento': null,
 };
 
