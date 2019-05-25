@@ -154,6 +154,40 @@
                         </div>
                     </div><!-- .row -->
 
+                    <div class="row" *ngIf="vehiculo.tipoMatricula == 'RADICADO'">
+                        <div class="col-xs-12 col-lg-8">
+                            <label>Organismo de transito de que proviene <b class="text-danger">*</b></label>
+                            <ng-select [multiple]="false" [options]="organismosTransito" [(ngModel)]="radicado.idOrganismoTransito" name="idOrganismoTransitoProviene" required>
+                            </ng-select>
+                        </div>
+    
+                        <div class="col-xs-12 col-lg-6"  >
+                            <label>Tipo documento empresa afiliadora <b class="text-danger">*</b></label>
+                            <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="radicado.idTipoIdentificacion" name="idTipoIdentificacion" required>
+                            </ng-select>
+                        </div>
+    
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Nro. Documento <b class="text-danger">*</b></label>
+                            <input class="form-control" [(ngModel)]="radicado.numeroDocumento"  name="numeroDocumento" type="text" required />
+                        </div>                      
+                        
+                        <div class="col-xs-12 col-lg-3">
+                            <label>Fecha de ingreso <b class="text-danger">*</b></label>
+                            <input class="form-control" [(ngModel)]="radicado.fechaIngreso" name="fechaIngreso" type="date" required />
+                        </div>
+    
+                        <div class="col-xs-12 col-lg-3">
+                            <label>Nro. guiá de llegada <b class="text-danger">*</b></label>
+                            <input class="form-control" [(ngModel)]="radicado.guiaLlegada" name="guiaLlegada" type="text" required />
+                        </div>
+    
+                        <div class="col-xs-12 col-lg-3">
+                            <label>Empresa de envió <b class="text-danger">*</b></label>
+                            <input class="form-control" [(ngModel)]="radicado.empresaEnvio" name="empresaEnvio" type="text" required />
+                        </div>
+                    </div>
+
                     <div class="row" *ngIf="vehiculo.idServicio == 2">
                         <div class="col-xs-12 col-lg-12">
                             <b class="text-uppercase">Buscar empresa de afiliación</b>

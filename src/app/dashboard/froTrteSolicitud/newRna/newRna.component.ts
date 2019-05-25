@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { FroTrteSolicitudRna } from '../froTrteSolicitudRna.modelo';
+import { FroTrteSolicitud } from '../froTrteSolicitud.modelo';
 import { FroTrteSolicitudService } from '../../../services/froTrteSolicitud.service';
 import { FroFacTramiteService } from '../../../services/froFacTramite.service';
 import { FroFacturaService } from '../../../services/froFactura.service';
@@ -12,14 +12,14 @@ import { LoginService } from '../../../services/login.service';
 import { environment } from 'environments/environment';
 import swal from 'sweetalert2';
 
-
 @Component({
-  selector: 'app-new',
+  selector: 'app-new-rna',
   templateUrl: './newRna.component.html'
 })
+
 export class NewRnaComponent implements OnInit {
   @Output() ready = new EventEmitter<any>();
-  public tramiteSolicitud: FroTrteSolicitudRna;
+  public tramiteSolicitud: FroTrteSolicitud;
   public errorMessage;
 
   public apiUrl = environment.apiUrl + 'financiero/frotrtesolicitud';
@@ -77,7 +77,7 @@ export class NewRnaComponent implements OnInit {
       }
     });
 
-    this.tramiteSolicitud = new FroTrteSolicitudRna(null, null, null, null, null, null, null, null, null, null);
+    this.tramiteSolicitud = new FroTrteSolicitud(null, null, null, null, null, null, null, null, null, null);
 
     let token = this._LoginService.getToken();
 

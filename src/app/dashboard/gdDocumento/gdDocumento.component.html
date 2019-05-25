@@ -38,7 +38,7 @@
       </div>
     </div>
 
-    <div class="col-xs-12 col-lg-8" *ngIf='formAssign'>
+    <div class="col-xs-12 col-lg-9" *ngIf='formAssign'>
       <div class="card">
         <div class="card-header">
           <h5 class="card-title">
@@ -72,71 +72,75 @@
               </tr>
             </thead>
             <tbody>
-              <tr class="odd" *ngFor="let documento of documentosPendientes; let i = index">
-                <td class="btn btn-danger" *ngIf="documento.estado == 'PENDIENTE'">{{ i + 1 }}</td>
-                <td class="btn btn-danger" *ngIf="documento.estado == 'RECHAZADO'">{{ i + 1 }}</td>
-                <td class="btn btn-primary" *ngIf="documento.estado == 'ASIGNADO'">{{ i + 1 }}</td>
-                <td class="btn btn-warning" *ngIf="documento.estado == 'EN TRAMITE' || documento.estado == 'RESPUESTA REALIZADA'">{{ i + 1 }}</td>
-                <td class="btn btn-success" *ngIf="documento.estado == 'FINALIZADO'">{{ i + 1 }}</td>
-                <td>
-                  <span *ngIf="documento.peticionarioNombres">
-                    {{ documento.peticionarioNombres }} {{ documento.peticionarioApellidos }}
-                    <br>
-                  </span>
-                  <span *ngIf="documento.identificacion">
-                    {{ documento.identificacion }}
-                    <br>
-                  </span>
-                  <span *ngIf="documento.entidadNombre">
-                    {{ documento.entidadNombre }}
-                  </span>
-                </td>
-                <td>
-                  <b>No. radicado:</b> {{ documento.numeroRadicado }}
-                  <br>
-                  <span *ngIf="documento.tipoCorrespondencia">
-                    <b>Tipo:</b> {{ documento.tipoCorrespondencia.nombre }}
-                    <br>
-                  </span>
-                  <b>Estado:</b> {{ documento.estado }}
-                  <span *ngIf="documento.estado == 'FINALIZADO'">
-                    <b>Tipo:</b> {{ documento.fechaEnvio }}
-                    <br>
-                  </span>
-                  <br>
-                  <b>No. oficio:</b> {{ documento.numeroOficio }}
-                </td>
-                <td>
-                  <b>F. radicado:</b>
-                  <br>
-                  {{ documento.fechaRegistro }}
-                  <br>
-                  <b>F. vencimiento:</b>
-                  <br>
-                  {{ documento.fechaVencimiento }}
-                </td>
-                <td>
-                  <div class="btn-group">
-                    <button (click)="onShow(documento)" class="btn btn-xs btn-primary" type="button" *ngIf="(documento.estado == 'PENDIENTE' || documento.estado == 'RECHAZADO') && !documento.url">
-                      <i class="fa fa-file-text-o"></i>
-                      Registrar Información
-                    </button>
-                    <button (click)="onPrint(documento)" class="btn btn-xs btn-primary" type="button" *ngIf="documento.estado == 'RESPUESTA REALIZADA'">
-                      <i class="fa fa-check"></i>
-                      Finalizar
-                    </button>
-                    <button (click)="onRecord(documento)" class="btn btn-xs btn-primary" type="button" *ngIf="documento.estado != 'PENDIENTE'">
-                      <i class="fa fa-bars"></i>
-                      Historial
-                    </button>
-                  </div>
-                  <div class="col-xs-12 col-lg-12" *ngIf="(documento.estado == 'PENDIENTE' || documento.estado == 'RECHAZADO') && documento.url">
+              <ng-container *ngFor="let documento of documentosPendientes; let i = index">
+                <tr colspan="5" *ngIf="(documento.estado == 'PENDIENTE' || documento.estado == 'RECHAZADO') && documento.url">
+                  <div class="col-xs-12 col-lg-12">
                     <label>Asignar a</label>
                     <ng-select [multiple]="false" [options]="funcionarios" [(ngModel)]="funcionarioSelected"  (ngModelChange)="onChangedAssign($event, documento.id)" name="funcionario" required>
                     </ng-select>
                   </div>
-                </td>
-              </tr>
+                </tr>
+                <tr class="odd">
+                  <td class="btn btn-danger" *ngIf="documento.estado == 'PENDIENTE'">{{ i + 1 }}</td>
+                  <td class="btn btn-danger" *ngIf="documento.estado == 'RECHAZADO'">{{ i + 1 }}</td>
+                  <td class="btn btn-primary" *ngIf="documento.estado == 'ASIGNADO'">{{ i + 1 }}</td>
+                  <td class="btn btn-warning" *ngIf="documento.estado == 'EN TRAMITE' || documento.estado == 'RESPUESTA REALIZADA'">{{ i + 1 }}</td>
+                  <td class="btn btn-success" *ngIf="documento.estado == 'FINALIZADO'">{{ i + 1 }}</td>
+                  <td>
+                    <span *ngIf="documento.peticionarioNombres">
+                      {{ documento.peticionarioNombres }} {{ documento.peticionarioApellidos }}
+                      <br>
+                    </span>
+                    <span *ngIf="documento.identificacion">
+                      {{ documento.identificacion }}
+                      <br>
+                    </span>
+                    <span *ngIf="documento.entidadNombre">
+                      {{ documento.entidadNombre }}
+                    </span>
+                  </td>
+                  <td>
+                    <b>No. radicado:</b> {{ documento.numeroRadicado }}
+                    <br>
+                    <span *ngIf="documento.tipoCorrespondencia">
+                      <b>Tipo:</b> {{ documento.tipoCorrespondencia.nombre }}
+                      <br>
+                    </span>
+                    <b>Estado:</b> {{ documento.estado }}
+                    <span *ngIf="documento.estado == 'FINALIZADO'">
+                      <b>Tipo:</b> {{ documento.fechaEnvio }}
+                      <br>
+                    </span>
+                    <br>
+                    <b>No. oficio:</b> {{ documento.numeroOficio }}
+                  </td>
+                  <td>
+                    <b>F. radicado:</b>
+                    <br>
+                    {{ documento.fechaRegistro }}
+                    <br>
+                    <b>F. vencimiento:</b>
+                    <br>
+                    {{ documento.fechaVencimiento }}
+                  </td>
+                  <td>
+                    <div class="btn-group">
+                      <button (click)="onShow(documento)" class="btn btn-xs btn-primary" type="button" *ngIf="(documento.estado == 'PENDIENTE' || documento.estado == 'RECHAZADO') && !documento.url">
+                        <i class="fa fa-file-text-o"></i>
+                        Registrar Información
+                      </button>
+                      <button (click)="onPrint(documento)" class="btn btn-xs btn-primary" type="button" *ngIf="documento.estado == 'RESPUESTA REALIZADA'">
+                        <i class="fa fa-check"></i>
+                        Finalizar
+                      </button>
+                      <button (click)="onRecord(documento)" class="btn btn-xs btn-primary" type="button" *ngIf="documento.estado != 'PENDIENTE'">
+                        <i class="fa fa-bars"></i>
+                        Historial
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </ng-container>
             </tbody>
           </table>
           <!-- /.table-responsive -->

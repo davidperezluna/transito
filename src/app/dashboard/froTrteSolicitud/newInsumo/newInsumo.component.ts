@@ -13,7 +13,6 @@ import swal from 'sweetalert2';
 export class NewInsumoComponent implements OnInit {
     @Output() onReadyInsumo = new EventEmitter<any>();
     @Input() factura: any = null;
-    @Input() idPropietario: any = null;
     @Input() idModulo: any = null;
     public errorMessage;
 

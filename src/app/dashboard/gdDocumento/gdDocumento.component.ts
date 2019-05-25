@@ -131,7 +131,7 @@ export class GdDocumentoComponent implements OnInit {
    this.table = $('#dataTables-example').DataTable();
   }
 
-  onChangedAssign(event,idDocumento) {
+  onChangedAssign(event, idDocumento) {
     if (event !== undefined) {
       let token = this._loginService.getToken();
 
@@ -188,7 +188,7 @@ export class GdDocumentoComponent implements OnInit {
         }
       );
 
-      var html = '¿Esta seguro que desea asignar este documento?';
+      var html = '¿Esta seguro que desea asignar este documento a: '+this.funcionarioSelected.ciudadano.primerNombre+' '+this.funcionarioSelected.ciudadano.primerApellido+'?';
 
       swal({
         title: 'Atención',

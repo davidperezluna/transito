@@ -16,6 +16,7 @@ export class VhloRnaPreregistro{
 		public numeroEjes:number,
 		public numeroPasajeros:number,
 		public tipoMatricula:string,
+		public radicado:any,
 		public capacidadCarga:number,
 		public idMarca: number,
 		public idLinea:number,

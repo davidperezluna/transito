@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FroTrteSolicitudRnc } from '../froTrteSolicitudRnc.modelo';
+import { FroTrteSolicitud } from '../froTrteSolicitud.modelo';
 import { FroTrteSolicitudService } from '../../../services/froTrteSolicitud.service';
 import { FroFacTramiteService } from '../../../services/froFacTramite.service';
 import { FroFacturaService } from '../../../services/froFactura.service';
@@ -16,7 +16,7 @@ import swal from 'sweetalert2';
 })
 export class NewRncComponent implements OnInit {
   @Output() ready = new EventEmitter<any>();
-  public tramiteSolicitud: FroTrteSolicitudRnc;
+  public tramiteSolicitud: FroTrteSolicitud;
   public errorMessage;
 
   public apiUrl = environment.apiUrl + 'financiero/frotrtesolicitud';
@@ -60,7 +60,7 @@ constructor(
       }
     });
 
-    this.tramiteSolicitud = new FroTrteSolicitudRnc(null, null, null, null, null, null, null, null);
+    this.tramiteSolicitud = new FroTrteSolicitud(null, null, null, null, null, null, null, null, null, null);
 
     let token = this._LoginService.getToken();
 

@@ -178,8 +178,6 @@ import { FroTramiteRoutes } from './froTramite/froTramite.routes';
 import { FroTrteCfgConceptoRoutes } from './froTrteCfgConcepto/froTrteCfgConcepto.routes';
 import { FroTrtePrecioRoutes } from './froTrtePrecio/froTrtePrecio.routes';
 import { FroTrteSolicitudRoutes } from './froTrteSolicitud/froTrteSolicitud.routes';
-import { FroTrteSolicitudRncRoutes } from './froTrteSolicitudRnc/froTrteSolicitudRnc.routes';
-import { FroTrteSolicitudRnaRoutes } from './froTrteSolicitudRna/froTrteSolicitudRna.routes';
 import { FroReporteIngresosRoutes } from './froReporteIngresos/froReporteIngresos.routes';
 import { FroCfgTipoRecaudoRoutes } from './froCfgTipoRecaudo/froCfgTipoRecaudo.routes';
 import { FroFacTramiteRoutes } from './froFacTramite/froFacTramite.routes';
@@ -338,8 +336,6 @@ export const DashboardRoutes: Route[] = [
       ...PnalTalonarioRoutes,
       ...PnalAsignacionRoutes,
       ...FroTrteSolicitudRoutes,
-      ...FroTrteSolicitudRncRoutes,
-      ...FroTrteSolicitudRnaRoutes,
       ...FroFacTramiteRoutes,
       ...FroTrteCfgCuentaRoutes,
       ...CvCdoComparendoRoutes,

@@ -10,6 +10,8 @@ import { FroFacRetefuenteService } from '../../services/froFacRetefuente.service
 import { FroTrteSolicitudService } from '../../services/froTrteSolicitud.service';
 
 import { FroTrteSolicitudComponent } from './froTrteSolicitud.component';
+import { NewRncComponent } from './newRnc/newRnc.component';
+import { NewRnaComponent } from './newRna/newRna.component';
 import { NewRnmaComponent } from './newRnma/newRnma.component';
 import { NewRnrsComponent } from './newRnrs/newRnrs.component';
 import { NewInsumoComponent } from './newInsumo/newInsumo.component';
@@ -41,6 +43,13 @@ import { NewTransformacionComponent } from './tramites/tramiteTransformacion/new
 import { NewImportacionTemporalComponent } from "./tramites/tramiteImportacionTemporal/new.importacionTemporal.component";
 import { NewProrrogaImportacionTemporalComponent } from "./tramites/tramiteProrrogaImportacionTemporal/new.prorrogaImportacionTemporal.component";
 
+import { NewRncExpedicionLicenciaComponent } from './tramites/tramiteExpedicionLicencia/newRncExpedicionLicencia.component';
+import { NewRncDuplicadoLicenciaComponent } from './tramites/tramiteDuplicadoLicencia/newRncDuplicadoLicencia.component';
+import { NewRncExpedicionLicenciaCambioDocumentoComponent } from './tramites/tramiteExpedicionLicenciaCambioDocumento/newRncExpedicionLicenciaCambioDocumento.component';
+import { NewRncRecategorizacionLicenciaAbajoComponent } from './tramites/tramiteRecategorizacionLicenciaAbajo/newRncRecategorizacionLicenciaAbajo.component';
+import { NewRncRecategorizacionLicenciaArribaComponent } from './tramites/tramiteRecategorizacionLicenciaArriba/newRncRecategorizacionLicenciaArriba.component';
+import { NewRncRefrendacionLicenciaComponent } from './tramites/tramiteRefrendacionLicencia/newRncRefrendacionLicencia.component';
+
 import { SelectModule } from 'angular2-select';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { TooltipModule, Tooltip } from "ngx-tooltip";
@@ -57,6 +66,8 @@ import { UserCiudadanoModule } from '../userCiudadano/userCiudadano.module';
     ],
     declarations: [
         FroTrteSolicitudComponent,
+        NewRncComponent,
+        NewRnaComponent,
         NewRnmaComponent,
         NewRnrsComponent,
         NewInsumoComponent,
@@ -87,9 +98,17 @@ import { UserCiudadanoModule } from '../userCiudadano/userCiudadano.module';
         NewTramiteCambioAcreedorPrendarioPropietarioComponent,
         NewImportacionTemporalComponent,
         NewProrrogaImportacionTemporalComponent,
+        NewRncExpedicionLicenciaComponent,
+        NewRncDuplicadoLicenciaComponent,
+        NewRncExpedicionLicenciaCambioDocumentoComponent,
+        NewRncRecategorizacionLicenciaAbajoComponent,
+        NewRncRecategorizacionLicenciaArribaComponent,
+        NewRncRefrendacionLicenciaComponent
     ],
     exports: [
         FroTrteSolicitudComponent,
+        NewRncComponent,
+        NewRnaComponent,
         NewRnmaComponent,
         NewRnrsComponent,
         NewInsumoComponent,
@@ -120,6 +139,12 @@ import { UserCiudadanoModule } from '../userCiudadano/userCiudadano.module';
         NewTramiteCambioAcreedorPrendarioPropietarioComponent,
         NewImportacionTemporalComponent,
         NewProrrogaImportacionTemporalComponent,
+        NewRncExpedicionLicenciaComponent,
+        NewRncDuplicadoLicenciaComponent,
+        NewRncExpedicionLicenciaCambioDocumentoComponent,
+        NewRncRecategorizacionLicenciaAbajoComponent,
+        NewRncRecategorizacionLicenciaArribaComponent,
+        NewRncRefrendacionLicenciaComponent
     ],
     providers: [
         FroTrteSolicitudService, 

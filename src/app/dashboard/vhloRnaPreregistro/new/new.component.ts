@@ -10,12 +10,12 @@ import { VhloCfgCombustibleService } from '../../../services/vhloCfgCombustible.
 import { VhloCfgRadioAccionService } from '../../../services/vhloCfgRadioAccion.service';
 import { VhloCfgModalidadTransporteService } from '../../../services/vhloCfgModalidadTransporte.service';
 import { VhloCfgMarcaService } from '../../../services/vhloCfgMarca.service';
+import { VhloPropietarioService } from '../../../services/vhloPropietario.service';
+import { VhloRnaPreregistroService } from '../../../services/vhloRnaPreregistro.service';
 import { UserCfgTipoIdentificacionService } from '../../../services/userCfgTipoIdentificacion.service';
 import { UserCiudadanoService } from '../../../services/userCiudadano.service';
 import { UserEmpresaService } from "../../../services/userEmpresa.service";
 import { PnalFuncionarioService } from '../../../services/pnalFuncionario.service';
-import { VhloPropietarioService } from '../../../services/vhloPropietario.service';
-import { VhloRnaPreregistroService } from '../../../services/vhloRnaPreregistro.service';
 import { LoginService } from '../../../services/login.service';
 
 import swal from 'sweetalert2';
@@ -83,6 +83,15 @@ export class NewComponent implements OnInit {
     'idVehiculo': null,
   };
 
+  public radicado = {
+    'numeroDocumento': null,
+    'fechaIngreso': null,
+    'guiaLlegada': null,
+    'empresaEnvio': null,
+    'idOrganismoTransito': null,
+    'idTipoIdentificacion': null,
+  };
+
 constructor(
   private _PropietarioService: VhloPropietarioService,
   private _MarcaService: VhloCfgMarcaService,
@@ -104,7 +113,7 @@ constructor(
   ){}
 
   ngOnInit() {
-    this.vehiculo = new VhloRnaPreregistro(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
+    this.vehiculo = new VhloRnaPreregistro(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
     
     let token = this._LoginService.getToken();
     let identity = this._LoginService.getIdentity();
@@ -596,6 +605,8 @@ constructor(
 
   onEnviar() {
     let token = this._LoginService.getToken();
+
+    this.vehiculo.radicado = this.radicado;
 
     this._RnaPreregistroService.register(this.vehiculo, token).subscribe(
       response => {
