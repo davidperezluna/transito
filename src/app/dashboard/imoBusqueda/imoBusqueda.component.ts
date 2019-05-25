@@ -23,8 +23,8 @@ export class ImoBusquedaComponent implements OnInit {
   public organismosTransito:any;
 
   public tiposInsumos:any = [
-    { 'value': 'SUSTRATO', 'label':'SUSTRATO'},
-    { 'value': 'INSUMO', 'label':'INSUMO'},
+    { 'value': 'SUSTRATO', 'label':'SUSTRATO'}
+    // { 'value': 'INSUMO', 'label':'INSUMO'},
   ];
 
   public datos = {

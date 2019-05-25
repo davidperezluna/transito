@@ -21,7 +21,7 @@
                     <td >{{ insumo.numero }}</td>
                     <td >{{ (insumo.fecha.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td>
                     <td>
-                      <button (click)="deleteInsumo(insumo.id)"  class="btn btn-danger" type="button">Eliminar</button>
+                      <button *ngIf="insumo.estado != 'ANULADO'" (click)="deleteInsumo(insumo.id)"  class="btn btn-danger" type="button">Eliminar</button>
                       <a href="{{ apiUrl }}/{{insumo.actaEntrega}}/{{insumo.organismoTransito.id}}/pdf/acta/asignacion" class="btn btn-success" target="_blank">
                         <i class="fa fa-file-pdf-o"></i>
                           Imprimir Acta 
