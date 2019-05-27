@@ -41,7 +41,7 @@
         <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
       </div>
       <div class="card-body">
-        <table class="table " id="dataTables-example">
+        <table class="table" id="dataTables-example">
           <thead>
             <tr>
               <th>Tipo Medida</th>
@@ -67,7 +67,7 @@
               </td>
               <td>
                 <div class="btn-group">
-                  <button (click)="onShow(limitacion)" class="btn btn-primary">
+                  <button (click)="onShow(limitacion)" class="btn btn-xs btn-primary">
                     <i class="fa fa-check"></i>
                   </button>
                 </div>
@@ -92,55 +92,58 @@
         <div class="row">
           <!--placas vehiculos -->
           <div class="col-xs-12 col-lg-12">
-            <table class="table " id="dataTables-example">
-              <thead>
+            <table class="table table-bordered table-striped">
+              <tbody>
                 <tr>
                   <td>
-                    <b>Causal</b>
-                    <br>
-                    {{ limitacion.causal.nombre }}
+                    <b>Causal:</b> {{ limitacion.causal.nombre }}
                   </td>
                   <td>
-                    <b>Proceso</b>
-                    <br>
-                    {{ limitacion.tipoProceso.nombre }}
+                    <b>Proceso:</b> {{ limitacion.tipoProceso.nombre }}
                   </td>
                 </tr>
                 <tr>
                   <td>
                     <b>Placa</b>
-                    <br>
-                    {{ limitacion.vehiculo.placa.numero }}
+                    {{ limitacion.vehiculo.placa?.numero }}
                   </td>
                   <td>
                     <b>Entidad Emisora</b>
-                    <br>
                     {{ limitacion.entidadJudicial.nombre }}
                   </td>
                 </tr>
                 <tr>
-                  <b>Municipio</b>
-                  <td>{{ limitacion.municipio.nombre }}</td>
-                  <b>Fecha Registro</b>
-                  <td>{{ limitacion.fechaRadicacion }}</td>
+                  <td>
+                    <b>Municipio</b>
+                    {{ limitacion.municipio.nombre }}
+                  </td>
+                  <td>
+                    <b>Fecha Registro</b>
+                    {{ (limitacion.fechaRadicacion.timestamp * 1000) | date: 'dd/MM/yyyy' }}
+                  </td>
                 </tr>
                 <tr>
-                  <b>Fecha Expedición</b>
-                  <td >{{ limitacion.fechaExpedicion }}</td>
-                  <b>Fecha Levantamiento</b>
-                  <td>--</td>
+                  <td>
+                    <b>Fecha Expedición</b>
+                    {{ (limitacion.fechaExpedicion.timestamp * 1000) | date: 'dd/MM/yyyy' }}
+                  </td>
+                  <td>
+                    <b>Fecha Levantamiento</b>
+                  </td>
                 </tr>
                 <tr>
-                  <b>Demandante</b>
                   <td >
+                    <b>Demandante</b>
+                    <br>
                     {{ limitacion.demandante.primerNombre }} {{ limitacion.demandante.primerApellido }}
                     <br>
                     {{ limitacion.demandante.tipoIdentificacion.nombre }}
                     <br>
                     {{ limitacion.demandante.identificacion }}
                   </td>
-                  <b>Demandado</b>
                   <td>
+                    <b>Demandado</b>
+                    <br>
                     {{ limitacion.demandado.primerNombre }} {{ limitacion.demandado.primerApellido }}
                     <br>
                     {{ limitacion.demandado.tipoIdentificacion.nombre }}
@@ -149,30 +152,36 @@
                   </td>
                 </tr>
                 <tr>
-                  <b>Estado</b>
                   <td>
-                    <span *ngIf="limitacion.activo">Inscrita</span>
+                    <b>Tipo</b>
+                    {{ limitacion.tipo.nombre }}
                   </td>
-                  <b>Descripción</b>
-                  <td>{{ limitacion.observaciones }}</td>
+                  <td>
+                    <b>Estado</b>
+                    <span class="badge badge-success" *ngIf="limitacion.activo">Inscrita</span>
+                    <span class="badge badge-danger" *ngIf="!limitacion.activo">Inactiva</span>
+                  </td>
                 </tr>
                 <tr>
-                  <b>Tipo</b>
-                  <td class="odd center">{{ limitacion.tipo.nombre }}</td>
-                  <b>Acciones</b>
-                  <td class="center">
-                    <button (click)="onDelete(limitacion)" class="btn btn-primary">Levantar Limitacion</button>
+                  <td colspan="2">
+                    <b>Descripción</b>
+                    {{ limitacion.observaciones }}
                   </td>
                 </tr>
-              </thead>
+              </tbody>
             </table>
           </div>
         </div>
       </div>
       <div class="card-footer">
         <div class="btn-group">
+          <button (click)="onDelete(limitacion)" class="btn btn-primary">
+            <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+            Levantar
+          </button>
           <button (click)="onCancelar()" class="btn btn-default">
             <i class="fa fa-times"></i>
+            Cancelar
           </button>
         </div>
       </div>

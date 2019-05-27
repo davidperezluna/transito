@@ -42,6 +42,26 @@ export class VhloRnaTramiteLevantamientoLimitacionComponent implements OnInit {
     }
   }
 
+  onInitTable() {
+    if (this.table) {
+      this.table.destroy();
+    }
+
+    this.table = $('#dataTables-example').DataTable({
+      responsive: true,
+      pageLength: 8,
+      sPaginationType: 'full_numbers',
+      oLanguage: {
+        oPaginate: {
+          sFirst: '<i class="fa fa-step-backward"></i>',
+          sPrevious: '<i class="fa fa-chevron-left"></i>',
+          sNext: '<i class="fa fa-chevron-right"></i>',
+          sLast: '<i class="fa fa-step-forward"></i>'
+        }
+      }
+    });
+  }
+
   onSearchByPlaca() {
     swal({
       title: 'Buscando vehiculo!',
@@ -69,6 +89,10 @@ export class VhloRnaTramiteLevantamientoLimitacionComponent implements OnInit {
                 this.formIndex = true;
                 this.formShow = false;
 
+                let timeoutId = setTimeout(() => {
+                  this.onInitTable();
+                }, 100);
+                
                 swal.close();
               } else {
                 this.limitaciones = null;
@@ -109,23 +133,6 @@ export class VhloRnaTramiteLevantamientoLimitacionComponent implements OnInit {
         }
       }
     );
-  }
-
-  iniciarTabla() {
-    $('#dataTables-example').DataTable({
-      responsive: true,
-      pageLength: 8,
-      sPaginationType: 'full_numbers',
-      oLanguage: {
-        oPaginate: {
-          sFirst: '<<',
-          sPrevious: '<',
-          sNext: '>',
-          sLast: '>>'
-        }
-      }
-    });
-    this.table = $('#dataTables-example').DataTable();
   }
 
   onDelete(limitacion:any) {

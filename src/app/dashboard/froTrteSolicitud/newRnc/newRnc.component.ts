@@ -308,7 +308,7 @@ constructor(
 
     swal({
       title: 'Perfecto!',
-      text: 'Insumo asignado con exito.',
+      text: 'Sustrato asignado con exito.',
       type: 'success',
       confirmButtonText: 'Aceptar'
     });
