@@ -1,17 +1,15 @@
-<div class="container">
-  <hr>
+<div class="container-fluid">
   <div class="row" *ngIf='formIndex'>
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-            <h5 class="card-title">Vehículos registrados<small> Automotor</small>
-              <div class="btn-group pull-right">
-                <button (click)="onNew()" class="btn btn-default">
-                  <i class="fa fa-plus"></i>
-                  Nuevo
-                </button>
-              </div>
-            </h5>
+            <b class="card-title">Vehículos registrados</b>
+            <div class="btn-group pull-right">
+              <button (click)="onNew()" class="btn btn-default">
+                <i class="fa fa-plus"></i>
+                Nuevo
+              </button>
+            </div>
           </div>
           <div class="card-body">
             <table class="table " id="dataTables-example">
@@ -23,8 +21,8 @@
                   <th>Cilindraje</th>
                   <th>Modelo</th>
                   <th>Marca</th>
-                  <th>linea</th> 
-                  <th>valor</th>
+                  <th>línea</th> 
+                  <th>Valor</th>
                   <th>chasis</th>
                   <th>Acciones</th>
                 </tr>

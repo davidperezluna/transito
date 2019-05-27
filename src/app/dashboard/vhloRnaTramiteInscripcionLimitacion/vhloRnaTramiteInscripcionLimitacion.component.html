@@ -51,11 +51,11 @@
           </div>
         </div>
         <div class="card-body">
-          <table class="table " id="dataTables-example">
+          <table class="table" id="dataTables-example">
             <thead>
               <tr>
-                <th>Id</th>
-                <th>Detalle</th>
+                <th>#</th>
+                <th>No. orden judicial</th>
                 <th>Vehiculo</th>
                 <!-- <th>Acciones</th> -->
               </tr>
@@ -63,7 +63,7 @@
             <tbody>
               <tr class="odd" *ngFor="let inscripcion of inscripciones; let i = index">
                 <td>{{ i + 1 }}</td>
-                <td>{{ inscripcion.limitacionDatos.nOrdenJudicial }}</td>
+                <td>{{ inscripcion.numeroOrdenJudicial }}</td>
                 <td>{{ inscripcion.vehiculo?.placa?.numero }}</td>
               </tr>
             </tbody>

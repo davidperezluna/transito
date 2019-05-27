@@ -67,7 +67,7 @@
                             <div  class="input-group">
                                 <input type="number" class="form-control" placeholder="Digite identificación" [(ngModel)]="identificacion" name="identificacion" required />
                                 <span class="input-group-btn">
-                                    <button (click)="onSearchCiudadano()" class="btn btn-primary" type="button">
+                                    <button (click)="onSearchCiudadano()" class="btn btn-default" type="button">
                                         <i class="fa fa-search"></i>
                                     </button>
                                 </span>
@@ -106,7 +106,7 @@
             </div>
             <div class="card-footer">
                 <div class="btn-group">
-                    <button (click)="onEnviar()"  [disabled]="formInsumo.invalid && !insumo" class="btn btn-primary">
+                    <button (click)="onEnviar()"  [disabled]="formInsumo.invalid && !insumo && !ciudadano" class="btn btn-primary">
                         <i class="fa fa-save"></i>
                         Guardar
                     </button>

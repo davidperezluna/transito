@@ -85,7 +85,7 @@ export class GdDocumentoComponent implements OnInit {
           this.formAssign = true;
 
           let timeoutId = setTimeout(() => {
-            this.iniciarTabla();
+            this.onInitTable();
           }, 100);
         }
         error => {
@@ -110,12 +110,12 @@ export class GdDocumentoComponent implements OnInit {
     });
   }
 
-  iniciarTabla(){
+  onInitTable(){
     if (this.table) {
       this.table.destroy();
     }
 
-    $('#dataTables-example').DataTable({
+    this.table = $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,
       sPaginationType: 'full_numbers',
@@ -127,18 +127,21 @@ export class GdDocumentoComponent implements OnInit {
           sLast: '<i class="fa fa-step-forward"></i>'
         }
       }
-   });
-   this.table = $('#dataTables-example').DataTable();
+    });
   }
 
   onChangedAssign(event, idDocumento) {
-    if (event !== undefined) {
+    swal({
+      title: 'Buscando registros!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+    
+    if (event) {
+      console.log(event);
       let token = this._loginService.getToken();
-
-      let datos = {
-        'idFuncionario': event,
-        'idDocumento': idDocumento
-      };
 
       this._DocumentoService.show({'id': idDocumento}, token).subscribe(
         response => {
@@ -168,6 +171,63 @@ export class GdDocumentoComponent implements OnInit {
         response => {
           if (response.status == 'success') {
             this.funcionarioSelected = response.data;
+
+            let datos = {
+              'idFuncionario': event,
+              'idDocumento': idDocumento
+            };
+      
+            var html = '¿Esta seguro que desea asignar este documento a: '+this.funcionarioSelected.ciudadano.primerNombre+' '+this.funcionarioSelected.ciudadano.primerApellido+'?';
+      
+            swal({
+              title: 'Atención',
+              type: 'warning',
+              html: html,
+              showCancelButton: true,
+              focusConfirm: false,
+              confirmButtonText:
+                '<i class="fa fa-thumbs-up"></i> Asignar!',
+              confirmButtonAriaLabel: 'Thumbs up, great!',
+              cancelButtonText:
+                '<i class="fa fa-thumbs-down"></i> Cancelar',
+              cancelButtonAriaLabel: 'Thumbs down',
+            }).then((result) => {
+              if (result.value) {
+                this._DocumentoService.assign(datos, token).subscribe(
+                  response => {
+                    if (response.status == 'success') {
+                      swal({
+                        title: 'Perfecto!',
+                        text: response.message,
+                        type: 'success',
+                        confirmButtonText: 'Aceptar'
+                      });
+      
+                      this.ngOnInit();
+                    } else {
+                      swal({
+                        title: 'Error!',
+                        text: response.message,
+                        type: 'error',
+                        confirmButtonText: 'Aceptar'
+                      });
+                    }
+                    error => {
+                      this.errorMessage = <any>error;
+                      if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                      }
+                    }
+                  }
+                );
+              } else if (
+                // Read more about handling dismissals
+                result.dismiss === swal.DismissReason.cancel
+              ) {
+      
+              }
+            });
           } else {
             swal({
               title: 'Error!',
@@ -187,59 +247,6 @@ export class GdDocumentoComponent implements OnInit {
           }
         }
       );
-
-      var html = '¿Esta seguro que desea asignar este documento a: '+this.funcionarioSelected.ciudadano.primerNombre+' '+this.funcionarioSelected.ciudadano.primerApellido+'?';
-
-      swal({
-        title: 'Atención',
-        type: 'warning',
-        html: html,
-        showCancelButton: true,
-        focusConfirm: false,
-        confirmButtonText:
-          '<i class="fa fa-thumbs-up"></i> Asignar!',
-        confirmButtonAriaLabel: 'Thumbs up, great!',
-        cancelButtonText:
-          '<i class="fa fa-thumbs-down"></i> Cancelar',
-        cancelButtonAriaLabel: 'Thumbs down',
-      }).then((result) => {
-        if (result.value) {
-          this._DocumentoService.assign(datos, token).subscribe(
-            response => {
-              if (response.status == 'success') {
-                swal({
-                  title: 'Perfecto!',
-                  text: response.message,
-                  type: 'success',
-                  confirmButtonText: 'Aceptar'
-                });
-
-                this.ngOnInit();
-              } else {
-                swal({
-                  title: 'Error!',
-                  text: response.message,
-                  type: 'error',
-                  confirmButtonText: 'Aceptar'
-                });
-              }
-              error => {
-                this.errorMessage = <any>error;
-                if (this.errorMessage != null) {
-                  console.log(this.errorMessage);
-                  alert("Error en la petición");
-                }
-              }
-            }
-          );
-        } else if (
-          // Read more about handling dismissals
-          result.dismiss === swal.DismissReason.cancel
-        ) {
-
-        }
-      });
-      
     }
   }
 
@@ -327,7 +334,7 @@ export class GdDocumentoComponent implements OnInit {
           }
 
           let timeoutId = setTimeout(() => {
-            this.iniciarTabla();
+            this.onInitTable();
           }, 100);
 
           swal.close();
@@ -370,7 +377,7 @@ export class GdDocumentoComponent implements OnInit {
           this.documentos = response.data;
 
           let timeoutId = setTimeout(() => {
-            this.iniciarTabla();
+            this.onInitTable();
           }, 100);
 
           swal.close();

@@ -41,6 +41,7 @@ export class NewComponent implements OnInit {
   public radiosAccion:any;
   public modalidadesTransporte:any;
   public organismosTransito:any;
+  public organismosTransitoNacional:any;
 
   public empresaSelected:any;
 
@@ -149,6 +150,20 @@ constructor(
     this._OrganismoTransitoService.selectSedes().subscribe(
       response => {
         this.organismosTransito = response;
+      }, 
+      error => {
+        this.errorMessage = <any>error;
+
+        if(this.errorMessage != null){
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+
+    this._OrganismoTransitoService.select().subscribe(
+      response => {
+        this.organismosTransitoNacional = response;
       }, 
       error => {
         this.errorMessage = <any>error;

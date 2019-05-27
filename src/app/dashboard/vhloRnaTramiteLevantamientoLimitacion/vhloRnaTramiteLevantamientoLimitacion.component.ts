@@ -1,4 +1,5 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import { VhloLimitacionService } from '../../services/vhloLimitacion.service';
 import { VhloVehiculoService } from '../../services/vhloVehiculo.service';
 
@@ -8,7 +9,8 @@ declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './vhloRnaTramiteLevantamientoLimitacion.component.html'
+  templateUrl: './vhloRnaTramiteLevantamientoLimitacion.component.html',
+  providers: [DatePipe]
 })
 
 export class VhloRnaTramiteLevantamientoLimitacionComponent implements OnInit {
@@ -60,7 +62,7 @@ export class VhloRnaTramiteLevantamientoLimitacionComponent implements OnInit {
         if (response.status == 'success') {
           this.vehiculo = response.data;
 
-          this._VehiculoLimitacionService.searchByPlaca({ 'idVehiculo': this.vehiculo.id }, token).subscribe(
+          this._VehiculoLimitacionService.searchByPlaca({ 'numero': this.placa }, token).subscribe(
             response => {
               if (response.status == 'success') {
                 this.limitaciones = response.data;
@@ -178,9 +180,9 @@ export class VhloRnaTramiteLevantamientoLimitacionComponent implements OnInit {
   }
 
   onShow(limitacion: any): void {
-    this.formIndex = false;
-    this.formIndex = true;
     this.limitacion = limitacion;
+    this.formIndex = false;
+    this.formShow = true;
   }
 
 }

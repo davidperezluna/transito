@@ -56,12 +56,11 @@ export class VhloRnaTramiteInscripcionLimitacionComponent implements OnInit {
       response => {
         if (response.code == 200) {
           this.inscripciones = response.data;
+          this.formIndex = true;
           
           let timeoutId = setTimeout(() => {
             this.onInitTable();
           }, 100);
-
-          this.formIndex = true;
 
           swal.close();
         }else{
@@ -112,7 +111,7 @@ export class VhloRnaTramiteInscripcionLimitacionComponent implements OnInit {
 
   onReady(isCreado: any) {
     if (isCreado) {
-      this.onInitForms();
+      this.ngOnInit();
     }
   }
 }

@@ -27,35 +27,33 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-xs-12 col-lg-8">
-                            <label>Organismo de transito de que proviene <b class="text-danger">*</b></label>
-                            <ng-select [multiple]="false" [options]="municipios" [(ngModel)]="datos.idMunicipio" name="idMunicipio" required>
-                            </ng-select>
+                            <label>Organismo de transito de que proviene</label>
+                            {{ vehiculo.organismoTransitoRadicado?.nombre }}
                         </div>
     
                         <div class="col-xs-12 col-lg-6"  >
-                            <label>Tipo documento empresa afiliadora <b class="text-danger">*</b></label>
-                            <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="datos.idTipoIdentificacion" name="idTipoIdentificacion" required>
-                            </ng-select>
+                            <label>Tipo documento empresa afiliadora</label>
+                            {{ vehiculo.tipoIdentificacionRadicado?.nombre }}
                         </div>
     
                         <div class="col-xs-12 col-lg-6">
-                            <label>Nro. Documento <b class="text-danger">*</b></label>
-                            <input class="form-control" [(ngModel)]="datos.numeroDocumento"  name="numeroDocumento" type="text" required />
+                            <label>Nro. Documento</label>
+                            {{ vehiculo.identificacionRadicado }}
                         </div>                      
                         
                         <div class="col-xs-12 col-lg-3">
-                            <label>Fecha de ingreso <b class="text-danger">*</b></label>
-                            <input class="form-control" [(ngModel)]="datos.fechaIngreso" name="fechaIngreso" type="date" required />
+                            <label>Fecha de ingreso</label>
+                            {{ (vehiculo.fechaIngresoRadicado.timestamp * 1000) | date: 'dd/MM/yyyy' }}
                         </div>
     
                         <div class="col-xs-12 col-lg-3">
-                            <label>Nro. guiá de llegada <b class="text-danger">*</b></label>
-                            <input class="form-control" [(ngModel)]="datos.guiaLlegada" name="guiaLlegada" type="text" required />
+                            <label>Nro. guiá de llegada</label>
+                            {{ vehiculo.numeroGuiaRadicado }}
                         </div>
     
                         <div class="col-xs-12 col-lg-3">
-                            <label>Empresa de envió <b class="text-danger">*</b></label>
-                            <input class="form-control" [(ngModel)]="datos.empresaEnvio" name="empresaEnvio" type="text" required />
+                            <label>Empresa de envió</label>
+                            {{ vehiculo.empresaEnvioRadicado }}
                         </div>
                     </div>
                 </div>

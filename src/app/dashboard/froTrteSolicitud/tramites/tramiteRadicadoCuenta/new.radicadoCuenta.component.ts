@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import { FroTrteSolicitudService } from '../../../../services/froTrteSolicitud.service';
 import { FroFacTramiteService } from '../../../../services/froFacTramite.service';
 import { CfgMunicipioService } from '../../../../services/cfgMunicipio.service';
@@ -9,8 +10,9 @@ import { LoginService } from '../../../../services/login.service';
 import swal from 'sweetalert2';
 
 @Component({
-    selector: 'app-radicado-cuenta',
-    templateUrl: './new.radicadoCuenta.html'
+  selector: 'app-radicado-cuenta',
+  templateUrl: './new.radicadoCuenta.html',
+  providers: [DatePipe]
 })
 export class NewRadicadoCuentaComponent implements OnInit {
     @Output() onReadyTramite = new EventEmitter<any>();
@@ -26,6 +28,7 @@ export class NewRadicadoCuentaComponent implements OnInit {
     public tiposIdentificacion: any;
     
     public datos = {
+      'campos': null,
       'numeroDocumento': null,
       'fechaIngreso': null,
       'guiaLlegada': null,
@@ -109,6 +112,7 @@ export class NewRadicadoCuentaComponent implements OnInit {
     
    
     onEnviar(){     
+      this.datos.campos = ['radicado'];
       this.datos.idTramiteFactura = this.tramiteFactura.id;
       this.datos.idVehiculo = this.vehiculo.id;
 

@@ -1,4 +1,4 @@
-import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { rnaAsignacionInsumos } from '../imoAsignacion.modelo';
 import { ImoLoteService } from '../../../services/imoLote.service';

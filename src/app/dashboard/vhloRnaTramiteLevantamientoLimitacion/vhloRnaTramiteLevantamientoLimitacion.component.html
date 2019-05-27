@@ -1,152 +1,181 @@
 <div class="row">
   <!-- .row -->
-  <div class="col-xs-12 col-lg-12">
+  <div class="col-xs-12 col-lg-3">
     <!-- .col -->
     <div class="card">
+      <div class="card-header">
+        <b class="text-uppercase">
+          Levantar limitaciones a la propiedad
+        </b>
+        <br>
+        <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
+      </div>
       <div class="card-body">
         <form #formNew="ngForm">
-          <b class="text-primary">
-            Levantar limitaciones a la propiedad
-          </b>
-          <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
-          <hr>
           <div class="row">
-
             <!--placas vehiculos -->
-            <div class="col-xs-12 col-lg-4">
+            <div class="col-xs-12 col-lg-12">
               <label>Placa</label>
               <div class="input-group">
-                <input type="text" class="form-control text-uppercase" placeholder="placa" [(ngModel)]="placa" name="placa" required />
+                <input type="text" class="form-control text-uppercase" [(ngModel)]="placa" name="placa" required />
                 <span class="input-group-btn">
-                  <button (click)="onSearchByPlaca()" class="btn btn-primary" type="button">
+                  <button (click)="onSearchByPlaca()" class="btn btn-default" type="button">
                     <i class="fa fa-search"></i>
                   </button>
                 </span>
               </div>
-
-              <div class="col-lg-12 col-md-12" *ngIf="limitaciones && formIndex">
-                <table class="table " id="dataTables-example">
-                  <thead>
-                    <tr>
-                      <th>Tipo Medida</th>
-                      <th>Proceso</th>
-                      <th>Placa</th>
-                      <th>Fecha Registro</th>
-                      <th>Acciones</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let limitacion of limitaciones; let i = index">
-                      <td>
-                        {{ limitacion.datos.causal.nombre }}
-                      </td>
-                      <td>
-                        {{ limitacion.datos.tipoProceso.nombre }}
-                      </td>
-                      <td>
-                        {{ limitacion.vehiculo.placa.numero }}
-                      </td>
-                      <td>
-                        {{ limitacion.datos.fechaRadicacion }}
-                      </td>
-                      <td>
-                        <button (click)="onShow(limitacion)" class="btn btn-info">Ver Limitación</button>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-
-            </div>
-
-            <div class="col-lg-12 col-md-12" *ngIf="formShow">
-              <b class="text-uppercase">
-                Detalles de limitación
-              </b>
-              <table class="table " id="dataTables-example">
-                <thead>
-                  <tr>
-                    <td>
-                      <b>Causal</b>
-                      <br>
-                      {{ limitacion.datos.causal.nombre }}
-                    </td>
-                    <td>
-                      <b>Proceso</b>
-                      <br>
-                      {{ limitacion.datos.tipoProceso.nombre }}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <b>Placa</b>
-                      <br>
-                      {{ limitacion.vehiculo.placa.numero }}
-                    </td>
-                    <td>
-                      <b>Entidad Emisora</b>
-                      <br>
-                      {{ limitacion.datos.entidadJudicial.nombre }}
-                    </td>
-                  </tr>
-                  <tr>
-                    <b>Municipio</b>
-                    <td>{{ limitacion.datos.municipio.nombre }}</td>
-                    <b>Fecha Registro</b>
-                    <td>{{ limitacion.datos.fechaRadicacion }}</td>
-                  </tr>
-                  <tr>
-                    <b>Fecha Expedición</b>
-                    <td >{{ limitacion.datos.fechaExpedicion }}</td>
-                    <b>Fecha Levantamiento</b>
-                    <td>--</td>
-                  </tr>
-                  <tr>
-                    <b>Demandante</b>
-                    <td >
-                      {{ limitacion.datos.demandante.primerNombre }} {{ limitacion.datos.demandante.primerApellido }}
-                      <br>
-                      {{ limitacion.datos.demandante.tipoIdentificacion.nombre }}
-                      <br>
-                      {{ limitacion.datos.demandante.identificacion }}
-                    </td>
-                    <b>Demandado</b>
-                    <td>
-                      {{ limitacion.datos.demandado.primerNombre }} {{ limitacion.datos.demandado.primerApellido }}
-                      <br>
-                      {{ limitacion.datos.demandado.tipoIdentificacion.nombre }}
-                      <br>
-                      {{ limitacion.datos.demandado.identificacion }}
-                    </td>
-                  </tr>
-                  <tr>
-                    <b>Estado</b>
-                    <td>
-                      <span *ngIf="limitacion.datos.activo">Inscrita</span>
-                    </td>
-                    <b>Descripción</b>
-                    <td>{{ limitacion.datos.observaciones }}</td>
-                  </tr>
-                  <tr>
-                    <b>Tipo</b>
-                    <td class="odd center">{{ limitacion.datos.tipo.nombre }}</td>
-                    <b>Acciones</b>
-                    <td class="center">
-                      <button (click)="onDelete(limitacion)" class="btn btn-primary">Levantar Limitacion</button>
-                    </td>
-                  </tr>
-                </thead>
-              </table>
-
-              <button (click)="onCancelar()" class="btn btn-default">
-                <i class="fa fa-times"></i>
-              </button>
             </div>
           </div>
         </form>
       </div>
     </div>
   </div>
-  <!-- /.col -->
+
+  <div class="col-xs-12 col-lg-9" *ngIf="limitaciones && formIndex">
+    <div class="card">
+      <div class="card-header">
+        <b class="text-uppercase">
+          Limitaciones encontradas
+        </b>
+        <br>
+        <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
+      </div>
+      <div class="card-body">
+        <table class="table " id="dataTables-example">
+          <thead>
+            <tr>
+              <th>Tipo Medida</th>
+              <th>Proceso</th>
+              <th>Placa</th>
+              <th>Fecha Registro</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let limitacion of limitaciones; let i = index">
+              <td>
+                {{ limitacion.causal?.nombre }}
+              </td>
+              <td>
+                {{ limitacion.tipoProceso?.nombre }}
+              </td>
+              <td>
+                {{ limitacion.vehiculo.placa?.numero }}
+              </td>
+              <td>
+                {{ (limitacion.fechaRadicacion.timestamp * 1000) | date: 'dd/MM/yyyy' }}
+              </td>
+              <td>
+                <div class="btn-group">
+                  <button (click)="onShow(limitacion)" class="btn btn-primary">
+                    <i class="fa fa-check"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xs-12 col-lg-9" *ngIf="formShow">
+    <div class="card">
+      <div class="card-header">
+        <b class="text-uppercase">
+          Detalles de limitación
+        </b>
+        <br>
+        <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <!--placas vehiculos -->
+          <div class="col-xs-12 col-lg-12">
+            <table class="table " id="dataTables-example">
+              <thead>
+                <tr>
+                  <td>
+                    <b>Causal</b>
+                    <br>
+                    {{ limitacion.causal.nombre }}
+                  </td>
+                  <td>
+                    <b>Proceso</b>
+                    <br>
+                    {{ limitacion.tipoProceso.nombre }}
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <b>Placa</b>
+                    <br>
+                    {{ limitacion.vehiculo.placa.numero }}
+                  </td>
+                  <td>
+                    <b>Entidad Emisora</b>
+                    <br>
+                    {{ limitacion.entidadJudicial.nombre }}
+                  </td>
+                </tr>
+                <tr>
+                  <b>Municipio</b>
+                  <td>{{ limitacion.municipio.nombre }}</td>
+                  <b>Fecha Registro</b>
+                  <td>{{ limitacion.fechaRadicacion }}</td>
+                </tr>
+                <tr>
+                  <b>Fecha Expedición</b>
+                  <td >{{ limitacion.fechaExpedicion }}</td>
+                  <b>Fecha Levantamiento</b>
+                  <td>--</td>
+                </tr>
+                <tr>
+                  <b>Demandante</b>
+                  <td >
+                    {{ limitacion.demandante.primerNombre }} {{ limitacion.demandante.primerApellido }}
+                    <br>
+                    {{ limitacion.demandante.tipoIdentificacion.nombre }}
+                    <br>
+                    {{ limitacion.demandante.identificacion }}
+                  </td>
+                  <b>Demandado</b>
+                  <td>
+                    {{ limitacion.demandado.primerNombre }} {{ limitacion.demandado.primerApellido }}
+                    <br>
+                    {{ limitacion.demandado.tipoIdentificacion.nombre }}
+                    <br>
+                    {{ limitacion.demandado.identificacion }}
+                  </td>
+                </tr>
+                <tr>
+                  <b>Estado</b>
+                  <td>
+                    <span *ngIf="limitacion.activo">Inscrita</span>
+                  </td>
+                  <b>Descripción</b>
+                  <td>{{ limitacion.observaciones }}</td>
+                </tr>
+                <tr>
+                  <b>Tipo</b>
+                  <td class="odd center">{{ limitacion.tipo.nombre }}</td>
+                  <b>Acciones</b>
+                  <td class="center">
+                    <button (click)="onDelete(limitacion)" class="btn btn-primary">Levantar Limitacion</button>
+                  </td>
+                </tr>
+              </thead>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="btn-group">
+          <button (click)="onCancelar()" class="btn btn-default">
+            <i class="fa fa-times"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-<!-- /.row -->
