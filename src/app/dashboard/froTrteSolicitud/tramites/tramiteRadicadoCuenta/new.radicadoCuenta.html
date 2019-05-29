@@ -26,34 +26,45 @@
                 <hr>
                 <div class="form-group">
                     <div class="row">
-                        <div class="col-xs-12 col-lg-8">
-                            <label>Organismo de transito de que proviene</label>
+                        <div class="col-xs-12 col-lg-6">
+                            <b>Organismo de transito de que proviene</b>
+                            <br>
                             {{ vehiculo.organismoTransitoRadicado?.nombre }}
                         </div>
     
                         <div class="col-xs-12 col-lg-6"  >
-                            <label>Tipo documento empresa afiliadora</label>
+                            <b>Tipo documento empresa afiliadora</b>
+                            <br>
                             {{ vehiculo.tipoIdentificacionRadicado?.nombre }}
                         </div>
     
                         <div class="col-xs-12 col-lg-6">
-                            <label>Nro. Documento</label>
+                            <b>Nro. Documento</b>
+                            <br>
                             {{ vehiculo.identificacionRadicado }}
                         </div>                      
                         
                         <div class="col-xs-12 col-lg-3">
-                            <label>Fecha de ingreso</label>
-                            {{ (vehiculo.fechaIngresoRadicado.timestamp * 1000) | date: 'dd/MM/yyyy' }}
+                            <b>Fecha de ingreso</b>
+                            <br>
+                            {{ (vehiculo.fechaRegistroRadicado.timestamp * 1000) | date: 'dd/MM/yyyy' }}
                         </div>
     
                         <div class="col-xs-12 col-lg-3">
-                            <label>Nro. guiá de llegada</label>
+                            <b>Nro. guiá de llegada</b>
+                            <br>
                             {{ vehiculo.numeroGuiaRadicado }}
                         </div>
     
-                        <div class="col-xs-12 col-lg-3">
-                            <label>Empresa de envió</label>
+                        <div class="col-xs-12 col-lg-6">
+                            <b>Empresa de envió</b>
+                            <br>
                             {{ vehiculo.empresaEnvioRadicado }}
+                        </div>
+
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Cantidad de placas</label>
+                            <input class="form-control" [(ngModel)]="datos.cantidadPlacas" name="cantidadPlacas" type="text" />
                         </div>
                     </div>
                 </div>

@@ -274,7 +274,7 @@
                 </div><!-- /.row -->
 
 
-                <div class="row" *ngIf="confirmarSolicitante && tramitesFactura && factura && factura.estado != 'FINALIZADA'">
+                <div class="row" *ngIf="(confirmarSolicitante && tramitesFactura && factura && factura.estado != 'FINALIZADA') || !propietarios">
                     <div class="col-xs-12 col-lg-12">
                         <ul class="nav nav-tabs" role="tablist">
                             <li class="nav-item">

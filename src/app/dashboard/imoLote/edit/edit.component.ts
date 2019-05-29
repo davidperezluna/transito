@@ -13,7 +13,7 @@ import swal from 'sweetalert2';
   providers: [DatePipe]
 })
 export class EditComponent implements OnInit{
-@Output() ready = new EventEmitter<any>();
+@Output() onReady = new EventEmitter<any>();
 @Input() loteInsumoInsumo:any = null;
 @Input() tipoInsumo:any = null;
 
@@ -109,7 +109,7 @@ constructor(
     }
   }
 
-  onCancelar(){ this.ready.emit(true); }
+  onCancelar(){ this.onReady.emit(true); }
 
   onEnviar(){
     this.loteInsumoInsumo.empresaId = this.empresaSelected;
@@ -119,7 +119,8 @@ constructor(
 		this._rnaloteInsumosService.edit(this.loteInsumoInsumo,token).subscribe(
 			response => {
         if(response.status == 'success'){
-          this.ready.emit(true);
+          this.onReady.emit(true);
+          
           swal({
             title: 'Perfecto!',
             text: 'El registro se ha modificado con exito',

@@ -14,10 +14,10 @@ import swal from 'sweetalert2';
   providers: [DatePipe]
 })
 export class NewComponent implements OnInit {
-@Output() ready = new EventEmitter<any>();
+@Output() onReady = new EventEmitter<any>();
 public ImoLote: ImoLote;
 public errorMessage;
-public respuesta;
+
 public empresas:any;
 public empresaSelected:any;
 public sedes:any;
@@ -111,7 +111,7 @@ constructor(
   }
 
   onCancelar(){
-    this.ready.emit(true);
+    this.onReady.emit(true);
   }
 
   onEnviar(){
@@ -137,9 +137,9 @@ constructor(
 
 		this._ImoLoteService.register(this.ImoLote,token).subscribe(
 			response => {
-        this.respuesta = response;
-        if(this.respuesta.status == 'success'){
-          this.ready.emit(true);
+        if(response.status == 'success'){
+          this.onReady.emit(true);
+          
           swal({
             title: 'Perfecto!',
             text: 'Registro exitoso!',
@@ -149,7 +149,7 @@ constructor(
         }else{
           swal({
             title: 'Error!',
-            text: this.respuesta.message,
+            text: response.message,
             type: 'error',
             confirmButtonText: 'Aceptar'
           })

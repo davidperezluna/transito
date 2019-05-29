@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ImoLoteService } from '../../services/imoLote.service';
+import { CfgOrganismoTransitoService } from '../../services/cfgOrganismoTransito.service';
 import { LoginService } from '../../services/login.service';
 import swal from 'sweetalert2';
 declare var $: any;
@@ -10,12 +11,17 @@ declare var $: any;
 })
 export class ImoLoteComponent implements OnInit {
   public errorMessage;
-	public id;
+
+  public organismosTransito: any;
+  public idOrganismoTransito: any;
 	public loteInsumoSustratos;
-	public loteInsumoInsumos;
-	public formNew = false;
-	public formEdit = false;
-  public formIndex = true;
+  public loteInsumoInsumos;
+  
+	public formSearch: any;
+	public formNew: any;
+	public formEdit: any;
+  public formIndex: any;
+
   public tipoInsumo :any;
   public table:any; 
   public totalesTipo:any; 
@@ -24,45 +30,88 @@ export class ImoLoteComponent implements OnInit {
 
   constructor(
 		private _LoteInsumoService: ImoLoteService,
-		private _loginService: LoginService,
+		private _OrganismoTransitoService: CfgOrganismoTransitoService,
+		private _LoginService: LoginService,
     ){}
     
   ngOnInit() {
+    this.onInitForms();
+
     swal({
-      title: 'Cargando Tabla!',
+      title: 'Cargando información!',
       text: 'Solo tardara unos segundos por favor espere.',
       onOpen: () => {
         swal.showLoading()
       }
     });
 
-		this._LoteInsumoService.index().subscribe(
-				response => {
-          this.loteInsumoSustratos = response.data.loteSustratos;
-          console.log(this.loteInsumoSustratos);
-          this.loteInsumoInsumos = response.data.loteInsumos; 
-          console.log(this.loteInsumoInsumos);
-          this.totalesTipo = response.data.totalesTipo; 
-          let timeoutId = setTimeout(() => {  
-            this.onInitTable();
-            swal.close();
-          }, 100); 
-				}, 
-				error => {
-					this.errorMessage = <any>error;
+    this._OrganismoTransitoService.selectSedes().subscribe(
+      response => {
+          this.organismosTransito = response;
 
-					if(this.errorMessage != null){
-						console.log(this.errorMessage);
-						alert("Error en la petición");
-					}
-				}
-      );
+          swal.close();
+
+          this.formSearch = true;
+      },
+      error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+              console.log(this.errorMessage);
+              alert("Error en la petición");
+          }
+      }
+    );
+  }
+
+  onInitForms(){
+    this.formSearch = false;
+    this.formNew = false;
+    this.formEdit = false;
+    this.formIndex = false;
+  }
+
+  onSearch() {
+    swal({
+      title: 'Buscando registros!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+
+    let token = this._LoginService.getToken();
+    
+    this._LoteInsumoService.index().subscribe(
+      response => {
+        this.loteInsumoSustratos = response.data.loteSustratos;
+        this.loteInsumoInsumos = response.data.loteInsumos; 
+        this.totalesTipo = response.data.totalesTipo; 
+
+        let timeoutId = setTimeout(() => {  
+          this.onInitTable();
+          swal.close();
+        }, 100); 
+      }, 
+      error => {
+        this.errorMessage = <any>error;
+
+        if(this.errorMessage != null){
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
   }
   
   onInitTable(){
+    if (this.table) {
+      this.table.destroy();
+    }
+
     this.table = $('#dataTables-example-Sustratos').DataTable({
       responsive: true,
-      pageLength: 8,
+      pageLength: 10,
       sPaginationType: 'full_numbers',
       oLanguage: {
         oPaginate: {
@@ -72,20 +121,16 @@ export class ImoLoteComponent implements OnInit {
           sLast: '<i class="fa fa-step-forward"></i>'
         }
       }
-   });
+    });
   }
  
   onNew(){
+    this.onInitForms();
     this.formNew = true;
-    this.formIndex = false;
-    this.table.destroy();
   }
 
-  ready(isCreado:any){
+  onReady(isCreado:any){
       if(isCreado) {
-        this.formNew = false;
-        this.formEdit = false;
-        this.formIndex = true;
         this.ngOnInit();
       }
   }
@@ -102,7 +147,7 @@ export class ImoLoteComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.value) {
-        let token = this._loginService.getToken();
+        let token = this._LoginService.getToken();
         this._LoteInsumoService.delete(token,id).subscribe(
             response => {
                 swal({
@@ -127,14 +172,14 @@ export class ImoLoteComponent implements OnInit {
     })
   }
  
-  editRnaLoteInsumoSustrato(loteInsumoInsumo:any){
+  onEditLoteInsumoSustrato(loteInsumoInsumo:any){
     this.loteInsumoInsumo = loteInsumoInsumo;
     this.tipoInsumo = 'SUSTRATO';
     this.formEdit = true;
     this.formIndex = false;
   }
 
-  editRnaLoteInsumoInsumo(loteInsumoInsumo:any){
+  onEditLoteInsumoInsumo(loteInsumoInsumo:any){
     this.loteInsumoInsumo = loteInsumoInsumo;
     this.tipoInsumo = 'INSUMO';
     this.formEdit = true;

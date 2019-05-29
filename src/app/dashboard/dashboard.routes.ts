@@ -13,7 +13,10 @@ import { UserUsuarioMenuRoutes } from './userUsuarioMenu/userUsuarioMenu.routes'
 import { UserLicenciaConduccionRoutes } from './userLicenciaConduccion/userLicenciaConduccion.routes';
 import { UserLicenciaTransitoRoutes } from './userLicenciaTransito/userLicenciaTransito.routes';
 import { UserLcCfgCategoriaRoutes } from './userLcCfgCategoria/userLcCfgCategoria.routes';
+import { UserMedidaCautelarRoutes } from './userMedidaCautelar/userMedidaCautelar.routes';
 import { UserCfgGrupoEtnicoRoutes } from './userCfgGrupoEtnico/userCfgGrupoEtnico.routes';
+import { UserCfgEmpresaTipoRoutes } from './userCfgEmpresaTipo/userCfgEmpresaTipo.routes';
+import { UserCfgEmpresaServicioRoutes } from './userCfgEmpresaServicio/userCfgEmpresaServicio.routes';
 
 import { CfgValorVehiculoRoutes } from './cfgValorVehiculo/cfgValorVehiculo.routes';
 import { CfgBodegaRoutes } from './cfgBodega/cfgBodega.routes';
@@ -140,13 +143,6 @@ import { SvIpatImpresoMunicipioRoutes } from './svIpatImpresoMunicipio/svIpatImp
 import { rnaRegistroInsumosRoutes } from './rnaRegistroInsumos/rnaRegistroInsumos.routes';
 //import { RnaPreasignacionInsumoRoutes } from './rnaPreasignacionInsumo/rnaPreasignacionInsumo.routes';
 import { RnmaPreregistroRoutes } from './rnmaPreregistro/rnmaPreregistro.routes'; 
-import { TramiteInscripcionLimitacionRoutes } from './rnmaTramiteInscripcionLimitacion/rnmaTramiteInscripcionLimitacion.routes';
-import { TramiteLevantamientoLimitacionRoutes } from './rnmaTramiteLevantamientoLimitacion/rnmaTramiteLevantamientoLimitacion.routes';
-import { RnrsTramiteInscripcionLimitacionRoutes } from './rnrsTramiteInscripcionLimitacion/rnrsTramiteInscripcionLimitacion.routes';
-import { RnrsTramiteLevantamientoLimitacionRoutes } from './rnrsTramiteLevantamientoLimitacion/rnrsTramiteLevantamientoLimitacion.routes';
-
-import { UserCfgEmpresaTipoRoutes } from './userCfgEmpresaTipo/userCfgEmpresaTipo.routes';
-import { UserCfgEmpresaServicioRoutes } from './userCfgEmpresaServicio/userCfgEmpresaServicio.routes';
 
 import { SvCfgClaseAccidenteRoutes } from './svCfgClaseAccidente/svCfgClaseAccidente.routes';
 import { CfgChoqueConRoutes } from './cfgChoqueCon/cfgChoqueCon.routes';
@@ -165,7 +161,6 @@ import { ImoLoteRoutes } from "./imoLote/imoLote.routes";
 import { ImoAsignacionRoutes} from './imoAsignacion/imoAsignacion.routes';
 import { ImoReasignacionRoutes } from './imoReasignacIon/imoReasignacion.routes';
 import { ImoActaRoutes } from './imoActa/imoActa.routes';
-
 
 import { BpCfgTipoInsumoRoutes } from './bpCfgTipoInsumo/bpCfgTipoInsumo.routes';
 import { BpProyectoRoutes } from './bpProyecto/bpProyecto.routes';
@@ -214,8 +209,7 @@ import { VhloCfgPlacaRoutes } from './vhloCfgPlaca/vhloCfgPlaca.routes';
 import { VhloRnaPreasignacionPlacaRoutes } from './vhloRnaPreasignacionPlaca/vhloRnaPreasignacionPlaca.routes';
 import { VhloCfgLimitacionTipoRoutes } from './vhloCfgLimitacionTipo/vhloCfgLimitacionTipo.routes';
 import { VhloCfgLimitacionTipoProcesoRoutes } from './vhloCfgLimitacionTipoProceso/vhloCfgLimitacionTipoProceso.routes';
-import { VhloRnaTramiteInscripcionLimitacionRoutes } from './vhloRnaTramiteInscripcionLimitacion/vhloRnaTramiteInscripcionLimitacion.routes';
-import { VhloRnaTramiteLevantamientoLimitacionRoutes } from './vhloRnaTramiteLevantamientoLimitacion/vhloRnaTramiteLevantamientoLimitacion.routes';
+import { VhloLimitacionRoutes } from './vhloLimitacion/vhloLimitacion.routes';
 import { VhloCfgValorRoutes } from './vhloCfgValor/vhloCfgValor.routes';
 import { VhloCfgLimitacionCausalRoutes } from './vhloCfgLimitacionCausal/vhloCfgLimitacionCausal.routes';
 import { VhloTecnoMecanicaRoutes } from './vhloTecnoMecanica/vhloTecnoMecanica.routes';
@@ -258,6 +252,11 @@ export const DashboardRoutes: Route[] = [
       ...UserUsuarioMenuRoutes,
       ...UserLicenciaConduccionRoutes,
       ...UserLicenciaTransitoRoutes,
+      ...UserCfgEmpresaTipoRoutes,
+      ...UserCfgEmpresaServicioRoutes,
+      ...UserLcCfgCategoriaRoutes,
+      ...UserMedidaCautelarRoutes,
+      ...UserCfgGrupoEtnicoRoutes,
       ...HomeRoutes,
       ...BancoRoutes,
       ...VhloRnaPreregistroRoutes,
@@ -292,8 +291,7 @@ export const DashboardRoutes: Route[] = [
       ...VhloCfgColorRoutes,
       ...VhloCfgCombustibleRoutes,
       ...VhloCfgServicioRoutes,
-      ...VhloRnaTramiteInscripcionLimitacionRoutes,
-      ...VhloRnaTramiteLevantamientoLimitacionRoutes,
+      ...VhloLimitacionRoutes,
       ...VhloCfgValorRoutes,
       ...VhloTecnoMecanicaRoutes,
       ...VhloSoatRoutes,
@@ -303,8 +301,6 @@ export const DashboardRoutes: Route[] = [
       ...CfgAuditoriaRoutes,
       ...CfgSmlmvRoutes,
       ...cfgFestivoRoutes,
-      ...UserLcCfgCategoriaRoutes,
-      ...UserCfgGrupoEtnicoRoutes,
       ...CfgTipoClaseRoutes,
       ...CfgModuloRoutes,
       ...PnalCfgCdoConsecutivoRoutes,
@@ -418,12 +414,8 @@ export const DashboardRoutes: Route[] = [
       ...SvIpatImpresoBodegaRoutes,
       ...SvIpatImpresoAsignacionRoutes,
       ...SvIpatImpresoMunicipioRoutes,
-      ...RnmaPreregistroRoutes,
       ...SvIpatRoutes,
-      ...TramiteInscripcionLimitacionRoutes,
-      ...TramiteLevantamientoLimitacionRoutes,
-      ...RnrsTramiteInscripcionLimitacionRoutes,
-      ...RnrsTramiteLevantamientoLimitacionRoutes,
+      ...RnmaPreregistroRoutes,
       ...CfgValorVehiculoRoutes,
       ...RnrsPreregistroRoutes,
       ...ReporteRoutes,
@@ -434,8 +426,6 @@ export const DashboardRoutes: Route[] = [
       ...ImoLoteRoutes,
       ...ImoReasignacionRoutes,
       ...ImoActaRoutes,
-      ...UserCfgEmpresaTipoRoutes,
-      ...UserCfgEmpresaServicioRoutes,
       ...RnaCertificadoTradicionRoutes,
       ...CvCfgTipoMedidaCautelarRoutes,
       ...CvMedidaCautelarRoutes,

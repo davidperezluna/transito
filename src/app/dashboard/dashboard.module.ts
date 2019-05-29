@@ -85,11 +85,10 @@ import { VhloVehiculoModule } from './vhloVehiculo/vhloVehiculo.module';
 import { VhloPropietarioModule } from './vhloPropietario/vhloPropietario.module';
 import { VhloCfgCarroceriaModule } from './vhloCfgCarroceria/vhloCfgCarroceria.module';
 import { VhloCfgPlacaModule } from './vhloCfgPlaca/vhloCfgPlaca.module';
-import { VhloRnaPreasignacionPlacaModule } from './vhloRnaPreasignacionPlaca/vhloRnaPreasignacionPlaca.module';
-import { VhloRnaTramiteInscripcionLimitacionModule } from './vhloRnaTramiteInscripcionLimitacion/vhloRnaTramiteInscripcionLimitacion.module';
-import { VhloRnaTramiteLevantamientoLimitacionModule } from './vhloRnaTramiteLevantamientoLimitacion/vhloRnaTramiteLevantamientoLimitacion.module';
 import { VhloCfgLimitacionCausalModule } from './vhloCfgLimitacionCausal/vhloCfgLimitacionCausal.module';
 import { VhloCfgLimitacionTipoModule } from './vhloCfgLimitacionTipo/vhloCfgLimitacionTipo.module';
+import { VhloLimitacionModule } from './vhloLimitacion/vhloLimitacion.module';
+import { VhloRnaPreasignacionPlacaModule } from './vhloRnaPreasignacionPlaca/vhloRnaPreasignacionPlaca.module';
 
 import { SvCapacitacionModule } from "./svCapacitacion/svCapacitacion.module";
 import { SvCfgFuncionModule } from "./svCfgFuncion/svCfgFuncion.module";
@@ -141,6 +140,9 @@ import { registroEntregaProductoModule } from './registroEntregaProducto/registr
 import { UserLcCfgCategoriaModule } from './userLcCfgCategoria/userLcCfgCategoria.module';
 import { UserLicenciaConduccionModule } from './userLicenciaConduccion/userLicenciaConduccion.module';
 import { UserLicenciaTransitoModule } from './userLicenciaTransito/userLicenciaTransito.module';
+import { UserMedidaCautelarModule } from './userMedidaCautelar/userMedidaCautelar.module';
+import { UserCfgEmpresaTipoModule } from './userCfgEmpresaTipo/userCfgEmpresaTipo.module';
+import { UserCfgEmpresaServicioModule } from './userCfgEmpresaServicio/userCfgEmpresaServicio.module';
 
 import { CfgAuditoriaModule } from './cfgAuditoria/cfgAuditoria.module';
 import { CfgValorVehiculoModule } from './cfgValorVehiculo/cfgValorVehiculo.module'; 
@@ -161,18 +163,13 @@ import { SvIpatAsignacionModule } from './svIpatAsignacion/svIpatAsignacion.modu
 import { SvIpatImpresoBodegaModule } from './svIpatImpresoBodega/svIpatImpresoBodega.module';
 import { SvIpatImpresoAsignacionModule } from './svIpatImpresoAsignacion/svIpatImpresoAsignacion.module';
 import { SvIpatImpresoMunicipioModule } from './svIpatImpresoMunicipio/svIpatImpresoMunicipio.module';
+import { SvIpatModule } from './svIpat/svIpat.module';
 
 import { PqoCfgTarifaModule } from './pqoCfgTarifa/pqoCfgTarifa.module';
 import { PqoCfgPatioModule } from './pqoCfgPatio/pqoCfgPatio.module';
 import { PqoCfgGruaModule } from './pqoCfgGrua/pqoCfgGrua.module';
 import { PqoGruaCiudadanoModule } from './pqoGruaCiudadano/pqoGruaCiudadano.module';
 import { PqoInmovilizacionModule } from './pqoInmovilizacion/pqoInmovilizacion.module';
-
-import { RnmaTramiteInscripcionLimitacionModule } from './rnmaTramiteInscripcionLimitacion/rnmaTramiteInscripcionLimitacion.module';
-import { RnmaTramiteLevantamientoLimitacionModule } from './rnmaTramiteLevantamientoLimitacion/rnmaTramiteLevantamientoLimitacion.module';
-import { RnrsTramiteInscripcionLimitacionModule } from './rnrsTramiteInscripcionLimitacion/rnrsTramiteInscripcionLimitacion.module';
-import { RnrsTramiteLevantamientoLimitacionModule } from './rnrsTramiteLevantamientoLimitacion/rnrsTramiteLevantamientoLimitacion.module';
-import { SvIpatModule } from './svIpat/svIpat.module';
 
 import { CfgOrganismoTransitoModule } from './cfgOrganismoTransito/cfgOrganismoTransito.module';
 import { CfgTipoProcesoModule } from './vhloCfgLimitacionTipoProceso/vhloCfgLimitacionTipoProceso.module';
@@ -238,9 +235,6 @@ import { FroAcuerdoPagoModule } from './froAcuerdoPago/froAcuerdoPago.module';
 
 import { BpCdpModule } from './bpCdp/bpCdp.module';
 
-import { UserCfgEmpresaTipoModule } from './userCfgEmpresaTipo/userCfgEmpresaTipo.module';
-import { UserCfgEmpresaServicioModule } from './userCfgEmpresaServicio/userCfgEmpresaServicio.module';
-
 import { DashboardComponent } from './dashboard.component'; 
 
 import {TopNavComponent} from '../shared';
@@ -265,6 +259,7 @@ import {RightsidebarComponent} from '../shared';
     UserUsuarioMenuModule,
     UserLicenciaConduccionModule,
     UserLicenciaTransitoModule,
+    UserMedidaCautelarModule,
     UserCfgGrupoEtnicoModule,
     HomeModule,
     BancoModule,
@@ -402,9 +397,8 @@ import {RightsidebarComponent} from '../shared';
     VhloCfgCondicionIngresoModule,
     VhloPlacaSedeModule,
     VhloCfgPlacaModule,
+    VhloLimitacionModule,
     VhloRnaPreasignacionPlacaModule,
-    VhloRnaTramiteInscripcionLimitacionModule,
-    VhloRnaTramiteLevantamientoLimitacionModule,
     VhloSoatModule,
     VhloTecnoMecanicaModule,
     VhloBuscarModule,
@@ -426,10 +420,6 @@ import {RightsidebarComponent} from '../shared';
     rnaRegistroInsumosModule,
     RnmaPreregistroModule,
     CfgTipoProcesoModule,
-    RnmaTramiteInscripcionLimitacionModule,
-    RnmaTramiteLevantamientoLimitacionModule,
-    RnrsTramiteInscripcionLimitacionModule,
-    RnrsTramiteLevantamientoLimitacionModule,
     SvIpatModule,
     CfgValorVehiculoModule,
     RnrsPreregistroModule,

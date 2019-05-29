@@ -1,12 +1,12 @@
 import  {Injectable} from "@angular/core";
 import  {Http, Response,Headers} from "@angular/http";
-import { environment } from 'environments/environment';
 import { LoggerService } from "../logger/services/logger.service";
+import { environment } from 'environments/environment';
 import  "rxjs/add/operator/map";
 
 @Injectable()
-export class FroFacTramiteService {
-	private url = environment.apiUrl + "financiero/frofactramite";
+export class UserMedidaCautelarService {
+	private url = environment.apiUrl + "usuario/usermedidacautelar";
 	public identity;
 	public token;
 
@@ -15,8 +15,11 @@ export class FroFacTramiteService {
 		private _loogerService: LoggerService
 	){}
 
-	index() {
-		return this._http.get(this.url + "/").map(res => res.json());
+	index(datos){
+		let json = JSON.stringify(datos);
+		let params = "data=" + json;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/", params, { headers: headers }).map(res => res.json());
 	}
 
 	register(datos, token) {
@@ -56,17 +59,10 @@ export class FroFacTramiteService {
 		);
 	}
 
-	searchTramitesByFactura(datos, token) {
+	searchByIdentificacion(datos, token) {
 		let json = JSON.stringify(datos);
 		let params = "data=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-		return this._http.post(this.url + "/search/tramites/factura", params, { headers: headers }).map(res => res.json());
-	}
-
-	searchMatriculaInicialByFactura(datos, token) {
-		let json = JSON.stringify(datos);
-		let params = "data=" + json + "&authorization=" + token;
-		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-		return this._http.post(this.url + "/search/matricula/inicial/factura", params, { headers: headers }).map(res => res.json());
+		return this._http.post(this.url + "/search/identificacion", params, { headers: headers }).map(res => res.json());
 	}
 }

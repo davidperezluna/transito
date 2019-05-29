@@ -43,6 +43,7 @@ export class NewRnaComponent implements OnInit {
   public confirmarSolicitante = false;
   
   public tramites:any;
+  public tramiteMatriculaInicial:any = null;
   public certificadoTradicion = false;
   public identificacionApoderado = false;
   public apoderado: any = null;

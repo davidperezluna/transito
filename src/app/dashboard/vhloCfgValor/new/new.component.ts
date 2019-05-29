@@ -63,9 +63,11 @@ export class NewComponent implements OnInit {
     );
 
   }
+
   onCancelar() {
     this.ready.emit(true);
   }
+  
   onEnviar() {
     let token = this._loginService.getToken();
     this.vhloVehiculo.claseId = this.claseSelected;

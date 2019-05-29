@@ -1,0 +1,173 @@
+<div class="row">
+    <div class="col-xs-12 col-lg-4">
+        <div class="card">
+            <div class="card-header">
+                <b class="text-uppercase">
+                    Registrar medida cautelar
+                </b>
+                <br>
+                <small>Todos los campos con  <b class="text-danger">*</b> son obligatorios</small>
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="row"><!-- .row -->
+                        <div class="col-xs-12 col-lg-12">
+                            <form #formSearch="ngForm">
+                                <div class="row">
+                                    <div class="col-xs-12 col-lg-12">
+                                        <h6 class="text-center"><b class="text-uppercase">Buscar demandado</b></h6>
+                                    </div>
+
+                                    <div class="col-xs-12 col-lg-12">
+                                        <label>Tipo de identificación <b class="text-danger">*</b></label>
+                                        <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="idTipoIdentificacionDemandado" name="idTipoIdentificacionDemandado" required>
+                                        </ng-select>
+                                    </div>
+                                    
+                                    <div class="col-xs-12 col-lg-12">
+                                        <label>Identificación <b class="text-danger">*</b></label>
+                                        <div class="input-group">
+                                            <input type="number" class="form-control" [(ngModel)]="identificacionDemandado" name="identificacionDemandado" required />
+                                            <span class="input-group-btn">
+                                                <button (click)="onSearchDemandado()" [disabled]="formSearch.invalid" class="btn btn-default" type="button">
+                                                    <i class="fa fa-search"></i>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row" *ngIf='medidaCautelar.demandados && medidaCautelar.demandados.length > 0'>
+                                    <div class="col-xs-12 col-lg-12">
+                                        <table class="table table-bordered table-striped">
+                                            <thead>
+                                                <tr class="text-center text-uppercase">
+                                                    <th><b>Demandado</b></th>
+                                                    <th><b>Vehiculos</b></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let demandado of medidaCautelar.demandados; let i = index">
+                                                    <td width="70%">
+                                                        <b>Ciudadano</b>
+                                                        <br>
+                                                        <small>{{ demandado.ciudadano.primerNombre }} {{ demandado.ciudadano.segundoNombre }} {{ demandado.ciudadano.primerApellido }} {{ demandado.ciudadano.segundoApellido }}</small>
+                                                        <br>
+                                                        <b>Tipo de identificación</b>
+                                                        <br>
+                                                        <small>{{ demandado.ciudadano.tipoIdentificacion.nombre }}</small>
+                                                        <br>
+                                                        <b>Numero de identificación</b>
+                                                        <br>
+                                                        <small>{{ demandado.ciudadano.identificacion }}</small>
+                                                    </td>
+                                                    <td width="30%" *ngIf="demandado.vehiculos">
+                                                        <span *ngFor="let vehiculo of demandado.vehiculos; let i = index">
+                                                            {{ vehiculo.placa?.numero }}
+                                                        </span>
+                                                    </td>
+                                                    <td width="30%" *ngIf="!demandado.vehiculos">
+                                                        NO POSEE VEHICULOS
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div><!-- /.row -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-lg-8" *ngIf="vehiculos && vehiculos.length > 0">
+        <form #formNew="ngForm">
+            <div class="card">
+                <div class="card-header">
+                    <b class="text-uppercase">información de medida cautelar</b>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-xs-12 col-lg-12">
+                            <div class="row"><!-- .row -->
+                                <div class="col-xs-12 col-lg-4">
+                                    <label>Fecha radicación <b class="text-danger">*</b></label>
+                                    <input class="form-control" [(ngModel)]="medidaCautelar.fechaRegistro" name="fechaRegistro" type="date" required />
+                                </div>
+    
+                                <div class="col-xs-12 col-lg-4">
+                                    <label>Fecha inicio <b class="text-danger">*</b></label>
+                                    <input class="form-control" [(ngModel)]="medidaCautelar.fechaInicio" name="fechaInicio" type="date" required />
+                                </div>
+    
+                                <div class="col-xs-12 col-lg-4">
+                                    <label>Fecha expiración <b class="text-danger">*</b></label>
+                                    <input class="form-control" [(ngModel)]="medidaCautelar.fechaExpiracion" name="fechaExpiracion" type="date" required />
+                                </div>
+        
+                                <div class="col-xs-12 col-lg-6">
+                                    <label>Departamento <b class="text-danger">*</b></label>
+                                    <ng-select [multiple]="false" [options]="departamentos" [(ngModel)]="medidaCautelar.idDepartamento" (ngModelChange)="onChangedDepartamento($event)" required name="idDepartamento">
+                                    </ng-select>
+                                </div>
+        
+                                <div class="col-xs-12 col-lg-6">
+                                    <label>Municipio <b class="text-danger">*</b></label>
+                                    <ng-select [multiple]="false" [options]="municipios" [(ngModel)]="medidaCautelar.idMunicipio" required name="idMunicipio">
+                                    </ng-select>
+                                </div>
+        
+                                <div class="col-xs-12 col-lg-6">
+                                    <label>No. oficio <b class="text-danger">*</b></label>
+                                    <input class="form-control" type="text" [(ngModel)]="medidaCautelar.numeroOficio" name="numeroOficio" required>
+                                </div>
+    
+                                <div class="col-xs-12 col-lg-6">
+                                    <label>No. radicado <b class="text-danger">*</b></label>
+                                    <input class="form-control" type="text" [(ngModel)]="medidaCautelar.numeroRadicado" name="numeroRadicado" required>
+                                </div>
+    
+                                <div class="col-xs-12 col-lg-6">
+                                    <label>Causal de Limitación <b class="text-danger">*</b></label>
+                                    <ng-select [multiple]="false" [options]="causalesLimitacion" [(ngModel)]="medidaCautelar.idCausalLimitacion" required name="idCausalLimitacion">
+                                    </ng-select>
+                                </div>
+        
+                                <div class="col-xs-12 col-lg-6">
+                                    <label>Tipo de Proceso <b class="text-danger">*</b></label>
+                                    <ng-select [multiple]="false" [options]="tiposProceso" [(ngModel)]="medidaCautelar.idTipoProcesoLimitacion" required name="idTipoProcesoLimitacion">
+                                    </ng-select>
+                                </div>
+        
+                                <div class="col-xs-12 col-lg-6">
+                                    <label>Entidad Judicial <b class="text-danger">*</b></label>
+                                    <ng-select [multiple]="false" [options]="entidadesJudiciales" [(ngModel)]="medidaCautelar.idEntidadJudicial" required name="idEntidadJudicial">
+                                    </ng-select>
+                                </div>
+        
+                                <div class="col-xs-12 col-lg-12">
+                                    <label>Observaciones</label>
+                                    <textarea class="form-control" [(ngModel)]="medidaCautelar.observaciones" name="observaciones" placeholder="Aqui puede ingresar las observaciones" rows="4" required></textarea>
+                                </div>
+                            </div><!-- /.row -->
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="btn-group">
+                        <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary">
+                            <i class="fa fa-save"></i>
+                            Enviar
+                        </button>
+                        <button (click)="onCancelar()"  class="btn btn-default">
+                            <i class="fa fa-times"></i>
+                            Cancelar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
