@@ -20,6 +20,9 @@ import { SvCfgClaseAccidenteService } from '../../../services/svCfgClaseAccident
 import { SvCfgClaseChoqueService } from '../../../services/svCfgClaseChoque.service';
 import { SvCfgObjetoFijoService } from '../../../services/svCfgObjetoFijo.service';
 import { SvCfgAreaService } from "../../../services/svCfgArea.service";
+import { SvCfgTipoAreaService } from "../../../services/svCfgTipoArea.service";
+import { SvCfgTipoViaService } from "../../../services/svCfgTipoVia.service";
+import { SvCfgCardinalidadService } from "../../../services/svCfgCardinalidad.service";
 import { SvCfgSectorService } from "../../../services/svCfgSector.service";
 import { SvCfgZonaService } from "../../../services/svCfgZona.service";
 import { SvCfgDisenioService } from "../../../services/svCfgDisenio.service";
@@ -95,6 +98,9 @@ export class NewComponent implements OnInit {
   public organismosTransito: any;
   public aseguradoras: any;
   public areas: any;
+  public tiposArea: any;
+  public tiposVia: any;
+  public cardinalidades: any;
   public sectores: any;
   public zonas: any;
   public disenios: any;
@@ -225,6 +231,9 @@ export class NewComponent implements OnInit {
     private _OrganismoTransitoService: CfgOrganismoTransitoService,
     private _AseguradoraService: SvCfgAseguradoraService,
     private _AreaService: SvCfgAreaService,
+    private _TipoAreaService: SvCfgTipoAreaService,
+    private _TipoViaService: SvCfgTipoViaService,
+    private _CardinalidadService: SvCfgCardinalidadService,
     private _SectorService: SvCfgSectorService,
     private _ZonaService: SvCfgZonaService,
     private _DisenioService: SvCfgDisenioService,
@@ -275,7 +284,7 @@ export class NewComponent implements OnInit {
   ngOnInit() {
     console.log(this.consecutivo);
 
-    this.ipat = new SvIpat(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    this.ipat = new SvIpat(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     this.ipatConductor = new SvIpatConductor(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     this.ipatVehiculo = new SvIpatVehiculo(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     this.ipatVictima = new SvIpatVictima(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
@@ -404,6 +413,45 @@ export class NewComponent implements OnInit {
       this._AreaService.getAreaSelect().subscribe(
         response => {
           this.areas = response;
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+      this._TipoAreaService.getTipoAreaSelect().subscribe(
+        response => {
+          this.tiposArea = response;
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+      this._TipoViaService.getTipoViaSelect().subscribe(
+        response => {
+          this.tiposVia = response;
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+      this._CardinalidadService.getCardinalidadSelect().subscribe(
+        response => {
+          this.cardinalidades = response;
         },
         error => {
           this.errorMessage = <any>error;
@@ -1081,7 +1129,7 @@ export class NewComponent implements OnInit {
     this._SvIpatService.register(this.ipat, token).subscribe(
       response => {
         if (response.status == 'success') {
-          /* this.ready.emit(true); */
+          this.ready.emit(true);
           swal({
             title: 'Perfecto!',
             text: response.message,
@@ -1125,14 +1173,14 @@ export class NewComponent implements OnInit {
 
   onBuscarConductor() {
     let token = this._LoginService.getToken();
-    if (this.ipatConductor.identificacionConductor) {
-      this._SvIpatService.getBuscarConductor({ 'identificacion': this.ipatConductor.identificacionConductor }, token).subscribe(
+    if (this.ipatConductor.identificacion) {
+      this._SvIpatService.getBuscarConductor({ 'identificacion': this.ipatConductor.identificacion }, token).subscribe(
 
         response => {
 
           if (response.status == 'success') {
             /* ================ cargar select placas vehiculos ===================== */
-            this._SvIpatVehiculoService.selectByConsecutivo(this.numeroConsecutivo, token).subscribe(
+            this._SvIpatVehiculoService.selectByConsecutivo(this.consecutivo.numero, token).subscribe(
               response => {
                 this.placasVehiculosIpat = response;
               },
@@ -1152,19 +1200,19 @@ export class NewComponent implements OnInit {
               this.tipoIdentificacionConductorSelected = [0];
             }
             if (response.data.segundoNombre == null) {
-              this.ipatConductor.nombresConductor = response.data.primerNombre;
+              this.ipatConductor.nombres = response.data.primerNombre;
             } else {
-              this.ipatConductor.nombresConductor = response.data.primerNombre + ' ' + response.data.segundoNombre;
+              this.ipatConductor.nombres = response.data.primerNombre + ' ' + response.data.segundoNombre;
             }
             if (response.data.segundoApellido == null) {
-              this.ipatConductor.apellidosConductor = response.data.primerApellido;
+              this.ipatConductor.apellidos = response.data.primerApellido;
             } else {
-              this.ipatConductor.apellidosConductor = response.data.primerApellido + ' ' + response.data.segundoApellido;
+              this.ipatConductor.apellidos = response.data.primerApellido + ' ' + response.data.segundoApellido;
             }
             if (response.data.fechaNacimiento != null) {
-              this.ipatConductor.fechaNacimientoConductor = response.data.fechaNacimiento;
+              this.ipatConductor.fechaNacimiento = response.data.fechaNacimiento;
             } else {
-              this.ipatConductor.fechaNacimientoConductor = '';
+              this.ipatConductor.fechaNacimiento = '';
             }
             if (response.data.genero != null) {
               this.sexoConductorSelected = [response.data.genero.id];
@@ -1172,9 +1220,9 @@ export class NewComponent implements OnInit {
               this.sexoConductorSelected = [0];
             }
             if (response.data.direccion != null) {
-              this.ipatConductor.direccionResidenciaConductor = response.data.direccion;
+              this.ipatConductor.direccionResidencia = response.data.direccion;
             } else {
-              this.ipatConductor.direccionResidenciaConductor = '';
+              this.ipatConductor.direccionResidencia = '';
             }
             if (response.data.municipioResidencia != null) {
               this.ciudadResidenciaConductorSelected = [response.data.municipioResidencia.id];
@@ -1182,9 +1230,9 @@ export class NewComponent implements OnInit {
               this.ciudadResidenciaConductorSelected = [0];
             }
             if (response.data.telefono != null) {
-              this.ipatConductor.telefonoConductor = response.data.telefono;
+              this.ipatConductor.telefono = response.data.telefono;
             } else {
-              this.ipatConductor.telefonoConductor = '';
+              this.ipatConductor.telefono = '';
             }
           } else {
             swal({
@@ -1195,14 +1243,14 @@ export class NewComponent implements OnInit {
             }).then((result) => {
               if (result.value) {
                 this.tipoIdentificacionConductorSelected = [0];
-                this.ipatConductor.nombresConductor = '';
-                this.ipatConductor.apellidosConductor = '';
+                this.ipatConductor.nombres = '';
+                this.ipatConductor.apellidos = '';
                 this.nacionalidadConductorSelected = [0];
-                this.ipatConductor.fechaNacimientoConductor = '';
+                this.ipatConductor.fechaNacimiento = '';
                 this.sexoConductorSelected = [0];
-                this.ipatConductor.direccionResidenciaConductor = '';
+                this.ipatConductor.direccionResidencia = '';
                 this.ciudadResidenciaConductorSelected = [0];
-                this.ipatConductor.telefonoConductor = '';
+                this.ipatConductor.telefono = '';
 
                 if (this.vehiculoIpat) {
                   swal({
@@ -1355,13 +1403,13 @@ export class NewComponent implements OnInit {
   onBuscarLicenciaConductor() {
     let token = this._LoginService.getToken();
     if (this.ipatConductor.numeroLicenciaConduccion) {
-      this._SvIpatService.getBuscarLicenciaConductor({ 'numero': this.ipatConductor.numeroLicenciaConduccion, 'identificacion': this.ipatConductor.identificacionConductor }, token).subscribe(
+      this._SvIpatService.getBuscarLicenciaConductor({ 'numero': this.ipatConductor.numeroLicenciaConduccion, 'identificacion': this.ipatConductor.identificacion }, token).subscribe(
 
         response => {
           if (response.status == 'success') {
             this.licencia = true;
             this.categoriaLcSelected = [response.data.categoria.id];
-            this.ipatConductor.restriccionConductor = response.data.restriccion;
+            this.ipatConductor.restriccion = response.data.restriccion;
             this.ipatConductor.fechaExpedicionLicenciaConduccion = response.data.fechaExpedicion;
             this.ipatConductor.fechaVencimientoLicenciaConduccion = response.data.fechaVencimiento;
             this.ipatConductor.organismoTransito = response.data.organismoTransito.divipo;
@@ -1387,12 +1435,12 @@ export class NewComponent implements OnInit {
   }
 
   onMismoConductor() {
-    if (this.ipatConductor.identificacionConductor != null && this.ipatConductor.nombresConductor != '' && this.ipatConductor.apellidosConductor != '') {
+    if (this.ipatConductor.identificacion != null && this.ipatConductor.nombres != '' && this.ipatConductor.apellidos != '') {
       this.msmConductor = true;
       this.tipoIdentificacionPropietarioSelected = [this.tipoIdentificacionConductorSelected];
-      this.ipat.identificacionPropietario = this.ipatConductor.identificacionConductor;
-      this.ipat.nombresPropietario = this.ipatConductor.nombresConductor;
-      this.ipat.apellidosPropietario = this.ipatConductor.apellidosConductor;
+      this.ipat.identificacionPropietario = this.ipatConductor.identificacion;
+      this.ipat.nombresPropietario = this.ipatConductor.nombres;
+      this.ipat.apellidosPropietario = this.ipatConductor.apellidos;
     } else {
       swal({
         title: 'Alerta!',
@@ -1465,8 +1513,8 @@ export class NewComponent implements OnInit {
 
   onBuscarVictima() {
     let token = this._LoginService.getToken();
-    if (this.ipatVictima.identificacionVictima) {
-      this._SvIpatService.getBuscarVictima({ 'identificacionVictima': this.ipatVictima.identificacionVictima }, token).subscribe(
+    if (this.ipatVictima.identificacion) {
+      this._SvIpatService.getBuscarVictima({ 'identificacionVictima': this.ipatVictima.identificacion }, token).subscribe(
 
         response => {
           if (response.status == 'success') {
@@ -1476,19 +1524,19 @@ export class NewComponent implements OnInit {
               this.tipoIdentificacionVictimaSelected = [0];
             }
             if (response.data.primerNombre != null) {
-              this.ipatVictima.nombresVictima = response.data.primerNombre + ' ' + response.data.segundoNombre;
+              this.ipatVictima.nombres = response.data.primerNombre + ' ' + response.data.segundoNombre;
             } else {
-              this.ipatVictima.nombresVictima = '';
+              this.ipatVictima.nombres = '';
             }
             if (response.data.primerApellido != null) {
-              this.ipatVictima.apellidosVictima = response.data.primerApellido + ' ' + response.data.segundoApellido;
+              this.ipatVictima.apellidos = response.data.primerApellido + ' ' + response.data.segundoApellido;
             } else {
-              this.ipatVictima.apellidosVictima = '';
+              this.ipatVictima.apellidos = '';
             }
             if (response.data.fechaNacimiento != null) {
-              this.ipatVictima.fechaNacimientoVictima = response.data.fechaNacimiento;
+              this.ipatVictima.fechaNacimiento = response.data.fechaNacimiento;
             } else {
-              this.ipatVictima.fechaNacimientoVictima = '';
+              this.ipatVictima.fechaNacimiento = '';
             }
             if (response.data.genero.id != null) {
               this.sexoVictimaSelected = [response.data.genero.id];
@@ -1496,9 +1544,9 @@ export class NewComponent implements OnInit {
               this.sexoVictimaSelected = [0];
             }
             if (response.data.direccionPersonal != null) {
-              this.ipatVictima.direccionResidenciaVictima = response.data.direccionPersonal;
+              this.ipatVictima.direccionResidencia = response.data.direccionPersonal;
             } else {
-              this.ipatVictima.direccionResidenciaVictima = '';
+              this.ipatVictima.direccionResidencia = '';
             }
             if (response.data.municipioResidencia.id != null) {
               this.ciudadResidenciaVictimaSelected = [response.data.municipioResidencia.id];
@@ -1506,9 +1554,9 @@ export class NewComponent implements OnInit {
               this.ciudadResidenciaVictimaSelected = [0];
             }
             if (response.data.telefono != null) {
-              this.ipatVictima.telefonoVictima = response.data.telefono;
+              this.ipatVictima.telefono = response.data.telefono;
             } else {
-              this.ipatVictima.telefonoVictima = '';
+              this.ipatVictima.telefono = '';
             }
           } else {
             swal({
@@ -1520,13 +1568,13 @@ export class NewComponent implements OnInit {
               if (result.value) {
                 /* this.victimaEncontrada = false; */
                 this.tipoIdentificacionVictimaSelected = [0];
-                this.ipatVictima.nombresVictima = '';
-                this.ipatVictima.apellidosVictima = '';
-                this.ipatVictima.fechaNacimientoVictima = '';
+                this.ipatVictima.nombres = '';
+                this.ipatVictima.apellidos = '';
+                this.ipatVictima.fechaNacimiento = '';
                 this.sexoVictimaSelected = [0];
-                this.ipatVictima.direccionResidenciaVictima = '';
+                this.ipatVictima.direccionResidencia = '';
                 this.ciudadResidenciaVictimaSelected = [0];
-                this.ipatVictima.telefonoVictima = '';
+                this.ipatVictima.telefono = '';
               }
             });
           }
@@ -1620,7 +1668,7 @@ export class NewComponent implements OnInit {
 
   registrarCiudadano() {
     let token = this._LoginService.getToken();
-    if (this.ipatConductor.identificacionConductor == null && this.ipatConductor.nombresConductor == null && this.ipatConductor.apellidosConductor) {
+    if (this.ipatConductor.identificacion == null && this.ipatConductor.nombres == null && this.ipatConductor.apellidos) {
       swal({
         title: 'Alerta!',
         text: "Registre los campos del conductor",
@@ -1629,22 +1677,22 @@ export class NewComponent implements OnInit {
       });
     } else {
       //consecutivo del ipat
-      this.ipatConductor.consecutivo = this.numeroConsecutivo;
+      this.ipatConductor.consecutivo = this.consecutivo.numero;
 
-      this.ipatConductor.tipoIdentificacionConductor = this.tipoIdentificacionConductorSelected;
-      this.ipatConductor.nacionalidadConductor = this.nacionalidadConductorSelected;
-      this.ipatConductor.sexoConductor = this.sexoConductorSelected;
-      this.ipatConductor.ciudadResidenciaConductor = this.ciudadResidenciaConductorSelected;
-      this.ipatConductor.idGravedadConductor = this.gravedadConductorSelected;
+      this.ipatConductor.tipoIdentificacion = this.tipoIdentificacionConductorSelected;
+      this.ipatConductor.nacionalidad = this.nacionalidadConductorSelected;
+      this.ipatConductor.sexo = this.sexoConductorSelected;
+      this.ipatConductor.ciudadResidencia = this.ciudadResidenciaConductorSelected;
+      this.ipatConductor.idGravedad = this.gravedadConductorSelected;
       this.ipatConductor.categoriaLicenciaConduccion = this.categoriaLcSelected;
 
 
       var html = 'Se va a registrar el usuario:<br>' +
-        'Nombres: <b>' + this.ipatConductor.nombresConductor + ' ' + this.ipatConductor.apellidosConductor + '</b><br>' +
+        'Nombres: <b>' + this.ipatConductor.nombres + ' ' + this.ipatConductor.apellidos + '</b><br>' +
         'Tipo Identificación: <b>' + this.tipoIdentificacionConductorSelected + '</b><br>' +
-        'Identificación: <b>' + this.ipatConductor.identificacionConductor + '</b><br>' +
+        'Identificación: <b>' + this.ipatConductor.identificacion + '</b><br>' +
         'Género: <b>' + this.sexoConductorSelected + '</b><br>' +
-        'Teléfono: <b>' + this.ipatConductor.telefonoConductor + '</b><br>';
+        'Teléfono: <b>' + this.ipatConductor.telefono + '</b><br>';
 
       swal({
         title: 'Creación de persona natural',
@@ -1667,30 +1715,30 @@ export class NewComponent implements OnInit {
                 });
 
                 this.usuario = false;
-                this.ipatConductor.identificacionConductor = '';
+                this.ipatConductor.identificacion = '';
                 this.tipoIdentificacionConductorSelected = [0];
                 this.nacionalidadConductorSelected = [0];
                 this.sexoConductorSelected = [0];
                 this.gravedadConductorSelected = [0];
                 this.ciudadResidenciaConductorSelected = [0];
-                this.ipatConductor.nombresConductor = '';
-                this.ipatConductor.apellidosConductor = '';
-                this.ipatConductor.fechaNacimientoConductor = '';
-                this.ipatConductor.direccionResidenciaConductor = '';
-                this.ipatConductor.telefonoConductor = '';
-                this.ipatConductor.sustanciasPsicoactivasConductor = '',
+                this.ipatConductor.nombres = '';
+                this.ipatConductor.apellidos = '';
+                this.ipatConductor.fechaNacimiento = '';
+                this.ipatConductor.direccionResidencia = '';
+                this.ipatConductor.telefono = '';
+                this.ipatConductor.sustanciasPsicoactivas = '',
                 this.ipatConductor.portaLicencia = '',
                 this.ipatConductor.numeroLicenciaConduccion = 0,
-                this.ipatConductor.restriccionConductor = '',
+                this.ipatConductor.restriccion = '',
                 this.ipatConductor.categoriaLicenciaConduccion = 0,
                 this.ipatConductor.fechaExpedicionLicenciaConduccion = '',
                 this.ipatConductor.fechaVencimientoLicenciaConduccion = '',
                 this.ipatConductor.organismoTransito = '',
-                this.ipatConductor.cinturonConductor = '',
-                this.ipatConductor.cascoConductor = '',
-                this.ipatConductor.chalecoConductor = '',
-                this.ipatConductor.idHospitalConductor = 0,
-                this.ipatConductor.descripcionLesionConductor = '',
+                this.ipatConductor.cinturon = '',
+                this.ipatConductor.casco = '',
+                this.ipatConductor.chaleco = '',
+                this.ipatConductor.idHospital = 0,
+                this.ipatConductor.descripcionLesion = '',
 
                   this.contConductores += 1;
                 this.ipat.totalConductores = this.contConductores;
@@ -1765,9 +1813,9 @@ export class NewComponent implements OnInit {
       });
     } else {
       //consecutivo ipat
-      this.ipatVehiculo.consecutivo = this.numeroConsecutivo;
+      this.ipatVehiculo.consecutivo = this.consecutivo.numero;
 
-      this.ipatVehiculo.nacionalidadVehiculo = this.nacionalidadVehiculoSelected;
+      this.ipatVehiculo.nacionalidad = this.nacionalidadVehiculoSelected;
       this.ipatVehiculo.marca = this.marcaSelected;
       this.ipatVehiculo.linea = this.lineaSelected;
       this.ipatVehiculo.color = this.colorSelected;
@@ -1891,7 +1939,7 @@ export class NewComponent implements OnInit {
   registrarVictima() {
     let token = this._LoginService.getToken();
 
-    if (this.ipatVictima.identificacionVictima == null) {
+    if (this.ipatVictima.identificacion == null) {
       swal({
         title: 'Alerta!',
         text: "Registre todos los campos de la victima",
@@ -1899,20 +1947,20 @@ export class NewComponent implements OnInit {
         confirmButtonText: 'Aceptar'
       });
     } else {
-      this.ipatVictima.consecutivo = this.numeroConsecutivo;
-      this.ipatVictima.tipoIdentificacionVictima = this.tipoIdentificacionVictimaSelected;
-      this.ipatVictima.nacionalidadVictima = this.nacionalidadVictimaSelected;
-      this.ipatVictima.sexoVictima = this.sexoVictimaSelected;
-      this.ipatVictima.ciudadResidenciaVictima = this.ciudadResidenciaVictimaSelected;
+      this.ipatVictima.consecutivo = this.consecutivo.numero;
+      this.ipatVictima.tipoIdentificacion = this.tipoIdentificacionVictimaSelected;
+      this.ipatVictima.nacionalidad = this.nacionalidadVictimaSelected;
+      this.ipatVictima.sexo = this.sexoVictimaSelected;
+      this.ipatVictima.ciudadResidencia = this.ciudadResidenciaVictimaSelected;
       this.ipatVictima.idTipoVictima = this.tipoVictimaSelected;
-      this.ipatVictima.idGravedadVictima = this.gravedadVictimaSelected;
+      this.ipatVictima.idGravedad = this.gravedadVictimaSelected;
 
       var html = 'Se va a registrar el usuario:<br>' +
-        'Nombres: <b>' + this.ipatVictima.nombresVictima + ' ' + this.ipatVictima.apellidosVictima + '</b><br>' +
+        'Nombres: <b>' + this.ipatVictima.nombres + ' ' + this.ipatVictima.apellidos + '</b><br>' +
         'Tipo Identificación: <b>' + this.tipoIdentificacionVictimaSelected + '</b><br>' +
-        'Identificación: <b>' + this.ipatVictima.identificacionVictima + '</b><br>' +
+        'Identificación: <b>' + this.ipatVictima.identificacion + '</b><br>' +
         'Género: <b>' + this.sexoVictimaSelected + '</b><br>' +
-        'Teléfono: <b>' + this.ipatVictima.telefonoVictima + '</b><br>';
+        'Teléfono: <b>' + this.ipatVictima.telefono + '</b><br>';
 
       swal({
         title: 'Creación de persona natural',
@@ -1953,26 +2001,26 @@ export class NewComponent implements OnInit {
                 this.victima = false;
                 this.tipoVictimaSelected = [0];
                 this.gravedadVictimaSelected = [0];
-                this.ipatVictima.identificacionVictima = '';
-                this.ipatVictima.tipoIdentificacionVictima = '';
-                this.ipatVictima.nombresVictima = '';
-                this.ipatVictima.apellidosVictima = '';
+                this.ipatVictima.identificacion = '';
+                this.ipatVictima.tipoIdentificacion = '';
+                this.ipatVictima.nombres = '';
+                this.ipatVictima.apellidos = '';
                 this.nacionalidadVictimaSelected = [0];
-                this.ipatVictima.fechaNacimientoVictima = '';
+                this.ipatVictima.fechaNacimiento = '';
                 this.sexoVictimaSelected = [0];
-                this.ipatVictima.direccionResidenciaVictima = '';
+                this.ipatVictima.direccionResidencia = '';
                 this.ciudadResidenciaVictimaSelected = [0];
-                this.ipatVictima.telefonoVictima = '';
-                this.ipatVictima.idHospitalVictima = '';
-                this.ipatVictima.practicoExamenVictima = '';
-                this.ipatVictima.autorizoVictima = '';
-                this.ipatVictima.idResultadoExamenVictima = '';
-                this.ipatVictima.idGradoExamenVictima = '';
-                this.ipatVictima.sustanciasPsicoactivasVictima = '';
-                this.ipatVictima.cinturonVictima = '';
-                this.ipatVictima.cascoVictima = '';
-                this.ipatVictima.chalecoVictima = '';
-                this.ipatVictima.descripcionLesionVictima = '';
+                this.ipatVictima.telefono = '';
+                this.ipatVictima.idHospital = '';
+                this.ipatVictima.practicoExamen = '';
+                this.ipatVictima.autorizo = '';
+                this.ipatVictima.idResultadoExamen = '';
+                this.ipatVictima.idGradoExamen = '';
+                this.ipatVictima.sustanciasPsicoactivas = '';
+                this.ipatVictima.cinturon = '';
+                this.ipatVictima.casco = '';
+                this.ipatVictima.chaleco = '';
+                this.ipatVictima.descripcionLesion = '';
               } else {
                 swal({
                   title: 'Alerta!',

@@ -1,6 +1,6 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import { SvIpatAsignacionService } from '../../../services/svIpatAsignacion.service';
-import { SvIpatConsecutivoService } from '../../../services/svIpatConsecutivo.service';
+/* import { SvIpatConsecutivoService } from '../../../services/svIpatConsecutivo.service'; */
 import { LoginService } from '../../../services/login.service';
 import { environment } from 'environments/environment';
 import swal from 'sweetalert2';
@@ -22,14 +22,14 @@ public table: any;
 
 constructor(
   private _AsignacionService: SvIpatAsignacionService,
-  private _ConsecutivoService: SvIpatConsecutivoService,
+  /* private _ConsecutivoService: SvIpatConsecutivoService, */
   private _loginService: LoginService,
   ){}
 
   ngOnInit(){
     let token = this._loginService.getToken();
 
-    this._ConsecutivoService.record(this.funcionario, token).subscribe(
+    this._AsignacionService.recordFuncionario(this.funcionario, token).subscribe(
       response => {
         this.comparendos = response.data;
         let timeoutId = setTimeout(() => {
@@ -78,10 +78,17 @@ constructor(
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',
-            text: 'El registro se ha modificado con exito',
+            text: response.message,
             type: 'success',
             confirmButtonText: 'Aceptar'
-          })
+          });
+        } else {
+          swal({
+            title: 'Error!',
+            text: response.message,
+            type: 'error',
+            confirmButtonText: 'Aceptar'
+          });
         }
 			error => {
 					this.errorMessage = <any>error;
