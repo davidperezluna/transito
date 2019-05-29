@@ -137,7 +137,7 @@ export class DeleteComponent implements OnInit {
   onDelete(limitacion:any) {
     swal({
       title: '¿Estás seguro?',
-      text: "¡Se levantara la limitación!",
+      text: "¡Se levantar la limitación!",
       type: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#15d4be',

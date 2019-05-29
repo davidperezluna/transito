@@ -30,11 +30,9 @@ constructor(
   ){}
 
   ngOnInit() {
-
     swal({
       title: 'Cargando Tabla!',
       text: 'Solo tardara unos segundos por favor espere.',
-      timer: 1500,
       onOpen: () => {
         swal.showLoading()
       }
@@ -46,8 +44,8 @@ constructor(
       response => {
         this.reasignaciones = response.data;
         let timeoutId = setTimeout(() => {
-          swal.close()
-          this.iniciarTabla();
+          this.onInitTable();
+          swal.close();
         }, 100);
       }, 
       error => {
@@ -60,11 +58,17 @@ constructor(
       }
     );
   }
+
   onCancelar(){
     this.ready.emit(true);
   }
-  iniciarTabla() {
-    $('#dataTables-example').DataTable({
+
+  onInitTable() {
+    if (this.table) {
+      this.table.destroy();
+    }
+    
+    this.table = $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,
       sPaginationType: 'full_numbers',
@@ -81,6 +85,5 @@ constructor(
         }
       }
     });
-    this.table = $('#dataTables-example').DataTable();
   }
 }
