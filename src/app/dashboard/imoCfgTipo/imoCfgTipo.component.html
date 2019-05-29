@@ -15,21 +15,34 @@
           <table class="table " id="dataTables-example">
             <thead>
               <tr>
-                <th>Id</th>
+                <th>#</th>
                 <th>Módulo</th>
                 <th>Nombre</th>
-                <th>Referencia</th>
-                <th>Categoria</th>
+                <th>Detalles</th>
                 <th>Acciones</th>
               </tr>
             </thead>
             <tbody>
               <tr class="odd" *ngFor="let tipoInsumo of tiposInsumo; let i = index">
-                <td>{{ tipoInsumo.id }}</td>
+                <td>{{ i + 1 }}</td>
                 <td>{{ tipoInsumo.modulo?.nombre }}</td>
-                <td>{{ tipoInsumo.nombre }}</td>
-                <td>{{ tipoInsumo.referencia }}</td>
-                <td>{{ tipoInsumo.categoria }}</td>
+                <td>
+                  {{ tipoInsumo.nombre }}
+                  <ng-container *ngIf="tipoInsumo.valores.length < 1">
+                    <br>
+                    <span class="badge badge-danger">
+                      <i class="fa fa-exclamation-triangle"></i>
+                      Registre al menos un valor para este tipo de insumo
+                    </span>
+                  </ng-container>
+                </td>
+                <td>
+                  <b>Referencia:</b>
+                  {{ tipoInsumo.referencia }}
+                  <br>
+                  <b>Categoria:</b>
+                  {{ tipoInsumo.categoria }}
+                </td>
                 <td>
                   <div class="btn-group">
                     <button (click)="onEdit(tipoInsumo)" class="btn btn-xs btn-primary" type="button" tooltip="Configurar" [tooltipDisabled]="false" [tooltipAnimation]="true"

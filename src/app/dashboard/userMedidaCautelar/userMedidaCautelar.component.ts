@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { VhloLimitacionService } from '../../services/vhloLimitacion.service';
+import { UserMedidaCautelarService } from '../../services/userMedidaCautelar.service';
 import { LoginService } from '../../services/login.service';
 import swal from 'sweetalert2';
 declare var $: any;
@@ -26,7 +26,7 @@ export class UserMedidaCautelarComponent implements OnInit {
   }
 
   constructor(
-    private _LimitacionService: VhloLimitacionService,
+    private _MedidaCautelarService: UserMedidaCautelarService,
     private _LoginService: LoginService,
   ) { }
 
@@ -53,7 +53,7 @@ export class UserMedidaCautelarComponent implements OnInit {
 
     let token = this._LoginService.getToken();
     
-    this._LimitacionService.searchByPlaca(this.search, token).subscribe(
+    this._MedidaCautelarService.searchByIdentificacion(this.search, token).subscribe(
       response => {
         if (response.code == 200) {
           this.inscripciones = response.data;
