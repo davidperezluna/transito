@@ -50,8 +50,6 @@ export class ImoLoteComponent implements OnInit {
           this.organismosTransito = response;
 
           swal.close();
-
-          this.formSearch = true;
       },
       error => {
           this.errorMessage = <any>error;
@@ -65,7 +63,7 @@ export class ImoLoteComponent implements OnInit {
   }
 
   onInitForms(){
-    this.formSearch = false;
+    this.formSearch = true;
     this.formNew = false;
     this.formEdit = false;
     this.formIndex = false;
@@ -82,16 +80,28 @@ export class ImoLoteComponent implements OnInit {
 
     let token = this._LoginService.getToken();
     
-    this._LoteInsumoService.index().subscribe(
+    this._LoteInsumoService.searchByOrganismoTransito({ 'idOrganismoTransito': this.idOrganismoTransito }, token).subscribe(
       response => {
-        this.loteInsumoSustratos = response.data.loteSustratos;
-        this.loteInsumoInsumos = response.data.loteInsumos; 
-        this.totalesTipo = response.data.totalesTipo; 
+        if (response.code == 200) {
+          this.loteInsumoSustratos = response.data.loteSustratos;
+          this.loteInsumoInsumos = response.data.loteInsumos; 
+          this.totalesTipo = response.data.totalesTipo; 
+  
+          let timeoutId = setTimeout(() => {  
+            this.onInitTable();
+            swal.close();
+          }, 100); 
 
-        let timeoutId = setTimeout(() => {  
-          this.onInitTable();
-          swal.close();
-        }, 100); 
+          this.onInitForms();
+          this.formIndex = true;
+        }else{
+          swal({
+            title: response.title,
+            text: response.message,
+            type: response.status,
+            confirmButtonText: 'Aceptar'
+          });
+        }
       }, 
       error => {
         this.errorMessage = <any>error;
@@ -148,16 +158,17 @@ export class ImoLoteComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._LoginService.getToken();
+
         this._LoteInsumoService.delete(token,id).subscribe(
             response => {
                 swal({
-                      title: 'Eliminado!',
-                      text:'Registro eliminado correctamente.',
-                      type:'success',
-                      confirmButtonColor: '#15d4be',
-                    })
-                  this.table.destroy();
-                  this.ngOnInit();
+                  title: 'Eliminado!',
+                  text:'Registro eliminado correctamente.',
+                  type:'success',
+                  confirmButtonColor: '#15d4be',
+                });
+
+                this.ngOnInit();
               }, 
             error => {
               this.errorMessage = <any>error;
