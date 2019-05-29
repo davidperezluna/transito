@@ -34,38 +34,51 @@
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="row" *ngIf="loteInsumos && loteInsumos.length > 0">
-      <div class="col-xs-12 col-lg-12">
+      <div class="col-xs-12 col-md-6 col-lg-8" *ngIf="loteInsumos && loteInsumos.length > 0  && formIndex">
         <div class="card">
           <div class="card-body">
             <table class="table " id="dataTables-example">
               <thead>
-                <tr>
-                  <th>No.Acta</th>
-                  <th>Empresa</th>
-                  <th>Sede</th>
-                  <th>Insumo</th>
-                  <th>Rango Inicio</th>
-                  <th>Rango Fin</th>
-                  <th>Cantidad</th>
-                  <th>Referencia</th>
-                  <th>Fecha</th>
+                <tr class="text-center">
+                  <th>Detalles</th>
+                  <th>Rangos</th>
                   <th>Acciones</th>
                 </tr>
               </thead>
               <tbody>
-                <tr class="odd" *ngFor="let loteInsumo of loteInsumos; let i = index">
-                  <td >{{ loteInsumo.numeroActa }}</td>
-                  <td >{{ loteInsumo.empresa.nombre }}</td>
-                  <td >{{ loteInsumo.sedeOperativa.nombre }}</td>
-                  <td >{{ loteInsumo.tipoInsumo.nombre }}</td>
-                  <td >{{ loteInsumo.rangoInicio }}</td>
-                  <td >{{ loteInsumo.rangoFin }}</td>
-                  <td >{{ loteInsumo.cantidad }}</td>
-                  <td >{{ loteInsumo.referencia }}</td>
-                  <td >{{ (loteInsumo.fecha* 1000) | date: 'dd/MM/yyyy' }}</td>
+                <tr *ngFor="let loteInsumo of loteInsumos; let i = index">
+                  <td>
+                    <b>No.Acta</b>
+                    {{ loteInsumo.numeroActa }}
+                    <br>
+                    <b>Empresa</b>
+                    <br>
+                    {{ loteInsumo.empresa.nombre }}
+                    <br>
+                    <b>Sede operativa</b>
+                    <br>
+                    {{ loteInsumo.sedeOperativa.nombre }}
+                    <br>
+                    <b>Insumo</b>
+                    {{ loteInsumo.tipoInsumo.nombre }}
+                  </td>
+                  <td>
+                    <b>Rango Inicio</b>
+                    {{ loteInsumo.rangoInicio }}
+                    <br>
+                    <b>Rango Fin</b>
+                    {{ loteInsumo.rangoFin }}
+                    <br>
+                    <b>Cantidad</b>
+                    {{ loteInsumo.cantidad }}
+                    <br>
+                    <b>Referencia</b>
+                    {{ loteInsumo.referencia }}
+                    <b>Fecha</b>
+                    <br>
+                    {{ (loteInsumo.fecha* 1000) | date: 'dd/MM/yyyy' }}
+                  </td>
                   <td>
                     <div class="btn-group">
                       <button (click)="onShow(loteInsumo)" class="btn btn-xs btn-primary" type="button">
@@ -79,7 +92,9 @@
           </div>
         </div>
       </div>
+  
+      <div class="col-xs-12 col-md-6 col-lg-8" *ngIf='formShow'>
+        <app-show  [insumos]="insumos" [loteInsumo]="loteInsumo"></app-show>
+      </div>
     </div>
-
-    <app-show *ngIf='formShow' [insumos]="insumos" [loteInsumo]="loteInsumo"></app-show>
 </div>

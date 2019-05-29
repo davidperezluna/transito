@@ -55,16 +55,45 @@
             <thead>
               <tr>
                 <th>#</th>
-                <th>No. orden judicial</th>
-                <th>Vehiculo</th>
+                <th>Ciudadano</th>
+                <th>Detalles</th>
+                <th>Fechas</th>
+                <th>Acciones</th>
                 <!-- <th>Acciones</th> -->
               </tr>
             </thead>
             <tbody>
-              <tr class="odd" *ngFor="let inscripcion of inscripciones; let i = index">
+              <tr class="odd" *ngFor="let medidaCautelar of medidasCautelares; let i = index">
                 <td>{{ i + 1 }}</td>
-                <td>{{ inscripcion.numeroOrdenJudicial }}</td>
-                <td>{{ inscripcion.vehiculo?.placa?.numero }}</td>
+                <td>
+                  {{ medidaCautelar.ciudadano.primerNombre }} {{ medidaCautelar.ciudadano.primerApellido }}
+                  <br>
+                  {{ medidaCautelar.ciudadano.identificacion }}
+                </td>
+                <td>
+                  <b>No. oficio</b>
+                  {{ medidaCautelar.numeroOficio }}
+                  <br>
+                  <b>Entidad judicial</b>
+                  {{ medidaCautelar.entidadJudicial?.nombre }}
+                </td>
+                <td>
+                  <b>Fecha registro</b>
+                  {{ (medidaCautelar.fechaRegistro.timestamp * 1000) | date: 'dd/MM/yyyy' }}
+                  <br>
+                  <b>Fecha inicio</b>
+                  {{ (medidaCautelar.fechaInicio.timestamp * 1000) | date: 'dd/MM/yyyy' }}
+                  <br>
+                  <b>Fecha expiración</b>
+                  {{ (medidaCautelar.fechaExpiracion.timestamp * 1000) | date: 'dd/MM/yyyy' }}
+                </td>
+                <td>
+                  <div class="btn-group">
+                    <button (click)="onDelete(medidaCautelar)" class="btn btn-xs btn-primary">
+                      <i class="fa fa-check"></i>
+                    </button>
+                  </div>
+                </td>
               </tr>
             </tbody>
           </table>

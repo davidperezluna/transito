@@ -31,7 +31,6 @@ constructor(
     swal({
       title: 'Cargando Tabla!',
       text: 'Solo tardara unos segundos por favor espere.',
-      timer: 1500,
       onOpen: () => {
         swal.showLoading()
       }
@@ -41,8 +40,8 @@ constructor(
       response => {
         this.reasignaciones = response.data; 
         let timeoutId = setTimeout(() => {
-          swal.close()
-          this.iniciarTabla();
+          this.onInitTable();
+          swal.close();
         }, 100);
       }, 
       error => {
@@ -55,6 +54,7 @@ constructor(
       }
     );
   }
+
   onShow(id:any){
     this.idReasignacion = id;
     this.formIndex = false;
@@ -62,11 +62,13 @@ constructor(
     this.formShow = true;
     this.table.destroy();
   }
+
   onNew(){
     this.formIndex = false;
     this.formNew = true;
     this.table.destroy();
   }
+
   ready(isCreado:any){
       if(isCreado) {
         this.formNew = false;
@@ -75,8 +77,13 @@ constructor(
         this.ngOnInit();
       }
   }
-  iniciarTabla() {
-    $('#dataTables-example').DataTable({
+
+  onInitTable() {
+    if (this.table) {
+      this.table.destroy();
+    }
+    
+    this.table = $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,
       sPaginationType: 'full_numbers',
@@ -89,6 +96,5 @@ constructor(
         }
       }
     });
-    this.table = $('#dataTables-example').DataTable();
   }
 }

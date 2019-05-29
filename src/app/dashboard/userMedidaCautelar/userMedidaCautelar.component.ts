@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { VhloLimitacionService } from '../../services/vhloLimitacion.service';
+import { UserMedidaCautelarService } from '../../services/userMedidaCautelar.service';
 import { LoginService } from '../../services/login.service';
 import swal from 'sweetalert2';
 declare var $: any;
@@ -12,7 +12,7 @@ declare var $: any;
 export class UserMedidaCautelarComponent implements OnInit {
   public errorMessage;
 
-  public inscripciones;
+  public medidasCautelares;
   
   public formSearch: any;
   public formIndex: any;
@@ -26,7 +26,7 @@ export class UserMedidaCautelarComponent implements OnInit {
   }
 
   constructor(
-    private _LimitacionService: VhloLimitacionService,
+    private _MedidaCautelarService: UserMedidaCautelarService,
     private _LoginService: LoginService,
   ) { }
 
@@ -53,10 +53,10 @@ export class UserMedidaCautelarComponent implements OnInit {
 
     let token = this._LoginService.getToken();
     
-    this._LimitacionService.searchByPlaca(this.search, token).subscribe(
+    this._MedidaCautelarService.searchByIdentificacion(this.search, token).subscribe(
       response => {
         if (response.code == 200) {
-          this.inscripciones = response.data;
+          this.medidasCautelares = response.data;
           this.formIndex = true;
           
           let timeoutId = setTimeout(() => {
@@ -65,6 +65,9 @@ export class UserMedidaCautelarComponent implements OnInit {
 
           swal.close();
         }else{
+          this.medidasCautelares = null;
+          this.formIndex = true;
+
           swal({
             title: response.title,
             text: response.message,
@@ -114,5 +117,52 @@ export class UserMedidaCautelarComponent implements OnInit {
     if (isCreado) {
       this.ngOnInit();
     }
+  }
+
+  onDelete(medidaCautelar:any) {
+    swal({
+      title: '¿Estás seguro?',
+      text: "¡Se levantar la medida cautelar!",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#15d4be',
+      cancelButtonColor: '#ff6262',
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.value) {
+        let token = this._LoginService.getToken();
+        
+        this._MedidaCautelarService.delete({ 'id': medidaCautelar.id }, token).subscribe(
+          response => {
+            if (response.status == 'success') {
+              swal({
+                title: 'Perfecto!',
+                text: response.message,
+                type: 'success',
+                confirmButtonText: 'Aceptar'
+              });
+    
+              this.onReady(true);
+            } else {
+              swal({
+                title: 'Error!',
+                text: response.message,
+                type: 'error',
+                confirmButtonText: 'Aceptar'
+              });
+            }
+            error => {
+              this.errorMessage = <any>error;
+    
+              if (this.errorMessage != null) {
+                console.log(this.errorMessage);
+                alert("Error en la petición");
+              }
+            }
+          }
+        );
+      }
+    });
   }
 }
