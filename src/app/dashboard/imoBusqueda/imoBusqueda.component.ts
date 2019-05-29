@@ -15,8 +15,9 @@ declare var $: any;
 export class ImoBusquedaComponent implements OnInit {
   public errorMessage;
 
-	public formNew = false;
-  public formShow = false;
+	public formIndex: any;
+	public formNew: any;
+  public formShow: any;
   public table:any; 
 
   public tipoInsumoSelected:any;
@@ -43,6 +44,8 @@ export class ImoBusquedaComponent implements OnInit {
     ){}
     
   ngOnInit() {
+    this.onInitForms();
+
     this._OrganismoTransitoService.selectSedes().subscribe(
       response => {
         this.organismosTransito = response;
@@ -55,6 +58,12 @@ export class ImoBusquedaComponent implements OnInit {
         }
       }
     );
+  }
+
+  onInitForms(){
+    this.formIndex = false;
+    this.formNew = false;
+    this.formShow = false;
   }
 
   onInitTable(){
@@ -92,6 +101,9 @@ export class ImoBusquedaComponent implements OnInit {
           let timeoutId = setTimeout(() => {  
             this.onInitTable();
           }, 100);
+
+          this.onInitForms();
+          this.formIndex = true;
           
           swal.close();
         }else{
@@ -123,10 +135,9 @@ export class ImoBusquedaComponent implements OnInit {
 			response => {
         if(response.status == 'success'){
           this.insumos = response.data;
-          this.formShow = false;
-          let timeoutId = setTimeout(() => {
-            this.formShow = true;
-          }, 100);
+          
+          this.onInitForms();
+          this.formShow = true;
         }
         error => {
           this.errorMessage = <any>error;
