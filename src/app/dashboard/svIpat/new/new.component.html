@@ -206,7 +206,7 @@
                             name="material">
                         </ng-select>
                     </div>
-                    <div class="col-lg-6 col-md-6" *ngIf="ipat.idMaterial == 'OTRO'">
+                    <div class="col-lg-6 col-md-6" *ngIf="ipat.idMaterial == 7">
                         <label>Otro (Material)</label>
                         <input class="form-control" type="text" [(ngModel)]="ipat.otroMaterial" name="otroMaterial">
                     </div>
@@ -245,13 +245,13 @@
                             name="visual">
                         </ng-select>
                     </div>
-                    <div class="col-lg-6 col-md-6" *ngIf="ipat.idVisual == 'DISMINUIDA'">
+                    <div class="col-lg-6 col-md-6" *ngIf="ipat.idVisual == 2">
                         <label>Visibilidad(Visual) Disminuida por </label>
                         <ng-select [multiple]="false" [options]="visualesDisminuidas"
                             [(ngModel)]="ipat.idVisualDisminuida" required name="visualDisminuida">
                         </ng-select>
                     </div>
-                    <div class="col-lg-6 col-md-6" *ngIf="ipat.idVisualDisminuida == 'OTRO'">
+                    <div class="col-lg-6 col-md-6" *ngIf="ipat.idVisualDisminuida == 1">
                         <label>Otra (Visibilidad Disminuida Por)</label>
                         <input class="form-control" type="text" [(ngModel)]="ipat.otraVisualDisminuida"
                             name="otraVisualDisminuida">
