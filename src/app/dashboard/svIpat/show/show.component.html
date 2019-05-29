@@ -44,8 +44,7 @@
                                     <th class="text-center"><b>ENTIDAD AGENTE</b></th>
                                     <th class="text-center"><b>PLACA AGENTE</b></th>
                                     <th class="text-center"><b>GRADO</b></th>
-                                    <th class="text-center"><b>MEDIO DE REGISTRO</b></th>
-                                    <th class="text-center"><b>PREFIJO REGISTRO</b></th>
+                                    <th class="text-center"><b>MEDIO REGISTRO</b></th>
                                     <th class="text-center"><b>CODIGO HIPOTESIS</b></th>
                                     <th class="text-center"><b>OTRA HIPOTESIS</b></th>
                                     <th class="text-center"><b>GEOMETRICA:</b></th>
@@ -71,14 +70,22 @@
                                     <th class="text-center"><b>OTRO (REDUCTOR VELOCIDAD)</b></th>
                                     <th class="text-center"><b>DELINEADOR PISO</b></th>
                                     <th class="text-center"><b>OTRO (DELINEADOR PISO)</b></th>
-                                    <!-- PARA DATOS DE  VEHICULOS-->
 
+                                    <!-- DATOS DEL VEHICULO -->
+                                    <th class="text-center"><b>VEHICULOS</b></th>
+                                    
+                                    <!-- DATOS DEL CONDUCTOR -->
+                                    <th class="text-center"><b>CONDUCTORES</b></th>
+                                    
                                     <!-- DATOS DEL PROPIETARIO-->
                                     <th class="text-center"><b> EL CONDUCTOR ES EL MISMO PROPIETARIO DEL VEHICULO</b></th>
                                     <th class="text-center"><b> TIPO DOCUMENTO DEL PROPIETARIO</b></th>
                                     <th class="text-center"><b>NÚMERO DOCUMENTO PROPIETARIO </b></th>
                                     <th class="text-center"><b>APELLIDOS PROPIETARIO</b></th>
                                     <th class="text-center"><b>NOMBRES PROPIETARIO</b></th>
+                                    
+                                    <!-- DATOS DEL VICTIMAS -->
+                                    <th class="text-center"><b>VICTIMAS</b></th>
 
                                     <!-- DATOS DEL TESTIGO -->
                                     <th class="text-center"><b>TIPO IDENTIFICACIÓN DEL TESTIGO</b></th>
@@ -88,15 +95,6 @@
                                     <th class="text-center"><b>DIRECCIÓN DOMICILIO DEL TESTIGO</b></th>
                                     <th class="text-center"><b>CIUDAD RESIDENCIA DEL TESTIGO</b></th>
                                     <th class="text-center"><b>TELEFONO DEL TESTIGO</b></th>
-                                    
-                                    <!-- DATOS DEL CONDUCTOR -->
-                                    <th class="text-center"><b>CONDUCTORES</b></th>
-                                    
-                                    <!-- DATOS DEL VEHICULO -->
-                                    <th class="text-center"><b>VEHICULOS</b></th>
-                                    
-                                    <!-- DATOS DEL VICTIMAS -->
-                                    <th class="text-center"><b>VICTIMAS</b></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -139,7 +137,6 @@
                                     <td>{{ ipat.placaAgente }}</td>
                                     <td>{{ ipat.gradoAgente }}</td>
                                     <td>CARGUE</td>
-                                    <td>PREFIJO REGISTRO</td>
                                     <td>{{ ipat.hipotesis?.codigo }}</td>
                                     <td>{{ ipat.otraHipotesis }}</td>
                                     <td>{{ ipat.geometria.nombre }}</td>
@@ -165,20 +162,12 @@
                                     <td>{{ ipat.senialVertical }}</td>
                                     <td>{{ ipat.senialHorizontal }}</td>
                                     <td>{{ ipat.reductorVelocidad }}</td>
-                                    <td>{{ ipat.reductorVelocidad }}</td>
+                                    <td>{{ ipat.otroReductorVelocidad }}</td>
                                     <td>{{ ipat.delineadorPiso.nombre }}</td>
                                     <td>{{ ipat.otroDelineadorPiso }}</td>
+
                                     <!--DATOS DEL VEHICULO-->
                                     <td>{{ vehiculos }}</td>
-                                    
-                                    <!--DATOS DE TESTIGOS-->
-                                    <td>{{ ipat?.tipoIdentificacionTestigo }}</td>
-                                    <td>{{ ipat?.identificacionTestigo }}</td>
-                                    <td>{{ ipat?.apellidosTestigo }}</td>
-                                    <td>{{ ipat?.nombresTestigo }}</td>
-                                    <td>{{ ipat?.direccionResidenciaTestigo }}</td>
-                                    <td>{{ ipat?.municipioResidenciaTestigo }}</td>
-                                    <td>{{ ipat?.telefonoTestigo }}</td>
                                     
                                     <!--DATOS DEL CONDUCTOR-->
                                     <td>{{ conductores }}</td>
@@ -196,153 +185,15 @@
                                     <!--DATOS DE LA VICTIMA-->
                                     <td>{{ victimas }}</td>
                                     
+                                    <!--DATOS DE TESTIGOS-->
+                                    <td>{{ ipat?.tipoIdentificacionTestigo }}</td>
+                                    <td>{{ ipat?.identificacionTestigo }}</td>
+                                    <td>{{ ipat?.apellidosTestigo }}</td>
+                                    <td>{{ ipat?.nombresTestigo }}</td>
+                                    <td>{{ ipat?.direccionResidenciaTestigo }}</td>
+                                    <td>{{ ipat?.municipioResidenciaTestigo }}</td>
+                                    <td>{{ ipat?.telefonoTestigo }}</td>
                                 </tr>
-                                
-                                <!-- DATO DE LA VICTIMA-->
-                                <!-- <tr>
-                                    <td>
-                                        <b>TIPO IDENTIFICACIÓN DE LA VICTIMA:</b><br>
-                                        {{ ipat.victima.tipoIdentificacion }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>NÚMERO DE IDENTIFICACIÓN DE LA VICTIMA:</b><br>
-                                        {{ ipat.victima.identificacion }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>APELLIDOS DE LA VICTIMA:</b><br>
-                                        {{ ipat.victima.apellido }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>NOMBRES DE LA VICTIMA:</b><br>
-                                        {{ ipat.victima.nombres }}
-                                    </td>
-                                </tr> -->
-                                <!-- <tr>
-                                    <td>
-                                        <b>PAIS DE LA VICTIMA:</b><br>
-                                        {{ ipat.victima.pais }}
-                                    </td>
-                                </tr> -->
-                                <!-- <tr>
-                                    <td>
-                                        <b>FECHA NACIMIENTO DE LA VICTIMA:</b><br>
-                                        {{ ipat.victima.fechaNacimiento }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>SEXO DE LA VICTIMA:</b><br>
-                                        {{ ipat.victima.genero }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>DIRECCION DOMICILIO DE LA VICTIMA:</b><br>
-                                        {{ ipat.victima.direccionResidencia }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>DEPARTAMENTO DOMICILIO DE LA VICTIMA:</b><br>
-                                        {{ ipat.victima.municipioResidencia.departamentoResidentcia.nombre }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>CIUDAD DE LA VICTIMA:</b><br>
-                                        {{ ipat.victima.ciudadResidencia }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b> TEELFONO DE LA VICTIMA:</b><br>
-                                        {{ ipat.victima.telefono }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b> USA CASCO:</b><br>
-                                        {{ ipat.victima.casco }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b> USA CHALECO:</b><br>
-                                        {{ ipat.victima.chaleco }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b> USA CINTURON:</b><br>
-                                        {{ ipat.victima.cinturon }}
-                                    </td>
-                                </tr> -->
-                                <!-- <tr>
-                                    <td>
-                                        <b> CONDICION DE LA VICTIMA:</b><br>
-                                        {{ ipat.victima.condicion }}
-                                    </td>
-                                </tr> -->
-                                <!-- <tr>
-                                    <td>
-                                        <b> GRAVEDAD DE LA VICTIMA:</b><br>
-                                        {{ ipat.victima.gravedad }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b> DESCRIPCION LESIONES DE LA VICTIMA:</b><br>
-                                        {{ ipat.victima.descripcionLesion }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b> HOSPITAL DE LA VICTIMA:</b><br>
-                                        {{ ipat.victima.hospital }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b> VEHICULO DE LA VICTIMA:</b><br>
-                                        {{ ipat.victima.placaVehiculo }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>¿PRESENTA EXAMEN DE EMBRIAGUEZ?:</b><br>
-                                        {{ ipat.victima.practicoExamen }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>RESULTADO DE EXAMEN DE LA VICTIMA:</b><br>
-                                        {{ ipat.victima.resultadoExamen }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>GRADO DE EMBRIAGUEZ DE LA VICTIMA:</b><br>
-                                        {{ ipat.victima.gradoExamen }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>¿AUTORIZO EXÁMEN?:</b><br>
-                                        {{ ipat.victima.autorizoExamen }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b> ¿PRESENTA EXÁMEN DE NARCOTICOS?:</b><br>
-                                        {{ ipat.victima.sustanciasPsicoactivas }}
-                                    </td>
-                                </tr> -->
                             </tbody>
                         </table>
                     </div>

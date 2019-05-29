@@ -21,10 +21,6 @@ export class ShowComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        console.log(this.ipat);
-        console.log(this.conductores);
-        console.log(this.vehiculos);
-        console.log(this.victimas);
         let timeoutId = setTimeout(() => {
             this.onInitTable();
         }, 100);
@@ -45,7 +41,7 @@ export class ShowComponent implements OnInit {
                     charset: 'utf-8',
                     filename: 'Ipat_' + this.ipat.consecutivo.numero,
                     fieldBoundary: '',
-                    /* header: false, */
+                    header: false,
                 },
                 
             ],
