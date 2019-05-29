@@ -127,8 +127,8 @@
                                     <td>{{ ipat.disenio.nombre }}</td>
                                     <td>{{ ipat.estadoTiempo }}</td>
                                     <td>{{ ipat.observaciones }}</td>
-                                    <td>{{ ipat.unidadCorrespondio?.entidadAccidente.nombre }}</td>
-                                    <td>{{ ipat.unidadCorrespondio.nombre }}</td>
+                                    <td>{{ ipat.entidadCorrespondio?.nombre }}</td>
+                                    <td>{{ ipat.unidadCorrespondio?.nombre }}</td>
                                     <td>{{ (ipat.fechaAccidente.timestamp * 1000) | date: 'yyyy' }}</td>
                                     <td>{{ ipat.consecutivo.numero }}</td>
                                     <td>{{ ipat.tipoIdentificacionAgente }}</td>

@@ -183,12 +183,11 @@ export class FroReporteIngresosComponent implements OnInit {
         if (this.tipoRecaudoSelected == 1) {
             this._FroReporteIngresosService.pdfTramiteByFecha({ 'identificacion': identity.identificacion, 'filtros': this.froReporteIngresos, 'tipoArchivoTramite': this.tipoArchivoTramite }, token).subscribe(
                 response => {
-                    console.log(response);
-                    if(response.code == 200){
+                    if(response.size > 100){
                         swal({
-                            title: response.title,
-                            text: response.message,
-                            type: response.status,
+                            title: 'Perfecto!',
+                            text: 'Registros encontrados',
+                            type: 'success',
                             confirmButtonText: 'Aceptar'
                         });
 
@@ -196,9 +195,9 @@ export class FroReporteIngresosComponent implements OnInit {
                         window.open(fileURL);
                     } else {
                         swal({
-                            title: response.title,
-                            text: response.message,
-                            type: response.status,
+                            title: 'Error!',
+                            text: 'No existen registros para la generación de reportes en el rango de las fechas estipuladas.',
+                            type: 'error',
                             confirmButtonText: 'Aceptar'
                         });
                         error => {
@@ -215,29 +214,125 @@ export class FroReporteIngresosComponent implements OnInit {
         } else if (this.tipoRecaudoSelected == 2) {
             this._FroReporteIngresosService.pdfInfraccionByFecha(this.froReporteIngresos, token).subscribe(
                 response => {
-                    var fileURL = URL.createObjectURL(response);
-                    window.open(fileURL);
+                    if(response.size > 100){
+                        swal({
+                            title: 'Perfecto!',
+                            text: 'Registros encontrados',
+                            type: 'success',
+                            confirmButtonText: 'Aceptar'
+                        });
+
+                        var fileURL = URL.createObjectURL(response);
+                        window.open(fileURL);
+                    } else {
+                        swal({
+                            title: 'Error!',
+                            text: 'No existen registros para la generación de reportes en el rango de las fechas estipuladas.',
+                            type: 'error',
+                            confirmButtonText: 'Aceptar'
+                        });
+                        error => {
+                            this.errorMessage = <any>error;
+
+                            if (this.errorMessage != null) {
+                                console.log(this.errorMessage);
+                                alert("Error en la petición");
+                            }
+                        }
+                    }
                 }
             );
         } else if (this.tipoRecaudoSelected == 3) {
             this._FroReporteIngresosService.pdfAcuerdoPagoByFecha(this.froReporteIngresos, token).subscribe(
                 response => {
-                    var fileURL = URL.createObjectURL(response);
-                    window.open(fileURL);
+                    if(response.size > 100){
+                        swal({
+                            title: 'Perfecto!',
+                            text: 'Registros encontrados',
+                            type: 'success',
+                            confirmButtonText: 'Aceptar'
+                        });
+
+                        var fileURL = URL.createObjectURL(response);
+                        window.open(fileURL);
+                    } else {
+                        swal({
+                            title: 'Error!',
+                            text: 'No existen registros para la generación de reportes en el rango de las fechas estipuladas.',
+                            type: 'error',
+                            confirmButtonText: 'Aceptar'
+                        });
+                        error => {
+                            this.errorMessage = <any>error;
+
+                            if (this.errorMessage != null) {
+                                console.log(this.errorMessage);
+                                alert("Error en la petición");
+                            }
+                        }
+                    }
                 }
             );
         } else if (this.tipoRecaudoSelected == 4) {
             this._FroReporteIngresosService.pdfCobroCoactivoByFecha(this.froReporteIngresos, token).subscribe(
                 response => {
-                    var fileURL = URL.createObjectURL(response);
-                    window.open(fileURL);
+                    if(response.size > 100){
+                        swal({
+                            title: 'Perfecto!',
+                            text: 'Registros encontrados',
+                            type: 'success',
+                            confirmButtonText: 'Aceptar'
+                        });
+
+                        var fileURL = URL.createObjectURL(response);
+                        window.open(fileURL);
+                    } else {
+                        swal({
+                            title: 'Error!',
+                            text: 'No existen registros para la generación de reportes en el rango de las fechas estipuladas.',
+                            type: 'error',
+                            confirmButtonText: 'Aceptar'
+                        });
+                        error => {
+                            this.errorMessage = <any>error;
+
+                            if (this.errorMessage != null) {
+                                console.log(this.errorMessage);
+                                alert("Error en la petición");
+                            }
+                        }
+                    }
                 }
             );
         } else if (this.tipoRecaudoSelected == 5) {
             this._FroReporteIngresosService.pdfParqueaderoByFecha(this.froReporteIngresos, token).subscribe(
                 response => {
-                    var fileURL = URL.createObjectURL(response);
-                    window.open(fileURL);
+                    if(response.size > 100){
+                        swal({
+                            title: 'Perfecto!',
+                            text: 'Registros encontrados',
+                            type: 'success',
+                            confirmButtonText: 'Aceptar'
+                        });
+
+                        var fileURL = URL.createObjectURL(response);
+                        window.open(fileURL);
+                    } else {
+                        swal({
+                            title: 'Error!',
+                            text: 'No existen registros para la generación de reportes en el rango de las fechas estipuladas.',
+                            type: 'error',
+                            confirmButtonText: 'Aceptar'
+                        });
+                        error => {
+                            this.errorMessage = <any>error;
+
+                            if (this.errorMessage != null) {
+                                console.log(this.errorMessage);
+                                alert("Error en la petición");
+                            }
+                        }
+                    }
                 }
             );
         } else if (this.tipoRecaudoSelected == 6) {
