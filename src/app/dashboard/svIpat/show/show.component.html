@@ -1,1051 +1,348 @@
-<div class="col-xs-12 col-lg-6">
+<div class="col-xs-12 col-lg-12">
     <div class="card">
         <div class="card-header">
-            <h5 class="text-uppercase">Datos de Consecutivo</h5>
+            <h5 class="text-uppercase">Datos de IPAT</h5>
         </div>
         <div class="card-body">
             <form #formShow="ngForm">
                 <div class="form-group row">
-                    <div class="col-xs-12 col-lg-6">
+                    <div class="col-xs-12 col-lg-12">
                         <table class="table table-bordered table-striped"  id="dataTables-example">
+                            <thead>
+                                <tr>
+                                    <th class="text-center"><b>NUMERO DE IPAT </b></th>
+                                    <th class="text-center"><b>ORGANISMO DE TRANSITO DE RADICACIÓN </b></th>
+                                    <th class="text-center"><b>GRAVEDAD ACCIDENTE</b></th>
+                                    <th class="text-center"><b>CLASE ACCIDENTE</b></th>
+                                    <th class="text-center"><b>CHOQUE CON</b></th>
+                                    <th class="text-center"><b>OBJETO FIJO</b></th>
+                                    <th class="text-center"><b>OTRO(OBJETO FIJO)</b></th>
+                                    <th class="text-center"><b>OTRO (CLASE ACCIDENTE)</b></th>
+                                    <th class="text-center"><b>FECHA ACCIDENTE</b></th>
+                                    <th class="text-center"><b>HORA ACCIDENTE</b></th>
+                                    <th class="text-center"><b>FECHA LEVANTAMIENTO</b></th>
+                                    <th class="text-center"><b>HORA LEVANTAMIENTO</b></th>
+                                    <th class="text-center"><b>¿SE IDENTIFICACRON TESTIGOS?</b></th>
+                                    <th class="text-center"><b>DEPARTAMENTO</b></th>
+                                    <th class="text-center"><b>MUNICIPIO</b></th>
+                                    <th class="text-center"><b>LOCALIDAD</b></th>
+                                    <th class="text-center"><b>ÁREA</b></th>
+                                    <th class="text-center"><b>TIPO ÁREA</b></th>
+                                    <th class="text-center"><b>TIPO VIA:</b></th>
+                                    <th class="text-center"><b>CARDINALIDAD:</b></th>
+                                    <th class="text-center"><b>SECTOR</b></th>
+                                    <th class="text-center"><b>ZONA</b></th>
+                                    <th class="text-center"><b>DISEÑO</b></th>
+                                    <th class="text-center"><b>ESTADO TIEMPO</b></th>
+                                    <th class="text-center"><b>OBSERVACIONES</b></th>
+                                    <th class="text-center"><b>ENTIDAD</b></th>
+                                    <th class="text-center"><b>UNIDAD RECEPTORA</b></th>
+                                    <th class="text-center"><b>AÑO</b></th>
+                                    <th class="text-center"><b>CONSECUTIVO</b></th>
+                                    <th class="text-center"><b>TIPO DOCUMENTO AGENTE</b></th>
+                                    <th class="text-center"><b>NÚMERO DOCUMENTO AGENTE</b></th>
+                                    <th class="text-center"><b>ENTIDAD AGENTE</b></th>
+                                    <th class="text-center"><b>PLACA AGENTE</b></th>
+                                    <th class="text-center"><b>GRADO</b></th>
+                                    <th class="text-center"><b>MEDIO DE REGISTRO</b></th>
+                                    <th class="text-center"><b>PREFIJO REGISTRO</b></th>
+                                    <th class="text-center"><b>CODIGO HIPOTESIS</b></th>
+                                    <th class="text-center"><b>OTRA HIPOTESIS</b></th>
+                                    <th class="text-center"><b>GEOMETRICA:</b></th>
+                                    <th class="text-center"><b>TIPO GEOMETRICA</b></th>
+                                    <th class="text-center"><b>UTILIZACIÓN</b></th>
+                                    <th class="text-center"><b>CALZADA</b></th>
+                                    <th class="text-center"><b>CARRIL</b></th>
+                                    <th class="text-center"><b>SUPERFICIE DE RODADURA (MATERIAL)</b></th>
+                                    <th class="text-center"><b>OTRO (SUPERFICIE DE RODADURA)</b></th>
+                                    <th class="text-center"><b>ESTADO VIA</b></th>
+                                    <th class="text-center"><b>CONDICIÓN VIA</b></th>
+                                    <th class="text-center"><b>OTRO (CONDICIONES)</b></th>
+                                    <th class="text-center"><b>ILUMINACIÓN ARTIFICIAL</b></th>
+                                    <th class="text-center"><b>ESTADO ILUMINACIÓN</b></th>
+                                    <th class="text-center"><b>VISIBILIDAD</b></th>
+                                    <th class="text-center"><b>VISIBILIDAD DISMINUIDA</b></th>
+                                    <th class="text-center"><b>OTRO (VISIBILIDAD)</b></th>
+                                    <th class="text-center"><b>¿HAY SEMÁFORO?</b></th>
+                                    <th class="text-center"><b>ESTADO SEMÁFORO</b></th>
+                                    <th class="text-center"><b>SEÑALES VERTICALES</b></th>
+                                    <th class="text-center"><b>SEÑALES HORIZONTALES</b></th>
+                                    <th class="text-center"><b>REDUCTOR VELOCIDAD</b></th>
+                                    <th class="text-center"><b>OTRO (REDUCTOR VELOCIDAD)</b></th>
+                                    <th class="text-center"><b>DELINEADOR PISO</b></th>
+                                    <th class="text-center"><b>OTRO (DELINEADOR PISO)</b></th>
+                                    <!-- PARA DATOS DE  VEHICULOS-->
+
+                                    <!-- DATOS DEL PROPIETARIO-->
+                                    <th class="text-center"><b> EL CONDUCTOR ES EL MISMO PROPIETARIO DEL VEHICULO</b></th>
+                                    <th class="text-center"><b> TIPO DOCUMENTO DEL PROPIETARIO</b></th>
+                                    <th class="text-center"><b>NÚMERO DOCUMENTO PROPIETARIO </b></th>
+                                    <th class="text-center"><b>APELLIDOS PROPIETARIO</b></th>
+                                    <th class="text-center"><b>NOMBRES PROPIETARIO</b></th>
+
+                                    <!-- DATOS DEL TESTIGO -->
+                                    <th class="text-center"><b>TIPO IDENTIFICACIÓN DEL TESTIGO</b></th>
+                                    <th class="text-center"><b>IDENTIFICACIÓN DEL TESTIGO</b></th>
+                                    <th class="text-center"><b>APELLIDOS DEL TESTIGO</b></th>
+                                    <th class="text-center"><b>NOMBRES DEL TESTIGO</b></th>
+                                    <th class="text-center"><b>DIRECCIÓN DOMICILIO DEL TESTIGO</b></th>
+                                    <th class="text-center"><b>CIUDAD RESIDENCIA DEL TESTIGO</b></th>
+                                    <th class="text-center"><b>TELEFONO DEL TESTIGO</b></th>
+                                    
+                                    <!-- DATOS DEL CONDUCTOR -->
+                                    <th class="text-center"><b>CONDUCTORES</b></th>
+                                    
+                                    <!-- DATOS DEL VEHICULO -->
+                                    <th class="text-center"><b>VEHICULOS</b></th>
+                                    
+                                    <!-- DATOS DEL VICTIMAS -->
+                                    <th class="text-center"><b>VICTIMAS</b></th>
+                                </tr>
+                            </thead>
                             <tbody>
                                 <tr>
-                                    <td>
-                                        <b>NÚMERO IPAT</b><br>
-                                        {{ ipatCreado.consecutivo.numero }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>ORGANISMO TRANSITO RADICACIÓN</b><br>
-                                        {{ ipatCreado.consecutivo.talonario.organismoTransito.nombre }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>GRAVEDAD ACCIDENTE:</b><br>
-                                        {{ ipatCreado.gravedadAccidente.nombre }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>CLASE ACCIDENTE:</b><br>
-                                        {{ ipatCreado.claseAccidente?.nombre }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>CHOQUE CON:</b><br>
-                                        {{ ipatCreado.choqueCon?.nombre }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>OBJETO FIJO:</b><br>
-                                        {{ ipatCreado.objetoFijo?.nombre }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>OTRO(OBJETO FIJO):</b><br>
-                                        {{ ipatCreado.otroObjetoFijo }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>OTRO (CLASE ACCIDENTE):</b><br>
-                                        {{ ipatCreado.otroClaseAccidente }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>FECHA ACCIDENTE:</b><br>
-                                        {{ (ipatCreado.fechaAccidente.timestamp * 1000) | date: 'dd/MM/yyyy' }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>HORA ACCIDENTE:</b><br>
-                                        {{ ipatCreado.horaAccidente }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>FECHA LEVANTAMIENTO:</b><br>
-                                        {{ (ipatCreado.fechaLevantamiento.timestamp * 1000) | date: 'dd/MM/yyyy' }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>HORA LEVANTAMIENTO:</b><br>
-                                        {{ ipatCreado.horaLevantamiento }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>¿SE IDENTIFICARON TESTIGOS?:</b><br>
-                                        {{ ipatCreado.hayTestigo }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>DEPARTAMENTO:</b><br>
-                                        {{ ipatCreado.consecutivo.talonario.organismoTransito.departamento }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>MUNICIPIO:</b><br>
-                                        {{ ipatCreado.consecutivo.talonario.organismoTransito.municipio }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>LOCALIDAD:</b><br>
-                                        {{ ipatCreado.lugar }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>ÁREA:</b><br>
-                                        {{ ipatCreado.area.nombre }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>TIPO ÁREA:</b><br>
-                                        {{ ipatCreado.area.tipoArea.nombre }}
-                                    </td>
-                                </tr>
-                                <!-- <tr>
-                                    <td>
-                                        <b>TIPO VIA:</b><br>
-                                        {{ ipatCreado.tipoVia.nombre }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>CARDINALIDAD:</b><br>
-                                        {{ ipatCreado.cardinalidad.nombre }}
-                                    </td>
-                                </tr> -->
-                                <tr>
-                                    <td>
-                                        <b>SECTOR:</b><br>
-                                        {{ ipatCreado.sector.nombre }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>ZONA:</b><br>
-                                        {{ ipatCreado.zona.nombre }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>DISEÑO:</b><br>
-                                        {{ ipatCreado.disenio.nombre }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>ESTADO TIEMPO:</b><br>
-                                        {{ ipatCreado.estadoTiempo }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>OBSERVACIONES:</b><br>
-                                        {{ ipatCreado.observaciones }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>ENTIDAD:</b><br>
-                                        {{ ipatCreado.unidadCorrespondio.entidadAccidente.nombre }}
-                                    </td>
-                                </tr>
-                                <!-- <tr>
-                                    <td>
-                                        <b>UNIDAD RECEPTORA:</b><br>
-                                        {{ ipatCreado.unidadReceptora.nombre }}
-                                    </td>
-                                </tr> -->
-                                <tr>
-                                    <td>
-                                        <b>AÑO:</b><br>
-                                        {{ (ipatCreado.fechaAccidente.timestamp * 1000) | date: 'yyyy' }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>CONSECUTIVO:</b><br>
-                                        {{ ipatCreado.consecutivo.numero }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>TIPO DOCUMENTO AGENTE:</b><br>
-                                        {{ ipatCreado.tipoIdentificacionAgente }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>NÚMERO DOCUMENTO AGENTE:</b><br>
-                                        {{ ipatCreado.identificacionAgente }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>ENTIDAD AGENTE:</b><br>
-                                        {{ ipatCreado.entidadAgente }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>PLACA AGENTE:</b><br>
-                                        {{ ipatCreado.placaAgente }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>GRADO:</b><br>
-                                        {{ ipatCreado.gradoAgente }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>MEDIO DE REGISTRO:</b><br>
-                                        CARGUE
-                                    </td>
-                                </tr>
-                                <!-- <tr>
-                                    <td>
-                                        <b>PREFJO REGISTRO:</b><br>
-                                        {{ ipatCreado..nombre }}
-                                    </td>
-                                </tr> -->
-                                <tr>
-                                    <td>
-                                        <b>CODIGO HIPOTESIS:</b><br>
-                                        {{ ipatCreado.hipotesis.codigo }}
-                                    </td>
-                                </tr>
-                                <!-- <tr>
-                                    <td>
-                                        <b>OTRA HIPOTESIS:</b><br>
-                                        {{ ipatCreado.otraHipotesis }}
-                                    </td>
-                                </tr> -->
-                                <!-- para las vias-->
-                                <tr>
-                                    <td>
-                                        <b>GEOMETRICA: </b><br>
-                                        {{ ipatCreado.geometria.nombre }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>TIPO GEOMETRICA:</b><br>
-                                        {{ ipatCreado.geometria.tipoGeometria.nombre }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>UTILIZACIÓN:</b><br>
-                                        {{ ipatCreado.utilizacion.nombre }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>CALZADA:</b><br>
-                                        {{ ipatCreado.calzada.nombre }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>CARRIL:</b><br>
-                                        {{ ipatCreado.carril.nombre }}
-                                    </td>
-                                </tr>
-                                <!-- <tr>
-                                    <td>
-                                        <b>SUPERFICIE DE RODADURA:</b><br>
-                                        {{ ipatCreado..nombre }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>OTRO (SUPERFICIE DE RODADURA):</b><br>
-                                        {{ ipatCreado..nombre }}
-                                    </td>
-                                </tr> -->
-                                <!-- <tr>
-                                    <td>
-                                        <b>ESTADO VIA:</b><br>
-                                        {{ ipatCreado.condicionVia.nombre }}
-                                    </td>
-                                </tr> -->
-                                <tr>
-                                    <td>
-                                        <b>CONDICIÓN VIA:</b><br>
-                                        {{ ipatCreado.condicionVia.nombre }}
-                                    </td>
-                                </tr>
-                                <!-- <tr>
-                                    <td>
-                                        <b>OTRO (CONDICIONES):</b><br>
-                                        {{ ipatCreado.otraCondcionVia.nombre }}
-                                    </td>
-                                </tr> -->
-                                <tr>
-                                    <td>
-                                        <b>ILUMINACIÓN ARTIFICIAL:</b><br>
-                                        {{ ipatCreado.iluminacion.nombre }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>ESTADO ILUMINACIÓN:</b><br>
-                                        {{ ipatCreado.estadoIluminacion?.nombre }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>VISIBILIDAD:</b><br>
-                                        {{ ipatCreado.visual.nombre }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>VISIBILIDAD DISMINUIDA:</b><br>
-                                        {{ ipatCreado.visualDisminuida?.nombre }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>OTRO (VISIBILIDAD):</b><br>
-                                        {{ ipatCreado.otraVisualDisminuida }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>¿HAY SEMÁFORO?:</b><br>
-                                        {{ ipatCreado?.haySemaforo }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>ESTADO SEMÁFORO:</b><br>
-                                        {{ ipatCreado.estadoSemaforo?.nombre }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>SEÑALES VERTICALES:</b><br>
-                                        {{ ipatCreado.senialVertical }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>SEÑALES HORIZONTALES:</b><br>
-                                        {{ ipatCreado.senialHorizontal }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>REDUCTOR VELOCIDAD:</b><br>
-                                        {{ ipatCreado.reductorVelocidad }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>OTRO (REDUCTOR VELOCIDAD):</b><br>
-                                        {{ ipatCreado.reductorVelocidad }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>DELINEADOR PISO:</b><br>
-                                        {{ ipatCreado.delineadorPiso }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>OTRO (DELINEADOR PISO):</b><br>
-                                        {{ ipatCreado.otroDelineadorPiso }}
-                                    </td>
-                                </tr>
-                                <!-- PARA DATOS DE  VEHICULOS-->
-                                <!-- <tr>
-                                    <td>
-                                        <b>POSEE PLACA:</b><br>
-                                        {{ ipatCreado.portaPlaca }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>PLACA REMOLQUE/SEMIREMOLQUE:</b><br>
-                                        {{ ipatCreado.placaRemolque }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>ORIGEN PLACA:</b><br>
-                                        {{ ipatCreado.vehiculo.matriculadoEn }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>MARCA:</b><br>
-                                        {{ ipatCreado.vehiculo.marca.nombre }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>LINEA:</b><br>
-                                        {{ ipatCreado.vehiculo.marca.linea.nombre }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>COLOR:</b><br>
-                                        {{ ipatCreado.vehiculo.color.nombre }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>MODELO:</b><br>
-                                        {{ ipatCreado.vehiculo.modelo }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>CARROCERIA:</b><br>
-                                        {{ ipatCreado.vehiculo.carroceria }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>CAPACIDAD CARGA:</b><br>
-                                        {{ ipatCreado.vehiculo.ton }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>CANTIDAD PASAJEROS:</b><br>
-                                        {{ ipatCreado.vehiculo.pasajeros }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>CLASE VEHICULO:</b><br>
-                                        {{ ipatCreado.vehiculo.clase }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>TIPO SERVICIO:</b><br>
-                                        {{ ipatCreado.vehiculo.servicio }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>NIT EMPRESA:</b><br>
-                                        {{ ipatCreado.vehiculo.nitEmpresa }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>NOMBRE EMPRESA:</b><br>
-                                        {{ ipatCreado.vehiculo.empresa }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>RADIO ACCIÓN:</b><br>
-                                        {{ ipatCreado.vehiculo.radioAccion }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>MODALIDAD TRANSPORTE:</b><br>
-                                        {{ ipatCreado.vehiculo.modalidadTransporte }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>PORTA RTM:</b><br>
-                                        {{ ipatCreado.vehiculo.revisionTenomecanica }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>NÚMERO DE RTM:</b><br>
-                                        {{ ipatCreado.vehiculo.numeroTecnomecanica }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>INMOVILIZADO:</b><br>
-                                        {{ ipatCreado.inmovilizado }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>INMOVILIZADO EN:</b><br>
-                                        {{ ipatCreado.vehiculo.inmovilizadoEn }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>AUTORIDAD A DISPOSICIÓN:</b><br>
-                                        {{ ipatCreado.vehiculo.aDisposicionDe }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>NÚMERO DE PASAJEROS AL MOMENTO DEL ACCIDENTE:</b><br>
-                                        {{ ipatCreado.vehiculo.cantidadAcompaniantes }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>DAÑOS MATERIALES SUFRIDOS:</b><br>
-                                        {{ ipatCreado.vehiculo.descripcionDanios }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>FALLAS EN:</b><br>
-                                        {{ ipatCreado.vehiculo.fallas }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>OTRAS FALLAS EN:</b><br>
-                                        {{ ipatCreado.vehiculo.otrasFallas }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>LUGAR IMPACTO:</b><br>
-                                        {{ ipatCreado.vehiculo.lugarImpacto }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>PORTA LICENCIA DE TRANSITO:</b><br>
-                                        {{ ipatCreado.conductor.portaLicencia }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>LICENCIA DE TRANSITO:</b><br>
-                                        {{ ipatCreado..nombre }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>OT MATRICULA VEHICULO:</b><br>
-                                        {{ ipatCreado..nombre }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>REMOLQUE PORTA TARJETA DE REGISTRO:</b><br>
-                                        {{ ipatCreado.vehiculo.portaTrjetaRegistro }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>NÚMERO TARJETA DE REGISTRO:</b><br>
-                                        {{ ipatCreado.vehicuo.tajetaRegistro }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>OT MATRICULA REMOLQUE:</b><br>
-                                        {{ ipatCreado.vehiculo.matriculadoEn }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>PORTA SOAT:</b><br>
-                                        {{ ipatCreado.vehiculo.portaSoat }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>NÚMERO SOAT VEHICULO ACCIDENTADO:</b><br>
-                                        {{ ipatCreado.vehiculo.soat }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>COMPAÑIA ASEGURADORA SOAT:</b><br>
-                                        {{ ipatCreado.vehiculo.aseguradoraSoat }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>FECHA VENCIMIENTO SOAT:</b><br>
-                                        {{ ipatCreado.vehiculo.fechaVencimientoSoat }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>PORTA SEGURO DE RESPONSABILIDAD CIVIL:</b><br>
-                                        {{ ipatCreado.vehiculo.portaSeguroResponsabilidadCivil }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>NÚMERO SEGURO RESPONSIBILIDAD CIVIL:</b><br>
-                                        {{ ipatCreado.vehiculo.numeroSeguroResponsabilidaCvil }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>COMPAÑIA ASEGURADORA SEGURO RESPONSABILIDAD CIVIL:</b><br>
-                                        {{ ipatCreado.vehiculo.aseguradoraSeguroResponsabilidaCvil }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>FECHA VENCIMIENTO ASEGURADORA SEGURO RESPONSABILIDAD CIVIL:</b><br>
-                                        {{ ipatCreado.vehiculo.fechaVencimientoSeguroResponsabilidaCvil }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>PORTA SEGURO RESPONSABILIDAD EXTRACONTRACTUAL:</b><br>
-                                        {{ ipatCreado.vehiculo.portaSeguroExtracontractual }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>NÚMERO SEGURO RESPONSABILIDAD EXTRACONTRACTUAL:</b><br>
-                                        {{ ipatCreado.vehiculo.numeroSeguroExtracontractual }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>COMPAÑIA ASEGURADORA RESPONSABILIDAD EXTRACONTRACTUAL:</b><br>
-                                        {{ ipatCreado.vehiculo.aseguradoraSeguroExtracontractual }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>FECHA VENCIMIENTO RESPONSABILIDAD EXTRACONTRACTUAL:</b><br>
-                                        {{ ipatCreado.vehiculo.fechaVencimientoSeguroExtracontractual }}
-                                    </td>
-                                </tr> -->
-                                <!-- DATOS CONDUCTOR-->
-                                <!--<tr>
-                                    <td>
-                                        <b>TIPO DOCUMENTO DEL CONDUCTOR:</b><br>
-                                        {{ ipatCreado.conductor.tipoIdentificacion }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>NÚMERO DOCUMENTO DEL CONDUCTOR:</b><br>
-                                        {{ ipatCreado.conductor.identificacion }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>APELLIDOS CONDUCTOR:</b><br>
-                                        {{ ipatCreado.conductor.apellidos }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>NOMBRES DEL CONDUCTOR:</b><br>
-                                        {{ ipatCreado.conductor.nombres }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>NACIONALIDAD DEL CONDUCTOR:</b><br>
-                                        {{ ipatCreado.conductor.nacionalidad }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>FECHA NACIMIENTO DEL CONDUCTOR:</b><br>
-                                        {{ ipatCreado.conductor.fechaNacimiento }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b> DEL CONDUCTOR:</b><br>
-                                        {{ ipatCreado.conductor. }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b> SEXO DEL CONDUCTOR:</b><br>
-                                        {{ ipatCreado.conductor.sexo }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>GRAVEDAD DEL CONDUCTOR:</b><br>
-                                        {{ ipatCreado.conductor.gravedad }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>DIRECCIÓN DOMOCILIO DEL CONDUCTOR:</b><br>
-                                        {{ ipatCreado.conductor.direccionResidencia }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>DEPARTAMENTO DOMICILIO DEL CONDUCTOR:</b><br>
-                                        {{ ipatCreado.conductor.municipioResidencia.departamento }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>CIUDAD DOMICILIO DEL CONDUCTOR:</b><br>
-                                        {{ ipatCreado.conductor.municipioResidencia }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>TELEFONO DEL CONDUCTOR:</b><br>
-                                        {{ ipatCreado.conductor.telefono }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>USA CASCO CONDUCTOR:</b><br>
-                                        {{ ipatCreado.conductor.casco }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>USA CHALECO CONDUCTOR:</b><br>
-                                        {{ ipatCreado.conductor.chaleco }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>USA CINTURÓN DE SEGURIDAD DEL CONDUCTOR:</b><br>
-                                        {{ ipatCreado.conductor.cinturon }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b> DESCRIPCIÓN LESIONES DEL CONDUCTOR:</b><br>
-                                        {{ ipatCreado.conductor.descripcionLesion }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>HOSPITAL DEL CONDUCTOR:</b><br>
-                                        {{ ipatCreado.conductor.hospital }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b> ¿PRESENTA EXAMEN DE EMBRIAGEUZ?</b><br>
-                                        {{ ipatCreado.conductor.practicoExamen }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b> RESULTADO PRUEBA DE EMBRIAGUEZ DEL CONDUCTOR:</b><br>
-                                        {{ ipatCreado.conductor.resultadoExamen }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b> GRADO DE EMBRIAGUEZ DEL CONDUCTOR:</b><br>
-                                        {{ ipatCreado.conductor.gradoExamen }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b> AUTORIZÓ EXÁMEN CONDUCTOR:</b><br>
-                                        {{ ipatCreado.conductor.autorizoExamen }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b> PRESENTA EXÁMEN DE NARCOTICOS CONDUCTOR:</b><br>
-                                        {{ ipatCreado.conductor.sustanciasPsicoactivas }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b> PORTA LICENCIA:</b><br>
-                                        {{ ipatCreado.conductor.portaLicencia }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>NÚMERO DE LICENCIA DE CONDUCCIÓN DEL CONDUCTOR:</b><br>
-                                        {{ ipatCreado.conductor.numeroLicencia }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b> CATEGORIA LICENCIA DE CONDUCCIÓN DEL CONDUCTOR:</b><br>
-                                        {{ ipatCreado.conductor.categoriaLicencia }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b> RESTRICCIONES LICENCIA DE CONDUCCIÓN DEL CONDUCTOR:</b><br>
-                                        {{ ipatCreado.conductor.restriccion }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>TIPO FECHA LICENCIA DEL CONDUCTOR:</b><br>
-                                        {{ ipatCreado.conductor. }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b> FECHA EXPEDICIÓN DEL CONDUCTOR:</b><br>
-                                        {{ ipatCreado.conductor.fechaExpedicionLicencia }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b> FECHA VENCIMIENTO DEL CONDUCTOR:</b><br>
-                                        {{ ipatCreado.conductor.fechaVencimientoLicencia }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>OT LICENCIA DEL CONDUCTOR:</b><br>
-                                        {{ ipatCreado.conductor. }}
-                                    </td>
-                                </tr> -->
-                                <tr>
-                                    <td>
-                                        <b> EL CONDUCTOR ES EL MISMO PROPIETARIO DEL VEHICULO:</b><br>
-                                        {{ ipatCreado.mismoConductor }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b> TIPO DOCUMENTO DEL PROPIETARIO:</b><br>
-                                        {{ ipatCreado.tipoIdentificacionPropietario }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>NÚMERO DOCUMENTO PROPIETARIO :</b><br>
-                                        {{ ipatCreado.numeroIdentificacionPropietario }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>APELLIDOS PROPIETARIO:</b><br>
-                                        {{ ipatCreado.apellidosPropietario }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>NOMBRES PROPIETARIO:</b><br>
-                                        {{ ipatCreado.nombresPropietario }}
-                                    </td>
-                                </tr>
+                                    <td>{{ ipat.consecutivo.numero }}</td>
+                                    <td>{{ ipat.consecutivo.talonario.organismoTransito.nombre }}</td>
+                                    <td>{{ ipat.gravedadAccidente.nombre }}</td>
+                                    <td>{{ ipat.claseAccidente?.nombre }}</td>
+                                    <td>{{ ipat.choqueCon?.nombre }}</td>
+                                    <td>{{ ipat.objetoFijo?.nombre }}</td>
+                                    <td>{{ ipat.otroObjetoFijo }}</td>
+                                    <td>{{ ipat.otroClaseAccidente }}</td>
+                                    <td>{{ (ipat.fechaAccidente.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td>
+                                    <td>{{ (ipat.horaAccidente.timestamp * 1000) | date: 'HH:mm' }}</td>
+                                    <td>{{ (ipat.fechaLevantamiento.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td>
+                                    <td>{{ (ipat.horaLevantamiento.timestamp * 1000) | date: 'HH:mm' }}</td>
+                                    <td>
+                                        <span *ngIf="ipat.hayTestigo">S</span>
+                                        <span *ngIf="!ipat.hayTestigo">N</span>
+                                    </td>
+                                    <td>{{ ipat.consecutivo.talonario.organismoTransito.departamento }}</td>
+                                    <td>{{ ipat.consecutivo.talonario.organismoTransito.municipio }}</td>
+                                    <td>{{ ipat.lugar }}</td>
+                                    <td>{{ ipat.area.nombre }}</td>
+                                    <td>{{ ipat.area.tipoArea.nombre }}</td>
+                                    <td>{{ ipat.tipoVia.nombre }}</td>
+                                    <td>{{ ipat.cardinalidad.nombre }}</td>
+                                    <td>{{ ipat.sector.nombre }}</td>
+                                    <td>{{ ipat.zona.nombre }}</td>
+                                    <td>{{ ipat.disenio.nombre }}</td>
+                                    <td>{{ ipat.estadoTiempo }}</td>
+                                    <td>{{ ipat.observaciones }}</td>
+                                    <td>{{ ipat.unidadCorrespondio?.entidadAccidente.nombre }}</td>
+                                    <td>{{ ipat.unidadCorrespondio.nombre }}</td>
+                                    <td>{{ (ipat.fechaAccidente.timestamp * 1000) | date: 'yyyy' }}</td>
+                                    <td>{{ ipat.consecutivo.numero }}</td>
+                                    <td>{{ ipat.tipoIdentificacionAgente }}</td>
+                                    <td>{{ ipat.identificacionAgente }}</td>
+                                    <td>{{ ipat.entidadAgente }}</td>
+                                    <td>{{ ipat.placaAgente }}</td>
+                                    <td>{{ ipat.gradoAgente }}</td>
+                                    <td>CARGUE</td>
+                                    <td>PREFIJO REGISTRO</td>
+                                    <td>{{ ipat.hipotesis?.codigo }}</td>
+                                    <td>{{ ipat.otraHipotesis }}</td>
+                                    <td>{{ ipat.geometria.nombre }}</td>
+                                    <td>{{ ipat.geometria.tipoGeometria.nombre }}</td>
+                                    <td>{{ ipat.utilizacion.nombre }}</td>
+                                    <td>{{ ipat.calzada.nombre }}</td>
+                                    <td>{{ ipat.carril.nombre }}</td>
+                                    <td>{{ ipat.material.nombre }}</td>
+                                    <td>{{ ipat.otroMaterial }}</td>
+                                    <td>{{ ipat.estadoVia.nombre }}</td>
+                                    <td>{{ ipat.condicionVia.nombre }}</td>
+                                    <td>{{ ipat.otraCondcionVia }}</td>
+                                    <td>{{ ipat.iluminacion.nombre }}</td>
+                                    <td>{{ ipat.estadoIluminacion?.nombre }}</td>
+                                    <td>{{ ipat.visual?.nombre }}</td>
+                                    <td>{{ ipat.visualDisminuida?.nombre }}</td>
+                                    <td>{{ ipat.otraVisualDisminuida }}</td>
+                                    <td>
+                                        <span *ngIf="ipat.haySemaforo">S</span>
+                                        <span *ngIf="!ipat.haySemaforo">N</span>
+                                    </td>
+                                    <td>{{ ipat.estadoSemaforo?.nombre }}</td>
+                                    <td>{{ ipat.senialVertical }}</td>
+                                    <td>{{ ipat.senialHorizontal }}</td>
+                                    <td>{{ ipat.reductorVelocidad }}</td>
+                                    <td>{{ ipat.reductorVelocidad }}</td>
+                                    <td>{{ ipat.delineadorPiso.nombre }}</td>
+                                    <td>{{ ipat.otroDelineadorPiso }}</td>
+                                    <!--DATOS DEL VEHICULO-->
+                                    <td>{{ vehiculos }}</td>
+                                    
+                                    <!--DATOS DE TESTIGOS-->
+                                    <td>{{ ipat?.tipoIdentificacionTestigo }}</td>
+                                    <td>{{ ipat?.identificacionTestigo }}</td>
+                                    <td>{{ ipat?.apellidosTestigo }}</td>
+                                    <td>{{ ipat?.nombresTestigo }}</td>
+                                    <td>{{ ipat?.direccionResidenciaTestigo }}</td>
+                                    <td>{{ ipat?.municipioResidenciaTestigo }}</td>
+                                    <td>{{ ipat?.telefonoTestigo }}</td>
+                                    
+                                    <!--DATOS DEL CONDUCTOR-->
+                                    <td>{{ conductores }}</td>
+
+                                    <!-- DATOS PROPIETARIO -->
+                                    <td>
+                                        <span *ngIf="ipat.mismoConductor">S</span>
+                                        <span *ngIf="!ipat.mismoConductor">N</span>
+                                    </td>
+                                    <td>{{ ipat.tipoIdentificacionPropietario }}</td>
+                                    <td>{{ ipat.numeroIdentificacionPropietario }}</td>
+                                    <td>{{ ipat.apellidosPropietario }}</td>
+                                    <td>{{ ipat.nombresPropietario }}</td>
+                                    
+                                    <!--DATOS DE LA VICTIMA-->
+                                    <td>{{ victimas }}</td>
+                                    
+                                </tr>
+                                
                                 <!-- DATO DE LA VICTIMA-->
                                 <!-- <tr>
                                     <td>
                                         <b>TIPO IDENTIFICACIÓN DE LA VICTIMA:</b><br>
-                                        {{ ipatCreado.victima.tipoIdentificacion }}
+                                        {{ ipat.victima.tipoIdentificacion }}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <b>NÚMERO DE IDENTIFICACIÓN DE LA VICTIMA:</b><br>
-                                        {{ ipatCreado.victima.identificacion }}
+                                        {{ ipat.victima.identificacion }}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <b>APELLIDOS DE LA VICTIMA:</b><br>
-                                        {{ ipatCreado.victima.apellido }}
+                                        {{ ipat.victima.apellido }}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <b>NOMBRES DE LA VICTIMA:</b><br>
-                                        {{ ipatCreado.victima.nombres }}
+                                        {{ ipat.victima.nombres }}
                                     </td>
                                 </tr> -->
                                 <!-- <tr>
                                     <td>
                                         <b>PAIS DE LA VICTIMA:</b><br>
-                                        {{ ipatCreado.victima.pais }}
+                                        {{ ipat.victima.pais }}
                                     </td>
                                 </tr> -->
                                 <!-- <tr>
                                     <td>
                                         <b>FECHA NACIMIENTO DE LA VICTIMA:</b><br>
-                                        {{ ipatCreado.victima.fechaNacimiento }}
+                                        {{ ipat.victima.fechaNacimiento }}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <b>SEXO DE LA VICTIMA:</b><br>
-                                        {{ ipatCreado.victima.genero }}
+                                        {{ ipat.victima.genero }}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <b>DIRECCION DOMICILIO DE LA VICTIMA:</b><br>
-                                        {{ ipatCreado.victima.direccionResidencia }}
+                                        {{ ipat.victima.direccionResidencia }}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <b>DEPARTAMENTO DOMICILIO DE LA VICTIMA:</b><br>
-                                        {{ ipatCreado.victima.municipioResidencia.departamentoResidentcia.nombre }}
+                                        {{ ipat.victima.municipioResidencia.departamentoResidentcia.nombre }}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <b>CIUDAD DE LA VICTIMA:</b><br>
-                                        {{ ipatCreado.victima.ciudadResidencia }}
+                                        {{ ipat.victima.ciudadResidencia }}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <b> TEELFONO DE LA VICTIMA:</b><br>
-                                        {{ ipatCreado.victima.telefono }}
+                                        {{ ipat.victima.telefono }}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <b> USA CASCO:</b><br>
-                                        {{ ipatCreado.victima.casco }}
+                                        {{ ipat.victima.casco }}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <b> USA CHALECO:</b><br>
-                                        {{ ipatCreado.victima.chaleco }}
+                                        {{ ipat.victima.chaleco }}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <b> USA CINTURON:</b><br>
-                                        {{ ipatCreado.victima.cinturon }}
+                                        {{ ipat.victima.cinturon }}
                                     </td>
                                 </tr> -->
                                 <!-- <tr>
                                     <td>
                                         <b> CONDICION DE LA VICTIMA:</b><br>
-                                        {{ ipatCreado.victima.condicion }}
+                                        {{ ipat.victima.condicion }}
                                     </td>
                                 </tr> -->
                                 <!-- <tr>
                                     <td>
                                         <b> GRAVEDAD DE LA VICTIMA:</b><br>
-                                        {{ ipatCreado.victima.gravedad }}
+                                        {{ ipat.victima.gravedad }}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <b> DESCRIPCION LESIONES DE LA VICTIMA:</b><br>
-                                        {{ ipatCreado.victima.descripcionLesion }}
+                                        {{ ipat.victima.descripcionLesion }}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <b> HOSPITAL DE LA VICTIMA:</b><br>
-                                        {{ ipatCreado.victima.hospital }}
+                                        {{ ipat.victima.hospital }}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <b> VEHICULO DE LA VICTIMA:</b><br>
-                                        {{ ipatCreado.victima.placaVehiculo }}
+                                        {{ ipat.victima.placaVehiculo }}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <b>¿PRESENTA EXAMEN DE EMBRIAGUEZ?:</b><br>
-                                        {{ ipatCreado.victima.practicoExamen }}
+                                        {{ ipat.victima.practicoExamen }}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <b>RESULTADO DE EXAMEN DE LA VICTIMA:</b><br>
-                                        {{ ipatCreado.victima.resultadoExamen }}
+                                        {{ ipat.victima.resultadoExamen }}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <b>GRADO DE EMBRIAGUEZ DE LA VICTIMA:</b><br>
-                                        {{ ipatCreado.victima.gradoExamen }}
+                                        {{ ipat.victima.gradoExamen }}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <b>¿AUTORIZO EXÁMEN?:</b><br>
-                                        {{ ipatCreado.victima.autorizoExamen }}
+                                        {{ ipat.victima.autorizoExamen }}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <b> ¿PRESENTA EXÁMEN DE NARCOTICOS?:</b><br>
-                                        {{ ipatCreado.victima.sustanciasPsicoactivas }}
+                                        {{ ipat.victima.sustanciasPsicoactivas }}
                                     </td>
                                 </tr> -->
-                                <!--DATOS DE TESTIGOS-->
-                                <tr>
-                                    <td>
-                                        <b> TIPO IDENTIFICACIÓN DEL TESTIGO:</b><br>
-                                        {{ ipatCreado?.tipoIdentificacionTestigo }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>IDENTIFICACIÓN DEL TESTIGO:</b><br>
-                                        {{ ipatCreado?.identificacionTestigo }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>APELLIDOS DEL TESTIGO:</b><br>
-                                        {{ ipatCreado?.apellidosTestigo }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>NOMBRES DEL TESTIGO:</b><br>
-                                        {{ ipatCreado?.nombresTestigos }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>DIRECCIÓN DOMICILIO DEL TESTIGO:</b><br>
-                                        {{ ipatCreado?.direccionResidenciaTestigo }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>CIUDAD RESIDENCIA DEL TESTIGO:</b><br>
-                                        {{ ipatCreado?.municipioResidenciaTestigo }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>TELEFONO DEL TESTIGO:</b><br>
-                                        {{ ipatCreado?.telefonoTestigo }}
-                                    </td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>

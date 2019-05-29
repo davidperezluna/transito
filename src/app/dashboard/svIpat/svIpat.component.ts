@@ -12,7 +12,10 @@ declare var $: any;
   templateUrl: './svIpat.component.html'
 })
 export class SvIpatComponent implements OnInit {
-  public ipatCreado: SvIpat;
+  public ipat: SvIpat;
+  public conductores: any = null;
+  public vehiculos: any = null;
+  public victimas: any = null;
   public errorMessage;
 
   public consecutivos;
@@ -67,6 +70,9 @@ export class SvIpatComponent implements OnInit {
   }
 
   onInitTable() {
+    if(this.table) {
+      this.table.destroy();
+    }
     this.table =  $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,
@@ -97,23 +103,27 @@ export class SvIpatComponent implements OnInit {
 
     this._IpatService.getIpatByConsecutivo(consecutivo, token).subscribe(
       response => {
-        console.log(response.data);
         if (response.code = 200) {
-          this.ipatCreado = response.data;
+          this.ipat = response.data.ipat;
+          this.conductores = response.data.conductores;
+          this.vehiculos = response.data.vehiculos;
+          this.victimas = response.data.victimas;
           swal({
             title: response.title,
             text: response.message,
             type: response.status,
             confirmButtonText: 'Aceptar'
           });
-          let timeoutId = setTimeout(() => {
-            this.onInitTable();
-          }, 100);
+          this.formShow = false;
           swal.close();
+            let timeoutId = setTimeout(() => {
+              this.onInitTable();
+              this.formShow = true;
+              this.formNew = false;
+              this.formIndex = false;
+            }, 100);
+                
 
-          this.formShow = true;
-          this.formNew = false;
-          this.formIndex = false;
           if (this.table) {
             this.table.destroy();
           }
@@ -142,6 +152,7 @@ export class SvIpatComponent implements OnInit {
   ready(isCreado: any) {
     if (isCreado) {
       this.formNew = false;
+      this.formShow = false;
       this.formEdit = false;
       this.formIndex = true;
       this.ngOnInit();

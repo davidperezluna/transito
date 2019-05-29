@@ -51,8 +51,12 @@ export class SvIpatAsignacionComponent implements OnInit {
     $('[data-toggle="tooltip"]').tooltip();
   }
   
-  iniciarTabla(){
-    $('#dataTables-example').DataTable({
+  onInitTable(){
+    if (this.table) {
+      this.table.destroy();
+    }
+
+    this.table = $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,
       sPaginationType: 'full_numbers',
@@ -64,8 +68,7 @@ export class SvIpatAsignacionComponent implements OnInit {
           sLast: '<i class="fa fa-step-forward"></i>'
         }
       }
-   });
-   this.table = $('#dataTables-example').DataTable();
+    });
   }
 
   onShow(funcionario: any){
@@ -135,38 +138,31 @@ export class SvIpatAsignacionComponent implements OnInit {
     })
   }
 
-  onSearch(){   
+  onSearch(){
     let token = this._loginService.getToken();
     
     this.datos.parametro = this.parametro;
 
-		this._AsignacionService.recordByTalonario(this.datos,token).subscribe(
+		/* this._AsignacionService.recordByTalonario(this.datos,token).subscribe( */
+		this._AsignacionService.searchFuncionarioAgente(this.datos,token).subscribe(
 			response => {
-        this.respuesta = response;
-        if(this.respuesta.status == 'success'){
+        if(response.status == 'success'){
           this.funcionarios = response.data;
-          this.iniciarTabla();
+          this.onInitTable();
 
           swal({
-            title: 'Perfecto',
-            text: response.msj,
-            type: 'info',
-            showCloseButton: true,
-            focusConfirm: false,
-            confirmButtonText:
-              '<i class="fa fa-thumbs-up"></i> OK!',
-            confirmButtonAriaLabel: 'Thumbs up, great!',
-            cancelButtonText:
-            '<i class="fa fa-thumbs-down"></i>',
-            cancelButtonAriaLabel: 'Thumbs down',
+            title: 'Perfecto!',
+            text: response.message,
+            type: 'success',
+            confirmButtonText: 'Aceptar'
           });
         }else{
           swal({
-            title: 'Atención',
-            text: response.msj,
-            type:'warning',
-            confirmButtonColor: '#15d4be',
-          });
+            title: 'Error!',
+            text: response.message,
+            type: 'error',
+            confirmButtonText: 'Aceptar'
+          })
         }
 			error => {
 					this.errorMessage = <any>error;
@@ -175,7 +171,6 @@ export class SvIpatAsignacionComponent implements OnInit {
 						alert("Error en la petición");
 					}
 				}
-
 		}); 
   }
 }

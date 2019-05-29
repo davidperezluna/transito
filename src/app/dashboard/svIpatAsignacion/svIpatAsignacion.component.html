@@ -52,14 +52,14 @@
                             <tr class="odd" *ngFor="let funcionario of funcionarios; let i = index">
                                 <td>{{ funcionario.id }}</td>
                                 <td>
-                                    {{ funcionario.ciudadano.usuario.primerNombre }}
-                                    {{ funcionario.ciudadano.usuario.segundoNombre }}
-                                    {{ funcionario.ciudadano.usuario.primerApellido }}
-                                    {{ funcionario.ciudadano.usuario.segundoApellido }}
+                                    {{ funcionario.ciudadano.primerNombre }}
+                                    {{ funcionario.ciudadano.segundoNombre }}
+                                    {{ funcionario.ciudadano.primerApellido }}
+                                    {{ funcionario.ciudadano.segundoApellido }}
                                 </td>
-                                <td>{{ funcionario.ciudadano.usuario.identificacion }}</td>
+                                <td>{{ funcionario.ciudadano.identificacion }}</td>
                                 <td>{{ funcionario.numeroPlaca }}</td>
-                                <td>{{ funcionario.sedeOperativa.nombre }}</td>
+                                <td>{{ funcionario.organismoTransito.nombre }}</td>
                                 <td>
                                     <button (click)="onShow(funcionario)"  class="btn btn-xs btn-primary" type="button" data-toggle="tooltip" data-placement="top" title="A Tooltip on the right">
                                         <i class="fa fa-check"></i>

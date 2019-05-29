@@ -6,7 +6,7 @@ export class SvIpatVehiculo {
         public portaPlaca: number,
         public placa: string,
         public placaRemolque: string,
-        public nacionalidadVehiculo: number,
+        public nacionalidad: number,
         public marca: number,
         public linea: number,
         public color: number,

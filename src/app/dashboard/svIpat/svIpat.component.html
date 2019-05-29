@@ -28,7 +28,7 @@
                     Ver
                   </button>
                   <button (click)="onNew(consecutivo)" *ngIf="consecutivo.estado == 'ASIGNADO'" (ready)="ready($event)" class="btn btn-xs btn-success" type="button">
-                    <!-- <i class="fa fa-plus">Nuevo Ipat</i> -->Nuevo Ipat {{ consecutivo.estado }}
+                    Nuevo Ipat
                   </button>
                 </td>
               </tr>
@@ -40,5 +40,6 @@
     </div>
   </div>
   <app-new *ngIf='formNew' [consecutivo]="consecutivo" (ready)="ready($event)"></app-new> 
-  <app-show *ngIf='formShow' [ipatCreado]="ipatCreado" (ready)="ready($event)"></app-show>
+  <app-show *ngIf='formShow' [ipat]="ipat" [conductores]="conductores" [vehiculos]="vehiculos" [victimas]="victimas" (ready)="ready($event)"></app-show>
+  <!-- <app-show *ngIf='formShow' [ipat]="ipat" (ready)="ready($event)"></app-show> -->
 </div>

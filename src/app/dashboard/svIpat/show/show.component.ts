@@ -9,7 +9,10 @@ declare var $: any;
 
 export class ShowComponent implements OnInit {
     @Output() ready = new EventEmitter<any>();
-    @Input() ipatCreado: any = null;
+    @Input() ipat: any = null;
+    @Input() conductores: any = null;
+    @Input() vehiculos: any = null;
+    @Input() victimas: any = null;
     public errorMessage;
     public table: any = null;
 
@@ -18,27 +21,31 @@ export class ShowComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        console.log(this.ipatCreado);
+        console.log(this.ipat);
+        console.log(this.conductores);
+        console.log(this.vehiculos);
+        console.log(this.victimas);
         let timeoutId = setTimeout(() => {
             this.onInitTable();
         }, 100);
     }
 
     onInitTable() {
-        if(this.table) {
-            this.table.destroy();
-        }
         this.table = $('#dataTables-example').DataTable({
             responsive: true,
             pageLength: 8,
             sPaginationType: 'full_numbers',
+            dom: 'Bfrtip',
             buttons: [
                 {
                     title: 'jhsjdhjasd',
                     extend: 'csvHtml5',
                     fieldSeparator: '|',
                     text: 'csv',
-                    filename: 'Ipat_' + this.ipatCreado.consecutivo.numero,
+                    charset: 'utf-8',
+                    filename: 'Ipat_' + this.ipat.consecutivo.numero,
+                    fieldBoundary: '',
+                    /* header: false, */
                 },
                 
             ],
