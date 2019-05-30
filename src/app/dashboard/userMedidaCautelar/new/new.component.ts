@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { UserMedidaCautelar } from '../userMedidaCautelar.modelo';
 import { VhloCfgLimitacionTipoProcesoService } from '../../../services/vhloCfgLimitacionTipoProceso.service';
 import { VhloCfgLimitacionCausalService } from '../../../services/vhloCfgLimitacionCausal.service';

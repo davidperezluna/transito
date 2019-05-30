@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { DatePipe } from '@angular/common';
-import { VhloLimitacionService } from '../../../services/vhloLimitacion.service';
-import { VhloVehiculoService } from '../../../services/vhloVehiculo.service';
+import { UserMedidaCautelarService } from '../../../services/userMedidaCautelar.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 declare var $: any;
@@ -12,132 +11,25 @@ declare var $: any;
   providers: [DatePipe]
 })
 
-export class DeleteComponent implements OnInit {
+export class DeleteComponent implements OnInit{
+  @Output() onReady = new EventEmitter<any>();
+  @Input() medidaCautelar:any = null;
   public errorMessage;
 
   public table: any = null;
-  
-  public limitaciones: any;
-  public limitacion: any;
-
-  public formIndex = false;
   public formShow = false;
 
-  public placa: any;
-  public vehiculo: any;
-
   constructor(
-    private _VehiculoLimitacionService: VhloLimitacionService,
-    private _VehiculoService: VhloVehiculoService,
+    private _MedidaCautelarService: UserMedidaCautelarService,
     private _LoginService: LoginService,
   ) { }
 
   ngOnInit() { }
 
-  ready(isCreado: any) {
-    if (isCreado) {
-      this.formIndex = true;
-      this.ngOnInit();
-    }
-  }
-
-  onInitTable() {
-    if (this.table) {
-      this.table.destroy();
-    }
-
-    this.table = $('#dataTables-example').DataTable({
-      responsive: true,
-      pageLength: 8,
-      sPaginationType: 'full_numbers',
-      oLanguage: {
-        oPaginate: {
-          sFirst: '<i class="fa fa-step-backward"></i>',
-          sPrevious: '<i class="fa fa-chevron-left"></i>',
-          sNext: '<i class="fa fa-chevron-right"></i>',
-          sLast: '<i class="fa fa-step-forward"></i>'
-        }
-      }
-    });
-  }
-
-  onSearchByPlaca() {
-    swal({
-      title: 'Buscando vehiculo!',
-      text: 'Solo tardara unos segundos por favor espere.',
-      onOpen: () => {
-        swal.showLoading()
-      }
-    });
-
-    let token = this._LoginService.getToken();
-
-    let datos = {
-      'numero': this.placa,
-    };
-
-    this._VehiculoService.searchByPlaca(datos, token).subscribe(
-      response => {
-        if (response.status == 'success') {
-          this.vehiculo = response.data;
-
-          this._VehiculoLimitacionService.searchByPlaca({ 'numero': this.placa }, token).subscribe(
-            response => {
-              if (response.status == 'success') {
-                this.limitaciones = response.data;
-                this.formIndex = true;
-                this.formShow = false;
-
-                let timeoutId = setTimeout(() => {
-                  this.onInitTable();
-                }, 100);
-                
-                swal.close();
-              } else {
-                this.limitaciones = null;
-
-                swal({
-                  title: 'Error!',
-                  text: response.message,
-                  type: 'error',
-                  confirmButtonText: 'Aceptar'
-                });
-              }
-              error => {
-                this.errorMessage = <any>error;
-
-                if (this.errorMessage != null) {
-                  console.log(this.errorMessage);
-                  alert("Error en la petición");
-                }
-              }
-            });
-        } else {
-          this.vehiculo = null;
-
-          swal({
-            title: 'Error!',
-            text: response.message,
-            type: 'error',
-            confirmButtonText: 'Aceptar'
-          });
-        }
-        error => {
-          this.errorMessage = <any>error;
-
-          if (this.errorMessage != null) {
-            console.log(this.errorMessage);
-            alert("Error en la petición");
-          }
-        }
-      }
-    );
-  }
-
-  onDelete(limitacion:any) {
+  onDelete(medidaCautelar:any) {
     swal({
       title: '¿Estás seguro?',
-      text: "¡Se levantara la limitación!",
+      text: "¡Se levantar la medida cautelar!",
       type: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#15d4be',
@@ -148,7 +40,7 @@ export class DeleteComponent implements OnInit {
       if (result.value) {
         let token = this._LoginService.getToken();
         
-        this._VehiculoLimitacionService.delete({ 'id': limitacion.id }, token).subscribe(
+        this._MedidaCautelarService.delete({ 'id': medidaCautelar.id }, token).subscribe(
           response => {
             if (response.status == 'success') {
               swal({
@@ -158,7 +50,7 @@ export class DeleteComponent implements OnInit {
                 confirmButtonText: 'Aceptar'
               });
     
-              this.ready(true);
+              this.onReady.emit(true);
             } else {
               swal({
                 title: 'Error!',
@@ -182,13 +74,6 @@ export class DeleteComponent implements OnInit {
   }
 
   onCancelar() {
-    this.formShow = false;
+    this.onReady.emit(true);
   }
-
-  onShow(limitacion: any): void {
-    this.limitacion = limitacion;
-    this.formIndex = false;
-    this.formShow = true;
-  }
-
 }
