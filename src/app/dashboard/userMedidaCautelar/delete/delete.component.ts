@@ -1,6 +1,9 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { UserMedidaCautelarService } from '../../../services/userMedidaCautelar.service';
+import { CfgMunicipioService } from '../../../services/cfgMunicipio.service';
+import { CfgDepartamentoService } from '../../../services/cfgDepartamento.service';
+import { CfgEntidadJudicialService } from '../../../services/cfgEntidadJudicial.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 declare var $: any;
@@ -16,15 +19,83 @@ export class DeleteComponent implements OnInit{
   @Input() medidaCautelar:any = null;
   public errorMessage;
 
+  public entidadesJudiciales;
+  public municipios;
+  public departamentos;
+
   public table: any = null;
   public formShow = false;
 
+  public datos = {
+    'fechaLevantamiento': null,
+    'numeroOficioLevantamiento': null,
+    'observacionesLevantamiento': null,
+    'idMedidaCautelar': null,
+    'idEntidadJudicialLevantamiento': null,
+    'idDepartamentoLevantamiento': null,
+    'idMunicipioLevantamiento': null,
+  }
+
   constructor(
     private _MedidaCautelarService: UserMedidaCautelarService,
+    private _DepartamentoService: CfgDepartamentoService,
+    private _MunicipioService: CfgMunicipioService,
+    private _EntidadJuducialService: CfgEntidadJudicialService,
     private _LoginService: LoginService,
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() { 
+    this._DepartamentoService.select().subscribe(
+      response => {
+        this.departamentos = response;
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+
+    this._EntidadJuducialService.select().subscribe( 
+      response => {
+        this.entidadesJudiciales = response;
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+  }
+
+  onCancelar() {
+    this.onReady.emit(true);
+  }
+
+  onChangedDepartamento(e) {
+    if (this.medidaCautelar.idDepartamento) {
+      let token = this._LoginService.getToken();
+      this._MunicipioService.selectByDepartamento({ 'idDepartamento':this.medidaCautelar.idDepartamento }, token).subscribe(
+        response => {
+          this.municipios = response;
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+    }
+  }
 
   onDelete(medidaCautelar:any) {
     swal({
@@ -40,7 +111,7 @@ export class DeleteComponent implements OnInit{
       if (result.value) {
         let token = this._LoginService.getToken();
         
-        this._MedidaCautelarService.delete({ 'id': medidaCautelar.id }, token).subscribe(
+        this._MedidaCautelarService.delete(this.datos, token).subscribe(
           response => {
             if (response.status == 'success') {
               swal({
@@ -71,9 +142,5 @@ export class DeleteComponent implements OnInit{
         );
       }
     });
-  }
-
-  onCancelar() {
-    this.onReady.emit(true);
   }
 }

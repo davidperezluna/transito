@@ -57,7 +57,7 @@ export class NewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.limitacion = new VhloLimitacion(null, null, null, null, null, null, null, null, null, null, null, null, null);
+    this.limitacion = new VhloLimitacion(null, null, null, null, [], [], null, null, null, null, null, null, null);
 
     this._TipoIdentificacionService.select().subscribe(
       response => {
