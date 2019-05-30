@@ -200,6 +200,7 @@ export class SvIpat{
 		public telefonoTestigo: string,
 		
 		public idHipotesis: string,
+		public otraHipotesis: string,
 		
 		//datos agente de transito
 		public gradoAgente: string,

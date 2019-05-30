@@ -67,10 +67,12 @@ import { VhloCfgColorService } from '../../../services/vhloCfgColor.service';
 import { VhloCfgModalidadTransporteService } from '../../../services/vhloCfgModalidadTransporte.service';
 import { VhloCfgCarroceriaService } from '../../../services/vhloCfgCarroceria.service';
 import { VhloCfgRadioAccionService } from '../../../services/vhloCfgRadioAccion.service';
+import { DatePipe, CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-new',
-  templateUrl: './new.component.html'
+  templateUrl: './new.component.html',
+  providers: [DatePipe]
 })
 export class NewComponent implements OnInit {
   @Output() ready = new EventEmitter<any>();
@@ -83,6 +85,7 @@ export class NewComponent implements OnInit {
   public errorMessage;
 
   public nroIpat: any;
+  public date: any; 
 
   public numeroConsecutivo: any;
 
@@ -284,7 +287,7 @@ export class NewComponent implements OnInit {
   ngOnInit() {
     console.log(this.consecutivo);
 
-    this.ipat = new SvIpat(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    this.ipat = new SvIpat(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     this.ipatConductor = new SvIpatConductor(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     this.ipatVehiculo = new SvIpatVehiculo(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     this.ipatVictima = new SvIpatVictima(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
@@ -1177,7 +1180,7 @@ export class NewComponent implements OnInit {
       this._SvIpatService.getBuscarConductor({ 'identificacion': this.ipatConductor.identificacion }, token).subscribe(
 
         response => {
-
+          console.log(response.data);
           if (response.status == 'success') {
             /* ================ cargar select placas vehiculos ===================== */
             this._SvIpatVehiculoService.selectByConsecutivo(this.consecutivo.numero, token).subscribe(
@@ -1194,10 +1197,33 @@ export class NewComponent implements OnInit {
               }
             );
 
-            if (response.data.tipoIdentificacion != null) {
+            if (response.data.tipoIdentificacion) {
               this.tipoIdentificacionConductorSelected = [response.data.tipoIdentificacion.id];
-            } else {
-              this.tipoIdentificacionConductorSelected = [0];
+            }
+            if (response.data.fechaNacimiento) {
+              var datePiper = new DatePipe('en-US');
+              
+              var date = new Date();
+              date.setTime(response.data.fechaNacimiento.timestamp * 1000);
+              
+              response.data.fechaNacimiento = datePiper.transform(
+                date, 'yyyy-MM-dd'
+              );
+              
+              this.ipatConductor.fechaNacimiento = response.data.fechaNacimiento;
+
+            }
+            if (response.data.genero) {
+              this.sexoConductorSelected = [response.data.genero.id];
+            }
+            if (response.data.direccionPersonal) {
+              this.ipatConductor.direccionResidencia = response.data.direccionPersonal;
+            }
+            if (response.data.municipioResidencia) {
+              this.ciudadResidenciaConductorSelected = [response.data.municipioResidencia.id];
+            }
+            if (response.data.telefonoCelular) {
+              this.ipatConductor.telefono = response.data.telefonoCelular;
             }
             if (response.data.segundoNombre == null) {
               this.ipatConductor.nombres = response.data.primerNombre;
@@ -1208,31 +1234,6 @@ export class NewComponent implements OnInit {
               this.ipatConductor.apellidos = response.data.primerApellido;
             } else {
               this.ipatConductor.apellidos = response.data.primerApellido + ' ' + response.data.segundoApellido;
-            }
-            if (response.data.fechaNacimiento != null) {
-              this.ipatConductor.fechaNacimiento = response.data.fechaNacimiento;
-            } else {
-              this.ipatConductor.fechaNacimiento = '';
-            }
-            if (response.data.genero != null) {
-              this.sexoConductorSelected = [response.data.genero.id];
-            } else {
-              this.sexoConductorSelected = [0];
-            }
-            if (response.data.direccion != null) {
-              this.ipatConductor.direccionResidencia = response.data.direccion;
-            } else {
-              this.ipatConductor.direccionResidencia = '';
-            }
-            if (response.data.municipioResidencia != null) {
-              this.ciudadResidenciaConductorSelected = [response.data.municipioResidencia.id];
-            } else {
-              this.ciudadResidenciaConductorSelected = [0];
-            }
-            if (response.data.telefono != null) {
-              this.ipatConductor.telefono = response.data.telefono;
-            } else {
-              this.ipatConductor.telefono = '';
             }
           } else {
             swal({
@@ -1275,7 +1276,6 @@ export class NewComponent implements OnInit {
                     };
                     this.vehiculosIpat.push(obj);
                   });
-                  console.log(this.vehiculosIpat);
                 } else {
                   let obj = {
                     value: this.ipatVehiculo.placa,
@@ -1283,7 +1283,6 @@ export class NewComponent implements OnInit {
                   };
                   this.vehiculosIpat.push(obj);
                 }
-                console.log(this.vehiculosIpat);
               }
             });
             error => {
@@ -1308,62 +1307,39 @@ export class NewComponent implements OnInit {
 
         response => {
           if (response.status == 'success') {
-            if (response.data.nacionalidad != null) {
+            if (response.data.nacionalidad) {
               this.nacionalidadVehiculoSelected = [response.data.nacionalidad.id];
-            } else {
-              this.nacionalidadVehiculoSelected = [0];
             }
-            if (response.data.linea.marca != null) {
+            if (response.data.linea.marca) {
               this.marcaSelected = [response.data.linea.marca.id];
               this.lineaSelected = [response.data.linea.id];
-            } else {
-              this.marcaSelected = [0];
-              this.lineaSelected = [0];
             }
-            if (response.data.color != null) {
+            if (response.data.color) {
               this.colorSelected = [response.data.color.id];
-            } else {
-              this.colorSelected = [0];
             }
-            if (response.data.modelo != null) {
+            if (response.data.modelo) {
               this.ipatVehiculo.modelo = response.data.modelo;
-            } else {
-              this.ipatVehiculo.modelo = 0;
             }
-            if (response.data.carroceria != null) {
+            if (response.data.carroceria) {
               this.carroceriaSelected = [response.data.carroceria.id];
-            } else {
-              this.carroceriaSelected = [0];
             }
-            if (response.data.numeroPasajeros != null) {
+            if (response.data.numeroPasajeros) {
               this.ipatVehiculo.pasajeros = response.data.numeroPasajeros;
-            } else {
-              this.ipatVehiculo.pasajeros = 0;
             }
-            if (response.data.municipio != null) {
+            if (response.data.municipio) {
               this.matriculadoEnSelected = [response.data.municipio.id];
-            } else {
-              this.matriculadoEnSelected = [0];
             }
-            if (response.data.clase != null) {
+            if (response.data.clase) {
               this.claseSelected = [response.data.clase.id];
-            } else {
-              this.claseSelected = [0];
             }
-            if (response.data.servicio != null) {
+            if (response.data.servicio) {
               this.servicioSelected = [response.data.servicio.id];
-            } else {
-              this.servicioSelected = [0];
             }
-            if (response.data.modalidadTransporte != null) {
+            if (response.data.modalidadTransporte) {
               this.modalidadTransporteSelected = [response.data.modalidadTransporte.id];
-            } else {
-              this.modalidadTransporteSelected = [0];
             }
-            if (response.data.radioAccion != null) {
+            if (response.data.radioAccion) {
               this.radioAccionSelected = [response.data.radioAccion.id];
-            } else {
-              this.radioAccionSelected = [0];
             }
           } else {
             swal({
@@ -1459,24 +1435,20 @@ export class NewComponent implements OnInit {
         response => {
           if (response.status == 'success') {
             this.agente = true;
-            if (response.data.ciudadano.tipoIdentificacion != null) {
+            if (response.data.ciudadano.tipoIdentificacion) {
               this.tipoIdentificacionAgenteSelected = [response.data.ciudadano.tipoIdentificacion.id];
-            } else {
-              this.tipoIdentificacionAgenteSelected = [0];
             }
-            if (response.data.cargo.nombre != null) {
+            if (response.data.cargo.nombre) {
               this.ipat.gradoAgente = response.data.cargo.nombre;
-            } else {
-              this.ipat.gradoAgente = '';
             }
             this.ipat.nombresAgente = response.data.ciudadano.primerNombre + ' ' + response.data.ciudadano.segundoNombre;
             this.ipat.apellidosAgente = response.data.ciudadano.primerApellido + ' ' + response.data.ciudadano.segundoApellido;
-            if (response.data.numeroPlaca != null) {
+            if (response.data.numeroPlaca) {
               this.ipat.placaAgente = response.data.numeroPlaca;
             } else {
               this.ipat.placaAgente = '';
             }
-            if (response.data.organismoTransito.nombre != null) {
+            if (response.data.organismoTransito.nombre) {
               this.ipat.entidadAgente = response.data.organismoTransito.nombre;
             } else {
               this.ipat.entidadAgente = '';
@@ -1518,45 +1490,38 @@ export class NewComponent implements OnInit {
 
         response => {
           if (response.status == 'success') {
-            if (response.data.tipoIdentificacion.id != null) {
+            if (response.data.tipoIdentificacion) {
               this.tipoIdentificacionVictimaSelected = [response.data.tipoIdentificacion.id];
-            } else {
-              this.tipoIdentificacionVictimaSelected = [0];
             }
-            if (response.data.primerNombre != null) {
+            if (response.data.primerNombre) {
               this.ipatVictima.nombres = response.data.primerNombre + ' ' + response.data.segundoNombre;
-            } else {
-              this.ipatVictima.nombres = '';
             }
-            if (response.data.primerApellido != null) {
+            if (response.data.primerApellido) {
               this.ipatVictima.apellidos = response.data.primerApellido + ' ' + response.data.segundoApellido;
-            } else {
-              this.ipatVictima.apellidos = '';
             }
-            if (response.data.fechaNacimiento != null) {
+            if (response.data.fechaNacimiento) {
+
+              var datePiper = new DatePipe('en-US');
+              var date = new Date();
+              date.setTime(response.data.fechaNacimiento.timestamp * 1000);
+
+              response.data.fechaNacimiento = datePiper.transform(
+                date, 'yyyy-MM-dd'
+              );
+
               this.ipatVictima.fechaNacimiento = response.data.fechaNacimiento;
-            } else {
-              this.ipatVictima.fechaNacimiento = '';
             }
-            if (response.data.genero.id != null) {
+            if (response.data.genero) {
               this.sexoVictimaSelected = [response.data.genero.id];
-            } else {
-              this.sexoVictimaSelected = [0];
             }
-            if (response.data.direccionPersonal != null) {
+            if (response.data.direccionPersonal) {
               this.ipatVictima.direccionResidencia = response.data.direccionPersonal;
-            } else {
-              this.ipatVictima.direccionResidencia = '';
             }
-            if (response.data.municipioResidencia.id != null) {
+            if (response.data.municipioResidencia) {
               this.ciudadResidenciaVictimaSelected = [response.data.municipioResidencia.id];
-            } else {
-              this.ciudadResidenciaVictimaSelected = [0];
             }
-            if (response.data.telefono != null) {
-              this.ipatVictima.telefono = response.data.telefono;
-            } else {
-              this.ipatVictima.telefono = '';
+            if (response.data.telefonoCelular) {
+              this.ipatVictima.telefono = response.data.telefonoCelular;
             }
           } else {
             swal({
@@ -1566,7 +1531,6 @@ export class NewComponent implements OnInit {
               confirmButtonText: 'Aceptar'
             }).then((result) => {
               if (result.value) {
-                /* this.victimaEncontrada = false; */
                 this.tipoIdentificacionVictimaSelected = [0];
                 this.ipatVictima.nombres = '';
                 this.ipatVictima.apellidos = '';
@@ -1574,7 +1538,7 @@ export class NewComponent implements OnInit {
                 this.sexoVictimaSelected = [0];
                 this.ipatVictima.direccionResidencia = '';
                 this.ciudadResidenciaVictimaSelected = [0];
-                this.ipatVictima.telefono = '';
+                this.ipatVictima.telefono = null;
               }
             });
           }
@@ -1597,7 +1561,6 @@ export class NewComponent implements OnInit {
 
         response => {
           if (response.status == 'success') {
-            console.log(response.data);
             this.testigo = true;
             this.tipoIdentificacionTestigoSelected = [response.data.tipoIdentificacion.id];
             this.ipat.nombresTestigo = response.data.primerNombre + ' ' + response.data.segundoNombre;
@@ -2077,9 +2040,5 @@ export class NewComponent implements OnInit {
         }
       }
     }
-  }
-
-  imprimirFormatos() {
-    alert("formatos policia judicial");
   }
 }
