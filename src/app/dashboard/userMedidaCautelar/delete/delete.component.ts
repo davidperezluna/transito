@@ -24,7 +24,6 @@ export class DeleteComponent implements OnInit{
   public departamentos;
 
   public table: any = null;
-  public formShow = false;
 
   public datos = {
     'fechaLevantamiento': null,

@@ -363,14 +363,14 @@ export class NewComponent implements OnInit {
           swal({
             title: response.title,
             text: response.message,
-            type: response.message,
+            type: response.status,
             confirmButtonText: 'Aceptar'
           });
         } else {
           swal({
             title: response.title,
             text: response.message,
-            type: response.message,
+            type: response.status,
             confirmButtonText: 'Aceptar'
           });
         }
