@@ -76,7 +76,7 @@
                     </div>
                     <div class="col-lg-6 col-md-6" *ngIf="ipat.idClaseAccidente == 1">
                         <label>Choque con</label>
-                        <ng-select [multiple]="false" [options]="choquesCon" [(ngModel)]="ipat.idChoqueCon"
+                        <ng-select [multiple]="false" [options]="choquesCon" [(ngModel)]="ipat.idClaseChoque"
                             name="choqueCon">
                         </ng-select>
                     </div>
@@ -91,7 +91,12 @@
                         <input class="form-control" type="text" [(ngModel)]="ipat.otroObjetoFijo" name="otroObjetoFijo">
                     </div>
                     <div class="col-lg-6 col-md-6">
-                        <label>¿Se identificaron testigos?</label>
+                        <label>Hipotesis del accidente de transito <strong class="text-danger">*</strong></label>
+                        <ng-select [multiple]="false" [options]="hipotesis" [(ngModel)]="ipat.idHipotesis" required name="hipotesis">
+                        </ng-select>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>¿Se identificaron testigos? <strong class="text-danger">*</strong></label>
                         <div class="form-group row">
                             <div class="col-xs-12 col-lg-6">
                                 <div class="custom-control custom-radio">
@@ -234,9 +239,9 @@
                         </ng-select>
                     </div>
                     <div class="col-lg-6 col-md-6" *ngIf="ipat.idIluminacion == '1'">
-                        <label>Estado Iluminación <strong class="text-danger">*</strong></label>
+                        <label>Estado Iluminación</label>
                         <ng-select [multiple]="false" [options]="estadosIluminacion"
-                            [(ngModel)]="ipat.idEstadoIluminacion" required name="estadoIluminacion">
+                            [(ngModel)]="ipat.idEstadoIluminacion" name="estadoIluminacion">
                         </ng-select>
                     </div>
                     <div class="col-lg-6 col-md-6">
@@ -248,7 +253,7 @@
                     <div class="col-lg-6 col-md-6" *ngIf="ipat.idVisual == 2">
                         <label>Visibilidad(Visual) Disminuida por </label>
                         <ng-select [multiple]="false" [options]="visualesDisminuidas"
-                            [(ngModel)]="ipat.idVisualDisminuida" required name="visualDisminuida">
+                            [(ngModel)]="ipat.idVisualDisminuida" name="visualDisminuida">
                         </ng-select>
                     </div>
                     <div class="col-lg-6 col-md-6" *ngIf="ipat.idVisualDisminuida == 1">
@@ -313,7 +318,7 @@
                             required name="delineadorPiso">
                         </ng-select>
                     </div>
-                    <div class="col-lg-6 col-md-6" *ngIf="ipat.idDelineadorPiso == 'OTRO'">
+                    <div class="col-lg-6 col-md-6" *ngIf="ipat.idDelineadorPiso == 141">
                         <label>Otro (Delineador de Piso)</label>
                         <input class="form-control" type="text" [(ngModel)]="ipat.otroDelineadorPiso"
                             name="otroDelineadorPiso">
@@ -353,8 +358,8 @@
                     <div class="col-lg-6 col-md-6"></div>
                     <div class="col-xs-16 col-lg-6" style="margin-top: 2%;">
                         <div class="input-group" *ngIf="ipatVehiculo.portaPlaca == '1'">
-                            <input type="text" class="form-control" placeholder="placaVehiculo"
-                                [(ngModel)]="ipatVehiculo.placa" required name="placaVehiculo" />
+                            <label>Placa vehículo <strong class="text-danger">*</strong></label>
+                            <input type="text" class="form-control" [(ngModel)]="ipatVehiculo.placa" required name="placaVehiculo" />
                             <span class="input-group-btn">
                                 <button (click)="onBuscarVehiculo()" class="btn btn-default btn-primary" type="button">
                                     <i class="fa fa-search"></i>
@@ -421,14 +426,14 @@
                         </ng-select>
                     </div>
                     <div class="col-lg-6 col-md-6" *ngIf="servicioSelected == 2">
-                        <label>Radio Acción <strong class="text-danger">*</strong></label>
+                        <label>Radio Acción</label>
                         <ng-select [multiple]="false" [disabled]="vhlRadioAccion" [options]="radiosAccion"
-                            [(ngModel)]="radioAccionSelected" required name="radioAccion">
+                            [(ngModel)]="radioAccionSelected" name="radioAccion">
                         </ng-select>
                     </div>
                     <div class="col-lg-6 col-md-6" *ngIf="ipatVehiculo.portaPlaca == '1'">
-                        <label>Capacidad de Carga (Ton)</label>
-                        <input class="form-control" type="text" [(ngModel)]="ipatVehiculo.ton" name="ton">
+                        <label>Capacidad de Carga (Ton) <strong class="text-danger">*</strong></label>
+                        <input class="form-control" type="text" [(ngModel)]="ipatVehiculo.ton" name="ton" required>
                     </div>
                     <div class="col-lg-6 col-md-6" *ngIf="ipatVehiculo.portaPlaca == '1'">
                         <label>Pasajeros <strong class="text-danger">*</strong></label>
@@ -705,12 +710,6 @@
                             [(ngModel)]="ipatVehiculo.arrayLugaresImpacto" name="lugarImpacto">
                         </ng-select>
                     </div>
-                    <div class="col-lg-6 col-md-6" *ngIf="ipatVehiculo.portaPlaca == '1'">
-                        <label>Hipotesis del accidente de transito <strong class="text-danger">*</strong></label>
-                        <ng-select [multiple]="false" [options]="hipotesis" [(ngModel)]="ipat.idHipotesis" required
-                            name="hipotesis">
-                        </ng-select>
-                    </div>
                 </div>
                 <div class="col-lg-6 col-md-6">
                     <button (click)="registrarVehiculo()" *ngIf="ipatVehiculo.portaPlaca == '1'"
@@ -728,8 +727,8 @@
                 <div class="form-group row">
                     <div class="col-xs-16 col-lg-6" style="margin-top: 2%;">
                         <div class="input-group">
-                            <input type="number" class="form-control" placeholder="número de identificación"
-                                [(ngModel)]="ipatConductor.identificacion" name="identificacionConductor" />
+                            <label>Identificación Conductor <strong class="text-danger">*</strong></label>
+                            <input type="number" class="form-control" [(ngModel)]="ipatConductor.identificacion" name="identificacionConductor" required/>
                             <span class="input-group-btn">
                                 <button (click)="onBuscarConductor()" class="btn btn-default btn-primary" type="button">
                                     <i class="fa fa-search"></i>
@@ -738,66 +737,66 @@
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6">
-                        <label>Tipo Identificación Conductor</label>
+                        <label>Tipo Identificación Conductor <strong class="text-danger">*</strong></label>
                         <ng-select [multiple]="false" [options]="tiposIdentificacion"
                             [disabled]="cdnTipoIdentificacionConductor"
-                            [(ngModel)]="tipoIdentificacionConductorSelected" name="tipoIdentificacionConductor">
+                            [(ngModel)]="tipoIdentificacionConductorSelected" name="tipoIdentificacionConductor" required>
                         </ng-select>
                     </div>
                     <div class="col-lg-6 col-md-6">
-                        <label>Nombres Conductor</label>
+                        <label>Nombres Conductor<strong class="text-danger">*</strong></label>
                         <input class="form-control" type="text" [disabled]="cdnPrimerNombreConductor"
-                            [(ngModel)]="ipatConductor.nombres" name="nombresConductor">
+                            [(ngModel)]="ipatConductor.nombres" name="nombresConductor" required>
                     </div>
                     <div class="col-lg-6 col-md-6">
-                        <label>Apellidos Conductor</label>
+                        <label>Apellidos Conductor<strong class="text-danger">*</strong></label>
                         <input class="form-control" type="text" [disabled]="cdnPrimerApellidoConductor"
-                            [(ngModel)]="ipatConductor.apellidos" name="apellidosConductor">
+                            [(ngModel)]="ipatConductor.apellidos" name="apellidosConductor" required>
                     </div>
                     <div class="col-lg-6 col-md-6">
-                        <label>Nacionalidad Conductor</label>
+                        <label>Nacionalidad Conductor<strong class="text-danger">*</strong></label>
                         <ng-select [multiple]="false" [options]="nacionalidades"
-                            [(ngModel)]="nacionalidadConductorSelected" name="nacionalidades">
+                            [(ngModel)]="nacionalidadConductorSelected" name="nacionalidades" required>
                         </ng-select>
                     </div>
                     <div class="col-lg-6 col-md-6">
-                        <label>Fecha Nacimiento Conductor</label>
+                        <label>Fecha Nacimiento Conductor<strong class="text-danger">*</strong></label>
                         <input class="form-control" type="date" [disabled]="cdnFechaNacimientoConductor"
-                            [(ngModel)]="ipatConductor.fechaNacimiento" name="fechaNacimientoConductor">
+                            [(ngModel)]="ipatConductor.fechaNacimiento" name="fechaNacimientoConductor" required>
                     </div>
                     <div class="col-lg-6 col-md-6">
-                        <label>Sexo Conductor</label>
+                        <label>Sexo Conductor<strong class="text-danger">*</strong></label>
                         <ng-select [multiple]="false" [options]="generos" [disabled]="cdnSexoConductor"
-                            [(ngModel)]="sexoConductorSelected" name="sexoConductor">
+                            [(ngModel)]="sexoConductorSelected" name="sexoConductor" required>
                         </ng-select>
                     </div>
                     <div class="col-lg-6 col-md-6">
-                        <label>Gravedad Conductor</label>
+                        <label>Gravedad Conductor<strong class="text-danger">*</strong></label>
                         <ng-select [multiple]="false" [options]="gravedadesVictima"
-                            [(ngModel)]="gravedadConductorSelected" name="gravedadConductor">
+                            [(ngModel)]="gravedadConductorSelected" name="gravedadConductor" required>
                         </ng-select>
                     </div>
                     <div class="col-lg-6 col-md-6">
-                        <label>Direccion Residencia Conductor</label>
+                        <label>Direccion Residencia Conductor<strong class="text-danger">*</strong></label>
                         <input class="form-control" type="text" [disabled]="cdnDireccionConductor"
                             [(ngModel)]="ipatConductor.direccionResidencia"
-                            name="direccionResidenciaConductor">
+                            name="direccionResidenciaConductor" required>
                     </div>
                     <div class="col-lg-6 col-md-6" *ngIf="nacionalidadConductorSelected == 1">
-                        <label>Ciudad residencia Conductor</label>
+                        <label>Ciudad residencia Conductor<strong class="text-danger">*</strong></label>
                         <ng-select [multiple]="false" [options]="municipios" [disabled]="cdnMunicipioConductor"
-                            [(ngModel)]="ciudadResidenciaConductorSelected" name="ciudadResidenciaConductor">
+                            [(ngModel)]="ciudadResidenciaConductorSelected" name="ciudadResidenciaConductor" required>
                         </ng-select>
                     </div>
                     <div class="col-lg-6 col-md-6">
-                        <label>Telefono Conductor</label>
+                        <label>Telefono Conductor<strong class="text-danger">*</strong></label>
                         <input class="form-control" type="number" min=0 [disabled]="cdnTelefonoConductor"
-                            [(ngModel)]="ipatConductor.telefono" name="telefonoConductor">
+                            [(ngModel)]="ipatConductor.telefono" name="telefonoConductor" required>
                     </div>
                     <div class="col-lg-6 col-md-6">
-                        <label>Placa Vehiculo Conductor </label>
+                        <label>Placa Vehiculo Conductor <strong class="text-danger">*</strong></label>
                         <ng-select [multiple]="false" [options]="placasVehiculosIpat"
-                            [(ngModel)]="ipatConductor.placaVehiculo" name="placaVehiculoConductor">
+                            [(ngModel)]="ipatConductor.placaVehiculo" name="placaVehiculoConductor" required>
                         </ng-select>
                     </div>
                     <div class="col-lg-6 col-md-6" *ngIf="ipat.idGravedad == 2 || ipat.idGravedad == 3">
@@ -844,13 +843,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6 col-md-6" *ngIf="ipatConductor.practicoExamenConductor == '1'">
+                    <div class="col-lg-6 col-md-6" *ngIf="ipatConductor.practicoExamen == '1'">
                         <label>Resultado Examen Conductor</label>
                         <ng-select [multiple]="false" [options]="resultadosExamen"
                             [(ngModel)]="ipatConductor.idResultadoExamen" name="resultadoExamenConductor">
                         </ng-select>
                     </div>
-                    <div class="col-lg-6 col-md-6" *ngIf="ipatConductor.practicoExamenConductor == '1'">
+                    <div class="col-lg-6 col-md-6" *ngIf="ipatConductor.practicoExamen == '1'">
                         <label>Grado Examen Conductor</label>
                         <ng-select [multiple]="false" [options]="gradosExamen"
                             [(ngModel)]="ipatConductor.idGradoExamen" name="gradoExamenConductor">
@@ -908,8 +907,8 @@
                     </div>
                     <div class="col-xs-16 col-lg-6" style="margin-top: 2%;" *ngIf='ipatConductor.portaLicencia == "1"'>
                         <div class="input-group">
-                            <input type="number" class="form-control" placeholder="número de licencia de conducción"
-                                [(ngModel)]="ipatConductor.numeroLicenciaConduccion" required
+                            <label>Número de licencia de conducción</label>
+                            <input type="number" class="form-control" [(ngModel)]="ipatConductor.numeroLicenciaConduccion" required
                                 name="numeroLicenciaConduccion" />
                             <span class="input-group-btn">
                                 <button (click)="onBuscarLicenciaConductor()" class="btn btn-default btn-primary"
@@ -949,7 +948,7 @@
                             [(ngModel)]="ipatConductor.organismoTransito" name="organismoTransito">
                     </div>
                     <div class="col-lg-6 col-md-6"
-                        *ngIf="ipat.clase == 'MOTOCARRO' || ipat.clase == 'MOTOCICLETA' || ipat.clase == 'CUATRIMOTO' || ipat.clase == 'BICICLETA'">
+                        *ngIf="ipat.clase == 14 || ipat.clase == 10 || ipat.clase == 19 || ipat.clase == 13">
                         <label>Chaleco</label>
                         <div class="form-group row">
                             <div class="col-xs-12 col-lg-6">
@@ -973,7 +972,7 @@
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6"
-                        *ngIf="ipat.clase == 'MOTOCARRO' || ipat.clase == 'MOTOCICLETA' || ipat.clase == 'CUATRIMOTO' || ipat.clase == 'BICICLETA'">
+                        *ngIf="ipat.clase == 14 || ipat.clase == 10 || ipat.clase == 19 || ipat.clase == 13">
                         <label>Casco</label>
                         <div class="form-group row">
                             <div class="col-xs-12 col-lg-6">
@@ -997,7 +996,7 @@
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6"
-                        *ngIf="ipat.clase != 'MOTOCARRO' || ipat.clase != 'MOTOCICLETA' || ipat.clase != 'CUATRIMOTO' || ipat.clase != 'BICICLETA'">
+                        *ngIf="ipat.clase != 14 || ipat.clase != 10 || ipat.clase != 19 || ipat.clase != 13">
                         <label>Cinturon</label>
                         <div class="form-group row">
                             <div class="col-xs-12 col-lg-6">
@@ -1021,9 +1020,9 @@
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6">
-                        <label>Hospital de atención</label>
+                        <label>Hospital de atención <strong class="text-danger">*</strong></label>
                         <ng-select [multiple]="false" [options]="hospitales"
-                            [(ngModel)]="ipatConductor.idHospital" name="hospitalConductor">
+                            [(ngModel)]="ipatConductor.idHospital" name="hospitalConductor" required>
                         </ng-select>
                     </div>
                     <div class="col-lg-6 col-md-6">
@@ -1102,8 +1101,8 @@
                 <div class="form-group row">
                     <div class="col-xs-16 col-lg-6" style="margin-top: 2%;">
                         <div class="input-group">
-                            <input type="number" class="form-control" placeholder="Identificación Testigo"
-                                [(ngModel)]="ipat.identificacionTestigo" required name="identificacionTestigo" />
+                            <label>Identificación Testigo</label>
+                            <input type="number" class="form-control" [(ngModel)]="ipat.identificacionTestigo" name="identificacionTestigo" />
                             <span class="input-group-btn">
                                 <button (click)="onBuscarTestigo()" class="btn btn-default btn-primary" type="button">
                                     <i class="fa fa-search"></i>
@@ -1114,7 +1113,7 @@
                     <div class="col-lg-6 col-md-6">
                         <label>Tipo Identificación Testigo</label>
                         <ng-select [multiple]="false" [options]="tiposIdentificacion" [disabled]='testigo'
-                            [(ngModel)]="tipoIdentificacionTestigoSelected" required name="tipoIdentificacionTestigo">
+                            [(ngModel)]="tipoIdentificacionTestigoSelected" name="tipoIdentificacionTestigo">
                         </ng-select>
                     </div>
                     <div class="col-lg-6 col-md-6">
@@ -1135,7 +1134,7 @@
                     <div class="col-lg-6 col-md-6">
                         <label>Ciudad Residencia Testigo</label>
                         <ng-select [multiple]="false" [options]="municipios" [disabled]='testigo'
-                            [(ngModel)]="ciudadResidenciaTestigoSelected" required name="ciudadResidenciaTestigo">
+                            [(ngModel)]="ciudadResidenciaTestigoSelected" name="ciudadResidenciaTestigo">
                         </ng-select>
                     </div>
                     <div class="col-lg-6 col-md-6">
@@ -1156,7 +1155,8 @@
                 <div class="form-group row">
                     <div class="col-xs-16 col-lg-6" style="margin-top: 2%;">
                         <div class="input-group">
-                            <input type="number" class="form-control" placeholder="Identificación Agente"
+                            <label>Identificación Agente <strong class="text-danger">*</strong></label>
+                            <input type="number" class="form-control"
                                 [(ngModel)]="ipat.identificacionAgente" required name="identificacionAgente" />
                             <span class="input-group-btn">
                                 <button (click)="onBuscarAgente()" class="btn btn-default btn-primary" type="button">
@@ -1231,8 +1231,8 @@
                     </div>
                     <div class="col-lg-16 col-md-6">
                         <div class="input-group" style="margin-top: 4%;">
-                            <input type="number" class="form-control" placeholder="Nro. identificación"
-                                [(ngModel)]="ipatVictima.identificacion" required name="identificacionVictima" />
+                            <label>Identificación Victima</label>
+                            <input type="number" class="form-control" [(ngModel)]="ipatVictima.identificacion" name="identificacionVictima" />
                             <span class="input-group-btn">
                                 <button (click)="onBuscarVictima()" class="col-lg-9 col-md-9"
                                     class="btn btn-default btn-primary" type="button">
@@ -1384,7 +1384,7 @@
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6"
-                        *ngIf="ipatVehiculo.clase == 'MOTOCARRO' || ipatVehiculo.clase == 'MOTOCICLETA' || ipatVehiculo.clase == 'CUATRIMOTO' || ipatVehiculo.clase == 'BICICLETA'">
+                        *ngIf="ipatVehiculo.clase == 14 || ipatVehiculo.clase == 10 || ipatVehiculo.clase == 19 || ipatVehiculo.clase == 13">
                         <label>Chaleco</label>
                         <div class="form-group row">
                             <div class="col-xs-12 col-lg-6">
@@ -1408,7 +1408,7 @@
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6"
-                        *ngIf="ipatVehiculo.clase == 'MOTOCARRO' || ipatVehiculo.clase == 'MOTOCICLETA' || ipatVehiculo.clase == 'CUATRIMOTO' || ipatVehiculo.clase == 'BICICLETA'">
+                        *ngIf="ipatVehiculo.clase == 14 || ipatVehiculo.clase == 10 || ipatVehiculo.clase == 19 || ipatVehiculo.clase == 13">
                         <label>Casco</label>
                         <div class="form-group row">
                             <div class="col-xs-12 col-lg-6">
@@ -1432,7 +1432,7 @@
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6"
-                        *ngIf="ipatVehiculo.clase != '' || ipatVehiculo.clase != 'MOTOCARRO' || ipatVehiculo.clase != 'MOTOCICLETA' || ipatVehiculo.clase != 'CUATRIMOTO' || ipatVehiculo.clase != 'BICICLETA'">
+                        *ngIf="ipatVehiculo.clase != 14 || ipatVehiculo.clase != 10 || ipatVehiculo.clase != 19 || ipatVehiculo.clase != 13">
                         <label>Cinturon</label>
                         <div class="form-group row">
                             <div class="col-xs-12 col-lg-6">
@@ -1548,15 +1548,12 @@
                         <input class="form-control" type="text" [(ngModel)]="ipat.totalMuertos" name="totalMuertos">
                     </div>
                 </div>
-                <!-- <button (click)="imprimirFormatos()"
-                        *ngIf="consecutivo && ipat.idGravedad == 2 || ipat.idGravedad == 3"
-                        class="btn btn-primary">Imprimir Formatos Pol. Jud</button> -->
             </div>
         </div>
-        <div class="card-footer">
-            <button (click)="onCancelar()" class="btn btn-default">Cancelar</button>
-            <button (click)="onEnviar()" [disabled]="formNew.invalid && ipat.haySemaforo" *ngIf="consecutivo"
-                class="btn btn-primary">Enviar</button>
-        </div>
     </form>
+    <div class="card-footer">
+        <!-- <button (click)="onEnviar()" [disabled]="formNew.invalid && ipat.haySemaforo && ipat.hayTestigo && ipat.portaPlaca && ipat.mismoConductor" class="btn btn-primary">Finalizar</button> -->
+        <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary">Finalizar</button>
+        <button (click)="onCancelar()" class="btn btn-default">Cancelar</button>
+    </div>
 </div>
