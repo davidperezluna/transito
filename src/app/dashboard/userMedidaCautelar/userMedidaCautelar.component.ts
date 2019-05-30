@@ -17,6 +17,9 @@ export class UserMedidaCautelarComponent implements OnInit {
   public formSearch: any;
   public formIndex: any;
   public formNew: any;
+  public formDelete: any;
+
+  public medidaCautelar: any;
 
   public table: any = null;
 
@@ -40,6 +43,7 @@ export class UserMedidaCautelarComponent implements OnInit {
     this.formSearch = false;
     this.formIndex = false;
     this.formNew = false;
+    this.formDelete = false;
   }
 
   onSearch() {
@@ -120,49 +124,8 @@ export class UserMedidaCautelarComponent implements OnInit {
   }
 
   onDelete(medidaCautelar:any) {
-    swal({
-      title: '¿Estás seguro?',
-      text: "¡Se levantar la medida cautelar!",
-      type: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#15d4be',
-      cancelButtonColor: '#ff6262',
-      confirmButtonText: 'Confirmar',
-      cancelButtonText: 'Cancelar'
-    }).then((result) => {
-      if (result.value) {
-        let token = this._LoginService.getToken();
-        
-        this._MedidaCautelarService.delete({ 'id': medidaCautelar.id }, token).subscribe(
-          response => {
-            if (response.status == 'success') {
-              swal({
-                title: 'Perfecto!',
-                text: response.message,
-                type: 'success',
-                confirmButtonText: 'Aceptar'
-              });
-    
-              this.onReady(true);
-            } else {
-              swal({
-                title: 'Error!',
-                text: response.message,
-                type: 'error',
-                confirmButtonText: 'Aceptar'
-              });
-            }
-            error => {
-              this.errorMessage = <any>error;
-    
-              if (this.errorMessage != null) {
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
-            }
-          }
-        );
-      }
-    });
+    this.medidaCautelar = medidaCautelar;
+    this.onInitForms();
+    this.formDelete = true;
   }
 }

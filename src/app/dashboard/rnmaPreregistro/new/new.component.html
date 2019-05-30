@@ -63,26 +63,26 @@
                                     <ng-select [multiple]="false" [options]="colores" [(ngModel)]="registroMaquinaria.idColor" required name="color">
                                     </ng-select>
                                 </div>
-                                <!-- 
-                                    <div class="col-md-3">
-                                        <label>Tipo maquinaria <b class="text-danger">*</b></label>
-                                        <ng-select [multiple]="false" [options]="tiposMaquinaria" [(ngModel)]="registroMaquinaria.idClaseMaquinaria" (ngModelChange)="onChangedTipoMaquinaria($event)" required name="tipoMaquinaria">
-                                        </ng-select>
-                                    </div>
-                                -->
+
+                                <div class="col-md-3">
+                                    <label>Tipo maquinaria <b class="text-danger">*</b></label>
+                                    <ng-select [multiple]="false" [options]="tiposMaquinaria" [(ngModel)]="registroMaquinaria.idClaseMaquinaria" (ngModelChange)="onChangedTipoMaquinaria($event)" required name="tipoMaquinaria">
+                                    </ng-select>
+                                </div>
+  
                                 <div class="col-lg-3">
                                     <label>Clase de maquinaria <b class="text-danger">*</b></label>
                                     <ng-select *ngIf="clasesMaquinaria" [multiple]="false" [options]="clasesMaquinaria" [(ngModel)]="registroMaquinaria.idClaseMaquinaria" required name="claseMaquinaria">
                                     </ng-select>
                                 </div>
-                                <!--
-                                    <div class="col-lg-3">
-                                        <label>Marca <b class="text-danger">*</b></label>
-                                        <ng-select [multiple]="false" [options]="marcas" [(ngModel)]="marcaSelected" (ngModelChange)="onChangedMarca($event)" required
-                                            name="marca">
-                                        </ng-select>
-                                    </div>
-                                -->
+
+                                <div class="col-lg-3">
+                                    <label>Marca <b class="text-danger">*</b></label>
+                                    <ng-select [multiple]="false" [options]="marcas" (ngModelChange)="onChangedMarca($event)" required
+                                        name="marca">
+                                    </ng-select>
+                                </div>
+
                                 <div class="col-lg-3">
                                     <label>Linea <b class="text-danger">*</b></label>
                                     <ng-select *ngIf="lineas" [multiple]="false" [options]="lineas" [(ngModel)]="registroMaquinaria.idLinea" required name="linea">

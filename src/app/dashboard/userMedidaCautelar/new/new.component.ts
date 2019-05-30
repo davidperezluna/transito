@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { UserMedidaCautelar } from '../userMedidaCautelar.modelo';
 import { VhloCfgLimitacionTipoProcesoService } from '../../../services/vhloCfgLimitacionTipoProceso.service';
 import { VhloCfgLimitacionCausalService } from '../../../services/vhloCfgLimitacionCausal.service';
@@ -103,6 +103,13 @@ export class NewComponent implements OnInit {
             if (response.data.ciudadano) {
               this.demandado = response.data.ciudadano;
 
+              swal({
+                title: 'Perfecto!',
+                text: response.message,
+                type: 'success',
+                confirmButtonText: 'Aceptar'
+              });
+
               this._VehiculoService.searchByParameters({ 'propietario': response.data.ciudadano.identificacion }, token).subscribe(
                 response => {
                   if (response.code == 200) {
@@ -114,13 +121,6 @@ export class NewComponent implements OnInit {
                         'vehiculos': this.vehiculos,
                       }
                     );
-
-                    swal({
-                      title: 'Perfecto!',
-                      text: response.message,
-                      type: 'success',
-                      confirmButtonText: 'Aceptar'
-                    });
                   } else {
                     this.vehiculos = null;
 
@@ -130,13 +130,6 @@ export class NewComponent implements OnInit {
                         'vehiculos': this.vehiculos,
                       }
                     );
-                    
-                    swal({
-                      title: 'Error!',
-                      text: response.message,
-                      type: 'error',
-                      confirmButtonText: 'Aceptar'
-                    });
                   }
                   error => {
                       this.errorMessage = <any>error;

@@ -1,89 +1,9 @@
 <div class="row">
-  <!-- .row -->
-  <div class="col-xs-12 col-lg-3">
-    <!-- .col -->
+  <div class="col-xs-12 col-lg-5">
     <div class="card">
       <div class="card-header">
         <b class="text-uppercase">
-          Levantar limitaciones a la propiedad
-        </b>
-        <br>
-        <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
-      </div>
-      <div class="card-body">
-        <form #formNew="ngForm">
-          <div class="row">
-            <!--placas vehiculos -->
-            <div class="col-xs-12 col-lg-12">
-              <label>Placa</label>
-              <div class="input-group">
-                <input type="text" class="form-control text-uppercase" [(ngModel)]="placa" name="placa" required />
-                <span class="input-group-btn">
-                  <button (click)="onSearchByPlaca()" class="btn btn-default" type="button">
-                    <i class="fa fa-search"></i>
-                  </button>
-                </span>
-              </div>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-xs-12 col-lg-9" *ngIf="limitaciones && formIndex">
-    <div class="card">
-      <div class="card-header">
-        <b class="text-uppercase">
-          Limitaciones encontradas
-        </b>
-        <br>
-        <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
-      </div>
-      <div class="card-body">
-        <table class="table" id="dataTables-example">
-          <thead>
-            <tr>
-              <th>Tipo Medida</th>
-              <th>Proceso</th>
-              <th>Placa</th>
-              <th>Fecha Registro</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let limitacion of limitaciones; let i = index">
-              <td>
-                {{ limitacion.causal?.nombre }}
-              </td>
-              <td>
-                {{ limitacion.tipoProceso?.nombre }}
-              </td>
-              <td>
-                {{ limitacion.vehiculo.placa?.numero }}
-              </td>
-              <td>
-                {{ (limitacion.fechaRadicacion.timestamp * 1000) | date: 'dd/MM/yyyy' }}
-              </td>
-              <td>
-                <div class="btn-group">
-                  <button (click)="onShow(limitacion)" class="btn btn-xs btn-primary">
-                    <i class="fa fa-check"></i>
-                  </button>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-xs-12 col-lg-9" *ngIf="formShow">
-    <div class="card">
-      <div class="card-header">
-        <b class="text-uppercase">
-          Detalles de limitación
+          Detalles de medida cautelar
         </b>
         <br>
         <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
@@ -96,76 +16,45 @@
               <tbody>
                 <tr>
                   <td>
-                    <b>Causal:</b> {{ limitacion.causal.nombre }}
+                    <b>No. radicado:</b> {{ medidaCautelar.numeroRadicado }}
                   </td>
                   <td>
-                    <b>Proceso:</b> {{ limitacion.tipoProceso.nombre }}
+                    <b>No. oficio:</b> {{ medidaCautelar.numeroOficio }}
                   </td>
                 </tr>
                 <tr>
                   <td>
-                    <b>Placa</b>
-                    {{ limitacion.vehiculo.placa?.numero }}
+                    <b>Fecha de registro:</b> {{ (medidaCautelar.fechaRegistro.timestamp * 1000) | date: 'dd/MM/yyyy' }}
                   </td>
                   <td>
-                    <b>Entidad Emisora</b>
-                    {{ limitacion.entidadJudicial.nombre }}
+                    <b>Entidad judicial: </b>
+                    {{ medidaCautelar.entidadJudicial?.nombre }}
                   </td>
                 </tr>
                 <tr>
                   <td>
-                    <b>Municipio</b>
-                    {{ limitacion.municipio.nombre }}
+                    <b>Departamento:</b>
+                    {{ medidaCautelar.municipio?.departamento.nombre }}
                   </td>
                   <td>
-                    <b>Fecha Registro</b>
-                    {{ (limitacion.fechaRadicacion.timestamp * 1000) | date: 'dd/MM/yyyy' }}
+                    <b>Municipio:</b>
+                    {{ medidaCautelar.municipio?.nombre }}
                   </td>
                 </tr>
                 <tr>
                   <td>
-                    <b>Fecha Expedición</b>
-                    {{ (limitacion.fechaExpedicion.timestamp * 1000) | date: 'dd/MM/yyyy' }}
+                    <b>Fecha inicio:</b>
+                    {{ (medidaCautelar.fechaInicio.timestamp * 1000) | date: 'dd/MM/yyyy' }}
                   </td>
                   <td>
-                    <b>Fecha Levantamiento</b>
-                  </td>
-                </tr>
-                <tr>
-                  <td >
-                    <b>Demandante</b>
-                    <br>
-                    {{ limitacion.demandante.primerNombre }} {{ limitacion.demandante.primerApellido }}
-                    <br>
-                    {{ limitacion.demandante.tipoIdentificacion.nombre }}
-                    <br>
-                    {{ limitacion.demandante.identificacion }}
-                  </td>
-                  <td>
-                    <b>Demandado</b>
-                    <br>
-                    {{ limitacion.demandado.primerNombre }} {{ limitacion.demandado.primerApellido }}
-                    <br>
-                    {{ limitacion.demandado.tipoIdentificacion.nombre }}
-                    <br>
-                    {{ limitacion.demandado.identificacion }}
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <b>Tipo</b>
-                    {{ limitacion.tipo.nombre }}
-                  </td>
-                  <td>
-                    <b>Estado</b>
-                    <span class="badge badge-success" *ngIf="limitacion.activo">Inscrita</span>
-                    <span class="badge badge-danger" *ngIf="!limitacion.activo">Inactiva</span>
+                    <b>Fecha expiración</b>
+                    {{ (medidaCautelar.fechaExpiracion.timestamp * 1000) | date: 'dd/MM/yyyy' }}
                   </td>
                 </tr>
                 <tr>
                   <td colspan="2">
-                    <b>Descripción</b>
-                    {{ limitacion.observaciones }}
+                    <b>Observaciones</b>
+                    {{ medidaCautelar.observaciones }}
                   </td>
                 </tr>
               </tbody>
@@ -173,18 +62,72 @@
           </div>
         </div>
       </div>
-      <div class="card-footer">
-        <div class="btn-group">
-          <button (click)="onDelete(limitacion)" class="btn btn-primary">
-            <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
-            Levantar
-          </button>
-          <button (click)="onCancelar()" class="btn btn-default">
-            <i class="fa fa-times"></i>
-            Cancelar
-          </button>
+    </div>
+  </div>
+
+  <div class="col-xs-12 col-lg-7">
+    <form #formDelete="ngForm">
+      <div class="card">
+        <div class="card-header">
+          <b class="text-uppercase">
+            Información de levantamiento
+          </b>
+          <br>
+          <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-xs-12 col-lg-12">
+              <div class="row"><!-- .row -->
+                <div class="col-xs-12 col-lg-4">
+                    <label>Fecha radicación <b class="text-danger">*</b></label>
+                    <input class="form-control" [(ngModel)]="datos.fechaLevantamiento" name="fechaLevantamiento" type="date" required />
+                </div>
+  
+                <div class="col-xs-12 col-lg-6">
+                  <label>Entidad Judicial <b class="text-danger">*</b></label>
+                  <ng-select [multiple]="false" [options]="entidadesJudiciales" [(ngModel)]="datos.idEntidadJudicialLevantamiento" name="idEntidadJudicialLevantamiento" required>
+                  </ng-select>
+                </div>
+  
+                <div class="col-xs-12 col-lg-6">
+                    <label>Departamento <b class="text-danger">*</b></label>
+                    <ng-select [multiple]="false" [options]="departamentos" [(ngModel)]="datos.idDepartamentoLevantamiento" (ngModelChange)="onChangedDepartamento($event)" name="idDepartamentoLevantamiento" required>
+                    </ng-select>
+                </div>
+  
+                <div class="col-xs-12 col-lg-6">
+                    <label>Municipio <b class="text-danger">*</b></label>
+                    <ng-select [multiple]="false" [options]="municipios" [(ngModel)]="datos.idMunicipioLevantamiento" name="idMunicipioLevantamiento" required>
+                    </ng-select>
+                </div>
+  
+                <div class="col-xs-12 col-lg-6">
+                    <label>No. oficio <b class="text-danger">*</b></label>
+                    <input class="form-control" type="text" [(ngModel)]="datos.numeroOficioLevantamiento" name="numeroOficioLevantamiento" required>
+                </div>
+  
+                <div class="col-xs-12 col-lg-12">
+                    <label>Observaciones</label>
+                    <textarea class="form-control" [(ngModel)]="datos.observacionesLevantamiento" name="observacionesLevantamiento" placeholder="Aqui puede ingresar las observaciones" rows="4"></textarea>
+                </div>
+              </div><!-- /.row -->
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="btn-group">
+            <button (click)="onDelete(medidaCautelar)" [disabled]="formDelete.invalid" class="btn btn-primary">
+              <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+              Levantar
+            </button>
+            <button (click)="onCancelar()" class="btn btn-default">
+              <i class="fa fa-times"></i>
+              Cancelar
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+    </form>
   </div>
 </div>

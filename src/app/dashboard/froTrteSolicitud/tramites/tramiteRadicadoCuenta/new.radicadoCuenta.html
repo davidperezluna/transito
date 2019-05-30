@@ -17,57 +17,77 @@
 <div class="row" *ngIf="!realizado"><!-- .row -->
     <div class="col-xs-12 col-lg-12"><!-- .col -->
         <div class="card">
-            <div class="card-body">
+            <div class="card-header">
                 <b class="text-primary">
                     Registar radicado de cuenta
                 </b>
                 <br>
                 <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
-                <hr>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-xs-12 col-lg-6">
-                            <b>Organismo de transito de que proviene</b>
-                            <br>
-                            {{ vehiculo.organismoTransitoRadicado?.nombre }}
+            </div>
+            <div class="card-body">
+                <form>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-12">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" [(ngModel)]="datos.documentacion" class="custom-control-input" id="documentacion" name="documentacion">
+                                    <label class="custom-control-label" for="documentacion">¿Presenta documentación completa?</label>
+                                </div>
+                            </div>
                         </div>
-    
-                        <div class="col-xs-12 col-lg-6"  >
-                            <b>Tipo documento empresa afiliadora</b>
-                            <br>
-                            {{ vehiculo.tipoIdentificacionRadicado?.nombre }}
-                        </div>
-    
-                        <div class="col-xs-12 col-lg-6">
-                            <b>Nro. Documento</b>
-                            <br>
-                            {{ vehiculo.identificacionRadicado }}
-                        </div>                      
-                        
-                        <div class="col-xs-12 col-lg-3">
-                            <b>Fecha de ingreso</b>
-                            <br>
-                            {{ (vehiculo.fechaRegistroRadicado.timestamp * 1000) | date: 'dd/MM/yyyy' }}
-                        </div>
-    
-                        <div class="col-xs-12 col-lg-3">
-                            <b>Nro. guiá de llegada</b>
-                            <br>
-                            {{ vehiculo.numeroGuiaRadicado }}
-                        </div>
-    
-                        <div class="col-xs-12 col-lg-6">
-                            <b>Empresa de envió</b>
-                            <br>
-                            {{ vehiculo.empresaEnvioRadicado }}
-                        </div>
-
-                        <div class="col-xs-12 col-lg-6">
-                            <label>Cantidad de placas</label>
-                            <input class="form-control" [(ngModel)]="datos.cantidadPlacas" name="cantidadPlacas" type="text" />
+                        <div class="row" *ngIf="!datos.documentacion">
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Registre que documentación esta pendiente <b class="text-danger">*</b></label>
+                                <textarea class="form-control" [(ngModel)]="datos.observacion" rows="4" name="observacion" required></textarea>
+                            </div>
                         </div>
                     </div>
-                </div>
+    
+                    <div class="form-group" *ngIf="datos.documentacion">
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-6">
+                                <b>Organismo de transito de que proviene</b>
+                                <br>
+                                {{ vehiculo.organismoTransitoRadicado?.nombre }}
+                            </div>
+        
+                            <div class="col-xs-12 col-lg-6"  >
+                                <b>Tipo documento empresa afiliadora</b>
+                                <br>
+                                {{ vehiculo.tipoIdentificacionRadicado?.nombre }}
+                            </div>
+        
+                            <div class="col-xs-12 col-lg-6">
+                                <b>Nro. Documento</b>
+                                <br>
+                                {{ vehiculo.identificacionRadicado }}
+                            </div>                      
+                            
+                            <div class="col-xs-12 col-lg-3">
+                                <b>Fecha de ingreso</b>
+                                <br>
+                                {{ (vehiculo.fechaRegistroRadicado.timestamp * 1000) | date: 'dd/MM/yyyy' }}
+                            </div>
+        
+                            <div class="col-xs-12 col-lg-3">
+                                <b>Nro. guiá de llegada</b>
+                                <br>
+                                {{ vehiculo.numeroGuiaRadicado }}
+                            </div>
+        
+                            <div class="col-xs-12 col-lg-6">
+                                <b>Empresa de envió</b>
+                                <br>
+                                {{ vehiculo.empresaEnvioRadicado }}
+                            </div>
+    
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Cantidad de placas</label>
+                                <input class="form-control" [(ngModel)]="datos.cantidadPlacas" name="cantidadPlacas" type="text" />
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
             <div class="card-footer">
                 <button (click)="onEnviar()" class="btn btn-primary">

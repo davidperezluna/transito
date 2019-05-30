@@ -9,7 +9,6 @@ import { DeleteComponent } from './delete/delete.component';
 
 import { UserMedidaCautelarService } from '../../services/userMedidaCautelar.service';
 
-
 @NgModule({
     imports: [CommonModule, Ng2BootstrapModule.forRoot(),SelectModule],
     declarations: [

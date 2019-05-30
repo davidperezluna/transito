@@ -29,6 +29,8 @@ export class NewRadicadoCuentaComponent implements OnInit {
   
   public datos = {
     'campos': null,
+    'documentacion': true,
+    'observacion': null,
     'cantidadPlacas': null,
     'idFuncionario': null,
     'idVehiculo': null,
@@ -127,8 +129,11 @@ export class NewRadicadoCuentaComponent implements OnInit {
 
     this.onReadyTramite.emit(
       {
+        'documentacion':this.datos.documentacion, 
+        'observacion':this.datos.observacion, 
         'foraneas':this.datos, 
-        'resumen': resumen
+        'resumen':resumen,
+        'idTramiteFactura': this.tramiteFactura.id,
       }
     );
   }
