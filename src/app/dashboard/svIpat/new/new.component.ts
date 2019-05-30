@@ -1132,7 +1132,7 @@ export class NewComponent implements OnInit {
     this._SvIpatService.register(this.ipat, token).subscribe(
       response => {
         if (response.status == 'success') {
-          this.ready.emit(true);
+          /* this.ready.emit(true); */
           swal({
             title: 'Perfecto!',
             text: response.message,
