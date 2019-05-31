@@ -1132,7 +1132,7 @@ export class NewComponent implements OnInit {
     this._SvIpatService.register(this.ipat, token).subscribe(
       response => {
         if (response.status == 'success') {
-          /* this.ready.emit(true); */
+          this.ready.emit(true);
           swal({
             title: 'Perfecto!',
             text: response.message,
@@ -1182,21 +1182,6 @@ export class NewComponent implements OnInit {
         response => {
           console.log(response.data);
           if (response.status == 'success') {
-            /* ================ cargar select placas vehiculos ===================== */
-            this._SvIpatVehiculoService.selectByConsecutivo(this.consecutivo.numero, token).subscribe(
-              response => {
-                this.placasVehiculosIpat = response;
-              },
-              error => {
-                this.errorMessage = <any>error;
-
-                if (this.errorMessage != null) {
-                  console.log(this.errorMessage);
-                  alert("Error en la petición");
-                }
-              }
-            );
-
             if (response.data.tipoIdentificacion) {
               this.tipoIdentificacionConductorSelected = [response.data.tipoIdentificacion.id];
             }
@@ -1703,15 +1688,15 @@ export class NewComponent implements OnInit {
                 this.ipatConductor.idHospital = 0,
                 this.ipatConductor.descripcionLesion = '',
 
-                  this.contConductores += 1;
+                this.contConductores += 1;
                 this.ipat.totalConductores = this.contConductores;
 
                 if (this.gravedadConductorSelected == 1) {
-                  this.contHeridos += 1;
-                  this.ipat.totalHeridos = this.contHeridos;
-                } if (this.gravedadConductorSelected == 2) {
                   this.contMuertos += 1;
                   this.ipat.totalMuertos = this.contMuertos;
+                } if (this.gravedadConductorSelected == 2) {
+                  this.contHeridos += 1;
+                  this.ipat.totalHeridos = this.contHeridos;
                 }
               } else {
                 swal({
@@ -1737,11 +1722,11 @@ export class NewComponent implements OnInit {
                 this.contConductores += 1;
                 this.ipat.totalConductores = this.contConductores;
                 if (this.gravedadConductorSelected == 1) {
-                  this.contHeridos += 1;
-                  this.ipat.totalHeridos = this.contHeridos;
-                } if (this.gravedadConductorSelected == 2) {
                   this.contMuertos += 1;
                   this.ipat.totalMuertos = this.contMuertos;
+                } if (this.gravedadConductorSelected == 2) {
+                  this.contHeridos += 1;
+                  this.ipat.totalHeridos = this.contHeridos;
                 }
               } else {
                 swal({
@@ -1811,6 +1796,21 @@ export class NewComponent implements OnInit {
           this._SvIpatVehiculoService.register(this.ipatVehiculo, token).subscribe(
             response => {
               if (response.status == 'success') {
+                /* ================ cargar select placas vehiculos ===================== */
+                this._SvIpatVehiculoService.selectByConsecutivo(this.consecutivo.numero, token).subscribe(
+                  response => {
+                    this.placasVehiculosIpat = response;
+                  },
+                  error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                      console.log(this.errorMessage);
+                      alert("Error en la petición");
+                    }
+                  }
+                );
+                /* ====================== fin cargar placas vehiculo ===================*/
                 swal({
                   title: 'Perfecto!',
                   text: response.message,
@@ -1871,6 +1871,22 @@ export class NewComponent implements OnInit {
           this._SvIpatVehiculoService.register(this.ipatVehiculo, token).subscribe(
             response => {
               if (response.status == 'success') {
+                /* ================ cargar select placas vehiculos ===================== */
+                this._SvIpatVehiculoService.selectByConsecutivo(this.consecutivo.numero, token).subscribe(
+                  response => {
+                    this.placasVehiculosIpat = response;
+                  },
+                  error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                      console.log(this.errorMessage);
+                      alert("Error en la petición");
+                    }
+                  }
+                );
+                /* ====================== fin cargar placas vehiculo ===================*/
+                
                 swal({
                   title: 'Perfecto!',
                   text: response.message,
@@ -1954,11 +1970,11 @@ export class NewComponent implements OnInit {
                   this.contAcompaniantes += 1;
                   this.ipat.totalAcompaniantes = this.contAcompaniantes;
                 } if (this.gravedadVictimaSelected == 1) {
-                  this.contHeridos += 1;
-                  this.ipat.totalHeridos = this.contHeridos;
-                } if (this.gravedadVictimaSelected == 2) {
                   this.contMuertos += 1;
                   this.ipat.totalMuertos = this.contMuertos;
+                } if (this.gravedadVictimaSelected == 2) {
+                  this.contHeridos += 1;
+                  this.ipat.totalHeridos = this.contHeridos;
                 }
 
                 this.victima = false;
@@ -2014,11 +2030,11 @@ export class NewComponent implements OnInit {
                   this.contAcompaniantes += 1;
                   this.ipat.totalAcompaniantes = this.contAcompaniantes;
                 } if (this.gravedadVictimaSelected == 1) {
-                  this.contHeridos += 1;
-                  this.ipat.totalHeridos = this.contHeridos;
-                } if (this.gravedadVictimaSelected == 2) {
                   this.contMuertos += 1;
                   this.ipat.totalMuertos = this.contMuertos;
+                } if (this.gravedadVictimaSelected == 2) {
+                  this.contHeridos += 1;
+                  this.ipat.totalHeridos = this.contHeridos;
                 }
               } else {
                 swal({
