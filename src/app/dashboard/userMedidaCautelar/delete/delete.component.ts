@@ -44,6 +44,8 @@ export class DeleteComponent implements OnInit{
   ) { }
 
   ngOnInit() {   
+    this.datos.idMedidaCautelar = this.medidaCautelar.id;
+    
     this._DepartamentoService.select().subscribe(
       response => {
         this.departamentos = response;
