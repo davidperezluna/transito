@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { UserCiudadano } from './userCiudadano.modelo';
 import { NewCiudadanoComponent } from './new/new.component';
 import { UserCiudadanoService } from '../../services/userCiudadano.service';
 import { LoginService } from '../../services/login.service';
@@ -22,7 +21,7 @@ export class UserCiudadanoComponent implements OnInit {
 	public formIndex: any;
 	public formSearch: any = true;
   public table:any = null; 
-  public ciudadano: UserCiudadano;
+  public ciudadano: any;
 
   public search: any = {
     'tipoFiltro': null,

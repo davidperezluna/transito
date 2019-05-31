@@ -107,7 +107,7 @@
     </div>
 
     <div class="col-xs-12 col-md-8 col-lg-12" *ngIf='formDelete'>
-      <app-delete></app-delete> 
+      <app-delete [medidaCautelar]="medidaCautelar" (onReady)="onReady($event)"></app-delete> 
     </div>
   </div>
 </div>

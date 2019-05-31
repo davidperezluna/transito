@@ -43,7 +43,7 @@ export class DeleteComponent implements OnInit{
     private _LoginService: LoginService,
   ) { }
 
-  ngOnInit() { 
+  ngOnInit() {   
     this._DepartamentoService.select().subscribe(
       response => {
         this.departamentos = response;
@@ -78,9 +78,9 @@ export class DeleteComponent implements OnInit{
   }
 
   onChangedDepartamento(e) {
-    if (this.medidaCautelar.idDepartamento) {
+    if (e) {
       let token = this._LoginService.getToken();
-      this._MunicipioService.selectByDepartamento({ 'idDepartamento':this.medidaCautelar.idDepartamento }, token).subscribe(
+      this._MunicipioService.selectByDepartamento({ 'idDepartamento':e }, token).subscribe(
         response => {
           this.municipios = response;
         },
