@@ -80,7 +80,7 @@
                             name="choqueCon">
                         </ng-select>
                     </div>
-                    <div class="col-lg-6 col-md-6" *ngIf="ipat.idChoqueCon == 4">
+                    <div class="col-lg-6 col-md-6" *ngIf="ipat.idClaseChoque == 4">
                         <label>Objeto Fijo</label>
                         <ng-select [multiple]="false" [options]="objetosFijos" [(ngModel)]="ipat.idObjetoFijo"
                             name="objetoFijo">
@@ -361,7 +361,7 @@
                     </div>
                     <div class="col-lg-6 col-md-6"></div>
                     <div class="col-xs-16 col-lg-6" style="margin-top: 2%;">
-                        <div class="input-group" *ngIf="ipatVehiculo.portaPlaca == '1'">
+                        <!-- <div class="input-group" *ngIf="ipatVehiculo.portaPlaca == '1'"> -->
                             <label>Placa vehículo <strong class="text-danger">*</strong></label><br>
                             <input type="text" class="form-control" [(ngModel)]="ipatVehiculo.placa" required name="placaVehiculo" />
                             <span class="input-group-btn">
@@ -369,7 +369,7 @@
                                     <i class="fa fa-search"></i>
                                 </button>
                             </span>
-                        </div>
+                        <!-- </div> -->
                     </div>
                     <div class="col-lg-6 col-md-6" *ngIf="ipatVehiculo.portaPlaca == '1'">
                         <label>Placa remolque/semiremolque</label>
