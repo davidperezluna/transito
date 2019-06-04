@@ -25,6 +25,7 @@ import { CfgTipoClaseRoutes } from './cfgTipoClase/cfgTipoClase.routes';
 import { CvAudienciaRoutes } from './cvAudiencia/cvAudiencia.routes';
 import { CvAuCfgAtencionRoutes } from './cvAuCfgAtencion/cvAuCfgAtencion.routes';
 import { CvAuCfgHorarioRoutes } from './cvAuCfgHorario/cvAuCfgHorario.routes';
+import { CvAuCfgTipoRoutes } from './cvAuCfgTipo/cvAuCfgTipo.routes';
 
 import { CvCdoComparendoRoutes } from './cvCdoComparendo/cvCdoComparendo.routes';
 import { CvCdoTrazabilidadRoutes } from './cvCdoTrazabilidad/cvCdoTrazabilidad.routes';
@@ -343,6 +344,7 @@ export const DashboardRoutes: Route[] = [
       ...CvAudienciaRoutes,
       ...CvAuCfgAtencionRoutes,
       ...CvAuCfgHorarioRoutes,
+      ...CvAuCfgTipoRoutes,
       ...CvLcCfgMotivoRoutes,
       ...CvRestriccionRoutes,
       ...CvCfgInteresRoutes,

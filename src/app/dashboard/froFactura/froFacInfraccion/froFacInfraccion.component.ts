@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { CvCdoComparendoService } from '../../../services/cvCdoComparendo.service';
 import { FroFacInfraccion } from './froFacInfraccion.modelo';
+import { CvCdoComparendoService } from '../../../services/cvCdoComparendo.service';
 import { FroFacturaService } from '../../../services/froFactura.service';
-import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
-import { UserCfgTipoIdentificacionService } from '../../../services/userCfgTipoIdentificacion.service';
-import { UserCiudadanoService } from '../../../services/userCiudadano.service';
+import { PnalFuncionarioService } from '../../../services/pnalFuncionario.service';
 import { LoginService } from '../../../services/login.service';
 import { environment } from 'environments/environment'
 import swal from 'sweetalert2';
@@ -19,29 +17,23 @@ export class FroFacInfraccionComponent implements OnInit {
   public errorMessage;
   
   public factura: FroFacInfraccion;
-	public valorTotal: any;
+	public valorTotal: any = 0;
 	public comparendos: any = null;
   public comparendosSelect: any = [];
-  public numeroIdentificacion: any;
-  public organismosTransito: any;
-  public tiposIdentificacion: any;
-  public tipoIdentificacionSelected: any = null;
-  public identificacion: any = null;
-  public ciudadano: any = null;
+  public infractor: any = null;
   
-  public formIndex = false;
-  public formNew = false;
-  public formNewCiudadano = false;
-  public formSearch = true;
+  public formIndex: any;
+  public formNew: any;
+  public formSearch: any;
   public table: any = null;
 
-  public sedeOperativa: any = null;
+  public funcionario: any = null;
   public municipio: any = null;
   public fechaCreacion: any = null;
   public fechaVencimiento: any = null;
   public facturaNumero: any = null;
 
-  public apiUrl = environment.apiUrl + 'financiero';
+  public apiUrl = environment.apiUrl;
 
   public search: any = {
     'tipoFiltro': null,
@@ -55,113 +47,60 @@ export class FroFacInfraccionComponent implements OnInit {
 
 
   constructor(
+    private _FuncionarioService: PnalFuncionarioService,
     private _ComparendoService: CvCdoComparendoService,
     private _FacturaService: FroFacturaService,
-    private _OrganismoTransitoService: CfgOrganismoTransitoService,
-    private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
-    private _CiudadanoService: UserCiudadanoService,
     private _LoginService: LoginService,
   ){}
     
-  ngOnInit() { 
+  ngOnInit() {
+    this.onInitForms();
+
+    this.factura = new FroFacInfraccion(0, 0, null, null, null, null, null);
+    
     if (this.comparendosSelect.length > 0) {
       this.comparendosSelect.splice(0, this.comparendosSelect.length);
     }
 
-    this._TipoIdentificacionService.select().subscribe(
+    let token = this._LoginService.getToken();
+
+    let identity = this._LoginService.getIdentity();
+
+    this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
       response => {
-        this.tiposIdentificacion = response;
+        if (response.status == 'success') {
+          this.funcionario = response.data;
+          this.factura.idOrganismoTransito = this.funcionario.organismoTransito.id;
 
-        swal.close();
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert('Error en la petición');
+          swal.close();
+        } else {
+          swal({
+            title: 'Error!',
+            text: 'Su usuario no tiene autorización para realizar facturación!',
+            type: 'error',
+            confirmButtonText: 'Aceptar'
+          });
+        }
+        error => {
+          this.errorMessage = <any>error;
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert('Error en la petición');
+          }
         }
       }
     );
   }
 
-  onSearchCiudadano() {
-    swal({
-      title: 'Buscando ciudadano!',
-      text: 'Solo tardara unos segundos por favor espere.',
-      onOpen: () => {
-        swal.showLoading()
-      }
-    });
-
-    if (!this.identificacion) {
-      swal({
-        title: 'Error!',
-        text: 'El número de identificación no puede estar vacia.',
-        type: 'error',
-        confirmButtonText: 'Aceptar'
-      });
-    }else{
-      let token = this._LoginService.getToken();
-  
-      let datos = {
-        'idTipoIdentificacion': this.tipoIdentificacionSelected,
-        'identificacion': this.identificacion,
-      }
-  
-      this._CiudadanoService.searchByIdentificacion(datos, token).subscribe(
-        response => {
-          if (response.code == 200) {
-            if (response.data.ciudadano) {
-              this.ciudadano = response.data.ciudadano;
-              this.factura.idCiudadano = this.ciudadano.id;
-
-              swal({
-                title: 'Perfecto!',
-                text: response.message,
-                type: 'success',
-                confirmButtonText: 'Aceptar'
-              });
-              
-              //this.onInitForms();
-              this.formNew = true;
-            }else{
-              this.ciudadano = null;
-              this.factura.idCiudadano = null;
-              this.formNew = false;
-              this.formNewCiudadano = true;
-
-              swal({
-                title: 'Error!',
-                text: response.message,
-                type: 'error',
-                confirmButtonText: 'Aceptar'
-              });
-            }
-          } else {
-            this.ciudadano = null;
-            this.factura.idCiudadano = null;
-  
-            swal({
-              title: 'Error!',
-              text: response.message + " Debe registrarlo en persona natural.",
-              type: 'error',
-              confirmButtonText: 'Aceptar'
-            });
-          }
-          error => {
-            this.errorMessage = <any>error;
-            if (this.errorMessage != null) {
-              console.log(this.errorMessage);
-              alert('Error en la petición');
-            }
-          }
-        }
-      );
-    }
+  onInitForms(){
+    this.formSearch = true;
+    this.formIndex = false;
+    this.formNew = false;
   }
 
   onSearch() {
+    this.onInitForms();
+
     swal({
       title: 'Buscando registros!',
       text: 'Solo tardara unos segundos por favor espere.',
@@ -170,14 +109,13 @@ export class FroFacInfraccionComponent implements OnInit {
       }
     });
 
-    this.formIndex = false;
-
     let token = this._LoginService.getToken();
 
     this._ComparendoService.searchByFiltrosFactura(this.search, token).subscribe(
       response => {
         if (response.status == 'success') {
-          this.comparendos = response.data;
+          this.comparendos = response.data.comparendos;
+          this.infractor = response.data.infractor;
           this.formIndex = true;
 
           this.comparendos.forEach((element: any, key: any) => {            
@@ -198,11 +136,13 @@ export class FroFacInfraccionComponent implements OnInit {
             type: 'success',
             confirmButtonText: 'Aceptar'
           });
+
           let timeoutId = setTimeout(() => {
             this.onInitTable();
           }, 100);
         } else {
           this.comparendos = null;
+
           swal({
             title: 'Alerta!',
             text: response.message,
@@ -264,11 +204,10 @@ export class FroFacInfraccionComponent implements OnInit {
   }
 
   onNew() {
-    this.formNew = true;
-    this.formIndex = false;
-    this.formSearch = false;
+    this.onInitForms();
 
-    this.factura = new FroFacInfraccion(0, 0, null, null, null, null, null);
+    this.formNew = true;
+    this.formSearch = false;
 
     swal({
       title: 'Calculando valores!',
@@ -305,48 +244,9 @@ export class FroFacInfraccionComponent implements OnInit {
         }
       }
     );
-
-    this._OrganismoTransitoService.selectSedes().subscribe(
-      response => {
-        this.organismosTransito = response;
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
   }
   
- 
-    /*let identity = this._LoginService.getIdentity();
-    let token = this._LoginService.getToken();
-      
-    this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion },token).subscribe(
-      response => { 
-        if(response.status == 'success'){
-          this.sedeOperativa = response.data.sedeOperativa;
-          let datos = {
-
-          }
-         
-        }
-      error => {
-          this.errorMessage = <any>error;
-          if(this.errorMessage != null){
-            console.log(this.errorMessage);
-            alert('Error en la petición');
-          }
-        }
-    });*/
-
   onCancelar(){
-    this.formNew = false;
-    this.formIndex = false;
-    this.formSearch = true;
     this.ngOnInit();
   }
 
@@ -360,11 +260,10 @@ export class FroFacInfraccionComponent implements OnInit {
     this._FacturaService.register({'factura':this.factura}, token).subscribe(
       response => {
         if (response.status == 'success') {
-          this.factura.id = response.data.id;
+          this.factura = response.data;
           this.municipio = response.data.organismoTransito.municipio;
           this.fechaCreacion = response.data.fechaCreacion;
           this.fechaVencimiento = response.data.fechaVencimiento;
-          this.facturaNumero = response.data.numero;
 
           swal({
             title: 'Perfecto!',

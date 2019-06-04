@@ -36,7 +36,8 @@ export class DeleteComponent implements OnInit {
 
   ready(isCreado: any) {
     if (isCreado) {
-      this.formIndex = true;
+      this.formIndex = false;
+      this.formShow = false;
       this.ngOnInit();
     }
   }

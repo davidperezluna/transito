@@ -21,9 +21,11 @@ export class CfgAdmFormatoService {
 
 	register(datos, token) {
 		let json = JSON.stringify(datos);
-		let params = "data=" + json + "&authorization=" + token;
-		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-		return this._http.post(this.url + "/new", params, { headers: headers }).map(
+		let formData = new FormData();
+		formData.append('data', json);
+		formData.append('authorization', token);
+		//let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/new", formData).map(
 			res => res.json());
 	}
 
@@ -46,9 +48,7 @@ export class CfgAdmFormatoService {
 
 	edit(datos, token) {
 		let json = JSON.stringify(datos);
-		json = encodeURI(json);
-		console.log(json);
-		
+		//json = encodeURI(json);		
 		let params = "data=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/edit", params, { headers: headers }).map(

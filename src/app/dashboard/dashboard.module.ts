@@ -45,6 +45,7 @@ import { CvCdoCfgEstadoModule } from './cvCdoCfgEstado/cvCdoCfgEstado.module';
 import { CvAudienciaModule } from './cvAudiencia/cvAudiencia.module';
 import { CvAuCfgAtencionModule } from './cvAuCfgAtencion/cvAuCfgAtencion.module';
 import { CvAuCfgHorarioModule } from './cvAuCfgHorario/cvAuCfgHorario.module';
+import { CvAuCfgTipoModule } from './cvAuCfgTipo/cvAuCfgTipo.module';
 import { CvLcCfgMotivoModule } from './cvLcCfgMotivo/cvLcCfgMotivo.module';
 import { CvRestriccionModule } from './cvRestriccion/cvRestriccion.module';
 import { CvCfgInteresModule } from './cvCfgInteres/cvCfgInteres.module';
@@ -373,6 +374,7 @@ import {RightsidebarComponent} from '../shared';
     CvAudienciaModule,
     CvAuCfgAtencionModule,
     CvAuCfgHorarioModule,
+    CvAuCfgTipoModule,
     CvLcCfgMotivoModule,
     CvRestriccionModule,
     CvCfgInteresModule,

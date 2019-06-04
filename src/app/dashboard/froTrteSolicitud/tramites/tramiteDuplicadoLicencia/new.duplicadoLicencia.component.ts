@@ -16,7 +16,7 @@ export class NewDuplicadoLicenciaComponent implements OnInit {
     @Input() vehiculo: any = null;
     @Input() funcionario: any = null;
     @Input() tramitesRealizados: any = null;
-    @Input() idPropietario: any = null;
+    @Input() idCiudadano: any = null;
     public errorMessage; 
     
     public realizado: any = false;
@@ -70,7 +70,8 @@ export class NewDuplicadoLicenciaComponent implements OnInit {
             });
         } else{
             let datos = {
-                'idPropietario': this.idPropietario
+                'idCiudadano': this.idCiudadano,
+                'idVehiculo': this.vehiculo.id,
             }
 
             let token = this._LoginService.getToken();
