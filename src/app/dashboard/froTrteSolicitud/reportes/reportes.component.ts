@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FroTrteSolicitudReporteService } from '../../../services/frotrtesolicitudreporte.service';
+import { FroTrteSolicitudReporteService } from '../../../services/froTrteSolicitudReporte.service';
 import { CfgModuloService } from "../../../services/cfgModulo.service";
 import { CfgOrganismoTransitoService } from "../../../services/cfgOrganismoTransito.service";
 import { LoginService } from '../../../services/login.service';
@@ -16,7 +16,7 @@ export class ReportesComponent implements OnInit {
     public errorMessage;
 
     public placa: any;
-    public tramitesSolictud: any = null;
+    public tramitesSolicitud: any = null;
 
     public organismoTransitoSelected;
     public organismosTransito;
@@ -99,6 +99,7 @@ export class ReportesComponent implements OnInit {
 
     onInitTable() {
         if (this.table) {
+            console.log(this.table);
             this.table.destroy();
         }
 
@@ -141,15 +142,17 @@ export class ReportesComponent implements OnInit {
         if (this.tipoReporteSelected == 1) {
             this._TrteSolicitudReporteService.searchByPlaca(this.datos, token).subscribe(
                 response => {
-                    console.log(response);
                     if (response.status == 'success') {
-                        this.tramitesSolictud = response.data;
+                        this.tramitesSolicitud = response.data;
                         swal({
                             title: 'Perfecto!',
                             text: response.message,
                             type: 'success',
                             confirmButtonText: 'Aceptar'
                         });
+                        let timeoutId = setTimeout(() => {
+                            this.onInitTable();
+                        }, 100);
                     } else {
                         swal({
                             title: 'Alerta!',

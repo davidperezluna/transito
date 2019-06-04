@@ -118,7 +118,7 @@
                                     <td>{{ tramiteSolicitud.vehiculo.serie }}</td>
                                     <td>{{ tramiteSolicitud.vehiculo.capacidadCarga }}</td>
                                     <td>{{ tramiteSolicitud.vehiculo.numeroPasajeros }}</td>
-                                    <td>{{ tramiteSolicitud.fecha }}</td>
+                                    <td>{{ (tramiteSolicitud.fecha.timestamp * 1000) | date: 'HH:mm' }}</td>
                                     <td>{{ tramiteSolicitud.vehiculo.combustible.nombre }}</td>
                                     <td>
                                         <span *ngIf="tramiteSolicitud.vehiculo.activo">ACTIVO</span>
