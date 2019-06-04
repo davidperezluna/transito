@@ -185,10 +185,7 @@ constructor(
   onCancelar(){ this.ready.emit(true); }
 
   onEnviar(){
-    let token = this._loginService.getToken();
-
-    console.log(this.formato);
-    
+    let token = this._loginService.getToken();   
 
     this.formato.cuerpo = $('#summernote').summernote('code');
     

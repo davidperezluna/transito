@@ -79,7 +79,7 @@ export class FroFacAcuerdoPagoComponent implements OnInit {
                         confirmButtonText: 'Aceptar'
                     });
                     let timeoutId = setTimeout(() => {
-                        this.iniciarTabla();
+                        this.onInitTable();
                     }, 100);
                 } else {
                     this.acuerdosPago = null;
@@ -129,7 +129,7 @@ export class FroFacAcuerdoPagoComponent implements OnInit {
                         confirmButtonText: 'Aceptar'
                     });
                     let timeoutId = setTimeout(() => {
-                        this.iniciarTabla();
+                        this.onInitTable();
                     }, 100);
                 } else {
                     this.amortizaciones = null;
@@ -152,12 +152,12 @@ export class FroFacAcuerdoPagoComponent implements OnInit {
         );
     }
 
-    iniciarTabla() {
+    onInitTable() {
         if (this.table) {
             this.table.destroy();
         }
 
-        $('#dataTables-example').DataTable({
+        this.table = $('#dataTables-example').DataTable({
             responsive: true,
             pageLength: 8,
             sPaginationType: 'full_numbers',
@@ -170,8 +170,6 @@ export class FroFacAcuerdoPagoComponent implements OnInit {
                 }
             }
         });
-
-        this.table = $('#dataTables-example').DataTable();
     }
 
     onCancelar() {

@@ -47,34 +47,43 @@
             <div class="card">
                 <!-- .card -->
                 <div class="card-header">
-                    <h5 class="card-title">
-                        <b class="text-uppercase">Comparendos asociados</b>
-                    </h5>
+                    <b class="text-uppercase">Infractor: {{ infractor.nombres }}</b>
+                    <small>({{ infractor.identificacion }})</small>
                 </div>
                 <div class="card-body">
-                    Total {{valorTotal}}
+                    
                     <table class="table table-bordered" id="dataTables-example">
                         <thead>
                             <tr>
-                                <th>#</th>
-                                <th>Número</th>
-                                <th>Fecha</th>
-                                <th>Cod. Infracción</th>
-                                <th>Valor</th>
-                                <th>Placa</th>
+                                <th>Comparendo</th>
+                                <th>Infracción</th>
                                 <th>Curso</th>
-                                <th>Estado</th>
                                 <th>Seleccionar</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr class="odd" *ngFor="let comparendo of comparendos; let i = index">
-                                <td>{{ i + 1 }}</td>
-                                <td>{{ comparendo.consecutivo.numero }}</td>
-                                <td>{{ comparendo.fecha }}</td>
-                                <td>{{ comparendo.infraccion?.codigo }}</td>
-                                <td>{{ comparendo.valorInfraccion }}</td>
-                                <td>{{ comparendo.placa }}</td>
+                                <td>
+                                    <b>Número</b>
+                                    {{ comparendo.consecutivo.numero }}
+                                    <br>
+                                    <b>Fecha</b>
+                                    {{ comparendo.fecha }}
+                                    <br>
+                                    <b>Estado</b>
+                                    {{ comparendo.estado?.nombre }}
+                                    <span *ngIf="comparendo.placa">
+                                        <br>
+                                        {{ comparendo.placa }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <b>Código</b>
+                                    {{ comparendo.infraccion?.codigo }}
+                                    <br>
+                                    <b>Valor</b>
+                                    {{ comparendo.valorInfraccion }}
+                                </td>
                                 <td>
                                     <div class="custom-control custom-checkbox" style="margin-top: 3px;">
                                         <input type="checkbox" (change)="onSelectCurso(comparendo, $event)" class="custom-control-input"
@@ -82,13 +91,20 @@
                                         <label class="custom-control-label" for="curso-{{comparendo.id}}"></label>
                                     </div>
                                 </td>
-                                <td>{{ comparendo.estado?.nombre }}</td>
                                 <td>
                                     <div class="custom-control custom-checkbox" style="margin-top: 3px;">
                                         <input type="checkbox" value="{{comparendo.id}}" (change)="onSelectComparendo(comparendo, $event)" class="custom-control-input"
                                             id="seleccion-{{comparendo.id}}">
                                         <label class="custom-control-label" for="seleccion-{{comparendo.id}}"></label>
                                     </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="text-right">
+                                    <b class="text-uppercase">Total</b>
+                                </td>
+                                <td colspan="2">
+                                    <b>{{ valorTotal }}</b>
                                 </td>
                             </tr>
                         </tbody>
@@ -121,62 +137,6 @@
                     <form #formNew="ngForm">
                         <div class="form-group">
                             <div class="row">
-                                <div class="col-xs-12 col-lg-12">
-                                    <b class="text-uppercase">Buscar solicitante</b>
-                                    <div class="row">
-                                        <div class="col-xs-12 col-lg-12">
-                                            <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionSelected" name="idTipoIdentificacion" required></ng-select>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-xs-12 col-lg-12">
-                                            <div class="input-group">
-                                                <input [disabled]="!tipoIdentificacionSelected" type="text" class="form-control" placeholder="Identificacion" [(ngModel)]="identificacion" name="identificacion" required />
-                                                <span class="input-group-btn">
-                                                    <button (click)="onSearchCiudadano()" class="btn btn-default btn-success" type="button">
-                                                        <i class="fa fa-search"></i>
-                                                    </button>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-        
-                                <div class="col-xs-12 col-lg-12" *ngIf='ciudadano'>
-                                    <table class="table table-bordered table-striped">
-                                        <tbody>
-                                            <tr class="odd">
-                                                <td>
-                                                    <b>Tipo de identificación</b>
-                                                    <br> {{ ciudadano.tipoIdentificacion.nombre }}
-                                                </td>
-                                                <td>
-                                                    <b>Numero de identificación</b>
-                                                    <br> {{ ciudadano.identificacion }}
-                                                </td>
-                                                <td>
-                                                    <b>Ciudadano</b>
-                                                    <br> {{ ciudadano.primerNombre }} {{ ciudadano.segundoNombre }} {{ ciudadano.primerApellido
-                                                    }} {{ ciudadano.segundoApellido }}
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>    
-                                </div>
-
-                                <div class="col-xs-12 col-lg-12" *ngIf="!ciudadano && formNewCiudadano">
-                                    <app-new-ciudadano></app-new-ciudadano>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-xs-12 col-lg-12">
-                                    <label>Sede operativa
-                                        <strong class="text-danger">*</strong>
-                                    </label>
-                                    <ng-select [multiple]="false" [options]="organismosTransito" [(ngModel)]="factura.idOrganismoTransito" required name="sedesOperativa">
-                                    </ng-select>
-                                </div>
                                 <div class="col-xs-12 col-lg-12">
                                     <label>Interes
                                         <strong class="text-danger">*</strong>
@@ -220,6 +180,21 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-xs-12 col-lg-12">
+                                <table style="border:none;">
+                                <tr>
+                                    <td>
+                                        <img src="{{ apiUrl }}img/logo-entidad.png" height="40px" />
+                                    </td>
+                                    <td>
+                                        <img src="{{ apiUrl }}img/logo-banco.png" height="40px" />
+                                    </td>
+                                    <td style="text-align:right;">
+                                        <span style="border:1px solid #000;text-align:center;background-color: #ccc;padding:5px;font-size:20px">
+                                            <b>{{ factura.numero }}</b>
+                                        </span>
+                                    </td>
+                                </tr>
+                            </table>
                             <table class="table table-bordered">
                                 <tbody>
                                     <tr>
@@ -269,7 +244,7 @@
                 </div>
                 <div class="card-footer">
                     <div class="btn-group">
-                        <a href="{{ apiUrl }}/frofactura/2/{{ factura.id }}/pdf" class="btn btn-success" target="_blank">
+                        <a href="{{ apiUrl }}financiero/frofactura/2/{{ factura.id }}/pdf" class="btn btn-success" target="_blank">
                             <i class="fa fa-file-pdf-o"></i>
                             Generar PDF
                         </a>

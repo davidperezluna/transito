@@ -6,7 +6,7 @@ export class FroTrteSolicitud{
 		public insumoEntregado: any,
 		public idFuncionario: number,
 		public idFactura: number,
-		public idPropietario: number,
+		public idCiudadano: number,
 		public idSolicitante: number,
 		public idVehiculo: number,
 		public id: number,

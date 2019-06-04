@@ -50,6 +50,7 @@ export class NewMatricualaInicialComponent implements OnInit {
     public tipoPropiedadSelected:any;
     
     public datos = {
+        'campos': null,
         'documentacion': true,
         'observacion': null,
         'propietarios': [],
@@ -267,7 +268,7 @@ export class NewMatricualaInicialComponent implements OnInit {
     onAddCiudadano(){
         this.datos.propietarios.push(
             {
-                'idPropietario':this.ciudadano.id,
+                'id':this.ciudadano.id,
                 'identificacion':this.ciudadano.identificacion,
                 'nombre':this.ciudadano.primerNombre +" "+ this.ciudadano.segundoNombre,
                 'permiso': this.datos.solidario,
@@ -291,7 +292,7 @@ export class NewMatricualaInicialComponent implements OnInit {
     onAddEmpresa(){
         this.datos.propietarios.push(
             {
-                'idPropietario':this.empresa.id,
+                'id':this.empresa.id,
                 'identificacion':this.empresa.nit,
                 'nombre':this.empresa.nombre,
                 'permiso':this.datos.solidario,
@@ -363,9 +364,10 @@ export class NewMatricualaInicialComponent implements OnInit {
     }
 
     onEnviar() {
+        this.datos.campos = ['matriculaInicial'];
         this.datos.idVehiculo = this.vehiculo.id;
-        this.datos.idTramiteFactura = this.tramiteFactura.id;
         this.datos.tipoPropiedad = this.tipoPropiedadSelected;
+        this.datos.idTramiteFactura = this.tramiteFactura.id;
 
         let resumen = "<b>No. factura: " + this.tramiteFactura.factura.numero;
 

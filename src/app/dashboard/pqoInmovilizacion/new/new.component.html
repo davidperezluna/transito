@@ -43,7 +43,7 @@
 
                         <div class="row">
                             <div class="col-xs-12 col-lg-6">
-                                <label>No. comparendo <strong class="text-danger">*</strong></label>
+                                <label>No. comparendo</label>
                                 <input class="form-control" [(ngModel)]="inmovilizacion.numeroComparendo" name="numeroComparendo" type="text" required />
                             </div>
                             <div class="col-xs-12 col-lg-6">
@@ -113,7 +113,7 @@
             </div>
             <div class="card-footer">
                 <div class="btn-group">
-                    <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
+                    <button (click)="onEnviar()" [disabled]="formNew.invalid && (inmovilizacion.numeroComparendo || inmovilizacion.placa)" class="btn btn-primary" type="button">
                         <i class="fa fa-save"></i>
                         Enviar
                     </button>

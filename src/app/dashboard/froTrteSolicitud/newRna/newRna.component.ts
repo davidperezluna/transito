@@ -45,7 +45,8 @@ export class NewRnaComponent implements OnInit {
   public tramites:any;
   public tramiteMatriculaInicial:any = null;
   public certificadoTradicion = false;
-  public identificacionApoderado = false;
+  public identificacionApoderado: any = null;
+  public identificacionCiudadano: any = null;
   public apoderado: any = null;
   public placa: any = null;
   
@@ -53,6 +54,7 @@ export class NewRnaComponent implements OnInit {
   public requiereRunt = false;
   public tramitesRealizados: any = [];
   public documentacionPendiente: any = [];
+  public ciudadanos: any = [];
   
   public fromApoderado = false;
   public formNewCiudadano: any = false;
@@ -166,9 +168,7 @@ export class NewRnaComponent implements OnInit {
 
                 if (response.data.propietarios) {
                   this.propietarios = response.data.propietarios;
-                } else {
-                  this.propietarios = null;
-                }                 
+                }            
 
                 swal.close();
               } else {
@@ -522,7 +522,7 @@ export class NewRnaComponent implements OnInit {
     var html = 'Se va a enviar la siguiente solicitud:<br>' +
       'Factura: <b>' + this.factura.numero + '</b><br>' +
       'Vehiculo: <b>' + this.vehiculo.placa.numero + '</b><br>' +
-      'Solicitante: <b>' + this.ciudadano.usuario.identificacion + '</b><hr>' +
+      'Solicitante(s): <b>' + this.ciudadanos + '</b><hr>' +
       'Tramites:<br>' +
       this.tramites
     swal({
@@ -629,12 +629,62 @@ export class NewRnaComponent implements OnInit {
             alert("Error en la petición");
           }
         }
-      });
+      }
+    );
   }
 
   onCloseApoderado() {
     this.fromApoderado = false;
     this.apoderado = null;
+  }
+
+  onSearchCiudadano() {
+    swal({
+      title: 'Buscando apoderado!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+
+    let token = this._LoginService.getToken();
+
+    let datos = {
+      'identificacion': this.identificacionCiudadano,
+      'idTipoIdentificacion': 1,
+    }
+
+    this._CiudadanoService.searchByIdentificacion(datos, token).subscribe(
+      response => {
+        if (response.code == 200) {
+          if (response.data.ciudadano) {
+            this.ciudadanos.push(response.data.ciudadano);
+
+            swal({
+              title: 'Perfecto!',
+              text: response.message,
+              type: 'success',
+              confirmButtonText: 'Aceptar'
+            });
+          }
+        } else {
+          swal({
+            title: 'Error!',
+            text: response.message,
+            type: 'error',
+            confirmButtonText: 'Aceptar'
+          });
+        }
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      }
+    );
   }
 
   onConfirmarSolicitante() {

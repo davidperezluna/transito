@@ -188,7 +188,7 @@ constructor(
 
     this.formato.cuerpo = $('#summernote').summernote('code');
     
-		this._FormatoService.register(this.formato,token).subscribe(
+		this._FormatoService.register(this.formato, token).subscribe(
 			response => {
         if(response.status == 'success'){
           this.ready.emit(true);
