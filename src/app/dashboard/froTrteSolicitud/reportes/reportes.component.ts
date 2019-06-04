@@ -15,8 +15,8 @@ declare var $: any;
 export class ReportesComponent implements OnInit {
     public errorMessage;
 
-    public placa: any;
     public tramitesSolicitud: any = null;
+    public propietariosActuales: any = null;
 
     public organismoTransitoSelected;
     public organismosTransito;
@@ -35,6 +35,7 @@ export class ReportesComponent implements OnInit {
     public tipoReporteSelected;
     public tiposReporte = [
         { value: '1', label: 'VEHICULOS' },
+        { value: '2', label: 'PROPIETARIOS ACTUALES' },
     ];
 
     public datos = {
@@ -42,7 +43,8 @@ export class ReportesComponent implements OnInit {
         'idModulo': null,
         'idOrganismoTransito': null,
         'fechaDesde': null,
-        'fechaHasta': null
+        'fechaHasta': null,
+        'tipoReporte': null,
     };
 
     constructor(
@@ -97,13 +99,13 @@ export class ReportesComponent implements OnInit {
         );
     }
 
-    onInitTable() {
+    onInitTable(estado) {
         if (this.table) {
             console.log(this.table);
             this.table.destroy();
         }
 
-        this.table = $('#dataTables-example').DataTable({
+        this.table = $('#dataTables-'+ estado).DataTable({
             responsive: false,
             pageLength: 10,
             sPaginationType: 'full_numbers',
@@ -131,6 +133,7 @@ export class ReportesComponent implements OnInit {
         
         this.datos.idModulo = this.moduloSelected;
         this.datos.idOrganismoTransito = this.organismoTransitoSelected;
+        this.datos.tipoReporte = this.tipoReporteSelected;
 
         swal({
             title: 'Buscando vehículo',
@@ -139,20 +142,31 @@ export class ReportesComponent implements OnInit {
                 swal.showLoading()
             }
         });
-        if (this.tipoReporteSelected == 1) {
+        if (this.tipoReporteSelected) {
             this._TrteSolicitudReporteService.searchByPlaca(this.datos, token).subscribe(
                 response => {
                     if (response.status == 'success') {
-                        this.tramitesSolicitud = response.data;
+                        if(response.tramitesSolicitud) {
+                            this.tramitesSolicitud = response.tramitesSolicitud;
+                            console.log(this.tramitesSolicitud);
+                            let estado = 'vehiculo'
+                            let timeoutId = setTimeout(() => {
+                                this.onInitTable(estado);
+                            }, 100);
+                        } else if(response.propietariosActuales) {
+                            this.propietariosActuales = response.propietariosActuales;
+                            console.log(this.propietariosActuales);
+                            let estado = 'propietarios-actuales'
+                            let timeoutId = setTimeout(() => {
+                                this.onInitTable(estado);
+                            }, 100);
+                        }
                         swal({
                             title: 'Perfecto!',
                             text: response.message,
                             type: 'success',
                             confirmButtonText: 'Aceptar'
                         });
-                        let timeoutId = setTimeout(() => {
-                            this.onInitTable();
-                        }, 100);
                     } else {
                         swal({
                             title: 'Alerta!',
