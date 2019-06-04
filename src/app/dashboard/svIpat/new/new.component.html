@@ -360,16 +360,16 @@
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6"></div>
-                    <div class="col-xs-16 col-lg-6" style="margin-top: 2%;">
-                        <!-- <div class="input-group" *ngIf="ipatVehiculo.portaPlaca == '1'"> -->
-                            <label>Placa vehículo <strong class="text-danger">*</strong></label><br>
+                    <div class="col-xs-16 col-lg-6">
+                        <label>Placa vehículo <strong class="text-danger">*</strong></label>
+                        <div class="input-group" *ngIf="ipatVehiculo.portaPlaca == '1'">
                             <input type="text" class="form-control" [(ngModel)]="ipatVehiculo.placa" required name="placaVehiculo" />
                             <span class="input-group-btn">
                                 <button (click)="onBuscarVehiculo()" class="btn btn-default btn-primary" type="button">
                                     <i class="fa fa-search"></i>
                                 </button>
                             </span>
-                        <!-- </div> -->
+                        </div>
                     </div>
                     <div class="col-lg-6 col-md-6" *ngIf="ipatVehiculo.portaPlaca == '1'">
                         <label>Placa remolque/semiremolque</label>
@@ -729,16 +729,14 @@
             </div>
             <div class="card-body">
                 <div class="form-group row">
-                    <div class="col-xs-16 col-lg-6" style="margin-top: 2%;">
-                        <div class="input-group">
-                            <label>Identificación Conductor <strong class="text-danger">*</strong></label>
-                            <input type="number" class="form-control" [(ngModel)]="ipatConductor.identificacion" name="identificacionConductor" required/>
-                            <span class="input-group-btn">
-                                <button (click)="onBuscarConductor()" class="btn btn-default btn-primary" type="button">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </span>
-                        </div>
+                    <div class="col-xs-16 col-lg-6">
+                        <label>Identificación Conductor <strong class="text-danger">*</strong></label>
+                        <input type="number" class="form-control" [(ngModel)]="ipatConductor.identificacion" name="identificacionConductor" required/>
+                        <span class="input-group-btn">
+                            <button (click)="onBuscarConductor()" class="btn btn-default btn-primary" type="button">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </span>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label>Tipo Identificación Conductor <strong class="text-danger">*</strong></label>

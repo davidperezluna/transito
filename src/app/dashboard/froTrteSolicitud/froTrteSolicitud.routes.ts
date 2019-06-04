@@ -4,6 +4,7 @@ import { NewRncComponent } from '.';
 import { NewRnaComponent } from '.';
 import { NewRnmaComponent } from '.';
 import { NewRnrsComponent } from '.';
+import { ReportesComponent } from '.';
 
 export const FroTrteSolicitudRoutes: Route[] = [
     {
@@ -29,6 +30,11 @@ export const FroTrteSolicitudRoutes: Route[] = [
     {
       path: 'tramitesolicitud/rnrs',
       component: NewRnrsComponent
+    },
+
+    {
+      path: 'tramitesolicitud/reportes',
+      component: ReportesComponent
     }
 ];
  

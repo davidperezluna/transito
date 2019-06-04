@@ -8,6 +8,7 @@ import { CfgTipoAlertaService } from '../../services/cfgTipoAlerta.service';
 import { VhloAcreedorService } from '../../services/vhloAcreedor.service';
 import { FroFacRetefuenteService } from '../../services/froFacRetefuente.service';
 import { FroTrteSolicitudService } from '../../services/froTrteSolicitud.service';
+import { FroTrteSolicitudReporteService } from '../../services/froTrteSolicitudReporte.service';
 
 import { FroTrteSolicitudComponent } from './froTrteSolicitud.component';
 import { NewRncComponent } from './newRnc/newRnc.component';
@@ -42,6 +43,8 @@ import { NewTramiteCambioAcreedorPrendarioPropietarioComponent } from './tramite
 import { NewTransformacionComponent } from './tramites/tramiteTransformacion/new.transformacion.component';
 import { NewImportacionTemporalComponent } from "./tramites/tramiteImportacionTemporal/new.importacionTemporal.component";
 import { NewProrrogaImportacionTemporalComponent } from "./tramites/tramiteProrrogaImportacionTemporal/new.prorrogaImportacionTemporal.component";
+//para reportes de tramite solicitud
+import { ReportesComponent } from "./reportes/reportes.component";
 
 import { NewRncExpedicionLicenciaComponent } from './tramites/tramiteExpedicionLicencia/newRncExpedicionLicencia.component';
 import { NewRncDuplicadoLicenciaComponent } from './tramites/tramiteDuplicadoLicencia/newRncDuplicadoLicencia.component';
@@ -103,7 +106,9 @@ import { UserCiudadanoModule } from '../userCiudadano/userCiudadano.module';
         NewRncExpedicionLicenciaCambioDocumentoComponent,
         NewRncRecategorizacionLicenciaAbajoComponent,
         NewRncRecategorizacionLicenciaArribaComponent,
-        NewRncRefrendacionLicenciaComponent
+        NewRncRefrendacionLicenciaComponent,
+
+        ReportesComponent
     ],
     exports: [
         FroTrteSolicitudComponent,
@@ -144,10 +149,13 @@ import { UserCiudadanoModule } from '../userCiudadano/userCiudadano.module';
         NewRncExpedicionLicenciaCambioDocumentoComponent,
         NewRncRecategorizacionLicenciaAbajoComponent,
         NewRncRecategorizacionLicenciaArribaComponent,
-        NewRncRefrendacionLicenciaComponent
+        NewRncRefrendacionLicenciaComponent,
+
+        ReportesComponent
     ],
     providers: [
         FroTrteSolicitudService, 
+        FroTrteSolicitudReporteService, 
         CfgTipoAlertaService, 
         TramiteTrasladoService, 
         VhloAcreedorService,

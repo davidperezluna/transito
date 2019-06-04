@@ -1,0 +1,137 @@
+<div class="container row">
+    <div class="col-xs-12 col-lg-4">
+        <div class="card">
+            <div class="card-header">
+                <b class="text-uppercase">Filtro de búsqueda</b>
+            </div>
+            <div class="card-body">
+                <form #formFiltros="ngForm">
+                    <div class="col-xs-12 col-lg-12">
+                        <label>Seleccionar OrganismoTransito</label>
+                        <ng-select [multiple]="false" [options]="organismosTransito" [(ngModel)]="organismoTransitoSelected" required
+                            name="idOrganismoTransito">
+                        </ng-select>
+                    </div>
+                    <div class="col-xs-12 col-lg-12">
+                        <label>Módulo</label>
+                        <ng-select [multiple]="false" [options]="modulos" [(ngModel)]="moduloSelected" required
+                            name="idModulo">
+                        </ng-select>
+                    </div>
+                    <div class="col-xs-12 col-lg-12">
+                        <label>Seleccionar tipo reporte</label>
+                        <ng-select [multiple]="false" [options]="tiposReporte" [(ngModel)]="tipoReporteSelected" required
+                            name="idTipoReporte">
+                        </ng-select>
+                    </div>
+                    <div class="col-xs-12 col-lg-12">
+                        <label>Desde<strong class="text-danger">*</strong></label>
+                        <input class="form-control" type="date" [(ngModel)]="datos.fechaDesde"
+                            name="fechaDesde" required>
+                    </div>
+                    <div class="col-xs-12 col-lg-12">
+                        <label>Hasta<strong class="text-danger">*</strong></label>
+                        <input class="form-control" type="date" [(ngModel)]="datos.fechaHasta"
+                            name="fechaHasta" required>
+                    </div>
+                    <!-- <div class="col-xs-12 col-lg-12">
+                        <div class="input-group">
+                            <input type="text" class="form-control text-uppercase" placeholder="Número de placa"
+                                [(ngModel)]="datos.placa" required name="numeroPlaca" />
+                            <span class="input-group-btn">
+                                <button (click)="onSearch()" class="btn btn-default btn-primary" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </div> -->
+                    <!-- <div *ngIf="vehiculo" class="col-xs-12 col-lg-12">
+                        <table class="table table-bordered table-striped">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <b>No. Placa:</b><br>
+                                        {{ vehiculo.placa.numero }}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div> -->
+                </form>
+            </div>
+        </div>
+        <button (click)="onEnviar()" class="btn btn-default btn-primary" type="button">
+            <i class="fa fa-search"></i>
+        </button>
+    </div>
+    <div class="col-xs-12 col-lg-8">
+        <div class="row">
+            <div class="col-xs-12 col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <b class="text-uppercase">Vehiculos</b>
+                    </div>
+                    <div class="card-body">
+                        <table class="table " id="dataTables-example">
+                            <thead>
+                                <tr class="text-center">
+                                    <th>#</th>
+                                    <th>organismo Tránsito</th>
+                                    <th>placa</th>
+                                    <th>linea</th>
+                                    <th>marca</th>
+                                    <th>clase</th>
+                                    <th>color</th>
+                                    <th>servicio</th>
+                                    <th>carroceria</th>
+                                    <th>modalidad</th>
+                                    <th>cilindraje</th>
+                                    <th>modelo</th>
+                                    <th>motor</th>
+                                    <th>chasis</th>
+                                    <th>serie</th>
+                                    <th>cap. ton</th>
+                                    <th>cap. pasajeros</th>
+                                    <th>fecha matricula</th>
+                                    <!-- <th>num. lic. transito</th> -->
+                                    <!-- <th>num. fac. sirev</th> -->
+                                    <th>tipo combustible</th>
+                                    <th>estado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="odd" *ngFor="let tramiteSolicitud of tramitesSolicitud; let i = index">
+                                    <td>{{ i + 1 }}</td>
+                                    <td>{{ tramiteSolicitud.organismoTransito.nombre }}</td>
+                                    <td>{{ tramiteSolicitud.vehiculo.placa.numero }}</td>
+                                    <td>{{ tramiteSolicitud.vehiculo.linea.nombre }}</td>
+                                    <td>{{ tramiteSolicitud.vehiculo.linea.marca.nombre }}</td>
+                                    <td>{{ tramiteSolicitud.vehiculo.clase.nombre }}</td>
+                                    <td>{{ tramiteSolicitud.vehiculo.color.nombre }}</td>
+                                    <td>{{ tramiteSolicitud.vehiculo.servicio.nombre }}</td>
+                                    <td>{{ tramiteSolicitud.vehiculo.carroceria.nombre }}</td>
+                                    <td>{{ tramiteSolicitud.vehiculo.modalidadTransporte.nombre }}</td>
+                                    <td>{{ tramiteSolicitud.vehiculo.cilindraje }}</td>
+                                    <td>{{ tramiteSolicitud.vehiculo.modelo }}</td>
+                                    <td>{{ tramiteSolicitud.vehiculo.motor }}</td>
+                                    <td>{{ tramiteSolicitud.vehiculo.chasis }}</td>
+                                    <td>{{ tramiteSolicitud.vehiculo.serie }}</td>
+                                    <td>{{ tramiteSolicitud.vehiculo.capacidadCarga }}</td>
+                                    <td>{{ tramiteSolicitud.vehiculo.numeroPasajeros }}</td>
+                                    <td>{{ tramiteSolicitud.fecha }}</td>
+                                    <td>{{ tramiteSolicitud.vehiculo.combustible.nombre }}</td>
+                                    <td>
+                                        <span *ngIf="tramiteSolicitud.vehiculo.activo">ACTIVO</span>
+                                        <span *ngIf="!tramiteSolicitud.vehiculo.activo">CANCELADO</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- <app-new *ngIf='formNew' [vehiculo]="vehiculo" (ready)="ready($event)"></app-new>
+                <app-edit *ngIf='formEdit' [soat]="soat" (ready)="ready($event)"></app-edit> -->
+            </div>
+        </div>
+    </div>
+</div>
