@@ -64,22 +64,23 @@
                                 <label>Identificación actual <b class="text-danger">*</b></label>
                                 <input type="text" class="form-control" [(ngModel)]="datos.identificacionActual" name="identificacionActual" required>
                             </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-xs-12 col-lg-4">
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Fecha expedición <b class="text-danger">*</b></label>
+                                <input type="date" class="form-control" [(ngModel)]="datos.fechaExpedicion" name="fechaExpedicion" required>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Vigencia</label>
+                                <input class="form-control" [(ngModel)]="datos.vigencia" name="vigencia" type="date" />
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
                                 <label>Categoria <b class="text-danger">*</b></label>
                                 <ng-select [multiple]="false" [options]="categorias" [(ngModel)]="datos.idCategoria" name="categoria" required>
                                 </ng-select>
                             </div>
-                            <div class="col-xs-12 col-lg-4">
+                            <div class="col-xs-12 col-lg-6">
                                 <label>Servicio <b class="text-danger">*</b></label>
                                 <ng-select [multiple]="false" [options]="servicios" [(ngModel)]="datos.idServicio" name="servicio" required>
                                 </ng-select>
-                            </div>
-                            <div class="col-xs-12 col-lg-4">
-                                <label>Vigencia</label>
-                                <input class="form-control" [(ngModel)]="datos.vigencia" name="vigencia" type="date" />
                             </div>
                         </div>
                     </div>

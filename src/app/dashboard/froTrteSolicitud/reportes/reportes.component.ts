@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FroTrteSolicitudReporteService } from '../../../services/frotrtesolicitudreporte.service';
+import { FroTrteSolicitudReporteService } from '../../../services/froTrteSolicitudReporte.service';
 import { CfgModuloService } from "../../../services/cfgModulo.service";
 import { CfgOrganismoTransitoService } from "../../../services/cfgOrganismoTransito.service";
 import { LoginService } from '../../../services/login.service';

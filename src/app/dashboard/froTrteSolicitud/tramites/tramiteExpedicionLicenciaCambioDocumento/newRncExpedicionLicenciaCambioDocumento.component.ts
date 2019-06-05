@@ -35,6 +35,7 @@ export class NewRncExpedicionLicenciaCambioDocumentoComponent implements OnInit 
         'identificacionAnterior': null,
         'identificacionActual': null,
         'vigencia': null,
+        'fechaExpedicion': null,
         'idFuncionario': null,
         'idOrganismoTransito': null,
         'idServicio': null,
