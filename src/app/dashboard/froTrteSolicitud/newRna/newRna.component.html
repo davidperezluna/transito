@@ -359,7 +359,7 @@
                         
                         <app-duplicado-licencia *ngIf="tramiteFactura.precio.tramite.id == 10" [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" [idCiudadano]='tramiteSolicitud.idCiudadano' (onReadyTramite)="onReadyTramite($event)"></app-duplicado-licencia>
                     
-                        <app-inscripcion-alerta-prenda *ngIf="tramiteFactura.precio.tramite.id == 11" [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" [idPropietario]='tramiteSolicitud.idCiudadano' (onReadyTramite)="onReadyTramite($event)"></app-inscripcion-alerta-prenda>
+                        <app-inscripcion-alerta-prenda *ngIf="tramiteFactura.precio.tramite.id == 11" [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" [idSolicitante]='tramiteSolicitud.idCiudadano' (onReadyTramite)="onReadyTramite($event)"></app-inscripcion-alerta-prenda>
                         
                         <app-levantamiento-alerta-prenda *ngIf="tramiteFactura.precio.tramite.id == 12" [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)"></app-levantamiento-alerta-prenda>
                         

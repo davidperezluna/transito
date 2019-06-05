@@ -3,7 +3,6 @@ import { FroTrteSolicitudService } from '../../../../services/froTrteSolicitud.s
 import { FroFacTramiteService } from '../../../../services/froFacTramite.service';
 import { VhloCfgTipoAlertaService } from '../../../../services/vhloCfgTipoAlerta.service';
 import { VhloAcreedorService } from '../../../../services/vhloAcreedor.service';
-import { VhloPropietarioService } from '../../../../services/vhloPropietario.service';
 import { UserCiudadanoService } from '../../../../services/userCiudadano.service';
 import { UserCfgTipoIdentificacionService } from '../../../../services/userCfgTipoIdentificacion.service';
 import { CfgEntidadJudicialService } from '../../../../services/cfgEntidadJudicial.service';
@@ -24,7 +23,7 @@ export class NewTramiteInscripcionAlertaPrendaComponent implements OnInit {
     @Input() tramiteFactura: any = null;
     @Input() funcionario: any = null;
     @Input() tramitesRealizados: any = null;
-    @Input() idPropietario: any = null;
+    @Input() idSolicitante: any = null;
     public errorMessage; 
       
     public realizado: any = false;
@@ -36,7 +35,7 @@ export class NewTramiteInscripcionAlertaPrendaComponent implements OnInit {
 
     public ciudadano: any = null;
     public empresa: any = null;
-    public propietario: any = null;
+    public solicitante: any = null;
 
     public identificacionAcreedor: any;
     public identificacionPropietario: any;
@@ -64,16 +63,16 @@ export class NewTramiteInscripcionAlertaPrendaComponent implements OnInit {
     ];
        
     public datos = {
+        'campos': null,
         'documentacion': true,
         'observacion': null,
-        'campos': null,
         'gradoAlerta': null,
         'fechaExpedicion':null,
         'idFuncionario': null,
         'idTipoAlerta': null,
+        'idSolicitante': null,
         'idCiudadano': null,
         'idEmpresa': null,
-        'idPropietario': null,
         'idEntidadJudicial':null,
         'idVehiculo': null,
         'idTramiteFactura': null,
@@ -85,7 +84,6 @@ export class NewTramiteInscripcionAlertaPrendaComponent implements OnInit {
         private _EntidadJudicialService: CfgEntidadJudicialService,
         private _TipoAlertaService: VhloCfgTipoAlertaService,
         private _AcreedorService: VhloAcreedorService,
-        private _PropietarioService: VhloPropietarioService,
         private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
         private _CiudadanoService: UserCiudadanoService,
         private _FuncionarioService: PnalFuncionarioService,
@@ -122,9 +120,10 @@ export class NewTramiteInscripcionAlertaPrendaComponent implements OnInit {
             var datePiper = new DatePipe(this.date);
             this.datos.fechaExpedicion = datePiper.transform(this.date, 'yyyy-MM-dd');
 
-            this._PropietarioService.show({ 'id': this.idPropietario }, token ).subscribe(
+            this._CiudadanoService.show({ 'id': this.idSolicitante }, token ).subscribe(
                 response => {
-                    this.propietario = response.data;
+                    this.solicitante = response.data;
+                    this.datos.idSolicitante = this.solicitante.id;
                 },
                 error => {
                     this.errorMessage = <any>error;
@@ -282,7 +281,6 @@ export class NewTramiteInscripcionAlertaPrendaComponent implements OnInit {
     onEnviar() {
         this.datos.campos = ['registrarPignorado'];
         this.datos.idVehiculo = this.vehiculo.id;
-        this.datos.idPropietario = this.propietario.id;
         this.datos.idTramiteFactura = this.tramiteFactura.id;
 
         let resumen = "No. factura: " + this.tramiteFactura.factura.numero;
