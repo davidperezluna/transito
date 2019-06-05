@@ -24,27 +24,27 @@
                             name="idTipoReporte">
                         </ng-select>
                     </div>
-                    <div class="col-xs-12 col-lg-12">
+                    <div class="col-xs-12 col-lg-12" *ngIf="this.tipoReporteSelected == 1">
                         <label>Desde<strong class="text-danger">*</strong></label>
                         <input class="form-control" type="date" [(ngModel)]="datos.fechaDesde"
                             name="fechaDesde" required>
                     </div>
-                    <div class="col-xs-12 col-lg-12">
+                    <div class="col-xs-12 col-lg-12" *ngIf="this.tipoReporteSelected == 1">
                         <label>Hasta<strong class="text-danger">*</strong></label>
                         <input class="form-control" type="date" [(ngModel)]="datos.fechaHasta"
                             name="fechaHasta" required>
                     </div>
-                    <!-- <div class="col-xs-12 col-lg-12">
+                    <div class="col-xs-12 col-lg-12" *ngIf="tipoReporteSelected == 2">
                         <div class="input-group">
                             <input type="text" class="form-control text-uppercase" placeholder="Número de placa"
                                 [(ngModel)]="datos.placa" required name="numeroPlaca" />
-                            <span class="input-group-btn">
+                            <!-- <span class="input-group-btn">
                                 <button (click)="onSearch()" class="btn btn-default btn-primary" type="button">
                                     <i class="fa fa-search"></i>
                                 </button>
-                            </span>
+                            </span> -->
                         </div>
-                    </div> -->
+                    </div>
                     <!-- <div *ngIf="vehiculo" class="col-xs-12 col-lg-12">
                         <table class="table table-bordered table-striped">
                             <tbody>
@@ -72,7 +72,7 @@
                         <b class="text-uppercase">Vehiculos</b>
                     </div>
                     <div class="card-body">
-                        <table class="table " id="dataTables-example">
+                        <table class="table " id="dataTables-vehiculos">
                             <thead>
                                 <tr class="text-center">
                                     <th>#</th>
@@ -118,12 +118,50 @@
                                     <td>{{ tramiteSolicitud.vehiculo.serie }}</td>
                                     <td>{{ tramiteSolicitud.vehiculo.capacidadCarga }}</td>
                                     <td>{{ tramiteSolicitud.vehiculo.numeroPasajeros }}</td>
-                                    <td>{{ tramiteSolicitud.fecha }}</td>
+                                    <td>{{ (tramiteSolicitud.fecha.timestamp * 1000) | date: 'HH:mm' }}</td>
                                     <td>{{ tramiteSolicitud.vehiculo.combustible.nombre }}</td>
                                     <td>
                                         <span *ngIf="tramiteSolicitud.vehiculo.activo">ACTIVO</span>
                                         <span *ngIf="!tramiteSolicitud.vehiculo.activo">CANCELADO</span>
                                     </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="table " id="dataTables-propitarios-actuales">
+                            <thead>
+                                <tr class="text-center">
+                                    <th>#</th>
+                                    <th>organismo Tránsito</th>
+                                    <th>placa</th>
+                                    <th>tipo documento</th>
+                                    <th>numero de documento</th>
+                                    <th>proindiviso</th>
+                                    <th>fecha propiedad</th>
+                                    <th>apellido 1</th>
+                                    <th>apellido 2</th>
+                                    <th>nombre 1</th>
+                                    <th>nombre 2</th>
+                                    <th>ciudad</th>
+                                    <th>direccion</th>
+                                    <th>telefono</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="odd" *ngFor="let propietarioActual of propietariosActuales; let i = index">
+                                    <td>{{ i + 1 }}</td>
+                                    <td>{{ propietarioActual.vehiculo.organismoTransito.nombre }}</td>
+                                    <td>{{ propietarioActual.vehiculo.placa.numero  }}</td>
+                                    <td>{{ propietarioActual.ciudadano.tipoIdentificacion.nombre  }}</td>
+                                    <td>{{ propietarioActual.ciudadano.numeroIdentificacion  }}</td>
+                                    <td>proindiviso</td>
+                                    <td>{{ (propietarioActual.fechaInicial.timestamp * 1000) | date: 'YYYY/mm/dd' }}</td>
+                                    <td>{{ propietarioActual.ciudadano.primerApellido  }}</td>
+                                    <td>{{ propietarioActual.ciudadano.segundoApellido  }}</td>
+                                    <td>{{ propietarioActual.ciudadano.primerNombre  }}</td>
+                                    <td>{{ propietarioActual.ciudadano.municipioResidencia.nombre  }}</td>
+                                    <td>{{ propietarioActual.ciudadano.direccionPersonal  }}</td>
+                                    <td>{{ propietarioActual.ciudadano.telefonoCelular  }}</td>
+                                    
                                 </tr>
                             </tbody>
                         </table>
