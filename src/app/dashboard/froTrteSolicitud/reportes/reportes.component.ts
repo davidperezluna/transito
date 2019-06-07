@@ -20,6 +20,8 @@ export class ReportesComponent implements OnInit {
     public tramites: any = null;
     public medidasCautelares: any = null;
     public cancelacionesMatricula: any = null;
+    public prendas: any = null;
+    public radicadosCuenta: any = null;
 
     public organismoTransitoSelected;
     public organismosTransito;
@@ -42,6 +44,8 @@ export class ReportesComponent implements OnInit {
         { value: '3', label: 'TRAMITES' },
         { value: '4', label: 'MEDIDA CAUTELAR' },
         { value: '5', label: 'CANCELACIÓN MATRICULA' },
+        { value: '6', label: 'PRENDAS' },
+        { value: '7', label: 'RADICADOS DE CUENTA' },
     ];
 
     public datos = {
@@ -164,8 +168,10 @@ export class ReportesComponent implements OnInit {
             this._TrteSolicitudReporteService.searchByFiltros(this.datos, token).subscribe(
                 response => {
                     if (response.status == 'success') {
+                        console.log(response);
                         if(response.tramitesSolicitud) {
                             this.tramitesSolicitud = response.tramitesSolicitud;
+                            console.log(this.tramitesSolicitud);
                             let estado = 'vehiculo'
                             let timeoutId = setTimeout(() => {
                                 this.onInitTable(estado);
@@ -190,7 +196,22 @@ export class ReportesComponent implements OnInit {
                             }, 100);
                         } else if(response.cancelacionesMatricula) {
                             this.cancelacionesMatricula = response.cancelacionesMatricula;
+                            console.log(this.cancelacionesMatricula);
                             let estado = 'cancelaciones-matricula'
+                            let timeoutId = setTimeout(() => {
+                                this.onInitTable(estado);
+                            }, 100);
+                        } else if(response.prendas) {
+                            this.prendas = response.prendas;
+                            console.log(this.prendas);
+                            let estado = 'prendas'
+                            let timeoutId = setTimeout(() => {
+                                this.onInitTable(estado);
+                            }, 100);
+                        } else if(response.radicadosCuenta) {
+                            this.radicadosCuenta = response.radicadosCuenta;
+                            console.log(this.radicadosCuenta);
+                            let estado = 'radicados-cuenta'
                             let timeoutId = setTimeout(() => {
                                 this.onInitTable(estado);
                             }, 100);

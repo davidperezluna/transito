@@ -69,7 +69,7 @@
             <div class="col-xs-12 col-lg-12">
                 <div class="card">
                     <div class="card-header">
-                        <b class="text-uppercase">Vehiculos</b>
+                        <b class="text-uppercase">Historial Registros</b>
                     </div>
                     <div class="card-body">
                         <table class="table" id="dataTables-vehiculos" *ngIf="tramitesSolicitud">
@@ -207,16 +207,16 @@
                             <tbody>
                                 <tr class="odd" *ngFor="let medidaCautelar of medidasCautelares; let i = index">
                                     <td>{{ i + 1 }}</td>
-                                    <td>placa</td>
-                                    <td>tipo medida cautelar</td>
-                                    <td>{{ medidaCautelar.entidadJudicial.nombre }}</td>
+                                    <td>{{ medidaCautelar.placa }}</td>
+                                    <td>{{ medidaCautelar.tipo }}</td>
+                                    <td>{{ medidaCautelar.ente }}</td>
                                     <td>{{ medidaCautelar.numeroOficio }}</td>
-                                    <td>{{ (medidaCautelar.fechaRegistro.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td>
+                                    <td>{{ (medidaCautelar.fechaExpedicion.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td>
                                     <td>
                                         <span *ngIf="medidaCautelar.activo">I</span>
                                         <span *ngIf="!medidaCautelar.activo">L</span>
                                     </td>
-                                    <td>{{ medidaCautelar.numeroOficio }}</td>
+                                    <td>{{ medidaCautelar.numeroLevantamiento }}</td>
                                     <td>{{ medidaCautelar.observaciones }}</td>
                                 </tr>
                             </tbody>
@@ -235,9 +235,71 @@
                                 <tr class="odd" *ngFor="let cancelacionMatricula of cancelacionesMatricula; let i = index">
                                     <td>{{ i + 1 }}</td>
                                     <td>{{ cancelacionMatricula.organismoTransito.divipo }}</td>
-                                    <td>placa</td>
-                                    <td>id cancelacion</td>
+                                    <td>{{ cancelacionMatricula.vehiculo.placa.numero }}</td>
+                                    <td>{{ cancelacionMatricula.foraneas.idMotivoCancelacion }}</td>
                                     <td>{{ (cancelacionMatricula.fecha.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="table " id="dataTables-prendas" *ngIf="prendas">
+                            <thead>
+                                <tr class="text-center">
+                                    <th>#</th>
+                                    <th>organismo tránsito</th>
+                                    <th>placa</th>
+                                    <th>tipo identificación</th>
+                                    <th>número identificación</th>
+                                    <th>nombre 1</th>
+                                    <th>nombre 2</th>
+                                    <th>apellido 1</th>
+                                    <th>apellido 2</th>
+                                    <th>dirección</th>
+                                    <th>ciudad</th>
+                                    <th>telefono</th>
+                                    <th>grado de la prenda</th>
+                                    <th>fecha trámite</th>
+                                    <th>estado prenda</th>
+                                    <th>tipo alerta</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="odd" *ngFor="let prenda of prendas; let i = index">
+                                    <td>{{ i + 1 }}</td>
+                                    <td>{{ prenda.organismoTransito.divipo }}</td>
+                                    <td>{{ prenda.vehiculo.placa.numero }}</td>
+                                    <td>{{ prenda.ciudadano.tipoIdentificacion.sigla }}</td>
+                                    <td>{{ prenda.ciudadano.identificacion }}</td>
+                                    <td>{{ prenda.ciudadano.primerNombre }}</td>
+                                    <td>{{ prenda.ciudadano?.segundoNombre }}</td>
+                                    <td>{{ prenda.ciudadano.primerApellido }}</td>
+                                    <td>{{ prenda.ciudadano?.segundoApellido }}</td>
+                                    <td>{{ prenda.ciudadano.direccionPersonal  }}</td>
+                                    <td>{{ prenda.ciudadano.municipioResidencia.codigoDane  }}</td>
+                                    <td>{{ prenda.ciudadano.telefonoCelular  }}</td>
+                                    <td>{{ prenda.foraneas.gradoAlerta }}</td>
+                                    <td>{{ (prenda.fecha.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td>
+                                    <td>estadoPrenda</td>
+                                    <td>{{ prenda.foraneas.tipoAlerta }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="table " id="dataTables-radicados-cuenta" *ngIf="radicadosCuenta">
+                            <thead>
+                                <tr class="text-center">
+                                    <th>#</th>
+                                    <th>organismo tránsito</th>
+                                    <th>placa</th>
+                                    <th>organismo tránsito origen</th>
+                                    <th>fecha radicación</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="odd" *ngFor="let radicadoCuenta of radicadosCuenta; let i = index">
+                                    <td>{{ i + 1 }}</td>
+                                    <td>{{ radicadoCuenta.vehiculo.organismoTransito.divipo }}</td>
+                                    <td>{{ radicadoCuenta.vehiculo.placa.numero }}</td>
+                                    <td>{{ radicadoCuenta.vehiculo.organismoTransitoRadicado.divipo }}</td>
+                                    <td>{{ (radicadoCuenta.vehiculo.fechaRegistroRadicado.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td>
                                 </tr>
                             </tbody>
                         </table>
