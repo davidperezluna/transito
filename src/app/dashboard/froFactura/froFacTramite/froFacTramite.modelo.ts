@@ -4,7 +4,7 @@ export class FroFacTramite{
 		public interes: number,
 		public tramites: string,
 		public numero: string,
-		public idModulo: boolean,
+		public idModulo: number,
 		public idTipoRecaudo: number,
 		public idVehiculo: number,
 		public idOrganismoTransito: number,

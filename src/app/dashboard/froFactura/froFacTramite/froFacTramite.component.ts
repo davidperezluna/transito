@@ -183,20 +183,6 @@ export class FroFacTramiteComponent implements OnInit {
           response => {
             this.modulo = response.data;
   
-            this._TramitePrecioService.selectByModulo({ 'idModulo': this.factura.idModulo }, token).subscribe(
-              response => {
-                this.tramitesPrecio = response;
-              },
-              error => {
-                this.errorMessage = <any>error;
-  
-                if (this.errorMessage != null) {
-                  console.log(this.errorMessage);
-                  alert("Error en la petición");
-                }
-              }
-            );
-  
             swal.close();
           },
           error => {
@@ -263,6 +249,10 @@ export class FroFacTramiteComponent implements OnInit {
               this.ciudadano = response.data.ciudadano;
               this.factura.idCiudadano = this.ciudadano.id;
 
+              if (this.factura.idModulo == 1) {
+                this.onLoadTramites();
+              }
+
               swal({
                 title: 'Perfecto!',
                 text: response.message,
@@ -320,7 +310,9 @@ export class FroFacTramiteComponent implements OnInit {
       response => {
         if (response.code == 200) {
           this.vehiculo = response.data;
-          this.factura.idVehiculo = this.vehiculo.id;         
+          this.factura.idVehiculo = this.vehiculo.id;
+          
+          this.onLoadTramites();
 
           this._PropietarioService.searchByVehiculo({ 'idVehiculo':this.vehiculo.id }, token).subscribe(
             response => {
@@ -366,6 +358,37 @@ export class FroFacTramiteComponent implements OnInit {
             console.log(this.errorMessage);
             alert("Error en la petición");
           }
+        }
+      }
+    );
+  }
+
+  onLoadTramites(){
+    let token = this._LoginService.getToken();
+
+    let datos: any;
+
+    if (this.vehiculo && this.factura.idModulo != 1) {
+      datos = { 
+        'idModulo': this.factura.idModulo, 
+        'idTipoVehiculo': this.vehiculo.placa.tipoVehiculo.id 
+      }
+    }else{
+      datos = { 
+        'idModulo': this.factura.idModulo
+      }
+    }
+
+    this._TramitePrecioService.selectByModulo(datos, token).subscribe(
+      response => {
+        this.tramitesPrecio = response;
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
         }
       }
     );

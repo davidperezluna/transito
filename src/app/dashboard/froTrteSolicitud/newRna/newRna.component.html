@@ -126,44 +126,6 @@
     <div class="col-xs-12 col-lg-8" *ngIf="factura && vehiculo">
         <div class="card">
             <div class="card-body">
-                <div class="row" *ngIf="documentacionPendiente.length > 0 && tramitesFactura && (tramitesFactura.length == tramitesRealizados.length)">
-                    <div class="col-xs-12 col-lg-12">
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-xs-12 col-lg-12">
-                                    <div class="btn-group">
-                                        <button (click)="onEnviar()" class="btn btn-success" [disabled]="tramitesFactura && (tramitesFactura.length == tramitesRealizados.length)">
-                                            <i class="fa fa-save"></i>
-                                            Guardar observaciones
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-        
-                <div class="row" *ngIf="tramitesFactura && tramitesFactura.length == tramitesRealizados.length">
-                    <div class="col-xs-12 col-lg-12" *ngIf="(requiereSustrato && tramiteSolicitud.insumoEntregado) || !requiereSustrato">
-                        <div class="form-group">
-                            <div class="row" *ngIf="requiereRunt">
-                                <div class="col-xs-12 col-lg-12"> 
-                                    <label>Número de solicitud RUNT <b class="text-danger">*</b></label>
-                                    <input type="text" class="form-control" placeholder="No. solicitud RUNT" [(ngModel)]="tramiteSolicitud.numeroRunt" name="numeroRunt" required />
-                                </div>
-                            </div>
-                            
-                            <div class="row" *ngIf="(requiereRunt && tramiteSolicitud.numeroRunt) || !requiereRunt">
-                                <div class="col-xs-12 col-lg-12">
-                                    <button (click)="onEnviar()" class="btn btn-success">
-                                        <i class="fa fa-save"></i>
-                                        Guardar información
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <!-- 
                 <div class="row" *ngIf="propietarios && vehiculo">
                     <div class="col-xs-12 col-lg-12">
@@ -202,7 +164,67 @@
                             <tfoot *ngIf="!confirmarSolicitante">
                                 <tr>
                                     <td colspan="3">
-                                        <button *ngIf='!fromApoderado && !apoderado' (click)="onFormApoderado()" class="btn btn-primary">
+                                        <button *ngIf='!formApoderado && !apoderado' (click)="onFormApoderado()" class="btn btn-primary">
+                                            <i class="fa fa-save"></i>
+                                            Agregar apoderado
+                                        </button>
+                                        <button *ngIf='tramiteSolicitud.idCiudadano' (click)="onConfirmarSolicitante()" class="btn btn-success">
+                                            <i class="fa fa-save"></i>
+                                            Confirmar solicitante
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+                    row -->
+
+                <div class="row">
+                    <div class="col-xs-12 col-lg-4" *ngIf="!confirmarSolicitante">
+                        <form #formSearchCiudadano="ngForm">
+                            <label>Buscar ciudadano</label>
+                            <div class="input-group">
+                                <input type="number" class="form-control" placeholder="Identificacion ciudadano" [(ngModel)]="identificacionCiudadano" name="identificacionApoderado" required />
+                                <span class="input-group-btn">
+                                    <button (click)="onSearchCiudadano()" [disabled]="formSearchCiudadano.invalid" class="btn btn-default" type="button">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </form>
+                    </div>
+                        
+                    <div class="col-xs-12 col-lg-12" *ngIf="ciudadanos && ciudadanos.length > 0">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th colspan="2" class="text-uppercase text-center">
+                                        <b>Ciudadanos</b>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let ciudadano of ciudadanos; let i = index">
+                                    <td *ngIf="ciudadano">
+                                        <strong>Nombre: </strong>
+                                        {{ ciudadano.primerNombre }} {{ ciudadano.primerApellido }}
+                                        <br>
+                                        <strong>Identificación: </strong>
+                                        {{ ciudadano.identificacion }}
+                                    </td>
+                                    <td>
+                                        <div class="custom-control custom-radio">
+                                            <input [disabled]='confirmarSolicitante' [(ngModel)]="tramiteSolicitud.idCiudadano" value="{{ ciudadano.id }}" type="radio" id="radio{{ i }}" name="radio" class="custom-control-input">
+                                            <label class="custom-control-label" for="radio{{ i }}">Solicitante</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot *ngIf="!confirmarSolicitante">
+                                <tr>
+                                    <td colspan="3">
+                                        <button *ngIf='!formApoderado && !apoderado' (click)="onFormApoderado()" class="btn btn-primary">
                                             <i class="fa fa-save"></i>
                                             Agregar apoderado
                                         </button>
@@ -216,7 +238,7 @@
                         </table>
                     </div>
 
-                    <div class="col-xs-12 col-lg-12" *ngIf='fromApoderado && !apoderado'>
+                    <div class="col-xs-12 col-lg-12" *ngIf='formApoderado && !apoderado'>
                         <div class="input-group">
                             <input type="number" class="form-control" placeholder="Identificacion apoderado" [(ngModel)]="identificacionApoderado" name="identificacionApoderado" required />
                             <span class="input-group-btn">
@@ -271,64 +293,43 @@
                         </table>
                     </div>
                 </div>
-                    row -->
 
-                <div class="row">
-                    <div class="col-xs-12 col-lg-4">
-                        <form #formSearchCiudadano="ngForm">
-                            <label>Buscar ciudadano</label>
-                            <div class="input-group">
-                                <input type="number" class="form-control" placeholder="Identificacion ciudadano" [(ngModel)]="identificacionCiudadano" name="identificacionApoderado" required />
-                                <span class="input-group-btn">
-                                    <button (click)="onSearchCiudadano()" [disabled]="formSearchCiudadano.invalid" class="btn btn-default" type="button">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                </span>
+                <div class="row" *ngIf="documentacionPendiente.length > 0 && factura.estado != 'PENDIENTE DOCUMENTACION' && tramitesFactura && (tramitesFactura.length == tramitesRealizados.length)">
+                    <div class="col-xs-12 col-lg-12">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-xs-12 col-lg-12">
+                                    <div class="btn-group">
+                                        <button (click)="onEnviar()" class="btn btn-success" [disabled]="tramitesFactura && (tramitesFactura.length == tramitesRealizados.length)">
+                                            <i class="fa fa-save"></i>
+                                            Guardar observaciones
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
-                        </form>
+                        </div>
                     </div>
-                        
-                    <div class="col-xs-12 col-lg-12" *ngIf="ciudadanos && ciudadanos.length > 0">
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th colspan="2" class="text-uppercase text-center">
-                                        <b>Ciudadanos</b>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let ciudadano of ciudadanos; let i = index">
-                                    <td *ngIf="ciudadano">
-                                        <strong>Nombre: </strong>
-                                        {{ ciudadano.primerNombre }} {{ ciudadano.primerApellido }}
-                                        <br>
-                                        <strong>Identificación: </strong>
-                                        {{ ciudadano.identificacion }}
-                                    </td>
-                                    <td>
-                                        <div class="custom-control custom-radio">
-                                            <input [disabled]='confirmarSolicitante' [(ngModel)]="tramiteSolicitud.idCiudadano" value="{{ ciudadano.id }}" type="radio" id="radio{{ i }}" name="radio" class="custom-control-input">
-                                            <label class="custom-control-label" for="radio{{ i }}">Solicitante</label>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                            <tfoot *ngIf="!confirmarSolicitante">
-                                <tr>
-                                    <td colspan="3">
-                                        <button *ngIf='!fromApoderado && !apoderado' (click)="onFormApoderado()" class="btn btn-primary">
-                                            <i class="fa fa-save"></i>
-                                            Agregar apoderado
-                                        </button>
-                                        <button *ngIf='tramiteSolicitud.idCiudadano' (click)="onConfirmarSolicitante()" class="btn btn-success">
-                                            <i class="fa fa-save"></i>
-                                            Confirmar solicitante
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tfoot>
-                        </table>
+                </div>
+        
+                <div class="row" *ngIf="tramitesFactura && tramitesFactura.length == tramitesRealizados.length && factura.estado != 'FINALIZADA'">
+                    <div class="col-xs-12 col-lg-12" *ngIf="(requiereSustrato && tramiteSolicitud.insumoEntregado) || !requiereSustrato">
+                        <div class="form-group">
+                            <div class="row" *ngIf="requiereRunt">
+                                <div class="col-xs-12 col-lg-12"> 
+                                    <label>Número de solicitud RUNT <b class="text-danger">*</b></label>
+                                    <input type="text" class="form-control" placeholder="No. solicitud RUNT" [(ngModel)]="tramiteSolicitud.numeroRunt" name="numeroRunt" required />
+                                </div>
+                            </div>
+                            
+                            <div class="row" *ngIf="(requiereRunt && tramiteSolicitud.numeroRunt) || !requiereRunt">
+                                <div class="col-xs-12 col-lg-12">
+                                    <button (click)="onEnviar()" class="btn btn-success">
+                                        <i class="fa fa-save"></i>
+                                        Guardar información
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 

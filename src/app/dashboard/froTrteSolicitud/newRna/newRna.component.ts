@@ -56,7 +56,7 @@ export class NewRnaComponent implements OnInit {
   public documentacionPendiente: any = [];
   public ciudadanos: any = [];
   
-  public fromApoderado = false;
+  public formApoderado = false;
   public formNewCiudadano: any = false;
   
   constructor(
@@ -565,11 +565,11 @@ export class NewRnaComponent implements OnInit {
   }
 
   onFormApoderado() {
-    this.fromApoderado = true;
+    this.formApoderado = true;
   }
 
   onAddApoderado() {
-    this.fromApoderado = false;
+    this.formApoderado = false;
     if (this.apoderado) {
       swal({
         title: 'Perfecto!',
@@ -634,7 +634,7 @@ export class NewRnaComponent implements OnInit {
   }
 
   onCloseApoderado() {
-    this.fromApoderado = false;
+    this.formApoderado = false;
     this.apoderado = null;
   }
 
