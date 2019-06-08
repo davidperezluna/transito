@@ -17,6 +17,11 @@ export class ReportesComponent implements OnInit {
 
     public tramitesSolicitud: any = null;
     public propietariosActuales: any = null;
+    public tramites: any = null;
+    public medidasCautelares: any = null;
+    public cancelacionesMatricula: any = null;
+    public prendas: any = null;
+    public radicadosCuenta: any = null;
 
     public organismoTransitoSelected;
     public organismosTransito;
@@ -36,6 +41,11 @@ export class ReportesComponent implements OnInit {
     public tiposReporte = [
         { value: '1', label: 'VEHICULOS' },
         { value: '2', label: 'PROPIETARIOS ACTUALES' },
+        { value: '3', label: 'TRAMITES' },
+        { value: '4', label: 'MEDIDA CAUTELAR' },
+        { value: '5', label: 'CANCELACIÓN MATRICULA' },
+        { value: '6', label: 'PRENDAS' },
+        { value: '7', label: 'RADICADOS DE CUENTA' },
     ];
 
     public datos = {
@@ -101,7 +111,6 @@ export class ReportesComponent implements OnInit {
 
     onInitTable(estado) {
         if (this.table) {
-            console.log(this.table);
             this.table.destroy();
         }
 
@@ -109,6 +118,20 @@ export class ReportesComponent implements OnInit {
             responsive: false,
             pageLength: 10,
             sPaginationType: 'full_numbers',
+            dom: 'Bfrtip',
+            buttons: [
+                {
+                    title: 'reporte',
+                    extend: 'csvHtml5',
+                    fieldSeparator: ',',
+                    text: 'csv',
+                    charset: 'utf-8',
+                    filename: 'Reporte_' + this.tipoReporteSelected,
+                    fieldBoundary: '',
+                    header: false,
+                },
+
+            ],
             oLanguage: {
                 oPaginate: {
                     sFirst: '<i class="fa fa-step-backward"></i>',
@@ -124,7 +147,6 @@ export class ReportesComponent implements OnInit {
         if (isCreado) {
             this.formHistorial = false;
             this.formFiltros = true;
-            /* this.onSearch(); */
         }
     }
 
@@ -143,9 +165,10 @@ export class ReportesComponent implements OnInit {
             }
         });
         if (this.tipoReporteSelected) {
-            this._TrteSolicitudReporteService.searchByPlaca(this.datos, token).subscribe(
+            this._TrteSolicitudReporteService.searchByFiltros(this.datos, token).subscribe(
                 response => {
                     if (response.status == 'success') {
+                        console.log(response);
                         if(response.tramitesSolicitud) {
                             this.tramitesSolicitud = response.tramitesSolicitud;
                             console.log(this.tramitesSolicitud);
@@ -155,8 +178,40 @@ export class ReportesComponent implements OnInit {
                             }, 100);
                         } else if(response.propietariosActuales) {
                             this.propietariosActuales = response.propietariosActuales;
-                            console.log(this.propietariosActuales);
                             let estado = 'propietarios-actuales'
+                            let timeoutId = setTimeout(() => {
+                                this.onInitTable(estado);
+                            }, 100);
+                        } else if(response.tramites) {
+                            this.tramites = response.tramites;
+                            let estado = 'tramites'
+                            let timeoutId = setTimeout(() => {
+                                this.onInitTable(estado);
+                            }, 100);
+                        } else if(response.medidasCautelares) {
+                            this.medidasCautelares = response.medidasCautelares;
+                            let estado = 'medidas-cautelares'
+                            let timeoutId = setTimeout(() => {
+                                this.onInitTable(estado);
+                            }, 100);
+                        } else if(response.cancelacionesMatricula) {
+                            this.cancelacionesMatricula = response.cancelacionesMatricula;
+                            console.log(this.cancelacionesMatricula);
+                            let estado = 'cancelaciones-matricula'
+                            let timeoutId = setTimeout(() => {
+                                this.onInitTable(estado);
+                            }, 100);
+                        } else if(response.prendas) {
+                            this.prendas = response.prendas;
+                            console.log(this.prendas);
+                            let estado = 'prendas'
+                            let timeoutId = setTimeout(() => {
+                                this.onInitTable(estado);
+                            }, 100);
+                        } else if(response.radicadosCuenta) {
+                            this.radicadosCuenta = response.radicadosCuenta;
+                            console.log(this.radicadosCuenta);
+                            let estado = 'radicados-cuenta'
                             let timeoutId = setTimeout(() => {
                                 this.onInitTable(estado);
                             }, 100);

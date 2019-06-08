@@ -17,17 +17,10 @@ export class FroTrteSolicitudReporteService {
 		private _loogerService: LoggerService
     ){}
     
-	searchByPlaca(datos, token) {
+	searchByFiltros(datos, token) {
 		let json = JSON.stringify(datos);
 		let params = "data=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/search/placa", params, { headers: headers }).map(res => res.json());
-	}
-    
-	searchPropietariosActualesByPlaca(datos, token) {
-		let json = JSON.stringify(datos);
-		let params = "data=" + json + "&authorization=" + token;
-		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-		return this._http.post(this.url + "/search/propietarios/actuales/placa", params, { headers: headers }).map(res => res.json());
 	}
 }
