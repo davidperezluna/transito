@@ -83,7 +83,7 @@
                     <button *ngIf="!audiencia.cuerpo" (click)="onShow(audiencia)" class="btn btn-xs btn-primary" type="button">
                       <i class="fa fa-check"></i>
                     </button>
-                    <a *ngIf="audiencia.cuerpo" href="{{ apiUrl }}contravencional/cvaudiencia/{{ audiencia.id }}/pdf" class="btn btn-xs btn-default">
+                    <a *ngIf="audiencia.cuerpo" href="{{ apiUrl }}contravencional/cvaudiencia/{{ audiencia.id }}/pdf" class="btn btn-xs btn-success" target="_blank">
                       <i class="fa fa-file-pdf-o"></i>
                     </a>
                   </div>

@@ -7,7 +7,7 @@ import { PnalFuncionarioService } from '../../../services/pnalFuncionario.servic
 import { UserCiudadanoService } from '../../../services/userCiudadano.service';
 import { FacturaInsumo } from './facturaInsumo.modelo';
 import { FacturaInsumoService } from '../../../services/facturaInsumo.service';
-import { CiudadanoVehiculoService } from '../../../services/ciudadanoVehiculo.service';
+import { VhloPropietarioService } from '../../../services/vhloPropietario.service';
 
 
 import swal from 'sweetalert2';
@@ -55,7 +55,7 @@ export class NewRnaInsumoComponent implements OnInit {
         private _tramiteFacturaService: TramiteFacturaService,
         private _FuncionarioService: PnalFuncionarioService,
         private _UserCiudadanoService: UserCiudadanoService,
-        private _CiudadanoVehiculoService: CiudadanoVehiculoService,
+        private _CiudadanoVehiculoService: VhloPropietarioService,
         private _FacturaInsumoService: FacturaInsumoService,
     ) {
         this.FacturaInsumo = new FacturaInsumo(null, null, null, null, null);
@@ -159,7 +159,7 @@ export class NewRnaInsumoComponent implements OnInit {
         this.FacturaInsumo.entregado = this.tarjetaEntregada;
         this.FacturaInsumo.idFactura = this.factura.id;
         
-        this._CiudadanoVehiculoService.editLicenciaTransito(this.datos,token).subscribe(
+        this._CiudadanoVehiculoService.edit(this.datos,token).subscribe(
             response => { 
                 this.respuesta = response;
                 if(this.respuesta.status == 'success'){  
