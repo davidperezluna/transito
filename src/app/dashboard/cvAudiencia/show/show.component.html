@@ -22,13 +22,7 @@
                 </table>
                 <form #formEdit="ngForm">
                     <div class="form-group row">
-                        <div class="col-xs-12 col-lg-6">
-                            <label>Tipo</label>
-                            <ng-select (ngModelChange)="onChangedTipo($event)" [multiple]="false" [options]="tipos" [(ngModel)]="datos.idTipo"
-                                name="idTipo" required>
-                            </ng-select>
-                        </div>
-                        <div class="col-xs-12 col-lg-12" *ngIf="datos.idTipo">
+                        <div class="col-xs-12 col-lg-12">
                             <label>Cuerpo
                                 <strong class="text-danger">*</strong>
                             </label>

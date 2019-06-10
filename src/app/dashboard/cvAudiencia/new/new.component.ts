@@ -2,6 +2,7 @@ import { Component, OnInit,Output,EventEmitter } from '@angular/core';
 import { CvAudiencia } from '../cvAudiencia.modelo';
 import { CvAudienciaService } from '../../../services/cvAudiencia.service';
 import { CvCdoComparendoService } from '../../../services/cvCdoComparendo.service';
+import { CvAuCfgTipoService } from '../../../services/cvAuCfgTipo.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 declare var $: any;
@@ -18,15 +19,17 @@ export class NewComponent implements OnInit {
   public numeroComparendo: any = null;
   public comparendo: any = null;
   public audienciaLast: any = null;
+  public tipos: any = null;
 
 constructor(
   private _AudienciaService: CvAudienciaService,
+  private _TipoService: CvAuCfgTipoService,
   private _ComparendoService: CvCdoComparendoService,
   private _LoginService: LoginService,
   ){}
 
   ngOnInit() {
-    this.audiencia = new CvAudiencia(null, null, null, null);
+    this.audiencia = new CvAudiencia(null, null, null, null, null);
 
     let token = this._LoginService.getToken();
 
@@ -54,6 +57,20 @@ constructor(
         }
       }
     );
+
+    this._TipoService.select().subscribe(
+      response => {
+          this.tipos = response;
+      },
+      error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+              console.log(this.errorMessage);
+              alert("Error en la petición");
+          }
+      }
+  );
   }
 
   onCancelar(){

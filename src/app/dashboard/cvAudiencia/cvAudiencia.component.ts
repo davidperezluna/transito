@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { CvAudiencia } from './cvAudiencia.modelo';
 import { CvAudienciaService } from '../../services/cvAudiencia.service';
 import { LoginService } from '../../services/login.service';
-import { CvAudiencia } from './cvAudiencia.modelo';
+import { environment } from 'environments/environment'
 import swal from 'sweetalert2';
 declare var $: any;
 
@@ -11,7 +12,8 @@ declare var $: any;
 })
 export class CvAudienciaComponent implements OnInit {
   public errorMessage;
-	public id;
+  
+  public apiUrl = environment.apiUrl;
 
   public audiencias;
   
@@ -131,14 +133,15 @@ export class CvAudienciaComponent implements OnInit {
   
   onNew(){
     this.onInitForms();
+
     this.formNew = true;
   }
 
   ready(isCreado:any){
     if(isCreado) {
-      this.onInitForms();
-      this.formIndex = true;
       this.ngOnInit();
+    }else{
+      this.onSearch();
     }
   }
 
