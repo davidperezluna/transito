@@ -123,12 +123,9 @@ export class ReportesComponent implements OnInit {
                 {
                     title: 'reporte',
                     extend: 'csvHtml5',
-                    fieldSeparator: ',',
                     text: 'csv',
                     charset: 'utf-8',
                     filename: 'Reporte_' + this.tipoReporteSelected,
-                    fieldBoundary: '',
-                    header: false,
                 },
 
             ],
@@ -168,50 +165,104 @@ export class ReportesComponent implements OnInit {
             this._TrteSolicitudReporteService.searchByFiltros(this.datos, token).subscribe(
                 response => {
                     if (response.status == 'success') {
-                        console.log(response);
                         if(response.tramitesSolicitud) {
                             this.tramitesSolicitud = response.tramitesSolicitud;
-                            console.log(this.tramitesSolicitud);
-                            let estado = 'vehiculo'
+                            
+                            this.propietariosActuales = null;
+                            this.tramites = null;
+                            this.medidasCautelares = null;
+                            this.cancelacionesMatricula = null;
+                            this.prendas = null;
+                            this.radicadosCuenta = null;
+
+                            let estado = 'vehiculo';
                             let timeoutId = setTimeout(() => {
                                 this.onInitTable(estado);
                             }, 100);
                         } else if(response.propietariosActuales) {
                             this.propietariosActuales = response.propietariosActuales;
-                            let estado = 'propietarios-actuales'
+
+                            this.tramitesSolicitud = null;
+                            this.tramites = null;
+                            this.medidasCautelares = null;
+                            this.cancelacionesMatricula = null;
+                            this.prendas = null;
+                            this.radicadosCuenta = null;
+
+                            let estado = 'propietarios-actuales';
                             let timeoutId = setTimeout(() => {
                                 this.onInitTable(estado);
                             }, 100);
                         } else if(response.tramites) {
                             this.tramites = response.tramites;
-                            let estado = 'tramites'
+
+                            this.tramitesSolicitud = null;
+                            this.propietariosActuales = null;
+                            this.medidasCautelares = null;
+                            this.cancelacionesMatricula = null;
+                            this.prendas = null;
+                            this.radicadosCuenta = null;
+
+                            let estado = 'tramites';
                             let timeoutId = setTimeout(() => {
                                 this.onInitTable(estado);
                             }, 100);
                         } else if(response.medidasCautelares) {
                             this.medidasCautelares = response.medidasCautelares;
-                            let estado = 'medidas-cautelares'
+                    
+                            this.tramitesSolicitud = null;
+                            this.propietariosActuales = null;
+                            this.tramites = null;
+                            this.cancelacionesMatricula = null;
+                            this.prendas = null;
+                            this.radicadosCuenta = null;
+
+                            let estado = 'medidas-cautelares';
                             let timeoutId = setTimeout(() => {
                                 this.onInitTable(estado);
                             }, 100);
                         } else if(response.cancelacionesMatricula) {
                             this.cancelacionesMatricula = response.cancelacionesMatricula;
                             console.log(this.cancelacionesMatricula);
-                            let estado = 'cancelaciones-matricula'
+                            
+                            this.tramitesSolicitud = null;
+                            this.propietariosActuales = null;
+                            this.tramites = null;
+                            this.medidasCautelares = null;
+                            this.prendas = null;
+                            this.radicadosCuenta = null;
+
+                            let estado = 'cancelaciones-matricula';
                             let timeoutId = setTimeout(() => {
                                 this.onInitTable(estado);
                             }, 100);
                         } else if(response.prendas) {
                             this.prendas = response.prendas;
                             console.log(this.prendas);
-                            let estado = 'prendas'
+
+                            this.tramitesSolicitud = null;
+                            this.propietariosActuales = null;
+                            this.tramites = null;
+                            this.cancelacionesMatricula = null;
+                            this.medidasCautelares = null;
+                            this.radicadosCuenta = null;
+
+                            let estado = 'prendas';
                             let timeoutId = setTimeout(() => {
                                 this.onInitTable(estado);
                             }, 100);
                         } else if(response.radicadosCuenta) {
                             this.radicadosCuenta = response.radicadosCuenta;
                             console.log(this.radicadosCuenta);
-                            let estado = 'radicados-cuenta'
+
+                            this.tramitesSolicitud = null;
+                            this.propietariosActuales = null;
+                            this.tramites = null;
+                            this.cancelacionesMatricula = null;
+                            this.medidasCautelares = null;
+                            this.prendas = null;
+                            
+                            let estado = 'radicados-cuenta';
                             let timeoutId = setTimeout(() => {
                                 this.onInitTable(estado);
                             }, 100);
