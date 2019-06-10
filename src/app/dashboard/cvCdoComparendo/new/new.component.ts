@@ -7,15 +7,12 @@ import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTrans
 import { CfgMunicipioService } from '../../../services/cfgMunicipio.service';
 import { CfgTipoInfractorService } from '../../../services/cfgTipoInfractor.service';
 import { UserLcCfgCategoriaService } from '../../../services/userLcCfgCategoria.service';
-import { VehiculoService } from '../../../services/vehiculo.service';
 import { UserCiudadanoService } from '../../../services/userCiudadano.service';
 import { UserEmpresaService } from '../../../services/userEmpresa.service';
-import { CiudadanoVehiculoService } from '../../../services/ciudadanoVehiculo.service';
 import { UserCfgTipoIdentificacionService } from '../../../services/userCfgTipoIdentificacion.service';
 import { PqoCfgPatioService } from '../../../services/pqoCfgPatio.service';
 import { PqoCfgGruaService } from '../../../services/pqoCfgGrua.service';
 import { PqoInmovilizacionService } from '../../../services/pqoInmovilizacion.service';
-import { CvCdoCfgEstadoService } from '../../../services/cvCdoCfgEstado.service';
 import { VhloCfgRadioAccionService } from '../../../services/vhloCfgRadioAccion.service';
 import { VhloCfgModalidadTransporteService } from '../../../services/vhloCfgModalidadTransporte.service';
 import { VhloCfgTransportePasajeroService } from '../../../services/vhloCfgTransportePasajero.service';
@@ -132,15 +129,12 @@ constructor(
   private _PnalCfgCdoConsecutivoService: PnalCfgCdoConsecutivoService,
   private _OrganismoTransitoService: CfgOrganismoTransitoService,
   private _MunicipioService: CfgMunicipioService,
-  private _VechiculoService: VehiculoService,
   private _UserCiudadanoService: UserCiudadanoService,
   private _EmpresaService: UserEmpresaService,
-  private _ciudadanoVehiculoService: CiudadanoVehiculoService,
   private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
   private _PqoCfgPatioService: PqoCfgPatioService,
   private _PqoCfgGruaService: PqoCfgGruaService,
   private _InmovilizacionService: PqoInmovilizacionService,
-  private _CvCdoCfgEstadoService: CvCdoCfgEstadoService,
   private _RadioAccionService: VhloCfgRadioAccionService,
   private _ModalidadTransporteService: VhloCfgModalidadTransporteService,
   private _TransportePasajeroService: VhloCfgTransportePasajeroService,
@@ -534,70 +528,6 @@ constructor(
         }
       );
     }
-  }
-
-  onKeyPlaca(){
-    swal({
-      title: 'Cargando Datos del Vehiculo!',
-      text: 'Solo tardará unos segundos por favor espere.',
-      timer: 2500,
-      onOpen: () => {
-        swal.showLoading()
-      }
-    }).then((result) => {
-      if (
-
-        // Read more about handling dismissals
-        result.dismiss === swal.DismissReason.timer
-      ) {
-      }
-    });
-  
-    let token = this._LoginService.getToken();
-
-    this._VechiculoService.showVehiculoPlaca(token, this.placa).subscribe(
-      response => {
-        if (response.status == "success") {
-          this.vehiculo = response.data;
-          this._ciudadanoVehiculoService.showCiudadanoVehiculoId(token, this.vehiculo.placa.numero).subscribe(
-            response => {
-              this.propietariosVehiculo = response.data;
-
-              this.propietariosVehiculo.forEach(element => {
-                if (element.ciudadano) {
-                  this.searchByIdentificacion = true;
-                }
-                if (element.empresa) {
-                  this.isEmpresa = true;
-                }
-              });
-
-              error => {
-                this.errorMessage = <any>error;
-                if (this.errorMessage != null) {
-                  console.log(this.errorMessage);
-                  alert("Error en la petición");
-                }
-              }
-            }
-          );
-        }else {
-          swal({
-            title: 'Atención!',
-            text: response.msj,
-            type: 'warning',
-            confirmButtonText: 'Aceptar'
-          });
-          this.vehiculo = false;
-        }
-        error => {
-          this.errorMessage = <any>error;
-          if (this.errorMessage != null) {
-            console.log(this.errorMessage);
-            alert("Error en la petición");
-          }
-        }
-      }); 
   }
   
   onSearchPropietario(){

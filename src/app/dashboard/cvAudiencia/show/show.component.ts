@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { CvAudienciaService } from '../../../services/cvAudiencia.service';
 import { CfgAdmFormatoService } from '../../../services/cfgAdmFormato.service';
+import { CvAuCfgTipoService } from '../../../services/cvAuCfgTipo.service';
+import { CvAuEstadoService } from '../../../services/cvAuEstado.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 declare var $: any;
@@ -13,27 +15,28 @@ export class ShowComponent implements OnInit {
     @Output() ready = new EventEmitter<any>();
     @Input() audiencia: any = null;
     public errorMessage;
-    public formReady = false;
-    public formatos: any = null;
+ 
+    public tipos: any = null;
 
     public datos = {
-        'borrador': null,
-        'idFormato': null,
-        'id': null,
+        'cuerpo': null,
+        'idTipo': null,
+        'idAudiencia': null,
     }
 
     constructor(
         private _AudienciaService: CvAudienciaService,
-        private _FormatoService: CfgAdmFormatoService,
+        private _EstadoService: CvAuEstadoService,
+        private _TipoService: CvAuCfgTipoService,
         private _LoginService: LoginService,
     ) { }
 
     ngOnInit() {
-        this.datos.idFormato = null;
+        this.datos.idTipo = null;
         
-        this._FormatoService.select().subscribe(
+        this._TipoService.select().subscribe(
             response => {
-                this.formatos = response;
+                this.tipos = response;
             },
             error => {
                 this.errorMessage = <any>error;
@@ -53,7 +56,7 @@ export class ShowComponent implements OnInit {
 
     onCancelar() { this.ready.emit(true); }
 
-    onChangedFormato(e) {
+    onChangedTipo(e) {
         if (e) {
             swal({
                 title: 'Cargando plantilla!',
@@ -65,26 +68,35 @@ export class ShowComponent implements OnInit {
 
             let token = this._LoginService.getToken();
 
-            this._FormatoService.show({ 'id': e, 'idComparendo': this.audiencia.comparendo.id }, token).subscribe(
+            this._TipoService.show({ 'id': e, 'idComparendo': this.audiencia.comparendo.id }, token).subscribe(
                 response => {
-                    /*$('#summernote').summernote({
-                        placeholder: 'Diligencie el cuerpo del acto administrativo',
-                        tabsize: 2,
-                        height: 800,
-                        toolbar: [
-                            ['style', ['bold', 'italic', 'underline', 'clear']],
-                            ['fontsize', ['fontsize']],
-                            ['color', ['color']],
-                            ['para', ['ul', 'ol', 'paragraph']],
-                            ['table', ['table']]
-                        ]
-                    });*/
+                    if (response.code == 200) {
+                        /*$('#summernote').summernote({
+                            placeholder: 'Diligencie el cuerpo del acto administrativo',
+                            tabsize: 2,
+                            height: 800,
+                            toolbar: [
+                                ['style', ['bold', 'italic', 'underline', 'clear']],
+                                ['fontsize', ['fontsize']],
+                                ['color', ['color']],
+                                ['para', ['ul', 'ol', 'paragraph']],
+                                ['table', ['table']]
+                            ]
+                        });*/
 
-                    $('#summernote').summernote('code', response.data.template);
+                        $('#summernote').summernote('code', response.data.template);
 
-                    this.datos.idFormato = response.data.formato.id;
+                        this.datos.idTipo = response.data.tipo.id;
 
-                    swal.close();
+                        swal.close();
+                    }else{
+                        swal({
+                            title: response.title,
+                            text: response.message,
+                            type: response.status,
+                            confirmButtonText: 'Aceptar'
+                        });
+                    }                    
                 },
                 error => {
                     this.errorMessage = <any>error;
@@ -100,7 +112,7 @@ export class ShowComponent implements OnInit {
 
     onEnviar() {
         swal({
-        title: 'Actualizando registros!',
+        title: 'Guardando registros!',
         text: 'Solo tardara unos segundos por favor espere.',
         onOpen: () => {
             swal.showLoading()
@@ -109,9 +121,9 @@ export class ShowComponent implements OnInit {
 
         let token = this._LoginService.getToken();
 
-        this.datos.id = this.audiencia.id;
+        this.datos.idAudiencia = this.audiencia.id;
 
-        this._AudienciaService.updateBorrador(this.datos, token).subscribe(
+        this._EstadoService.register(this.datos, token).subscribe(
             response => {
                 if (response.status == 'success') {
                     this.ready.emit(true);

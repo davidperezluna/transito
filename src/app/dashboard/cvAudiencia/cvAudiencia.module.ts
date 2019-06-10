@@ -6,14 +6,16 @@ import {
     TemplateRef 
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CvAudienciaComponent } from './cvAudiencia.component';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
+import { SelectModule } from 'angular2-select';
+
+import { CvAudienciaComponent } from './cvAudiencia.component';
 import { CvAudienciaService } from '../../services/cvAudiencia.service';
+import { CvAuEstadoService } from '../../services/cvAuEstado.service';
 
 import { NewComponent } from './new/new.component';
 import { EditComponent } from './edit/edit.component';
 import { ShowComponent } from './show/show.component';
-import { SelectModule } from 'angular2-select';
 
 @NgModule({
     imports: [
@@ -23,7 +25,10 @@ import { SelectModule } from 'angular2-select';
     ],
     declarations: [CvAudienciaComponent,NewComponent,EditComponent,ShowComponent],
     exports: [CvAudienciaComponent, NewComponent,EditComponent,ShowComponent],
-    providers:[CvAudienciaService]
+    providers:[
+        CvAudienciaService,
+        CvAuEstadoService
+    ]
 })
 
 export class CvAudienciaModule { }

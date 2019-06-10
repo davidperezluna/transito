@@ -2,7 +2,6 @@ import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@
 import { LoginService } from '../../../services/login.service';
 import { VehiculoService } from '../../../services/vehiculo.service';
 import { TramiteSolicitudService } from '../../../services/tramiteSolicitud.service';
-import { CiudadanoVehiculoService } from '../../../services/ciudadanoVehiculo.service'
 import swal from 'sweetalert2';
 import { forEach } from '@angular/router/src/utils/collection';
 declare var $: any;
@@ -34,9 +33,7 @@ export class showRegistroEntregaProductoComponent implements OnInit {
   constructor(
     private _loginService: LoginService,
     private _VehiculoService: VehiculoService,
-    private _TramiteSolicitudService: TramiteSolicitudService,
-    private _CiudadanoVehiculoService: CiudadanoVehiculoService,
-
+    private _TramiteSolicitudService: TramiteSolicitudService
   ) { }
 
   ngOnInit() {

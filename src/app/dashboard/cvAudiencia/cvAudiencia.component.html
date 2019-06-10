@@ -96,11 +96,11 @@
     
     <app-edit *ngIf='formEdit' [audiencia]="audiencia" (ready)="ready($event)"></app-edit>
     
-    <div class="col-xs-12 col-lg-8" *ngIf='formShow'>
+    <div class="col-xs-12 col-lg-12" *ngIf='formShow'>
       <app-show [audiencia]="audiencia" (ready)="ready($event)"></app-show>
     </div>
 
-    <div class="col-xs-12 col-lg-8" *ngIf='formNew'>
+    <div class="col-xs-12 col-lg-12" *ngIf='formNew'>
       <app-new (ready)="ready($event)"></app-new>
     </div>
 </div>

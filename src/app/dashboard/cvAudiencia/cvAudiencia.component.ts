@@ -13,12 +13,14 @@ export class CvAudienciaComponent implements OnInit {
   public errorMessage;
 	public id;
 
-	public audiencias;
-	public formNew = false;
-	public formEdit = false;
-  public formIndex = false;
-  public formShow = false;
-  public formSearch = true;
+  public audiencias;
+  
+	public formNew: any;
+	public formEdit: any;
+  public formIndex: any;
+  public formShow: any;
+  public formSearch: any;
+
   public table:any = null; 
   public audiencia: CvAudiencia;
 
@@ -38,7 +40,19 @@ export class CvAudienciaComponent implements OnInit {
 		private _LoginService: LoginService,
     ){}
     
-  ngOnInit() {  }
+  ngOnInit() { 
+    this.onInitForms();
+
+    this.formSearch = true;
+  }
+
+  onInitForms(){
+    this.formNew = false;
+    this.formEdit = false;
+    this.formIndex = false;
+    this.formShow = false;
+    this.formSearch = false;
+  }
 
   onSearch() {
     swal({
@@ -57,6 +71,7 @@ export class CvAudienciaComponent implements OnInit {
       response => {
         if (response.status == 'success') {
           this.audiencias = response.data;
+          this.onInitForms();
           this.formIndex = true;
 
           swal({
@@ -65,11 +80,15 @@ export class CvAudienciaComponent implements OnInit {
             type: 'success',
             confirmButtonText: 'Aceptar'
           });
+
           let timeoutId = setTimeout(() => {
-            this.iniciarTabla();
+            this.onInitTable();
           }, 100);
         } else {
           this.audiencias = null;
+          this.onInitForms();
+          this.formIndex = false;
+
           swal({
             title: 'Alerta!',
             text: response.message,
@@ -90,12 +109,12 @@ export class CvAudienciaComponent implements OnInit {
   }
 
 
-  iniciarTabla(){
+  onInitTable(){
     if (this.table) {
       this.table.destroy();
     }
 
-    $('#dataTables-example').DataTable({
+    this.table = $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,
       sPaginationType: 'full_numbers',
@@ -107,22 +126,17 @@ export class CvAudienciaComponent implements OnInit {
           sLast: '<i class="fa fa-step-forward"></i>'
         }
       }
-   });
-   this.table = $('#dataTables-example').DataTable();
+    });
   }
   
   onNew(){
+    this.onInitForms();
     this.formNew = true;
-    this.formEdit = false;
-    this.formShow = false;
-    this.formIndex = false;
   }
 
   ready(isCreado:any){
     if(isCreado) {
-      this.formNew = false;
-      this.formEdit = false;
-      this.formShow = false;
+      this.onInitForms();
       this.formIndex = true;
       this.ngOnInit();
     }

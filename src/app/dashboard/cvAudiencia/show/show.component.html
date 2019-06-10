@@ -23,16 +23,16 @@
                 <form #formEdit="ngForm">
                     <div class="form-group row">
                         <div class="col-xs-12 col-lg-6">
-                            <label>Formato</label>
-                            <ng-select (ngModelChange)="onChangedFormato($event)" [multiple]="false" [options]="formatos" [(ngModel)]="datos.idFormato"
-                                name="idFormato" required>
+                            <label>Tipo</label>
+                            <ng-select (ngModelChange)="onChangedTipo($event)" [multiple]="false" [options]="tipos" [(ngModel)]="datos.idTipo"
+                                name="idTipo" required>
                             </ng-select>
                         </div>
-                        <div class="col-xs-12 col-lg-12">
-                            <label>Borrador
+                        <div class="col-xs-12 col-lg-12" *ngIf="datos.idTipo">
+                            <label>Cuerpo
                                 <strong class="text-danger">*</strong>
                             </label>
-                            <textarea class="form-control" [(ngModel)]="datos.borrador" name="borrador" id="summernote"></textarea>
+                            <textarea class="form-control" [(ngModel)]="datos.cuerpo" name="cuerpo" id="summernote"></textarea>
                         </div>
                     </div>
                 </form>

@@ -1,9 +1,9 @@
 import { Component, OnInit,Input, Output, EventEmitter } from '@angular/core';
+import { VhloVehiculo } from '../vhloVehiculo/vhloVehiculo.modelo';
 import {VhloCfgColorService} from '../../services/vhloCfgColor.service';
 import {LoginService} from '../../services/login.service';
-import { VhloVehiculo } from '../vhloVehiculo/vhloVehiculo.modelo';
 import {VehiculoService} from '../../services/vehiculo.service';
-import {CiudadanoVehiculoService} from '../../services/ciudadanoVehiculo.service';
+import { VhloPropietarioService } from '../../services/vhloPropietario.service';
 import {VhloCfgPlacaService} from '../../services/vhloCfgPlaca.service';
 import {CfgOrganismoTransitoService} from '../../services/cfgOrganismoTransito.service';
 import swal from 'sweetalert2';
@@ -39,7 +39,7 @@ export class RnrsPreasignacionPlacaComponent implements OnInit {
     private _vehiculoService: VehiculoService,
 		private _ColorService: VhloCfgColorService,
     private _loginService: LoginService,
-    private _ciudadanoVehiculoService: CiudadanoVehiculoService,
+    private _PropietarioService: VhloPropietarioService,
     private _CfgPlacaService: VhloCfgPlacaService,
     private _OrganismoTransitoService: CfgOrganismoTransitoService,
     ){}
@@ -163,7 +163,7 @@ export class RnrsPreasignacionPlacaComponent implements OnInit {
 
     let token = this._loginService.getToken();
 
-    this._ciudadanoVehiculoService.showCiudadanoVehiculoId(token,this.vehiculoCriterio).subscribe(
+    this._PropietarioService.searchByVehiculo(token,this.vehiculoCriterio).subscribe(
       response => {
         // console.log(response.data);
         if (response.code == 200 ) {

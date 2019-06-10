@@ -4,7 +4,6 @@ import { CvCdoComparendoComponent } from './cvCdoComparendo.component';
 import { CvCdoComparendoService } from '../../services/cvCdoComparendo.service';
 import { CfgOrganismoTransitoService } from '../../services/cfgOrganismoTransito.service';
 import { PnalFuncionarioService } from '../../services/pnalFuncionario.service';
-import { CiudadanoVehiculoService } from '../../services/ciudadanoVehiculo.service';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 
 import { NewComponent } from './new/new.component';
@@ -39,7 +38,11 @@ import { SelectModule } from 'angular2-select';
         DocumentComponent,
         ExportComponent
     ],
-    providers:[PnalFuncionarioService,CvCdoComparendoService,CfgOrganismoTransitoService,CiudadanoVehiculoService]
+    providers:[
+        PnalFuncionarioService,
+        CvCdoComparendoService,
+        CfgOrganismoTransitoService
+    ]
 })
 
 export class CvCdoComparendoModule { }
