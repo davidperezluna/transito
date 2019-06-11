@@ -1,35 +1,34 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { UserEmpresaService } from '../../services/userEmpresa.service';
 import { LoginService } from '../../services/login.service';
-import { TpAlcaldia } from './tpAlcaldia.modelo';
+import { VhloTpConvenio } from './vhloTpConvenio.modelo';
 import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './tpAlcaldia.component.html',
+  templateUrl: './vhloTpConvenio.component.html',
 })
-export class TpAlcaldiaComponent implements OnInit {
+export class VhloTpConvenioComponent implements OnInit {
   public errorMessage;
 	public id;
-	public respuesta;
 	public empresas;
 	public formNew = false;
 	public formEdit = false;
   public formIndex = true;
   public formShow = false;
   public table:any;  
-  public empresa: TpAlcaldia;
+  public empresa: VhloTpConvenio;
 
   constructor(
 		private _EmpresaService: UserEmpresaService,
-		private _loginService: LoginService,
+		private _LoginService: LoginService,
     ){}
     
   ngOnInit() {
     swal({
       title: 'Cargando Tabla!',
-      text: 'Solo tardara unos segundos por favor espere.',
+      text: 'Solo tardará unos segundos, por favor espere.',
       onOpen: () => {
         swal.showLoading()
       }
@@ -40,7 +39,7 @@ export class TpAlcaldiaComponent implements OnInit {
           this.empresas = response.data;
 
           let timeoutId = setTimeout(() => {  
-            this.iniciarTabla();
+            this.onInitTable();
           }, 100);
 
           swal.close();
@@ -55,8 +54,8 @@ export class TpAlcaldiaComponent implements OnInit {
 				}
       );
   }
-  iniciarTabla(){
-    $('#dataTables-example').DataTable({
+  onInitTable(){
+    this.table = $('#dataTables-example').DataTable({
       responsive: false,
       pageLength: 6,
       sPaginationType: 'full_numbers',
@@ -69,8 +68,8 @@ export class TpAlcaldiaComponent implements OnInit {
         }
       }
    });
-   this.table = $('#dataTables-example').DataTable();
   }
+
   onNew(){
     this.formNew = true;
     this.formIndex = false;
@@ -88,9 +87,8 @@ export class TpAlcaldiaComponent implements OnInit {
       }
   }
 
-  getSucursal(empresa:any){
+  getConvenio(empresa:any){
     this.empresa = empresa;
-    console.log(this.empresa);
     this.formShow = true;
     this.formIndex = false;
   }

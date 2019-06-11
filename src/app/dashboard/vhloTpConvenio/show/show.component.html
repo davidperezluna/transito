@@ -1,19 +1,3 @@
-
-<div class="container">
-    <div class="row align-items-center justify-content-between">
-         <div class="col-11 col-sm-12 page-title">
-            <!-- <h5>
-                <b>Módulo RNC.</b>
-                <small>Inscripción de convenio</small>
-            </h5> 
-         </div> -->
-         <!-- <div class="col text-left ">
-             <div class="btn-group pull-left"><br>
-                   
-             </div>
-         </div> -->
-     </div>
-     
 <div class="container row">
     <div class="col-md-4 col-lg-4">
         <div class="card">
@@ -67,12 +51,15 @@
     </div> 
     <div class="col-md-11 col-lg-8">
         <div class="table-responsive">
-            <div class="card" *ngIf='formListaConvenioes'>
+            <div class="card" *ngIf='formListaConvenios'>
                 <div class="card-header">
                     <h5 >
                         <b class="text-center">Convenios</b>
                         <div class="btn-group pull-right">
-                            <button (click)="onNewConvenio()" class="btn btn-outline-success  btn-round pull-left "  data-target="#themepicker" data-toggle="modal"><span class="text">Nuevo</span> <i class="ti-save ml-2"></i></button>
+                            <button (click)="onNew()" class="btn btn-default">
+                                <i class="fa fa-plus"></i>
+                                <span class="text">Nuevo</span>
+                            </button>
                         </div>
                     </h5>
                 </div>
@@ -80,11 +67,11 @@
                     <table class="table " id="dataTables-example">
                         <thead>
                             <tr>
-                                <th>Numero</th>
-                                <th>fechaConvenio</th>
-                                <th>fechaActaInicio</th>
-                                <th>fechaActaFin</th>
-                                <th>observacion</th>
+                                <th>Número</th>
+                                <th>Fecha Convenio</th>
+                                <th>Fecha acta inicio</th>
+                                <th>Fecha acta fin</th>
+                                <th>Observación</th>
                                 <th>Acción</th>
                             </tr>
                         </thead>
@@ -97,8 +84,8 @@
                                 <td>{{convenio.fechaActaFin}}</td>
                                 <td>{{convenio.observacion}}</td>
                                 <td>
-                                    <!-- <button (click)="editSucursal(convenio)"       class="btn btn-outline-info btn-xs" type="button">Editar</button>  -->
-                                    <button (click)="deleteSucursal(convenio.id)"  class="btn btn-outline-danger btn-xs" type="button">Eliminar</button>
+                                    <button (click)="onEdit(convenio)" class="btn btn-info btn-xs" type="button">Editar</button> 
+                                    <button (click)="onDelete(convenio.id)"  class="btn btn-danger btn-xs" type="button">Eliminar</button>
                                 </td>
                             </tr>
                         </tbody>
@@ -106,13 +93,12 @@
                 </div>               
             </div>          
         </div>
-        <!-- fin de lista de convenioes -->
-        <!--formulario de nueva convenio-->
-        <app-new-convenio *ngIf='formNewConvenio' [empresa]="empresa" (readyConvenio)="readyConvenio($event)"></app-new-convenio>
+        <!-- fin de lista de convenios -->
+        <!--formulario de nuevo convenio-->
+        <app-new *ngIf='formNew' [empresa]="empresa" (ready)="ready($event)"></app-new>
+        <app-edit *ngIf='formEdit' [convenio]="convenio" (ready)="ready($event)"></app-edit>
         <!-- fin formulario -->
      </div> 
-     
-</div>
 </div>
 
 

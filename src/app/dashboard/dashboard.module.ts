@@ -180,7 +180,7 @@ import { SvCfgClaseAccidenteModule } from './svCfgClaseAccidente/svCfgClaseAccid
 import { CfgChoqueConModule } from './cfgChoqueCon/cfgChoqueCon.module';
 import { SvCfgObjetoFijoModule } from './svCfgObjetoFijo/svCfgObjetoFijo.module';
 
-import { TpAlcaldiaModule } from './tpAlcaldia/tpAlcaldia.module';
+import { VhloTpConvenioModule } from './vhloTpConvenio/vhloTpConvenio.module';
 // import { SucursalModule } from './empresa/sucursal/new/sucursal.module';
 
 import { GdDocumentoModule } from './gdDocumento/gdDocumento.module';
@@ -443,7 +443,7 @@ import {RightsidebarComponent} from '../shared';
     BpProyectoModule,
     BpCdpModule,
     RnrsPreasignacionPlacaModule,
-    TpAlcaldiaModule,
+    VhloTpConvenioModule,
     FroFacturaModule,
     FroRecaudoModule,
     FroAcuerdoPagoModule,

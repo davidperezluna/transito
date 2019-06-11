@@ -1,4 +1,4 @@
-export class Convenio{
+export class VhloTpConvenio{
 	constructor(
 		public id: number,
 		public numeroConvenio: number,

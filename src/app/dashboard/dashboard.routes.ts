@@ -128,7 +128,7 @@ import { PnalAsignacionRoutes } from './pnalAsignacion/pnalAsignacion.routes';
 
 import { GestionTransportePublicoRoutes } from './gestionTransportePublico/gestionTransportePublico.routes';
 
-import { TpAlcaldiaRoutes } from './tpAlcaldia/tpAlcaldia.routes';
+import { VhloTpConvenioRoutes } from './vhloTpConvenio/vhloTpConvenio.routes';
 import { RpcccInventarioDocumentalRoutes } from './rpcccInventarioDocumental/rpcccInventarioDocumental.routes';
 import { RnrsPreasignacionPlacaRoutes } from './rnrsPreasignacionPlaca/rnrsPreasignacionPlaca.routes';
 
@@ -435,7 +435,7 @@ export const DashboardRoutes: Route[] = [
       ...BpProyectoRoutes,
       ...BpCdpRoutes,
       ...RnrsPreasignacionPlacaRoutes,
-      ...TpAlcaldiaRoutes,
+      ...VhloTpConvenioRoutes,
       ...FroFacturaRoutes,
       ...FroRecaudoRoutes,
       ...FroAcuerdoPagoRoutes,

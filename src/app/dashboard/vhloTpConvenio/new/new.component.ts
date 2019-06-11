@@ -1,43 +1,36 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { Convenio } from './convenio.modelo';
-// import { Empresa } from '../new/empresa.modelo';
+import { VhloTpConvenio } from '../vhloTpConvenio.modelo';
 
-import { VhloTpConvenioService } from '../../../../services/vhloTpConvenio.service';
-import { LoginService } from '../../../../services/login.service';
-import { UserEmpresaService } from '../../../../services/userEmpresa.service';
+import { VhloTpConvenioService } from '../../../services/vhloTpConvenio.service';
+import { UserEmpresaService } from '../../../services/userEmpresa.service';
+import { LoginService } from '../../../services/login.service';
 
 import swal from 'sweetalert2';
  
 @Component({
-  selector: 'app-new-convenio',
+  selector: 'app-new',
   templateUrl: './new.component.html'
 })
-export class NewConvenioComponent implements OnInit {
-@Output() readyConvenio = new EventEmitter<any>();
+export class NewComponent implements OnInit {
+@Output() ready = new EventEmitter<any>();
 @Input() empresa:any = null;
-public convenio: Convenio;
+public convenio: VhloTpConvenio;
 public errorMessage;
-public respuesta;
 public cerrarFormulario=true;
 public empresasTransportePublico: any;
 
-
-
-
-public btnVisible=false;
 public formNewConvenio = false;
 public formIndexConvenio = true;
 
-// los que vienen desde el base de datos
 constructor(
   private _VhloTpConvenioService: VhloTpConvenioService,
-  private _loginService: LoginService,
+  private _LoginService: LoginService,
   private _EmpresaService: UserEmpresaService,
  
 ){}
 
   ngOnInit() {
-    this.convenio = new Convenio(null,null,null,null,null,null,null,null);
+    this.convenio = new VhloTpConvenio(null,null,null,null,null,null,null,null);
 
     this._EmpresaService.selectTransportePublico().subscribe( 
       response => {
@@ -53,35 +46,33 @@ constructor(
     );   
 
   } 
-  // la función cancelar
-  onCancelar(){
-    this.readyConvenio.emit(true);
-   
-  }
-  // enviar a guarda
-  onEnviar(){
 
-    let token = this._loginService.getToken();
+  onCancelar(){
+    this.ready.emit(true);
+  }
+
+  onEnviar(){
+    let token = this._LoginService.getToken();
+
     this.convenio.empresa = this.empresa.id;
+    
     console.log(this.convenio);
 
-    this._VhloTpConvenioService.register(this.convenio,token).subscribe(
+    this._VhloTpConvenioService.register(this.convenio, token).subscribe(
       response => {
-        this.respuesta = response;
-        console.log(this.respuesta);
-        if(this.respuesta.status == 'success'){
-          this.readyConvenio.emit(true);
+        if(response.code == 200){
+          this.ready.emit(true);
           swal({
-            title: 'Perfecto!',
-            text: 'Registro exitoso!',
-            type: 'success',
+            title: response.title,
+            text: response.message,
+            type: response.status,
             confirmButtonText: 'Aceptar'
           })
         }else{
           swal({
-            title: 'Error!',
-            text: 'El convenio ya se encuentra registrado',
-            type: 'error',
+            title: response.title,
+            text: response.message,
+            type: response.status,
             confirmButtonText: 'Aceptar'
           })
         }
@@ -94,6 +85,4 @@ constructor(
         }
     }); 
   }
-  // final del enviar
-
 }
