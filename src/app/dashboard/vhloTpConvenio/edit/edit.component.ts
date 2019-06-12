@@ -30,6 +30,12 @@ export class EditComponent implements OnInit {
         
         var datePiper = new DatePipe(this.convenio.fechaConvenio.timestamp);
         this.convenio.fechaConvenio = datePiper.transform(this.convenio.fechaConvenio.timestamp, 'yyyy-MM-dd');
+        
+        var datePiper = new DatePipe(this.convenio.fechaActaInicio.timestamp);
+        this.convenio.fechaActaInicio = datePiper.transform(this.convenio.fechaActaInicio.timestamp, 'yyyy-MM-dd');
+        
+        var datePiper = new DatePipe(this.convenio.fechaActaFin.timestamp);
+        this.convenio.fechaActaFin = datePiper.transform(this.convenio.fechaActaFin.timestamp, 'yyyy-MM-dd');
 
         this._EmpresaService.selectTransportePublico().subscribe(
             response => {
