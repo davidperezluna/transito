@@ -1,0 +1,65 @@
+<div class="row ">
+    <div class="col-xs-12 col-lg-12 ">
+        <div class="card">
+            <div class="card-body ">
+                <h5 class="m-0">Editar Convenio</h5>
+                <hr>
+                <form #formEdit="ngForm">
+                    <div class="row justify-content-center container">
+                        <div class="form-group row">
+                            <!-- informacion  especifica de la nueva convenio-->
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Nro. convenio
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input class="form-control" [(ngModel)]="convenio.numeroConvenio" name="numeroConvenio"
+                                    placeholder="" type="text" required>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>fecha convenio</label>
+                                <input class="form-control" [(ngModel)]="convenio.fechaConvenio" name="fechaConvenio"
+                                    placeholder="" type="date">
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>fecha acta Inicio</label>
+                                <input class="form-control" [(ngModel)]="convenio.fechaActaInicio"
+                                    name="fechaActaInicio" placeholder="" type="date">
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>fecha acta Fin</label>
+                                <input class="form-control" [(ngModel)]="convenio.fechaActaFin" name="fechaActaFin"
+                                    placeholder="" type="date">
+                            </div>
+
+                            <div class="col-lg-12 col-md-12">
+                                <label>Empresas transporte público <span class="text-danger">*</span></label>
+                                <ng-select [multiple]="true" [options]="empresasTransportePublico"
+                                    [(ngModel)]="convenio.empresas" required name="arrayEmpresas">
+                                </ng-select>
+                            </div>
+
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Observación</label>
+                                <textarea class="form-control" [(ngModel)]="convenio.observacion" name="observacion"
+                                    placeholder=""></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <div class="btn-group">
+                    <button (click)="onEnviar()" [disabled]="formEdit.invalid" class="btn btn-primary"
+                        type="button">
+                        <i class="fa fa-save"></i>
+                        Enviar
+                    </button>
+                    <button (click)="onCancelar()" class="btn btn-default">
+                        <i class="fa fa-times"></i>
+                        Cancelar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

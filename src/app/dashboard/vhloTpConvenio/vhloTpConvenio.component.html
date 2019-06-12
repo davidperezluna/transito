@@ -1,12 +1,11 @@
 <div class="container" >
-  <hr>
   <div class="row" *ngIf='formIndex'>
     <div class="col-md-12">
         <div class="card">
           <div class="card-header">
               <h5>
                 <b>Alcaldías</b>
-                <small>Registro de alcaldías</small>
+                <small>Lista de alcaldías</small>
               </h5>
           </div>
           <div class="card-body responsive">
@@ -51,7 +50,7 @@
                   </td>
                   <td>
                     <div class="btn-group">
-                      <button (click)="getSucursal(empresa)" class="btn btn-info" type="button" title="Tramites">
+                      <button (click)="getConvenio(empresa)" class="btn btn-info" type="button">
                         Convenios
                       </button>
                     </div>
@@ -65,5 +64,5 @@
         </div>
       </div>
     </div>
-    <convenio-show *ngIf='formShow' [empresa]="empresa" (ready)="ready($event)"></convenio-show>
+    <app-show *ngIf='formShow' [empresa]="empresa" (ready)="ready($event)"></app-show>
 </div>

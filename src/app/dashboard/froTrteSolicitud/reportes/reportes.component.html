@@ -33,38 +33,25 @@
                         <label>Hasta<strong class="text-danger">*</strong></label>
                         <input class="form-control" type="date" [(ngModel)]="datos.fechaHasta"
                             name="fechaHasta" required>
-                    </div>
+                    </div><br>
                     <div class="col-xs-12 col-lg-12" *ngIf="tipoReporteSelected == 2">
                         <div class="input-group">
                             <input type="text" class="form-control text-uppercase" placeholder="Número de placa"
                                 [(ngModel)]="datos.placa" required name="numeroPlaca" />
-                            <!-- <span class="input-group-btn">
-                                <button (click)="onSearch()" class="btn btn-default btn-primary" type="button">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </span> -->
                         </div>
                     </div>
-                    <!-- <div *ngIf="vehiculo" class="col-xs-12 col-lg-12">
-                        <table class="table table-bordered table-striped">
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <b>No. Placa:</b><br>
-                                        {{ vehiculo.placa.numero }}
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div> -->
                 </form>
             </div>
+            <div class="card-footer">
+                <div class="btn-group">
+                    <button (click)="onEnviar()" [disabled]="formFiltros.invalid" class="btn btn-default btn-primary" type="button">
+                        <i class="fa fa-search"></i>buscar
+                    </button>
+                </div>
+            </div>
         </div>
-        <button (click)="onEnviar()" class="btn btn-default btn-primary" type="button">
-            <i class="fa fa-search"></i>
-        </button>
     </div>
-    <div class="col-xs-12 col-lg-8">
+    <div class="col-xs-12 col-lg-8" *ngIf="tramitesSolicitud || propietariosActuales || tramites || medidasCautelares || cancelacionesMatricula || prendas || radicadosCuenta">
         <div class="row">
             <div class="col-xs-12 col-lg-12">
                 <div class="card">
@@ -137,10 +124,10 @@
                                     <th>numero de documento</th>
                                     <th>proindiviso</th>
                                     <th>fecha propiedad</th>
-                                    <th>apellido 1</th>
-                                    <th>apellido 2</th>
-                                    <th>nombre 1</th>
-                                    <th>nombre 2</th>
+                                    <th>primer apellido</th>
+                                    <th>segundo apellido</th>
+                                    <th>primer nombre</th>
+                                    <th>segundo nombre</th>
                                     <th>ciudad</th>
                                     <th>direccion</th>
                                     <th>telefono</th>
@@ -181,12 +168,12 @@
                             <tbody>
                                 <tr class="odd" *ngFor="let tramite of tramites; let i = index">
                                     <td>{{ i + 1 }}</td>
-                                    <td>{{ tramite.tramiteFactura.precio.tramite.codigo }}</td>
-                                    <td>{{ tramite.vehiculo?.placa.numero  }}</td>
+                                    <td>{{ tramite.tipoTramite }}</td>
+                                    <td>{{ tramite.placa  }}</td>
                                     <td>{{ (tramite.fecha.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td>
-                                    <td>{{ tramite.organismoTransito.divipo }}</td>
-                                    <td>lic transito</td>
-                                    <td>tvrfact</td>
+                                    <td>{{ tramite.organismoTransito }}</td>
+                                    <td>{{ tramite.licenciaTransito }}</td>
+                                    <td>{{ tramite.numeroPago }}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -249,10 +236,10 @@
                                     <th>placa</th>
                                     <th>tipo identificación</th>
                                     <th>número identificación</th>
-                                    <th>nombre 1</th>
-                                    <th>nombre 2</th>
-                                    <th>apellido 1</th>
-                                    <th>apellido 2</th>
+                                    <th>primer nombre</th>
+                                    <th>segundo nombre</th>
+                                    <th>primer apellido</th>
+                                    <th>segundo apellido</th>
                                     <th>dirección</th>
                                     <th>ciudad</th>
                                     <th>telefono</th>
