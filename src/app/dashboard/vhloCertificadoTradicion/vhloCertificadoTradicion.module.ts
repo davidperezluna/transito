@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { rnaCertificadoTradicionOficialComponent } from './rnaCertificadoTradicionOficial.component';
+import { VhloCertificadoTradicionComponent } from './vhloCertificadoTradicion.component';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import {VhloCfgMarcaService} from '../../services/vhloCfgMarca.service';
 
 @NgModule({
     imports: [CommonModule, Ng2BootstrapModule.forRoot()],
-    declarations: [rnaCertificadoTradicionOficialComponent],
-    exports: [rnaCertificadoTradicionOficialComponent],
+    declarations: [VhloCertificadoTradicionComponent],
+    exports: [VhloCertificadoTradicionComponent],
     providers:[VhloCfgMarcaService]
 })
 
-export class RnaCertificadoTradicionOficialModule { }
+export class VhloCertificadoTradicionModule { }

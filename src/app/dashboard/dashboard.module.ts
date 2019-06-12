@@ -219,7 +219,7 @@ import { rnaRegistroInsumosModule } from './rnaRegistroInsumos/rnaRegistroInsumo
 import { RnmaPreregistroModule } from './rnmaPreregistro/rnmaPreregistro.module';
 import { RnrsPreregistroModule } from './rnrsPreregistro/rnrsPreregistro.module';
 import { ReporteModule } from './reporte/reporte.module';
-import { RnaCertificadoTradicionOficialModule } from './rnaCertificadoTradicionOficial/rnaCertificadoTradicionOficial.module';
+import { VhloCertificadoTradicionModule } from './vhloCertificadoTradicion/vhloCertificadoTradicion.module';
 
 import { BpCfgTipoInsumoModule } from './bpCfgTipoInsumo/bpCfgTipoInsumo.module';
 import { BpProyectoModule } from './bpProyecto/bpProyecto.module';
@@ -430,7 +430,7 @@ import {RightsidebarComponent} from '../shared';
     RpcccInventarioDocumentalModule,
     UserCfgEmpresaTipoModule,
     UserCfgEmpresaServicioModule,
-    RnaCertificadoTradicionOficialModule,
+    VhloCertificadoTradicionModule,
     ImoReasignacionModule,
     ImoBusquedaModule,
     ImoAsignacionModule,

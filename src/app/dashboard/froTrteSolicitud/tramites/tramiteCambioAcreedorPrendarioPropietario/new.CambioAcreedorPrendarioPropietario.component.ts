@@ -68,6 +68,14 @@ export class NewTramiteCambioAcreedorPrendarioPropietarioComponent implements On
     ) { }
 
     ngOnInit() {
+        swal({
+            title: 'Buscando acreedores actuales!',
+            text: 'Solo tardara unos segundos por favor espere.',
+            onOpen: () => {
+                swal.showLoading()
+            }
+        });
+
         this.datos.idFuncionario  = this.funcionario.id;
         
         if ( this.tramitesRealizados.length > 0) {
@@ -110,6 +118,8 @@ export class NewTramiteCambioAcreedorPrendarioPropietarioComponent implements On
                 response => {
                     if (response.code == 200) {
                         this.acreedoresActuales = response.data;
+
+                        swal.close();
                     }else{
                         this.acreedoresActuales = null;
 

@@ -12,8 +12,6 @@ declare var $: any;
 export class ImoLoteComponent implements OnInit {
   public errorMessage;
 
-  public organismosTransito: any;
-  public idOrganismoTransito: any;
 	public loteInsumoSustratos;
   public loteInsumoInsumos;
   
@@ -27,6 +25,11 @@ export class ImoLoteComponent implements OnInit {
   public totalesTipo:any; 
   public loteInsumoInsumo:any; 
   public color:any; 
+
+  public search = {
+    'fechaInicial': null,
+    'fechaFinal': null,
+  }
 
   constructor(
 		private _LoteInsumoService: ImoLoteService,
@@ -44,22 +47,6 @@ export class ImoLoteComponent implements OnInit {
         swal.showLoading()
       }
     });
-
-    this._OrganismoTransitoService.selectSedes().subscribe(
-      response => {
-          this.organismosTransito = response;
-
-          swal.close();
-      },
-      error => {
-          this.errorMessage = <any>error;
-
-          if (this.errorMessage != null) {
-              console.log(this.errorMessage);
-              alert("Error en la petición");
-          }
-      }
-    );
   }
 
   onInitForms(){
@@ -80,7 +67,7 @@ export class ImoLoteComponent implements OnInit {
 
     let token = this._LoginService.getToken();
     
-    this._LoteInsumoService.searchByOrganismoTransito({ 'idOrganismoTransito': this.idOrganismoTransito }, token).subscribe(
+    this._LoteInsumoService.searchByFechas(this.search, token).subscribe(
       response => {
         if (response.code == 200) {
           this.loteInsumoSustratos = response.data.loteSustratos;

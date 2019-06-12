@@ -104,7 +104,7 @@ constructor(
             confirmButtonText: 'Aceptar'
           });
           let timeoutId = setTimeout(() => {
-            this.iniciarTabla();
+            this.onInitTable();
           }, 100);
         } else {
           this.comparendos = null;
@@ -127,25 +127,24 @@ constructor(
     );
   }
 
-  iniciarTabla() {
+  onInitTable() {
     if (this.table) {
       this.table.destroy();
     }
 
-    $('#dataTables-example').DataTable({
+    this.table = $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,
       sPaginationType: 'full_numbers',
       oLanguage: {
         oPaginate: {
-          sFirst: '<<',
-          sPrevious: '<',
-          sNext: '>',
-          sLast: '>>'
+          sFirst: '<i class="fa fa-step-backward"></i>',
+          sPrevious: '<i class="fa fa-chevron-left"></i>',
+          sNext: '<i class="fa fa-chevron-right"></i>',
+          sLast: '<i class="fa fa-step-forward"></i>'
         }
       }
     });
-    this.table = $('#dataTables-example').DataTable();
   }
 
   onRecord(comparendo: any) {
@@ -174,7 +173,7 @@ constructor(
             this.acuerdoPago = response.data.acuerdoPago;
             this.amortizaciones = response.data.amortizaciones;
             let timeoutId = setTimeout(() => {
-              this.iniciarTabla();
+              this.onInitTable();
             }, 100);
 
             swal.close();
@@ -217,7 +216,7 @@ constructor(
 
       this._FormatoService.show({ 'id': e, 'idComparendo': this.comparendo.id }, token).subscribe(
         response => {
-          this.datos.numero = this.trazabilidad.estado.sigla + '-' + this.comparendo.consecutivo.consecutivo;
+          this.datos.numero = this.trazabilidad.estado.sigla + '-' + this.comparendo.consecutivo.numero;
 
           $('#summernote').summernote({
             placeholder: 'Diligencie el cuerpo del acto administrativo',
