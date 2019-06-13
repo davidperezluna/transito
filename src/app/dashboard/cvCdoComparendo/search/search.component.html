@@ -109,7 +109,7 @@
                             <td>
                                 {{ trazabilidad.estado.nombre }}
                                 <br>
-                                {{ (trazabilidad.fecha.timestamp * 1000) | date: 'dd/MM/yyyy' }} {{ (trazabilidad.hora.timestamp * 1000) | date: 'hh:mm:ss a' }}
+                                {{ trazabilidad.fecha }} {{ (trazabilidad.hora.timestamp * 1000) | date: 'hh:mm:ss a' }}
                             </td>
                             <td>
                                 <i class="fa fa-check text-success" *ngIf="trazabilidad.activo"></i>
@@ -210,12 +210,12 @@
                             </div>
                             <div class="col-xs-12 col-lg-6">
                                 <label>Estado <strong class="text-danger">*</strong></label>
-                                <ng-select [multiple]="false" [options]="estados" [(ngModel)]="datosTrazabilidad.idComparendoEstado" name="idComparendoEstado" required>
+                                <ng-select (ngModelChange)="onChangedEstado($event)" [multiple]="false" [options]="estados" [(ngModel)]="datosTrazabilidad.idComparendoEstado" name="idComparendoEstado" required>
                                 </ng-select>
                             </div>
                             <div class="col-xs-12 col-lg-12">
                                 <label>Observaciones </label>
-                                <textarea  class="form-control" [(ngModel)]="datosTrazabilidad.observaciones" name="observaciones" rows="4"></textarea>
+                                <textarea  class="form-control" [(ngModel)]="datosTrazabilidad.observaciones" name="observaciones" id="summernote-trazabilidad"></textarea>
                             </div>
                         </div><!-- /.row -->
 

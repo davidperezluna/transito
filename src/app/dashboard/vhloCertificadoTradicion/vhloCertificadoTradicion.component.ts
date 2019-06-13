@@ -13,9 +13,9 @@ import swal from 'sweetalert2';
 })
 
 export class VhloCertificadoTradicionComponent implements OnInit {
+  public errorMessage;
     public apiUrl = environment.apiUrl + 'default';
-    public errorMessage;
-    public respuesta;
+
     public tramiteFacturaSelected: any; 
     public sustratos: any;
     public vehiculo: any = false;
