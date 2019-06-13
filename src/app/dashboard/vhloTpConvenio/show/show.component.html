@@ -78,11 +78,11 @@
                         <tbody>
                             <tr class="odd" *ngFor="let convenio of convenios; let i = index">
                                
-                                <td>{{convenio.numeroConvenio}}</td> 
-                                <td>{{convenio.fechaConvenio}}</td>
-                                <td>{{convenio.fechaActaInicio}}</td>
-                                <td>{{convenio.fechaActaFin}}</td>
-                                <td>{{convenio.observacion}}</td>
+                                <td>{{ convenio.numeroConvenio }}</td> 
+                                <td>{{ (convenio.fechaConvenio.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td>
+                                <td>{{ (convenio.fechaActaInicio.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td>
+                                <td>{{ (convenio.fechaActaFin.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td>
+                                <td>{{ convenio.observacion }}</td>
                                 <td>
                                     <button (click)="onEdit(convenio)" class="btn btn-info btn-xs" type="button">Editar</button> 
                                     <button (click)="onDelete(convenio.id)"  class="btn btn-danger btn-xs" type="button">Eliminar</button>
@@ -95,8 +95,8 @@
         </div>
         <!-- fin de lista de convenios -->
         <!--formulario de nuevo convenio-->
-        <app-new *ngIf='formNew' [empresa]="empresa" (ready)="ready($event)"></app-new>
-        <app-edit *ngIf='formEdit' [convenio]="convenio" (ready)="ready($event)"></app-edit>
+        <app-new *ngIf='formNew' [empresa]="empresa" (ready)="onReady($event)"></app-new>
+        <app-edit *ngIf='formEdit' [convenio]="convenio" (ready)="onReady($event)"></app-edit>
         <!-- fin formulario -->
      </div> 
 </div>

@@ -15,7 +15,6 @@ declare var $: any;
 export class GestionTransportePublicoComponent implements OnInit {
   public errorMessage;
 	public id;
-	public respuesta;
   public table:any;
   public vehiculos:any; 
   public gestionTransportePublico:any; 
@@ -24,8 +23,8 @@ export class GestionTransportePublicoComponent implements OnInit {
 
   constructor(
 		private _VehiculoService: VehiculoService,
-    private _loginService: LoginService,
-    private _claseService: VhloCfgClaseService,
+    private _LoginService: LoginService,
+    private _ClaseService: VhloCfgClaseService,
 		private _OrganismoTransitoService: CfgOrganismoTransitoService,
     ){}
     
@@ -57,7 +56,7 @@ export class GestionTransportePublicoComponent implements OnInit {
           }
         }
       );
-    this._claseService.select().subscribe(
+    this._ClaseService.select().subscribe(
         response => {
           this.clases = response;
         }, 
@@ -106,7 +105,7 @@ export class GestionTransportePublicoComponent implements OnInit {
     
     this.table.destroy();
 
-   let token = this._loginService.getToken();
+   let token = this._LoginService.getToken();
 
     this._VehiculoService.filterByParameters(this.gestionTransportePublico,token).subscribe(
       response => {

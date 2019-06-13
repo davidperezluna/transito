@@ -36,11 +36,16 @@ export class ShowComponent implements OnInit {
     console.log(this.empresa);
     this._VhloTpConvenioService.getVhloTpConvenioEmpresa(this.empresa.id).subscribe(
       response => {
+        this.formListaConvenios = true;
         if (response.status == "success") {
           this.convenios = response.data;
-          this.formListaConvenios = true;
         } else {
-          this.formNew = true;
+          swal({
+            title: 'Alerta!',
+            text: response.message,
+            type: 'error',
+            confirmButtonColor: '#15d4be',
+          })
         }
       },
       error => {
@@ -62,6 +67,7 @@ export class ShowComponent implements OnInit {
     this.formListaConvenios = true;
     this.formNew = false;
     this.formEdit = false;
+    this.ngOnInit();
   }
   
   onNew() {

@@ -6,14 +6,15 @@ import { UserEmpresaService } from '../../services/userEmpresa.service';
 import { VhloTpConvenioService } from '../../services/vhloTpConvenio.service';
 import { NewComponent } from './new/new.component';
 import { EditComponent } from './edit/edit.component';
+import { EnableComponent } from "./enable/enable.component";
 import { ShowComponent } from './show/show.component';
 import {SelectModule} from 'angular2-select';
 
 
 @NgModule({
     imports: [CommonModule, Ng2BootstrapModule.forRoot(),SelectModule],
-    declarations: [VhloTpConvenioComponent, NewComponent, EditComponent, ShowComponent],
-    exports: [VhloTpConvenioComponent, NewComponent, EditComponent, ShowComponent],
+    declarations: [VhloTpConvenioComponent, NewComponent, EditComponent, ShowComponent, EnableComponent],
+    exports: [VhloTpConvenioComponent, NewComponent, EditComponent, ShowComponent, EnableComponent],
     providers: [UserEmpresaService, VhloTpConvenioService]
 })
 
