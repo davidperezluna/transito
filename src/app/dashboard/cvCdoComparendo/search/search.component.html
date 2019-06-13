@@ -44,7 +44,7 @@
                 <div class="form-group row">
                     <div class="col-lg-12">
                         <div class="table-responsive">
-                            <table class="table" id="dataTables-example">
+                            <table class="table table-bordered" id="dataTables-example">
                                 <thead>
                                     <tr>
                                         <th>No.</th>
@@ -94,48 +94,43 @@
                 </h5>
             </div>
             <div class="card-body container">
-                <table class="table" *ngIf="trazabilidades">
+                <table class="table table-bordered" *ngIf="trazabilidades">
                     <thead>
                         <tr>
                             <th>No.</th>
                             <th>Estado</th>
                             <th>Activo</th>
-                            <th>Acto Administrativo</th>
+                            <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr class="odd" *ngFor="let trazabilidad of trazabilidades; let i = index">
                             <td>{{ i + 1 }}</td>
                             <td>
-                                {{ trazabilidad.estado.nombre }} 
-                                <a href="{{ apiUrl }}/minuta/estados/{{ trazabilidad.id }}/pdf" *ngIf="trazabilidad.estado.id == 14" class="btn btn-primary" target="_blank">
-                                    <i class="fa fa-file-pdf-o"></i>
-                                </a>
-                                <span *ngIf="trazabilidad.estado.id == 4 && acuerdoPago">
-                                    <button (click)="onAcuerdoPago()" class="btn btn-xs btn-default">
-                                        {{ acuerdoPago.numero }}
-                                    </button>
-                                </span>
+                                {{ trazabilidad.estado.nombre }}
                                 <br>
-                                {{ trazabilidad.fecha }}
+                                {{ trazabilidad.fecha }} {{ (trazabilidad.hora.timestamp * 1000) | date: 'hh:mm:ss a' }}
                             </td>
                             <td>
                                 <i class="fa fa-check text-success" *ngIf="trazabilidad.activo"></i>
                                 <i class="fa fa-ban text-danger" *ngIf="!trazabilidad.activo"></i>
                             </td>
                             <td>
-                                <span *ngIf="trazabilidad.actoAdministrativo">
-                                    {{ trazabilidad.actoAdministrativo.numero }}
-                                    <a href="{{ apiUrl }}/cfgadmactoadministrativo/{{ trazabilidad.id }}/pdf" class="btn btn-success" target="_blank">
+                                <div class="btn-group">
+                                    <a *ngIf="trazabilidad.estado.id == 14"  href="{{ apiUrl }}/minuta/estados/{{ trazabilidad.id }}/pdf" class="btn btn-xs btn-primary" target="_blank" tooltip="Minuta de estados" [tooltipDisabled]="false" [tooltipAnimation]="true" tooltipPlacement="top">
                                         <i class="fa fa-file-pdf-o"></i>
                                     </a>
-                                    <br>
-                                     {{ trazabilidad.actoAdministrativo.fecha }}
-                                </span>
-                                <button *ngIf="!trazabilidad.actoAdministrativo" (click)="onDocument(trazabilidad)" class="btn btn-xs btn-default" type="button">
-                                    <i class="fa fa-file-text"></i>
-                                    Crear Acto Administrativo
-                                </button>
+                                    <a *ngIf="trazabilidad.actoAdministrativo" href="{{ apiUrl }}/cfgadmactoadministrativo/{{ trazabilidad.id }}/pdf" class="btn btn-xs btn-success" target="_blank" tooltip="Ver acto admtivo." [tooltipDisabled]="false" [tooltipAnimation]="true" tooltipPlacement="top">
+                                        <i class="fa fa-file-pdf-o"></i>
+                                        {{ trazabilidad.actoAdministrativo.numero }}
+                                    </a>
+                                    <button *ngIf="trazabilidad.estado.id == 4 && acuerdoPago" (click)="onAcuerdoPago()" class="btn btn-xs btn-default" tooltip="Ver acuerdo de pago" [tooltipDisabled]="false" [tooltipAnimation]="true" tooltipPlacement="top">
+                                        {{ acuerdoPago.numero }}
+                                    </button>
+                                    <button *ngIf="!trazabilidad.actoAdministrativo" (click)="onDocument(trazabilidad)" class="btn btn-xs btn-info" type="button" tooltip="Crear acto admtivo." [tooltipDisabled]="false" [tooltipAnimation]="true" tooltipPlacement="top">
+                                        <i class="fa fa-file-text"></i>
+                                    </button>
+                                </div>
                             </td>
                         </tr>
                     </tbody>
@@ -215,12 +210,12 @@
                             </div>
                             <div class="col-xs-12 col-lg-6">
                                 <label>Estado <strong class="text-danger">*</strong></label>
-                                <ng-select [multiple]="false" [options]="estados" [(ngModel)]="datosTrazabilidad.idComparendoEstado" name="idComparendoEstado" required>
+                                <ng-select (ngModelChange)="onChangedEstado($event)" [multiple]="false" [options]="estados" [(ngModel)]="datosTrazabilidad.idComparendoEstado" name="idComparendoEstado" required>
                                 </ng-select>
                             </div>
                             <div class="col-xs-12 col-lg-12">
                                 <label>Observaciones </label>
-                                <textarea  class="form-control" [(ngModel)]="datosTrazabilidad.observaciones" name="observaciones" rows="4"></textarea>
+                                <textarea  class="form-control" [(ngModel)]="datosTrazabilidad.observaciones" name="observaciones" id="summernote-trazabilidad"></textarea>
                             </div>
                         </div><!-- /.row -->
 

@@ -49,15 +49,13 @@
 
                         <div class="row">                          
                             <div class="col-xs-12 col-lg-12" *ngIf="acreedoresActuales">
-                                <table class="table table-bordered table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th colspan="2" class="text-center">
-                                                <b class="text-uppercase">Propietario actual encontrado</b>
-                                            </th>
-                                        </tr>
-                                    </thead>
+                                <table class="table table-bordered">
                                     <tbody>
+                                        <tr>
+                                            <td colspan="2" class="text-center">
+                                                <b class="text-uppercase">Propietario actual encontrado</b>
+                                            </td>
+                                        </tr>
                                         <tr *ngFor="let acreedorActual of acreedoresActuales; let i = index">
                                             <td *ngIf="acreedorActual.propietario.ciudadano">
                                                 <b>Identificación:</b> {{ acreedorActual.propietario.ciudadano.identificacion }}
@@ -70,9 +68,9 @@
                                                 <b>Nombre:</b> {{ acreedorActual.propietario.empresa.nombre }}
                                             </td>
                                             <td>
-                                                <b>Tipo alerta:</b> {{ acreedorActual.propietario.tipoAlerta.nombre }}
+                                                <b>Tipo alerta:</b> {{ acreedorActual.tipoAlerta.nombre }}
                                                 <br>
-                                                <b>Grado:</b> {{ acreedorActual.propietario.gradoAlerta }}
+                                                <b>Grado:</b> {{ acreedorActual.gradoAlerta }}
                                             </td>
                                             <td>
                                                 <div class="custom-control custom-radio">

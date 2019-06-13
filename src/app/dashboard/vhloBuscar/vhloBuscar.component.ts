@@ -2,6 +2,7 @@ import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@ang
 import { VhloVehiculoService } from '../../services/vhloVehiculo.service';
 import { LoginService } from '../../services/login.service';
 import swal from 'sweetalert2';
+declare var $: any;
 
 @Component({
   selector: 'app-buscar-automotor',
@@ -16,6 +17,8 @@ export class VhloBuscarComponent implements OnInit {
   public vehiculos: any = null;
   public formShow:any = false;
   public formIndex:any = false;
+
+  public table:any = null;
   
   public datos = {
     'numeroPlaca': null,
@@ -49,25 +52,49 @@ constructor(
 
     this._VehiculoService.searchByParameters(this.datos, token).subscribe(
       response => {
-          if (response.code == 200) {
-            this.vehiculos = response.data;
-            this.formIndex = true;
-            this.formShow = false;
-              
-            swal.close();                  
-          } else {
-            this.vehiculos = null;
-            swal.close();                  
-          }
-          error => {
-              this.errorMessage = <any>error;
-              if (this.errorMessage != null) {
-                  console.log(this.errorMessage);
-                  alert("Error en la petición");
-              }
-          }
+        if (response.code == 200) {
+          this.vehiculos = response.data;
+          this.formIndex = true;
+          this.formShow = false;
+
+          let timeoutId = setTimeout(() => {
+            this.onInitTable();
+          }, 100);
+            
+          swal.close();                  
+        } else {
+          this.vehiculos = null;
+          swal.close();                  
+        }
+        error => {
+            this.errorMessage = <any>error;
+            if (this.errorMessage != null) {
+                console.log(this.errorMessage);
+                alert("Error en la petición");
+            }
+        }
       }
     );
+  }
+
+  onInitTable(){
+    if (this.table) {
+      this.table.destroy();
+    }
+
+    this.table = $('#dataTables-example').DataTable({
+      responsive: true,
+      pageLength: 8,
+      sPaginationType: 'full_numbers',
+      oLanguage: {
+        oPaginate: {
+          sFirst: '<i class="fa fa-step-backward"></i>',
+          sPrevious: '<i class="fa fa-chevron-left"></i>',
+          sNext: '<i class="fa fa-chevron-right"></i>',
+          sLast: '<i class="fa fa-step-forward"></i>'
+        }
+      }
+    });
   }
 
   onShow(vehiculo:any){

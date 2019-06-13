@@ -8,13 +8,14 @@ import { environment } from 'environments/environment';
 import swal from 'sweetalert2';
 
 @Component({
-    selector: 'appRna-certificadoTradicionOficial',
-    templateUrl: './rnacertificadoTradicionOficial.html'
+    selector: 'app-certificado-tradicion',
+    templateUrl: './vhloCertificadoTradicion.html'
 })
-export class rnaCertificadoTradicionOficialComponent implements OnInit {
+
+export class VhloCertificadoTradicionComponent implements OnInit {
+  public errorMessage;
     public apiUrl = environment.apiUrl + 'default';
-    public errorMessage;
-    public respuesta;
+
     public tramiteFacturaSelected: any; 
     public sustratos: any;
     public vehiculo: any = false;

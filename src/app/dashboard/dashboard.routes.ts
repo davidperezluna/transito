@@ -150,7 +150,7 @@ import { CfgChoqueConRoutes } from './cfgChoqueCon/cfgChoqueCon.routes';
 import { SvCfgObjetoFijoRoutes } from './svCfgObjetoFijo/svCfgObjetoFijo.routes';
 import { RnrsPreregistroRoutes } from './rnrsPreregistro/rnrsPreregistro.routes';
 import { ReporteRoutes } from './reporte/reporte.routes';
-import { RnaCertificadoTradicionRoutes } from './rnaCertificadoTradicionOficial/rnaCertificadoTradicionOficial.routes';
+import { VhloCertificadoTradicionRoutes } from './vhloCertificadoTradicion/vhloCertificadoTradicion.routes';
 import { CvCfgTipoRestriccionRoutes } from './cvCfgTipoRestriccion/cvCfgTipoRestriccion.routes';
 import { CvLcCfgTipoRestriccionRoutes } from './cvLcCfgTipoRestriccion/cvLcCfgTipoRestriccion.routes';
 import { CvCfgTipoMedidaCautelarRoutes } from './cvCfgTipoMedidaCautelar/cvCfgTipoMedidaCautelar.routes';
@@ -428,7 +428,7 @@ export const DashboardRoutes: Route[] = [
       ...ImoLoteRoutes,
       ...ImoReasignacionRoutes,
       ...ImoActaRoutes,
-      ...RnaCertificadoTradicionRoutes,
+      ...VhloCertificadoTradicionRoutes,
       ...CvCfgTipoMedidaCautelarRoutes,
       ...CvMedidaCautelarRoutes,
       ...BpCfgTipoInsumoRoutes,

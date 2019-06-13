@@ -64,9 +64,11 @@ export class CvCdoTrazabilidadService {
     
 	updateDocumento(datos, token) {
         let json = JSON.stringify(datos);
-        let params = "data=" + json + "&authorization=" + token;
-        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-        return this._http.post(this.url + "/update/documento", params, { headers: headers }).map(
+        let formData = new FormData();
+		formData.append('data', json);
+		formData.append('authorization', token);
+        //let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+        return this._http.post(this.url + "/update/documento", formData).map(
             res => res.json(),
             this._loogerService.registerLog(token, 'UPDATE', json, this.url)
         );
