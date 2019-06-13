@@ -99,6 +99,7 @@ export class EditComponent implements OnInit {
     onEnviar() {
         let token = this._LoginService.getToken();
 
+        console.log(this.tramitePrecio);
         this.tramitePrecio.idTramite = this.tramiteSelected;
         this.tramitePrecio.idModulo = this.moduloSelected;
         this.tramitePrecio.idTipoVehiculo = this.tipoVehiculoSelected;

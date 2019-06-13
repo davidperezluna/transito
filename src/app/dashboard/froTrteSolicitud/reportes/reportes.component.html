@@ -65,8 +65,8 @@
                                     <th>#</th>
                                     <th>organismo Tránsito</th>
                                     <th>placa</th>
-                                    <th>linea</th>
                                     <th>marca</th>
+                                    <th>linea</th>
                                     <th>clase</th>
                                     <th>color</th>
                                     <th>servicio</th>
@@ -81,7 +81,7 @@
                                     <th>cap. pasajeros</th>
                                     <th>fecha matricula</th>
                                     <!-- <th>num. lic. transito</th> -->
-                                    <!-- <th>num. fac. sirev</th> -->
+                                    <th>num. fac. sirev</th>
                                     <th>tipo combustible</th>
                                     <th>estado</th>
                                 </tr>
@@ -91,8 +91,8 @@
                                     <td>{{ i + 1 }}</td>
                                     <td>{{ tramiteSolicitud.organismoTransito.nombre }}</td>
                                     <td>{{ tramiteSolicitud.vehiculo.placa.numero }}</td>
-                                    <td>{{ tramiteSolicitud.vehiculo.linea.nombre }}</td>
                                     <td>{{ tramiteSolicitud.vehiculo.linea.marca.nombre }}</td>
+                                    <td>{{ tramiteSolicitud.vehiculo.linea.nombre }}</td>
                                     <td>{{ tramiteSolicitud.vehiculo.clase.nombre }}</td>
                                     <td>{{ tramiteSolicitud.vehiculo.color.nombre }}</td>
                                     <td>{{ tramiteSolicitud.vehiculo.servicio.nombre }}</td>
@@ -105,7 +105,8 @@
                                     <td>{{ tramiteSolicitud.vehiculo.serie }}</td>
                                     <td>{{ tramiteSolicitud.vehiculo.capacidadCarga }}</td>
                                     <td>{{ tramiteSolicitud.vehiculo.numeroPasajeros }}</td>
-                                    <td>{{ (tramiteSolicitud.fecha.timestamp * 1000) | date: 'HH:mm' }}</td>
+                                    <td>{{ (tramiteSolicitud.fecha.timestamp * 1000) | date: 'yyyyMMdd' }}</td>
+                                    <td>N</td>
                                     <td>{{ tramiteSolicitud.vehiculo.combustible.nombre }}</td>
                                     <td>
                                         <span *ngIf="tramiteSolicitud.vehiculo.activo">ACTIVO</span>
@@ -140,7 +141,7 @@
                                     <td>{{ propietarioActual.vehiculo.placa.numero  }}</td>
                                     <td>{{ propietarioActual.ciudadano.tipoIdentificacion.sigla  }}</td>
                                     <td>{{ propietarioActual.ciudadano.identificacion  }}</td>
-                                    <td>proindiviso</td>
+                                    <td>N</td>
                                     <td>{{ (propietarioActual.fechaInicial.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td>
                                     <td>{{ propietarioActual.ciudadano.primerApellido  }}</td>
                                     <td>{{ propietarioActual.ciudadano.segundoApellido  }}</td>

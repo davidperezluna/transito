@@ -1,0 +1,108 @@
+<div class="col-xs-12 col-lg-12">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="text-uppercase">Registrar Sector</h5>
+            <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
+        </div>
+        <div class="card-body">
+            <form #formNew="ngForm">
+                <div class="col-xs-6 col-lg-6">
+                    <label>Tipo Identificación <strong class="text-danger">*</strong></label>
+                    <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionSelected" name="tipoIdentificacion" required>
+                    </ng-select>
+                </div>
+                <div class="col-xs-16 col-lg-6">
+                    <label>Número Identificación <strong class="text-danger">*</strong></label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" [(ngModel)]="identificacion" required name="identificacion" />
+                        <span class="input-group-btn">
+                            <button (click)="onSearchCiudadano()" class="btn btn-default btn-primary" type="button">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-xs-16 col-lg-6"></div>
+                <div class="col-xs-16 col-lg-6">
+                    <div class="row">
+                        <div class="col-xs-12 col-lg-12" *ngIf='ciudadano || empresa'>
+                            <table class="table table-bordered table-striped">
+                                <tr>
+                                    <th><b>Tipo de identificación</b></th>
+                                    <th><b>Numero de identificación</b></th>
+                                </tr>
+                                <tr>
+                                    <td>{{ empresa.tipoIdentificacion?.nombre }}</td>
+                                    <td>{{ empresa.nit }}</td>
+                                </tr>
+                                <tr>
+                                    <th><b>Razón Social</b></th>
+                                    <th><b>Identificador Empresa</b></th>
+                                </tr>
+                                <tr>
+                                    <td>{{ empresa.razonSocial }}</td>
+                                    <td>N</td>
+                                </tr>
+                                <tr>
+                                    <th><b>Departamento</b></th>
+                                    <th><b>Ciudad</b></th>
+                                </tr>
+                                <tr>
+                                    <td>{{ empresa.municipio.departamento.nombre }}</td>
+                                    <td>{{ empresa.municipio.nombre }}</td>
+                                </tr>
+                                <tr>
+                                    <th><b>Dirección Principal</b></th>
+                                    <th><b>Teléfono</b></th>
+                                </tr>
+                                <tr>
+                                    <td>{{ empresa.direccion }}</td>
+                                    <td>{{ empresa.telefono }}</td>
+                                </tr>
+                                <tr>
+                                    <th><b>Fax</b></th>
+                                    <th><b>Email</b></th>
+                                </tr>
+                                <tr>
+                                    <td>{{ empresa.fax }}</td>
+                                    <td>{{ empresa.correo }}</td>
+                                </tr>
+                            </table>
+                            <h5>Datos del representante</h5>                                       
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th><b>Tipo Identificación</b></th>
+                                        <th><b>Número Identificación</b></th>
+                                        <th><b>Nombres y Apellidos</b></th>
+                                        <th><b>Fecha Inicio</b></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{{ empresa.empresaRepresentante.ciudadano.tipoIdentificacion.nombre }}</td>
+                                        <td>{{ empresa.empresaRepresentante.ciudadano.identificacion }}</td> 
+                                        <td>{{ empresa.empresaRepresentante.ciudadano.primerNombre }} {{ empresa.empresaRepresentante.ciudadano.segundoNombre }} {{ empresa.empresaRepresentante.ciudadano.primerApellido }} {{ empresa.empresaRepresentante.ciudadano.segundoApellido }}</td>   
+                                        <td>{{ (empresa.empresaRepresentante.fechaInicial.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td>                                         
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="card-footer">
+            <div class="btn-group">
+                <button (click)="onCancelar()" class="btn btn-default">
+                    <i class="fa fa-times"></i>
+                    Cancel
+                </button>
+                <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
+                    <i class="fa fa-save"></i>
+                    Enviar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
