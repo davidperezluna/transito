@@ -2,7 +2,8 @@
     <div class="col-xs-12 col-lg-4">
         <div class="card">
             <div class="card-header">
-                <h5 class="text-uppercase">Editar valor de trámite {{ tramitePrecio.modulo.abreviatura }}</h5>
+                <b class="text-uppercase">Editar valor de trámite {{ tramitePrecio.modulo.abreviatura }}</b>
+                <br>
                 <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
             </div>
             <div class="card-body">
@@ -33,7 +34,7 @@
                         </div>
                         <div class="col-xs-12 col-lg-12">
                             <label>Tipo vehiculo</label>
-                            <ng-select [multiple]="false" [options]="tiposVehiculo" [disabled]="!tiposVehiculo" [(ngModel)]="tipoVehiculoSelected"
+                            <ng-select [multiple]="false" [options]="tiposVehiculo" [(ngModel)]="tipoVehiculoSelected"
                                 name="idTipoVehiculo">
                             </ng-select>
                         </div>
@@ -56,6 +57,43 @@
                         Cancelar
                     </button>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-lg-8" *ngIf="tramitesConcepto && tramitesConcepto.length > 0">
+        <div class="card">
+            <div class="card-header">
+                <b class="text-uppercase">Conceptos asociados</b>
+            </div>
+            <div class="card-body">
+                <table class="table" id="dataTables-example">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Nombre</th>
+                            <th>Valor</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="odd" *ngFor="let tramiteConcepto of tramitesConcepto; let i = index">
+                            <td>{{ i + 1 }}</td>
+                            <td>{{ tramiteConcepto.concepto.nombre }}</td>
+                            <td>${{ tramiteConcepto.concepto.valor }}</td>
+                            <td>
+                                <div class="btn-group">
+                                    <!--
+                                        <button (click)="onDelete(tramiteConcepto.id)" class="btn btn-xs btn-danger" type="button" tooltip="Eliminar" [tooltipDisabled]="false"
+                                            [tooltipAnimation]="true" tooltipPlacement="top">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    -->
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
