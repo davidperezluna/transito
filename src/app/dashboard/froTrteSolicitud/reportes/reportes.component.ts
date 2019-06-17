@@ -166,8 +166,8 @@ export class ReportesComponent implements OnInit {
                 response => {
                     if (response.status == 'success') {
                         if(response.tramitesSolicitud) {
+                            console.log(response.tramitesSolicitud);
                             this.tramitesSolicitud = response.tramitesSolicitud;
-                            
                             this.propietariosActuales = null;
                             this.tramites = null;
                             this.medidasCautelares = null;

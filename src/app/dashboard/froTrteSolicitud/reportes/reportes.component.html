@@ -80,7 +80,7 @@
                                     <th>cap. ton</th>
                                     <th>cap. pasajeros</th>
                                     <th>fecha matricula</th>
-                                    <!-- <th>num. lic. transito</th> -->
+                                    <th>num. lic. transito</th>
                                     <th>num. fac. sirev</th>
                                     <th>tipo combustible</th>
                                     <th>estado</th>
@@ -89,28 +89,29 @@
                             <tbody>
                                 <tr class="odd" *ngFor="let tramiteSolicitud of tramitesSolicitud; let i = index">
                                     <td>{{ i + 1 }}</td>
-                                    <td>{{ tramiteSolicitud.organismoTransito.nombre }}</td>
-                                    <td>{{ tramiteSolicitud.vehiculo.placa.numero }}</td>
-                                    <td>{{ tramiteSolicitud.vehiculo.linea.marca.nombre }}</td>
-                                    <td>{{ tramiteSolicitud.vehiculo.linea.nombre }}</td>
-                                    <td>{{ tramiteSolicitud.vehiculo.clase.nombre }}</td>
-                                    <td>{{ tramiteSolicitud.vehiculo.color.nombre }}</td>
-                                    <td>{{ tramiteSolicitud.vehiculo.servicio.nombre }}</td>
-                                    <td>{{ tramiteSolicitud.vehiculo.carroceria.nombre }}</td>
-                                    <td>{{ tramiteSolicitud.vehiculo.modalidadTransporte.nombre }}</td>
-                                    <td>{{ tramiteSolicitud.vehiculo.cilindraje }}</td>
-                                    <td>{{ tramiteSolicitud.vehiculo.modelo }}</td>
-                                    <td>{{ tramiteSolicitud.vehiculo.motor }}</td>
-                                    <td>{{ tramiteSolicitud.vehiculo.chasis }}</td>
-                                    <td>{{ tramiteSolicitud.vehiculo.serie }}</td>
-                                    <td>{{ tramiteSolicitud.vehiculo.capacidadCarga }}</td>
-                                    <td>{{ tramiteSolicitud.vehiculo.numeroPasajeros }}</td>
-                                    <td>{{ (tramiteSolicitud.fecha.timestamp * 1000) | date: 'yyyyMMdd' }}</td>
+                                    <td>{{ tramiteSolicitud.organismoTransito }}</td>
+                                    <td>{{ tramiteSolicitud.placa }}</td>
+                                    <td>{{ tramiteSolicitud.marca }}</td>
+                                    <td>{{ tramiteSolicitud.linea }}</td>
+                                    <td>{{ tramiteSolicitud.clase }}</td>
+                                    <td>{{ tramiteSolicitud.color }}</td>
+                                    <td>{{ tramiteSolicitud.servicio }}</td>
+                                    <td>{{ tramiteSolicitud.carroceria }}</td>
+                                    <td>{{ tramiteSolicitud.modalidadTransporte }}</td>
+                                    <td>{{ tramiteSolicitud.cilindraje }}</td>
+                                    <td>{{ tramiteSolicitud.modelo }}</td>
+                                    <td>{{ tramiteSolicitud.motor }}</td>
+                                    <td>{{ tramiteSolicitud.chasis }}</td>
+                                    <td>{{ tramiteSolicitud.serie }}</td>
+                                    <td>{{ tramiteSolicitud.capacidadCarga }}</td>
+                                    <td>{{ tramiteSolicitud.numeroPasajeros }}</td>
+                                    <td>{{ (tramiteSolicitud.fechaMatricula.timestamp * 1000) | date: 'yyyyMMdd' }}</td>
+                                    <td>{{ tramiteSolicitud.numeroLicenciaTransito }}</td>
                                     <td>N</td>
-                                    <td>{{ tramiteSolicitud.vehiculo.combustible.nombre }}</td>
+                                    <td>{{ tramiteSolicitud.combustible }}</td>
                                     <td>
-                                        <span *ngIf="tramiteSolicitud.vehiculo.activo">ACTIVO</span>
-                                        <span *ngIf="!tramiteSolicitud.vehiculo.activo">CANCELADO</span>
+                                        <span *ngIf="tramiteSolicitud.estado">ACTIVO</span>
+                                        <span *ngIf="!tramiteSolicitud.estado">CANCELADO</span>
                                     </td>
                                 </tr>
                             </tbody>
@@ -142,7 +143,7 @@
                                     <td>{{ propietarioActual.ciudadano.tipoIdentificacion.sigla  }}</td>
                                     <td>{{ propietarioActual.ciudadano.identificacion  }}</td>
                                     <td>N</td>
-                                    <td>{{ (propietarioActual.fechaInicial.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td>
+                                    <td>{{ (propietarioActual.fechaInicial.timestamp * 1000) | date: 'yyyyMMdd' }}</td>
                                     <td>{{ propietarioActual.ciudadano.primerApellido  }}</td>
                                     <td>{{ propietarioActual.ciudadano.segundoApellido  }}</td>
                                     <td>{{ propietarioActual.ciudadano.primerNombre  }}</td>
@@ -171,7 +172,7 @@
                                     <td>{{ i + 1 }}</td>
                                     <td>{{ tramite.tipoTramite }}</td>
                                     <td>{{ tramite.placa  }}</td>
-                                    <td>{{ (tramite.fecha.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td>
+                                    <td>{{ (tramite.fecha.timestamp * 1000) | date: 'yyyyMMdd' }}</td>
                                     <td>{{ tramite.organismoTransito }}</td>
                                     <td>{{ tramite.licenciaTransito }}</td>
                                     <td>{{ tramite.numeroPago }}</td>
@@ -199,7 +200,7 @@
                                     <td>{{ medidaCautelar.tipo }}</td>
                                     <td>{{ medidaCautelar.ente }}</td>
                                     <td>{{ medidaCautelar.numeroOficio }}</td>
-                                    <td>{{ (medidaCautelar.fechaExpedicion.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td>
+                                    <td>{{ (medidaCautelar.fechaExpedicion.timestamp * 1000) | date: 'yyyyMMdd' }}</td>
                                     <td>
                                         <span *ngIf="medidaCautelar.activo">I</span>
                                         <span *ngIf="!medidaCautelar.activo">L</span>
@@ -225,7 +226,7 @@
                                     <td>{{ cancelacionMatricula.organismoTransito.divipo }}</td>
                                     <td>{{ cancelacionMatricula.vehiculo.placa.numero }}</td>
                                     <td>{{ cancelacionMatricula.foraneas.idMotivoCancelacion }}</td>
-                                    <td>{{ (cancelacionMatricula.fecha.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td>
+                                    <td>{{ (cancelacionMatricula.fecha.timestamp * 1000) | date: 'yyyyMMdd' }}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -265,7 +266,7 @@
                                     <td>{{ prenda.ciudadano.municipioResidencia.codigoDane  }}</td>
                                     <td>{{ prenda.ciudadano.telefonoCelular  }}</td>
                                     <td>{{ prenda.foraneas.gradoAlerta }}</td>
-                                    <td>{{ (prenda.fecha.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td>
+                                    <td>{{ (prenda.fecha.timestamp * 1000) | date: 'yyyyMMdd' }}</td>
                                     <td>estadoPrenda</td>
                                     <td>{{ prenda.foraneas.tipoAlerta }}</td>
                                 </tr>
@@ -287,7 +288,7 @@
                                     <td>{{ radicadoCuenta.vehiculo.organismoTransito.divipo }}</td>
                                     <td>{{ radicadoCuenta.vehiculo.placa.numero }}</td>
                                     <td>{{ radicadoCuenta.vehiculo.organismoTransitoRadicado.divipo }}</td>
-                                    <td>{{ (radicadoCuenta.vehiculo.fechaRegistroRadicado.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td>
+                                    <td>{{ (radicadoCuenta.vehiculo.fechaRegistroRadicado.timestamp * 1000) | date: 'yyyyMMdd' }}</td>
                                 </tr>
                             </tbody>
                         </table>
