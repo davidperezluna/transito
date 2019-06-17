@@ -22,14 +22,14 @@
                             <tr>
                                 <th>Id</th>
                                 <th>Nombre</th>
-                                <th>Acciones</th>
+                                <!-- <th>Acciones</th> -->
                             </tr>
                         </thead>
                         <tbody>
                             <tr class="odd" *ngFor="let empresaTransporte of empresasTransporte; let i = index">
                                 <td>{{ i + 1 }}</td>
                                 <td>{{ empresaTransporte.nombre }}</td>
-                                <td>
+                                <!-- <td>
                                     <button (click)="onEdit(empresaTransporte)" class="btn btn-xs btn-info" type="button">
                                         <i class="fa fa-edit"></i>
                                         Editar
@@ -38,7 +38,7 @@
                                         <i class="fa fa-trash"></i>
                                         Eliminar
                                     </button>
-                                </td>
+                                </td> -->
                             </tr>
                         </tbody>
                     </table>
