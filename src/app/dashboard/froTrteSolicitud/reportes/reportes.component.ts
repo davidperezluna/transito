@@ -34,7 +34,13 @@ export class ReportesComponent implements OnInit {
 
     public formSearch: any;
     
-    public table: any;
+    public tableVehiculos: any;
+    public tablePropietariosActuales: any;
+    public tableTramites: any;
+    public tableMedidaCautelar: any;
+    public tableCancelacionMatricula: any;
+    public tablePrendas: any;
+    public tableRadicadoCuenta: any;
     
     public tipoReporteSelected;
     public tiposReporte = [
@@ -114,35 +120,235 @@ export class ReportesComponent implements OnInit {
         this.formSearch = true;
     }
 
+    onInitDatatables(){
+        this.tramitesSolicitud = null;
+        this.propietariosActuales = null;
+        this.tramites = null;
+        this.cancelacionesMatricula = null;
+        this.medidasCautelares = null;
+        this.prendas = null;
+        this.radicadosCuenta = null;
+    }
+
     onInitTable(estado) {
-        if (this.table) {
-            this.table.destroy();
-        }
-
-        this.table = $('#dataTables-'+ estado).DataTable({
-            responsive: false,
-            pageLength: 10,
-            sPaginationType: 'full_numbers',
-            dom: 'Bfrtip',
-            buttons: [
-                {
-                    title: 'reporte',
-                    extend: 'csvHtml5',
-                    text: 'csv',
-                    charset: 'utf-8',
-                    filename: 'Reporte_' + this.tipoReporteSelected,
-                },
-
-            ],
-            oLanguage: {
-                oPaginate: {
-                    sFirst: '<i class="fa fa-step-backward"></i>',
-                    sPrevious: '<i class="fa fa-chevron-left"></i>',
-                    sNext: '<i class="fa fa-chevron-right"></i>',
-                    sLast: '<i class="fa fa-step-forward"></i>'
+        switch (estado) {
+            case 'vehiculos':
+                if (this.tableVehiculos) {
+                    this.tableVehiculos.destroy();
                 }
-            }
-        });
+        
+                this.tableVehiculos = $('#table-vehiculos').DataTable({
+                    responsive: false,
+                    pageLength: 10,
+                    sPaginationType: 'full_numbers',
+                    dom: 'Bfrtip',
+                    buttons: [
+                        {
+                            title: 'reporte',
+                            extend: 'csvHtml5',
+                            text: 'csv',
+                            charset: 'utf-8',
+                            filename: 'Reporte_' + this.tipoReporteSelected,
+                        },
+        
+                    ],
+                    oLanguage: {
+                        oPaginate: {
+                            sFirst: '<i class="fa fa-step-backward"></i>',
+                            sPrevious: '<i class="fa fa-chevron-left"></i>',
+                            sNext: '<i class="fa fa-chevron-right"></i>',
+                            sLast: '<i class="fa fa-step-forward"></i>'
+                        }
+                    }
+                });
+                break;
+        
+                case 'propietarios-actuales':
+                    if (this.tablePropietariosActuales) {
+                        this.tablePropietariosActuales.destroy();
+                    }
+            
+                    this.tablePropietariosActuales = $('#table-propietarios-actuales').DataTable({
+                        responsive: false,
+                        pageLength: 10,
+                        sPaginationType: 'full_numbers',
+                        dom: 'Bfrtip',
+                        buttons: [
+                            {
+                                title: 'reporte',
+                                extend: 'csvHtml5',
+                                text: 'csv',
+                                charset: 'utf-8',
+                                filename: 'Reporte_' + this.tipoReporteSelected,
+                            },
+            
+                        ],
+                        oLanguage: {
+                            oPaginate: {
+                                sFirst: '<i class="fa fa-step-backward"></i>',
+                                sPrevious: '<i class="fa fa-chevron-left"></i>',
+                                sNext: '<i class="fa fa-chevron-right"></i>',
+                                sLast: '<i class="fa fa-step-forward"></i>'
+                            }
+                        }
+                    });
+                    break;
+
+                    case 'tramites':
+                        if (this.tableTramites) {
+                            this.tableTramites.destroy();
+                        }
+                
+                        this.tableTramites = $('#table-tramites').DataTable({
+                            responsive: false,
+                            pageLength: 10,
+                            sPaginationType: 'full_numbers',
+                            dom: 'Bfrtip',
+                            buttons: [
+                                {
+                                    title: 'reporte',
+                                    extend: 'csvHtml5',
+                                    text: 'csv',
+                                    charset: 'utf-8',
+                                    filename: 'Reporte_' + this.tipoReporteSelected,
+                                },
+                
+                            ],
+                            oLanguage: {
+                                oPaginate: {
+                                    sFirst: '<i class="fa fa-step-backward"></i>',
+                                    sPrevious: '<i class="fa fa-chevron-left"></i>',
+                                    sNext: '<i class="fa fa-chevron-right"></i>',
+                                    sLast: '<i class="fa fa-step-forward"></i>'
+                                }
+                            }
+                        });
+                        break;
+                    
+                    case 'medidas-cautelares':
+                        if (this.tableMedidaCautelar) {
+                            this.tableMedidaCautelar.destroy();
+                        }
+                
+                        this.tableMedidaCautelar = $('#table-medidas-cautelares').DataTable({
+                            responsive: false,
+                            pageLength: 10,
+                            sPaginationType: 'full_numbers',
+                            dom: 'Bfrtip',
+                            buttons: [
+                                {
+                                    title: 'reporte',
+                                    extend: 'csvHtml5',
+                                    text: 'csv',
+                                    charset: 'utf-8',
+                                    filename: 'Reporte_' + this.tipoReporteSelected,
+                                },
+                
+                            ],
+                            oLanguage: {
+                                oPaginate: {
+                                    sFirst: '<i class="fa fa-step-backward"></i>',
+                                    sPrevious: '<i class="fa fa-chevron-left"></i>',
+                                    sNext: '<i class="fa fa-chevron-right"></i>',
+                                    sLast: '<i class="fa fa-step-forward"></i>'
+                                }
+                            }
+                        });
+                        break;
+                    
+                    case 'cancelaciones-matricula':
+                        if (this.tableCancelacionMatricula) {
+                            this.tableCancelacionMatricula.destroy();
+                        }
+                
+                        this.tableCancelacionMatricula = $('#table-cancelaciones-matricula').DataTable({
+                            responsive: false,
+                            pageLength: 10,
+                            sPaginationType: 'full_numbers',
+                            dom: 'Bfrtip',
+                            buttons: [
+                                {
+                                    title: 'reporte',
+                                    extend: 'csvHtml5',
+                                    text: 'csv',
+                                    charset: 'utf-8',
+                                    filename: 'Reporte_' + this.tipoReporteSelected,
+                                },
+                
+                            ],
+                            oLanguage: {
+                                oPaginate: {
+                                    sFirst: '<i class="fa fa-step-backward"></i>',
+                                    sPrevious: '<i class="fa fa-chevron-left"></i>',
+                                    sNext: '<i class="fa fa-chevron-right"></i>',
+                                    sLast: '<i class="fa fa-step-forward"></i>'
+                                }
+                            }
+                        });
+                        break;
+
+                    case 'prendas':
+                        if (this.tablePrendas) {
+                            this.tablePrendas.destroy();
+                        }
+                
+                        this.tablePrendas = $('#table-prendas').DataTable({
+                            responsive: false,
+                            pageLength: 10,
+                            sPaginationType: 'full_numbers',
+                            dom: 'Bfrtip',
+                            buttons: [
+                                {
+                                    title: 'reporte',
+                                    extend: 'csvHtml5',
+                                    text: 'csv',
+                                    charset: 'utf-8',
+                                    filename: 'Reporte_' + this.tipoReporteSelected,
+                                },
+                
+                            ],
+                            oLanguage: {
+                                oPaginate: {
+                                    sFirst: '<i class="fa fa-step-backward"></i>',
+                                    sPrevious: '<i class="fa fa-chevron-left"></i>',
+                                    sNext: '<i class="fa fa-chevron-right"></i>',
+                                    sLast: '<i class="fa fa-step-forward"></i>'
+                                }
+                            }
+                        });
+                        break;
+
+                    case 'radicados-cuenta':
+                        if (this.tableRadicadoCuenta) {
+                            this.tableRadicadoCuenta.destroy();
+                        }
+                
+                        this.tableRadicadoCuenta = $('#table-radicados-cuenta').DataTable({
+                            responsive: false,
+                            pageLength: 10,
+                            sPaginationType: 'full_numbers',
+                            dom: 'Bfrtip',
+                            buttons: [
+                                {
+                                    title: 'reporte',
+                                    extend: 'csvHtml5',
+                                    text: 'csv',
+                                    charset: 'utf-8',
+                                    filename: 'Reporte_' + this.tipoReporteSelected,
+                                },
+                
+                            ],
+                            oLanguage: {
+                                oPaginate: {
+                                    sFirst: '<i class="fa fa-step-backward"></i>',
+                                    sPrevious: '<i class="fa fa-chevron-left"></i>',
+                                    sNext: '<i class="fa fa-chevron-right"></i>',
+                                    sLast: '<i class="fa fa-step-forward"></i>'
+                                }
+                            }
+                        });
+                        break;
+        }
     }
     
     ready(isCreado: any) {
@@ -170,29 +376,18 @@ export class ReportesComponent implements OnInit {
                 response => {
                     if (response.status == 'success') {
                         if(response.tramitesSolicitud) {
-                            console.log(response.tramitesSolicitud);
-                            this.tramitesSolicitud = response.tramitesSolicitud;
-                            this.propietariosActuales = null;
-                            this.tramites = null;
-                            this.medidasCautelares = null;
-                            this.cancelacionesMatricula = null;
-                            this.prendas = null;
-                            this.radicadosCuenta = null;
+                            this.onInitDatatables();
 
-                            let estado = 'vehiculo';
+                            this.tramitesSolicitud = response.tramitesSolicitud;
+
+                            let estado = 'vehiculos';
 
                             let timeoutId = setTimeout(() => {
                                 this.onInitTable(estado);
                             }, 100);
                         } else if(response.propietariosActuales) {
+                            this.onInitDatatables();
                             this.propietariosActuales = response.propietariosActuales;
-
-                            this.tramitesSolicitud = null;
-                            this.tramites = null;
-                            this.medidasCautelares = null;
-                            this.cancelacionesMatricula = null;
-                            this.prendas = null;
-                            this.radicadosCuenta = null;
 
                             let estado = 'propietarios-actuales';
 
@@ -200,75 +395,47 @@ export class ReportesComponent implements OnInit {
                                 this.onInitTable(estado);
                             }, 100);
                         } else if(response.tramites) {
+                            this.onInitDatatables();
                             this.tramites = response.tramites;
 
-                            this.tramitesSolicitud = null;
-                            this.propietariosActuales = null;
-                            this.medidasCautelares = null;
-                            this.cancelacionesMatricula = null;
-                            this.prendas = null;
-                            this.radicadosCuenta = null;
-
                             let estado = 'tramites';
+
                             let timeoutId = setTimeout(() => {
                                 this.onInitTable(estado);
                             }, 100);
                         } else if(response.medidasCautelares) {
+                            this.onInitDatatables();
                             this.medidasCautelares = response.medidasCautelares;
-                    
-                            this.tramitesSolicitud = null;
-                            this.propietariosActuales = null;
-                            this.tramites = null;
-                            this.cancelacionesMatricula = null;
-                            this.prendas = null;
-                            this.radicadosCuenta = null;
 
                             let estado = 'medidas-cautelares';
+
                             let timeoutId = setTimeout(() => {
                                 this.onInitTable(estado);
                             }, 100);
                         } else if(response.cancelacionesMatricula) {
+                            this.onInitDatatables();
                             this.cancelacionesMatricula = response.cancelacionesMatricula;
-                            console.log(this.cancelacionesMatricula);
-                            
-                            this.tramitesSolicitud = null;
-                            this.propietariosActuales = null;
-                            this.tramites = null;
-                            this.medidasCautelares = null;
-                            this.prendas = null;
-                            this.radicadosCuenta = null;
 
                             let estado = 'cancelaciones-matricula';
+
                             let timeoutId = setTimeout(() => {
                                 this.onInitTable(estado);
                             }, 100);
                         } else if(response.prendas) {
+                            this.onInitDatatables();
                             this.prendas = response.prendas;
-                            console.log(this.prendas);
-
-                            this.tramitesSolicitud = null;
-                            this.propietariosActuales = null;
-                            this.tramites = null;
-                            this.cancelacionesMatricula = null;
-                            this.medidasCautelares = null;
-                            this.radicadosCuenta = null;
 
                             let estado = 'prendas';
+
                             let timeoutId = setTimeout(() => {
                                 this.onInitTable(estado);
                             }, 100);
                         } else if(response.radicadosCuenta) {
+                            this.onInitDatatables();
                             this.radicadosCuenta = response.radicadosCuenta;
-                            console.log(this.radicadosCuenta);
-
-                            this.tramitesSolicitud = null;
-                            this.propietariosActuales = null;
-                            this.tramites = null;
-                            this.cancelacionesMatricula = null;
-                            this.medidasCautelares = null;
-                            this.prendas = null;
                             
                             let estado = 'radicados-cuenta';
+
                             let timeoutId = setTimeout(() => {
                                 this.onInitTable(estado);
                             }, 100);
