@@ -12,11 +12,13 @@ declare var $: any;
 
 export class FroTrtePrecioComponent implements OnInit {
     public errorMessage;
+
     public formNew = false;
     public formEdit = false;
     public formIndex = false;
     public formRecord = false;
     public formSearch = true;
+    
     public table: any = null;
     public tramitesPrecios;
     public modulos: any;
@@ -238,6 +240,7 @@ export class FroTrtePrecioComponent implements OnInit {
         this.formEdit = true;
         this.formIndex = false;
         this.formNew = false;
+        
         this.tramitePrecio = tramitePrecio;
     }
 
