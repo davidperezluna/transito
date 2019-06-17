@@ -18,7 +18,6 @@ export class ShowComponent implements OnInit {
     @Input() proyecto: any = null;
     public errorMessage;
 
-    public cuentas: any = null;
     public insumos: any = null;
     public actividades: any = null;
     public tiposInsumo: any = null;
@@ -69,197 +68,18 @@ export class ShowComponent implements OnInit {
     ) { }
 
     ngOnInit() { 
-        this.onSearchCuentas();
-     }
+        
+    }
 
     onCancelar() {
         this.ready.emit(true);
     }
 
     /* ================== CUENTA ========================== */
-    onSearchCuentas(){
-        this.formIndexCuenta = true;
-        this.formIndexActividad = false;
-        this.formIndexInsumo = false;
-        this.formNewCuenta = false;
-        this.formNewActividad = false;
-        this.formNewInsumo = false;
 
-        this.datosCuenta.numero = null;
-        this.datosCuenta.nombre = null;
+    
 
-        swal({
-            title: 'Buscando cuentas registradas!',
-            text: 'Solo tardara unos segundos por favor espere.',
-            onOpen: () => {
-                swal.showLoading()
-            }
-        });
-
-        let token = this._LoginService.getToken();
-
-        this._ProyectoService.show({ 'id': this.proyecto.id }, token).subscribe(
-            response => {
-                if (response.code == 200) {
-                    this.proyecto = response.data;
-
-                    this._ProyectoService.searchCuentas({ 'idProyecto': this.proyecto.id }, token).subscribe(
-                        response => {
-                            if (response.code = 200) {
-                                this.cuentas = response.data;
-            
-                                let timeoutId = setTimeout(() => {
-                                    this.onInitTableCuentas();
-                                }, 100);
-            
-                                swal.close();
-                            } else {
-                                swal({
-                                    title: 'Atención!',
-                                    text: response.message,
-                                    type: 'warning',
-                                    confirmButtonText: 'Aceptar'
-                                });
-                            }
-                            error => {
-                                this.errorMessage = <any>error;
-                                if (this.errorMessage != null) {
-                                    console.log(this.errorMessage);
-                                    alert("Error en la petición");
-                                }
-                            }
-            
-                        }
-                    );
-                } else {
-                    swal({
-                        title: 'Error!',
-                        text: response.message,
-                        type: 'error',
-                        confirmButtonText: 'Aceptar'
-                    });
-                }
-                error => {
-                    this.errorMessage = <any>error;
-                    if (this.errorMessage != null) {
-                        console.log(this.errorMessage);
-                        alert("Error en la petición");
-                    }
-                }
-
-            }
-        );  
-    }
-
-    onNewCuenta() {
-        this.formIndexCuenta = false;
-        this.formIndexActividad = false;
-        this.formIndexInsumo = false;
-        this.formNewCuenta = true;
-        this.formNewActividad = false;
-        this.formNewInsumo = false;
-    }
-
-    onCancelarCuenta() {
-        this.formIndexCuenta = true;
-        this.formIndexActividad = false;
-        this.formIndexInsumo = false;
-        this.formNewCuenta = false;
-        this.formNewActividad = false;
-        this.formNewInsumo = false;
-    }
-
-    onRegisterCuenta() {
-        let token = this._LoginService.getToken();
-        
-        this.datosCuenta.idProyecto = this.proyecto.id;
-
-        this._CuentaService.register(this.datosCuenta, token).subscribe(
-            response => {
-                if (response.code = 200) {
-                    swal({
-                        title: 'Perfecto!',
-                        text: response.message,
-                        type: 'success',
-                        confirmButtonText: 'Aceptar'
-                    });
-
-                    this.onSearchCuentas();
-                } else {
-                    swal({
-                        title: 'Atención!',
-                        text: response.message,
-                        type: 'warning',
-                        confirmButtonText: 'Aceptar'
-                    });
-                }
-                error => {
-                    this.errorMessage = <any>error;
-                    if (this.errorMessage != null) {
-                        console.log(this.errorMessage);
-                        alert("Error en la petición");
-                    }
-                }
-
-            }
-        ); 
-    }
-
-    onDeleteCuenta(id: any) {
-        swal({
-            title: '¿Estás seguro?',
-            text: "¡Se eliminara este registro!",
-            type: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#15d4be',
-            cancelButtonColor: '#ff6262',
-            confirmButtonText: 'Confirmar',
-            cancelButtonText: 'Cancelar'
-        }).then((result) => {
-            if (result.value) {
-                let token = this._LoginService.getToken();
-
-                this._CuentaService.delete({ 'id': id }, token).subscribe(
-                    response => {
-                        swal({
-                            title: 'Eliminado!',
-                            text: response.message,
-                            type: 'success',
-                            confirmButtonColor: '#15d4be',
-                        })
-                        this.table.destroy();
-
-                        this.ngOnInit();
-                    },
-                    error => {
-                        this.errorMessage = <any>error;
-
-                        if (this.errorMessage != null) {
-                            console.log(this.errorMessage);
-                            alert("Error en la petición");
-                        }
-                    }
-                );
-            }
-        });
-    }
-
-    onInitTableCuentas() {       
-        this.table = $('#dataTables-cuentas').DataTable({
-            destroy: true,
-            responsive: true,
-            pageLength: 8,
-            sPaginationType: 'full_numbers',
-            oLanguage: {
-                oPaginate: {
-                    sFirst: '<i class="fa fa-step-backward"></i>',
-                    sPrevious: '<i class="fa fa-chevron-left"></i>',
-                    sNext: '<i class="fa fa-chevron-right"></i>',
-                    sLast: '<i class="fa fa-step-forward"></i>'
-                }
-            }
-        });
-    }
+    
 
     /* ================== ACTIVIDAD ========================== */
     onSearchActividades(cuenta: any){
