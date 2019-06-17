@@ -145,14 +145,16 @@ constructor(
             text: 'Registro exitoso!',
             type: 'success',
             confirmButtonText: 'Aceptar'
-          })
+          });
+          swal.close();
         }else{
           swal({
             title: 'Error!',
             text: response.message,
             type: 'error',
             confirmButtonText: 'Aceptar'
-          })
+          });
+          swal.close();
         }
 			error => {
 					this.errorMessage = <any>error;

@@ -125,14 +125,6 @@
                                 <ng-select [multiple]="false" [options]="tipoEmpresas" [(ngModel)]="tipoEmpresaSelected" required name="idTipoEmpresa">
                                 </ng-select>
                             </div>
-
-                            <div class="col-xs-12 col-lg-4" *ngIf='tipoEmpresaSelected == 2'>
-                                <label>Modalidad transporte
-                                    <span class="text-danger">*</span>
-                                </label>
-                                <ng-select [multiple]="false" [options]="modalidadTransportes" [(ngModel)]="modalidadTransporteSelect" required name="idModalidadEmpresa">
-                                </ng-select>
-                            </div>
                             <hr>
 
                             <h5 class="col-xs-16 col-lg-12">Datos representante</h5>

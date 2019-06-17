@@ -1,7 +1,14 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
-import { UserCfgTipoIdentificacionService } from "../../../services/userCfgTipoIdentificacion.service";
-import { UserCiudadanoService } from "../../../services/userCiudadano.service";
+import { UserEmpresaTransporteService } from "../../../services/userEmpresaTransporte.service";
+
+import { VhloCfgRadioAccionService } from "../../../services/vhloCfgRadioAccion.service";
+import { VhloCfgModalidadTransporteService } from "../../../services/vhloCfgModalidadTransporte.service";
+import { VhloCfgServicioService } from "../../../services/vhloCfgServicio.service";
+import { VhloCfgTipoVehiculoService } from "../../../services/vhloCfgTipoVehiculo.service";
+import { VhloCfgColorService } from "../../../services/vhloCfgColor.service";
+import { CfgMunicipioService } from "../../../services/cfgMunicipio.service";
+
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -12,86 +19,45 @@ import swal from 'sweetalert2';
 export class EnableComponent implements OnInit {
     @Output() ready = new EventEmitter<any>();
     public errorMessage;
-    public ciudadano;
     public empresa;
-    public identificacion;
+    public nit;
 
-    public tiposIdentificacion;
-    public tipoIdentificacionSelected;
+    public radiosAccion;
+    public modalidadesTransporte;
+    public servicios;
+    public tiposVehiculo;
+    public colores;
+    public municipios;
 
     constructor(
-        private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
-        private _UserCiudadanoService: UserCiudadanoService,
+        private _UserEmpresaTransporteService: UserEmpresaTransporteService,
         private _LoginService: LoginService,
     ) { }
 
     ngOnInit() {
-        /* this.disenio = new SvCfgDisenio(null, null); */
-        this._TipoIdentificacionService.select().subscribe(
-            response => {
-                this.tiposIdentificacion = response;
-            },
-            error => {
-                this.errorMessage = <any>error;
-
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert("Error en la petición");
-                }
-            }
-        );
     }
 
     onCancelar() {
         this.ready.emit(true);
     }
 
-    /* onEnviar() {
-        let token = this._loginService.getToken();
-
-        this._DisenioService.register(this.disenio, token).subscribe(
-            response => {
-                if (response.status == 'success') {
-                    this.ready.emit(true);
-                    swal({
-                        title: 'Perfecto!',
-                        text: response.message,
-                        type: 'success',
-                        confirmButtonText: 'Aceptar'
-                    })
-                } else {
-                    swal({
-                        title: 'Error!',
-                        text: response.message,
-                        type: 'error',
-                        confirmButtonText: 'Aceptar'
-                    })
-                }
-                error => {
-                    this.errorMessage = <any>error;
-                    if (this.errorMessage != null) {
-                        console.log(this.errorMessage);
-                        alert("Error en la petición");
-                    }
-                }
-
-            });
-    } */
-    onSearchCiudadano() {
+    onSearchEmpresa() {
         let token = this._LoginService.getToken();
-        this._UserCiudadanoService.searchByIdentificacion({'idTipoIdentificacion': this.tipoIdentificacionSelected, 'identificacion': this.identificacion }, token).subscribe(
+        this._UserEmpresaTransporteService.searchByNit(this.nit, token).subscribe(
             response => {
-                if (response.status == 'success') {
-                    if(response.data.ciudadano){
-                        this.ciudadano = response.data.ciudadano;
-                    } else if(response.data.empresa){
-                        this.empresa = response.data.empresa;
-                    }
+                if (response.code == 200) {
+                    this.empresa = response.data;
+                    swal({
+                        title: response.title,
+                        text: response.message,
+                        type: response.status,
+                        confirmButtonText: 'Aceptar'
+                    })
                 } else {
                     swal({
-                        title: 'Alerta!',
+                        title: response.title,
                         text: response.message,
-                        type: 'error',
+                        type: response.status,
                         confirmButtonText: 'Aceptar'
                     })
                 }
