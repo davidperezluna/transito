@@ -1,8 +1,6 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
-import { CvCfgTipoMedidaCautelar } from '../cvCfgTipoMedidaCautelar.modelo';
-import { CvAcuerdoPagoService } from '../../../services/cvAcuerdoPago.service';
-import { CvCfgInteresService } from '../../../services/cvCfgInteres.service';
-import { CvCfgTipoMedidaCautelarService } from '../../../services/cvCfgTipoMedidaCautelar.service';
+import { UserCfgTipoMedidaCautelar } from '../userCfgTipoMedidaCautelar.modelo';
+import { UserCfgTipoMedidaCautelarService } from '../../../services/userCfgTipoMedidaCautelar.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -13,7 +11,7 @@ import swal from 'sweetalert2';
 export class NewComponent implements OnInit {
   @Output() ready = new EventEmitter<any>();
   @Input() comparendosSelect: any = null;
-  public tipoMedidacautelar: CvCfgTipoMedidaCautelar;
+  public tipoMedidacautelar: UserCfgTipoMedidaCautelar;
   public errorMessage;
   public formPreliquidacion = false;
 
@@ -30,11 +28,11 @@ export class NewComponent implements OnInit {
 
 constructor(
   private _loginService: LoginService,
-  private _CvCfgTipoMedidaCautelarService: CvCfgTipoMedidaCautelarService,
+  private _CvCfgTipoMedidaCautelarService: UserCfgTipoMedidaCautelarService,
   ){}
 
   ngOnInit() {
-    this.tipoMedidacautelar = new CvCfgTipoMedidaCautelar(null, null);
+    this.tipoMedidacautelar = new UserCfgTipoMedidaCautelar(null, null);
 
     
 

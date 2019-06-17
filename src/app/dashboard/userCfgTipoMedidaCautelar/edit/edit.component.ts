@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { CvCfgTipoMedidaCautelarService } from '../../../services/cvCfgTipoMedidaCautelar.service';
+import { UserCfgTipoMedidaCautelarService } from '../../../services/userCfgTipoMedidaCautelar.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -11,12 +11,11 @@ export class EditComponent implements OnInit{
 @Output() ready = new EventEmitter<any>();
 @Input() tipoMedidaCautelar:any = null;
 public errorMessage;
-public respuesta;
 public formReady = false;
 
 constructor(
-  private _CvCfgTipoMedidaCautelarService: CvCfgTipoMedidaCautelarService,
-  private _loginService: LoginService,
+  private _UserCfgTipoMedidaCautelarService: UserCfgTipoMedidaCautelarService,
+  private _LoginService: LoginService,
   ){}
 
   ngOnInit(){ console.log(this.tipoMedidaCautelar);  }
@@ -24,19 +23,24 @@ constructor(
   onCancelar(){ this.ready.emit(true); }
 
   onEnviar(){
-    let token = this._loginService.getToken();
-		this._CvCfgTipoMedidaCautelarService.edit(this.tipoMedidaCautelar,token).subscribe(
+    let token = this._LoginService.getToken();
+		this._UserCfgTipoMedidaCautelarService.edit(this.tipoMedidaCautelar,token).subscribe(
 			response => {
-        this.respuesta = response;
-        console.log(this.respuesta);
-        if(this.respuesta.status == 'success'){
+        if(response.status == 'success'){
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',
-            text: 'El registro se ha modificado con exito',
+            text: response.message,
             type: 'success',
             confirmButtonText: 'Aceptar'
-          })
+          });
+        } else {
+          swal({
+            title: 'Error!',
+            text: response.message,
+            type: 'error',
+            confirmButtonText: 'Aceptar'
+          });
         }
 			error => {
 					this.errorMessage = <any>error;

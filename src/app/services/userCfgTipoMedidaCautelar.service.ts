@@ -5,8 +5,8 @@ import { environment } from 'environments/environment';
 import  "rxjs/add/operator/map";
 
 @Injectable()
-export class CvCfgTipoMedidaCautelarService {
-	private url = environment.apiUrl + 'contravencional/cvcfgtipomedidacautelar';
+export class UserCfgTipoMedidaCautelarService {
+	private url = environment.apiUrl + 'usuario/usercfgtipomedidacautelar';
 	public identity;
 	public token;
 
@@ -38,10 +38,11 @@ export class CvCfgTipoMedidaCautelarService {
 		);
 	}
 
-	show(token, id) {
-		let params = "authorization=" + token;
+	show(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = "data=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-		return this._http.post(this.url + "/" + id + "/show", params, { headers: headers })
+		return this._http.post(this.url + "/show", params, { headers: headers })
 			.map(res => res.json());
 	}
 

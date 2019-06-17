@@ -53,7 +53,7 @@ import { CvCfgInteresModule } from './cvCfgInteres/cvCfgInteres.module';
 import { CvCfgPorcentajeInicialModule } from './cvCfgPorcentajeInicial/cvCfgPorcentajeInicial.module';
 import { CvCfgTipoRestriccionModule } from './cvCfgTipoRestriccion/cvCfgTipoRestriccion.module';
 import { CvLcCfgTipoRestriccionModule } from './cvLcCfgTipoRestriccion/cvLcCfgTipoRestriccion.module';
-import { CvCfgTipoMedidaCautelarModule } from './cvCfgTipoMedidaCautelar/cvCfgTipoMedidaCautelar.module';
+import { UserCfgTipoMedidaCautelarModule } from './userCfgTipoMedidaCautelar/userCfgTipoMedidaCautelar.module';
 import { CvMedidaCautelarModule } from './cvMedidaCautelar/cvMedidaCautelar.module';
 
 import { VhloCfgTipoVehiculoModule } from './vhloCfgTipoVehiculo/vhloCfgTipoVehiculo.module';
@@ -439,7 +439,7 @@ import {RightsidebarComponent} from '../shared';
     ImoCfgTipoModule,
     ImoActaModule,
     ImoLoteModule,
-    CvCfgTipoMedidaCautelarModule,
+    UserCfgTipoMedidaCautelarModule,
     CvMedidaCautelarModule,
     BpCfgTipoInsumoModule,
     BpProyectoModule,

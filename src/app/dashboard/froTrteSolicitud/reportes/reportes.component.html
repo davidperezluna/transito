@@ -203,7 +203,7 @@
                                     <tr class="odd" *ngFor="let medidaCautelar of medidasCautelares; let i = index">
                                         <td>{{ i + 1 }}</td>
                                         <td>{{ medidaCautelar.placa }}</td>
-                                        <td>{{ medidaCautelar.tipo }}</td>
+                                        <td>{{ medidaCautelar.tipoMedida }}</td>
                                         <td>{{ medidaCautelar.ente }}</td>
                                         <td>{{ medidaCautelar.numeroOficio }}</td>
                                         <td>{{ (medidaCautelar.fechaExpedicion.timestamp * 1000) | date: 'yyyyMMdd' }}</td>

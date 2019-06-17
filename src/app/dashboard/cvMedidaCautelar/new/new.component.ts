@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { CvMedidaCautelar } from '../cvMedidaCautelar.modelo';
-import { CvCfgTipoMedidaCautelarService } from '../../../services/cvCfgTipoMedidaCautelar.service';
+import { UserCfgTipoMedidaCautelarService } from '../../../services/userCfgTipoMedidaCautelar.service';
 import { CvMedidaCautelarService } from '../../../services/cvMedidaCautelar.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
@@ -29,7 +29,7 @@ export class NewComponent implements OnInit {
 
 constructor(
   private _loginService: LoginService,
-  private _CvCfgTipoMedidaCautelarService: CvCfgTipoMedidaCautelarService,
+  private _CvCfgTipoMedidaCautelarService: UserCfgTipoMedidaCautelarService,
   private _CvMedidaCautelarService: CvMedidaCautelarService,
   ){}
 

@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { CvCfgTipoMedidaCautelarService } from '../../services/cvCfgTipoMedidaCautelar.service';
+import { UserCfgTipoMedidaCautelarService } from '../../services/userCfgTipoMedidaCautelar.service';
 import { LoginService } from '../../services/login.service';
 import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './cvCfgTipoMedidaCautelar.component.html'
+  templateUrl: './userCfgTipoMedidaCautelar.component.html'
 })
 
-export class CvCfgTipoMedidaCautelarComponent implements OnInit {
+export class UserCfgTipoMedidaCautelarComponent implements OnInit {
   public errorMessage;
-	public tipoMedidacautelar: any;
+	public tipoMedidaCautelar: any;
 	public valorTotal: any;
 	public ciudadano: any;
 	public tiposMedidasCautelares: any = null;
@@ -25,7 +25,7 @@ export class CvCfgTipoMedidaCautelarComponent implements OnInit {
 
   constructor(
     private _loginService: LoginService,
-    private _CvCfgTipoMedidaCautelarService: CvCfgTipoMedidaCautelarService,
+    private _CvCfgTipoMedidaCautelarService: UserCfgTipoMedidaCautelarService,
   ){}
     
   ngOnInit() {
@@ -93,8 +93,8 @@ export class CvCfgTipoMedidaCautelarComponent implements OnInit {
     }
   }
 
-  onEdit(tipoMedidacautelar:any){
-    this.tipoMedidacautelar = tipoMedidacautelar;
+  onEdit(tipoMedidaCautelar:any){
+    this.tipoMedidaCautelar = tipoMedidaCautelar;
     this.formEdit = true;
     this.formIndex = false;
   }

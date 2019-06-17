@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { CvCfgTipoMedidaCautelarService } from '../../../services/cvCfgTipoMedidaCautelar.service';
+import { UserCfgTipoMedidaCautelarService } from '../../../services/userCfgTipoMedidaCautelar.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -15,7 +15,7 @@ public respuesta;
 public formReady = false;
 
 constructor(
-  private _CvCfgTipoMedidaCautelarService: CvCfgTipoMedidaCautelarService,
+  private _CvCfgTipoMedidaCautelarService: UserCfgTipoMedidaCautelarService,
   private _loginService: LoginService,
   ){}
 

@@ -50,7 +50,7 @@ export class NewComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.empresaTransporte = new UserEmpresaTransporte(null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+        this.empresaTransporte = new UserEmpresaTransporte(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
         this._VhloCfgRadioAccionService.select().subscribe(
             response => {
                 this.radiosAccion = response;
@@ -179,7 +179,37 @@ export class NewComponent implements OnInit {
         );
     }
 
-    onEnviar(){
-        console.log(this.empresaTransporte);
+    onEnviar() {
+        let token = this._LoginService.getToken();
+
+        this.empresaTransporte.idEmpresa = this.empresa.id;
+
+        this._UserEmpresaTransporteService.register(this.empresaTransporte, token).subscribe(
+            response => {
+                if (response.code == 200) {
+                    this.ready.emit(true);
+                    swal({
+                        title: response.title,
+                        text: response.message,
+                        type: response.status,
+                        confirmButtonText: 'Aceptar'
+                    })
+                } else {
+                    swal({
+                        title: 'Error!',
+                        text: 'El tipoIdentificacion ' + +' ya se encuentra registrado',
+                        type: 'error',
+                        confirmButtonText: 'Aceptar'
+                    })
+                }
+                error => {
+                    this.errorMessage = <any>error;
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                    }
+                }
+
+            });
     }
 }

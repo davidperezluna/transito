@@ -154,7 +154,7 @@ import { ReporteRoutes } from './reporte/reporte.routes';
 import { VhloCertificadoTradicionRoutes } from './vhloCertificadoTradicion/vhloCertificadoTradicion.routes';
 import { CvCfgTipoRestriccionRoutes } from './cvCfgTipoRestriccion/cvCfgTipoRestriccion.routes';
 import { CvLcCfgTipoRestriccionRoutes } from './cvLcCfgTipoRestriccion/cvLcCfgTipoRestriccion.routes';
-import { CvCfgTipoMedidaCautelarRoutes } from './cvCfgTipoMedidaCautelar/cvCfgTipoMedidaCautelar.routes';
+import { UserCfgTipoMedidaCautelarRoutes } from './userCfgTipoMedidaCautelar/userCfgTipoMedidaCautelar.routes';
 import { CvMedidaCautelarRoutes } from './cvMedidaCautelar/cvMedidaCautelar.routes';
 
 import { ImoBusquedaRoutes } from './imoBusqueda/imoBusqueda.routes';
@@ -431,7 +431,7 @@ export const DashboardRoutes: Route[] = [
       ...ImoReasignacionRoutes,
       ...ImoActaRoutes,
       ...VhloCertificadoTradicionRoutes,
-      ...CvCfgTipoMedidaCautelarRoutes,
+      ...UserCfgTipoMedidaCautelarRoutes,
       ...CvMedidaCautelarRoutes,
       ...BpCfgTipoInsumoRoutes,
       ...BpProyectoRoutes,
