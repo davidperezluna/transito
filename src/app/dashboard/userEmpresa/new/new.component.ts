@@ -8,7 +8,6 @@ import { UserCiudadanoService } from '../../../services/userCiudadano.service';
 import { UserCfgEmpresaTipoSociedadService } from '../../../services/userCfgEmpresaTipoSociedad.service';
 import { UserCfgTipoIdentificacionService } from '../../../services/userCfgTipoIdentificacion.service';
 import { UserCfgEmpresaServicioService } from '../../../services/userCfgEmpresaServicio.service';
-import { VhloCfgModalidadTransporteService } from '../../../services/vhloCfgModalidadTransporte.service';
 
 import swal from 'sweetalert2';
 
@@ -64,7 +63,6 @@ export class NewEmpresaComponent implements OnInit {
     private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
     private _CiudadanoService: UserCiudadanoService,
     private _CfgEmpresaServicioService: UserCfgEmpresaServicioService,
-    private _modalidadTransporteService: VhloCfgModalidadTransporteService,
   ) { }
 
   ngOnInit() {
@@ -80,19 +78,6 @@ export class NewEmpresaComponent implements OnInit {
           console.log(this.errorMessage);
           alert('Error en la petición');
         } 
-      }
-    );
-
-    this._modalidadTransporteService.select().subscribe(
-      response => {
-        this.modalidadTransportes = response;
-      },
-      error => {
-        this.errorMessage = <any>error;
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert('Error en la petición');
-        }
       }
     );
 

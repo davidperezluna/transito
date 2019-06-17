@@ -1,0 +1,220 @@
+<div class="col-xs-12 col-lg-12">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="text-uppercase">Habilitar Empresa</h5>
+            <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
+        </div>
+        <div class="card-body">
+            <form #formNew="ngForm">
+                <div class="col-xs-16 col-lg-6">
+                    <label>Número Identificación <strong class="text-danger">*</strong></label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" [(ngModel)]="nit" required name="nit" />
+                        <span class="input-group-btn">
+                            <button (click)="onSearchEmpresa()" class="btn btn-default btn-primary" type="button">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-xs-16 col-lg-6">
+                    <div class="row">
+                        <div class="col-xs-12 col-lg-12" *ngIf='empresa'>
+                            <table class="table table-bordered table-striped">
+                                <tr>
+                                    <th><b>Tipo de identificación</b></th>
+                                    <th><b>Numero de identificación</b></th>
+                                </tr>
+                                <tr>
+                                    <td>{{ empresa.tipoIdentificacion?.nombre }}</td>
+                                    <td>{{ empresa.nit }}</td>
+                                </tr>
+                                <tr>
+                                    <th><b>Razón Social</b></th>
+                                    <th><b>Identificador Empresa</b></th>
+                                </tr>
+                                <tr>
+                                    <td>{{ empresa.razonSocial }}</td>
+                                    <td>N</td>
+                                </tr>
+                                <tr>
+                                    <th><b>Departamento</b></th>
+                                    <th><b>Ciudad</b></th>
+                                </tr>
+                                <tr>
+                                    <td>{{ empresa.municipio.departamento.nombre }}</td>
+                                    <td>{{ empresa.municipio.nombre }}</td>
+                                </tr>
+                                <tr>
+                                    <th><b>Dirección Principal</b></th>
+                                    <th><b>Teléfono</b></th>
+                                </tr>
+                                <tr>
+                                    <td>{{ empresa.direccion }}</td>
+                                    <td>{{ empresa.telefono }}</td>
+                                </tr>
+                                <tr>
+                                    <th><b>Fax</b></th>
+                                    <th><b>Email</b></th>
+                                </tr>
+                                <tr>
+                                    <td>{{ empresa.fax }}</td>
+                                    <td>{{ empresa.correo }}</td>
+                                </tr>
+                            </table>
+                            <h5>Datos del representante</h5>
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th><b>Tipo Identificación</b></th>
+                                        <th><b>Número Identificación</b></th>
+                                        <th><b>Nombres y Apellidos</b></th>
+                                        <th><b>Fecha Inicio</b></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{{ empresa.empresaRepresentante.ciudadano.tipoIdentificacion.nombre }}</td>
+                                        <td>{{ empresa.empresaRepresentante.ciudadano.identificacion }}</td>
+                                        <td>{{ empresa.empresaRepresentante.ciudadano.primerNombre }}
+                                            {{ empresa.empresaRepresentante.ciudadano.segundoNombre }}
+                                            {{ empresa.empresaRepresentante.ciudadano.primerApellido }}
+                                            {{ empresa.empresaRepresentante.ciudadano.segundoApellido }}</td>
+                                        <td>{{ (empresa.empresaRepresentante.fechaInicial.timestamp * 1000) | date: 'dd/MM/yyyy' }}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">
+                <strong class="text-uppercase">Modalidad Transporte</strong>
+            </h5>
+        </div>
+        <div class="card-body">
+            <div class="form-group row">
+                <div class="col-lg-6 col-md-6">
+                    <label>Radio Acción <strong class="text-danger">*</strong></label>
+                    <ng-select [multiple]="false" [options]="radiosAccion" [(ngModel)]="empresaTransporte.idRadioAccion" required name="idRadioAccion">
+                    </ng-select>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <label>Modalidad Transporte <strong class="text-danger">*</strong></label>
+                    <ng-select [multiple]="false" [options]="modalidadesTransporte" [(ngModel)]="empresaTransporte.idModalidadTransporte" required name="idModalidadTransporte">
+                    </ng-select>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <label>Servicio <strong class="text-danger">*</strong></label>
+                    <ng-select [multiple]="false" [options]="servicios" [(ngModel)]="empresaTransporte.idServicio" required name="idServicio">
+                    </ng-select>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <label>Clase <strong class="text-danger">*</strong></label>
+                    <ng-select [multiple]="false" [options]="clases" [(ngModel)]="empresaTransporte.idClase" required name="idClase">
+                    </ng-select>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <label>Nro. de Acto Administrativo <strong class="text-danger">*</strong></label>
+                    <input class="form-control" [(ngModel)]="empresaTransporte.numeroActo" name="numeroActo" type="number">
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <label>Fecha Expedición Acto Administrativo <strong class="text-danger">*</strong></label>
+                    <input class="form-control" [(ngModel)]="empresaTransporte.fechaExpedicionActo" name="fechaExpedicionActo" type="date">
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <label>Nro. de Ejecutoria Acto Administrativo <strong class="text-danger">*</strong></label>
+                    <input class="form-control" [(ngModel)]="empresaTransporte.numeroEjecutoriaActo" name="numeroEjecutoriaActo" type="number">
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <label>Fecha Ejecutoria Acto Administrativo <strong class="text-danger">*</strong></label>
+                    <input class="form-control" [(ngModel)]="empresaTransporte.fechaEjecutoriaActo" name="fechaEjecutoriaActo" type="date">
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <label>Color<strong class="text-danger">*</strong></label>
+                    <ng-select [multiple]="true" [options]="colores" [(ngModel)]="empresaTransporte.arrayColores" required
+                        name="colores">
+                    </ng-select>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <label>Municipio<strong class="text-danger">*</strong></label>
+                    <ng-select [multiple]="true" [options]="municipios" [(ngModel)]="empresaTransporte.arrayMunicipios" required
+                        name="municipios">
+                    </ng-select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">
+                <strong class="text-uppercase">Datos de la Capacidad Transportadora</strong>
+            </h5>
+        </div>
+        <div class="card-body">
+            <div class="form-group row">
+                <div class="col-lg-6 col-md-6" *ngIf="empresaTransporte.idModalidadTransporte == 3">
+                    <label>Tipo Carroceria <strong class="text-danger">*</strong></label>
+                    <ng-select [multiple]="false" [options]="carrocerias" [(ngModel)]="empresaTransporte.idCarroceria"
+                        required name="idCarroceria">
+                    </ng-select>
+                </div>
+                <div class="col-lg-6 col-md-6" *ngIf="empresaTransporte.idServicio == 4">
+                    <label>Capacidad <strong class="text-danger">*</strong></label>
+                    <input class="form-control" [(ngModel)]="empresaTransporte.capacidad" name="capacidad" type="number">
+                </div>
+                <div class="col-lg-6 col-md-6" *ngIf="empresaTransporte.idModalidadTransporte">
+                    <label>Capacidad mínima <strong class="text-danger">*</strong></label>
+                    <input class="form-control" [(ngModel)]="empresaTransporte.capacidadMinima" name="capacidadMinima" type="number">
+                </div>
+                <div class="col-lg-6 col-md-6" *ngIf="empresaTransporte.idModalidadTransporte">
+                    <label>Capacidad máxima <strong class="text-danger">*</strong></label>
+                    <input class="form-control" [(ngModel)]="empresaTransporte.capacidadMaxima" name="capacidadMaxima" type="number">
+                </div>
+                <div class="col-xs-12 col-lg-12" *ngIf="empresaTransporte.idServicio == 4 && empresaTransporte.idClase == 5">
+                    <div class="custom-control custom-checkbox">
+                        <input [(ngModel)]="empresaTransporte.dobleCabina" name="dobleCabina" type="checkbox" class="custom-control-input"
+                            id="checkbox-dobleCabina" checked="">
+                        <label class="custom-control-label" for="checkbox-dobleCabina">Doble Cabina</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">
+                <strong class="text-uppercase">Modalidad Transporte</strong>
+            </h5>
+        </div>
+        <div class="card-body">
+            <div class="form-group row">
+                <div class="col-lg-6 col-md-6">
+                    <label>Radio Acción <strong class="text-danger">*</strong></label>
+                    <ng-select [multiple]="false" [options]="radiosAccion" [(ngModel)]="empresaTransporte.idRadioAccion" required name="idRadioAccion">
+                    </ng-select>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <label>Modalidad Transporte <strong class="text-danger">*</strong></label>
+                    <ng-select [multiple]="false" [options]="modalidadesTransporte" [(ngModel)]="empresaTransporte.idModalidadTransporte" required name="idModalidadTransporte">
+                    </ng-select>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <!-- <div class="card-footer">
+        <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
+            <i class="fa fa-floppy-o"></i>
+            Enviar
+        </button>
+        <button (click)="onCancelar()" class="btn btn-default">
+            <i class="fa fa-times"></i>
+            Cancelar
+        </button>
+    </div> -->
+</div>

@@ -5,6 +5,7 @@ import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { ToolTipModule } from 'angular2-tooltip'
 
 import { UserEmpresaModule } from './userEmpresa/userEmpresa.module';
+import { UserEmpresaTransporteModule } from './userEmpresaTransporte/userEmpresaTransporte.module';
 import { UserCiudadanoModule } from './userCiudadano/userCiudadano.module';
 import { UserCfgTipoIdentificacionModule } from './userCfgTipoIdentificacion/userCfgTipoIdentificacion.module';
 import { UserCfgGeneroModule } from './userCfgGenero/userCfgGenero.module';
@@ -251,6 +252,7 @@ import {RightsidebarComponent} from '../shared';
     Ng2BootstrapModule.forRoot(),
     ToolTipModule,
     UserEmpresaModule,
+    UserEmpresaTransporteModule,
     UserCiudadanoModule,
     UserCfgTipoIdentificacionModule,
     UserCfgGeneroModule,

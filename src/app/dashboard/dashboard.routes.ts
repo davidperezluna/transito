@@ -3,6 +3,7 @@ import { Route } from '@angular/router';
 import { HomeRoutes } from './home/home.routes';
 
 import { UserEmpresaRoutes } from './userEmpresa/userEmpresa.routes';
+import { UserEmpresaTransporteRoutes } from './userEmpresaTransporte/userEmpresaTransporte.routes';
 import { UserCiudadanoRoutes } from './userCiudadano/userCiudadano.routes';
 import { UserCfgTipoIdentificacionRoutes } from './userCfgTipoIdentificacion/userCfgTipoIdentificacion.routes';
 import { UserCfgGeneroRoutes } from './userCfgGenero/userCfgGenero.routes';
@@ -244,6 +245,7 @@ export const DashboardRoutes: Route[] = [
     children: [
       ...CvLcCfgTipoRestriccionRoutes,
       ...UserEmpresaRoutes,
+      ...UserEmpresaTransporteRoutes,
       ...UserCiudadanoRoutes,
       ...UserCfgTipoIdentificacionRoutes,
       ...UserCfgGeneroRoutes,

@@ -140,18 +140,44 @@
                                     <td>{{ i + 1 }}</td>
                                     <td>{{ propietarioActual.vehiculo.organismoTransito.divipo }}</td>
                                     <td>{{ propietarioActual.vehiculo.placa.numero  }}</td>
-                                    <td>{{ propietarioActual.ciudadano.tipoIdentificacion.sigla  }}</td>
-                                    <td>{{ propietarioActual.ciudadano.identificacion  }}</td>
-                                    <td>N</td>
+                                    <td>
+                                        <span *ngIf="propietarioActual.ciudadano">{{ propietarioActual.ciudadano.tipoIdentificacion.sigla }}</span>
+                                        <span *ngIf="propietarioActual.empresa">{{ propietarioActual.empresa.tipoIdentificacion.sigla }}</span>
+                                    </td>
+                                    <td>
+                                        <span *ngIf="propietarioActual.ciudadano">{{ propietarioActual.ciudadano.identificacion }}</span>
+                                        <span *ngIf="propietarioActual.empresa">{{ propietarioActual.empresa.nit }}</span>
+                                    </td>
+                                    <td>
+                                        <span *ngIf="propietariosActuales.length > 1">S</span>
+                                        <span *ngIf="propietariosActuales.length == 1">N</span>
+                                    </td>
                                     <td>{{ (propietarioActual.fechaInicial.timestamp * 1000) | date: 'yyyyMMdd' }}</td>
-                                    <td>{{ propietarioActual.ciudadano.primerApellido  }}</td>
-                                    <td>{{ propietarioActual.ciudadano.segundoApellido  }}</td>
-                                    <td>{{ propietarioActual.ciudadano.primerNombre  }}</td>
-                                    <td>{{ propietarioActual.ciudadano?.segundoNombre  }}</td>
-                                    <td>{{ propietarioActual.ciudadano.municipioResidencia.codigoDane  }}</td>
-                                    <td>{{ propietarioActual.ciudadano.direccionPersonal  }}</td>
-                                    <td>{{ propietarioActual.ciudadano.telefonoCelular  }}</td>
-                                    
+                                    <td>
+                                        <span *ngIf="propietarioActual.ciudadano">{{ propietarioActual.ciudadano?.primerApellido }}</span>
+                                    </td>
+                                    <td>
+                                        <span *ngIf="propietarioActual.ciudadano">{{ propietarioActual.ciudadano?.segundoApellido }}</span>
+                                    </td>
+                                    <td>
+                                        <span *ngIf="propietarioActual.ciudadano">{{ propietarioActual.ciudadano.primerNombre  }}</span>
+                                        <span *ngIf="propietarioActual.empresa">{{ propietarioActual.empresa.nombre  }}</span>
+                                    </td>
+                                    <td>
+                                        <span *ngIf="propietarioActual.ciudadano">{{ propietarioActual.ciudadano?.segundoNombre }}</span>
+                                    </td>
+                                    <td>
+                                        <span *ngIf="propietarioActual.ciudadano">{{ propietarioActual.ciudadano.municipioResidencia.codigoDane }}</span>
+                                        <span *ngIf="propietarioActual.empresa">{{ propietarioActual.empresa.municipio.codigoDane }}</span>
+                                    </td>
+                                    <td>
+                                        <span *ngIf="propietarioActual.ciudadano">{{ propietarioActual.ciudadano.direccionPersonal  }}</span>
+                                        <span *ngIf="propietarioActual.empresa">{{ propietarioActual.empresa.direccion  }}</span>
+                                    </td>
+                                    <td>
+                                        <span *ngIf="propietarioActual.ciudadano">{{ propietarioActual.ciudadano?.telefonoCelular }}</span>
+                                        <span *ngIf="propietarioActual.empresa">{{ propietarioActual.empresa.telefono }}</span>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
