@@ -31,9 +31,8 @@ export class ReportesComponent implements OnInit {
     
     public fechaDesde;
     public fechaHasta;
-    
-    public formHistorial = false;
-    public formFiltros = true;
+
+    public formSearch: any;
     
     public table: any;
     
@@ -107,6 +106,12 @@ export class ReportesComponent implements OnInit {
                 }
             }
         );
+
+        this.onInitForms();
+    }
+
+    onInitForms(){
+        this.formSearch = true;
     }
 
     onInitTable(estado) {
@@ -142,8 +147,7 @@ export class ReportesComponent implements OnInit {
     
     ready(isCreado: any) {
         if (isCreado) {
-            this.formHistorial = false;
-            this.formFiltros = true;
+           this.formSearch = true;
         }
     }
 
@@ -176,6 +180,7 @@ export class ReportesComponent implements OnInit {
                             this.radicadosCuenta = null;
 
                             let estado = 'vehiculo';
+
                             let timeoutId = setTimeout(() => {
                                 this.onInitTable(estado);
                             }, 100);
@@ -190,6 +195,7 @@ export class ReportesComponent implements OnInit {
                             this.radicadosCuenta = null;
 
                             let estado = 'propietarios-actuales';
+
                             let timeoutId = setTimeout(() => {
                                 this.onInitTable(estado);
                             }, 100);

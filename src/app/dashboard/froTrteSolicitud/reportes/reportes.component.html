@@ -1,301 +1,306 @@
-<div class="container row">
-    <div class="col-xs-12 col-lg-4">
-        <div class="card">
-            <div class="card-header">
-                <b class="text-uppercase">Filtro de búsqueda</b>
-            </div>
-            <div class="card-body">
-                <form #formFiltros="ngForm">
-                    <div class="col-xs-12 col-lg-12">
-                        <label>Seleccionar OrganismoTransito</label>
-                        <ng-select [multiple]="false" [options]="organismosTransito" [(ngModel)]="organismoTransitoSelected" required
-                            name="idOrganismoTransito">
-                        </ng-select>
-                    </div>
-                    <div class="col-xs-12 col-lg-12">
-                        <label>Módulo</label>
-                        <ng-select [multiple]="false" [options]="modulos" [(ngModel)]="moduloSelected" required
-                            name="idModulo">
-                        </ng-select>
-                    </div>
-                    <div class="col-xs-12 col-lg-12">
-                        <label>Seleccionar tipo reporte</label>
-                        <ng-select [multiple]="false" [options]="tiposReporte" [(ngModel)]="tipoReporteSelected" required
-                            name="idTipoReporte">
-                        </ng-select>
-                    </div>
-                    <div class="col-xs-12 col-lg-12" *ngIf="this.tipoReporteSelected != 2">
-                        <label>Desde<strong class="text-danger">*</strong></label>
-                        <input class="form-control" type="date" [(ngModel)]="datos.fechaDesde"
-                            name="fechaDesde" required>
-                    </div>
-                    <div class="col-xs-12 col-lg-12" *ngIf="this.tipoReporteSelected != 2">
-                        <label>Hasta<strong class="text-danger">*</strong></label>
-                        <input class="form-control" type="date" [(ngModel)]="datos.fechaHasta"
-                            name="fechaHasta" required>
-                    </div><br>
-                    <div class="col-xs-12 col-lg-12" *ngIf="tipoReporteSelected == 2">
-                        <div class="input-group">
-                            <input type="text" class="form-control text-uppercase" placeholder="Número de placa"
-                                [(ngModel)]="datos.placa" required name="numeroPlaca" />
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="col-xs-12 col-lg-4" *ngIf="formSearch">
+            <div class="card">
+                <div class="card-header">
+                    <b class="text-uppercase">Filtro de búsqueda</b>
+                </div>
+                <div class="card-body">
+                    <form #formFiltros="ngForm">
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Seleccionar OrganismoTransito</label>
+                            <ng-select [multiple]="false" [options]="organismosTransito" [(ngModel)]="organismoTransitoSelected" required
+                                name="idOrganismoTransito">
+                            </ng-select>
                         </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Módulo</label>
+                            <ng-select [multiple]="false" [options]="modulos" [(ngModel)]="moduloSelected" required
+                                name="idModulo">
+                            </ng-select>
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Seleccionar tipo reporte</label>
+                            <ng-select [multiple]="false" [options]="tiposReporte" [(ngModel)]="tipoReporteSelected" required
+                                name="idTipoReporte">
+                            </ng-select>
+                        </div>
+                        <div class="col-xs-12 col-lg-12" *ngIf="this.tipoReporteSelected != 2">
+                            <label>Desde<strong class="text-danger">*</strong></label>
+                            <input class="form-control" type="date" [(ngModel)]="datos.fechaDesde"
+                                name="fechaDesde" required>
+                        </div>
+                        <div class="col-xs-12 col-lg-12" *ngIf="this.tipoReporteSelected != 2">
+                            <label>Hasta<strong class="text-danger">*</strong></label>
+                            <input class="form-control" type="date" [(ngModel)]="datos.fechaHasta"
+                                name="fechaHasta" required>
+                        </div><br>
+                        <div class="col-xs-12 col-lg-12" *ngIf="tipoReporteSelected == 2">
+                            <div class="input-group">
+                                <input type="text" class="form-control text-uppercase" placeholder="Número de placa"
+                                    [(ngModel)]="datos.placa" required name="numeroPlaca" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer">
+                    <div class="btn-group">
+                        <button (click)="onEnviar()" [disabled]="formFiltros.invalid" class="btn btn-default btn-primary" type="button">
+                            <i class="fa fa-search"></i>buscar
+                        </button>
                     </div>
-                </form>
-            </div>
-            <div class="card-footer">
-                <div class="btn-group">
-                    <button (click)="onEnviar()" [disabled]="formFiltros.invalid" class="btn btn-default btn-primary" type="button">
-                        <i class="fa fa-search"></i>buscar
-                    </button>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="col-xs-12 col-lg-8" *ngIf="tramitesSolicitud || propietariosActuales || tramites || medidasCautelares || cancelacionesMatricula || prendas || radicadosCuenta">
-        <div class="row">
-            <div class="col-xs-12 col-lg-12">
-                <div class="card">
-                    <div class="card-header">
-                        <b class="text-uppercase">Historial Registros</b>
+
+        <div class="col-xs-12 col-lg-8" *ngIf="tramitesSolicitud || propietariosActuales || tramites || medidasCautelares || cancelacionesMatricula || prendas || radicadosCuenta">
+            <div class="row">
+                <div class="col-xs-12 col-lg-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <b class="text-uppercase">Historial Registros</b>
+                        </div>
+                        <div class="card-body">
+                            <table class="table" id="dataTables-vehiculos" *ngIf="tramitesSolicitud">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th>#</th>
+                                        <th>organismo Tránsito</th>
+                                        <th>placa</th>
+                                        <th>marca</th>
+                                        <th>linea</th>
+                                        <th>clase</th>
+                                        <th>color</th>
+                                        <th>servicio</th>
+                                        <th>carroceria</th>
+                                        <th>modalidad</th>
+                                        <th>cilindraje</th>
+                                        <th>modelo</th>
+                                        <th>motor</th>
+                                        <th>chasis</th>
+                                        <th>serie</th>
+                                        <th>cap. ton</th>
+                                        <th>cap. pasajeros</th>
+                                        <th>fecha matricula</th>
+                                        <th>num. lic. transito</th>
+                                        <th>num. fac. sirev</th>
+                                        <th>tipo combustible</th>
+                                        <th>estado</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="odd" *ngFor="let tramiteSolicitud of tramitesSolicitud; let i = index">
+                                        <td>{{ i + 1 }}</td>
+                                        <td>{{ tramiteSolicitud.organismoTransito }}</td>
+                                        <td>{{ tramiteSolicitud.placa }}</td>
+                                        <td>{{ tramiteSolicitud.marca }}</td>
+                                        <td>{{ tramiteSolicitud.linea }}</td>
+                                        <td>{{ tramiteSolicitud.clase }}</td>
+                                        <td>{{ tramiteSolicitud.color }}</td>
+                                        <td>{{ tramiteSolicitud.servicio }}</td>
+                                        <td>{{ tramiteSolicitud.carroceria }}</td>
+                                        <td>{{ tramiteSolicitud.modalidadTransporte }}</td>
+                                        <td>{{ tramiteSolicitud.cilindraje }}</td>
+                                        <td>{{ tramiteSolicitud.modelo }}</td>
+                                        <td>{{ tramiteSolicitud.motor }}</td>
+                                        <td>{{ tramiteSolicitud.chasis }}</td>
+                                        <td>{{ tramiteSolicitud.serie }}</td>
+                                        <td>{{ tramiteSolicitud.capacidadCarga }}</td>
+                                        <td>{{ tramiteSolicitud.numeroPasajeros }}</td>
+                                        <td>{{ (tramiteSolicitud.fechaMatricula.timestamp * 1000) | date: 'yyyyMMdd' }}</td>
+                                        <td>{{ tramiteSolicitud.numeroLicenciaTransito }}</td>
+                                        <td>N</td>
+                                        <td>{{ tramiteSolicitud.combustible }}</td>
+                                        <td>
+                                            <span *ngIf="tramiteSolicitud.estado">ACTIVO</span>
+                                            <span *ngIf="!tramiteSolicitud.estado">CANCELADO</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <table class="table" id="dataTables-propitarios-actuales" *ngIf="propietariosActuales">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th>#</th>
+                                        <th>organismo Tránsito</th>
+                                        <th>placa</th>
+                                        <th>tipo documento</th>
+                                        <th>numero de documento</th>
+                                        <th>proindiviso</th>
+                                        <th>fecha propiedad</th>
+                                        <th>primer apellido</th>
+                                        <th>segundo apellido</th>
+                                        <th>primer nombre</th>
+                                        <th>segundo nombre</th>
+                                        <th>ciudad</th>
+                                        <th>direccion</th>
+                                        <th>telefono</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="odd" *ngFor="let propietarioActual of propietariosActuales; let i = index">
+                                        <td>{{ i + 1 }}</td>
+                                        <td>{{ propietarioActual.vehiculo.organismoTransito.divipo }}</td>
+                                        <td>{{ propietarioActual.vehiculo.placa.numero  }}</td>
+                                        <td>{{ propietarioActual.ciudadano.tipoIdentificacion.sigla  }}</td>
+                                        <td>{{ propietarioActual.ciudadano.identificacion  }}</td>
+                                        <td>N</td>
+                                        <td>{{ (propietarioActual.fechaInicial.timestamp * 1000) | date: 'yyyyMMdd' }}</td>
+                                        <td>{{ propietarioActual.ciudadano.primerApellido  }}</td>
+                                        <td>{{ propietarioActual.ciudadano.segundoApellido  }}</td>
+                                        <td>{{ propietarioActual.ciudadano.primerNombre  }}</td>
+                                        <td>{{ propietarioActual.ciudadano?.segundoNombre  }}</td>
+                                        <td>{{ propietarioActual.ciudadano.municipioResidencia.codigoDane  }}</td>
+                                        <td>{{ propietarioActual.ciudadano.direccionPersonal  }}</td>
+                                        <td>{{ propietarioActual.ciudadano.telefonoCelular  }}</td>
+                                        
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table class="table " id="dataTables-tramites" *ngIf="tramites">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th>#</th>
+                                        <th>tipo trámite</th>
+                                        <th>placa</th>
+                                        <th>fecha</th>
+                                        <th>organismo tránsito</th>
+                                        <th>numero lic tránsito</th>
+                                        <th>tvrfact</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="odd" *ngFor="let tramite of tramites; let i = index">
+                                        <td>{{ i + 1 }}</td>
+                                        <td>{{ tramite.tipoTramite }}</td>
+                                        <td>{{ tramite.placa  }}</td>
+                                        <td>{{ (tramite.fecha.timestamp * 1000) | date: 'yyyyMMdd' }}</td>
+                                        <td>{{ tramite.organismoTransito }}</td>
+                                        <td>{{ tramite.licenciaTransito }}</td>
+                                        <td>{{ tramite.numeroPago }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table class="table " id="dataTables-medidas-cautelares" *ngIf="medidasCautelares">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th>#</th>
+                                        <th>placa</th>
+                                        <th>tipo medida cautelar</th>
+                                        <th>ente expedidor</th>
+                                        <th>numero oficio </th>
+                                        <th>fecha expedicion</th>
+                                        <th>estado</th>
+                                        <th>numero oficino ant</th>
+                                        <th>observacion</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="odd" *ngFor="let medidaCautelar of medidasCautelares; let i = index">
+                                        <td>{{ i + 1 }}</td>
+                                        <td>{{ medidaCautelar.placa }}</td>
+                                        <td>{{ medidaCautelar.tipo }}</td>
+                                        <td>{{ medidaCautelar.ente }}</td>
+                                        <td>{{ medidaCautelar.numeroOficio }}</td>
+                                        <td>{{ (medidaCautelar.fechaExpedicion.timestamp * 1000) | date: 'yyyyMMdd' }}</td>
+                                        <td>
+                                            <span *ngIf="medidaCautelar.activo">I</span>
+                                            <span *ngIf="!medidaCautelar.activo">L</span>
+                                        </td>
+                                        <td>{{ medidaCautelar.numeroLevantamiento }}</td>
+                                        <td>{{ medidaCautelar.observaciones }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table class="table " id="dataTables-cancelaciones-matricula" *ngIf="cancelacionesMatricula">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th>#</th>
+                                        <th>organismo tránsito</th>
+                                        <th>placa</th>
+                                        <th>id cancelación</th>
+                                        <th>fecha cancelación</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="odd" *ngFor="let cancelacionMatricula of cancelacionesMatricula; let i = index">
+                                        <td>{{ i + 1 }}</td>
+                                        <td>{{ cancelacionMatricula.organismoTransito.divipo }}</td>
+                                        <td>{{ cancelacionMatricula.vehiculo.placa.numero }}</td>
+                                        <td>{{ cancelacionMatricula.foraneas.idMotivoCancelacion }}</td>
+                                        <td>{{ (cancelacionMatricula.fecha.timestamp * 1000) | date: 'yyyyMMdd' }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table class="table " id="dataTables-prendas" *ngIf="prendas">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th>#</th>
+                                        <th>organismo tránsito</th>
+                                        <th>placa</th>
+                                        <th>tipo identificación</th>
+                                        <th>número identificación</th>
+                                        <th>primer nombre</th>
+                                        <th>segundo nombre</th>
+                                        <th>primer apellido</th>
+                                        <th>segundo apellido</th>
+                                        <th>dirección</th>
+                                        <th>ciudad</th>
+                                        <th>telefono</th>
+                                        <th>grado de la prenda</th>
+                                        <th>fecha trámite</th>
+                                        <th>estado prenda</th>
+                                        <th>tipo alerta</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="odd" *ngFor="let prenda of prendas; let i = index">
+                                        <td>{{ i + 1 }}</td>
+                                        <td>{{ prenda.organismoTransito.divipo }}</td>
+                                        <td>{{ prenda.vehiculo.placa.numero }}</td>
+                                        <td>{{ prenda.ciudadano.tipoIdentificacion.sigla }}</td>
+                                        <td>{{ prenda.ciudadano.identificacion }}</td>
+                                        <td>{{ prenda.ciudadano.primerNombre }}</td>
+                                        <td>{{ prenda.ciudadano?.segundoNombre }}</td>
+                                        <td>{{ prenda.ciudadano.primerApellido }}</td>
+                                        <td>{{ prenda.ciudadano?.segundoApellido }}</td>
+                                        <td>{{ prenda.ciudadano.direccionPersonal  }}</td>
+                                        <td>{{ prenda.ciudadano.municipioResidencia.codigoDane  }}</td>
+                                        <td>{{ prenda.ciudadano.telefonoCelular  }}</td>
+                                        <td>{{ prenda.foraneas.gradoAlerta }}</td>
+                                        <td>{{ (prenda.fecha.timestamp * 1000) | date: 'yyyyMMdd' }}</td>
+                                        <td>estadoPrenda</td>
+                                        <td>{{ prenda.foraneas.tipoAlerta }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table class="table " id="dataTables-radicados-cuenta" *ngIf="radicadosCuenta">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th>#</th>
+                                        <th>organismo tránsito</th>
+                                        <th>placa</th>
+                                        <th>organismo tránsito origen</th>
+                                        <th>fecha radicación</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="odd" *ngFor="let radicadoCuenta of radicadosCuenta; let i = index">
+                                        <td>{{ i + 1 }}</td>
+                                        <td>{{ radicadoCuenta.vehiculo.organismoTransito.divipo }}</td>
+                                        <td>{{ radicadoCuenta.vehiculo.placa.numero }}</td>
+                                        <td>{{ radicadoCuenta.vehiculo.organismoTransitoRadicado.divipo }}</td>
+                                        <td>{{ (radicadoCuenta.vehiculo.fechaRegistroRadicado.timestamp * 1000) | date: 'yyyyMMdd' }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <table class="table" id="dataTables-vehiculos" *ngIf="tramitesSolicitud">
-                            <thead>
-                                <tr class="text-center">
-                                    <th>#</th>
-                                    <th>organismo Tránsito</th>
-                                    <th>placa</th>
-                                    <th>marca</th>
-                                    <th>linea</th>
-                                    <th>clase</th>
-                                    <th>color</th>
-                                    <th>servicio</th>
-                                    <th>carroceria</th>
-                                    <th>modalidad</th>
-                                    <th>cilindraje</th>
-                                    <th>modelo</th>
-                                    <th>motor</th>
-                                    <th>chasis</th>
-                                    <th>serie</th>
-                                    <th>cap. ton</th>
-                                    <th>cap. pasajeros</th>
-                                    <th>fecha matricula</th>
-                                    <th>num. lic. transito</th>
-                                    <th>num. fac. sirev</th>
-                                    <th>tipo combustible</th>
-                                    <th>estado</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="odd" *ngFor="let tramiteSolicitud of tramitesSolicitud; let i = index">
-                                    <td>{{ i + 1 }}</td>
-                                    <td>{{ tramiteSolicitud.organismoTransito }}</td>
-                                    <td>{{ tramiteSolicitud.placa }}</td>
-                                    <td>{{ tramiteSolicitud.marca }}</td>
-                                    <td>{{ tramiteSolicitud.linea }}</td>
-                                    <td>{{ tramiteSolicitud.clase }}</td>
-                                    <td>{{ tramiteSolicitud.color }}</td>
-                                    <td>{{ tramiteSolicitud.servicio }}</td>
-                                    <td>{{ tramiteSolicitud.carroceria }}</td>
-                                    <td>{{ tramiteSolicitud.modalidadTransporte }}</td>
-                                    <td>{{ tramiteSolicitud.cilindraje }}</td>
-                                    <td>{{ tramiteSolicitud.modelo }}</td>
-                                    <td>{{ tramiteSolicitud.motor }}</td>
-                                    <td>{{ tramiteSolicitud.chasis }}</td>
-                                    <td>{{ tramiteSolicitud.serie }}</td>
-                                    <td>{{ tramiteSolicitud.capacidadCarga }}</td>
-                                    <td>{{ tramiteSolicitud.numeroPasajeros }}</td>
-                                    <td>{{ (tramiteSolicitud.fechaMatricula.timestamp * 1000) | date: 'yyyyMMdd' }}</td>
-                                    <td>{{ tramiteSolicitud.numeroLicenciaTransito }}</td>
-                                    <td>N</td>
-                                    <td>{{ tramiteSolicitud.combustible }}</td>
-                                    <td>
-                                        <span *ngIf="tramiteSolicitud.estado">ACTIVO</span>
-                                        <span *ngIf="!tramiteSolicitud.estado">CANCELADO</span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <table class="table " id="dataTables-propitarios-actuales" *ngIf="propietariosActuales">
-                            <thead>
-                                <tr class="text-center">
-                                    <th>#</th>
-                                    <th>organismo Tránsito</th>
-                                    <th>placa</th>
-                                    <th>tipo documento</th>
-                                    <th>numero de documento</th>
-                                    <th>proindiviso</th>
-                                    <th>fecha propiedad</th>
-                                    <th>primer apellido</th>
-                                    <th>segundo apellido</th>
-                                    <th>primer nombre</th>
-                                    <th>segundo nombre</th>
-                                    <th>ciudad</th>
-                                    <th>direccion</th>
-                                    <th>telefono</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="odd" *ngFor="let propietarioActual of propietariosActuales; let i = index">
-                                    <td>{{ i + 1 }}</td>
-                                    <td>{{ propietarioActual.vehiculo.organismoTransito.divipo }}</td>
-                                    <td>{{ propietarioActual.vehiculo.placa.numero  }}</td>
-                                    <td>{{ propietarioActual.ciudadano.tipoIdentificacion.sigla  }}</td>
-                                    <td>{{ propietarioActual.ciudadano.identificacion  }}</td>
-                                    <td>N</td>
-                                    <td>{{ (propietarioActual.fechaInicial.timestamp * 1000) | date: 'yyyyMMdd' }}</td>
-                                    <td>{{ propietarioActual.ciudadano.primerApellido  }}</td>
-                                    <td>{{ propietarioActual.ciudadano.segundoApellido  }}</td>
-                                    <td>{{ propietarioActual.ciudadano.primerNombre  }}</td>
-                                    <td>{{ propietarioActual.ciudadano?.segundoNombre  }}</td>
-                                    <td>{{ propietarioActual.ciudadano.municipioResidencia.codigoDane  }}</td>
-                                    <td>{{ propietarioActual.ciudadano.direccionPersonal  }}</td>
-                                    <td>{{ propietarioActual.ciudadano.telefonoCelular  }}</td>
-                                    
-                                </tr>
-                            </tbody>
-                        </table>
-                        <table class="table " id="dataTables-tramites" *ngIf="tramites">
-                            <thead>
-                                <tr class="text-center">
-                                    <th>#</th>
-                                    <th>tipo trámite</th>
-                                    <th>placa</th>
-                                    <th>fecha</th>
-                                    <th>organismo tránsito</th>
-                                    <th>numero lic tránsito</th>
-                                    <th>tvrfact</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="odd" *ngFor="let tramite of tramites; let i = index">
-                                    <td>{{ i + 1 }}</td>
-                                    <td>{{ tramite.tipoTramite }}</td>
-                                    <td>{{ tramite.placa  }}</td>
-                                    <td>{{ (tramite.fecha.timestamp * 1000) | date: 'yyyyMMdd' }}</td>
-                                    <td>{{ tramite.organismoTransito }}</td>
-                                    <td>{{ tramite.licenciaTransito }}</td>
-                                    <td>{{ tramite.numeroPago }}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <table class="table " id="dataTables-medidas-cautelares" *ngIf="medidasCautelares">
-                            <thead>
-                                <tr class="text-center">
-                                    <th>#</th>
-                                    <th>placa</th>
-                                    <th>tipo medida cautelar</th>
-                                    <th>ente expedidor</th>
-                                    <th>numero oficio </th>
-                                    <th>fecha expedicion</th>
-                                    <th>estado</th>
-                                    <th>numero oficino ant</th>
-                                    <th>observacion</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="odd" *ngFor="let medidaCautelar of medidasCautelares; let i = index">
-                                    <td>{{ i + 1 }}</td>
-                                    <td>{{ medidaCautelar.placa }}</td>
-                                    <td>{{ medidaCautelar.tipo }}</td>
-                                    <td>{{ medidaCautelar.ente }}</td>
-                                    <td>{{ medidaCautelar.numeroOficio }}</td>
-                                    <td>{{ (medidaCautelar.fechaExpedicion.timestamp * 1000) | date: 'yyyyMMdd' }}</td>
-                                    <td>
-                                        <span *ngIf="medidaCautelar.activo">I</span>
-                                        <span *ngIf="!medidaCautelar.activo">L</span>
-                                    </td>
-                                    <td>{{ medidaCautelar.numeroLevantamiento }}</td>
-                                    <td>{{ medidaCautelar.observaciones }}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <table class="table " id="dataTables-cancelaciones-matricula" *ngIf="cancelacionesMatricula">
-                            <thead>
-                                <tr class="text-center">
-                                    <th>#</th>
-                                    <th>organismo tránsito</th>
-                                    <th>placa</th>
-                                    <th>id cancelación</th>
-                                    <th>fecha cancelación</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="odd" *ngFor="let cancelacionMatricula of cancelacionesMatricula; let i = index">
-                                    <td>{{ i + 1 }}</td>
-                                    <td>{{ cancelacionMatricula.organismoTransito.divipo }}</td>
-                                    <td>{{ cancelacionMatricula.vehiculo.placa.numero }}</td>
-                                    <td>{{ cancelacionMatricula.foraneas.idMotivoCancelacion }}</td>
-                                    <td>{{ (cancelacionMatricula.fecha.timestamp * 1000) | date: 'yyyyMMdd' }}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <table class="table " id="dataTables-prendas" *ngIf="prendas">
-                            <thead>
-                                <tr class="text-center">
-                                    <th>#</th>
-                                    <th>organismo tránsito</th>
-                                    <th>placa</th>
-                                    <th>tipo identificación</th>
-                                    <th>número identificación</th>
-                                    <th>primer nombre</th>
-                                    <th>segundo nombre</th>
-                                    <th>primer apellido</th>
-                                    <th>segundo apellido</th>
-                                    <th>dirección</th>
-                                    <th>ciudad</th>
-                                    <th>telefono</th>
-                                    <th>grado de la prenda</th>
-                                    <th>fecha trámite</th>
-                                    <th>estado prenda</th>
-                                    <th>tipo alerta</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="odd" *ngFor="let prenda of prendas; let i = index">
-                                    <td>{{ i + 1 }}</td>
-                                    <td>{{ prenda.organismoTransito.divipo }}</td>
-                                    <td>{{ prenda.vehiculo.placa.numero }}</td>
-                                    <td>{{ prenda.ciudadano.tipoIdentificacion.sigla }}</td>
-                                    <td>{{ prenda.ciudadano.identificacion }}</td>
-                                    <td>{{ prenda.ciudadano.primerNombre }}</td>
-                                    <td>{{ prenda.ciudadano?.segundoNombre }}</td>
-                                    <td>{{ prenda.ciudadano.primerApellido }}</td>
-                                    <td>{{ prenda.ciudadano?.segundoApellido }}</td>
-                                    <td>{{ prenda.ciudadano.direccionPersonal  }}</td>
-                                    <td>{{ prenda.ciudadano.municipioResidencia.codigoDane  }}</td>
-                                    <td>{{ prenda.ciudadano.telefonoCelular  }}</td>
-                                    <td>{{ prenda.foraneas.gradoAlerta }}</td>
-                                    <td>{{ (prenda.fecha.timestamp * 1000) | date: 'yyyyMMdd' }}</td>
-                                    <td>estadoPrenda</td>
-                                    <td>{{ prenda.foraneas.tipoAlerta }}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <table class="table " id="dataTables-radicados-cuenta" *ngIf="radicadosCuenta">
-                            <thead>
-                                <tr class="text-center">
-                                    <th>#</th>
-                                    <th>organismo tránsito</th>
-                                    <th>placa</th>
-                                    <th>organismo tránsito origen</th>
-                                    <th>fecha radicación</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="odd" *ngFor="let radicadoCuenta of radicadosCuenta; let i = index">
-                                    <td>{{ i + 1 }}</td>
-                                    <td>{{ radicadoCuenta.vehiculo.organismoTransito.divipo }}</td>
-                                    <td>{{ radicadoCuenta.vehiculo.placa.numero }}</td>
-                                    <td>{{ radicadoCuenta.vehiculo.organismoTransitoRadicado.divipo }}</td>
-                                    <td>{{ (radicadoCuenta.vehiculo.fechaRegistroRadicado.timestamp * 1000) | date: 'yyyyMMdd' }}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                    <!-- <app-new *ngIf='formNew' [vehiculo]="vehiculo" (ready)="ready($event)"></app-new>
+                    <app-edit *ngIf='formEdit' [soat]="soat" (ready)="ready($event)"></app-edit> -->
                 </div>
-                <!-- <app-new *ngIf='formNew' [vehiculo]="vehiculo" (ready)="ready($event)"></app-new>
-                <app-edit *ngIf='formEdit' [soat]="soat" (ready)="ready($event)"></app-edit> -->
             </div>
         </div>
     </div>
