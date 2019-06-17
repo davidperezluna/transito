@@ -222,6 +222,9 @@ import { ReporteModule } from './reporte/reporte.module';
 import { VhloCertificadoTradicionModule } from './vhloCertificadoTradicion/vhloCertificadoTradicion.module';
 
 import { BpCfgTipoInsumoModule } from './bpCfgTipoInsumo/bpCfgTipoInsumo.module';
+import { BpInsumoModule } from './bpInsumo/bpInsumo.module';
+import { BpActividadModule } from './bpActividad/bpActividad.module';
+import { BpCuentaModule } from './bpCuenta/bpCuenta.module';
 import { BpProyectoModule } from './bpProyecto/bpProyecto.module';
 
 import { FroFacturaModule } from './froFactura/froFactura.module';
@@ -440,6 +443,9 @@ import {RightsidebarComponent} from '../shared';
     CvCfgTipoMedidaCautelarModule,
     CvMedidaCautelarModule,
     BpCfgTipoInsumoModule,
+    BpInsumoModule,
+    BpCuentaModule,
+    BpActividadModule,
     BpProyectoModule,
     BpCdpModule,
     RnrsPreasignacionPlacaModule,

@@ -164,6 +164,9 @@ import { ImoReasignacionRoutes } from './imoReasignacIon/imoReasignacion.routes'
 import { ImoActaRoutes } from './imoActa/imoActa.routes';
 
 import { BpCfgTipoInsumoRoutes } from './bpCfgTipoInsumo/bpCfgTipoInsumo.routes';
+import { BpInsumoRoutes } from './bpInsumo/bpInsumo.routes';
+import { BpCuentaRoutes } from './bpCuenta/bpCuenta.routes';
+import { BpActividadRoutes } from './bpActividad/bpActividad.routes';
 import { BpProyectoRoutes } from './bpProyecto/bpProyecto.routes';
 import { BpCdpRoutes } from './bpCdp/bpCdp.routes';
 
@@ -432,6 +435,9 @@ export const DashboardRoutes: Route[] = [
       ...CvCfgTipoMedidaCautelarRoutes,
       ...CvMedidaCautelarRoutes,
       ...BpCfgTipoInsumoRoutes,
+      ...BpInsumoRoutes,
+      ...BpCuentaRoutes,
+      ...BpActividadRoutes,
       ...BpProyectoRoutes,
       ...BpCdpRoutes,
       ...RnrsPreasignacionPlacaRoutes,

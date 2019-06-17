@@ -1,0 +1,56 @@
+<div class="container" >
+  <hr>
+  <div class="row" *ngIf='formIndex'>
+    <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="card-title">
+              <b class="text-uppercase">Tarifas</b>
+              <div class="btn-group pull-right">
+                <button (click)="onNew()" class="btn btn-default">
+                  <i class="fa fa-plus"></i>
+                  <span class="text">Nuevo</span>
+                </button>
+              </div>
+            </h5>
+          </div>
+          <div class="card-body">
+            <table class="table " id="dataTables-example">
+              <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Valor</th>
+                    <th>Tipo vehiculo</th>
+                    <th>Patio</th>
+                    <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="odd" *ngFor="let tarifa of tarifas; let i = index">
+                  <td >{{ i + 1 }}</td>
+                  <td >{{ tarifa.valorHora }}</td>
+                  <td >{{ tarifa.tipoVehiculo.nombre }}</td>
+                  <td >{{ tarifa.patio.nombre }}</td>
+                  <td>
+                    <div class="btn-group">
+                      <button (click)="onEdit(tarifa)" class="btn btn-xs btn-info" type="button">
+                        <i class="fa fa-pencil"></i>
+                      </button> 
+                      <button (click)="onDelete(tarifa.id)"  class="btn btn-xs btn-danger" type="button">
+                        <i class="fa fa-trash"></i>
+                      </button> 
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- /.table-responsive --> 
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <app-edit-insumo *ngIf='formEdit' [tarifa]="tarifa" (ready)="ready($event)"></app-edit-insumo>
+
+    <app-new-insumo *ngIf='formNew' (ready)="ready($event)"></app-new-insumo>
+</div>
