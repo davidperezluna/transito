@@ -13,7 +13,7 @@
                             <label>Fecha Inicio
                                 <strong class="text-danger">*</strong>
                             </label>
-                            <input class="form-control" [(ngModel)]="tramitePrecio.fechaInicial" name="fechaInicial" type="date" required />
+                            <input class="form-control" [(ngModel)]="tramitePrecio.fechaInicial" name="fechaInicial" type="date" value="{{ (tramitePrecio.fechaInicial.timestamp * 1000) | date: 'yyyy-MM-dd' }}" required />
                         </div>
                         <div class="col-xs-12 col-lg-12">
                             <label>Nombre

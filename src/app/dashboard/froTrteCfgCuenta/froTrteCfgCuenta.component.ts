@@ -87,8 +87,8 @@ export class FroTrteCfgCuentaComponent implements OnInit {
         this.ngOnInit();
       }
   }
-  deletefroTrteCfgCuenta(id:any){
 
+  deletefroTrteCfgCuenta(id:any){
     swal({
       title: '¿Estás seguro?',
       text: "¡Se eliminara este registro!",
