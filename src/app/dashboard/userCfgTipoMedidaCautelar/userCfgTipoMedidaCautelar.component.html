@@ -16,20 +16,22 @@
                 <thead>
                   <tr>
                       <th>#</th>
+                      <th>Código</th>
                       <th>Nombre</th>
                       <th>Acciones</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr class="odd" *ngFor="let tipoMedidaCautelar of tiposMedidasCautelares; let i = index">
-                    <td >{{ tipoMedidaCautelar.id }}</td>
+                    <td >{{ i + 1 }}</td>
+                    <td >{{ tipoMedidaCautelar.codigo }}</td>
                     <td >{{ tipoMedidaCautelar.nombre }}</td>
                     <td>
                       <button (click)="onEdit(tipoMedidaCautelar)" class="btn btn-xs btn-info" type="button">
                         <i class="fa fa-edit"></i>
                         Editar
                       </button> 
-                      <button (click)="onDelete(tipoMedidacautelar.id)"  class="btn btn-xs btn-danger" type="button">
+                      <button (click)="onDelete(tipoMedidaCautelar.id)"  class="btn btn-xs btn-danger" type="button">
                         <i class="fa fa-trash"></i>
                         Eliminar
                       </button> 

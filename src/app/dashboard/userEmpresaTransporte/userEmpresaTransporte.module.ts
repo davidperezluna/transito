@@ -9,6 +9,7 @@ import { UserEmpresaTransporteService } from '../../services/userEmpresaTranspor
 import { UserEmpresaTransporteComponent } from './userEmpresaTransporte.component';
 import { NewComponent } from './new/new.component';
 import { EditComponent } from './edit/edit.component';
+import { RangeComponent } from './range/range.component';
 
 @NgModule({
     imports: [CommonModule, Ng2BootstrapModule.forRoot(), SelectModule, TooltipModule],
@@ -16,11 +17,13 @@ import { EditComponent } from './edit/edit.component';
         UserEmpresaTransporteComponent,
         NewComponent,
         EditComponent,
+        RangeComponent,
     ],
     exports: [
         UserEmpresaTransporteComponent,
         NewComponent,
         EditComponent,
+        RangeComponent,
     ],
     providers: [
         UserEmpresaTransporteService,

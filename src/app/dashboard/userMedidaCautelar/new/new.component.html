@@ -130,6 +130,12 @@
                                 </div>
     
                                 <div class="col-xs-12 col-lg-6">
+                                    <label>Tipo Medida Cautelar <b class="text-danger">*</b></label>
+                                    <ng-select [multiple]="false" [options]="tiposMedidaCautelar" [(ngModel)]="medidaCautelar.idTipoMedidaCautelar" required name="idTipoMedidaCautelar">
+                                    </ng-select>
+                                </div>
+                                
+                                <div class="col-xs-12 col-lg-6">
                                     <label>Causal de Limitación <b class="text-danger">*</b></label>
                                     <ng-select [multiple]="false" [options]="causalesLimitacion" [(ngModel)]="medidaCautelar.idCausalLimitacion" required name="idCausalLimitacion">
                                     </ng-select>

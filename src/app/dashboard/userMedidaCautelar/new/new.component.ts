@@ -5,6 +5,7 @@ import { VhloCfgLimitacionCausalService } from '../../../services/vhloCfgLimitac
 import { VhloVehiculoService } from '../../../services/vhloVehiculo.service';
 import { VhloPropietarioService } from '../../../services/vhloPropietario.service';
 import { UserMedidaCautelarService } from '../../../services/userMedidaCautelar.service';
+import { UserCfgTipoMedidaCautelarService } from '../../../services/userCfgTipoMedidaCautelar.service';
 import { UserCiudadanoService } from '../../../services/userCiudadano.service';
 import { UserCfgTipoIdentificacionService } from '../../../services/userCfgTipoIdentificacion.service';
 import { CfgMunicipioService } from '../../../services/cfgMunicipio.service';
@@ -34,12 +35,13 @@ export class NewComponent implements OnInit {
   public tiposProceso;
   public causalesLimitacion;
   public tiposIdentificacion;
+  public tiposMedidaCautelar;
   public demandado:any;
   public vehiculos:any;
 
   constructor(
     private _VehiculoService: VhloVehiculoService,
-    private _PropietarioService: VhloPropietarioService,
+    private _UserCfgTipoMedidaCautelarService: UserCfgTipoMedidaCautelarService,
     private _UserCiudadanoService: UserCiudadanoService,
     private _DepartamentoService: CfgDepartamentoService,
     private _MunicipioService: CfgMunicipioService,
@@ -52,11 +54,25 @@ export class NewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.medidaCautelar = new UserMedidaCautelar(null, null, null, null, null, null, [], null, null, null, null, null);
+    this.medidaCautelar = new UserMedidaCautelar(null, null, null, null, null, null, [], null, null, null, null, null, null);
 
     this._TipoIdentificacionService.select().subscribe(
       response => {
         this.tiposIdentificacion = response;
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert('Error en la petición');
+        }
+      }
+    );
+
+    this._UserCfgTipoMedidaCautelarService.select().subscribe(
+      response => {
+        this.tiposMedidaCautelar = response;
       },
       error => {
         this.errorMessage = <any>error;
