@@ -9,6 +9,7 @@ export class UserMedidaCautelar{
 		public demandados: any,
 		public idEntidadJudicial: number,
 		public idCausalLimitacion: number,
+		public idTipoMedidaCautelar: number,
 		public idTipoProcesoLimitacion: number,
 		public idDepartamento: number,
 		public idMunicipio: number,

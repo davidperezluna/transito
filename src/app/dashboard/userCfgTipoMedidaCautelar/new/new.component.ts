@@ -10,44 +10,26 @@ import swal from 'sweetalert2';
 })
 export class NewComponent implements OnInit {
   @Output() ready = new EventEmitter<any>();
-  @Input() comparendosSelect: any = null;
-  public tipoMedidacautelar: UserCfgTipoMedidaCautelar;
+  public tipoMedidaCautelar: UserCfgTipoMedidaCautelar;
   public errorMessage;
-  public formPreliquidacion = false;
-
-  public intereses: any;
-  public interesSelected: any;
-  public interes: any;
-  
-  public porcentaje: any;
-  public valorTotal: any;
-  public valorInteres: any;
-  public valorCuotaInicial: any;
-  public fechaFinal: any;
-  public cuotas: any = null;
 
 constructor(
-  private _loginService: LoginService,
+  private _LoginService: LoginService,
   private _CvCfgTipoMedidaCautelarService: UserCfgTipoMedidaCautelarService,
   ){}
 
   ngOnInit() {
-    this.tipoMedidacautelar = new UserCfgTipoMedidaCautelar(null, null);
-
-    
-
+    this.tipoMedidaCautelar = new UserCfgTipoMedidaCautelar(null, null);
   }
 
   onCancelar(){
     this.ready.emit(true);
   }
-
- 
   
   onEnviar(){
-    let token = this._loginService.getToken();
+    let token = this._LoginService.getToken();
     
-		this._CvCfgTipoMedidaCautelarService.register(this.tipoMedidacautelar, token).subscribe(
+		this._CvCfgTipoMedidaCautelarService.register(this.tipoMedidaCautelar, token).subscribe(
 			response => {
         if(response.status == 'success'){
           this.ready.emit(true);
@@ -75,5 +57,4 @@ constructor(
       }
     );
   }
-
 }

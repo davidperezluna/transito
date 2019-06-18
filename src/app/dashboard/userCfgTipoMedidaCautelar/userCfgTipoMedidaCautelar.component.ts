@@ -12,10 +12,7 @@ declare var $: any;
 export class UserCfgTipoMedidaCautelarComponent implements OnInit {
   public errorMessage;
 	public tipoMedidaCautelar: any;
-	public valorTotal: any;
-	public ciudadano: any;
 	public tiposMedidasCautelares: any = null;
-	public numeroIdentificacion: any;
   
   public formNew = false;
 	public formEdit = false;
@@ -24,8 +21,8 @@ export class UserCfgTipoMedidaCautelarComponent implements OnInit {
 
 
   constructor(
-    private _loginService: LoginService,
-    private _CvCfgTipoMedidaCautelarService: UserCfgTipoMedidaCautelarService,
+    private _LoginService: LoginService,
+    private _UserCfgTipoMedidaCautelarService: UserCfgTipoMedidaCautelarService,
   ){}
     
   ngOnInit() {
@@ -43,11 +40,11 @@ export class UserCfgTipoMedidaCautelarComponent implements OnInit {
       ) {
       }
     })
-    this._CvCfgTipoMedidaCautelarService.index().subscribe(
+    this._UserCfgTipoMedidaCautelarService.index().subscribe(
 				response => {
           this.tiposMedidasCautelares = response.data;
           let timeoutId = setTimeout(() => {
-            this.iniciarTabla();
+            this.onInitTable();
           }, 100);
 				},
 				error => {
@@ -61,8 +58,11 @@ export class UserCfgTipoMedidaCautelarComponent implements OnInit {
   }
 
 
-  iniciarTabla(){
-    $('#dataTables-example').DataTable({
+  onInitTable(){
+    if(this.table) {
+      this.table.destroy();
+    }
+    this.table = $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,
       sPaginationType: 'full_numbers',
@@ -75,7 +75,6 @@ export class UserCfgTipoMedidaCautelarComponent implements OnInit {
         }
       }
    });
-   this.table = $('#dataTables-example').DataTable();
   }
   
   onNew(){
@@ -91,6 +90,53 @@ export class UserCfgTipoMedidaCautelarComponent implements OnInit {
       this.formIndex = true;
       this.ngOnInit();
     }
+  }
+
+  onDelete(id: any) {
+    swal({
+      title: '¿Estás seguro?',
+      text: "¡Se eliminará este registro!",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#15d4be',
+      cancelButtonColor: '#ff6262',
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.value) {
+        let token = this._LoginService.getToken();
+
+        this._UserCfgTipoMedidaCautelarService.delete({'id': id}, token).subscribe(
+          response => {
+            if(response.code == 200){
+              swal({
+                title: response.title,
+                text: response.message,
+                type: response.status,
+                confirmButtonColor: '#15d4be',
+              })
+              this.table.destroy();
+              this.ngOnInit();
+            } else {
+              swal({
+                title: response.title,
+                text: response.message,
+                type: response.status,
+                confirmButtonColor: '#15d4be',
+              })
+            }
+          },
+          error => {
+            this.errorMessage = <any>error;
+
+            if (this.errorMessage != null) {
+              console.log(this.errorMessage);
+              alert("Error en la petición");
+            }
+          }
+        );
+      }
+    })
   }
 
   onEdit(tipoMedidaCautelar:any){

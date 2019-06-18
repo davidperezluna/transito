@@ -424,6 +424,7 @@ export class ReportesComponent implements OnInit {
                         } else if (response.prendas) {
                             this.onInitDatatables();
                             this.prendas = response.prendas;
+                            console.log(this.prendas);
 
                             let estado = 'prendas';
 

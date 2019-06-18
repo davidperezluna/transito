@@ -262,21 +262,51 @@
                                 <tbody>
                                     <tr class="odd" *ngFor="let prenda of prendas; let i = index">
                                         <td>{{ i + 1 }}</td>
-                                        <td>{{ prenda.organismoTransito.divipo }}</td>
-                                        <td>{{ prenda.vehiculo.placa.numero }}</td>
-                                        <td>{{ prenda.ciudadano.tipoIdentificacion.sigla }}</td>
-                                        <td>{{ prenda.ciudadano.identificacion }}</td>
-                                        <td>{{ prenda.ciudadano.primerNombre }}</td>
-                                        <td>{{ prenda.ciudadano?.segundoNombre }}</td>
-                                        <td>{{ prenda.ciudadano.primerApellido }}</td>
-                                        <td>{{ prenda.ciudadano?.segundoApellido }}</td>
-                                        <td>{{ prenda.ciudadano.direccionPersonal  }}</td>
-                                        <td>{{ prenda.ciudadano.municipioResidencia.codigoDane  }}</td>
-                                        <td>{{ prenda.ciudadano.telefonoCelular  }}</td>
-                                        <td>{{ prenda.foraneas.gradoAlerta }}</td>
+                                        <td>{{ prenda.organismoTransito }}</td>
+                                        <td>{{ prenda.placa }}</td>
+                                        <td>
+                                            <span *ngIf="prenda.ciudadano">{{ prenda.ciudadano.tipoIdentificacion.sigla }}</span>
+                                            <span *ngIf="prenda.empresa">{{ prenda.empresa.tipoIdentificacion.sigla }}</span>
+                                        </td>
+                                        <td>
+                                            <span *ngIf= "prenda.ciudadano">{{ prenda.ciudadano.identificacion }}</span>
+                                            <span *ngIf= "prenda.empresa">{{ prenda.empresa.nit }}</span>
+                                        </td>
+                                        <td>
+                                            <span *ngIf= "prenda.ciudadano">{{ prenda.ciudadano.primerNombre }}</span>
+                                            <span *ngIf= "prenda.empresa">{{ prenda.empresa.nombre }}</span>
+                                        </td>
+                                        <td>
+                                            <span *ngIf= "prenda.ciudadano">{{ prenda.ciudadano?.segundoNombre }}</span>
+                                            <span *ngIf= "prenda.empresa"></span>
+                                        </td>
+                                        <td>
+                                            <span *ngIf= "prenda.ciudadano">{{ prenda.ciudadano.primerApellido }}</span>
+                                            <span *ngIf= "prenda.empresa"></span>
+                                        </td>
+                                        <td>
+                                            <span *ngIf= "prenda.ciudadano">{{ prenda.ciudadano?.segundoApellido }}</span>
+                                            <span *ngIf= "prenda.empresa"></span>
+                                        </td>
+                                        <td>
+                                            <span *ngIf= "prenda.ciudadano">{{ prenda.ciudadano.direccionPersonal }}</span>
+                                            <span *ngIf= "prenda.empresa">{{ prenda.empresa.direccion }}</span>
+                                        </td>
+                                        <td>
+                                            <span *ngIf= "prenda.ciudadano">{{ prenda.ciudadano.municipioResidencia.codigoDane }}</span>
+                                            <span *ngIf= "prenda.empresa">{{ prenda.empresa.municipio.codigoDane }}</span>
+                                        </td>
+                                        <td>
+                                            <span *ngIf= "prenda.ciudadano">{{ prenda.ciudadano.telefonoCelular }}</span>
+                                            <span *ngIf= "prenda.empresa">{{ prenda.empresa.telefono }}</span>
+                                        </td>
+                                        <td>{{ prenda.gradoAlerta }}</td>
                                         <td>{{ (prenda.fecha.timestamp * 1000) | date: 'yyyyMMdd' }}</td>
-                                        <td>estadoPrenda</td>
-                                        <td>{{ prenda.foraneas.tipoAlerta }}</td>
+                                        <td>
+                                            <span *ngIf="prenda.estadoPrenda">I</span>
+                                            <span *ngIf="!prenda.estadoPrenda">L</span>
+                                        </td>
+                                        <td>{{ prenda.tipoAlerta }}</td>
                                     </tr>
                                 </tbody>
                             </table>
