@@ -245,9 +245,51 @@ export class FroTrtePrecioComponent implements OnInit {
     }
 
     onDelete(idTramitePrecio: any) {
-        this.formEdit = true;
-        this.formIndex = false;
-        this.formNew = false;
-        this.tramitePrecio = idTramitePrecio;
+        swal({
+            title: '¿Estás seguro?',
+            text: "¡Se eliminara este registro!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#15d4be',
+            cancelButtonColor: '#ff6262',
+            confirmButtonText: 'Confirmar',
+            cancelButtonText: 'Cancelar'
+          }).then((result) => {
+            if (result.value) {
+              let token = this._LoginService.getToken();
+
+              this._PrecioService.delete({ 'id': idTramitePrecio }, token).subscribe(
+                  response => {
+                      if (response.code == 200) {
+                            swal({
+                                title: response.title,
+                                text: response.message,
+                                type: response.status,
+                                confirmButtonColor: '#15d4be',
+                            });
+  
+                            this.onSearch();
+                      }else{
+                        swal({
+                            title: response.title,
+                            text: response.message,
+                            type: response.status,
+                            confirmButtonColor: '#15d4be',
+                        });
+                      }
+                    }, 
+                  error => {
+                    this.errorMessage = <any>error;
+      
+                    if(this.errorMessage != null){
+                      console.log(this.errorMessage);
+                      alert("Error en la petición");
+                    }
+                  }
+                );
+      
+              
+            }
+        });
     }
 }
