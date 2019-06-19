@@ -182,6 +182,7 @@ import { CfgChoqueConModule } from './cfgChoqueCon/cfgChoqueCon.module';
 import { SvCfgObjetoFijoModule } from './svCfgObjetoFijo/svCfgObjetoFijo.module';
 
 import { VhloTpConvenioModule } from './vhloTpConvenio/vhloTpConvenio.module';
+import { VhloTpAsignacionModule } from './vhloTpAsignacion/vhloTpAsignacion.module';
 // import { SucursalModule } from './empresa/sucursal/new/sucursal.module';
 
 import { GdDocumentoModule } from './gdDocumento/gdDocumento.module';
@@ -452,6 +453,7 @@ import {RightsidebarComponent} from '../shared';
     BpCdpModule,
     RnrsPreasignacionPlacaModule,
     VhloTpConvenioModule,
+    VhloTpAsignacionModule,
     FroFacturaModule,
     FroRecaudoModule,
     FroAcuerdoPagoModule,

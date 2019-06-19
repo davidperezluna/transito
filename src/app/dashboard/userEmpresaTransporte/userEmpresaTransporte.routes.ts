@@ -10,5 +10,5 @@ export const UserEmpresaTransporteRoutes: Route[] = [
     {
         path: 'userEmpresaTransporte/range',
         component: RangeComponent
-    }
+    },
 ];
