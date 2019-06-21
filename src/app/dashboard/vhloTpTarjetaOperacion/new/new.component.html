@@ -1,0 +1,70 @@
+<div class="col-xs-12 col-lg-12">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">
+                <strong class="text-uppercase">Datos del vehículo</strong>
+            </h5>
+        </div>
+        <div class="card-body">
+            <div class="form-group row">
+                <div class="col-xs-12 col-lg-6">
+                    <label>Placa <strong class="text-danger">*</strong></label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" [(ngModel)]="placa" required name="placa" />
+                        <span class="input-group-btn">
+                            <button (click)="onSearchAsignacion()" class="btn btn-default btn-primary" type="button">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-lg-6" *ngIf='asignacion'>
+                    <div class="row">
+                        <div class="col-xs-12 col-lg-12">
+                            <table class="table table-bordered table-striped">
+                                <tr>
+                                    <td><b>Clase</b></td>
+                                    <td><b>Tipo carroceria</b></td>
+                                    <th><b>Marca</b></th>
+                                    <th><b>Modelo</b></th>
+                                    <th><b>Servicio</b></th>
+                                    <td><b>Cap. carga</b></td>
+                                    <td><b>Nombre Empresa</b></td>
+                                    <td><b>Nro. Cupo</b></td>
+                                </tr>
+                                <tr>
+                                    <td>{{ asignacion.vehiculo.clase.nombre }}</td>
+                                    <td>{{ asignacion.vehiculo.carroceria.nombre }}</td>
+                                    <td>{{ asignacion.vehiculo.linea.marca.nombre }}</td>
+                                    <td>{{ asignacion.vehiculo.modelo }}</td>
+                                    <td>{{ asignacion.vehiculo.servicio.nombre }}</td>
+                                    <td>{{ asignacion.vehiculo.capacidadCarga }}</td>
+                                    <td>{{ asignacion.empresaTransporte.empresa.nombre }}</td>
+                                    <td>{{ asignacion.cupo.numero }}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-lg-6" *ngIf='asignacion'>
+                    <label>Fecha vencimiento <strong class="text-danger">*</strong></label>
+                    <input type="date" class="form-control" [(ngModel)]="tarjetaOperacion.fechaVencimiento" name="fechaVencimiento" required />
+                </div>
+                <div class="col-xs-12 col-lg-6" *ngIf='asignacion'>
+                    <label>Nro. Tarjeta operación <strong class="text-danger">*</strong></label>
+                    <input type="number" class="form-control" [(ngModel)]="tarjetaOperacion.numeroTarjetaOperacion" name="numeroTarjetaOperacion" required />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <button (click)="onEnviar()" class="btn btn-primary" type="button">
+            <i class="fa fa-floppy-o"></i>
+            Enviar
+        </button>
+        <button (click)="onCancelar()" class="btn btn-default">
+            <i class="fa fa-times"></i>
+            Cancelar
+        </button>
+    </div>
+</div>
