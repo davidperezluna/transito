@@ -61,6 +61,7 @@ import { VhloCfgTipoAlertaModule } from './vhloCfgTipoAlerta/vhloCfgTipoAlerta.m
 import { VhloCfgCdaModule } from './vhloCfgCda/vhloCfgCda.module';
 import { VhloCfgOrigenRegistroModule } from './vhloCfgOrigenRegistro/vhloCfgOrigenRegistro.module';
 import { VhloCfgModalidadTransporteModule } from './vhloCfgModalidadTransporte/vhloCfgModalidadTransporte.module';
+import { VhloCfgMotivoCancelacionModule } from './vhloCfgMotivoCancelacion/vhloCfgMotivoCancelacion.module';
 import { VhloCfgRadioAccionModule } from './vhloCfgRadioAccion/vhloCfgRadioAccion.module';
 import { VhloCfgTransportePasajeroModule } from './vhloCfgTransportePasajero/vhloCfgTransportePasajero.module';
 import { VhloCfgTransporteEspecialModule } from './vhloCfgTransporteEspecial/vhloCfgTransporteEspecial.module';
@@ -394,6 +395,7 @@ import {RightsidebarComponent} from '../shared';
     VhloCfgCdaModule,
     VhloCfgOrigenRegistroModule,
     VhloCfgModalidadTransporteModule,
+    VhloCfgMotivoCancelacionModule,
     VhloCfgRadioAccionModule,
     VhloCfgTransportePasajeroModule,
     VhloCfgTransporteEspecialModule,

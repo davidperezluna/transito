@@ -197,6 +197,7 @@ import { VhloCfgTipoAlertaRoutes } from './vhloCfgTipoAlerta/vhloCfgTipoAlerta.r
 import { VhloCfgCdaRoutes } from './vhloCfgCda/vhloCfgCda.routes';
 import { VhloCfgOrigenRegistroRoutes } from './vhloCfgOrigenRegistro/vhloCfgOrigenRegistro.routes';
 import { VhloCfgModalidadTransporteRoutes } from './vhloCfgModalidadTransporte/vhloCfgModalidadTransporte.routes';
+import { VhloCfgMotivoCancelacionRoutes } from './vhloCfgMotivoCancelacion/vhloCfgMotivoCancelacion.routes';
 import { VhloCfgRadioAccionRoutes } from './vhloCfgRadioAccion/vhloCfgRadioAccion.routes';
 import { VhloCfgTransportePasajeroRoutes } from './vhloCfgTransportePasajero/vhloCfgTransportePasajero.routes';
 import { VhloCfgTransporteEspecialRoutes } from './vhloCfgTransporteEspecial/vhloCfgTransporteEspecial.routes';
@@ -281,6 +282,7 @@ export const DashboardRoutes: Route[] = [
       ...VhloCfgCdaRoutes,
       ...VhloCfgOrigenRegistroRoutes,
       ...VhloCfgModalidadTransporteRoutes,
+      ...VhloCfgMotivoCancelacionRoutes,
       ...VhloCfgRadioAccionRoutes,
       ...VhloCfgTransportePasajeroRoutes,
       ...VhloCfgTransporteEspecialRoutes,

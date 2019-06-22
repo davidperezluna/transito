@@ -7,7 +7,7 @@
         <div class="card-body">
             <form #formNew="ngForm">
                 <div class="col-xs-16 col-lg-6">
-                    <label>Número Identificación <strong class="text-danger">*</strong></label>
+                    <label>NIT <strong class="text-danger">*</strong></label>
                     <div class="input-group">
                         <input type="text" class="form-control" [(ngModel)]="nit" required name="nit" />
                         <span class="input-group-btn">
@@ -34,7 +34,7 @@
                                     <th><b>Identificador Empresa</b></th>
                                 </tr>
                                 <tr>
-                                    <td>{{ empresa.razonSocial }}</td>
+                                    <td>{{ empresa.nombre }}</td>
                                     <td>N</td>
                                 </tr>
                                 <tr>

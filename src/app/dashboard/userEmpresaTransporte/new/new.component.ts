@@ -196,9 +196,9 @@ export class NewComponent implements OnInit {
                     })
                 } else {
                     swal({
-                        title: 'Error!',
-                        text: 'El tipoIdentificacion ' + +' ya se encuentra registrado',
-                        type: 'error',
+                        title: response.title,
+                        text: response.message,
+                        type: response.status,
                         confirmButtonText: 'Aceptar'
                     })
                 }

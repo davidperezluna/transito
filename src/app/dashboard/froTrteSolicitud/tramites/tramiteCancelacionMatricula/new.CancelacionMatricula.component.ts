@@ -4,6 +4,7 @@ import { FroFacTramiteService } from '../../../../services/froFacTramite.service
 import { VhloVehiculoService } from '../../../../services/vhloVehiculo.service';
 import { CfgEntidadJudicialService } from "../../../../services/cfgEntidadJudicial.service";
 import { PnalFuncionarioService } from '../../../../services/pnalFuncionario.service';
+import { VhloCfgMotivoCancelacionService } from "../../../../services/vhloCfgMotivoCancelacion.service";
 import { LoginService } from '../../../../services/login.service';
 
 import swal from 'sweetalert2';
@@ -27,6 +28,7 @@ export class NewCancelacionMatriculaComponent implements OnInit {
     public tipoRegrabacionList: string[];
     public tipoRegrabacionSelected: any;
     public motivoSelected: any;
+    public motivosCancelacion: any;
 
     public datos = {
         'documentacion': true,
@@ -47,7 +49,7 @@ export class NewCancelacionMatriculaComponent implements OnInit {
         'idTramiteFactura': null,
     };
     
-    public motivosCancelacion = [
+    /* public motivosCancelacion = [
         { value: 'DESAPARICIÓN DOCUMENTAL', label: 'DESAPARICIÓN DOCUMENTAL' },
         { value: 'EXPORTACIÓN O REEXPORTACIÓN', label: 'EXPORTACIÓN O REEXPORTACIÓN' },
         { value: 'DESTRUCCIÓN O PERDIDA TOTAL', label: 'DESTRUCCIÓN O PERDIDA TOTAL' },
@@ -58,7 +60,7 @@ export class NewCancelacionMatriculaComponent implements OnInit {
         { value: 'PERDIDA DEFINITIVA', label: 'PERDIDA DEFINITIVA' },
         { value: 'REPOSICIÓN', label: 'REPOSICIÓN' },
         { value: 'RECONOCIMIENTO ECONOMICO', label: 'RECONOCIMIENTO ECONOMICO' },
-    ];
+    ]; */
 
     constructor(
         private _TramiteSolicitudService: FroTrteSolicitudService,
@@ -66,6 +68,7 @@ export class NewCancelacionMatriculaComponent implements OnInit {
         private _VehiculoService: VhloVehiculoService,
         private _EntidadJudicialService: CfgEntidadJudicialService,
         private _FuncionarioService: PnalFuncionarioService,
+        private _VhloCfgMotivoCancelacionService: VhloCfgMotivoCancelacionService,
         private _LoginService: LoginService,
     ) { }
 
@@ -95,6 +98,19 @@ export class NewCancelacionMatriculaComponent implements OnInit {
             this._EntidadJudicialService.select().subscribe(
                 response => {
                     this.entidadesJudiciales = response;
+                },
+                error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert('Error en la petición');
+                    }
+                }
+            );
+            this._VhloCfgMotivoCancelacionService.select().subscribe(
+                response => {
+                    this.motivosCancelacion = response;
                 },
                 error => {
                     this.errorMessage = <any>error;
