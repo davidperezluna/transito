@@ -30,8 +30,7 @@ export class NewRncComponent implements OnInit {
 
   public tramitesFactura: any = null;
   public tramiteFactura: any = null;
-  public tramiteFacturaSelected: any;
-  public tramiteSelected: any;
+  public idTramiteFactura: any = null;
   public tramites='';
   
   public tramite = false;
@@ -175,6 +174,39 @@ constructor(
     }
   }
 
+  onComplete() {
+    let token = this._LoginService.getToken();
+
+    this._FacturaService.complete({ 'id': this.factura.id }, token).subscribe(
+			response => {
+        if(response.code == 200){
+          this.factura = response.data;
+
+          swal({
+            title: response.title,
+            text: response.message,
+            type: response.status,
+            confirmButtonText: 'Aceptar'
+          });
+        }else{
+          swal({
+            title: response.title,
+            text: response.message,
+            type: response.status,
+            confirmButtonText: 'Aceptar'
+          });
+        }
+			error => {
+					this.errorMessage = <any>error;
+					if(this.errorMessage != null){
+						console.log(this.errorMessage);
+						alert("Error en la petición");
+					}
+				}
+      }
+    );
+  }
+
   onSearchCiudadano() {
     swal({
       title: 'Buscando ciudadano!',
@@ -204,7 +236,7 @@ constructor(
           if (response.code == 200) {
             if (response.data.ciudadano) {
               this.solicitante = response.data.ciudadano;
-              this.tramiteSolicitud.idSolicitante = this.solicitante.id;
+              this.tramiteSolicitud.idCiudadano = this.solicitante.id;
 
               swal({
                 title: 'Perfecto!',
@@ -215,7 +247,7 @@ constructor(
             }
           } else {
             this.solicitante = null;
-            this.tramiteSolicitud.idSolicitante = null;
+            this.tramiteSolicitud.idCiudadano = null;
 
             swal({
               title: 'Error!',

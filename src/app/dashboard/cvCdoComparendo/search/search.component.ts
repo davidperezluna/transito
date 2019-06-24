@@ -290,7 +290,7 @@ constructor(
       this._EstadoService.show({ 'id': e }, token).subscribe(
         response => {
           if (response.code == 200) {
-            this._FormatoService.show({ 'id': e, 'idComparendo': this.comparendo.id }, token).subscribe(
+            this._FormatoService.show({ 'id': response.data.formato.id, 'idComparendo': this.comparendo.id }, token).subscribe(
               response => {
                 this.datos.numero = this.trazabilidad.estado.sigla + '-' + this.comparendo.consecutivo.numero;
       

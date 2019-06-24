@@ -175,7 +175,6 @@ export class EditComponent implements OnInit {
         let token = this._LoginService.getToken();
 
         this.tramitePrecio.idTramite = this.tramiteSelected;
-        this.tramitePrecio.idModulo = this.moduloSelected;
         this.tramitePrecio.idTipoVehiculo = this.tipoVehiculoSelected;
 
         this._PrecioService.edit(this.tramitePrecio, token).subscribe(

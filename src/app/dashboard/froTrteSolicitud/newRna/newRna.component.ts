@@ -38,7 +38,6 @@ export class NewRnaComponent implements OnInit {
   public tramitesFactura: any = null;
   public tramiteFactura: any = null;
   public idTramiteFactura: any = null;
-  public facturas: any;
 
   public confirmarSolicitante = false;
   
@@ -512,7 +511,7 @@ export class NewRnaComponent implements OnInit {
     );
   }
 
-  finalizarSolicitud() {
+  /*finalizarSolicitud() {
     let token = this._LoginService.getToken();
     this.tramites = '';
     this.tramitesFactura.forEach(tramiteFactura => {
@@ -539,7 +538,7 @@ export class NewRnaComponent implements OnInit {
       cancelButtonAriaLabel: 'Thumbs down',
     }).then((result) => {
       if (result.value) {
-        this.factura.estado = 'Finalizada';
+        this.factura.estado = 'FINALIZADA';
         this.factura.idSolicitante = this.tramiteSolicitud.idSolicitante;  
         this.factura.idApoderado = this.apoderado.id;  
         console.log(this.factura);
@@ -562,7 +561,7 @@ export class NewRnaComponent implements OnInit {
 
       }
     })
-  }
+  }*/
 
   onFormApoderado() {
     this.formApoderado = true;
