@@ -1,0 +1,49 @@
+<div class="container">
+    <div class="row" *ngIf='formIndex'>
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title"><strong class="text-uppercase">Motivos Cancelación</strong> <small>Registradas</small>
+                        <div class="btn-group pull-right">
+                            <button (click)="onNew()" class="btn btn-success  btn-round"
+                                data-target="#themepicker" data-toggle="modal">
+                                <span class="text">Nuevo</span>
+                                <i class="ti-save ml-2"></i>
+                            </button>
+                        </div>
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <table class="table " id="dataTables-example">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Código</th>
+                                <th>Nombre</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="odd" *ngFor="let motivoCancelacion of motivosCancelacion; let i = index">
+                                <td>{{ i + 1 }}</td>
+                                <td>{{ motivoCancelacion.codigo }}</td>
+                                <td>{{ motivoCancelacion.nombre }}</td>
+                                <td>
+                                    <div class="btn-group">
+                                        <button (click)="onEdit(motivoCancelacion)" class="btn btn-xs btn-info"
+                                            type="button">Editar</button>
+                                        <button (click)="onDelete(motivoCancelacion.id)" class="btn btn-xs btn-danger"
+                                            type="button">Eliminar </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- /.table-responsive -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <app-edit *ngIf='formEdit' [motivoCancelacion]="motivoCancelacion" (ready)="ready($event)"></app-edit>
+    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+</div>

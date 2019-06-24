@@ -128,17 +128,41 @@ export class ReportesComponent implements OnInit {
         this.medidasCautelares = null;
         this.prendas = null;
         this.radicadosCuenta = null;
+
+
+        if (this.tableVehiculos) {
+            this.tableVehiculos.destroy();
+        }
+
+        if (this.tablePropietariosActuales) {
+            this.tablePropietariosActuales.destroy();
+        }
+
+        if (this.tableTramites) {
+            this.tableTramites.destroy();
+        }
+
+        if (this.tableMedidaCautelar) {
+            this.tableMedidaCautelar.destroy();
+        }
+
+        if (this.tableCancelacionMatricula) {
+            this.tableCancelacionMatricula.destroy();
+        }
+
+        if (this.tablePrendas) {
+            this.tablePrendas.destroy();
+        }
+        if (this.tableRadicadoCuenta) {
+            this.tableRadicadoCuenta.destroy();
+        }
     }
 
     onInitTable(estado) {
         switch (estado) {
             case 'vehiculos':
-                if (this.tableVehiculos) {
-                    this.tableVehiculos.destroy();
-                }
-
                 this.tableVehiculos = $('#table-vehiculos').DataTable({
-                    responsive: false,
+                    responsive: true,
                     pageLength: 10,
                     sPaginationType: 'full_numbers',
                     dom: 'Bfrtip',
@@ -164,12 +188,8 @@ export class ReportesComponent implements OnInit {
                 break;
 
             case 'propietarios-actuales':
-                if (this.tablePropietariosActuales) {
-                    this.tablePropietariosActuales.destroy();
-                }
-
                 this.tablePropietariosActuales = $('#table-propietarios-actuales').DataTable({
-                    responsive: false,
+                    responsive: true,
                     pageLength: 10,
                     sPaginationType: 'full_numbers',
                     dom: 'Bfrtip',
@@ -195,12 +215,8 @@ export class ReportesComponent implements OnInit {
                 break;
 
             case 'tramites':
-                if (this.tableTramites) {
-                    this.tableTramites.destroy();
-                }
-
                 this.tableTramites = $('#table-tramites').DataTable({
-                    responsive: false,
+                    responsive: true,
                     pageLength: 10,
                     sPaginationType: 'full_numbers',
                     dom: 'Bfrtip',
@@ -226,12 +242,8 @@ export class ReportesComponent implements OnInit {
                 break;
 
             case 'medidas-cautelares':
-                if (this.tableMedidaCautelar) {
-                    this.tableMedidaCautelar.destroy();
-                }
-
                 this.tableMedidaCautelar = $('#table-medidas-cautelares').DataTable({
-                    responsive: false,
+                    responsive: true,
                     pageLength: 10,
                     sPaginationType: 'full_numbers',
                     dom: 'Bfrtip',
@@ -257,12 +269,8 @@ export class ReportesComponent implements OnInit {
                 break;
 
             case 'cancelaciones-matricula':
-                if (this.tableCancelacionMatricula) {
-                    this.tableCancelacionMatricula.destroy();
-                }
-
                 this.tableCancelacionMatricula = $('#table-cancelaciones-matricula').DataTable({
-                    responsive: false,
+                    responsive: true,
                     pageLength: 10,
                     sPaginationType: 'full_numbers',
                     dom: 'Bfrtip',
@@ -288,12 +296,8 @@ export class ReportesComponent implements OnInit {
                 break;
 
             case 'prendas':
-                if (this.tablePrendas) {
-                    this.tablePrendas.destroy();
-                }
-
                 this.tablePrendas = $('#table-prendas').DataTable({
-                    responsive: false,
+                    responsive: true,
                     pageLength: 10,
                     sPaginationType: 'full_numbers',
                     dom: 'Bfrtip',
@@ -319,12 +323,8 @@ export class ReportesComponent implements OnInit {
                 break;
 
             case 'radicados-cuenta':
-                if (this.tableRadicadoCuenta) {
-                    this.tableRadicadoCuenta.destroy();
-                }
-
                 this.tableRadicadoCuenta = $('#table-radicados-cuenta').DataTable({
-                    responsive: false,
+                    responsive: true,
                     pageLength: 10,
                     sPaginationType: 'full_numbers',
                     dom: 'Bfrtip',
