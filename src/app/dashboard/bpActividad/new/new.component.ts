@@ -68,19 +68,20 @@ constructor(
 			response => {
         if(response.status == 'success'){
           this.ready.emit(true);
+
           swal({
             title: 'Perfecto!',
             text: response.message,
             type: 'success',
             confirmButtonText: 'Aceptar'
-          })
+          });
         }else{
           swal({
             title: 'Error!',
             text: response.message,
             type: 'error',
             confirmButtonText: 'Aceptar'
-          })
+          });
         }
 			error => {
 					this.errorMessage = <any>error;

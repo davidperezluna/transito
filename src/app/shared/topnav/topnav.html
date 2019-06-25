@@ -90,7 +90,7 @@
             <a class="dropdown-item" href="#">Setting</a> </div>
         </li>
         -->
-        <li><a [routerLink]="['/']" class="btn btn-link icon-header" ><span class="fa fa-sign-out"></span></a></li>
+        <li><a (click)="onLogout()" class="btn btn-link icon-header" ><span class="fa fa-sign-out"></span></a></li>
       </ul>
     </div>
   </nav>

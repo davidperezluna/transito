@@ -1,5 +1,6 @@
 <div class="row" *ngIf="patio">
     <div class="col-xs-12 col-lg-6">
+        <form #formNew="ngForm" ngNativeValidate>
         <div class="card">
             <div class="card-header">
                 <h5 class="text-uppercase">Nueva inmovilización</h5>
@@ -28,7 +29,6 @@
                     </tbody>
                 </table>
 
-                <form #formNew="ngForm"> 
                     <div class="form-group">
                         <div class="row">
                             <div class="col-xs-12 col-lg-6">
@@ -44,7 +44,7 @@
                         <div class="row">
                             <div class="col-xs-12 col-lg-6">
                                 <label>No. comparendo</label>
-                                <input class="form-control" [(ngModel)]="inmovilizacion.numeroComparendo" name="numeroComparendo" type="text" required />
+                                <input class="form-control" [(ngModel)]="inmovilizacion.numeroComparendo" name="numeroComparendo" type="text" />
                             </div>
                             <div class="col-xs-12 col-lg-6">
                                 <label>Placa</label>
@@ -83,16 +83,12 @@
                         <div class="row">
                             <div class="col-xs-12 col-lg-6">
                                 <label>No. inventario <strong class="text-danger">*</strong></label>
-                                <input class="form-control" [(ngModel)]="inmovilizacion.numeroInventario" name="numeroInventario" type="text" required />
+                                <input class="form-control" [(ngModel)]="inmovilizacion.numeroInventario" name="numeroInventario" type="text" required [ngClass]="{'red-border-class': name.errors}" />
                             </div>
                             <div class="col-xs-12 col-lg-6">
                                 <label>Grúa</label>
                                 <ng-select [multiple]="false" [options]="gruas" [(ngModel)]="inmovilizacion.idGrua" name="idGrua">
                                 </ng-select>
-                            </div>
-                            <div class="col-xs-12 col-lg-6">
-                                <label>Costo grúa</label>
-                                <input class="form-control" [(ngModel)]="inmovilizacion.costoGrua" name="costoGrua" type="numeric" />
                             </div>
                             <div class="col-xs-12 col-lg-6">
                                 <label>No. recibo grúa</label>
@@ -109,21 +105,21 @@
                             </div>
                         </div>
                     </div>
-                </form>
-            </div>
-            <div class="card-footer">
-                <div class="btn-group">
-                    <button (click)="onEnviar()" [disabled]="formNew.invalid && (inmovilizacion.numeroComparendo || inmovilizacion.placa)" class="btn btn-primary" type="button">
-                        <i class="fa fa-save"></i>
-                        Enviar
-                    </button>
-                    <button (click)="onCancelar()" class="btn btn-default">
-                        <i class="fa fa-times"></i>
-                        Cancelar
-                    </button>
+                </div>
+                <div class="card-footer">
+                    <div class="btn-group">
+                        <button (click)="onEnviar()" [disabled]="formNew.invalid && (inmovilizacion.numeroComparendo || inmovilizacion.placa)" class="btn btn-primary" type="submit">
+                            <i class="fa fa-save"></i>
+                            Enviar
+                        </button>
+                        <button (click)="onCancelar()" class="btn btn-default">
+                            <i class="fa fa-times"></i>
+                            Cancelar
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
 </div>
 

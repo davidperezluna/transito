@@ -13,13 +13,20 @@ export class LoginService {
 
 	constructor(private _http: Http){}
 
-	signup(user_to_login){
-		let json = JSON.stringify(user_to_login);
-		let params = "json="+json;
+	signup(user){
+		let json = JSON.stringify(user);
+		let params = "data="+json;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 
-		return this._http.post(this.url+"login", params, {headers: headers})
-							  .map(res => res.json());
+		return this._http.post(this.url+"login", params, {headers: headers}).map(res => res.json());
+	}
+
+	signout(datos, token){
+		let json = JSON.stringify(datos);
+		let params = "data=" + json + "&authorization=" + token;
+		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
+
+		return this._http.post(this.url+"logout", params, {headers: headers}).map(res => res.json());
 	}
 
 	register(user_to_register){

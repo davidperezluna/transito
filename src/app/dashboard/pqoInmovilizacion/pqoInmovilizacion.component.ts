@@ -15,9 +15,10 @@ export class PqoInmovilizacionComponent implements OnInit {
 	public inmovilizaciones;
 	public formNew = false;
 	public formEdit = false;
+	public formExit = false;
   public formIndex = true;
   public table:any; 
-  public entrada: PqoInmovilizacion;
+  public inmovilizacion: PqoInmovilizacion;
 
   constructor(
     private _InmovilizacionService: PqoInmovilizacionService,
@@ -125,13 +126,15 @@ export class PqoInmovilizacionComponent implements OnInit {
     })
   }
 
-  edit(entrada:any){
-    this.entrada = entrada;
-    this.formEdit = true;
+  onExit(inmovilizacion:any){
+    this.inmovilizacion = inmovilizacion;
+
+    this.formExit = true;
+    this.formNew = false;
     this.formIndex = false;
   }
 
-  onExit(inmovilizacion:any){
+  /*onExit(inmovilizacion:any){
     let token = this._loginService.getToken();
 
     this._InmovilizacionService.exit({ 'id':inmovilizacion.id }, token).subscribe(
@@ -164,5 +167,5 @@ export class PqoInmovilizacionComponent implements OnInit {
         }
       }
     );
-  }
+  }*/
 }
