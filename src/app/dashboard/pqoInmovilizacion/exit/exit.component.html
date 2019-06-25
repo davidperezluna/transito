@@ -11,11 +11,11 @@
                     <div class="form-group row">
                         <div class="col-xs-12 col-lg-12">
                             <label>Fecha ingreso <strong class="text-danger">*</strong></label>
-                            {{ inmovilizacion.fechaIngreso }}
+                            {{ (inmovilizacion.fechaIngreso.timestamp * 1000) | date: 'dd/MM/yyyy' }}
                         </div>
                         <div class="col-xs-12 col-lg-12">
                             <label>Dias vigencia <strong class="text-danger">*</strong></label>
-                            {{ inmovilizacion.horaIngreso }}
+                            {{ (inmovilizacion.horaIngreso.timestamp * 1000) | date: 'h:i:s A' }}
                         </div>
                         <div class="col-xs-12 col-lg-12">
                             <label>Número inventario <strong class="text-danger">*</strong></label>

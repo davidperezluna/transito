@@ -11,21 +11,25 @@ declare var $: any;
 })
 export class PqoInmovilizacionComponent implements OnInit {
   public errorMessage;
-
-	public inmovilizaciones;
-	public formNew = false;
-	public formEdit = false;
-	public formExit = false;
-  public formIndex = true;
-  public table:any; 
   public inmovilizacion: PqoInmovilizacion;
 
+  public inmovilizaciones;
+  
+	public formNew: any;
+	public formEdit: any;
+	public formExit: any;
+  public formIndex: any;
+
+  public table:any; 
+  
   constructor(
     private _InmovilizacionService: PqoInmovilizacionService,
 		private _loginService: LoginService,
   ){}
     
   ngOnInit() {
+    this.onInitForms();
+
     swal({
       title: 'Cargando Tabla!',
       text: 'Solo tardara unos segundos por favor espere.',
@@ -39,8 +43,10 @@ export class PqoInmovilizacionComponent implements OnInit {
         this.inmovilizaciones = response.data;
 
         let timeoutId = setTimeout(() => {
-          this.iniciarTabla();
+          this.onInitTable();
         }, 100);
+
+        this.formIndex = true;
 
         swal.close();
       },
@@ -55,7 +61,14 @@ export class PqoInmovilizacionComponent implements OnInit {
     );
   }
 
-  iniciarTabla(){
+  onInitForms(){
+    this.formNew = false;
+    this.formEdit = false;
+    this.formExit = false;
+    this.formIndex = false;
+  }
+
+  onInitTable(){
     this.table = $('#dataTables-example').DataTable({
       destroy: true,
       responsive: true,
@@ -73,16 +86,12 @@ export class PqoInmovilizacionComponent implements OnInit {
   }
 
   onNew(){
+    this.onInitForms();
     this.formNew = true;
-    this.formIndex = false;
-    this.table.destroy();
   }
 
   ready(isCreado:any){
     if(isCreado) {
-      this.formNew = false;
-      this.formEdit = false;
-      this.formIndex = true;
       this.ngOnInit();
     }
   }
@@ -129,9 +138,9 @@ export class PqoInmovilizacionComponent implements OnInit {
   onExit(inmovilizacion:any){
     this.inmovilizacion = inmovilizacion;
 
+    this.onInitForms();
+
     this.formExit = true;
-    this.formNew = false;
-    this.formIndex = false;
   }
 
   /*onExit(inmovilizacion:any){
