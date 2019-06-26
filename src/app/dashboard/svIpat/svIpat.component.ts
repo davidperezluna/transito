@@ -104,6 +104,7 @@ export class SvIpatComponent implements OnInit {
     this._IpatService.getIpatByConsecutivo(consecutivo, token).subscribe(
       response => {
         if (response.code = 200) {
+          console.log(response);
           this.ipat = response.data.ipat;
           this.conductores = response.data.conductores;
           this.vehiculos = response.data.vehiculos;
