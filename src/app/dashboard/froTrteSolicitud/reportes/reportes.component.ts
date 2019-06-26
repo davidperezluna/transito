@@ -173,6 +173,10 @@ export class ReportesComponent implements OnInit {
                             text: 'csv',
                             charset: 'utf-8',
                             filename: 'Reporte_' + this.tipoReporteSelected,
+                            bom: true,
+                            exportOptions: {
+                                charset: 'utf-8',
+                            }
                         },
 
                     ],
@@ -200,6 +204,10 @@ export class ReportesComponent implements OnInit {
                             text: 'csv',
                             charset: 'utf-8',
                             filename: 'Reporte_' + this.tipoReporteSelected,
+                            bom: true,
+                            exportOptions: {
+                                charset: 'utf-8',
+                            }
                         },
 
                     ],
@@ -227,6 +235,10 @@ export class ReportesComponent implements OnInit {
                             text: 'csv',
                             charset: 'utf-8',
                             filename: 'Reporte_' + this.tipoReporteSelected,
+                            bom: true,
+                            exportOptions: {
+                                charset: 'utf-8',
+                            }
                         },
 
                     ],
@@ -254,6 +266,10 @@ export class ReportesComponent implements OnInit {
                             text: 'csv',
                             charset: 'utf-8',
                             filename: 'Reporte_' + this.tipoReporteSelected,
+                            bom: true,
+                            exportOptions: {
+                                charset: 'utf-8',
+                            }
                         },
 
                     ],
@@ -281,6 +297,10 @@ export class ReportesComponent implements OnInit {
                             text: 'csv',
                             charset: 'utf-8',
                             filename: 'Reporte_' + this.tipoReporteSelected,
+                            bom: true,
+                            exportOptions: {
+                                charset: 'utf-8',
+                            }
                         },
 
                     ],
@@ -308,6 +328,10 @@ export class ReportesComponent implements OnInit {
                             text: 'csv',
                             charset: 'utf-8',
                             filename: 'Reporte_' + this.tipoReporteSelected,
+                            bom: true,
+                            exportOptions: {
+                                charset: 'utf-8',
+                            }
                         },
 
                     ],
@@ -335,6 +359,10 @@ export class ReportesComponent implements OnInit {
                             text: 'csv',
                             charset: 'utf-8',
                             filename: 'Reporte_' + this.tipoReporteSelected,
+                            bom: true,
+                            exportOptions: {
+                                charset: 'utf-8',
+                            }
                         },
 
                     ],
