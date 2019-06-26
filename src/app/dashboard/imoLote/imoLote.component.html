@@ -16,11 +16,11 @@
                 <!-- .row -->
                 <div class="col-xs-12 col-lg-12">
                   <label>Fecha inicial</label>
-                  <input type="date" class="form-control" [(ngModel)]="search.fechaInicial" name="fechaInicial">
+                  <input type="date" class="form-control" [(ngModel)]="search.fechaInicial" name="fechaInicial" required>
                 </div>
                 <div class="col-xs-12 col-lg-12">
                   <label>Fecha final</label>
-                  <input type="date" class="form-control" [(ngModel)]="search.fechaFinal" name="fechaFinal">
+                  <input type="date" class="form-control" [(ngModel)]="search.fechaFinal" name="fechaFinal" required>
                 </div>
               </div>
             </div>
@@ -197,14 +197,14 @@
             <!-- /.table-responsive --> 
           </div>
         </div>
-      </div>
-
-      <div class="col-xs-12 col-md-8 col-lg-9" *ngIf='formNew'>
-        <app-new (onReady)="onReady($event)"></app-new>
-      </div>
-
-      <div class="col-xs-12 col-md-8 col-lg-9" *ngIf='formEdit'>
-        <app-edit [loteInsumoInsumo]="loteInsumoInsumo" [tipoInsumo]="tipoInsumo" (onReady)="onReady($event)"></app-edit>
-      </div>
     </div>
+
+    <div class="col-xs-12 col-md-8 col-lg-8" *ngIf='formNew'>
+      <app-new (onReady)="onReady($event)"></app-new>
+    </div>
+
+    <div class="col-xs-12 col-md-8 col-lg-8" *ngIf='formEdit'>
+      <app-edit [loteInsumoInsumo]="loteInsumoInsumo" [tipoInsumo]="tipoInsumo" (onReady)="onReady($event)"></app-edit>
+    </div>
+  </div>
 </div>

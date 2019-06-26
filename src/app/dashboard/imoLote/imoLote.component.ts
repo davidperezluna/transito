@@ -39,14 +39,6 @@ export class ImoLoteComponent implements OnInit {
     
   ngOnInit() {
     this.onInitForms();
-
-    swal({
-      title: 'Cargando información!',
-      text: 'Solo tardara unos segundos por favor espere.',
-      onOpen: () => {
-        swal.showLoading()
-      }
-    });
   }
 
   onInitForms(){

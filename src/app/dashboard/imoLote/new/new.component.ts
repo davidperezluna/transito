@@ -142,11 +142,10 @@ constructor(
           
           swal({
             title: 'Perfecto!',
-            text: 'Registro exitoso!',
+            text: response.message,
             type: 'success',
             confirmButtonText: 'Aceptar'
           });
-          swal.close();
         }else{
           swal({
             title: 'Error!',
@@ -154,7 +153,6 @@ constructor(
             type: 'error',
             confirmButtonText: 'Aceptar'
           });
-          swal.close();
         }
 			error => {
 					this.errorMessage = <any>error;

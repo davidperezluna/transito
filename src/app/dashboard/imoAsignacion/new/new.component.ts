@@ -102,13 +102,11 @@ constructor(
         }
       }
     );
-
   }
+
   onCancelar(){
     this.ready.emit(true);
   }
-
- 
 
   isFin() {
    this.rnaAsignacionInsumos.numero = parseInt(this.rnaAsignacionInsumos.rangoFin) - parseInt(this.rnaAsignacionInsumos.rangoInicio)+1;
@@ -230,7 +228,6 @@ constructor(
   }
 
   onAsignarLote(lote){
-
     let asignado = false;
     //Verifica que el arreglo de lotes tenga datos registrados
     if ( this.lotesSeleccionados.length > 0) {
