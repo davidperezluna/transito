@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { LoginService } from '../../services/login.service';
-import { VehiculoService } from '../../services/vehiculo.service';
+import { VhloVehiculoService } from '../../services/vhloVehiculo.service';
 
 import { environment } from 'environments/environment';
 
@@ -18,52 +18,21 @@ export class VhloCertificadoTradicionComponent implements OnInit {
 
     public tramiteFacturaSelected: any; 
     public sustratos: any;
-    public vehiculo: any = false;
-    public vehiculoRna: any = false;
+    public vehiculo: any = null;
     public placa: any;
-    public sustratoSelected: any;
-    public tipoRegrabacionList: string[];
-    public tipoBlindajeList: string[];
-    public tipoRegrabacionSelected: any;
-    public nivelBlindajeList: string[];
-    public motivoSelected: any;
-    public nuevoNumero: any;
-    public numeroRunt: any;
-    public certificadoEntregado: any;
-    public documentacion: any;
-    public ciudadanoId: any;
-    public entregada = false;
-    public ciudadanoEncontrado=1;
-    public ciudadanoNew = false;
-    public ciudadano:any;
+
     public txt:any;
     public valido:any;
-    public resumen = {};     
-    public datos = {
-        'nroRunt': null,
-        'observacion': null,                  
-        'certificadoEntregada': null,
-        'entregado': null,
-        'tramiteFormulario': null,
-        'facturaId': null,
-    };
 
     constructor(
-        private _loginService: LoginService,
-        private _VehiculoService: VehiculoService,
+      private _VehiculoService: VhloVehiculoService,
+      private _LoginService: LoginService,
       
     ) { }
 
-    ngOnInit() {
-       
-        
-    }
+    ngOnInit() { }
 
-    
-    ready(){ 
-        this.ciudadanoEncontrado = 3;
-    }
-    onKeyValidateVehiculo(){
+    onSearchVehiculo(){
         swal({
           title: 'Buscando Vehiculo!',
           text: 'Solo tardara unos segundos por favor espere.',
@@ -77,42 +46,17 @@ export class VhloCertificadoTradicionComponent implements OnInit {
           ) {
           }
         })
-        let token = this._loginService.getToken();
-        let datos = {
-            'placa' : this.placa
-        }
+        let token = this._LoginService.getToken();
         
-        this._VehiculoService.showVehiculoPlaca(token, datos).subscribe(
-          responseVehiculo => {
-            if(responseVehiculo.status == 'success'){
-              this.vehiculo = responseVehiculo.data;
-              this._VehiculoService.showVehiculoRna(this.vehiculo.id, token).subscribe(
-                response => {
-                  if (response.status == 'success') {
-                    this.vehiculoRna = response.vehiculo;
-                    swal.close();
-                  }else{
-                    swal.close();
-                    swal({
-                      title: 'Error!',
-                      text: response.message,
-                      type: 'error',
-                      confirmButtonText: 'Aceptar'
-                    })
-                  }
-                error => {
-                  this.errorMessage = <any>error;
-                  if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert("Error en la petición");
-                  }
-                }
-              });
-            }else{
+        this._VehiculoService.searchByPlaca({ 'numero': this.placa }, token).subscribe(
+          response => {
+            if(response.status == 'success'){
+              this.vehiculo = response.data;
               swal.close();
+            }else{
               swal({
                 title: 'Error!',
-                text: responseVehiculo.message,
+                text: response.message,
                 type: 'error',
                 confirmButtonText: 'Aceptar'
               })
@@ -129,11 +73,11 @@ export class VhloCertificadoTradicionComponent implements OnInit {
     
     async ngAbrirInput(){
         const {value: files} = await swal({
-          title: 'Seleccione el atchivo .csv',
+          title: 'Seleccione el archivo .csv',
           input: 'file',
           inputAttributes: {
-            'accept': 'txt/*',
-            'aria-label': 'Upload your profile picture'
+            'accept': 'csv/*',
+            'aria-label': 'Cargar archivo plano'
           }
         })
     
@@ -144,6 +88,7 @@ export class VhloCertificadoTradicionComponent implements OnInit {
           reader.onload = (e) => {
             let txt: string = reader.result;
             let allTextLines = txt.split(/\r\n|\n/);
+
             for (let i = 0; i < allTextLines.length; i++) {
               let data = allTextLines[i].split(','); 
               if (data.length <= 0) {
@@ -156,7 +101,7 @@ export class VhloCertificadoTradicionComponent implements OnInit {
             }
             
             if (this.valido) {
-              let token = this._loginService.getToken();
+              let token = this._LoginService.getToken();
               console.log(this.txt);
             //   this._ComparendoService.setComparendoArchivo(this.txt,polca,token).subscribe(
             //     response => {
