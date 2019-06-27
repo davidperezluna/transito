@@ -84,11 +84,20 @@ constructor(
   }
 
   onPrint(){
+    swal({
+      title: 'Generando acta!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+
     let token = this._LoginService.getToken();
 
     this._AsignacionService.printReasignacion({ 'idTrazabilidad': this.idReasignacion }, token).subscribe((response)=>{     
       var fileURL = URL.createObjectURL(response);
       window.open(fileURL);
+      swal.close();
     })
   }
 }
