@@ -19,7 +19,7 @@ export class VhloTpAsignacionService {
 		let json = JSON.stringify(datos);
 		let params = "data="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
-		return this._http.post(this.url+"/new", params, {headers: headers}).map(res => res.json());
+		return this._http.post(this.url+"/new2", params, {headers: headers}).map(res => res.json());
 	}
 
 	delete(datos, token){
