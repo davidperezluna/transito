@@ -73,11 +73,15 @@
                     <b>Cantidad</b>
                     {{ loteInsumo.cantidad }}
                     <br>
-                    <b>Referencia</b>
-                    {{ loteInsumo.referencia }}
-                    <b>Fecha</b>
-                    <br>
-                    {{ (loteInsumo.fecha* 1000) | date: 'dd/MM/yyyy' }}
+                    <ng-container *ngIf="loteInsumo.referencia">
+                      <b>Referencia</b>
+                      {{ loteInsumo.referencia }}
+                      <br>
+                    </ng-container>
+                    <ng-container *ngIf="loteInsumo.fecha">
+                      <b>Fecha</b>
+                      {{ ( loteInsumo.fecha * 1000) | date: 'dd/MM/yyyy' }}
+                    </ng-container>
                   </td>
                   <td>
                     <div class="btn-group">

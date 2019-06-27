@@ -1,64 +1,48 @@
-<div class="container">
-  <hr>
+<div class="container-fluid">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-xs-12 col-lg-6">
       <div class="card">
         <div class="card-header">
-          <h5 class="card-title">
-            <b class="text-uppercase">Impresión</b>
-            <br>
-            <small>Acta</small>
-          </h5>
+            <b class="text-uppercase">Reportes</b>
         </div>
         <div class="card-body">
-          <div class="col-xs-12 col-lg-12 row">
+          <div class="row">
+            <div class="col-xs-12 col-lg-12">
+              <label>Tipo acta <b class="text-danger">*</b></label>
+              <ng-select [multiple]="false" [options]="tiposActas" [(ngModel)]="data.tipoActa" name="tipoActa">
+              </ng-select>
+            </div>
 
-            <label>Tipo acta <b class="text-danger">*</b></label>
-            <ng-select
-                [multiple]="false"
-                [options]="tiposActas"
-                [(ngModel)]="data.tipoActa"
-                name="tipoActa">
-            </ng-select>
-
-            <label>Organismo de tránsito <small>(sedes)</small> <b class="text-danger">*</b></label>
-            <ng-select
-                [multiple]="false"
-                [options]="sedes"
-                [(ngModel)]="data.idOrganismoTransito"
-                name="idOrganismoTransito">
-            </ng-select>
-
-            <br>
-
-            <div class="col-lg-6 col-xs-12">
+            <div class="col-xs-12 col-lg-6">
                 <label>Fecha inicio<b class="text-danger">*</b></label>
                 <input class="form-control" [(ngModel)]="data.fechaInicio" name="fechaInicio" placeholder="" type="date" required>
-                <br>
             </div>
-
-            <div class="col-lg-6 col-xs-12">
+            
+            <div class="col-xs-12 col-lg-6">
                 <label>Fecha Fin<b class="text-danger">*</b></label>
                 <input class="form-control" [(ngModel)]="data.fechaFin" name="fechaFin" placeholder="" type="date" required>
-                <br>
             </div>
 
-            <div class="custom-control custom-checkbox col-lg-12">
-              <input [(ngModel)]="data.anulado" name="anulado" type="checkbox" class="custom-control-input" id="anulado">
-              <label class="custom-control-label" for="anulado"><p>Anulados</p></label>
-            </div>
-            <br>
-            <div class="custom-control custom-checkbox col-lg-12">
-              <input [(ngModel)]="data.asignado" name="asignado" type="checkbox" class="custom-control-input" id="asignado">
-              <label class="custom-control-label" for="asignado"><p>Asignados</p></label>
-            </div>
-            <br>
-            <div class="custom-control custom-checkbox col-lg-12">
-              <input [(ngModel)]="data.disponibles" name="disponibles" type="checkbox" class="custom-control-input" id="disponibles">
-              <label class="custom-control-label" for="disponibles"><p>Disponible</p></label>
+            <div class="col-xs-12 col-lg-12">
+              <div class="custom-control custom-checkbox">
+                <input [(ngModel)]="data.anulado" name="anulado" type="checkbox" class="custom-control-input" id="anulado">
+                <label class="custom-control-label" for="anulado"><p>Anulados</p></label>
+              </div>
             </div>
 
-            <br>
+            <div class="col-xs-12 col-lg-12">
+              <div class="custom-control custom-checkbox">
+                <input [(ngModel)]="data.asignado" name="asignado" type="checkbox" class="custom-control-input" id="asignado">
+                <label class="custom-control-label" for="asignado"><p>Asignados</p></label>
+              </div>
+            </div>
+
+            <div class="col-xs-12 col-lg-12">
+              <div class="custom-control custom-checkbox">
+                <input [(ngModel)]="data.disponibles" name="disponibles" type="checkbox" class="custom-control-input" id="disponibles">
+                <label class="custom-control-label" for="disponibles"><p>Disponible</p></label>
+              </div>
+            </div>
           </div>
         </div>
         <div class="card-footer">
@@ -68,7 +52,7 @@
                   Imprimir Acta
               </button>
           </div>
-      </div>
+        </div>
       </div>
     </div>
   </div>

@@ -25,7 +25,7 @@ public isCantidad=true;
 
 constructor(
   private _ImoTrazabilidadService: ImoTrazabilidadService,
-  private _ImoAsignacionService: ImoAsignacionService,
+  private _AsignacionService: ImoAsignacionService,
   private _LoginService: LoginService,
   ){}
 
@@ -40,7 +40,7 @@ constructor(
 
     let token = this._LoginService.getToken();
 
-    this._ImoAsignacionService.showTrazabilidad(token,this.idReasignacion).subscribe(
+    this._AsignacionService.showTrazabilidad(token,this.idReasignacion).subscribe(
       response => {
         this.reasignaciones = response.data;
         let timeoutId = setTimeout(() => {
@@ -72,10 +72,6 @@ constructor(
       responsive: true,
       pageLength: 8,
       sPaginationType: 'full_numbers',
-      dom: 'Bfrtip',
-      buttons: [
-          'pdf',
-      ],
       oLanguage: {
         oPaginate: {
           sFirst: '<i class="fa fa-step-backward"></i>',
@@ -85,5 +81,14 @@ constructor(
         }
       }
     });
+  }
+
+  onPrint(){
+    let token = this._LoginService.getToken();
+
+    this._AsignacionService.printReasignacion({ 'idTrazabilidad': this.idReasignacion }, token).subscribe((response)=>{     
+      var fileURL = URL.createObjectURL(response);
+      window.open(fileURL);
+    })
   }
 }

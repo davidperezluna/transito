@@ -1,9 +1,10 @@
 <div class="row">
     <div class="col-xs-12 col-lg-12">
         <div class="card">
-        <div class="card-body">
-            <h5 class="m-0">{{ loteInsumo.tipoInsumo.nombre }} {{ loteInsumo.sedeOperativa.nombre }}</h5>
-            <hr>
+          <div class="card-header">
+              <b class="text-uppercase">{{ loteInsumo.tipoInsumo.nombre }} {{ loteInsumo.sedeOperativa.nombre }}</b>
+          </div>
+          <div class="card-body">
             <table class="table" id="dataTables-example-sustratos">
                 <thead>
                   <tr>
@@ -21,11 +22,16 @@
                     <td >{{ insumo.numero }}</td>
                     <td >{{ (insumo.fecha.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td>
                     <td>
-                      <button *ngIf="insumo.estado != 'ANULADO'" (click)="deleteInsumo(insumo.id)"  class="btn btn-danger" type="button">Eliminar</button>
-                      <a href="{{ apiUrl }}/{{insumo.actaEntrega}}/{{insumo.organismoTransito.id}}/pdf/acta/asignacion" class="btn btn-success" target="_blank">
-                        <i class="fa fa-file-pdf-o"></i>
-                          Imprimir Acta 
-                      </a>
+                      <div class="btn-group">
+                        <button *ngIf="insumo.estado != 'ANULADO'" (click)="deleteInsumo(insumo.id)"  class="btn btn-danger" type="button">
+                          <i class="fa fa-ban"></i>
+                          Anular
+                        </button>
+                        <a href="{{ apiUrl }}/{{insumo.actaEntrega}}/{{insumo.organismoTransito.id}}/pdf/acta/asignacion" class="btn btn-success" target="_blank">
+                          <i class="fa fa-file-pdf-o"></i>
+                          Acta
+                        </a>
+                      </div>
                     </td>
                   </tr>
                 </tbody>

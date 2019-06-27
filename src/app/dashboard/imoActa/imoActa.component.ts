@@ -13,9 +13,10 @@ declare var $: any;
 export class ImoActaComponent implements OnInit {
   public apiUrl = environment.apiUrl + 'insumo/imoinsumo';
   public errorMessage;
-  public respuesta;
+
   public sedes:any;
   public sedeSelected:any;
+  
   public tiposActas = [
     {value:'subTotales',label:'Subtotal'} ,
     {value:'totales',label:'Totales'} ,
@@ -52,39 +53,15 @@ export class ImoActaComponent implements OnInit {
         }
       }
     );
-    
   }
   
   
   onPrintActa(){
     let token = this._loginService.getToken();
-    this._ImoInsumoService.pdfActaInsumo(token, this.data).subscribe((response)=>{
-      //let file = new Blob([response], { type: 'application/pdf' });            
+
+    this._ImoInsumoService.pdfActaInsumo(token, this.data).subscribe((response)=>{     
       var fileURL = URL.createObjectURL(response);
-      console.log(fileURL);
       window.open(fileURL);
     })
-
-    
-
-    // this._ImoInsumoService.pdfActaInsumo(token,this.data).subscribe(
-    //   response => {
-    //     var fileURL = window.URL.createObjectURL(response);
-    //     console.log(fileURL);
-    //     console.log(response); 
-    //     window.open(fileURL);
-    //   },  
-    //   error => {
-    //     this.errorMessage = <any>error;
-  
-    //     if(this.errorMessage != null){
-    //       console.log(this.errorMessage);
-    //       alert("Error en la petición");
-    //     }
-    //   }
-    // );
-    // console.log(this.data);
   }
-  
-
 }

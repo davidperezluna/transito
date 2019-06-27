@@ -1,32 +1,41 @@
 <div class="container" >
-        <div class="row">
+    <div class="row">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
                     <form #newForm="ngForm">
-                        <div class="row justify-content-center">
-                            <div class="card-body col-md-12"> 
+                        <div class="row">
+                            <div class="card-body col-md-12">
+                                <div class="btn-group"> 
+                                    <button (click)="onPrint()" class="btn btn-success">
+                                        <i class="fa fa-file-pdf-o"></i>
+                                        Imprimir
+                                    </button>
+                                </div>
                                 <table class="table " id="dataTables-example">
-                                <thead>
-                                <tr>
-                                    <th>Sede</th>
-                                    <th>sustrato</th>
-                                    <th>Estado</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr class="odd" *ngFor="let reasignacion of reasignaciones; let i = index">
-                                    <td >{{reasignacion.insumo.organismoTransito.nombre}}</td>
-                                    <td >{{reasignacion.insumo.numero}}</td>
-                                    <td >{{reasignacion.insumo.estado}}</td>
-                                </tr>
-                                </tbody>
-                            </table>
+                                    <thead>
+                                        <tr>
+                                            <th>Tipo</th>
+                                            <th>Número</th>
+                                            <th>Estado</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr class="odd" *ngFor="let reasignacion of reasignaciones; let i = index">
+                                        <td >{{ reasignacion.insumo.tipo.nombre }}</td>
+                                        <td >{{ reasignacion.insumo.numero }}</td>
+                                        <td >{{ reasignacion.insumo.estado }}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
                             </div>    
                         </div>
                     </form>
                     <div class="card-footer">
-                        <button (click)="onCancelar()" class="btn btn-default">Cancelar</button>
+                        <button (click)="onCancelar()" class="btn btn-default">
+                            <i class="fa fa-times"></i>
+                            Cancelar
+                        </button>
                     </div>    
                 </div>
             </div>

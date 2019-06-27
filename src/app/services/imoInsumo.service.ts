@@ -77,7 +77,7 @@ export class ImoInsumoService {
 	}
 
 
-	pdfActaInsumo(token,datos): any{
+	pdfActaInsumo(token, datos): any{
 		let json = JSON.stringify(datos);
 		let params = "data="+json+"&authorization="+token;
 
