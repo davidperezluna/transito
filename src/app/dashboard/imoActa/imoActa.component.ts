@@ -18,7 +18,7 @@ export class ImoActaComponent implements OnInit {
   public sedeSelected:any;
   
   public tiposActas = [
-    {value:'subTotales',label:'Subtotal'} ,
+    {value:'subtotales',label:'Subtotal'} ,
     {value:'totales',label:'Totales'} ,
   ]
 
@@ -35,7 +35,7 @@ export class ImoActaComponent implements OnInit {
   constructor(
     private _OrganismoTransitoService: CfgOrganismoTransitoService,
     private _ImoInsumoService: ImoInsumoService,
-    private _loginService: LoginService,
+    private _LoginService: LoginService,
   ) { }
 
   ngOnInit() {
@@ -57,7 +57,7 @@ export class ImoActaComponent implements OnInit {
   
   
   onPrintActa(){
-    let token = this._loginService.getToken();
+    let token = this._LoginService.getToken();
 
     this._ImoInsumoService.pdfActaInsumo(token, this.data).subscribe((response)=>{     
       var fileURL = URL.createObjectURL(response);

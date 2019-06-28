@@ -72,10 +72,8 @@ export class ImoInsumoService {
 	show(token,id){
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
-		return this._http.post(this.url+"/"+id+"/show", params, {headers: headers})
-							  .map(res => res.json());
+		return this._http.post(this.url+"/"+id+"/show", params, {headers: headers}).map(res => res.json());
 	}
-
 
 	pdfActaInsumo(token, datos): any{
 		let json = JSON.stringify(datos);
