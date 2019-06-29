@@ -12,6 +12,12 @@
               <ng-select [multiple]="false" [options]="tiposActas" [(ngModel)]="data.tipoActa" name="tipoActa">
               </ng-select>
             </div>
+            
+            <div class="col-xs-12 col-lg-12" *ngIf="data.tipoActa && data.tipoActa == 'totales'">
+                <label>Organismo de tránsito <small>(sedes)</small> <b class="text-danger">*</b></label>
+                <ng-select [multiple]="false" [options]="sedes" [(ngModel)]="data.idOrganismoTransito" name="idOrganismoTransito" required>
+                </ng-select>
+            </div>
 
             <div class="col-xs-12 col-lg-6">
                 <label>Fecha inicio<b class="text-danger">*</b></label>
