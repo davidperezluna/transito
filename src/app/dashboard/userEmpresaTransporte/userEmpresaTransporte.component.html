@@ -1,52 +1,146 @@
-<div class="container">
+<div class="container-fluid">
     <hr>
-    <div class="row" *ngIf='formIndex'>
-        <div class="col-md-12">
+    <div class="row">
+        <div class="col-xs-12 col-lg-4" *ngIf='formSearch'>
+            <!-- .col -->
             <div class="card">
                 <div class="card-header">
-                    <h5 class="card-title">
-                        <strong class="text-uppercase">Empresa Transporte</strong>
-                        <small>Lista de Empresas de Transporte</small>
-                        <div class="btn-group pull-right">
-                            <button (click)="onNew()" class="btn btn-success  btn-round " data-target="#themepicker"
-                                data-toggle="modal">
-                                <i class="fa fa-plus"></i>
-                                <span class="text">Nuevo</span>
-                            </button>
-                        </div>
-                    </h5>
+                    <b class="text-uppercase">
+                        Buscar empresas de transporte público
+                    </b>
                 </div>
                 <div class="card-body">
-                    <table class="table" id="dataTables-example">
-                        <thead>
-                            <tr>
-                                <th>Id</th>
-                                <th>Nombre</th>
-                                <!-- <th>Acciones</th> -->
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="odd" *ngFor="let empresaTransporte of empresasTransporte; let i = index">
-                                <td>{{ i + 1 }}</td>
-                                <td>{{ empresaTransporte.nombre }}</td>
-                                <!-- <td>
-                                    <button (click)="onEdit(empresaTransporte)" class="btn btn-xs btn-info" type="button">
-                                        <i class="fa fa-edit"></i>
-                                        Editar
+                    <form #formSearch="ngForm">
+                        <div class="col-xs-16 col-lg-12">
+                            <label>NIT <strong class="text-danger">*</strong></label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" [(ngModel)]="nit" required name="nit" />
+                                <span class="input-group-btn">
+                                    <button (click)="onSearchEmpresa()" class="btn btn-default btn-primary" type="button">
+                                        <i class="fa fa-search"></i>
                                     </button>
-                                    <button (click)="onDelete(empresaTransporte.id)" class="btn btn-xs btn-danger" type="button">
-                                        <i class="fa fa-trash"></i>
-                                        Eliminar
-                                    </button>
-                                </td> -->
-                            </tr>
-                        </tbody>
-                    </table>
-                    <!-- /.table-responsive -->
+                                </span>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="col-xs-12 col-lg-12">
+                            <div class="row">
+                                <div class="col-xs-12 col-lg-12" *ngIf='empresa'>
+                                    <table class="table table-bordered table-striped">
+                                        <tr>
+                                            <th><b>Tipo de identificación</b></th>
+                                            <th><b>Numero de identificación</b></th>
+                                        </tr>
+                                        <tr>
+                                            <td>{{ empresa.tipoIdentificacion?.nombre }}</td>
+                                            <td>{{ empresa.nit }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th><b>Razón Social</b></th>
+                                            <th><b>Email</b></th>
+                                        </tr>
+                                        <tr>
+                                            <td>{{ empresa.nombre }}</td>
+                                            <td>{{ empresa.correo }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th><b>Departamento</b></th>
+                                            <th><b>Ciudad</b></th>
+                                        </tr>
+                                        <tr>
+                                            <td>{{ empresa.municipio.departamento.nombre }}</td>
+                                            <td>{{ empresa.municipio.nombre }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th><b>Dirección Principal</b></th>
+                                            <th><b>Teléfono</b></th>
+                                        </tr>
+                                        <tr>
+                                            <td>{{ empresa.direccion }}</td>
+                                            <td>{{ empresa.telefono }}</td>
+                                        </tr>
+                                    </table>
+                                    <h5>Datos del representante</h5>
+                                    <table class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th><b>Tipo Identificación</b></th>
+                                                <th><b>Número Identificación</b></th>
+                                                <th><b>Nombres y Apellidos</b></th>
+                                                <th><b>Fecha Inicio</b></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>{{ empresa.empresaRepresentante.ciudadano.tipoIdentificacion.nombre }}</td>
+                                                <td>{{ empresa.empresaRepresentante.ciudadano.identificacion }}</td>
+                                                <td>{{ empresa.empresaRepresentante.ciudadano.primerNombre }}
+                                                    {{ empresa.empresaRepresentante.ciudadano.segundoNombre }}
+                                                    {{ empresa.empresaRepresentante.ciudadano.primerApellido }}
+                                                    {{ empresa.empresaRepresentante.ciudadano.segundoApellido }}</td>
+                                                <td>{{ (empresa.empresaRepresentante.fechaInicial.timestamp * 1000) | date: 'dd/MM/yyyy' }}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
+        <div class="col-xs-12 col-lg-8" *ngIf='formIndex'>
+            <div class="card">
+                <div class="card-header">
+                    <b class="text-uppercase">Habilitaciones</b>
+                    <div class="btn-group pull-right">
+                        <button (click)="onNew(empresa)" class="btn btn-default">
+                            <i class="fa fa-plus"></i>
+                            Nuevo
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                <table class="table " id="dataTables-example">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Radio Acción</th>
+                            <th>Modalidad Transporte</th>
+                            <th>Servicio</th>
+                            <th>Clase</th>
+                            <th>Fecha Expedicion</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="odd" *ngFor="let habilitacion of habilitaciones; let i = index">
+                            <td>{{ i + 1 }}</td>
+                            <td>{{ habilitacion.radioAccion.nombre }}</td>
+                            <td>{{ habilitacion.modalidadTransporte.nombre }}</td>
+                            <td>{{ habilitacion.servicio.nombre }}</td>
+                            <td>{{ habilitacion.clase.nombre }}</td>
+                            <td>{{ (habilitacion.fechaExpedicionActo.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td>
+                            <td>
+                                <button (click)="onEdit(habilitacion)" class="btn btn-xs btn-info" type="button">
+                                    <i class="fa fa-pencil"></i>
+                                </button>
+                                <button (click)="onDelete(habilitacion.id)" class="btn btn-xs btn-danger" type="button">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-lg-8" *ngIf='formNew'>
+            <app-new [empresa]="empresa" (ready)="ready($event)"></app-new>
+        </div>
+        <div class="col-xs-12 col-lg-8" *ngIf='formEdit'>
+            <app-edit [habilitacion]="habilitacion" (ready)="ready($event)"></app-edit>
+        </div>
     </div>
-    <!-- <app-edit *ngIf='formEdit' [empresaTransporte]="empresaTransporte" (ready)="ready($event)"></app-edit> -->
-    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
 </div>

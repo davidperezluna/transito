@@ -21,9 +21,8 @@ import swal from 'sweetalert2';
 })
 export class NewComponent implements OnInit {
     @Output() ready = new EventEmitter<any>();
+    @Input() empresa: any = null;
     public errorMessage;
-    public empresa;
-    public nit;
     
     public empresaTransporte;
 
@@ -146,37 +145,6 @@ export class NewComponent implements OnInit {
 
     onCancelar() {
         this.ready.emit(true);
-    }
-
-    onSearchEmpresa() {
-        let token = this._LoginService.getToken();
-        this._UserEmpresaTransporteService.searchByNit(this.nit, token).subscribe(
-            response => {
-                if (response.code == 200) {
-                    this.empresa = response.data;
-                    swal({
-                        title: response.title,
-                        text: response.message,
-                        type: response.status,
-                        confirmButtonText: 'Aceptar'
-                    })
-                } else {
-                    swal({
-                        title: response.title,
-                        text: response.message,
-                        type: response.status,
-                        confirmButtonText: 'Aceptar'
-                    })
-                }
-                error => {
-                    this.errorMessage = <any>error;
-                    if (this.errorMessage != null) {
-                        console.log(this.errorMessage);
-                        alert('Error en la petición');
-                    }
-                }
-            }
-        );
     }
 
     onEnviar() {

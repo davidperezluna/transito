@@ -1,0 +1,121 @@
+<div class="col-xs-12 col-lg-12">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">
+                <strong class="text-uppercase">Modalidad Transporte</strong>
+            </h5>
+        </div>
+        <div class="card-body">
+            <form #formEdit="ngForm">
+                <div class="form-group row">
+                    <div class="col-xs-6 col-lg-6">
+                        <label>Radio Acción <strong class="text-danger">*</strong></label>
+                        <ng-select [multiple]="false" [options]="radiosAccion"
+                            [(ngModel)]="radioSelected" required name="idRadioAccion">
+                        </ng-select>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Modalidad Transporte <strong class="text-danger">*</strong></label>
+                        <ng-select [multiple]="false" [options]="modalidadesTransporte"
+                            [(ngModel)]="modalidadTransporteSelected" required name="idModalidadTransporte">
+                        </ng-select>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Servicio <strong class="text-danger">*</strong></label>
+                        <ng-select [multiple]="false" [options]="servicios" [(ngModel)]="servicioSelected"
+                            required name="idServicio">
+                        </ng-select>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Clase <strong class="text-danger">*</strong></label>
+                        <ng-select [multiple]="false" [options]="clases" [(ngModel)]="claseSelected"
+                            required name="idClase">
+                        </ng-select>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Nro. de Acto Administrativo <strong class="text-danger">*</strong></label>
+                        <input class="form-control" [(ngModel)]="habilitacion.numeroActo" name="numeroActo"
+                            type="number">
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Fecha Expedición Acto Administrativo <strong class="text-danger">*</strong></label>
+                        <input class="form-control" [(ngModel)]="habilitacion.fechaExpedicionActo"
+                            name="fechaExpedicionActo" type="date">
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Nro. de Ejecutoria Acto Administrativo <strong class="text-danger">*</strong></label>
+                        <input class="form-control" [(ngModel)]="habilitacion.numeroEjecutoriaActo"
+                            name="numeroEjecutoriaActo" type="number">
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Fecha Ejecutoria Acto Administrativo <strong class="text-danger">*</strong></label>
+                        <input class="form-control" [(ngModel)]="habilitacion.fechaEjecutoriaActo"
+                            name="fechaEjecutoriaActo" type="date">
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Color<strong class="text-danger">*</strong></label>
+                        <ng-select [multiple]="true" [options]="colores" [(ngModel)]="arrayColoresSelected"
+                            required name="colores">
+                        </ng-select>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Municipio<strong class="text-danger">*</strong></label>
+                        <ng-select [multiple]="true" [options]="municipios"
+                            [(ngModel)]="arrayMunicipiosSelected" required name="municipios">
+                        </ng-select>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="card" *ngIf="radioSelected && modalidadTransporteSelected">
+        <div class="card-header">
+            <h5 class="card-title">
+                <strong class="text-uppercase">Datos de la Capacidad Transportadora</strong>
+            </h5>
+        </div>
+        <div class="card-body">
+            <div class="form-group row">
+                <div class="col-lg-6 col-md-6" *ngIf="modalidadTransporteSelected == 3">
+                    <label>Tipo Carroceria <strong class="text-danger">*</strong></label>
+                    <ng-select [multiple]="false" [options]="carrocerias" [(ngModel)]="carroceriaSeelcted"
+                        required name="idCarroceria">
+                    </ng-select>
+                </div>
+                <div class="col-lg-6 col-md-6" *ngIf="servicioSelected == 4">
+                    <label>Capacidad <strong class="text-danger">*</strong></label>
+                    <input class="form-control" [(ngModel)]="habilitacion.capacidad" name="capacidad"
+                        type="number">
+                </div>
+                <div class="col-lg-6 col-md-6" *ngIf="modalidadTransporteSelected">
+                    <label>Capacidad mínima <strong class="text-danger">*</strong></label>
+                    <input class="form-control" [(ngModel)]="habilitacion.capacidadMinima" name="capacidadMinima"
+                        type="number">
+                </div>
+                <div class="col-lg-6 col-md-6" *ngIf="modalidadTransporteSelected">
+                    <label>Capacidad máxima <strong class="text-danger">*</strong></label>
+                    <input class="form-control" [(ngModel)]="habilitacion.capacidadMaxima" name="capacidadMaxima"
+                        type="number">
+                </div>
+                <div class="col-xs-12 col-lg-12"
+                    *ngIf="servicioSelected == 4 && claseSelected == 5">
+                    <div class="custom-control custom-checkbox">
+                        <input [(ngModel)]="habilitacion.dobleCabina" name="dobleCabina" type="checkbox"
+                            class="custom-control-input" id="checkbox-dobleCabina" checked="">
+                        <label class="custom-control-label" for="checkbox-dobleCabina">Doble Cabina</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <button (click)="onEnviar()" [disabled]="formEdit.invalid" class="btn btn-primary" type="button">
+            <i class="fa fa-floppy-o"></i>
+            Enviar
+        </button>
+        <button (click)="onCancelar()" class="btn btn-default">
+            <i class="fa fa-times"></i>
+            Cancelar
+        </button>
+    </div>
+</div>

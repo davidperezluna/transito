@@ -6,48 +6,61 @@
         </div>
         <div class="card-body">
             <form #formNew="ngForm">
-                <div class="col-lg-6 col-md-6">
-                    <label>Servicio <strong class="text-danger">*</strong></label>
-                    <ng-select [multiple]="false" [options]="servicios" [(ngModel)]="datos.idServicio" required
-                        name="idServicio">
-                    </ng-select>
-                </div>
-                <div class="col-lg-6 col-md-6">
-                    <label>Clase <strong class="text-danger">*</strong></label>
-                    <ng-select [multiple]="false" [options]="clases" [(ngModel)]="datos.idClase" required
-                        name="idClase">
-                    </ng-select>
-                </div>
-                <div class="col-xs-16 col-lg-6">
-                    <label>Nit <strong class="text-danger">*</strong></label>
-                    <div class="input-group">
-                        <input type="text" class="form-control" [(ngModel)]="datos.nit" required name="nit" />
-                        <span class="input-group-btn">
-                            <button (click)="onSearchEmpresa()" class="btn btn-default btn-primary" type="button">
-                                <i class="fa fa-search"></i>
-                            </button>
-                        </span>
+                <div class="form-group row">
+                    <div class="col-xs-16 col-lg-6">
+                        <label>Placa <strong class="text-danger">*</strong></label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" [(ngModel)]="placa" required name="placa" />
+                            <span class="input-group-btn">
+                                <button (click)="onSearchVehiculo()" class="btn btn-default btn-primary" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                        </div>
                     </div>
-                </div>
-                <div class="col-xs-16 col-lg-6">
-                    <div class="row">
-                        <div class="col-xs-12 col-lg-12" *ngIf='empresa'>
-                            <table class="table table-bordered table-striped">
-                                <tr>
-                                    <th><b>Tipo de identificación</b></th>
-                                    <th><b>Numero de identificación</b></th>
-                                    <td><b>Razón Social</b></td>
-                                </tr>
-                                <tr>
-                                    <td>{{ empresa.tipoIdentificacion?.nombre }}</td>
-                                    <td>{{ empresa.nit }}</td>
-                                    <td>N</td>
-                                </tr>
-                            </table>
+                    <br>
+                    <div class="col-xs-16 col-lg-6">
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-12" *ngIf='vehiculo'>
+                                <table class="table table-bordered table-striped">
+                                    <tr>
+                                        <th><b>Marca</b></th>
+                                        <th><b>Linea</b></th>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ vehiculo.linea.nombre }}</td>
+                                        <td>{{ vehiculo.linea.marca.nombre }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Clase</b></td>
+                                        <td><b>Nro. chasis</b></td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ vehiculo.clase.nombre }}</td>
+                                        <td>{{ vehiculo.chasis }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Tipo carroceria</b></td>
+                                        <td><b>Nro. motor</b></td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ vehiculo.carroceria.nombre }}</td>
+                                        <td>{{ vehiculo.motor }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Cap. carga</b></td>
+                                        <td><b>Nro. pasajeros</b></td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ vehiculo.capacidadCarga }}</td>
+                                        <td>{{ vehiculo.numeroPasajeros }}</td>
+                                    </tr>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-6" *ngIf="empresa">
+                <div class="col-xs-6 col-lg-6">
                     <label>Cupos Disponibles <strong class="text-danger">*</strong></label>
                     <ng-select [multiple]="false" [options]="cupos" [(ngModel)]="asignacion.idCupo" required name="idCupo">
                     </ng-select>
@@ -56,71 +69,6 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-xs-12 col-lg-5">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="card-title">
-                        <strong class="text-uppercase">Datos del vehículo</strong>
-                    </h5>
-                </div>
-                <div class="card-body">
-                    <div class="form-group">
-                        <div class="col-xs-16 col-lg-12">
-                            <label>Placa <strong class="text-danger">*</strong></label>
-                            <div class="input-group">
-                                <input type="text" class="form-control" [(ngModel)]="placa" required name="placa" />
-                                <span class="input-group-btn">
-                                    <button (click)="onSearchVehiculo()" class="btn btn-default btn-primary" type="button">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                </span>
-                            </div>
-                        </div>
-                        <br>
-                        <div class="col-xs-16 col-lg-12">
-                            <div class="row">
-                                <div class="col-xs-12 col-lg-12" *ngIf='vehiculo'>
-                                    <table class="table table-bordered table-striped">
-                                        <tr>
-                                            <th><b>Marca</b></th>
-                                            <th><b>Linea</b></th>
-                                        </tr>
-                                        <tr>
-                                            <td>{{ vehiculo.linea.nombre }}</td>
-                                            <td>{{ vehiculo.linea.marca.nombre }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td><b>Clase</b></td>
-                                            <td><b>Nro. chasis</b></td>
-                                        </tr>
-                                        <tr>
-                                            <td>{{ vehiculo.clase.nombre }}</td>
-                                            <td>{{ vehiculo.chasis }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td><b>Tipo carroceria</b></td>
-                                            <td><b>Nro. motor</b></td>
-                                        </tr>
-                                        <tr>
-                                            <td>{{ vehiculo.carroceria.nombre }}</td>
-                                            <td>{{ vehiculo.motor }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td><b>Cap. carga</b></td>
-                                            <td><b>Nro. pasajeros</b></td>
-                                        </tr>
-                                        <tr>
-                                            <td>{{ vehiculo.capacidadCarga }}</td>
-                                            <td>{{ vehiculo.numeroPasajeros }}</td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="col-xs-12 col-lg-7">
             <div class="card" *ngIf='vehiculo'>
                 <div class="card-header">
@@ -156,19 +104,23 @@
                                                 <span *ngIf="propietario.empresa">{{ propietario.empresa.nit }}</span>
                                             </td>
                                             <td>
-                                                <span *ngIf="propietario.ciudadano">{{ propietario.ciudadano.primerNombre }}
+                                                <span
+                                                    *ngIf="propietario.ciudadano">{{ propietario.ciudadano.primerNombre }}
                                                     {{ propietario.ciudadano?.segundoNombre }}</span>
-                                                <span *ngIf="propietario.empresa">{{ propietario.empresa.nombre }}</span>
+                                                <span
+                                                    *ngIf="propietario.empresa">{{ propietario.empresa.nombre }}</span>
                                             </td>
                                             <td>
-                                                <span *ngIf="propietario.ciudadano">{{ propietario.ciudadano.primerApellido }}
+                                                <span
+                                                    *ngIf="propietario.ciudadano">{{ propietario.ciudadano.primerApellido }}
                                                     {{ propietario.ciudadano?.segundoApellido }}</span>
                                                 <span *ngIf="propietario.empresa"></span>
                                             </td>
                                             <td>
                                                 <span
                                                     *ngIf="propietario.ciudadano">{{ propietario.ciudadano.direccionPersonal }}</span>
-                                                <span *ngIf="propietario.empresa">{{ propietario.empresa.direccion }}</span>
+                                                <span
+                                                    *ngIf="propietario.empresa">{{ propietario.empresa.direccion }}</span>
                                             </td>
                                             <td>
                                                 <span
@@ -179,7 +131,8 @@
                                             <td>
                                                 <span
                                                     *ngIf="propietario.ciudadano">{{ propietario.ciudadano.telefonoCelular }}</span>
-                                                <span *ngIf="propietario.empresa">{{ propietario.empresa.telefono }}</span>
+                                                <span
+                                                    *ngIf="propietario.empresa">{{ propietario.empresa.telefono }}</span>
                                             </td>
                                         </tr>
                                     </table>

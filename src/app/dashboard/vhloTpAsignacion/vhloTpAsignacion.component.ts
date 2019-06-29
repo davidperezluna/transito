@@ -12,21 +12,29 @@ declare var $: any;
 export class VhloTpAsignacionComponent implements OnInit {
     public errorMessage;
     public table: any;
+    
+    public nit;
+    public empresaHabilitadaRango = null;
 
     public asignacion: VhloTpAsignacion;
 
     public asignaciones;
 
-    public formNew = false;
-    public formEdit = false;
-    public formIndex = true;
+    public formIndex: any;
+    public formSearch: any;
+    public formNew: any;
+    public formEdit: any;
 
     constructor(
-        private _VhloTpAsignacion: VhloTpAsignacionService,
+        private _VhloTpAsignacionService: VhloTpAsignacionService,
         private _LoginService: LoginService,
     ) { }
 
     ngOnInit() {
+        this.onInitForms();
+
+        this.formSearch = true;
+
         swal({
             title: 'Cargando Tabla!',
             text: 'Solo tardará unos segundos, por favor espere.',
@@ -41,28 +49,65 @@ export class VhloTpAsignacionComponent implements OnInit {
             ) {
             }
         });
-        this._VhloTpAsignacion.index().subscribe(
-            response => {
-                this.asignaciones = response.data;
-                let timeoutId = setTimeout(() => {
-                    this.onInitTable();
-                }, 100);
-            },
-            error => {
-                this.errorMessage = <any>error;
 
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert("Error en la petición");
+        if(this.empresaHabilitadaRango != null) {
+            let token = this._LoginService.getToken();
+            
+            this._VhloTpAsignacionService.searchCupos({ 'idEmpresa': this.empresaHabilitadaRango.id }, token).subscribe(
+                response => {
+                    if (response.code == 200) {
+                        this.asignaciones = response.data;
+                        this.formIndex = true;
+                        
+                        let timeoutId = setTimeout(() => {
+                            this.onInitTable();
+                        }, 100);
+                        swal({
+                            title: response.title,
+                            text: response.message,
+                            type: response.status,
+                            confirmButtonText: 'Aceptar'
+                        })
+                    } else {
+                        swal({
+                            title: response.title,
+                            text: response.message,
+                            type: response.status,
+                            confirmButtonText: 'Aceptar'
+                        })
+                    }
+                    error => {
+                        this.errorMessage = <any>error;
+                        if (this.errorMessage != null) {
+                            console.log(this.errorMessage);
+                            alert('Error en la petición');
+                        }
+                    }
                 }
-            }
-        );
+            );
+            this.onInitForms();
+            this.formIndex = true;
+            this.formSearch = true;
+        }
+    }
+
+    onInitForms() {
+        this.formIndex = false;
+        this.formSearch = false;
+        this.formNew = false;
+        this.formEdit = false;
+
+        return true;
     }
     
     onInitTable() {
+        if (this.table) {
+            this.table.destroy();
+        }
+
         this.table = $('#dataTables-example').DataTable({
             responsive: false,
-            pageLength: 6,
+            pageLength: 10,
             sPaginationType: 'full_numbers',
             oLanguage: {
                 oPaginate: {
@@ -75,21 +120,76 @@ export class VhloTpAsignacionComponent implements OnInit {
         });
     }
 
-    onNew() {
+    onNew(empresaHabilitada: any) {
+        this.empresaHabilitadaRango = empresaHabilitada;
+        this.onInitForms();
+        this.formSearch = true;
         this.formNew = true;
-        this.formIndex = false;
-        if (this.table) {
-            this.table.destroy();
-        }
     }
 
     ready(isCreado: any) {
         if (isCreado) {
-            this.formNew = false;
-            this.formEdit = false;
-            this.formIndex = true;
             this.ngOnInit();
         }
+    }
+
+    onSearchEmpresa() {
+        let token = this._LoginService.getToken();
+        this._VhloTpAsignacionService.searchEmpresaTransporte(this.nit, token).subscribe(
+            response => {
+                if (response.code == 200) {
+                    this.empresaHabilitadaRango = response.data;
+
+                    this._VhloTpAsignacionService.searchCupos({ 'idEmpresa': this.empresaHabilitadaRango.id }, token).subscribe(
+                        response => {
+                            if (response.code == 200) {
+                                this.asignaciones = response.data;
+                                let timeoutId = setTimeout(() => {
+                                    this.onInitTable();
+                                }, 100);
+                                swal({
+                                    title: response.title,
+                                    text: response.message,
+                                    type: response.status,
+                                    confirmButtonText: 'Aceptar'
+                                })
+                            } else {
+                                swal({
+                                    title: response.title,
+                                    text: response.message,
+                                    type: response.status,
+                                    confirmButtonText: 'Aceptar'
+                                })
+                            }
+                            error => {
+                                this.errorMessage = <any>error;
+                                if (this.errorMessage != null) {
+                                    console.log(this.errorMessage);
+                                    alert('Error en la petición');
+                                }
+                            }
+                        }
+                    );
+                    this.onInitForms();
+                    this.formIndex = true;
+                    this.formSearch = true;
+                } else {
+                    swal({
+                        title: response.title,
+                        text: response.message,
+                        type: response.status,
+                        confirmButtonText: 'Aceptar'
+                    })
+                }
+                error => {
+                    this.errorMessage = <any>error;
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert('Error en la petición');
+                    }
+                }
+            }
+        );
     }
 
     onDelete(id: any) {
@@ -106,7 +206,7 @@ export class VhloTpAsignacionComponent implements OnInit {
             if (result.value) {
                 let token = this._LoginService.getToken();
 
-                this._VhloTpAsignacion.delete({ 'id': id }, token).subscribe(
+                this._VhloTpAsignacionService.delete({ 'id': id }, token).subscribe(
                     response => {
                         swal({
                             title: response.title,
@@ -114,7 +214,6 @@ export class VhloTpAsignacionComponent implements OnInit {
                             type: response.status,
                             confirmButtonColor: '#15d4be',
                         })
-                        this.table.destroy();
                         this.ngOnInit();
                     },
                     error => {

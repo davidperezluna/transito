@@ -26,31 +26,31 @@
                         <br>
                         <div class="col-xs-12 col-lg-12">
                             <div class="row">
-                                <div class="col-xs-12 col-lg-12" *ngIf='empresaHabilitadaRango'>
+                                <div class="col-xs-12 col-lg-12" *ngIf='empresaHabilitada'>
                                     <table class="table table-bordered table-striped">
                                         <tr>
                                             <th><b>Tipo de identificación</b></th>
                                             <th><b>Numero de identificación</b></th>
                                         </tr>
                                         <tr>
-                                            <td>{{ empresaHabilitadaRango.empresa.tipoIdentificacion?.nombre }}</td>
-                                            <td>{{ empresaHabilitadaRango.empresa.nit }}</td>
+                                            <td>{{ empresaHabilitada.empresa.tipoIdentificacion?.nombre }}</td>
+                                            <td>{{ empresaHabilitada.empresa.nit }}</td>
                                         </tr>
                                         <tr>
                                             <th><b>Razón Social</b></th>
                                             <th><b>Ciudad</b></th>
                                         </tr>
                                         <tr>
-                                            <td>{{ empresaHabilitadaRango.empresa.nombre }}</td>
-                                            <td>{{ empresaHabilitadaRango.empresa.municipio.nombre }}</td>
+                                            <td>{{ empresaHabilitada.empresa.nombre }}</td>
+                                            <td>{{ empresaHabilitada.empresa.municipio.nombre }}</td>
                                         </tr>
                                         <tr>
                                             <th><b>Dirección Principal</b></th>
                                             <th><b>Teléfono</b></th>
                                         </tr>
                                         <tr>
-                                            <td>{{ empresaHabilitadaRango.empresa.direccion }}</td>
-                                            <td>{{ empresaHabilitadaRango.empresa.telefono }}</td>
+                                            <td>{{ empresaHabilitada.empresa.direccion }}</td>
+                                            <td>{{ empresaHabilitada.empresa.telefono }}</td>
                                         </tr>
                                     </table>
                                 </div>
@@ -63,39 +63,42 @@
         <div class="col-xs-12 col-lg-8" *ngIf='formIndex'>
             <div class="card">
                 <div class="card-header">
-                    <h5 class="card-title">
-                        <strong class="text-uppercase">Asignaciones de Cupo para {{ empresaHabilitadaRango.empresa.nombre }}</strong>
-                        <div class="btn-group pull-right">
-                            <button (click)="onNew(empresaHabilitadaRango)" class="btn btn-default">
-                                <i class="fa fa-plus"></i>
-                                Nuevo
-                            </button>
-                        </div>
-                    </h5>
+                    <b class="text-uppercase">Rangos</b>
+                    <div class="btn-group pull-right">
+                        <button (click)="onNew(empresaHabilitada)" class="btn btn-default">
+                            <i class="fa fa-plus"></i>
+                            Nuevo
+                        </button>
+                    </div>
                 </div>
                 <div class="card-body">
-                    <table class="table" id="dataTables-example">
+                    <table class="table " id="dataTables-example">
                         <thead>
                             <tr>
-                                <th>Id</th>
-                                <th>Placa Vehiculo</th>
-                                <th>Nro. Cupo</th>
+                                <th>#</th>
+                                <th>Modalidad Transporte</th>
+                                <th>Clase</th>
+                                <th>Fecha Resolucion</th>
+                                <th>Rango Inicio</th>
+                                <th>Rango Fin</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="odd" *ngFor="let asignacion of asignaciones; let i = index">
+                            <tr class="odd" *ngFor="let rango of rangos; let i = index">
                                 <td>{{ i + 1 }}</td>
-                                <td>{{ asignacion.vehiculo.placa.numero }}</td>
-                                <td>{{ asignacion.cupo.numero }}</td>
+                                <td>{{ rango.habilitacion.modalidadTransporte.nombre }}</td>
+                                <td>{{ rango.habilitacion.clase.nombre }}</td>
+                                <td>{{ (rango.fechaResolucionCupo.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td>
+                                <td>{{ rango.rangoInicio }}</td>
+                                <td>{{ rango.rangoFin }}</td>
                                 <td>
-                                    <button (click)="onEdit(asignacion)" class="btn btn-xs btn-info" type="button">
-                                        <i class="fa fa-edit"></i>
-                                        Editar
-                                    </button>
-                                    <button (click)="onDelete(asignacion.id)" class="btn btn-xs btn-danger" type="button">
+                                    <!-- <button (click)="onEdit(habilitacion)" class="btn btn-xs btn-info" type="button">
+                                        <i class="fa fa-pencil"></i>
+                                    </button> -->
+                                    <button (click)="onDelete(rango.id)" class="btn btn-xs btn-danger"
+                                        type="button">
                                         <i class="fa fa-trash"></i>
-                                        Eliminar
                                     </button>
                                 </td>
                             </tr>
@@ -105,7 +108,7 @@
             </div>
         </div>
         <div class="col-xs-12 col-lg-8" *ngIf='formNew'>
-            <app-new [empresaHabilitadaRango]="empresaHabilitadaRango" (ready)="ready($event)"></app-new>
+            <app-new [empresaHabilitada]="empresaHabilitada" (ready)="ready($event)"></app-new>
         </div>
         <!-- <div class="col-xs-12 col-lg-8" *ngIf='formEdit'>
             <app-edit [habilitacion]="habilitacion" (ready)="ready($event)"></app-edit>

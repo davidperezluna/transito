@@ -1,30 +1,32 @@
 import { Component, OnInit } from '@angular/core';
+import { VhloTpRangoService } from '../../services/vhloTpRango.service';
 import { UserEmpresaTransporteService } from '../../services/userEmpresaTransporte.service';
 import { LoginService } from '../../services/login.service';
-import { UserEmpresaTransporte } from './userEmpresaTransporte.modelo';
+import { VhloTpRango } from './vhloTpRango.modelo';
 import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
     selector: 'app-index',
-    templateUrl: './userEmpresaTransporte.component.html'
+    templateUrl: './vhloTpRango.component.html'
 })
-export class UserEmpresaTransporteComponent implements OnInit {
+export class VhloTpRangoComponent implements OnInit {
     public errorMessage;
     public table: any;
     public empresasTransporte;
-    public habilitacion: UserEmpresaTransporte;
+    public rango: VhloTpRango;
 
     public nit;
-    public empresa = null;
-    public habilitaciones;
-    
+    public empresaHabilitada = null;
+    public rangos;
+
     public formIndex: any;
     public formSearch: any;
     public formNew: any;
     public formEdit: any;
 
     constructor(
+        private _VhloTpRangoService: VhloTpRangoService,
         private _UserEmpresaTransporteService: UserEmpresaTransporteService,
         private _LoginService: LoginService,
     ) { }
@@ -49,15 +51,15 @@ export class UserEmpresaTransporteComponent implements OnInit {
             }
         });
 
-        if(this.empresa != null) {
+        if (this.empresaHabilitada != null) {
             let token = this._LoginService.getToken();
 
-            this._UserEmpresaTransporteService.searchHabiltacionesByEmpresa({ 'idEmpresa': this.empresa.id }, token).subscribe(
+            this._VhloTpRangoService.searchRangos({ 'idEmpresa': this.empresaHabilitada.id }, token).subscribe(
                 response => {
                     if (response.code == 200) {
-                        this.habilitaciones = response.data;
+                        this.rangos = response.data;
                         this.formIndex = true;
-
+                        
                         let timeoutId = setTimeout(() => {
                             this.onInitTable();
                         }, 100);
@@ -110,8 +112,8 @@ export class UserEmpresaTransporteComponent implements OnInit {
         });
     }
 
-    onNew(empresa: any) {
-        this.empresa = empresa;
+    onNew(empresaHabilitada: any) {
+        this.empresaHabilitada = empresaHabilitada;
         this.onInitForms();
         this.formSearch = true;
         this.formNew = true;
@@ -137,12 +139,12 @@ export class UserEmpresaTransporteComponent implements OnInit {
             if (result.value) {
                 let token = this._LoginService.getToken();
 
-                this._UserEmpresaTransporteService.delete({ 'id': id }, token).subscribe(
+                this._VhloTpRangoService.delete({ 'id': id }, token).subscribe(
                     response => {
                         swal({
-                            title: 'Eliminado!',
+                            title: response.title,
                             text: response.message,
-                            type: 'success',
+                            type: response.status,
                             confirmButtonColor: '#15d4be',
                         })
                         this.ngOnInit();
@@ -162,15 +164,24 @@ export class UserEmpresaTransporteComponent implements OnInit {
 
     onSearchEmpresa() {
         let token = this._LoginService.getToken();
-        this._UserEmpresaTransporteService.searchByNit(this.nit, token).subscribe(
+        this._VhloTpRangoService.searchEmpresaTransporte(this.nit, token).subscribe(
             response => {
                 if (response.code == 200) {
-                    this.empresa = response.data;
+                    this.empresaHabilitada = response.data;
 
-                    this._UserEmpresaTransporteService.searchHabiltacionesByEmpresa({'idEmpresa': this.empresa.id}, token).subscribe(
+                    this._VhloTpRangoService.searchRangos({ 'idEmpresa': this.empresaHabilitada.id }, token).subscribe(
                         response => {
                             if (response.code == 200) {
-                                this.habilitaciones = response.data;
+                                this.rangos = response.data;
+                                let timeoutId = setTimeout(() => {
+                                    this.onInitTable();
+                                }, 100);
+                                swal({
+                                    title: response.title,
+                                    text: response.message,
+                                    type: response.status,
+                                    confirmButtonText: 'Aceptar'
+                                })
                             } else {
                                 swal({
                                     title: response.title,
@@ -210,10 +221,10 @@ export class UserEmpresaTransporteComponent implements OnInit {
         );
     }
 
-    onEdit(habilitacion: any) {
+    /* onEdit(habilitacion: any) {
         this.habilitacion = habilitacion;
         this.onInitForms();
         this.formEdit = true;
         this.formSearch = true;
-    }
+    } */
 }

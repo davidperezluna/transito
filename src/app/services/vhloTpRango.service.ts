@@ -4,8 +4,8 @@ import  "rxjs/add/operator/map";
 import { environment } from 'environments/environment';
 
 @Injectable()
-export class VhloTpAsignacionService {
-	private url = environment.apiUrl + "vehiculo/vhlotpasignacion";
+export class VhloTpRangoService {
+	private url = environment.apiUrl + "vehiculo/vhlotprango";
 	public identity;
 	public token;
 
@@ -19,7 +19,7 @@ export class VhloTpAsignacionService {
 		let json = JSON.stringify(datos);
 		let params = "data="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
-		return this._http.post(this.url+"/new2", params, {headers: headers}).map(res => res.json());
+		return this._http.post(this.url+"/new", params, {headers: headers}).map(res => res.json());
 	}
 
 	delete(datos, token){
@@ -43,11 +43,11 @@ export class VhloTpAsignacionService {
  			return this._http.post(this.url+"/edit", params, {headers: headers}).map(res => res.json());
 	}	
 
-	searchVehiculo(datos,token){
+	searchRangos(datos,token){
 		let json = JSON.stringify(datos);
 		let params = "data="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
- 			return this._http.post(this.url+"/search/vehiculo", params, {headers: headers}).map(res => res.json());
+ 			return this._http.post(this.url+"/search/rangos", params, {headers: headers}).map(res => res.json());
 	}	
 
 	searchEmpresaTransporte(datos,token){
@@ -55,19 +55,5 @@ export class VhloTpAsignacionService {
 		let params = "data="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
  			return this._http.post(this.url+"/search/empresaTransporte", params, {headers: headers}).map(res => res.json());
-	}	
-
-	searchCupos(datos,token){
-		let json = JSON.stringify(datos);
-		let params = "data="+json+"&authorization="+token;
-		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
- 			return this._http.post(this.url+"/search/cupos", params, {headers: headers}).map(res => res.json());
-	}	
-
-	searchCuposDisponibles(datos,token){
-		let json = JSON.stringify(datos);
-		let params = "data="+json+"&authorization="+token;
-		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
- 			return this._http.post(this.url+"/search/cupos/disponibles", params, {headers: headers}).map(res => res.json());
 	}	
 }
