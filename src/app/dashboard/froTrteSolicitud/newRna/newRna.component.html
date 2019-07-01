@@ -390,7 +390,7 @@
                         
                         <app-regrabar-vin *ngIf="tramiteFactura.precio.tramite.id == 28"  [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)"></app-regrabar-vin>
                         
-                        <app-traspaso-indeterminada *ngIf="tramiteFactura.precio.tramite.id == 29"  [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" [idPropietario]='tramiteSolicitud.idCiudadano' (onReadyTramite)="onReadyTramite($event)"></app-traspaso-indeterminada>
+                        <app-traspaso-indeterminada *ngIf="tramiteFactura.precio.tramite.id == 29"  [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" [idCiudadano]='tramiteSolicitud.idCiudadano' (onReadyTramite)="onReadyTramite($event)"></app-traspaso-indeterminada>
                     
                         <app-certificado-tradicion *ngIf="tramiteFactura.precio.tramite.id == 30"  [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)"></app-certificado-tradicion>
                     </div>
