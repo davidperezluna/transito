@@ -44,7 +44,7 @@ export class EditComponent implements OnInit {
         this.datos.idClase = this.asignacion.empresaTransporte.clase.id;
         this.datos.idServicio = this.asignacion.empresaTransporte.servicio.id;
         this.datos.nit = this.asignacion.empresaTransporte.empresa.nit;
-        this.onSearchEmpresa();
+        /* this.onSearchEmpresa(); */
 
         this.placa = this.asignacion.vehiculo.placa.numero;
         this.onSearchVehiculo();
@@ -81,7 +81,7 @@ export class EditComponent implements OnInit {
         this.ready.emit(true);
     }
 
-    onSearchEmpresa() {
+    /* onSearchEmpresa() {
         let token = this._LoginService.getToken();
         this._VhloTpAsignacionService.searchByServicioAndClase(this.datos, token).subscribe(
             response => {
@@ -115,7 +115,7 @@ export class EditComponent implements OnInit {
                 }
             }
         );
-    }
+    } */
 
     onSearchVehiculo() {
         let token = this._LoginService.getToken();

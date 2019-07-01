@@ -131,6 +131,7 @@ import { GestionTransportePublicoRoutes } from './gestionTransportePublico/gesti
 
 import { VhloTpConvenioRoutes } from './vhloTpConvenio/vhloTpConvenio.routes';
 import { VhloTpAsignacionRoutes } from './vhloTpAsignacion/vhloTpAsignacion.routes';
+import { VhloTpRangoRoutes } from './vhloTpRango/vhloTpRango.routes';
 import { VhloTpTarjetaOperacionRoutes } from './vhloTpTarjetaOperacion/vhloTpTarjetaOperacion.routes';
 import { RpcccInventarioDocumentalRoutes } from './rpcccInventarioDocumental/rpcccInventarioDocumental.routes';
 import { RnrsPreasignacionPlacaRoutes } from './rnrsPreasignacionPlaca/rnrsPreasignacionPlaca.routes';
@@ -449,6 +450,7 @@ export const DashboardRoutes: Route[] = [
       ...RnrsPreasignacionPlacaRoutes,
       ...VhloTpConvenioRoutes,
       ...VhloTpAsignacionRoutes,
+      ...VhloTpRangoRoutes,
       ...VhloTpTarjetaOperacionRoutes,
       ...FroFacturaRoutes,
       ...FroRecaudoRoutes,

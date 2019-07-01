@@ -184,6 +184,7 @@ import { SvCfgObjetoFijoModule } from './svCfgObjetoFijo/svCfgObjetoFijo.module'
 
 import { VhloTpConvenioModule } from './vhloTpConvenio/vhloTpConvenio.module';
 import { VhloTpAsignacionModule } from './vhloTpAsignacion/vhloTpAsignacion.module';
+import { VhloTpRangoModule } from './vhloTpRango/vhloTpRango.module';
 import { VhloTpTarjetaOperacionModule } from './vhloTpTarjetaOperacion/vhloTpTarjetaOperacion.module';
 // import { SucursalModule } from './empresa/sucursal/new/sucursal.module';
 
@@ -457,6 +458,7 @@ import {RightsidebarComponent} from '../shared';
     RnrsPreasignacionPlacaModule,
     VhloTpConvenioModule,
     VhloTpAsignacionModule,
+    VhloTpRangoModule,
     VhloTpTarjetaOperacionModule,
     FroFacturaModule,
     FroRecaudoModule,
