@@ -45,6 +45,8 @@ export class NewTramiteCambioAcreedorPrendarioComponent implements OnInit {
 
     public datos = {
         'tipo': 'ACREEDOR',
+        'documentacion': true,
+        'observacion': null,
         'campos': null,
         'idFuncionario': null,
         'idAcreedor': null,
@@ -228,7 +230,7 @@ export class NewTramiteCambioAcreedorPrendarioComponent implements OnInit {
         this.datos.idVehiculo = this.vehiculo.id;
         this.datos.idTramiteFactura = this.tramiteFactura.id;
 
-        let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero;
+        let resumen = "No. factura: " + this.tramiteFactura.factura.numero;
 
         this.realizado = true;
             
