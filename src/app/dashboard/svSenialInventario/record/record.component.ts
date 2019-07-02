@@ -67,7 +67,7 @@ export class RecordComponent implements OnInit {
                     this.inventarios = response.data;
 
                     let timeoutId = setTimeout(() => {
-                        this.iniciarTabla();
+                        this.onInitTable();
                     }, 100);
 
                     swal({
@@ -137,7 +137,7 @@ export class RecordComponent implements OnInit {
         }
     }
 
-    iniciarTabla() {
+    onInitTable() {
         if (this.table) {
             this.table.empty();
             this.table.destroy();

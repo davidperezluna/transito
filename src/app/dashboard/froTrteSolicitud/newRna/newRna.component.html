@@ -293,7 +293,7 @@
                     </div>
                 </div>
 
-                <div class="row" *ngIf="documentacionPendiente.length > 0 && factura.estado != 'PENDIENTE DOCUMENTACION' && tramitesFactura && (tramitesFactura.length == tramitesRealizados.length)">
+                <div class="row" *ngIf="documentacionPendiente.length > 0 && tramitesFactura">
                     <div class="col-xs-12 col-lg-12">
                         <div class="form-group">
                             <div class="row">
@@ -310,7 +310,7 @@
                     </div>
                 </div>
         
-                <div class="row" *ngIf="tramitesFactura && tramitesFactura.length == tramitesRealizados.length && factura.estado != 'FINALIZADA'">
+                <div class="row" *ngIf="tramitesFactura && tramitesFactura.length == tramitesRealizados.length">
                     <div class="col-xs-12 col-lg-12" *ngIf="(requiereSustrato && tramiteSolicitud.insumoEntregado) || !requiereSustrato">
                         <div class="form-group">
                             <div class="row" *ngIf="requiereRunt">

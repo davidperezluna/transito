@@ -42,9 +42,7 @@ export class NewComponent implements OnInit {
   public modalidadesTransporte:any;
   public organismosTransito:any;
   public organismosTransitoNacional:any;
-
   public empresaSelected:any;
-
   public tipoIdentificacionSelected:any;
 
   public ciudadano: any = null;
@@ -339,56 +337,6 @@ constructor(
     this.vehiculo.serie = this.vehiculo.chasis;
   }
 
-  onSearchCiudadano() {
-    swal({
-      title: 'Buscando ciudadano!',
-      text: 'Solo tardara unos segundos por favor espere.',
-      onOpen: () => {
-        swal.showLoading()
-      }
-    });
-
-    let token = this._LoginService.getToken();
-
-    let datos = {
-      'identificacion': this.identificacion,
-      'idTipoIdentificacion': this.tipoIdentificacionSelected,
-    }
-
-    this._CiudadanoService.searchByIdentificacion(datos, token).subscribe(
-      response => {
-        if (response.code == 200) {
-          if (response.data.ciudadano) {
-            this.ciudadano = response.data.ciudadano;
-
-            swal({
-              title: 'Perfecto!',
-              text: response.message,
-              type: 'success',
-              confirmButtonText: 'Aceptar'
-            });
-          }
-        } else {
-          this.ciudadano = null;
-
-          swal({
-            title: 'Error!',
-            text: response.message,
-            type: 'error',
-            confirmButtonText: 'Aceptar'
-          });
-        }
-        error => {
-          this.errorMessage = <any>error;
-          if (this.errorMessage != null) {
-            console.log(this.errorMessage);
-            alert('Error en la petición');
-          }
-        }
-      }
-    );
-  }
-
   onSearchEmpresaTransporte() {
     swal({
       title: 'Buscando empresa de afiliacion!',
@@ -422,6 +370,56 @@ constructor(
         } else {
           this.empresaTransporte = null;
           this.vehiculo.idEmpresa = null;
+
+          swal({
+            title: 'Error!',
+            text: response.message,
+            type: 'error',
+            confirmButtonText: 'Aceptar'
+          });
+        }
+        error => {
+          this.errorMessage = <any>error;
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert('Error en la petición');
+          }
+        }
+      }
+    );
+  }
+
+  onSearchCiudadano() {
+    swal({
+      title: 'Buscando ciudadano!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+
+    let token = this._LoginService.getToken();
+
+    let datos = {
+      'identificacion': this.identificacion,
+      'idTipoIdentificacion': this.tipoIdentificacionSelected,
+    }
+
+    this._CiudadanoService.searchByIdentificacion(datos, token).subscribe(
+      response => {
+        if (response.code == 200) {
+          if (response.data.ciudadano) {
+            this.ciudadano = response.data.ciudadano;
+
+            swal({
+              title: 'Perfecto!',
+              text: response.message,
+              type: 'success',
+              confirmButtonText: 'Aceptar'
+            });
+          }
+        } else {
+          this.ciudadano = null;
 
           swal({
             title: 'Error!',
@@ -629,6 +627,7 @@ constructor(
           if (this.vehiculo.tipoMatricula == 'RADICADO' || this.vehiculo.tipoMatricula == 'IMPORTACION') {
             this.datos.idVehiculo = response.data.id;
             this.datos.licenciaTransito = this.vehiculo.numeroLicencia;
+            
             this._PropietarioService.register(this.datos, token).subscribe(
               response => {
                 if (response.code == 200) {
