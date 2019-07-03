@@ -1,6 +1,5 @@
 export class VhloRnaPreregistro{
 	constructor(
-		public numeroLicencia:number,
 		public numeroFactura:string,
 		public fechaFactura:string,
 		public valor:string,

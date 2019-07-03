@@ -49,14 +49,14 @@
                             </ng-select>
                         </div>
 
-                        <div class="col-xs-12 col-lg-12">
-                            <h6 class="text-center">
-                                <b class="text-uppercase">Propietarios que realizarán el traspaso</b>
-                            </h6>
-                        </div>
-
                         <!-- retenciones -->
-                        <div class="row" *ngIf="datos.retenciones.length > 0">
+                        <div class="row" *ngIf="datos.retenciones && datos.retenciones.length > 0">
+                            <div class="col-xs-12 col-lg-12">
+                                <h6 class="text-center">
+                                    <b class="text-uppercase">Propietarios que realizarán el traspaso</b>
+                                </h6>
+                            </div>
+
                             <table class="table table-bordered table-striped">
                                 <tbody>
                                     <tr *ngFor="let retencion of datos.retenciones; let i = index">
@@ -134,7 +134,7 @@
                                             <b *ngIf="propietario.tipo == 'CIUDADANO'">Nombres y apellidos: </b>
                                             <b *ngIf="propietario.tipo == 'EMPRESA'">Nombres y apellidos: </b>
                                             <br>
-                                            {{ propietario.Nombre }}
+                                            {{ propietario.nombre }}
                                             <span *ngIf="propietario.permiso" class="badge badge-success">
                                                 <b>Autorizado</b> para realizar trámites.
                                             </span>

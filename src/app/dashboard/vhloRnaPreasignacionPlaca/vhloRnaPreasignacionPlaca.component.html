@@ -1,150 +1,150 @@
-<div class="container" >
-  <hr>
-  <div class="row" *ngIf='formSearch'>
-    <div class="col-xs-12 col-lg-4">
-      <div class="card">
-          <div class="card-header">
-            <h5 class="card-title">
-              <b class="text-uppercase">Preasignación de placa RNA</b>
-            </h5>
-          </div>
-          <div class="card-body">
-                <div class="form-group">
-                    <div class="row"><!-- .row -->
+<div class="container">
+    <div class="row" *ngIf='formSearch'>
+        <div class="col-xs-12 col-lg-4">
+            <div class="card">
+                <div class="card-header">
+                    <b class="text-uppercase">Preasignación de placa RNA</b>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <div class="row"><!-- .row -->
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Buscar por (Vin,Chasis,Placa,Motor,Serie)</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control text-uppercase" [(ngModel)]="vehiculoFiltro" name="vehiculoFiltro" required />
+                                    <span class="input-group-btn">
+                                        <button (click)="onSearchVehiculo()" class="btn btn-primary" type="button">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div><!-- /.row -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-lg-8">
+            <div class="row" *ngIf="vehiculos && formIndex"><!-- .row -->                 
+                <div class="col-xs-12 col-lg-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <b class="text-uppercase">Vehículo(s)Encontrados(s)</b>
+                        </div>
+                        <div class="card-body">
+                            <table class="table" id="dataTables-example">
+                                <thead>
+                                <tr>
+                                    <th>Placa</th>
+                                    <th>Motor</th>
+                                    <th>Chasis</th>
+                                    <th>VIN</th>
+                                    <th>Serie</th>
+                                    <th>Acciones</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr class="odd" *ngFor="let vehiculo of vehiculos; let i=index">
+                                    <td >{{ vehiculo.placa?.numero }}</td>
+                                    <td >{{ vehiculo.motor }}</td>
+                                    <td >{{ vehiculo.chasis }}</td>
+                                    <td >{{ vehiculo.vin }}</td>
+                                    <td >{{ vehiculo.serie }}</td>
+                                    <td><button (click)="onShow(vehiculo)" class="btn btn-primary" type="button">Detalles</button> 
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <!-- /.table-responsive --> 
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /.row -->
+        </div>
+
+        <div class="col-xs-12 col-lg-7" *ngIf="vehiculo && formShow">
+            <div class="card">
+                <div class="card-header">
+                    <b class="text-uppercase">Resumen de vehiculo</b>
+                </div>
+                <div class="card-body">
+                    <div class="row"><!-- .row -->                
                         <div class="col-xs-12 col-lg-12">
-                            <label>Buscar por (Vin,Chasis,Placa,Motor,Serie)</label>
-                            <div class="input-group">
-                                <input type="text" class="form-control text-uppercase" [(ngModel)]="vehiculoFiltro" name="vehiculoFiltro" required />
-                                <span class="input-group-btn">
-                                    <button (click)="onSearchVehiculo()" class="btn btn-primary" type="button">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                </span>
+                            <table class="table table-bordered table-striped">
+                                <tbody>
+                                    <tr *ngIf="vehiculo.placa">
+                                        <td>
+                                            <b>Placa</b>
+                                            {{ vehiculo.placa?.numero }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <b>Motor</b>
+                                            {{ vehiculo.motor }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <b>Chasis</b>
+                                            {{ vehiculo.chasis }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <b>VIN</b>
+                                            {{ vehiculo.vin }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <b>Serie</b>
+                                            {{ vehiculo.serie }}
+                                        </td>
+                                    </tr>
+                                    <tr *ngIf="vehiculo.clase">
+                                        <td>
+                                            <b>Clase</b>
+                                            {{ vehiculo.clase?.nombre }}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+        
+                        <div class="col-xs-12 col-lg-12" *ngIf="!funcionario">
+                            <div class="notes notes-danger" role="alert"> 
+                                <strong>Atención!</strong> el usuario registrado no tiene autorización para realizar la preasignación de placa.
+                            </div>
+                        </div>
+                    </div><!-- /.row -->
+                    
+                    <div class="row" *ngIf="funcionario"><!-- .row -->
+                        <div class="col-xs-12 col-lg-12">
+                            <b class="text-uppercase">Tramite de preasignación de placa</b>   
+                        </div>
+                        <div class="col-xs-12 col-lg-4" *ngIf="placas">
+                            <label>Placas disponibles en {{ funcionario.organismoTransito.nombre }} <b class="text-danger">*</b></label>
+                            <ng-select [multiple]="false" [options]="placas" [(ngModel)]="datos.idPlaca" name="idPlaca" required>
+                            </ng-select>
+                        </div>
+                        <div class="col-xs-12 col-lg-12" *ngIf="datos.idPlaca">
+                            <br>
+                            <div class="btn-group">
+                                <button *ngIf="!preasignacion" (click)="onEnviar()"  class="btn btn-primary" type="button">
+                                    <i class="fa fa-save"></i>
+                                    Enviar
+                                </button>
+                                <a *ngIf="preasignacion" href="{{ apiUrl }}vehiculo/vhlovehiculo/{{ funcionario.id }}/{{ vehiculo.id }}/pdf/preasignacion/placa" class="btn btn-success" target="_blank">
+                                    <i class="fa fa-file-pdf-o"></i>
+                                    Generar PDF
+                                </a>
                             </div>
                         </div>
                     </div><!-- /.row -->
                 </div>
-          </div>
+            </div>
         </div>
-      </div>
-
-      <div class="col-xs-col-lg-8">
-            <div class="row" *ngIf="vehiculos && formIndex"><!-- .row -->                 
-                <div class="col-xs-12 col-lg-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5 class="card-title"><strong>Vehículo(s)</strong> <small>Encontrados(s)</small></h5>
-                            </div>
-                            <div class="card-body">
-                                <table class="table" id="dataTables-example">
-                                    <thead>
-                                    <tr>
-                                        <th>Placa</th>
-                                        <th>Motor</th>
-                                        <th>Chasis</th>
-                                        <th>VIN</th>
-                                        <th>Serie</th>
-                                        <th>Acciones</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr class="odd" *ngFor="let vehiculo of vehiculos; let i=index">
-                                        <td >{{ vehiculo.placa?.numero }}</td>
-                                        <td >{{ vehiculo.motor }}</td>
-                                        <td >{{ vehiculo.chasis }}</td>
-                                        <td >{{ vehiculo.vin }}</td>
-                                        <td >{{ vehiculo.serie }}</td>
-                                        <td><button (click)="onShow(vehiculo)" class="btn btn-primary" type="button">Detalles</button> 
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                                <!-- /.table-responsive --> 
-                            </div>
-                        </div>
-                </div>
-            </div><!-- /.row -->
-      </div>
-
-      <div class="col-xs-12 col-lg-8" *ngIf="vehiculo && formShow">
-        <div class="form-group">
-            <div class="row"><!-- .row -->                
-                <div class="col-xs-12 col-lg-12">
-                    <table class="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th class="text-uppercase text-center">
-                                    <b>Resumen de vehiculo</b>
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngIf="vehiculo.placa">
-                                <td>
-                                    <b>Placa</b>
-                                    {{ vehiculo.placa?.numero }}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <b>Motor</b>
-                                    {{ vehiculo.motor }}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <b>Chasis</b>
-                                    {{ vehiculo.chasis }}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <b>VIN</b>
-                                    {{ vehiculo.vin }}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <b>Serie</b>
-                                    {{ vehiculo.serie }}
-                                </td>
-                            </tr>
-                            <tr *ngIf="vehiculo.clase">
-                                <td>
-                                    <b>Clase</b>
-                                    {{ vehiculo.clase?.nombre }}
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="col-xs-12 col-lg-12" *ngIf="!funcionario">
-                    <div class="notes notes-danger" role="alert"> 
-                        <strong>Atención!</strong> el usuario registrado no tiene autorización para realizar la preasignación de placa.
-                    </div>
-                </div>
-            </div><!-- /.row -->
-            
-            <div class="row" *ngIf="funcionario"><!-- .row -->
-                <div class="col-xs-12 col-lg-12">
-                    <b class="text-uppercase">Tramite de preasignación de placa</b>   
-                </div>
-                <div class="col-xs-12 col-lg-4" *ngIf="placas">
-                    <label>Placas disponibles en {{ funcionario.organismoTransito.nombre }} <b class="text-danger">*</b></label>
-                    <ng-select [multiple]="false" [options]="placas" [(ngModel)]="datos.idPlaca" name="idPlaca" required>
-                    </ng-select>
-                </div>
-                <div class="col-xs-12 col-lg-12" *ngIf="datos.idPlaca"> 
-                    <div class="btn-group">
-                        <button (click)="onEnviar()"  class="btn btn-primary" type="button">
-                            <i class="fa fa-floppy-o"></i>
-                            Enviar
-                        </button>
-                    </div>
-                </div>
-            </div><!-- /.row -->
-        </div>
-      </div>
     </div>
 </div>

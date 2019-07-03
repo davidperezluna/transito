@@ -21,7 +21,7 @@ export class NewTraspasoIndeterminadaComponent implements OnInit {
   @Input() tramiteFactura: any = null;
   @Input() funcionario: any = null;
   @Input() tramitesRealizados: any = null;
-  @Input() idPropietario: any = null;
+  @Input() idCiudadano: any = null;
   public errorMessage; 
   
   public realizado: any = false;
@@ -40,6 +40,7 @@ export class NewTraspasoIndeterminadaComponent implements OnInit {
   ];
 
   public datos = {
+    'campos': null,
     'documentacion': true,
     'observacion': null,
     'permiso': true,
@@ -61,7 +62,6 @@ export class NewTraspasoIndeterminadaComponent implements OnInit {
     private _TramiteSolicitudService: FroTrteSolicitudService,
     private _TramiteFacturaService: FroFacTramiteService,
     private _CfgEntidadJudicialService: CfgEntidadJudicialService,
-    //private _ActaTraspasoService: VhloActaTraspasoService,
     private _PropietarioService: VhloPropietarioService,
     private _CiudadanoService: UserCiudadanoService,
     private _FuncionarioService: PnalFuncionarioService,
@@ -110,121 +110,92 @@ export class NewTraspasoIndeterminadaComponent implements OnInit {
       this.datos.fecha = datePiper.transform(this.date,'yyyy-MM-dd');
     }
   }
-  
-
-  ready(isCreado:any){
-    if(isCreado) {
-      this.ngOnInit();
-    }
-  }
 
   onEnviar() {
     let token = this._LoginService.getToken();
 
-    this.datos.idVehiculo = this.vehiculo.id;
-    this.datos.idTramiteFactura = this.tramiteFactura.id;
+    let datos = {
+      'id': this.idCiudadano,
+      'idVehiculo': this.vehiculo.id,
+      'tipo': 'CIUDADANO',
+    }
 
-    this._PropietarioService.show({ 'id': this.idPropietario }, token ).subscribe(
+    this._PropietarioService.searchByCiudadanoOrEmpresaAndVehiculo(datos, token).subscribe( 
       response => {
+        if (response.code == 200) {
           this.propietario = response.data;
-          this.datos.idPropietario = this.propietario.id;
 
           let datos = {
             'identificacion': 99,
             'idTipoIdentificacion': 1,
           }
 
-          this._CiudadanoService.searchByIdentificacion(datos, token).subscribe(
+          this._CiudadanoService.searchByIdentificacion(datos, token).subscribe( 
             response => {
               if (response.code == 200) {
                 if (response.data.ciudadano) {
                   this.datos.idCiudadano = response.data.ciudadano.id;
-                  let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero;
+
+                  this.datos.campos = ['traspasoIndeterminada'];
+                  this.datos.idTramiteFactura = this.tramiteFactura.id;
+                  this.datos.idVehiculo = this.vehiculo.id;
+
+                  let resumen = "No. factura: " + this.tramiteFactura.factura.numero;
 
                   this.realizado = true;
-    
+                                      
                   this.onReadyTramite.emit(
-                    {
-                        'documentacion':this.datos.documentacion, 
-                        'observacion':this.datos.observacion, 
-                        'foraneas':this.datos, 
-                        'resumen':resumen,
-                        'idTramiteFactura': this.tramiteFactura.id,
-                    }
-                  );
-
-                  /*this._TramiteSolicitudService.validations(this.datos, token).subscribe(
-                    response => {
-                      if (response.code == 200) {
-                        this._PropietarioService.update(this.datos, token).subscribe(
-                          response => {
-                            if (response.code == 200) {
-                              
-                            }else{
-                              swal({
-                                title: 'Error!',
-                                text: response.message,
-                                type: 'error',
-                                confirmButtonText: 'Aceptar'
-                              });
-                            }
-                          },
-                          error => {
-                              this.errorMessage = <any>error;
-    
-                              if (this.errorMessage != null) {
-                                  console.log(this.errorMessage);
-                                  alert('Error en la petición');
-                              }
-                          }
-                        );
-                      }else{
-                        swal({
-                          title: 'Error!',
-                          text: response.message,
-                          type: 'error',
-                          confirmButtonText: 'Aceptar'
-                        });
+                      {
+                          'documentacion':this.datos.documentacion, 
+                          'observacion':this.datos.observacion, 
+                          'foraneas':this.datos, 
+                          'resumen':resumen,
+                          'idTramiteFactura': this.tramiteFactura.id,
                       }
-                    },
-                    error => {
-                        this.errorMessage = <any>error;
-
-                        if (this.errorMessage != null) {
-                            console.log(this.errorMessage);
-                            alert('Error en la petición');
-                        }
-                    }
-                  );*/
+                  ); 
+                }else{
+                  this.datos.idCiudadano = null;
                 }
-              } else {
+              }else{
                 this.datos.idCiudadano = null;
-
+      
                 swal({
-                    title: 'Error!',
-                    text: response.message,
-                    type: 'error',
-                    confirmButtonText: 'Aceptar'
+                  title: 'Error!',
+                  text: response.message,
+                  type: response.status,
+                  confirmButtonText: 'Aceptar'
                 });
               }
-              error => {
-                  this.errorMessage = <any>error;
-                  if (this.errorMessage != null) {
-                      console.log(this.errorMessage);
-                      alert('Error en la petición');
-                  }
+            },
+            error => {
+              this.errorMessage = <any>error;
+      
+              if (this.errorMessage != null) {
+                console.log(this.errorMessage);
+                alert("Error en la petición");
               }
-          }
-        );
+            }
+          );
+        }else{
+          this.propietario = null;
+          this.datos.idPropietario = this.propietario.id;
+
+          swal({
+            title: response.title,
+            text: response.message,
+            type: response.status,
+            confirmButtonText: 'Aceptar'
+        });
+        }
       },
       error => {
-          this.errorMessage = <any>error;
+        this.errorMessage = <any>error;
 
-          if (this.errorMessage != null) {
-              console.log(this.errorMessage);
-              alert('Error en la petición');
-          }
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
       }
-    );
+    );               
   }
 }

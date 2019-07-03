@@ -18,7 +18,7 @@ export class VhloRnaPreregistroComponent implements OnInit {
   public formIndex = true;
   public formNew = false;
   public formEdit= false;
-  public table:any; 
+  public table:any = null; 
   public vehiculo: VhloRnaPreregistro;
 
   constructor(
@@ -27,7 +27,8 @@ export class VhloRnaPreregistroComponent implements OnInit {
 		private _loginService: LoginService,
 	
 		
-		){}
+  ){}
+  
   ngOnInit() {
     swal({
       title: 'Cargando información!',
@@ -41,12 +42,13 @@ export class VhloRnaPreregistroComponent implements OnInit {
 
     this.formEdit=false;
     this.formNew=false;
+
 		this._RnaPreregistroService.index().subscribe(
 				response => {
           this.vehiculos = response.data;
       
           let timeoutId = setTimeout(() => {  
-            this.iniciarTabla();
+            this.onInitTable();
             swal.close();
           }, 100);
 				}, 
@@ -60,10 +62,17 @@ export class VhloRnaPreregistroComponent implements OnInit {
 				}
       );
   }
-  iniciarTabla(){
-    $('#dataTables-example').DataTable({
+
+  onInitTable(){
+    if (this.table) {
+      this.table.destroy();
+      $('#dataTables-example').empty();
+    }
+
+    this.table = $('#dataTables-example').DataTable({
+      destroy: true,
       responsive: true,
-      pageLength: 8,
+      pageLength: 10,
       sPaginationType: 'full_numbers',
       oLanguage: {
         oPaginate: {
@@ -73,9 +82,10 @@ export class VhloRnaPreregistroComponent implements OnInit {
           sLast: '<i class="fa fa-step-forward"></i>'
         }
       }
-   });
-   this.table = $('#dataTables-example').DataTable();
+    });
+
   }
+
   onNew(){
     this.formNew = true;
     this.formIndex = false;
@@ -90,13 +100,13 @@ export class VhloRnaPreregistroComponent implements OnInit {
       }
   }
 
-  editVehiculo(vehiculo:any){
+  onEdit(vehiculo:any){
     this.vehiculo = vehiculo;
     this.formIndex = false;
     this.formEdit = true;
   }
   
-  deleteVehiculo(id:any){
+  onDelete(id:any){
     swal({
       title: '¿Estás seguro?',
       text: "¡Se eliminara este registro!",
@@ -106,32 +116,50 @@ export class VhloRnaPreregistroComponent implements OnInit {
       cancelButtonColor: '#ff6262',
       confirmButtonText: 'Confirmar',
       cancelButtonText: 'Cancelar'
-      
     }).then((result) => {
       if (result.value) {
+        swal({
+          title: 'Eliminando registro!',
+          text: 'Solo tardara unos segundos por favor espere.',
+          type: 'info',
+          showConfirmButton: false,
+          onOpen: () => {
+            swal.showLoading()
+          }
+        });
+
         let token = this._loginService.getToken();
 
-        this._VehiculoService.delete(token,id).subscribe(
-            response => {
-                swal({
-                      title: 'Eliminado!',
-                      text:'Registro eliminado correctamente.',
-                      type:'success',
-                      confirmButtonColor: '#15d4be',
-                    })
-                  this.table.destroy();
-                  this.ngOnInit();
-              }, 
-            error => {
-              this.errorMessage = <any>error;
+        this._VehiculoService.delete({ 'id': id}, token).subscribe(
+          response => {
+            if (response.code == 200) {
+              swal({
+                title: response.title,
+                text: response.message,
+                type: response.status,
+                confirmButtonText: 'Aceptar'
+              });
 
-              if(this.errorMessage != null){
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
+              this.ngOnInit();
+            }else{
+              swal({
+                title: response.title,
+                text: response.message,
+                type: response.status,
+                confirmButtonText: 'Aceptar'
+              });
             }
-          );
+          }, 
+          error => {
+            this.errorMessage = <any>error;
+
+            if(this.errorMessage != null){
+              console.log(this.errorMessage);
+              alert("Error en la petición");
+            }
+          }
+        );
       }
-    })
+    });
   }
 }

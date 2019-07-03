@@ -42,9 +42,7 @@ export class NewComponent implements OnInit {
   public modalidadesTransporte:any;
   public organismosTransito:any;
   public organismosTransitoNacional:any;
-
   public empresaSelected:any;
-
   public tipoIdentificacionSelected:any;
 
   public ciudadano: any = null;
@@ -80,12 +78,12 @@ export class NewComponent implements OnInit {
     'propietarios': [],
     'solidario': false,
     'tipoPropiedad': null,
-    'licenciaTransito': null,
+    'numeroLicencia': null,
+    'fechaLicencia': null,
     'idVehiculo': null,
   };
 
   public radicado = {
-    'numeroDocumento': null,
     'fechaIngreso': null,
     'guiaLlegada': null,
     'empresaEnvio': null,
@@ -114,7 +112,7 @@ constructor(
   ){}
 
   ngOnInit() {
-    this.vehiculo = new VhloRnaPreregistro(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
+    this.vehiculo = new VhloRnaPreregistro(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
     
     let token = this._LoginService.getToken();
     let identity = this._LoginService.getIdentity();
@@ -339,56 +337,6 @@ constructor(
     this.vehiculo.serie = this.vehiculo.chasis;
   }
 
-  onSearchCiudadano() {
-    swal({
-      title: 'Buscando ciudadano!',
-      text: 'Solo tardara unos segundos por favor espere.',
-      onOpen: () => {
-        swal.showLoading()
-      }
-    });
-
-    let token = this._LoginService.getToken();
-
-    let datos = {
-      'identificacion': this.identificacion,
-      'idTipoIdentificacion': this.tipoIdentificacionSelected,
-    }
-
-    this._CiudadanoService.searchByIdentificacion(datos, token).subscribe(
-      response => {
-        if (response.code == 200) {
-          if (response.data.ciudadano) {
-            this.ciudadano = response.data.ciudadano;
-
-            swal({
-              title: 'Perfecto!',
-              text: response.message,
-              type: 'success',
-              confirmButtonText: 'Aceptar'
-            });
-          }
-        } else {
-          this.ciudadano = null;
-
-          swal({
-            title: 'Error!',
-            text: response.message,
-            type: 'error',
-            confirmButtonText: 'Aceptar'
-          });
-        }
-        error => {
-          this.errorMessage = <any>error;
-          if (this.errorMessage != null) {
-            console.log(this.errorMessage);
-            alert('Error en la petición');
-          }
-        }
-      }
-    );
-  }
-
   onSearchEmpresaTransporte() {
     swal({
       title: 'Buscando empresa de afiliacion!',
@@ -422,6 +370,56 @@ constructor(
         } else {
           this.empresaTransporte = null;
           this.vehiculo.idEmpresa = null;
+
+          swal({
+            title: 'Error!',
+            text: response.message,
+            type: 'error',
+            confirmButtonText: 'Aceptar'
+          });
+        }
+        error => {
+          this.errorMessage = <any>error;
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert('Error en la petición');
+          }
+        }
+      }
+    );
+  }
+
+  onSearchCiudadano() {
+    swal({
+      title: 'Buscando ciudadano!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+
+    let token = this._LoginService.getToken();
+
+    let datos = {
+      'identificacion': this.identificacion,
+      'idTipoIdentificacion': this.tipoIdentificacionSelected,
+    }
+
+    this._CiudadanoService.searchByIdentificacion(datos, token).subscribe(
+      response => {
+        if (response.code == 200) {
+          if (response.data.ciudadano) {
+            this.ciudadano = response.data.ciudadano;
+
+            swal({
+              title: 'Perfecto!',
+              text: response.message,
+              type: 'success',
+              confirmButtonText: 'Aceptar'
+            });
+          }
+        } else {
+          this.ciudadano = null;
 
           swal({
             title: 'Error!',
@@ -623,70 +621,94 @@ constructor(
 
     this.vehiculo.radicado = this.radicado;
 
-    this._RnaPreregistroService.register(this.vehiculo, token).subscribe(
-      response => {
-        if (response.status == 'success') {
-          if (this.vehiculo.tipoMatricula == 'RADICADO' || this.vehiculo.tipoMatricula == 'IMPORTACION') {
-            this.datos.idVehiculo = response.data.id;
-            this.datos.licenciaTransito = this.vehiculo.numeroLicencia;
-            this._PropietarioService.register(this.datos, token).subscribe(
-              response => {
-                if (response.code == 200) {
-                  this.ready.emit(true);
+    var html = 'Que desea pre-registrar el vehiculo como:  <b>'+ this.vehiculo.tipoMatricula +
+                '</b><br>Recuerde que solo podrá editar datos generales del vehículo.';
 
-                  swal({
-                    title: 'Perfecto!',
-                    text: response.message,
-                    type: 'success',
-                    confirmButtonText: 'Aceptar'
-                  });
-                }else{
-                  swal({
-                    title: 'Error!',
-                    text: response.message,
-                    type: 'error',
-                    confirmButtonText: 'Aceptar'
-                  });
-                }
-              },
-              error => {
-                this.errorMessage = <any>error;
+    swal({
+      title: '¿Está seguro?',
+      type: 'info',
+      html:html,
+      showCancelButton: true,
+      confirmButtonColor: '#15d4be',
+      cancelButtonColor: '#ff6262',
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.value) {
+        swal({
+          title: 'Preregistrando vehículo!',
+          text: 'Solo tardara unos segundos por favor espere.',
+          onOpen: () => {
+            swal.showLoading()
+          }
+        });
 
-                if (this.errorMessage != null) {
-                  console.log(this.errorMessage);
-                  alert('Error en la petición');
-                }
+        this._RnaPreregistroService.register(this.vehiculo, token).subscribe(
+          response => {
+            if (response.status == 'success') {
+              if (this.vehiculo.tipoMatricula == 'RADICADO' || this.vehiculo.tipoMatricula == 'IMPORTACION') {
+                this.datos.idVehiculo = response.data.id;
+                
+                this._PropietarioService.register(this.datos, token).subscribe(
+                  response => {
+                    if (response.code == 200) {
+                      this.ready.emit(true);
+    
+                      swal({
+                        title: 'Perfecto!',
+                        text: response.message,
+                        type: 'success',
+                        confirmButtonText: 'Aceptar'
+                      });
+                    }else{
+                      swal({
+                        title: 'Error!',
+                        text: response.message,
+                        type: 'error',
+                        confirmButtonText: 'Aceptar'
+                      });
+                    }
+                  },
+                  error => {
+                    this.errorMessage = <any>error;
+    
+                    if (this.errorMessage != null) {
+                      console.log(this.errorMessage);
+                      alert('Error en la petición');
+                    }
+                  }
+                );
+              } else {
+                this.ready.emit(true);
+    
+                swal({
+                  title: 'Perfecto!',
+                  text: response.message,
+                  type: 'success',
+                  confirmButtonText: 'Aceptar'
+                })
               }
-            );
-          } else {
-            this.ready.emit(true);
-
-            swal({
-              title: 'Perfecto!',
-              text: response.message,
-              type: 'success',
-              confirmButtonText: 'Aceptar'
-            })
+    
+            } else {
+              swal({
+                title: 'Error!',
+                text: response.message,
+                type: 'error',
+                confirmButtonText: 'Aceptar'
+              })
+            }
+            error => {
+              this.errorMessage = <any>error;
+    
+              if (this.errorMessage != null) {
+                console.log(this.errorMessage);
+                alert("Error en la petición");
+              }
+            }
+    
           }
-
-        } else {
-          swal({
-            title: 'Error!',
-            text: response.message,
-            type: 'error',
-            confirmButtonText: 'Aceptar'
-          })
-        }
-        error => {
-          this.errorMessage = <any>error;
-
-          if (this.errorMessage != null) {
-            console.log(this.errorMessage);
-            alert("Error en la petición");
-          }
-        }
-
+        );
       }
-    );
+    });
   }
 } 

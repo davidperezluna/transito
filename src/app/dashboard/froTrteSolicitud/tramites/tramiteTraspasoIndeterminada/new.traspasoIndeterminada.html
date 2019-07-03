@@ -16,87 +16,86 @@
 <div class="row" *ngIf="!realizado">
     <div class="col-xs-12 col-lg-12">
         <div class="card">
-            <div class="card-body">
+            <div class="card-header">
                 <b class="text-primary">Registrar traspaso a persona indeterminada</b>
                 <br>
                 <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
-                <hr>
-                <div class="container">
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-xs-12 col-lg-12">
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" [(ngModel)]="datos.documentacion" class="custom-control-input" id="documentacion" name="documentacion">
-                                    <label class="custom-control-label" for="documentacion">¿Presenta documentación completa?</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row" *ngIf="!datos.documentacion">
-                            <div class="col-xs-12 col-lg-12">
-                                <label>Registre que documentación esta pendiente <b class="text-danger">*</b></label>
-                                <textarea class="form-control" [(ngModel)]="datos.observacion" rows="4" name="observacion" required></textarea>
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-12 col-lg-12">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" [(ngModel)]="datos.documentacion" class="custom-control-input" id="documentacion" name="documentacion">
+                                <label class="custom-control-label" for="documentacion">¿Presenta documentación completa?</label>
                             </div>
                         </div>
                     </div>
-
-                    <div class="form-group" *ngIf="datos.documentacion"><!-- .from-group -->
-                        <div class="row">
-                            <label>Datos básicos</label>
-                            <table class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>
-                                            <b>Fecha</b>
-                                            <br>
-                                            {{ date| date: 'yyyy-MM-dd' }}
-                                        </th>
-                                        <th>
-                                            <b>Organismo transito</b>
-                                            <br>
-                                            {{ vehiculo.organismoTransito?.nombre }}
-                                        </th>
-                                        <th *ngIf="vehiculo.tipoServicio">
-                                            <b>Tipo de servicio</b>
-                                            <br>
-                                            {{ vehiculo.tipoServicio?.nombre }}
-                                        </th>
-                                        <th>
-                                            <b>Tipo documento traspaso</b>
-                                            <br>
-                                            <ng-select [multiple]="false" [options]="tipos" [(ngModel)]="datos.tipoTraspaso" name="tipoTraspaso" required>
-                                            </ng-select>
-                                        </th>
-                                    </tr>
-                                </thead>
-                            </table>
+                    <div class="row" *ngIf="!datos.documentacion">
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Registre que documentación esta pendiente <b class="text-danger">*</b></label>
+                            <textarea class="form-control" [(ngModel)]="datos.observacion" rows="4" name="observacion" required></textarea>
                         </div>
-
-                        <div class="row">
-                            <label>Información del destinatario del traspaso</label>
-                            <table class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>
-                                            <b>Tipo documento</b>
-                                            <br>
-                                            Sin registro
-                                        </th>
-                                        <th>
-                                            <b>Número documento</b>
-                                            <br>
-                                            Sin registro
-                                        </th>
-                                        <th>
-                                            <b>Nombre apoderado</b>
-                                            <br>
-                                            Sin registro
-                                        </th>
-                                    </tr>
-                                </thead>
-                            </table>
-                        </div>
-                    </div><!-- /.from-group -->
+                    </div>
                 </div>
+
+                <div class="form-group" *ngIf="datos.documentacion"><!-- .from-group -->
+                    <div class="row">
+                        <label>Datos básicos</label>
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <b>Fecha</b>
+                                        <br>
+                                        {{ date| date: 'yyyy-MM-dd' }}
+                                    </th>
+                                    <th>
+                                        <b>Organismo transito</b>
+                                        <br>
+                                        {{ vehiculo.organismoTransito?.nombre }}
+                                    </th>
+                                    <th *ngIf="vehiculo.tipoServicio">
+                                        <b>Tipo de servicio</b>
+                                        <br>
+                                        {{ vehiculo.tipoServicio?.nombre }}
+                                    </th>
+                                    <th>
+                                        <b>Tipo documento traspaso</b>
+                                        <br>
+                                        <ng-select [multiple]="false" [options]="tipos" [(ngModel)]="datos.tipoTraspaso" name="tipoTraspaso" required>
+                                        </ng-select>
+                                    </th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+
+                    <div class="row">
+                        <label>Información del destinatario del traspaso</label>
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <b>Tipo documento</b>
+                                        <br>
+                                        Sin registro
+                                    </th>
+                                    <th>
+                                        <b>Número documento</b>
+                                        <br>
+                                        Sin registro
+                                    </th>
+                                    <th>
+                                        <b>Nombre apoderado</b>
+                                        <br>
+                                        Sin registro
+                                    </th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div><!-- /.from-group -->
             </div>
         </div>
    </div>

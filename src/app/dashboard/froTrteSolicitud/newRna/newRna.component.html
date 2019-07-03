@@ -293,7 +293,7 @@
                     </div>
                 </div>
 
-                <div class="row" *ngIf="documentacionPendiente.length > 0 && factura.estado != 'PENDIENTE DOCUMENTACION' && tramitesFactura && (tramitesFactura.length == tramitesRealizados.length)">
+                <div class="row" *ngIf="documentacionPendiente.length > 0 && tramitesFactura">
                     <div class="col-xs-12 col-lg-12">
                         <div class="form-group">
                             <div class="row">
@@ -310,7 +310,7 @@
                     </div>
                 </div>
         
-                <div class="row" *ngIf="tramitesFactura && tramitesFactura.length == tramitesRealizados.length && factura.estado != 'FINALIZADA'">
+                <div class="row" *ngIf="tramitesFactura && tramitesFactura.length == tramitesRealizados.length">
                     <div class="col-xs-12 col-lg-12" *ngIf="(requiereSustrato && tramiteSolicitud.insumoEntregado) || !requiereSustrato">
                         <div class="form-group">
                             <div class="row" *ngIf="requiereRunt">
@@ -390,7 +390,7 @@
                         
                         <app-regrabar-vin *ngIf="tramiteFactura.precio.tramite.id == 28"  [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)"></app-regrabar-vin>
                         
-                        <app-traspaso-indeterminada *ngIf="tramiteFactura.precio.tramite.id == 29"  [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" [idPropietario]='tramiteSolicitud.idCiudadano' (onReadyTramite)="onReadyTramite($event)"></app-traspaso-indeterminada>
+                        <app-traspaso-indeterminada *ngIf="tramiteFactura.precio.tramite.id == 29"  [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" [idCiudadano]='tramiteSolicitud.idCiudadano' (onReadyTramite)="onReadyTramite($event)"></app-traspaso-indeterminada>
                     
                         <app-certificado-tradicion *ngIf="tramiteFactura.precio.tramite.id == 30"  [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)"></app-certificado-tradicion>
                     </div>

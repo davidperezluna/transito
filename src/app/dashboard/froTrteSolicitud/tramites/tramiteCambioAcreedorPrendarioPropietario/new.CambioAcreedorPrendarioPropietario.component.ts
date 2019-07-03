@@ -44,6 +44,7 @@ export class NewTramiteCambioAcreedorPrendarioPropietarioComponent implements On
     public formCiudadano = false;
     
     public datos = {
+        'campos': null,
         'documentacion': true,
         'observacion': null,
         'tipo': 'PROPIETARIO',
@@ -244,63 +245,14 @@ export class NewTramiteCambioAcreedorPrendarioPropietarioComponent implements On
     }
 
     onEnviar() {
-        let token = this._LoginService.getToken();
-
+        this.datos.campos = ['cambioAcreedor'];
         this.datos.idVehiculo = this.vehiculo.id;
         this.datos.idTramiteFactura = this.tramiteFactura.id;
 
-        this._TramiteSolicitudService.validations(this.datos, token).subscribe(
-            response => {
-                if (response.code == 200) {
-                    this._AcreedorService.update(this.datos, token).subscribe(
-                        response => {
-                            if (response.code == 200) {
-                                let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero;
-                                
-                                this.realizado = true;
-                                
-                                this.onReadyTramite.emit({ 
-                                    'documentacion':this.datos.documentacion, 
-                                    'observacion':this.datos.observacion, 
-                                    'foraneas':this.datos, 
-                                    'resumen':resumen,
-                                    'idTramiteFactura': this.tramiteFactura.id,
-                                });
-                            }else{
-                                swal({
-                                    title: 'Error!',
-                                    text: response.message,
-                                    type: 'error',
-                                    confirmButtonText: 'Aceptar'
-                                });
-                            }
-                        },
-                        error => {
-                            this.errorMessage = <any>error;
-            
-                            if (this.errorMessage != null) {
-                                console.log(this.errorMessage);
-                                alert('Error en la petición');
-                            }
-                        }
-                    );
-                }else{
-                    swal({
-                    title: 'Error!',
-                    text: response.message,
-                    type: 'error',
-                    confirmButtonText: 'Aceptar'
-                    });
-                }
-            },
-            error => {
-                this.errorMessage = <any>error;
+        let resumen = "No. factura: " + this.tramiteFactura.factura.numero;
 
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert('Error en la petición');
-                }
-            }
-        );
+        this.realizado = true;
+            
+        this.onReadyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
     }
 }

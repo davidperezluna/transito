@@ -108,7 +108,7 @@ export class NewTraspasoComponent implements OnInit {
 
             let token = this._LoginService.getToken();
 
-            this._RetefuenteService.searchByFactura({ 'idfactura': this.tramiteFactura.factura.id }, token).subscribe(
+            this._RetefuenteService.searchByFactura({ 'idFactura': this.tramiteFactura.factura.id }, token).subscribe(
                 response => {
                     if (response.code == 200) {
                         this.datos.retenciones = response.data;
