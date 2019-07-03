@@ -136,19 +136,21 @@ constructor(
       this.vehiculo.placa = this.vehiculo.placa.numero;
     }
 
-    /*var datePiper = new DatePipe('en-US');
+    var datePiper = new DatePipe('en-US');
 
     var date = new Date();
     date.setTime(this.vehiculo.fechaFactura.timestamp * 1000);
 
     this.vehiculo.fechaFactura = datePiper.transform(
       date, 'yyyy-MM-dd'
-    );*/
+    );
 
+    date.setTime(this.vehiculo.fechaManifiesto.timestamp * 1000);
 
-    /*if (this.vehiculo.fechaFactura) {
-      this.fechaFactura = 
-    }*/
+    this.vehiculo.fechaManifiesto = datePiper.transform(
+      date, 'yyyy-MM-dd'
+    );
+
 
     let token = this._LoginService.getToken();
     let identity = this._LoginService.getIdentity();
@@ -230,6 +232,7 @@ constructor(
         }
       }
     );
+
     this._ClaseService.select().subscribe(
       response => {
         this.clases = response;
@@ -246,6 +249,7 @@ constructor(
         }
       }
     );
+
     this._CarroceriaService.select().subscribe(
       response => {
         this.carrocerias = response;
@@ -277,6 +281,7 @@ constructor(
         }
       }
     );
+
     this._ColorService.select().subscribe(
       response => {
         this.colores = response;
@@ -292,6 +297,7 @@ constructor(
         }
       }
     );
+
     this._CombustibleService.select().subscribe(
       response => {
         this.combustibles = response;
@@ -311,9 +317,12 @@ constructor(
     this._OrganismoTransitoService.selectSedes().subscribe(
       response => {
         this.organismosTransito = response;
-        setTimeout(() => {
-            this.sedeOperativaSelected = [this.vehiculo.organismoTransito.id];
-        });
+
+        if (this.vehiculo.organismoTransito) {
+          setTimeout(() => {
+              this.sedeOperativaSelected = [this.vehiculo.organismoTransito.id];
+          });
+        }
       }, 
       error => {
         this.errorMessage = <any>error;
@@ -348,9 +357,12 @@ constructor(
     this._MunicipioService.select().subscribe(
       response => {
         this.municipios = response;
-        setTimeout(() => {
-            this.municipioSelected = [this.vehiculo.municipio.id];
-        });
+
+        if (this.vehiculo.municipio) {
+          setTimeout(() => {
+              this.municipioSelected = [this.vehiculo.municipio.id];
+          });
+        }
       }, 
       error => {
         this.errorMessage = <any>error;
@@ -361,12 +373,16 @@ constructor(
         }
       }
     );
+
     this._RadioAccionService.select().subscribe(
       response => {
         this.radioAcciones = response;
-        setTimeout(() => {
-            this.radioAccionSelected = [this.vehiculo.radioAccion.id];
-        });
+
+        if (this.vehiculo.radioAccion) {
+          setTimeout(() => {
+              this.radioAccionSelected = [this.vehiculo.radioAccion.id];
+          });
+        }
       }, 
       error => {
         this.errorMessage = <any>error;
@@ -381,9 +397,14 @@ constructor(
     this._ModalidadTransporteService.select().subscribe(
       response => {
         this.modalidadTransportes = response;
-        setTimeout(() => {
-            this.modalidadTransporteSelected = [this.vehiculo.modalidadTransporte.id];
-        });
+
+        if (this.vehiculo.modalidadTransporte) {
+          setTimeout(() => {
+              this.modalidadTransporteSelected = [this.vehiculo.modalidadTransporte.id];
+          });
+        }
+
+        swal.close();
       }, 
       error => {
         this.errorMessage = <any>error;
