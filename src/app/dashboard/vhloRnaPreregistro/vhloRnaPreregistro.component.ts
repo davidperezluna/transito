@@ -64,11 +64,15 @@ export class VhloRnaPreregistroComponent implements OnInit {
   }
 
   onInitTable(){
+    if (this.table) {
+      this.table.destroy();
+      $('#dataTables-example').empty();
+    }
+
     this.table = $('#dataTables-example').DataTable({
-      retrieve: false,
       destroy: true,
       responsive: true,
-      pageLength: 8,
+      pageLength: 10,
       sPaginationType: 'full_numbers',
       oLanguage: {
         oPaginate: {

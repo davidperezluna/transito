@@ -4,6 +4,7 @@ import { VhloCfgPlacaService } from '../../services/vhloCfgPlaca.service';
 import { PnalFuncionarioService } from '../../services/pnalFuncionario.service';
 import { CfgOrganismoTransitoService } from '../../services/cfgOrganismoTransito.service';
 import { LoginService } from '../../services/login.service';
+import { environment } from 'environments/environment'
 import swal from 'sweetalert2';
 declare var $: any;
 
@@ -27,12 +28,15 @@ export class VhloRnaPreasignacionPlacaComponent implements OnInit {
   public organismoTransito:any = null;
   public funcionario:any = null;
   public placas:any = null;
+  public preasignacion:any = false;
 
   public datos = {
     'idVehiculo': null,
     'idOrganismoTransito': null,
     'idPlaca': null,
   };
+
+  public apiUrl = environment.apiUrl;
 
   constructor(
     private _VehiculoService: VhloVehiculoService,
@@ -176,11 +180,11 @@ export class VhloRnaPreasignacionPlacaComponent implements OnInit {
         if (response.code == 200) {
           this.placa = response.data;
 
-          var html = 'El vehiculo con:<br> numero de chasis:  <b>'+ this.vehiculo.chasis +
-                '</b><br>numero de motor:  <b>'+ this.vehiculo.motor +
-                '</b><br>numero de serie:  <b>'+ this.vehiculo.serie +
-                '</b><br>fue asignada La placa:<br><b><h2>'+ this.placa.numero +
-                '</h2></b>con exitosamente durante 60 días';
+          var html = 'Se preasignara al vehiculo con:<br> Número de chasis:  <b>'+ this.vehiculo.chasis +
+                '</b><br>Número de motor:  <b>'+ this.vehiculo.motor +
+                '</b><br>Número de serie:  <b>'+ this.vehiculo.serie +
+                '</b><br>La placa:<br><b><h2>'+ this.placa.numero +
+                '</h2></b>durante 60 días';
 
           swal({
             title: '¿Estás seguro?',
@@ -193,28 +197,30 @@ export class VhloRnaPreasignacionPlacaComponent implements OnInit {
             cancelButtonText: 'Cancelar'
           }).then((result) => {
             if (result.value) {
+              swal({
+                title: 'Preasignando placa!',
+                text: 'Solo tardara unos segundos por favor espere.',
+                onOpen: () => {
+                  swal.showLoading()
+                }
+              });
+
               this._VehiculoService.assign(this.datos, token).subscribe(
                 response => {
-                  if(response.status == 'success'){
-                    this.formShow = false; 
+                  if(response.code == 200){
+                    this.preasignacion = true; 
                     
                     swal({
-                      title: 'Perfecto!',
-                      html: html,
-                      type: 'success',
-                      confirmButtonText: 'Aceptar',
-                    }).then((result) => {
-                      if (result.value) {
-                        this.onCancelar();
-                      }
-                    });          
-                  }else{
-                    this.formShow = false;
-
-                    swal({
-                      title: 'Error!',
+                      title: response.title,
                       text: response.message,
-                      type: 'error',
+                      type: response.status,
+                      confirmButtonText: 'Aceptar'
+                    });
+                  }else{
+                    swal({
+                      title: response.title,
+                      text: response.message,
+                      type: response.status,
                       confirmButtonText: 'Aceptar'
                     });
                   }

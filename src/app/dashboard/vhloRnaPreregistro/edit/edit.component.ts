@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
 import { CfgMunicipioService } from '../../../services/cfgMunicipio.service';
 import { VhloCfgLineaService } from '../../../services/vhloCfgLinea.service';
@@ -22,7 +23,8 @@ import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-edit',
-  templateUrl: './edit.component.html'
+  templateUrl: './edit.component.html',
+  providers: [DatePipe]
 })
 
 export class EditComponent implements OnInit {
@@ -43,6 +45,8 @@ export class EditComponent implements OnInit {
   public organismosTransito:any;
   public organismosTransitoNacional:any;
 
+  public fechaFactura:any;
+  public fechaManifiesto:any;
   public municipioSelected:any;
   public lineaSelected:any;
   public claseSelected:any;
@@ -127,6 +131,24 @@ constructor(
         swal.showLoading()
       }
     });
+
+    if (this.vehiculo.placa) {
+      this.vehiculo.placa = this.vehiculo.placa.numero;
+    }
+
+    /*var datePiper = new DatePipe('en-US');
+
+    var date = new Date();
+    date.setTime(this.vehiculo.fechaFactura.timestamp * 1000);
+
+    this.vehiculo.fechaFactura = datePiper.transform(
+      date, 'yyyy-MM-dd'
+    );*/
+
+
+    /*if (this.vehiculo.fechaFactura) {
+      this.fechaFactura = 
+    }*/
 
     let token = this._LoginService.getToken();
     let identity = this._LoginService.getIdentity();

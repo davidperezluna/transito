@@ -150,11 +150,6 @@
                                 <label>Capacidad carga</label>
                                 <input class="form-control" type="text" type="text" [(ngModel)]="vehiculo.capacidadCarga" name="capacidadCarga">
                             </div>
-                            
-                            <div class="col-xs-12 col-lg-3" *ngIf="vehiculo.tipoMatricula == 'RADICADO'">
-                                <label>Numero licencia transito </label>
-                                <input class="form-control" type="text" type="text" [(ngModel)]="vehiculo.numeroLicencia" name="licenciaTransito">
-                            </div>
                         </div><!-- .row -->
 
                         <div class="row" *ngIf="vehiculo.tipoMatricula == 'RADICADO'">
@@ -162,7 +157,19 @@
                                 <label>Organismo de transito de que proviene <b class="text-danger">*</b></label>
                                 <ng-select [multiple]="false" [options]="organismosTransitoNacional" [(ngModel)]="radicado.idOrganismoTransito" name="idOrganismoTransitoProviene" required>
                                 </ng-select>
-                            </div>                    
+                            </div>
+                            
+                            <!--
+                                <div class="col-xs-12 col-lg-3">
+                                    <label>Numero licencia transito </label>
+                                    <input class="form-control" type="text" type="text" [(ngModel)]="datos.numeroLicencia" name="numeroLicencia">
+                                </div>
+    
+                                <div class="col-xs-12 col-lg-3">
+                                    <label>Fecha de expedición <b class="text-danger">*</b></label>
+                                    <input class="form-control" [(ngModel)]="datos.fechaLicencia" name="fechaLicencia" type="date" required />
+                                </div>
+                            -->
                             
                             <div class="col-xs-12 col-lg-3">
                                 <label>Fecha de ingreso <b class="text-danger">*</b></label>
