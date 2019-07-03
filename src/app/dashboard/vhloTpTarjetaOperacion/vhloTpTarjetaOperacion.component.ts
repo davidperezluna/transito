@@ -13,13 +13,17 @@ export class VhloTpTarjetaOperacionComponent implements OnInit {
     public errorMessage;
     public table: any;
 
+    public nit;
+    public empresaHabilitadaCupo = null;
+
     public tarjetaOperacion: VhloTpTarjetaOperacion;
 
     public tarjetasOperacion;
 
+    public formIndex = true;
+    public formSearch: any;
     public formNew = false;
     public formEdit = false;
-    public formIndex = true;
 
     constructor(
         private _VhloTpTarjetaOperacionService: VhloTpTarjetaOperacionService,
@@ -27,6 +31,10 @@ export class VhloTpTarjetaOperacionComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+        this.onInitForms();
+
+        this.formSearch = true;
+
         swal({
             title: 'Cargando Tabla!',
             text: 'Solo tardará unos segundos, por favor espere.',
@@ -57,9 +65,62 @@ export class VhloTpTarjetaOperacionComponent implements OnInit {
                 }
             }
         );
+
+        if (this.empresaHabilitadaCupo != null) {
+            let token = this._LoginService.getToken();
+
+            this._VhloTpTarjetaOperacionService.searchTarjetasOperacion({ 'idEmpresa': this.empresaHabilitadaCupo.id }, token).subscribe(
+                response => {
+                    if (response.code == 200) {
+                        this.tarjetasOperacion = response.data;
+                        this.formIndex = true;
+
+                        let timeoutId = setTimeout(() => {
+                            this.onInitTable();
+                        }, 100);
+                        swal({
+                            title: response.title,
+                            text: response.message,
+                            type: response.status,
+                            confirmButtonText: 'Aceptar'
+                        })
+                    } else {
+                        swal({
+                            title: response.title,
+                            text: response.message,
+                            type: response.status,
+                            confirmButtonText: 'Aceptar'
+                        })
+                    }
+                    error => {
+                        this.errorMessage = <any>error;
+                        if (this.errorMessage != null) {
+                            console.log(this.errorMessage);
+                            alert('Error en la petición');
+                        }
+                    }
+                }
+            );
+            this.onInitForms();
+            this.formIndex = true;
+            this.formSearch = true;
+        }
+    }
+
+    onInitForms() {
+        this.formIndex = false;
+        this.formSearch = false;
+        this.formNew = false;
+        this.formEdit = false;
+
+        return true;
     }
 
     onInitTable() {
+        if (this.table) {
+            this.table.destroy();
+        }
+
         this.table = $('#dataTables-example').DataTable({
             responsive: false,
             pageLength: 6,
@@ -75,21 +136,78 @@ export class VhloTpTarjetaOperacionComponent implements OnInit {
         });
     }
 
-    onNew() {
+    onNew(empresaHabilitadaCupo: any) {
+        this.empresaHabilitadaCupo = empresaHabilitadaCupo;
+        this.onInitForms();
+        this.formSearch = true;
         this.formNew = true;
-        this.formIndex = false;
-        if (this.table) {
-            this.table.destroy();
-        }
     }
 
     ready(isCreado: any) {
         if (isCreado) {
-            this.formNew = false;
-            this.formEdit = false;
-            this.formIndex = true;
             this.ngOnInit();
         }
+    }
+
+    onSearchEmpresa() {
+        let token = this._LoginService.getToken();
+        this._VhloTpTarjetaOperacionService.searchEmpresaTransporte(this.nit, token).subscribe(
+            response => {
+                if (response.code == 200) {
+                    this.empresaHabilitadaCupo = response.data;
+
+                    this._VhloTpTarjetaOperacionService.searchTarjetasOperacion({ 'idEmpresa': this.empresaHabilitadaCupo.id }, token).subscribe(
+                        response => {
+                            if (response.code == 200) {
+                                this.tarjetasOperacion = response.data;
+                                console.log(this.tarjetasOperacion);
+
+                                /* let timeoutId = setTimeout(() => {
+                                    this.onInitTable();
+                                }, 100); */
+                                swal({
+                                    title: response.title,
+                                    text: response.message,
+                                    type: response.status,
+                                    confirmButtonText: 'Aceptar'
+                                })
+                            } else {
+                                swal({
+                                    title: response.title,
+                                    text: response.message,
+                                    type: response.status,
+                                    confirmButtonText: 'Aceptar'
+                                })
+                            }
+                            error => {
+                                this.errorMessage = <any>error;
+                                if (this.errorMessage != null) {
+                                    console.log(this.errorMessage);
+                                    alert('Error en la petición');
+                                }
+                            }
+                        }
+                    );
+                    this.onInitForms();
+                    this.formIndex = true;
+                    this.formSearch = true;
+                } else {
+                    swal({
+                        title: response.title,
+                        text: response.message,
+                        type: response.status,
+                        confirmButtonText: 'Aceptar'
+                    })
+                }
+                error => {
+                    this.errorMessage = <any>error;
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert('Error en la petición');
+                    }
+                }
+            }
+        );
     }
 
     onDelete(id: any) {
@@ -114,7 +232,6 @@ export class VhloTpTarjetaOperacionComponent implements OnInit {
                             type: response.status,
                             confirmButtonColor: '#15d4be',
                         })
-                        this.table.destroy();
                         this.ngOnInit();
                     },
                     error => {
@@ -129,8 +246,10 @@ export class VhloTpTarjetaOperacionComponent implements OnInit {
             }
         });
     }
-    onEdit(tarjetaOperacion: any) {
+    
+    onEdit(empresaHabiltiadaCupo: any, tarjetaOperacion: any) {
         this.tarjetaOperacion = tarjetaOperacion;
+        this.empresaHabilitadaCupo = this.empresaHabilitadaCupo;
         this.formEdit = true;
         this.formIndex = false;
     }

@@ -1,12 +1,69 @@
-<div class="container">
+<div class="container-fluid">
     <hr>
-    <div class="row" *ngIf='formIndex'>
-        <div class="col-md-12">
+    <div class="row">
+        <div class="col-xs-12 col-lg-4" *ngIf='formSearch'>
+            <div class="card">
+                <div class="card-header">
+                    <b class="text-uppercase">
+                        Buscar empresas de transporte público
+                    </b>
+                </div>
+                <div class="card-body">
+                    <form #formSearch="ngForm">
+                        <div class="col-xs-16 col-lg-12">
+                            <label>NIT <strong class="text-danger">*</strong></label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" [(ngModel)]="nit" required name="nit" />
+                                <span class="input-group-btn">
+                                    <button (click)="onSearchEmpresa()" class="btn btn-default btn-primary" type="button">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="col-xs-12 col-lg-12">
+                            <div class="row">
+                                <div class="col-xs-12 col-lg-12" *ngIf='empresaHabilitadaCupo'>
+                                    <table class="table table-bordered table-striped">
+                                        <tr>
+                                            <th><b>Tipo de identificación</b></th>
+                                            <th><b>Numero de identificación</b></th>
+                                        </tr>
+                                        <tr>
+                                            <td>{{ empresaHabilitadaCupo.empresa.tipoIdentificacion?.nombre }}</td>
+                                            <td>{{ empresaHabilitadaCupo.empresa.nit }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th><b>Razón Social</b></th>
+                                            <th><b>Ciudad</b></th>
+                                        </tr>
+                                        <tr>
+                                            <td>{{ empresaHabilitadaCupo.empresa.nombre }}</td>
+                                            <td>{{ empresaHabilitadaCupo.empresa.municipio.nombre }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th><b>Dirección Principal</b></th>
+                                            <th><b>Teléfono</b></th>
+                                        </tr>
+                                        <tr>
+                                            <td>{{ empresaHabilitadaCupo.empresa.direccion }}</td>
+                                            <td>{{ empresaHabilitadaCupo.empresa.telefono }}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-lg-8" *ngIf='formIndex'>
             <div class="card">
                 <div class="card-header">
                     <h5 class="card-title">
                         <strong class="text-uppercase">Tarjetas Operación</strong>
-                        <small>Lista de Tarjetas de Operación a transporte público</small>
+                        <small>Lista de tarjetas de operación a transporte público</small>
                         <div class="btn-group pull-right">
                             <button (click)="onNew()" class="btn btn-success  btn-round " data-target="#themepicker"
                                 data-toggle="modal">
@@ -20,21 +77,21 @@
                     <table class="table" id="dataTables-example">
                         <thead>
                             <tr>
-                                <th>Id</th>
-                                <th>Empresa</th>
-                                <th>Placa Vehiculo</th>
+                                <th>#</th>
+                                <!-- <th>Placa Vehiculo</th>
                                 <th>Nro. Tarjeta Operación</th>
+                                <th>Fecha Vencimiento</th> -->
                                 <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr class="odd" *ngFor="let tarjetaOperacion of tarjetasOperacion; let i = index">
                                 <td>{{ i + 1 }}</td>
-                                <td>{{ tarjetaOperacion.asignacion.empresaTransporte.empresa.nombre }}</td>
-                                <td>{{ tarjetaOperacion.asignacion.vehiculo.placa.numero }}</td>
+                                <!-- <td>{{ tarjetaOperacion.asignacion.vehiculo.placa.numero }}</td>
                                 <td>{{ tarjetaOperacion.numeroTarjetaOperacion }}</td>
+                                <td>{{ (tarjetaOperacion.fechaVencimiento.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td> -->
                                 <td>
-                                    <button (click)="onEdit(tarjetaOperacion)" class="btn btn-xs btn-info" type="button">
+                                    <button (click)="onEdit(empresaHabilitadaCupo, tarjetaOperacion)" class="btn btn-xs btn-info" type="button">
                                         <i class="fa fa-edit"></i>
                                         Editar
                                     </button>
@@ -47,11 +104,14 @@
                             </tr>
                         </tbody>
                     </table>
-                    <!-- /.table-responsive -->
                 </div>
             </div>
         </div>
+        <div class="col-xs-12 col-lg-8" *ngIf='formNew'>
+            <app-new [empresaHabilitadaCupo]="empresaHabilitadaCupo" (ready)="ready($event)"></app-new>
+        </div>
+        <div class="col-xs-12 col-lg-8" *ngIf='formEdit'>
+            <app-edit [empresaHabilitadaCupo]="empresaHabilitadaCupo" [tarjetaOperacion]="tarjetaOperacion" (ready)="ready($event)"></app-edit>
+        </div>
     </div>
-    <!-- <app-edit *ngIf='formEdit' [tarjetaOperacion]="tarjetaOperacion" (ready)="ready($event)"></app-edit> -->
-    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
 </div>

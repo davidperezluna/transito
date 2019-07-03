@@ -120,18 +120,54 @@
                                 <tr class="odd"
                                     *ngFor="let retefuenteExogena of arrayRetefuentesExogena; let i = index">
                                     <td>{{ 5046 }}</td>
-                                    <td>{{ retefuenteExogena.tipoDocumento }}</td>
-                                    <td>{{ retefuenteExogena.identificacion }}</td>
-                                    <td>{{ 52354001 }}</td>
-                                    <td>{{ retefuenteExogena.primerApellido }}</td>
-                                    <td>{{ retefuenteExogena?.segundoApellido }}</td>
-                                    <td>{{ retefuenteExogena.primerNombre }}</td>
-                                    <td>{{ retefuenteExogena?.segundoNombre }}</td>
-                                    <td>{{ retefuenteExogena.razonSocial }}</td>
-                                    <td>{{ retefuenteExogena.direccion }}</td>
-                                    <td>{{ retefuenteExogena.departamento }}</td>
-                                    <td>{{ retefuenteExogena.municipio }}</td>
-                                    <td>{{ retefuenteExogena.pais }}</td>
+                                    <td>
+                                        <span *ngIf="retefuenteExogena.ciudadano">{{ retefuenteExogena.ciudadano.tipoIdentificacion.codigo }}</span>
+                                        <span *ngIf="retefuenteExogena.empresa">{{ retefuenteExogena.empresa.tipoIdentificacion.codigo }}</span>
+                                    </td>
+                                    <td>
+                                        <span *ngIf="retefuenteExogena.ciudadano">{{ retefuenteExogena.ciudadano.identificacion }}</span>
+                                        <span *ngIf="retefuenteExogena.empresa">{{ retefuenteExogena.empresa.nit }}</span>
+                                    </td>
+                                    <td>
+                                        <span *ngIf="retefuenteExogena.ciudadano"></span>
+                                        <span *ngIf="retefuenteExogena.empresa">{{ retefuenteExogena.empresa.dv }}</span>
+                                    </td>
+                                    <td>
+                                        <span *ngIf="retefuenteExogena.ciudadano">{{ retefuenteExogena.primerApellido }}</span>
+                                        <span *ngIf="retefuenteExogena.empresa"> </span>
+                                    </td>
+                                    <td>
+                                        <span *ngIf="retefuenteExogena.ciudadano">{{ retefuenteExogena?.segundoApellido }}</span>
+                                        <span *ngIf="retefuenteExogena.empresa"> </span>
+                                    </td>
+                                    <td>
+                                        <span *ngIf="retefuenteExogena.ciudadano">{{ retefuenteExogena.primerNombre }}</span>
+                                        <span *ngIf="retefuenteExogena.empresa"> </span>
+                                    </td>
+                                    <td>
+                                        <span *ngIf="retefuenteExogena.ciudadano">{{ retefuenteExogena?.segundoNombre }}</span>
+                                        <span *ngIf="retefuenteExogena.empresa"> </span>
+                                    </td>
+                                    <td>
+                                        <span *ngIf="retefuenteExogena.ciudadano"> </span>
+                                        <span *ngIf="retefuenteExogena.empresa">{{ retefuenteExogena.empresa.nombre }}</span>
+                                    </td>
+                                    <td>
+                                        <span *ngIf="retefuenteExogena.ciudadano">{{ retefuenteExogena.ciudadano.direccionPersonal }}</span>
+                                        <span *ngIf="retefuenteExogena.empresa">{{ retefuenteExogena.empresa.direccion }}</span>
+                                    </td>
+                                    <td>
+                                        <span *ngIf="retefuenteExogena.ciudadano">{{ retefuenteExogena.ciudadano.municipioResidencia.departamento.codigoDane }}</span>
+                                        <span *ngIf="retefuenteExogena.empresa">{{ retefuenteExogena.empresa.municipio.departamento.codigoDane }}</span>
+                                    </td>
+                                    <td>
+                                        <span *ngIf="retefuenteExogena.ciudadano">{{ retefuenteExogena.ciudadano.municipioResidencia.codigoDane }}</span>
+                                        <span *ngIf="retefuenteExogena.empresa">{{ retefuenteExogena.empresa.municipio.codigoDane }}</span>
+                                    </td>
+                                    <td>
+                                        <span *ngIf="retefuenteExogena.ciudadano">{{ retefuenteExogena.ciudadano.municipioResidencia.departamento.pais.codigo }}</span>
+                                        <span *ngIf="retefuenteExogena.empresa">{{ retefuenteExogena.empresa.municipio.departamento.pais.codigo }}</span>
+                                    </td>
                                     <td>{{ retefuenteExogena.valorVehiculo }}</td>
                                     <td>0</td>
                                     <td>0</td>
@@ -179,14 +215,38 @@
                                     <td>{{ retefuenteTesoreria.marca }}</td>
                                     <td>{{ retefuenteTesoreria.clase }}</td>
                                     <td>{{ retefuenteTesoreria.modelo }}</td>
-                                    <td>{{ retefuenteTesoreria.primerApellido }}</td>
-                                    <td>{{ retefuenteTesoreria?.segundoApellido }}</td>
-                                    <td>{{ retefuenteTesoreria.primerNombre }}</td>
-                                    <td>{{ retefuenteTesoreria?.segundoNombre }}</td>
-                                    <td>{{ retefuenteTesoreria.identificacion }}</td>
-                                    <td>{{ retefuenteTesoreria.direccion }}</td>
-                                    <td>{{ retefuenteTesoreria.municipio }}</td>
-                                    <td>{{ retefuenteTesoreria.telefono }}</td>
+                                    <td>
+                                        <span *ngIf="retefuenteExogena.ciudadano">{{ retefuenteExogena.primerApellido }}</span>
+                                        <span *ngIf="retefuenteExogena.empresa"> </span>
+                                    </td>
+                                    <td>
+                                        <span *ngIf="retefuenteExogena.ciudadano">{{ retefuenteExogena?.segundoApellido }}</span>
+                                        <span *ngIf="retefuenteExogena.empresa"> </span>
+                                    </td>
+                                    <td>
+                                        <span *ngIf="retefuenteExogena.ciudadano">{{ retefuenteExogena.primerNombre }}</span>
+                                        <span *ngIf="retefuenteExogena.empresa"> </span>
+                                    </td>
+                                    <td>
+                                        <span *ngIf="retefuenteExogena.ciudadano">{{ retefuenteExogena?.segundoNombre }}</span>
+                                        <span *ngIf="retefuenteExogena.empresa"> </span>
+                                    </td>
+                                    <td>
+                                        <span *ngIf="retefuenteExogena.ciudadano">{{ retefuenteExogena.ciudadano.identificacion }}</span>
+                                        <span *ngIf="retefuenteExogena.empresa">{{ retefuenteExogena.empresa.nit }}</span>
+                                    </td>
+                                    <td>
+                                        <span *ngIf="retefuenteExogena.ciudadano">{{ retefuenteExogena.ciudadano.direccionPersonal }}</span>
+                                        <span *ngIf="retefuenteExogena.empresa">{{ retefuenteExogena.empresa.direccion }}</span>
+                                    </td>
+                                    <td>
+                                        <span *ngIf="retefuenteExogena.ciudadano">{{ retefuenteExogena.ciudadano.municipioResidencia.codigoDane }}</span>
+                                        <span *ngIf="retefuenteExogena.empresa">{{ retefuenteExogena.empresa.municipio.codigoDane }}</span>
+                                    </td>
+                                    <td>
+                                        <span *ngIf="retefuenteExogena.ciudadano">{{ retefuenteExogena.ciudadano.telefonoCelular }}</span>
+                                        <span *ngIf="retefuenteExogena.empresa">{{ retefuenteExogena.empresa.telefono }}</span>
+                                    </td>
                                     <td>{{ retefuenteTesoreria.valorVehiculo }}</td>
                                     <td>{{ retefuenteTesoreria.retencion }}</td>
                                 </tr>
