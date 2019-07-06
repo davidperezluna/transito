@@ -411,7 +411,7 @@ export class FroFacTramiteComponent implements OnInit {
           this.tramitePrecio = response.data;
           if (this.modulo.abreviatura == 'RNC') {
               this.onCreateArray();
-          } else if (this.modulo.abreviatura == 'RNA' || this.modulo.abreviatura == 'RNMA' || this.modulo.abreviatura == 'RNRS') {
+          } else if (this.modulo.abreviatura == 'RNA' || this.modulo.abreviatura == 'RNET' || this.modulo.abreviatura == 'RNMA' || this.modulo.abreviatura == 'RNRS') {
             //Valida si el tramite seleccionado requiere calcular retefuente
             if (this.tramitePrecio.tramite.id == 2 && this.propietarios) {
               if (this.tramitesPrecioArray.length < 1) { 

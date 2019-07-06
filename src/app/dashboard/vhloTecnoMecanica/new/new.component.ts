@@ -17,6 +17,8 @@ export class NewComponent implements OnInit {
   public errorMessage;
   public cdas: any;
   public cdaSelected: any;
+  
+  public fecha= null;
 
   public estadoSelected: any;
   public estados = [
@@ -107,10 +109,11 @@ constructor(
     let token = this._loginService.getToken();
     
     if (this.tecnomecanica.fechaExpedicion) {
-      this._TecnoMecanicaService.getFechaVencimiento({'fechaExpedicion':this.tecnomecanica.fechaExpedicion}, token).subscribe(
+      this._TecnoMecanicaService.getFechaVencimiento({'idVehiculo': this.vehiculo.id, 'fechaExpedicion':this.tecnomecanica.fechaExpedicion}, token).subscribe(
         response => {
           if (response.status == 'success') {
             this.tecnomecanica.fechaVencimiento = response.data;
+            this.fecha = true;
             //swal.close();
           } else {
             swal({

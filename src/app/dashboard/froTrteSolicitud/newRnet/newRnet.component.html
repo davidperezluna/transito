@@ -1,0 +1,405 @@
+<div class="row" *ngIf="funcionario">
+    <!-- .row -->
+    <div class="col-xs-12 col-lg-4">
+        <div class="card">
+            <div class="card-header">
+                <b class="text-uppercase">Nueva Solicitud de trámite RNET</b>
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-12 col-lg-12">
+                            <form #formSearchFactura="ngForm">
+                                <label>Consultar factura <strong class="text-danger">*</strong></label>
+                                <div class="input-group">
+                                    <input class="form-control" [(ngModel)]="numeroFactura" name="numeroFactura"
+                                        type="text" required />
+                                    <span class="input-group-btn">
+                                        <button (click)="onSearchFactura()" [disabled]="formSearchFactura.invalid"
+                                            class="btn btn-default" type="button">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="row" *ngIf='factura'>
+                        <div class="col-xs-12 col-lg-12">
+                            <span class="badge badge-success"
+                                *ngIf="factura.estado == 'PAGADA'">{{ factura.estado }}</span>
+                            <span class="badge badge-danger"
+                                *ngIf="factura.estado == 'PENDIENTE DOCUMENTACION'">{{ factura.estado }}</span>
+                            <span class="badge badge-warning"
+                                *ngIf="factura.estado == 'FINALIZADA'">{{ factura.estado }}</span>
+                            <span class="badge badge-info"
+                                *ngIf="factura.estado == 'COMPLETAR TRAMITES'">{{ factura.estado }}</span>
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <div class="btn-group">
+                                <a *ngIf="factura && factura.estado == 'PENDIENTE DOCUMENTACION'"
+                                    href="{{ apiUrl }}/{{ factura.id }}/pdf/documentacion" class="btn btn-primary"
+                                    target="_blank">
+                                    <i class="fa fa-file-pdf-o"></i>
+                                    Observaciones
+                                </a>
+                                <button *ngIf="factura && factura.estado == 'PENDIENTE DOCUMENTACION'"
+                                    (click)="onComplete()" class="btn btn-default btn-success" type="button">
+                                    <i class="fa fa-save"></i>
+                                    Completar trámites
+                                </button>
+                                <a *ngIf="factura && factura.estado == 'FINALIZADA' && certificadoTradicion"
+                                    href="{{ apiUrl }}/{{ vehiculo.id }}/pdf/certificadotradicion"
+                                    class="btn btn-primary" target="_blank">
+                                    <i class="fa fa-file-pdf-o"></i>
+                                    Certificado de tradición
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group"
+                    *ngIf="factura && factura.estado != 'FINALIZADA' && factura.estado != 'PENDIENTE DOCUMENTACION'">
+                    <div class="row">
+                        <div class="col-xs-12 col-lg-12">
+                            <form #formSearchVehiculo="ngForm">
+                                <label>Buscar vehiculo por placa</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control text-uppercase" [(ngModel)]="placa"
+                                        name="placa" required />
+                                    <span class="input-group-btn">
+                                        <button (click)="onSearchVehiculo()" [disabled]="formSearchVehiculo.invalid"
+                                            class="btn btn-default" type="button">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="row" *ngIf="vehiculo">
+                        <div class="col-xs-12 col-lg-12" *ngIf="vehiculo.cancelado">
+                            <div class="notes notes-success" role="alert">
+                                <strong>Atención!</strong> este vehiculo se encuentra con la matricula cancelada solo
+                                podrá realizar certificado de tradición y rematricula.
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12 col-lg-12">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th class="text-uppercase text-center">
+                                            <b>Resumen de vehiculo</b>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngIf="vehiculo.placa">
+                                        <td>
+                                            <b>Placa</b>
+                                            {{ vehiculo.placa?.numero }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <b>Motor</b>
+                                            {{ vehiculo.motor }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <b>Servicio</b>
+                                            {{ vehiculo.servicio.nombre }}
+                                        </td>
+                                    </tr>
+                                    <tr *ngIf="vehiculo.clase">
+                                        <td>
+                                            <b>Tipo</b>
+                                            {{ vehiculo.clase?.nombre }}
+                                        </td>
+                                    </tr>
+                                    <tr *ngIf="vehiculo.organismoTransito">
+                                        <td>
+                                            <b>Organismo transito</b>
+                                            <br>
+                                            {{ vehiculo.organismoTransito?.nombre }}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div><!-- form-group -->
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-lg-8" *ngIf="factura && vehiculo">
+        <div class="card">
+            <div class="card-body">
+                <!-- 
+                <div class="row" *ngIf="propietarios && vehiculo">
+                    <div class="col-xs-12 col-lg-12">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th colspan="2" class="text-uppercase text-center">
+                                        <b>Propietarios</b>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let propietario of propietarios; let i = index">
+                                    <td *ngIf="propietario.ciudadano">
+                                        <strong>Nombre: </strong>
+                                        {{ propietario.ciudadano?.primerNombre }} {{ propietario.ciudadano?.primerApellido }}
+                                        <br>
+                                        <strong>Identificación: </strong>
+                                        {{ propietario.ciudadano?.identificacion }}
+                                    </td>
+                                    <td *ngIf="propietario.empresa">
+                                        <strong>Nombre: </strong>
+                                        {{ propietario.empresa?.nombre }}
+                                        <br>
+                                        <strong>Identificación (NIT): </strong>
+                                        {{ propietario.empresa?.nit }}
+                                    </td>
+                                    <td>
+                                        <div class="custom-control custom-radio">
+                                            <input [disabled]='confirmarSolicitante' [(ngModel)]="tramiteSolicitud.idCiudadano" value="{{ propietario.ciudadano.id }}" type="radio" id="radio{{ i }}" name="radio" class="custom-control-input">
+                                            <label class="custom-control-label" for="radio{{ i }}">Solicitante</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot *ngIf="!confirmarSolicitante">
+                                <tr>
+                                    <td colspan="3">
+                                        <button *ngIf='!formApoderado && !apoderado' (click)="onFormApoderado()" class="btn btn-primary">
+                                            <i class="fa fa-save"></i>
+                                            Agregar apoderado
+                                        </button>
+                                        <button *ngIf='tramiteSolicitud.idCiudadano' (click)="onConfirmarSolicitante()" class="btn btn-success">
+                                            <i class="fa fa-save"></i>
+                                            Confirmar solicitante
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+                    row -->
+
+                <div class="row">
+                    <div class="col-xs-12 col-lg-4" *ngIf="!confirmarSolicitante">
+                        <form #formSearchCiudadano="ngForm">
+                            <label>Buscar ciudadano</label>
+                            <div class="input-group">
+                                <input type="number" class="form-control" placeholder="Identificacion ciudadano"
+                                    [(ngModel)]="identificacionCiudadano" name="identificacionApoderado" required />
+                                <span class="input-group-btn">
+                                    <button (click)="onSearchCiudadano()" [disabled]="formSearchCiudadano.invalid"
+                                        class="btn btn-default" type="button">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="col-xs-12 col-lg-12" *ngIf="ciudadanos && ciudadanos.length > 0">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th colspan="2" class="text-uppercase text-center">
+                                        <b>Ciudadanos</b>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let ciudadano of ciudadanos; let i = index">
+                                    <td *ngIf="ciudadano">
+                                        <strong>Nombre: </strong>
+                                        {{ ciudadano.primerNombre }} {{ ciudadano.primerApellido }}
+                                        <br>
+                                        <strong>Identificación: </strong>
+                                        {{ ciudadano.identificacion }}
+                                    </td>
+                                    <td>
+                                        <div class="custom-control custom-radio">
+                                            <input [disabled]='confirmarSolicitante'
+                                                [(ngModel)]="tramiteSolicitud.idCiudadano" value="{{ ciudadano.id }}"
+                                                type="radio" id="radio{{ i }}" name="radio"
+                                                class="custom-control-input">
+                                            <label class="custom-control-label" for="radio{{ i }}">Solicitante</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot *ngIf="!confirmarSolicitante">
+                                <tr>
+                                    <td colspan="3">
+                                        <button *ngIf='!formApoderado && !apoderado' (click)="onFormApoderado()"
+                                            class="btn btn-primary">
+                                            <i class="fa fa-save"></i>
+                                            Agregar apoderado
+                                        </button>
+                                        <button *ngIf='tramiteSolicitud.idCiudadano' (click)="onConfirmarSolicitante()"
+                                            class="btn btn-success">
+                                            <i class="fa fa-save"></i>
+                                            Confirmar solicitante
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+
+                    <div class="col-xs-12 col-lg-12" *ngIf='formApoderado && !apoderado'>
+                        <div class="input-group">
+                            <input type="number" class="form-control" placeholder="Identificacion apoderado"
+                                [(ngModel)]="identificacionApoderado" name="identificacionApoderado" required />
+                            <span class="input-group-btn">
+                                <button (click)="onSearchApoderado()" class="btn" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                                <button (click)="onCloseApoderado()" class="btn btn-danger" type="button">
+                                    <i class="fa fa-close"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-lg-12" *ngIf="apoderado">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <th colspan="3" class="text-center text-uppercase">
+                                    <b>Datos de apoderado</b>
+                                </th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <b>Tipo de identificación</b>
+                                        <br>
+                                        {{ apoderado.tipoIdentificacion.nombre }}
+                                        <br>
+                                        <b>Numero de identificación</b>
+                                        {{ apoderado.identificacion }}
+                                    </td>
+                                    <td>
+                                        <b>Nombres</b>
+                                        <br> {{ apoderado.primerNombre }} {{ apoderado.segundoNombre }}
+                                        <br>
+                                        <b>Apellidos</b>
+                                        {{ apoderado.primerApellido }} {{apoderado.segundoApellido }}
+                                    </td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <button *ngIf="!tramiteSolicitud.idSolicitante" (click)="onAddApoderado()"
+                                                class="btn btn-primary">
+                                                <i class="fa fa-save"></i>
+                                                Agregar
+                                            </button>
+                                            <button *ngIf='!confirmarSolicitante' class="btn btn-default"
+                                                (click)="onCloseApoderado()">
+                                                <i class="fa fa-times"></i>
+                                                Cancelar
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="row" *ngIf="documentacionPendiente.length > 0 && tramitesFactura">
+                    <div class="col-xs-12 col-lg-12">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-xs-12 col-lg-12">
+                                    <div class="btn-group">
+                                        <button (click)="onEnviar()" class="btn btn-success"
+                                            [disabled]="tramitesFactura && (tramitesFactura.length == tramitesRealizados.length)">
+                                            <i class="fa fa-save"></i>
+                                            Guardar observaciones
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" *ngIf="tramitesFactura && tramitesFactura.length == tramitesRealizados.length">
+                    <div class="col-xs-12 col-lg-12"
+                        *ngIf="(requiereSustrato && tramiteSolicitud.insumoEntregado) || !requiereSustrato">
+                        <div class="form-group">
+                            <div class="row" *ngIf="requiereRunt">
+                                <div class="col-xs-12 col-lg-12">
+                                    <label>Número de solicitud RUNT <b class="text-danger">*</b></label>
+                                    <input type="text" class="form-control" placeholder="No. solicitud RUNT"
+                                        [(ngModel)]="tramiteSolicitud.numeroRunt" name="numeroRunt" required />
+                                </div>
+                            </div>
+
+                            <div class="row" *ngIf="(requiereRunt && tramiteSolicitud.numeroRunt) || !requiereRunt">
+                                <div class="col-xs-12 col-lg-12">
+                                    <button (click)="onEnviar()" class="btn btn-success">
+                                        <i class="fa fa-save"></i>
+                                        Guardar información
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row"
+                    *ngIf="confirmarSolicitante && tramiteSolicitud.idCiudadano && tramitesFactura && (tramitesFactura.length > tramitesRealizados.length)">
+                    <div class="col-xs-12 col-lg-12">
+                        <b class="text-uppercase">Trámite a realizar</b>
+                        <ng-select (ngModelChange)="onChangedTramiteFactura($event)" [(ngModel)]="idTramiteFactura"
+                            [multiple]="false" [options]="tramitesFactura" name="idTramiteFactura" required></ng-select>
+                    </div>
+
+                    <div class="col-xs-12 col-lg-12" *ngIf="tramiteFactura">
+                        <app-duplicado-tarjeta-operacion *ngIf="tramiteFactura.precio.tramite.id == 37" [vehiculo]="vehiculo"
+                            [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario"
+                            [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)">
+                        </app-duplicado-tarjeta-operacion>
+
+                        <!-- <app-cambio-motor *ngIf="tramiteFactura.precio.tramite.id == 38" [vehiculo]="vehiculo"
+                            [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario"
+                            [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)">
+                        </app-cambio-motor> -->
+                    </div>
+                </div>
+
+                <div class="row"
+                    *ngIf="requiereSustrato && tramitesFactura && tramitesFactura.length == tramitesRealizados.length && !this.tramiteSolicitud.insumoEntregado">
+                    <div class="col-xs-12 col-lg-12">
+                        <app-insumo [factura]="factura" [idModulo]='2' (onReadyInsumo)="onReadyInsumo($event)">
+                        </app-insumo>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!-- /.row -->
+
+<div class="row" *ngIf="!funcionario">
+    <div class="col-xs-12 col-lg-12">
+        <div class="card">
+            <div class="card-body text-center">
+                <span class="badge badge-danger text-uppercase">Usted no tiene permisos para realizar trámites</span>
+            </div>
+        </div>
+    </div>
+</div>

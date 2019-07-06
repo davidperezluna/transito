@@ -13,6 +13,7 @@ import { FroTrteSolicitudReporteService } from '../../services/froTrteSolicitudR
 import { FroTrteSolicitudComponent } from './froTrteSolicitud.component';
 import { NewRncComponent } from './newRnc/newRnc.component';
 import { NewRnaComponent } from './newRna/newRna.component';
+import { NewRnetComponent } from './newRnet/newRnet.component';
 import { NewRnmaComponent } from './newRnma/newRnma.component';
 import { NewRnrsComponent } from './newRnrs/newRnrs.component';
 import { NewInsumoComponent } from './newInsumo/newInsumo.component';
@@ -71,6 +72,7 @@ import { UserCiudadanoModule } from '../userCiudadano/userCiudadano.module';
         FroTrteSolicitudComponent,
         NewRncComponent,
         NewRnaComponent,
+        NewRnetComponent,
         NewRnmaComponent,
         NewRnrsComponent,
         NewInsumoComponent,
@@ -114,6 +116,7 @@ import { UserCiudadanoModule } from '../userCiudadano/userCiudadano.module';
         FroTrteSolicitudComponent,
         NewRncComponent,
         NewRnaComponent,
+        NewRnetComponent,
         NewRnmaComponent,
         NewRnrsComponent,
         NewInsumoComponent,
