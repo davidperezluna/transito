@@ -33,7 +33,7 @@ export class SvIpatVehiculo {
 
         //soat
         public portaSoat: number,
-        public soat: number,
+        /* public soat: number, */
         public numeroPoliza: number,
         public aseguradoraSoat: number,
         public fechaVencimientoSoat: string,
