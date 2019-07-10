@@ -285,11 +285,9 @@ export class NewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.consecutivo);
-
     this.ipat = new SvIpat(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     this.ipatConductor = new SvIpatConductor(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    this.ipatVehiculo = new SvIpatVehiculo(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    this.ipatVehiculo = new SvIpatVehiculo(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     this.ipatVictima = new SvIpatVictima(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 
     /* === inicio consecutivo === */
@@ -1842,7 +1840,7 @@ export class NewComponent implements OnInit {
                 this.ipatVehiculo.numeroTecnoMecanica = 0;
                 this.ipatVehiculo.cantidadAcompaniantes = 0;
                 this.ipatVehiculo.portaSoat = 0;
-                this.ipatVehiculo.soat = 0;
+                /* this.ipatVehiculo.soat = 0; */
                 this.ipatVehiculo.numeroPoliza = 0;
                 this.ipatVehiculo.aseguradoraSoat = 0;
                 this.ipatVehiculo.fechaVencimientoSoat = '';
@@ -1857,7 +1855,7 @@ export class NewComponent implements OnInit {
                 this.ipatVehiculo.descripcionDanios = '';
                 this.ipatVehiculo.arrayFallas = '';
                 this.ipatVehiculo.arrayLugaresImpacto = '';
-                this.ipat.idHipotesis = '';
+                /* this.ipat.idHipotesis = ''; */
               } else {
                 swal({
                   title: 'Alerta!',

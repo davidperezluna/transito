@@ -357,6 +357,8 @@ export class FroReporteIngresosComponent implements OnInit {
                             this.arrayRetefuentesExogena = response.dataExogena.arrayRetefuentesExogena;
                             this.totalRetefuentesExogena = response.dataExogena.totalRetefuentesExogena;
 
+                            console.log(response.dataExogena.arrayRetefuentesExogena);
+
                             if (this.table) {
                                 this.table.destroy();
                             }

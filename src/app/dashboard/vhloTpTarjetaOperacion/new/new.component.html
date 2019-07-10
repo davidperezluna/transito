@@ -18,9 +18,10 @@
                         </span>
                     </div>
                 </div>
-                <div class="col-xs-12 col-lg-6" *ngIf='asignacion'>
+                <div class="col-xs-12 col-lg-12" *ngIf='asignacion'>
                     <div class="row">
                         <div class="col-xs-12 col-lg-12">
+                            <br>
                             <table class="table table-bordered table-striped">
                                 <tr>
                                     <td><b>Clase</b></td>
@@ -48,11 +49,13 @@
                 </div>
                 <div class="col-xs-12 col-lg-6" *ngIf='asignacion'>
                     <label>Fecha vencimiento <strong class="text-danger">*</strong></label>
-                    <input type="date" class="form-control" [(ngModel)]="tarjetaOperacion.fechaVencimiento" name="fechaVencimiento" required />
+                    <input type="date" class="form-control" [(ngModel)]="tarjetaOperacion.fechaVencimiento"
+                        name="fechaVencimiento" required />
                 </div>
                 <div class="col-xs-12 col-lg-6" *ngIf='asignacion'>
                     <label>Nro. Tarjeta operación <strong class="text-danger">*</strong></label>
-                    <input type="number" class="form-control" [(ngModel)]="tarjetaOperacion.numeroTarjetaOperacion" name="numeroTarjetaOperacion" required />
+                    <input type="number" class="form-control" [(ngModel)]="tarjetaOperacion.numeroTarjetaOperacion"
+                        name="numeroTarjetaOperacion" required />
                 </div>
             </div>
         </div>

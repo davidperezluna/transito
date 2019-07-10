@@ -29,7 +29,7 @@
                     </div>
                     <div class="col-xs-12 col-lg-6">
                         <label>Fecha vencimiento <strong class="text-danger">*</strong></label>
-                        <input type="date" class="form-control" [(ngModel)]="tecnomecanica.fechaVencimiento"
+                        <input type="date" class="form-control" [(ngModel)]="tecnomecanica.fechaVencimiento" [disabled]="fecha"
                             name="fechaVencimiento" required />
                     </div>
                 </div>

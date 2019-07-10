@@ -49,4 +49,18 @@ export class VhloTpTarjetaOperacionService {
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
  			return this._http.post(this.url+"/search/asignacion", params, {headers: headers}).map(res => res.json());
 	}	
+
+	searchEmpresaTransporte(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = "data=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/search/empresaTransporte", params, { headers: headers }).map(res => res.json());
+	}	
+
+	searchTarjetasOperacion(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = "data=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/search/tarjetasOperacion", params, { headers: headers }).map(res => res.json());
+	}	
 }

@@ -2,6 +2,7 @@ import { Route } from '@angular/router';
 import { FroTrteSolicitudComponent } from '.';
 import { NewRncComponent } from '.';
 import { NewRnaComponent } from '.';
+import { NewRnetComponent } from '.';
 import { NewRnmaComponent } from '.';
 import { NewRnrsComponent } from '.';
 import { ReportesComponent } from '.';
@@ -20,6 +21,11 @@ export const FroTrteSolicitudRoutes: Route[] = [
     {
       path: 'tramitesolicitud/rna',
       component: NewRnaComponent
+    },
+
+    {
+      path: 'tramitesolicitud/rnet',
+      component: NewRnetComponent
     },
 
     {

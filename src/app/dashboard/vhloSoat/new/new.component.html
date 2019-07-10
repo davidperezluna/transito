@@ -21,11 +21,11 @@
                     </div>
                     <div class="col-xs-12 col-lg-4">
                         <label>Fecha de Vigencia <strong class="text-danger">*</strong></label>
-                        <input type="date" class="form-control" [(ngModel)]="soat.fechaVigencia" name="fechaVigencia" required/>
+                        <input type="date" class="form-control" [(ngModel)]="soat.fechaVigencia" [disabled]="fecha" name="fechaVigencia" required/>
                     </div>
                     <div class="col-xs-12 col-lg-4">
                         <label>Fecha Vencimiento<strong class="text-danger">*</strong></label>
-                        <input type="date" class="form-control" [(ngModel)]="soat.fechaVencimiento" name="fechaVencimiento" required />
+                        <input type="date" class="form-control" [(ngModel)]="soat.fechaVencimiento" [disabled]="fecha" name="fechaVencimiento" required />
                     </div> 
                     <div class="col-xs-12 col-lg-6">
                         <label>Nombre Empresa <strong class="text-danger">*</strong></label>

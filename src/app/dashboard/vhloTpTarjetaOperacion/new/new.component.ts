@@ -11,6 +11,7 @@ import swal from 'sweetalert2';
 })
 export class NewComponent implements OnInit {
     @Output() ready = new EventEmitter<any>();
+    @Input() empresaHabilitadaCupo: any = null;
     public errorMessage;
     public tarjetaOperacion: VhloTpTarjetaOperacion;
     public asignacion;
@@ -23,7 +24,7 @@ export class NewComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-
+        console.log(this.empresaHabilitadaCupo);
         this.tarjetaOperacion = new VhloTpTarjetaOperacion(null, null, null, null);
     }
 

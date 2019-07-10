@@ -18,6 +18,8 @@ export class NewComponent implements OnInit {
     public soat: VhloSoat;
     public errorMessage;
     
+    public fecha= false;
+    
     public soats: any;
     public municipios: any;
     public municipioSelected: any;
@@ -78,7 +80,6 @@ export class NewComponent implements OnInit {
         this.soat.idMunicipio = this.municipioSelected;
         this.soat.estado = this.estadoSelected;
         if(this.vehiculo == null) {
-            console.log("error-----------------------------------");
             swal({
                 title: 'Error!',
                 text: 'No se ha digitado el número de la placa del vehículo',
@@ -138,12 +139,12 @@ export class NewComponent implements OnInit {
         let token = this._LoginService.getToken();
 
         if (this.soat.fechaExpedicion) {
-            this._SoatService.getFechaVencimiento({ 'fechaExpedicion': this.soat.fechaExpedicion }, token).subscribe(
+            this._SoatService.getFechaVencimiento({ 'idVehiculo': this.vehiculo.id, 'fechaExpedicion': this.soat.fechaExpedicion }, token).subscribe(
                 response => {
                     if (response.status == 'success') {
                         this.soat.fechaVencimiento = response.fechaVencimiento;
                         this.soat.fechaVigencia = response.fechaVigencia;
-                        //swal.close();
+                        this.fecha = true;
                     } else {
                         swal({
                             title: 'Alerta!',

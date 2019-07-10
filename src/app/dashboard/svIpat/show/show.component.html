@@ -48,7 +48,7 @@
                                     <th class="text-center"><b>CODIGO HIPOTESIS</b></th>
                                     <th class="text-center"><b>OTRA HIPOTESIS</b></th>
                                     <th class="text-center"><b>GEOMETRICA:</b></th>
-                                    <th class="text-center"><b>TIPO GEOMETRICA</b></th>
+                                    <!-- <th class="text-center"><b>TIPO GEOMETRICA</b></th> -->
                                     <th class="text-center"><b>UTILIZACIÓN</b></th>
                                     <th class="text-center"><b>CALZADA</b></th>
                                     <th class="text-center"><b>CARRIL</b></th>
@@ -62,7 +62,7 @@
                                     <th class="text-center"><b>VISIBILIDAD</b></th>
                                     <th class="text-center"><b>VISIBILIDAD DISMINUIDA</b></th>
                                     <th class="text-center"><b>OTRO (VISIBILIDAD)</b></th>
-                                    <th class="text-center"><b>¿HAY SEMÁFORO?</b></th>
+                                    <th class="text-center"><b>¿HAY AGENTE TRÁNSITO?</b></th>
                                     <th class="text-center"><b>ESTADO SEMÁFORO</b></th>
                                     <th class="text-center"><b>SEÑALES VERTICALES</b></th>
                                     <th class="text-center"><b>SEÑALES HORIZONTALES</b></th>
@@ -120,11 +120,11 @@
                                     <td>{{ ipat.lugar }}</td>
                                     <td>{{ ipat.area.nombre }}</td>
                                     <td>{{ ipat.area.tipoArea.nombre }}</td>
-                                    <td>{{ ipat.tipoVia.nombre }}</td>
-                                    <td>{{ ipat.cardinalidad.nombre }}</td>
+                                    <td>{{ ipat.tipoVia?.nombre }}</td>
+                                    <td>{{ ipat.cardinalidad?.nombre }}</td>
                                     <td>{{ ipat.sector.nombre }}</td>
                                     <td>{{ ipat.zona.nombre }}</td>
-                                    <td>{{ ipat.disenio.nombre }}</td>
+                                    <td>{{ ipat.disenios }}</td>
                                     <td>{{ ipat.estadoTiempo }}</td>
                                     <td>{{ ipat.observaciones }}</td>
                                     <td>{{ ipat.entidadCorrespondio?.nombre }}</td>
@@ -137,17 +137,17 @@
                                     <td>{{ ipat.placaAgente }}</td>
                                     <td>{{ ipat.gradoAgente }}</td>
                                     <td>CARGUE</td>
-                                    <td>{{ ipat.hipotesis?.codigo }}</td>
+                                    <td>{{ ipat.hipotesis }}</td>
                                     <td>{{ ipat.otraHipotesis }}</td>
-                                    <td>{{ ipat.geometria.nombre }}</td>
-                                    <td>{{ ipat.geometria.tipoGeometria.nombre }}</td>
+                                    <td>{{ ipat.geometrias }}</td>
+                                    <!-- <td>{{ ipat.geometria.tipoGeometria.nombre }}</td> -->
                                     <td>{{ ipat.utilizacion.nombre }}</td>
                                     <td>{{ ipat.calzada.nombre }}</td>
                                     <td>{{ ipat.carril.nombre }}</td>
                                     <td>{{ ipat.material.nombre }}</td>
                                     <td>{{ ipat.otroMaterial }}</td>
                                     <td>{{ ipat.estadoVia.nombre }}</td>
-                                    <td>{{ ipat.condicionVia.nombre }}</td>
+                                    <td>{{ ipat.condicionesVia }}</td>
                                     <td>{{ ipat.otraCondcionVia }}</td>
                                     <td>{{ ipat.iluminacion.nombre }}</td>
                                     <td>{{ ipat.estadoIluminacion?.nombre }}</td>
@@ -155,8 +155,8 @@
                                     <td>{{ ipat.visualDisminuida?.nombre }}</td>
                                     <td>{{ ipat.otraVisualDisminuida }}</td>
                                     <td>
-                                        <span *ngIf="ipat.haySemaforo">S</span>
-                                        <span *ngIf="!ipat.haySemaforo">N</span>
+                                        <span *ngIf="ipat.hayAgenteTransito">S</span>
+                                        <span *ngIf="!ipat.hayAgenteTransito">N</span>
                                     </td>
                                     <td>{{ ipat.estadoSemaforo?.nombre }}</td>
                                     <td>{{ ipat.senialVertical }}</td>
