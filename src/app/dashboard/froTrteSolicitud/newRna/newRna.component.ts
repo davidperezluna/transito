@@ -354,6 +354,14 @@ export class NewRnaComponent implements OnInit {
   }
 
   onComplete() {
+    swal({
+      title: 'Activando Factura!',
+      text: 'Solo tardará unos segundos, por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+    
     let token = this._LoginService.getToken();
 
     this._FacturaService.complete({ 'id': this.factura.id }, token).subscribe(

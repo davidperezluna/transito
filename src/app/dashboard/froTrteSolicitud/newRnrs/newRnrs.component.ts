@@ -38,13 +38,14 @@ export class NewRnrsComponent implements OnInit {
   public tramitesFactura: any = null;
   public tramiteFactura: any = null;
   public idTramiteFactura: any = null;
-  public facturas: any;
 
   public confirmarSolicitante = false;
   
   public tramites:any;
+  public tramiteMatriculaInicial:any = null;
   public certificadoTradicion = false;
-  public identificacionApoderado = false;
+  public identificacionApoderado: any = null;
+  public identificacionCiudadano: any = null;
   public apoderado: any = null;
   public placa: any = null;
   
@@ -52,8 +53,9 @@ export class NewRnrsComponent implements OnInit {
   public requiereRunt = false;
   public tramitesRealizados: any = [];
   public documentacionPendiente: any = [];
+  public ciudadanos: any = [];
   
-  public fromApoderado = false;
+  public formApoderado = false;
   public formNewCiudadano: any = false;
   
   constructor(
@@ -165,9 +167,7 @@ export class NewRnrsComponent implements OnInit {
 
                 if (response.data.propietarios) {
                   this.propietarios = response.data.propietarios;
-                } else {
-                  this.propietarios = null;
-                }                 
+                }            
 
                 swal.close();
               } else {
@@ -354,6 +354,14 @@ export class NewRnrsComponent implements OnInit {
   }
 
   onComplete() {
+    swal({
+      title: 'Activando Factura!',
+      text: 'Solo tardará unos segundos, por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+    
     let token = this._LoginService.getToken();
 
     this._FacturaService.complete({ 'id': this.factura.id }, token).subscribe(
@@ -511,7 +519,7 @@ export class NewRnrsComponent implements OnInit {
     );
   }
 
-  finalizarSolicitud() {
+  /*finalizarSolicitud() {
     let token = this._LoginService.getToken();
     this.tramites = '';
     this.tramitesFactura.forEach(tramiteFactura => {
@@ -521,7 +529,7 @@ export class NewRnrsComponent implements OnInit {
     var html = 'Se va a enviar la siguiente solicitud:<br>' +
       'Factura: <b>' + this.factura.numero + '</b><br>' +
       'Vehiculo: <b>' + this.vehiculo.placa.numero + '</b><br>' +
-      'Solicitante: <b>' + this.ciudadano.usuario.identificacion + '</b><hr>' +
+      'Solicitante(s): <b>' + this.ciudadanos + '</b><hr>' +
       'Tramites:<br>' +
       this.tramites
     swal({
@@ -538,7 +546,7 @@ export class NewRnrsComponent implements OnInit {
       cancelButtonAriaLabel: 'Thumbs down',
     }).then((result) => {
       if (result.value) {
-        this.factura.estado = 'Finalizada';
+        this.factura.estado = 'FINALIZADA';
         this.factura.idSolicitante = this.tramiteSolicitud.idSolicitante;  
         this.factura.idApoderado = this.apoderado.id;  
         console.log(this.factura);
@@ -561,14 +569,14 @@ export class NewRnrsComponent implements OnInit {
 
       }
     })
-  }
+  }*/
 
   onFormApoderado() {
-    this.fromApoderado = true;
+    this.formApoderado = true;
   }
 
   onAddApoderado() {
-    this.fromApoderado = false;
+    this.formApoderado = false;
     if (this.apoderado) {
       swal({
         title: 'Perfecto!',
@@ -628,12 +636,62 @@ export class NewRnrsComponent implements OnInit {
             alert("Error en la petición");
           }
         }
-      });
+      }
+    );
   }
 
   onCloseApoderado() {
-    this.fromApoderado = false;
+    this.formApoderado = false;
     this.apoderado = null;
+  }
+
+  onSearchCiudadano() {
+    swal({
+      title: 'Buscando apoderado!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+
+    let token = this._LoginService.getToken();
+
+    let datos = {
+      'identificacion': this.identificacionCiudadano,
+      'idTipoIdentificacion': 1,
+    }
+
+    this._CiudadanoService.searchByIdentificacion(datos, token).subscribe(
+      response => {
+        if (response.code == 200) {
+          if (response.data.ciudadano) {
+            this.ciudadanos.push(response.data.ciudadano);
+
+            swal({
+              title: 'Perfecto!',
+              text: response.message,
+              type: 'success',
+              confirmButtonText: 'Aceptar'
+            });
+          }
+        } else {
+          swal({
+            title: 'Error!',
+            text: response.message,
+            type: 'error',
+            confirmButtonText: 'Aceptar'
+          });
+        }
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      }
+    );
   }
 
   onConfirmarSolicitante() {

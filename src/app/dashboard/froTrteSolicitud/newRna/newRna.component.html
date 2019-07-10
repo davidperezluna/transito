@@ -319,7 +319,7 @@
                                     <input type="text" class="form-control" placeholder="No. solicitud RUNT" [(ngModel)]="tramiteSolicitud.numeroRunt" name="numeroRunt" required />
                                 </div>
                             </div>
-                            
+                            <br>
                             <div class="row" *ngIf="(requiereRunt && tramiteSolicitud.numeroRunt) || !requiereRunt">
                                 <div class="col-xs-12 col-lg-12">
                                     <button (click)="onEnviar()" class="btn btn-success">

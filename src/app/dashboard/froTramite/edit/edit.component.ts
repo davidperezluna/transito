@@ -25,6 +25,7 @@ export class EditComponent implements OnInit {
 
     onEnviar() {
         let token = this._loginService.getToken();
+        
         this._FroTramiteService.edit(this.tramite, token).subscribe(
             response => {
                 if (response.status == 'success') {

@@ -290,42 +290,53 @@ constructor(
       this._EstadoService.show({ 'id': e }, token).subscribe(
         response => {
           if (response.code == 200) {
-            this._FormatoService.show({ 'id': response.data.formato.id, 'idComparendo': this.comparendo.id }, token).subscribe(
-              response => {
-                this.datos.numero = this.trazabilidad.estado.sigla + '-' + this.comparendo.consecutivo.numero;
-      
-                $('#summernote-trazabilidad').summernote({
-                  placeholder: 'Diligencie el cuerpo del acto administrativo',
-                  tabsize: 2,
-                  height: 800,
-                  toolbar: [
-                    ['style', ['bold', 'italic', 'underline', 'clear']],
-                    ['fontsize', ['fontsize']],
-                    ['color', ['color']],
-                    ['para', ['ul', 'ol', 'paragraph']],
-                    ['table', ['table']]
-                  ]
-                });
-      
-                $('#summernote-trazabilidad').summernote('code',response.data.template);
-      
-                swal.close();
-              },
-              error => {
-                this.errorMessage = <any>error;
-      
-                if (this.errorMessage != null) {
-                  console.log(this.errorMessage);
-                  alert("Error en la petición");
+            if (response.data.formato) {
+              this._FormatoService.show({ 'id': response.data.formato.id, 'idComparendo': this.comparendo.id }, token).subscribe(
+                response => {
+                  if (response.code == 200) {
+                    $('#summernote-trazabilidad').summernote({
+                      placeholder: 'Diligencie el cuerpo del acto administrativo',
+                      tabsize: 2,
+                      height: 800,
+                      toolbar: [
+                        ['style', ['bold', 'italic', 'underline', 'clear']],
+                        ['fontsize', ['fontsize']],
+                        ['color', ['color']],
+                        ['para', ['ul', 'ol', 'paragraph']],
+                        ['table', ['table']]
+                      ]
+                    });
+          
+                    $('#summernote-trazabilidad').summernote('code', response.data.template);
+                  }
+    
+                  swal.close();
+                },
+                error => {
+                  this.errorMessage = <any>error;
+        
+                  if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert("Error en la petición");
+                  }
                 }
-              }
-            );
-            
-            swal.close();
+              );
+            }else{
+              swal({
+                title: 'Error!',
+                text: response.message,
+                type: 'error',
+                confirmButtonText: 'Aceptar'
+              });
+            }
           }else{
-
+            swal({
+              title: 'Error!',
+              text: response.message,
+              type: 'error',
+              confirmButtonText: 'Aceptar'
+            });
           }
-
         },
         error => {
           this.errorMessage = <any>error;
@@ -389,8 +400,8 @@ constructor(
       }
     );
 
-    this.formRecord = false;
     this.formTrazabilidad = true;
+    this.formRecord = false;
     this.formAcuerdoPago = false;
     this.formDocument = false;
   }
@@ -410,7 +421,8 @@ constructor(
     this._TrazabilidadService.register(this.datosTrazabilidad, token).subscribe(
       response => {
         if (response.status == 'success') {
-          this.ready.emit(true);
+          this.onSearch();
+
           swal({
             title: 'Perfecto!',
             text: response.message,

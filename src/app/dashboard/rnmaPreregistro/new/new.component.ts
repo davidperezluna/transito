@@ -315,6 +315,7 @@ ngOnInit() {
   onChangedMarca(e){
     if (e) {
       let token = this._LoginService.getToken()
+      
       this._LineaService.selectByMarca({'idMarca': e}, token).subscribe(
           response => { 
             this.lineas = response;
@@ -334,6 +335,7 @@ ngOnInit() {
   onChangedTipoMaquinaria(e) {
     if (e) {
       let token = this._LoginService.getToken()
+      
       this._ClaseMaquinariaService.searchByTipoMaquinariaSelect({'idTipoMaquinaria': e}, token).subscribe(
         response => {
           this.clasesMaquinaria = response;

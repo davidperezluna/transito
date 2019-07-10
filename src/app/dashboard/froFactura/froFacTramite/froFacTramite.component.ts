@@ -381,7 +381,16 @@ export class FroFacTramiteComponent implements OnInit {
 
     this._TramitePrecioService.selectByModulo(datos, token).subscribe(
       response => {
-        this.tramitesPrecio = response;
+        this.tramitesPrecio = response.data;
+        
+        if (response.code == 400) {
+          swal({
+            title: response.title,
+            text: response.message,
+            type: response.status,
+            confirmButtonText: 'Aceptar'
+          });
+        }
       },
       error => {
         this.errorMessage = <any>error;
@@ -433,7 +442,7 @@ export class FroFacTramiteComponent implements OnInit {
                       this.idVehiculoValor = response.data.id;
                     } else {
                       swal({
-                        title: 'Sin valor!',
+                        title: 'No existen valores registrados para calcular la retefuente!',
                         text: response.message,
                         type: 'error',
                         confirmButtonText: 'Aceptar'

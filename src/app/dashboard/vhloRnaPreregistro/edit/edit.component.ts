@@ -8,7 +8,7 @@ import { VhloCfgCarroceriaService } from '../../../services/vhloCfgCarroceria.se
 import { VhloCfgServicioService } from '../../../services/vhloCfgServicio.service';
 import { VhloCfgColorService } from '../../../services/vhloCfgColor.service';
 import { VhloCfgCombustibleService } from '../../../services/vhloCfgCombustible.service';
-import { VehiculoService } from '../../../services/vehiculo.service';
+import { VhloVehiculoService } from '../../../services/vhloVehiculo.service';
 import { VhloCfgMarcaService } from '../../../services/vhloCfgMarca.service';
 import { VhloCfgRadioAccionService } from '../../../services/vhloCfgRadioAccion.service';
 import { VhloCfgModalidadTransporteService } from '../../../services/vhloCfgModalidadTransporte.service';
@@ -113,7 +113,7 @@ constructor(
   private _MarcaService: VhloCfgMarcaService,
   private _ColorService: VhloCfgColorService,
   private _CombustibleService: VhloCfgCombustibleService,
-  private _VehiculoService: VehiculoService,
+  private _VehiculoService: VhloVehiculoService,
   private _OrganismoTransitoService: CfgOrganismoTransitoService,
   private _RadioAccionService: VhloCfgRadioAccionService,
   private _ModalidadTransporteService: VhloCfgModalidadTransporteService,
@@ -150,7 +150,6 @@ constructor(
     this.vehiculo.fechaManifiesto = datePiper.transform(
       date, 'yyyy-MM-dd'
     );
-
 
     let token = this._LoginService.getToken();
     let identity = this._LoginService.getIdentity();
@@ -745,21 +744,18 @@ constructor(
   }
 
   onEnviar(){
-    console.log("hhhgfh");
     let token = this._LoginService.getToken();
-    this.vehiculo.marcaId = this.marcaSelected;
-    this.vehiculo.lineaId = this.lineaSelected;
-    this.vehiculo.claseId = this.claseSelected;
-    this.vehiculo.carroceriaId = this.carroceriaSelected;
-    this.vehiculo.servicioId = this.servicioSelected;
-    this.vehiculo.colorId = this.colorSelected;
-    this.vehiculo.combustibleId = this.combustibleSelected;
-    this.vehiculo.sedeOperativaId = this.sedeOperativaSelected;
-    this.vehiculo.municipioId = this.municipioSelected;
-    this.vehiculo.radioAccionId = this.radioAccionSelected;
-    this.vehiculo.modalidadTransporteId = this.modalidadTransporteSelected;
+    this.vehiculo.idLinea = this.lineaSelected;
+    this.vehiculo.idClase = this.claseSelected;
+    this.vehiculo.idCarroceria = this.carroceriaSelected;
+    this.vehiculo.idServicio = this.servicioSelected;
+    this.vehiculo.idColor = this.colorSelected;
+    this.vehiculo.idCombustible = this.combustibleSelected;
+    this.vehiculo.idOrganismoTransito = this.sedeOperativaSelected;
+    this.vehiculo.idRadioAccion = this.radioAccionSelected;
+    this.vehiculo.idModalidadTransporte = this.modalidadTransporteSelected;
      
-    var html = 'los datos de la Automotor sera editados !<br>';
+    var html = 'los datos del Automotor seran editados !<br>';
    
    swal({
       title: 'Actualización de automotor!',
@@ -768,15 +764,15 @@ constructor(
       showCancelButton: true,
       focusConfirm: false,
       confirmButtonText:
-        '<i class="fa fa-thumbs-up"></i> Crear!',
+        '<i class="fa fa-thumbs-up"></i> Editar!',
       confirmButtonAriaLabel: 'Thumbs up, great!',
       cancelButtonText:
-      '<i class="fa fa-thumbs-down"></i> No crear',
+      '<i class="fa fa-thumbs-down"></i> No editar',
       cancelButtonAriaLabel: 'Thumbs down',
     }).then((result) => {
         if (result.value) {
 
-    this._VehiculoService.editVehiculo(this.vehiculo,token).subscribe(
+    this._VehiculoService.edit(this.vehiculo, token).subscribe(
 			response => {
         if(response.status == 'success'){
           this.ready.emit(true);
@@ -789,7 +785,7 @@ constructor(
         }else{
           swal({
             title: 'Error!',
-            text: 'El vehiculo '+ this.vehiculo.placa +' ya se encuentra registrado',
+            text: response.message,
             type: 'error',
             confirmButtonText: 'Aceptar'
           })

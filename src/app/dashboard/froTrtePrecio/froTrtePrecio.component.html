@@ -77,7 +77,11 @@
                         <tbody>
                             <tr class="odd" *ngFor="let tramitePrecio of tramitesPrecios; let i = index">
                                 <td>{{ i + 1 }}</td>
-                                <td>{{ tramitePrecio.tramite.nombre }} {{ tramitePrecio.tipoVehiculo.nombre }}</td>
+                                <td>
+                                    {{ tramitePrecio.tramite.nombre }} {{ tramitePrecio.tipoVehiculo.nombre }}
+                                    <br>
+                                    {{ tramitePrecio.tipoVehiculo.nombre }}
+                                </td>
                                 <td>
                                     <input class="form-control" [(ngModel)]="tramitePrecio.fechaInicial" name="fechaInicial" type="date" value="{{ (tramitePrecio.fechaInicial.timestamp * 1000) | date: 'yyyy-MM-dd' }}" required 
                                     (click)='onToggleDisable()' (blur)='onValidateDate(tramitePrecio)' [readonly]="disableTextbox">

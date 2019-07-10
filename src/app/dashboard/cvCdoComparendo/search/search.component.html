@@ -213,22 +213,11 @@
                                 <ng-select (ngModelChange)="onChangedEstado($event)" [multiple]="false" [options]="estados" [(ngModel)]="datosTrazabilidad.idComparendoEstado" name="idComparendoEstado" required>
                                 </ng-select>
                             </div>
-                            <div class="col-xs-12 col-lg-12">
-                                <label>Observaciones </label>
+                            <div class="col-xs-12 col-lg-12" *ngIf="datosTrazabilidad.idComparendoEstado">
+                                <label>Acto administrativo</label>
                                 <textarea  class="form-control" [(ngModel)]="datosTrazabilidad.observaciones" name="observaciones" id="summernote-trazabilidad"></textarea>
                             </div>
                         </div><!-- /.row -->
-
-                        <div class="row" *ngIf="datosTrazabilidad.idComparendoEstado == 14">
-                            <div class="col-xs-12 col-lg-4">
-                                <label>Fecha <strong class="text-danger">*</strong></label>
-                                <input type="date" class="form-control text-uppercase" [(ngModel)]="audiencia.fecha" name="fecha" required />
-                            </div>
-                            <div class="col-xs-12 col-lg-4">
-                                <label>Hora <strong class="text-danger">*</strong></label>
-                                <input type="time" class="form-control text-uppercase" [(ngModel)]="audiencia.hora" name="hora" required />
-                            </div>
-                        </div>
                     </div>
                 </form>
             </div>

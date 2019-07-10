@@ -13,7 +13,7 @@
               </ng-select>
             </div>
             
-            <div class="col-xs-12 col-lg-12" *ngIf="data.tipoActa && data.tipoActa == 'totales'">
+            <div class="col-xs-12 col-lg-12" *ngIf="data.tipoActa && data.tipoActa == 'subtotales'">
                 <label>Organismo de tránsito <small>(sedes)</small> <b class="text-danger">*</b></label>
                 <ng-select [multiple]="false" [options]="sedes" [(ngModel)]="data.idOrganismoTransito" name="idOrganismoTransito" required>
                 </ng-select>

@@ -69,8 +69,7 @@ constructor(
     });
   }
 
-  deleteInsumo(id:any){
-
+  onDeleteInsumo(id:any){
     swal({
       title: '¿Estás seguro?',
       text: "¡Se dañara el sustrato este registro!",
@@ -86,41 +85,40 @@ constructor(
         this.insumos = null;
         let token = this._LoginService.getToken();
         this._ImoInsumoService.delete(token,id).subscribe(
+          response => {
+          swal({
+            title: 'Perfecto!',
+            text: 'Sustrato anulado con éxito.',
+            type: 'success',
+            confirmButtonColor: '#15d4be',
+          })
+
+          this._ImoInsumoService.showLote(this.loteInsumo.id, token).subscribe(
             response => {
-                swal({
-                      title: 'Perfecto!',
-                      text: response.message,
-                      type: 'success',
-                      confirmButtonColor: '#15d4be',
-                    })
-
-                    this._ImoInsumoService.showLote(this.loteInsumo.id, token).subscribe(
-                      response => {
-                        if(response.status == 'success'){
-                          this.insumos = response.data;
-                          this.ngOnInit();
-                        }
-                        error => {
-                            this.errorMessage = <any>error;
-                
-                            if(this.errorMessage != null){
-                              console.log(this.errorMessage);
-                              alert("Error en la petición");
-                            }
-                          }
-                
-                      }); 
-              }, 
-            error => {
-              this.errorMessage = <any>error;
-
-              if(this.errorMessage != null){
-                console.log(this.errorMessage);
-                alert("Error en la petición");
+              if(response.status == 'success'){
+                this.insumos = response.data;
+                this.ngOnInit();
               }
+              error => {
+                this.errorMessage = <any>error;
+    
+                if(this.errorMessage != null){
+                  console.log(this.errorMessage);
+                  alert("Error en la petición");
+                }
+              }    
+            }); 
+          }, 
+          error => {
+            this.errorMessage = <any>error;
+
+            if(this.errorMessage != null){
+              console.log(this.errorMessage);
+              alert("Error en la petición");
             }
-          );
+          }
+        );
       }
-    })
+    });
   }
 }
