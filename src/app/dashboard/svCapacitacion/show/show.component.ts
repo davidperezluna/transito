@@ -29,8 +29,10 @@ export class ShowComponent implements OnInit {
         this._CapacitacionService.showByCapacitacion(this.capacitacion, token).subscribe(
             response => {
                 if (response.status == 'success') {
-                    this.capacitados = response.data;
-                    console.log(this.capacitados);
+                    let timeoutId = setTimeout(() => {
+                        this.capacitados = response.data;
+                        this.onInitTable();
+                    }, 100);
                     swal({
                         title: 'Perfecto!',
                         text: response.message,
@@ -57,8 +59,12 @@ export class ShowComponent implements OnInit {
         );
     }
 
-    iniciarTabla() {
-        $('#dataTables-example').DataTable({
+    onInitTable() {
+        if(this.table){
+            this.table.destroy();
+        }
+
+        this.table = $('#dataTables-example').DataTable({
             responsive: true,
             pageLength: 8,
             sPaginationType: 'full_numbers',
@@ -71,7 +77,6 @@ export class ShowComponent implements OnInit {
                 }
             }
         });
-        this.table = $('#dataTables-example').DataTable();
     }
 
     onCancelar() {

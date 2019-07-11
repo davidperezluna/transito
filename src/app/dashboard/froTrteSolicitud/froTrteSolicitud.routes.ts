@@ -6,6 +6,7 @@ import { NewRnetComponent } from '.';
 import { NewRnmaComponent } from '.';
 import { NewRnrsComponent } from '.';
 import { ReportesComponent } from '.';
+/* import { ReportesRnetComponent } from './newRnet/reportes/reportesRnet.component'; */
 
 export const FroTrteSolicitudRoutes: Route[] = [
     {
@@ -41,6 +42,11 @@ export const FroTrteSolicitudRoutes: Route[] = [
     {
       path: 'tramitesolicitud/reportes',
       component: ReportesComponent
-    }
+    },
+
+    /* {
+      path: 'tramitesolicitud/rnet/reportes',
+      component: ReportesRnetComponent
+    } */
 ];
  

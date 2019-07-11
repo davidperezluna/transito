@@ -102,7 +102,7 @@ export class NewComponent implements OnInit {
     ngOnInit() {
         this.date = new Date();
         var datePiper = new DatePipe(this.date);
-        this.fecha = datePiper.transform(this.date, 'yyyy-MM-dd HH:mm:ss a');
+        this.fecha = datePiper.transform(this.date, 'yyyy/MM/dd HH:mm');
 
         this.capacitacion = new SvCapacitacion(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 

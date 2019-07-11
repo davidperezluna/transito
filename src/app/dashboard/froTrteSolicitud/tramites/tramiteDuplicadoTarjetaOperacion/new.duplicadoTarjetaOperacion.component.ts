@@ -26,6 +26,7 @@ export class NewDuplicadoTarjetaOperacionComponent implements OnInit {
     public datos = {
         'documentacion': true,
         'observacion': null,
+        'campos': null,
         'nuevoNumeroTarjetaOperacion': null,
         'idVehiculo': null,
         'idFuncionario': null,
@@ -67,6 +68,7 @@ export class NewDuplicadoTarjetaOperacionComponent implements OnInit {
 
    
     onEnviar() {      
+        this.datos.campos = ['duplicadoTarjetaOperacion'];
         this.datos.idTramiteFactura = this.tramiteFactura.id;
         this.datos.idVehiculo = this.vehiculo.id;
 
