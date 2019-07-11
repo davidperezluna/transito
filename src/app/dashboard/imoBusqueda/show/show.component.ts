@@ -1,9 +1,9 @@
-import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import { LoginService } from '../../../services/login.service';
 import { ImoInsumoService } from '../../../services/imoInsumo.service';
-import { DatePipe } from '@angular/common';
-import swal from 'sweetalert2';
 import { environment } from 'environments/environment';
+import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
@@ -27,19 +27,17 @@ constructor(
   ){}
 
   ngOnInit() {
-    console.log(this.loteInsumo);
-
     let timeoutId = setTimeout(() => {  
       this.onInitTable();
     }, 200);
   }
 
   onInitTable(){
-     // Setup - add a text input to each footer cell
-     $('#dataTables-example-sustratos thead th.filter').each( function () {
+    // Setup - add a text input to each footer cell
+    /*$('#dataTables-example-sustratos thead th.filter').each( function () {
       var title = $(this).text();
-      $(this).html( '<input type="text" class="form-control" placeholder="'+title+'" />' );
-    } );
+      $(this).html( '<input type="text" class="filter" placeholder="'+title+'" />' );
+    } );*/
 
     this.table = $('#dataTables-example-sustratos').DataTable({
       responsive: true,
@@ -69,29 +67,39 @@ constructor(
     });
   }
 
-  onDeleteInsumo(id:any){
+  onDelete(id:any){
     swal({
       title: '¿Estás seguro?',
-      text: "¡Se dañara el sustrato este registro!",
-      type: 'warning',
+      text: "¡Se anulara el sustrato!",
+      input: 'textarea',
+      inputPlaceholder: 'Por favor diligencia el motivo de la anulación.',
       showCancelButton: true,
       confirmButtonColor: '#15d4be',
       cancelButtonColor: '#ff6262',
       confirmButtonText: 'Confirmar',
       cancelButtonText: 'Cancelar'
     }).then((result) => {
-      if (result.value) {
-        this.table.destroy();
+      if (result.value != "") {
         this.insumos = null;
+
+        swal({
+          title: 'Anulando sustrato!',
+          text: 'Solo tardara unos segundos por favor espere.',
+          onOpen: () => {
+            swal.showLoading()
+          }
+        });
+
         let token = this._LoginService.getToken();
-        this._ImoInsumoService.delete(token,id).subscribe(
+
+        this._ImoInsumoService.delete({ 'id': id, 'motivo': result.value }, token).subscribe(
           response => {
           swal({
             title: 'Perfecto!',
             text: 'Sustrato anulado con éxito.',
             type: 'success',
             confirmButtonColor: '#15d4be',
-          })
+          });
 
           this._ImoInsumoService.showLote(this.loteInsumo.id, token).subscribe(
             response => {
@@ -118,6 +126,13 @@ constructor(
             }
           }
         );
+      }else{
+        swal({
+          title: 'Atención!',
+          text: 'El sustrato no se anulara si no se diligencia un motivo.',
+          type: 'warning',
+          confirmButtonColor: '#15d4be',
+        });
       }
     });
   }

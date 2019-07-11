@@ -50,13 +50,17 @@
                         </div>    
                     </div>
                     <div class="card-footer">
-                        <button (click)="onCancelar()" class="btn btn-default">
-                            Cancelar
-                        </button>
-                        <!-- <button (click)="onEnviar()" [disabled]="isCantidad" class="btn btn-primary pull-right" type="button">Enviar</button> -->
-                        <button (click)="onSearchLote()" [disabled]="newForm.invalid" class="btn btn-primary" type="button">
-                            Buscar
-                        </button>
+                        <div class="btn-group">
+                            <button (click)="onCancelar()" class="btn btn-default">
+                                <i class="fa fa-times"></i>
+                                Cancelar
+                            </button>
+                            <!-- <button (click)="onEnviar()" [disabled]="isCantidad" class="btn btn-primary pull-right" type="button">Enviar</button> -->
+                            <button (click)="onSearchLote()" [disabled]="newForm.invalid" class="btn btn-primary" type="button">
+                                <i class="fa fa-search"></i>
+                                Buscar
+                            </button>
+                        </div>
                     </div>    
                 </form>
             </div>
@@ -102,8 +106,8 @@
                             </td>
                             <td>
                                 <button (click)="onAsignarLote(lote)" class="btn btn-success" type="button">
-                                    <i class="fa fa-check"></i>
-                                    Asignar
+                                    <i class="fa fa-exchange"></i>
+                                    Reasignar
                                 </button> 
                             </td>
                         </tr>

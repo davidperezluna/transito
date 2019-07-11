@@ -14,27 +14,36 @@
                     <form #newForm="ngForm">
                         <div class="row">
                             <div class="col-xs-12 col-lg-12"> 
-                                <table class="table " id="dataTables-example-Sustratos">
+                                <table class="table " id="dataTables-example">
                                 <thead>
                                 <tr>
-                                    <th>Sede</th>
+                                    <th>Reasignación</th>
                                     <th>Fecha</th>
                                     <th>Estado</th>
-                                    <th>Descripcion</th>
                                     <th>Acciones</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr class="odd" *ngFor="let reasignacion of reasignaciones; let i = index">
-                                    <td>{{ reasignacion.organismoTransitoDestino.nombre }}</td>
+                                    <td>
+                                        <b>Origen:</b>
+                                        <br>
+                                        {{ reasignacion.organismoTransitoOrigen?.nombre }}
+                                        <br>
+                                        <b>Destino:</b>
+                                        <br>
+                                        {{ reasignacion.organismoTransitoDestino?.nombre }}
+                                    </td>
                                     <td>{{ reasignacion.fecha }}</td>
                                     <td>{{ reasignacion.estado }}</td>
-                                    <td>{{ reasignacion.descripcion }}</td>
                                     <td>
                                         <div class="btn-group">
                                             <button (click)="onShow(reasignacion.id)"  class="btn btn-xs btn-primary" type="button">
-                                                Listar
-                                            </button> 
+                                                <i class="fa fa-list"></i>
+                                            </button>
+                                            <button (click)="onPrint(reasignacion.id)" class="btn btn-success">
+                                                <i class="fa fa-file-pdf-o"></i>
+                                            </button>
                                         </div>
                                     </td>
                                 </tr>
