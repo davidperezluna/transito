@@ -47,7 +47,7 @@ export class ImoInsumoService {
 		let json = JSON.stringify(datos);
 		let params = "data="+json;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
-		return this._http.post(this.url+"/reasignacionSustrato", params, {headers: headers}).map(
+		return this._http.post(this.url+"/reasignacion/sustrato", params, {headers: headers}).map(
 			res => res.json(),
 		);
 	}
@@ -76,7 +76,7 @@ export class ImoInsumoService {
 		return this._http.post(this.url+"/"+id+"/show", params, {headers: headers}).map(res => res.json());
 	}
 
-	pdfActaInsumo(token, datos): any{
+	pdfActaInsumo(datos, token): any{
 		let json = JSON.stringify(datos);
 		let params = "data="+json+"&authorization="+token;
 

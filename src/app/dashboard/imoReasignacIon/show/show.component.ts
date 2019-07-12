@@ -1,5 +1,4 @@
-import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { ImoTrazabilidadService } from '../../../services/imoTrazabilidad.service';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ImoAsignacionService } from '../../../services/imoAsignacion.service';
 import { PnalFuncionarioService } from '../../../services/pnalFuncionario.service';
 import { LoginService } from '../../../services/login.service';
@@ -25,7 +24,6 @@ public numero:any;
 public funcionario: any = null;
 
 constructor(
-  private _ImoTrazabilidadService: ImoTrazabilidadService,
   private _AsignacionService: ImoAsignacionService,
   private _FuncionarioService: PnalFuncionarioService,
   private _LoginService: LoginService,
