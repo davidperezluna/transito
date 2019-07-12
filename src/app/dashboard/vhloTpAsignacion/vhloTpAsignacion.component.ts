@@ -2,17 +2,22 @@ import { Component, OnInit } from '@angular/core';
 import { VhloTpAsignacionService } from '../../services/vhloTpAsignacion.service';
 import { LoginService } from '../../services/login.service';
 import { VhloTpAsignacion } from './vhloTpAsignacion.modelo';
+import { DatePipe, CurrencyPipe } from '@angular/common';
 import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
     selector: 'app-index',
-    templateUrl: './vhloTpAsignacion.component.html'
+    templateUrl: './vhloTpAsignacion.component.html',
+    providers: [DatePipe]
 })
 export class VhloTpAsignacionComponent implements OnInit {
     public errorMessage;
     public table: any;
     
+    public fecha;
+    public date;
+
     public nit;
     public empresaHabilitadaRango = null;
 
@@ -32,8 +37,11 @@ export class VhloTpAsignacionComponent implements OnInit {
 
     ngOnInit() {
         this.onInitForms();
-
         this.formSearch = true;
+
+        this.date = new Date();
+        var datePiper = new DatePipe(this.date);
+        this.fecha = datePiper.transform(this.date, 'dd-MM-yyyy');
 
         swal({
             title: 'Cargando Tabla!',
@@ -106,9 +114,22 @@ export class VhloTpAsignacionComponent implements OnInit {
         }
 
         this.table = $('#dataTables-example').DataTable({
-            responsive: false,
+            responsive: true,
             pageLength: 10,
             sPaginationType: 'full_numbers',
+            dom: 'Bfrtip',
+            buttons: [
+                {
+                    title: 'Nombre Empresa: ' + this.empresaHabilitadaRango.empresa.nombre,
+                    messageTop: 'Nit: ' + this.empresaHabilitadaRango.empresa.nit,
+                    extend: 'excel',
+                    text: 'Excel',
+                    filename: 'Reporte_Cupos_' + this.empresaHabilitadaRango.empresa.nombre + '_' + this.fecha,
+                    exportOptions: {
+                        columns: [0, 1, 2]
+                    },
+                },
+            ],
             oLanguage: {
                 oPaginate: {
                     sFirst: '<i class="fa fa-step-backward"></i>',

@@ -18,6 +18,7 @@ import { NewRnmaComponent } from './newRnma/newRnma.component';
 import { NewRnrsComponent } from './newRnrs/newRnrs.component';
 import { NewInsumoComponent } from './newInsumo/newInsumo.component';
 import { NewDuplicadoPlacaComponent } from './tramites/tramiteDuplicadoPlaca/new.duplicadoPlaca.component';
+import { NewDuplicadoTarjetaOperacionComponent } from './tramites/tramiteDuplicadoTarjetaOperacion/new.duplicadoTarjetaOperacion.component';
 import { NewDuplicadoLicenciaComponent } from './tramites/tramiteDuplicadoLicencia/new.duplicadoLicencia.component';
 import { NewCambioColorComponent } from './tramites/tramiteCambioColor/new.cambioColor.component';
 import { NewCambioServicioComponent } from './tramites/tramiteCambioServicio/new.cambioServicio.component';
@@ -46,6 +47,7 @@ import { NewImportacionTemporalComponent } from "./tramites/tramiteImportacionTe
 import { NewProrrogaImportacionTemporalComponent } from "./tramites/tramiteProrrogaImportacionTemporal/new.prorrogaImportacionTemporal.component";
 //para reportes de tramite solicitud
 import { ReportesComponent } from "./reportes/reportes.component";
+/* import { ReportesRnetComponent } from "./newRnet/reportes/reportesRnet.component"; */
 
 import { NewRncExpedicionLicenciaComponent } from './tramites/tramiteExpedicionLicencia/newRncExpedicionLicencia.component';
 import { NewRncDuplicadoLicenciaComponent } from './tramites/tramiteDuplicadoLicencia/newRncDuplicadoLicencia.component';
@@ -77,6 +79,7 @@ import { UserCiudadanoModule } from '../userCiudadano/userCiudadano.module';
         NewRnrsComponent,
         NewInsumoComponent,
         NewDuplicadoPlacaComponent,
+        NewDuplicadoTarjetaOperacionComponent,
         NewDuplicadoLicenciaComponent,
         NewCambioColorComponent,
         NewCambioPlacaComponent,
@@ -110,7 +113,8 @@ import { UserCiudadanoModule } from '../userCiudadano/userCiudadano.module';
         NewRncRecategorizacionLicenciaArribaComponent,
         NewRncRefrendacionLicenciaComponent,
 
-        ReportesComponent
+        ReportesComponent,
+        /* ReportesRnetComponent, */
     ],
     exports: [
         FroTrteSolicitudComponent,
@@ -121,6 +125,7 @@ import { UserCiudadanoModule } from '../userCiudadano/userCiudadano.module';
         NewRnrsComponent,
         NewInsumoComponent,
         NewDuplicadoPlacaComponent,
+        NewDuplicadoTarjetaOperacionComponent,
         NewDuplicadoLicenciaComponent,
         NewCambioColorComponent,
         NewCambioPlacaComponent,
@@ -154,7 +159,8 @@ import { UserCiudadanoModule } from '../userCiudadano/userCiudadano.module';
         NewRncRecategorizacionLicenciaArribaComponent,
         NewRncRefrendacionLicenciaComponent,
 
-        ReportesComponent
+        ReportesComponent,
+        /* ReportesRnetComponent */
     ],
     providers: [
         FroTrteSolicitudService, 

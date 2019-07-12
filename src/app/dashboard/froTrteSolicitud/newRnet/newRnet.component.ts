@@ -391,6 +391,7 @@ export class NewRnetComponent implements OnInit {
             }
         });
 
+        console.log(idTramiteFactura);
         if (idTramiteFactura) {
             let token = this._LoginService.getToken();
 
@@ -398,7 +399,7 @@ export class NewRnetComponent implements OnInit {
                 response => {
                     if (response.code == 200) {
                         this.tramiteFactura = response.data;
-
+                        console.log(this.tramiteFactura);
                         swal.close();
                     } else {
                         this.tramiteFactura = null;

@@ -3,18 +3,25 @@ import { VhloTpRangoService } from '../../services/vhloTpRango.service';
 import { UserEmpresaTransporteService } from '../../services/userEmpresaTransporte.service';
 import { LoginService } from '../../services/login.service';
 import { VhloTpRango } from './vhloTpRango.modelo';
+import { DatePipe, CurrencyPipe } from '@angular/common';
+
 import swal from 'sweetalert2';
+
 declare var $: any;
 
 @Component({
     selector: 'app-index',
-    templateUrl: './vhloTpRango.component.html'
+    templateUrl: './vhloTpRango.component.html',
+    providers: [DatePipe]
 })
 export class VhloTpRangoComponent implements OnInit {
     public errorMessage;
     public table: any;
     public empresasTransporte;
     public rango: VhloTpRango;
+
+    public fecha;
+    public date;
 
     public nit;
     public empresaHabilitada = null;
@@ -33,8 +40,12 @@ export class VhloTpRangoComponent implements OnInit {
 
     ngOnInit() {
         this.onInitForms();
-
         this.formSearch = true;
+
+        this.date = new Date();
+        var datePiper = new DatePipe(this.date);
+        this.fecha = datePiper.transform(this.date, 'dd-MM-yyyy');
+        
 
         swal({
             title: 'Cargando Tabla!',
@@ -96,11 +107,23 @@ export class VhloTpRangoComponent implements OnInit {
         if (this.table) {
             this.table.destroy();
         }
-
         this.table = $('#dataTables-example').DataTable({
-            responsive: false,
+            responsive: true,
             pageLength: 10,
             sPaginationType: 'full_numbers',
+            dom: 'Bfrtip',
+            buttons: [
+                {
+                    title: 'Nombre Empresa: ' + this.empresaHabilitada.empresa.nombre,
+                    messageTop: 'Nit: ' + this.empresaHabilitada.empresa.nit, 
+                    extend: 'excel',
+                    text: 'Excel',
+                    filename: 'Reporte_Rangos_' + this.empresaHabilitada.empresa.nombre + '_' + this.fecha,
+                    exportOptions: {
+                        columns: [0,1,2,3,4,5]
+                    },
+                },
+            ],
             oLanguage: {
                 oPaginate: {
                     sFirst: '<i class="fa fa-step-backward"></i>',
