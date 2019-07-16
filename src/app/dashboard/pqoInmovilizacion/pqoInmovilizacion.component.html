@@ -1,4 +1,36 @@
 <div class="container-fluid">
+  <div class="col-xs-12 col-lg-4" *ngIf='formSearch'>
+    <div class="card">
+        <div class="card-header">
+            <b class="text-uppercase">Buscar</b>
+        </div>
+        <div class="card-body">
+            <form #formIndex="ngForm">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Tipo de filtro</label>
+                            <ng-select [multiple]="false" [options]="tiposFiltro" [(ngModel)]="search.tipoFiltro" name="tipoFiltro" required></ng-select>
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Filtro</label>
+                            <input class="form-control text-uppercase" [(ngModel)]="search.filtro" name="filtro" type="text" required>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="card-footer">
+            <div class="btn-group">
+                <button (click)="onSearch()" [disabled]="formIndex.invalid" class="btn btn-primary" type="button">
+                    <i class="fa fa-search"></i>
+                    Buscar
+                </button>
+            </div>
+        </div>
+    </div>
+  </div>
+
   <div class="row" *ngIf='formIndex'>
     <div class="col-md-12">
         <div class="card">
@@ -15,7 +47,7 @@
             <table class="table " id="dataTables-example">
               <thead>
                 <tr>
-                    <th>Id</th>
+                    <th>#</th>
                     <th>Placa</th>
                     <th>No. Comparendo</th>
                     <th>Fecha ingreso</th>
@@ -34,8 +66,8 @@
                   </td>
                   <td>
                     <div class="btn-group">
-                        <button (click)="onExit(inmovilizacion)" class="btn btn-xs btn-success" type="button">
-                          <i class="fa fa-check"></i>
+                        <button *ngIf="inmovilizacion.placa.estado == 'ASIGNADA'" (click)="onExit(inmovilizacion)" class="btn btn-xs btn-success" type="button">
+                          <i class="fa fa-file-text-o"></i>
                         </button> 
                     </div>
                   </td>

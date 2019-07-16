@@ -27,7 +27,7 @@ export class NewVhloPlacaSedeComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.asignacion = new VhloPlacaSede(null, null, null, null, null, null, null);
+        this.asignacion = new VhloPlacaSede(null, null, null, null, null);
 
         this._TipoVehiculoService.select().subscribe(
             response => {

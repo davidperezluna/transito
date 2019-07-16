@@ -6,6 +6,7 @@ export class CvCdoCfgEstado{
 		public simit: boolean,
 		public habiles: boolean,
 		public actualiza: boolean,
+		public finaliza: boolean,
 		public idFormato:number,
 		public id:number
 	){}

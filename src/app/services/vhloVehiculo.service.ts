@@ -115,4 +115,11 @@ export class VhloVehiculoService {
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/validations", params, { headers: headers }).map(res => res.json());
 	}
+
+	certificadoTradicionByFile(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = "data=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/certificado/tradicion/file", params, { headers: headers }).map(res => res.json());
+	}
 }

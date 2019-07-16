@@ -1,46 +1,51 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { PqoInmovilizacionService } from '../../services/pqoInmovilizacion.service';
-import { PqoInmovilizacion } from './pqoInmovilizacion.modelo';
-import { LoginService } from '../../services/login.service';
+import { PqoInmovilizacionService } from '../../../services/pqoInmovilizacion.service';
+import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
-  selector: 'app-index',
-  templateUrl: './pqoInmovilizacion.component.html'
+  selector: 'app-search',
+  templateUrl: './search.component.html'
 })
-export class PqoInmovilizacionComponent implements OnInit {
-  public errorMessage;
-  public inmovilizacion: PqoInmovilizacion;
 
-  public inmovilizaciones;
-  
-	public formNew: any;
-	public formEdit: any;
-  public formIndex: any;
-	public formExit: any;
-	public formSearch: any;
+export class SearchComponent implements OnInit {
+    public errorMessage;
 
-  public table:any = true;
+    public inmovilizaciones;
+    public formIndex: any;
+    public formNew: any;
+    public formEdit: any;
+    public formExit: any;
+    public formSearch: any;
 
-  public search: any = {
+    public table:any = null;
+
+    public search: any = {
     'tipoFiltro': null,
     'filtro': null,
-  }
+    }
 
-  public tiposFiltro = [
+    public tiposFiltro = [
     { 'value': '1', 'label': 'Placa' },
-  ];
+    ];
   
   constructor(
     private _InmovilizacionService: PqoInmovilizacionService,
-		private _LoginService: LoginService,
+	private _LoginService: LoginService,
   ){}
     
   ngOnInit() {
     this.onInitForms();
 
     this.formSearch = true;
+  }
+
+  onInitForms(){
+    this.formNew = false;
+    this.formEdit = false;
+    this.formExit = false;
+    this.formIndex = false;
   }
 
   onSearch(){
@@ -55,46 +60,33 @@ export class PqoInmovilizacionComponent implements OnInit {
     let token = this._LoginService.getToken();
 
     this._InmovilizacionService.searchByFilter(this.search, token).subscribe(
-			response => {
-        if (response.code == 200) {
-          this.inmovilizaciones = response.data;
+		response => {
+            if (response.code == 200) {
+            this.inmovilizaciones = response.data;
 
-          let timeoutId = setTimeout(() => {
-            this.onInitTable();
-            swal.close();
-          }, 100);
+            let timeoutId = setTimeout(() => {
+                this.onInitTable();
+            }, 100);
+            } else {
+            this.inmovilizaciones = null;
 
-          this.onInitForms();
-
-          this.formSearch = true;
-        } else {
-          this.inmovilizaciones = null;
-
-          swal({
-            title: response.title,
-            text: response.message,
-            type: response.status,
-            confirmButtonText: 'Aceptar'
-          })
-        }
+            swal({
+                title: 'Alerta!',
+                text: response.message,
+                type: 'warning',
+                confirmButtonText: 'Aceptar'
+            })
+            }
 			error => {
-					this.errorMessage = <any>error;
+                this.errorMessage = <any>error;
 
-					if(this.errorMessage != null){
-						console.log(this.errorMessage);
-						alert("Error en la petición");
-					}
-				}
-      }
+                if(this.errorMessage != null){
+                    console.log(this.errorMessage);
+                    alert("Error en la petición");
+                }
+            }
+        }
     );
-  }
-
-  onInitForms(){
-    this.formNew = false;
-    this.formEdit = false;
-    this.formIndex = false;
-    this.formExit = false;
-    this.formSearch = false;
   }
 
   onInitTable(){
@@ -157,22 +149,12 @@ export class PqoInmovilizacionComponent implements OnInit {
                 alert("Error en la petición");
               }
             }
-          );
-
-        
+        );        
       }
-    })
+    });
   }
 
   onExit(inmovilizacion:any){
-    this.inmovilizacion = inmovilizacion;
-
-    this.onInitForms();
-
-    this.formExit = true;
-  }
-
-  /*onExit(inmovilizacion:any){
     let token = this._LoginService.getToken();
 
     this._InmovilizacionService.exit({ 'id':inmovilizacion.id }, token).subscribe(
@@ -205,5 +187,5 @@ export class PqoInmovilizacionComponent implements OnInit {
         }
       }
     );
-  }*/
+  }
 }

@@ -50,8 +50,8 @@ export class CvCdoComparendoService {
 
 	}
 
-	setComparendoArchivo(datoss,polca,token){
-		let json = JSON.stringify(datoss);
+	setComparendoArchivo(datos,polca,token){
+		let json = JSON.stringify(datos);
 		let params = "data="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
  			return this._http.post(this.url+"/"+polca+"/archivo", params, {headers: headers})

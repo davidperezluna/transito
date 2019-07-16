@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-
-import { LoginService } from '../../services/login.service';
 import { VhloVehiculoService } from '../../services/vhloVehiculo.service';
-
+import { PnalFuncionarioService } from '../../services/pnalFuncionario.service';
+import { LoginService } from '../../services/login.service';
 import { environment } from 'environments/environment';
-
 import swal from 'sweetalert2';
 
 @Component({
@@ -20,55 +18,80 @@ export class VhloCertificadoTradicionComponent implements OnInit {
     public sustratos: any;
     public vehiculo: any = null;
     public placa: any;
+    public funcionario:any = null;
 
-    public txt:any;
-    public valido:any;
+    public txt: any[];
+    public valido:any = true;
 
     constructor(
       private _VehiculoService: VhloVehiculoService,
+      private _FuncionarioService: PnalFuncionarioService,
       private _LoginService: LoginService,
       
     ) { }
 
-    ngOnInit() { }
+    ngOnInit() {
+      let token = this._LoginService.getToken();
+      
+      let identity = this._LoginService.getIdentity();
 
-    onSearchVehiculo(){
-        swal({
-          title: 'Buscando Vehiculo!',
-          text: 'Solo tardara unos segundos por favor espere.',
-          onOpen: () => {
-            swal.showLoading()
-          }
-        }).then((result) => {
-          if (
-            // Read more about handling dismissals
-            result.dismiss === swal.DismissReason.timer
-          ) {
-          }
-        })
-        let token = this._LoginService.getToken();
-        
-        this._VehiculoService.searchByPlaca({ 'numero': this.placa }, token).subscribe(
-          response => {
-            if(response.status == 'success'){
-              this.vehiculo = response.data;
-              swal.close();
-            }else{
-              swal({
+      this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
+        response => {
+          if (response.status == 'success') {
+            this.funcionario = response.data; 
+          } else {
+            this.funcionario = null;
+
+            swal({
                 title: 'Error!',
-                text: response.message,
+                text: 'Usted no tiene permisos para realizar la impresión.',
                 type: 'error',
                 confirmButtonText: 'Aceptar'
-              })
-            }
-          error => {
-            this.errorMessage = <any>error;
-            if (this.errorMessage != null) {
-              console.log(this.errorMessage);
-              alert("Error en la petición");
-            }
+            });
           }
-        });
+          error => {
+              this.errorMessage = <any>error;
+              if (this.errorMessage != null) {
+                  console.log(this.errorMessage);
+                  alert('Error en la petición');
+              }
+          }
+        }
+      );
+    }
+
+    onSearchVehiculo(){
+      swal({
+        title: 'Buscando Vehiculo!',
+        text: 'Solo tardara unos segundos por favor espere.',
+        onOpen: () => {
+          swal.showLoading()
+        }
+      });
+
+      let token = this._LoginService.getToken();
+      
+      this._VehiculoService.searchByPlaca({ 'numero': this.placa }, token).subscribe(
+        response => {
+          if(response.status == 'success'){
+            this.vehiculo = response.data;
+            swal.close();
+          }else{
+            swal({
+              title: 'Error!',
+              text: response.message,
+              type: 'error',
+              confirmButtonText: 'Aceptar'
+            })
+          }
+        error => {
+          this.errorMessage = <any>error;
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      });
     }   
     
     async ngAbrirInput(){
@@ -90,7 +113,7 @@ export class VhloCertificadoTradicionComponent implements OnInit {
             let allTextLines = txt.split(/\r\n|\n/);
 
             for (let i = 0; i < allTextLines.length; i++) {
-              let data = allTextLines[i].split(','); 
+              let data = allTextLines[i].split(';'); 
               if (data.length <= 0) {
                   this.valido = false;
               }else{
@@ -102,24 +125,28 @@ export class VhloCertificadoTradicionComponent implements OnInit {
             
             if (this.valido) {
               let token = this._LoginService.getToken();
-              console.log(this.txt);
-            //   this._ComparendoService.setComparendoArchivo(this.txt,polca,token).subscribe(
-            //     response => {
-            //       if (response.status == 'success') {
-            //         swal('Archivo cargado con exito')
-            //         console.log(response);
-            //       }
-            //     }, 
-            //     error => {
-            //       this.errorMessage = <any>error;
-            //       if(this.errorMessage != null){
-            //         console.log(this.errorMessage);
-            //         alert("Error en la petición");
-            //       }
-            //     }
-            //   );
+
+              let datos = {
+                'identificaciones': this.txt,
+                'idFuncionario': this.funcionario.id,
+              }
+
+              this._VehiculoService.certificadoTradicionByFile(datos, token).subscribe(
+                response => {
+                  var fileURL = URL.createObjectURL(response);
+                  window.open(fileURL);
+                }, 
+                error => {
+                  this.errorMessage = <any>error;
+                  if(this.errorMessage != null){
+                    console.log(this.errorMessage);
+                    alert("Error en la petición");
+                  }
+                }
+              );
             }else{
-              this.valido = true; 
+              this.valido = true;
+
               swal('Formato de archivo no valido');
                 swal({
                   title: 'Error',
