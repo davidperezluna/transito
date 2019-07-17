@@ -2,16 +2,21 @@ import { Component, OnInit } from '@angular/core';
 import { VhloTpTarjetaOperacionService } from '../../services/vhloTpTarjetaOperacion.service';
 import { LoginService } from '../../services/login.service';
 import { VhloTpTarjetaOperacion } from './vhloTpTarjetaOperacion.modelo';
+import { DatePipe, CurrencyPipe } from '@angular/common';
 import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
     selector: 'app-index',
-    templateUrl: './vhloTpTarjetaOperacion.component.html'
+    templateUrl: './vhloTpTarjetaOperacion.component.html',
+    providers: [DatePipe]
 })
 export class VhloTpTarjetaOperacionComponent implements OnInit {
     public errorMessage;
     public table: any;
+
+    public fecha;
+    public date;
 
     public nit;
     public empresaHabilitadaCupo = null;
@@ -32,8 +37,11 @@ export class VhloTpTarjetaOperacionComponent implements OnInit {
 
     ngOnInit() {
         this.onInitForms();
-
         this.formSearch = true;
+
+        this.date = new Date();
+        var datePiper = new DatePipe(this.date);
+        this.fecha = datePiper.transform(this.date, 'dd-MM-yyyy');
 
         swal({
             title: 'Cargando Tabla!',
@@ -49,7 +57,7 @@ export class VhloTpTarjetaOperacionComponent implements OnInit {
             ) {
             }
         });
-        this._VhloTpTarjetaOperacionService.index().subscribe(
+        /* this._VhloTpTarjetaOperacionService.index().subscribe(
             response => {
                 this.tarjetasOperacion = response.data;
                 let timeoutId = setTimeout(() => {
@@ -64,7 +72,7 @@ export class VhloTpTarjetaOperacionComponent implements OnInit {
                     alert("Error en la petición");
                 }
             }
-        );
+        ); */
 
         if (this.empresaHabilitadaCupo != null) {
             let token = this._LoginService.getToken();
@@ -117,14 +125,28 @@ export class VhloTpTarjetaOperacionComponent implements OnInit {
     }
 
     onInitTable() {
+        console.log(this.empresaHabilitadaCupo);
         if (this.table) {
             this.table.destroy();
         }
 
         this.table = $('#dataTables-example').DataTable({
-            responsive: false,
-            pageLength: 6,
+            responsive: true,
+            pageLength: 10,
             sPaginationType: 'full_numbers',
+            dom: 'Bfrtip',
+            buttons: [
+                {
+                    title: 'Nombre Empresa: ' + this.empresaHabilitadaCupo.empresa.nombre,
+                    messageTop: 'Nit: ' + this.empresaHabilitadaCupo.empresa.nit,
+                    extend: 'excel',
+                    text: 'Excel',
+                    filename: 'Reporte_tarjetasOperacion_' + this.empresaHabilitadaCupo.empresa.nombre + '_' + this.fecha,
+                    exportOptions: {
+                        columns: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17]
+                    },
+                },
+            ],
             oLanguage: {
                 oPaginate: {
                     sFirst: '<i class="fa fa-step-backward"></i>',
@@ -160,11 +182,10 @@ export class VhloTpTarjetaOperacionComponent implements OnInit {
                         response => {
                             if (response.code == 200) {
                                 this.tarjetasOperacion = response.data;
-                                console.log(this.tarjetasOperacion);
 
-                                /* let timeoutId = setTimeout(() => {
+                                let timeoutId = setTimeout(() => {
                                     this.onInitTable();
-                                }, 100); */
+                                }, 100);
                                 swal({
                                     title: response.title,
                                     text: response.message,

@@ -78,18 +78,46 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <!-- <th>Placa Vehiculo</th>
                                 <th>Nro. Tarjeta Operación</th>
-                                <th>Fecha Vencimiento</th> -->
+                                <th>Nro. Cupo</th>
+                                <th>Fecha Vencimiento Tarjeta Operación</th>
+                                <th>Placa Vehiculo</th>
+                                <th>Marca</th>
+                                <th>Linea</th>
+                                <th>Clase</th>
+                                <th>Carroceria</th>
+                                <th>Color</th>
+                                <th>Combustible</th>
+                                <th>Cilindraje</th>
+                                <th>Modelo</th>
+                                <th>Motor</th>
+                                <th>Chasis</th>
+                                <th>Serie</th>
+                                <th>Vin</th>
+                                <th>Mod. Transprote</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr class="odd" *ngFor="let tarjetaOperacion of tarjetasOperacion; let i = index">
                                 <td>{{ i + 1 }}</td>
-                                <!-- <td>{{ tarjetaOperacion.asignacion.vehiculo.placa.numero }}</td>
-                                <td>{{ tarjetaOperacion.numeroTarjetaOperacion }}</td>
-                                <td>{{ (tarjetaOperacion.fechaVencimiento.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td> -->
+                                <td>{{ tarjetaOperacion[0].numeroTarjetaOperacion }}</td>
+                                <td>{{ tarjetaOperacion[0].asignacion.cupo.numero }}</td>
+                                <td>{{ (tarjetaOperacion[0].fechaVencimiento.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td>
+                                <td>{{ tarjetaOperacion[0].asignacion.vehiculo.placa.numero }}</td>
+                                <td>{{ tarjetaOperacion[0].asignacion.vehiculo.linea.marca.nombre }}</td>
+                                <td>{{ tarjetaOperacion[0].asignacion.vehiculo.linea.nombre }}</td>
+                                <td>{{ tarjetaOperacion[0].asignacion.vehiculo.clase.nombre }}</td>
+                                <td>{{ tarjetaOperacion[0].asignacion.vehiculo.carroceria.nombre }}</td>
+                                <td>{{ tarjetaOperacion[0].asignacion.vehiculo.color.nombre }}</td>
+                                <td>{{ tarjetaOperacion[0].asignacion.vehiculo.combustible.nombre }}</td>
+                                <td>{{ tarjetaOperacion[0].asignacion.vehiculo.cilindraje }}</td>
+                                <td>{{ tarjetaOperacion[0].asignacion.vehiculo.modelo }}</td>
+                                <td>{{ tarjetaOperacion[0].asignacion.vehiculo.motor }}</td>
+                                <td>{{ tarjetaOperacion[0].asignacion.vehiculo.chasis }}</td>
+                                <td>{{ tarjetaOperacion[0].asignacion.vehiculo.serie }}</td>
+                                <td>{{ tarjetaOperacion[0].asignacion.vehiculo.vin }}</td>
+                                <td>{{ tarjetaOperacion[0].asignacion.vehiculo.modalidadTransporte.nombre }}</td>
                                 <td>
                                     <button (click)="onEdit(empresaHabilitadaCupo, tarjetaOperacion)" class="btn btn-xs btn-info" type="button">
                                         <i class="fa fa-edit"></i>
