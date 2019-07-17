@@ -303,64 +303,139 @@ export class FroFacTramiteComponent implements OnInit {
         swal.showLoading()
       }
     });
-
     let token = this._LoginService.getToken();
 
-    this._VehiculoService.searchByPlaca({ 'numero': this.vehiculoFiltro }, token).subscribe(
-      response => {
-        if (response.code == 200) {
-          this.vehiculo = response.data;
-          this.factura.idVehiculo = this.vehiculo.id;
-          
-          this.onLoadTramites();
+    console.log(this.modulo);
+    if (this.modulo.id == 6) {
+      this._VehiculoService.searchByPlaca({ 'numero': this.vehiculoFiltro }, token).subscribe(
+        response => {
+          if (response.code == 200) {
+            this.vehiculo = response.data;
+            this.factura.idVehiculo = this.vehiculo.id;
 
-          this._PropietarioService.searchByVehiculo({ 'idVehiculo':this.vehiculo.id }, token).subscribe(
-            response => {
-              if (response.code == 200) {
-                this.propietarios = response.data;
-                                
-                swal.close();
+            if(this.vehiculo.servicio == 2){
+              swal({
+                title: 'Atención!',
+                text: 'El vehículo no pertence a transporte publico',
+                type: 'warning',
+                confirmButtonText: 'Aceptar'
+              });
+              this.onLoadTramites();
+    
+              this._PropietarioService.searchByVehiculo({ 'idVehiculo':this.vehiculo.id }, token).subscribe(
+                response => {
+                  if (response.code == 200) {
+                    this.propietarios = response.data;
+                                    
+                    swal.close();
+                  } else {
+                    this.propietarios = null;
+    
+                    swal({
+                      title: 'Atención!',
+                      text: response.message,
+                      type: 'warning',
+                      confirmButtonText: 'Aceptar'
+                    });
+                  }
+    
+                  error => {
+                    this.errorMessage = <any>error;
+                    if (this.errorMessage != null) {
+                      console.log(this.errorMessage);
+                      alert("Error en la petición");
+                    }
+                  }
+                }
+              );
               } else {
-                this.propietarios = null;
-
                 swal({
                   title: 'Atención!',
-                  text: response.message,
+                  text: 'El vehículo no pertenece a transporte público.',
                   type: 'warning',
                   confirmButtonText: 'Aceptar'
                 });
               }
-
-              error => {
-                this.errorMessage = <any>error;
-                if (this.errorMessage != null) {
-                  console.log(this.errorMessage);
-                  alert("Error en la petición");
-                }
+            } else {
+              this.vehiculo = null;
+              this.factura.idVehiculo = null;
+    
+              swal({
+                title: 'Atención!',
+                text: response.message,
+                type: 'warning',
+                confirmButtonText: 'Aceptar'
+              });
+            }
+    
+            error => {
+              this.errorMessage = <any>error;
+              if (this.errorMessage != null) {
+                console.log(this.errorMessage);
+                alert("Error en la petición");
               }
             }
-          );
-        } else {
-          this.vehiculo = null;
-          this.factura.idVehiculo = null;
-
-          swal({
-            title: 'Atención!',
-            text: response.message,
-            type: 'warning',
-            confirmButtonText: 'Aceptar'
-          });
-        }
-
-        error => {
-          this.errorMessage = <any>error;
-          if (this.errorMessage != null) {
-            console.log(this.errorMessage);
-            alert("Error en la petición");
           }
-        }
+        );
+         
+      } else {
+        this._VehiculoService.searchByPlaca({ 'numero': this.vehiculoFiltro }, token).subscribe(
+          response => {
+            if (response.code == 200) {
+              this.vehiculo = response.data;
+              this.factura.idVehiculo = this.vehiculo.id;
+              
+              this.onLoadTramites();
+    
+              this._PropietarioService.searchByVehiculo({ 'idVehiculo':this.vehiculo.id }, token).subscribe(
+                response => {
+                  if (response.code == 200) {
+                    this.propietarios = response.data;
+                                    
+                    swal.close();
+                  } else {
+                    this.propietarios = null;
+    
+                    swal({
+                      title: 'Atención!',
+                      text: response.message,
+                      type: 'warning',
+                      confirmButtonText: 'Aceptar'
+                    });
+                  }
+    
+                  error => {
+                    this.errorMessage = <any>error;
+                    if (this.errorMessage != null) {
+                      console.log(this.errorMessage);
+                      alert("Error en la petición");
+                    }
+                  }
+                }
+              );
+            } else {
+              this.vehiculo = null;
+              this.factura.idVehiculo = null;
+    
+              swal({
+                title: 'Atención!',
+                text: response.message,
+                type: 'warning',
+                confirmButtonText: 'Aceptar'
+              });
+            }
+    
+            error => {
+              this.errorMessage = <any>error;
+              if (this.errorMessage != null) {
+                console.log(this.errorMessage);
+                alert("Error en la petición");
+              }
+            }
+          }
+        );
       }
-    );
+      
   }
 
   onLoadTramites(){

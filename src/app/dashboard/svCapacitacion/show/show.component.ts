@@ -29,10 +29,12 @@ export class ShowComponent implements OnInit {
         this._CapacitacionService.showByCapacitacion(this.capacitacion, token).subscribe(
             response => {
                 if (response.status == 'success') {
+                    this.capacitados = response.data;
+                    
                     let timeoutId = setTimeout(() => {
-                        this.capacitados = response.data;
                         this.onInitTable();
                     }, 100);
+
                     swal({
                         title: 'Perfecto!',
                         text: response.message,
@@ -70,10 +72,10 @@ export class ShowComponent implements OnInit {
             sPaginationType: 'full_numbers',
             oLanguage: {
                 oPaginate: {
-                    sFirst: '<<',
-                    sPrevious: '<',
-                    sNext: '>',
-                    sLast: '>>'
+                    sFirst: '<i class="fa fa-step-backward"></i>',
+                    sPrevious: '<i class="fa fa-chevron-left"></i>',
+                    sNext: '<i class="fa fa-chevron-right"></i>',
+                    sLast: '<i class="fa fa-step-forward"></i>'
                 }
             }
         });

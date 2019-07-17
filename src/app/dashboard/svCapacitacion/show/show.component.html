@@ -1,41 +1,38 @@
-<hr>
 <div class="row">
     <div class="col-xs-12 col-lg-12">
         <div class="card">
             <div class="card-header">
-                <h5 class="text-uppercase">Detalles Capacitación
-                </h5>
+                <h5 class="text-uppercase">Detalles Capacitación</h5>
             </div>
             <div class="card-body">
                 <div class="form-group row">
                     <div class="col-xs-12 col-lg-12">
-                        <div class="col-lg-12 col-md-12">
+                        <div class="col-xs-12 col-lg-12">
                             <table class="table table-bordered table-striped">
                                 <tbody>
                                     <tr>
                                         <td>
                                             <strong>Fecha y hora de registro: </strong>
-                                            <br>{{ capacitacion.fechaHoraRegistro }}
+                                            <br>{{ (capacitacion.fechaHoraRegistro.timestamp * 1000) | date: 'yyyy/MM/dd HH:mm' }}
                                         </td>
-                                        <td>
+                                        <!-- <td>
                                             <strong>Fecha Actividad: </strong>
                                             <br>{{ capacitacion.fechaActividad }}
-                                        </td>
+                                        </td> -->
                                         <td>
                                             <strong>Descripción Actividad: </strong>
                                             <br>{{ capacitacion.descripcionActividad }}
                                         </td>
-        
                                         <td>
                                             <strong>Municipio: </strong>
                                             <br>{{ capacitacion.municipio.nombre }}
                                         </td>
                                         <td>
-                                            <strong>Función Seguridad Víal: </strong>
+                                            <strong>Función: </strong>
                                             <br>{{ capacitacion.funcion.nombre }}
                                         </td>
                                         <td>
-                                            <strong>Función Criterio Seguridad Víal: </strong>
+                                            <strong>Función Criterio: </strong>
                                             <br>{{ capacitacion.funcionCriterio.nombre }}
                                         </td>
                                     </tr>
@@ -79,7 +76,7 @@
                             <td>{{ capacitado.numeroCedulaActorVial }}</td>
                             <td>{{ capacitado.nombreActorVial }}</td>
                             <td>{{ capacitado.apellidoActorVial }}</td>
-                            <td>{{ capacitado?.fechaNacimientoActorVial }}</td>
+                            <td>{{ (capacitado?.fechaNacimientoActorVial.timestamp * 1000) | date: 'yyyy/MM/dd' }}</td>
                             <td>{{ capacitado?.cargoActorVial }}</td>
                             <td>{{ capacitado?.emailActorVial }}</td>
                             <td>{{ capacitado?.telefonoActorVial }}</td>

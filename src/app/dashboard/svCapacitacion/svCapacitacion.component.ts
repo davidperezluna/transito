@@ -195,20 +195,48 @@ export class SvCapacitacionComponent implements OnInit {
     }
 
     iniciarTabla() {
-        $('#dataTables-example').DataTable({
-            responsive: true,
-            pageLength: 8,
-            sPaginationType: 'full_numbers',
-            oLanguage: {
-                oPaginate: {
-                    sFirst: '<<',
-                    sPrevious: '<',
-                    sNext: '>',
-                    sLast: '>>'
+        if (this.ciudadano) {
+            this.table = $('#dataTables-example').DataTable({
+                responsive: true,
+                pageLength: 8,
+                sPaginationType: 'full_numbers',
+                oLanguage: {
+                    oPaginate: {
+                        sFirst: '<i class="fa fa-step-backward"></i>',
+                        sPrevious: '<i class="fa fa-chevron-left"></i>',
+                        sNext: '<i class="fa fa-chevron-right"></i>',
+                        sLast: '<i class="fa fa-step-forward"></i>'
+                    }
                 }
-            }
-        });
-        this.table = $('#dataTables-example').DataTable();
+            });
+        } else {
+            this.table = $('#dataTables-example').DataTable({
+                responsive: true,
+                pageLength: 8,
+                sPaginationType: 'full_numbers',
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        title: 'Nombre empresa: ' + this.empresa.nombre,
+                        messageTop: 'nit: ' + this.empresa.nit,
+                        extend: 'excel',
+                        text: 'Excel',
+                        filename: 'Reporte_Capacitacion',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4, 5, 6, 7]
+                        },
+                    },
+                ],
+                oLanguage: {
+                    oPaginate: {
+                        sFirst: '<i class="fa fa-step-backward"></i>',
+                        sPrevious: '<i class="fa fa-chevron-left"></i>',
+                        sNext: '<i class="fa fa-chevron-right"></i>',
+                        sLast: '<i class="fa fa-step-forward"></i>'
+                    }
+                }
+            });
+        }
     }
 
     edit(capacitacion: any) {

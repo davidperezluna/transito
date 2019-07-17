@@ -80,6 +80,19 @@
                                 <th>#</th>
                                 <th>Placa Vehiculo</th>
                                 <th>Nro. Cupo</th>
+                                <th>Marca</th>
+                                <th>Linea</th>
+                                <th>Clase</th>
+                                <th>Carroceria</th>
+                                <th>Color</th>
+                                <th>Combustible</th>
+                                <th>Cilindraje</th>
+                                <th>Modelo</th>
+                                <th>Motor</th>
+                                <th>Chasis</th>
+                                <th>Serie</th>
+                                <th>Vin</th>
+                                <th>Mod. Transprote</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -88,6 +101,19 @@
                                 <td>{{ i + 1 }}</td>
                                 <td>{{ asignacion.vehiculo.placa.numero }}</td>
                                 <td>{{ asignacion.cupo.numero }}</td>
+                                <td>{{ asignacion.vehiculo.linea.marca.nombre }}</td>
+                                <td>{{ asignacion.vehiculo.linea.nombre }}</td>
+                                <td>{{ asignacion.vehiculo.clase.nombre }}</td>
+                                <td>{{ asignacion.vehiculo.carroceria.nombre }}</td>
+                                <td>{{ asignacion.vehiculo.color.nombre }}</td>
+                                <td>{{ asignacion.vehiculo.combustible.nombre }}</td>
+                                <td>{{ asignacion.vehiculo.cilindraje }}</td>
+                                <td>{{ asignacion.vehiculo.modelo }}</td>
+                                <td>{{ asignacion.vehiculo.motor }}</td>
+                                <td>{{ asignacion.vehiculo.chasis }}</td>
+                                <td>{{ asignacion.vehiculo.serie }}</td>
+                                <td>{{ asignacion.vehiculo.vin }}</td>
+                                <td>{{ asignacion.vehiculo.modalidadTransporte.nombre }}</td>
                                 <td>
                                     <button (click)="onEdit(asignacion)" class="btn btn-xs btn-info" type="button">
                                         <i class="fa fa-edit"></i>

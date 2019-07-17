@@ -372,6 +372,8 @@
                     <div class="col-xs-12 col-lg-12" *ngIf="tramiteFactura">
                         <app-duplicado-tarjeta-operacion *ngIf="tramiteFactura.precio.tramite.id == 5" [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)">
                         </app-duplicado-tarjeta-operacion>
+                        <!-- <app-expedicion-tarjeta-operacion-cambio-servicio *ngIf="tramiteFactura.precio.tramite.id == 5" [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)">
+                        </app-expedicion-tarjeta-operacion-cambio-servicio> -->
                     </div>
                 </div>
 

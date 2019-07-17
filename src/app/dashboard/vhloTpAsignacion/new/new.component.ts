@@ -5,6 +5,8 @@ import { VhloTpAsignacionService } from "../../../services/vhloTpAsignacion.serv
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
+declare var $: any;
+
 @Component({
     selector: 'app-new',
     templateUrl: './new.component.html'
@@ -12,6 +14,7 @@ import swal from 'sweetalert2';
 export class NewComponent implements OnInit {
     @Output() ready = new EventEmitter<any>();
     @Input() empresaHabilitadaRango: any = null;
+    public table: any;
     public errorMessage;
     public asignacion: VhloTpAsignacion;
     public empresa;
@@ -61,6 +64,26 @@ export class NewComponent implements OnInit {
         this.ready.emit(true);
     }
 
+    onInitTable() {
+        if (this.table) {
+            this.table.destroy();
+        }
+
+        this.table = $('#dataTables-propietario').DataTable({
+            responsive: true,
+            pageLength: 10,
+            sPaginationType: 'full_numbers',
+            oLanguage: {
+                oPaginate: {
+                    sFirst: '<i class="fa fa-step-backward"></i>',
+                    sPrevious: '<i class="fa fa-chevron-left"></i>',
+                    sNext: '<i class="fa fa-chevron-right"></i>',
+                    sLast: '<i class="fa fa-step-forward"></i>'
+                }
+            }
+        });
+    }
+
     onSearchVehiculo() {
         let token = this._LoginService.getToken();
 
@@ -69,6 +92,10 @@ export class NewComponent implements OnInit {
                 if (response.status == 'success') {
                     this.vehiculo = response.data.vehiculo;
                     this.propietarios = response.data.propietarios;
+
+                    let timeoutId = setTimeout(() => {
+                        this.onInitTable();
+                    }, 100);
                 }
             }
         );

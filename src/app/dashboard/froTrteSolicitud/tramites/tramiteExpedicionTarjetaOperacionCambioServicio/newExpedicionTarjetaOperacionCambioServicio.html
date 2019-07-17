@@ -16,13 +16,13 @@
         <div class="card">
             <div class="card-body ">
                 <b class="text-primary">
-                    Registrar duplicado de tarjeta de operación
+                    Registrar expedición de tarjeta de operación por cambio de nivel de servicio
                 </b>
                 <small>Todos los campos con
                     <b class="text-danger">*</b> son obligatorios</small>
                 <hr>
                 <div class="container">
-                    <!-- <div class="form-group">
+                    <div class="form-group">
                         <div class="row">
                             <div class="col-xs-12 col-lg-12">
                                 <div class="custom-control custom-checkbox">
@@ -40,40 +40,27 @@
                                     name="observacion" required></textarea>
                             </div>
                         </div>
-                    </div> -->
-                    <!-- <div class="form-group" *ngIf="datos.documentacion">
-                        <div class="row">
-                            <div class="col-xs-12 col-lg-12">
-                                <label>Número Cupo</label>
-                                <input class="form-control" [(ngModel)]="tarjetaOperacion.asignacion.cupo.numero" name="numeroCupo" type="number"
-                                    required />
-                            </div>
-                        </div>
-                    </div> -->
-                    <!-- <div class="form-group" *ngIf="datos.documentacion">
-                        <div class="row">
-                            <div class="col-xs-12 col-lg-12">
-                                <label>Número tarjeta operación</label>
-                                <input class="form-control" [(ngModel)]="tarjetaOperacion.numeroTarjetaOperacion" name="numeroTarjetaOperacion" type="number"
-                                    required />
-                            </div>
-                        </div>
                     </div>
+
                     <div class="form-group" *ngIf="datos.documentacion">
                         <div class="row">
-                            <div class="col-xs-12 col-lg-12">
-                                <label>Fecha vencimiento</label>
-                                <input class="form-control" [(ngModel)]="tarjetaOperacion.fechaVencimiento" name="fechaVencimiento" type="number"
-                                    required />
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Modalidad Servicio <b class="text-danger">*</b></label>
+                                <ng-select [multiple]="false" [options]="servicios" [(ngModel)]="datos.servicioAnterior" name="servicioAnterior" required>
+                                </ng-select>
                             </div>
-                        </div>
-                    </div> -->
-                    <div class="form-group" *ngIf="datos.documentacion">
-                        <div class="row">
-                            <div class="col-xs-12 col-lg-12">
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Nuevo Nivel de Servicio <b class="text-danger">*</b></label>
+                                <ng-select [multiple]="false" [options]="servicios" [(ngModel)]="datos.servicioNuevo" name="servicioNuevo" required>
+                                </ng-select>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
                                 <label>Nuevo número tarjeta operación</label>
-                                <input class="form-control" [(ngModel)]="datos.nuevoNumeroTarjetaOperacion" name="nuevoNumeroTarjetaOperacion" type="number"
-                                    required />
+                                <input class="form-control" [(ngModel)]="datos.nuevoNumeroTarjetaOperacion" name="nuevoNumeroTarjetaOperacion" type="number" required />
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Vigencia tarjeta operación</label>
+                                <input class="form-control" [(ngModel)]="datos.fechaVigencia" name="fechaVigencia" type="date" required />
                             </div>
                         </div>
                     </div>

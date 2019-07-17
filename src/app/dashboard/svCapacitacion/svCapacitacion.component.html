@@ -114,8 +114,8 @@
                         <tbody>
                             <tr class="odd" *ngFor="let capacitacion of capacitaciones; let i = index">
                                 <td>{{ i + 1 }}</td>
-                                <td>{{ capacitacion.fechaHoraRegistro }}</td>
-                                <td>{{ capacitacion.fechaActividad }}</td>
+                                <td>{{ (capacitacion.fechaHoraRegistro.timestamp * 1000) | date: 'yyyy/MM/dd HH:mm' }}</td>
+                                <td>{{ (capacitacion.fechaActividad.timestamp * 1000) | date: 'yyyy/MM/dd' }}</td>
                                 <td>{{ capacitacion.municipio.nombre }}</td>
                                 <td>{{ capacitacion.funcion.nombre }}</td>
                                 <td>{{ capacitacion.funcionCriterio.nombre }}</td>
@@ -140,7 +140,7 @@
                 </div>
             </div>
         </div>
-        <app-new *ngIf='formNew' [capacitacionInput]="capacitacion" [ciudadano]="ciudadano" [empresa]="empresa" (ready)="ready($event)"></app-new>
-        <app-show *ngIf='formShow' [capacitacion]="capacitacion" (ready)="ready($event)"></app-show>
     </div>
+    <app-new *ngIf='formNew' [capacitacionInput]="capacitacion" [ciudadano]="ciudadano" [empresa]="empresa" (ready)="ready($event)"></app-new>
+    <app-show *ngIf='formShow' [capacitacion]="capacitacion" (ready)="ready($event)"></app-show>
 </div>

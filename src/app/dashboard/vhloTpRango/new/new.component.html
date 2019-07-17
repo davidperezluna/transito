@@ -10,38 +10,38 @@
                 <div class="form-group row">
                     <div class="col-lg-6 col-md-6">
                         <label>Rango Inicio<strong class="text-danger">*</strong></label>
-                        <input class="form-control" [(ngModel)]="rango.rangoInicio" name="rangoInicio" type="number">
+                        <input class="form-control" [(ngModel)]="rango.rangoInicio" name="rangoInicio" type="number" required>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label>Rango Fin<strong class="text-danger">*</strong></label>
-                        <input class="form-control" [(ngModel)]="rango.rangoFin" name="rangoFin" type="number">
+                        <input class="form-control" [(ngModel)]="rango.rangoFin" name="rangoFin" type="number" required>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label>Nro. de Resolución <strong class="text-danger">*</strong></label>
                         <input class="form-control" [(ngModel)]="rango.numeroResolucion" name="numeroResolucion"
-                            type="number">
+                            type="number" required>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label>Fecha Resolución <strong class="text-danger">*</strong></label>
                         <input class="form-control" [(ngModel)]="rango.fechaResolucion" name="fechaResolucion"
-                            type="date">
+                            type="date" required>
                     </div>
                     <div class="form-group row" class="col-lg-6 col-md-6">
-                        <label>Observaciones <strong class="text-danger">*</strong></label>
+                        <label>Observaciones</label>
                         <textarea class="form-control" [(ngModel)]="rango.observaciones" name="observacion"></textarea>
                     </div>
                 </div>
             </form>
         </div>
-    </div>
-    <div class="card-footer">
-        <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
-            <i class="fa fa-floppy-o"></i>
-            Enviar
-        </button>
-        <button (click)="onCancelar()" class="btn btn-default">
-            <i class="fa fa-times"></i>
-            Cancelar
-        </button>
+        <div class="card-footer">
+            <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
+                <i class="fa fa-floppy-o"></i>
+                Enviar
+            </button>
+            <button (click)="onCancelar()" class="btn btn-default">
+                <i class="fa fa-times"></i>
+                Cancelar
+            </button>
+        </div>
     </div>
 </div>
