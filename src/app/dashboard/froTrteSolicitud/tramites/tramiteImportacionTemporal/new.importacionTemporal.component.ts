@@ -53,7 +53,6 @@ export class NewImportacionTemporalComponent implements OnInit {
         'propietarios': null,
         'fechaSolicitud': null,
         'numeroCuotas': null,
-        'licenciaConduccion': null,
         'idFuncionario': null,
         'idPais': null,
         'idVehiculo': null,

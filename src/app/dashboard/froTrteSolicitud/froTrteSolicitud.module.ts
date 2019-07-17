@@ -6,6 +6,7 @@ import { UserEmpresaService } from '../../services/userEmpresa.service';
 import { DefaultService } from '../../services/default.service';
 import { CfgTipoAlertaService } from '../../services/cfgTipoAlerta.service';
 import { VhloAcreedorService } from '../../services/vhloAcreedor.service';
+import { VhloRestriccionService } from '../../services/vhloRestriccion.service';
 import { FroFacRetefuenteService } from '../../services/froFacRetefuente.service';
 import { FroTrteSolicitudService } from '../../services/froTrteSolicitud.service';
 import { FroTrteSolicitudReporteService } from '../../services/froTrteSolicitudReporte.service';
@@ -114,9 +115,7 @@ import { UserCiudadanoModule } from '../userCiudadano/userCiudadano.module';
         NewRncRecategorizacionLicenciaAbajoComponent,
         NewRncRecategorizacionLicenciaArribaComponent,
         NewRncRefrendacionLicenciaComponent,
-
         ReportesComponent,
-        /* ReportesRnetComponent, */
     ],
     exports: [
         FroTrteSolicitudComponent,
@@ -161,15 +160,14 @@ import { UserCiudadanoModule } from '../userCiudadano/userCiudadano.module';
         NewRncRecategorizacionLicenciaAbajoComponent,
         NewRncRecategorizacionLicenciaArribaComponent,
         NewRncRefrendacionLicenciaComponent,
-
         ReportesComponent,
-        /* ReportesRnetComponent */
     ],
     providers: [
         FroTrteSolicitudService, 
         FroTrteSolicitudReporteService, 
         CfgTipoAlertaService, 
         TramiteTrasladoService, 
+        VhloRestriccionService,
         VhloAcreedorService,
         FroFacRetefuenteService,
         UserEmpresaService,

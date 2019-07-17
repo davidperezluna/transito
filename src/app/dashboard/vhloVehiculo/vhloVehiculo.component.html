@@ -25,13 +25,13 @@
               </thead>
               <tbody>
                 <tr class="odd" *ngFor="let vehiculo of vehiculos; let i = index">
-                  <td>{{vehiculo.placa}}</td>
-                  <td>{{vehiculo.motor}}</td>
-                  <td>{{vehiculo.modelo}}</td>
-                  <td>{{vehiculo.linea.marca.nombre}}</td>
-                  <td>{{vehiculo.linea.nombre}}</td>
-                  <td>{{vehiculo.valor}}</td>
-                  <td>{{vehiculo.chasis}}</td>
+                  <td>{{ vehiculo.placa }}</td>
+                  <td>{{ vehiculo.motor }}</td>
+                  <td>{{ vehiculo.modelo }}</td>
+                  <td>{{ vehiculo.linea.marca.nombre }}</td>
+                  <td>{{ vehiculo.linea.nombre }}</td>
+                  <td>{{ vehiculo.valor }}</td>
+                  <td>{{ vehiculo.chasis }}</td>
                   <td>
                     <div class="btn-group">
                       <button (click)="editVehiculo(vehiculo)" class="btn btn-info" type="button">

@@ -57,7 +57,7 @@
                             <td>{{ placa.tipoVehiculo?.nombre }}</td>
                             <td>{{ placa.organismoTransito?.nombre }}</td>
                             <td>
-                                <button (click)="onLiberate(placa.id)" class="btn btn-xs btn-info" type="button">
+                                <button *ngIf="placa.estado == 'ASIGNADA'" (click)="onLiberate(placa.id)" class="btn btn-xs btn-info" type="button">
                                     <i class="fa fa-unlock"></i>
                                     Liberar
                                 </button>

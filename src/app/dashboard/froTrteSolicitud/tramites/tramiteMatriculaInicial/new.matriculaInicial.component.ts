@@ -55,6 +55,7 @@ export class NewMatricualaInicialComponent implements OnInit {
         'observacion': null,
         'propietarios': [],
         'solidario': false,
+        'cantidadPlacas': null,
         'tipoPropiedad': null,
         'idFuncionario': null,
         'idVehiculo': null,

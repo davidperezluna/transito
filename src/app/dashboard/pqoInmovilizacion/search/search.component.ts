@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { PqoInmovilizacionService } from '../../../services/pqoInmovilizacion.service';
+import { PnalFuncionarioService } from '../../../services/pnalFuncionario.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 declare var $: any;
@@ -13,39 +14,75 @@ export class SearchComponent implements OnInit {
     public errorMessage;
 
     public inmovilizaciones;
-    public formIndex: any;
-    public formNew: any;
-    public formEdit: any;
-    public formExit: any;
+    public inmovilizacion: any = null;
+    public funcionario: any = null;
     public formSearch: any;
+    public formIndex: any;
+    public formExit: any;
 
     public table:any = null;
 
     public search: any = {
-    'tipoFiltro': null,
-    'filtro': null,
+      'tipoFiltro': null,
+      'filtro': null,
     }
 
     public tiposFiltro = [
-    { 'value': '1', 'label': 'Placa' },
+      { 'value': '1', 'label': 'Placa' },
     ];
+
+    public datos: any = {
+      'observaciones': null,
+      'idFuncionario': null,
+      'idInmovilizacion': null,
+    }
   
   constructor(
     private _InmovilizacionService: PqoInmovilizacionService,
-	private _LoginService: LoginService,
+    private _FuncionarioService: PnalFuncionarioService,
+	  private _LoginService: LoginService,
   ){}
     
   ngOnInit() {
     this.onInitForms();
 
     this.formSearch = true;
+
+    let token = this._LoginService.getToken();
+      
+      let identity = this._LoginService.getIdentity();
+
+      this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
+        response => {
+          if (response.status == 'success') {
+            this.funcionario = response.data;
+
+            this.datos.idFuncionario = this.funcionario.id;
+          } else {
+            this.funcionario = null;
+
+            swal({
+                title: 'Error!',
+                text: 'Usted no tiene permisos para registrar salidas de vehiculos.',
+                type: 'error',
+                confirmButtonText: 'Aceptar'
+            });
+          }
+          error => {
+              this.errorMessage = <any>error;
+              if (this.errorMessage != null) {
+                  console.log(this.errorMessage);
+                  alert('Error en la petición');
+              }
+          }
+        }
+      );
   }
 
   onInitForms(){
-    this.formNew = false;
-    this.formEdit = false;
-    this.formExit = false;
+    this.formSearch = false;
     this.formIndex = false;
+    this.formExit = false;
   }
 
   onSearch(){
@@ -60,32 +97,37 @@ export class SearchComponent implements OnInit {
     let token = this._LoginService.getToken();
 
     this._InmovilizacionService.searchByFilter(this.search, token).subscribe(
-		response => {
-            if (response.code == 200) {
-            this.inmovilizaciones = response.data;
+      response => {
+        if (response.code == 200) {
+          this.inmovilizaciones = response.data;
 
-            let timeoutId = setTimeout(() => {
-                this.onInitTable();
-            }, 100);
-            } else {
-            this.inmovilizaciones = null;
+          let timeoutId = setTimeout(() => {
+              this.onInitTable();
+              swal.close();
+          }, 100);
 
-            swal({
-                title: 'Alerta!',
-                text: response.message,
-                type: 'warning',
-                confirmButtonText: 'Aceptar'
-            })
-            }
+          this.onInitForms();
+
+          this.formIndex = true;
+        } else {
+        this.inmovilizaciones = null;
+
+        swal({
+            title: 'Alerta!',
+            text: response.message,
+            type: 'warning',
+            confirmButtonText: 'Aceptar'
+        });
+      }
 			error => {
-                this.errorMessage = <any>error;
+          this.errorMessage = <any>error;
 
-                if(this.errorMessage != null){
-                    console.log(this.errorMessage);
-                    alert("Error en la petición");
-                }
-            }
+          if(this.errorMessage != null){
+              console.log(this.errorMessage);
+              alert("Error en la petición");
+          }
         }
+      }
     );
   }
 
@@ -106,58 +148,24 @@ export class SearchComponent implements OnInit {
     });
   }
 
-  onNew(){
-    this.onInitForms();
-    this.formNew = true;
-  }
-
-  ready(isCreado:any){
-    if(isCreado) {
-      this.ngOnInit();
-    }
-  }
-
-  delete(id:any){
-    swal({
-      title: '¿Estás seguro?',
-      text: "¡Se eliminara este registro!",
-      type: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#15d4be',
-      cancelButtonColor: '#ff6262',
-      confirmButtonText: 'Confirmar',
-      cancelButtonText: 'Cancelar'
-    }).then((result) => {
-      if (result.value) {
-        let token = this._LoginService.getToken();
-        this._InmovilizacionService.delete(token,id).subscribe(
-            response => {
-                swal({
-                      title: 'Eliminado!',
-                      text:'Registro eliminado correctamente.',
-                      type:'success',
-                      confirmButtonColor: '#15d4be',
-                    })
-                  this.table.destroy();
-                  this.ngOnInit();
-              }, 
-            error => {
-              this.errorMessage = <any>error;
-
-              if(this.errorMessage != null){
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
-            }
-        );        
-      }
-    });
-  }
-
   onExit(inmovilizacion:any){
+    this.inmovilizacion = inmovilizacion;
+
+    this.onInitForms();
+
+    this.formExit = true;
+  }
+
+  onCancelar(){
+    this.ngOnInit();
+  }
+
+  onEnviar(){
     let token = this._LoginService.getToken();
 
-    this._InmovilizacionService.exit({ 'id':inmovilizacion.id }, token).subscribe(
+    this.datos.idInmovilizacion = this.inmovilizacion.id;
+
+    this._InmovilizacionService.authorization(this.datos, token).subscribe(
       response => {
         if (response.code == 200) {
           swal({
@@ -167,7 +175,6 @@ export class SearchComponent implements OnInit {
             confirmButtonText: 'Aceptar'
           });
 
-          this.table.destroy();
           this.ngOnInit();
         }else{
           swal({

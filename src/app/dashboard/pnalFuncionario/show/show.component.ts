@@ -29,7 +29,7 @@ constructor(
       response => {
         this.horarios = response.data;
         let timeoutId = setTimeout(() => {
-          this.iniciarTabla();
+          this.onInitTable();
         }, 100);
       },
       error => {
@@ -43,7 +43,7 @@ constructor(
     );
   }
 
-  iniciarTabla() {
+  onInitTable() {
     $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,

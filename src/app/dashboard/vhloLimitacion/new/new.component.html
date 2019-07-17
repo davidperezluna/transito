@@ -188,7 +188,7 @@
         
                                 <div class="col-xs-12 col-lg-6">
                                     <label>Tipo Limitación <b class="text-danger">*</b></label>
-                                    <ng-select [multiple]="false" [options]="limitaciones" [(ngModel)]="limitacion.idTipoLimitacion" required name="idTipoLimitacion">
+                                    <ng-select [multiple]="false" [options]="limitaciones" [(ngModel)]="limitacion.idTipoLimitacion" name="idTipoLimitacion" required>
                                     </ng-select>
                                 </div>
         
@@ -199,13 +199,13 @@
         
                                 <div class="col-xs-12 col-lg-6">
                                     <label>Causal de Limitación <b class="text-danger">*</b></label>
-                                    <ng-select [multiple]="false" [options]="causalesLimitacion" [(ngModel)]="limitacion.idCausalLimitacion" required name="idCausalLimitacion">
+                                    <ng-select [multiple]="false" [options]="causalesLimitacion" [(ngModel)]="limitacion.idCausalLimitacion" name="idCausalLimitacion">
                                     </ng-select>
                                 </div>
         
                                 <div class="col-xs-12 col-lg-6">
                                     <label>Tipo de Proceso <b class="text-danger">*</b></label>
-                                    <ng-select [multiple]="false" [options]="tiposProceso" [(ngModel)]="limitacion.idTipoProcesoLimitacion" required name="idTipoProcesoLimitacion">
+                                    <ng-select [multiple]="false" [options]="tiposProceso" [(ngModel)]="limitacion.idTipoProcesoLimitacion" name="idTipoProcesoLimitacion" required>
                                     </ng-select>
                                 </div>
         

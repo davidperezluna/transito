@@ -135,6 +135,13 @@ constructor(
           });
 
           this.ngOnInit();
+        }else{
+          swal({
+            title: 'Error!',
+            text: response.message,
+            type: 'error',
+            confirmButtonText: 'Aceptar'
+          });
         }
 			error => {
 					this.errorMessage = <any>error;

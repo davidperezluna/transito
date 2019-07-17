@@ -44,7 +44,7 @@
                     <div class="form-group" *ngIf="datos.documentacion">
                         <div class="row">
                             <div class="col-xs-12 col-lg-6">
-                                <label>Tipo de propiedad <span class="text-danger">*</span></label>
+                                <label>Tipo de propiedad <b class="text-danger">*</b></label>
                                 <ng-select [multiple]="false" [options]="tiposPropiedad" [(ngModel)]="tipoPropiedadSelected" name="tipoPropiedad" required>
                                 </ng-select>
                             </div>
@@ -55,9 +55,7 @@
                                 <div *ngIf="tipoPropiedadSelected">
                                     <div class="row">                                       
                                         <div class="col-xs-12 col-lg-6">
-                                            <label>Tipo de identificación
-                                                <span class="text-danger">*</span>
-                                            </label>
+                                            <label>Tipo de identificación<b class="text-danger">*</b></label>
                                             <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionSelected" name="idTipoIdentificacion" required>
                                             </ng-select>
                                         </div>
@@ -291,6 +289,15 @@
                             </div>
                         </div><!-- /.row -->
                     </div><!-- /.form-group -->
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Cantidad de placas</label>
+                                <input class="form-control" [(ngModel)]="datos.cantidadPlacas" name="cantidadPlacas" type="text" />
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="card-footer">

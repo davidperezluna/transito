@@ -71,10 +71,13 @@
                                 <td>{{ asignacion.tipoVehiculo.nombre }}</td>
                                 <td>
                                     <b>Rango inicial: </b>
-                                    {{ asignacion.letrasInicio }} {{ asignacion.numeroInicial }}
+                                    {{ asignacion.rangoInicial }}
                                     <br>
                                     <b>Rango final: </b>
-                                    {{ asignacion.letrasFinal }} {{ asignacion.numeroFinal }}
+                                    {{ asignacion.rangoFinal }}
+                                    <br>
+                                    <b>Fecha asignación: </b>
+                                    {{ (asignacion.createdAt.timestamp * 1000) | date: 'dd/MM/yyyy' }}
                                 </td>
                                 <td>
                                     <div class="btn-group">

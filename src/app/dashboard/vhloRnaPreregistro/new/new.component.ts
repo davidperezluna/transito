@@ -647,6 +647,13 @@ constructor(
         this._RnaPreregistroService.register(this.vehiculo, token).subscribe(
           response => {
             if (response.status == 'success') {
+              swal({
+                title: 'Perfecto!',
+                text: response.message,
+                type: 'success',
+                confirmButtonText: 'Aceptar'
+              });
+              
               if (this.vehiculo.tipoMatricula == 'RADICADO' || this.vehiculo.tipoMatricula == 'IMPORTACION') {
                 this.datos.idVehiculo = response.data.id;
                 
@@ -654,20 +661,6 @@ constructor(
                   response => {
                     if (response.code == 200) {
                       this.ready.emit(true);
-    
-                      swal({
-                        title: 'Perfecto!',
-                        text: response.message,
-                        type: 'success',
-                        confirmButtonText: 'Aceptar'
-                      });
-                    }else{
-                      swal({
-                        title: 'Error!',
-                        text: response.message,
-                        type: 'error',
-                        confirmButtonText: 'Aceptar'
-                      });
                     }
                   },
                   error => {

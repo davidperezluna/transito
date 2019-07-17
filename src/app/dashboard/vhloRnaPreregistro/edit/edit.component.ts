@@ -252,6 +252,7 @@ constructor(
     this._CarroceriaService.select().subscribe(
       response => {
         this.carrocerias = response;
+
         setTimeout(() => {
             this.carroceriaSelected = [this.vehiculo.carroceria.id];
         });
@@ -776,6 +777,7 @@ constructor(
 			response => {
         if(response.status == 'success'){
           this.ready.emit(true);
+          
           swal({
             title: 'Perfecto!',
             text: 'Registro exitoso!',
