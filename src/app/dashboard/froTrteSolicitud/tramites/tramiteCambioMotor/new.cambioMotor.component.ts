@@ -26,19 +26,48 @@ export class NewCambioMotorComponent implements OnInit {
     public tramiteSolicitud: any = null;
 
     public tiposIdentificacion: any;
-    public tipoIngresoList: string[];
     public combustibles: any;
+    public tipoIngresoSelected: any;
 
     public datos = {
+        'documentacion': true,
+        'observacion': null,
+        'sijinChequeoNumero': null,
+        'sijinChequeoFecha': null,
+        'entidad': null,
+        'idTipoIngreso': null,
+        'idFuncionario': null,
+    };
+
+    public datosNuevo = {
         'documentacion': true,
         'observacion': null,
         'numeroMotor': null,
         'numeroAceptacion': null,
         'numeroFactura': null,
+        'fechaFactura': null,
         'sijinChequeoNumero': null,
         'sijinChequeoFecha': null,
         'entidad': null,
         'fecha': null,
+        'campos': null,
+        'idFuncionario': null,
+        'idVehiculo': null,
+        'idTipoIngreso': null,
+        'idCombustible': null,
+        'idTramiteFactura': null,
+    };
+
+    public datosUsado = {
+        'documentacion': true,
+        'observacion': null,
+        'numeroMotor': null,
+        'numeroAceptacion': null,
+        'numeroCompraVenta': null,
+        'fechaCompraVenta': null,
+        'sijinChequeoNumero': null,
+        'sijinChequeoFecha': null,
+        'entidad': null,
         'tipoIdentificacion': null,
         'numeroIdentificacion': null,
         'campos': null,
@@ -118,13 +147,35 @@ export class NewCambioMotorComponent implements OnInit {
     }
 
     onEnviar() {
-        this.datos.campos = ['motor'];
-        this.datos.idVehiculo = this.vehiculo.id;
-        this.datos.idTramiteFactura = this.tramiteFactura.id;
+        let resumen;
 
-        let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero +
-                    '<br><b>Motor anterior: </b>' + this.vehiculo.motor.nombre +
-                    '<br><b>Motor nuevo: </b>' + this.datos.numeroMotor;
+        if (this.datos.idTipoIngreso == 'NUEVO') {
+            this.datosNuevo.campos = ['motor'];
+            this.datosNuevo.idVehiculo = this.vehiculo.id;
+            this.datosNuevo.idTramiteFactura = this.tramiteFactura.id;
+            this.datosNuevo.idTipoIngreso = this.datos.idTipoIngreso;
+            this.datosNuevo.idFuncionario = this.datos.idFuncionario;
+            this.datosNuevo.entidad = this.datos.entidad;
+            this.datosNuevo.sijinChequeoNumero = this.datos.sijinChequeoNumero;
+            this.datosNuevo.sijinChequeoFecha = this.datos.sijinChequeoFecha;
+
+            resumen = "No. factura: ," + this.tramiteFactura.factura.numero +
+                    'Motor anterior: ,' + this.vehiculo.motor +
+                    'Motor nuevo: ,' + this.datosNuevo.numeroMotor;
+        } else {
+            this.datosUsado.campos = ['motor'];
+            this.datosUsado.idVehiculo = this.vehiculo.id;
+            this.datosUsado.idTramiteFactura = this.tramiteFactura.id;
+            this.datosUsado.idTipoIngreso = this.datos.idTipoIngreso;
+            this.datosUsado.idFuncionario = this.datos.idFuncionario;
+            this.datosUsado.entidad = this.datos.entidad;
+            this.datosUsado.sijinChequeoNumero = this.datos.sijinChequeoNumero;
+            this.datosUsado.sijinChequeoFecha = this.datos.sijinChequeoFecha;
+
+            resumen = "No. factura: ," + this.tramiteFactura.factura.numero +
+                    'Motor anterior: ,' + this.vehiculo.motor +
+                    'Motor nuevo: ,' + this.datosUsado.numeroMotor;
+        }
 
         this.realizado = true;
 

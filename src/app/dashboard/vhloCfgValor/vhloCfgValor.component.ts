@@ -11,15 +11,20 @@ declare var $: any;
 export class VhloCfgValorComponent implements OnInit {
   public errorMessage;
   public id;
-  public respuesta;
-  public cfgValorVehiculos;
+  public valores;
+
+  public formIndex = true;
   public formNew = false;
   public formEdit = false;
-  public formIndex = true;
+  public formUpload = false;
+
   public txt: any[] = null;
   public table: any = null;
-  public cfgValorVehiculo: any;
+  public valor: any;
   public valido = true;
+
+  public file: any = null;
+  public fileSelected: File = null;
 
   constructor(
     private _VhloValorService: VhloValorService,
@@ -30,23 +35,20 @@ export class VhloCfgValorComponent implements OnInit {
     swal({
       title: 'Cargando Tabla!',
       text: 'Solo tardara unos segundos por favor espere.',
-      timer: 1500,
       onOpen: () => {
         swal.showLoading()
       }
-    }).then((result) => {
-      if (
-        // Read more about handling dismissals
-        result.dismiss === swal.DismissReason.timer
-      ) {
-      }
-    })
-    this._VhloValorService.get().subscribe(
+    });
+
+    this._VhloValorService.index().subscribe(
       response => {
         if (response) {
-          this.cfgValorVehiculos = response.data;
+          this.valores = response.data;
+
           let timeoutId = setTimeout(() => {
-            this.iniciarTabla();
+            this.onInitForms();
+            this.onInitTable();
+            this.formIndex = true;
           }, 100);
         }
       },
@@ -60,27 +62,50 @@ export class VhloCfgValorComponent implements OnInit {
       }
     );
   }
-  iniciarTabla() {
-    $('#dataTables-example').DataTable({
+
+  onInitForms(){
+    this.formIndex = false;
+    this.formNew = false;
+    this.formEdit = false;
+    this.formUpload = false;
+  }
+
+  onInitTable() {
+    this.table = $('#dataTables-example').DataTable({
       responsive: true,
-      pageLength: 8,
+      pageLength: 10,
       sPaginationType: 'full_numbers',
       oLanguage: {
         oPaginate: {
-          sFirst: '<<',
-          sPrevious: '<',
-          sNext: '>',
-          sLast: '>>'
+          sFirst: '<i class="fa fa-step-backward"></i>',
+          sPrevious: '<i class="fa fa-chevron-left"></i>',
+          sNext: '<i class="fa fa-chevron-right"></i>',
+          sLast: '<i class="fa fa-step-forward"></i>'
         }
       }
     });
-    this.table = $('#dataTables-example').DataTable();
   }
+
   onNew() {
     this.formNew = true;
     this.formIndex = false;
     if (this.table) {
       this.table.destroy();
+    }
+  }
+
+  onFormUpload() {
+    this.onInitForms();
+
+    this.formUpload = true;
+  }
+
+  onFileChange(event) {
+    if (event.target.files.length > 0) {
+      this.fileSelected = event.target.files[0];
+
+      this.file = new FormData();
+      this.file.append('file', this.fileSelected);
     }
   }
 
@@ -92,8 +117,8 @@ export class VhloCfgValorComponent implements OnInit {
       this.ngOnInit();
     }
   }
-  deleteCfgValorVehiculo(id: any) {
 
+  onDelete(id: any) {
     swal({
       title: '¿Estás seguro?',
       text: "¡Se eliminara este registro!",
@@ -115,7 +140,7 @@ export class VhloCfgValorComponent implements OnInit {
               confirmButtonColor: '#15d4be',
             })
             this.table.destroy();
-            this.respuesta = response;
+
             this.ngOnInit();
           },
           error => {
@@ -127,73 +152,62 @@ export class VhloCfgValorComponent implements OnInit {
             }
           }
         );
-
-
       }
     })
   }
 
-  editCfgValorVehiculo(cfgValorVehiculo: any) {
-    this.cfgValorVehiculo = cfgValorVehiculo;
+  onEdit(valor: any) {
+    this.valor = valor;
     this.formEdit = true;
     this.formIndex = false;
   }
 
-  async onUploadFile() {
-    let token = this._loginService.getToken();
-    
-    const { value: files } = await swal({
-        title: 'Seleccione el archivo .csv',
-        input: 'file',
-        inputAttributes: {
-            'accept': 'txt/*',
-            'aria-label': 'Upload your profile picture'
+  onEnviar(){
+    if (this.fileSelected) {
+      swal({
+        title: 'Subiendo datos!',
+        text: 'Solo tardara unos segundos por favor espere.',
+        onOpen: () => {
+          swal.showLoading()
         }
-    })
+      });
 
-    if (files) {
-        this.txt = [];
-        let reader: FileReader = new FileReader();
-        reader.readAsBinaryString(files);
-        reader.onload = (e) => {
-            let txt: string = reader.result;
-            let allTextLines = txt.split(/\r\n|\n/);
-            for (let i = 0; i < allTextLines.length; i++) {
-                let data = allTextLines[i].split(';');
-                if (data.length == 7) {
-                    this.valido = false;
-                } else {
-                    if (data[0] != '') {
-                        this.txt.push(data);
-                    }
-                }
-            }
-            console.log(this.txt);
+      let token = this._loginService.getToken();
+
+      this._VhloValorService.upload(this.file, token).subscribe(
+        response => {
+          if (response.code == 200) {
             swal({
-              title: 'Subiendo datos!',
-              text: 'Solo tardara unos segundos por favor espere.',
-              onOpen: () => {
-                swal.showLoading()
-              }
+              title: response.title,
+              text: response.message,
+              type: response.status,
+              confirmButtonText: 'Aceptar'
             });
-            this._VhloValorService.upload(token, this.txt).subscribe(
-              response => {
-                swal.close();
-                this.table.destroy();
-                this.respuesta = response;
-                this.ngOnInit();
-              },
-              error => {
-                this.errorMessage = <any>error;
-    
-                if (this.errorMessage != null) {
-                  console.log(this.errorMessage);
-                  alert("Error en la petición");
-                }
-              }
-            );
+          } else {
+            swal({
+              title: response.title,
+              text: response.message,
+              type: response.status,
+              confirmButtonText: 'Aceptar'
+            });
           }
+          error => {
+            this.errorMessage = <any>error;
 
+            if (this.errorMessage != null) {
+              console.log(this.errorMessage);
+              alert("Error en la petición");
+            }
+          }
+        }
+      );
+    } else {
+      swal({
+        title: 'Error!',
+        text: 'Debe adjuntar el documento escaneado.',
+        type: 'error',
+        confirmButtonText: 'Aceptar'
+      });
     }
   }
 }

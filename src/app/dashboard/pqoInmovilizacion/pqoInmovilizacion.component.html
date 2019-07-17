@@ -26,6 +26,10 @@
                     <i class="fa fa-search"></i>
                     Buscar
                 </button>
+                <button (click)="onNew()" class="btn btn-xs btn-default">
+                  <i class="fa fa-plus"></i>
+                  <span class="text">Nuevo</span>
+                </button>
             </div>
         </div>
     </div>
@@ -66,7 +70,7 @@
                   </td>
                   <td>
                     <div class="btn-group">
-                        <button *ngIf="inmovilizacion.placa.estado == 'ASIGNADA'" (click)="onExit(inmovilizacion)" class="btn btn-xs btn-success" type="button">
+                        <button *ngIf="inmovilizacion.estado == 'AUTORIZADO'" (click)="onExit(inmovilizacion)" class="btn btn-xs btn-success" type="button">
                           <i class="fa fa-file-text-o"></i>
                         </button> 
                     </div>

@@ -56,20 +56,6 @@ export class VhloRnaPreasignacionPlacaComponent implements OnInit {
           if (response.code == 200) {
               this.funcionario = response.data;
               this.datos.idOrganismoTransito = this.funcionario.organismoTransito.id;
-              
-              this._PlacaService.selectByOrganismoTransito({ 'idOrganismoTransito': this.funcionario.organismoTransito.id }, token).subscribe(
-                response => {
-                  this.placas = response;
-                }, 
-                error => {
-                  this.errorMessage = <any>error;
-          
-                  if(this.errorMessage != null){
-                    console.log(this.errorMessage);
-                    alert("Error en la petición");
-                  }
-                }
-              );
             } else {
               this.funcionario = null;
               this.datos.idOrganismoTransito = null;
@@ -108,7 +94,21 @@ export class VhloRnaPreasignacionPlacaComponent implements OnInit {
         if (response.code == 200) {
           this.vehiculos = response.data; 
           this.formIndex = true; 
-          this.formShow = false; 
+          this.formShow = false;
+
+          this._PlacaService.selectByOrganismoTransitoAndTipoVehiculo({ 'idOrganismoTransito': this.funcionario.organismoTransito.id, 'idTipoVehiculo': this.vehiculo.clase.tipoVehiculo.id }, token).subscribe(
+            response => {
+              this.placas = response;
+            }, 
+            error => {
+              this.errorMessage = <any>error;
+      
+              if(this.errorMessage != null){
+                console.log(this.errorMessage);
+                alert("Error en la petición");
+              }
+            }
+          );
 
           let timeoutId = setTimeout(() => {  
             this.onInitTable();

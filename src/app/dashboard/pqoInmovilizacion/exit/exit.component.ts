@@ -18,22 +18,22 @@ constructor(
   private _loginService: LoginService,
   ){}
 
-  ngOnInit(){ console.log(this.inmovilizacion);  }
+  ngOnInit(){ }
 
   onCancelar(){ this.ready.emit(true); }
 
   onEnviar(){
     let token = this._loginService.getToken();
 
-		this._InmovilizacionService.edit(this.inmovilizacion,token).subscribe(
+		this._InmovilizacionService.exit(this.inmovilizacion, token).subscribe(
 			response => {
         if(response.status == 'success'){
           this.ready.emit(true);
 
           swal({
             title: 'Perfecto!',
-            text: 'El registro se ha modificado con exito',
-            type: 'success',
+            text: response.message,
+            type: response.status,
             confirmButtonText: 'Aceptar'
           });
         }

@@ -14,9 +14,9 @@ import swal from 'sweetalert2';
 })
 export class EditComponent {
   @Output() ready = new EventEmitter<any>();
-  @Input() cfgValorVehiculo: any = null;
+  @Input() valor: any = null;
   public errorMessage;
-  public respuesta;
+
   public clases: any;
   public claseSelected: any;
   public lineaSelected: any;
@@ -28,9 +28,9 @@ export class EditComponent {
   constructor(
     private _VhloValorService: VhloValorService,
     private _loginService: LoginService,
-    private _claseService: VhloCfgClaseService,
+    private _ClaseService: VhloCfgClaseService,
     private _MarcaService: VhloCfgMarcaService,
-    private _lineaService: VhloCfgLineaService,  
+    private _LineaService: VhloCfgLineaService,  
     private _OrganismoTransitoService: CfgOrganismoTransitoService,
   ) {
     //   this.tipoIdentificacion = [
@@ -42,12 +42,12 @@ export class EditComponent {
   }
 
   ngOnInit() {
-    console.log(this.cfgValorVehiculo);
-    this._lineaService.select().subscribe(
+    this._LineaService.select().subscribe(
       response => {
         this.lineas = response;
+
         setTimeout(() => {
-            this.lineaSelected = [this.cfgValorVehiculo.linea.id]; 
+            this.lineaSelected = [this.valor.linea.id]; 
         });
       }, 
       error => { 
@@ -64,7 +64,7 @@ export class EditComponent {
       response => {
         this.marcas = response; 
         setTimeout(() => {
-            this.marcaSelected = [this.cfgValorVehiculo.linea.marca.id];
+            this.marcaSelected = [this.valor.linea.marca.id];
         })
       }, 
       error => { 
@@ -77,11 +77,11 @@ export class EditComponent {
       }
     );
 
-    this._claseService.select().subscribe(
+    this._ClaseService.select().subscribe(
       response => {
         this.clases = response;
         setTimeout(() => {
-          this.claseSelected = [this.cfgValorVehiculo.clase.id];
+          this.claseSelected = [this.valor.clase.id];
         });
       },
       error => {
@@ -95,18 +95,22 @@ export class EditComponent {
     );
     
   }
+  
   onCancelar() {
     this.ready.emit(true);
   }
+
   onEnviar() {
     let token = this._loginService.getToken();
-    this.cfgValorVehiculo.claseId = this.claseSelected;
-    this.cfgValorVehiculo.lineaId = this.lineaSelected;
-    this._VhloValorService.edit(this.cfgValorVehiculo, token).subscribe(
+
+    this.valor.claseId = this.claseSelected;
+    this.valor.lineaId = this.lineaSelected;
+
+    this._VhloValorService.edit(this.valor, token).subscribe(
       response => {
-        this.respuesta = response;
-        if (this.respuesta.status == 'success') {
+        if (response.status == 'success') {
           this.ready.emit(true);
+
           swal({
             title: 'Perfecto!',
             text: 'El registro se ha modificado con exito',
@@ -127,7 +131,7 @@ export class EditComponent {
   changedMarca(e){
       if (this.marcaSelected) {
         let token = this._loginService.getToken()
-          this._lineaService.selectByMarca(this.marcaSelected, token).subscribe(
+          this._LineaService.selectByMarca(this.marcaSelected, token).subscribe(
             response => {
               if (response != null) {
                 this.lineas = response;

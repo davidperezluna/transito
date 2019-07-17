@@ -66,7 +66,6 @@ export class VhloRnaPreregistroComponent implements OnInit {
   onInitTable(){
     if (this.table) {
       this.table.destroy();
-      $('#dataTables-example').empty();
     }
 
     this.table = $('#dataTables-example').DataTable({
@@ -83,7 +82,6 @@ export class VhloRnaPreregistroComponent implements OnInit {
         }
       }
     });
-
   }
 
   onNew(){

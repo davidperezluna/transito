@@ -1,28 +1,26 @@
 <div class="container">
-  <hr>
   <div class="row" *ngIf='formIndex'>
     <div class="col-md-12">
       <div class="card">
         <div class="card-header">
-          <h5 class="card-title">
-            <b class="text-uppercase">Configuración</b> <small>Valor</small>
-            <div class="btn-group pull-right">
-              <button (click)="onNew()" class="btn btn-default">
-                <i class="fa fa-plus"></i>
-                <span class="text">Nuevo</span>
-              </button>
-              <button (click)="onUploadFile()" class="btn btn-default">
-                <i class="fa fa-plus"></i>
-                <span class="text">archivo</span>
-              </button>
-            </div>
-          </h5>
+          <b class="text-uppercase">Configuración Valor</b>
+          
+          <div class="btn-group pull-right">
+            <button (click)="onNew()" class="btn btn-primary">
+              <i class="fa fa-plus"></i>
+              <span class="text">Nuevo</span>
+            </button>
+            <button (click)="onFormUpload()" class="btn btn-default">
+              <i class="fa fa-upload"></i>
+              <span class="text">Archivo</span>
+            </button>
+          </div>
         </div>
         <div class="card-body">
           <table class="table " id="dataTables-example">
             <thead>
               <tr>
-                <th>Id</th>
+                <th>#</th>
                 <th>Marca</th>
                 <th>Linea</th>
                 <th>Clase</th>
@@ -32,18 +30,18 @@
               </tr>
             </thead>
             <tbody>
-              <tr class="odd" *ngFor="let cfgValorVehiculo of cfgValorVehiculos; let i = index">
-                <td>{{ cfgValorVehiculo.id }}</td>
-                <td>{{ cfgValorVehiculo.linea.marca.nombre }}</td>
-                <td>{{ cfgValorVehiculo.linea.nombre }}</td>
-                <td>{{ cfgValorVehiculo.clase?.nombre }}</td>
-                <td>{{ cfgValorVehiculo.valor }}</td>
-                <td>{{ cfgValorVehiculo.anio }}</td>
+              <tr class="odd" *ngFor="let valor of valores; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ valor.linea.marca.nombre }}</td>
+                <td>{{ valor.linea.nombre }}</td>
+                <td>{{ valor.clase?.nombre }}</td>
+                <td>{{ valor.valor }}</td>
+                <td>{{ valor.anio }}</td>
                 <td>
-                  <button (click)="editCfgValorVehiculo(cfgValorVehiculo)" class="btn btn-xs btn-info" type="button">Editar
+                  <button (click)="onEdit(valor)" class="btn btn-xs btn-info" type="button">Editar
                     <i class="fa fa-edit"></i>
                   </button>
-                  <button (click)="deleteCfgValorVehiculo(cfgValorVehiculo.id)" class="btn btn-xs btn-danger" type="button">Eliminar
+                  <button (click)="onDelete(valor.id)" class="btn btn-xs btn-danger" type="button">Eliminar
                     <i class="fa fa-trash"></i>
                   </button>
 
@@ -56,6 +54,43 @@
       </div>
     </div>
   </div>
-  <app-edit *ngIf='formEdit' [cfgValorVehiculo]="cfgValorVehiculo" (ready)="ready($event)"></app-edit>
+
+  <div class="row" *ngIf='formUpload'>
+    <div class="col-xs-12 col-md-12 col-lg-6">
+      <form #formNew="ngForm">
+        <div class="card">
+          <div class="card-header">
+              <b class="text-uppercase">Cargar archivo de valores</b>
+          </div>
+          <div class="card-body">
+            <div class="form-group">
+              <div class="row">
+                <div class="col-xs-12 col-lg-12">
+                    <label>Adjuntar documento <b class="text-danger">*</b> <small>(.csv)</small></label>
+                    <input class="form-control" type="file" (change)="onFileChange($event)" required>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer">
+              <div class="btn-group">
+                  <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
+                      <i class="fa fa-save"></i>
+                      Enviar
+                  </button>
+                  <!--
+                    <button (click)="onCancelar()" class="btn btn-default">
+                        <i class="fa fa-times"></i>
+                        Cancelar
+                    </button>
+                  -->
+              </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <app-edit *ngIf='formEdit' [valor]="valor" (ready)="ready($event)"></app-edit>
   <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
 </div>

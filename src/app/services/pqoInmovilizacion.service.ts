@@ -66,6 +66,16 @@ export class PqoInmovilizacionService {
 		);
 	}
 
+	authorization(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = "data=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/authorization", params, { headers: headers }).map(
+			res => res.json(),
+			this._loogerService.registerLog(token, 'UPDATE', json, this.url)
+		);
+	}
+
 	findByComparendo(datos, token) {
 		let json = JSON.stringify(datos);
 		let params = "data=" + json + "&authorization=" + token;

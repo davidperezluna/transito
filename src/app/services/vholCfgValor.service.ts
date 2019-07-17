@@ -11,7 +11,7 @@ export class VhloValorService {
 
 	constructor(private _http: Http){}
 
-	get(){
+	index(){
 		
 		return this._http.get(this.url+"/").map(res => res.json());
 	}
@@ -25,40 +25,28 @@ export class VhloValorService {
 							  .map(res => res.json());
 	}
 
-	upload(token,array){
-		
-		let json = JSON.stringify(array);
-		let params = "data="+json+"&authorization="+token;
-		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
-		return this._http.post(this.url+"/new/upload", params, {headers: headers})
-							  .map(res => res.json());
+	upload(formData, token){
+		formData.append('authorization', token);
+		return this._http.post(this.url + "/upload", formData).map(res => res.json());
 	}
 
 	delete(token,id){ 
-
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
-		return this._http.post(this.url+"/"+id+"/delete", params, {headers: headers})
-							  .map(res => res.json());
+		return this._http.post(this.url+"/"+id+"/delete", params, {headers: headers}).map(res => res.json());
 	}
 
 	show(token,id){
-		
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
-		return this._http.post(this.url+"/show/"+id, params, {headers: headers})
-							  .map(res => res.json());
-
+		return this._http.post(this.url+"/show/"+id, params, {headers: headers}).map(res => res.json());
 	}
 
 	edit(vhloCfgValor,token){
-
 		let json = JSON.stringify(vhloCfgValor);
 		let params = "data="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
- 			return this._http.post(this.url+"/edit", params, {headers: headers})
-							  .map(res => res.json());
-
+ 		return this._http.post(this.url+"/edit", params, {headers: headers}).map(res => res.json());
 	}
 
 	getValorVehiculoVehiculo(datos,token){
