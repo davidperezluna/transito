@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { VhloCfgNivelServicioComponent } from '.';
+import { VhloCfgNivelServicioComponent } from './vhloCfgNivelServicio.component';
 
 export const VhloCfgNivelServicioRoutes: Route[] = [
     {

@@ -1,5 +1,5 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import {VhloCfgServicio} from '../vhloCfgNivelServicio.modelo';
+import {VhloCfgNivelServicio} from '../vhloCfgNivelServicio.modelo';
 import {VhloCfgServicioService} from '../../../services/vhloCfgServicio.service';
 import {LoginService} from '../../../services/login.service';
 import swal from 'sweetalert2';
@@ -12,8 +12,6 @@ export class EditComponent {
 @Output() ready = new EventEmitter<any>();
 @Input() servicio:any = null;
 public errorMessage;
-public respuesta;
-
 
 constructor(
   private _ServicioService: VhloCfgServicioService,
@@ -25,19 +23,18 @@ constructor(
   onCancelar(){
     this.ready.emit(true);
   }
+
   onEnviar(){
     let token = this._loginService.getToken();
 
 		this._ServicioService.edit(this.servicio,token).subscribe(
 			response => {
-        this.respuesta = response;
-        console.log(this.respuesta);
-        if(this.respuesta.status == 'success'){
+        if(response.code == 200){
           this.ready.emit(true);
           swal({
-            title: 'Perfecto!',
-            text: 'El registro se ha modificado con exito',
-            type: 'success',
+            title: response.title,
+            text: response.message,
+            type: response.status,
             confirmButtonText: 'Aceptar'
           })
         }
