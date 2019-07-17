@@ -1,0 +1,74 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-lg-4">
+            <div class="card">
+                <div class="card-header">
+                    <b class="text-uppercase">Liberar placa</b>
+                </div>
+                <div class="card-body">
+                    <form #formIndex="ngForm">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-xs-12 col-lg-12">
+                                    <label>Número</label>
+                                    <input type="text" class="form-control" [(ngModel)]="numero" name="numero" required>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer">
+                    <div class="btn-group">
+                        <button (click)="onSearchPlaca()" [disabled]="formIndex.invalid" class="btn btn-primary" type="button">
+                            <i class="fa fa-search"></i>
+                            Buscar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-lg-8" *ngIf='formIndex'>
+            <div class="row" *ngIf='formIndex'>
+                <div class="col-md-12">
+                  <div class="card">
+                    <div class="card-header">
+                      <b class="card-title">
+                        <b class="text-uppercase">Placas encontradas</b>
+                      </b>
+                    </div>
+                    <div class="card-body">
+                      <table class="table " id="dataTables-example">
+                        <thead>
+                          <tr>
+                            <th>Id</th>
+                            <th>Numero</th>
+                            <th>Estado</th>
+                            <th>Tipo</th>
+                            <th>Oragnismo Transito</th>
+                            <th>Acciones</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr class="odd" *ngFor="let placa of placas; let i = index">
+                            <td>{{ i + 1}}</td>
+                            <td>{{ placa.numero }}</td>
+                            <td>{{ placa.estado }}</td>
+                            <td>{{ placa.tipoVehiculo?.nombre }}</td>
+                            <td>{{ placa.organismoTransito?.nombre }}</td>
+                            <td>
+                                <button (click)="onLiberate(placa.id)" class="btn btn-xs btn-info" type="button">
+                                    <i class="fa fa-unlock"></i>
+                                    Liberar
+                                </button>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

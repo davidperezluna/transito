@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { VhloCfgPlacaService } from '../../../services/vhloCfgPlaca.service';
-import { LoginService } from '../../../services/login.service';
-import { VhloCfgClaseService } from '../../../services/vhloCfgClase.service';
+import { VhloCfgTipoVehiculoService } from '../../../services/vhloCfgTipoVehiculo.service';
 import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
+import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
 
@@ -14,18 +14,16 @@ export class EditComponent {
   @Output() ready = new EventEmitter<any>();
   @Input() cfgPlaca: any = null;
   public errorMessage;
-  public respuesta;
-  public clases: any;
-  public claseSelected: any;
+  public tiposVehiculo: any;
+  public tipoVehiculoSelected: any;
   public organismosTransito: any;
-  public sedeOperativaSelected: any;
-  // public tipoIdentificacion: Array<any>
+  public organismoTransitoSelected: any;
 
   constructor(
     private _CfgPlacaService: VhloCfgPlacaService,
-    private _loginService: LoginService,
-    private _claseService: VhloCfgClaseService,
+    private _TipoVehiculoService: VhloCfgTipoVehiculoService,
     private _OrganismoTransitoService: CfgOrganismoTransitoService,
+    private _LoginService: LoginService,
   ) {
     //   this.tipoIdentificacion = [
     //     {value: 'CC', label: 'Cédula de ciudadanía'},
@@ -36,12 +34,12 @@ export class EditComponent {
   }
 
   ngOnInit() {
-
-    this._claseService.select().subscribe(
+    this._TipoVehiculoService.select().subscribe(
       response => {
-        this.clases = response;
+        this.tiposVehiculo = response;
+
         setTimeout(() => {
-          this.claseSelected = [this.cfgPlaca.clase.id];
+          this.tipoVehiculoSelected = [this.cfgPlaca.tipoVehiculo.id];
         });
       },
       error => {
@@ -57,8 +55,9 @@ export class EditComponent {
     this._OrganismoTransitoService.selectSedes().subscribe(
       response => {
         this.organismosTransito = response;
+
         setTimeout(() => {
-          this.sedeOperativaSelected = [this.cfgPlaca.sedeOperativa.id];
+          this.organismoTransitoSelected = [this.cfgPlaca.organismoTransito.id];
         });
       },
       error => {
@@ -77,15 +76,14 @@ export class EditComponent {
     this.ready.emit(true);
   }
   onEnviar() {
-    let token = this._loginService.getToken();
-    this.cfgPlaca.claseId = this.claseSelected;
-    this.cfgPlaca.sedeOperativaId = this.sedeOperativaSelected;
+    let token = this._LoginService.getToken();
+
+    this.cfgPlaca.claseId = this.tipoVehiculoSelected;
+    this.cfgPlaca.sedeOperativaId = this.organismoTransitoSelected;
+
     this._CfgPlacaService.edit(this.cfgPlaca, token).subscribe(
       response => {
-        //console.log(response);
-        this.respuesta = response;
-        console.log(this.respuesta);
-        if (this.respuesta.status == 'success') {
+        if (response.status == 'success') {
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',

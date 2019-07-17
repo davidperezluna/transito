@@ -40,7 +40,7 @@ export class VhloPlacaSedeComponent implements OnInit {
                 this.organismosTransito = response;
                 
                 let timeoutId = setTimeout(() => {
-                    this.iniciarTabla();
+                    this.onInitTable();
                 }, 100);
             },
             error => {
@@ -88,7 +88,7 @@ export class VhloPlacaSedeComponent implements OnInit {
                                 });
                                 
                                 let timeoutId = setTimeout(() => {
-                                    this.iniciarTabla();
+                                    this.onInitTable();
                                 }, 100);
                             } else {
                                 this.asignaciones = null;
@@ -133,8 +133,8 @@ export class VhloPlacaSedeComponent implements OnInit {
         );
     }
 
-    iniciarTabla() {
-        $('#dataTables-example').DataTable({
+    onInitTable() {
+        this.table = $('#dataTables-example').DataTable({
             responsive: true,
             pageLength: 8,
             sPaginationType: 'full_numbers',
@@ -146,10 +146,6 @@ export class VhloPlacaSedeComponent implements OnInit {
                     sLast: '<i class="fa fa-step-forward"></i>'
                 }
             }
-        });
-
-        this.table = $('#dataTables-example').DataTable({
-            retrieve: true
         });
     }
 
@@ -210,9 +206,9 @@ export class VhloPlacaSedeComponent implements OnInit {
                 this._PlacaSedeService.delete({ 'id': id }, token).subscribe(
                     response => {
                         swal({
-                            title: 'Eliminado!',
-                            text: 'Registro eliminado correctamente.',
-                            type: 'success',
+                            title: response.title,
+                            text: response.message,
+                            type: response.status,
                             confirmButtonColor: '#15d4be',
                         });
                         this.table.destroy();

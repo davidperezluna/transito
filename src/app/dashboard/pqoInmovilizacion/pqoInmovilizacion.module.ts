@@ -9,6 +9,7 @@ import { PqoInmovilizacionComponent } from './pqoInmovilizacion.component';
 import { NewComponent } from './new/new.component';
 import { EditComponent } from './edit/edit.component';
 import { ExitComponent } from './exit/exit.component';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
     imports: [CommonModule, Ng2BootstrapModule.forRoot(),SelectModule],
@@ -16,13 +17,15 @@ import { ExitComponent } from './exit/exit.component';
         PqoInmovilizacionComponent,
         NewComponent,
         EditComponent,
-        ExitComponent
+        ExitComponent,
+        SearchComponent
     ],
     exports: [
         PqoInmovilizacionComponent,
         NewComponent,
         EditComponent,
-        ExitComponent
+        ExitComponent,
+        SearchComponent
     ],
     providers:[PqoInmovilizacionService]
 })

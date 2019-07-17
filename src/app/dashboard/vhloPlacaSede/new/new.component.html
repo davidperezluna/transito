@@ -15,65 +15,14 @@
                                 </ng-select>
                             </div>
                         </div>
-                        <div *ngIf="tipoVehiculo?.nombre !='MOTOCICLETA' && tipoVehiculo?.nombre !='MOTOCARRO' && tipoVehiculo?.nombre !='REMOLQUE Y SEMIREMOLQUE'" class="row">
-                            <div class="col-xs-12 col-lg-4">
-                                <label>Letras Placa<strong class="text-danger">*</strong></label>
-                                <input style="text-transform:uppercase" class="form-control" placeholder="AAA" type="text" maxlength="3" [(ngModel)]="asignacion.letrasPlaca" required name="letrasPlaca">
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Rango inicio <strong class="text-danger">*</strong></label>
+                                <input style="text-transform:uppercase" class="form-control" placeholder="AAA000" type="text" maxlength="6" [(ngModel)]="asignacion.rangoInicial" name="rangoInicial" required>
                             </div>
-                            <div class="col-xs-12 col-lg-4">
-                                <label>Números Inicio <strong class="text-danger">*</strong></label>
-                                <input class="form-control" placeholder="000" type="text" maxlength="3" [(ngModel)]="asignacion.numeroInicial" required name="numeroInicial">
-                            </div>
-                            <div class="col-xs-12 col-lg-4">
-                                <label>Números Final <strong class="text-danger">*</strong></label>
-                                <input class="form-control" placeholder="000" type="text" maxlength="3" [(ngModel)]="asignacion.numeroFinal" required name="numeroFinal">
-                            </div>
-                        </div>
-                        <div *ngIf="tipoVehiculo?.nombre == 'MOTOCICLETA' && tipoVehiculo?.modulo != '5'" class="row">
-                            <div class="col-xs-12 col-lg-3">
-                                <label>Letras Placa <strong class="text-danger">*</strong></label>
-                                <input style="text-transform:uppercase" class="form-control" placeholder="AAA" type="text" maxlength="3" [(ngModel)]="asignacion.letrasPlaca" required name="letrasPlaca">
-                            </div>
-                            <div class="col-xs-12 col-lg-3">
-                                <label>Número Inicial<strong class="text-danger">*</strong></label>
-                                <input class="form-control" placeholder="00" type="text" maxlength="2" [(ngModel)]="asignacion.numeroInicial" required name="numeroInicial">
-                            </div>
-                            <div class="col-xs-12 col-lg-3">
-                                <label>Número Final<strong class="text-danger">*</strong></label>
-                                <input class="form-control" placeholder="00" type="text" maxlength="2" [(ngModel)]="asignacion.numeroFinal" required name="numeroFinal">
-                            </div>
-                            <div class="col-xs-12 col-lg-3">
-                                <label>Letra Final <strong class="text-danger">*</strong></label>
-                                <input style="text-transform:uppercase" class="form-control" placeholder="A" type="text" maxlength="1" [(ngModel)]="asignacion.letraFinal" required name="letraFinal">
-                            </div>
-                        </div>
-                        <div *ngIf="tipoVehiculo?.nombre == 'MOTOCARRO'" class="row">
-                            <div class="col-xs-12 col-lg-4">
-                                <label>Números Inicio<strong class="text-danger">*</strong></label>
-                                <input class="form-control" placeholder="000" type="text" maxlength="3" [(ngModel)]="asignacion.numeroInicial" required name="numeroInicial">
-                            </div>
-                            <div class="col-xs-12 col-lg-4">
-                                <label>Números Final <strong class="text-danger">*</strong></label>
-                                <input class="form-control" placeholder="000" type="text" maxlength="3" [(ngModel)]="asignacion.numeroFinal" required name="numeroFinal">
-                            </div>
-                            <div class="col-xs-12 col-lg-4">
-                            <label>Letras Placa <strong class="text-danger">*</strong></label>
-                                <input style="text-transform:uppercase" class="form-control" placeholder="AAA" style="text-transform:uppercase" type="text" maxlength="3" [(ngModel)]="asignacion.letrasPlaca" required name="letrasPlaca">
-                            </div>
-                        </div>
-                        <div *ngIf="tipoVehiculo?.nombre == 'REMOLQUE Y SEMIREMOLQUE'" class="row">
-                            <div class="col-xs-12 col-lg-4">
-                                <label>Letras Placa <strong class="text-danger">*</strong></label>
-                                <input style="text-transform:uppercase" class="form-control" placeholder="R ó S" style="text-transform:uppercase" type="text"
-                                    maxlength="1" [(ngModel)]="asignacion.letrasPlaca" required name="letrasPlaca">
-                            </div>
-                            <div class="col-xs-12 col-lg-4">
-                                <label>Números Inicio<strong class="text-danger">*</strong></label>
-                                <input class="form-control" placeholder="00000" type="text" maxlength="5" [(ngModel)]="asignacion.numeroInicial" required name="numeroInicial">
-                            </div>
-                            <div class="col-xs-12 col-lg-4">
-                                <label>Números Final <strong class="text-danger">*</strong></label>
-                                <input class="form-control" placeholder="00000" type="text" maxlength="5" [(ngModel)]="asignacion.numeroFinal" required name="numeroFinal">
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Rango final <strong class="text-danger">*</strong></label>
+                                <input style="text-transform:uppercase" class="form-control" placeholder="ZZZ999" type="text" maxlength="6" [(ngModel)]="asignacion.rangoFinal" name="rangoFinal" required>
                             </div>
                         </div>
                     </div>

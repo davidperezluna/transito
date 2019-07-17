@@ -1,19 +1,29 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { VhloCfgPlacaComponent } from './vhloCfgPlaca.component';
+import {SelectModule} from 'angular2-select';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
+
 import { VhloCfgPlacaService } from '../../services/vhloCfgPlaca.service';
 
+import { VhloCfgPlacaComponent } from './vhloCfgPlaca.component';
 import { NewComponent } from './new/new.component';
 import { EditComponent } from './edit/edit.component';
-import {SelectModule} from 'angular2-select';
-// import {SelectModule} from 'angular2-select';
-
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
     imports: [CommonModule, Ng2BootstrapModule.forRoot(),SelectModule],
-    declarations: [VhloCfgPlacaComponent,NewComponent,EditComponent],
-    exports: [VhloCfgPlacaComponent, NewComponent,EditComponent],
+    declarations: [
+        VhloCfgPlacaComponent,
+        NewComponent,
+        EditComponent,
+        SearchComponent
+    ],
+    exports: [
+        VhloCfgPlacaComponent,
+        NewComponent,
+        EditComponent,
+        SearchComponent
+    ],
     providers:[VhloCfgPlacaService]
 })
 

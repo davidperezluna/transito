@@ -11,44 +11,37 @@
                 <form #formEdit="ngForm">
                     <div class="form-group row">
                         <div class="col-xs-12 col-lg-12">
-                            <label>Numero
+                            <label>Número
                                 <strong class="text-danger">*</strong>
                             </label>
-                            <input class="form-control" [(ngModel)]="cfgPlaca.numero" name="numero" type="text" required />
+                            <input class="form-control" [(ngModel)]="cfgPlaca.numero" name="numero" placeholder="" type="text" required>
                         </div>
                         <div class="col-xs-12 col-lg-12">
-                            <label>Estado
+                            <label>Tipo Vehiculo
                                 <strong class="text-danger">*</strong>
                             </label>
-                            <input class="form-control" [(ngModel)]="cfgPlaca.estado" name="estado" type="text" required />
-                        </div>
-                        <div class="col-xs-12 col-lg-12">
-                            <label>Clase
-                                <strong class="text-danger">*</strong>
-                            </label>
-                            <ng-select [multiple]="false" [options]="clases" [(ngModel)]="claseSelected" required name="claseId">
+                            <ng-select [multiple]="false" [options]="tiposVehiculo" [(ngModel)]="tipoVehiculoSelected" required name="idTipoVehiculo">
                             </ng-select>
                         </div>
                         <div class="col-xs-12 col-lg-12">
-                            <label>Sede Operativa
+                            <label>Organismo Transito
                                 <strong class="text-danger">*</strong>
                             </label>
-                            <ng-select [multiple]="false" [options]="organismosTransito" [(ngModel)]="sedeOperativaSelected" required name="sedeOperativaId">
+                            <ng-select [multiple]="false" [options]="organismosTransito" [(ngModel)]="organismoTransitoSelected" required name="idOrganismoTransito">
                             </ng-select>
                         </div>
-
                     </div>
                 </form>
             </div>
             <div class="card-footer">
                 <div class="btn-group">
-                    <button (click)="onCancelar()" class="btn btn-default">
-                        <i class="fa fa-times"></i>
-                        Cancel
-                    </button>
                     <button (click)="onEnviar()" [disabled]="formEdit.invalid" class="btn btn-primary" type="button">
                         <i class="fa fa-save"></i>
                         Enviar
+                    </button>
+                    <button (click)="onCancelar()" class="btn btn-default">
+                        <i class="fa fa-times"></i>
+                        Cancelar
                     </button>
                 </div>
             </div>

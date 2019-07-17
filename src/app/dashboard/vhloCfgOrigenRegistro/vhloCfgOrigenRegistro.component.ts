@@ -44,7 +44,7 @@ export class VhloCfgOrigenRegistroComponent implements OnInit {
 				response => {
           this.origenesRegistro = response.data;
           let timeoutId = setTimeout(() => {  
-            this.iniciarTabla();
+            this.onInitTable();
           }, 100);
 				}, 
 				error => {
@@ -58,7 +58,7 @@ export class VhloCfgOrigenRegistroComponent implements OnInit {
       );
   }
 
-  iniciarTabla(){
+  onInitTable(){
     $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,

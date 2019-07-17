@@ -19,8 +19,8 @@ export class EditComponent implements OnInit {
     public tiposVehiculos: any;
 
     public sedeOperativaSelected: any;
-    public moduloSelected: any;
     public tipoVehiculoSelected: any;
+    public moduloSelected: any;
 
     constructor(
         private _PlacaSedeService: VhloPlacaSedeService,
@@ -34,8 +34,9 @@ export class EditComponent implements OnInit {
         this._OrganismoTransitoService.selectSedes().subscribe(
             response => {
                 this.organismosTransito = response;
+
                 setTimeout(() => {
-                    this.sedeOperativaSelected = [this.asignacion.sedeOperativa.id];
+                    this.sedeOperativaSelected = [this.asignacion.organismoTransito.id];
                 });
             }, 
             error => {
@@ -73,6 +74,7 @@ export class EditComponent implements OnInit {
         this.asignacion.sedeOperativa = this.sedeOperativaSelected;
         this.asignacion.modulo = this.moduloSelected;
         this.asignacion.tipoVehiculo = this.tipoVehiculoSelected;
+        
         this._PlacaSedeService.edit(this.asignacion, token).subscribe(
             response => {
                 if (response.status == 'success') {
@@ -92,7 +94,8 @@ export class EditComponent implements OnInit {
                         alert("Error en la petición");
                     }
                 }
-            });
+            }
+        );
     }
 
 }

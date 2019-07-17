@@ -23,7 +23,7 @@ constructor(
   ){}
 
   ngOnInit() {
-    this.tipo = new CvAuCfgTipo(null, null, null);
+    this.tipo = new CvAuCfgTipo(null, false, null, null);
     
 		this._FormatoService.select().subscribe(
 			response => {

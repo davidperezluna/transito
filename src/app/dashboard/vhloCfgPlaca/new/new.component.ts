@@ -14,17 +14,16 @@ export class NewComponent implements OnInit {
   @Output() ready = new EventEmitter<any>();
   public cfgPlaca: VhloCfgPlaca;
   public errorMessage;
-  public respuesta;
   public tiposVehiculo: any;
   public tipoVehiculoSelected: any;
   public organismosTransito: any;
   public organismoTransitoSelected: any;
 
   constructor(
-    private _CfgPlacaService: VhloCfgPlacaService,
-    private _loginService: LoginService,
+    private _PlacaService: VhloCfgPlacaService,
     private _TipoVehiculoService: VhloCfgTipoVehiculoService,
     private _OrganismoTransitoService: CfgOrganismoTransitoService,
+    private _LoginService: LoginService,
   ) { }
 
   ngOnInit() {
@@ -63,16 +62,14 @@ export class NewComponent implements OnInit {
     this.ready.emit(true);
   }
   onEnviar() {
-    let token = this._loginService.getToken();
+    let token = this._LoginService.getToken();
 
     this.cfgPlaca.idTipoVehiculo = this.tipoVehiculoSelected;
     this.cfgPlaca.idOrganismoTransito = this.organismoTransitoSelected;
 
-    this._CfgPlacaService.register(this.cfgPlaca, token).subscribe(
+    this._PlacaService.register(this.cfgPlaca, token).subscribe(
       response => {
-        this.respuesta = response;
-
-        if (this.respuesta.status == 'success') {
+        if (response.status == 'success') {
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',

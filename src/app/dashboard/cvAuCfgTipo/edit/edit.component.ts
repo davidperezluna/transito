@@ -22,10 +22,14 @@ constructor(
   private _LoginService: LoginService,
   ){}
 
-  ngOnInit(){ 
+  ngOnInit(){    
     this._FormatoService.select().subscribe(
 			response => {
         this.formatos = response;
+
+        setTimeout(() => {
+          this.formatoSelected = [this.tipo.formato.id];
+        });
 			error => {
 					this.errorMessage = <any>error;
 					if(this.errorMessage != null){
@@ -44,7 +48,9 @@ constructor(
   onEnviar(){
     let token = this._LoginService.getToken();
 
-		this._TipoService.edit(this.tipo,token).subscribe(
+    this.tipo.formato = this.formatoSelected;
+
+		this._TipoService.edit(this.tipo, token).subscribe(
 			response => {
         if(response.status == 'success'){
           this.ready.emit(true);

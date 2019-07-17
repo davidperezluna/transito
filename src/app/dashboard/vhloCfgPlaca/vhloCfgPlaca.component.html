@@ -1,5 +1,4 @@
 <div class="container">
-  <hr>
   <div class="row" *ngIf='formIndex'>
     <div class="col-md-12">
       <div class="card">
@@ -36,7 +35,7 @@
                 <td>{{cfgPlaca.tipoVehiculo?.nombre}}</td>
                 <td>{{cfgPlaca.organismoTransito?.nombre}}</td>
                 <td>
-                  <button (click)="liberarCfgPlaca(cfgPlaca.id)" class="btn btn-xs btn-info" type="button">Liberar
+                  <button (click)="onLiberate(cfgPlaca.id)" class="btn btn-xs btn-info" type="button">Liberar
                   </button>
                 </td>
               </tr>

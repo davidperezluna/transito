@@ -1,5 +1,4 @@
 <div class="container">
-    <hr>
     <div class="row" *ngIf='formSearch'>
         <!-- .row -->
         <div class="col-xs-12 col-lg-3">
@@ -46,46 +45,46 @@
         <div class="col-xs-12 col-lg-9" *ngIf='formIndex && organismoTransito'><!-- .col -->
             <div class="card">
                 <div class="card-header">
-                    <h5 class="card-title">
-                        <small>Asignación de Placas a Sede {{ organismoTransito.nombre }}</small>
-                        <div class="btn-group pull-right">
-                            <button (click)="onNew()" class="btn btn-default">
-                                <i class="fa fa-plus"></i>
-                                <span class="text">Nuevo</span>
-                            </button>
-                        </div>
-                    </h5>
+                    <b class="text-uppercase">Asignar placas a {{ organismoTransito.nombre }}</b>
+                    <div class="btn-group pull-right">
+                        <button (click)="onNew()" class="btn btn-default">
+                            <i class="fa fa-plus"></i>
+                            <span class="text">Nuevo</span>
+                        </button>
+                    </div>
                 </div>
                 <div class="card-body">
                     <table class="table " id="dataTables-example">
                         <thead>
                             <tr>
-                                <th>Id</th>
+                                <th>#</th>
                                 <th>Sede Operativa</th>
-                                <th>Letras Placa</th>
+                                <th>Tipo vehiculo</th>
                                 <th>Rango</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr class="odd" *ngFor="let asignacion of asignaciones; let i = index">
-                                <td>{{ asignacion.id }}</td>
+                                <td>{{ i + 1 }}</td>
                                 <td>{{ asignacion.organismoTransito.nombre }}</td>
-                                <td>{{ asignacion.letrasPlaca }}</td>
+                                <td>{{ asignacion.tipoVehiculo.nombre }}</td>
                                 <td>
-                                    <b>Número inicial: </b>
-                                    {{ asignacion.numeroInicial }}
+                                    <b>Rango inicial: </b>
+                                    {{ asignacion.letrasInicio }} {{ asignacion.numeroInicial }}
                                     <br>
-                                    <b>Número final: </b>
-                                    {{ asignacion.numeroFinal }}
+                                    <b>Rango final: </b>
+                                    {{ asignacion.letrasFinal }} {{ asignacion.numeroFinal }}
                                 </td>
                                 <td>
-                                    <button (click)="onEdit(asignacion)" class="btn btn-xs btn-info" type="button">
-                                        <i class="fa fa-edit"></i>
-                                    </button>
-                                    <button (click)="onDelete(asignacion.id)" class="btn btn-xs btn-danger" type="button">
-                                        <i class="fa fa-trash"></i>
-                                    </button>
+                                    <div class="btn-group">
+                                        <button (click)="onEdit(asignacion)" class="btn btn-xs btn-info" type="button">
+                                            <i class="fa fa-pencil"></i>
+                                        </button>
+                                        <button (click)="onDelete(asignacion.id)" class="btn btn-xs btn-danger" type="button">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </div>
                                 </td>
                             </tr>
                         </tbody>

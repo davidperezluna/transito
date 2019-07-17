@@ -47,7 +47,7 @@ export class VhloCfgPlacaComponent implements OnInit {
           console.log(response);
           this.cfgPlacas = response.data;
           let timeoutId = setTimeout(() => {
-            this.iniciarTabla();
+            this.onInitTable();
           }, 100);
         }
       },
@@ -61,22 +61,22 @@ export class VhloCfgPlacaComponent implements OnInit {
       }
     );
   }
-  iniciarTabla() {
-    $('#dataTables-example').DataTable({
+  onInitTable() {
+    this.table = $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,
       sPaginationType: 'full_numbers',
       oLanguage: {
         oPaginate: {
-          sFirst: '<<',
-          sPrevious: '<',
-          sNext: '>',
-          sLast: '>>'
+          sFirst: '<i class="fa fa-step-backward"></i>',
+          sPrevious: '<i class="fa fa-chevron-left"></i>',
+          sNext: '<i class="fa fa-chevron-right"></i>',
+          sLast: '<i class="fa fa-step-forward"></i>'
         }
       }
     });
-    this.table = $('#dataTables-example').DataTable();
   }
+
   onNew() {
     this.formNew = true;
     this.formIndex = false;
@@ -94,7 +94,7 @@ export class VhloCfgPlacaComponent implements OnInit {
     }
   }
 
-  liberarCfgPlaca(id: any) {
+  onLiberate(id: any) {
     swal({
       title: '¿Estás seguro?',
       text: "¡Esta placa estara libre para su uso!",
@@ -107,7 +107,8 @@ export class VhloCfgPlacaComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._CfgPlacaService.liberarCfgPlaca(token, id).subscribe(
+
+        this._CfgPlacaService.liberate({ 'id':id }, token).subscribe(
           response => {
             swal({
               title: 'Eliminado!',

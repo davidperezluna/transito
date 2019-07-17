@@ -1,9 +1,7 @@
 export class VhloPlacaSede {
     constructor(
-        public letrasPlaca: string,
-        public numeroInicial: string,
-        public numeroFinal: string,
-        public letraFinal: string,
+        public rangoInicial: string,
+        public rangoFinal: string,
         public idOrganismoTransito: number,
         public idTipoVehiculo: number,
         public id: number,
