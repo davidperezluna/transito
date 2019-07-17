@@ -193,6 +193,7 @@ import { VhloCfgClaseRoutes } from './vhloCfgClase/vhloCfgClase.routes';
 import { VhloCfgColorRoutes } from './vhloCfgColor/vhloCfgColor.routes';
 import { VhloCfgCombustibleRoutes } from './vhloCfgCombustible/vhloCfgCombustible.routes';
 import { VhloCfgServicioRoutes } from './vhloCfgServicio/vhloCfgServicio.routes';
+import { VhloCfgNivelServicioRoutes } from './vhloCfgNivelServicio/vhloCfgNivelServicio.routes';
 import { VhloCfgTipoVehiculoRoutes } from './vhloCfgTipoVehiculo/vhloCfgTipoVehiculo.routes';
 import { VhloCfgTipoAlertaRoutes } from './vhloCfgTipoAlerta/vhloCfgTipoAlerta.routes';
 import { VhloCfgCdaRoutes } from './vhloCfgCda/vhloCfgCda.routes';
@@ -302,6 +303,7 @@ export const DashboardRoutes: Route[] = [
       ...VhloCfgColorRoutes,
       ...VhloCfgCombustibleRoutes,
       ...VhloCfgServicioRoutes,
+      ...VhloCfgNivelServicioRoutes,
       ...VhloLimitacionRoutes,
       ...VhloCfgValorRoutes,
       ...VhloTecnoMecanicaRoutes,

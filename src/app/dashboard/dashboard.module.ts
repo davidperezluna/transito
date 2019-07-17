@@ -81,6 +81,7 @@ import { VhloCfgClaseModule } from './vhloCfgClase/vhloCfgClase.module';
 import { VhloCfgColorModule } from './vhloCfgColor/vhloCfgColor.module';
 import { VhloCfgCombustibleModule } from './vhloCfgCombustible/vhloCfgCombustible.module';
 import { VhloCfgServicioModule } from './vhloCfgServicio/vhloCfgServicio.module';
+import { VhloCfgNivelServicioModule } from './vhloCfgNivelServicio/vhloCfgNivelServicio.module';
 import { VhloCfgValorModule } from './vhloCfgValor/vhloCfgValor.module';
 import { VhloRnaPreregistroModule } from './vhloRnaPreregistro/vhloRnaPreregistro.module';
 import { VhloBuscarModule } from './vhloBuscar/vhloBuscar.module';
@@ -424,6 +425,7 @@ import {RightsidebarComponent} from '../shared';
     VhloCfgColorModule,
     VhloCfgCombustibleModule,
     VhloCfgServicioModule,
+    VhloCfgNivelServicioModule,
     GestionTransportePublicoModule,
     CfgOrganismoTransitoModule,
     CfgChoqueConModule,
