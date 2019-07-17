@@ -1,6 +1,7 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import {VhloCfgNivelServicio} from '../vhloCfgNivelServicio.modelo';
-import {VhloCfgServicioService} from '../../../services/vhloCfgServicio.service';
+import {VhloCfgNivelServicioService} from '../../../services/vhloCfgNivelServicio.service';
+import { VhloCfgServicioService } from '../../../services/vhloCfgServicio.service';
 import {LoginService} from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -10,24 +11,47 @@ import swal from 'sweetalert2';
 })
 export class EditComponent {
 @Output() ready = new EventEmitter<any>();
-@Input() servicio:any = null;
+@Input() nivelServicio:any = null;
+public servicios;
+public servicioSelected;
 public errorMessage;
 
 constructor(
+  private _NivelServicioService: VhloCfgNivelServicioService,
   private _ServicioService: VhloCfgServicioService,
-  private _loginService: LoginService,
+  private _LoginService: LoginService,
   ){
 
   }
 
+  ngOnInit() {
+    this._ServicioService.select().subscribe(
+      response => {
+        this.servicios = response;
+        setTimeout(() => {
+          this.servicioSelected = [this.nivelServicio.servicio.id];
+        });
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+  }
   onCancelar(){
     this.ready.emit(true);
   }
 
   onEnviar(){
-    let token = this._loginService.getToken();
+    let token = this._LoginService.getToken();
 
-		this._ServicioService.edit(this.servicio,token).subscribe(
+    this.nivelServicio.idServicio = this.servicioSelected;
+
+		this._NivelServicioService.edit(this.nivelServicio,token).subscribe(
 			response => {
         if(response.code == 200){
           this.ready.emit(true);
@@ -49,5 +73,4 @@ constructor(
 
 		}); 
   }
-
 }
