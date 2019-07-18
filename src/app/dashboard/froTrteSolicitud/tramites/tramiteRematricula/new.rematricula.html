@@ -13,7 +13,7 @@
     </div>
 </div>
 
-<div class="row" *ngIf="!realizado">
+<div class="row" *ngIf="!realizado && !notification">
     <!-- .row -->
     <div class="col-xs-12 col-lg-12">
         <!-- .col -->
@@ -53,62 +53,65 @@
                                 <label>Número de acta <b class="text-danger">*</b></label>
                                 <input class="form-control" [(ngModel)]="datos.numeroActa" name="numeroActa" type="text" required />
                             </div>
-                            <div class="col-lg-6 col-md-6">
-                                <label>Municipio del acta <b class="text-danger">*</b></label>
-                                <ng-select 
-                                [multiple]="false" 
-                                [options]="municipios" 
-                                [(ngModel)]="datos.idMunicipioActa" 
-                                required 
-                                name="idMunicipioActa">
+
+                            <div class="col-lg-6 col-lg-12">
+                                <label>Departamento del acta <b class="text-danger">*</b></label>
+                                <ng-select (ngModelChange)="onChangedDepartamentoActa($event)" [multiple]="false" [options]="departamentos" [(ngModel)]="datos.idDepartamentoActa" name="idDepartamentoActa" required>
                                 </ng-select>
                             </div>
-                            <div class="col-lg-6 col-md-6">
+
+                            <div class="col-lg-6 col-lg-12">
+                                <label>Municipio del acta <b class="text-danger">*</b></label>
+                                <ng-select [multiple]="false" [options]="municipiosActa" [(ngModel)]="datos.idMunicipioActa" name="idMunicipioActa" required>
+                                </ng-select>
+                            </div>
+
+                            <div class="col-lg-6 col-lg-6">
                                 <label>Fecha acta <b class="text-danger">*</b></label>
                                 <input class="form-control" [(ngModel)]="datos.fechaActa" name="fechaActa" type="date" required />
                             </div>
-                        </div>
 
-                        <div class="row">
-                            <div class="col-lg-12 col-md-16">
-                                <br>
-                                <h5 class="text-center">Datos de entrega</h5>
-                            </div>
-                            <div class="col-lg-12 col-md-16">
-                                <label>Tipo identificación <b class="text-danger">*</b></label>
-                                <ng-select 
-                                [multiple]="false" 
-                                [options]="tiposIdentificacion" 
-                                [(ngModel)]="datos.idTipoIdentificacionEntrega" 
-                                required 
-                                name="idTipoIdentificacionEntrega">
-                                </ng-select>
-                            </div>
                             <div class="col-xs-12 col-lg-6">
-                                <label>Número Identificación <b class="text-danger">*</b></label>
-                                <input class="form-control" [(ngModel)]="datos.numeroIdentificacionEntrega" name="numeroIdentificacionEntrega" type="text" required />
-                            </div>
-                            <div class="col-xs-12 col-lg-6">
-                                <label>Nombre <b class="text-danger">*</b></label>
+                                <label>Nombre a quien se entrega <b class="text-danger">*</b></label>
                                 <input class="form-control" [(ngModel)]="datos.nombreEntrega" name="nombreEntrega" type="text" required />
                             </div>
+
+                            <div class="col-lg-12 col-md-16">
+                                <label>Tipo documento a quien se entrega <b class="text-danger">*</b></label>
+                                <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="datos.idTipoIdentificacionEntrega" name="idTipoIdentificacionEntrega" required>
+                                </ng-select>
+                            </div>
+
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Número documento a quien se entrega <b class="text-danger">*</b></label>
+                                <input class="form-control" [(ngModel)]="datos.numeroIdentificacionEntrega" name="numeroIdentificacionEntrega" type="text" required />
+                            </div>
+
+                            <div class="col-lg-6 col-lg-12">
+                                <label>Departamento del acta <b class="text-danger">*</b></label>
+                                <ng-select (ngModelChange)="onChangedDepartamentoEntrega($event)" [multiple]="false" [options]="departamentos" [(ngModel)]="datos.idDepartamentoEntrega" name="idDepartamentoEntrega" required>
+                                </ng-select>
+                            </div>
+
+                            <div class="col-lg-6 col-lg-12">
+                                <label>Municipio de entrega <b class="text-danger">*</b></label>
+                                <ng-select [multiple]="false" [options]="municipiosEntrega" [(ngModel)]="datos.idMunicipioEntrega" name="idMunicipioEntrega" required>
+                                </ng-select>
+                            </div>                         
+                            
                             <div class="col-lg-6 col-md-6">
                                 <label>Fecha entrega <b class="text-danger">*</b></label>
                                 <input class="form-control" [(ngModel)]="datos.fechaEntrega" name="fechaEntrega" type="date" required />
                             </div>
-                            <div class="col-lg-6 col-md-6">
-                                <label>Municipio de entrega <b class="text-danger">*</b></label>
-                                <ng-select 
-                                [multiple]="false" 
-                                [options]="municipios" 
-                                [(ngModel)]="datos.idMunicipioEntrega" 
-                                required 
-                                name="idMunicipioEntrega">
-                                </ng-select>
+
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Placa de entrega <b class="text-danger">*</b></label>
+                                <input class="form-control" [(ngModel)]="datos.placaEntrega" name="placaEntrega" type="text" required />
                             </div>
+                        
                             <div class="col-lg-6 col-md-6">
-                                <label>Estado del automotor</label>
-                                <textarea class="form-control" [(ngModel)]="datos.estado" name="estado"></textarea>
+                                <label>Estado de la entrega</label>
+                                <textarea class="form-control" [(ngModel)]="datos.estadoEntrega" name="estadoEntrega" rows="3"></textarea>
                             </div>
                         </div>
                     </div>
@@ -120,7 +123,6 @@
                     Enviar
                 </button>
             </div>
-            
         </div>
     </div>
     <!-- /.col -->

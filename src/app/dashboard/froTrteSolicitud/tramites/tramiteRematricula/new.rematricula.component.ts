@@ -1,10 +1,9 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { FroTrteSolicitudService } from '../../../../services/froTrteSolicitud.service';
-import { FroFacTramiteService } from '../../../../services/froFacTramite.service';
-import { VhloVehiculoService } from '../../../../services/vhloVehiculo.service';
+import { CfgDepartamentoService } from '../../../../services/cfgDepartamento.service';
 import { CfgMunicipioService } from '../../../../services/cfgMunicipio.service';
 import { UserCfgTipoIdentificacionService } from '../../../../services/userCfgTipoIdentificacion.service';
-import { PnalFuncionarioService } from '../../../../services/pnalFuncionario.service';
+import { VhloCfgMotivoCancelacionService } from "../../../../services/vhloCfgMotivoCancelacion.service";
+import { VhloVehiculoService } from '../../../../services/vhloVehiculo.service';
 import { LoginService } from '../../../../services/login.service';
 
 import swal from 'sweetalert2';
@@ -23,9 +22,12 @@ export class NewRematriculaComponent implements OnInit {
     
     public realizado: any = false;
     public tramiteSolicitud: any = null;
-    public municipios: any;
+    public departamentos: any;
+    public municipiosActa: any;
+    public municipiosEntrega: any;
     public tiposIdentificacion: any;
     public matriculaCancelada: any = null;
+    public notification = false;
 
     public datos = {
         'documentacion': true,
@@ -36,10 +38,13 @@ export class NewRematriculaComponent implements OnInit {
         'fechaEntrega': null,
         'numeroIdentificacionEntrega': null,
         'nombreEntrega': null,
-        'estado': null,
+        'placaEntrega': null,
+        'estadoEntrega': null,
         'idFuncionario': null,
         'idEntidad': null,
+        'idDepartamentoActa': null,
         'idMunicipioActa': null,
+        'idDepartamentoEntrega': null,
         'idMunicipioEntrega': null,
         'idTipoIdentificacionEntrega': null,
         'idVehiculo': null,
@@ -53,12 +58,11 @@ export class NewRematriculaComponent implements OnInit {
     ];
 
     constructor(
-        private _TramiteSolicitudService: FroTrteSolicitudService,
-        private _TramiteFacturaService: FroFacTramiteService,
-        private _VehiculoService: VhloVehiculoService,
+        private _DepartamentoService: CfgDepartamentoService,
         private _MunicipioService: CfgMunicipioService,
         private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
-        private _FuncionarioService: PnalFuncionarioService,
+        private _VhloCfgMotivoCancelacionService: VhloCfgMotivoCancelacionService,
+        private _VehiculoService: VhloVehiculoService,
         private _LoginService: LoginService,
     ) { }
 
@@ -85,9 +89,35 @@ export class NewRematriculaComponent implements OnInit {
                 confirmButtonText: 'Aceptar'
             });
         }else{
-            this._MunicipioService.select().subscribe(
+            let token = this._LoginService.getToken();
+
+            this._VehiculoService.validations({ 'id': this.vehiculo.id, 'idTramiteFactura': this.tramiteFactura.id }, token).subscribe(
                 response => {
-                    this.municipios = response;
+                    if (response.code == 400) {
+                        this.notification = true;
+
+                        swal({
+                            title: response.title,
+                            text: response.message,
+                            type: response.status,
+                            confirmButtonText: 'Aceptar'
+                        });
+                    }
+                },
+                error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert('Error en la petición');
+                    }
+                }
+            );
+
+
+            this._DepartamentoService.select().subscribe(
+                response => {
+                    this.departamentos = response;
                 },
                 error => {
                     this.errorMessage = <any>error;
@@ -112,6 +142,44 @@ export class NewRematriculaComponent implements OnInit {
                     }
                 }
             );
+        }
+    }
+
+    onChangedDepartamentoActa(id){
+        if (id) {
+          let token = this._LoginService.getToken();
+    
+          this._MunicipioService.selectByDepartamento({ 'idDepartamento':id }, token).subscribe(
+            response => {
+              this.municipiosActa = response;
+            },
+            error => {
+              this.errorMessage = <any>error;
+              if (this.errorMessage != null) {
+                console.log(this.errorMessage);
+                alert('Error en la petición');
+              }
+            }
+          );
+        }
+    }
+
+    onChangedDepartamentoEntrega(id){
+        if (id) {
+          let token = this._LoginService.getToken();
+    
+          this._MunicipioService.selectByDepartamento({ 'idDepartamento':id }, token).subscribe(
+            response => {
+              this.municipiosEntrega = response;
+            },
+            error => {
+              this.errorMessage = <any>error;
+              if (this.errorMessage != null) {
+                console.log(this.errorMessage);
+                alert('Error en la petición');
+              }
+            }
+          );
         }
     }
 

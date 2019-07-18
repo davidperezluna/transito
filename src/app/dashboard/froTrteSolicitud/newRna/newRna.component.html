@@ -125,7 +125,6 @@
     <div class="col-xs-12 col-lg-8" *ngIf="factura && vehiculo">
         <div class="card">
             <div class="card-body">
-                <!-- 
                 <div class="row" *ngIf="propietarios && vehiculo">
                     <div class="col-xs-12 col-lg-12">
                         <table class="table table-bordered">
@@ -177,9 +176,8 @@
                         </table>
                     </div>
                 </div>
-                    row -->
 
-                <div class="row">
+                <div class="row" *ngIf="!propietarios">
                     <div class="col-xs-12 col-lg-4" *ngIf="!confirmarSolicitante">
                         <form #formSearchCiudadano="ngForm">
                             <label>Buscar ciudadano</label>

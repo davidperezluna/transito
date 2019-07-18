@@ -43,7 +43,8 @@
                                             <th>Identificación</th>
                                             <th>No. placa</th>
                                             <th>Sede operativa</th>
-                                            <th>Consecutivo</th>
+                                            <th>No. de comparendo</th>
+                                            <th>Estado</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -59,6 +60,7 @@
                                         <td>{{ consecutivo.funcionario.numeroPlaca }}</td>
                                         <td>{{ consecutivo.funcionario.organismoTransito.nombre }}</td>
                                         <td>{{ consecutivo.numero }}</td>
+                                        <td>{{ consecutivo.estado }}</td>
                                     </tr>
                                     </tbody>
                                 </table>

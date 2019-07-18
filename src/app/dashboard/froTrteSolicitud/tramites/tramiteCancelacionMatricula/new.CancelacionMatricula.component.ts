@@ -1,10 +1,7 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { FroTrteSolicitudService } from '../../../../services/froTrteSolicitud.service';
-import { FroFacTramiteService } from '../../../../services/froFacTramite.service';
-import { VhloVehiculoService } from '../../../../services/vhloVehiculo.service';
 import { CfgEntidadJudicialService } from "../../../../services/cfgEntidadJudicial.service";
-import { PnalFuncionarioService } from '../../../../services/pnalFuncionario.service';
 import { VhloCfgMotivoCancelacionService } from "../../../../services/vhloCfgMotivoCancelacion.service";
+import { VhloVehiculoService } from '../../../../services/vhloVehiculo.service';
 import { LoginService } from '../../../../services/login.service';
 
 import swal from 'sweetalert2';
@@ -48,26 +45,9 @@ export class NewCancelacionMatriculaComponent implements OnInit {
         'idVehiculo': null,
         'idTramiteFactura': null,
     };
-    
-    /* public motivosCancelacion = [
-        { value: 'DESAPARICIÓN DOCUMENTAL', label: 'DESAPARICIÓN DOCUMENTAL' },
-        { value: 'EXPORTACIÓN O REEXPORTACIÓN', label: 'EXPORTACIÓN O REEXPORTACIÓN' },
-        { value: 'DESTRUCCIÓN O PERDIDA TOTAL', label: 'DESTRUCCIÓN O PERDIDA TOTAL' },
-        { value: 'DESINTEGRACIÓN FISICA TOTAL', label: 'DESINTEGRACIÓN FISICA TOTAL' },
-        { value: 'DESTRUCCIÓN O PERDIDA TOTAL POR ACCIDENTE DE TRÁNSITO', label: 'DESTRUCCIÓN O PERDIDA TOTAL POR ACCIDENTE DE TRÁNSITO' },
-        { value: 'DESTRUCCIÓN O PERDIDA TOTAL POR CASO FORTUITO O FUERZA MAYOR', label: 'DESTRUCCIÓN O PERDIDA TOTAL POR CASO FORTUITO O FUERZA MAYOR' },
-        { value: 'HURTO', label: 'HURTO' },
-        { value: 'PERDIDA DEFINITIVA', label: 'PERDIDA DEFINITIVA' },
-        { value: 'REPOSICIÓN', label: 'REPOSICIÓN' },
-        { value: 'RECONOCIMIENTO ECONOMICO', label: 'RECONOCIMIENTO ECONOMICO' },
-    ]; */
 
     constructor(
-        private _TramiteSolicitudService: FroTrteSolicitudService,
-        private _TramiteFacturaService: FroFacTramiteService,
-        private _VehiculoService: VhloVehiculoService,
         private _EntidadJudicialService: CfgEntidadJudicialService,
-        private _FuncionarioService: PnalFuncionarioService,
         private _VhloCfgMotivoCancelacionService: VhloCfgMotivoCancelacionService,
         private _LoginService: LoginService,
     ) { }

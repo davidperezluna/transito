@@ -85,7 +85,7 @@ constructor(
 
     this._AsignacionService.register(this.asignacion, token).subscribe(
       response => {        
-        if(response.status == 'success'){
+        if(response.code == 200){
           this.asignacion = response.data;
           this.numeroActa = response.data.numeroActa;
           
