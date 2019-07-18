@@ -79,7 +79,7 @@ export class NewRnetComponent implements OnInit {
             }
         });
 
-        this.tramiteSolicitud = new FroTrteSolicitud(null, null, null, null, null, null, null, null, null, null);
+        this.tramiteSolicitud = new FroTrteSolicitud(null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 
         let token = this._LoginService.getToken();
 

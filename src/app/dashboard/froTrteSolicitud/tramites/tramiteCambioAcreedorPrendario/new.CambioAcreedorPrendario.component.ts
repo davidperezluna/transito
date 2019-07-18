@@ -233,8 +233,16 @@ export class NewTramiteCambioAcreedorPrendarioComponent implements OnInit {
         let resumen = "No. factura: " + this.tramiteFactura.factura.numero;
 
         this.realizado = true;
-            
-        this.onReadyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
+
+        this.onReadyTramite.emit(
+            {
+                'documentacion':this.datos.documentacion, 
+                'observacion':this.datos.observacion, 
+                'foraneas':this.datos, 
+                'resumen':resumen,
+                'idTramiteFactura': this.tramiteFactura.id,
+            }
+        );
 
         /*this._TramiteSolicitudService.validations(this.datos, token).subscribe(
             response => {

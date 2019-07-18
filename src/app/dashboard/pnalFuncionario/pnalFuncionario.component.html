@@ -115,6 +115,13 @@
                   <small>
                     {{ funcionario.organismoTransito.nombre }}
                   </small>
+                  <ng-container *ngIf="funcionario.numeroPlaca">
+                      <br>
+                      <strong>No. de placa:</strong>
+                      <small>
+                        {{ funcionario.numeroPlaca }}
+                      </small>
+                  </ng-container>
                 </td>
                 <td>
                   <strong>Tipo Nombramiento:</strong>
@@ -141,13 +148,15 @@
                 </td>
                 <td>
                   <strong>Fecha inicio:</strong>
+                  <br>
                   <small>
-                    {{ funcionario.fechaInicial }}
+                    {{ (funcionario.fechaInicial.timestamp * 1000) | date: 'yyyy-MM-dd' }}
                   </small>
                   <br>
                   <strong>Fecha fin:</strong>
+                  <br>
                   <small>
-                    {{ funcionario.fechaFinal }}
+                    {{ (funcionario.fechaFinal.timestamp * 1000) | date: 'yyyy-MM-dd' }}
                   </small>
                 </td>
                 <td *ngIf='funcionario.activo'>En ejecución</td>
@@ -161,24 +170,24 @@
                 <td>
                   <div class="btn-group">
                     <button (click)="onShow(funcionario)" (ready)="ready($event)" class="btn btn-xs btn-default"
-                      type="button">
+                      type="button" tooltip="Más información" [tooltipDisabled]="false" [tooltipAnimation]="true" tooltipPlacement="top">
                       <i class="fa fa-eye"></i>
                     </button>
                     <button (click)="onTime(funcionario)" (ready)="ready($event)" class="btn btn-xs btn-primary"
-                      type="button" *ngIf="funcionario.tipoNombramiento.horarios">
+                      type="button" *ngIf="funcionario.tipoNombramiento.horarios" tooltip="Gestión de horarios" [tooltipDisabled]="false" [tooltipAnimation]="true" tooltipPlacement="top">
                       <i class="fa fa-clock-o"></i>
                     </button>
                     <button (click)="onProrroga(funcionario)" (ready)="ready($event)" class="btn btn-xs btn-success"
-                      type="button" *ngIf="funcionario.tipoNombramiento.prorroga">
+                      type="button" *ngIf="funcionario.tipoNombramiento.prorroga" tooltip="Prorroga" [tooltipDisabled]="false" [tooltipAnimation]="true" tooltipPlacement="top">
                       <i class="fa fa-calendar"></i>
                     </button>
                     <button (click)="onSuspension(funcionario)" (ready)="ready($event)" class="btn btn-xs btn-danger"
-                      type="button" *ngIf="funcionario.activo">
+                      type="button" *ngIf="funcionario.activo" tooltip="Suspender" [tooltipDisabled]="false" [tooltipAnimation]="true" tooltipPlacement="top">
                       <i class="fa fa-ban"></i>
                     </button>
                     <button (click)="onDisabled(funcionario)" (ready)="ready($event)" class="btn btn-xs btn-warning"
-                      type="button" *ngIf="funcionario.activo">
-                      <i class="fa fa-ban"></i>
+                      type="button" *ngIf="funcionario.activo" tooltip="Deshabilitar" [tooltipDisabled]="false" [tooltipAnimation]="true" tooltipPlacement="top">
+                      <i class="fa fa-times"></i>
                     </button>
                   </div>
                 </td>

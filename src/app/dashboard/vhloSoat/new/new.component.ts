@@ -27,7 +27,7 @@ export class NewComponent implements OnInit {
     public empresaSelected: any;
     public estadoSelected: any;
     public estados = [
-        { value: 'UTILIZADO', label: 'UTILIZADO' },
+        { value: 'VIGENTE', label: 'VIGENTE' },
         { value: 'VENCIDO', label: 'VENCIDO' },
     ];
 

@@ -108,11 +108,8 @@ export class UserEmpresaComponent implements OnInit {
   }
 
   onInitTable(){
-    if (this.table) {
-      this.table.destroy();
-    }
-
     this.table = $('#dataTables-example').DataTable({
+      destroy: true,
       responsive: false,
       pageLength: 10,
       sPaginationType: 'full_numbers',

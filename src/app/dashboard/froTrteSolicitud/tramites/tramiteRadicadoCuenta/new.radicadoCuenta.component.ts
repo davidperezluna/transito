@@ -1,10 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { DatePipe } from '@angular/common';
-import { FroTrteSolicitudService } from '../../../../services/froTrteSolicitud.service';
-import { FroFacTramiteService } from '../../../../services/froFacTramite.service';
 import { CfgMunicipioService } from '../../../../services/cfgMunicipio.service';
 import { UserCfgTipoIdentificacionService } from '../../../../services/userCfgTipoIdentificacion.service';
-import { PnalFuncionarioService } from '../../../../services/pnalFuncionario.service';
 import { LoginService } from '../../../../services/login.service';
 
 import swal from 'sweetalert2';
@@ -23,6 +20,7 @@ export class NewRadicadoCuentaComponent implements OnInit {
   public errorMessage; 
   
   public realizado: any = false;
+  public notification: any = false;
   public tramiteSolicitud: any = null;
   public municipios:any;
   public tiposIdentificacion: any;
@@ -32,6 +30,7 @@ export class NewRadicadoCuentaComponent implements OnInit {
     'documentacion': true,
     'observacion': null,
     'cantidadPlacas': null,
+    'empresaAfiliadora': null,
     'idFuncionario': null,
     'idVehiculo': null,
     'idMunicipio': null,
@@ -41,12 +40,8 @@ export class NewRadicadoCuentaComponent implements OnInit {
   };
 
   constructor(
-      private _TramiteSolicitudService: FroTrteSolicitudService,
-      private _TramiteFacturaService: FroFacTramiteService,
       private _MunicipioService: CfgMunicipioService,
       private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
-      private _FuncionarioService: PnalFuncionarioService,
-      private _LoginService: LoginService,
   ) { }
 
   ngOnInit() {
@@ -101,6 +96,8 @@ export class NewRadicadoCuentaComponent implements OnInit {
         );
       }
     } else {
+      this.notification = true;
+      
       swal({
         title: 'Error!',
         text: 'El vehiculo no se registro para radicado de cuenta.',

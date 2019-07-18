@@ -111,9 +111,6 @@ export class VhloCfgValorComponent implements OnInit {
 
   ready(isCreado: any) {
     if (isCreado) {
-      this.formNew = false;
-      this.formEdit = false;
-      this.formIndex = true;
       this.ngOnInit();
     }
   }

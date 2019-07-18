@@ -4,7 +4,7 @@ import { FroTrteSolicitudService } from '../../../services/froTrteSolicitud.serv
 import { FroFacTramiteService } from '../../../services/froFacTramite.service';
 import { FroFacturaService } from '../../../services/froFactura.service';
 import { UserCiudadanoService } from '../../../services/userCiudadano.service';
-import { VhloAcreedorService } from '../../../services/vhloAcreedor.service';
+import { VhloRestriccionService } from '../../../services/vhloRestriccion.service';
 import { VhloPropietarioService } from '../../../services/vhloPropietario.service';
 import { PnalFuncionarioService } from '../../../services/pnalFuncionario.service';
 import { VhloVehiculoService } from '../../../services/vhloVehiculo.service';
@@ -54,6 +54,7 @@ export class NewRnmaComponent implements OnInit {
   public tramitesRealizados: any = [];
   public documentacionPendiente: any = [];
   public ciudadanos: any = [];
+  public restricciones: any = null;
   
   public formApoderado = false;
   public formNewCiudadano: any = false;
@@ -63,7 +64,7 @@ export class NewRnmaComponent implements OnInit {
     private _TramiteFacturaService: FroFacTramiteService,
     private _FacturaService: FroFacturaService,
     private _CiudadanoService: UserCiudadanoService,
-    private _AcreedorService: VhloAcreedorService,
+    private _RestriccionService: VhloRestriccionService,
     private _PropietarioService: VhloPropietarioService,
     private _VehiculoService: VhloVehiculoService,
     private _FuncionarioService: PnalFuncionarioService,
@@ -79,7 +80,7 @@ export class NewRnmaComponent implements OnInit {
       }
     });
 
-    this.tramiteSolicitud = new FroTrteSolicitud(null, null, null, null, null, null, null, null, null, null);
+    this.tramiteSolicitud = new FroTrteSolicitud(null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 
     let token = this._LoginService.getToken();
 
@@ -158,28 +159,37 @@ export class NewRnmaComponent implements OnInit {
           this.vehiculo = response.data;
           this.tramiteSolicitud.idVehiculo = this.vehiculo.id;
 
-          this._TramiteFacturaService.searchTramitesByFactura({ 'idFactura': this.factura.id, 'idVehiculo': this.vehiculo.id }, token).subscribe(
+          this._RestriccionService.searchByVehiculo({ 'idVehiculo': this.vehiculo.id }, token).subscribe(
             response => {
               if (response.code == 200) {
-                this.tramitesFactura = response.data.tramitesFactura;
-                this.requiereSustrato = response.data.sustrato;
-                this.requiereRunt = response.data.numeroRunt;
-
-                if (response.data.propietarios) {
-                  this.propietarios = response.data.propietarios;
-                }            
-
-                swal.close();
-              } else {
-                this.tramitesFactura = null;
-                this.propietarios = null
-                this.requiereSustrato = false;
-                this.requiereRunt = false;
+                this.restricciones = response.data;
 
                 swal({
-                  title: 'Error!',
+                  title: 'Vehiculo con '+response.message,
+                  text: "¿Esta seguro que desea continuar?",
+                  type: 'warning',
+                  showCancelButton: true,
+                  confirmButtonColor: '#15d4be',
+                  cancelButtonColor: '#ff6262',
+                  confirmButtonText: 'Confirmar',
+                  cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                  if (result.value) {
+                    this.onSearchTramites();
+                  }else{
+                    this.vehiculo = null;
+                    this.tramiteSolicitud.idVehiculo = null;
+                  }
+                });
+              } else if(response.code == 401){                
+                this.onSearchTramites();
+              }else{
+                this.restricciones = null;
+
+                swal({
+                  title: response.title,
                   text: response.message,
-                  type: 'error',
+                  type: response.status,
                   confirmButtonText: 'Aceptar'
                 });
               }
@@ -192,57 +202,65 @@ export class NewRnmaComponent implements OnInit {
               }
             }
           );
-
-          /*this._AcreedorService.searchByVehiculo({ 'idVehiculo': vehiculo.id }, token).subscribe(
-            response => {
-              if (response.code == 200) {
-                swal({
-                  title: 'Vehiculo con prenda',
-                  text: "¿Esta seguro que desea continuar?",
-                  type: 'warning',
-                  showCancelButton: true,
-                  confirmButtonColor: '#15d4be',
-                  cancelButtonColor: '#ff6262',
-                  confirmButtonText: 'Confirmar',
-                  cancelButtonText: 'Cancelar'
-                }).then((result) => {
-                  if (result.value) {
-                    this.vehiculo = vehiculo;
-                    this.tramiteSolicitud.idVehiculo = this.vehiculo.id;
-
-                    this.onSearchPropietarios();
-                  }else{
-                    this.vehiculo = null;
-                    this.tramiteSolicitud.idVehiculo = null;
-                  }
-                });
-              } else {
-                this.vehiculo = vehiculo;
-                this.tramiteSolicitud.idVehiculo = this.vehiculo.id;
-
-                this.onSearchPropietarios();
-              }
-              error => {
-                this.errorMessage = <any>error;
-                if (this.errorMessage != null) {
-                  console.log(this.errorMessage);
-                  alert("Error en la petición");
-                }
-              }
-            }
-          );*/
-        } else {
+        } else{
           this.vehiculo = null;
           this.tramiteSolicitud.idVehiculo = null;
 
           swal({
-            title: 'Atención!',
+            title: response.title,
             text: response.message,
-            type: 'warning',
+            type: response.status,
             confirmButtonText: 'Aceptar'
           });
         }
 
+        error => {
+          this.errorMessage = <any>error;
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      }
+    );
+  }
+
+  onSearchTramites(){
+    swal({
+      title: 'Cargando tramites!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+
+    let token = this._LoginService.getToken();
+
+    this._TramiteFacturaService.searchTramitesByFactura({ 'idFactura': this.factura.id, 'idVehiculo': this.vehiculo.id }, token).subscribe(
+      response => {
+        if (response.code == 200) {
+          this.tramitesFactura = response.data.tramitesFactura;
+          this.requiereSustrato = response.data.sustrato;
+          this.requiereRunt = response.data.numeroRunt;
+
+          if (response.data.propietarios) {
+            this.propietarios = response.data.propietarios;
+          }            
+
+          swal.close();
+        } else {
+          this.tramitesFactura = null;
+          this.propietarios = null
+          this.requiereSustrato = false;
+          this.requiereRunt = false;
+
+          swal({
+            title: 'Error!',
+            text: response.message,
+            type: 'error',
+            confirmButtonText: 'Aceptar'
+          });
+        }
         error => {
           this.errorMessage = <any>error;
           if (this.errorMessage != null) {
@@ -361,7 +379,7 @@ export class NewRnmaComponent implements OnInit {
         swal.showLoading()
       }
     });
-
+    
     let token = this._LoginService.getToken();
 
     this._FacturaService.complete({ 'id': this.factura.id }, token).subscribe(
@@ -473,6 +491,14 @@ export class NewRnmaComponent implements OnInit {
   }
 
   onEnviar() {
+    swal({
+      title: 'Guardando información!',
+      text: 'Solo tardará unos segundos, por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+
     let token = this._LoginService.getToken();
 
     this.tramiteSolicitud.tramitesRealizados = this.tramitesRealizados;

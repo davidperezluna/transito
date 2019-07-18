@@ -202,7 +202,7 @@
                                         </div>
                                     </div>
                                     <div class="card-body">
-                                        <table class="table table-bordered table-striped">
+                                        <table class="table table-bordered">
                                             <tbody>
                                                 <tr *ngFor="let propietario of propietarios; let i = index">
                                                     <td *ngIf='propietario.ciudadano'>
@@ -221,7 +221,7 @@
                                                     </td>
                                                     <td> 
                                                         <div class="custom-control custom-checkbox"  >
-                                                            <input (change)="onSeller($event, propietario.id)" [(ngModel)]="propietario.state" name="{{propietario.id}}" type="checkbox" class="custom-control-input" id="{{propietario.id}}">
+                                                            <input (change)="onSeller($event, propietario.id)" [(ngModel)]="propietario.state" name="{{propietario.id}}" type="checkbox" class="custom-control-input form-check-input" id="{{propietario.id}}">
                                                             <label class="custom-control-label" for="{{propietario.id}}"><p>${{valorRetefuenteUnitario}}</p></label>
                                                         </div>
                                                     </td>

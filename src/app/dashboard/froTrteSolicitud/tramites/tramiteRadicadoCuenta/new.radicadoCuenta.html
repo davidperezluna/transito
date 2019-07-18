@@ -14,18 +14,18 @@
     </div>
 </div>
 
-<div class="row" *ngIf="!realizado"><!-- .row -->
+<div class="row" *ngIf="!realizado && !notification"><!-- .row -->
     <div class="col-xs-12 col-lg-12"><!-- .col -->
-        <div class="card">
-            <div class="card-header">
-                <b class="text-primary">
-                    Registar radicado de cuenta
-                </b>
-                <br>
-                <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
-            </div>
-            <div class="card-body">
-                <form>
+        <form #formNew="ngForm">
+            <div class="card">
+                <div class="card-header">
+                    <b class="text-primary">
+                        Registar radicado de cuenta
+                    </b>
+                    <br>
+                    <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
+                </div>
+                <div class="card-body">
                     <div class="form-group">
                         <div class="row">
                             <div class="col-xs-12 col-lg-12">
@@ -45,23 +45,28 @@
     
                     <div class="form-group" *ngIf="datos.documentacion">
                         <div class="row">
-                            <div class="col-xs-12 col-lg-6">
+                            <div class="col-xs-12 col-lg-12">
                                 <b>Organismo de transito de que proviene</b>
                                 <br>
                                 {{ vehiculo.organismoTransitoRadicado?.nombre }}
                             </div>
         
-                            <div class="col-xs-12 col-lg-6"  >
+                            <div class="col-xs-12 col-lg-6" *ngIf="vehiculo.modalidadTransporte.id == 1 || vehiculo.modalidadTransporte.id == 3">
                                 <b>Tipo documento empresa afiliadora</b>
                                 <br>
                                 {{ vehiculo.tipoIdentificacionRadicado?.nombre }}
                             </div>
         
-                            <div class="col-xs-12 col-lg-6">
-                                <b>Nro. Documento</b>
+                            <div class="col-xs-12 col-lg-6" *ngIf="vehiculo.modalidadTransporte.id == 1 || vehiculo.modalidadTransporte.id == 3">
+                                <b>Nro. documento empresa afiliadora</b>
                                 <br>
                                 {{ vehiculo.identificacionRadicado }}
-                            </div>                      
+                            </div>    
+                            
+                            <div class="col-xs-12 col-lg-12" *ngIf="vehiculo.modalidadTransporte.id == 1 || vehiculo.modalidadTransporte.id == 3">
+                                <label>Empresa afiliadora<b class="text-danger">*</b></label>
+                                <input class="form-control" [(ngModel)]="datos.empresaAfiliadora" name="empresaAfiliadora" type="text" required />
+                            </div>  
                             
                             <div class="col-xs-12 col-lg-3">
                                 <b>Fecha de ingreso</b>
@@ -82,19 +87,19 @@
                             </div>
     
                             <div class="col-xs-12 col-lg-6">
-                                <label>Cantidad de placas</label>
-                                <input class="form-control" [(ngModel)]="datos.cantidadPlacas" name="cantidadPlacas" type="text" />
+                                <label>Cantidad de placas <b class="text-danger">*</b></label>
+                                <input class="form-control" [(ngModel)]="datos.cantidadPlacas" name="cantidadPlacas" type="text" required />
                             </div>
                         </div>
                     </div>
-                </form>
+                </div>
+                <div class="card-footer">
+                    <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary">
+                        <i class="fa fa-save"></i>
+                        Enviar
+                    </button>
+                </div>
             </div>
-            <div class="card-footer">
-                <button (click)="onEnviar()" class="btn btn-primary">
-                    <i class="fa fa-save"></i>
-                    Enviar
-                </button>
-            </div>
-        </div>
+        </form>
     </div><!-- /.col -->
 </div><!-- /.row -->

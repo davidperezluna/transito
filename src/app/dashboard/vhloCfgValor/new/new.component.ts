@@ -103,16 +103,12 @@ export class NewComponent implements OnInit {
       });
   }
 
-  changedMarca(e){
-    if (this.marcaSelected) {
+  onChangedMarca(e){
+    if (e) {
       let token = this._loginService.getToken()
-        this._lineaService.selectByMarca(this.marcaSelected, token).subscribe(
+        this._lineaService.selectByMarca(e, token).subscribe(
           response => {
-            if (response != null) {
-              this.lineas = response;
-            }else{
-              this.lineas = [];
-            }
+            this.lineas = response;
           }, 
           error => { 
             this.errorMessage = <any>error;

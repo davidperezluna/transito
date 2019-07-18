@@ -69,17 +69,17 @@
 
                             <div class="col-xs-12 col-lg-3">
                                 <label>Fecha factura <b class="text-danger">*</b></label>
-                                <input class="form-control" [(ngModel)]="datosNuevo.fecha" name="fecha" type="date" required />
+                                <input class="form-control" [(ngModel)]="datosNuevo.fechaFactura" name="fechaFactura" type="date" required />
                             </div>
 
                             <div class="col-xs-12 col-lg-4">
                                 <label>No. declaración importación <b class="text-danger">*</b></label>
-                                <input class="form-control" [(ngModel)]="datosNuevo.numeroFactura" name="numeroFactura" type="text" />
+                                <input class="form-control" [(ngModel)]="datosNuevo.numeroImportacion" name="numeroImportacion" type="text" />
                             </div>
 
                             <div class="col-xs-12 col-lg-3">
                                 <label>Fecha declaración importación <b class="text-danger">*</b></label>
-                                <input class="form-control" [(ngModel)]="datosNuevo.fechaFactura" name="fechaFactura" type="date" required />
+                                <input class="form-control" [(ngModel)]="datosNuevo.fechaImportacion" name="fechaImportacion" type="date" required />
                             </div>
 
                             <div class="col-xs-12 col-lg-6">
@@ -121,20 +121,18 @@
                                 <ng-select [multiple]="false" [options]="combustibles" [(ngModel)]="datosUsado.idCombustible" name="idCombustible" required>
                                 </ng-select>
                             </div>
-                        </div>
 
-                        <div class="row">
                             <div class="col-xs-12 col-lg-6">
                                 <label>Entidad <b class="text-danger">*</b></label>
-                                <input class="form-control" [(ngModel)]="datos.entidad" name="entidad" type="text" required />
+                                <input class="form-control" [(ngModel)]="datosUsado.entidad" name="entidad" type="text" required />
                             </div>
                             <div class="col-xs-12 col-lg-3">
                                 <label>Número chequeo SIJIN <b class="text-danger">*</b></label>
-                                <input class="form-control" [(ngModel)]="datos.sijinChequeoNumero" name="sijinChequeoNumero" type="text" required />
+                                <input class="form-control" [(ngModel)]="datosUsado.sijinChequeoNumero" name="sijinChequeoNumero" type="text" required />
                             </div>
                             <div class="col-xs-12 col-lg-3">
                                 <label>Fecha chequeo SIJIN <b class="text-danger">*</b></label>
-                                <input class="form-control" [(ngModel)]="datos.sijinChequeoFecha" name="sijinChequeoFecha" type="date" required />
+                                <input class="form-control" [(ngModel)]="datosUsado.sijinChequeoFecha" name="sijinChequeoFecha" type="date" required />
                             </div>
                         </div>
                     </div>
