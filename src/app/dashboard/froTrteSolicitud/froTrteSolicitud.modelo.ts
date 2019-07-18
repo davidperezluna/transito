@@ -1,6 +1,10 @@
 export class FroTrteSolicitud{
 	constructor(
 		public numeroRunt: string,
+		public numeroFolios: number,
+		public numeroArchivador: number,
+		public bandeja: number,
+		public numeroCaja: number,
 		public tramitesRealizados: any,
 		public documentacionPendiente: any,
 		public insumoEntregado: any,

@@ -80,7 +80,7 @@ export class NewRnaComponent implements OnInit {
       }
     });
 
-    this.tramiteSolicitud = new FroTrteSolicitud(null, null, null, null, null, null, null, null, null, null);
+    this.tramiteSolicitud = new FroTrteSolicitud(null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 
     let token = this._LoginService.getToken();
 
@@ -159,7 +159,7 @@ export class NewRnaComponent implements OnInit {
           this.vehiculo = response.data;
           this.tramiteSolicitud.idVehiculo = this.vehiculo.id;
 
-          this._RestriccionService.searchByVehiculo({ 'numero': this.vehiculo.id }, token).subscribe(
+          this._RestriccionService.searchByVehiculo({ 'idVehiculo': this.vehiculo.id }, token).subscribe(
             response => {
               if (response.code == 200) {
                 this.restricciones = response.data;
@@ -175,24 +175,23 @@ export class NewRnaComponent implements OnInit {
                   cancelButtonText: 'Cancelar'
                 }).then((result) => {
                   if (result.value) {
-                    this.tramiteSolicitud.idVehiculo = this.vehiculo.id;
-
                     this.onSearchTramites();
                   }else{
                     this.vehiculo = null;
                     this.tramiteSolicitud.idVehiculo = null;
                   }
                 });
-              } else if(response.code == 401){
-                this.tramiteSolicitud.idVehiculo = this.vehiculo.id;
-                
+              } else if(response.code == 401){                
                 this.onSearchTramites();
-                
-                swal.close();
               }else{
                 this.restricciones = null;
 
-                swal.close();
+                swal({
+                  title: response.title,
+                  text: response.message,
+                  type: response.status,
+                  confirmButtonText: 'Aceptar'
+                });
               }
               error => {
                 this.errorMessage = <any>error;
@@ -227,6 +226,14 @@ export class NewRnaComponent implements OnInit {
   }
 
   onSearchTramites(){
+    swal({
+      title: 'Cargando tramites!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+
     let token = this._LoginService.getToken();
 
     this._TramiteFacturaService.searchTramitesByFactura({ 'idFactura': this.factura.id, 'idVehiculo': this.vehiculo.id }, token).subscribe(
@@ -484,6 +491,14 @@ export class NewRnaComponent implements OnInit {
   }
 
   onEnviar() {
+    swal({
+      title: 'Guardando información!',
+      text: 'Solo tardará unos segundos, por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+
     let token = this._LoginService.getToken();
 
     this.tramiteSolicitud.tramitesRealizados = this.tramitesRealizados;

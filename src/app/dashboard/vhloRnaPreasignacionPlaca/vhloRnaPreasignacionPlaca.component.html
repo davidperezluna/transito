@@ -63,7 +63,7 @@
             </div><!-- /.row -->
         </div>
 
-        <div class="col-xs-12 col-lg-8" *ngIf="vehiculo && formShow">
+        <div class="col-xs-12 col-sm-8 col-lg-6" *ngIf="vehiculo && formShow">
             <div class="card">
                 <div class="card-header">
                     <b class="text-uppercase">Resumen de vehiculo</b>
@@ -73,10 +73,11 @@
                         <div class="col-xs-12 col-lg-12">
                             <table class="table table-bordered table-striped">
                                 <tbody>
-                                    <tr *ngIf="vehiculo.placa">
+                                    <tr>
                                         <td>
                                             <b>Placa</b>
-                                            {{ vehiculo.placa?.numero }}
+                                            <span *ngIf="vehiculo.placa">{{ vehiculo.placa?.numero }}</span>
+                                            <span *ngIf="!vehiculo.placa">Sin asignar</span>
                                         </td>
                                     </tr>
                                     <tr>

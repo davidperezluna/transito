@@ -47,9 +47,8 @@ import { NewTramiteCambioAcreedorPrendarioPropietarioComponent } from './tramite
 import { NewTransformacionComponent } from './tramites/tramiteTransformacion/new.transformacion.component';
 import { NewImportacionTemporalComponent } from "./tramites/tramiteImportacionTemporal/new.importacionTemporal.component";
 import { NewProrrogaImportacionTemporalComponent } from "./tramites/tramiteProrrogaImportacionTemporal/new.prorrogaImportacionTemporal.component";
-//para reportes de tramite solicitud
+//Reportes de tramite solicitud
 import { ReportesComponent } from "./reportes/reportes.component";
-/* import { ReportesRnetComponent } from "./newRnet/reportes/reportesRnet.component"; */
 
 import { NewRncExpedicionLicenciaComponent } from './tramites/tramiteExpedicionLicencia/newRncExpedicionLicencia.component';
 import { NewRncDuplicadoLicenciaComponent } from './tramites/tramiteDuplicadoLicencia/newRncDuplicadoLicencia.component';
@@ -58,11 +57,14 @@ import { NewRncRecategorizacionLicenciaAbajoComponent } from './tramites/tramite
 import { NewRncRecategorizacionLicenciaArribaComponent } from './tramites/tramiteRecategorizacionLicenciaArriba/newRncRecategorizacionLicenciaArriba.component';
 import { NewRncRefrendacionLicenciaComponent } from './tramites/tramiteRefrendacionLicencia/newRncRefrendacionLicencia.component';
 
+
 import { SelectModule } from 'angular2-select';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { TooltipModule, Tooltip } from "ngx-tooltip";
 
 import { UserCiudadanoModule } from '../userCiudadano/userCiudadano.module';
+import { VhloSoatModule } from '../vhloSoat/vhloSoat.module';
+import { VhloTecnoMecanicaModule } from '../vhloTecnoMecanica/vhloTecnoMecanica.module';
 
 @NgModule({
     imports: [
@@ -70,7 +72,9 @@ import { UserCiudadanoModule } from '../userCiudadano/userCiudadano.module';
         Ng2BootstrapModule.forRoot(),
         SelectModule,
         TooltipModule,
-        UserCiudadanoModule
+        UserCiudadanoModule,
+        VhloSoatModule,
+        VhloTecnoMecanicaModule
     ],
     declarations: [
         FroTrteSolicitudComponent,

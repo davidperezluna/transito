@@ -305,7 +305,6 @@ export class FroFacTramiteComponent implements OnInit {
     });
     let token = this._LoginService.getToken();
 
-    console.log(this.modulo);
     if (this.modulo.id == 6) {
       this._VehiculoService.searchByPlaca({ 'numero': this.vehiculoFiltro }, token).subscribe(
         response => {
@@ -377,7 +376,6 @@ export class FroFacTramiteComponent implements OnInit {
             }
           }
         );
-         
       } else {
         this._VehiculoService.searchByPlaca({ 'numero': this.vehiculoFiltro }, token).subscribe(
           response => {
@@ -435,7 +433,6 @@ export class FroFacTramiteComponent implements OnInit {
           }
         );
       }
-      
   }
 
   onLoadTramites(){
@@ -513,7 +510,6 @@ export class FroFacTramiteComponent implements OnInit {
                     if (response.code == 200) {
                       this.valorRetefuente = parseInt(response.data.valor) * 0.01;
                       this.valorRetefuenteUnitario = this.valorRetefuente / this.propietarios.length;
-                      console.log(this.valorRetefuenteUnitario);
                       this.idVehiculoValor = response.data.id;
                     } else {
                       swal({

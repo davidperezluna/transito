@@ -30,6 +30,7 @@ export class NewCancelacionMatriculaComponent implements OnInit {
     public datos = {
         'documentacion': true,
         'observacion': null,
+        'numeroCertificado': null,
         'numeroOficio': null,
         'fechaOficio': null,
         'declaracion':null,  
