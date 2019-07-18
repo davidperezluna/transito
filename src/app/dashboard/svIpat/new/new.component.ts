@@ -1421,7 +1421,7 @@ export class NewComponent implements OnInit {
 
         response => {
           if (response.status == 'success') {
-            this.agente = true;
+            /* this.agente = true; */
             
             this.ipat.identificacionAgente = response.data.ciudadano.identificacion;
 
