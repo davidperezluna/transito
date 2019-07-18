@@ -107,7 +107,10 @@
                                     <td>{{ ipat.objetoFijo?.nombre }}</td>
                                     <td>{{ ipat.otroObjetoFijo }}</td>
                                     <td>{{ ipat.otroClaseAccidente }}</td>
-                                    <td>{{ (ipat.fechaAccidente.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td>
+                                    <td>
+                                        <span *ngIf="ipat.fechaAccidente != null"> {{ (ipat.fechaAccidente.timestamp * 1000) | date: 'dd/MM/yyyy' }} </span>
+                                        <span *ngIf="ipat.fechaAccidente == null"> </span>
+                                    </td>
                                     <td>{{ (ipat.horaAccidente.timestamp * 1000) | date: 'HH:mm' }}</td>
                                     <td>{{ (ipat.fechaLevantamiento.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td>
                                     <td>{{ (ipat.horaLevantamiento.timestamp * 1000) | date: 'HH:mm' }}</td>
@@ -129,7 +132,10 @@
                                     <td>{{ ipat.observaciones }}</td>
                                     <td>{{ ipat.entidadCorrespondio?.nombre }}</td>
                                     <td>{{ ipat.unidadCorrespondio?.nombre }}</td>
-                                    <td>{{ (ipat.fechaAccidente.timestamp * 1000) | date: 'yyyy' }}</td>
+                                    <td>
+                                        <span *ngIf="ipat.fechaAccidente != null">{{ (ipat.fechaAccidente.timestamp * 1000) | date: 'yyyy' }}</span>
+                                        <span *ngIf="ipat.fechaAccidente == null"> </span>
+                                    </td>
                                     <td>{{ ipat.consecutivo.numero }}</td>
                                     <td>{{ ipat.tipoIdentificacionAgente }}</td>
                                     <td>{{ ipat.identificacionAgente }}</td>
