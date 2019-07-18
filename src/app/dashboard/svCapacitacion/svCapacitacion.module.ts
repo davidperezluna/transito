@@ -7,12 +7,13 @@ import { SvCapacitacionService } from '../../services/svCapacitacion.service';
 import { NewComponent } from './new/new.component';
 import { EditComponent } from './edit/edit.component';
 import { ShowComponent } from './show/show.component';
+import { ReporteComponent } from './reporte/reporte.component';
 import { SelectModule } from 'angular2-select';
 
 @NgModule({
     imports: [CommonModule, Ng2BootstrapModule.forRoot(), SelectModule],
-    declarations: [SvCapacitacionComponent, NewComponent, EditComponent, ShowComponent],
-    exports: [SvCapacitacionComponent, NewComponent, EditComponent, ShowComponent],
+    declarations: [SvCapacitacionComponent, NewComponent, EditComponent, ShowComponent, ReporteComponent],
+    exports: [SvCapacitacionComponent, NewComponent, EditComponent, ShowComponent, ReporteComponent],
     providers: [SvCapacitacionService]
 })
 

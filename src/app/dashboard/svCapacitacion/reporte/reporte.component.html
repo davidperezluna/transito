@@ -1,0 +1,113 @@
+<div class="container">
+    <hr>
+    <div class="row" *ngIf='formIndex'>
+        <div class="col-xs-12 col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">
+                        <small>REPORTE CAPACITACIONES</small>
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <form #formFiltros="ngForm">
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Fecha (Desde) <strong class="text-danger">*</strong></label>
+                                <input type="date" class="form-control" [(ngModel)]="datos.fechaInicio" name="fechaInicio" required/>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Fecha (Hasta) <strong class="text-danger">*</strong></label>
+                                <input type="date" class="form-control" [(ngModel)]="datos.fechaFin" name="fechaFin" required/>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Municipio</label>
+                                <ng-select [multiple]="true" [options]="municipios" [(ngModel)]="datos.arrayMunicipios" required
+                                    name="municipio">
+                                </ng-select>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Función Seguridad Vial <strong class="text-danger">*</strong></label>
+                                <ng-select [multiple]="true" [options]="funciones" [(ngModel)]="datos.arrayFunciones"
+                                required name="idFuncion">
+                                </ng-select>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Función Criterio Seguridad Vial <strong class="text-danger">*</strong></label>
+                                <ng-select [multiple]="true" [options]="funcionesCriterios" [(ngModel)]="datos.arrayFuncionesCriterio" required
+                                    name="idFuncionCriterio"></ng-select>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Clase de Actor de la vía <strong class="text-danger">*</strong></label>
+                                <ng-select [multiple]="true" [options]="clasesActoresVia" [(ngModel)]="datos.arrayClasesActorVia" required
+                                    name="claseActorVia"></ng-select>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="card-footer">
+                        <button (click)="onEnviar()" [disabled]="formFiltros.invalid" class="btn btn-primary">Enviar</button>
+                        <button (click)="onCancelar()" class="btn btn-default">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card" *ngIf="capacitacionesEncontradas">
+                <div class="card-header">
+                    <h5 class="card-title">
+                        <small>REPORTE CAPACITACIÓN</small>
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <table class="table" id="dataTables-capacitacion">
+                        <thead>
+                            <tr>
+                                <th>TIPO IDENTIFICACIÓN</th>
+                                <th>IDENTIFICACIÓN</th>
+                                <th>NOMBRES</th>
+                                <th>APELLIDOS</th>
+                                <!-- <th>FECHA NACIMIENTO</th> -->
+                                <th>CARGO</th>
+                                <th>EMAIL</th>
+                                <th>TELÉFONO/CELULAR</th>
+                                <th>GÉNERO</th>
+                                <th>GRUPO ÉTNICO</th>
+                                <th>CLASE ACTOR VÍAL</th>
+                                <th>DISCAPACIDAD</th>
+                                <th>VÍCTIMA</th>
+                                <th>COMUNIDAD LGBTI</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="odd" *ngFor="let capacitacion of capacitaciones; let i = index">
+                                <td>{{ capacitacion.tipoIdentificacionActorVial.nombre }}</td>
+                                <td>{{ capacitacion.numeroCedulaActorVial }}</td>
+                                <td>{{ capacitacion.nombreActorVial }}</td>
+                                <td>{{ capacitacion.apellidoActorVial }}</td>
+                                <!-- <td>{{ (capacitacion.fechaNacimiento.timestamp * 1000) | date: 'dd/MM/yyyy' }} -->
+                                <td>{{ capacitacion.cargoActorVial }}</td>
+                                <td>{{ capacitacion.emailActorVial }}</td>
+                                <td>{{ capacitacion.telefonoActorVial }}</td>
+                                <td>{{ capacitacion.genero.sigla }}</td>
+                                <td>{{ capacitacion.grupoEtnicoActorVial.nombre }}</td>
+                                <td>{{ capacitacion.claseActorVial.nombre }}</td>
+                                <td>
+                                    <span *ngIf="capacitacion.discapacidad">Si</span>
+                                    <span *ngIf="!capacitacion.discapacidad">No</span>
+                                    <span *ngIf="capacitacion.discapacidad == NULL">Registra</span>
+                                </td>
+                                <td>
+                                    <span *ngIf="capacitacion.victima">Si</span>
+                                    <span *ngIf="!capacitacion.victima">No</span>
+                                    <span *ngIf="capacitacion.victima == NULL">Registra</span>
+                                </td>
+                                <td>
+                                    <span *ngIf="capacitacion.comunidad">Si</span>
+                                    <span *ngIf="!capacitacion.comunidad">No</span>
+                                    <span *ngIf="capacitacion.comunidad == NULL">Registra</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
