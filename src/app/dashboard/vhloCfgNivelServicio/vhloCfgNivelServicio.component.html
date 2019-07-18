@@ -1,4 +1,4 @@
-<!-- <div class="container">
+<div class="container">
   <div class="row" *ngIf='formIndex'>
     <div class="col-md-12">
       <div class="card">
@@ -44,8 +44,8 @@
           </table>
         </div>
       </div>
-      <app-edit *ngIf='formEdit' [nivelServicio]="nivelServicio" (ready)="ready($event)"></app-edit>
-      <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
     </div>
   </div>
-</div> -->
+  <app-edit *ngIf='formEdit' [nivelServicio]="nivelServicio" (ready)="ready($event)"></app-edit>
+  <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+</div>

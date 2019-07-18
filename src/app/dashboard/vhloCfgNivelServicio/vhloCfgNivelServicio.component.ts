@@ -12,11 +12,12 @@ export class VhloCfgNivelServicioComponent implements OnInit {
   public errorMessage;
 	public id;
 	public nivelesServicio;
+  public table:any; 
+  public nivelServicio:any; 
+  
 	public formNew = false;
 	public formEdit = false;
   public formIndex = true;
-  public table:any; 
-  public nivelServicio:any; 
 
   constructor(
 		private _NivelServicioService: VhloCfgNivelServicioService,
@@ -92,7 +93,7 @@ export class VhloCfgNivelServicioComponent implements OnInit {
   onDelete(id:any){
     swal({
       title: '¿Estás seguro?',
-      text: "¡Se eliminara este registro!",
+      text: "¡Se eliminará este registro!",
       type: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#15d4be',
@@ -123,8 +124,6 @@ export class VhloCfgNivelServicioComponent implements OnInit {
               }
             }
           );
-
-        
       }
     })
   }

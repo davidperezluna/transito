@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { SvCfgFuncionCriterio } from '../svCfgFuncionCriterio.modelo';
 import { SvCfgFuncionCriterioService } from '../../../services/svCfgFuncionCriterio.service';
 import { LoginService } from '../../../services/login.service';

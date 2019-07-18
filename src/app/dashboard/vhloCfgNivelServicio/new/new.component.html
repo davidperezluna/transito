@@ -1,4 +1,4 @@
-<!-- <div class="col-xs-12 col-lg-12">
+<div class="col-xs-12 col-lg-4">
     <div class="card">
         <div class="card-header">
             <h5 class="text-uppercase">Registrar nivel servicio</h5>
@@ -6,14 +6,13 @@
         </div>
         <div class="card-body">
             <form #formNew="ngForm">
-                <div class="form-group row">
-                    <div class="col-xs-12 col-lg-6">
+                <div class="form-group">
+                    <div class="col-xs-12 col-lg-12">
                         <label>Servicio <strong class="text-danger">*</strong></label>
-                        <ng-select [multiple]="false" [options]="servicios" [(ngModel)]="nivelServicio.idServicio"
-                            name="idServicio" required>
+                        <ng-select [multiple]="false" [options]="servicios" [(ngModel)]="nivelServicio.idServicio" required name="idServicio">
                         </ng-select>
                     </div>
-                    <div class="col-xs-12 col-lg-6">
+                    <div class="col-xs-12 col-lg-12">
                         <label>Nombre <strong class="text-danger">*</strong></label>
                         <input class="form-control" [(ngModel)]="nivelServicio.nombre" name="nombre" type="text"
                             required>
@@ -22,9 +21,14 @@
             </form>
         </div>
         <div class="card-footer">
-            <button (click)="onCancelar()" class="btn btn-default">Cancelar</button>
-            <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-outline-primary pull-right"
-                type="button">Enviar</button>
+            <button (click)="onEnviar()" class="btn btn-primary" type="button">
+                <i class="fa fa-floppy-o"></i>
+                Enviar
+            </button>
+            <button (click)="onCancelar()" class="btn btn-default">
+                <i class="fa fa-times"></i>
+                Cancelar
+            </button>
         </div>
     </div>
-</div> -->
+</div>

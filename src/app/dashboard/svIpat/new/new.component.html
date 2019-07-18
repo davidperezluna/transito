@@ -1557,10 +1557,22 @@
                         <input class="form-control" type="text" [disabled]="agente" [(ngModel)]="ipat.apellidosAgente"
                             name="apellidosAgente" required>
                     </div>
-                    <div class="col-lg-6 col-md-6">
+                    <!-- <div class="col-lg-6 col-md-6">
                         <label>Placa <strong class="text-danger">*</strong></label>
                         <input class="form-control" type="text" [disabled]="agente" [(ngModel)]="ipat.placaAgente"
                             name="placaAgente" required>
+                    </div> -->
+                    <div class="col-xs-16 col-lg-6">
+                        <label>Placa  <strong class="text-danger">*</strong></label>
+                        <div class="input-group">
+                            <input type="number" class="form-control" [(ngModel)]="ipat.placaAgente" required
+                                name="placaAgente" />
+                            <span class="input-group-btn">
+                                <button (click)="onBuscarAgente()" class="btn btn-default btn-primary" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                        </div>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label>Entidad <strong class="text-danger">*</strong></label>

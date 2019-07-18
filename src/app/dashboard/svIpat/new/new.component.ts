@@ -1412,12 +1412,19 @@ export class NewComponent implements OnInit {
 
   onBuscarAgente() {
     let token = this._LoginService.getToken();
-    if (this.ipat.identificacionAgente) {
-      this._SvIpatService.getBuscarAgente({ 'identificacionAgente': this.ipat.identificacionAgente }, token).subscribe(
+    let identity = this._LoginService.getIdentity();
+
+    console.log(identity);
+    
+    if (this.ipat.identificacionAgente || this.ipat.placaAgente) {
+      this._SvIpatService.getBuscarAgente({ 'identificacionUsuario': identity.identificacion, 'identificacionAgente': this.ipat.identificacionAgente, 'placaAgente': this.ipat.placaAgente }, token).subscribe(
 
         response => {
           if (response.status == 'success') {
             this.agente = true;
+            
+            this.ipat.identificacionAgente = response.data.ciudadano.identificacion;
+
             if (response.data.ciudadano.tipoIdentificacion) {
               this.tipoIdentificacionAgenteSelected = [response.data.ciudadano.tipoIdentificacion.id];
             }
