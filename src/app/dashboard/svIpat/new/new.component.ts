@@ -2062,4 +2062,14 @@ export class NewComponent implements OnInit {
       }
     }
   }
+
+  onChangedAgente(e, campo) {
+    if(e) {
+      if(campo == 'identificacion') {
+        this.ipat.placaAgente = '';
+      } else if(campo == 'placa') {
+        this.ipat.identificacionAgente = '';
+      }
+    }
+  }
 }
