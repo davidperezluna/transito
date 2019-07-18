@@ -112,6 +112,8 @@ export class NewTraspasoComponent implements OnInit {
                 response => {
                     if (response.code == 200) {
                         this.datos.retenciones = response.data;
+                        console.log(this.datos.retenciones);
+                        
 
                         swal.close();
                     }else{

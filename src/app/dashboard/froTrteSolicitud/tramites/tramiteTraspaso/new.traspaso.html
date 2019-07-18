@@ -64,19 +64,21 @@
                                             <b>Identificación:</b>
                                             <br>
                                             {{  retencion.propietario.ciudadano.identificacion }}
-                                            <br> 
+                                        </td>
+                                        <td *ngIf="retencion.propietario.ciudadano">
                                             <b>Nombre y apellido:</b>
                                             <br>
                                             {{ retencion.propietario.ciudadano.primerNombre }} {{ retencion.propietario.ciudadano.primerApellido }}
                                         </td>
-                                        <td *ngIf="retencion.empresa.propietario">
+                                        <td *ngIf="retencion.propietario.empresa">
                                             <b>Identificación (NIT):</b>
                                             <br>
-                                            {{ retencion.empresa.propietario.nit }}
-                                            <br>
+                                            {{ retencion.propietario.empresa.nit }}
+                                        </td>
+                                        <td *ngIf="retencion.propietario.empresa">
                                             <b>Nombre:</b>
                                             <br>
-                                            {{ retencion.empresa.propietario.nombre }}
+                                            {{ retencion.propietario.empresa.nombre }}
                                         </td>
                                     </tr>
                                 </tbody>

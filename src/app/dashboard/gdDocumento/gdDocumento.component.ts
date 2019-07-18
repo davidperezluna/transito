@@ -111,11 +111,8 @@ export class GdDocumentoComponent implements OnInit {
   }
 
   onInitTable(){
-    if (this.table) {
-      this.table.destroy();
-    }
-
     this.table = $('#dataTables-example').DataTable({
+      retreive: true,
       responsive: true,
       pageLength: 8,
       sPaginationType: 'full_numbers',

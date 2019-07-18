@@ -49,7 +49,7 @@ export class NewCancelacionMatriculaComponent implements OnInit {
 
     constructor(
         private _EntidadJudicialService: CfgEntidadJudicialService,
-        private _VhloCfgMotivoCancelacionService: VhloCfgMotivoCancelacionService,
+        private _MotivoCancelacionService: VhloCfgMotivoCancelacionService,
         private _LoginService: LoginService,
     ) { }
 
@@ -89,7 +89,7 @@ export class NewCancelacionMatriculaComponent implements OnInit {
                     }
                 }
             );
-            this._VhloCfgMotivoCancelacionService.select().subscribe(
+            this._MotivoCancelacionService.select().subscribe(
                 response => {
                     this.motivosCancelacion = response;
                 },
