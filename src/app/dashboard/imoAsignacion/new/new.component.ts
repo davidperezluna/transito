@@ -143,7 +143,7 @@ constructor(
               text: 'No existen insumos para esta sede',
               type: 'error',
               confirmButtonText: 'Aceptar'
-            })
+            });
           }
         error => {
             this.errorMessage = <any>error;

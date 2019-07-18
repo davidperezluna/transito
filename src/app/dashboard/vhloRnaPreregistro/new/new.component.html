@@ -150,11 +150,6 @@
                                 <label>Capacidad carga</label>
                                 <input class="form-control" type="text" type="text" [(ngModel)]="vehiculo.capacidadCarga" name="capacidadCarga">
                             </div>
-
-                            <div class="col-xs-12 col-lg-3" *ngIf="vehiculo.tipoMatricula == 'RADICADO'">
-                                <label>Numero licencia transito </label>
-                                <input class="form-control" type="text" type="text" [(ngModel)]="datos.numeroLicencia" name="licenciaTransito">
-                            </div>
                         </div><!-- .row -->
 
                         <div class="row" *ngIf="vehiculo.tipoMatricula == 'RADICADO'">

@@ -183,8 +183,16 @@ export class NewRnaComponent implements OnInit {
                     this.tramiteSolicitud.idVehiculo = null;
                   }
                 });
-              } else {
+              } else if(response.code == 401){
+                this.tramiteSolicitud.idVehiculo = this.vehiculo.id;
+                
+                this.onSearchTramites();
+                
+                swal.close();
+              }else{
                 this.restricciones = null;
+
+                swal.close();
               }
               error => {
                 this.errorMessage = <any>error;
@@ -194,12 +202,8 @@ export class NewRnaComponent implements OnInit {
                 }
               }
             }
-          );          
-        } else if(response.code == 401){
-          this.tramiteSolicitud.idVehiculo = this.vehiculo.id;
-          
-          this.onSearchTramites();
-        }else{
+          );
+        } else{
           this.vehiculo = null;
           this.tramiteSolicitud.idVehiculo = null;
 
