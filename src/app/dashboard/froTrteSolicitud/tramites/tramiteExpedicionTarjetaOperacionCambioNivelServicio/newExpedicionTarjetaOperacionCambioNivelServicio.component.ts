@@ -2,50 +2,44 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FroTrteSolicitudService } from '../../../../services/froTrteSolicitud.service';
 import { FroFacTramiteService } from '../../../../services/froFacTramite.service';
 import { PnalFuncionarioService } from '../../../../services/pnalFuncionario.service';
-import { VhloCfgServicioService } from '../../../../services/vhloCfgServicio.service';
+import { VhloCfgNivelServicioService } from '../../../../services/vhloCfgNivelServicio.service';
 import { CfgPaisService } from '../../../../services/cfgPais.service';
 import { UserLcCfgCategoriaService } from '../../../../services/userLcCfgCategoria.service';
+import { VhloTpAsignacionService } from '../../../../services/vhloTpAsignacion.service';
 import { LoginService } from '../../../../services/login.service';
 
 import swal from 'sweetalert2';
 
 @Component({
-    selector: 'app-expedicion-tarjeta-operacion-cambio-servicio',
-    templateUrl: './newExpedicionTarjetaOperacionCambioServicio.html'
+    selector: 'app-expedicion-tarjeta-operacion-cambio-nivel-servicio',
+    templateUrl: './newExpedicionTarjetaOperacionCambioNivelServicio.html'
 })
-export class NewExpedicionTarjetaOperacionCambioServicioComponent implements OnInit {
+export class NewExpedicionTarjetaOperacionCambioNivelServicioComponent implements OnInit {
     @Output() onReadyTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;
     @Input() funcionario: any = null;
-    @Input() solicitante: any = null;
     @Input() tramiteFactura: any = null;
     @Input() tramitesRealizados: any = null;
     public errorMessage;
+    
+    public cupo;
 
     public realizado: any = false;
     public tramiteSolicitud: any = null;
-    public servicios: any;
+    public nivelesServicio: any;
     /* public paises: any;
     public categorias: any; */
 
     public datos = {
         'campos': null,
-        'numero': null,
         'documentacion': true,
         'observacion': null,
-        'identificacionAnterior': null,
-        'identificacionActual': null,
-        'vigencia': null,
-        'fechaExpedicion': null,
         'idFuncionario': null,
-        'idOrganismoTransito': null,
-        'idServicio': null,
-        'idCategoria': null,
         'idTramiteFactura': null,
-        'idSolicitante': null,
         'fechaVigencia': null,
-        'servicioAnterior': null,
-        'servicioNuevo': null,
+        'idNivelServicioAnterior': null,
+        'idNivelServicioNuevo': null,
+        'idVehiculo': null,
 
     };
 
@@ -53,7 +47,8 @@ export class NewExpedicionTarjetaOperacionCambioServicioComponent implements OnI
         private _TramiteFacturaService: FroFacTramiteService,
         private _TramiteSolicitudService: FroTrteSolicitudService,
         private _FuncionarioService: PnalFuncionarioService,
-        private _ServicioService: VhloCfgServicioService,
+        private _NivelServicioService: VhloCfgNivelServicioService,
+        private _VhloTpAsignacionService: VhloTpAsignacionService,
         private _CfgPaisService: CfgPaisService,
         private _CategoriaService: UserLcCfgCategoriaService,
         private _LoginService: LoginService,
@@ -61,6 +56,29 @@ export class NewExpedicionTarjetaOperacionCambioServicioComponent implements OnI
 
     ngOnInit() {
         this.datos.idFuncionario = this.funcionario.id;
+
+        let token = this._LoginService.getToken();
+
+        this._VhloTpAsignacionService.searchCupoByVehiculo({ 'idVehiculo': this.vehiculo.id }, token).subscribe(
+            response => {
+                this.cupo = response.data;
+                console.log(this.cupo);
+
+                this.datos.idNivelServicioAnterior = [this.cupo.nivelServicio.id];
+
+                /* let timeoutId = setTimeout(() => {
+                    this.ngOnInit();
+                }, 100); */
+            },
+            error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert("Error en la petición");
+                }
+            }
+        );
 
         if (this.tramitesRealizados.length > 0) {
             this.tramitesRealizados.forEach(tramiteRealizado => {
@@ -82,9 +100,9 @@ export class NewExpedicionTarjetaOperacionCambioServicioComponent implements OnI
                 confirmButtonText: 'Aceptar'
             });
         } else {
-            this._ServicioService.select().subscribe(
+            this._NivelServicioService.select().subscribe(
                 response => {
-                    this.servicios = response;
+                    this.nivelesServicio = response;
                 },
                 error => {
                     this.errorMessage = <any>error;
@@ -100,12 +118,11 @@ export class NewExpedicionTarjetaOperacionCambioServicioComponent implements OnI
 
     onEnviar() {
         this.datos.campos = ['cambioNivelServicio'];
-        this.datos.numero = this.datos.identificacionActual;
-        this.datos.idOrganismoTransito = this.funcionario.organismoTransito.id;
         this.datos.idTramiteFactura = this.tramiteFactura.factura.id;
-        this.datos.idSolicitante = this.solicitante.id;
+        this.datos.idVehiculo = this.vehiculo.id;
 
-        let resumen = "<b>No. factura</b>" + this.tramiteFactura.factura.numero;
+        let resumen = "<b>No. factura</b>" + this.tramiteFactura.factura.numero +
+         ", nivel servicio anterior:" + this.cupo.nivelServicio.id;
 
         this.realizado = true;
 
