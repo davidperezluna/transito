@@ -370,10 +370,14 @@
                     </div>
 
                     <div class="col-xs-12 col-lg-12" *ngIf="tramiteFactura">
-                        <app-duplicado-tarjeta-operacion *ngIf="tramiteFactura.precio.tramite.id == 5" [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)">
-                        </app-duplicado-tarjeta-operacion>
-                        <!-- <app-expedicion-tarjeta-operacion-cambio-servicio *ngIf="tramiteFactura.precio.tramite.id == 5" [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)">
-                        </app-expedicion-tarjeta-operacion-cambio-servicio> -->
+                        <!-- <app-expedicion-tarjeta-operacion *ngIf="tramiteFactura.precio.tramite.id == 5" [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)">
+                        </app-expedicion-tarjeta-operacion> -->
+                        <!-- <app-duplicado-tarjeta-operacion *ngIf="tramiteFactura.precio.tramite.id == 5" [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)">
+                        </app-duplicado-tarjeta-operacion> -->
+                        <!-- <app-expedicion-tarjeta-operacion-cambio-nivel-servicio *ngIf="tramiteFactura.precio.tramite.id == 5" [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)">
+                        </app-expedicion-tarjeta-operacion-cambio-nivel-servicio> -->
+                        <app-renovacion-tarjeta-operacion *ngIf="tramiteFactura.precio.tramite.id == 5" [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)">
+                        </app-renovacion-tarjeta-operacion>
                     </div>
                 </div>
 

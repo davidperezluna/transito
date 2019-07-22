@@ -19,8 +19,10 @@ import { NewRnmaComponent } from './newRnma/newRnma.component';
 import { NewRnrsComponent } from './newRnrs/newRnrs.component';
 import { NewInsumoComponent } from './newInsumo/newInsumo.component';
 import { NewDuplicadoPlacaComponent } from './tramites/tramiteDuplicadoPlaca/new.duplicadoPlaca.component';
+import { NewExpedicionTarjetaOperacionComponent } from './tramites/tramiteExpedicionTarjetaOperacion/newExpedicionTarjetaOperacion.component';
 import { NewDuplicadoTarjetaOperacionComponent } from './tramites/tramiteDuplicadoTarjetaOperacion/new.duplicadoTarjetaOperacion.component';
-import { NewExpedicionTarjetaOperacionCambioServicioComponent } from './tramites/tramiteExpedicionTarjetaOperacionCambioServicio/newExpedicionTarjetaOperacionCambioServicio.component';
+import { NewExpedicionTarjetaOperacionCambioNivelServicioComponent } from './tramites/tramiteExpedicionTarjetaOperacionCambioNivelServicio/newExpedicionTarjetaOperacionCambioNivelServicio.component';
+import { NewRenovacionTarjetaOperacionComponent } from './tramites/tramiteRenovacionTarjetaOperacion/newRenovacionTarjetaOperacion.component';
 import { NewDuplicadoLicenciaComponent } from './tramites/tramiteDuplicadoLicencia/new.duplicadoLicencia.component';
 import { NewCambioColorComponent } from './tramites/tramiteCambioColor/new.cambioColor.component';
 import { NewCambioServicioComponent } from './tramites/tramiteCambioServicio/new.cambioServicio.component';
@@ -85,8 +87,10 @@ import { VhloTecnoMecanicaModule } from '../vhloTecnoMecanica/vhloTecnoMecanica.
         NewRnrsComponent,
         NewInsumoComponent,
         NewDuplicadoPlacaComponent,
+        NewExpedicionTarjetaOperacionComponent,
         NewDuplicadoTarjetaOperacionComponent,
-        NewExpedicionTarjetaOperacionCambioServicioComponent,
+        NewExpedicionTarjetaOperacionCambioNivelServicioComponent,
+        NewRenovacionTarjetaOperacionComponent,
         NewDuplicadoLicenciaComponent,
         NewCambioColorComponent,
         NewCambioPlacaComponent,
@@ -130,8 +134,10 @@ import { VhloTecnoMecanicaModule } from '../vhloTecnoMecanica/vhloTecnoMecanica.
         NewRnrsComponent,
         NewInsumoComponent,
         NewDuplicadoPlacaComponent,
+        NewExpedicionTarjetaOperacionComponent,
         NewDuplicadoTarjetaOperacionComponent,
-        NewExpedicionTarjetaOperacionCambioServicioComponent,
+        NewExpedicionTarjetaOperacionCambioNivelServicioComponent,
+        NewRenovacionTarjetaOperacionComponent,
         NewDuplicadoLicenciaComponent,
         NewCambioColorComponent,
         NewCambioPlacaComponent,
