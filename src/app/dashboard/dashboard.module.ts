@@ -27,7 +27,6 @@ import { CfgAdmFormatoModule } from './cfgAdmFormato/cfgAdmFormato.module';
 import { CfgAdmFormatoTipoModule } from './cfgAdmFormatoTipo/cfgAdmFormatoTipo.module';
 import { CfgModuloModule } from './cfgModulo/cfgModulo.module';
 
-import { CfgBodegaModule } from './cfgBodega/cfgBodega.module';
 import { SvCfgSenialUnidadMedidaModule } from './svCfgSenialUnidadMedida/svCfgSenialUnidadMedida.module';
 import { SvCfgSenialTipoModule } from './svCfgSenialTipo/svCfgSenialTipo.module';
 import { SvCfgSenialColorModule } from './svCfgSenialColor/svCfgSenialColor.module';
@@ -214,7 +213,7 @@ import { ImoBusquedaModule } from './imoBusqueda/imoBusqueda.module';
 import { ImoLoteModule } from "./imoLote/imoLote.module";
 
 
-import { RnrsPreasignacionPlacaModule } from './rnrsPreasignacionPlaca/rnrsPreasignacionPlaca.module';
+import { VhloRnrsPreasignacionPlacaModule } from './vhloRnrsPreasignacionPlaca/vhloRnrsPreasignacionPlaca.module';
 
 import { FroFacTramiteModule } from './froFacTramite/froFacTramite.module';
 import { FroTrteCfgCuentaModule } from './froTrteCfgCuenta/froTrteCfgCuenta.module';
@@ -223,8 +222,8 @@ import { GestionTransportePublicoModule } from './gestionTransportePublico/gesti
 import { rnaRegistroInsumosModule } from './rnaRegistroInsumos/rnaRegistroInsumos.module';
 //import { RnaPreasignacionInsumoModule } from './rnaPreasignacIonInsumo/rnaPreasignacionInsumo.module';
 import { RnmaPreregistroModule } from './rnmaPreregistro/rnmaPreregistro.module';
-import { RnrsPreregistroModule } from './rnrsPreregistro/rnrsPreregistro.module';
 import { ReporteModule } from './reporte/reporte.module';
+import { VhloRnrsPreregistroModule } from './vhloRnrsPreregistro/vhloRnrsPreregistro.module';
 import { VhloCertificadoTradicionModule } from './vhloCertificadoTradicion/vhloCertificadoTradicion.module';
 
 import { BpCfgTipoInsumoModule } from './bpCfgTipoInsumo/bpCfgTipoInsumo.module';
@@ -364,7 +363,6 @@ import {RightsidebarComponent} from '../shared';
     FroTrteCfgCuentaModule,
     CfgAdmFormatoModule,
     CfgAdmFormatoTipoModule,
-    CfgBodegaModule,
     SvCfgSenialUnidadMedidaModule,
     SvCfgSenialTipoModule,
     SvCfgSenialColorModule,
@@ -436,7 +434,7 @@ import {RightsidebarComponent} from '../shared';
     CfgTipoProcesoModule,
     SvIpatModule,
     CfgValorVehiculoModule,
-    RnrsPreregistroModule,
+    VhloRnrsPreregistroModule,
     ReporteModule,
     registroEntregaProductoModule,
     RpcccInventarioDocumentalModule,
@@ -457,7 +455,7 @@ import {RightsidebarComponent} from '../shared';
     BpActividadModule,
     BpProyectoModule,
     BpCdpModule,
-    RnrsPreasignacionPlacaModule,
+    VhloRnrsPreasignacionPlacaModule,
     VhloTpConvenioModule,
     VhloTpAsignacionModule,
     VhloTpRangoModule,

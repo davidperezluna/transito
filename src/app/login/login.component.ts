@@ -58,24 +58,7 @@ export class LoginComponent implements OnInit {
 							localStorage.setItem('identity', JSON.stringify(identity));
 	
 							this.user.gethash = "false";
-
-							let token = response.data;
-							this.token = token;
-							swal.close();
-
-							if(this.token.length <= 0){
-								alert("Error en el servidor");
-							}else{
-								if(response.code == 200){
-									swal.close();
-
-									localStorage.setItem('token', token);
-									//console.log(localStorage.getItem('token'));
-									// REDIRECCION
-									this._router.navigate(["dashboard/home"]);
-								}
-							}
-							/*this._LoginService.signup(this.user).subscribe(
+							this._LoginService.signup(this.user).subscribe(
 								response => { 
 									let token = response.data;
 									this.token = token;
@@ -102,7 +85,7 @@ export class LoginComponent implements OnInit {
 										alert("Error en la petición");
 									}
 								}
-							);*/
+							);
 						}else{
 							this.login = true;
 							this.user.password ='';

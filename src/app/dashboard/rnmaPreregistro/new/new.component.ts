@@ -48,6 +48,13 @@ export class NewRegistroMaquinariaComponent implements OnInit {
   public subpartidasArancelarias:any;
   public btnRadicado:string = "Preregistro para matricula inicial";
 
+  public tiposMatricula = [
+    {'value':'RADICADO','label':"Radicado de cuenta"},
+    {'value':'MATRICULA','label':"Matricula inicial"},
+    {'value':'IMPORTACION','label':"Importación temporal"},
+    {'value':'CARPETA','label':"Cargue de carpeta"}
+  ];
+
 constructor(
   private _RegistroMaquinariaService: RnmaPreregistroService,
   private _LoginService: LoginService,
@@ -68,7 +75,7 @@ constructor(
 ){}
 
 ngOnInit() {
-  this.registroMaquinaria = new RnmaPreregistro(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
+  this.registroMaquinaria = new RnmaPreregistro(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
   this._ColorService.select().subscribe(
     response => {
       this.colores = response;
@@ -317,18 +324,18 @@ ngOnInit() {
       let token = this._LoginService.getToken()
       
       this._LineaService.selectByMarca({'idMarca': e}, token).subscribe(
-          response => { 
-            this.lineas = response;
-          }, 
-          error => { 
-            this.errorMessage = <any>error;
-    
-            if(this.errorMessage != null){
-              console.log(this.errorMessage);
-              alert("Error en la petición");
-            }
+        response => { 
+          this.lineas = response;
+        }, 
+        error => { 
+          this.errorMessage = <any>error;
+  
+          if(this.errorMessage != null){
+            console.log(this.errorMessage);
+            alert("Error en la petición");
           }
-        );
+        }
+      );
     }
   }
 

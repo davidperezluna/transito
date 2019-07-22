@@ -52,7 +52,7 @@
                     <div class="row">
                         <div class="col-xs-12 col-lg-12">
                             <form #formSearchVehiculo="ngForm">
-                                <label>Buscar vehiculo por placa</label>
+                                <label>Buscar por No. de registro</label>
                                 <div class="input-group">
                                     <input type="text" class="form-control text-uppercase" [(ngModel)]="placa" name="placa" required />
                                     <span class="input-group-btn">
@@ -92,12 +92,6 @@
                                         <td>
                                             <b>Motor</b>
                                             {{ vehiculo.motor }}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <b>Servicio</b>
-                                            {{ vehiculo.servicio.nombre }}
                                         </td>
                                     </tr>
                                     <tr *ngIf="vehiculo.clase">

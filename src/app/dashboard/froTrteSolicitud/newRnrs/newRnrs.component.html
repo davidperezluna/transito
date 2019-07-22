@@ -94,12 +94,6 @@
                                             {{ vehiculo.motor }}
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>
-                                            <b>Servicio</b>
-                                            {{ vehiculo.servicio.nombre }}
-                                        </td>
-                                    </tr>
                                     <tr *ngIf="vehiculo.clase">
                                         <td>
                                             <b>Tipo</b>
@@ -122,10 +116,9 @@
         </div>
     </div>
 
-    <div class="col-xs-12 col-lg-8" *ngIf="factura && vehiculo">
+    <div class="col-xs-12 col-lg-8" *ngIf="factura && vehiculo && factura.estado != 'FINALIZADA'">
         <div class="card">
             <div class="card-body">
-                <!-- 
                 <div class="row" *ngIf="propietarios && vehiculo">
                     <div class="col-xs-12 col-lg-12">
                         <table class="table table-bordered">
@@ -177,9 +170,8 @@
                         </table>
                     </div>
                 </div>
-                    row -->
 
-                <div class="row">
+                <div class="row" *ngIf="!propietarios">
                     <div class="col-xs-12 col-lg-4" *ngIf="!confirmarSolicitante">
                         <form #formSearchCiudadano="ngForm">
                             <label>Buscar ciudadano</label>
@@ -313,6 +305,27 @@
                 <div class="row" *ngIf="tramitesFactura && tramitesFactura.length == tramitesRealizados.length">
                     <div class="col-xs-12 col-lg-12" *ngIf="(requiereSustrato && tramiteSolicitud.insumoEntregado) || !requiereSustrato">
                         <div class="form-group">
+                            <div class="row">
+                                <div class="col-xs-12 col-lg-12"> 
+                                    <label>Número de folios <b class="text-danger">*</b></label>
+                                    <input type="text" class="form-control" placeholder="No. de folios" [(ngModel)]="tramiteSolicitud.numeroFolios" name="numeroFolios" required />
+                                </div>
+
+                                <div class="col-xs-12 col-lg-12"> 
+                                    <label>Número de archivador <b class="text-danger">*</b></label>
+                                    <input type="text" class="form-control" placeholder="No. de archivador" [(ngModel)]="tramiteSolicitud.numeroArchivador" name="numeroArchivador" required />
+                                </div>
+
+                                <div class="col-xs-12 col-lg-12"> 
+                                    <label>Bandeja <b class="text-danger">*</b></label>
+                                    <input type="text" class="form-control" placeholder="Bandeja" [(ngModel)]="tramiteSolicitud.bandeja" name="bandeja" required />
+                                </div>
+
+                                <div class="col-xs-12 col-lg-12"> 
+                                    <label>Número de caja <b class="text-danger">*</b></label>
+                                    <input type="text" class="form-control" placeholder="No. de caja" [(ngModel)]="tramiteSolicitud.numeroCaja" name="numeroCaja" required />
+                                </div>
+                            </div>
                             <div class="row" *ngIf="requiereRunt">
                                 <div class="col-xs-12 col-lg-12"> 
                                     <label>Número de solicitud RUNT <b class="text-danger">*</b></label>

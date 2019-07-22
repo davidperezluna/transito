@@ -112,9 +112,10 @@ export class GdDocumentoComponent implements OnInit {
 
   onInitTable(){
     this.table = $('#dataTables-example').DataTable({
-      retreive: true,
+      retrieve: true,
+      paging: false,
       responsive: true,
-      pageLength: 8,
+      pageLength: 10,
       sPaginationType: 'full_numbers',
       oLanguage: {
         oPaginate: {

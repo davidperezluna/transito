@@ -19,6 +19,18 @@
                                 <label class="custom-control-label" for="gestionable">Gestionable</label>
                             </div>
                         </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" [(ngModel)]="tipoNombramiento.horarios" class="custom-control-input" id="horarios" name="horarios">
+                                <label class="custom-control-label" for="horarios">Horarios</label>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" [(ngModel)]="tipoNombramiento.prorroga" class="custom-control-input" id="prorroga" name="prorroga">
+                                <label class="custom-control-label" for="prorroga">Prorroga</label>
+                            </div>
+                        </div>
                     </div>
                 </form>
             </div>

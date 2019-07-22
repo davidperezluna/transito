@@ -108,12 +108,11 @@
                                     <td>{{ ipat.otroObjetoFijo }}</td>
                                     <td>{{ ipat.otroClaseAccidente }}</td>
                                     <td>
-                                        <span *ngIf="ipat.fechaAccidente != null"> {{ (ipat.fechaAccidente.timestamp * 1000) | date: 'dd/MM/yyyy' }} </span>
-                                        <span *ngIf="ipat.fechaAccidente == null"> </span>
+                                        <span *ngIf="ipat.fechaAccidente"> {{ (ipat.fechaAccidente.timestamp * 1000) | date: 'dd/MM/yyyy' }} </span>
                                     </td>
-                                    <td>{{ (ipat.horaAccidente.timestamp * 1000) | date: 'HH:mm' }}</td>
-                                    <td>{{ (ipat.fechaLevantamiento.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td>
-                                    <td>{{ (ipat.horaLevantamiento.timestamp * 1000) | date: 'HH:mm' }}</td>
+                                    <td><span *ngIf="ipat.horaAccidente">{{ (ipat.horaAccidente.timestamp * 1000) | date: 'HH:mm' }}</span></td>
+                                    <td><span *ngIf="ipat.fechaLevantamiento">{{ (ipat.fechaLevantamiento.timestamp * 1000) | date: 'dd/MM/yyyy' }}</span></td>
+                                    <td><span *ngIf="ipat.horaLevantamiento">{{ (ipat.horaLevantamiento.timestamp * 1000) | date: 'HH:mm' }}</span></td>
                                     <td>
                                         <span *ngIf="ipat.hayTestigo">S</span>
                                         <span *ngIf="!ipat.hayTestigo">N</span>
@@ -133,8 +132,7 @@
                                     <td>{{ ipat.entidadCorrespondio?.nombre }}</td>
                                     <td>{{ ipat.unidadCorrespondio?.nombre }}</td>
                                     <td>
-                                        <span *ngIf="ipat.fechaAccidente != null">{{ (ipat.fechaAccidente.timestamp * 1000) | date: 'yyyy' }}</span>
-                                        <span *ngIf="ipat.fechaAccidente == null"> </span>
+                                        <span *ngIf="ipat.fechaAccidente">{{ (ipat.fechaAccidente.timestamp * 1000) | date: 'yyyy' }}</span>
                                     </td>
                                     <td>{{ ipat.consecutivo.numero }}</td>
                                     <td>{{ ipat.tipoIdentificacionAgente }}</td>
@@ -206,7 +204,7 @@
                 </div>
                 <div class="form-group row">
                     <div class="btn-group">
-                        <button (click)="onCancelar()" (ready)="ready($event)" class="btn btn-default">
+                        <button (click)="onCancelar()" class="btn btn-default">
                             <i class="fa fa-times"></i>
                             Cancelar
                         </button>

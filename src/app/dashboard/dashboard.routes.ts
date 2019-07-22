@@ -20,7 +20,6 @@ import { UserCfgEmpresaTipoRoutes } from './userCfgEmpresaTipo/userCfgEmpresaTip
 import { UserCfgEmpresaServicioRoutes } from './userCfgEmpresaServicio/userCfgEmpresaServicio.routes';
 
 import { CfgValorVehiculoRoutes } from './cfgValorVehiculo/cfgValorVehiculo.routes';
-import { CfgBodegaRoutes } from './cfgBodega/cfgBodega.routes';
 import { CfgTipoClaseRoutes } from './cfgTipoClase/cfgTipoClase.routes';
 
 import { CvAudienciaRoutes } from './cvAudiencia/cvAudiencia.routes';
@@ -134,7 +133,7 @@ import { VhloTpAsignacionRoutes } from './vhloTpAsignacion/vhloTpAsignacion.rout
 import { VhloTpRangoRoutes } from './vhloTpRango/vhloTpRango.routes';
 import { VhloTpTarjetaOperacionRoutes } from './vhloTpTarjetaOperacion/vhloTpTarjetaOperacion.routes';
 import { RpcccInventarioDocumentalRoutes } from './rpcccInventarioDocumental/rpcccInventarioDocumental.routes';
-import { RnrsPreasignacionPlacaRoutes } from './rnrsPreasignacionPlaca/rnrsPreasignacionPlaca.routes';
+import { VhloRnrsPreasignacionPlacaRoutes } from './vhloRnrsPreasignacionPlaca/vhloRnrsPreasignacionPlaca.routes';
 
 // import { SucursalRoutes } from './empresa/sucursal/sucursal.routes';
 
@@ -152,8 +151,8 @@ import { RnmaPreregistroRoutes } from './rnmaPreregistro/rnmaPreregistro.routes'
 import { SvCfgClaseAccidenteRoutes } from './svCfgClaseAccidente/svCfgClaseAccidente.routes';
 import { CfgChoqueConRoutes } from './cfgChoqueCon/cfgChoqueCon.routes';
 import { SvCfgObjetoFijoRoutes } from './svCfgObjetoFijo/svCfgObjetoFijo.routes';
-import { RnrsPreregistroRoutes } from './rnrsPreregistro/rnrsPreregistro.routes';
 import { ReporteRoutes } from './reporte/reporte.routes';
+import { VhloRnrsPreregistroRoutes } from './vhloRnrsPreregistro/vhloRnrsPreregistro.routes';
 import { VhloCertificadoTradicionRoutes } from './vhloCertificadoTradicion/vhloCertificadoTradicion.routes';
 import { CvCfgTipoRestriccionRoutes } from './cvCfgTipoRestriccion/cvCfgTipoRestriccion.routes';
 import { CvLcCfgTipoRestriccionRoutes } from './cvLcCfgTipoRestriccion/cvLcCfgTipoRestriccion.routes';
@@ -361,7 +360,6 @@ export const DashboardRoutes: Route[] = [
       ...CvRestriccionRoutes,
       ...CvCfgInteresRoutes,
       ...CvCfgPorcentajeInicialRoutes,
-      ...CfgBodegaRoutes,
       ...SvCfgSenialUnidadMedidaRoutes,
       ...SvCfgSenialTipoRoutes,
       ...SvCfgSenialColorRoutes,
@@ -431,7 +429,7 @@ export const DashboardRoutes: Route[] = [
       ...SvIpatRoutes,
       ...RnmaPreregistroRoutes,
       ...CfgValorVehiculoRoutes,
-      ...RnrsPreregistroRoutes,
+      ...VhloRnrsPreregistroRoutes,
       ...ReporteRoutes,
       ...RpcccInventarioDocumentalRoutes,
       ...ImoBusquedaRoutes,
@@ -449,7 +447,7 @@ export const DashboardRoutes: Route[] = [
       ...BpActividadRoutes,
       ...BpProyectoRoutes,
       ...BpCdpRoutes,
-      ...RnrsPreasignacionPlacaRoutes,
+      ...VhloRnrsPreasignacionPlacaRoutes,
       ...VhloTpConvenioRoutes,
       ...VhloTpAsignacionRoutes,
       ...VhloTpRangoRoutes,

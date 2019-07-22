@@ -24,6 +24,7 @@ export class RnmaPreregistro{
 		public numeroFactura: number,
 		public fechaFactura:string,
 		public valor:string,
+		public tipoMatricula:string,
 		public idSubpartidaArancelaria: number,
 		public idTipoRodaje: number,
 		public idTipoCabina: number,
