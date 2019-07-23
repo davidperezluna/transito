@@ -19,11 +19,11 @@ export class CfgPropietarioService {
 		return this._http.get(this.url+"/").map(res => res.json());
 	}
 
-	register(datos, token) {	
+	register(formData, datos, token) {	
 		let json = JSON.stringify(datos);
-		let params = "data=" + json + "&authorization=" + token;
-		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-		return this._http.post(this.url + "/new", params, { headers: headers }).map(
+		formData.append('data', json);
+		formData.append('authorization', token);
+		return this._http.post(this.url + "/new", formData).map(
 			res => res.json(),
 			this._loogerService.registerLog(token, 'INSERT', json, this.url)
 		);
@@ -42,11 +42,11 @@ export class CfgPropietarioService {
 		return this._http.post(this.url+"/show", params, {headers: headers}).map(res => res.json());
 	}
 
-	edit(datos,token){
+	edit(formData, datos, token){
 		let json = JSON.stringify(datos);
-		let params = "data="+json+"&authorization="+token;
-		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
-		return this._http.post(this.url + "/edit", params, { headers: headers }).map(
+		formData.append('data', json);
+		formData.append('authorization', token);
+		return this._http.post(this.url + "/edit", formData).map(
 			res => res.json(),
 			this._loogerService.registerLog(token, 'UPDATE', json, this.url)
 		);

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FroFacturaService } from '../../services/froFactura.service';
 import { LoginService } from '../../services/login.service';
-import { CvCdoComparendoService } from '../../services/cvCdoComparendo.service';
 import swal from 'sweetalert2';
 declare var $: any;
 
@@ -23,7 +23,8 @@ export class FroFacturaComponent implements OnInit {
   public formEdit = false;
   public formSearch = true;
   public table: any = null;
-  public sedeOperativa: any = null;
+  public organismosTransito: any = null;
+  public organismoTransito: any = null;
 
   public search: any = {
     'tipoFiltro': null,
@@ -38,7 +39,7 @@ export class FroFacturaComponent implements OnInit {
 
   constructor(
     private _LoginService: LoginService,
-    private _ComparendoService: CvCdoComparendoService,
+    private _FacturaService: FroFacturaService,
   ){}
     
   ngOnInit() {  }
@@ -56,23 +57,11 @@ export class FroFacturaComponent implements OnInit {
 
     let token = this._LoginService.getToken();
 
-    this._ComparendoService.searchByFiltrosFactura(this.search, token).subscribe(
+    this._FacturaService.searchByFilters(this.search, token).subscribe(
       response => {
         if (response.status == 'success') {
           this.comparendos = response.data;
           this.formIndex = true;
-
-          this.comparendos.forEach((element: any, key: any) => {            
-            this._ComparendoService.validateCurso({ 'id':element.id }, token).subscribe(
-              response => {
-                if (response.status == 'success') {
-                  element.curso = true;
-                }else{
-                  element.curso = false;
-                }
-              }
-            );
-          });
 
           swal({
             title: 'Perfecto!',

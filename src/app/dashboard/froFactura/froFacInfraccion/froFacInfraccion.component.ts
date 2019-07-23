@@ -111,7 +111,7 @@ export class FroFacInfraccionComponent implements OnInit {
 
     let token = this._LoginService.getToken();
 
-    this._ComparendoService.searchByFiltrosFactura(this.search, token).subscribe(
+    this._ComparendoService.searchByFiltrosForFactura(this.search, token).subscribe(
       response => {
         if (response.status == 'success') {
           this.comparendos = response.data.comparendos;

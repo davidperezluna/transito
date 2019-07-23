@@ -35,7 +35,7 @@ export class FroAcuerdoPagoComponent implements OnInit {
   ];
 
   constructor(
-    private _loginService: LoginService,
+    private _LoginService: LoginService,
     private _ComparendoService: CvCdoComparendoService,
   ){}
     
@@ -52,26 +52,20 @@ export class FroAcuerdoPagoComponent implements OnInit {
       onOpen: () => {
         swal.showLoading()
       }
-    }).then((result) => {
-      if (
-        // Read more about handling dismissals
-        result.dismiss === swal.DismissReason.timer
-      ) {
-      }
     });
 
     this.formIndex = false;
 
-    let token = this._loginService.getToken();
+    let token = this._LoginService.getToken();
 
-    this._ComparendoService.searchByFiltrosFactura(this.search, token).subscribe(
+    this._ComparendoService.searchByFiltrosForFactura(this.search, token).subscribe(
       response => {
         if (response.status == 'success') {
           this.comparendos = response.data.comparendos;
           this.formIndex = true;
 
           let timeoutId = setTimeout(() => {
-            this.iniciarTabla();
+            this.onInitTable();
           }, 100);
           
           swal({
@@ -112,12 +106,8 @@ export class FroAcuerdoPagoComponent implements OnInit {
   }
 
 
-  iniciarTabla(){
-    if (this.table) {
-      this.table.destroy();
-    }
-
-    $('#dataTables-example').DataTable({
+  onInitTable(){
+    this.table = $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,
       sPaginationType: 'full_numbers',
@@ -129,8 +119,7 @@ export class FroAcuerdoPagoComponent implements OnInit {
           sLast: '<i class="fa fa-step-forward"></i>'
         }
       }
-   });
-   this.table = $('#dataTables-example').DataTable();
+    });
   }
   
   onNew(){

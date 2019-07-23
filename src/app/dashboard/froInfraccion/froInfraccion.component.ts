@@ -44,8 +44,9 @@ export class FroInfraccionComponent implements OnInit {
     this._InfraccionService.index().subscribe(
 				response => {
           this.infracciones = response.data;
+
           let timeoutId = setTimeout(() => {  
-            this.iniciarTabla();
+            this.onInitTable();
           }, 100);
 				}, 
 				error => {
@@ -58,8 +59,9 @@ export class FroInfraccionComponent implements OnInit {
 				}
       );
   }
-  iniciarTabla(){
-    $('#dataTables-example').DataTable({
+
+  onInitTable(){
+    this.table = $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,
       sPaginationType: 'full_numbers',
@@ -71,8 +73,7 @@ export class FroInfraccionComponent implements OnInit {
           sLast: '<i class="fa fa-step-forward"></i>'
         }
       }
-   });
-   this.table = $('#dataTables-example').DataTable();
+    });
   }
   
   onNew(){
@@ -89,7 +90,8 @@ export class FroInfraccionComponent implements OnInit {
       this.ngOnInit();
     }
   }
-  deleteInfraccion(id:any){
+
+  onDelete(id:any){
     swal({
       title: '¿Estás seguro?',
       text: "¡Se eliminara este registro!",

@@ -46,6 +46,14 @@ constructor(
   ){}
 
   ngOnInit() {
+    swal({
+      title: 'Cargando interes y porcentaje inicial!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+
     this.acuerdoPago = new FroAcuerdoPago(null, null, null, null, null, null, null, null, null, null, null);
 
     this.acuerdoPago.numeroCuotas = 1;
@@ -98,6 +106,10 @@ constructor(
         }
       }
     );
+
+    if(this.porcentaje && this.interes){
+      swal.close();
+    }
   }
 
   onCancelar(){

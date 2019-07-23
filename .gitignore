@@ -2,3 +2,4 @@
 *.log
 dist.zip
 src/app/dashboard/tramiteSolicitudRnma/rnma/tramiteBlindaje/newRnma.Blindaje.component.ts
+npm-debug.log.403212561

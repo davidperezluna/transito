@@ -14,10 +14,8 @@ export class SvIpatVehiculo {
         public carroceria: number,
         public ton: number,
         public pasajeros: number,
-
         public empresa: string,
         public nitEmpresa: number,
-
         public matriculadoEn: number,
         public inmovilizado: string,
         public inmovilizadoEn: number,

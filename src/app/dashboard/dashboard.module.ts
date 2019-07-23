@@ -26,6 +26,7 @@ import { CfgMunicipioModule } from './cfgMunicipio/cfgMunicipio.module';
 import { CfgAdmFormatoModule } from './cfgAdmFormato/cfgAdmFormato.module';
 import { CfgAdmFormatoTipoModule } from './cfgAdmFormatoTipo/cfgAdmFormatoTipo.module';
 import { CfgModuloModule } from './cfgModulo/cfgModulo.module';
+import { CfgPropietarioModule } from './cfgPropietario/cfgPropietario.module';
 
 import { SvCfgSenialUnidadMedidaModule } from './svCfgSenialUnidadMedida/svCfgSenialUnidadMedida.module';
 import { SvCfgSenialTipoModule } from './svCfgSenialTipo/svCfgSenialTipo.module';
@@ -277,6 +278,7 @@ import {RightsidebarComponent} from '../shared';
     CfgDepartamentoModule,
     CfgMunicipioModule,
     CfgModuloModule,
+    CfgPropietarioModule,
     CfgTipoInfractorModule,
     CfgAuditoriaModule,
     CfgSmlmvModule,

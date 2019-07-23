@@ -1,7 +1,7 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import { FroInfraccionService } from '../../../services/froInfraccion.service';
 import { FroInfrCfgCategoriaService } from '../../../services/froInfrCfgCategoria.service';
-import {LoginService} from '../../../services/login.service';
+import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
 @Component({
@@ -12,7 +12,6 @@ export class EditComponent implements OnInit{
 @Output() ready = new EventEmitter<any>();
 @Input() infraccion:any = null;
 public errorMessage;
-public respuesta;
 public formReady = false;
 public infraccionCategorias: any;
 public infraccionCategoriaSelected: any;
@@ -20,7 +19,7 @@ public infraccionCategoriaSelected: any;
 constructor(
   private _InfraccionService: FroInfraccionService,
   private _InfraccionCategoriaService: FroInfrCfgCategoriaService,
-  private _loginService: LoginService,
+  private _LoginService: LoginService,
   ){}
 
   ngOnInit(){
@@ -45,22 +44,21 @@ constructor(
   onCancelar(){ this.ready.emit(true); }
 
   onEnviar(){
-    let token = this._loginService.getToken();
+    let token = this._LoginService.getToken();
 
-    this.infraccion.infraccionCategoriaId = this.infraccionCategoriaSelected;
+    this.infraccion.categoria.id = this.infraccionCategoriaSelected;
 
-		this._InfraccionService.edit(this.infraccion,token).subscribe(
+		this._InfraccionService.edit(this.infraccion, token).subscribe(
 			response => {
-        this.respuesta = response;
-        console.log(this.respuesta);
-        if(this.respuesta.status == 'success'){
-          this.ready.emit(true);
+        if(response.code == 200){
           swal({
             title: 'Perfecto!',
-            text: 'El registro se ha modificado con exito',
-            type: 'success',
+            text: response.message,
+            type: response.status,
             confirmButtonText: 'Aceptar'
-          })
+          });
+
+          this.ready.emit(true);
         }
 			error => {
 					this.errorMessage = <any>error;
@@ -73,5 +71,4 @@ constructor(
 
 		}); 
   }
-
 }
