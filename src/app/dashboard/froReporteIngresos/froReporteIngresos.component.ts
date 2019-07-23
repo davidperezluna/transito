@@ -3,6 +3,7 @@ import { FroReporteIngresosService } from '../../services/froReporteIngresos.ser
 import { LoginService } from '../../services/login.service';
 import { FroReporteIngresos } from "./froReporteIngresos.modelo";
 import { FroCfgTipoRecaudoService } from "../../services/froCfgTipoRecaudo.service";
+import { PnalFuncionarioService } from "../../services/pnalFuncionario.service";
 import { CfgOrganismoTransitoService } from "../../services/cfgOrganismoTransito.service";
 
 import swal from 'sweetalert2';
@@ -50,6 +51,15 @@ export class FroReporteIngresosComponent implements OnInit {
     public tipoArchivo;
     public nombreOrganismoTransito;
 
+    //variables para las infracciones
+    public infracciones: any = null;
+    public totalInfracciones;
+
+    //variables para las inmovilizaciones
+    public inmovilizaciones: any = null;
+    public totalInmovilizaciones;
+
+
     //variables para retefuente
     public arrayRetefuentesExogena: any = null;
     public totalRetefuente;
@@ -65,10 +75,19 @@ export class FroReporteIngresosComponent implements OnInit {
     public acuerdosPago;
     public totalAcuerdosPago;
 
+    public arrayExportar = [
+        { value: 1, label: 'EXCEL' },
+        { value: 2, label: 'PDF' },
+    ];
+
+    public exportarSelected;
+    public funcionario = null;
+
     constructor(
         private _FroReporteIngresosService: FroReporteIngresosService,
         private _FroCfgTipoRecaudoService: FroCfgTipoRecaudoService,
         private _OrganismoTransitoService: CfgOrganismoTransitoService,
+        private _PnalFuncionarioService: PnalFuncionarioService,
 
         private _LoginService: LoginService,
     ) { }
@@ -79,6 +98,39 @@ export class FroReporteIngresosComponent implements OnInit {
         this.date = new Date();
         var datePiper = new DatePipe(this.date);
         this.fecha = datePiper.transform(this.date, 'dd/MM/yyyy HH:mm:ss a');
+
+        let token = this._LoginService.getToken();
+        let identity = this._LoginService.getIdentity();
+
+        this._PnalFuncionarioService.searchCargoByIdentificacion({ 'identificacion': identity.identificacion }, token).subscribe(
+            response => {
+                if (response.code == 200) {
+                    this.funcionario = response.data;
+                    console.log(this.funcionario);
+                    swal({
+                        title: response.title,
+                        text: response.message,
+                        type: response.status,
+                        confirmButtonText: 'Aceptar'
+                    });
+                } else {
+                    swal({
+                        title: response.title,
+                        text: response.message,
+                        type: response.status,
+                        confirmButtonText: 'Aceptar'
+                    });
+                    error => {
+                        this.errorMessage = <any>error;
+
+                        if (this.errorMessage != null) {
+                            console.log(this.errorMessage);
+                            alert("Error en la petición");
+                        }
+                    }
+                }
+            }
+        );
 
         swal({
             title: 'Cargando Tabla!',
@@ -131,29 +183,124 @@ export class FroReporteIngresosComponent implements OnInit {
         var datePiper = new DatePipe(this.date);
         this.fecha = datePiper.transform(this.date, 'yyyy-MM-dd');
 
-        this.table = $('#dataTables-' + archivo).DataTable({
-            responsive: true,
-            pageLength: 8,
-            sPaginationType: 'full_numbers',
-            dom: 'Bfrtip',
-            buttons: [
-                {
-                    title: 'Reporte Exógena_' + this.nombreOrganismoTransito,
-                    messageBottom: 'TOTAL: ' + this.totalRetefuentesTesoreria,
-                    extend: 'excel',
-                    text: 'Excel',
-                    filename: 'Reporte_Exógena_' + this.nombreOrganismoTransito + '_' + this.fecha,
-                },
-            ],
-            oLanguage: {
-                oPaginate: {
-                    sFirst: '<i class="fa fa-step-backward"></i>',
-                    sPrevious: '<i class="fa fa-chevron-left"></i>',
-                    sNext: '<i class="fa fa-chevron-right"></i>',
-                    sLast: '<i class="fa fa-step-forward"></i>'
+        if(archivo == 'exogena') {
+            this.table = $('#dataTables-' + archivo).DataTable({
+                responsive: true,
+                pageLength: 8,
+                sPaginationType: 'full_numbers',
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        title: 'Reporte Exógena_' + this.nombreOrganismoTransito,
+                        messageBottom: 'TOTAL: ' + this.totalRetefuentesTesoreria,
+                        extend: 'excel',
+                        text: 'Excel',
+                        filename: 'Reporte_Exógena_' + this.nombreOrganismoTransito + '_' + this.fecha,
+                    },
+                ],
+                oLanguage: {
+                    oPaginate: {
+                        sFirst: '<i class="fa fa-step-backward"></i>',
+                        sPrevious: '<i class="fa fa-chevron-left"></i>',
+                        sNext: '<i class="fa fa-chevron-right"></i>',
+                        sLast: '<i class="fa fa-step-forward"></i>'
+                    }
                 }
-            }
-        });
+            });
+        } else if(archivo == 'infracciones') {
+            this.table = $('#dataTables-' + archivo).DataTable({
+                responsive: true,
+                pageLength: 8,
+                sPaginationType: 'full_numbers',
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        title: 'Reporte Infracciones_' + this.nombreOrganismoTransito,
+                        messageBottom: 'TOTAL: ' + this.totalInfracciones,
+                        extend: 'excel',
+                        text: 'Excel',
+                        filename: 'Reporte_Infracciones_' + this.nombreOrganismoTransito + '_' + this.fecha,
+                    },
+                    {
+                        title: 'Reporte Infracciones_' + this.nombreOrganismoTransito,
+                        messageBottom: 'TOTAL: ' + this.totalInfracciones,
+                        extend: 'pdfHtml5',
+                        text: 'PDF',
+                        filename: 'Reporte_Infracciones_' + this.nombreOrganismoTransito + '_' + this.fecha,
+                    },
+                ],
+                oLanguage: {
+                    oPaginate: {
+                        sFirst: '<i class="fa fa-step-backward"></i>',
+                        sPrevious: '<i class="fa fa-chevron-left"></i>',
+                        sNext: '<i class="fa fa-chevron-right"></i>',
+                        sLast: '<i class="fa fa-step-forward"></i>'
+                    }
+                }
+            });
+        } else if(archivo == 'acuerdosPago') {
+            this.table = $('#dataTables-' + archivo).DataTable({
+                responsive: true,
+                pageLength: 8,
+                sPaginationType: 'full_numbers',
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        title: 'Reporte Acuerdo_Pago_' + this.nombreOrganismoTransito,
+                        messageBottom: 'TOTAL: ' + this.totalAcuerdosPago,
+                        extend: 'excel',
+                        text: 'Excel',
+                        filename: 'Reporte_Acuerdo_Pago_' + this.nombreOrganismoTransito + '_' + this.fecha,
+                    },
+                    {
+                        title: 'Reporte Acuerdo_Pago_' + this.nombreOrganismoTransito,
+                        messageBottom: 'TOTAL: ' + this.totalAcuerdosPago,
+                        extend: 'pdfHtml5',
+                        text: 'PDF',
+                        filename: 'Reporte_Acuerdo_Pago_' + this.nombreOrganismoTransito + '_' + this.fecha,
+                    },
+                ],
+                oLanguage: {
+                    oPaginate: {
+                        sFirst: '<i class="fa fa-step-backward"></i>',
+                        sPrevious: '<i class="fa fa-chevron-left"></i>',
+                        sNext: '<i class="fa fa-chevron-right"></i>',
+                        sLast: '<i class="fa fa-step-forward"></i>'
+                    }
+                }
+            });
+        } else if(archivo == 'parqueadero') {
+            this.table = $('#dataTables-' + archivo).DataTable({
+                responsive: true,
+                pageLength: 8,
+                sPaginationType: 'full_numbers',
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        title: 'Reporte Parqueadero_' + this.nombreOrganismoTransito,
+                        messageBottom: 'TOTAL: ' + this.totalInmovilizaciones,
+                        extend: 'excel',
+                        text: 'Excel',
+                        filename: 'Reporte_Parqueadero_' + this.nombreOrganismoTransito + '_' + this.fecha,
+                    },
+                    {
+                        title: 'Reporte Parqueadero_' + this.nombreOrganismoTransito,
+                        messageBottom: 'TOTAL: ' + this.totalInmovilizaciones,
+                        extend: 'pdfHtml5',
+                        text: 'PDF',
+                        filename: 'Reporte_Parqueadero_' + this.nombreOrganismoTransito + '_' + this.fecha,
+                    },
+                ],
+                oLanguage: {
+                    oPaginate: {
+                        sFirst: '<i class="fa fa-step-backward"></i>',
+                        sPrevious: '<i class="fa fa-chevron-left"></i>',
+                        sNext: '<i class="fa fa-chevron-right"></i>',
+                        sLast: '<i class="fa fa-step-forward"></i>'
+                    }
+                }
+            });
+        }
     }
 
     onNew() {
@@ -181,7 +328,7 @@ export class FroReporteIngresosComponent implements OnInit {
         this.froReporteIngresos.idTipoRecaudo = this.tipoRecaudoSelected;
 
         if (this.tipoRecaudoSelected == 1) {
-            this._FroReporteIngresosService.pdfTramiteByFecha({ 'identificacion': identity.identificacion, 'filtros': this.froReporteIngresos, 'tipoArchivoTramite': this.tipoArchivoTramite }, token).subscribe(
+            this._FroReporteIngresosService.pdfTramiteByFecha({ 'identificacion': identity.identificacion, 'filtros': this.froReporteIngresos, 'tipoArchivoTramite': this.tipoArchivoTramite, 'exportarEn': this.exportarSelected }, token).subscribe(
                 response => {
                     if(response.size > 100){
                         swal({
@@ -214,7 +361,12 @@ export class FroReporteIngresosComponent implements OnInit {
         } else if (this.tipoRecaudoSelected == 2) {
             this._FroReporteIngresosService.pdfInfraccionByFecha(this.froReporteIngresos, token).subscribe(
                 response => {
-                    if(response.size > 100){
+                    if(response.code = 200){
+                        console.log(response);
+                        this.nombreOrganismoTransito = null;
+                        this.nombreOrganismoTransito = response.data.organismoTransito.nombre;
+                        this.infracciones = response.data.arrayInfracciones;
+                        this.totalInfracciones = response.data.totalInfracciones;
                         swal({
                             title: 'Perfecto!',
                             text: 'Registros encontrados',
@@ -222,8 +374,16 @@ export class FroReporteIngresosComponent implements OnInit {
                             confirmButtonText: 'Aceptar'
                         });
 
-                        var fileURL = URL.createObjectURL(response);
-                        window.open(fileURL);
+                        /* var fileURL = URL.createObjectURL(response);
+                        window.open(fileURL); */
+
+                        if (this.table) {
+                            this.table.destroy();
+                        }
+
+                        let timeoutId = setTimeout(() => {
+                            this.onInitTable('infracciones');
+                        }, 100);
                     } else {
                         swal({
                             title: 'Error!',
@@ -245,7 +405,11 @@ export class FroReporteIngresosComponent implements OnInit {
         } else if (this.tipoRecaudoSelected == 3) {
             this._FroReporteIngresosService.pdfAcuerdoPagoByFecha(this.froReporteIngresos, token).subscribe(
                 response => {
-                    if(response.size > 100){
+                    if(response.code == 200){
+                        this.nombreOrganismoTransito = null;
+                        this.nombreOrganismoTransito = response.data.organismoTransito.nombre;
+                        this.acuerdosPago = response.data.arrayAcuerdosPago;
+                        this.totalAcuerdosPago = response.data.totalAcuerdosPago;
                         swal({
                             title: 'Perfecto!',
                             text: 'Registros encontrados',
@@ -253,8 +417,15 @@ export class FroReporteIngresosComponent implements OnInit {
                             confirmButtonText: 'Aceptar'
                         });
 
-                        var fileURL = URL.createObjectURL(response);
-                        window.open(fileURL);
+                        /* var fileURL = URL.createObjectURL(response);
+                        window.open(fileURL); */
+                        if (this.table) {
+                            this.table.destroy();
+                        }
+
+                        let timeoutId = setTimeout(() => {
+                            this.onInitTable('acuerdosPago');
+                        }, 100);
                     } else {
                         swal({
                             title: 'Error!',
@@ -276,7 +447,7 @@ export class FroReporteIngresosComponent implements OnInit {
         } else if (this.tipoRecaudoSelected == 4) {
             this._FroReporteIngresosService.pdfCobroCoactivoByFecha(this.froReporteIngresos, token).subscribe(
                 response => {
-                    if(response.size > 100){
+                    if(response.code == 200){
                         swal({
                             title: 'Perfecto!',
                             text: 'Registros encontrados',
@@ -284,8 +455,15 @@ export class FroReporteIngresosComponent implements OnInit {
                             confirmButtonText: 'Aceptar'
                         });
 
-                        var fileURL = URL.createObjectURL(response);
-                        window.open(fileURL);
+                        /* var fileURL = URL.createObjectURL(response);
+                        window.open(fileURL); */
+                        /* if (this.table) {
+                            this.table.destroy();
+                        }
+
+                        let timeoutId = setTimeout(() => {
+                            this.onInitTable('inmovilizaciones');
+                        }, 100); */
                     } else {
                         swal({
                             title: 'Error!',
@@ -307,7 +485,12 @@ export class FroReporteIngresosComponent implements OnInit {
         } else if (this.tipoRecaudoSelected == 5) {
             this._FroReporteIngresosService.pdfParqueaderoByFecha(this.froReporteIngresos, token).subscribe(
                 response => {
-                    if(response.size > 100){
+                    if(response.code == 200){
+                        this.nombreOrganismoTransito = null;
+                        this.nombreOrganismoTransito = response.data.organismoTransito.nombre;
+                        this.inmovilizaciones = response.data.arrayInmovilizaciones;
+                        this.totalInmovilizaciones = response.data.totalInmovilizaciones;
+
                         swal({
                             title: 'Perfecto!',
                             text: 'Registros encontrados',
@@ -315,8 +498,17 @@ export class FroReporteIngresosComponent implements OnInit {
                             confirmButtonText: 'Aceptar'
                         });
 
-                        var fileURL = URL.createObjectURL(response);
-                        window.open(fileURL);
+                        /* var fileURL = URL.createObjectURL(response);
+                        window.open(fileURL); */
+
+                    if (this.table) {
+                        this.table.destroy();
+                    }
+
+                    let timeoutId = setTimeout(() => {
+                        this.onInitTable('parqueadero');
+                    }, 100);
+                        
                     } else {
                         swal({
                             title: 'Error!',

@@ -22,6 +22,7 @@ import { NewDuplicadoPlacaComponent } from './tramites/tramiteDuplicadoPlaca/new
 import { NewExpedicionTarjetaOperacionComponent } from './tramites/tramiteExpedicionTarjetaOperacion/newExpedicionTarjetaOperacion.component';
 import { NewDuplicadoTarjetaOperacionComponent } from './tramites/tramiteDuplicadoTarjetaOperacion/new.duplicadoTarjetaOperacion.component';
 import { NewExpedicionTarjetaOperacionCambioNivelServicioComponent } from './tramites/tramiteExpedicionTarjetaOperacionCambioNivelServicio/newExpedicionTarjetaOperacionCambioNivelServicio.component';
+import { NewExpedicionTarjetaOperacionCambioServicioComponent } from './tramites/tramiteExpedicionTarjetaOperacionCambioServicio/newExpedicionTarjetaOperacionCambioServicio.component';
 import { NewRenovacionTarjetaOperacionComponent } from './tramites/tramiteRenovacionTarjetaOperacion/newRenovacionTarjetaOperacion.component';
 import { NewDuplicadoLicenciaComponent } from './tramites/tramiteDuplicadoLicencia/new.duplicadoLicencia.component';
 import { NewCambioColorComponent } from './tramites/tramiteCambioColor/new.cambioColor.component';
@@ -90,6 +91,7 @@ import { VhloTecnoMecanicaModule } from '../vhloTecnoMecanica/vhloTecnoMecanica.
         NewExpedicionTarjetaOperacionComponent,
         NewDuplicadoTarjetaOperacionComponent,
         NewExpedicionTarjetaOperacionCambioNivelServicioComponent,
+        NewExpedicionTarjetaOperacionCambioServicioComponent,
         NewRenovacionTarjetaOperacionComponent,
         NewDuplicadoLicenciaComponent,
         NewCambioColorComponent,
