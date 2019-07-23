@@ -20,7 +20,7 @@ constructor(
   ){}
 
   ngOnInit() {
-    this.tipoNombramiento = new PnalCfgTipoNombramiento(null, true, true, true, null);
+    this.tipoNombramiento = new PnalCfgTipoNombramiento(null, true, true, true, true, null);
   }
   
   onCancelar(){

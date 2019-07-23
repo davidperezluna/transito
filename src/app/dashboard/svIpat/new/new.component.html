@@ -405,18 +405,18 @@
                             [(ngModel)]="colorSelected" name="color">
                         </ng-select>
                     </div>
-                    <div class="col-lg-6 col-md-6" *ngIf="ipatVehiculo.portaPlaca == '1'">
+                    <div class="col-lg-6 col-md-6" *ngIf="ipatVehiculo.portaPlaca == 1">
                         <label>Modelo <strong class="text-danger">*</strong></label>
                         <input class="form-control" [disabled]="vhlModelo" type="number"
                             [(ngModel)]="ipatVehiculo.modelo" name="modelo" required>
                     </div>
-                    <div class="col-lg-6 col-md-6" *ngIf="ipatVehiculo.portaPlaca == '1'">
+                    <div class="col-lg-6 col-md-6" *ngIf="ipatVehiculo.portaPlaca == 1">
                         <label>Carroceria <strong class="text-danger">*</strong></label>
                         <ng-select [multiple]="false" [disabled]="vhlCarroceria" [options]="carrocerias"
                             [(ngModel)]="carroceriaSelected" required name="carroceria">
                         </ng-select>
                     </div>
-                    <div class="col-lg-6 col-md-6" *ngIf="ipatVehiculo.portaPlaca == '1'">
+                    <div class="col-lg-6 col-md-6" *ngIf="ipatVehiculo.portaPlaca == 1">
                         <h6 class="text-uppercase text-center gradient" style="margin-top: 2%; border-radius: 60px;"><b>8.1.1. Clase </b><strong class="text-danger">*</strong></h6>
                         <ng-select [multiple]="false" [disabled]="vhlClase" [options]="clases"
                             [(ngModel)]="claseSelected" required name="clase">

@@ -11,35 +11,69 @@ import swal from 'sweetalert2';
 
 export class EditComponent implements OnInit{
 @Output() ready = new EventEmitter<any>();
-@Input() auditoria:any = null;
+@Input() propietario:any = null;
 public errorMessage;
-public respuesta;
+
 public formReady = false;
+
+public images = new FormData();
+
+public fileHeader: any = null;
+public fileHeaderSelected: File = null;
+
+public fileFooter: any = null;
+public fileFooterSelected: File = null;
+
+public fileLogo: any = null;
+public fileLogoSelected: File = null;
 
 constructor(
   private _PropietarioService: CfgPropietarioService,
-  private _loginService: LoginService,
+  private _LoginService: LoginService,
   ){}
 
-  ngOnInit(){ console.log(this.auditoria);  }
+  ngOnInit(){ }
 
   onCancelar(){ this.ready.emit(true); }
 
-  onEnviar(){
-    let token = this._loginService.getToken();
+  onFileHeaderChange(event) {
+    if (event.target.files.length > 0) {
+      this.fileHeaderSelected = event.target.files[0];
 
-		this._PropietarioService.edit(this.auditoria,token).subscribe(
+      this.images.append('fileHeader', this.fileHeaderSelected);
+    }
+  }
+
+  onFileFooterChange(event) {
+    if (event.target.files.length > 0) {
+      this.fileFooterSelected = event.target.files[0];
+
+      this.images.append('fileFooter', this.fileFooterSelected);
+    }
+  }
+
+  onFileLogoChange(event) {
+    if (event.target.files.length > 0) {
+      this.fileLogoSelected = event.target.files[0];
+      
+      this.images.append('fileLogo', this.fileLogoSelected);
+    }
+  }
+
+  onEnviar(){
+    let token = this._LoginService.getToken();
+
+		this._PropietarioService.edit(this.images, this.propietario, token).subscribe(
 			response => {
-        this.respuesta = response;
-        console.log(this.respuesta);
-        if(this.respuesta.status == 'success'){
+        if(response.code == 200){
           this.ready.emit(true);
+
           swal({
-            title: 'Perfecto!',
-            text: 'El registro se ha modificado con exito',
-            type: 'success',
+            title: response.title,
+            text: response.message,
+            type: response.status,
             confirmButtonText: 'Aceptar'
-          })
+          });
         }
 			error => {
 					this.errorMessage = <any>error;

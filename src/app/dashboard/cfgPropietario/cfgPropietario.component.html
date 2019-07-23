@@ -4,45 +4,88 @@
     <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-            <h5 class="card-title">
-              <b class="text-uppercase">Configuración</b>
-              <br>
-              <small>Auditorias</small>
-            </h5>
+            <b class="text-uppercase">Configuración de propietario</b>
           </div>
           <div class="card-body">
-            <table class="table " id="dataTables-example">
-              <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Url</th>
-                    <th>Fecha</th>
-                    <th>Datos</th>
-                    <th>Acción</th>
-                    <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="odd" *ngFor="let auditoria of auditorias; let i = index">
-                  <td >{{ auditoria.id }}</td>
-                  <td >{{ auditoria.url }}</td>
-                  <td >{{ auditoria.fecha }}</td>
-                  <td >{{ auditoria.datos }}</td>
-                  <td >{{ auditoria.accion }}</td>
-                  <td>
-                    <button (click)="edit(auditoria)" class="btn btn-xs btn-info" type="button">
-                      <i class="fa fa-edit"></i>
-                      Editar
-                    </button> 
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <!-- /.table-responsive --> 
+            <div class="form-group">
+              <div class="row" *ngIf="propietario">
+                <div class="col-xs-12 col-lg-5">
+                  <table class="table table-bordered table-striped">
+                      <tr>
+                          <td>
+                              <b class="text-uppercase">Nombre</b>
+                              <br>
+                              {{ propietario.nombre }}
+                          </td>
+                      </tr>
+                      <tr>
+                          <td>
+                              <b class="text-uppercase">NIT</b>
+                              <br>
+                              {{ propietario.nit }}
+                          </td>
+                      </tr>
+                      <tr>
+                          <td>
+                              <b class="text-uppercase">Dirección</b>
+                              <br>
+                              {{ propietario.direccion }}
+                          </td>
+                      </tr>
+                      <tr>
+                          <td>
+                              <b class="text-uppercase">Telefono</b>
+                              <br>
+                              {{ propietario.telefono }}
+                          </td>
+                      </tr>
+                      <tr>
+                          <td>
+                              <b class="text-uppercase">Correo</b>
+                              <br>
+                              {{ propietario.correo }}
+                          </td>
+                      </tr>
+                      <tr>
+                          <td>
+                              <b class="text-uppercase">Visualizar conceptos</b>
+                              <br>
+                              {{ propietario.conceptos }}
+                          </td>
+                      </tr>
+                  </table>
+                </div>
+                <div class="col-xs-12 col-lg-7">
+                  <b>Cabecera de pagina</b>
+                  <br>
+                  <img src="{{ imgUrl }}/header.png" width="50%">
+                  <br>
+                  <b>Pie de página</b>
+                  <br>
+                  <img src="{{ imgUrl }}/footer.png" width="50%">
+                  <br>
+                  <b>Logo</b>
+                  <br>
+                  <img src="{{ imgUrl }}/logo.png">
+                </div>
+              </div>
+            </div> 
+          </div>
+          <div class="card-footer">
+            <div class="btn-group">
+                <button (click)="onNew()" class="btn btn-primary" type="button" *ngIf="!propietario">
+                    <i class="fa fa-save"></i>
+                    Registrar
+                </button>
+                <button (click)="onEdit(propietario)" class="btn btn-default" *ngIf="propietario">
+                    <i class="fa fa-pencil"></i>
+                    Editar
+                </button>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <app-edit *ngIf='formEdit' [auditoria]="auditoria" (ready)="ready($event)"></app-edit>
+    <app-edit *ngIf='formEdit' [propietario]="propietario" (ready)="ready($event)"></app-edit>
     <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
 </div>

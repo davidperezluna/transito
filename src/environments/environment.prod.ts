@@ -6,4 +6,5 @@ export const environment = {
   apiUrl : 'https://subdetra.nariño.gov.co/colossus-sit/web/',
   docsUrl : 'https://subdetra.nariño.gov.co/colossus-sit/web/docs/', 
   uploadUrl : 'https://subdetra.nariño.gov.co/colossus-sit/web/uploads/', 
+  imgUrl : 'https://subdetra.nariño.gov.co/colossus-sit/web/img', 
 };

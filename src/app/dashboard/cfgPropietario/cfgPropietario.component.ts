@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { CfgPropietario } from './cfgPropietario.modelo';
 import { CfgPropietarioService } from '../../services/cfgPropietario.service';
 import { LoginService } from '../../services/login.service';
+import { environment } from 'environments/environment';
 import swal from 'sweetalert2';
 declare var $: any;
 
@@ -11,14 +11,16 @@ declare var $: any;
 })
 export class CfgPropietarioComponent implements OnInit {
   public errorMessage;
-	public id;
-	public respuesta;
-	public auditorias;
-	public formNew = false;
-	public formEdit = false;
-  public formIndex = true;
+
+  public imgUrl = environment.imgUrl;
+
   public table:any; 
-  public auditoria: CfgPropietario;
+  public propietario: any = null;
+  
+	public formNew: any = null;
+	public formEdit: any = null;
+  public formIndex: any = null;
+
 
   constructor(
     private _PropietarioService: CfgPropietarioService,
@@ -26,8 +28,10 @@ export class CfgPropietarioComponent implements OnInit {
     ){}
     
   ngOnInit() {
+    this.onInitForms();
+
     swal({
-      title: 'Cargando Tabla!',
+      title: 'Cargando datos!',
       text: 'Solo tardara unos segundos por favor espere.',
       onOpen: () => {
         swal.showLoading()
@@ -36,10 +40,20 @@ export class CfgPropietarioComponent implements OnInit {
 
     this._PropietarioService.index().subscribe(
 				response => {
-          this.auditorias = response.data;
-          let timeoutId = setTimeout(() => {  
-            this.iniciarTabla();
-          }, 100);
+          if(response.code == 200){
+            this.propietario = response.data;
+
+            swal.close();
+          }else{
+            swal({
+              title: response.title,
+              text: response.message,
+              type: response.status,
+              confirmButtonText: 'Aceptar'
+            });
+          }
+
+          this.formIndex = true;
 				}, 
 				error => {
 					this.errorMessage = <any>error;
@@ -51,27 +65,17 @@ export class CfgPropietarioComponent implements OnInit {
 				}
       );
   }
-  iniciarTabla(){
-    $('#dataTables-example').DataTable({
-      responsive: true,
-      pageLength: 10,
-      sPaginationType: 'full_numbers',
-      oLanguage: {
-        oPaginate: {
-          sFirst: '<i class="fa fa-step-backward"></i>',
-          sPrevious: '<i class="fa fa-chevron-left"></i>',
-          sNext: '<i class="fa fa-chevron-right"></i>',
-          sLast: '<i class="fa fa-step-forward"></i>'
-        }
-      }
-   });
-   this.table = $('#dataTables-example').DataTable();
+
+  onInitForms(){
+    this.formNew = false;
+	  this.formEdit = false;
+    this.formIndex = false;
   }
   
   onNew(){
+    this.onInitForms();
+
     this.formNew = true;
-    this.formIndex = false;
-    this.table.destroy();
   }
 
   ready(isCreado:any){
@@ -83,51 +87,11 @@ export class CfgPropietarioComponent implements OnInit {
     }
   }
 
-  delete(id:any){
-    swal({
-      title: '¿Estás seguro?',
-      text: "¡Se eliminara este registro!",
-      type: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#15d4be',
-      cancelButtonColor: '#ff6262',
-      confirmButtonText: 'Confirmar',
-      cancelButtonText: 'Cancelar'
-    }).then((result) => {
-      if (result.value) {
-        let token = this._loginService.getToken();
-        
-        this._PropietarioService.delete(token,id).subscribe(
-            response => {
-                swal({
-                  title: 'Eliminado!',
-                  text:'Registro eliminado correctamente.',
-                  type:'success',
-                  confirmButtonColor: '#15d4be',
-                });
+  onEdit(propietario:any){
+    this.onInitForms();
+    
+    this.propietario = propietario;
 
-                this.table.destroy();
-                this.respuesta= response;
-                this.ngOnInit();
-              }, 
-            error => {
-              this.errorMessage = <any>error;
-
-              if(this.errorMessage != null){
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
-            }
-          );
-
-        
-      }
-    })
-  }
-
-  edit(auditoria:any){
-    this.auditoria = auditoria;
     this.formEdit = true;
-    this.formIndex = false;
   }
 }

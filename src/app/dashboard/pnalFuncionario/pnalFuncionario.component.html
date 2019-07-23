@@ -88,7 +88,6 @@
                 <th>Id</th>
                 <th>Funcionario</th>
                 <th>Contrato/Nombramiento</th>
-                <th>Vigencias</th>
                 <th>Estado</th>
                 <th>Contrato</th>
                 <th>Estado</th>
@@ -144,20 +143,23 @@
                     <small>
                       {{ funcionario.resolucion }}
                     </small>
+                    <br>
                   </div>
-                </td>
-                <td>
-                  <strong>Fecha inicio:</strong>
-                  <br>
-                  <small>
-                    {{ (funcionario.fechaInicial.timestamp * 1000) | date: 'yyyy-MM-dd' }}
-                  </small>
-                  <br>
-                  <strong>Fecha fin:</strong>
-                  <br>
-                  <small>
-                    {{ (funcionario.fechaFinal.timestamp * 1000) | date: 'yyyy-MM-dd' }}
-                  </small>
+                  <ng-container *ngIf="funcionario.fechaInicial">
+                    <strong>Fecha inicio:</strong>
+                    <br>
+                    <small>
+                      {{ (funcionario.fechaInicial.timestamp * 1000) | date: 'yyyy-MM-dd' }}
+                    </small>
+                    <br>
+                  </ng-container>
+                  <ng-container *ngIf="funcionario.fechaFinal">
+                    <strong>Fecha fin:</strong>
+                    <br>
+                    <small>
+                      {{ (funcionario.fechaFinal.timestamp * 1000) | date: 'yyyy-MM-dd' }}
+                    </small>
+                  </ng-container>
                 </td>
                 <td *ngIf='funcionario.activo'>En ejecución</td>
                 <td *ngIf='!funcionario.activo'>Finalizado</td>
@@ -182,11 +184,11 @@
                       <i class="fa fa-calendar"></i>
                     </button>
                     <button (click)="onSuspension(funcionario)" (ready)="ready($event)" class="btn btn-xs btn-danger"
-                      type="button" *ngIf="funcionario.activo" tooltip="Suspender" [tooltipDisabled]="false" [tooltipAnimation]="true" tooltipPlacement="top">
+                      type="button" *ngIf="funcionario.tipoNombramiento.supencion" tooltip="Suspender" [tooltipDisabled]="false" [tooltipAnimation]="true" tooltipPlacement="top">
                       <i class="fa fa-ban"></i>
                     </button>
                     <button (click)="onDisabled(funcionario)" (ready)="ready($event)" class="btn btn-xs btn-warning"
-                      type="button" *ngIf="funcionario.activo" tooltip="Deshabilitar" [tooltipDisabled]="false" [tooltipAnimation]="true" tooltipPlacement="top">
+                      type="button" *ngIf="funcionario.activo" tooltip="Terminación de contrato o Traslado de dependencia" [tooltipDisabled]="false" [tooltipAnimation]="true" tooltipPlacement="top">
                       <i class="fa fa-times"></i>
                     </button>
                   </div>

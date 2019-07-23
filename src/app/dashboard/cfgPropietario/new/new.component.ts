@@ -11,9 +11,19 @@ import swal from 'sweetalert2';
 
 export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
-public tipoCorrespondencia: CfgPropietario;
+public propietario: CfgPropietario;
 public errorMessage;
-public respuesta;
+
+public images = new FormData();
+
+public fileHeader: any = null;
+public fileHeaderSelected: File = null;
+
+public fileFooter: any = null;
+public fileFooterSelected: File = null;
+
+public fileLogo: any = null;
+public fileLogoSelected: File = null;
 
 constructor(
   private _PropietarioService: CfgPropietarioService,
@@ -21,35 +31,58 @@ constructor(
   ){}
 
   ngOnInit() {
-    this.tipoCorrespondencia = new CfgPropietario(null, null, null, null, null, null, null, null, null, null);
+    this.propietario = new CfgPropietario(null, null, null, null, null, null, null);
   }
+
   onCancelar(){
     this.ready.emit(true);
+  }
+
+  onFileHeaderChange(event) {
+    if (event.target.files.length > 0) {
+      this.fileHeaderSelected = event.target.files[0];
+
+      this.images.append('fileHeader', this.fileHeaderSelected);
+    }
+  }
+
+  onFileFooterChange(event) {
+    if (event.target.files.length > 0) {
+      this.fileFooterSelected = event.target.files[0];
+
+      this.images.append('fileFooter', this.fileFooterSelected);
+    }
+  }
+
+  onFileLogoChange(event) {
+    if (event.target.files.length > 0) {
+      this.fileLogoSelected = event.target.files[0];
+      
+      this.images.append('fileLogo', this.fileLogoSelected);
+    }
   }
   
   onEnviar(){
     let token = this._LoginService.getToken();
-    
-    console.log(this.tipoCorrespondencia);
-		this._PropietarioService.register(this.tipoCorrespondencia,token).subscribe(
+
+		this._PropietarioService.register(this.images, this.propietario, token).subscribe(
 			response => {
-        this.respuesta = response;
-        console.log(this.respuesta);
-        if(this.respuesta.status == 'success'){
-          this.ready.emit(true);
+        if(response.code == 200){
           swal({
-            title: 'Perfecto!',
-            text: 'Registro exitoso!',
-            type: 'success',
+            title: response.title,
+            text: response.message,
+            type: response.status,
             confirmButtonText: 'Aceptar'
-          })
+          });
+
+          this.ready.emit(true);
         }else{
           swal({
-            title: 'Error!',
-            text: 'El tipoCorrespondencia '+  +' ya se encuentra registrado',
-            type: 'error',
+            title: response.title,
+            text: response.message,
+            type: response.status,
             confirmButtonText: 'Aceptar'
-          })
+          });
         }
 			error => {
 					this.errorMessage = <any>error;

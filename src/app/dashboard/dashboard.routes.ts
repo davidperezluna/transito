@@ -233,6 +233,7 @@ import { CfgAdmFormatoTipoRoutes } from './cfgAdmFormatoTipo/cfgAdmFormatoTipo.r
 import { CfgAuditoriaRoutes } from './cfgAuditoria/cfgAuditoria.routes';
 import { CfgSmlmvRoutes } from './cfgSmlmv/cfgSmlmv.routes';
 import { CfgModuloRoutes } from './cfgModulo/cfgModulo.routes';
+import { CfgPropietarioRoutes } from './cfgPropietario/cfgPropietario.routes';
 import { CfgOrganismoTransitoRoutes } from './cfgOrganismoTransito/cfgOrganismoTransito.routes';
 import { CfgEntidadJudicialRoutes } from './cfgEntidadJudicial/cfgEntidadJudicial.routes';
 import { cfgFestivoRoutes } from './cfgFestivo/cfgFestivo.routes';
@@ -315,6 +316,7 @@ export const DashboardRoutes: Route[] = [
       ...cfgFestivoRoutes,
       ...CfgTipoClaseRoutes,
       ...CfgModuloRoutes,
+      ...CfgPropietarioRoutes,
       ...PnalCfgCdoConsecutivoRoutes,
       ...PnalCfgCargoRoutes,
       ...PnalCfgTipoNombramientoRoutes,

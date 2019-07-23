@@ -4,6 +4,7 @@ export class PnalCfgTipoNombramiento{
 		public gestionable: boolean,
 		public horarios: boolean,
 		public prorroga: boolean,
+		public suspencion: boolean,
 		public id:number
 	){}
 }
