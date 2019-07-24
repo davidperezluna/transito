@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FroFacturaService } from '../../services/froFactura.service';
+import { CfgOrganismoTransitoService } from '../../services/cfgOrganismoTransito.service';
+import { FroTramiteService } from '../../services/froTramite.service';
+import { FroInfraccionService } from '../../services/froInfraccion.service';
 import { LoginService } from '../../services/login.service';
+import { environment } from 'environments/environment'
 import swal from 'sweetalert2';
 declare var $: any;
 
@@ -11,35 +15,46 @@ declare var $: any;
 
 export class FroFacturaComponent implements OnInit {
   public errorMessage;
-	public acuerdoPago: any;
-	public valorTotal: any;
-	public ciudadano: any;
-	public comparendos: any = null;
-  public comparendosSelect: any = [];
-	public numeroIdentificacion: any;
+  public apiUrl = environment.apiUrl;
   
   public formIndex = false;
-  public formNew = false;
-  public formEdit = false;
   public formSearch = true;
+
   public table: any = null;
+
   public organismosTransito: any = null;
-  public organismoTransito: any = null;
+  public tramites: any = null;
+  public infracciones: any = null;
+  public facturas: any = null;
 
   public search: any = {
     'tipoFiltro': null,
     'filtro': null,
+    'fechaInicial': null,
+    'fechaFinal': null,
+    'tipoRecaudo': null,
+    'idTramite': null,
+    'idInfraccion': null,
   }
 
-  public tiposFiltro = [
-    { 'value': '2', 'label': 'Identificación' },
-    { 'value': '4', 'label': 'No. de comparendo' },
+  public tiposRecaudo = [
+    { 'value': null, 'label': 'Seleccione un tipo' },
+    { 'value': 'TRAMITES', 'label': 'TRAMITES' },
+    { 'value': 'INFRACCIONES', 'label': 'INFRACCIONES' },
   ];
 
+  public tiposFiltro = [
+    { 'value': 1, 'label': 'No. de factura' },
+    { 'value': 2, 'label': 'Sede operativa' },
+    { 'value': 3, 'label': 'Valor de recaudo' },
+  ];
 
   constructor(
-    private _LoginService: LoginService,
+    private _OrganismoTransitoService: CfgOrganismoTransitoService,
+    private _TramiteService: FroTramiteService,
+    private _InfraccionService: FroInfraccionService,
     private _FacturaService: FroFacturaService,
+    private _LoginService: LoginService,
   ){}
     
   ngOnInit() {  }
@@ -60,26 +75,28 @@ export class FroFacturaComponent implements OnInit {
     this._FacturaService.searchByFilters(this.search, token).subscribe(
       response => {
         if (response.status == 'success') {
-          this.comparendos = response.data;
+          this.facturas = response.data;
           this.formIndex = true;
 
           swal({
-            title: 'Perfecto!',
+            title: response.title,
             text: response.message,
-            type: 'success',
+            type: response.status,
             confirmButtonText: 'Aceptar'
           });
+
           let timeoutId = setTimeout(() => {
-            this.iniciarTabla();
+            this.onInitTable();
           }, 100);
         } else {
-          this.comparendos = null;
+          this.facturas = null;
+
           swal({
-            title: 'Alerta!',
+            title: response.title,
             text: response.message,
-            type: 'warning',
+            type: response.status,
             confirmButtonText: 'Aceptar'
-          })
+          });
         }
         error => {
           this.errorMessage = <any>error;
@@ -93,29 +110,10 @@ export class FroFacturaComponent implements OnInit {
     );
   }
 
-  onSelectCurso(comparendo: any, eve: any) {
-    if (eve.target.checked) {
-      comparendo.curso = true;
-    } else {
-      comparendo.curso = false;
-    }
-  }
-
-  onSelectComparendo(comparendo: any, eve: any) {
-    if (eve.target.checked) {
-      this.comparendosSelect.push(comparendo);
-      this.valorTotal = this.valorTotal + comparendo.valorInfraccion;
-    } else {
-      let index = this.comparendosSelect.indexOf(comparendo.consecutivo.consecutivo);
-      this.valorTotal = this.valorTotal - comparendo.valorInfraccion;
-      if (index > -1) {
-        this.comparendosSelect.splice(index, 1);
-      }
-    }
-  }
-
-  iniciarTabla(){
-    $('#dataTables-example').DataTable({
+  onInitTable(){
+    this.table = $('#dataTables-example').DataTable({
+      retrieve: true,
+      paging: false,
       responsive: true,
       pageLength: 8,
       sPaginationType: 'full_numbers',
@@ -127,52 +125,55 @@ export class FroFacturaComponent implements OnInit {
           sLast: '<i class="fa fa-step-forward"></i>'
         }
       }
-   });
-   this.table = $('#dataTables-example').DataTable();
+    });
   }
-
-  onNew() {
-    this.formNew = true;
-    this.formIndex = false;
-    this.formSearch = false;
-    this.table.destroy();
-  }
-  
- 
-    /*let identity = this._LoginService.getIdentity();
-    let token = this._LoginService.getToken();
-      
-    this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion },token).subscribe(
-      response => { 
-        if(response.status == 'success'){
-          this.sedeOperativa = response.data.sedeOperativa;
-          let datos = {
-
-          }
-         
-        }
-      error => {
-          this.errorMessage = <any>error;
-          if(this.errorMessage != null){
-            console.log(this.errorMessage);
-            alert('Error en la petición');
-          }
-        }
-    });*/
 
   ready(isCreado:any){
     if(isCreado) {
-      this.formNew = false;
-      this.formEdit = false;
-      this.formIndex = false;
-      this.formSearch = true;
       this.ngOnInit();
     }
   }
 
-  onEdit(acuerdoPago:any){
-    this.acuerdoPago = acuerdoPago;
-    this.formEdit = true;
-    this.formIndex = false;
+  onChangedTipoRecaudo(e){
+    if (e) {
+      let token = this._LoginService.getToken()
+
+      switch (e) {
+        case 'TRAMITES':
+          this._TramiteService.select().subscribe(
+            response => {
+              this.tramites = response;
+            }, 
+            error => { 
+              this.errorMessage = <any>error;
+      
+              if(this.errorMessage != null){
+                console.log(this.errorMessage);
+                alert("Error en la petición");
+              }
+            }
+          );
+          break;
+
+        case 'INFRACCIONES':
+          this._InfraccionService.select().subscribe(
+            response => {
+              this.infracciones = response;
+            }, 
+            error => { 
+              this.errorMessage = <any>error;
+      
+              if(this.errorMessage != null){
+                console.log(this.errorMessage);
+                alert("Error en la petición");
+              }
+            }
+          );
+          break;
+      
+        case null:
+          break;
+      }
+    }
   }
 }

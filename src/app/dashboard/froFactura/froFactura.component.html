@@ -4,7 +4,7 @@
     <div class="col-xs-12 col-lg-4"><!-- .col -->
       <div class="card">
         <div class="card-header">
-            <h5 class="text-uppercase"><strong>Facturas</strong> <small>Buscar comparendos</small></h5>
+            <b class="text-uppercase">Búsqueda avanzada de facturas</b>
         </div>
         <div class="card-body"><!-- .card-body -->
           <form #formSearch="ngForm">
@@ -17,6 +17,28 @@
                 <div class="col-xs-12 col-lg-12">
                   <label>Filtro</label>
                   <input class="form-control text-uppercase" [(ngModel)]="search.filtro" name="filtro" type="text" required>
+                </div>
+                <div class="col-xs-12 col-lg-12" *ngIf="search.tipoFiltro && search.tipoFiltro != 1">
+                  <label>Fecha inicial</label>
+                  <input class="form-control" [(ngModel)]="search.fechaInicial" name="fechaInicial" type="date" required>
+                </div>
+                <div class="col-xs-12 col-lg-12" *ngIf="search.tipoFiltro && search.tipoFiltro != 1">
+                  <label>Fecha final</label>
+                  <input class="form-control" [(ngModel)]="search.fechaFinal" name="fechaFinal" type="date" required>
+                </div>
+                <div class="col-xs-12 col-lg-12" *ngIf="search.tipoFiltro && search.tipoFiltro != 1">
+                  <label>Tipo de filtro</label>
+                  <ng-select (ngModelChange)="onChangedTipoRecaudo($event)" [multiple]="false" [options]="tiposRecaudo" [(ngModel)]="search.tipoRecaudo" name="tipoRecaudo" required></ng-select>
+                </div>
+                <div class="col-xs-12 col-lg-12" *ngIf="search.tipoRecaudo && search.tipoRecaudo == 'TRAMITES'">
+                  <label>Tramites <b class="text-danger">*</b></label>
+                  <ng-select [multiple]="false" [options]="tramites" [(ngModel)]="search.idTramite" name="idTramite" required>
+                  </ng-select>
+                </div>
+                <div class="col-xs-12 col-lg-12" *ngIf="search.tipoRecaudo && search.tipoRecaudo == 'INFRACCIONES'">
+                  <label>Infracciones <b class="text-danger">*</b></label>
+                  <ng-select [multiple]="false" [options]="infracciones" [(ngModel)]="search.idInfraccion" name="idInfraccion" required>
+                  </ng-select>
                 </div>
               </div>
             </div><!-- /.row -->
@@ -32,68 +54,45 @@
     </div><!-- /.col -->
     
     <!-- ======================== Inventarios en Municipio seleccionado ============================== -->
-    <div class="col-xs-12 col-lg-8" *ngIf="comparendos && formIndex"><!-- .col -->
+    <div class="col-xs-12 col-lg-8" *ngIf="facturas && formIndex"><!-- .col -->
       <div class="card"><!-- .card -->
         <div class="card-header">
           <h5 class="card-title">
-            <b class="text-uppercase">Comparendos asociados</b>
+            <b class="text-uppercase">Facturas encontradas</b>
           </h5>
         </div>
         <div class="card-body">
-          Total {{valorTotal}}
           <table class="table table-bordered" id="dataTables-example">
             <thead>
               <tr>
                 <th>#</th>
                 <th>Número</th>
                 <th>Fecha</th>
-                <th>Cod. Infracción</th>
+                <th>Tipo recaudo</th>
                 <th>Valor</th>
-                <th>Placa</th>
-                <th>Curso</th>
-                <th>Estado</th>
-                <th>Seleccionar</th>
+                <th>Acciones</th>
               </tr>
             </thead>
             <tbody>
-              <tr class="odd" *ngFor="let comparendo of comparendos; let i = index">
+              <tr class="odd" *ngFor="let factura of facturas; let i = index">
                 <td>{{ i + 1 }}</td>
-                <td>{{ comparendo.consecutivo.consecutivo }}</td>
-                <td>{{ comparendo.fecha }}</td>
-                <td>{{ comparendo.infraccion?.codigo }}</td>
-                <td>{{ comparendo.valorInfraccion }}</td>
-                <td>{{ comparendo.placa }}</td>
+                <td>{{ factura.numero }}</td>
+                <td>{{ factura.fecha }}</td>
+                <td>{{ factura.tipoRecaudo.nombre }}</td>
+                <td>{{ factura.valor }}</td>
                 <td>
-                  <div class="form-group"><!-- .form-group -->
-                    <div class="row"><!-- .row -->
-                      <div class="custom-control custom-checkbox" style="margin-top: -17px;">
-                        <input type="checkbox" (change)="onSelectCurso(comparendo, $event)" class="custom-control-input" id="curso-{{comparendo.id}}" [disabled]="!comparendo.curso">
-                      </div>
-                    </div><!-- /.row -->
-                  </div><!-- /.form-group -->
-                </td>
-                <td>{{ comparendo.estado?.nombre }}</td>
-                <td>
-                  <div class="form-group"><!-- .form-group -->
-                    <div class="row"><!-- .row -->
-                      <div class="custom-control custom-checkbox" style="margin-top: -17px;">
-                        <input type="checkbox" value="{{comparendo.id}}" (change)="onSelectComparendo(comparendo, $event)" class="custom-control-input" id="seleccion-{{comparendo.id}}">
-                      </div>
-                    </div><!-- /.row -->
-                  </div><!-- /.form-group -->
+                  <div class="btn-group">
+                    <a href="{{ apiUrl }}financiero/frofactura/1/{{ factura.id }}/pdf" class="btn btn-success" target="_blank">
+                      <i class="fa fa-file-pdf-o"></i>
+                      Generar PDF
+                  </a>
+                  </div>
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
-        <div class="card-footer"><!-- .card-footer -->
-          <div class="btn-group">
-            <button type="button" (click)="onNew()" class="btn btn-primary btn-lg btn-block" [disabled]='comparendosSelect?.length == 0'>Liquidar</button>
-          </div>
-        </div><!-- /.card-footer -->
       </div><!-- /.card -->
     </div><!-- /.col -->
   </div><!-- /.row -->
-
-  <app-new *ngIf='formNew' [comparendosSelect]="comparendosSelect" (ready)="ready($event)"></app-new>
 </div>
