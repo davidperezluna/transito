@@ -52,7 +52,7 @@ export class UserEmpresaTransporteComponent implements OnInit {
         if(this.empresa != null) {
             let token = this._LoginService.getToken();
 
-            this._UserEmpresaTransporteService.searchHabiltacionesByEmpresa({ 'idEmpresa': this.empresa.id }, token).subscribe(
+            this._UserEmpresaTransporteService.searchHabilitacionesByEmpresa({ 'idEmpresa': this.empresa.id }, token).subscribe(
                 response => {
                     if (response.code == 200) {
                         this.habilitaciones = response.data;
@@ -167,7 +167,7 @@ export class UserEmpresaTransporteComponent implements OnInit {
                 if (response.code == 200) {
                     this.empresa = response.data;
 
-                    this._UserEmpresaTransporteService.searchHabiltacionesByEmpresa({'idEmpresa': this.empresa.id}, token).subscribe(
+                    this._UserEmpresaTransporteService.searchHabilitacionesByEmpresa({'idEmpresa': this.empresa.id}, token).subscribe(
                         response => {
                             if (response.code == 200) {
                                 this.habilitaciones = response.data;

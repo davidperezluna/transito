@@ -54,7 +54,7 @@ export class UserEmpresaTransporteService {
                 return this._http.post(this.url+"/search/nit", params, {headers: headers}).map(res => res.json());
 	}
 	
-	searchHabiltacionesByEmpresa(datos,token){
+	searchHabilitacionesByEmpresa(datos,token){
         let json = JSON.stringify(datos);
         let params = "data="+json+"&authorization="+token;
         let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});

@@ -25,6 +25,12 @@
                         <input class="form-control" type="date" [(ngModel)]="froReporteIngresos.fechaHasta"
                             name="fechaHasta" required>
                     </div>
+                    <div class="col-xs-12 col-lg-12" *ngIf="tipoRecaudoSelected == 1">
+                        <label>Exportar en</label>
+                        <ng-select [multiple]="false" [options]="arrayExportar" [(ngModel)]="exportarSelected" required
+                            name="exportar">
+                        </ng-select>
+                    </div>
                     <div class="col-xs-12 col-lg-12" *ngIf="tipoRecaudoSelected == 6">
                         <label>Tipo archivo</label>
                         <div class="form-group row">
@@ -79,13 +85,102 @@
     <div class="col-xs-12 col-lg-8">
         <div class="row">
             <div class="col-xs-12 col-lg-12">
-                <div class="card" *ngIf="arrayRetefuentesExogena || arrayRetefuentesTesoreria">
+                <div class="card">
                     <div class="card-header">
                         <h5 class="card-title">
-                            <strong class="text-uppercase">Retefuente</strong>
+                            <strong class="text-uppercase">REPORTE</strong>
                         </h5>
                     </div>
                     <div class="card-body">
+                        <table class="table" id="dataTables-infracciones" *ngIf="infracciones && infracciones.length > 0">
+                            <thead>
+                                <tr>
+                                    <th><b>NRO. FACTURA</b></th>
+                                    <th><b>NRO. COMPARENDO</b></th>
+                                    <th><b>IDENTIFICACIÓN INFRACTOR</b></th>
+                                    <th><b>PORCENTAJE DESCUENTO</b></th>
+                                    <th><b>VALOR DESCUENTO</b></th>
+                                    <th><b>TOTAL</b></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="odd" *ngFor="let infraccion of infracciones; let i = index">
+                                    <td>{{ infraccion.numeroFactura }}</td>
+                                    <td>{{ infraccion.numeroConsecutivo }}</td>
+                                    <td>{{ infraccion.infractorIdentificacion }}</td>
+                                    <td>{{ infraccion.porcentajeDescuento }}</td>
+                                    <td>--</td>
+                                    <td>{{ infraccion.total }}</td>
+                                </tr>
+                                <!-- <tr>
+                                    <td colspan="5"><b>TOTAL</b></td>
+                                    <td>{{ totalInfracciones }}</td>
+                                </tr> -->
+                            </tbody>
+                        </table>
+                        <table class="table" id="dataTables-acuerdosPago" *ngIf="acuerdosPago && acuerdosPago.length > 0">
+                            <thead>
+                                <tr>
+                                    <td><b>Nro. Acuerdo Pago</b></td>
+                                    <td><b>Nro. Comparendo</b></td>
+                                    <td><b>Identificación Infractor</b></td>
+                                    <td><b>Nombre completo Infractor</b></td>
+                                    <td><b>Cod. Infracción</b></td>
+                                    <td><b>Nro. Factura</b></td>
+                                    <td><b>Valor</b></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="odd" *ngFor="let acuerdoPago of acuerdosPago; let i = index">
+                                    <td>{{ acuerdoPago.numeroAcuerdoPago }}</td>
+                                    <td>{{ acuerdoPago.numeroComparendo }}</td>
+                                    <td>{{ acuerdoPago.identificacionInfractor }}</td>
+                                    <td>{{ acuerdoPago.nombreCompletoInfractor }}</td>
+                                    <td>{{ acuerdoPago.codigoInfraccion }}</td>
+                                    <td>{{ acuerdoPago.numeroFactura }}</td>
+                                    <td>{{ acuerdoPago.total }}</td>
+                                </tr>
+                                <!-- <tr>
+                                    <td colspan="5"><b>TOTAL</b></td>
+                                    <td>{{ totalInfracciones }}</td>
+                                </tr> -->
+                            </tbody>
+                        </table>
+                        <table class="table" id="dataTables-parqueadero" *ngIf="inmovilizaciones && inmovilizaciones.length > 0">
+                            <thead>
+                                <tr>
+                                    <td><b>Nro. Recibo Inmovilización</b></td>
+                                    <td><b>Placa Vehículo</b></td>
+                                    <td><b>Fecha Entrada</b></td>
+                                    <td><b>Fecha Salida</b></td>
+                                    <td><b>Hora Salida</b></td>
+                                    <td><b>Horas</b></td>
+                                    <td><b>Valor Hora</b></td>
+                                    <td><b>Costo Grua</b></td>
+                                    <td><b>Valor</b></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="odd" *ngFor="let inmovilizacion of inmovilizaciones; let i = index">
+                                    <td>{{ inmovilizacion.numeroRecibo }}</td>
+                                    <td>{{ inmovilizacion.placa }}</td>
+                                    <td>{{ (inmovilizacion.fechaIngreso.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td>
+                                    <td>{{ (inmovilizacion.fechaSalida.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td>
+                                    <td>{{ (inmovilizacion.horaSalida.timestamp * 1000) | date: 'HH:mm' }}</td>
+                                    <td>{{ inmovilizacion.horas }}</td>
+                                    <td>{{ inmovilizacion.valorHora }}</td>
+                                    <td>
+                                        <span *ngIf="inmovilizacion.costoGrua">{{ inmovilizacion.costoGrua }}</span>
+                                        <span *ngIf="!inmovilizacion.costoGrua">0</span>
+                                    </td>
+                                    <td>{{ inmovilizacion.valor }}</td>
+                                </tr>
+                                <!-- <tr>
+                                    <td colspan="5"><b>TOTAL</b></td>
+                                    <td>{{ totalInfracciones }}</td>
+                                </tr> -->
+                            </tbody>
+                        </table>
                         <table class="table" id="dataTables-exogena"
                             *ngIf="arrayRetefuentesExogena && arrayRetefuentesExogena.length > 0">
                             <thead>

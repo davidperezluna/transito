@@ -77,6 +77,10 @@ export class FroReporteIngresosService {
     pdfInfraccionByFecha(datos, token): any {
         let json = JSON.stringify(datos);
         let params = "data=" + json + "&authorization=" + token;
+        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+        return this._http.post(this.url + "/pdf/infraccion/fecha", params, { headers: headers }).map(res => res.json()); 
+        /* let json = JSON.stringify(datos);
+        let params = "data=" + json + "&authorization=" + token;
 
         let headers = new Headers(
             {
@@ -85,11 +89,15 @@ export class FroReporteIngresosService {
         );
 
         return this._http.post(this.url + "/pdf/infraccion/fecha", params, { 'responseType': ResponseContentType.Blob, headers: headers }).map(res => { return new Blob([res.blob()], { type: 'application/pdf' }) }
-        ); 
+        );  */
     }
 
     pdfAcuerdoPagoByFecha(datos, token): any {
         let json = JSON.stringify(datos);
+        let params = "data=" + json + "&authorization=" + token;
+        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+        return this._http.post(this.url + "/pdf/acuerdopago/fecha", params, { headers: headers }).map(res => res.json()); 
+        /* let json = JSON.stringify(datos);
         let params = "data=" + json + "&authorization=" + token;
 
         let headers = new Headers(
@@ -99,11 +107,15 @@ export class FroReporteIngresosService {
         );
 
         return this._http.post(this.url + "/pdf/acuerdopago/fecha", params, { 'responseType': ResponseContentType.Blob, headers: headers }).map(res => { return new Blob([res.blob()], { type: 'application/pdf' }) }
-        ); 
+        );  */
     }
 
     pdfCobroCoactivoByFecha(datos, token): any {
         let json = JSON.stringify(datos);
+        let params = "data=" + json + "&authorization=" + token;
+        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+        return this._http.post(this.url + "/pdf/cobrocoactivo/fecha", params, { headers: headers }).map(res => res.json());
+        /* let json = JSON.stringify(datos);
         let params = "data=" + json + "&authorization=" + token;
 
         let headers = new Headers(
@@ -113,11 +125,15 @@ export class FroReporteIngresosService {
         );
 
         return this._http.post(this.url + "/pdf/cobrocoactivo/fecha", params, { 'responseType': ResponseContentType.Blob, headers: headers }).map(res => { return new Blob([res.blob()], { type: 'application/pdf' }) }
-        ); 
+        ); */ 
     }
 
     pdfParqueaderoByFecha(datos, token): any {
         let json = JSON.stringify(datos);
+        let params = "data=" + json + "&authorization=" + token;
+        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+        return this._http.post(this.url + "/pdf/parqueadero/fecha", params, { headers: headers }).map(res => res.json());
+        /* let json = JSON.stringify(datos);
         let params = "data=" + json + "&authorization=" + token;
 
         let headers = new Headers(
@@ -127,7 +143,7 @@ export class FroReporteIngresosService {
         );
 
         return this._http.post(this.url + "/pdf/parqueadero/fecha", params, { 'responseType': ResponseContentType.Blob, headers: headers }).map(res => { return new Blob([res.blob()], { type: 'application/pdf' }) }
-        ); 
+        );  */
     }
 
     pdfRetefuenteByFecha(datos, token) {
