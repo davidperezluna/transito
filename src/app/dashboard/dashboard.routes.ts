@@ -35,6 +35,7 @@ import { CvCdoCfgInteresRoutes } from './cvCdoCfgInteres/cvCdoCfgInteres.routes'
 import { CvCdoCfgEstadoRoutes } from './cvCdoCfgEstado/cvCdoCfgEstado.routes';
 import { CvRestriccionRoutes } from './cvRestriccion/cvRestriccion.routes';
 import { CvCfgInteresRoutes } from './cvCfgInteres/cvCfgInteres.routes';
+import { CvCfgModuloRoutes } from './cvCfgModulo/cvCfgModulo.routes';
 import { CvCfgPorcentajeInicialRoutes } from './cvCfgPorcentajeInicial/cvCfgPorcentajeInicial.routes';
 import { CvLcCfgMotivoRoutes } from './cvLcCfgMotivo/cvLcCfgMotivo.routes';
 
@@ -361,6 +362,7 @@ export const DashboardRoutes: Route[] = [
       ...CvLcCfgMotivoRoutes,
       ...CvRestriccionRoutes,
       ...CvCfgInteresRoutes,
+      ...CvCfgModuloRoutes,
       ...CvCfgPorcentajeInicialRoutes,
       ...SvCfgSenialUnidadMedidaRoutes,
       ...SvCfgSenialTipoRoutes,

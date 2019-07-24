@@ -50,6 +50,7 @@ import { CvAuCfgTipoModule } from './cvAuCfgTipo/cvAuCfgTipo.module';
 import { CvLcCfgMotivoModule } from './cvLcCfgMotivo/cvLcCfgMotivo.module';
 import { CvRestriccionModule } from './cvRestriccion/cvRestriccion.module';
 import { CvCfgInteresModule } from './cvCfgInteres/cvCfgInteres.module';
+import { CvCfgModuloModule } from './cvCfgModulo/cvCfgModulo.module';
 import { CvCfgPorcentajeInicialModule } from './cvCfgPorcentajeInicial/cvCfgPorcentajeInicial.module';
 import { CvCfgTipoRestriccionModule } from './cvCfgTipoRestriccion/cvCfgTipoRestriccion.module';
 import { CvLcCfgTipoRestriccionModule } from './cvLcCfgTipoRestriccion/cvLcCfgTipoRestriccion.module';
@@ -388,6 +389,7 @@ import {RightsidebarComponent} from '../shared';
     CvLcCfgMotivoModule,
     CvRestriccionModule,
     CvCfgInteresModule,
+    CvCfgModuloModule,
     CvCfgPorcentajeInicialModule,
     VhloRnaPreregistroModule,
     VhloCfgLimitacionCausalModule,

@@ -1,5 +1,4 @@
 <div class="container" >
-    <hr>
     <div class="row" *ngIf='formIndex'>
       <div class="col-md-12">
           <div class="card">
@@ -21,15 +20,15 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="odd" *ngFor="let tipoRestriccion of tiposRestriccion; let i = index">
-                    <td >{{ tipoRestriccion.id }}</td>
-                    <td >{{ tipoRestriccion.nombre }}</td>
+                  <tr class="odd" *ngFor="let modulo of modulos; let i = index">
+                    <td >{{ modulo.id }}</td>
+                    <td >{{ modulo.nombre }}</td>
                     <td>
-                      <button (click)="onEdit(tipoRestriccion)" class="btn btn-xs btn-info" type="button">
+                      <button (click)="onEdit(modulo)" class="btn btn-xs btn-info" type="button">
                         <i class="fa fa-edit"></i>
                         Editar
                       </button> 
-                      <button (click)="onDelete(tipoRestriccion.id)"  class="btn btn-xs btn-danger" type="button">
+                      <button (click)="onDelete(modulo.id)"  class="btn btn-xs btn-danger" type="button">
                         <i class="fa fa-trash"></i>
                         Eliminar
                       </button> 
@@ -43,6 +42,6 @@
         </div>
       </div>
       
-      <app-edit *ngIf='formEdit' [tipoRestriccion]="tipoRestriccion" (ready)="ready($event)"></app-edit>
+      <app-edit *ngIf='formEdit' [modulo]="modulo" (ready)="ready($event)"></app-edit>
       <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
   </div>

@@ -15,9 +15,10 @@ export class CvCfgModuloComponent implements OnInit {
 	public modulo: any;
 	public modulos: any = null;
   
-  public formNew = false;
-	public formEdit = false;
-  public formIndex = true;
+  public formNew: any;
+	public formEdit: any;
+  public formIndex: any;
+
   public table: any = null;
 
 
@@ -27,6 +28,8 @@ export class CvCfgModuloComponent implements OnInit {
   ){}
     
   ngOnInit() {
+    this.onInitForms();
+
     swal({
       title: 'Cargando Tabla!',
       text: 'Solo tardara unos segundos por favor espere.',
@@ -36,23 +39,29 @@ export class CvCfgModuloComponent implements OnInit {
     });
 
     this._ModuloService.index().subscribe(
-				response => {
-          this.modulos = response.data;
+      response => {
+        this.modulos = response.data;
 
-          let timeoutId = setTimeout(() => {
-            this.onInitTable();
-          }, 100);
-				},
-				error => {
-					this.errorMessage = <any>error;
-					if(this.errorMessage != null){
-						console.log(this.errorMessage);
-						alert("Error en la petición");
-					}
-				}
-      );
+        let timeoutId = setTimeout(() => {
+          this.onInitTable();
+          this.formIndex = true;
+        }, 100);
+      },
+      error => {
+        this.errorMessage = <any>error;
+        if(this.errorMessage != null){
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
   }
 
+  onInitForms(){
+    this.formNew = false;
+    this.formEdit = false;
+    this.formIndex = false;
+  }
 
   onInitTable(){
     this.table = $('#dataTables-example').DataTable({
@@ -73,23 +82,66 @@ export class CvCfgModuloComponent implements OnInit {
   }
   
   onNew(){
+    this.onInitForms();
     this.formNew = true;
-    this.formIndex = false;
-    this.table.destroy();
   }
 
   ready(isCreado:any){
     if(isCreado) {
-      this.formNew = false;
-      this.formEdit = false;
-      this.formIndex = true;
       this.ngOnInit();
     }
   }
 
   onEdit(modulo:any){
+    this.onInitForms();
     this.modulo = modulo;
     this.formEdit = true;
-    this.formIndex = false;
+  }
+
+  onDelete(id:any){
+    swal({
+      title: '¿Estás seguro?',
+      text: "¡Se eliminara este registro!",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#15d4be',
+      cancelButtonColor: '#ff6262',
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.value) {
+        let token = this._LoginService.getToken();
+
+        this._ModuloService.delete({'id':id}, token).subscribe(
+          response => {
+            if (response.code == 200) {
+              swal({
+                title: response.title,
+                text: response.message,
+                type: response.status,
+                confirmButtonColor: '#15d4be',
+              });
+
+              this.ngOnInit();
+            }else{
+              swal({
+                title: response.title,
+                text: response.message,
+                type: response.status,
+                confirmButtonColor: '#15d4be',
+              });
+            }
+          }, 
+          error => {
+            this.errorMessage = <any>error;
+
+            if(this.errorMessage != null){
+              console.log(this.errorMessage);
+              alert("Error en la petición");
+            }
+          }
+        );        
+      }
+    })
   }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { CvCfgTipoRestriccionService } from '../../../services/cvCfgTipoRestriccion.service';
+import { CvCfgModuloService } from '../../../services/cvCfgModulo.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -9,23 +9,24 @@ import swal from 'sweetalert2';
 })
 export class EditComponent implements OnInit{
 @Output() ready = new EventEmitter<any>();
-@Input() tipoRestriccion:any = null;
+@Input() modulo:any = null;
 public errorMessage;
 public respuesta;
 public formReady = false;
 
 constructor(
-  private _CvCfgTipoRestriccionService: CvCfgTipoRestriccionService,
-  private _loginService: LoginService,
+  private _ModuloService: CvCfgModuloService,
+  private _LoginService: LoginService,
   ){}
 
-  ngOnInit(){ console.log(this.tipoRestriccion);  }
+  ngOnInit(){ console.log(this.modulo);  }
 
   onCancelar(){ this.ready.emit(true); }
 
   onEnviar(){
-    let token = this._loginService.getToken();
-		this._CvCfgTipoRestriccionService.edit(this.tipoRestriccion,token).subscribe(
+    let token = this._LoginService.getToken();
+
+		this._ModuloService.edit(this.modulo,token).subscribe(
 			response => {
         this.respuesta = response;
         console.log(this.respuesta);
