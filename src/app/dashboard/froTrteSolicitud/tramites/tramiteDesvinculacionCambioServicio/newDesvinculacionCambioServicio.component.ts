@@ -1,82 +1,62 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { FroTrteSolicitudService } from '../../../../services/froTrteSolicitud.service';
 import { FroFacTramiteService } from '../../../../services/froFacTramite.service';
 import { PnalFuncionarioService } from '../../../../services/pnalFuncionario.service';
-import { VhloCfgNivelServicioService } from '../../../../services/vhloCfgNivelServicio.service';
-import { CfgPaisService } from '../../../../services/cfgPais.service';
-import { UserLcCfgCategoriaService } from '../../../../services/userLcCfgCategoria.service';
-import { VhloTpAsignacionService } from '../../../../services/vhloTpAsignacion.service';
+import { VhloTpTarjetaOperacionService } from "../../../../services/vhloTpTarjetaOperacion.service";
+import { VhloCfgServicioService } from "../../../../services/vhloCfgServicio.service";
+import { DatePipe, CurrencyPipe } from '@angular/common';
 import { LoginService } from '../../../../services/login.service';
 
 import swal from 'sweetalert2';
 
 @Component({
-    selector: 'app-expedicion-tarjeta-operacion-cambio-nivel-servicio',
-    templateUrl: './newExpedicionTarjetaOperacionCambioNivelServicio.html'
+    selector: 'app-desvinculacion-cambio-servicio',
+    templateUrl: './newDesvinculacionCambioServicio.html',
+    providers: [DatePipe]
 })
-export class NewExpedicionTarjetaOperacionCambioNivelServicioComponent implements OnInit {
+export class NewDesvinculacionCambioServicioComponent implements OnInit {
     @Output() onReadyTramite = new EventEmitter<any>();
+    @Input() tramiteFactura: any = null;
     @Input() vehiculo: any = null;
     @Input() funcionario: any = null;
-    @Input() tramiteFactura: any = null;
     @Input() tramitesRealizados: any = null;
     public errorMessage;
-    
-    public cupo;
+
+    public tarjetaOperacion;
+    public servicios;
 
     public realizado: any = false;
     public tramiteSolicitud: any = null;
-    public nivelesServicio: any;
-    /* public paises: any;
-    public categorias: any; */
 
     public datos = {
-        'campos': null,
         'documentacion': true,
         'observacion': null,
+        'campos': null,
+        'idVehiculo': null,
+        'idServicioAnterior': null,
+        'idServicioNuevo': null,
         'idFuncionario': null,
         'idTramiteFactura': null,
-        'fechaVigencia': null,
-        'idNivelServicioAnterior': null,
-        'idNivelServicioNuevo': null,
-        'idVehiculo': null,
-
     };
 
     constructor(
-        private _TramiteFacturaService: FroFacTramiteService,
         private _TramiteSolicitudService: FroTrteSolicitudService,
+        private _TramiteFacturaService: FroFacTramiteService,
         private _FuncionarioService: PnalFuncionarioService,
-        private _NivelServicioService: VhloCfgNivelServicioService,
-        private _VhloTpAsignacionService: VhloTpAsignacionService,
-        private _CfgPaisService: CfgPaisService,
-        private _CategoriaService: UserLcCfgCategoriaService,
+        private _TarjetaOperacionService: VhloTpTarjetaOperacionService,
+        private _ServicioService: VhloCfgServicioService,
         private _LoginService: LoginService,
     ) { }
 
     ngOnInit() {
-        this.datos.idFuncionario = this.funcionario.id;
+        console.log(this.vehiculo);
 
         let token = this._LoginService.getToken();
 
-        this._VhloTpAsignacionService.searchCupoByVehiculo({ 'idVehiculo': this.vehiculo.id }, token).subscribe(
-            response => {
-                this.cupo = response.data;
-                this.datos.idNivelServicioAnterior = [this.cupo.nivelServicio.id];
+        this.datos.idFuncionario = this.funcionario.id;
+        this.datos.idServicioAnterior = [this.vehiculo.servicio.id];
 
-                /* let timeoutId = setTimeout(() => {
-                    this.ngOnInit();
-                }, 100); */
-            },
-            error => {
-                this.errorMessage = <any>error;
-
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert("Error en la petición");
-                }
-            }
-        );
+        console.log(this.datos.idServicioAnterior);
 
         if (this.tramitesRealizados.length > 0) {
             this.tramitesRealizados.forEach(tramiteRealizado => {
@@ -98,9 +78,9 @@ export class NewExpedicionTarjetaOperacionCambioNivelServicioComponent implement
                 confirmButtonText: 'Aceptar'
             });
         } else {
-            this._NivelServicioService.select().subscribe(
+            this._ServicioService.select().subscribe(
                 response => {
-                    this.nivelesServicio = response;
+                    this.servicios = response;
                 },
                 error => {
                     this.errorMessage = <any>error;
@@ -114,13 +94,14 @@ export class NewExpedicionTarjetaOperacionCambioNivelServicioComponent implement
         }
     }
 
+
     onEnviar() {
-        this.datos.campos = ['cambioNivelServicio'];
-        this.datos.idTramiteFactura = this.tramiteFactura.factura.id;
+        this.datos.campos = ['desvinculacionCambioServicio'];
+        this.datos.idTramiteFactura = this.tramiteFactura.id;
         this.datos.idVehiculo = this.vehiculo.id;
 
-        let resumen = "<b>No. factura</b>" + this.tramiteFactura.factura.numero +
-         ", nivel servicio anterior:" + this.cupo.nivelServicio.id;
+        let resumen = "No. factura: " + this.tramiteFactura.factura.numero +
+            ", servicio anterior: " + this.vehiculo.servicio.id;
 
         this.realizado = true;
 

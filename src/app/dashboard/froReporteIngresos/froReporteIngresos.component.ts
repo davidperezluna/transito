@@ -208,98 +208,176 @@ export class FroReporteIngresosComponent implements OnInit {
                 }
             });
         } else if(archivo == 'infracciones') {
-            this.table = $('#dataTables-' + archivo).DataTable({
-                responsive: true,
-                pageLength: 8,
-                sPaginationType: 'full_numbers',
-                dom: 'Bfrtip',
-                buttons: [
-                    {
-                        title: 'Reporte Infracciones_' + this.nombreOrganismoTransito,
-                        messageBottom: 'TOTAL: ' + this.totalInfracciones,
-                        extend: 'excel',
-                        text: 'Excel',
-                        filename: 'Reporte_Infracciones_' + this.nombreOrganismoTransito + '_' + this.fecha,
-                    },
-                    {
-                        title: 'Reporte Infracciones_' + this.nombreOrganismoTransito,
-                        messageBottom: 'TOTAL: ' + this.totalInfracciones,
-                        extend: 'pdfHtml5',
-                        text: 'PDF',
-                        filename: 'Reporte_Infracciones_' + this.nombreOrganismoTransito + '_' + this.fecha,
-                    },
-                ],
-                oLanguage: {
-                    oPaginate: {
-                        sFirst: '<i class="fa fa-step-backward"></i>',
-                        sPrevious: '<i class="fa fa-chevron-left"></i>',
-                        sNext: '<i class="fa fa-chevron-right"></i>',
-                        sLast: '<i class="fa fa-step-forward"></i>'
+            if (this.funcionario.excel == true) {
+                this.table = $('#dataTables-' + archivo).DataTable({
+                    responsive: true,
+                    pageLength: 8,
+                    sPaginationType: 'full_numbers',
+                    dom: 'Bfrtip',
+                    buttons: [
+                        {
+                            title: 'Reporte Infracciones_' + this.nombreOrganismoTransito,
+                            messageBottom: 'TOTAL: ' + this.totalInfracciones,
+                            extend: 'excel',
+                            text: 'Excel',
+                            filename: 'Reporte_Infracciones_' + this.nombreOrganismoTransito + '_' + this.fecha,
+                        },
+                        {
+                            title: 'Reporte Infracciones_' + this.nombreOrganismoTransito,
+                            messageBottom: 'TOTAL: ' + this.totalInfracciones,
+                            extend: 'pdfHtml5',
+                            text: 'PDF',
+                            filename: 'Reporte_Infracciones_' + this.nombreOrganismoTransito + '_' + this.fecha,
+                        },
+                    ],
+                    oLanguage: {
+                        oPaginate: {
+                            sFirst: '<i class="fa fa-step-backward"></i>',
+                            sPrevious: '<i class="fa fa-chevron-left"></i>',
+                            sNext: '<i class="fa fa-chevron-right"></i>',
+                            sLast: '<i class="fa fa-step-forward"></i>'
+                        }
                     }
-                }
-            });
+                });
+            } else {
+                this.table = $('#dataTables-' + archivo).DataTable({
+                    responsive: true,
+                    pageLength: 8,
+                    sPaginationType: 'full_numbers',
+                    dom: 'Bfrtip',
+                    buttons: [
+                        {
+                            title: 'Reporte Infracciones_' + this.nombreOrganismoTransito,
+                            messageBottom: 'TOTAL: ' + this.totalInfracciones,
+                            extend: 'pdfHtml5',
+                            text: 'PDF',
+                            filename: 'Reporte_Infracciones_' + this.nombreOrganismoTransito + '_' + this.fecha,
+                        },
+                    ],
+                    oLanguage: {
+                        oPaginate: {
+                            sFirst: '<i class="fa fa-step-backward"></i>',
+                            sPrevious: '<i class="fa fa-chevron-left"></i>',
+                            sNext: '<i class="fa fa-chevron-right"></i>',
+                            sLast: '<i class="fa fa-step-forward"></i>'
+                        }
+                    }
+                });
+            }
         } else if(archivo == 'acuerdosPago') {
-            this.table = $('#dataTables-' + archivo).DataTable({
-                responsive: true,
-                pageLength: 8,
-                sPaginationType: 'full_numbers',
-                dom: 'Bfrtip',
-                buttons: [
-                    {
-                        title: 'Reporte Acuerdo_Pago_' + this.nombreOrganismoTransito,
-                        messageBottom: 'TOTAL: ' + this.totalAcuerdosPago,
-                        extend: 'excel',
-                        text: 'Excel',
-                        filename: 'Reporte_Acuerdo_Pago_' + this.nombreOrganismoTransito + '_' + this.fecha,
-                    },
-                    {
-                        title: 'Reporte Acuerdo_Pago_' + this.nombreOrganismoTransito,
-                        messageBottom: 'TOTAL: ' + this.totalAcuerdosPago,
-                        extend: 'pdfHtml5',
-                        text: 'PDF',
-                        filename: 'Reporte_Acuerdo_Pago_' + this.nombreOrganismoTransito + '_' + this.fecha,
-                    },
-                ],
-                oLanguage: {
-                    oPaginate: {
-                        sFirst: '<i class="fa fa-step-backward"></i>',
-                        sPrevious: '<i class="fa fa-chevron-left"></i>',
-                        sNext: '<i class="fa fa-chevron-right"></i>',
-                        sLast: '<i class="fa fa-step-forward"></i>'
+            if (this.funcionario.excel == true) {
+                this.table = $('#dataTables-' + archivo).DataTable({
+                    responsive: true,
+                    pageLength: 8,
+                    sPaginationType: 'full_numbers',
+                    dom: 'Bfrtip',
+                    buttons: [
+                        {
+                            title: 'Reporte Acuerdo_Pago_' + this.nombreOrganismoTransito,
+                            messageBottom: 'TOTAL: ' + this.totalAcuerdosPago,
+                            extend: 'excel',
+                            text: 'Excel',
+                            filename: 'Reporte_Acuerdo_Pago_' + this.nombreOrganismoTransito + '_' + this.fecha,
+                        },
+                        {
+                            title: 'Reporte Acuerdo_Pago_' + this.nombreOrganismoTransito,
+                            messageBottom: 'TOTAL: ' + this.totalAcuerdosPago,
+                            extend: 'pdfHtml5',
+                            text: 'PDF',
+                            filename: 'Reporte_Acuerdo_Pago_' + this.nombreOrganismoTransito + '_' + this.fecha,
+                        },
+                    ],
+                    oLanguage: {
+                        oPaginate: {
+                            sFirst: '<i class="fa fa-step-backward"></i>',
+                            sPrevious: '<i class="fa fa-chevron-left"></i>',
+                            sNext: '<i class="fa fa-chevron-right"></i>',
+                            sLast: '<i class="fa fa-step-forward"></i>'
+                        }
                     }
-                }
-            });
+                });
+            } else {
+                this.table = $('#dataTables-' + archivo).DataTable({
+                    responsive: true,
+                    pageLength: 8,
+                    sPaginationType: 'full_numbers',
+                    dom: 'Bfrtip',
+                    buttons: [
+                        {
+                            title: 'Reporte Acuerdo_Pago_' + this.nombreOrganismoTransito,
+                            messageBottom: 'TOTAL: ' + this.totalAcuerdosPago,
+                            extend: 'pdfHtml5',
+                            text: 'PDF',
+                            filename: 'Reporte_Acuerdo_Pago_' + this.nombreOrganismoTransito + '_' + this.fecha,
+                        },
+                    ],
+                    oLanguage: {
+                        oPaginate: {
+                            sFirst: '<i class="fa fa-step-backward"></i>',
+                            sPrevious: '<i class="fa fa-chevron-left"></i>',
+                            sNext: '<i class="fa fa-chevron-right"></i>',
+                            sLast: '<i class="fa fa-step-forward"></i>'
+                        }
+                    }
+                });
+            }
         } else if(archivo == 'parqueadero') {
-            this.table = $('#dataTables-' + archivo).DataTable({
-                responsive: true,
-                pageLength: 8,
-                sPaginationType: 'full_numbers',
-                dom: 'Bfrtip',
-                buttons: [
-                    {
-                        title: 'Reporte Parqueadero_' + this.nombreOrganismoTransito,
-                        messageBottom: 'TOTAL: ' + this.totalInmovilizaciones,
-                        extend: 'excel',
-                        text: 'Excel',
-                        filename: 'Reporte_Parqueadero_' + this.nombreOrganismoTransito + '_' + this.fecha,
-                    },
-                    {
-                        title: 'Reporte Parqueadero_' + this.nombreOrganismoTransito,
-                        messageBottom: 'TOTAL: ' + this.totalInmovilizaciones,
-                        extend: 'pdfHtml5',
-                        text: 'PDF',
-                        filename: 'Reporte_Parqueadero_' + this.nombreOrganismoTransito + '_' + this.fecha,
-                    },
-                ],
-                oLanguage: {
-                    oPaginate: {
-                        sFirst: '<i class="fa fa-step-backward"></i>',
-                        sPrevious: '<i class="fa fa-chevron-left"></i>',
-                        sNext: '<i class="fa fa-chevron-right"></i>',
-                        sLast: '<i class="fa fa-step-forward"></i>'
+            if(this.funcionario.excel == true){
+                this.table = $('#dataTables-' + archivo).DataTable({
+                    responsive: true,
+                    pageLength: 8,
+                    sPaginationType: 'full_numbers',
+                    dom: 'Bfrtip',
+                    buttons: [
+                        {
+                            title: 'Reporte Parqueadero_' + this.nombreOrganismoTransito,
+                            messageBottom: 'TOTAL: ' + this.totalInmovilizaciones,
+                            extend: 'excel',
+                            text: 'Excel',
+                            filename: 'Reporte_Parqueadero_' + this.nombreOrganismoTransito + '_' + this.fecha,
+                        },
+                        {
+                            title: 'Reporte Parqueadero_' + this.nombreOrganismoTransito,
+                            messageBottom: 'TOTAL: ' + this.totalInmovilizaciones,
+                            extend: 'pdfHtml5',
+                            text: 'PDF',
+                            filename: 'Reporte_Parqueadero_' + this.nombreOrganismoTransito + '_' + this.fecha,
+                        },
+                    ],
+                    oLanguage: {
+                        oPaginate: {
+                            sFirst: '<i class="fa fa-step-backward"></i>',
+                            sPrevious: '<i class="fa fa-chevron-left"></i>',
+                            sNext: '<i class="fa fa-chevron-right"></i>',
+                            sLast: '<i class="fa fa-step-forward"></i>'
+                        }
                     }
-                }
-            });
+                });
+            } else {
+                this.table = $('#dataTables-' + archivo).DataTable({
+                    responsive: true,
+                    pageLength: 8,
+                    sPaginationType: 'full_numbers',
+                    dom: 'Bfrtip',
+                    buttons: [
+                        {
+                            title: 'Reporte Parqueadero_' + this.nombreOrganismoTransito,
+                            messageBottom: 'TOTAL: ' + this.totalInmovilizaciones,
+                            extend: 'pdfHtml5',
+                            text: 'PDF',
+                            filename: 'Reporte_Parqueadero_' + this.nombreOrganismoTransito + '_' + this.fecha,
+                        },
+                    ],
+                    oLanguage: {
+                        oPaginate: {
+                            sFirst: '<i class="fa fa-step-backward"></i>',
+                            sPrevious: '<i class="fa fa-chevron-left"></i>',
+                            sNext: '<i class="fa fa-chevron-right"></i>',
+                            sLast: '<i class="fa fa-step-forward"></i>'
+                        }
+                    }
+                });
+            }
         }
     }
 

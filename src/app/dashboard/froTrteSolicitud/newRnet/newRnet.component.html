@@ -378,8 +378,12 @@
                         </app-expedicion-tarjeta-operacion-cambio-nivel-servicio>
                         <app-renovacion-tarjeta-operacion *ngIf="tramiteFactura.precio.tramite.id == 40" [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)">
                         </app-renovacion-tarjeta-operacion>
-                        <app-cambio-empresa *ngIf="tramiteFactura.precio.tramite.id == 41" [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)">
+                        <!-- <app-cambio-empresa *ngIf="tramiteFactura.precio.tramite.id == 41" [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)">
                         </app-cambio-empresa>
+                        <app-concepto-favorable *ngIf="tramiteFactura.precio.tramite.id == 44" [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)">
+                        </app-concepto-favorable> -->
+                        <app-desvinculacion-cambio-servicio *ngIf="tramiteFactura.precio.tramite.id == 5" [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)">
+                        </app-desvinculacion-cambio-servicio>
                     </div>
                 </div>
 

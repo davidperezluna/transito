@@ -82,13 +82,13 @@
             </div>
         </div>
     </div>
-    <div class="col-xs-12 col-lg-8">
+    <div class="col-xs-12 col-lg-8" *ngIf="infracciones || acuerdosPago || inmovilizaciones || arrayRetefuentesTesoreria || arrayRetefuentesExogena">
         <div class="row">
             <div class="col-xs-12 col-lg-12">
                 <div class="card">
                     <div class="card-header">
                         <h5 class="card-title">
-                            <strong class="text-uppercase">REPORTE</strong>
+                            <strong class="text-uppercase">REPORTES</strong>
                         </h5>
                     </div>
                     <div class="card-body">

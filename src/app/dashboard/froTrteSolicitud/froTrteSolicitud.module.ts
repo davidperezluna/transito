@@ -22,8 +22,9 @@ import { NewDuplicadoPlacaComponent } from './tramites/tramiteDuplicadoPlaca/new
 import { NewExpedicionTarjetaOperacionComponent } from './tramites/tramiteExpedicionTarjetaOperacion/newExpedicionTarjetaOperacion.component';
 import { NewDuplicadoTarjetaOperacionComponent } from './tramites/tramiteDuplicadoTarjetaOperacion/new.duplicadoTarjetaOperacion.component';
 import { NewExpedicionTarjetaOperacionCambioNivelServicioComponent } from './tramites/tramiteExpedicionTarjetaOperacionCambioNivelServicio/newExpedicionTarjetaOperacionCambioNivelServicio.component';
-import { NewCambioEmpresaComponent } from './tramites/tramiteCambioEmpresa/newCambioEmpresa.component';
 import { NewRenovacionTarjetaOperacionComponent } from './tramites/tramiteRenovacionTarjetaOperacion/newRenovacionTarjetaOperacion.component';
+import { NewCambioEmpresaComponent } from './tramites/tramiteCambioEmpresa/newCambioEmpresa.component';
+import { NewDesvinculacionCambioServicioComponent } from './tramites/tramiteDesvinculacionCambioServicio/newDesvinculacionCambioServicio.component';
 import { NewDuplicadoLicenciaComponent } from './tramites/tramiteDuplicadoLicencia/new.duplicadoLicencia.component';
 import { NewCambioColorComponent } from './tramites/tramiteCambioColor/new.cambioColor.component';
 import { NewCambioServicioComponent } from './tramites/tramiteCambioServicio/new.cambioServicio.component';
@@ -92,6 +93,7 @@ import { VhloTecnoMecanicaModule } from '../vhloTecnoMecanica/vhloTecnoMecanica.
         NewDuplicadoTarjetaOperacionComponent,
         NewExpedicionTarjetaOperacionCambioNivelServicioComponent,
         NewCambioEmpresaComponent,
+        NewDesvinculacionCambioServicioComponent,
         NewRenovacionTarjetaOperacionComponent,
         NewDuplicadoLicenciaComponent,
         NewCambioColorComponent,
@@ -140,6 +142,7 @@ import { VhloTecnoMecanicaModule } from '../vhloTecnoMecanica/vhloTecnoMecanica.
         NewDuplicadoTarjetaOperacionComponent,
         NewExpedicionTarjetaOperacionCambioNivelServicioComponent,
         NewCambioEmpresaComponent,
+        NewDesvinculacionCambioServicioComponent,
         NewRenovacionTarjetaOperacionComponent,
         NewDuplicadoLicenciaComponent,
         NewCambioColorComponent,
