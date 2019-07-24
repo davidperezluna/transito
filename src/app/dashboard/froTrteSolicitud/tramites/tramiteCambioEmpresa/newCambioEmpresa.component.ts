@@ -11,10 +11,10 @@ import { LoginService } from '../../../../services/login.service';
 import swal from 'sweetalert2';
 
 @Component({
-    selector: 'app-expedicion-tarjeta-operacion-cambio-servicio',
-    templateUrl: './newExpedicionTarjetaOperacionCambioServicio.html'
+    selector: 'app-cambio-empresa',
+    templateUrl: './newCambioEmpresa.html'
 })
-export class NewExpedicionTarjetaOperacionCambioServicioComponent implements OnInit {
+export class NewCambioEmpresaComponent implements OnInit {
     @Output() onReadyTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;
     @Input() funcionario: any = null;
