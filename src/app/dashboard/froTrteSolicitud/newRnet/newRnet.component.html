@@ -378,8 +378,8 @@
                         </app-expedicion-tarjeta-operacion-cambio-nivel-servicio>
                         <app-renovacion-tarjeta-operacion *ngIf="tramiteFactura.precio.tramite.id == 40" [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)">
                         </app-renovacion-tarjeta-operacion>
-                        <!-- <app-expedicion-tarjeta-operacion-cambio-servicio *ngIf="tramiteFactura.precio.tramite.id == 5" [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)">
-                        </app-expedicion-tarjeta-operacion-cambio-servicio> -->
+                        <app-cambio-empresa *ngIf="tramiteFactura.precio.tramite.id == 41" [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)">
+                        </app-cambio-empresa>
                     </div>
                 </div>
 
