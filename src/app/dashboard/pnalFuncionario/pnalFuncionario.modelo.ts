@@ -8,6 +8,7 @@ export class PnalFuncionario{
 		public fechaFin: string,
 		public numeroPlaca: string,
 		public novedad: string,
+		public excel: boolean,
 		public activo: string,
 		public inhabilidad: string,
 		public identificacion: number,

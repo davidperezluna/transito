@@ -22,10 +22,11 @@ export class FroFacAcuerdoPagoComponent implements OnInit {
     public numeroIdentificacion: any;
     public organismosTransito: any;
 
-    public formIndex = false;
-    public formShow = false;
-    public formNew = false;
-    public formSearch = true;
+    public formIndex: any;
+    public formShow: any;
+    public formNew: any;
+    public formSearch: any;
+
     public table: any = null;
     public municipio: any = null;
     public fechaCreacion: any = null;
@@ -51,7 +52,18 @@ export class FroFacAcuerdoPagoComponent implements OnInit {
         private _LoginService: LoginService,
     ) { }
 
-    ngOnInit() { }
+    ngOnInit() { 
+        this.onInitForms();
+        
+        this.formSearch = true;
+    }
+
+    onInitForms(){
+        this.formIndex = false;
+        this.formShow = false;
+        this.formNew = false;
+        this.formSearch = false;
+    }
 
     onSearch() {
         swal({
@@ -62,7 +74,9 @@ export class FroFacAcuerdoPagoComponent implements OnInit {
             }
         });
 
-        this.formIndex = false;
+        this.onInitForms();
+        
+        this.formSearch = true;
 
         let token = this._LoginService.getToken();
 
@@ -111,7 +125,9 @@ export class FroFacAcuerdoPagoComponent implements OnInit {
             }
         });
 
-        this.formIndex = false;
+        this.onInitForms();
+        
+        this.formSearch = true;
 
         let token = this._LoginService.getToken();
 

@@ -7,6 +7,7 @@ export class CvCdoCfgEstado{
 		public habiles: boolean,
 		public actualiza: boolean,
 		public finaliza: boolean,
+		public reparto: boolean,
 		public idFormato:number,
 		public id:number
 	){}

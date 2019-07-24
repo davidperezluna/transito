@@ -22,7 +22,7 @@ constructor(
   ){}
 
   ngOnInit() {
-    this.estado = new CvCdoCfgEstado(null, null, null, null, null, null, null, null, null);
+    this.estado = new CvCdoCfgEstado(null, null, null, null, null, false, false, false, null, null);
 
 
     this._FormatoService.select().subscribe(

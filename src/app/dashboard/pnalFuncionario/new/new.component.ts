@@ -47,7 +47,7 @@ export class NewComponent implements OnInit {
 
   ngOnInit() {
 
-    this.funcionario = new PnalFuncionario(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    this.funcionario = new PnalFuncionario(null, null, null, null, null, null, null, null, false, null, null, null, null, null, null, null);
 
     this._TipoNombramientoService.select().subscribe(
       response => {
