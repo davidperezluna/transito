@@ -25,6 +25,7 @@ export class NewRnetComponent implements OnInit {
     public apiUrl = environment.apiUrl + 'financiero/frotrtesolicitud';
 
     public numeroFactura: any;
+    public numeroResolucion: any;
 
     public factura: any = null;
     public vehiculo: any = null;
@@ -40,6 +41,7 @@ export class NewRnetComponent implements OnInit {
     public idTramiteFactura: any = null;
 
     public confirmarSolicitante = false;
+    public imprimirResolucion = false;
 
     public tramites: any;
     public tramiteMatriculaInicial: any = null;
@@ -471,6 +473,7 @@ export class NewRnetComponent implements OnInit {
         this._TramiteSolicitudService.register(this.tramiteSolicitud, token).subscribe(
             response => {
                 if (response.code == 200) {
+                    this.imprimirResolucion = true;
                     this.factura = response.data.factura;
                     this.certificadoTradicion = response.data.certificadoTradicion;
 

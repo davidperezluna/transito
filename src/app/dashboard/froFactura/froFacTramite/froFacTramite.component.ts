@@ -311,14 +311,9 @@ export class FroFacTramiteComponent implements OnInit {
           if (response.code == 200) {
             this.vehiculo = response.data;
             this.factura.idVehiculo = this.vehiculo.id;
+            console.log(this.vehiculo.servicio.id);
 
-            if(this.vehiculo.servicio == 2){
-              swal({
-                title: 'Atención!',
-                text: 'El vehículo no pertence a transporte publico',
-                type: 'warning',
-                confirmButtonText: 'Aceptar'
-              });
+            if(this.vehiculo.servicio.id == 2){
               this.onLoadTramites();
     
               this._PropietarioService.searchByVehiculo({ 'idVehiculo':this.vehiculo.id }, token).subscribe(

@@ -68,10 +68,10 @@ export class UserEmpresaTransporteService {
                 return this._http.post(this.url+"/search/modalidad/clase", params, {headers: headers}).map(res => res.json());
     }
     
-    registerRangoCupos(datos,token){
+	searchByVehiculo(datos,token){
         let json = JSON.stringify(datos);
         let params = "data="+json+"&authorization="+token;
         let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
-		return this._http.post(this.url +"/new/rango/cupos", params, {headers: headers}).map(res => res.json());
-    }
+		return this._http.post(this.url +"/search/empresa/vehiculo", params, {headers: headers}).map(res => res.json());
+	}
 }

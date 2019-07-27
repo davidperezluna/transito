@@ -16,7 +16,7 @@
         <div class="card">
             <div class="card-body ">
                 <b class="text-primary">
-                    Registrar expedición de tarjeta de operación por cambio de de servicio
+                    Cambio de empresa
                 </b>
                 <small>Todos los campos con
                     <b class="text-danger">*</b> son obligatorios</small>
@@ -44,7 +44,7 @@
 
                     <div class="form-group" *ngIf="datos.documentacion">
                         <div class="row">
-                            <div class="col-xs-12 col-lg-6">
+                            <!-- <div class="col-xs-12 col-lg-6">
                                 <label>Modalidad Servicio <b class="text-danger">*</b></label>
                                 <ng-select [multiple]="false" [options]="servicios" disabled
                                     [(ngModel)]="datos.idServicioAnterior" name="servicioAnterior" required>
@@ -55,14 +55,84 @@
                                 <ng-select [multiple]="false" [options]="servicios"
                                     [(ngModel)]="datos.idServicioNuevo" name="servicioNuevo" required>
                                 </ng-select>
+                            </div> -->
+                            <div class="col-xs-12 col-lg-4">
+                                <label>Empresa actual</label>
+                                <input class="form-control" [(ngModel)]="datos.idEmpresaActual"
+                                    name="idEmpresaActual" type="text" required disabled/>
                             </div>
-                            <div class="col-xs-12 col-lg-6">
-                                <label>Nuevo número tarjeta operación</label>
-                                <input class="form-control" [(ngModel)]="datos.nuevoNumeroTarjetaOperacion"
-                                    name="nuevoNumeroTarjetaOperacion" type="number" required />
+                            <div class="col-xs-12 col-lg-4">
+                                <label>Nro. Cupo</label>
+                                <input class="form-control" [(ngModel)]="datos.numeroCupoActual"
+                                    name="numeroCupoActual" type="number" required disabled/>
                             </div>
+                            <!-- <div class="col-xs-12 col-lg-6">
+                                <label>Modalidad Servicio <b class="text-danger">*</b></label>
+                                <ng-select [multiple]="false" [options]="nivelesServicio" disabled [(ngModel)]="datos.idNivelServicioAnterior"
+                                    name="servicioAnterior" required>
+                                </ng-select>
+                            </div> -->
+                            <div class="col-xs-12 col-lg-4">
+                                <label>Nro. TarjetaOperación</label>
+                                <input class="form-control" [(ngModel)]="datos.numeroTarjetaOperacionActual"
+                                    name="numeroTarjetaOperacionActual" type="number" required disabled/>
+                            </div>
+                            <br>
+                            <hr>
                             <div class="col-xs-12 col-lg-6">
-                                <label>Vigencia tarjeta operación</label>
+                                <label>Nueva Empresa</label>
+                                <div class="input-group">
+                                    <input class="form-control" [(ngModel)]="nit" name="idEmpresaNueva" type="number" placeholder="nit de la empresa" required />
+                                    <span class="input-group-btn">
+                                        <button (click)="onSearchEmpresaTransporte()" [disabled]="nit == null"  class="btn btn-default"
+                                            type="button">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-xs-16 col-lg-6" style="margin-top: 2%;">
+                                <div class="row">
+                                    <div class="col-xs-12 col-lg-12" *ngIf='empresaEncontrada'>
+                                        <table class="table table-bordered table-striped">
+                                            <tbody>
+                                                <tr class="odd">
+                                                    <td>
+                                                        <b>Nit</b>
+                                                        <br> {{ empresaEncontrada.nit }}
+                                                    </td>
+                                                    <td>
+                                                        <b>Nombre</b>
+                                                        <br> {{ empresaEncontrada.nombre }}
+                                                    </td>
+                                                    <td>
+                                                        <b>Teléfono</b>
+                                                        <br> {{ empresaEncontrada.telefono }}
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-lg-4">
+                                <label>Nuevo Nro. Cupo</label>
+                                <ng-select [multiple]="false" [options]="arrayCuposDisponibles" [(ngModel)]="datos.idCupoNuevo" name="cupoDisponible" required>
+                                </ng-select>
+                            </div>
+                            <!-- <div class="col-xs-12 col-lg-6">
+                                <label>Nuevo Nivel de Servicio <b class="text-danger">*</b></label>
+                                <ng-select [multiple]="false" [options]="nivelesServicio" [(ngModel)]="datos.idNivelServicioNuevo"
+                                    name="servicioNuevo" required>
+                                </ng-select>
+                            </div> -->
+                            <div class="col-xs-12 col-lg-4">
+                                <label>Nuevo Nro. Tarjeta Operación</label>
+                                <input class="form-control" [(ngModel)]="datos.numeroTarjetaOperacionNuevo" name="numeroTarjetaOperacionNuevo"
+                                    type="number" required />
+                            </div>
+                            <div class="col-xs-12 col-lg-4">
+                                <label>Nueva Fecha Vigencia</label>
                                 <input class="form-control" [(ngModel)]="datos.fechaVigencia" name="fechaVigencia"
                                     type="date" required />
                             </div>

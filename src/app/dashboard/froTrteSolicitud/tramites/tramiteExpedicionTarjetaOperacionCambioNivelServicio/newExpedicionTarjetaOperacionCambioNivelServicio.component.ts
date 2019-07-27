@@ -3,8 +3,6 @@ import { FroTrteSolicitudService } from '../../../../services/froTrteSolicitud.s
 import { FroFacTramiteService } from '../../../../services/froFacTramite.service';
 import { PnalFuncionarioService } from '../../../../services/pnalFuncionario.service';
 import { VhloCfgNivelServicioService } from '../../../../services/vhloCfgNivelServicio.service';
-import { CfgPaisService } from '../../../../services/cfgPais.service';
-import { UserLcCfgCategoriaService } from '../../../../services/userLcCfgCategoria.service';
 import { VhloTpAsignacionService } from '../../../../services/vhloTpAsignacion.service';
 import { LoginService } from '../../../../services/login.service';
 
@@ -49,8 +47,6 @@ export class NewExpedicionTarjetaOperacionCambioNivelServicioComponent implement
         private _FuncionarioService: PnalFuncionarioService,
         private _NivelServicioService: VhloCfgNivelServicioService,
         private _VhloTpAsignacionService: VhloTpAsignacionService,
-        private _CfgPaisService: CfgPaisService,
-        private _CategoriaService: UserLcCfgCategoriaService,
         private _LoginService: LoginService,
     ) { }
 

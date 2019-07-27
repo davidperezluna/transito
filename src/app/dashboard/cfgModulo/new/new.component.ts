@@ -1,6 +1,6 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import { CfgModulo } from '../cfgModulo.modelo';
-import { ModuloService } from '../../../services/modulo.service';
+import { CfgModuloService } from '../../../services/cfgModulo.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -14,7 +14,7 @@ public modulo: CfgModulo;
 public errorMessage;
 
 constructor(
-  private _ModuloService: ModuloService,
+  private _CfgModuloService: CfgModuloService,
   private _loginService: LoginService,
   ){}
 
@@ -29,22 +29,22 @@ constructor(
   onEnviar(){
     let token = this._loginService.getToken();
 
-		this._ModuloService.register(this.modulo,token).subscribe(
+		this._CfgModuloService.register(this.modulo,token).subscribe(
 			response => {
 
-        if(response.status == 'success'){
+        if(response.code == 200){
           this.ready.emit(true);
           swal({
-            title: 'Perfecto!',
-            text: 'Registro exitoso!',
-            type: 'success',
+            title: response.title,
+            text: response.message,
+            type: response.status,
             confirmButtonText: 'Aceptar'
           })
         }else{
           swal({
-            title: 'Error!',
-            text: 'El modulo '+ this.modulo.nombre +' ya se encuentra registrado',
-            type: 'error',
+            title: response.title,
+            text: response.message,
+            type: response.status,
             confirmButtonText: 'Aceptar'
           })
         }

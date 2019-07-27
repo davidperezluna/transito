@@ -342,10 +342,15 @@
                         *ngIf="(requiereSustrato && tramiteSolicitud.insumoEntregado) || !requiereSustrato">
                         <div class="form-group">
                             <div class="row" *ngIf="requiereRunt">
-                                <div class="col-xs-12 col-lg-12">
+                                <div class="col-xs-12 col-lg-6">
                                     <label>Número de solicitud RUNT <b class="text-danger">*</b></label>
                                     <input type="text" class="form-control" placeholder="No. solicitud RUNT"
                                         [(ngModel)]="tramiteSolicitud.numeroRunt" name="numeroRunt" required />
+                                </div>
+                                <div class="col-xs-12 col-lg-6">
+                                    <label>Número de Resolución <b class="text-danger">*</b></label>
+                                    <input type="text" class="form-control" placeholder="No. resolución"
+                                        [(ngModel)]="numeroResolucion" name="numeroResolucion" required />
                                 </div>
                             </div>
 
@@ -355,6 +360,9 @@
                                         <i class="fa fa-save"></i>
                                         Guardar información
                                     </button>
+                                    <a *ngIf="imprimirResolucion" href="{{ apiUrl }}/{{ vehiculo.id }}/{{ numeroResolucion }}/resolucion/cambioServicio/pdf" class="btn btn-light" target="_blank">
+                                        <i class="fa fa-eye"></i>IMPRIMIR RESOLUCIÓN
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -368,7 +376,6 @@
                         <ng-select (ngModelChange)="onChangedTramiteFactura($event)" [(ngModel)]="idTramiteFactura"
                             [multiple]="false" [options]="tramitesFactura" name="idTramiteFactura" required></ng-select>
                     </div>
-
                     <div class="col-xs-12 col-lg-12" *ngIf="tramiteFactura">
                         <app-expedicion-tarjeta-operacion *ngIf="tramiteFactura.precio.tramite.id == 37" [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)">
                         </app-expedicion-tarjeta-operacion>
@@ -378,12 +385,12 @@
                         </app-expedicion-tarjeta-operacion-cambio-nivel-servicio>
                         <app-renovacion-tarjeta-operacion *ngIf="tramiteFactura.precio.tramite.id == 40" [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)">
                         </app-renovacion-tarjeta-operacion>
-                        <!-- <app-cambio-empresa *ngIf="tramiteFactura.precio.tramite.id == 41" [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)">
+                        <app-cambio-empresa *ngIf="tramiteFactura.precio.tramite.id == 5" [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)">
                         </app-cambio-empresa>
-                        <app-concepto-favorable *ngIf="tramiteFactura.precio.tramite.id == 44" [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)">
-                        </app-concepto-favorable> -->
-                        <app-desvinculacion-cambio-servicio *ngIf="tramiteFactura.precio.tramite.id == 5" [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)">
-                        </app-desvinculacion-cambio-servicio>
+                        <!-- <app-concepto-favorable *ngIf="tramiteFactura.precio.tramite.id == 44" [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)">
+                        </app-concepto-favorable>
+                        <app-desvinculacion-cambio-servicio *ngIf="tramiteFactura.precio.tramite.id == 43" [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)">
+                        </app-desvinculacion-cambio-servicio> -->
                     </div>
                 </div>
 
