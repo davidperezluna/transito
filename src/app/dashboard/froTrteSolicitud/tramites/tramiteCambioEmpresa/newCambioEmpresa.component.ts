@@ -2,9 +2,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FroTrteSolicitudService } from '../../../../services/froTrteSolicitud.service';
 import { FroFacTramiteService } from '../../../../services/froFacTramite.service';
 import { PnalFuncionarioService } from '../../../../services/pnalFuncionario.service';
-import { VhloCfgServicioService } from '../../../../services/vhloCfgServicio.service';
-import { CfgPaisService } from '../../../../services/cfgPais.service';
-import { UserLcCfgCategoriaService } from '../../../../services/userLcCfgCategoria.service';
+import { VhloCfgNivelServicioService } from '../../../../services/vhloCfgNivelServicio.service';
+import { UserEmpresaTransporteService } from "../../../../services/userEmpresaTransporte.service";
 import { VhloTpAsignacionService } from '../../../../services/vhloTpAsignacion.service';
 import { LoginService } from '../../../../services/login.service';
 
@@ -22,9 +21,13 @@ export class NewCambioEmpresaComponent implements OnInit {
     @Input() tramitesRealizados: any = null;
     public errorMessage;
     
+    public nit: any = null;
+    public empresaEncontrada;
+    public arrayCuposDisponibles = null;
+
     public realizado: any = false;
     public tramiteSolicitud: any = null;
-    public servicios: any;
+    public nivelesServicio: any;
 
     public datos = {
         'campos': null,
@@ -32,10 +35,14 @@ export class NewCambioEmpresaComponent implements OnInit {
         'observacion': null,
         'idFuncionario': null,
         'idTramiteFactura': null,
-        'idServicioAnterior': null,
+        'idEmpresaActual': null,
+        'numeroCupoActual': null,
+        'numeroTarjetaOperacionActual': null,
+        'idEmpresaNueva': null,
+        'idCupoNuevo': null,
+        'numeroTarjetaOperacionNuevo': null,
         'fechaVigencia': null,
-        'nuevoNumeroTarjetaOperacion': null,
-        'idServicioNuevo': null,
+        'idNivelServicioAnterior': null,
         'idVehiculo': null,
 
     };
@@ -44,10 +51,9 @@ export class NewCambioEmpresaComponent implements OnInit {
         private _TramiteFacturaService: FroFacTramiteService,
         private _TramiteSolicitudService: FroTrteSolicitudService,
         private _FuncionarioService: PnalFuncionarioService,
-        private _ServicioService: VhloCfgServicioService,
         private _VhloTpAsignacionService: VhloTpAsignacionService,
-        private _CfgPaisService: CfgPaisService,
-        private _CategoriaService: UserLcCfgCategoriaService,
+        private _UserEmpresaTransporteService: UserEmpresaTransporteService,
+        private _NivelServicioService: VhloCfgNivelServicioService,
         private _LoginService: LoginService,
     ) { }
 
@@ -56,8 +62,23 @@ export class NewCambioEmpresaComponent implements OnInit {
 
         let token = this._LoginService.getToken();
 
-        console.log(this.vehiculo);
-        this.datos.idServicioAnterior = [this.vehiculo.servicio.id];
+
+        this._UserEmpresaTransporteService.searchByVehiculo({ 'idVehiculo': this.vehiculo.id }, token).subscribe(
+            response => {
+                this.datos.idEmpresaActual = response.data.empresaTransporte.empresa.nombre;
+                this.datos.numeroCupoActual = response.data.cupo.numero;
+                this.datos.idNivelServicioAnterior = response.data.nivelServicio.id;
+                this.datos.numeroTarjetaOperacionActual = response.data.tarjetaOperacion.numeroTarjetaOperacion;
+            },
+            error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert("Error en la petición");
+                }
+            }
+        );
 
         if (this.tramitesRealizados.length > 0) {
             this.tramitesRealizados.forEach(tramiteRealizado => {
@@ -79,9 +100,9 @@ export class NewCambioEmpresaComponent implements OnInit {
                 confirmButtonText: 'Aceptar'
             });
         } else {
-            this._ServicioService.select().subscribe(
+            this._NivelServicioService.select().subscribe(
                 response => {
-                    this.servicios = response;
+                    this.nivelesServicio = response;
                 },
                 error => {
                     this.errorMessage = <any>error;
@@ -96,15 +117,16 @@ export class NewCambioEmpresaComponent implements OnInit {
     }
 
     onEnviar() {
-        this.datos.campos = ['cambioServicio'];
+        this.datos.campos = ['cambioEmpresa'];
         this.datos.idTramiteFactura = this.tramiteFactura.factura.id;
         this.datos.idVehiculo = this.vehiculo.id;
-
+        this.datos.idEmpresaNueva = this.empresaEncontrada.id;
+        
         let resumen = "<b>No. factura</b>" + this.tramiteFactura.factura.numero +
-         ", servicio anterior:" + this.vehiculo.servicio.id;
-
+        ", empresa Anterior:" + this.datos.idEmpresaActual;
+        
         this.realizado = true;
-
+        
         this.onReadyTramite.emit(
             {
                 'documentacion': this.datos.documentacion,
@@ -112,6 +134,67 @@ export class NewCambioEmpresaComponent implements OnInit {
                 'foraneas': this.datos,
                 'resumen': resumen,
                 'idTramiteFactura': this.tramiteFactura.id,
+            }
+            );
+        }
+    
+    onSearchEmpresaTransporte() {
+        let token = this._LoginService.getToken();
+
+        this._UserEmpresaTransporteService.searchByNit(this.nit, token).subscribe(
+            response => {
+                if (response.code == 200) {
+                    this.empresaEncontrada = response.data;
+                    console.log(this.empresaEncontrada);
+                    this._VhloTpAsignacionService.searchCuposDisponibles({ 'idEmpresa': this.empresaEncontrada.id }, token).subscribe(
+                        response => {
+                            if (response.code == 200) {
+                                this.arrayCuposDisponibles = response.data;
+
+                                swal({
+                                    title: response.title,
+                                    text: response.message,
+                                    type: response.status,
+                                    confirmButtonText: 'Aceptar'
+                                })
+                            } else {
+                                swal({
+                                    title: response.title,
+                                    text: response.message,
+                                    type: response.status,
+                                    confirmButtonText: 'Aceptar'
+                                })
+                            }
+                            error => {
+                                this.errorMessage = <any>error;
+                                if (this.errorMessage != null) {
+                                    console.log(this.errorMessage);
+                                    alert('Error en la petición');
+                                }
+                            }
+                        }
+                    );
+                    swal({
+                        title: response.title,
+                        text: response.message,
+                        type: response.status,
+                        confirmButtonText: 'Aceptar'
+                    })
+                } else {
+                    swal({
+                        title: response.title,
+                        text: response.message,
+                        type: response.status,
+                        confirmButtonText: 'Aceptar'
+                    })
+                }
+                error => {
+                    this.errorMessage = <any>error;
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert('Error en la petición');
+                    }
+                }
             }
         );
     }
