@@ -70,6 +70,24 @@ export class NewComponent implements OnInit {
                     }
                 }
             );
+        }else if(this.modulo.abreviatura == 'RNET'){
+            this._TipoVehiculoService.selectByModulo({ 'idModulo': 2 }, token).subscribe(
+                response => {
+                    if (response) {
+                        this.tiposVehiculo = response;
+                    } else {
+                        this.tiposVehiculo = null;
+                    }
+                },
+                error => {
+                    this.errorMessage = <any>error;
+    
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                    }
+                }
+            );
         }else{
             this._TipoVehiculoService.selectByModulo({ 'idModulo': this.modulo.id }, token).subscribe(
                 response => {

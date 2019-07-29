@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { SelectModule } from 'angular2-select';
+import { Ng2BootstrapModule } from 'ng2-bootstrap';
+import { TooltipModule, Tooltip } from "ngx-tooltip";
 
 import { TramiteTrasladoService } from '../../services/tramiteTraslado.service';
 import { UserEmpresaService } from '../../services/userEmpresa.service';
@@ -60,11 +63,6 @@ import { NewRncExpedicionLicenciaCambioDocumentoComponent } from './tramites/tra
 import { NewRncRecategorizacionLicenciaAbajoComponent } from './tramites/tramiteRecategorizacionLicenciaAbajo/newRncRecategorizacionLicenciaAbajo.component';
 import { NewRncRecategorizacionLicenciaArribaComponent } from './tramites/tramiteRecategorizacionLicenciaArriba/newRncRecategorizacionLicenciaArriba.component';
 import { NewRncRefrendacionLicenciaComponent } from './tramites/tramiteRefrendacionLicencia/newRncRefrendacionLicencia.component';
-
-
-import { SelectModule } from 'angular2-select';
-import { Ng2BootstrapModule } from 'ng2-bootstrap';
-import { TooltipModule, Tooltip } from "ngx-tooltip";
 
 import { UserCiudadanoModule } from '../userCiudadano/userCiudadano.module';
 import { VhloSoatModule } from '../vhloSoat/vhloSoat.module';

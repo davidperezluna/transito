@@ -21,17 +21,20 @@
                 </thead>
                 <tbody>
                   <tr class="odd" *ngFor="let modulo of modulos; let i = index">
-                    <td >{{ modulo.id }}</td>
+                    <td >{{ i + 1 }}</td>
                     <td >{{ modulo.nombre }}</td>
                     <td>
-                      <button (click)="onEdit(modulo)" class="btn btn-xs btn-info" type="button">
-                        <i class="fa fa-edit"></i>
-                        Editar
-                      </button> 
-                      <button (click)="onDelete(modulo.id)"  class="btn btn-xs btn-danger" type="button">
-                        <i class="fa fa-trash"></i>
-                        Eliminar
-                      </button> 
+                      <div class="btn-group">
+                        <button (click)="onEdit(modulo)" class="btn btn-xs btn-primary" type="button">
+                          <i class="fa fa-pencil"></i>
+                        </button>
+                        <button (click)="onState(modulo)" class="btn btn-xs btn-info" type="button">
+                          <i class="fa fa-check"></i>
+                        </button>
+                        <button (click)="onDelete(modulo.id)"  class="btn btn-xs btn-danger" type="button">
+                          <i class="fa fa-trash"></i>
+                        </button> 
+                      </div>
                     </td>
                   </tr>
                 </tbody>
@@ -43,5 +46,6 @@
       </div>
       
       <app-edit *ngIf='formEdit' [modulo]="modulo" (ready)="ready($event)"></app-edit>
+      <app-states *ngIf='formStates' [modulo]="modulo" (ready)="ready($event)"></app-states>
       <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
   </div>

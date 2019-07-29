@@ -1,0 +1,59 @@
+<hr>
+<div class="row">
+    <div class="col-xs-12 col-lg-4"><!-- .col -->
+        <div class="card">
+            <div class="card-header">
+                <b class="text-uppercase">Asignar estados a {{ modulo.nombre }} </b>
+                <br>
+                <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
+            </div>
+            <div class="card-body">
+                <form #formNew="ngForm"> 
+                    <div class="form-group row">
+                        <div  class="col-xs-12 col-lg-12">
+                            <label>Estado</label>
+                            <ng-select [multiple]="true" [options]="estados" [(ngModel)]="estadoSelected" name="estadoSelected">
+                            </ng-select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <div class="btn-group">
+                    <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
+                        <i class="fa fa-save"></i>
+                        Enviar
+                    </button>
+                    <button (click)="onCancelar()" class="btn btn-default" type="button">
+                        <i class="fa fa-times"></i>
+                        Cancelar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div><!-- /.col -->
+
+    <div class="col-xs-12 col-lg-8" *ngIf='formIndex'><!-- .col -->
+        <div class="card">
+            <div class="card-header">
+                <b class="text-uppercase">Estados asignados</b>
+            </div>
+            <div class="card-body">
+                <table class="table " id="dataTables-example">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Nombre</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="odd" *ngFor="let reparto of repartos; let i = index">
+                            <td >{{ i + 1 }}</td>
+                            <td >{{ reparto.estado.nombre }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div><!-- /.col -->
+</div>

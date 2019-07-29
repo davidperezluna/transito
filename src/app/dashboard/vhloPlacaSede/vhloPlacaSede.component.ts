@@ -226,6 +226,7 @@ export class VhloPlacaSedeComponent implements OnInit {
             }
         });
     }
+    
     onEdit(asignacion: any) {
         this.asignacion = asignacion;
         this.formEdit = true;

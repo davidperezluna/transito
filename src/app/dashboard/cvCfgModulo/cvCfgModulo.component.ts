@@ -18,6 +18,7 @@ export class CvCfgModuloComponent implements OnInit {
   public formNew: any;
 	public formEdit: any;
   public formIndex: any;
+  public formStates: any;
 
   public table: any = null;
 
@@ -45,6 +46,7 @@ export class CvCfgModuloComponent implements OnInit {
         let timeoutId = setTimeout(() => {
           this.onInitTable();
           this.formIndex = true;
+          swal.close();
         }, 100);
       },
       error => {
@@ -61,14 +63,13 @@ export class CvCfgModuloComponent implements OnInit {
     this.formNew = false;
     this.formEdit = false;
     this.formIndex = false;
+    this.formStates = false;
   }
 
   onInitTable(){
     this.table = $('#dataTables-example').DataTable({
-      retrieve: true,
-      paging: false,
       responsive: true,
-      pageLength: 8,
+      pageLength: 10,
       sPaginationType: 'full_numbers',
       oLanguage: {
         oPaginate: {
@@ -84,6 +85,12 @@ export class CvCfgModuloComponent implements OnInit {
   onNew(){
     this.onInitForms();
     this.formNew = true;
+  }
+
+  onState(modulo:any){
+    this.onInitForms();
+    this.modulo = modulo;
+    this.formStates = true;
   }
 
   ready(isCreado:any){

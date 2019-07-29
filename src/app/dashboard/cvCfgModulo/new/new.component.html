@@ -11,13 +11,14 @@
                 <form #formNew="ngForm"> 
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-xs-12 col-lg-6">
+                            <div class="col-xs-12 col-lg-12">
                                 <label>Nombre <strong class="text-danger">*</strong></label>
-                                <input type="numeric" class="form-control" [(ngModel)]="modulo.nombre" name="nombre" required />
+                                <input type="numeric" class="form-control text-uppercase" [(ngModel)]="modulo.nombre" name="nombre" required />
                             </div>
-                            <div class="col-xs-12 col-lg-6">
-                                <label>Código <strong class="text-danger">*</strong></label>
-                                <input type="numeric" class="form-control" [(ngModel)]="modulo.id" name="id" required />
+                            <div  class="col-xs-12 col-lg-12">
+                                <label>Funcionario</label>
+                                <ng-select [multiple]="false" [options]="funcionarios" [(ngModel)]="modulo.idFuncionario" name="idFuncionario">
+                                </ng-select>
                             </div>
                         </div>
                     </div>

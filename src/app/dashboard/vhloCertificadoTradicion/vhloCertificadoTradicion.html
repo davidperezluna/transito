@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" *ngIf='formIndex'>
     <!-- .row -->
     <div class="col-xs-12 col-lg-12">
         <!-- .col -->
@@ -18,9 +18,9 @@
                                 <span class="input-group-btn">
                                     <button (click)="onSearchVehiculo()" class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
                                 </span>
-                                <button type="button" (click)="ngAbrirInput()" class="btn btn-primary">
+                                <button (click)="onFormUpload()" class="btn btn-primary">
                                     <i class="fa fa-file-pdf-o"></i>
-                                    Generación masiva 
+                                    Generación masiva
                                 </button>
                             </div>
                         </div>
@@ -63,7 +63,7 @@
                                 {{vehiculo.serie}}
                             </td>
                             <td>
-                                <a href="{{ apiUrl }}/pdf/certificadoTradicion/{{ vehiculo.placa.id }}/{{ funcionario.id }}/OFICIAL" class="btn btn-primary" target="_blank">
+                                <a href="{{ apiUrl }}/pdf/certificado/tradicion/{{ vehiculo.placa.id }}/{{ funcionario.id }}/OFICIAL" class="btn btn-primary" target="_blank">
                                     <i class="fa fa-file-pdf-o"></i>
                                     Generar 
                                 </a>
@@ -76,3 +76,42 @@
     </div>
 </div>
 <!-- /.row -->
+
+<div class="row" *ngIf='formUpload'>
+    <div class="col-xs-12 col-md-12 col-lg-6">
+      <form #formNew="ngForm">
+        <div class="card">
+          <div class="card-header">
+              <b class="text-uppercase">Cargar archivo de valores</b>
+          </div>
+          <div class="card-body">
+            <div class="form-group">
+              <div class="row">
+                <div class="col-xs-12 col-lg-12">
+                    <label>Tipo de cambio <span class="text-danger">*</span></label>
+                    <ng-select [multiple]="false" [options]="tipos" [(ngModel)]="datos.tipo" name="tipo" required>
+                    </ng-select>
+                </div>
+                <div class="col-xs-12 col-lg-12">
+                    <label>Adjuntar documento <b class="text-danger">*</b> <small>(.csv)</small></label>
+                    <input class="form-control" type="file" (change)="onFileChange($event)" required>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer">
+              <div class="btn-group">
+                <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
+                    <i class="fa fa-save"></i>
+                    Enviar
+                </button>
+                <button (click)="ready(true)" class="btn btn-default">
+                    <i class="fa fa-times"></i>
+                    Cancelar
+                </button>
+              </div>
+          </div>
+        </div>
+      </form>
+    </div>
+</div>
