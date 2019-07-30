@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Http, Headers } from "@angular/http";
+import  {Http, Headers, ResponseContentType} from "@angular/http";
 import { LoggerService } from "../logger/services/logger.service";
 import { environment } from 'environments/environment';
 import { EventEmitter } from '@angular/core';
@@ -117,9 +117,18 @@ export class VhloVehiculoService {
 	}
 
 	certificadoTradicionByFile(formData, datos, token) {
+		let contentType;
 		let json = JSON.stringify(datos);
 		formData.append('data', json);
 		formData.append('authorization', token);
-		return this._http.post(this.url + "/certificado/tradicion/file", formData).map(res => res.json());
+		return this._http.post(this.url + "/certificado/tradicion/file", formData, { 'responseType': ResponseContentType.Blob }).map(res =>{
+				contentType = res.headers.get('Content-type');
+				if (contentType == 'application/json') {
+					return res.json();   
+				} else if (contentType == 'application/pdf') {
+					return new Blob([res.blob()], { type: 'application/pdf' })
+				}
+			} 
+		);
 	}
 }

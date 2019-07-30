@@ -2,7 +2,7 @@ import { Component, OnInit,Output,EventEmitter } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { SvIpatImpresoMunicipio } from '../svIpatImpresoMunicipio.modelo';
 import { SvIpatImpresoMunicipioService } from '../../../services/svIpatImpresoMunicipio.service';
-import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
+import { PnalFuncionarioService } from '../../../services/pnalFuncionario.service';
 import { CfgMunicipioService } from '../../../services/cfgMunicipio.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
@@ -17,13 +17,12 @@ export class NewComponent implements OnInit {
   public municipio: SvIpatImpresoMunicipio;
   public errorMessage;
 
-  public organismosTransito: any;
   public municipios: any;
   public date: any;
 
 constructor(
   private _ImpresoMunicipioService: SvIpatImpresoMunicipioService,
-  private _OrganismoTransitoService: CfgOrganismoTransitoService,
+  private _FuncionarioService: PnalFuncionarioService,
   private _MunicipioService: CfgMunicipioService,
   private _LoginService: LoginService,
   ){}
@@ -34,22 +33,6 @@ constructor(
     this.date = new Date();
     var datePiper = new DatePipe(this.date);
     this.date = datePiper.transform(this.date,'yyyy-MM-dd');
-
-    this._OrganismoTransitoService.selectSedes().subscribe(
-      response => {
-          this.organismosTransito = response;
-
-          swal.close();
-      },
-      error => {
-          this.errorMessage = <any>error;
-
-          if (this.errorMessage != null) {
-              console.log(this.errorMessage);
-              alert("Error en la petición");
-          }
-      }
-    );
 
     let token = this._LoginService.getToken();
 
@@ -66,6 +49,26 @@ constructor(
               console.log(this.errorMessage);
               alert("Error en la petición");
           }
+      }
+    );
+
+    let identity = this._LoginService.getIdentity();
+
+    this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
+      response => {
+        if (response.status == 'success') {
+          this.municipio.idOrganismoTransito = response.data.organismoTransito.id;
+
+        } else {
+          this.municipio.idOrganismoTransito = null;
+        }
+        error => {
+          this.errorMessage = <any>error;
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert('Error en la petición');
+          }
+        }
       }
     );
   }

@@ -22,7 +22,7 @@ export class SvIpatImpresoMunicipioComponent implements OnInit {
 	public formNew = false;
 	public formEdit = false;
   public formIndex = true;
-  public table:any = null; 
+  public table:any = null;
   public organismoTransito:any = null; 
   public municipio: SvIpatImpresoMunicipio;
 

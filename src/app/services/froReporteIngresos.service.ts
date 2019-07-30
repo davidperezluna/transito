@@ -70,8 +70,7 @@ export class FroReporteIngresosService {
             }
         );
 
-        return this._http.post(this.url + "/pdf/tramite/fecha", params, { 'responseType': ResponseContentType.Blob, headers: headers }).map(res => { return new Blob([res.blob()], { type: 'application/pdf' }) }
-        );
+        return this._http.post(this.url + "/pdf/tramite/fecha", params, { 'responseType': ResponseContentType.Blob, headers: headers }).map(res => { return new Blob([res.blob()], { type: 'application/pdf' }) });
     }
 
     pdfInfraccionByFecha(datos, token): any {
