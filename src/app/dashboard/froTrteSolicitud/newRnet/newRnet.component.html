@@ -360,7 +360,19 @@
                                         <i class="fa fa-save"></i>
                                         Guardar información
                                     </button>
-                                    <a *ngIf="imprimirResolucion" href="{{ apiUrl }}/{{ vehiculo.id }}/{{ numeroResolucion }}/resolucion/cambioServicio/pdf" class="btn btn-light" target="_blank">
+                                    <!-- <a *ngIf="imprimirResolucion" href="{{ apiUrl }}/{{ vehiculo.id }}/{{ numeroResolucion }}/resolucion/cambioServicio/pdf" class="btn btn-light" target="_blank">
+                                        <i class="fa fa-eye"></i>IMPRIMIR RESOLUCIÓN
+                                    </a> -->
+                                    <!-- <a *ngIf="imprimirResolucion" href="{{ apiUrl }}/{{ vehiculo.id }}/{{ tramiteSolicitud.tramitesRealizados[0].foraneas.idEmpresaActual }}/{{ numeroResolucion }}/resolucion/cambioEmpresa/pdf"
+                                        class="btn btn-light" target="_blank">
+                                        <i class="fa fa-eye"></i>IMPRIMIR RESOLUCIÓN
+                                    </a> -->
+                                    <!-- <a *ngIf="imprimirResolucion" href="{{ apiUrl }}/{{ vehiculo.id }}/{{ tramiteSolicitud.tramitesRealizados[0].foraneas.idEmpresaActual }}/{{ tramiteSolicitud.tramitesRealizados[0].foraneas.numeroConceptoFavorable }}/{{ numeroResolucion }}/resolucion/cambioEmpresaConceptoFavorable/pdf"
+                                        class="btn btn-light" target="_blank">
+                                        <i class="fa fa-eye"></i>IMPRIMIR RESOLUCIÓN
+                                    </a> -->
+                                    <a *ngIf="imprimirResolucion" href="{{ apiUrl }}/{{ vehiculo.id }}/{{ numeroResolucion }}/resolucion/desvinculacionComunAcuerdo/pdf"
+                                        class="btn btn-light" target="_blank">
                                         <i class="fa fa-eye"></i>IMPRIMIR RESOLUCIÓN
                                     </a>
                                 </div>
@@ -385,12 +397,14 @@
                         </app-expedicion-tarjeta-operacion-cambio-nivel-servicio>
                         <app-renovacion-tarjeta-operacion *ngIf="tramiteFactura.precio.tramite.id == 40" [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)">
                         </app-renovacion-tarjeta-operacion>
-                        <app-cambio-empresa *ngIf="tramiteFactura.precio.tramite.id == 5" [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)">
+                        <app-cambio-empresa *ngIf="tramiteFactura.precio.tramite.id == 41" [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)">
                         </app-cambio-empresa>
-                        <!-- <app-concepto-favorable *ngIf="tramiteFactura.precio.tramite.id == 44" [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)">
+                        <app-concepto-favorable *ngIf="tramiteFactura.precio.tramite.id == 44" [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)">
                         </app-concepto-favorable>
                         <app-desvinculacion-cambio-servicio *ngIf="tramiteFactura.precio.tramite.id == 43" [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)">
-                        </app-desvinculacion-cambio-servicio> -->
+                        </app-desvinculacion-cambio-servicio>
+                        <app-desvinculacion-comun-acuerdo *ngIf="tramiteFactura.precio.tramite.id == 5" [vehiculo]="vehiculo" [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura" (onReadyTramite)="onReadyTramite($event)">
+                        </app-desvinculacion-comun-acuerdo>
                     </div>
                 </div>
 

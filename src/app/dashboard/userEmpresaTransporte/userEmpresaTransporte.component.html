@@ -64,10 +64,10 @@
                                     <table class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
-                                                <th><b>Tipo Identificación</b></th>
-                                                <th><b>Número Identificación</b></th>
-                                                <th><b>Nombres y Apellidos</b></th>
-                                                <th><b>Fecha Inicio</b></th>
+                                                <th><b>Tipo Identif</b></th>
+                                                <th><b>Identificación</b></th>
+                                                <th><b>Nombre</b></th>
+                                                <th><b>Fec Inicio</b></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -78,7 +78,7 @@
                                                     {{ empresa.empresaRepresentante.ciudadano.segundoNombre }}
                                                     {{ empresa.empresaRepresentante.ciudadano.primerApellido }}
                                                     {{ empresa.empresaRepresentante.ciudadano.segundoApellido }}</td>
-                                                <td>{{ (empresa.empresaRepresentante.fechaInicial.timestamp * 1000) | date: 'dd/MM/yyyy' }}
+                                                <td>{{ empresa.empresaRepresentante.fechaInicial }}
                                                 </td>
                                             </tr>
                                         </tbody>

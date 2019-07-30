@@ -166,6 +166,7 @@ export class UserEmpresaTransporteComponent implements OnInit {
             response => {
                 if (response.code == 200) {
                     this.empresa = response.data;
+                    console.log(this.empresa.empresaRepresentante.fechaInicial);
 
                     this._UserEmpresaTransporteService.searchHabilitacionesByEmpresa({'idEmpresa': this.empresa.id}, token).subscribe(
                         response => {
