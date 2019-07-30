@@ -9,7 +9,7 @@ export const VhloCfgPlacaRoutes: Route[] = [
     },
 
     {
-      path: 'vehiculo/search',
+      path: 'vhloCfgPlaca/search',
       component: SearchComponent
     },
 ];

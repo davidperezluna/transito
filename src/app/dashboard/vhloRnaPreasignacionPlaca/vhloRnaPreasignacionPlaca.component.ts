@@ -183,7 +183,7 @@ export class VhloRnaPreasignacionPlacaComponent implements OnInit {
         if (response.code == 200) {
           this.placa = response.data;
 
-          var html = 'Se preasignara al vehiculo con:<br> Número de chasis:  <b>'+ this.vehiculo.chasis +
+          var html = 'Se preasignara al vehiculo<br> Número de chasis:  <b>'+ this.vehiculo.chasis +
                 '</b><br>Número de motor:  <b>'+ this.vehiculo.motor +
                 '</b><br>Número de serie:  <b>'+ this.vehiculo.serie +
                 '</b><br>La placa:<br><b><h2>'+ this.placa.numero +

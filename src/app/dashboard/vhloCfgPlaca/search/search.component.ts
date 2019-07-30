@@ -16,12 +16,16 @@ export class SearchComponent implements OnInit {
   public numero: any = null;
   public placas: any = null;
 
+  public formIndex: any = null;
+
   constructor(
     private _PlacaService: VhloCfgPlacaService,
     private _LoginService: LoginService,
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() { 
+    this.formIndex = false;
+  }
 
   onInitTable(){
     this.table = $('#dataTables-example').DataTable({
@@ -40,6 +44,14 @@ export class SearchComponent implements OnInit {
   }
 
   onSearchPlaca() {
+    swal({
+      title: 'Buscando placa!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+
     let token = this._LoginService.getToken();
 
     this._PlacaService.searchByNumero({ 'numero': this.numero }, token).subscribe(
@@ -49,6 +61,7 @@ export class SearchComponent implements OnInit {
 
           let timeoutId = setTimeout(() => {
             this.onInitTable();
+            this.formIndex = true;
           }, 100);
 
           swal({
@@ -80,7 +93,7 @@ export class SearchComponent implements OnInit {
   onLiberate(id: any) {
     swal({
       title: '¿Estás seguro?',
-      text: "¡Esta placa estara libre para su uso!",
+      text: "¡Esta placa pasará a estado DISPONIBLE!",
       type: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#15d4be',
@@ -91,7 +104,7 @@ export class SearchComponent implements OnInit {
       if (result.value) {
         let token = this._LoginService.getToken();
 
-        this._PlacaService.liberate({ 'id':id }, token).subscribe(
+        this._PlacaService.state({ 'id':id, 'estado':'DISPONIBLE' }, token).subscribe(
           response => {
             swal({
               title: response.title,
@@ -118,4 +131,42 @@ export class SearchComponent implements OnInit {
     });
   }
 
+  onUsed(id: any) {
+    swal({
+      title: '¿Estás seguro?',
+      text: "¡Esta placa pasará a estado UTILIZADA!",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#15d4be',
+      cancelButtonColor: '#ff6262',
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.value) {
+        let token = this._LoginService.getToken();
+
+        this._PlacaService.state({ 'id':id, 'estado':'UTILIZADA' }, token).subscribe(
+          response => {
+            swal({
+              title: response.title,
+              text: response.message,
+              type: response.status,
+              confirmButtonText: 'Aceptar'
+            });
+
+            this.table.destroy();
+            this.ngOnInit();
+          },
+          error => {
+            this.errorMessage = <any>error;
+
+            if (this.errorMessage != null) {
+              console.log(this.errorMessage);
+              alert("Error en la petición");
+            }
+          }
+        );
+      }
+    });
+  }
 }

@@ -1,9 +1,10 @@
 <div class="row" *ngIf="patio">
     <div class="col-xs-12 col-lg-6">
-        <form #formNew="ngForm" ngNativeValidate>
+        <form #formNew="ngForm">
         <div class="card">
             <div class="card-header">
-                <h5 class="text-uppercase">Nueva inmovilización</h5>
+                <b class="text-uppercase">Nueva inmovilización</b>
+                <br>
                 <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
             </div>
             <div class="card-body">
@@ -83,7 +84,7 @@
                         <div class="row">
                             <div class="col-xs-12 col-lg-6">
                                 <label>No. inventario <strong class="text-danger">*</strong></label>
-                                <input class="form-control" [(ngModel)]="inmovilizacion.numeroInventario" name="numeroInventario" type="text" required [ngClass]="{'red-border-class': name.errors}" />
+                                <input class="form-control" [(ngModel)]="inmovilizacion.numeroInventario" name="numeroInventario" type="text" required />
                             </div>
                             <div class="col-xs-12 col-lg-6">
                                 <label>Grúa</label>

@@ -10,18 +10,17 @@ declare var $: any;
 })
 export class VhloCfgPlacaComponent implements OnInit {
   public errorMessage;
-  public id;
-  public respuesta;
-  public cfgPlacas;
+
+  public placas;
   public formNew = false;
   public formEdit = false;
   public formIndex = true;
   public table: any = null;
-  public cfgPlaca: any;
+  public placa: any;
 
   constructor(
-    private _CfgPlacaService: VhloCfgPlacaService,
-    private _loginService: LoginService,
+    private _PlacaService: VhloCfgPlacaService,
+    private _LoginService: LoginService,
   ) { }
 
   ngOnInit() {
@@ -40,12 +39,12 @@ export class VhloCfgPlacaComponent implements OnInit {
       }
     })
 
-    this._CfgPlacaService.index().subscribe(
+    this._PlacaService.index().subscribe(
       response => {
         if (response) {
 
           console.log(response);
-          this.cfgPlacas = response.data;
+          this.placas = response.data;
           let timeoutId = setTimeout(() => {
             this.onInitTable();
           }, 100);
@@ -106,9 +105,9 @@ export class VhloCfgPlacaComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.value) {
-        let token = this._loginService.getToken();
+        let token = this._LoginService.getToken();
 
-        this._CfgPlacaService.liberate({ 'id':id }, token).subscribe(
+        this._PlacaService.liberate({ 'id':id }, token).subscribe(
           response => {
             swal({
               title: 'Eliminado!',
@@ -116,8 +115,6 @@ export class VhloCfgPlacaComponent implements OnInit {
               type: 'success',
               confirmButtonColor: '#15d4be',
             })
-            this.table.destroy();
-            this.respuesta = response;
             this.ngOnInit();
           },
           error => {
@@ -136,7 +133,7 @@ export class VhloCfgPlacaComponent implements OnInit {
   }
 
   edit(cfgPLaca: any) {
-    this.cfgPlaca = cfgPLaca;
+    this.placa = cfgPLaca;
     this.formEdit = true;
     this.formIndex = false;
   }

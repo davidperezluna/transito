@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SvIpatImpresoAsignacion } from './svIpatImpresoAsignacion.modelo';
 import { SvIpatImpresoAsignacionService } from '../../services/svIpatImpresoAsignacion.service';
+import { PnalFuncionarioService } from '../../services/pnalFuncionario.service';
 import { LoginService } from '../../services/login.service';
 import { environment } from 'environments/environment';
 import swal from 'sweetalert2';
@@ -21,10 +22,12 @@ export class SvIpatImpresoAsignacionComponent implements OnInit {
 	public formEdit = false;
   public formIndex = true;
   public table:any = null; 
+  public funcionario:any = null; 
   public asignacion: SvIpatImpresoAsignacion;
 
   constructor(
     private _BodegaService: SvIpatImpresoAsignacionService,
+    private _FuncionarioService: PnalFuncionarioService,
 		private _LoginService: LoginService,
     ){}
     
@@ -38,22 +41,50 @@ export class SvIpatImpresoAsignacionComponent implements OnInit {
     });
 
     this._BodegaService.index().subscribe(
-				response => {
-          this.asignaciones = response.data;
-          let timeoutId = setTimeout(() => {  
-            this.iniciarTabla();
-          }, 100);
-          swal.close();
-				}, 
-				error => {
-					this.errorMessage = <any>error;
+      response => {
+        this.asignaciones = response.data;
+        let timeoutId = setTimeout(() => {  
+          this.iniciarTabla();
+        }, 100);
+        swal.close();
+      }, 
+      error => {
+        this.errorMessage = <any>error;
 
-					if(this.errorMessage != null){
-						console.log(this.errorMessage);
-						alert("Error en la petición");
-					}
-				}
-      );
+        if(this.errorMessage != null){
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+
+    let token = this._LoginService.getToken();
+
+    let identity = this._LoginService.getIdentity();
+
+    this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
+      response => {
+        if (response.status == 'success') {
+          this.funcionario = response.data; 
+        } else {
+          this.funcionario = null;
+
+          swal({
+              title: 'Error!',
+              text: 'Usted no tiene permisos para realizar la impresión.',
+              type: 'error',
+              confirmButtonText: 'Aceptar'
+          });
+        }
+        error => {
+            this.errorMessage = <any>error;
+            if (this.errorMessage != null) {
+                console.log(this.errorMessage);
+                alert('Error en la petición');
+            }
+        }
+      }
+    );
   }
 
   iniciarTabla(){

@@ -4,9 +4,8 @@
       <div class="card">
         <div class="card-header">
           <h5 class="card-title">
-            <b class="text-uppercase">Configuración</b>
+            <b class="text-uppercase">Configuración Placas</b>
             <br>
-            <small>Placas</small>
             <div class="btn-group pull-right">
               <button (click)="onNew()" class="btn btn-default">
                 <i class="fa fa-plus"></i>
@@ -19,7 +18,7 @@
           <table class="table " id="dataTables-example">
             <thead>
               <tr>
-                <th>Id</th>
+                <th>#</th>
                 <th>Numero</th>
                 <th>Estado</th>
                 <th>Tipo</th>
@@ -28,25 +27,28 @@
               </tr>
             </thead>
             <tbody>
-              <tr class="odd" *ngFor="let cfgPlaca of cfgPlacas; let i = index">
-                <td>{{cfgPlaca.id}}</td>
-                <td>{{cfgPlaca.numero}}</td>
-                <td>{{cfgPlaca.estado}}</td>
-                <td>{{cfgPlaca.tipoVehiculo?.nombre}}</td>
-                <td>{{cfgPlaca.organismoTransito?.nombre}}</td>
+              <tr class="odd" *ngFor="let placa of placas; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ placa.numero }}</td>
+                <td>{{ placa.estado }}</td>
+                <td>{{ placa.tipoVehiculo?.nombre }}</td>
+                <td>{{ placa.organismoTransito?.nombre }}</td>
                 <td>
-                  <button (click)="onLiberate(cfgPlaca.id)" class="btn btn-xs btn-info" type="button">Liberar
-                  </button>
+                  <div class="btn-group">
+                    <button (click)="onLiberate(placa.id)" class="btn btn-xs btn-primary" type="button">
+                      <i class="fa fa-unlock"></i>
+                      Liberar
+                    </button>
+                  </div>
                 </td>
               </tr>
             </tbody>
           </table>
           <!-- /.table-responsive -->
-          
         </div>
       </div>
     </div>
   </div>
-  <app-edit *ngIf='formEdit' [cfgPlaca]="cfgPlaca" (ready)="ready($event)"></app-edit>
+  <app-edit *ngIf='formEdit' [placa]="placa" (ready)="ready($event)"></app-edit>
   <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
 </div>

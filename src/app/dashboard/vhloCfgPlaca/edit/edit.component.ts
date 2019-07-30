@@ -12,7 +12,7 @@ import swal from 'sweetalert2';
 })
 export class EditComponent {
   @Output() ready = new EventEmitter<any>();
-  @Input() cfgPlaca: any = null;
+  @Input() placa: any = null;
   public errorMessage;
   public tiposVehiculo: any;
   public tipoVehiculoSelected: any;
@@ -39,7 +39,7 @@ export class EditComponent {
         this.tiposVehiculo = response;
 
         setTimeout(() => {
-          this.tipoVehiculoSelected = [this.cfgPlaca.tipoVehiculo.id];
+          this.tipoVehiculoSelected = [this.placa.tipoVehiculo.id];
         });
       },
       error => {
@@ -57,7 +57,7 @@ export class EditComponent {
         this.organismosTransito = response;
 
         setTimeout(() => {
-          this.organismoTransitoSelected = [this.cfgPlaca.organismoTransito.id];
+          this.organismoTransitoSelected = [this.placa.organismoTransito.id];
         });
       },
       error => {
@@ -78,10 +78,10 @@ export class EditComponent {
   onEnviar() {
     let token = this._LoginService.getToken();
 
-    this.cfgPlaca.claseId = this.tipoVehiculoSelected;
-    this.cfgPlaca.sedeOperativaId = this.organismoTransitoSelected;
+    this.placa.claseId = this.tipoVehiculoSelected;
+    this.placa.sedeOperativaId = this.organismoTransitoSelected;
 
-    this._CfgPlacaService.edit(this.cfgPlaca, token).subscribe(
+    this._CfgPlacaService.edit(this.placa, token).subscribe(
       response => {
         if (response.status == 'success') {
           this.ready.emit(true);

@@ -29,6 +29,8 @@ export class SearchComponent implements OnInit {
 
     public tiposFiltro = [
       { 'value': '1', 'label': 'Placa' },
+      { 'value': '2', 'label': 'No. comparendo' },
+      { 'value': '3', 'label': 'Identificación Infractor' },
     ];
 
     public datos: any = {
