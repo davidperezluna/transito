@@ -142,7 +142,7 @@ export class VhloCertificadoTradicionComponent implements OnInit {
     onEnviar(){
       if (this.fileSelected) {
         swal({
-          title: 'Subiendo datos!',
+          title: 'Generando certificado!',
           text: 'Solo tardara unos segundos por favor espere.',
           onOpen: () => {
             swal.showLoading()
@@ -155,20 +155,18 @@ export class VhloCertificadoTradicionComponent implements OnInit {
   
         this._VehiculoService.certificadoTradicionByFile(this.file, this.datos, token).subscribe(
           response => {
-            if (response.code == 200) {
+            if (response.type == 'application/json') {
               swal({
-                title: response.title,
-                text: response.message,
-                type: response.status,
+                title: 'Error!',
+                text: 'No existen tramites realizados o el formato no es .CSV',
+                type: 'error',
                 confirmButtonText: 'Aceptar'
               });
             } else {
-              swal({
-                title: response.title,
-                text: response.message,
-                type: response.status,
-                confirmButtonText: 'Aceptar'
-              });
+              var fileURL = URL.createObjectURL(response);
+              window.open(fileURL);
+
+              swal.close();
             }
             error => {
               this.errorMessage = <any>error;
