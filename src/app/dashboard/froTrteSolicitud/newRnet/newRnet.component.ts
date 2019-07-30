@@ -470,6 +470,8 @@ export class NewRnetComponent implements OnInit {
         this.tramiteSolicitud.documentacionPendiente = this.documentacionPendiente;
         this.tramiteSolicitud.idFactura = this.factura.id;
 
+        console.log(this.tramiteSolicitud);
+
         this._TramiteSolicitudService.register(this.tramiteSolicitud, token).subscribe(
             response => {
                 if (response.code == 200) {

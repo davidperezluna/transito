@@ -10,20 +10,20 @@ import { LoginService } from '../../../../services/login.service';
 import swal from 'sweetalert2';
 
 @Component({
-    selector: 'app-cambio-empresa',
-    templateUrl: './newCambioEmpresa.html'
+    selector: 'app-concepto-favorable',
+    templateUrl: './newConceptoFavorable.html'
 })
-export class NewCambioEmpresaComponent implements OnInit {
+export class NewConceptoFavorableComponent implements OnInit {
     @Output() onReadyTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;
     @Input() funcionario: any = null;
     @Input() tramiteFactura: any = null;
     @Input() tramitesRealizados: any = null;
     public errorMessage;
-    
+
     public nit: any = null;
     public empresaEncontrada;
-    empresaActual
+    public empresaActual;
     public arrayCuposDisponibles = null;
 
     public realizado: any = false;
@@ -39,6 +39,7 @@ export class NewCambioEmpresaComponent implements OnInit {
         'idEmpresaActual': null,
         'numeroCupoActual': null,
         'numeroTarjetaOperacionActual': null,
+        'numeroConceptoFavorable': null,
         'idEmpresaNueva': null,
         'idCupoNuevo': null,
         'numeroTarjetaOperacionNuevo': null,
@@ -119,16 +120,16 @@ export class NewCambioEmpresaComponent implements OnInit {
     }
 
     onEnviar() {
-        this.datos.campos = ['cambioEmpresa'];
+        this.datos.campos = ['conceptoFavorable'];
         this.datos.idTramiteFactura = this.tramiteFactura.factura.id;
         this.datos.idVehiculo = this.vehiculo.id;
         this.datos.idEmpresaNueva = this.empresaEncontrada.id;
-        
+
         let resumen = "<b>No. factura</b>" + this.tramiteFactura.factura.numero +
-        ", empresa Anterior:" + this.datos.idEmpresaActual;
-        
+            ", numeroConceptoFavorable:" + this.datos.numeroConceptoFavorable;
+
         this.realizado = true;
-        
+
         this.onReadyTramite.emit(
             {
                 'documentacion': this.datos.documentacion,
@@ -137,9 +138,9 @@ export class NewCambioEmpresaComponent implements OnInit {
                 'resumen': resumen,
                 'idTramiteFactura': this.tramiteFactura.id,
             }
-            );
-        }
-    
+        );
+    }
+
     onSearchEmpresaTransporte() {
         let token = this._LoginService.getToken();
 

@@ -29,6 +29,8 @@ import { NewRenovacionTarjetaOperacionComponent } from './tramites/tramiteRenova
 import { NewCambioEmpresaComponent } from './tramites/tramiteCambioEmpresa/newCambioEmpresa.component';
 import { NewDesvinculacionCambioServicioComponent } from './tramites/tramiteDesvinculacionCambioServicio/newDesvinculacionCambioServicio.component';
 import { NewDuplicadoLicenciaComponent } from './tramites/tramiteDuplicadoLicencia/new.duplicadoLicencia.component';
+import { NewConceptoFavorableComponent } from './tramites/tramiteConceptoFavorable/newConceptoFavorable.component';
+import { NewDesvinculacionComunAcuerdoComponent } from './tramites/tramiteDesvinculacionComunAcuerdo/newDesvinculacionComunAcuerdo.component';
 import { NewCambioColorComponent } from './tramites/tramiteCambioColor/new.cambioColor.component';
 import { NewCambioServicioComponent } from './tramites/tramiteCambioServicio/new.cambioServicio.component';
 import { NewCambioPlacaComponent } from './tramites/tramiteCambioPlaca/new.cambioPlaca.component';
@@ -94,6 +96,8 @@ import { VhloTecnoMecanicaModule } from '../vhloTecnoMecanica/vhloTecnoMecanica.
         NewDesvinculacionCambioServicioComponent,
         NewRenovacionTarjetaOperacionComponent,
         NewDuplicadoLicenciaComponent,
+        NewConceptoFavorableComponent,
+        NewDesvinculacionComunAcuerdoComponent,
         NewCambioColorComponent,
         NewCambioPlacaComponent,
         NewCambioMotorComponent,
@@ -143,6 +147,8 @@ import { VhloTecnoMecanicaModule } from '../vhloTecnoMecanica/vhloTecnoMecanica.
         NewDesvinculacionCambioServicioComponent,
         NewRenovacionTarjetaOperacionComponent,
         NewDuplicadoLicenciaComponent,
+        NewConceptoFavorableComponent,
+        NewDesvinculacionComunAcuerdoComponent,
         NewCambioColorComponent,
         NewCambioPlacaComponent,
         NewCambioMotorComponent,
