@@ -141,13 +141,12 @@ export class PqoInmovilizacionComponent implements OnInit {
         this._InmovilizacionService.delete(token,id).subscribe(
             response => {
                 swal({
-                      title: 'Eliminado!',
-                      text:'Registro eliminado correctamente.',
-                      type:'success',
-                      confirmButtonColor: '#15d4be',
-                    })
-                  this.table.destroy();
-                  this.ngOnInit();
+                  title: 'Eliminado!',
+                  text:'Registro eliminado correctamente.',
+                  type:'success',
+                  confirmButtonColor: '#15d4be',
+                });
+                this.ngOnInit();
               }, 
             error => {
               this.errorMessage = <any>error;
@@ -165,10 +164,19 @@ export class PqoInmovilizacionComponent implements OnInit {
   }
 
   onExit(inmovilizacion:any){
-    this.inmovilizacion = inmovilizacion;
-
-    this.onInitForms();
-
-    this.formExit = true;
+    if (inmovilizacion.numeroComparendo) {
+      this.inmovilizacion = inmovilizacion;
+  
+      this.onInitForms();
+  
+      this.formExit = true;
+    }else{
+      swal({
+        title: 'Atención!',
+        text:'La inmovilización no tiene registrado el número de comparendo por lo tanto no se puede gestionar la salida.',
+        type:'warning',
+        confirmButtonText: 'Aceptar',
+      });
+    }
   }
 }
