@@ -524,89 +524,6 @@ export class FroReporteIngresosComponent implements OnInit {
                 }
             );
         } else if (this.tipoRecaudoSelected == 4) {
-            this._FroReporteIngresosService.pdfCobroCoactivoByFecha(this.froReporteIngresos, token).subscribe(
-                response => {
-                    if(response.code == 200){
-                        swal({
-                            title: 'Perfecto!',
-                            text: 'Registros encontrados',
-                            type: 'success',
-                            confirmButtonText: 'Aceptar'
-                        });
-
-                        /* var fileURL = URL.createObjectURL(response);
-                        window.open(fileURL); */
-                        /* if (this.table) {
-                            this.table.destroy();
-                        }
-
-                        let timeoutId = setTimeout(() => {
-                            this.onInitTable('inmovilizaciones');
-                        }, 100); */
-                    } else {
-                        swal({
-                            title: 'Error!',
-                            text: 'No existen registros para la generación de reportes en el rango de las fechas estipuladas.',
-                            type: 'error',
-                            confirmButtonText: 'Aceptar'
-                        });
-                        error => {
-                            this.errorMessage = <any>error;
-
-                            if (this.errorMessage != null) {
-                                console.log(this.errorMessage);
-                                alert("Error en la petición");
-                            }
-                        }
-                    }
-                }
-            );
-        } else if (this.tipoRecaudoSelected == 5) {
-            this._FroReporteIngresosService.pdfParqueaderoByFecha(this.froReporteIngresos, token).subscribe(
-                response => {
-                    if(response.code == 200){
-                        this.nombreOrganismoTransito = null;
-                        this.nombreOrganismoTransito = response.data.organismoTransito.nombre;
-                        this.inmovilizaciones = response.data.arrayInmovilizaciones;
-                        this.totalInmovilizaciones = response.data.totalInmovilizaciones;
-
-                        swal({
-                            title: 'Perfecto!',
-                            text: 'Registros encontrados',
-                            type: 'success',
-                            confirmButtonText: 'Aceptar'
-                        });
-
-                        /* var fileURL = URL.createObjectURL(response);
-                        window.open(fileURL); */
-
-                    if (this.table) {
-                        this.table.destroy();
-                    }
-
-                    let timeoutId = setTimeout(() => {
-                        this.onInitTable('parqueadero');
-                    }, 100);
-                        
-                    } else {
-                        swal({
-                            title: 'Error!',
-                            text: 'No existen registros para la generación de reportes en el rango de las fechas estipuladas.',
-                            type: 'error',
-                            confirmButtonText: 'Aceptar'
-                        });
-                        error => {
-                            this.errorMessage = <any>error;
-
-                            if (this.errorMessage != null) {
-                                console.log(this.errorMessage);
-                                alert("Error en la petición");
-                            }
-                        }
-                    }
-                }
-            );
-        } else if (this.tipoRecaudoSelected == 6) {
             this._FroReporteIngresosService.pdfRetefuenteByFecha({ 'datos': this.froReporteIngresos, 'tipoArchivo': this.tipoArchivo }, token).subscribe(
                 response => {
                     if (response.status == 'success') {
@@ -681,6 +598,51 @@ export class FroReporteIngresosComponent implements OnInit {
                     }
                 }
             );
-        }
+        } else if (this.tipoRecaudoSelected == 5) {
+            this._FroReporteIngresosService.pdfParqueaderoByFecha(this.froReporteIngresos, token).subscribe(
+                response => {
+                    if(response.code == 200){
+                        this.nombreOrganismoTransito = null;
+                        this.nombreOrganismoTransito = response.data.organismoTransito.nombre;
+                        this.inmovilizaciones = response.data.arrayInmovilizaciones;
+                        this.totalInmovilizaciones = response.data.totalInmovilizaciones;
+
+                        swal({
+                            title: 'Perfecto!',
+                            text: 'Registros encontrados',
+                            type: 'success',
+                            confirmButtonText: 'Aceptar'
+                        });
+
+                        /* var fileURL = URL.createObjectURL(response);
+                        window.open(fileURL); */
+
+                    if (this.table) {
+                        this.table.destroy();
+                    }
+
+                    let timeoutId = setTimeout(() => {
+                        this.onInitTable('parqueadero');
+                    }, 100);
+                        
+                    } else {
+                        swal({
+                            title: 'Error!',
+                            text: 'No existen registros para la generación de reportes en el rango de las fechas estipuladas.',
+                            type: 'error',
+                            confirmButtonText: 'Aceptar'
+                        });
+                        error => {
+                            this.errorMessage = <any>error;
+
+                            if (this.errorMessage != null) {
+                                console.log(this.errorMessage);
+                                alert("Error en la petición");
+                            }
+                        }
+                    }
+                }
+            );
+        } 
     }
 }
