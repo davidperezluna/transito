@@ -61,7 +61,7 @@ export class FroReporteIngresosService {
     }
 
     pdfTramiteByFecha(datos, token): any {
-        let json = JSON.stringify(datos);
+        /* let json = JSON.stringify(datos);
         let params = "data=" + json + "&authorization=" + token;
 
         let headers = new Headers(
@@ -70,7 +70,11 @@ export class FroReporteIngresosService {
             }
         );
 
-        return this._http.post(this.url + "/pdf/tramite/fecha", params, { 'responseType': ResponseContentType.Blob, headers: headers }).map(res => { return new Blob([res.blob()], { type: 'application/pdf' }) });
+        return this._http.post(this.url + "/pdf/tramite/fecha", params, { 'responseType': ResponseContentType.Blob, headers: headers }).map(res => { return new Blob([res.blob()], { type: 'application/pdf' }) }); */
+        let json = JSON.stringify(datos);
+        let params = "data=" + json + "&authorization=" + token;
+        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+        return this._http.post(this.url + "/pdf/tramite/fecha", params, { headers: headers }).map(res => res.json()); 
     }
 
     pdfInfraccionByFecha(datos, token): any {

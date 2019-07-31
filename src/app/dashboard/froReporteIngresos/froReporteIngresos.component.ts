@@ -408,8 +408,9 @@ export class FroReporteIngresosComponent implements OnInit {
         if (this.tipoRecaudoSelected == 1) {
             this._FroReporteIngresosService.pdfTramiteByFecha({ 'identificacion': identity.identificacion, 'filtros': this.froReporteIngresos, 'tipoArchivoTramite': this.tipoArchivoTramite, 'exportarEn': this.exportarSelected }, token).subscribe(
                 response => {
-                    if(response.size > 100){
-                        swal({
+                    if(response.code == 200){
+                        console.log(response);
+                        /* swal({
                             title: 'Perfecto!',
                             text: 'Registros encontrados',
                             type: 'success',
@@ -417,7 +418,7 @@ export class FroReporteIngresosComponent implements OnInit {
                         });
 
                         var fileURL = URL.createObjectURL(response);
-                        window.open(fileURL);
+                        window.open(fileURL); */
                     } else {
                         swal({
                             title: 'Error!',
