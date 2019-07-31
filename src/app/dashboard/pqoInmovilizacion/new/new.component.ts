@@ -182,34 +182,42 @@ constructor(
   
   onEnviar(){
     let token = this._LoginService.getToken();
-    
-		this._InmovilizacionService.register(this.inmovilizacion,token).subscribe(
-			response => {
-        if(response.status == 'success'){
-          this.ready.emit(true);
-          swal({
-            title: 'Perfecto!',
-            text: response.message,
-            type: 'success',
-            confirmButtonText: 'Aceptar'
-          });
-        }else{
-          swal({
-            title: 'Error!',
-            text: 'El inmovilizacion '+  +' ya se encuentra registrado',
-            type: 'error',
-            confirmButtonText: 'Aceptar'
-          })
+
+    if (this.inmovilizacion.placa || this.inmovilizacion.numeroComparendo) {
+      this._InmovilizacionService.register(this.inmovilizacion, token).subscribe(
+        response => {
+          if(response.code == 200){
+            this.ready.emit(true);
+            swal({
+              title: 'Perfecto!',
+              text: response.message,
+              type: response.status,
+              confirmButtonText: 'Aceptar'
+            });
+          }else{
+            swal({
+              title: 'Error!',
+              text: response.message,
+              type: response.status,
+              confirmButtonText: 'Aceptar'
+            });
+          }
+        error => {
+            this.errorMessage = <any>error;
+            if(this.errorMessage != null){
+              console.log(this.errorMessage);
+              alert("Error en la petición");
+            }
+          }
         }
-			error => {
-					this.errorMessage = <any>error;
-					if(this.errorMessage != null){
-						console.log(this.errorMessage);
-						alert("Error en la petición");
-					}
-				}
-
-		}); 
+      ); 
+    }else{
+      swal({
+        title: 'Error!',
+        text: 'Debe diligenciar el No. de placa y/o el No. de comparendo',
+        type: 'error',
+        confirmButtonText: 'Aceptar'
+      });
+    }
   }
-
 }

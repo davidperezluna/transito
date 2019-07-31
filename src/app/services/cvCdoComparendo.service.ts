@@ -12,7 +12,6 @@ export class CvCdoComparendoService {
 	constructor(private _http: Http){}
 
 	getComparendo(){
-		
 		return this._http.get(this.url+"/").map(res => res.json());
 	}
 

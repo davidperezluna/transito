@@ -250,7 +250,7 @@
                         </div>                        
                         <div class="col-xs-12 col-lg-3">
                             <label>No. Licencia conducción</label>
-                            <input class="form-control" [(ngModel)]="infractor.licenciaConduccion" name="infractorLicenciaConduccion" type="text" required>
+                            <input class="form-control" [(ngModel)]="infractor.licenciaConduccion" name="infractorLicenciaConduccion" type="text">
                         </div>
                         <div class="col-xs-12 col-lg-3">
                             <label>Categoria
@@ -271,8 +271,8 @@
                     <div class="row">
                         <div class="col-xs-12 col-lg-4">
                             <label>Tipo Identificación</label>
-                            <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="infractor.idTipoIdentificacion" name="infractorTipoIdentificacion"
-                                required></ng-select>
+                            <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="infractor.idTipoIdentificacion" name="infractorTipoIdentificacion">
+                            </ng-select>
                         </div>
                         <div class="col-xs-12 col-lg-4">
                             <label>Número documento identidad</label>
@@ -296,8 +296,7 @@
                         </div>
                         <div class="col-xs-12 col-lg-6">
                             <label>Municipio</label>
-                            <ng-select [multiple]="false" [options]="municipios" [(ngModel)]="infractor.idMunicipio" name="infractorMunicipio"
-                                required>
+                            <ng-select [multiple]="false" [options]="municipios" [(ngModel)]="infractor.idMunicipio" name="infractorMunicipio">
                             </ng-select>
                         </div>
                         <div class="col-xs-12 col-lg-6">
@@ -328,12 +327,12 @@
                             <div class="row">
                                 <div class="col-xs-12 col-lg-6">
                                     <label>Org.de T.</label>
-                                    <ng-select [multiple]="false" [options]="organismosTransitoNacional" [(ngModel)]="comparendo.idOrganismoTransitoLicencia" name="organismoTransitoLicencia"
-                                        required></ng-select>
+                                    <ng-select [multiple]="false" [options]="organismosTransitoNacional" [(ngModel)]="comparendo.idOrganismoTransitoLicencia" name="organismoTransitoLicencia">
+                                    </ng-select>
                                 </div>
                                 <div class="col-xs-12 col-lg-6">
                                     <label>No. del documento</label>
-                                    <input class="form-control" [(ngModel)]="comparendo.licenciaTransitoNumero" name="licenciaTransitoNumero" type="text" required>
+                                    <input class="form-control" [(ngModel)]="comparendo.licenciaTransitoNumero" name="licenciaTransitoNumero" type="text">
                                 </div>
                             </div>
                         </div>
@@ -348,8 +347,8 @@
                         </div>
                         <div class="col-xs-12 col-lg-3">
                             <label>Tipo Identificación</label>
-                            <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="propietario.idTipoIdentificacion" name="propietarioTipoIdentificacion"
-                                required></ng-select>
+                            <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="propietario.idTipoIdentificacion" name="propietarioTipoIdentificacion"> 
+                            </ng-select>
                         </div>
                         <div class="col-xs-12 col-lg-4">
                             <label>Número documento identidad</label>
@@ -423,7 +422,8 @@
 
                             <div class="row">
                                 <div class="col-xs-12 col-lg-12">
-                                    <span class="badge badge-success">No se realizo registro de inmovilización</span>
+                                    <span class="badge badge-success" *ngIf="inmovilizacionOld">Presenta registro de inmovilización</span>
+                                    <span class="badge badge-danger" *ngIf="!inmovilizacionOld">No se realizo registro de inmovilización</span>
                                 </div>
                             </div>
                         </div>

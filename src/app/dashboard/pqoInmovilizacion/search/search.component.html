@@ -77,11 +77,19 @@
     <div class="col-xs-12 col-lg-4" *ngIf="formExit">
         <div class="card">
             <div class="card-header">
-                <b class="text-uppercase">Regitrar salida</b>
+                <b class="text-uppercase">Autorizar salida</b>
             </div>
             <div class="card-body">
                 <form #formNew="ngForm">
                     <div class="form-group">
+                        <div class="row" *ngIf="comparendo">
+                            <div class="col-xs-12 col-lg-12">
+                                <a href="{{ apiUrl }}/{{ comparendo.id }}/pdf" class="btn btn-primary" target="_blank">
+                                    <i class="fa fa-file-pdf-o"></i>
+                                    Visualizar comparendo
+                                </a>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-xs-12 col-lg-12">
                                 <label>Observaciones
