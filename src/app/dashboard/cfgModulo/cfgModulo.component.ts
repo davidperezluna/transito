@@ -33,7 +33,7 @@ export class CfgModuloComponent implements OnInit {
       }
     });
 
-		this._ModuloService.select().subscribe(
+		this._ModuloService.index().subscribe(
 				response => {
           this.modulos = response;
 
