@@ -22,6 +22,8 @@ export class NewConceptoFavorableComponent implements OnInit {
     public errorMessage;
 
     public nit: any = null;
+    public numeroActo: any = null;
+
     public empresaEncontrada;
     public empresaActual;
     public arrayCuposDisponibles = null;
@@ -67,11 +69,20 @@ export class NewConceptoFavorableComponent implements OnInit {
 
         this._UserEmpresaTransporteService.searchByVehiculo({ 'idVehiculo': this.vehiculo.id }, token).subscribe(
             response => {
-                this.empresaActual = response.data.empresaTransporte.empresa.nombre;
-                this.datos.idEmpresaActual = response.data.empresaTransporte.empresa.id;
-                this.datos.numeroCupoActual = response.data.cupo.numero;
-                this.datos.idNivelServicioAnterior = response.data.nivelServicio.id;
-                this.datos.numeroTarjetaOperacionActual = response.data.tarjetaOperacion.numeroTarjetaOperacion;
+                if (response.code == 200) {
+                    this.empresaActual = response.data.empresaTransporte.empresa.nombre;
+                    this.datos.idEmpresaActual = response.data.empresaTransporte.empresa.id;
+                    this.datos.numeroCupoActual = response.data.cupo.numero;
+                    this.datos.idNivelServicioAnterior = response.data.nivelServicio.id;
+                    this.datos.numeroTarjetaOperacionActual = response.data.tarjetaOperacion.numeroTarjetaOperacion;
+                } else {
+                    swal({
+                        title: response.title,
+                        text: response.message,
+                        type: response.status,
+                        confirmButtonText: 'Aceptar'
+                    })
+                }
             },
             error => {
                 this.errorMessage = <any>error;
@@ -144,7 +155,7 @@ export class NewConceptoFavorableComponent implements OnInit {
     onSearchEmpresaTransporte() {
         let token = this._LoginService.getToken();
 
-        this._UserEmpresaTransporteService.searchByNit(this.nit, token).subscribe(
+        this._UserEmpresaTransporteService.searchByNitAndNumeroActo({ 'nit': this.nit, 'numeroActo': this.numeroActo }, token).subscribe(
             response => {
                 if (response.code == 200) {
                     this.empresaEncontrada = response.data;
