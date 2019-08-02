@@ -61,20 +61,24 @@ export class FroReporteIngresosService {
     }
 
     pdfTramiteByFecha(datos, token): any {
-        /* let json = JSON.stringify(datos);
-        let params = "data=" + json + "&authorization=" + token;
+        let contentType;
 
-        let headers = new Headers(
-            {
-                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-            }
-        );
-
-        return this._http.post(this.url + "/pdf/tramite/fecha", params, { 'responseType': ResponseContentType.Blob, headers: headers }).map(res => { return new Blob([res.blob()], { type: 'application/pdf' }) }); */
         let json = JSON.stringify(datos);
-        let params = "data=" + json + "&authorization=" + token;
-        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-        return this._http.post(this.url + "/pdf/tramite/fecha", params, { headers: headers }).map(res => res.json()); 
+
+        let formData = new FormData();
+
+        formData.append('data', json);
+        formData.append('authorization', token);
+
+        return this._http.post(this.url + "/pdf/tramite/fecha", formData, { 'responseType': ResponseContentType.Blob }).map(res => { 
+            contentType = res.headers.get('Content-type');
+            if (contentType == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
+                return new Blob([res.blob()], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' })
+            } else if (contentType == 'application/pdf') {
+                return new Blob([res.blob()], { type: 'application/pdf' })
+            }
+        });
+        
     }
 
     pdfInfraccionByFecha(datos, token): any {
@@ -82,17 +86,6 @@ export class FroReporteIngresosService {
         let params = "data=" + json + "&authorization=" + token;
         let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
         return this._http.post(this.url + "/pdf/infraccion/fecha", params, { headers: headers }).map(res => res.json()); 
-        /* let json = JSON.stringify(datos);
-        let params = "data=" + json + "&authorization=" + token;
-
-        let headers = new Headers(
-            {
-                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-            }
-        );
-
-        return this._http.post(this.url + "/pdf/infraccion/fecha", params, { 'responseType': ResponseContentType.Blob, headers: headers }).map(res => { return new Blob([res.blob()], { type: 'application/pdf' }) }
-        );  */
     }
 
     pdfAcuerdoPagoByFecha(datos, token): any {
@@ -100,17 +93,6 @@ export class FroReporteIngresosService {
         let params = "data=" + json + "&authorization=" + token;
         let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
         return this._http.post(this.url + "/pdf/acuerdopago/fecha", params, { headers: headers }).map(res => res.json()); 
-        /* let json = JSON.stringify(datos);
-        let params = "data=" + json + "&authorization=" + token;
-
-        let headers = new Headers(
-            {
-                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-            }
-        );
-
-        return this._http.post(this.url + "/pdf/acuerdopago/fecha", params, { 'responseType': ResponseContentType.Blob, headers: headers }).map(res => { return new Blob([res.blob()], { type: 'application/pdf' }) }
-        );  */
     }
 
     pdfCobroCoactivoByFecha(datos, token): any {
@@ -136,17 +118,6 @@ export class FroReporteIngresosService {
         let params = "data=" + json + "&authorization=" + token;
         let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
         return this._http.post(this.url + "/pdf/parqueadero/fecha", params, { headers: headers }).map(res => res.json());
-        /* let json = JSON.stringify(datos);
-        let params = "data=" + json + "&authorization=" + token;
-
-        let headers = new Headers(
-            {
-                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-            }
-        );
-
-        return this._http.post(this.url + "/pdf/parqueadero/fecha", params, { 'responseType': ResponseContentType.Blob, headers: headers }).map(res => { return new Blob([res.blob()], { type: 'application/pdf' }) }
-        );  */
     }
 
     pdfRetefuenteByFecha(datos, token) {

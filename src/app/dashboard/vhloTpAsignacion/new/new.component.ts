@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { VhloTpAsignacion } from "../vhloTpAsignacion.modelo";
 import { VhloTpAsignacionService } from "../../../services/vhloTpAsignacion.service";
+import { VhloCfgNivelServicioService } from "../../../services/vhloCfgNivelServicio.service";
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -24,16 +25,16 @@ export class NewComponent implements OnInit {
     public placa;
 
     public cupos;
+    public nivelesServicio;
 
     constructor(
         private _LoginService: LoginService,
         private _VhloTpAsignacionService: VhloTpAsignacionService,
+        private _VhloCfgNivelServicioService: VhloCfgNivelServicioService,
     ) { }
 
     ngOnInit() {
-        console.log(this.empresaHabilitadaRango);
-
-        this.asignacion = new VhloTpAsignacion(null, null, null, null);
+        this.asignacion = new VhloTpAsignacion(null, null, null, null, null);
         
         let token = this._LoginService.getToken();
         this._VhloTpAsignacionService.searchCuposDisponibles({'idEmpresa': this.empresaHabilitadaRango.id }, token).subscribe(
@@ -54,6 +55,22 @@ export class NewComponent implements OnInit {
                         console.log(this.errorMessage);
                         alert('Error en la petición');
                     }
+                }
+            }
+        );
+        this._VhloCfgNivelServicioService.select().subscribe(
+            response => {
+                this.nivelesServicio = response;
+                let timeoutId = setTimeout(() => {
+                    this.onInitTable();
+                }, 100);
+            },
+            error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert("Error en la petición");
                 }
             }
         );

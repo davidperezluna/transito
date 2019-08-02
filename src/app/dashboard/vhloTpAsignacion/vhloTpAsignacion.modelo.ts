@@ -4,6 +4,7 @@ export class VhloTpAsignacion {
 
         public idEmpresa: number,
         public idVehiculo: number,
+        public idNivelServicio: number,
         public id: number,
     ) { }
 }

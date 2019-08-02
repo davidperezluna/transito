@@ -59,12 +59,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xs-16 col-lg-6">
+                    <div class="col-xs-16 col-lg-6" *ngIf='vehiculo' style="margin-top: -36%;">
                         <div class="row">
+                            <strong class="text-uppercase">Datos de propietario(s)</strong>
                             <table class="table" id="dataTables-propietario">
                                 <thead>
                                     <tr>
-                                        <th><b>Tipo Identificación</b></th>
+                                        <!-- <th><b>Tipo Identificación</b></th> -->
                                         <th><b>Identificación</b></th>
                                         <th><b>Nombres</b></th>
                                         <th><b>Apellidos</b></th>
@@ -75,10 +76,10 @@
                                 </thead>
                                 <tbody>
                                     <tr class="odd" *ngFor="let propietario of propietarios; let i = index">
-                                        <td>
+                                        <!-- <td>
                                             <span *ngIf="propietario.ciudadano">{{ propietario.ciudadano.tipoIdentificacion.sigla }}</span>
                                             <span *ngIf="propietario.empresa">{{ propietario.empresa.tipoIdentificacion.sigla }}</span>
-                                        </td>
+                                        </td> -->
                                         <td>
                                             <span *ngIf="propietario.ciudadano">{{ propietario.ciudadano.identificacion }}</span>
                                             <span *ngIf="propietario.empresa">{{ propietario.empresa.nit }}</span>
@@ -110,89 +111,18 @@
                             </table>
                         </div>
                     </div>
-                </div>
-                <div class="col-xs-6 col-lg-6">
-                    <label>Cupos Disponibles <strong class="text-danger">*</strong></label>
-                    <ng-select [multiple]="false" [options]="cupos" [(ngModel)]="asignacion.idCupo" required name="idCupo">
-                    </ng-select>
-                </div>
-            </form>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-12 col-lg-7">
-            <div class="card" *ngIf='vehiculo'>
-                <div class="card-header">
-                    <h5 class="card-title">
-                        <strong class="text-uppercase">Datos de propietario(s)</strong>
-                    </h5>
-                </div>
-                <div class="card-body">
-                    <div class="form-group row">
-                        <div class="col-xs-16 col-lg-6">
-                            <div class="row">
-                                <div class="col-xs-12 col-lg-12">
-                                    <!-- <table class="table table-bordered table-striped">
-                                        <tr>
-                                            <th><b>Tipo Identificación</b></th>
-                                            <th><b>Identificación</b></th>
-                                            <th><b>Nombres</b></th>
-                                            <th><b>Apellidos</b></th>
-                                            <th><b>Dirección</b></th>
-                                            <th><b>Teléfono</b></th>
-                                            <th><b>Ciudad</b></th>
-                                        </tr>
-                                        <tr class="odd" *ngFor="let propietario of propietarios; let i = index">
-                                            <td>
-                                                <span
-                                                    *ngIf="propietario.ciudadano">{{ propietario.ciudadano.tipoIdentificacion.sigla }}</span>
-                                                <span
-                                                    *ngIf="propietario.empresa">{{ propietario.empresa.tipoIdentificacion.sigla }}</span>
-                                            </td>
-                                            <td>
-                                                <span
-                                                    *ngIf="propietario.ciudadano">{{ propietario.ciudadano.identificacion }}</span>
-                                                <span *ngIf="propietario.empresa">{{ propietario.empresa.nit }}</span>
-                                            </td>
-                                            <td>
-                                                <span
-                                                    *ngIf="propietario.ciudadano">{{ propietario.ciudadano.primerNombre }}
-                                                    {{ propietario.ciudadano?.segundoNombre }}</span>
-                                                <span
-                                                    *ngIf="propietario.empresa">{{ propietario.empresa.nombre }}</span>
-                                            </td>
-                                            <td>
-                                                <span
-                                                    *ngIf="propietario.ciudadano">{{ propietario.ciudadano.primerApellido }}
-                                                    {{ propietario.ciudadano?.segundoApellido }}</span>
-                                                <span *ngIf="propietario.empresa"></span>
-                                            </td>
-                                            <td>
-                                                <span
-                                                    *ngIf="propietario.ciudadano">{{ propietario.ciudadano.direccionPersonal }}</span>
-                                                <span
-                                                    *ngIf="propietario.empresa">{{ propietario.empresa.direccion }}</span>
-                                            </td>
-                                            <td>
-                                                <span
-                                                    *ngIf="propietario.ciudadano">{{ propietario.ciudadano.municipioResidencia.codigoDane }}</span>
-                                                <span
-                                                    *ngIf="propietario.empresa">{{ propietario.empresa.municipio.codigoDane }}</span>
-                                            </td>
-                                            <td>
-                                                <span
-                                                    *ngIf="propietario.ciudadano">{{ propietario.ciudadano.telefonoCelular }}</span>
-                                                <span
-                                                    *ngIf="propietario.empresa">{{ propietario.empresa.telefono }}</span>
-                                            </td>
-                                        </tr>
-                                    </table> -->
-                                </div>
-                            </div>
-                        </div>
+                    <div class="col-xs-6 col-lg-6" *ngIf="vehiculo"> 
+                        <label>Cupos Disponibles <strong class="text-danger">*</strong></label>
+                        <ng-select [multiple]="false" [options]="cupos" [(ngModel)]="asignacion.idCupo" required name="idCupo">
+                        </ng-select>
+                    </div>
+                    <div class="col-xs-6 col-lg-6" *ngIf="vehiculo" style="margin-top: -8.5%;">
+                        <label>Nivel Servicio <strong class="text-danger">*</strong></label>
+                        <ng-select [multiple]="false" [options]="nivelesServicio" [(ngModel)]="asignacion.idNivelServicio" required name="idNivelServicio">
+                        </ng-select>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
     <div class="card-footer">

@@ -106,13 +106,6 @@ export class FroReporteIngresosComponent implements OnInit {
             response => {
                 if (response.code == 200) {
                     this.funcionario = response.data;
-                    console.log(this.funcionario);
-                    swal({
-                        title: response.title,
-                        text: response.message,
-                        type: response.status,
-                        confirmButtonText: 'Aceptar'
-                    });
                 } else {
                     swal({
                         title: response.title,
@@ -405,20 +398,20 @@ export class FroReporteIngresosComponent implements OnInit {
         this.froReporteIngresos.idOrganismoTransito = this.organismoTransitoSelected;
         this.froReporteIngresos.idTipoRecaudo = this.tipoRecaudoSelected;
 
-        if (this.tipoRecaudoSelected == 1) {
-            this._FroReporteIngresosService.pdfTramiteByFecha({ 'identificacion': identity.identificacion, 'filtros': this.froReporteIngresos, 'tipoArchivoTramite': this.tipoArchivoTramite, 'exportarEn': this.exportarSelected }, token).subscribe(
-                response => {
-                    if(response.code == 200){
-                        console.log(response);
-                        /* swal({
-                            title: 'Perfecto!',
-                            text: 'Registros encontrados',
-                            type: 'success',
-                            confirmButtonText: 'Aceptar'
-                        });
+        let datos = { 
+            'identificacion': identity.identificacion, 
+            'filtros': this.froReporteIngresos, 
+            'tipoArchivoTramite': this.tipoArchivoTramite, 
+            'exportarEn': this.exportarSelected 
+        };
 
+        if (this.tipoRecaudoSelected == 1) {
+            this._FroReporteIngresosService.pdfTramiteByFecha(datos, token).subscribe(
+                response => {
+                    console.log(response);
+                    if(response.type){
                         var fileURL = URL.createObjectURL(response);
-                        window.open(fileURL); */
+                        window.open(fileURL);
                     } else {
                         swal({
                             title: 'Error!',
