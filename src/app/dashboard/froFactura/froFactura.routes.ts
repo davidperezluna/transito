@@ -3,6 +3,7 @@ import { FroFacturaComponent } from '.';
 import { FroFacAcuerdoPagoComponent } from '.';
 import { FroFacInfraccionComponent } from '.';
 import { FroFacTramiteComponent } from '.';
+import { FroFacParqueaderoComponent } from '.';
 
 export const FroFacturaRoutes: Route[] = [
     {
@@ -23,6 +24,11 @@ export const FroFacturaRoutes: Route[] = [
     {
       path: 'factura/tramite',
       component: FroFacTramiteComponent
+    },
+
+    {
+      path: 'factura/parqueadero',
+      component: FroFacParqueaderoComponent
     }
 ];
  
