@@ -124,7 +124,7 @@ export class VhloVehiculoService {
 		return this._http.post(this.url + "/certificado/tradicion/file", formData, { 'responseType': ResponseContentType.Blob }).map(res =>{
 				contentType = res.headers.get('Content-type');
 				if (contentType == 'application/json') {
-					return res.json();   
+					return res.json();
 				} else if (contentType == 'application/pdf') {
 					return new Blob([res.blob()], { type: 'application/pdf' })
 				}
