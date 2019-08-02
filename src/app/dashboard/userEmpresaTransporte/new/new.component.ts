@@ -49,7 +49,7 @@ export class NewComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.empresaTransporte = new UserEmpresaTransporte(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+        this.empresaTransporte = new UserEmpresaTransporte(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
         this._VhloCfgRadioAccionService.select().subscribe(
             response => {
                 this.radiosAccion = response;

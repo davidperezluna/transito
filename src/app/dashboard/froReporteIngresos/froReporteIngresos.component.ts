@@ -106,13 +106,6 @@ export class FroReporteIngresosComponent implements OnInit {
             response => {
                 if (response.code == 200) {
                     this.funcionario = response.data;
-                    console.log(this.funcionario);
-                    swal({
-                        title: response.title,
-                        text: response.message,
-                        type: response.status,
-                        confirmButtonText: 'Aceptar'
-                    });
                 } else {
                     swal({
                         title: response.title,

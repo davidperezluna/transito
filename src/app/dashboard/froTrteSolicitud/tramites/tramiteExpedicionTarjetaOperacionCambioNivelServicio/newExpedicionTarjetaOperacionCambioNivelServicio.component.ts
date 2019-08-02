@@ -58,11 +58,10 @@ export class NewExpedicionTarjetaOperacionCambioNivelServicioComponent implement
         this._VhloTpAsignacionService.searchCupoByVehiculo({ 'idVehiculo': this.vehiculo.id }, token).subscribe(
             response => {
                 this.cupo = response.data;
-                this.datos.idNivelServicioAnterior = [this.cupo.nivelServicio.id];
 
-                /* let timeoutId = setTimeout(() => {
-                    this.ngOnInit();
-                }, 100); */
+                let timeoutId = setTimeout(() => {
+                    this.datos.idNivelServicioAnterior = [this.cupo.nivelServicio.id];
+                }, 100);
             },
             error => {
                 this.errorMessage = <any>error;

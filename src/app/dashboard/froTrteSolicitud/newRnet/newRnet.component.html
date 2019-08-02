@@ -346,7 +346,7 @@
                         *ngIf="(requiereSustrato && tramiteSolicitud.insumoEntregado) || !requiereSustrato">
                         <div class="form-group">
                             <div class="row">
-                                <div class="col-xs-12 col-lg-12">
+                                <!-- <div class="col-xs-12 col-lg-12">
                                     <label>Número de folios <b class="text-danger">*</b></label>
                                     <input type="text" class="form-control" placeholder="No. de folios"
                                         [(ngModel)]="tramiteSolicitud.numeroFolios" name="numeroFolios" required />
@@ -369,7 +369,7 @@
                                     <label>Número de caja <b class="text-danger">*</b></label>
                                     <input type="text" class="form-control" placeholder="No. de caja"
                                         [(ngModel)]="tramiteSolicitud.numeroCaja" name="numeroCaja" required />
-                                </div>
+                                </div> -->
                             </div>
                             <div class="row" *ngIf="requiereRunt">
                                 <div class="col-xs-12 col-lg-12">
@@ -390,6 +390,26 @@
                                         <i class="fa fa-save"></i>
                                         Guardar información
                                     </button>
+                                    <!-- <a *ngIf="imprimirResolucion" href="{{ apiUrl }}/{{ vehiculo.id }}/{{ numeroResolucion }}/resolucion/cambioServicio/pdf" class="btn btn-light" target="_blank">
+                                        <i class="fa fa-eye"></i>IMPRIMIR RESOLUCIÓN
+                                    </a> -->
+                                    <a *ngIf="imprimirResolucion" href="{{ apiUrl }}/{{ vehiculo.id }}/{{ tramiteSolicitud.tramitesRealizados[0].foraneas.idEmpresaActual }}/{{ numeroResolucion }}/resolucion/cambioEmpresa/pdf"
+                                        class="btn btn-light" target="_blank">
+                                        <i class="fa fa-eye"></i>IMPRIMIR RESOLUCIÓN
+                                    </a>
+                                    <a *ngIf="imprimirResolucion" href="{{ apiUrl }}/{{ vehiculo.id }}/{{ tramiteSolicitud.tramitesRealizados[0].foraneas.idEmpresaActual }}/{{ numeroResolucion }}/resolucion/cambioEmpresa/pdf"
+                                        class="btn btn-light" target="_blank">
+                                        <i class="fa fa-eye"></i>IMPRIMIR RESOLUCIÓN
+                                    </a>
+                                    <!-- <a *ngIf="imprimirResolucion" href="{{ apiUrl }}/{{ vehiculo.id }}/{{ tramiteSolicitud.tramitesRealizados[0].foraneas.idEmpresaActual }}/{{ tramiteSolicitud.tramitesRealizados[0].foraneas.numeroConceptoFavorable }}/{{ numeroResolucion }}/resolucion/cambioEmpresaConceptoFavorable/pdf"
+                                        class="btn btn-light" target="_blank">
+                                        <i class="fa fa-eye"></i>IMPRIMIR RESOLUCIÓN
+                                    </a> -->
+                                    <!-- <a *ngIf="imprimirResolucion"
+                                        href="{{ apiUrl }}/{{ vehiculo.id }}/{{ numeroResolucion }}/resolucion/desvinculacionComunAcuerdo/pdf"
+                                        class="btn btn-light" target="_blank">
+                                        <i class="fa fa-eye"></i>IMPRIMIR RESOLUCIÓN
+                                    </a> -->
                                 </div>
                             </div>
                         </div>
