@@ -8,7 +8,6 @@ import { PqoInmovilizacionService } from '../../services/pqoInmovilizacion.servi
 import { PqoInmovilizacionComponent } from './pqoInmovilizacion.component';
 import { NewComponent } from './new/new.component';
 import { EditComponent } from './edit/edit.component';
-import { ExitComponent } from './exit/exit.component';
 import { SearchComponent } from './search/search.component';
 
 @NgModule({
@@ -17,14 +16,12 @@ import { SearchComponent } from './search/search.component';
         PqoInmovilizacionComponent,
         NewComponent,
         EditComponent,
-        ExitComponent,
         SearchComponent
     ],
     exports: [
         PqoInmovilizacionComponent,
         NewComponent,
         EditComponent,
-        ExitComponent,
         SearchComponent
     ],
     providers:[PqoInmovilizacionService]

@@ -1,0 +1,53 @@
+<div class="container" >
+  <div class="row" *ngIf='formIndex'>
+    <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <b class="text-uppercase">Inventarios consecutivos en bodega</b>
+            <div class="btn-group pull-right">
+              <button (click)="onNew()" class="btn btn-default">
+                <i class="fa fa-plus"></i>
+                <span class="text">Nuevo</span>
+              </button>
+            </div>
+          </div>
+          <div class="card-body">
+            <table class="table " id="dataTables-example">
+              <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Fecha</th>
+                    <th>Cantidad recibida</th>
+                    <th>Cantidad disponible</th>
+                    <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="odd" *ngFor="let bodega of bodegas; let i = index">
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ (bodega.fecha.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td>
+                  <td>{{ bodega.cantidadRecibida }}</td>
+                  <td>{{ bodega.cantidadDisponible }}</td>
+                  <td>
+                    <div class="btn-group">
+                      <button (click)="onEdit(bodega)" class="btn btn-xs btn-primary" type="button" tooltip="Editar" [tooltipDisabled]="false" [tooltipAnimation]="true"
+                        tooltipPlacement="top">
+                        <i class="fa fa-pencil"></i>
+                      </button>
+                      <button (click)="onDelete(bodega.id)" class="btn btn-xs btn-danger" type="button" tooltip="Eliminar" [tooltipDisabled]="false" [tooltipAnimation]="true" tooltipPlacement="top">
+                        <i class="fa fa-trash"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- /.table-responsive --> 
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <app-edit *ngIf='formEdit' [bodega]="bodega" (ready)="ready($event)"></app-edit>
+    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+</div>

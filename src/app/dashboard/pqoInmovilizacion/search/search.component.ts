@@ -15,12 +15,14 @@ declare var $: any;
 export class SearchComponent implements OnInit {
     public errorMessage;
 
-    public apiUrl = environment.apiUrl + 'contravencional/cvcdocomparendo';
+    public apiUrlComparendo = environment.apiUrl + 'contravencional/cvcdocomparendo';
+    public apiUrlInmovilizacion = environment.apiUrl + 'parqueadero/pqoinmovilizacion';
 
     public inmovilizaciones;
     public inmovilizacion: any = null;
     public funcionario: any = null;
     public comparendo: any = null;
+    public autorizacion: any = null;
 
     public formSearch: any;
     public formIndex: any;
@@ -208,9 +210,11 @@ export class SearchComponent implements OnInit {
 
     this.datos.idInmovilizacion = this.inmovilizacion.id;
 
-    this._InmovilizacionService.authorization(this.datos, token).subscribe(
+    this._InmovilizacionService.exit(this.datos, token).subscribe(
       response => {
         if (response.code == 200) {
+          this.autorizacion = response.data;
+
           swal({
             title: 'Perfecto!',
             text: response.message,
@@ -218,8 +222,10 @@ export class SearchComponent implements OnInit {
             confirmButtonText: 'Aceptar'
           });
 
-          this.ngOnInit();
+          this.onSearch();
         }else{
+          this.autorizacion = null;
+
           swal({
             title: 'Error!',
             text: response.message,

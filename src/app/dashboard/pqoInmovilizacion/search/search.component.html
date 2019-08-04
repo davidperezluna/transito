@@ -36,6 +36,12 @@
             <div class="card">
                 <div class="card-header">
                     <b class="text-uppercase">Inmovilizaciones</b>
+                    <div class="btn-group pull-right">
+                        <button (click)="onCancelar()" class="btn btn-xs btn-default">
+                            <i class="fa fa-times"></i>
+                            <span class="text">Cancelar</span>
+                        </button>
+                    </div>
                 </div>
                 <div class="card-body">
                     <table class="table" id="dataTables-example">
@@ -60,9 +66,12 @@
                             </td>
                             <td>
                                 <div class="btn-group">
-                                    <button (click)="onExit(inmovilizacion)" class="btn btn-xs btn-success" type="button">
-                                    <i class="fa fa-check"></i>
-                                    </button> 
+                                    <button *ngIf="inmovilizacion.estado == 'INMOVILIZADO'" (click)="onExit(inmovilizacion)" class="btn btn-xs btn-success" type="button">
+                                        <i class="fa fa-check"></i>
+                                    </button>
+                                    <a *ngIf="inmovilizacion.estado == 'AUTORIZADO'" href="{{ apiUrlInmovilizacion }}/{{ inmovilizacion.id }}/exit/pdf" class="btn btn-primary" target="_blank">
+                                        <i class="fa fa-file-pdf-o"></i>
+                                    </a>
                                 </div>
                             </td>
                             </tr>
@@ -84,7 +93,7 @@
                     <div class="form-group">
                         <div class="row" *ngIf="comparendo">
                             <div class="col-xs-12 col-lg-12">
-                                <a href="{{ apiUrl }}/{{ comparendo.id }}/pdf" class="btn btn-primary" target="_blank">
+                                <a href="{{ apiUrlComparendo }}/{{ comparendo.id }}/pdf" class="btn btn-primary" target="_blank">
                                     <i class="fa fa-file-pdf-o"></i>
                                     Visualizar comparendo
                                 </a>

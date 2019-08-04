@@ -26,7 +26,7 @@ constructor(
   ){}
 
   ngOnInit() {
-    this.patio = new PqoCfgPatio(null, null, null, null, null, null, null, null, null, null, null);
+    this.patio = new PqoCfgPatio(null, null, null, null, null, null, null, null, null, false, null, null);
 
     let token = this._LoginService.getToken();
 

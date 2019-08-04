@@ -198,6 +198,7 @@ import { GdCfgMedioCorrespondenciaModule } from './gdCfgMedioCorrespondencia/gdC
 import { FroInfraccionModule } from './froInfraccion/froInfraccion.module';
 import { FroInfrCfgCategoriaModule } from './froInfrCfgCategoria/froInfrCfgCategoria.module';
 
+import { PnalCfgCdoBodegaModule } from './pnalCfgCdoBodega/pnalCfgCdoBodega.module';
 import { PnalCfgCdoConsecutivoModule } from './pnalCfgCdoConsecutivo/pnalCfgCdoConsecutivo.module';
 import { PnalCfgCargoModule } from './pnalCfgCargo/pnalCfgCargo.module';
 import { PnalCfgTipoNombramientoModule } from './pnalCfgTipoNombramiento/pnalCfgTipoNombramiento.module';
@@ -228,12 +229,6 @@ import { ReporteModule } from './reporte/reporte.module';
 import { VhloRnrsPreregistroModule } from './vhloRnrsPreregistro/vhloRnrsPreregistro.module';
 import { VhloCertificadoTradicionModule } from './vhloCertificadoTradicion/vhloCertificadoTradicion.module';
 
-import { BpCfgTipoInsumoModule } from './bpCfgTipoInsumo/bpCfgTipoInsumo.module';
-import { BpInsumoModule } from './bpInsumo/bpInsumo.module';
-import { BpActividadModule } from './bpActividad/bpActividad.module';
-import { BpCuentaModule } from './bpCuenta/bpCuenta.module';
-import { BpProyectoModule } from './bpProyecto/bpProyecto.module';
-
 import { FroFacturaModule } from './froFactura/froFactura.module';
 import { FroRecaudoModule } from './froRecaudo/froRecaudo.module';
 import { FroTramiteModule } from './froTramite/froTramite.module';
@@ -243,8 +238,6 @@ import { FroTrteSolicitudModule } from './froTrteSolicitud/froTrteSolicitud.modu
 import { FroReporteIngresosModule } from './froReporteIngresos/froReporteIngresos.module';
 import { FroCfgTipoRecaudoModule } from './froCfgTipoRecaudo/froCfgTipoRecaudo.module';
 import { FroAcuerdoPagoModule } from './froAcuerdoPago/froAcuerdoPago.module';
-
-import { BpCdpModule } from './bpCdp/bpCdp.module';
 
 import { DashboardComponent } from './dashboard.component'; 
 
@@ -355,6 +348,7 @@ import {RightsidebarComponent} from '../shared';
     PqoCfgGruaModule,
     PqoGruaCiudadanoModule,
     PqoInmovilizacionModule,
+    PnalCfgCdoBodegaModule,
     PnalCfgCdoConsecutivoModule,
     PnalCfgCargoModule,
     PnalCfgTipoNombramientoModule,
@@ -453,12 +447,6 @@ import {RightsidebarComponent} from '../shared';
     ImoLoteModule,
     UserCfgTipoMedidaCautelarModule,
     CvMedidaCautelarModule,
-    BpCfgTipoInsumoModule,
-    BpInsumoModule,
-    BpCuentaModule,
-    BpActividadModule,
-    BpProyectoModule,
-    BpCdpModule,
     VhloRnrsPreasignacionPlacaModule,
     VhloTpConvenioModule,
     VhloTpAsignacionModule,

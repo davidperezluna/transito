@@ -92,7 +92,10 @@ export class ImoActaComponent implements OnInit {
 
     this._ImoInsumoService.pdfActaInsumo(this.data, token).subscribe((response)=>{     
       var fileURL = URL.createObjectURL(response);
-      window.open(fileURL);
-    })
+      var myWindow = window.open(fileURL);
+
+      myWindow.focus();
+      print();
+    });
   }
 }

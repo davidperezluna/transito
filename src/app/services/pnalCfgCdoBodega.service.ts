@@ -1,12 +1,12 @@
 import  {Injectable} from "@angular/core";
-import  {Http, Response, Headers} from "@angular/http";
-import { environment } from 'environments/environment';
+import  {Http, Headers} from "@angular/http";
 import { LoggerService } from "../logger/services/logger.service";
+import { environment } from 'environments/environment';
 import  "rxjs/add/operator/map";
 
 @Injectable()
-export class PqoInmovilizacionService {
-	private url = environment.apiUrl + 'parqueadero/pqoinmovilizacion';
+export class PnalCfgCdoBodegaService {
+	private url = environment.apiUrl + 'personal/pnalcfgcdobodega';
 	public identity;
 	public token;
 
@@ -39,11 +39,11 @@ export class PqoInmovilizacionService {
 		);
 	}
 
-	show(token, id) {
-		let params = "authorization=" + token;
+	show(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = "data=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-		return this._http.post(this.url + "/" + id + "/show", params, { headers: headers })
-			.map(res => res.json());
+		return this._http.post(this.url + "/show", params, { headers: headers }).map(res => res.json());
 	}
 
 	edit(datos, token) {
@@ -56,27 +56,14 @@ export class PqoInmovilizacionService {
 		);
 	}
 
-	exit(datos, token) {
-		let json = JSON.stringify(datos);
-		let params = "data=" + json + "&authorization=" + token;
-		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-		return this._http.post(this.url + "/exit", params, { headers: headers }).map(
-			res => res.json(),
-			this._loogerService.registerLog(token, 'UPDATE', json, this.url)
-		);
+	select() {
+		return this._http.get(this.url + "/select").map(res => res.json());
 	}
 
-	findByComparendo(datos, token) {
+	searchByFecha(datos, token) {
 		let json = JSON.stringify(datos);
 		let params = "data=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-		return this._http.post(this.url + "/find/comparendo", params, { headers: headers }).map(res => res.json());
-	}
-
-	searchByFilter(datos, token) {
-		let json = JSON.stringify(datos);
-		let params = "data=" + json + "&authorization=" + token;
-		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-		return this._http.post(this.url + "/search/filter", params, { headers: headers }).map(res => res.json());
+		return this._http.post(this.url + "/search/fecha", params, { headers: headers }).map(res => res.json());
 	}
 }

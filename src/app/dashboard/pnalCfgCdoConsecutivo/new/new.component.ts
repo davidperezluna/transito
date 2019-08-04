@@ -57,7 +57,7 @@ constructor(
       if (cantidad < 0) {
         cantidad = 0;
       }
-      this.consecutivo.cantidadRecibida = cantidad;
+      this.consecutivo.cantidad = cantidad;
     }else{
       swal({
         title: 'Alerta!',
@@ -66,7 +66,7 @@ constructor(
         confirmButtonText: 'Aceptar'
       });
 
-      this.consecutivo.cantidadRecibida = null;
+      this.consecutivo.cantidad = null;
     }
   }
   

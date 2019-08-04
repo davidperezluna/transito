@@ -57,6 +57,15 @@
                                 <input class="form-control" [(ngModel)]="patio.fechaFinal" name="fechaFinal" type="date" required />
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-6">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" [(ngModel)]="patio.interno" class="custom-control-input" id="interno"
+                                        name="interno">
+                                    <label class="custom-control-label" for="interno">Interno</label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </form>
             </div>

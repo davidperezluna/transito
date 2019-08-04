@@ -1,0 +1,41 @@
+<hr>
+<div class="row">
+    <div class="col-xs-12 col-lg-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="text-uppercase"><b>Editar organismo de transito</b></h5>
+                <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
+            </div>
+            <div class="card-body">
+                <form #formEdit="ngForm"> 
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Fecha <b class="text-danger">*</b></label>
+                                <input type="date" class="form-control" [(ngModel)]="bodega.fecha" name="fecha" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Cantidad <b class="text-danger">*</b></label>
+                                <input type="text" class="form-control" [(ngModel)]="bodega.cantidad" name="cantidad" />
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <div class="btn-group">
+                    <button (click)="onEnviar()" [disabled]="formEdit.invalid" class="btn btn-primary" type="button">
+                        <i class="fa fa-save"></i>
+                        Enviar
+                    </button>
+                    <button (click)="onCancelar()" class="btn btn-default">
+                        <i class="fa fa-times"></i>
+                        Cancelar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -114,6 +114,7 @@ import { PqoCfgGruaRoutes } from './pqoCfgGrua/pqoCfgGrua.routes';
 import { PqoGruaCiudadanoRoutes } from './pqoGruaCiudadano/pqoGruaCiudadano.routes';
 import { PqoInmovilizacionRoutes } from './pqoInmovilizacion/pqoInmovilizacion.routes';
 
+import { PnalCfgCdoBodegaRoutes } from './pnalCfgCdoBodega/pnalCfgCdoBodega.routes';
 import { PnalCfgCdoConsecutivoRoutes } from './pnalCfgCdoConsecutivo/pnalCfgCdoConsecutivo.routes';
 import { PnalCfgCargoRoutes } from './pnalCfgCargo/pnalCfgCargo.routes';
 import { PnalCfgTipoNombramientoRoutes } from './pnalCfgTipoNombramiento/pnalCfgTipoNombramiento.routes';
@@ -166,13 +167,6 @@ import { ImoLoteRoutes } from "./imoLote/imoLote.routes";
 import { ImoAsignacionRoutes} from './imoAsignacion/imoAsignacion.routes';
 import { ImoReasignacionRoutes } from './imoReasignacIon/imoReasignacion.routes';
 import { ImoActaRoutes } from './imoActa/imoActa.routes';
-
-import { BpCfgTipoInsumoRoutes } from './bpCfgTipoInsumo/bpCfgTipoInsumo.routes';
-import { BpInsumoRoutes } from './bpInsumo/bpInsumo.routes';
-import { BpCuentaRoutes } from './bpCuenta/bpCuenta.routes';
-import { BpActividadRoutes } from './bpActividad/bpActividad.routes';
-import { BpProyectoRoutes } from './bpProyecto/bpProyecto.routes';
-import { BpCdpRoutes } from './bpCdp/bpCdp.routes';
 
 import { FroFacturaRoutes } from './froFactura/froFactura.routes';
 import { FroRecaudoRoutes } from './froRecaudo/froRecaudo.routes';
@@ -318,6 +312,7 @@ export const DashboardRoutes: Route[] = [
       ...CfgTipoClaseRoutes,
       ...CfgModuloRoutes,
       ...CfgPropietarioRoutes,
+      ...PnalCfgCdoBodegaRoutes,
       ...PnalCfgCdoConsecutivoRoutes,
       ...PnalCfgCargoRoutes,
       ...PnalCfgTipoNombramientoRoutes,
@@ -445,12 +440,6 @@ export const DashboardRoutes: Route[] = [
       ...VhloCertificadoTradicionRoutes,
       ...UserCfgTipoMedidaCautelarRoutes,
       ...CvMedidaCautelarRoutes,
-      ...BpCfgTipoInsumoRoutes,
-      ...BpInsumoRoutes,
-      ...BpCuentaRoutes,
-      ...BpActividadRoutes,
-      ...BpProyectoRoutes,
-      ...BpCdpRoutes,
       ...VhloRnrsPreasignacionPlacaRoutes,
       ...VhloTpConvenioRoutes,
       ...VhloTpAsignacionRoutes,

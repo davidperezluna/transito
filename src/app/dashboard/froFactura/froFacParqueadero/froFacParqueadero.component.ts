@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { FroFacParqueadero } from './froFacParqueadero.modelo';
 import { FroFacturaService } from '../../../services/froFactura.service';
+import { PnalFuncionarioService } from '../../../services/pnalFuncionario.service';
+import { CvCdoComparendoService } from '../../../services/cvCdoComparendo.service';
 import { PqoInmovilizacionService } from '../../../services/pqoInmovilizacion.service';
 import { UserCiudadanoService } from '../../../services/userCiudadano.service';
 import { LoginService } from '../../../services/login.service';
@@ -19,19 +21,21 @@ export class FroFacParqueaderoComponent implements OnInit {
   public errorMessage;
   public factura: FroFacParqueadero;
 
-  public municipio: any = null;
+  public inmovilizaciones: any = null;
   public inmovilizacion: any = null;
-  public numeroComparendo: any = null;
   public tiposIdentificacion: any;
   public tipoIdentificacionSelected: any = null;
   public identificacion: any = null;
-  public funcionario: any = null;
   public ciudadano: any = null;
+  public funcionario: any = null;
+  public comparendo: any = null;
+  public municipio: any = null;
   
-  public formIndex = false;
-  public formNew = false;
-  public formCiudadano = false;
-  public formSearch = true;
+  public formIndex: any;
+  public formNew: any;
+  public formSolicitante: any;
+  public formCiudadano: any;
+  public formSearch: any;
   public table: any = null;
   
   public fechaCreacion: any = null;
@@ -39,16 +43,29 @@ export class FroFacParqueaderoComponent implements OnInit {
   
   public apiUrl = environment.apiUrl;
 
+  public search: any = {
+    'tipoFiltro': null,
+    'filtro': null,
+  }
+
+  public tiposFiltro = [
+    { 'value': '1', 'label': 'Placa' },
+    { 'value': '2', 'label': 'No. comparendo' },
+    { 'value': '3', 'label': 'Identificación Infractor' },
+  ];
 
   constructor(
     private _FacturaService: FroFacturaService,
+    private _FuncionarioService: PnalFuncionarioService,
     private _InmovilizacionService: PqoInmovilizacionService,
+    private _ComparendoService: CvCdoComparendoService,
     private _CiudadanoService: UserCiudadanoService,
     private _LoginService: LoginService,
   ){}
     
   ngOnInit() {
     this.factura = new FroFacParqueadero(null, 0, null, null, null, null, null, null, null, null, null, null); 
+    this.onInitForms();
 
     swal({
       title: 'Cargando Datos!',
@@ -62,13 +79,13 @@ export class FroFacParqueaderoComponent implements OnInit {
 
     let identity = this._LoginService.getIdentity();
 
-    /*this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
+    this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
       response => {
         if (response.status == 'success') {
           this.funcionario = response.data;
           this.factura.idOrganismoTransito = this.funcionario.organismoTransito.id;
 
-          this.formNew = true;
+          this.formSearch = true;
         } else {
           swal({
             title: 'Error!',
@@ -87,47 +104,110 @@ export class FroFacParqueaderoComponent implements OnInit {
           }
         }
       }
-    );*/
+    );
+  }
+
+  onInitForms() {
+    this.formSearch = false;
+    this.formIndex = false;
+    this.formNew = false;
+    this.formSolicitante = false;
+    this.formCiudadano = false;
   }
 
   onSearchInmovilizacion() {
     swal({
-      title: 'Buscando inmovilizacion!',
+      title: 'Buscando registros!',
       text: 'Solo tardara unos segundos por favor espere.',
       onOpen: () => {
         swal.showLoading()
       }
     });
 
-    if (!this.numeroComparendo) {
+    if (!this.search.filtro) {
       swal({
         title: 'Error!',
-        text: 'El número de comparendo no puede estar vacio.',
+        text: 'El filtro de búsqueda no puede estar vacio.',
         type: 'error',
         confirmButtonText: 'Aceptar'
       });
-    }else{
+    } else {
+
       let token = this._LoginService.getToken();
   
-      this._InmovilizacionService.findByComparendo({ 'numero': this.numeroComparendo }, token).subscribe(
+      this._InmovilizacionService.searchByFilter(this.search, token).subscribe(
         response => {
           if (response.code == 200) {
-            this.inmovilizacion = response.data;
-            this.factura.idInmovilizacion = this.inmovilizacion.id;
-            
+            this.inmovilizaciones = response.data;
+  
+            let timeoutId = setTimeout(() => {
+              this.onInitTable();
+              swal.close();
+            }, 100);
+  
+            this.onInitForms();
+  
+            this.formIndex = true;
+          } else {
+            this.inmovilizaciones = null;
+  
             swal({
-              title: 'Perfecto!',
+              title: 'Alerta!',
               text: response.message,
-              type: 'success',
+              type: 'warning',
               confirmButtonText: 'Aceptar'
             });
+          }
+          error => {
+            this.errorMessage = <any>error;
+  
+            if (this.errorMessage != null) {
+              console.log(this.errorMessage);
+              alert("Error en la petición");
+            }
+          }
+        }
+      );
+    }
+  }
+
+  onInitTable() {
+    this.table = $('#dataTables-example').DataTable({
+      destroy: true,
+      responsive: true,
+      pageLength: 8,
+      sPaginationType: 'full_numbers',
+      oLanguage: {
+        oPaginate: {
+          sFirst: '<i class="fa fa-step-backward"></i>',
+          sPrevious: '<i class="fa fa-chevron-left"></i>',
+          sNext: '<i class="fa fa-chevron-right"></i>',
+          sLast: '<i class="fa fa-step-forward"></i>'
+        }
+      }
+    });
+  }
+
+  onSelected(inmovilizacion: any) {
+    if (inmovilizacion.numeroComparendo) {
+      let token = this._LoginService.getToken();
+
+      this._ComparendoService.searchByNumber({ 'numero': inmovilizacion.numeroComparendo }, token).subscribe(
+        response => {
+          if (response.code == 200) {
+            this.comparendo = response.data;
+            this.inmovilizacion = inmovilizacion;
+
+            this.onInitForms();
+
+            this.formSolicitante = true;
           } else {
-            this.inmovilizacion = null;
+            this.comparendo = null;
 
             swal({
-              title: 'Error!',
+              title: response.title,
               text: response.message,
-              type: 'error',
+              type: response.status,
               confirmButtonText: 'Aceptar'
             });
           }
@@ -140,6 +220,13 @@ export class FroFacParqueaderoComponent implements OnInit {
           }
         }
       );
+    } else {
+      swal({
+        title: 'Atención!',
+        text: 'La inmovilización no tiene registrado el número de comparendo por lo tanto no se puede gestionar la salida.',
+        type: 'warning',
+        confirmButtonText: 'Aceptar',
+      });
     }
   }
 
@@ -234,7 +321,7 @@ export class FroFacParqueaderoComponent implements OnInit {
       response => {
         if (response.status == 'success') {
           this.factura = response.data;         
-          this.formNew = false;
+          this.municipio = response.data.organismoTransito.municipio;
 
           swal({
             title: 'Perfecto!',
