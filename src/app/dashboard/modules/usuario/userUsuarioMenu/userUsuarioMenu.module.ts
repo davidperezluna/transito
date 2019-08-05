@@ -1,6 +1,6 @@
 import { NgModule, NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { Ng2BootstrapModule } from 'ng2-bootstrap';
 
 import { UserUsuarioMenuService } from '../../../../services/userUsuarioMenu.service';
 
@@ -9,7 +9,7 @@ import { EditComponent } from './edit/edit.component';
 import { DeleteComponent } from './delete/delete.component';
 
 @NgModule({
-    imports: [CommonModule, FormsModule],
+    imports: [CommonModule, Ng2BootstrapModule.forRoot()],
     declarations: [NewComponent,EditComponent,DeleteComponent],
     exports: [ NewComponent,EditComponent,DeleteComponent],
     providers:[UserUsuarioMenuService],
