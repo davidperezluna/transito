@@ -40,11 +40,11 @@ const routes: Routes = [
       {
         path: 'personal',
         loadChildren: './modules/personal/personal.module#PersonalModule'
-      },
+      },*/
       {
         path: 'seguridad-vial',
         loadChildren: './modules/seguridad-vial/seguridad-vial.module#SeguridadVialModule'
-      },*/
+      },
       {
         path: 'usuario',
         loadChildren: './modules/usuario/usuario.module#UsuarioModule'
