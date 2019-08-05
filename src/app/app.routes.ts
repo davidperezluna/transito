@@ -30,50 +30,6 @@ const routes: Routes = [
     path: 'dashboard',
     loadChildren: './dashboard/dashboard.module#DashboardModule'
   },
-  {
-    path: 'bancoProyecto',
-    loadChildren: './banco-proyecto/banco-proyecto.module#BancoProyectoModule'
-  },
-  {
-    path: 'config',
-    loadChildren: './config/config.module#ConfigModule'
-  },
-  {
-    path: 'contravencional',
-    loadChildren: './contravencional/contravencional.module#ContravencionalModule'
-  },
-  {
-    path: 'financiero',
-    loadChildren: './financiero/financiero.module#FinancieroModule'
-  },
-  {
-    path: 'gestion-documental',
-    loadChildren: './gestion-documental/gestion-documental.module#GestionDocumentalModule'
-  },
-  {
-    path: 'insumo',
-    loadChildren: './insumo/insumo.module#InsumoModule'
-  },
-  {
-    path: 'parqueadero',
-    loadChildren: './parqueadero/parqueadero.module#ParqueaderoModule'
-  },
-  {
-    path: 'personal',
-    loadChildren: './personal/personal.module#PersonalModule'
-  },
-  {
-    path: 'seguridad-vial',
-    loadChildren: './seguridad-vial/seguridad-vial.module#SeguridadVialModule'
-  },
-  {
-    path: 'usuario',
-    loadChildren: './usuario/usuario.module#UsuarioModule'
-  },
-  {
-    path: 'vehiculo',
-    loadChildren: './vehiculo/vehiculo.module#VehiculoModule'
-  },
 ];
 
 @NgModule({

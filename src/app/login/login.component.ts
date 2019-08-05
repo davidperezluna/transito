@@ -73,8 +73,7 @@ export class LoginComponent implements OnInit {
 											localStorage.setItem('token', token);
 											//console.log(localStorage.getItem('token'));
 											// REDIRECCION
-											//this._router.navigate(["dashboard/home"]);
-											this._router.navigate(["usuario/userCfgMenu"]);
+											this._router.navigate(["dashboard"]);
 										}
 									}
 								},

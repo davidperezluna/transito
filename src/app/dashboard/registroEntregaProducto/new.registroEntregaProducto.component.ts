@@ -2,7 +2,7 @@ import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@
 import { Router } from "@angular/router";
 import { VhloVehiculoService } from '../../services/vhloVehiculo.service';
 import { TramiteSolicitudService } from '../../services/tramiteSolicitud.service';
-import { VhloVehiculo } from '../../vehiculo/vhloVehiculo/vhloVehiculo.modelo';
+import { VhloVehiculo } from '../modules/vehiculo/vhloVehiculo/vhloVehiculo.modelo';
 import { LoginService } from '../../services/login.service';
 import swal from 'sweetalert2';
 import { log } from 'util';

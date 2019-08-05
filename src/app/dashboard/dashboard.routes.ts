@@ -1,36 +1,3 @@
-/*
-import { Route } from '@angular/router';
-
-import { HomeRoutes } from './home/home.routes';
-import { BancoRoutes } from './banco/banco.routes';
-import { CfgValorVehiculoRoutes } from './cfgValorVehiculo/cfgValorVehiculo.routes';
-import { registroEntregaProductoRoutes } from './registroEntregaProducto/registroEntregaProducto.routes';
-import { GestionTransportePublicoRoutes } from './gestionTransportePublico/gestionTransportePublico.routes';
-import { RpcccInventarioDocumentalRoutes } from './rpcccInventarioDocumental/rpcccInventarioDocumental.routes';
-import { rnaRegistroInsumosRoutes } from './rnaRegistroInsumos/rnaRegistroInsumos.routes';
-import { RnmaPreregistroRoutes } from './rnmaPreregistro/rnmaPreregistro.routes'; 
-import { ReporteRoutes } from './reporte/reporte.routes';
-import { DashboardComponent } from '.';
-
-export const DashboardRoutes: Route[] = [
-  {
-    path: 'dashboard', 
-    component: DashboardComponent,
-    loadChildren: [
-      ...HomeRoutes,
-      ...BancoRoutes,
-      ...registroEntregaProductoRoutes,
-      ...GestionTransportePublicoRoutes,
-      ...rnaRegistroInsumosRoutes,
-      ...RnmaPreregistroRoutes,
-      ...CfgValorVehiculoRoutes,
-      ...ReporteRoutes,
-      ...RpcccInventarioDocumentalRoutes
-    ]
-  }
-];
-*/
-
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -40,12 +7,53 @@ import { DashboardComponent } from './dashboard.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
-  },
-  {
-    path: 'home',
-    component: DashboardComponent
+    component: DashboardComponent,
+    children: [
+      {
+        path: 'bancoProyecto',
+        loadChildren: './modules/banco-proyecto/banco-proyecto.module#BancoProyectoModule'
+      },
+      /*{
+        path: 'config',
+        loadChildren: './modules/config/config.module#ConfigModule'
+      },
+      {
+        path: 'contravencional',
+        loadChildren: './modules/contravencional/contravencional.module#ContravencionalModule'
+      },
+      {
+        path: 'financiero',
+        loadChildren: './modules/financiero/financiero.module#FinancieroModule'
+      },
+      {
+        path: 'gestion-documental',
+        loadChildren: './modules/gestion-documental/gestion-documental.module#GestionDocumentalModule'
+      },
+      {
+        path: 'insumo',
+        loadChildren: './modules/insumo/insumo.module#InsumoModule'
+      },
+      {
+        path: 'parqueadero',
+        loadChildren: './modules/parqueadero/parqueadero.module#ParqueaderoModule'
+      },
+      {
+        path: 'personal',
+        loadChildren: './modules/personal/personal.module#PersonalModule'
+      },
+      {
+        path: 'seguridad-vial',
+        loadChildren: './modules/seguridad-vial/seguridad-vial.module#SeguridadVialModule'
+      },*/
+      {
+        path: 'usuario',
+        loadChildren: './modules/usuario/usuario.module#UsuarioModule'
+      },
+      /*{
+        path: 'vehiculo',
+        loadChildren: './modules/vehiculo/vehiculo.module#VehiculoModule'
+      },*/
+    ]
   },
 ];
 

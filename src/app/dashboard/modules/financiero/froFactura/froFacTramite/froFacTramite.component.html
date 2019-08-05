@@ -1,0 +1,346 @@
+<div class="row">
+    <div class="col-xs-12 col-lg-12" *ngIf="formNew">
+        <form #facturaForm="ngForm">
+            <div class="card">
+                <!-- .card -->
+                <div class="card-header">
+                    <b class="text-uppercase">Factura de trámites</b>
+                </div>
+                <div class="card-body">
+                    <!-- .card-body -->
+                    <table class="table table-bordered table-striped" *ngIf="funcionario">
+                        <tbody>
+                            <tr class="odd">
+                                <td>
+                                    <strong>Fecha Expedición</strong>
+                                    <br>{{ date| date: 'yyyy-MM-dd' }}
+                                </td>
+                                <td>
+                                    <strong>Hora</strong>
+                                    <br>{{ date| date: 'h:m:ss' }}
+                                </td>
+                                <td>
+                                    <strong>Sede operativa</strong>
+                                    <br>{{ funcionario.organismoTransito.nombre }}
+                                </td>
+                                <td>
+                                    <strong>Fecha vencimiento</strong>
+                                    <br>{{ date| date: 'yyyy-MM-dd' }}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-4">
+                                <label>Módulo
+                                    <b class="text-danger">*</b>
+                                </label>
+                                <ng-select [multiple]="false" [options]="modulos" [(ngModel)]="factura.idModulo" (ngModelChange)="onChangedModulo($event)" name="idModulo" required>
+                                </ng-select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="form-group" *ngIf="modulo">
+                        <div class="row">
+                            <!-- .row -->
+                            <div class="col-xs-12 col-lg-12">
+                                <b class="text-uppercase">Buscar solicitante</b>
+                                <div class="row">
+                                    <div class="col-xs-12 col-lg-4">
+                                        <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionSelected" name="idTipoIdentificacion" required></ng-select>
+                                    </div>
+                                    <div class="col-xs-12 col-lg-3">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" placeholder="Identificacion" [(ngModel)]="identificacion" name="identificacion" required />
+                                            <span class="input-group-btn">
+                                                <button (click)="onSearchCiudadano()" class="btn btn-default btn-success"
+                                                    type="button">
+                                                    <i class="fa fa-search"></i>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.row -->
+
+                        <div class="row">
+                            <!-- .row -->
+                            <div class="col-xs-12 col-lg-12" *ngIf='ciudadano'>
+                                <table class="table table-bordered table-striped">
+                                    <tbody>
+                                        <tr class="odd">
+                                            <td>
+                                                <b>Tipo de identificación</b>
+                                                <br> {{ ciudadano.tipoIdentificacion.nombre }}
+                                            </td>
+                                            <td>
+                                                <b>Numero de identificación</b>
+                                                <br> {{ ciudadano.identificacion }}
+                                            </td>
+                                            <td>
+                                                <b>Ciudadano</b>
+                                                <br> {{ ciudadano.primerNombre }} {{ ciudadano.segundoNombre }} {{ ciudadano.primerApellido
+                                                }} {{ ciudadano.segundoApellido }}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>    
+                            </div>
+
+                            <div class="col-xs-12 col-lg-12" *ngIf="!ciudadano && formNewCiudadano">
+                                <!--
+                                    <app-new-ciudadano (ready)="ready($event)"></app-new-ciudadano>
+                                -->
+                            </div>
+                        </div>
+                        <!-- /.row -->
+                    </div>
+
+
+                    <div class="form-group" *ngIf="modulo && modulo.vehiculo && ciudadano">
+                        <!-- .form-group -->
+                        <div class="row">
+                            <!-- .row -->
+                            <div class="col-xs-12 col-lg-6">
+                                <b class="text-uppercase">Buscar vehiculo</b>
+                                <div class="input-group">
+                                    <input type="text" class="form-control text-uppercase" placeholder="Vin,Chasis,Motor,Serie" [(ngModel)]="vehiculoFiltro" name="vehiculoFiltro" />
+                                    <span class="input-group-btn">
+                                        <button (click)="onSearchVehiculo()" class="btn btn-default btn-success"
+                                            type="button">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-lg-12">
+                                <div *ngIf="vehiculo">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-lg-12">
+                                            <table class="table table-bordered table-striped">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <b>Modelo: </b>
+                                                            {{ vehiculo.modelo }}
+                                                        </td>
+                                                        <td>
+                                                            <b>Clase: </b>
+                                                            {{ vehiculo.clase?.nombre }}
+                                                        </td>
+                                                        <td>
+                                                            <b>Marca: </b>
+                                                            {{ vehiculo.linea?.marca.nombre }}
+                                                        </td>
+                                                        <td>
+                                                            <b>Línea: </b>
+                                                            {{ vehiculo.linea?.nombre }}
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <!-- fin detalles del vehiculo -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                    <!-- /.form-group -->
+
+                    <div class="form-group" *ngIf="modulo && modulo.abreviatura != 'RNC' && vehiculo && ciudadano"><!-- .form-group -->
+                        <div class="row"><!-- .row -->
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Trámites</label>
+                                <div class="input-group">
+                                    <ng-select [multiple]="false" [options]="tramitesPrecio" [(ngModel)]="tramitePrecioSelected" name="idTramitePrecio" required>
+                                    </ng-select>
+                                    <span class="input-group-btn">
+                                        <button (click)="onAddTramite()" class="btn btn-primary" type="button">
+                                            <i class="fa fa-plus"></i>
+                                            Agregar
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div><!-- /.row -->
+                    </div><!-- /.form-group -->
+
+                    <div class="form-group" *ngIf="ciudadano && modulo.abreviatura == 'RNC'"><!-- .form-group -->
+                        <div class="row"><!-- .row -->
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Trámites</label>
+                                <div class="input-group">
+                                    <ng-select [multiple]="false" [options]="tramitesPrecio" [(ngModel)]="tramitePrecioSelected" name="idTramitePrecio" required>
+                                    </ng-select>
+                                    <span class="input-group-btn">
+                                        <button (click)="onAddTramite()" class="btn btn-primary pull-right">
+                                            <i class="fa fa-plus"></i>
+                                            Agregar
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div><!-- /.row -->
+                    </div><!-- /.form-group -->
+
+                    <div class="form-group" *ngIf="tramitePrecio">
+                        <!-- .form-group -->
+                        <div class="row"><!-- .row -->
+                            <div class="col-xs-12 col-lg-12" *ngIf="valorRetefuenteUnitario">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <div class="card-title">
+                                            <h5 class="text-uppercase"><b>Propietarios</b></h5>
+                                            <p>Valor retefuente: ${{ valorRetefuente }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <table class="table table-bordered">
+                                            <tbody>
+                                                <tr *ngFor="let propietario of propietarios; let i = index">
+                                                    <td *ngIf='propietario.ciudadano'>
+                                                        <strong>Nombre: </strong>
+                                                        {{ propietario.ciudadano?.primerNombre }} {{ propietario.ciudadano?.primerApellido }}
+                                                        <br>
+                                                        <strong>Identificación: </strong>
+                                                        {{ propietario.ciudadano?.identificacion }}
+                                                    </td>
+                                                    <td *ngIf='propietario.empresa'>
+                                                        <strong>NIT: </strong>
+                                                        {{propietario.empresa?.nit}}
+                                                        <br>
+                                                        <strong>Nombre: </strong>
+                                                        {{propietario.empresa?.nombre}}
+                                                    </td>
+                                                    <td> 
+                                                        <div class="custom-control custom-checkbox"  >
+                                                            <input (change)="onSeller($event, propietario.id)" [(ngModel)]="propietario.state" name="{{propietario.id}}" type="checkbox" class="custom-control-input form-check-input" id="{{propietario.id}}">
+                                                            <label class="custom-control-label" for="{{propietario.id}}"><p>${{valorRetefuenteUnitario}}</p></label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody> 
+                                        </table> 
+                                    </div>
+                                </div>
+                            </div> 
+                        </div><!-- /.row -->
+                        <!-- /.row -->
+                    </div>
+                
+                    <!-- /.form-group -->
+
+                    <div class="form-group" *ngIf="tramitesPrecioArray?.length > 0">
+                        <!-- .form-group -->
+                        <div class="row">
+                            <!-- .row -->
+                            <div class="col-xs-12 col-lg-12">
+                                <table class="table table-bordered table-striped table-hover" id="dataTables-example">
+                                    <thead>
+                                        <tr class="text-center text-uppercase">
+                                            <th>Nombre</th>
+                                            <th>Valor</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="odd" *ngFor="let tramitePrecio of tramitesPrecioArray; let i = index">
+                                            <td>{{tramitePrecio.nombre}}</td>
+                                            <td *ngIf='tramitePrecio.valor'>{{ tramitePrecio.valor | currency: 'COP' }}</td>
+                                            <td *ngIf='!tramitePrecio.valor'>{{ 0 | currency: 'COP' }}</td>
+                                            <td>
+                                                <button (click)="onDeleteTramite(tramitePrecio)" class="btn btn-xs btn-danger" type="button">
+                                                    <i class="fa fa-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                    <!-- /.form-group -->
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer" *ngIf="tramitesPrecioArray && tramitesPrecioArray.length > 0">
+                    <!-- .card-footer -->
+                    <div class="btn-group">
+                        <button (click)="onEnviar()" class="btn btn-primary" type="button">
+                            <i class="fa fa-save"></i>
+                            Enviar
+                        </button>
+                        <button (click)="onCancelar()" class="btn btn-default">
+                            <i class="fa fa-times"></i>
+                            Cancelar
+                        </button>
+                    </div>
+                </div>
+                <!-- /.card-footer -->
+            </div>
+            <!-- /.card -->
+        </form>
+    </div>
+
+    <div class="col-xs-12 col-lg-6" *ngIf="factura.id">
+        <div class="card"><!-- .card -->
+            <div class="card-header">
+                <b class="text-uppercase">Detalles de factura</b>
+            </div>
+            <div class="card-body">
+                <table style="border:none;">
+                    <tr>
+                        <td>
+                            <img src="{{ apiUrl }}img/logo-entidad.png" height="40px" />
+                        </td>
+                        <td>
+                            <img src="{{ apiUrl }}img/logo-banco.png" height="40px" />
+                        </td>
+                        <td style="text-align:right;">
+                            <span style="border:1px solid #000;text-align:center;background-color: #ccc;padding:5px;font-size:20px">
+                                <b>{{ factura.numero }}</b>
+                            </span>
+                        </td>
+                    </tr>
+                </table>
+                <table class="table table-bordered table-striped" width="50%">
+                    <tr>
+                        <td><b>Ciudad:</b><br>  {{ municipio }}</td> 
+                        <td><b>Fec. Creación:</b><br> {{ fechaCreacion }}</td>
+                        <td><b>Fec. Vencimiento:</b><br> {{ fechaVencimiento }}</td>
+                    </tr>
+                </table>
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr class="text-center text-uppercase">
+                            <th>Nombre</th>
+                            <th>Valor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="odd" *ngFor="let tramitePrecio of tramitesPrecioArray; let i = index">
+                            <td>{{tramitePrecio.nombre}}</td>
+                            <td *ngIf='tramitePrecio.valor'>{{ tramitePrecio.valor | currency: 'COP' }}</td>
+                            <td *ngIf='!tramitePrecio.valor'>{{ 0 | currency: 'COP' }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-footer">
+                <a href="{{ apiUrl }}financiero/frofactura/1/{{ factura.id }}/pdf" class="btn btn-success" target="_blank">
+                    <i class="fa fa-file-pdf-o"></i>
+                    Generar PDF
+                </a>
+            </div>
+        </div><!-- /.card -->
+    </div>
+</div>
