@@ -12,22 +12,22 @@ export const CvCdoComparendoRoutes: Route[] = [
     },
 
     {
-      path: 'comparendo/new',
+      path: 'comparendoNew',
       component: NewComponent
     },
 
     {
-      path: 'comparendo/state',
+      path: 'comparendoState',
       component: StateComponent
     },
 
     {
-      path: 'comparendo/search',
+      path: 'comparendoSearch',
       component: SearchComponent
     },
 
     {
-    path: 'comparendo/export',
+    path: 'comparendoExport',
     component: ExportComponent
     }
 ];
