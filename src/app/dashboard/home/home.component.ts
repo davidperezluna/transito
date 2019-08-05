@@ -22,8 +22,6 @@ export class ChatComponent { }
 })
 export class NotificationComponent { }
 
-
-
 @Component({
   selector: 'app-line-chart',
   templateUrl: 'linechart.html'
@@ -101,8 +99,6 @@ export class LineChartComponent {
   public lineChartType: any = 'line';
 
 }
-
-
 
 @Component({
   selector: 'app-home-cmp',

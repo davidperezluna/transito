@@ -60,6 +60,7 @@ export class SidebarComponent implements OnInit {
     this._UserCfgMenuService.generateByUsuario({ 'idUsuario': this.idUsuario }, token).subscribe(
       response => {
         this.menus = response.data;
+        
         swal.close();
       },
       error => {

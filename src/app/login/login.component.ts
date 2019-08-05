@@ -1,6 +1,6 @@
 import { Component,OnInit } from '@angular/core';
 import { RouterModule, Router, ActivatedRoute } from '@angular/router';
-import {LoginService} from '../services/login.service';
+import { LoginService } from '../services/login.service';
 import swal from 'sweetalert2';
 /**
 *  This class represents the lazy loaded LoginComponent.
@@ -73,7 +73,8 @@ export class LoginComponent implements OnInit {
 											localStorage.setItem('token', token);
 											//console.log(localStorage.getItem('token'));
 											// REDIRECCION
-											this._router.navigate(["dashboard/home"]);
+											//this._router.navigate(["dashboard/home"]);
+											this._router.navigate(["usuario/userCfgMenu"]);
 										}
 									}
 								},

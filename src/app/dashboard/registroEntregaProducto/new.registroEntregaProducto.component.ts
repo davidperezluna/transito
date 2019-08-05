@@ -1,17 +1,17 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { Router } from "@angular/router";
 import { VhloVehiculoService } from '../../services/vhloVehiculo.service';
-import { LoginService } from '../../services/login.service';
 import { TramiteSolicitudService } from '../../services/tramiteSolicitud.service';
-import { VhloVehiculo } from '../vhloVehiculo/vhloVehiculo.modelo';
+import { VhloVehiculo } from '../../vehiculo/vhloVehiculo/vhloVehiculo.modelo';
+import { LoginService } from '../../services/login.service';
 import swal from 'sweetalert2';
 import { log } from 'util';
-
 
 @Component({
     selector: 'app-registroEntregaProducto',
     templateUrl: './new.registroEntregaProducto.html',
 })
+
 export class NewRegistroEntregaProductoComponent implements OnInit {
     public errorMessage = false;
     public error = false;
