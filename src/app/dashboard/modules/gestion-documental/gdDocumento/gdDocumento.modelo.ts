@@ -15,6 +15,7 @@ export class GdDocumento{
 		public vigencia: number,
 		public entidadNombre: string,
 		public entidadCargo: string,
+		public numeroComparendo: string,
 		public idTipoIdentificacion: number,
 		public idSedeOperativa: number,
 		public idTipoCorrespondencia: number,

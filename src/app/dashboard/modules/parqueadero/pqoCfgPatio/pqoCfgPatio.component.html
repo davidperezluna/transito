@@ -49,9 +49,9 @@
       </div>
     </div>
 
-    <app-edit *ngIf='formEdit' [patio]="patio" (ready)="ready($event)"></app-edit>
+    <app-edit-pqocfgpatio *ngIf='formEdit' [patio]="patio" (ready)="ready($event)"></app-edit-pqocfgpatio>
     
-    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+    <app-new-pqocfgpatio *ngIf='formNew' (ready)="ready($event)"></app-new-pqocfgpatio>
 
-    <app-show *ngIf='formShow' [patio]="patio" (ready)="ready($event)"></app-show>
+    <app-show-pqocfgpatio *ngIf='formShow' [patio]="patio" (ready)="ready($event)"></app-show-pqocfgpatio>
 </div>

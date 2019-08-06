@@ -202,10 +202,10 @@
     </div>
   </div>
 
-  <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
-  <app-edit *ngIf='formEdit' [funcionario]="funcionario" (ready)="ready($event)"></app-edit>
+  <app-new-pnalfuncionario *ngIf='formNew' (ready)="ready($event)"></app-new-pnalfuncionario>
+  <app-edit-pnalfuncionario *ngIf='formEdit' [funcionario]="funcionario" (ready)="ready($event)"></app-edit-pnalfuncionario>
+  <app-show-pnalfuncionario *ngIf='formShow' [funcionario]="funcionario" (ready)="ready($event)"></app-show-pnalfuncionario>
   <app-time *ngIf='formTime' [funcionario]="funcionario" (ready)="ready($event)"></app-time>
-  <app-show *ngIf='formShow' [funcionario]="funcionario" (ready)="ready($event)"></app-show>
   <app-prorroga *ngIf='formProrroga' [funcionario]="funcionario" (ready)="ready($event)"></app-prorroga>
   <app-suspension *ngIf='formSuspension' [funcionario]="funcionario" (ready)="ready($event)"></app-suspension>
   <app-disabled *ngIf='formDisabled' [funcionario]="funcionario" (ready)="ready($event)"></app-disabled>

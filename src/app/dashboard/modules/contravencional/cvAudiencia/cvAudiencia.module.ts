@@ -1,15 +1,8 @@
-import {
-    NgModule, 
-    Component,
-    ChangeDetectionStrategy,
-    ViewChild,
-    TemplateRef 
-} from '@angular/core';
+import { NgModule, NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { SelectModule } from 'angular2-select';
 
-import { CvAudienciaComponent } from './cvAudiencia.component';
 import { CvAudienciaService } from '../../../../services/cvAudiencia.service';
 import { CvAuEstadoService } from '../../../../services/cvAuEstado.service';
 
@@ -23,12 +16,13 @@ import { ShowComponent } from './show/show.component';
         Ng2BootstrapModule.forRoot(),
         SelectModule
     ],
-    declarations: [CvAudienciaComponent,NewComponent,EditComponent,ShowComponent],
-    exports: [CvAudienciaComponent, NewComponent,EditComponent,ShowComponent],
+    declarations: [NewComponent,EditComponent,ShowComponent],
+    exports: [NewComponent,EditComponent,ShowComponent],
     providers:[
         CvAudienciaService,
         CvAuEstadoService
-    ]
+    ],
+    schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]  
 })
 
 export class CvAudienciaModule { }

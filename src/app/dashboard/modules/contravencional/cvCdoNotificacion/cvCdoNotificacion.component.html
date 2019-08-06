@@ -53,6 +53,6 @@
       </div>
     </div>
     
-    <app-edit *ngIf='formEdit' [notificacion]="notificacion" (ready)="ready($event)"></app-edit>
-    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+    <app-edit-cvcdonotificacion *ngIf='formEdit' [notificacion]="notificacion" (ready)="ready($event)"></app-edit-cvcdonotificacion>
+    <app-new-cvcdonotificacion *ngIf='formNew' (ready)="ready($event)"></app-new-cvcdonotificacion>
 </div>

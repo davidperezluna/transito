@@ -48,14 +48,6 @@ export class CvCdoComparendoService {
 							  .map(res => res.json());
 
 	}
-
-	setComparendoArchivo(datos,polca,token){
-		let json = JSON.stringify(datos);
-		let params = "data="+json+"&authorization="+token;
-		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
- 			return this._http.post(this.url+"/"+polca+"/archivo", params, {headers: headers})
-							  .map(res => res.json());
-	}
 	
 	searchByInfractor(datos, token) {
 		let json = JSON.stringify(datos);	
@@ -122,5 +114,12 @@ export class CvCdoComparendoService {
 		let params = "data=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/search/agente", params, { headers: headers }).map(res => res.json());
+	}
+
+	upload(formData, datos, token) {
+		let json = JSON.stringify(datos);
+		formData.append('data', json);
+		formData.append('authorization', token);
+		return this._http.post(this.url + "/upload", formData).map(res => res.json());
 	}
 }

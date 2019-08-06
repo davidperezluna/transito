@@ -1,25 +1,24 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { PnalAsignacion } from '../pnalAsignacion.modelo';
 import { PnalAsignacionService } from '../../../../../services/pnalAsignacion.service';
-import { LoginService } from '../../../../../services/login.service';
 import { CfgOrganismoTransitoService } from '../../../../../services/cfgOrganismoTransito.service';
+import { LoginService } from '../../../../../services/login.service';
 import { environment } from 'environments/environment';
 import swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-new',
+  selector: 'app-new-pnalasignacion',
   templateUrl: './new.component.html'
 })
 export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
-@Input() funcionario:any = null;
 
 public apiUrl = environment.apiUrl + 'personal/pnalasignacion';
 public asignacion: PnalAsignacion;
 public errorMessage;
 
 public organismosTransito: any;
-public numeroActa: any = null;
+public asignacionRealizada: any = null;
 
 constructor(
   private _AsignacionService: PnalAsignacionService,
@@ -86,8 +85,7 @@ constructor(
     this._AsignacionService.register(this.asignacion, token).subscribe(
       response => {        
         if(response.code == 200){
-          this.asignacion = response.data;
-          this.numeroActa = response.data.numeroActa;
+          this.asignacionRealizada = response.data;
           
           swal({
             title: 'Perfecto!',

@@ -2,7 +2,7 @@ export class FroFacParqueadero{
 	constructor(
 		public valorParqueadero: number,
 		public valorGrua: number,
-		public valorTotal: number,
+		public valor: number,
 		public interes: number,
 		public numero: string,
 		public fechaSalida: string,

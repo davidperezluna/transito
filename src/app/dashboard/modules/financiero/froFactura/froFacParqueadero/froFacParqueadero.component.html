@@ -36,7 +36,7 @@
         </div>
     </div>
 
-    <div class="col-xs-12 col-lg-8" *ngIf='formIndex'>
+    <div class="col-xs-12 col-lg-12" *ngIf='formIndex'>
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
@@ -79,116 +79,127 @@
         </div>
     </div>
 
-    <div class="col-xs-12 col-lg-8" *ngIf='inmovilizacion && formSolicitante'>
-        <div class="col-xs-12 col-lg-12">
-            <b class="text-uppercase">Buscar solicitante</b>
-            <div class="row">
-                <div class="col-xs-12 col-lg-4">
-                    <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionSelected" name="idTipoIdentificacion" required></ng-select>
+    <div class="col-xs-12 col-lg-12" >
+        <div class="col-xs-12 col-lg-12" *ngIf='inmovilizacion && formSolicitante'>
+            <div class="card">
+                <div class="card-header">
+                    <b class="text-uppercase">Buscar solicitante</b>
                 </div>
-                <div class="col-xs-12 col-lg-3">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Identificacion" [(ngModel)]="identificacion" name="identificacion" required />
-                        <span class="input-group-btn">
-                            <button (click)="onSearchCiudadano()" class="btn btn-default btn-success"
-                                type="button">
-                                <i class="fa fa-search"></i>
-                            </button>
-                        </span>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-xs-12 col-lg-4">
+                            <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionSelected" name="idTipoIdentificacion" required></ng-select>
+                        </div>
+                        <div class="col-xs-12 col-lg-3">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Identificacion" [(ngModel)]="identificacion" name="identificacion" required />
+                                <span class="input-group-btn">
+                                    <button (click)="onSearchCiudadano()" class="btn btn-default btn-success"
+                                        type="button">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" *ngIf='ciudadano'>
+                        <div class="col-xs-12 col-lg-12">
+                            <table class="table table-bordered table-striped">
+                                <tbody>
+                                    <tr class="odd">
+                                        <td>
+                                            <b>Tipo de identificación</b>
+                                            <br> {{ ciudadano.tipoIdentificacion.nombre }}
+                                        </td>
+                                        <td>
+                                            <b>Numero de identificación</b>
+                                            <br> {{ ciudadano.identificacion }}
+                                        </td>
+                                        <td>
+                                            <b>Ciudadano</b>
+                                            <br> {{ ciudadano.primerNombre }} {{ ciudadano.segundoNombre }} {{ ciudadano.primerApellido
+                                            }} {{ ciudadano.segundoApellido }}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>    
+                        </div>
+                    </div>
+
+                    <div class="row" *ngIf='ciudadano && inmovilizacion'>
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-12">
+                                <a href="{{ apiUrl }}/{{ comparendo.id }}/pdf" class="btn btn-primary" target="_blank">
+                                    <i class="fa fa-file-pdf-o"></i>
+                                    Visualizar comparendo
+                                </a>
+                                <a *ngIf="inmovilizacion.salida" href="{{ apiUrl }}/{{ inmovilizacion.id }}/exit/pdf"
+                                    class="btn btn-primary" target="_blank">
+                                    <i class="fa fa-file-pdf-o"></i>
+                                    Autorización
+                                </a>
+                            </div>
+                        </div>
+                    
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-8">
+                                <form #facturaForm="ngForm">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <b class="text-uppercase">Nueva factura de parqueadero</b>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-xs-12 col-lg-6">
+                                                        <label>Fecha de salida</label>
+                                                        <input class="form-control text-uppercase" [(ngModel)]="factura.fechaSalida"
+                                                            name="fechaSalida" type="date" required>
+                                                    </div>
+                                                    <div class="col-xs-12 col-lg-6">
+                                                        <label>Hora de salida</label>
+                                                        <input class="form-control text-uppercase" [(ngModel)]="factura.horaSalida"
+                                                            name="horaSalida" type="time" required>
+                                                    </div>
+                                                    <div class="col-xs-12 col-lg-12">
+                                                        <label>Valor parqueadero</label>
+                                                        <input (blur)="onCalcularTotal()" class="form-control text-uppercase" [(ngModel)]="factura.valorParqueadero"
+                                                            name="valorParqueadero" type="number" required>
+                                                    </div>
+                                                    <div class="col-xs-12 col-lg-12">
+                                                        <label>Valor grúa</label>
+                                                        <input (blur)="onCalcularTotal()" class="form-control text-uppercase" [(ngModel)]="factura.valorGrua"
+                                                            name="valorGrua" type="number" required>
+                                                    </div>
+                                                    <div class="col-xs-12 col-lg-12">
+                                                        <label>Valor total</label>
+                                                        <input class="form-control text-uppercase" [(ngModel)]="factura.valor"
+                                                            name="valor" type="number" disabled required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer">
+                                            <div class="btn-group">
+                                                <button (click)="onEnviar()" class="btn btn-primary" type="button">
+                                                    <i class="fa fa-save"></i>
+                                                    Enviar
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-
-        <div class="row" *ngIf='ciudadano'>
-            <div class="col-xs-12 col-lg-12">
-                <table class="table table-bordered table-striped">
-                    <tbody>
-                        <tr class="odd">
-                            <td>
-                                <b>Tipo de identificación</b>
-                                <br> {{ ciudadano.tipoIdentificacion.nombre }}
-                            </td>
-                            <td>
-                                <b>Numero de identificación</b>
-                                <br> {{ ciudadano.identificacion }}
-                            </td>
-                            <td>
-                                <b>Ciudadano</b>
-                                <br> {{ ciudadano.primerNombre }} {{ ciudadano.segundoNombre }} {{ ciudadano.primerApellido
-                                }} {{ ciudadano.segundoApellido }}
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>    
             </div>
         </div>
 
         <!--
             <app-new-ciudadano *ngIf='formCiudadano' [tipoIdentificacion]="tipoIdentificacionSelected" [identificacion]="identificacion"></app-new-ciudadano>
         -->
-        
-        <div class="row" *ngIf='ciudadano && inmovilizacion'>
-            <div class="row">
-                <div class="col-xs-12 col-lg-12">
-                    <a href="{{ apiUrl }}/{{ comparendo.id }}/pdf" class="btn btn-primary" target="_blank">
-                        <i class="fa fa-file-pdf-o"></i>
-                        Visualizar comparendo
-                    </a>
-                    <a *ngIf="inmovilizacion.salida" href="{{ apiUrl }}/{{ inmovilizacion.id }}/exit/pdf" class="btn btn-primary"
-                        target="_blank">
-                        <i class="fa fa-file-pdf-o"></i>
-                        Autorización
-                    </a>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-xs-12 col-lg-12">
-                    <form #facturaForm="ngForm">
-                        <div class="card">
-                            <div class="card-header">
-                                <b class="text-uppercase">Nueva factura de parqueadero</b>
-                            </div>
-                            <div class="card-body">
-                                 <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-xs-12 col-lg-6">
-                                            <label>Fecha de salida</label>
-                                            <input class="form-control text-uppercase" [(ngModel)]="factura.fechaSalida" name="fechaSalida" type="date" required>
-                                        </div>
-                                        <div class="col-xs-12 col-lg-6">
-                                            <label>Hora de salida</label>
-                                            <input class="form-control text-uppercase" [(ngModel)]="factura.horaSalida" name="horaSalida" type="time" required>
-                                        </div>
-                                        <div class="col-xs-12 col-lg-12">
-                                            <label>Valor parqueadero</label>
-                                            <input class="form-control text-uppercase" [(ngModel)]="factura.valorParqueadero" name="valorParqueadero" type="number" required>
-                                        </div>
-                                        <div class="col-xs-12 col-lg-12">
-                                            <label>Valor grúa</label>
-                                            <input class="form-control text-uppercase" [(ngModel)]="factura.valorGrua" name="valorGrua" type="number" required>
-                                        </div>
-                                        <div class="col-xs-12 col-lg-12">
-                                            <label>Valor total</label>
-                                            <input class="form-control text-uppercase" [(ngModel)]="factura.valorTotal" name="valorTotal" type="number" required>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-footer">
-                                <div class="btn-group">
-                                    <button (click)="onEnviar()" class="btn btn-primary" type="button">
-                                        <i class="fa fa-save"></i>
-                                        Enviar
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
     </div>
 
     <div class="col-xs-12 col-lg-8" *ngIf="factura.id">

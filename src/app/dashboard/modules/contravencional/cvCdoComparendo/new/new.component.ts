@@ -24,9 +24,10 @@ import { LoginService } from '../../../../../services/login.service';
 import swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-new',
+  selector: 'app-new-cvcdocomparendo',
   templateUrl: './new.component.html'
 })
+
 export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
   public comparendo: CvCdoComparendo;
@@ -126,7 +127,7 @@ export class NewComponent implements OnInit {
 constructor(
   private _ComparendoService: CvCdoComparendoService,
   private _FuncionarioService: PnalFuncionarioService,
-  private _PnalCfgCdoConsecutivoService: PnalCfgCdoConsecutivoService,
+  private _ConsecutivoService: PnalCfgCdoConsecutivoService,
   private _OrganismoTransitoService: CfgOrganismoTransitoService,
   private _MunicipioService: CfgMunicipioService,
   private _UserCiudadanoService: UserCiudadanoService,
@@ -256,7 +257,7 @@ constructor(
             this.funcionario = response.data;
             this.comparendo.idFuncionario = this.funcionario.id;
   
-            this._PnalCfgCdoConsecutivoService.searchByNumeroAndFuncionario(this.search, token).subscribe(
+            this._ConsecutivoService.searchByNumeroAndFuncionario(this.search, token).subscribe(
               response => {
                 if (response.status == 'success') {
                   swal.close();

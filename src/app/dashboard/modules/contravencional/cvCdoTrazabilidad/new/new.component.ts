@@ -7,7 +7,7 @@ import { LoginService } from '../../../../../services/login.service';
 import swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-new',
+  selector: 'app-new-cvcdotrazabilidad',
   templateUrl: './new.component.html'
 })
 export class NewComponent implements OnInit {

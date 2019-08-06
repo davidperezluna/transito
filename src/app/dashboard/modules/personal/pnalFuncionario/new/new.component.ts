@@ -11,7 +11,7 @@ import { DatePipe } from '@angular/common';
 import swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-new',
+  selector: 'app-new-pnalfuncionario',
   templateUrl: './new.component.html',
   providers: [DatePipe]
 })

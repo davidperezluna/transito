@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { TooltipModule } from "ngx-tooltip";
+import { FormsModule } from '@angular/forms';
+import { SelectModule } from 'angular2-select';
 
 import { PqoCfgGruaComponent } from './pqoCfgGrua/pqoCfgGrua.component';
 import { PqoCfgPatioComponent } from './pqoCfgPatio/pqoCfgPatio.component';
@@ -20,6 +23,9 @@ import { PqoInmovilizacionModule } from './pqoInmovilizacion/pqoInmovilizacion.m
   imports: [
     CommonModule,
     RouterModule,
+    TooltipModule,
+    FormsModule,
+    SelectModule,
     ParqueaderoRoutingModule,
     PqoCfgGruaModule,
     PqoCfgPatioModule,

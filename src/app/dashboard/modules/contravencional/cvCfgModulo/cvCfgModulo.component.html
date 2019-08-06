@@ -45,7 +45,7 @@
         </div>
       </div>
       
-      <app-edit *ngIf='formEdit' [modulo]="modulo" (ready)="ready($event)"></app-edit>
-      <app-states *ngIf='formStates' [modulo]="modulo" (ready)="ready($event)"></app-states>
-      <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+      <app-edit-cvcfgmodulo *ngIf='formEdit' [modulo]="modulo" (ready)="ready($event)"></app-edit-cvcfgmodulo>
+      <app-new-cvcfgmodulo *ngIf='formNew' (ready)="ready($event)"></app-new-cvcfgmodulo>
+      <app-states-cvcfgmodulo *ngIf='formStates' [modulo]="modulo" (ready)="ready($event)"></app-states-cvcfgmodulo>
   </div>

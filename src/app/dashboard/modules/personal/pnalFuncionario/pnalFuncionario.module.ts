@@ -10,7 +10,6 @@ import { PnalHorarioService } from '../../../../services/pnalHorario.service';
 import { PnalProrrogaService } from '../../../../services/pnalProrroga.service';
 import { PnalSuspensionService } from '../../../../services/pnalSuspension.service';
 
-import { PnalFuncionarioComponent } from './pnalFuncionario.component';
 import { NewComponent } from './new/new.component';
 import { EditComponent } from './edit/edit.component';
 import { TimeComponent } from './time/time.component';
@@ -21,8 +20,8 @@ import { DisabledComponent } from './disabled/disabled.component';
 
 @NgModule({
     imports: [CommonModule, Ng2BootstrapModule.forRoot(), SelectModule, PopoverModule, TooltipModule],
-    declarations: [PnalFuncionarioComponent, NewComponent, EditComponent, TimeComponent, ShowComponent, ProrrogaComponent, SuspensionComponent, DisabledComponent],
-    exports: [PnalFuncionarioComponent, NewComponent, EditComponent, TimeComponent, ShowComponent, ProrrogaComponent, SuspensionComponent, DisabledComponent],
+    declarations: [NewComponent, EditComponent, TimeComponent, ShowComponent, ProrrogaComponent, SuspensionComponent, DisabledComponent],
+    exports: [NewComponent, EditComponent, TimeComponent, ShowComponent, ProrrogaComponent, SuspensionComponent, DisabledComponent],
     providers: [PnalFuncionarioService, PnalHorarioService, PnalProrrogaService, PnalSuspensionService]     
 })
 

@@ -1,17 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CvCfgPorcentajeInicialComponent } from './cvCfgPorcentajeInicial.component';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
+import { SelectModule } from 'angular2-select';
+import { TooltipModule } from "ngx-tooltip";
+
 import { CvCfgPorcentajeInicialService } from '../../../../services/cvCfgPorcentajeInicial.service';
 
 import { NewComponent } from './new/new.component';
 import { EditComponent } from './edit/edit.component';
-import { SelectModule } from 'angular2-select';
 
 @NgModule({
-    imports: [CommonModule, Ng2BootstrapModule.forRoot(),SelectModule],
-    declarations: [CvCfgPorcentajeInicialComponent,NewComponent,EditComponent],
-    exports: [CvCfgPorcentajeInicialComponent, NewComponent,EditComponent],
+    imports: [CommonModule, Ng2BootstrapModule.forRoot(),SelectModule, TooltipModule],
+    declarations: [NewComponent,EditComponent],
+    exports: [NewComponent,EditComponent],
     providers:[CvCfgPorcentajeInicialService]
 })
 

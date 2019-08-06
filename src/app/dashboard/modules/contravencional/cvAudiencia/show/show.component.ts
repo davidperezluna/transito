@@ -6,7 +6,7 @@ import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
-    selector: 'app-show',
+    selector: 'app-show-cvaudiencia',
     templateUrl: './show.component.html'
 })
 export class ShowComponent implements OnInit {

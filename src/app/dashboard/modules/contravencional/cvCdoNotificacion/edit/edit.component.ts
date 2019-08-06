@@ -6,7 +6,7 @@ import { LoginService } from '../../../../../services/login.service';
 import swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-edit',
+  selector: 'app-edit-cvcdonotificacion',
   templateUrl: './edit.component.html'
 })
 export class EditComponent implements OnInit{

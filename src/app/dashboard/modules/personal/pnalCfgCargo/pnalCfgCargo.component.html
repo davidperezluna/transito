@@ -48,6 +48,8 @@
         </div>
       </div>
     </div>
-    <app-edit *ngIf='formEdit' [cargo]="cargo" (ready)="ready($event)"></app-edit>
-    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+
+    <app-edit-pnalcfgcargo *ngIf='formEdit' [cargo]="cargo" (ready)="ready($event)"></app-edit-pnalcfgcargo>
+    
+    <app-new-pnalcfgcargo *ngIf='formNew' (ready)="ready($event)"></app-new-pnalcfgcargo>
 </div>

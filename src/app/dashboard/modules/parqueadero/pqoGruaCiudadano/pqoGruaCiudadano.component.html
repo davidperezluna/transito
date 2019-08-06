@@ -59,6 +59,8 @@
         </div>
       </div>
     </div>
-    <app-edit *ngIf='formEdit' [gruaCiudadano]="gruaCiudadano" (ready)="ready($event)"></app-edit>
-    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+
+    <app-edit-pqogruaciudadano *ngIf='formEdit' [gruaCiudadano]="gruaCiudadano" (ready)="ready($event)"></app-edit-pqogruaciudadano>
+    
+    <app-new-pqogruaciudadano *ngIf='formNew' (ready)="ready($event)"></app-new-pqogruaciudadano>
 </div>

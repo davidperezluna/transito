@@ -1,4 +1,4 @@
-import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { PnalTalonario } from '../pnalTalonario.modelo';
 import { PnalTalonarioService } from '../../../../../services/pnalTalonario.service';
 import { CfgOrganismoTransitoService } from '../../../../../services/cfgOrganismoTransito.service';
@@ -6,7 +6,7 @@ import { LoginService } from '../../../../../services/login.service';
 import swal from 'sweetalert2'; 
 
 @Component({
-  selector: 'app-new',
+  selector: 'app-new-pnaltalonario',
   templateUrl: './new.component.html'
 })
 export class NewComponent implements OnInit {
@@ -21,7 +21,7 @@ public organismoTransito: any = null;
 constructor(
   private _FuncionarioService: PnalTalonarioService,
   private _OrganismoTransitoService: CfgOrganismoTransitoService,
-  private _loginService: LoginService,
+  private _LoginService: LoginService,
   ){}
 
   ngOnInit() {
@@ -33,7 +33,7 @@ constructor(
       },
       error => {
         this.errorMessage = <any>error;
-        if(this.errorMessage != null){
+        if (this.errorMessage != null) {
           console.log(this.errorMessage);
           alert('Error en la petición');
         }
@@ -68,7 +68,7 @@ constructor(
 
   onChangedOrganismoTransito(e) {
     if (e) {
-      let token = this._loginService.getToken();
+      let token = this._LoginService.getToken();
 
       this._OrganismoTransitoService.show({ 'id':e },token).subscribe(
         response => {
@@ -101,7 +101,7 @@ constructor(
 
     this.talonario.idOrganismoTransito = this.organismoTransito.id;
 
-    let token = this._loginService.getToken();
+    let token = this._LoginService.getToken();
 
     this._FuncionarioService.register(this.talonario, token).subscribe(
       response => {      

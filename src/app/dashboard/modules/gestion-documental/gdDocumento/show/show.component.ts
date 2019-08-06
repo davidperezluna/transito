@@ -31,6 +31,7 @@ export class ShowComponent implements OnInit {
   public departamentoSelected: any;
   public tiposCorrespondencia: any;
   public mediosCorrespondencia: any;
+  public comparendo: any = false;
   
   public datos = {
     'observaciones': null,

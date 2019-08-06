@@ -87,13 +87,25 @@
                             </div>
                             <div class="col-xs-12 col-lg-2">
                                 <label>No. Oficio </label>
-                                <input class="form-control" [(ngModel)]="documento.numeroOficio" name="medidaCautelarNumeroOficio" type="text">
+                                <input class="form-control" [(ngModel)]="documento.numeroOficio" name="numeroOficio" type="text">
                             </div>
                             <div class="col-xs-12 col-lg-12">
                                 <label>Asunto y Concepto
                                     <b class="text-danger">*</b>
                                 </label>
                                 <textarea class="form-control" [(ngModel)]="documento.descripcion" name="descripcion" rows="6" required></textarea>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-lg-6">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" [(ngModel)]="comparendo" class="custom-control-input" id="comparendo" name="comparendo">
+                                        <label class="custom-control-label" for="comparendo">No. comparendo</label>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-lg-6" *ngIf="comparendo">
+                                    <label>No. de comparendo </label>
+                                    <input class="form-control" [(ngModel)]="documento.numeroComparendo" name="numeroComparendo" type="text">
+                                </div>
                             </div>
                             <div class="col-xs-12 col-lg-12">
                                 <label>Adjuntar documento

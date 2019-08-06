@@ -5,6 +5,7 @@ import { FroFacturaService } from '../../../../../services/froFactura.service';
 import { PnalFuncionarioService } from '../../../../../services/pnalFuncionario.service';
 import { CvCdoComparendoService } from '../../../../../services/cvCdoComparendo.service';
 import { PqoInmovilizacionService } from '../../../../../services/pqoInmovilizacion.service';
+import { UserCfgTipoIdentificacionService } from '../../../../../services/userCfgTipoIdentificacion.service';
 import { UserCiudadanoService } from '../../../../../services/userCiudadano.service';
 import { LoginService } from '../../../../../services/login.service';
 import { environment } from 'environments/environment'
@@ -59,6 +60,7 @@ export class FroFacParqueaderoComponent implements OnInit {
     private _FuncionarioService: PnalFuncionarioService,
     private _InmovilizacionService: PqoInmovilizacionService,
     private _ComparendoService: CvCdoComparendoService,
+    private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
     private _CiudadanoService: UserCiudadanoService,
     private _LoginService: LoginService,
   ){}
@@ -86,6 +88,22 @@ export class FroFacParqueaderoComponent implements OnInit {
           this.factura.idOrganismoTransito = this.funcionario.organismoTransito.id;
 
           this.formSearch = true;
+
+          this._TipoIdentificacionService.select().subscribe(
+            response => {
+              this.tiposIdentificacion = response;
+            },
+            error => {
+              this.errorMessage = <any>error;
+
+              if (this.errorMessage != null) {
+                console.log(this.errorMessage);
+                alert('Error en la petición');
+              }
+            }
+          );
+
+          swal.close();
         } else {
           swal({
             title: 'Error!',
@@ -292,6 +310,14 @@ export class FroFacParqueaderoComponent implements OnInit {
         }
       );
     }
+  }
+
+  onCalcularTotal() {
+    let valorGrua, valorParqueadero, cantidad;
+    valorGrua = Number(this.factura.valorParqueadero);
+    valorParqueadero = Number(this.factura.valorGrua);
+
+    this.factura.valor = valorGrua + valorParqueadero;
   }
 
   onNew() {

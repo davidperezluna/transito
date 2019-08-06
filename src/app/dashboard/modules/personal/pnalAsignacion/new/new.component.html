@@ -10,28 +10,31 @@
                 <form #formNew="ngForm">
                     <div class="form-group">
                         <div class="row">
-                            <div  class="col-xs-12 col-lg-12">
+                            <div class="col-xs-12 col-lg-12">
                                 <label>Organismo tránsito <small>(Sede operativa)</small> <b class="text-danger">*</b></label>
-                                <ng-select [multiple]="false" [options]="organismosTransito" [(ngModel)]="asignacion.idOrganismoTransito" name="organismosTransito">
+                                <ng-select [multiple]="false" [options]="organismosTransito" [(ngModel)]="asignacion.idOrganismoTransito"
+                                    name="organismosTransito">
                                 </ng-select>
                             </div>
                         </div>
                         <div class="row">
-                            <div  class="col-xs-12 col-lg-4">
+                            <div class="col-xs-12 col-lg-4">
                                 <label>Desde</label>
                                 <input class="form-control" [(ngModel)]="asignacion.desde" name="desde" type="numeric" required>
                             </div>
-                            <div  class="col-xs-12 col-lg-4">
+                            <div class="col-xs-12 col-lg-4">
                                 <label>Hasta</label>
-                                <input class="form-control" (blur)="onCalcularTotal()" [(ngModel)]="asignacion.hasta" name="hasta" type="numeric" required>
+                                <input class="form-control" (blur)="onCalcularTotal()" [(ngModel)]="asignacion.hasta" name="hasta"
+                                    type="numeric" required>
                             </div>
-                            <div  class="col-xs-12 col-lg-4">
+                            <div class="col-xs-12 col-lg-4">
                                 <label>Rangos</label>
-                                <input class="form-control" [(ngModel)]="asignacion.cantidadRecibida" name="cantidadRecibida" type="numeric" required readonly>
+                                <input class="form-control" [(ngModel)]="asignacion.cantidadRecibida" name="cantidadRecibida" type="numeric"
+                                    required readonly>
                             </div>
                         </div>
                         <div class="row">
-                            <div  class="col-xs-12 col-lg-4">
+                            <div class="col-xs-12 col-lg-4">
                                 <label>Fecha asignación</label>
                                 <input class="form-control" [(ngModel)]="asignacion.fecha" name="fecha" type="date" required>
                             </div>
@@ -53,15 +56,29 @@
     </div>
 </div>
 
-<div class="row" *ngIf="numeroActa">
+<div class="row" *ngIf="asignacionRealizada">
     <div class="col-xs-12 col-lg-12">
-        <a href="{{ apiUrl }}/acta/{{ asignacion.id }}/pdf" class="btn btn-success" target="_blank">
-            <i class="fa fa-file-pdf-o"></i>
-            {{ numeroActa }}
-        </a>
-        <button (click)="onCancelar()" class="btn btn-default" type="button">
-            <i class="fa fa-times"></i>
-            Cancelar
-        </button>
+        <div class="card">
+            <div class="card-header">
+                <b class="text-uppercase">Acta de asignación No. {{ asignacionRealizada.numeroActa }} </b>
+                <br>
+                <small>{{ asignacionRealizada.organismoTransito.nombre }}</small>
+            </div>
+            <div class="card-body">
+                <form #formNew="ngForm">
+                    <div class="form-group">
+                        <a href="{{ apiUrl }}/acta/{{ asignacionRealizada.id }}/pdf" class="btn btn-success" target="_blank">
+                            <i class="fa fa-file-pdf-o"></i>
+                            {{ asignacionRealizada.numeroActa }}
+                        </a>
+                        <button (click)="onCancelar()" class="btn btn-default" type="button">
+                            <i class="fa fa-times"></i>
+                            Cancelar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
     </div>
 </div> 

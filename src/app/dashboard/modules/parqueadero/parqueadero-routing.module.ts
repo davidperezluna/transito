@@ -30,7 +30,7 @@ const routes: Routes = [
     component: PqoInmovilizacionComponent
   },
   {
-    path: 'search',
+    path: 'inmovilizacionSearch',
     component: SearchComponent
   },
 ];

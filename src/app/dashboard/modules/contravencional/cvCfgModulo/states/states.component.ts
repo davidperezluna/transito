@@ -6,7 +6,7 @@ import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
-  selector: 'app-states',
+  selector: 'app-states-cvcfgmodulo',
   templateUrl: './states.component.html'
 })
 

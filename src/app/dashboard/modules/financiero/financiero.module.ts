@@ -23,9 +23,9 @@ import { FroTrtePrecioComponent } from './froTrtePrecio/froTrtePrecio.component'
 import { FroTrteSolicitudComponent } from './froTrteSolicitud/froTrteSolicitud.component';
 
 import { FinancieroRoutingModule } from './financiero-routing.module';
+import { FroFacturaModule } from './froFactura/froFactura.module';
 import { FroAcuerdoPagoModule } from './froAcuerdoPago/froAcuerdoPago.module';
 import { FroCfgTipoRecaudoModule } from './froCfgTipoRecaudo/froCfgTipoRecaudo.module';
-import { FroFacturaModule } from './froFactura/froFactura.module';
 import { FroInfraccionModule } from './froInfraccion/froInfraccion.module';
 import { FroInfrCfgCategoriaModule } from './froInfrCfgCategoria/froInfrCfgCategoria.module';
 import { FroRecaudoModule } from './froRecaudo/froRecaudo.module';
@@ -44,28 +44,10 @@ import { FroTrteSolicitudModule } from './froTrteSolicitud/froTrteSolicitud.modu
     SelectModule,
     TooltipModule,
     FinancieroRoutingModule,
-    FroAcuerdoPagoModule,
-    FroCfgTipoRecaudoModule,
     FroFacturaModule,
-    FroInfraccionModule,
   ],
   declarations: [
-    FroAcuerdoPagoComponent,
-    FroCfgTipoRecaudoComponent,
-    FroFacturaComponent,
-    FroFacAcuerdoPagoComponent,
-    FroFacInfraccionComponent,
-    FroFacTramiteComponent,
     FroFacParqueaderoComponent,
-    FroInfraccionComponent,
-    FroInfrCfgCategoriaComponent,
-    FroRecaudoComponent,
-    FroReporteIngresosComponent,
-    FroTramiteComponent,
-    FroTrteCfgConceptoComponent,
-    FroTrteCfgCuentaComponent,
-    FroTrtePrecioComponent,
-    FroTrteSolicitudComponent,
   ]
 })
 export class FinancieroModule { }

@@ -16,7 +16,7 @@ const routes: Routes = [
       /*{
         path: 'config',
         loadChildren: './modules/config/config.module#ConfigModule'
-      },
+      },*/
       {
         path: 'contravencional',
         loadChildren: './modules/contravencional/contravencional.module#ContravencionalModule'
@@ -25,14 +25,14 @@ const routes: Routes = [
         path: 'financiero',
         loadChildren: './modules/financiero/financiero.module#FinancieroModule'
       },
-      {
+      /*{
         path: 'gestion-documental',
         loadChildren: './modules/gestion-documental/gestion-documental.module#GestionDocumentalModule'
       },
       {
         path: 'insumo',
         loadChildren: './modules/insumo/insumo.module#InsumoModule'
-      },
+      },*/
       {
         path: 'parqueadero',
         loadChildren: './modules/parqueadero/parqueadero.module#ParqueaderoModule'
@@ -40,7 +40,7 @@ const routes: Routes = [
       {
         path: 'personal',
         loadChildren: './modules/personal/personal.module#PersonalModule'
-      },*/
+      },
       {
         path: 'seguridad-vial',
         loadChildren: './modules/seguridad-vial/seguridad-vial.module#SeguridadVialModule'

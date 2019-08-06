@@ -1,4 +1,5 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { CfgOrganismoTransitoService } from '../../../../services/cfgOrganismoTransito.service';
 import { CvCdoComparendoService } from '../../../../services/cvCdoComparendo.service';
 import { CvCdoComparendo } from './cvCdoComparendo.modelo';
 import { LoginService } from '../../../../services/login.service';
@@ -12,36 +13,95 @@ declare var $: any;
 
 export class CvCdoComparendoComponent implements OnInit {
   public comparendo: CvCdoComparendo;
-  public txt: any[];
   public errorMessage:any;
-  public valido= true;
+
+  public organismosTransito: any;
   public comparendos;
   public table: any;
 
+  public file: any = null;
+  public fileSelected: File = null;
+
+  public formNew: any; 
+  public formUpload: any;
+
+  public tiposFuente = [
+    { 'value': '1', 'label': 'SSTTDN' },
+    { 'value': '2', 'label': 'POLCA' },
+  ];
+
+  public datos = {
+    'tipoFuente': null,
+    'idOrganismoTransito': null,
+  };
+
   constructor(
-		private _ComparendoService: CvCdoComparendoService,
+    private _ComparendoService: CvCdoComparendoService,
+    private _OrganismoTransitoService: CfgOrganismoTransitoService,
 		private _LoginService: LoginService,
     ){}
 
   ngOnInit() {
+    this.onInitForms();
+    
     swal({
-      title: '¿Cual es la fuente del archivo?',
-      type: 'info',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#3085d6',
-      confirmButtonText: 'SSTTDN',
-      cancelButtonText: 'SETRA DENAR'
-    }).then((result) => {
-      if (result.value) {
-        this.ngAbrirInput(1);
-      }else if (result.dismiss === swal.DismissReason.cancel) {
-        this.ngAbrirInput(0);
+      title: 'Cargando datos!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
       }
-    })
+    });
+
+    this._OrganismoTransitoService.selectSedes().subscribe(
+      response => {
+        this.organismosTransito = response;
+
+        let timeoutId = setTimeout(() => {
+          swal.close();
+        }, 100);
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+  }
+
+  onInitForms(){
+    this.formUpload = false;
+    this.formNew = false;
+  }
+
+  onCancelar(){
+    this.ngOnInit();
+  }
+
+  onNew(){
+    this.onInitForms();
+
+    this.formNew = true;
+  }
+
+  onFormUpload() {
+    this.onInitForms();
+
+    this.formUpload = true;
+  }
+
+  onFileChange(event) {
+    if (event.target.files.length > 0) {
+      this.fileSelected = event.target.files[0];
+
+      this.file = new FormData();
+      this.file.append('file', this.fileSelected);
+    }
   }
  
-  async ngAbrirInput(polca:any){
+  /*async ngAbrirInput(polca:any){
     const {value: files} = await swal({
       title: 'Seleccione el archivo .txt',
       input: 'file',
@@ -105,6 +165,55 @@ export class CvCdoComparendoComponent implements OnInit {
             })
         }    
       }
+    }
+  }*/
+
+  onEnviar() {
+    if (this.fileSelected) {
+      swal({
+        title: 'Subiendo datos!',
+        text: 'Solo tardara unos segundos por favor espere.',
+        onOpen: () => {
+          swal.showLoading()
+        }
+      });
+
+      let token = this._LoginService.getToken();
+
+      this._ComparendoService.upload(this.file, this.datos, token).subscribe(
+        response => {
+          if (response.code == 200) {
+            swal({
+              title: response.title,
+              text: response.message,
+              type: response.status,
+              confirmButtonText: 'Aceptar'
+            });
+          } else {
+            swal({
+              title: response.title,
+              text: response.message,
+              type: response.status,
+              confirmButtonText: 'Aceptar'
+            });
+          }
+          error => {
+            this.errorMessage = <any>error;
+
+            if (this.errorMessage != null) {
+              console.log(this.errorMessage);
+              alert("Error en la petición");
+            }
+          }
+        }
+      );
+    } else {
+      swal({
+        title: 'Error!',
+        text: 'Debe adjuntar el documento escaneado.',
+        type: 'error',
+        confirmButtonText: 'Aceptar'
+      });
     }
   }
 }

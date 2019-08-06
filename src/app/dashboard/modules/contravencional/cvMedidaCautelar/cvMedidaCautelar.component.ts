@@ -11,7 +11,7 @@ declare var $: any;
 
 export class CvMedidaCautelarComponent implements OnInit {
   public errorMessage;
-	public tipoMedidacautelar: any;
+  public tipoMedidaCautelar: any;
 	public valorTotal: any;
 	public ciudadano: any;
 	public identificacion: any;
@@ -94,8 +94,8 @@ export class CvMedidaCautelarComponent implements OnInit {
     }
   }
 
-  onEdit(tipoMedidacautelar:any){
-    this.tipoMedidacautelar = tipoMedidacautelar;
+  onEdit(tipoMedidaCautelar:any){
+    this.tipoMedidaCautelar = tipoMedidaCautelar;
     this.formEdit = true;
     this.formIndex = false;
   }

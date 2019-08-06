@@ -1,19 +1,77 @@
 <div class="container">
   <div class="row">
-    <div class="col-xs-12 col-lg-12">
-      <h3>Comparendo</h3>
-      <p>aquí podrás cargar el archivo de comparendos</p>
-    </div>
-    <div class="col text-right ">
-      <div class="btn-group pull-right">
-        <button (click)="ngOnInit()" class="btn btn-outline-success  btn-round " data-target="#themepicker" data-toggle="modal"><span
-            class="text">Nuevo</span> <i class="ti-save ml-2"></i></button>
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
+      <div class="card">
+        <div class="card-header">
+          <b class="text-uppercase">Ordenes de comparendo</b>
+        </div>
+        <div class="card-body">
+          <div class="btn-group pull-right">
+            <button (click)="onFormUpload()" class="btn btn-default">
+              <i class="fa fa-upload"></i>
+              Cargar archivo
+            </button>
+            <button (click)="onNew()" class="btn btn-primary">
+              <i class="fa fa-plus"></i>
+              Nuevo
+            </button>
+          </div>
+        </div>
       </div>
-    </div> 
+    </div>
+
+    <div class="col-xs-12 col-md-12 col-lg-6" *ngIf="formUpload">
+      <form #formNew="ngForm">
+        <div class="card">
+          <div class="card-header">
+            <b class="text-uppercase">Cargar archivo de valores</b>
+          </div>
+          <div class="card-body">
+            <div class="form-group">
+              <div class="row">
+                <div class="col-xs-12 col-lg-12">
+                  <label>Organismo transito</label>
+                  <ng-select [multiple]="false" [options]="organismosTransito" [(ngModel)]="datos.idOrganismoTransito" name="idOrganismoTransito" required>
+                  </ng-select>
+                </div>
+                <div class="col-xs-12 col-lg-12">
+                  <label>Fuente del archivo</label>
+                  <ng-select [multiple]="false" [options]="tiposFuente" [(ngModel)]="datos.tipoFuente" name="tipoFuente" required>
+                  </ng-select>
+                </div>
+                <div class="col-xs-12 col-lg-12">
+                  <label>Adjuntar documento <b class="text-danger">*</b> <small>(.csv)</small></label>
+                  <input class="form-control" type="file" (change)="onFileChange($event)" required>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <div class="btn-group">
+              <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
+                <i class="fa fa-save"></i>
+                Enviar
+              </button>
+              <button (click)="onCancelar()" class="btn btn-default">
+                <i class="fa fa-times"></i>
+                Cancelar
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
   </div>
-</div>
-<!-- <div class="row" >
-      <h1>comparendo</h1>
-  </div> -->
+
+
+  <div class="row">
+    <app-new-cvcdocomparendo *ngIf='formNew'></app-new-cvcdocomparendo>
+  </div>
+
+
 <!-- <app-edit *ngIf='formEdit' [cuenta]="cuenta" (ready)="ready($event)"></app-edit>
-    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new> --> 
+    > --> 
+</div>
+
+<!-- <app-edit *ngIf='formEdit' [cuenta]="cuenta" (ready)="ready($event)"></app-edit>
+    > --> 

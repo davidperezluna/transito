@@ -6,7 +6,7 @@ import { LoginService } from '../../../../../services/login.service';
 import swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-new',
+  selector: 'app-new-pnalcfgcdoconsecutivo',
   templateUrl: './new.component.html'
 })
 

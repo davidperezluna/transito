@@ -62,6 +62,8 @@
           </div>
       </div>
   </div>
-  <app-edit *ngIf='formEdit' [talonario]="talonario" (ready)="ready($event)"></app-edit>
-  <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+  
+  <app-edit-pnaltalonario *ngIf='formEdit' [talonario]="talonario" (ready)="ready($event)"></app-edit-pnaltalonario>
+  
+  <app-new-pnaltalonario *ngIf='formNew' (ready)="ready($event)"></app-new-pnaltalonario>
 </div>

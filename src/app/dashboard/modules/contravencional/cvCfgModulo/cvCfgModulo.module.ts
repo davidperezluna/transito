@@ -2,24 +2,22 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { SelectModule } from 'angular2-select';
+import { TooltipModule } from "ngx-tooltip";
 
 import { CvCfgModuloService } from '../../../../services/cvCfgModulo.service';
 
 import { NewComponent } from './new/new.component';
 import { EditComponent } from './edit/edit.component';
 import { StatesComponent } from './states/states.component';
-import { CvCfgModuloComponent } from './cvCfgModulo.component';
 
 @NgModule({
-    imports: [CommonModule, Ng2BootstrapModule.forRoot(),SelectModule],
+    imports: [CommonModule, Ng2BootstrapModule.forRoot(), SelectModule, TooltipModule],
     declarations: [
-        CvCfgModuloComponent,
         NewComponent,
         EditComponent,
         StatesComponent
     ],
     exports: [
-        CvCfgModuloComponent,
         NewComponent,
         EditComponent,
         StatesComponent

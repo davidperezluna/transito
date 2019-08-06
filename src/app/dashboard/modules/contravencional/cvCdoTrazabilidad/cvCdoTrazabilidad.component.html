@@ -104,8 +104,8 @@
       </div>
     </div>
     
-    <app-edit *ngIf='formEdit' [trazabilidad]="trazabilidad" (ready)="ready($event)"></app-edit>
-    <app-new *ngIf='formNew && comparendo' [comparendo]="comparendo" (ready)="ready($event)"></app-new>
+    <app-edit-cvcdotrazabilidad *ngIf='formEdit' [trazabilidad]="trazabilidad" (ready)="ready($event)"></app-edit-cvcdotrazabilidad>
+    <app-new-cvcdotrazabilidad *ngIf='formNew && comparendo' [comparendo]="comparendo" (ready)="ready($event)"></app-new-cvcdotrazabilidad>
 
     <div class="row" *ngIf='formAcuerdoPago'>
       <div class="col-md-12">

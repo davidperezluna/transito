@@ -8,7 +8,7 @@ import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
-  selector: 'app-search',
+  selector: 'app-search-pqoinmovilizacion',
   templateUrl: './search.component.html'
 })
 

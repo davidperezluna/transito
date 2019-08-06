@@ -99,8 +99,8 @@ export class NewComponent implements OnInit {
             alert("Error en la petición");
           }
         }
-
-      });
+      }
+    );
   }
 
   onChangedMarca(e){

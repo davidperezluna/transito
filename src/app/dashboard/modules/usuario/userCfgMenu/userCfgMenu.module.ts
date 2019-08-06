@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { SelectModule } from 'angular2-select';
+
 import { UserCfgMenuService } from '../../../../services/userCfgMenu.service';
 
 import { NewComponent } from './new/new.component';

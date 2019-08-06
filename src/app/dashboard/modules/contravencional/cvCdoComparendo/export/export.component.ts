@@ -5,7 +5,7 @@ import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
-    selector: 'app-index',
+    selector: 'app-index-cvcdocomparendo',
     templateUrl: './export.component.html'
 })
 export class ExportComponent implements OnInit {
