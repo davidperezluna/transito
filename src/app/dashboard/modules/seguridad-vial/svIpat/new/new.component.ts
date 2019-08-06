@@ -70,7 +70,7 @@ import { VhloCfgRadioAccionService } from '../../../../../services/vhloCfgRadioA
 import { DatePipe, CurrencyPipe } from '@angular/common';
 
 @Component({
-  selector: 'app-new',
+  selector: 'app-new-svipat',
   templateUrl: './new.component.html',
   providers: [DatePipe]
 })

@@ -47,6 +47,6 @@
             </div>
         </div>
     </div>
-    <app-edit *ngIf='formEdit' [parametro]="parametro" (ready)="ready($event)"></app-edit>
-    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+    <app-edit-svparametro *ngIf='formEdit' [parametro]="parametro" (ready)="ready($event)"></app-edit-svparametro>
+    <app-new-svparametro *ngIf='formNew' (ready)="ready($event)"></app-new-svparametro>
 </div>

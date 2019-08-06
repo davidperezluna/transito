@@ -3,7 +3,7 @@ import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
-    selector: 'app-show',
+    selector: 'app-show-svipat',
     templateUrl: './show.component.html'
 })
 

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SvIpatImpresoMunicipioComponent } from './svIpatImpresoMunicipio.component';
 import { SvIpatImpresoMunicipioService } from '../../../../services/svIpatImpresoMunicipio.service';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 
@@ -12,8 +11,8 @@ import { TooltipModule } from "ngx-tooltip";
 
 @NgModule({
     imports: [CommonModule, Ng2BootstrapModule.forRoot(), SelectModule, TooltipModule],
-    declarations: [SvIpatImpresoMunicipioComponent,NewComponent,EditComponent],
-    exports: [SvIpatImpresoMunicipioComponent, NewComponent,EditComponent],
+    declarations: [NewComponent,EditComponent],
+    exports: [NewComponent,EditComponent],
     providers:[SvIpatImpresoMunicipioService]
 })
 

@@ -49,6 +49,6 @@
       </div>
     </div>
     
-    <app-edit *ngIf='formEdit' [bodega]="bodega" (ready)="ready($event)"></app-edit>
-    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+    <app-editimpresobodega *ngIf='formEdit' [bodega]="bodega" (ready)="ready($event)"></app-editimpresobodega>
+    <app-newimpresobodega *ngIf='formNew' (ready)="ready($event)"></app-newimpresobodega>
 </div>

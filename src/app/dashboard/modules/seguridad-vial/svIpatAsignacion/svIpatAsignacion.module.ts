@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SvIpatAsignacionComponent } from './svIpatAsignacion.component';
 import { SvIpatAsignacionService } from '../../../../services/svIpatAsignacion.service';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 
@@ -11,8 +10,8 @@ import { SelectModule } from 'angular2-select';
 
 @NgModule({
     imports: [CommonModule, Ng2BootstrapModule.forRoot(),SelectModule],
-    declarations: [SvIpatAsignacionComponent,NewComponent,EditComponent,ShowComponent],
-    exports: [SvIpatAsignacionComponent, NewComponent,EditComponent,ShowComponent],
+    declarations: [NewComponent,EditComponent,ShowComponent],
+    exports: [NewComponent,EditComponent,ShowComponent],
     providers:[SvIpatAsignacionService]
 })
 

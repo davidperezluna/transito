@@ -7,7 +7,7 @@ import { SvCfgEntidadAccidenteService } from '../../../../../services/svCfgEntid
 import { CfgMunicipioService } from '../../../../../services/cfgMunicipio.service';
 
 @Component({
-    selector: 'app-edit',
+    selector: 'app-edit-svcfgunidadreceptora',
     templateUrl: './edit.component.html'
 })
 export class EditComponent implements OnInit {

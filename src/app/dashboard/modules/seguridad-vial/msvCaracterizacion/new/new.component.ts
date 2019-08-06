@@ -9,7 +9,7 @@ import { DatePipe, CurrencyPipe } from '@angular/common';
 import swal from 'sweetalert2';
 
 @Component({
-    selector: 'app-new',
+    selector: 'app-new-svcaracterizacion',
     templateUrl: './new.component.html',
     providers: [DatePipe]
 })

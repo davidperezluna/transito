@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SvCfgRequiereEmpresaComponent } from './svCfgRequiereEmpresa.component';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { SvCfgRequiereEmpresaService } from '../../../../services/svCfgRequiereEmpresa.service';
 
@@ -10,8 +9,8 @@ import { SelectModule } from 'angular2-select';
 
 @NgModule({
     imports: [CommonModule, Ng2BootstrapModule.forRoot(), SelectModule],
-    declarations: [SvCfgRequiereEmpresaComponent, NewComponent, EditComponent],
-    exports: [SvCfgRequiereEmpresaComponent, NewComponent, EditComponent],
+    declarations: [NewComponent, EditComponent],
+    exports: [NewComponent, EditComponent],
     providers: [SvCfgRequiereEmpresaService]
 })
 

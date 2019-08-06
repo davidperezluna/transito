@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SvCfgObjetoFijoComponent } from './svCfgObjetoFijo.component';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { SvCfgObjetoFijoService } from '../../../../services/svCfgObjetoFijo.service';
 
@@ -12,8 +11,8 @@ import {SelectModule} from 'angular2-select';
 
 @NgModule({
     imports: [CommonModule, Ng2BootstrapModule.forRoot(),SelectModule],
-    declarations: [SvCfgObjetoFijoComponent,NewComponent,EditComponent],
-    exports: [SvCfgObjetoFijoComponent, NewComponent,EditComponent],
+    declarations: [NewComponent,EditComponent],
+    exports: [NewComponent,EditComponent],
     providers:[SvCfgObjetoFijoService]
 })
 

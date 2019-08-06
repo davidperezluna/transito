@@ -47,6 +47,6 @@
             </div>
         </div>
     </div>
-    <app-edit *ngIf='formEdit' [sustanciaPeligrosa]="sustanciaPeligrosa" (ready)="ready($event)"></app-edit>
-    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+    <app-edit-svcfgsustanciapeligrosa *ngIf='formEdit' [sustanciaPeligrosa]="sustanciaPeligrosa" (ready)="ready($event)"></app-edit-svcfgsustanciapeligrosa>
+    <app-new-svcfgsustanciapeligrosa *ngIf='formNew' (ready)="ready($event)"></app-new-svcfgsustanciapeligrosa>
 </div>

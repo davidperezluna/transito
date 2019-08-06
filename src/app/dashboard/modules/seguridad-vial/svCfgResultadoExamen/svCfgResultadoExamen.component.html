@@ -47,6 +47,6 @@
             </div>
         </div>
     </div>
-    <app-edit *ngIf='formEdit' [resultadoExamen]="resultadoExamen" (ready)="ready($event)"></app-edit>
-    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+    <app-edit-svcfgresultadoexamen *ngIf='formEdit' [resultadoExamen]="resultadoExamen" (ready)="ready($event)"></app-edit-svcfgresultadoexamen>
+    <app-new-svcfgresultadoexamen *ngIf='formNew' (ready)="ready($event)"></app-new-svcfgresultadoexamen>
 </div>

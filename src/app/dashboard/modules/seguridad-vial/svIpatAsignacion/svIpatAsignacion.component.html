@@ -74,6 +74,6 @@
             </div>
         </div>
     </div>
-    <app-new *ngIf='formNew' [funcionario]="funcionario" (ready)="ready($event)"></app-new>
-    <app-show *ngIf='formShow' [funcionario]="funcionario" (ready)="ready($event)" (readyNew)="readyNew($event)"></app-show>
+    <app-new-svipatasignacion *ngIf='formNew' [funcionario]="funcionario" (ready)="ready($event)"></app-new-svipatasignacion>
+    <app-show-svipatasignacion *ngIf='formShow' [funcionario]="funcionario" (ready)="ready($event)" (readyNew)="readyNew($event)"></app-show-svipatasignacion>
 </div>

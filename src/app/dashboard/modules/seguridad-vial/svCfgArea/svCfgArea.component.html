@@ -48,6 +48,6 @@
             </div>
         </div>
     </div>
-    <app-edit *ngIf='formEdit' [area]="area" (ready)="ready($event)"></app-edit>
-    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+    <app-edit-svcfgarea *ngIf='formEdit' [area]="area" (ready)="ready($event)"></app-edit-svcfgarea>
+    <app-new-svcfgarea *ngIf='formNew' (ready)="ready($event)"></app-new-svcfgarea>
 </div>

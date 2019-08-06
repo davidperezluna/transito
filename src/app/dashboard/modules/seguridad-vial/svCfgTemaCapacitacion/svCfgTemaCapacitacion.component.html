@@ -47,6 +47,6 @@
             </div>
         </div>
     </div>
-    <app-edit *ngIf='formEdit' [temaCapacitacion]="tema" (ready)="ready($event)"></app-edit>
-    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+    <app-edit-svcfgtemacapacitacion *ngIf='formEdit' [temaCapacitacion]="tema" (ready)="ready($event)"></app-edit-svcfgtemacapacitacion>
+    <app-new-svcfgtemacapacitacion *ngIf='formNew' (ready)="ready($event)"></app-new-svcfgtemacapacitacion>
 </div>

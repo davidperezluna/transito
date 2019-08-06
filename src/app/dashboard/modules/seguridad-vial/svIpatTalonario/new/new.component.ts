@@ -7,7 +7,7 @@ import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
-    selector: 'app-new',
+    selector: 'app-new-svipattalonario',
     templateUrl: './new.component.html'
 })
 export class NewComponent implements OnInit {

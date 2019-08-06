@@ -50,6 +50,6 @@
       </div>
     </div>
     
-    <app-edit *ngIf='formEdit' [proveedor]="proveedor" (ready)="ready($event)"></app-edit>
-    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+    <app-edit-svcfgsenialproveedor *ngIf='formEdit' [proveedor]="proveedor" (ready)="ready($event)"></app-edit-svcfgsenialproveedor>
+    <app-new-svcfgsenialproveedor *ngIf='formNew' (ready)="ready($event)"></app-new-svcfgsenialproveedor>
 </div>

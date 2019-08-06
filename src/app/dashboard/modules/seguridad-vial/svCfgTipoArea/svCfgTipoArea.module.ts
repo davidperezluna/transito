@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SvCfgTipoAreaComponent } from './svCfgTipoArea.component';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { SvCfgTipoAreaService } from '../../../../services/svCfgTipoArea.service';
 
@@ -10,8 +9,8 @@ import { SelectModule } from 'angular2-select';
 
 @NgModule({
     imports: [CommonModule, Ng2BootstrapModule.forRoot(), SelectModule],
-    declarations: [SvCfgTipoAreaComponent, NewComponent, EditComponent],
-    exports: [SvCfgTipoAreaComponent, NewComponent, EditComponent],
+    declarations: [NewComponent, EditComponent],
+    exports: [NewComponent, EditComponent],
     providers: [SvCfgTipoAreaService]
 })
 

@@ -47,6 +47,6 @@
             </div>
         </div>
     </div>
-    <app-edit *ngIf='formEdit' [tipoGeometria]="tipoGeometria" (ready)="ready($event)"></app-edit>
-    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+    <app-edit-svcfgtipogeometria *ngIf='formEdit' [tipoGeometria]="tipoGeometria" (ready)="ready($event)"></app-edit-svcfgtipogeometria>
+    <app-new-svcfgtipogeometria *ngIf='formNew' (ready)="ready($event)"></app-new-svcfgtipogeometria>
 </div>

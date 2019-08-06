@@ -7,7 +7,7 @@ import swal from 'sweetalert2';
 import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 
 @Component({
-  selector: 'app-new',
+  selector: 'app-new-svcfgobjetofijo',
   templateUrl: './new.component.html'
 })
 export class NewComponent implements OnInit {

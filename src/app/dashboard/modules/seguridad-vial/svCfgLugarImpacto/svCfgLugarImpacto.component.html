@@ -47,6 +47,6 @@
             </div>
         </div>
     </div>
-    <app-edit *ngIf='formEdit' [lugarImpacto]="lugarImpacto" (ready)="ready($event)"></app-edit>
-    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+    <app-edit-svcfglugarimpacto *ngIf='formEdit' [lugarImpacto]="lugarImpacto" (ready)="ready($event)"></app-edit-svcfglugarimpacto>
+    <app-new-svcfglugarimpacto *ngIf='formNew' (ready)="ready($event)"></app-new-svcfglugarimpacto>
 </div>

@@ -54,6 +54,6 @@
             </div>
         </div>
     </div>
-    <app-edit *ngIf='formEdit' [hospital]="hospital" (ready)="ready($event)"></app-edit>
-    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+    <app-edit-svcfghospital *ngIf='formEdit' [hospital]="hospital" (ready)="ready($event)"></app-edit-svcfghospital>
+    <app-new-svcfghospital *ngIf='formNew' (ready)="ready($event)"></app-new-svcfghospital>
 </div>

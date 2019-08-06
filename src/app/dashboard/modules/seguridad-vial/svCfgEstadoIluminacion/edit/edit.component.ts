@@ -4,14 +4,13 @@ import { LoginService } from '../../../../../services/login.service';
 import swal from 'sweetalert2';
 
 @Component({
-    selector: 'app-edit',
+    selector: 'app-edit-svcfgestadoiluminacion',
     templateUrl: './edit.component.html'
 })
 export class EditComponent implements OnInit {
     @Output() ready = new EventEmitter<any>();
     @Input() estadoIluminacion: any = null;
     public errorMessage;
-    public respuesta;
 
     public formReady = false;
 

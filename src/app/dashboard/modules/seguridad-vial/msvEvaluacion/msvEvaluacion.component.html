@@ -318,9 +318,9 @@
             </div>
             <div class="card-body">
                <label>Categoria <strong class="text-danger">*</strong></label>
-               <ng-select [multiple]="false" [options]="msvCategorias" (ngModelChange)="changedCategoria($event)"
+               <!-- <ng-select [multiple]="false" [options]="msvCategorias" (ngModelChange)="changedCategoria($event)"
                   [(ngModel)]="categoriaSelected" required name="idCategoria">
-               </ng-select>
+               </ng-select> -->
 
                <div style="overflow-x: auto; padding: 20px;">
                   <div style="width: 1500px !important;">
@@ -494,8 +494,8 @@
          </div>
       </div>
    </div>
-   <app-show *ngIf='formShow' [revision]= revision (ready)="ready($event)"> </app-show>
-   <app-new-empresa *ngIf='formNewEmpresa' (ready)="ready($event)"> </app-new-empresa>
-   <app-new-revision *ngIf="formNewRevision" [miEmpresa]="miEmpresa" (ready)="ready($event)"> </app-new-revision>
-   <app-edit-revision *ngIf='formEditRevision' [miEmpresa]="miEmpresa" [msvRevision]="revision" (ready)="ready($event)"></app-edit-revision>
+   <app-show-svevaluacion *ngIf='formShow' [revision]= revision (ready)="ready($event)"> </app-show-svevaluacion>
+   <app-new-empresa-svevaluacion *ngIf='formNewEmpresa' (ready)="ready($event)"> </app-new-empresa-svevaluacion>
+   <app-new-revision-svevaluacion *ngIf="formNewRevision" [miEmpresa]="miEmpresa" (ready)="ready($event)"> </app-new-revision-svevaluacion>
+   <app-edit-revision-svevaluacion *ngIf='formEditRevision' [miEmpresa]="miEmpresa" [msvRevision]="revision" (ready)="ready($event)"></app-edit-revision-svevaluacion>
 </div>
