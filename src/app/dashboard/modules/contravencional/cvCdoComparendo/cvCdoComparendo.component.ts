@@ -22,6 +22,7 @@ export class CvCdoComparendoComponent implements OnInit {
   public file: any = null;
   public fileSelected: File = null;
 
+  public formIndex: any; 
   public formNew: any; 
   public formUpload: any;
 
@@ -58,6 +59,7 @@ export class CvCdoComparendoComponent implements OnInit {
 
         let timeoutId = setTimeout(() => {
           swal.close();
+          this.formIndex = true;
         }, 100);
       },
       error => {
@@ -72,6 +74,7 @@ export class CvCdoComparendoComponent implements OnInit {
   }
 
   onInitForms(){
+    this.formIndex = false;
     this.formUpload = false;
     this.formNew = false;
   }

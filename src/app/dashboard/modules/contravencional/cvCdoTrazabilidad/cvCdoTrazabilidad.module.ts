@@ -5,6 +5,8 @@ import { SelectModule } from 'angular2-select';
 import { TooltipModule } from "ngx-tooltip";
 
 import { CvCdoTrazabilidadService } from '../../../../services/cvCdoTrazabilidad.service';
+import { CvCdoComparendoService } from '../../../../services/cvCdoComparendo.service';
+import { CvCdoCfgEstadoService } from '../../../../services/cvCdoCfgEstado.service';
 
 import { NewComponent } from './new/new.component';
 import { EditComponent } from './edit/edit.component';
@@ -13,7 +15,11 @@ import { EditComponent } from './edit/edit.component';
     imports: [CommonModule, Ng2BootstrapModule.forRoot(),SelectModule, TooltipModule],
     declarations: [NewComponent,EditComponent],
     exports: [NewComponent,EditComponent],
-    providers:[CvCdoTrazabilidadService]
+    providers:[
+        CvCdoTrazabilidadService,
+        CvCdoComparendoService,
+        CvCdoCfgEstadoService,
+    ]
 })
 
 export class CvCdoTrazabilidadModule { }

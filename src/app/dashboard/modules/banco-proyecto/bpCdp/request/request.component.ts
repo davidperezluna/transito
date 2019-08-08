@@ -17,6 +17,7 @@ export class RequestComponent implements OnInit {
     @Output() ready = new EventEmitter<any>();
     public cdp: BpCdp;
     public errorMessage;
+    
     public numeroProyecto: any;
     public proyecto: any;
     public actividades: any;
@@ -28,6 +29,11 @@ export class RequestComponent implements OnInit {
     public datos = {
         'idActividad': null
     };
+
+    public search = {
+        'tipoFiltro': null,
+        'filtro': null
+    }
 
 constructor(
   private _CdpService: BpCdpService,
@@ -99,9 +105,12 @@ constructor(
 
         let token = this._loginService.getToken();
 
-        this._ProyectoService.searchByNumero({ 'numero': this.numeroProyecto}, token).subscribe(
+        this.search.tipoFiltro = 1;
+        this.search.filtro = this.numeroProyecto;
+
+        this._ProyectoService.searchByFilter(this.search, token).subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                     this.proyecto = response.data;
 
                     this._ActividadService.select({ 'idProyecto': this.proyecto.id }, token).subscribe(
@@ -123,7 +132,7 @@ constructor(
                     swal.close();
                 }else{
                     swal({
-                        title: 'Sin propietarios!',
+                        title: 'Sin actividades!',
                         text: response.message,
                         type: 'error',
                         confirmButtonText: 'Aceptar'

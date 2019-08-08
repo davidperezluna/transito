@@ -280,6 +280,7 @@ export class FroFacParqueaderoComponent implements OnInit {
               this.ciudadano = response.data.ciudadano;
               this.factura.idCiudadano = this.ciudadano.id;
               this.formCiudadano = false;
+              this.formNew = true;
               
               swal({
                 title: 'Perfecto!',
@@ -289,6 +290,7 @@ export class FroFacParqueaderoComponent implements OnInit {
               });
             }else{
               this.formCiudadano = true;
+              this.formNew = false;
             }
           } else {
             this.ciudadano = null;
@@ -348,6 +350,7 @@ export class FroFacParqueaderoComponent implements OnInit {
     this._FacturaService.register(datos, token).subscribe(
       response => {
         if (response.status == 'success') {
+          this.onInitForms();
           this.factura = response.data;         
           this.municipio = response.data.organismoTransito.municipio;
 

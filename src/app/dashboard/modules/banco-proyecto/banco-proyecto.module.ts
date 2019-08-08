@@ -11,6 +11,7 @@ import { BpCfgTipoInsumoComponent } from './bpCfgTipoInsumo/bpCfgTipoInsumo.comp
 import { BpCuentaComponent } from './bpCuenta/bpCuenta.component';
 import { BpInsumoComponent } from './bpInsumo/bpInsumo.component';
 import { BpProyectoComponent } from './bpProyecto/bpProyecto.component';
+import { RequestComponent } from './bpCdp/request/request.component';
 
 import { BancoProyectoRoutingModule } from './banco-proyecto-routing.module';
 import { BpActividadModule } from './bpActividad/bpActividad.module';
@@ -42,6 +43,7 @@ import { BpProyectoModule } from './bpProyecto/bpProyecto.module';
     BpCuentaComponent,
     BpInsumoComponent,
     BpProyectoComponent,
+    RequestComponent,
   ]
 })
 export class BancoProyectoModule { }

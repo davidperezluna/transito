@@ -72,5 +72,24 @@ export class CvCdoTrazabilidadService {
             res => res.json(),
             this._loogerService.registerLog(token, 'UPDATE', json, this.url)
         );
-    }
+	}
+	
+	searchBienes(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = "data=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/search/bienes", params, { headers: headers }).map(
+			res => res.json()
+		);
+	}
+
+	registerBien(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = "data=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/new/bien", params, { headers: headers }).map(
+			res => res.json(),
+			this._loogerService.registerLog(token, 'INSERT', json, this.url)
+		);
+	}
 }
