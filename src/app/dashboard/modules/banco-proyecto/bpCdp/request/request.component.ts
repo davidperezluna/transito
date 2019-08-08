@@ -9,13 +9,15 @@ import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
-  selector: 'app-request',
+  selector: 'app-request-cdp',
   templateUrl: './request.component.html'
 })
+
 export class RequestComponent implements OnInit {
     @Output() ready = new EventEmitter<any>();
     public cdp: BpCdp;
     public errorMessage;
+    
     public numeroProyecto: any;
     public proyecto: any;
     public actividades: any;
@@ -27,6 +29,11 @@ export class RequestComponent implements OnInit {
     public datos = {
         'idActividad': null
     };
+
+    public search = {
+        'tipoFiltro': null,
+        'filtro': null
+    }
 
 constructor(
   private _CdpService: BpCdpService,
@@ -48,7 +55,7 @@ constructor(
             response => {
                 this.solicitudes = response.data;
                 let timeoutId = setTimeout(() => {
-                    this.iniciarTabla();
+                    this.onInitTable();
                 }, 100);
 
                 swal.close();
@@ -64,17 +71,17 @@ constructor(
         );
     }
 
-    iniciarTabla() {
+    onInitTable() {
         $('#dataTables-example').DataTable({
             responsive: true,
             pageLength: 8,
             sPaginationType: 'full_numbers',
             oLanguage: {
                 oPaginate: {
-                    sFirst: '<<',
-                    sPrevious: '<',
-                    sNext: '>',
-                    sLast: '>>'
+                    sFirst: '<i class="fa fa-step-backward"></i>',
+                    sPrevious: '<i class="fa fa-chevron-left"></i>',
+                    sNext: '<i class="fa fa-chevron-right"></i>',
+                    sLast: '<i class="fa fa-step-forward"></i>'
                 }
             }
         });
@@ -98,9 +105,12 @@ constructor(
 
         let token = this._loginService.getToken();
 
-        this._ProyectoService.searchByNumero({ 'numero': this.numeroProyecto}, token).subscribe(
+        this.search.tipoFiltro = 1;
+        this.search.filtro = this.numeroProyecto;
+
+        this._ProyectoService.searchByFilter(this.search, token).subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                     this.proyecto = response.data;
 
                     this._ActividadService.select({ 'idProyecto': this.proyecto.id }, token).subscribe(
@@ -122,7 +132,7 @@ constructor(
                     swal.close();
                 }else{
                     swal({
-                        title: 'Sin propietarios!',
+                        title: 'Sin actividades!',
                         text: response.message,
                         type: 'error',
                         confirmButtonText: 'Aceptar'

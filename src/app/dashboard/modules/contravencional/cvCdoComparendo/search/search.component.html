@@ -130,6 +130,11 @@
                                     <button *ngIf="!trazabilidad.actoAdministrativo" (click)="onDocument(trazabilidad)" class="btn btn-xs btn-info" type="button" tooltip="Crear acto admtivo." [tooltipDisabled]="false" [tooltipAnimation]="true" tooltipPlacement="top">
                                         <i class="fa fa-file-text"></i>
                                     </button>
+                                    <button *ngIf="trazabilidad.comparendo.estado.id == 25" (click)="onInvestigacion(trazabilidad)" class="btn btn-xs btn-warning"
+                                        type="button" tooltip="Crear investigación bienes" [tooltipDisabled]="false" [tooltipAnimation]="true"
+                                        tooltipPlacement="top">
+                                        <i class="fa fa-search"></i>
+                                    </button>
                                 </div>
                             </td>
                         </tr>
@@ -285,6 +290,111 @@
                         </tr>
                     </tbody>
                 </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-lg-6" *ngIf='formInvestigacion'>
+        <div class="card">
+            <div class="card-header">
+                <b class="text-uppercase">
+                    Crear invetigación de bienes
+                </b>
+                <br>
+                <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
+            </div>
+            <div class="card-body">
+                <div class="col-xs-12 col-lg-12">
+                    <form #formNew="ngForm">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-xs-12 col-lg-6">
+                                    <label>Nombre
+                                        <b class="text-danger">*</b>
+                                    </label>
+                                    <input class="form-control" [(ngModel)]="datosInvestigacion.nombre" name="nombre" type="text" required
+                                        readonly />
+                                </div>
+                                <div class="col-xs-12 col-lg-12">
+                                    <label>Tipo
+                                        <b class="text-danger">*</b>
+                                    </label>
+                                    <ng-select [multiple]="false" [options]="tiposBien" [(ngModel)]="datosInvestigacion.tipo" name="tipo" required>
+                                    </ng-select>
+                                </div>
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" [(ngModel)]="datosInvestigacion.embargable" class="custom-control-input" id="embargable"
+                                        name="embargable">
+                                    <label class="custom-control-label" for="embargable">Embargable</label>
+                                </div>
+                                <div class="col-xs-12 col-lg-6">
+                                    <label>Avaluo
+                                        <b class="text-danger">*</b>
+                                    </label>
+                                    <input class="form-control" [(ngModel)]="datosInvestigacion.avaluo" name="avaluo" type="text" required readonly />
+                                </div>
+                                <div class="col-xs-12 col-lg-6" *ngIf="datosInvestigacion.embargable">
+                                    <label>Valor embargado
+                                        <b class="text-danger">*</b>
+                                    </label>
+                                    <input class="form-control" [(ngModel)]="datosInvestigacion.valor" name="valor" type="text" required readonly />
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="btn-group">
+                    <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
+                        <i class="fa fa-save"></i>
+                        Enviar
+                    </button>
+                    <button (click)="onSearch()" class="btn btn-default">
+                        <i class="fa fa-times"></i>
+                        Cancelar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-lg-6" *ngIf="bienes">
+        <div class="card">
+            <div class="card-header">
+                <b class="text-uppercase">
+                    Bienes investigados
+                </b>
+            </div>
+            <div class="card-body">
+                <div class="col-xs-12 col-lg-12">
+                    <table class="table table-bordered" id="dataTables-bienes">
+                        <thead>
+                            <tr>
+                                <th>Bien</th>
+                                <th>Avaluo</th>
+                                <th>Valor</th>
+                                <th>Embargable</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="odd" *ngFor="let bien of bienes; let i = index">
+                                <td>
+                                    <b>Nombre</b><br>
+                                    {{ bien.nombre }}
+                                    <b>Tipo</b><br>
+                                    {{ bien.tipo }}
+                                </td>
+                                <td>{{ bien.avaluo | currency: 'COP' }}</td>
+                                <td>{{ bien.valor | currency: 'COP' }}</td>
+                                <td>
+                                    <span *ngIf="bien.embargable" class="text-success"><b>Si</b></span>
+                                    <span *ngIf="!bien.embargable" class="text-danger"><b>No</b></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

@@ -215,6 +215,7 @@ export class FroFacParqueaderoComponent implements OnInit {
           if (response.code == 200) {
             this.comparendo = response.data;
             this.inmovilizacion = inmovilizacion;
+            this.factura.idInmovilizacion = this.inmovilizacion.id;
 
             this.onInitForms();
 
@@ -279,6 +280,7 @@ export class FroFacParqueaderoComponent implements OnInit {
               this.ciudadano = response.data.ciudadano;
               this.factura.idCiudadano = this.ciudadano.id;
               this.formCiudadano = false;
+              this.formNew = true;
               
               swal({
                 title: 'Perfecto!',
@@ -288,6 +290,7 @@ export class FroFacParqueaderoComponent implements OnInit {
               });
             }else{
               this.formCiudadano = true;
+              this.formNew = false;
             }
           } else {
             this.ciudadano = null;
@@ -337,6 +340,7 @@ export class FroFacParqueaderoComponent implements OnInit {
     let token = this._LoginService.getToken();
 
     //Tipo de recaudo trámites
+    this.factura.interes = 0;
     this.factura.idTipoRecaudo = 5;
 
     let datos = {
@@ -346,6 +350,7 @@ export class FroFacParqueaderoComponent implements OnInit {
     this._FacturaService.register(datos, token).subscribe(
       response => {
         if (response.status == 'success') {
+          this.onInitForms();
           this.factura = response.data;         
           this.municipio = response.data.organismoTransito.municipio;
 

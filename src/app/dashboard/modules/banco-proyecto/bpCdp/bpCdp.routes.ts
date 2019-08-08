@@ -8,7 +8,7 @@ export const BpCdpRoutes: Route[] = [
       component: BpCdpComponent
     },
     {
-      path: 'bpCdp/request',
+      path: 'request',
       component: RequestComponent
     }
 ];

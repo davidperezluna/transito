@@ -1,20 +1,21 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import { BpCuentaService } from '../../../../../services/bpCuenta.service';
+import { BpActividadService } from '../../../../../services/bpActividad.service';
 import { LoginService } from '../../../../../services/login.service';
 import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
-  selector: 'app-index-cuenta',
+  selector: 'app-index-insumo',
   templateUrl: './index.component.html'
 })
 export class IndexComponent implements OnInit{
     @Output() ready = new EventEmitter<any>();
-    @Input() proyecto:any = null;
+    @Input() actividad:any = null;
     public errorMessage;
 
-    public cuentas: any = null;
-    public cuenta: any = null;
+    public insumos: any = null;
+    public insumo: any = null;
 
     public table: any = null;
 
@@ -24,6 +25,7 @@ export class IndexComponent implements OnInit{
 
     constructor(
         private _CuentaService: BpCuentaService,
+        private _ActividadService: BpActividadService,
         private _LoginService: LoginService,
     ){}
 
@@ -31,7 +33,7 @@ export class IndexComponent implements OnInit{
         this.onInitForms();
 
         swal({
-        title: 'Buscando cuentas registradas!',
+        title: 'Buscando insumos registradas!',
         text: 'Solo tardara unos segundos por favor espere.',
         onOpen: () => {
             swal.showLoading()
@@ -40,10 +42,10 @@ export class IndexComponent implements OnInit{
 
         let token = this._LoginService.getToken();
         
-        this._CuentaService.searchByProyecto({ 'idProyecto': this.proyecto.id }, token).subscribe(
+        this._ActividadService.searchInsumos({ 'idActividad': this.actividad.id }, token).subscribe(
             response => {
                 if (response.code = 200) {
-                    this.cuentas = response.data;
+                    this.insumos = response.data;
 
                     let timeoutId = setTimeout(() => {
                         this.onInitTable();
@@ -52,7 +54,7 @@ export class IndexComponent implements OnInit{
                     swal.close();
                 } else {
                     swal({
-                        title: 'Atención!',
+                        title: 'Atencion!',
                         text: response.message,
                         type: 'warning',
                         confirmButtonText: 'Aceptar'
@@ -67,6 +69,7 @@ export class IndexComponent implements OnInit{
                         alert("Error en la petición");
                     }
                 }
+
             }
         );
     }
@@ -78,7 +81,7 @@ export class IndexComponent implements OnInit{
     }
 
     onInitTable() {       
-        this.table = $('#dataTables-cuentas').DataTable({
+        this.table = $('#dataTables-insumos').DataTable({
             destroy: true,
             responsive: true,
             pageLength: 8,
@@ -104,8 +107,8 @@ export class IndexComponent implements OnInit{
         this.formNew = true;
     }
 
-    onShow(cuenta: any) {
-        this.cuenta = cuenta;
+    onShow(insumo: any) {
+        this.insumo = insumo;
 
         this.onInitForms();
         

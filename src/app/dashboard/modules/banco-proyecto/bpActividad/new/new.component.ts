@@ -1,8 +1,6 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import { BpActividad } from '../bpActividad.modelo';
 import { BpActividadService } from '../../../../../services/bpActividad.service';
-import { PqoCfgPatioService } from '../../../../../services/pqoCfgPatio.service';
-import { VhloCfgTipoVehiculoService } from '../../../../../services/vhloCfgTipoVehiculo.service';
 import { LoginService } from '../../../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -12,62 +10,32 @@ import swal from 'sweetalert2';
 })
 
 export class NewComponent implements OnInit {
-@Output() ready = new EventEmitter<any>();
-public tarifa: BpActividad;
+@Output() onReady = new EventEmitter<any>();
+@Input() cuenta: any = null;
+public actividad: BpActividad;
 public errorMessage;
 
-public patios: any;
-public tiposVehiculo: any;
-
 constructor(
-  private _TarifaService: BpActividadService,
-  private _PatioService: PqoCfgPatioService,
-  private _TipoVehiculoService: VhloCfgTipoVehiculoService,
-  private _loginService: LoginService,
+  private _ActividadService: BpActividadService,
+  private _LoginService: LoginService,
   ){}
 
   ngOnInit() {
-    this.tarifa = new BpActividad(null, null, null);
-
-    this._PatioService.select().subscribe(
-      response => {
-        this.patios = response;
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
-
-    this._TipoVehiculoService.select().subscribe(
-      response => {
-        this.tiposVehiculo = response;
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
+    this.actividad = new BpActividad(null, null, null);
   }
   onCancelar(){
-    this.ready.emit(true);
+    this.onReady.emit();
   }
   
   onEnviar(){
-    let token = this._loginService.getToken();
+    let token = this._LoginService.getToken();
+
+    this.actividad.idCuenta = this.cuenta.id;
     
-		this._TarifaService.register(this.tarifa,token).subscribe(
+		this._ActividadService.register(this.actividad,token).subscribe(
 			response => {
         if(response.status == 'success'){
-          this.ready.emit(true);
+          this.onReady.emit();
 
           swal({
             title: 'Perfecto!',
@@ -90,8 +58,8 @@ constructor(
 						alert("Error en la petición");
 					}
 				}
-
-		}); 
+      }
+    ); 
   }
 
 }

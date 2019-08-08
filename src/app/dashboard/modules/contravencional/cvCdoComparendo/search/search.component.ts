@@ -24,6 +24,7 @@ export class SearchComponent implements OnInit{
   public trazabilidad: any = null;
   public acuerdoPago: any = null;
   public amortizaciones: any = null;
+  public bienes: any = null;
   public table: any;
 
   public filtro: any = null;
@@ -31,6 +32,7 @@ export class SearchComponent implements OnInit{
   public formTrazabilidad: any = false;
   public formDocument: any = false;
   public formAcuerdoPago: any = false;
+  public formInvestigacion: any = false;
   public formatos: any = null;
 
   public apiUrl = environment.apiUrl + 'configuracion';
@@ -62,6 +64,20 @@ export class SearchComponent implements OnInit{
     'idComparendoEstado': null,
   }
 
+  public tiposBien = [
+    { 'value': 'INMUEBLE', 'label': 'INMUEBLE' },
+    { 'value': 'CUENTA BANCARIA', 'label': 'CUENTA BANCARIA' },
+  ];
+
+  public datosInvestigacion = {
+    'nombre': null,
+    'tipo': null,
+    'avaluo': null,
+    'embargable': false,
+    'valor': null,
+    'idTrazabilidad': null,
+  }
+
 constructor(
   private _ComparendoService: CvCdoComparendoService,
   private _FormatoService: CfgAdmFormatoService,
@@ -87,6 +103,7 @@ constructor(
     });
 
     this.formDocument = false;
+    this.formInvestigacion = false;
     this.formTrazabilidad = false;
     this.formRecord = false;
     this.formAcuerdoPago = false;
@@ -104,7 +121,7 @@ constructor(
             confirmButtonText: 'Aceptar'
           });
           let timeoutId = setTimeout(() => {
-            this.onInitTable();
+            this.onInitTable('#dataTables-example');
           }, 100);
         } else {
           this.comparendos = null;
@@ -127,12 +144,10 @@ constructor(
     );
   }
 
-  onInitTable() {
-    if (this.table) {
-      this.table.destroy();
-    }
-
-    this.table = $('#dataTables-example').DataTable({
+  onInitTable(table) {
+    this.table = $(table).DataTable({
+      retrieve: true,
+      paging: false,
       responsive: true,
       pageLength: 8,
       sPaginationType: 'full_numbers',
@@ -152,6 +167,7 @@ constructor(
     if (this.comparendo) {
       this.formRecord = true;
       this.formDocument = false;
+      this.formInvestigacion = false;
       this.formTrazabilidad = false;
       this.formAcuerdoPago = false;
       this.comparendos = null;
@@ -172,8 +188,9 @@ constructor(
             this.trazabilidades = response.data.trazabilidades;
             this.acuerdoPago = response.data.acuerdoPago;
             this.amortizaciones = response.data.amortizaciones;
+
             let timeoutId = setTimeout(() => {
-              this.onInitTable();
+              this.onInitTable('#dataTables-example');
             }, 100);
 
             swal.close();
@@ -271,6 +288,7 @@ constructor(
       this.formRecord = false;
       this.formTrazabilidad = false;
       this.formAcuerdoPago = false;
+      this.formInvestigacion = false;
       this.formDocument = true;
     }
   }
@@ -403,6 +421,7 @@ constructor(
     this.formTrazabilidad = true;
     this.formRecord = false;
     this.formAcuerdoPago = false;
+    this.formInvestigacion = false;
     this.formDocument = false;
   }
 
@@ -410,6 +429,7 @@ constructor(
     this.formRecord = false;
     this.formTrazabilidad = false;
     this.formAcuerdoPago = true;
+    this.formInvestigacion = false;
     this.formDocument = false;
   }
 
@@ -419,6 +439,91 @@ constructor(
     this.datosTrazabilidad.idComparendo = this.comparendo.id;
 
     this._TrazabilidadService.register(this.datosTrazabilidad, token).subscribe(
+      response => {
+        if (response.status == 'success') {
+          this.onSearch();
+
+          swal({
+            title: 'Perfecto!',
+            text: response.message,
+            type: 'success',
+            confirmButtonText: 'Aceptar'
+          });
+        } else {
+          swal({
+            title: 'Error!',
+            text: response.message,
+            type: 'error',
+            confirmButtonText: 'Aceptar'
+          });
+        }
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      }
+    );
+  }
+
+  onInvestigacion(trazabilidad: any) {
+    this.trazabilidad = trazabilidad;
+    if (this.trazabilidad) {
+      this.datosInvestigacion.idTrazabilidad = trazabilidad.id;
+
+      let token = this._LoginService.getToken();
+
+      this._TrazabilidadService.searchBienes({ 'idTrazabilidad': this.trazabilidad.id }, token).subscribe(
+        response => {
+          if (response.code == 200) {
+            this.bienes = response.data;
+
+            swal({
+              title: response.title,
+              text: response.message,
+              type: response.status,
+              confirmButtonText: 'Aceptar'
+            });
+
+            let timeoutId = setTimeout(() => {
+              this.onInitTable('#dataTables-bienes');
+            }, 100);
+          } else {
+            this.bienes = null;
+
+            swal({
+              title: response.title,
+              text: response.message,
+              type: response.status,
+              confirmButtonText: 'Aceptar'
+            })
+          }
+          error => {
+            this.errorMessage = <any>error;
+
+            if (this.errorMessage != null) {
+              console.log(this.errorMessage);
+              alert("Error en la petición");
+            }
+          }
+        }
+      );
+
+      this.formRecord = false;
+      this.formTrazabilidad = false;
+      this.formAcuerdoPago = false;
+      this.formDocument = false;
+      this.formInvestigacion = true;
+    }
+  }
+
+  onEnviarBien() {
+    let token = this._LoginService.getToken();
+
+    this._TrazabilidadService.register(this.datosInvestigacion, token).subscribe(
       response => {
         if (response.status == 'success') {
           this.onSearch();

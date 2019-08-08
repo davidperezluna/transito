@@ -22,7 +22,8 @@ import { CvCfgTipoRestriccionComponent } from './cvCfgTipoRestriccion/cvCfgTipoR
 import { CvLcCfgMotivoComponent } from './cvLcCfgMotivo/cvLcCfgMotivo.component';
 import { CvLcCfgTipoRestriccionComponent } from './cvLcCfgTipoRestriccion/cvLcCfgTipoRestriccion.component';
 import { CvMedidaCautelarComponent } from './cvMedidaCautelar/cvMedidaCautelar.component';
-import { CvRestriccionComponent } from './cvRestriccion/cvRestriccion.component';         
+import { CvRestriccionComponent } from './cvRestriccion/cvRestriccion.component';
+import { SearchComponent } from './cvCdoComparendo/search/search.component';        
 
 import { ContravencionalRoutingModule } from './contravencional-routing.module';
 import { CvAuCfgAtencionModule } from './cvAuCfgAtencion/cvAuCfgAtencion.module';
@@ -90,6 +91,7 @@ import { CvRestriccionModule } from './cvRestriccion/cvRestriccion.module';
     CvLcCfgTipoRestriccionComponent,
     CvMedidaCautelarComponent,
     CvRestriccionComponent,
+    SearchComponent,
   ]
 })
 export class ContravencionalModule { }

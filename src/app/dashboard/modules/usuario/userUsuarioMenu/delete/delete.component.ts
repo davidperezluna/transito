@@ -6,7 +6,7 @@ import { LoginService } from '../../../../../services/login.service';
 import swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-delete',
+  selector: 'app-delete-userusuariomenu',
   templateUrl: './delete.component.html'
 })
 export class DeleteComponent implements OnInit {

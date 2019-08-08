@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { MsvCaracterizacionComponent } from './msvCaracterizacion/msvCaracterizacion.component';
 import { ExportComponent } from "./msvCaracterizacion/export/export.component";
+import { MsvCaracterizacionComponent } from './msvCaracterizacion/msvCaracterizacion.component';
 import { MsvCategoriaComponent } from './msvCategoria/msvCategoria.component';
 import { MsvCriterioComponent } from './msvCriterio/msvCriterio.component';
 import { MsvEvaluacionComponent } from './msvEvaluacion/msvEvaluacion.component';
@@ -360,7 +360,6 @@ const routes: Routes = [
     component: LocationComponent
   }
 ]; 
-
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

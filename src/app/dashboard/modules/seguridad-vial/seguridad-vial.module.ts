@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { Ng2BootstrapModule } from 'ng2-bootstrap';
+import { SelectModule } from 'angular2-select';
 import { TooltipModule } from "ngx-tooltip";
 import { FormsModule } from '@angular/forms';
 
@@ -143,8 +145,8 @@ import { SvIpatImpresoBodegaModule } from "./svIpatImpresoBodega/svIpatImpresoBo
 import { SvIpatImpresoMunicipioModule } from "./svIpatImpresoMunicipio/svIpatImpresoMunicipio.module";
 import { SvIpatTalonarioModule } from "./svIpatTalonario/svIpatTalonario.module";
 import { SvSenialInventarioModule } from "./svSenialInventario/svSenialInventario.module";
-
 import { SeguridadVialRoutingModule } from './seguridad-vial-routing.module';
+
 
 @NgModule({
   imports: [

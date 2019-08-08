@@ -1,8 +1,7 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import { BpInsumo } from '../bpInsumo.modelo';
 import { BpInsumoService } from '../../../../../services/bpInsumo.service';
-import { PqoCfgPatioService } from '../../../../../services/pqoCfgPatio.service';
-import { VhloCfgTipoVehiculoService } from '../../../../../services/vhloCfgTipoVehiculo.service';
+import { BpCfgTipoInsumoService } from '../../../../../services/bpCfgTipoInsumo.service';
 import { LoginService } from '../../../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -12,62 +11,69 @@ import swal from 'sweetalert2';
 })
 
 export class NewComponent implements OnInit {
-@Output() ready = new EventEmitter<any>();
-public tarifa: BpInsumo;
-public errorMessage;
+  @Output() onReady = new EventEmitter<any>();
+  @Input() actividad: any = null;
+  public insumo: BpInsumo;
+  public errorMessage;
 
-public patios: any;
-public tiposVehiculo: any;
+  public tiposInsumo: any = null;
 
-constructor(
-  private _TarifaService: BpInsumoService,
-  private _PatioService: PqoCfgPatioService,
-  private _TipoVehiculoService: VhloCfgTipoVehiculoService,
-  private _loginService: LoginService,
+  constructor(
+    private _TipoInsumoService: BpCfgTipoInsumoService,
+    private _InsumoService: BpInsumoService,
+    private _LoginService: LoginService,
   ){}
 
   ngOnInit() {
-    this.tarifa = new BpInsumo(null, null, null, null);
+    this.insumo = new BpInsumo(null, null, null, null, null, null, null, null);
 
-    this._PatioService.select().subscribe(
+    this._TipoInsumoService.select().subscribe(
       response => {
-        this.patios = response;
+        this.tiposInsumo = response;
       },
       error => {
         this.errorMessage = <any>error;
 
         if (this.errorMessage != null) {
           console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
-
-    this._TipoVehiculoService.select().subscribe(
-      response => {
-        this.tiposVehiculo = response;
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert("Error en la petición");
+          alert('Error en la petición');
         }
       }
     );
   }
+
   onCancelar(){
-    this.ready.emit(true);
+    this.onReady.emit();
+  }
+
+  onCalcularTotal() {
+    let cantidad, valor;
+    cantidad = this.insumo.cantidad;
+    valor = this.insumo.valorUnitario;
+
+    if (cantidad == 0 || valor == 0) {
+      swal({
+        title: 'Alerta!',
+        text: 'La cantidad y/o el valor unitario no pueden estar en 0',
+        type: 'error',
+        confirmButtonText: 'Aceptar'
+      });
+      this.insumo.valorTotal = 0;
+    } else {
+      this.insumo.valorTotal = cantidad * valor;
+    }
   }
   
   onEnviar(){
-    let token = this._loginService.getToken();
+    let token = this._LoginService.getToken();
+
+    this.insumo.idActividad = this.actividad.id;
     
-		this._TarifaService.register(this.tarifa,token).subscribe(
+		this._InsumoService.register(this.insumo,token).subscribe(
 			response => {
         if(response.status == 'success'){
-          this.ready.emit(true);
+          this.onReady.emit();
+          
           swal({
             title: 'Perfecto!',
             text: response.message,

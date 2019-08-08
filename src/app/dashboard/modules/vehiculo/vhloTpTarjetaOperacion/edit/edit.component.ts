@@ -7,7 +7,7 @@ import { DatePipe, CurrencyPipe } from '@angular/common';
 import swal from 'sweetalert2';
 
 @Component({
-    selector: 'app-edit',
+    selector: 'app-edit-vhlotptarjetaoperacion',
     templateUrl: './edit.component.html',
     providers: [DatePipe]
 })

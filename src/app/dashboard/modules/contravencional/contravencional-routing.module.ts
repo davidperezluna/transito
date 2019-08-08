@@ -20,6 +20,7 @@ import { CvLcCfgMotivoComponent } from './cvLcCfgMotivo/cvLcCfgMotivo.component'
 import { CvLcCfgTipoRestriccionComponent } from './cvLcCfgTipoRestriccion/cvLcCfgTipoRestriccion.component';
 import { CvMedidaCautelarComponent } from './cvMedidaCautelar/cvMedidaCautelar.component';
 import { CvRestriccionComponent } from './cvRestriccion/cvRestriccion.component';
+import { SearchComponent } from './cvCdoComparendo/search/search.component';
 
 const routes: Routes = [
   /*{
@@ -57,12 +58,16 @@ const routes: Routes = [
   /*{
     path: 'cvCdoNotificacion',
     component: CvCdoNotificacionComponent
-  },
+  },*/
   {
     path: 'cvCdoTrazabilidad',
     component: CvCdoTrazabilidadComponent
   },
   {
+    path: 'search',
+    component: SearchComponent
+  },
+  /*{
     path: 'cvCfgInteres',
     component: CvCfgInteresComponent
   },

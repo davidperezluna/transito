@@ -1,52 +1,31 @@
-<hr>
-<div class="row">
-    <div class="col-xs-12 col-lg-4">
+<div class="col-xs-12 col-lg-12">
+    <form #formActividad="ngForm">
         <div class="card">
             <div class="card-header">
-                <b class="text-uppercase">Nueva tarifa</b>
-                <br>
-                <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
+                <b class="text-uppercase">Crear Actividad</b>
             </div>
             <div class="card-body">
-                <form #formNew="ngForm"> 
-                    <div class="form-group row">
-                        <div class="col-xs-12 col-lg-12">
-                            <label>Valor hora <strong class="text-danger">*</strong></label>
-                            <input class="form-control" [(ngModel)]="tarifa.valorHora" name="valorHora" type="numeric" required />
-                        </div>
-                        <div class="col-xs-12 col-lg-12">
-                            <label>No. acta adtivo.</label>
-                            <input class="form-control" [(ngModel)]="tarifa.numeroActoAdministrativo" name="numeroActoAdministrativo" type="text" />
-                        </div>
-                        <div class="col-xs-12 col-lg-12">
-                            <label>Fecha <b class="text-danger">*</b></label>
-                            <input class="form-control" [(ngModel)]="tarifa.fecha" name="fecha" type="date" required />
-                        </div>
-                        <div class="col-xs-12 col-lg-12">
-                            <label>Patio <strong class="text-danger">*</strong></label>
-                            <ng-select [multiple]="false" [options]="patios" [(ngModel)]="tarifa.idPatio" name="idPatio" required>
-                            </ng-select>
-                        </div>
-                        <div class="col-xs-12 col-lg-12">
-                            <label>Tipo vehiculo <strong class="text-danger">*</strong></label>
-                            <ng-select [multiple]="false" [options]="tiposVehiculo" [(ngModel)]="tarifa.idTipoVehiculo" name="idTipoVehiculo" required>
-                            </ng-select>
-                        </div>
+                <div class="form-group row">
+                    <div class="col-xs-12 col-lg-8">
+                        <label>Nombre <b class="text-danger">*</b></label>
+                        <input class="form-control text-uppercase" [(ngModel)]="actividad.nombre" name="nombre"
+                            type="text" required>
                     </div>
-                </form>
-            </div>
-            <div class="card-footer">
-                <div class="btn-group">
-                    <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
-                        <i class="fa fa-save"></i>
-                        Enviar
-                    </button>
-                    <button (click)="onCancelar()" class="btn btn-default">
-                        <i class="fa fa-times"></i>
-                        Cancelar
-                    </button>
                 </div>
             </div>
         </div>
-    </div>
+        <div class="form-group row">
+            <div class="col-xs-12 col-lg-12">
+                <button (click)="onEnviar()" [disabled]="formActividad.invalid" class="btn btn-primary"
+                    type="button">
+                    <i class="fa fa-save"></i>
+                    Enviar
+                </button>
+                <button (click)="onCancelar()" class="btn btn-default">
+                    <i class="fa fa-times"></i>
+                    Cancelar
+                </button>
+            </div>
+        </div>
+    </form>
 </div>

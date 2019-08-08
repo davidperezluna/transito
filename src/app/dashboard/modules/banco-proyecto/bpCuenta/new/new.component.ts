@@ -1,8 +1,6 @@
-import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import { BpCuenta } from '../bpCuenta.modelo';
 import { BpCuentaService } from '../../../../../services/bpCuenta.service';
-import { PqoCfgPatioService } from '../../../../../services/pqoCfgPatio.service';
-import { VhloCfgTipoVehiculoService } from '../../../../../services/vhloCfgTipoVehiculo.service';
 import { LoginService } from '../../../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -12,62 +10,34 @@ import swal from 'sweetalert2';
 })
 
 export class NewComponent implements OnInit {
-@Output() ready = new EventEmitter<any>();
-public tarifa: BpCuenta;
-public errorMessage;
+  @Output() onReady = new EventEmitter<any>();
+  @Input() proyecto: any = null;
+  public cuenta: BpCuenta;
+  public errorMessage;
 
-public patios: any;
-public tiposVehiculo: any;
-
-constructor(
-  private _TarifaService: BpCuentaService,
-  private _PatioService: PqoCfgPatioService,
-  private _TipoVehiculoService: VhloCfgTipoVehiculoService,
-  private _loginService: LoginService,
+  constructor(
+    private _CuentaService: BpCuentaService,
+    private _LoginService: LoginService,
   ){}
 
   ngOnInit() {
-    this.tarifa = new BpCuenta(null, null, null, null);
-
-    this._PatioService.select().subscribe(
-      response => {
-        this.patios = response;
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
-
-    this._TipoVehiculoService.select().subscribe(
-      response => {
-        this.tiposVehiculo = response;
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
+    this.cuenta = new BpCuenta(null, null, null, null);
   }
+
   onCancelar(){
-    this.ready.emit(true);
+    this.onReady.emit();
   }
   
   onEnviar(){
-    let token = this._loginService.getToken();
+    let token = this._LoginService.getToken();
+
+    this.cuenta.idProyecto = this.proyecto.id;
     
-		this._TarifaService.register(this.tarifa,token).subscribe(
+		this._CuentaService.register(this.cuenta,token).subscribe(
 			response => {
         if(response.status == 'success'){
-          this.ready.emit(true);
+          this.onReady.emit();
+          
           swal({
             title: 'Perfecto!',
             text: response.message,

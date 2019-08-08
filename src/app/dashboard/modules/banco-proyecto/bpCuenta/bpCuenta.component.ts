@@ -13,12 +13,14 @@ declare var $: any;
 export class BpCuentaComponent implements OnInit {
   public errorMessage;
 
-	public tarifas;
-	public formNew = false;
-	public formEdit = false;
-  public formIndex = true;
+  public cuentas;
+  
+	public formNew: any;
+	public formEdit: any;
+  public formIndex: any;
+
   public table:any; 
-  public tarifa: BpCuenta;
+  public cuenta: BpCuenta;
 
   constructor(
     private _TarifaService: BpCuentaService,
@@ -29,20 +31,14 @@ export class BpCuentaComponent implements OnInit {
     swal({
       title: 'Cargando Tabla!',
       text: 'Solo tardara unos segundos por favor espere.',
-      timer: 1500,
       onOpen: () => {
         swal.showLoading()
       }
-    }).then((result) => {
-      if (
-        // Read more about handling dismissals
-        result.dismiss === swal.DismissReason.timer
-      ) {
-      }
-    })
+    });
+    
     this._TarifaService.index().subscribe(
 				response => {
-          this.tarifas = response.data;
+          this.cuentas = response.data;
           let timeoutId = setTimeout(() => {  
             this.iniciarTabla();
           }, 100);
@@ -127,8 +123,8 @@ export class BpCuentaComponent implements OnInit {
     });
   }
 
-  onEdit(tarifa:any){
-    this.tarifa = tarifa;
+  onEdit(cuenta:any){
+    this.cuenta = cuenta;
     this.formEdit = true;
     this.formIndex = false;
   }

@@ -9,11 +9,14 @@ import { NewComponent } from './new/new.component';
 import { EditComponent } from './edit/edit.component';
 import { IndexComponent } from './index/index.component';
 
+import { BpActividadModule } from '../bpActividad/bpActividad.module';
+
 @NgModule({
     imports: [
         CommonModule,
         Ng2BootstrapModule.forRoot(),
-        SelectModule
+        SelectModule,
+        BpActividadModule,
     ],
     declarations: [
         NewComponent,

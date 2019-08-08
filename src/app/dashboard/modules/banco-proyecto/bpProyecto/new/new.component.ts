@@ -13,11 +13,10 @@ export class NewComponent implements OnInit {
   @Output() onShow = new EventEmitter<any>();
   public proyecto: BpProyecto;
   public errorMessage;
-  public respuesta;
 
-constructor(
-  private _ProyectoService: BpProyectoService,
-  private _loginService: LoginService,
+  constructor(
+    private _ProyectoService: BpProyectoService,
+    private _loginService: LoginService,
   ){}
 
   ngOnInit() {

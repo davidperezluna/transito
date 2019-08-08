@@ -7,7 +7,7 @@ import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
-  selector: 'app-index',
+  selector: 'app-index-cdp',
   templateUrl: './bpCdp.component.html'
 })
 export class BpCdpComponent implements OnInit {

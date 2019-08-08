@@ -9,12 +9,14 @@ import { NewComponent } from './new/new.component';
 import { EditComponent } from './edit/edit.component';
 import { ShowComponent } from './show/show.component';
 
+import { BpCuentaModule } from '../bpCuenta/bpCuenta.module';
 
 @NgModule({
     imports: [
         CommonModule,
         Ng2BootstrapModule.forRoot(),
         SelectModule,
+        BpCuentaModule,
     ],
     declarations: [
         NewComponent,
