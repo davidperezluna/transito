@@ -215,6 +215,7 @@ export class FroFacParqueaderoComponent implements OnInit {
           if (response.code == 200) {
             this.comparendo = response.data;
             this.inmovilizacion = inmovilizacion;
+            this.factura.idInmovilizacion = this.inmovilizacion.id;
 
             this.onInitForms();
 
@@ -337,6 +338,7 @@ export class FroFacParqueaderoComponent implements OnInit {
     let token = this._LoginService.getToken();
 
     //Tipo de recaudo trámites
+    this.factura.interes = 0;
     this.factura.idTipoRecaudo = 5;
 
     let datos = {

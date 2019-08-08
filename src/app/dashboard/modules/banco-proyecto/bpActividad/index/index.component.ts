@@ -1,20 +1,22 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import { BpCuentaService } from '../../../../../services/bpCuenta.service';
+import { BpActividadService } from '../../../../../services/bpActividad.service';
 import { LoginService } from '../../../../../services/login.service';
 import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
-  selector: 'app-index-cuenta',
+  selector: 'app-index-actividad',
   templateUrl: './index.component.html'
 })
+
 export class IndexComponent implements OnInit{
     @Output() ready = new EventEmitter<any>();
-    @Input() proyecto:any = null;
+    @Input() cuenta:any = null;
     public errorMessage;
 
-    public cuentas: any = null;
-    public cuenta: any = null;
+    public actividades: any = null;
+    public actividad: any = null;
 
     public table: any = null;
 
@@ -24,6 +26,7 @@ export class IndexComponent implements OnInit{
 
     constructor(
         private _CuentaService: BpCuentaService,
+        private _ActividadService: BpActividadService,
         private _LoginService: LoginService,
     ){}
 
@@ -31,7 +34,7 @@ export class IndexComponent implements OnInit{
         this.onInitForms();
 
         swal({
-        title: 'Buscando cuentas registradas!',
+        title: 'Buscando actividades registradas!',
         text: 'Solo tardara unos segundos por favor espere.',
         onOpen: () => {
             swal.showLoading()
@@ -40,10 +43,10 @@ export class IndexComponent implements OnInit{
 
         let token = this._LoginService.getToken();
         
-        this._CuentaService.searchByProyecto({ 'idProyecto': this.proyecto.id }, token).subscribe(
+        this._CuentaService.searchActividades({ 'idCuenta': this.cuenta.id }, token).subscribe(
             response => {
                 if (response.code = 200) {
-                    this.cuentas = response.data;
+                    this.actividades = response.data;
 
                     let timeoutId = setTimeout(() => {
                         this.onInitTable();
@@ -78,7 +81,7 @@ export class IndexComponent implements OnInit{
     }
 
     onInitTable() {       
-        this.table = $('#dataTables-cuentas').DataTable({
+        this.table = $('#dataTables-actividades').DataTable({
             destroy: true,
             responsive: true,
             pageLength: 8,
@@ -92,11 +95,11 @@ export class IndexComponent implements OnInit{
                 }
             }
         });
-    }   
+    }
 
     onCancelar(){ this.ready.emit(true); }
 
-    onReady(){ this.ngOnInit(); }
+    onReady() { this.ngOnInit(); }
 
     onNew() {
         this.onInitForms();
@@ -104,11 +107,11 @@ export class IndexComponent implements OnInit{
         this.formNew = true;
     }
 
-    onShow(cuenta: any) {
-        this.cuenta = cuenta;
+    onShow(actividad: any) {
+        this.actividad = actividad;
 
         this.onInitForms();
-        
+
         this.formShow = true;
     }
 
@@ -123,32 +126,32 @@ export class IndexComponent implements OnInit{
             confirmButtonText: 'Confirmar',
             cancelButtonText: 'Cancelar'
         }).then((result) => {
-            if (result.value) {
-                let token = this._LoginService.getToken();
+        if (result.value) {
+            let token = this._LoginService.getToken();
 
-                this._CuentaService.delete({ 'id': id }, token).subscribe(
-                    response => {
-                        swal({
-                            title: 'Eliminado!',
-                            text: response.message,
-                            type: 'success',
-                            confirmButtonColor: '#15d4be',
-                        })
-                        this.table.destroy();
+            this._ActividadService.delete({ 'id': id }, token).subscribe(
+                response => {
+                    swal({
+                        title: 'Eliminado!',
+                        text: response.message,
+                        type: 'success',
+                        confirmButtonColor: '#15d4be',
+                    })
+                    this.table.destroy();
 
-                        this.ngOnInit();
-                    },
-                    error => {
-                        this.errorMessage = <any>error;
+                    this.ngOnInit();
+                },
+                error => {
+                    this.errorMessage = <any>error;
 
-                        if (this.errorMessage != null) {
-                            console.log(this.errorMessage);
-                            alert("Error en la petición");
-                        }
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
                     }
-                );
-            }
-        });
-    }
+                }
+            );
+        }
+    });
+}
 
 }

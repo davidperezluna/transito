@@ -1,22 +1,19 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
-import { UserEmpresaTransporteService } from "../../../../../services/userEmpresaTransporte.service";
 import { UserEmpresaTransporte } from "../userEmpresaTransporte.modelo";
-
+import { UserEmpresaTransporteService } from "../../../../../services/userEmpresaTransporte.service";
 import { VhloCfgRadioAccionService } from "../../../../../services/vhloCfgRadioAccion.service";
 import { VhloCfgModalidadTransporteService } from "../../../../../services/vhloCfgModalidadTransporte.service";
 import { VhloCfgServicioService } from "../../../../../services/vhloCfgServicio.service";
 import { VhloCfgClaseService } from "../../../../../services/vhloCfgClase.service";
 import { VhloCfgColorService } from "../../../../../services/vhloCfgColor.service";
-import { CfgMunicipioService } from "../../../../../services/cfgMunicipio.service";
-
 import { VhloCfgCarroceriaService } from "../../../../../services/vhloCfgCarroceria.service";
-
+import { CfgMunicipioService } from "../../../../../services/cfgMunicipio.service";
 import { LoginService } from '../../../../../services/login.service';
 import swal from 'sweetalert2';
 
 @Component({
-    selector: 'app-new',
+    selector: 'app-new-userempresatransporte',
     templateUrl: './new.component.html'
 })
 export class NewComponent implements OnInit {

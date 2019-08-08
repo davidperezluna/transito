@@ -5,25 +5,36 @@ import { SelectModule } from 'angular2-select';
 import { TooltipModule } from "ngx-tooltip";
 
 import { UserEmpresaTransporteService } from '../../../../services/userEmpresaTransporte.service';
+import { VhloCfgRadioAccionService } from "../../../../services/vhloCfgRadioAccion.service";
+import { VhloCfgModalidadTransporteService } from "../../../../services/vhloCfgModalidadTransporte.service";
+import { VhloCfgServicioService } from "../../../../services/vhloCfgServicio.service";
+import { VhloCfgClaseService } from "../../../../services/vhloCfgClase.service";
+import { VhloCfgColorService } from "../../../../services/vhloCfgColor.service";
+import { VhloCfgCarroceriaService } from "../../../../services/vhloCfgCarroceria.service";
+import { CfgMunicipioService } from "../../../../services/cfgMunicipio.service";
 
-import { UserEmpresaTransporteComponent } from './userEmpresaTransporte.component';
 import { NewComponent } from './new/new.component';
 import { EditComponent } from './edit/edit.component';
 
 @NgModule({
     imports: [CommonModule, Ng2BootstrapModule.forRoot(), SelectModule, TooltipModule],
     declarations: [
-        UserEmpresaTransporteComponent,
         NewComponent,
         EditComponent,
     ],
     exports: [
-        UserEmpresaTransporteComponent,
         NewComponent,
         EditComponent,
     ],
     providers: [
         UserEmpresaTransporteService,
+        VhloCfgRadioAccionService,
+        VhloCfgModalidadTransporteService,
+        VhloCfgServicioService,
+        VhloCfgClaseService,
+        VhloCfgColorService,
+        VhloCfgCarroceriaService,
+        CfgMunicipioService,
     ]
 })
 

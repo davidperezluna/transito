@@ -13,7 +13,7 @@ import { LoginService } from '../../../../../services/login.service';
 import swal from 'sweetalert2';
 
 @Component({
-    selector: 'app-enable',
+    selector: 'app-enable-vhlotpconvenio',
     templateUrl: './enable.component.html'
 })
 export class EnableComponent implements OnInit {

@@ -10,7 +10,7 @@ const routes: Routes = [
     component: DashboardComponent,
     children: [
       {
-        path: 'bancoProyecto',
+        path: 'banco-proyecto',
         loadChildren: './modules/banco-proyecto/banco-proyecto.module#BancoProyectoModule'
       },
       /*{
@@ -49,10 +49,10 @@ const routes: Routes = [
         path: 'usuario',
         loadChildren: './modules/usuario/usuario.module#UsuarioModule'
       },
-      /*{
+      {
         path: 'vehiculo',
         loadChildren: './modules/vehiculo/vehiculo.module#VehiculoModule'
-      },*/
+      },
     ]
   },
 ];

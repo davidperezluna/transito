@@ -10,8 +10,8 @@ import { FroCfgTipoRecaudoComponent } from './froCfgTipoRecaudo/froCfgTipoRecaud
 import { FroFacturaComponent } from './froFactura';
 import { FroFacAcuerdoPagoComponent } from './froFactura';
 import { FroFacInfraccionComponent } from './froFactura';
-import { FroFacTramiteComponent } from './froFactura';
-import { FroFacParqueaderoComponent } from './froFactura';
+import { FroFacTramiteComponent } from './froFactura/froFacTramite/froFacTramite.component';
+import { FroFacParqueaderoComponent } from './froFactura/froFacParqueadero/froFacParqueadero.component';
 import { FroInfraccionComponent } from './froInfraccion/froInfraccion.component';
 import { FroInfrCfgCategoriaComponent } from './froInfrCfgCategoria/froInfrCfgCategoria.component';
 import { FroRecaudoComponent } from './froRecaudo/froRecaudo.component';
@@ -47,6 +47,7 @@ import { FroTrteSolicitudModule } from './froTrteSolicitud/froTrteSolicitud.modu
     FroFacturaModule,
   ],
   declarations: [
+    FroFacTramiteComponent,
     FroFacParqueaderoComponent,
   ]
 })

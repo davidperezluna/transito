@@ -95,8 +95,8 @@
         </div>
         <!-- fin de lista de convenios -->
         <!--formulario de nuevo convenio-->
-        <app-new *ngIf='formNew' [empresa]="empresa" (ready)="onReady($event)"></app-new>
-        <app-edit *ngIf='formEdit' [convenio]="convenio" (ready)="onReady($event)"></app-edit>
+        <app-new-vhlotpconvenio *ngIf='formNew' [empresa]="empresa" (ready)="onReady($event)"></app-new-vhlotpconvenio>
+        <app-edit-vhlotpconvenio *ngIf='formEdit' [convenio]="convenio" (ready)="onReady($event)"></app-edit-vhlotpconvenio>
         <!-- fin formulario -->
      </div> 
 </div>

@@ -1,0 +1,51 @@
+<div class="col-xs-12 col-lg-12" *ngIf="formIndex">
+    <div class="card">
+        <div class="card-header">
+            <b class="text-uppercase">Insumos registrados</b>
+            <div class="btn-group pull-right">
+                <button (click)="onNew()" class="btn btn-xs btn-primary">
+                    <i class="fa fa-plus"></i>
+                    <span class="text">Nueva</span>
+                </button>
+            </div>
+        </div>
+        <div class="card-body" *ngIf="insumos && insumos.length > 0">
+            <table class="table" id="dataTables-insumos">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nombre</th>
+                        <th>Und. Medida</th>
+                        <th>Cantidad</th>
+                        <th>Valor unitario</th>
+                        <th>Valor total</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="odd" *ngFor="let insumo of insumos; let i = index">
+                        <td>{{ i +1 }}</td>
+                        <td>{{ insumo.nombre }}</td>
+                        <td>{{ insumo.unidadMedida }}</td>
+                        <td>{{ insumo.cantidad }}</td>
+                        <td>{{ insumo.valorUnitario | currency: 'COP' }}</td>
+                        <td>{{ insumo.valorTotal | currency: 'COP' }}</td>
+                        <td>
+                            <div class="btn-group">
+                                <!--
+                                    <button (click)="onDeleteInsumo(insumo.id)" class="btn btn-xs btn-danger" type="button">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                -->
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="row" *ngIf="formNew">
+    <app-new-insumo [actividad]="actividad" (onReady)="onReady()"></app-new-insumo>
+</div>

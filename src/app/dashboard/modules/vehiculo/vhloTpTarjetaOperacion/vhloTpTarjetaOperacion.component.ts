@@ -11,6 +11,7 @@ declare var $: any;
     templateUrl: './vhloTpTarjetaOperacion.component.html',
     providers: [DatePipe]
 })
+
 export class VhloTpTarjetaOperacionComponent implements OnInit {
     public errorMessage;
     public table: any;

@@ -9,9 +9,10 @@ import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
-  selector: 'app-request',
+  selector: 'app-request-cdp',
   templateUrl: './request.component.html'
 })
+
 export class RequestComponent implements OnInit {
     @Output() ready = new EventEmitter<any>();
     public cdp: BpCdp;
@@ -48,7 +49,7 @@ constructor(
             response => {
                 this.solicitudes = response.data;
                 let timeoutId = setTimeout(() => {
-                    this.iniciarTabla();
+                    this.onInitTable();
                 }, 100);
 
                 swal.close();
@@ -64,17 +65,17 @@ constructor(
         );
     }
 
-    iniciarTabla() {
+    onInitTable() {
         $('#dataTables-example').DataTable({
             responsive: true,
             pageLength: 8,
             sPaginationType: 'full_numbers',
             oLanguage: {
                 oPaginate: {
-                    sFirst: '<<',
-                    sPrevious: '<',
-                    sNext: '>',
-                    sLast: '>>'
+                    sFirst: '<i class="fa fa-step-backward"></i>',
+                    sPrevious: '<i class="fa fa-chevron-left"></i>',
+                    sNext: '<i class="fa fa-chevron-right"></i>',
+                    sLast: '<i class="fa fa-step-forward"></i>'
                 }
             }
         });

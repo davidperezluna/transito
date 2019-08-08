@@ -6,10 +6,12 @@ import { FormsModule } from '@angular/forms';
 
 import { UserCfgMenuComponent } from './userCfgMenu/userCfgMenu.component';
 import { UserUsuarioMenuComponent } from './userUsuarioMenu/userUsuarioMenu.component';
+import { UserEmpresaTransporteComponent } from './userEmpresaTransporte/userEmpresaTransporte.component';
 
 import { UsuarioRoutingModule } from './usuario-routing.module';
 import { UserCfgMenuModule } from './userCfgMenu/userCfgMenu.module';
 import { UserUsuarioMenuModule } from './userUsuarioMenu/userUsuarioMenu.module';
+import { UserEmpresaTransporteModule } from './userEmpresaTransporte/userEmpresaTransporte.module';
 
 @NgModule({
   imports: [
@@ -20,10 +22,12 @@ import { UserUsuarioMenuModule } from './userUsuarioMenu/userUsuarioMenu.module'
     UsuarioRoutingModule,
     UserCfgMenuModule,
     UserUsuarioMenuModule,
+    UserEmpresaTransporteModule,
   ],
   declarations: [
     UserCfgMenuComponent,
     UserUsuarioMenuComponent,
+    UserEmpresaTransporteComponent,
   ]
 })
 export class UsuarioModule { }

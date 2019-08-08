@@ -15,7 +15,7 @@ import { VhloCfgCarroceriaService } from "../../../../../services/vhloCfgCarroce
 import swal from 'sweetalert2';
 
 @Component({
-    selector: 'app-edit',
+    selector: 'app-edit-userempresatransporte',
     templateUrl: './edit.component.html',
     providers: [DatePipe]
 })
