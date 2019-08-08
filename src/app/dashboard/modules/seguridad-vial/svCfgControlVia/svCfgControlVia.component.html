@@ -49,6 +49,6 @@
             </div>
         </div>
     </div>
-    <app-edit *ngIf='formEdit' [controlVia]="controlVia" (ready)="ready($event)"></app-edit>
-    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+    <app-edit-svcfgcontrolvia *ngIf='formEdit' [controlVia]="controlVia" (ready)="ready($event)"></app-edit-svcfgcontrolvia>
+    <app-new-svcfgcontrolvia *ngIf='formNew' (ready)="ready($event)"></app-new-svcfgcontrolvia>
 </div>

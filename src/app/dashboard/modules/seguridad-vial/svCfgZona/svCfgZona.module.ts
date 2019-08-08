@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SvCfgZonaComponent } from './svCfgZona.component';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { SvCfgZonaService } from '../../../../services/svCfgZona.service';
 
@@ -10,8 +9,8 @@ import { SelectModule } from 'angular2-select';
 
 @NgModule({
     imports: [CommonModule, Ng2BootstrapModule.forRoot(), SelectModule],
-    declarations: [SvCfgZonaComponent, NewComponent, EditComponent],
-    exports: [SvCfgZonaComponent, NewComponent, EditComponent],
+    declarations: [NewComponent, EditComponent],
+    exports: [NewComponent, EditComponent],
     providers: [SvCfgZonaService]
 })
 

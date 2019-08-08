@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SvCfgHospitalComponent } from './svCfgHospital.component';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { SvCfgHospitalService } from '../../../../services/svCfgHospital.service';
 
@@ -10,8 +9,8 @@ import { SelectModule } from 'angular2-select';
 
 @NgModule({
     imports: [CommonModule, Ng2BootstrapModule.forRoot(), SelectModule],
-    declarations: [SvCfgHospitalComponent, NewComponent, EditComponent],
-    exports: [SvCfgHospitalComponent, NewComponent, EditComponent],
+    declarations: [NewComponent, EditComponent],
+    exports: [NewComponent, EditComponent],
     providers: [SvCfgHospitalService]
 })
 

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SvCfgMotivoAnulacionComponent } from './svCfgMotivoAnulacion.component';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { SvCfgMotivoAnulacionService } from '../../../../services/svCfgMotivoAnulacion.service';
 
@@ -10,8 +9,8 @@ import { SelectModule } from 'angular2-select';
 
 @NgModule({
     imports: [CommonModule, Ng2BootstrapModule.forRoot(), SelectModule],
-    declarations: [SvCfgMotivoAnulacionComponent, NewComponent, EditComponent],
-    exports: [SvCfgMotivoAnulacionComponent, NewComponent, EditComponent],
+    declarations: [NewComponent, EditComponent],
+    exports: [NewComponent, EditComponent],
     providers: [SvCfgMotivoAnulacionService]
 })
 

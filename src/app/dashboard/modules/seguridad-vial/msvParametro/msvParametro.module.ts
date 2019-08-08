@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MsvParametroComponent } from './msvParametro.component';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { MsvParametroService } from '../../../../services/msvParametro.service';
 
@@ -10,8 +9,8 @@ import { SelectModule } from 'angular2-select';
 
 @NgModule({
     imports: [CommonModule, Ng2BootstrapModule.forRoot(), SelectModule],
-    declarations: [MsvParametroComponent, NewComponent, EditComponent],
-    exports: [MsvParametroComponent, NewComponent, EditComponent],
+    declarations: [NewComponent, EditComponent],
+    exports: [NewComponent, EditComponent],
     providers: [MsvParametroService]
 })
 

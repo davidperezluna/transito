@@ -5,7 +5,7 @@ import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
-    selector: 'app-show',
+    selector: 'app-show-svevaluacion',
     templateUrl: './show.component.html'
 })
 

@@ -5,14 +5,13 @@ import { LoginService } from '../../../../../services/login.service';
 import swal from 'sweetalert2';
 
 @Component({
-    selector: 'app-new',
+    selector: 'app-new-svcfgestadoiluminacion',
     templateUrl: './new.component.html'
 })
 export class NewComponent implements OnInit {
     @Output() ready = new EventEmitter<any>();
     public estadoIluminacion: SvCfgEstadoIluminacion;
     public errorMessage;
-    public respuesta;
 
     constructor(
         private _EstadoIluminacionService: SvCfgEstadoIluminacionService,

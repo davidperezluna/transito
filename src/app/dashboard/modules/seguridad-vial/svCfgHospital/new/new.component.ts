@@ -7,7 +7,7 @@ import { CfgMunicipioService } from '../../../../../services/cfgMunicipio.servic
 import { CfgOrganismoTransitoService } from '../../../../../services/cfgOrganismoTransito.service';
 
 @Component({
-    selector: 'app-new',
+    selector: 'app-new-svcfghospital',
     templateUrl: './new.component.html'
 })
 export class NewComponent implements OnInit {

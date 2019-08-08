@@ -47,6 +47,6 @@
             </div>
         </div>
     </div>
-    <app-edit *ngIf='formEdit' [iluminacion]="iluminacion" (ready)="ready($event)"></app-edit>
-    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+    <app-edit-svcfgiluminacion *ngIf='formEdit' [iluminacion]="iluminacion" (ready)="ready($event)"></app-edit-svcfgiluminacion>
+    <app-new-svcfgiluminacion *ngIf='formNew' (ready)="ready($event)"></app-new-svcfgiluminacion>
 </div>

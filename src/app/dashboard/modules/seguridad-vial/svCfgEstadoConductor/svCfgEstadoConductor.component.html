@@ -47,6 +47,6 @@
             </div>
         </div>
     </div>
-    <app-edit *ngIf='formEdit' [estadoConductor]="estadoConductor" (ready)="ready($event)"></app-edit>
-    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+    <app-edit-svcfgestadoconductor *ngIf='formEdit' [estadoConductor]="estadoConductor" (ready)="ready($event)"></app-edit-svcfgestadoconductor>
+    <app-new-svcfgestadoconductor *ngIf='formNew' (ready)="ready($event)"></app-new-svcfgestadoconductor>
 </div>

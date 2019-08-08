@@ -54,6 +54,6 @@
         </div>
     </div>
 
-    <app-edit *ngIf='formEdit' [unidadReceptora]="unidadReceptora" (ready)="ready($event)"></app-edit>
-    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+    <app-edit-svcfgunidadreceptora *ngIf='formEdit' [unidadReceptora]="unidadReceptora" (ready)="ready($event)"></app-edit-svcfgunidadreceptora>
+    <app-new-svcfgunidadreceptora *ngIf='formNew' (ready)="ready($event)"></app-new-svcfgunidadreceptora>
 </div>

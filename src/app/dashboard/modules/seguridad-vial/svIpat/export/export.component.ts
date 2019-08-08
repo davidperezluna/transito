@@ -18,7 +18,7 @@ import { Utils } from 'ng2-bootstrap';
 declare var $: any;
 
 @Component({
-    selector: 'app-index',
+    selector: 'app-index-svipat',
     templateUrl: './export.component.html',
     providers: [DatePipe]
 })

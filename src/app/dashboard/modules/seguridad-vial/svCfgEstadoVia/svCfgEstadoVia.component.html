@@ -47,6 +47,6 @@
             </div>
         </div>
     </div>
-    <app-edit *ngIf='formEdit' [estadoVia]="estadoVia" (ready)="ready($event)"></app-edit>
-    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+    <app-edit-svcfgestadovia *ngIf='formEdit' [estadoVia]="estadoVia" (ready)="ready($event)"></app-edit-svcfgestadovia>
+    <app-new-svcfgestadovia *ngIf='formNew' (ready)="ready($event)"></app-new-svcfgestadovia>
 </div>

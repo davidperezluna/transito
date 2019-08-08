@@ -1,4 +1,4 @@
-<div class="container">
+-svcfgestadotiempo<div class="container">
     <hr>
     <div class="row" *ngIf='formIndex'>
         <div class="col-md-12">
@@ -47,6 +47,6 @@
             </div>
         </div>
     </div>
-    <app-edit *ngIf='formEdit' [estadoTiempo]="estadoTiempo" (ready)="ready($event)"></app-edit>
-    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+    <app-edit-svcfgestadotiempo *ngIf='formEdit' [estadoTiempo]="estadoTiempo" (ready)="ready($event)"></app-edit-svcfgestadotiempo>
+    <app-new-svcfgestadotiempo *ngIf='formNew' (ready)="ready($event)"></app-new-svcfgestadotiempo>
 </div>

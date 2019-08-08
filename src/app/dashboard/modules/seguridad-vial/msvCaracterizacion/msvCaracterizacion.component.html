@@ -25,7 +25,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr class="odd" *ngFor="let caracterizacion of msvCaracterizaciones; let i = index">
+              <tr class="odd" *ngFor="let caracterizacion of caracterizaciones; let i = index">
                 <td>{{ i + 1 }}</td>
                 <td>{{ caracterizacion.empresa.nit }}</td>
                 <td>{{ caracterizacion.empresa.nombre }}</td>
@@ -47,6 +47,6 @@
       </div>
     </div>
   </div>
-  <app-edit *ngIf='formEdit' [caracterizacion]="caracterizacion" (ready)="ready($event)"></app-edit>
-  <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+  <app-edit-svcaracterizacion *ngIf='formEdit' [caracterizacion]="caracterizacion" (ready)="ready($event)"></app-edit-svcaracterizacion>
+  <app-new-svcaracterizacion *ngIf='formNew' (ready)="ready($event)"></app-new-svcaracterizacion>
 </div>

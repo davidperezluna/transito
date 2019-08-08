@@ -12,12 +12,15 @@ declare var $: any;
 export class MsvCaracterizacionComponent implements OnInit {
   public errorMessage;
 	public id;
-	public msvCaracterizaciones: any;
+  
+  public table:any; 
+  
+  public caracterizaciones: any;
+  public caracterizacion: MsvCaracterizacion;
+  
 	public formNew = false;
 	public formEdit = false;
   public formIndex = true;
-  public table:any; 
-  public msvCaracterizacion: MsvCaracterizacion;
 
   constructor(
     private _CaracterizacionService: MsvCaracterizacionService,
@@ -41,9 +44,9 @@ export class MsvCaracterizacionComponent implements OnInit {
     })
     this._CaracterizacionService.getCaracterizacion().subscribe(
 				response => {
-          this.msvCaracterizaciones = response.data;
+          this.caracterizaciones = response.data;
           let timeoutId = setTimeout(() => {  
-            this.iniciarTabla();
+            this.onInitTable();
           }, 100);
 				}, 
 				error => {
@@ -56,8 +59,9 @@ export class MsvCaracterizacionComponent implements OnInit {
 				}
       );
   }
-  iniciarTabla(){
-    $('#dataTables-example').DataTable({
+
+  onInitTable(){
+    this.table = $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,
       sPaginationType: 'full_numbers',
@@ -70,7 +74,6 @@ export class MsvCaracterizacionComponent implements OnInit {
         }
       }
    });
-   this.table = $('#dataTables-example').DataTable();
   }
   
   onNew() {
@@ -89,7 +92,8 @@ export class MsvCaracterizacionComponent implements OnInit {
       this.ngOnInit();
     }
   }
-  deletemsvCaracterizaciones(id:any){
+
+  onDelete(id:any){
     swal({
       title: '¿Estás seguro?',
       text: "¡Se eliminara este registro!",
@@ -105,9 +109,9 @@ export class MsvCaracterizacionComponent implements OnInit {
         this._CaracterizacionService.deleteCaracterizacion(token,id).subscribe(
             response => {
                 swal({
-                      title: 'Eliminado!',
-                      text:'Registro eliminado correctamente.',
-                      type:'success',
+                      title: response.title,
+                      text: response.message,
+                      type: response.status,
                       confirmButtonColor: '#15d4be',
                     })
                   this.table.destroy();
@@ -128,8 +132,8 @@ export class MsvCaracterizacionComponent implements OnInit {
     })
   }
 
-  editmsvCaracterizacion(msvCaracterizacion:any){
-    this.msvCaracterizacion = msvCaracterizacion;
+  onEdit(caracterizacion:any){
+    this.caracterizacion = caracterizacion;
     this.formEdit = true;
     this.formIndex = false;
   }

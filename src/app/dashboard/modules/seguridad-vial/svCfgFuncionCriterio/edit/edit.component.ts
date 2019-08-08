@@ -5,7 +5,7 @@ import swal from 'sweetalert2';
 import { SvCfgFuncionService } from '../../../../../services/svCfgFuncion.service';
 
 @Component({
-    selector: 'app-edit',
+    selector: 'app-edit-svcfgfuncioncriterio',
     templateUrl: './edit.component.html'
 })
 export class EditComponent implements OnInit {

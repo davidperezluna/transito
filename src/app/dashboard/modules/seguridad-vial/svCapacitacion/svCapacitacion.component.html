@@ -12,9 +12,9 @@
                     <div class="row">
                         <div class="col-xs-12 col-lg-6">
                             <label>Tipo Identificacion <b class="text-danger">*</b></label>
-                            <ng-select [multiple]="false" [options]="tiposIdentificacion"
+                            <!-- <ng-select [multiple]="false" [options]="tiposIdentificacion"
                                 [(ngModel)]="capacitacion.idTipoIdentificacion" required name="idTipoIdentificacion">
-                            </ng-select>
+                            </ng-select> -->
                         </div>
                         <div class="col-xs-12 col-lg-6">
                             <div class="input-group" style="margin-top: 4%;"
@@ -141,6 +141,6 @@
             </div>
         </div>
     </div>
-    <app-new *ngIf='formNew' [capacitacionInput]="capacitacion" [ciudadano]="ciudadano" [empresa]="empresa" (ready)="ready($event)"></app-new>
-    <app-show *ngIf='formShow' [capacitacion]="capacitacion" (ready)="ready($event)"></app-show>
+    <app-new-svcapacitacion *ngIf='formNew' [capacitacionInput]="capacitacion" [ciudadano]="ciudadano" [empresa]="empresa" (ready)="ready($event)"></app-new-svcapacitacion>
+    <app-show-svcapacitacion *ngIf='formShow' [capacitacion]="capacitacion" (ready)="ready($event)"></app-show-svcapacitacion>
 </div>

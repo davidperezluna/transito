@@ -14,7 +14,7 @@ import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
-    selector: 'app-reporte',
+    selector: 'app-reporte-svcapacitacion',
     templateUrl: './reporte.component.html',
     providers: [DatePipe]
 })

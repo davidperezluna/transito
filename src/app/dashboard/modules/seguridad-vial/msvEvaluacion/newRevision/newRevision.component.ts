@@ -6,7 +6,7 @@ import { LoginService } from '../../../../../services/login.service';
 import swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-new-revision',
+  selector: 'app-new-revision-svevaluacion',
   templateUrl: './newRevision.component.html'
 })
 export class NewRevisionComponent implements OnInit {

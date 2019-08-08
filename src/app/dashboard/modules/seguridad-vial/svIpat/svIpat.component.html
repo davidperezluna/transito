@@ -39,7 +39,7 @@
       </div>
     </div>
   </div>
-  <app-new *ngIf='formNew' [consecutivo]="consecutivo" (ready)="ready($event)"></app-new> 
-  <app-show *ngIf='formShow' [ipat]="ipat" [conductores]="conductores" [vehiculos]="vehiculos" [victimas]="victimas" (ready)="ready($event)"></app-show>
+  <app-new-svipat *ngIf='formNew' [consecutivo]="consecutivo" (ready)="ready($event)"></app-new-svipat> 
+  <app-show-svipat *ngIf='formShow' [ipat]="ipat" [conductores]="conductores" [vehiculos]="vehiculos" [victimas]="victimas" (ready)="ready($event)"></app-show-svipat>
   <!-- <app-show *ngIf='formShow' [ipat]="ipat" (ready)="ready($event)"></app-show> -->
 </div>

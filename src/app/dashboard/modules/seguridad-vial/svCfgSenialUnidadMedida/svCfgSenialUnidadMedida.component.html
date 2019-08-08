@@ -47,6 +47,6 @@
       </div>
     </div>
     
-    <app-edit *ngIf='formEdit' [unidadMedida]="unidadMedida" (ready)="ready($event)"></app-edit>
-    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+    <app-edit-svcfgsenialunidadmedida *ngIf='formEdit' [unidadMedida]="unidadMedida" (ready)="ready($event)"></app-edit-svcfgsenialunidadmedida>
+    <app-new-svcfgsenialunidadmedida *ngIf='formNew' (ready)="ready($event)"></app-new-svcfgsenialunidadmedida>
 </div>

@@ -7,7 +7,7 @@ import { environment } from 'environments/environment';
 import swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-edit',
+  selector: 'app-edit-svcfgsenial',
   templateUrl: './edit.component.html'
 })
 export class EditComponent implements OnInit{

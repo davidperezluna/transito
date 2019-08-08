@@ -8,7 +8,7 @@ import swal from 'sweetalert2';
 
 
 @Component({
-  selector: 'app-edit',
+  selector: 'app-edit-svipattalonario',
   templateUrl: './edit.component.html'
 })
 export class EditComponent {

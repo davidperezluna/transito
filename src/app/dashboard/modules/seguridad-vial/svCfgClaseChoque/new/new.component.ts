@@ -6,7 +6,7 @@ import swal from 'sweetalert2';
 import { SvCfgClaseAccidenteService } from '../../../../../services/svCfgClaseAccidente.service';
 
 @Component({
-    selector: 'app-new',
+    selector: 'app-new-svcfgclasechoque',
     templateUrl: './new.component.html'
 })
 export class NewComponent implements OnInit {

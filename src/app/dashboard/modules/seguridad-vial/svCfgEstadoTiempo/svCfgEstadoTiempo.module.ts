@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SvCfgEstadoTiempoComponent } from './svCfgEstadoTiempo.component';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { SvCfgEstadoTiempoService } from '../../../../services/svCfgEstadoTiempo.service';
 
@@ -10,8 +9,8 @@ import { SelectModule } from 'angular2-select';
 
 @NgModule({
     imports: [CommonModule, Ng2BootstrapModule.forRoot(), SelectModule],
-    declarations: [SvCfgEstadoTiempoComponent, NewComponent, EditComponent],
-    exports: [SvCfgEstadoTiempoComponent, NewComponent, EditComponent],
+    declarations: [NewComponent, EditComponent],
+    exports: [NewComponent, EditComponent],
     providers: [SvCfgEstadoTiempoService]
 })
 

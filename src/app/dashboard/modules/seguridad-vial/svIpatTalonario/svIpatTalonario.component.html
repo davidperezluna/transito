@@ -93,6 +93,6 @@
       </div>
     </div>
 
-    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
-    <app-show *ngIf='formShow' [talonario]="talonario" (ready)="ready($event)"></app-show>
+    <app-new-svipattalonario *ngIf='formNew' (ready)="ready($event)"></app-new-svipattalonario>
+    <app-show-svipattalonario *ngIf='formShow' [talonario]="talonario" (ready)="ready($event)"></app-show-svipattalonario>
 </div>

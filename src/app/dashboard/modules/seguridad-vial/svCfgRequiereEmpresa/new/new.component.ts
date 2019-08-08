@@ -6,7 +6,7 @@ import swal from 'sweetalert2';
 import { VhloCfgCarroceriaService } from '../../../../../services/vhloCfgCarroceria.service';
 
 @Component({
-    selector: 'app-new',
+    selector: 'app-new-svcfgrequiereempresa',
     templateUrl: './new.component.html'
 })
 export class NewComponent implements OnInit {

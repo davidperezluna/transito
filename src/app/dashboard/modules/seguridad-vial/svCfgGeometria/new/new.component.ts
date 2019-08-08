@@ -6,7 +6,7 @@ import swal from 'sweetalert2';
 import { SvCfgTipoGeometriaService } from '../../../../../services/svCfgTipoGeometria.service';
 
 @Component({
-    selector: 'app-new',
+    selector: 'app-new-svcfggeometria',
     templateUrl: './new.component.html'
 })
 export class NewComponent implements OnInit {

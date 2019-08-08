@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SvCfgDisenioComponent } from './svCfgDisenio.component';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { SvCfgDisenioService } from '../../../../services/svCfgDisenio.service';
 
@@ -10,8 +9,8 @@ import { SelectModule } from 'angular2-select';
 
 @NgModule({
     imports: [CommonModule, Ng2BootstrapModule.forRoot(), SelectModule],
-    declarations: [SvCfgDisenioComponent, NewComponent, EditComponent],
-    exports: [SvCfgDisenioComponent, NewComponent, EditComponent],
+    declarations: [NewComponent, EditComponent],
+    exports: [NewComponent, EditComponent],
     providers: [SvCfgDisenioService]
 })
 

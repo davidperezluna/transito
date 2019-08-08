@@ -46,6 +46,6 @@
             </div>
         </div>
     </div>
-    <app-edit *ngIf='formEdit' [tipoArea]="tipoArea" (ready)="ready($event)"></app-edit>
-    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+    <app-edit-svcfgtipoarea *ngIf='formEdit' [tipoArea]="tipoArea" (ready)="ready($event)"></app-edit-svcfgtipoarea>
+    <app-new-svcfgtipoarea *ngIf='formNew' (ready)="ready($event)"></app-new-svcfgtipoarea>
 </div>

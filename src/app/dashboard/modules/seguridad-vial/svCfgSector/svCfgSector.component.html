@@ -47,6 +47,6 @@
             </div>
         </div>
     </div>
-    <app-edit *ngIf='formEdit' [sector]="sector" (ready)="ready($event)"></app-edit>
-    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+    <app-edit-svcfgsector *ngIf='formEdit' [sector]="sector" (ready)="ready($event)"></app-edit-svcfgsector>
+    <app-new-svcfgsector *ngIf='formNew' (ready)="ready($event)"></app-new-svcfgsector>
 </div>

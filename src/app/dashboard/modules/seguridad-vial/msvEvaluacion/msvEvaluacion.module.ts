@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MsvEvaluacionComponent } from './msvEvaluacion.component';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { MsvRevisionService } from '../../../../services/msvRevision.service';
 import { MsvEvaluacionService } from '../../../../services/msvEvaluacion.service';
@@ -19,8 +18,8 @@ import { NewRevisionComponent } from './newRevision/newRevision.component';
 
 @NgModule({
     imports: [CommonModule, Ng2BootstrapModule.forRoot(),SelectModule],
-    declarations: [MsvEvaluacionComponent, NewComponent, EditComponent, ShowComponent, EditRevisionComponent,NewEmpresaComponent, NewRevisionComponent],
-    exports: [MsvEvaluacionComponent, NewComponent, EditComponent, ShowComponent, EditRevisionComponent, NewEmpresaComponent, NewRevisionComponent],
+    declarations: [NewComponent, EditComponent, ShowComponent, EditRevisionComponent,NewEmpresaComponent, NewRevisionComponent],
+    exports: [NewComponent, EditComponent, ShowComponent, EditRevisionComponent, NewEmpresaComponent, NewRevisionComponent],
     providers: [MsvRevisionService, MsvEvaluacionService, MsvParametroService, MsvVariableService, MsvCalificacionService, MsvResultadoService]
 })
 

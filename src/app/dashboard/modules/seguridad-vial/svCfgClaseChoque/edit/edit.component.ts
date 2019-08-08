@@ -5,7 +5,7 @@ import swal from 'sweetalert2';
 import { SvCfgClaseAccidenteService } from '../../../../../services/svCfgClaseAccidente.service';
 
 @Component({
-    selector: 'app-edit',
+    selector: 'app-edit-svcfgclasechoque',
     templateUrl: './edit.component.html'
 })
 export class EditComponent implements OnInit {

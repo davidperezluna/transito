@@ -47,6 +47,6 @@
             </div>
         </div>
     </div>
-    <app-edit *ngIf='formEdit' [criterio]="criterio" (ready)="ready($event)"></app-edit>
-    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+    <app-edit-svcriterio *ngIf='formEdit' [criterio]="criterio" (ready)="ready($event)"></app-edit-svcriterio>
+    <app-new-svcriterio *ngIf='formNew' (ready)="ready($event)"></app-new-svcriterio>
 </div>
