@@ -15,23 +15,23 @@
               <div class="col-xs-12 col-lg-12">
                 <div class="form-group">
                   <label>Destino:</label>
-                  <ng-select (ngModelChange)="getDestino($event)" [multiple]="false" [options]="destinos" [(ngModel)]="datos.tipoDestino" name="destino" required></ng-select>
+                  <!-- <ng-select (ngModelChange)="getDestino($event)" [multiple]="false" [options]="destinos" [(ngModel)]="datos.tipoDestino" name="destino" required></ng-select> -->
                 </div>
               </div>
 
               <div class="col-xs-12 col-lg-12" *ngIf="municipios && datos.tipoDestino == 'MUNICIPIO'">
                 <div class="form-group">
                   <label>Municipio:</label><br>
-                  <ng-select (ngModelChange)="onChangedMunicipio($event)"  [multiple]="false" [options]="municipios" [(ngModel)]="datos.idMunicipio" name="municipio" required>
-                  </ng-select>
+                  <!-- <ng-select (ngModelChange)="onChangedMunicipio($event)"  [multiple]="false" [options]="municipios" [(ngModel)]="datos.idMunicipio" name="municipio" required>
+                  </ng-select> -->
                 </div>
               </div>
 
               <div class="col-xs-12 col-lg-12">
                 <div class="form-group">
                   <label>Tipo de señal:</label><br>
-                  <ng-select [multiple]="false" [options]="tiposSenial" [(ngModel)]="datos.idTipoSenial" name="tipoSenial" required>
-                  </ng-select>
+                  <!-- <ng-select [multiple]="false" [options]="tiposSenial" [(ngModel)]="datos.idTipoSenial" name="tipoSenial" required>
+                  </ng-select> -->
                 </div>
               </div>
             </div><!-- /.row -->

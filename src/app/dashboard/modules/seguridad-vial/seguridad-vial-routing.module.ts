@@ -90,7 +90,7 @@ const routes: Routes = [
     path: 'msvCriterio',
     component: MsvCriterioComponent
   },
-  /* {
+  {
     path: 'msvEvaluacion',
     component: MsvEvaluacionComponent
   },
@@ -358,7 +358,7 @@ const routes: Routes = [
   {
     path: 'senializacion/location',
     component: LocationComponent
-  } */
+  }
 ]; 
 
 
