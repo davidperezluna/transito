@@ -472,6 +472,12 @@ constructor(
   onInvestigacion(trazabilidad: any) {
     this.trazabilidad = trazabilidad;
     if (this.trazabilidad) {
+      this.formRecord = false;
+      this.formTrazabilidad = false;
+      this.formAcuerdoPago = false;
+      this.formDocument = false;
+      this.formInvestigacion = true;
+      
       this.datosInvestigacion.idTrazabilidad = trazabilidad.id;
 
       let token = this._LoginService.getToken();
@@ -511,22 +517,16 @@ constructor(
           }
         }
       );
-
-      this.formRecord = false;
-      this.formTrazabilidad = false;
-      this.formAcuerdoPago = false;
-      this.formDocument = false;
-      this.formInvestigacion = true;
     }
   }
 
   onEnviarBien() {
     let token = this._LoginService.getToken();
 
-    this._TrazabilidadService.register(this.datosInvestigacion, token).subscribe(
+    this._TrazabilidadService.registerBien(this.datosInvestigacion, token).subscribe(
       response => {
         if (response.status == 'success') {
-          this.onSearch();
+          this.onInvestigacion(this.trazabilidad);
 
           swal({
             title: 'Perfecto!',

@@ -5,7 +5,7 @@ import { environment } from 'environments/environment';
 import swal from 'sweetalert2';
 
 @Component({
-    selector: 'app-record',
+    selector: 'app-record-gddocumento',
     templateUrl: './record.component.html',
 })
 export class RecordComponent implements OnInit {

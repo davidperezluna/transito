@@ -228,19 +228,19 @@
       </div>
       
       <div class="col-xs-12 col-lg-8" *ngIf='formNew'>
-        <app-new (ready)="ready($event)" (onShow)="onShow($event)"></app-new>
+        <app-new-gddocumento (ready)="ready($event)" (onShow)="onShow($event)"></app-new-gddocumento>
       </div>
       
       <div class="col-xs-12 col-lg-8" *ngIf='formShow'>
-        <app-show [documento]="documento" (ready)="ready($event)"></app-show>
+        <app-show-gddocumento [documento]="documento" (ready)="ready($event)"></app-show-gddocumento>
       </div>
 
       <div class="col-xs-12 col-lg-8" *ngIf='formRecord'>
-        <app-record [documento]="documento" (ready)="ready($event)"></app-record>
+        <app-record-gddocumento [documento]="documento" (ready)="ready($event)"></app-record-gddocumento>
       </div>
 
       <div class="col-xs-12 col-lg-8" *ngIf='formPrint'>
-        <app-print [documento]="documento" (ready)="ready($event)"></app-print>
+        <app-print-gddocumento [documento]="documento" (ready)="ready($event)"></app-print-gddocumento>
       </div>
     </div>
 </div>

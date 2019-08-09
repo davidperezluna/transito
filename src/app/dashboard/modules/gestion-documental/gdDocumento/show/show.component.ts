@@ -9,7 +9,7 @@ import { environment } from 'environments/environment';
 import swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-show',
+  selector: 'app-show-gddocumento',
   templateUrl: './show.component.html',
 })
 export class ShowComponent implements OnInit {

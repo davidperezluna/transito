@@ -122,8 +122,6 @@ constructor(
                                     console.log(this.errorMessage);
                                     alert("Error en la petición");
                                 }
-
-                                this.actividades = null;
                             }
 
                         }

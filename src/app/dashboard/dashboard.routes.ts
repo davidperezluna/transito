@@ -25,11 +25,11 @@ const routes: Routes = [
         path: 'financiero',
         loadChildren: './modules/financiero/financiero.module#FinancieroModule'
       },
-      /*{
+      {
         path: 'gestion-documental',
         loadChildren: './modules/gestion-documental/gestion-documental.module#GestionDocumentalModule'
       },
-      {
+      /*{
         path: 'insumo',
         loadChildren: './modules/insumo/insumo.module#InsumoModule'
       },*/

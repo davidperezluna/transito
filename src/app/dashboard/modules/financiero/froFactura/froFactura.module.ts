@@ -9,6 +9,12 @@ import { CvCdoComparendoService } from '../../../../services/cvCdoComparendo.ser
 import { PqoInmovilizacionService } from '../../../../services/pqoInmovilizacion.service';
 import { UserCfgTipoIdentificacionService } from '../../../../services/userCfgTipoIdentificacion.service';
 import { UserCiudadanoService } from '../../../../services/userCiudadano.service';
+import { FroTrtePrecioService } from '../../../../services/froTrtePrecio.service';
+import { FroFacTramiteService } from '../../../../services/froFacTramite.service';
+import { CfgModuloService } from '../../../../services/cfgModulo.service';
+import { VhloPropietarioService } from '../../../../services/vhloPropietario.service';
+import { VhloVehiculoService } from '../../../../services/vhloVehiculo.service';
+import { VhloValorService } from '../../../../services/vholCfgValor.service';
 
 import { NewComponent } from './new/new.component';
 import { EditComponent } from './edit/edit.component';
@@ -37,6 +43,12 @@ import { UserCiudadanoModule } from '../../usuario/userCiudadano/userCiudadano.m
         PqoInmovilizacionService,
         UserCfgTipoIdentificacionService,
         UserCiudadanoService,
+        FroTrtePrecioService,
+        FroFacTramiteService,
+        CfgModuloService,
+        VhloPropietarioService,
+        VhloVehiculoService,
+        VhloValorService,
     ]
 })
 

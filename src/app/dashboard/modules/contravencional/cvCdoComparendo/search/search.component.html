@@ -130,7 +130,7 @@
                                     <button *ngIf="!trazabilidad.actoAdministrativo" (click)="onDocument(trazabilidad)" class="btn btn-xs btn-info" type="button" tooltip="Crear acto admtivo." [tooltipDisabled]="false" [tooltipAnimation]="true" tooltipPlacement="top">
                                         <i class="fa fa-file-text"></i>
                                     </button>
-                                    <button *ngIf="trazabilidad.comparendo.estado.id == 25" (click)="onInvestigacion(trazabilidad)" class="btn btn-xs btn-warning"
+                                    <button *ngIf="trazabilidad.estado.id == 25" (click)="onInvestigacion(trazabilidad)" class="btn btn-xs btn-warning"
                                         type="button" tooltip="Crear investigación bienes" [tooltipDisabled]="false" [tooltipAnimation]="true"
                                         tooltipPlacement="top">
                                         <i class="fa fa-search"></i>
@@ -294,7 +294,7 @@
         </div>
     </div>
 
-    <div class="col-xs-12 col-lg-6" *ngIf='formInvestigacion'>
+    <div class="col-xs-12 col-lg-4" *ngIf='formInvestigacion'>
         <div class="card">
             <div class="card-header">
                 <b class="text-uppercase">
@@ -304,49 +304,48 @@
                 <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
             </div>
             <div class="card-body">
-                <div class="col-xs-12 col-lg-12">
-                    <form #formNew="ngForm">
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-xs-12 col-lg-6">
-                                    <label>Nombre
-                                        <b class="text-danger">*</b>
-                                    </label>
-                                    <input class="form-control" [(ngModel)]="datosInvestigacion.nombre" name="nombre" type="text" required
-                                        readonly />
-                                </div>
-                                <div class="col-xs-12 col-lg-12">
-                                    <label>Tipo
-                                        <b class="text-danger">*</b>
-                                    </label>
-                                    <ng-select [multiple]="false" [options]="tiposBien" [(ngModel)]="datosInvestigacion.tipo" name="tipo" required>
-                                    </ng-select>
-                                </div>
+                <form #formNew="ngForm">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Nombre
+                                    <b class="text-danger">*</b>
+                                </label>
+                                <input class="form-control" [(ngModel)]="datosInvestigacion.nombre" name="nombre" type="text" required />
+                            </div>
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Tipo
+                                    <b class="text-danger">*</b>
+                                </label>
+                                <ng-select [multiple]="false" [options]="tiposBien" [(ngModel)]="datosInvestigacion.tipo" name="tipo" required>
+                                </ng-select>
+                            </div>
+                            <div class="col-xs-12 col-lg-12">
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" [(ngModel)]="datosInvestigacion.embargable" class="custom-control-input" id="embargable"
                                         name="embargable">
                                     <label class="custom-control-label" for="embargable">Embargable</label>
                                 </div>
-                                <div class="col-xs-12 col-lg-6">
-                                    <label>Avaluo
-                                        <b class="text-danger">*</b>
-                                    </label>
-                                    <input class="form-control" [(ngModel)]="datosInvestigacion.avaluo" name="avaluo" type="text" required readonly />
-                                </div>
-                                <div class="col-xs-12 col-lg-6" *ngIf="datosInvestigacion.embargable">
-                                    <label>Valor embargado
-                                        <b class="text-danger">*</b>
-                                    </label>
-                                    <input class="form-control" [(ngModel)]="datosInvestigacion.valor" name="valor" type="text" required readonly />
-                                </div>
+                            </div>
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Avaluo
+                                    <b class="text-danger">*</b>
+                                </label>
+                                <input class="form-control" [(ngModel)]="datosInvestigacion.avaluo" name="avaluo" type="text" required />
+                            </div>
+                            <div class="col-xs-12 col-lg-12" *ngIf="datosInvestigacion.embargable">
+                                <label>Valor embargado
+                                    <b class="text-danger">*</b>
+                                </label>
+                                <input class="form-control" [(ngModel)]="datosInvestigacion.valor" name="valor" type="text" required />
                             </div>
                         </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
             </div>
             <div class="card-footer">
                 <div class="btn-group">
-                    <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
+                    <button (click)="onEnviarBien()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
                         <i class="fa fa-save"></i>
                         Enviar
                     </button>
@@ -359,7 +358,7 @@
         </div>
     </div>
 
-    <div class="col-xs-12 col-lg-6" *ngIf="bienes">
+    <div class="col-xs-12 col-lg-6" *ngIf="formInvestigacion && bienes">
         <div class="card">
             <div class="card-header">
                 <b class="text-uppercase">
@@ -382,6 +381,7 @@
                                 <td>
                                     <b>Nombre</b><br>
                                     {{ bien.nombre }}
+                                    <br>
                                     <b>Tipo</b><br>
                                     {{ bien.tipo }}
                                 </td>

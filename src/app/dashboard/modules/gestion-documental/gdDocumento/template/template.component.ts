@@ -4,7 +4,7 @@ import { LoginService } from '../../../../../services/login.service';
 import swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-template',
+  selector: 'app-template-dgdocumento',
   templateUrl: './template.component.html',
 })
 export class TemplateComponent implements OnInit {
