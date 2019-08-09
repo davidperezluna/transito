@@ -1,10 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { SvCapacitacion } from '../svCapacitacion.modelo';
+
 import { SvCapacitacionService } from '../../../../../services/svCapacitacion.service';
-import { LoginService } from '../../../../../services/login.service';
-
 import { CfgMunicipioService } from '../../../../../services/cfgMunicipio.service';
-
 import { SvCfgFuncionService } from '../../../../../services/svCfgFuncion.service';
 import { SvCfgFuncionCriterioService } from '../../../../../services/svCfgFuncionCriterio.service';
 import { SvCfgTemaCapacitacionService } from '../../../../../services/svCfgTemaCapacitacion.service';
@@ -12,6 +10,8 @@ import { SvCfgClaseActorViaService } from '../../../../../services/svCfgClaseAct
 import { UserCfgTipoIdentificacionService } from '../../../../../services/userCfgTipoIdentificacion.service';
 import { UserCfgGeneroService } from '../../../../../services/userCfgGenero.service';
 import { UserCfgGrupoEtnicoService } from '../../../../../services/userCfgGrupoEtnico.service';
+
+import { LoginService } from '../../../../../services/login.service';
 
 import { environment } from 'environments/environment';
 import { DatePipe, CurrencyPipe } from '@angular/common';

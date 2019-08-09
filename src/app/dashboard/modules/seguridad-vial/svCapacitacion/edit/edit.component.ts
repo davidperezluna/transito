@@ -15,7 +15,7 @@ export class EditComponent implements OnInit {
 
     constructor(
         private _SvCapacitacionService: SvCapacitacionService,
-        private _loginService: LoginService,
+        private _LoginService: LoginService,
     ) { }
 
     ngOnInit() {
@@ -25,7 +25,7 @@ export class EditComponent implements OnInit {
     onCancelar() { this.ready.emit(true); }
 
     onEnviar() {
-        let token = this._loginService.getToken();
+        let token = this._LoginService.getToken();
         this._SvCapacitacionService.edit(this.capacitacion, token).subscribe(
             response => {
                 if (response.status == 'success') {

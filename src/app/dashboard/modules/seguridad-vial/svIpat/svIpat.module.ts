@@ -36,6 +36,7 @@ import { SvCfgResultadoExamenService } from "../../../../services/svCfgResultado
 import { SvCfgGradoExamenService } from "../../../../services/svCfgGradoExamen.service";
 import { SvCfgHospitalService } from "../../../../services/svCfgHospital.service";
 import { UserEmpresaService } from "../../../../services/userEmpresa.service";
+import { UserCiudadanoService } from "../../../../services/userCiudadano.service";
 import { SvCfgFallaService } from "../../../../services/svCfgFalla.service";
 import { SvCfgLugarImpactoService } from "../../../../services/svCfgLugarImpacto.service";
 import { VhloCfgClaseService } from "../../../../services/vhloCfgClase.service";
@@ -112,6 +113,7 @@ import { ToolTipModule } from 'angular2-tooltip';
         SvCfgGradoExamenService,
         SvCfgHospitalService,
         UserEmpresaService,
+        UserCiudadanoService,
         SvCfgFallaService,
         SvCfgLugarImpactoService,
         VhloCfgClaseService,

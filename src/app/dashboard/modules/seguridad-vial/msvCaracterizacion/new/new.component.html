@@ -1,510 +1,515 @@
-<div class="col-xs-12 col-lg-12">
-    <div class="card">
-        <div class="card-header">
-            <h5 class="text-uppercase">Registrar Caracterización Empresa</h5>
-            <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
-        </div>
-        <div class="card-body">
-            <div class="form-group row">
-                <div class="col-xs-12 col-lg-6" style="margin-top: 2%">
-                    <div class="input-group">
-                        <input type="number" class="form-control" placeholder="NIT Empresa"
-                            [(ngModel)]="msvCaracterizacion.nit" name="nit" required />
-                        <span class="input-group-btn">
-                            <button (click)="onSearchEmpresa()" class="btn btn-default btn-primary" type="button"><i
-                                    class="fa fa-search"></i></button>
-                        </span>
-                    </div>
+<div class="container-fluid">
+    <hr>
+    <div class="row">
+        <div class="col-xs-12 col-lg-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="text-uppercase">Registrar Caracterización Empresa</h5>
+                    <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
                 </div>
-                <div *ngIf="empresaEncontrada" class="col-xs-12 col-lg-6">
-                    <table class="table " id="dataTables-example">
-                        <br>
-                        <thead>
-                            <tr>
-                                <th>Nit</th>
-                                <th>Nombre</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="odd">
-                                <td>{{ empresa.nit }}</td>
-                                <td>{{ empresa.nombre }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="card-body">
+                    <div class="form-group">
+                        <div class="col-xs-12 col-lg-12" style="margin-top: 2%">
+                            <div class="input-group">
+                                <input type="number" class="form-control" placeholder="NIT Empresa"
+                                    [(ngModel)]="msvCaracterizacion.nit" name="nit" required />
+                                <span class="input-group-btn">
+                                    <button (click)="onSearchEmpresa()" class="btn btn-default btn-primary" type="button"><i
+                                            class="fa fa-search"></i></button>
+                                </span>
+                            </div>
+                        </div>
+                        <div *ngIf="empresaEncontrada" class="col-xs-12 col-lg-12">
+                            <table class="table table-bordered table-striped">
+                                <br>
+                                <thead>
+                                    <tr>
+                                        <th>Nit</th>
+                                        <th>Nombre</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="odd">
+                                        <td>{{ empresa.nit }}</td>
+                                        <td>{{ empresa.nombre }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="card" *ngIf="empresaEncontrada">
-        <div class="card-header">
-            <h5 class="text-uppercase">Datos Caracterización Empresa</h5>
-            <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
-        </div>
-        <div class="card-body">
-            <div class="form-group row">
-                <form #formNew="ngForm">
-                    <div class="form-group row">
-                        <div class="col-xs-12 col-lg-6">
-                            <label>Fecha <strong class="text-danger">*</strong></label>
-                            <input class="form-control" type="date" [(ngModel)]="msvCaracterizacion.fecha" name="fecha"
-                                required disabled>
-                        </div>
-                        <div class="col-xs-12 col-lg-6">
-                            <label>Ciudad <strong class="text-danger">*</strong></label>
-                            <ng-select [multiple]="false" [options]="municipios"
-                                [(ngModel)]="msvCaracterizacion.municipio" required name="municipio">
-                            </ng-select>
-                        </div>
-                        <div class="col-xs-12 col-lg-6">
-                            <label>Nombres <strong class="text-danger">*</strong></label>
-                            <input class="form-control" type="text" [(ngModel)]="msvCaracterizacion.nombres"
-                                name="nombres" required>
-                        </div>
-                        <div class="col-xs-12 col-lg-6">
-                            <label>Apellidos <strong class="text-danger">*</strong></label>
-                            <input class="form-control" type="text" [(ngModel)]="msvCaracterizacion.apellidos"
-                                name="apellidos" required>
-                        </div>
-                        <div class="col-xs-12 col-lg-6">
-                            <label>Número Identificación <strong class="text-danger">*</strong></label>
-                            <input class="form-control" type="number" [(ngModel)]="msvCaracterizacion.identificacion"
-                                name="identificacion" required>
-                        </div>
-                        <div class="col-xs-12 col-lg-6">
-                            <label>Categoría Licencia Conducción</label>
-                            <ng-select [multiple]="false" [options]="categoriasLicenciaConduccion"
-                                [(ngModel)]="msvCaracterizacion.clc" required name="clc">
-                            </ng-select>
-                        </div>
-                        <div class="col-xs-12 col-lg-6">
-                            <label>Fecha Vigencia</label>
-                            <input class="form-control" type="date" [(ngModel)]="msvCaracterizacion.fechaVigencia"
-                                name="fechaVigencia" required>
-                        </div>
-                        <div class="col-xs-12 col-lg-6">
-                            <label>Edad <strong class="text-danger">*</strong></label>
-                            <input class="form-control" type="number" [(ngModel)]="msvCaracterizacion.edad" name="edad"
-                                required>
-                        </div>
-                        <div class="col-xs-12 col-lg-6">
-                            <label>Genero <strong class="text-danger">*</strong></label>
-                            <ng-select [multiple]="false" [options]="generos" [(ngModel)]="msvCaracterizacion.genero"
-                                required name="genero">
-                            </ng-select>
-                        </div>
-                        <hr>
-                        <div class="col-xs-12 col-lg-6">
-                            <label>Grupo de trabajo al que pertenece</label>
-                            <div class="form-group row">
-                                <div class="col-xs-12 col-lg-6">
-                                    <div class="custom-control custom-radio">
-                                        <input id="radioAdministrativo" name="administrativo"
-                                            [(ngModel)]="msvCaracterizacion.grupoTrabajo" value="Administrativo"
-                                            type="radio" id="customRadioAdministrativo" name="customRadioAdministrativo"
-                                            class="custom-control-input">
-                                        <label class="custom-control-label"
-                                            for="customRadioAdministrativo">Administrativo</label>
+        <div class="col-xs-12 col-lg-8">
+            <div class="card" *ngIf="empresaEncontrada">
+                <div class="card-header">
+                    <h5 class="text-uppercase">Datos Caracterización Empresa</h5>
+                    <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
+                </div>
+                <div class="card-body">
+                    <form #formNew="ngForm">
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Fecha <strong class="text-danger">*</strong></label>
+                                <input class="form-control" type="date" [(ngModel)]="msvCaracterizacion.fecha" name="fecha"
+                                    required disabled>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Ciudad <strong class="text-danger">*</strong></label>
+                                <ng-select [multiple]="false" [options]="municipios"
+                                    [(ngModel)]="msvCaracterizacion.municipio" required name="municipio">
+                                </ng-select>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Nombres <strong class="text-danger">*</strong></label>
+                                <input class="form-control" type="text" [(ngModel)]="msvCaracterizacion.nombres"
+                                    name="nombres" required>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Apellidos <strong class="text-danger">*</strong></label>
+                                <input class="form-control" type="text" [(ngModel)]="msvCaracterizacion.apellidos"
+                                    name="apellidos" required>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Número Identificación <strong class="text-danger">*</strong></label>
+                                <input class="form-control" type="number" [(ngModel)]="msvCaracterizacion.identificacion"
+                                    name="identificacion" required>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Categoría Licencia Conducción</label>
+                                <ng-select [multiple]="false" [options]="categoriasLicenciaConduccion"
+                                    [(ngModel)]="msvCaracterizacion.clc" required name="clc">
+                                </ng-select>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Fecha Vigencia</label>
+                                <input class="form-control" type="date" [(ngModel)]="msvCaracterizacion.fechaVigencia"
+                                    name="fechaVigencia" required>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Edad <strong class="text-danger">*</strong></label>
+                                <input class="form-control" type="number" [(ngModel)]="msvCaracterizacion.edad" name="edad"
+                                    required>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Genero <strong class="text-danger">*</strong></label>
+                                <ng-select [multiple]="false" [options]="generos" [(ngModel)]="msvCaracterizacion.genero"
+                                    required name="genero">
+                                </ng-select>
+                            </div>
+                            <hr>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Grupo de trabajo al que pertenece</label>
+                                <div class="form-group row">
+                                    <div class="col-xs-12 col-lg-6">
+                                        <div class="custom-control custom-radio">
+                                            <input id="radioAdministrativo" name="administrativo"
+                                                [(ngModel)]="msvCaracterizacion.grupoTrabajo" value="Administrativo"
+                                                type="radio" id="customRadioAdministrativo" name="customRadioAdministrativo"
+                                                class="custom-control-input">
+                                            <label class="custom-control-label"
+                                                for="customRadioAdministrativo">Administrativo</label>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-xs-12 col-lg-6">
-                                    <div class="custom-control custom-radio">
-                                        <input id="radioComercial" name="comercial"
-                                            [(ngModel)]="msvCaracterizacion.grupoTrabajo" value="Comercial" type="radio"
-                                            id="customRadioComercial" name="customRadioComercial"
-                                            class="custom-control-input">
-                                        <label class="custom-control-label" for="customRadioComercial">Comercial</label>
+                                    <div class="col-xs-12 col-lg-6">
+                                        <div class="custom-control custom-radio">
+                                            <input id="radioComercial" name="comercial"
+                                                [(ngModel)]="msvCaracterizacion.grupoTrabajo" value="Comercial" type="radio"
+                                                id="customRadioComercial" name="customRadioComercial"
+                                                class="custom-control-input">
+                                            <label class="custom-control-label" for="customRadioComercial">Comercial</label>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-xs-12 col-lg-6">
-                                    <div class="custom-control custom-radio">
-                                        <input id="radioTecnico" name="tecnico"
-                                            [(ngModel)]="msvCaracterizacion.grupoTrabajo" value="Tecnico" type="radio"
-                                            id="customRadioTecnico" name="customRadioTecnico"
-                                            class="custom-control-input">
-                                        <label class="custom-control-label" for="customRadioTecnico">Técnico</label>
+                                    <div class="col-xs-12 col-lg-6">
+                                        <div class="custom-control custom-radio">
+                                            <input id="radioTecnico" name="tecnico"
+                                                [(ngModel)]="msvCaracterizacion.grupoTrabajo" value="Tecnico" type="radio"
+                                                id="customRadioTecnico" name="customRadioTecnico"
+                                                class="custom-control-input">
+                                            <label class="custom-control-label" for="customRadioTecnico">Técnico</label>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-xs-12 col-lg-6">
-                                    <div class="custom-control custom-radio">
-                                        <input id="radioOperativo" name="operativo"
-                                            [(ngModel)]="msvCaracterizacion.grupoTrabajo" value="Operativo" type="radio"
-                                            id="customRadioOperativo" name="customRadioOperativo"
-                                            class="custom-control-input">
-                                        <label class="custom-control-label" for="customRadioOperativo">Operativo</label>
+                                    <div class="col-xs-12 col-lg-6">
+                                        <div class="custom-control custom-radio">
+                                            <input id="radioOperativo" name="operativo"
+                                                [(ngModel)]="msvCaracterizacion.grupoTrabajo" value="Operativo" type="radio"
+                                                id="customRadioOperativo" name="customRadioOperativo"
+                                                class="custom-control-input">
+                                            <label class="custom-control-label" for="customRadioOperativo">Operativo</label>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-xs-12 col-lg-6">
-                                    <div class="custom-control custom-radio">
-                                        <input id="radioOtro" name="otro" [(ngModel)]="msvCaracterizacion.grupoTrabajo"
-                                            value="Otro" type="radio" id="customRadioOtro" name="customRadioOtro"
-                                            class="custom-control-input">
-                                        <label class="custom-control-label" for="customRadioOtro">Otro</label>
+                                    <div class="col-xs-12 col-lg-6">
+                                        <div class="custom-control custom-radio">
+                                            <input id="radioOtro" name="otro" [(ngModel)]="msvCaracterizacion.grupoTrabajo"
+                                                value="Otro" type="radio" id="customRadioOtro" name="customRadioOtro"
+                                                class="custom-control-input">
+                                            <label class="custom-control-label" for="customRadioOtro">Otro</label>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6" *ngIf="msvCaracterizacion.grupoTrabajo == 'Otro'">
-                                    <label>Explique</label>
-                                    <input class="form-control" type="text"
-                                        [(ngModel)]="msvCaracterizacion.otroGrupoTrabajo" name="otroGrupoTrabajo">
+                                    <div class="col-lg-6 col-md-6" *ngIf="msvCaracterizacion.grupoTrabajo == 'Otro'">
+                                        <label>Explique</label>
+                                        <input class="form-control" type="text"
+                                            [(ngModel)]="msvCaracterizacion.otroGrupoTrabajo" name="otroGrupoTrabajo">
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6">
-                            <label>Tipo Contrato:</label>
-                            <div class="form-group row">
-                                <div class="col-xs-12 col-lg-6">
-                                    <div class="custom-control custom-radio">
-                                        <input id="radioIndefinido" name="indefinido"
-                                            [(ngModel)]="msvCaracterizacion.tipoContrato" value="Indefinido"
-                                            type="radio" id="customRadioIndefinido" name="customRadioIndefinido"
-                                            class="custom-control-input">
-                                        <label class="custom-control-label"
-                                            for="customRadioIndefinido">Indefinido</label>
+                            <div class="col-lg-6 col-md-6">
+                                <label>Tipo Contrato:</label>
+                                <div class="form-group row">
+                                    <div class="col-xs-12 col-lg-6">
+                                        <div class="custom-control custom-radio">
+                                            <input id="radioIndefinido" name="indefinido"
+                                                [(ngModel)]="msvCaracterizacion.tipoContrato" value="Indefinido"
+                                                type="radio" id="customRadioIndefinido" name="customRadioIndefinido"
+                                                class="custom-control-input">
+                                            <label class="custom-control-label"
+                                                for="customRadioIndefinido">Indefinido</label>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-xs-12 col-lg-6">
-                                    <div class="custom-control custom-radio">
-                                        <input id="radioDefinido" name="definido"
-                                            [(ngModel)]="msvCaracterizacion.tipoContrato" value="Definido" type="radio"
-                                            id="customRadioDefinido" name="customRadioDefinido"
-                                            class="custom-control-input">
-                                        <label class="custom-control-label" for="customRadioDefinido">Definido</label>
+                                    <div class="col-xs-12 col-lg-6">
+                                        <div class="custom-control custom-radio">
+                                            <input id="radioDefinido" name="definido"
+                                                [(ngModel)]="msvCaracterizacion.tipoContrato" value="Definido" type="radio"
+                                                id="customRadioDefinido" name="customRadioDefinido"
+                                                class="custom-control-input">
+                                            <label class="custom-control-label" for="customRadioDefinido">Definido</label>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-xs-12 col-lg-6">
-                                    <div class="custom-control custom-radio">
-                                        <input id="radioContratista" name="contratista"
-                                            [(ngModel)]="msvCaracterizacion.tipoContrato" value="Contratista"
-                                            type="radio" id="customRadioContratista" name="customRadioContratista"
-                                            class="custom-control-input">
-                                        <label class="custom-control-label"
-                                            for="customRadioContratista">Contratista</label>
+                                    <div class="col-xs-12 col-lg-6">
+                                        <div class="custom-control custom-radio">
+                                            <input id="radioContratista" name="contratista"
+                                                [(ngModel)]="msvCaracterizacion.tipoContrato" value="Contratista"
+                                                type="radio" id="customRadioContratista" name="customRadioContratista"
+                                                class="custom-control-input">
+                                            <label class="custom-control-label"
+                                                for="customRadioContratista">Contratista</label>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="col-xs-12 col-lg-6">
-                                    <div class="custom-control custom-radio">
-                                        <input id="radioOtroTipoContrato" name="otroTipoContrato"
-                                            [(ngModel)]="msvCaracterizacion.tipoContrato" value="OtroTipoContrato"
-                                            type="radio" id="customRadioOtroTipoContrato"
-                                            name="customRadioOtroTipoContrato" class="custom-control-input">
-                                        <label class="custom-control-label"
-                                            for="customRadioOtroTipoContrato">Otro</label>
+                                    <div class="col-xs-12 col-lg-6">
+                                        <div class="custom-control custom-radio">
+                                            <input id="radioOtroTipoContrato" name="otroTipoContrato"
+                                                [(ngModel)]="msvCaracterizacion.tipoContrato" value="OtroTipoContrato"
+                                                type="radio" id="customRadioOtroTipoContrato"
+                                                name="customRadioOtroTipoContrato" class="custom-control-input">
+                                            <label class="custom-control-label"
+                                                for="customRadioOtroTipoContrato">Otro</label>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6"
-                                    *ngIf="msvCaracterizacion.tipoContrato == 'OtroTipoContrato'">
-                                    <label>Explique</label>
-                                    <input class="form-control" type="text"
-                                        [(ngModel)]="msvCaracterizacion.otroTipoContrato" name="otroTipoContrato">
-                                </div>
-                                <div class="col-lg-6 col-md-6">
-                                    <label>Cargo</label>
-                                    <input class="form-control" type="text" [(ngModel)]="msvCaracterizacion.cargo"
-                                        name="cargo">
-                                </div>
+                                    <div class="col-lg-6 col-md-6"
+                                        *ngIf="msvCaracterizacion.tipoContrato == 'OtroTipoContrato'">
+                                        <label>Explique</label>
+                                        <input class="form-control" type="text"
+                                            [(ngModel)]="msvCaracterizacion.otroTipoContrato" name="otroTipoContrato">
+                                    </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <label>Cargo</label>
+                                        <input class="form-control" type="text" [(ngModel)]="msvCaracterizacion.cargo"
+                                            name="cargo">
+                                    </div>
 
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6">
-                            <label>Experiencia en la conducción</label>
-                            <input class="form-control" type="text"
-                                [(ngModel)]="msvCaracterizacion.experienciaConduccion" name="experienciaConduccion">
-                        </div>
-                        <div class="col-lg-6 col-md-6">
-                            <label>Accidentes: ¿Ha tenido en los últimos cinco años accidentes de transito?</label>
-                            <div class="form-group row">
-                                <div class="col-xs-12 col-lg-6">
-                                    <div class="custom-control custom-radio">
-                                        <input id="radioAccidenteSi" name="accidenteSi"
-                                            [(ngModel)]="msvCaracterizacion.accidente" value="Si" type="radio"
-                                            id="customRadioAccidenteSi" name="customRadioAccidenteSi"
-                                            class="custom-control-input">
-                                        <label class="custom-control-label" for="customRadioAccidenteSi">Si</label>
-                                    </div>
-                                </div>
-                                <div class="col-xs-12 col-lg-6">
-                                    <div class="custom-control custom-radio">
-                                        <input id="radioAccidenteNo" name="accidenteNo"
-                                            [(ngModel)]="msvCaracterizacion.accidente" value="No" type="radio"
-                                            id="customRadioAccidenteNo" name="customRadioAccidenteNo"
-                                            class="custom-control-input">
-                                        <label class="custom-control-label" for="customRadioAccidenteNo">No</label>
-                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6" *ngIf="msvCaracterizacion.accidente == 'Si'">
-                            <label>Describa brevemente las circunstancias</label>
-                            <input class="form-control" type="text" [(ngModel)]="msvCaracterizacion.circunstancias"
-                                name="circunstancias">
-                        </div>
-                        <div class="col-lg-6 col-md-6">
-                            <label>Incidentes ¿Ha tenido en los ultimos cinco años algun incidente de tránsito
-                                produciéndose
-                                daños materiales , pero no personales?</label>
-                            <div class="form-group row">
-                                <div class="col-xs-12 col-lg-6">
-                                    <div class="custom-control custom-radio">
-                                        <input id="radioIncidenteSi" name="incidenteSi"
-                                            [(ngModel)]="msvCaracterizacion.incidente" value="Si" type="radio"
-                                            id="customRadioIncidenteSi" name="customRadioIncidenteSi"
-                                            class="custom-control-input">
-                                        <label class="custom-control-label" for="customRadioIncidenteSi">Si</label>
+                            <div class="col-lg-6 col-md-6">
+                                <label>Experiencia en la conducción</label>
+                                <input class="form-control" type="text"
+                                    [(ngModel)]="msvCaracterizacion.experienciaConduccion" name="experienciaConduccion">
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <label>Accidentes: ¿Ha tenido en los últimos cinco años accidentes de transito?</label>
+                                <div class="form-group row">
+                                    <div class="col-xs-12 col-lg-6">
+                                        <div class="custom-control custom-radio">
+                                            <input id="radioAccidenteSi" name="accidenteSi"
+                                                [(ngModel)]="msvCaracterizacion.accidente" value="Si" type="radio"
+                                                id="customRadioAccidenteSi" name="customRadioAccidenteSi"
+                                                class="custom-control-input">
+                                            <label class="custom-control-label" for="customRadioAccidenteSi">Si</label>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-xs-12 col-lg-6">
-                                    <div class="custom-control custom-radio">
-                                        <input id="radioIncidenteNo" name="incidenteNo"
-                                            [(ngModel)]="msvCaracterizacion.incidente" value="No" type="radio"
-                                            id="customRadioIncidenteNo" name="customRadioIncidenteNo"
-                                            class="custom-control-input">
-                                        <label class="custom-control-label" for="customRadioIncidenteNo">No</label>
+                                    <div class="col-xs-12 col-lg-6">
+                                        <div class="custom-control custom-radio">
+                                            <input id="radioAccidenteNo" name="accidenteNo"
+                                                [(ngModel)]="msvCaracterizacion.accidente" value="No" type="radio"
+                                                id="customRadioAccidenteNo" name="customRadioAccidenteNo"
+                                                class="custom-control-input">
+                                            <label class="custom-control-label" for="customRadioAccidenteNo">No</label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6">
-                            <label>¿Con qué frecuencia realiza desplazamientos en misión?</label>
-                            <div class="form-group row">
-                                <div class="col-xs-12 col-lg-6">
-                                    <div class="custom-control custom-radio">
-                                        <input id="radioFrecuenciaDesplazamientoDiario"
-                                            name="frecuenciaDesplazamientoDiario"
-                                            [(ngModel)]="msvCaracterizacion.frecuenciaDesplazamiento" value="Diario"
-                                            type="radio" id="customRadioFrecuenciaDesplazamientoDiario"
-                                            name="customRadioFrecuenciaDesplazamientoDiario"
-                                            class="custom-control-input">
-                                        <label class="custom-control-label"
-                                            for="customRadioFrecuenciaDesplazamientoDiario">A Diario</label>
+                            <div class="col-lg-6 col-md-6" *ngIf="msvCaracterizacion.accidente == 'Si'">
+                                <label>Describa brevemente las circunstancias</label>
+                                <input class="form-control" type="text" [(ngModel)]="msvCaracterizacion.circunstancias"
+                                    name="circunstancias">
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <label>Incidentes ¿Ha tenido en los ultimos cinco años algun incidente de tránsito
+                                    produciéndose
+                                    daños materiales , pero no personales?</label>
+                                <div class="form-group row">
+                                    <div class="col-xs-12 col-lg-6">
+                                        <div class="custom-control custom-radio">
+                                            <input id="radioIncidenteSi" name="incidenteSi"
+                                                [(ngModel)]="msvCaracterizacion.incidente" value="Si" type="radio"
+                                                id="customRadioIncidenteSi" name="customRadioIncidenteSi"
+                                                class="custom-control-input">
+                                            <label class="custom-control-label" for="customRadioIncidenteSi">Si</label>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-xs-12 col-lg-6">
-                                    <div class="custom-control custom-radio">
-                                        <input id="radioFrecuenciaDesplazamientoUna" name="frecuenciaDesplazamientoUna"
-                                            [(ngModel)]="msvCaracterizacion.frecuenciaDesplazamiento"
-                                            value="UnaODosVecesAlMes" type="radio"
-                                            id="customRadioFrecuenciaDesplazamientoUna"
-                                            name="customRadioFrecuenciaDesplazamientoUna" class="custom-control-input">
-                                        <label class="custom-control-label"
-                                            for="customRadioFrecuenciaDesplazamientoUna">Una o dos veces al mes</label>
-                                    </div>
-                                </div>
-                                <div class="col-xs-12 col-lg-6">
-                                    <div class="custom-control custom-radio">
-                                        <input id="radioFrecuenciaDesplazamientoAlguna"
-                                            name="frecuenciaDesplazamientoAlguna"
-                                            [(ngModel)]="msvCaracterizacion.frecuenciaDesplazamiento"
-                                            value="AgunaVezSemana" type="radio"
-                                            id="customRadioFrecuenciaDesplazamientoAlguna"
-                                            name="customRadioFrecuenciaDesplazamientoAlguna"
-                                            class="custom-control-input">
-                                        <label class="custom-control-label"
-                                            for="customRadioFrecuenciaDesplazamientoAlguna">Alguna vez a la semana
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-xs-12 col-lg-6">
-                                    <div class="custom-control custom-radio">
-                                        <input id="radioFrecuenciaDesplazamientoVaria"
-                                            name="frecuenciaDesplazamientoVaria"
-                                            [(ngModel)]="msvCaracterizacion.frecuenciaDesplazamiento"
-                                            value="VariasVecesAño" type="radio"
-                                            id="customRadioFrecuenciaDesplazamientoVaria"
-                                            name="customRadioFrecuenciaDesplazamientoVaria"
-                                            class="custom-control-input">
-                                        <label class="custom-control-label"
-                                            for="customRadioFrecuenciaDesplazamientoVaria">Varias veces al año</label>
+                                    <div class="col-xs-12 col-lg-6">
+                                        <div class="custom-control custom-radio">
+                                            <input id="radioIncidenteNo" name="incidenteNo"
+                                                [(ngModel)]="msvCaracterizacion.incidente" value="No" type="radio"
+                                                id="customRadioIncidenteNo" name="customRadioIncidenteNo"
+                                                class="custom-control-input">
+                                            <label class="custom-control-label" for="customRadioIncidenteNo">No</label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6">
-                            <label>¿Conduce su propio vehiculo para estos desplazamientos?</label>
-                            <div class="form-group row">
-                                <div class="col-xs-12 col-lg-6">
-                                    <div class="custom-control custom-radio">
-                                        <input id="radioPropioVehiculoSi" name="propioVehiculoSi"
-                                            [(ngModel)]="msvCaracterizacion.propioVehiculo" value="Si" type="radio"
-                                            id="customRadioPropioVehiculoSi" name="customRadioPropioVehiculoSi"
-                                            class="custom-control-input">
-                                        <label class="custom-control-label" for="customRadioPropioVehiculoSi">Si</label>
+                            <div class="col-lg-6 col-md-6">
+                                <label>¿Con qué frecuencia realiza desplazamientos en misión?</label>
+                                <div class="form-group row">
+                                    <div class="col-xs-12 col-lg-6">
+                                        <div class="custom-control custom-radio">
+                                            <input id="radioFrecuenciaDesplazamientoDiario"
+                                                name="frecuenciaDesplazamientoDiario"
+                                                [(ngModel)]="msvCaracterizacion.frecuenciaDesplazamiento" value="Diario"
+                                                type="radio" id="customRadioFrecuenciaDesplazamientoDiario"
+                                                name="customRadioFrecuenciaDesplazamientoDiario"
+                                                class="custom-control-input">
+                                            <label class="custom-control-label"
+                                                for="customRadioFrecuenciaDesplazamientoDiario">A Diario</label>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-xs-12 col-lg-6">
-                                    <div class="custom-control custom-radio">
-                                        <input id="radioPropioVehiculoNo" name="propioVehiculoNo"
-                                            [(ngModel)]="msvCaracterizacion.propioVehiculo" value="No" type="radio"
-                                            id="customRadioPropioVehiculoNo" name="customRadioPropioVehiculoNo"
-                                            class="custom-control-input">
-                                        <label class="custom-control-label" for="customRadioPropioVehiculoNo">No</label>
+                                    <div class="col-xs-12 col-lg-6">
+                                        <div class="custom-control custom-radio">
+                                            <input id="radioFrecuenciaDesplazamientoUna" name="frecuenciaDesplazamientoUna"
+                                                [(ngModel)]="msvCaracterizacion.frecuenciaDesplazamiento"
+                                                value="UnaODosVecesAlMes" type="radio"
+                                                id="customRadioFrecuenciaDesplazamientoUna"
+                                                name="customRadioFrecuenciaDesplazamientoUna" class="custom-control-input">
+                                            <label class="custom-control-label"
+                                                for="customRadioFrecuenciaDesplazamientoUna">Una o dos veces al mes</label>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6">
-                            <label>Mis desplazamientos en misión son, en general, planificados por</label>
-                            <div class="form-group row">
-                                <div class="col-xs-12 col-lg-6">
-                                    <div class="custom-control custom-radio">
-                                        <input id="radioMismo" name="mismo"
-                                            [(ngModel)]="msvCaracterizacion.desplazamientoPlanificado" value="MiMismo"
-                                            type="radio" id="customRadioMismo" name="customRadioMismo"
-                                            class="custom-control-input">
-                                        <label class="custom-control-label" for="customRadioMismo">Mi mismo</label>
+                                    <div class="col-xs-12 col-lg-6">
+                                        <div class="custom-control custom-radio">
+                                            <input id="radioFrecuenciaDesplazamientoAlguna"
+                                                name="frecuenciaDesplazamientoAlguna"
+                                                [(ngModel)]="msvCaracterizacion.frecuenciaDesplazamiento"
+                                                value="AgunaVezSemana" type="radio"
+                                                id="customRadioFrecuenciaDesplazamientoAlguna"
+                                                name="customRadioFrecuenciaDesplazamientoAlguna"
+                                                class="custom-control-input">
+                                            <label class="custom-control-label"
+                                                for="customRadioFrecuenciaDesplazamientoAlguna">Alguna vez a la semana
+                                            </label>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-xs-12 col-lg-6">
-                                    <div class="custom-control custom-radio">
-                                        <input id="radioEmpresa" name="empresa"
-                                            [(ngModel)]="msvCaracterizacion.desplazamientoPlanificado" value="LaEmpresa"
-                                            type="radio" id="customRadioEmpresa" name="customRadioEmpresa"
-                                            class="custom-control-input">
-                                        <label class="custom-control-label" for="customRadioEmpresa">La empresa</label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6">
-                            <label>¿Con cuánto tiempo de antelación se suelen prever mis misiones?</label>
-                            <input class="form-control" type="text" [(ngModel)]="msvCaracterizacion.antelacion"
-                                name="antelacion">
-                        </div>
-                        <div class="col-lg-6 col-md-6">
-                            <label>Trayectos <i>in-intinere</i>, medios de desplazamiento que utilizó para los proyectos
-                                casa-trabajo</label>
-                            <div class="form-group row">
-                                <div class="col-xs-12 col-lg-6">
-                                    <div class="custom-control custom-radio">
-                                        <input id="radioPie" name="pie"
-                                            [(ngModel)]="msvCaracterizacion.medioDesplazamiento" value="APie"
-                                            type="radio" id="customRadioPie" name="customRadioPie"
-                                            class="custom-control-input">
-                                        <label class="custom-control-label" for="customRadioPie">A Pie</label>
-                                    </div>
-                                </div>
-                                <div class="col-xs-12 col-lg-6">
-                                    <div class="custom-control custom-radio">
-                                        <input id="radioAutomotor" name="automotor"
-                                            [(ngModel)]="msvCaracterizacion.medioDesplazamiento" value="Automotor"
-                                            type="radio" id="customRadioAutomotor" name="customRadioAutomotor"
-                                            class="custom-control-input">
-                                        <label class="custom-control-label" for="customRadioAutomotor">Automotor</label>
-                                    </div>
-                                </div>
-                                <div class="col-xs-12 col-lg-6">
-                                    <div class="custom-control custom-radio">
-                                        <input id="radioBicicleta" name="bicicleta"
-                                            [(ngModel)]="msvCaracterizacion.medioDesplazamiento" value="Bicicleta"
-                                            type="radio" id="customRadioBicicleta" name="customRadioBicicleta"
-                                            class="custom-control-input">
-                                        <label class="custom-control-label" for="customRadioBicicleta">En
-                                            bicicleta</label>
-                                    </div>
-                                </div>
-                                <div class="col-xs-12 col-lg-6">
-                                    <div class="custom-control custom-radio">
-                                        <input id="radioTransportePublico" name="transportePublico"
-                                            [(ngModel)]="msvCaracterizacion.medioDesplazamiento"
-                                            value="TransportePublico" type="radio" id="customRadioTransportePublico"
-                                            name="customRadioTransportePublico" class="custom-control-input">
-                                        <label class="custom-control-label"
-                                            for="customRadioTransportePublico">Transporte
-                                            Público</label>
-                                    </div>
-                                </div>
-                                <div class="col-xs-12 col-lg-6">
-                                    <div class="custom-control custom-radio">
-                                        <input id="radioTransporteColectivo" name="transporteColectivo"
-                                            [(ngModel)]="msvCaracterizacion.medioDesplazamiento"
-                                            value="TransporteColectivoEmpresa" type="radio"
-                                            id="customRadioTransporteColectivo" name="customRadioTransporteColectivo"
-                                            class="custom-control-input">
-                                        <label class="custom-control-label"
-                                            for="customRadioTransporteColectivo">Transporte
-                                            Colectivo de empresa</label>
-                                    </div>
-                                </div>
-                                <div class="col-xs-12 col-lg-6">
-                                    <div class="custom-control custom-radio">
-                                        <input id="radioMoto" name="moto"
-                                            [(ngModel)]="msvCaracterizacion.medioDesplazamiento" value="MotoCiclomotor"
-                                            type="radio" id="customRadioMoto" name="customRadioMoto"
-                                            class="custom-control-input">
-                                        <label class="custom-control-label" for="customRadioMoto">Moto o
-                                            ciclomotor</label>
+                                    <div class="col-xs-12 col-lg-6">
+                                        <div class="custom-control custom-radio">
+                                            <input id="radioFrecuenciaDesplazamientoVaria"
+                                                name="frecuenciaDesplazamientoVaria"
+                                                [(ngModel)]="msvCaracterizacion.frecuenciaDesplazamiento"
+                                                value="VariasVecesAño" type="radio"
+                                                id="customRadioFrecuenciaDesplazamientoVaria"
+                                                name="customRadioFrecuenciaDesplazamientoVaria"
+                                                class="custom-control-input">
+                                            <label class="custom-control-label"
+                                                for="customRadioFrecuenciaDesplazamientoVaria">Varias veces al año</label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-lg-6 col-md-6">
+                                <label>¿Conduce su propio vehiculo para estos desplazamientos?</label>
+                                <div class="form-group row">
+                                    <div class="col-xs-12 col-lg-6">
+                                        <div class="custom-control custom-radio">
+                                            <input id="radioPropioVehiculoSi" name="propioVehiculoSi"
+                                                [(ngModel)]="msvCaracterizacion.propioVehiculo" value="Si" type="radio"
+                                                id="customRadioPropioVehiculoSi" name="customRadioPropioVehiculoSi"
+                                                class="custom-control-input">
+                                            <label class="custom-control-label" for="customRadioPropioVehiculoSi">Si</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-lg-6">
+                                        <div class="custom-control custom-radio">
+                                            <input id="radioPropioVehiculoNo" name="propioVehiculoNo"
+                                                [(ngModel)]="msvCaracterizacion.propioVehiculo" value="No" type="radio"
+                                                id="customRadioPropioVehiculoNo" name="customRadioPropioVehiculoNo"
+                                                class="custom-control-input">
+                                            <label class="custom-control-label" for="customRadioPropioVehiculoNo">No</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <label>Mis desplazamientos en misión son, en general, planificados por</label>
+                                <div class="form-group row">
+                                    <div class="col-xs-12 col-lg-6">
+                                        <div class="custom-control custom-radio">
+                                            <input id="radioMismo" name="mismo"
+                                                [(ngModel)]="msvCaracterizacion.desplazamientoPlanificado" value="MiMismo"
+                                                type="radio" id="customRadioMismo" name="customRadioMismo"
+                                                class="custom-control-input">
+                                            <label class="custom-control-label" for="customRadioMismo">Mi mismo</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-lg-6">
+                                        <div class="custom-control custom-radio">
+                                            <input id="radioEmpresa" name="empresa"
+                                                [(ngModel)]="msvCaracterizacion.desplazamientoPlanificado" value="LaEmpresa"
+                                                type="radio" id="customRadioEmpresa" name="customRadioEmpresa"
+                                                class="custom-control-input">
+                                            <label class="custom-control-label" for="customRadioEmpresa">La empresa</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <label>¿Con cuánto tiempo de antelación se suelen prever mis misiones?</label>
+                                <input class="form-control" type="text" [(ngModel)]="msvCaracterizacion.antelacion"
+                                    name="antelacion">
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <label>Trayectos <i>in-intinere</i>, medios de desplazamiento que utilizó para los proyectos
+                                    casa-trabajo</label>
+                                <div class="form-group row">
+                                    <div class="col-xs-12 col-lg-6">
+                                        <div class="custom-control custom-radio">
+                                            <input id="radioPie" name="pie"
+                                                [(ngModel)]="msvCaracterizacion.medioDesplazamiento" value="APie"
+                                                type="radio" id="customRadioPie" name="customRadioPie"
+                                                class="custom-control-input">
+                                            <label class="custom-control-label" for="customRadioPie">A Pie</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-lg-6">
+                                        <div class="custom-control custom-radio">
+                                            <input id="radioAutomotor" name="automotor"
+                                                [(ngModel)]="msvCaracterizacion.medioDesplazamiento" value="Automotor"
+                                                type="radio" id="customRadioAutomotor" name="customRadioAutomotor"
+                                                class="custom-control-input">
+                                            <label class="custom-control-label" for="customRadioAutomotor">Automotor</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-lg-6">
+                                        <div class="custom-control custom-radio">
+                                            <input id="radioBicicleta" name="bicicleta"
+                                                [(ngModel)]="msvCaracterizacion.medioDesplazamiento" value="Bicicleta"
+                                                type="radio" id="customRadioBicicleta" name="customRadioBicicleta"
+                                                class="custom-control-input">
+                                            <label class="custom-control-label" for="customRadioBicicleta">En
+                                                bicicleta</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-lg-6">
+                                        <div class="custom-control custom-radio">
+                                            <input id="radioTransportePublico" name="transportePublico"
+                                                [(ngModel)]="msvCaracterizacion.medioDesplazamiento"
+                                                value="TransportePublico" type="radio" id="customRadioTransportePublico"
+                                                name="customRadioTransportePublico" class="custom-control-input">
+                                            <label class="custom-control-label"
+                                                for="customRadioTransportePublico">Transporte
+                                                Público</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-lg-6">
+                                        <div class="custom-control custom-radio">
+                                            <input id="radioTransporteColectivo" name="transporteColectivo"
+                                                [(ngModel)]="msvCaracterizacion.medioDesplazamiento"
+                                                value="TransporteColectivoEmpresa" type="radio"
+                                                id="customRadioTransporteColectivo" name="customRadioTransporteColectivo"
+                                                class="custom-control-input">
+                                            <label class="custom-control-label"
+                                                for="customRadioTransporteColectivo">Transporte
+                                                Colectivo de empresa</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-lg-6">
+                                        <div class="custom-control custom-radio">
+                                            <input id="radioMoto" name="moto"
+                                                [(ngModel)]="msvCaracterizacion.medioDesplazamiento" value="MotoCiclomotor"
+                                                type="radio" id="customRadioMoto" name="customRadioMoto"
+                                                class="custom-control-input">
+                                            <label class="custom-control-label" for="customRadioMoto">Moto o
+                                                ciclomotor</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <label>Número de Km entre mi lugar de trabajo y mi dimicilio (trayectos ida y vuelta en
+                                    kms)</label>
+                                <input class="form-control" type="number" [(ngModel)]="msvCaracterizacion.trayecto"
+                                    name="trayecto">
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <label>Tiempo medio diario que utiliza para desplazarse entre mi lugar de trabajo y mi
+                                    domicilio
+                                    (trayectos ida y vuelta en Hrs)</label>
+                                <input class="form-control" type="number" [(ngModel)]="msvCaracterizacion.tiempoTrayecto"
+                                    name="tiempoTrayecto">
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <label>Número de Km mensuales recorridos en la labor profesional (Kms)</label>
+                                <input class="form-control" type="number" [(ngModel)]="msvCaracterizacion.kmMensualTrayecto"
+                                    name="kmMensualTrayecto">
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Principales factores de riesgo con los que se encuentra (tanto los trayectos
+                                    ida-vuelta del
+                                    domicilio al trabajo como en los desplazamientos en misión)</label>
+                                <ng-select [multiple]="true" [options]="arrayFactoresRiesgo"
+                                    [(ngModel)]="msvCaracterizacion.arrayFactoresRiesgo" required
+                                    name="principalFactorRiesgo">
+                                </ng-select>
+                            </div>
+                            <div class="col-lg-6 col-md-6" *ngIf="msvCaracterizacion.arrayFactoresRiesgo == 'OTRO'">
+                                <label>Otro factor riesgo</label>
+                                <input class="form-control" type="text" [(ngModel)]="msvCaracterizacion.otroFactorRiesgo"
+                                    name="otroFactorRiesgo">
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Causas que motivan el riesgo (indique todos los que considere adecuados, en su
+                                    caso)</label>
+                                <ng-select [multiple]="true" [options]="arrayCausasRiesgo"
+                                    [(ngModel)]="msvCaracterizacion.arrayCausasRiesgo" required name="causaRiesgo">
+                                </ng-select>
+                            </div>
+                            <div class="col-lg-6 col-md-6" *ngIf="msvCaracterizacion.arrayCausasRiesgo == 'OTRA'">
+                                <label>Cuales</label>
+                                <input class="form-control" type="text" [(ngModel)]="msvCaracterizacion.otroCausaRiesgo"
+                                    name="otroCausaRiesgo">
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <label>Concrete el riesgo que percibe</label>
+                                <input class="form-control" type="text" [(ngModel)]="msvCaracterizacion.riesgoPercibido"
+                                    name="riesgoPercibido">
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <label>Sus propuestas para reducir el riesgo de accidente</label>
+                                <input class="form-control" type="text" [(ngModel)]="msvCaracterizacion.propuestaReduccion"
+                                    name="propuestaReduccion">
+                            </div>
                         </div>
-                        <div class="col-lg-6 col-md-6">
-                            <label>Número de Km entre mi lugar de trabajo y mi dimicilio (trayectos ida y vuelta en
-                                kms)</label>
-                            <input class="form-control" type="number" [(ngModel)]="msvCaracterizacion.trayecto"
-                                name="trayecto">
-                        </div>
-                        <div class="col-lg-6 col-md-6">
-                            <label>Tiempo medio diario que utiliza para desplazarse entre mi lugar de trabajo y mi
-                                domicilio
-                                (trayectos ida y vuelta en Hrs)</label>
-                            <input class="form-control" type="number" [(ngModel)]="msvCaracterizacion.tiempoTrayecto"
-                                name="tiempoTrayecto">
-                        </div>
-                        <div class="col-lg-6 col-md-6">
-                            <label>Número de Km mensuales recorridos en la labor profesional (Kms)</label>
-                            <input class="form-control" type="number" [(ngModel)]="msvCaracterizacion.kmMensualTrayecto"
-                                name="kmMensualTrayecto">
-                        </div>
-                        <div class="col-xs-12 col-lg-6">
-                            <label>Principales factores de riesgo con los que se encuentra (tanto los trayectos
-                                ida-vuelta del
-                                domicilio al trabajo como en los desplazamientos en misión)</label>
-                            <ng-select [multiple]="true" [options]="arrayFactoresRiesgo"
-                                [(ngModel)]="msvCaracterizacion.arrayFactoresRiesgo" required
-                                name="principalFactorRiesgo">
-                            </ng-select>
-                        </div>
-                        <div class="col-lg-6 col-md-6" *ngIf="msvCaracterizacion.arrayFactoresRiesgo == 'OTRO'">
-                            <label>Otro factor riesgo</label>
-                            <input class="form-control" type="text" [(ngModel)]="msvCaracterizacion.otroFactorRiesgo"
-                                name="otroFactorRiesgo">
-                        </div>
-                        <div class="col-xs-12 col-lg-6">
-                            <label>Causas que motivan el riesgo (indique todos los que considere adecuados, en su
-                                caso)</label>
-                            <ng-select [multiple]="true" [options]="arrayCausasRiesgo"
-                                [(ngModel)]="msvCaracterizacion.arrayCausasRiesgo" required name="causaRiesgo">
-                            </ng-select>
-                        </div>
-                        <div class="col-lg-6 col-md-6" *ngIf="msvCaracterizacion.arrayCausasRiesgo == 'OTRA'">
-                            <label>Cuales</label>
-                            <input class="form-control" type="text" [(ngModel)]="msvCaracterizacion.otroCausaRiesgo"
-                                name="otroCausaRiesgo">
-                        </div>
-                        <div class="col-lg-6 col-md-6">
-                            <label>Concrete el riesgo que percibe</label>
-                            <input class="form-control" type="text" [(ngModel)]="msvCaracterizacion.riesgoPercibido"
-                                name="riesgoPercibido">
-                        </div>
-                        <div class="col-lg-6 col-md-6">
-                            <label>Sus propuestas para reducir el riesgo de accidente</label>
-                            <input class="form-control" type="text" [(ngModel)]="msvCaracterizacion.propuestaReduccion"
-                                name="propuestaReduccion">
-                        </div>
+                    </form>
+                </div>
+                <div class="card-footer">
+                    <div class="btn-group">
+                        <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
+                            <i class="fa fa-save"></i>
+                            Enviar
+                        </button>
+                        <button (click)="onCancelar()" class="btn btn-default">
+                            <i class="fa fa-times"></i>
+                            Cancel
+                        </button>
                     </div>
-                </form>
-            </div>
-        </div>
-        <div class="card-footer">
-            <div class="btn-group">
-                <button (click)="onCancelar()" class="btn btn-default">
-                    <i class="fa fa-times"></i>
-                    Cancel
-                </button>
-                <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
-                    <i class="fa fa-save"></i>
-                    Enviar
-                </button>
+                </div>
             </div>
         </div>
     </div>

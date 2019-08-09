@@ -146,6 +146,7 @@ import { SvIpatImpresoMunicipioModule } from "./svIpatImpresoMunicipio/svIpatImp
 import { SvIpatTalonarioModule } from "./svIpatTalonario/svIpatTalonario.module";
 import { SvSenialInventarioModule } from "./svSenialInventario/svSenialInventario.module";
 import { SeguridadVialRoutingModule } from './seguridad-vial-routing.module';
+import { AgmCoreModule } from '@agm/core';
 
 
 @NgModule({
@@ -154,8 +155,9 @@ import { SeguridadVialRoutingModule } from './seguridad-vial-routing.module';
     RouterModule,
     TooltipModule,
     FormsModule,
+    Ng2BootstrapModule.forRoot(),
+    SelectModule,
     SeguridadVialRoutingModule,
-
     MsvCaracterizacionModule,
     MsvCategoriaModule,
     MsvCriterioModule,
@@ -222,7 +224,10 @@ import { SeguridadVialRoutingModule } from './seguridad-vial-routing.module';
     SvIpatImpresoBodegaModule,
     SvIpatImpresoMunicipioModule,
     SvIpatTalonarioModule,
-    SvSenialInventarioModule
+    SvSenialInventarioModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCZLRPtun19mn3xqSZi08dPp-1R4P2A2B4'
+    })
   ],
   declarations: [
     MsvCaracterizacionComponent,
