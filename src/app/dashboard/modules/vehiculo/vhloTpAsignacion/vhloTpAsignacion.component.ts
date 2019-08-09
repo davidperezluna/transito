@@ -24,6 +24,7 @@ export class VhloTpAsignacionComponent implements OnInit {
 
     public nit: any = null;
     public numeroActo: any = null;
+    
     public empresaHabilitadaRango = null;
 
     public asignacion: VhloTpAsignacion;
