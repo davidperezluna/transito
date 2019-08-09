@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { GdDocumento } from './gdDocumento.modelo';
 import { GdDocumentoService } from '../../../../services/gdDocumento.service';
 import { PnalFuncionarioService } from '../../../../services/pnalFuncionario.service';
 import { LoginService } from '../../../../services/login.service';
-import { GdDocumento } from './gdDocumento.modelo';
 import swal from 'sweetalert2';
 declare var $: any;
 

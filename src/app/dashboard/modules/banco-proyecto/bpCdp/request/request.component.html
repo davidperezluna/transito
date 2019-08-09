@@ -57,7 +57,7 @@
                         <tr class="odd" *ngFor="let solicitud of solicitudes; let i = index">
                             <td>{{ i + 1 }}</td>
                             <td>{{ solicitud.solicitudNumero }}</td>
-                            <td>{{ solicitud.actividad.proyecto.numero }}</td>
+                            <td>{{ solicitud.actividad.cuenta.proyecto.numero }}</td>
                             <td>{{ solicitud.valor | currency: 'COP' }}</td>
                             <td>{{ solicitud.solicitudFecha }}</td>
                             <td>

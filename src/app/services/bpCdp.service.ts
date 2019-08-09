@@ -68,4 +68,13 @@ export class BpCdpService {
 	select() {
 		return this._http.get(this.url + "/select").map(res => res.json());
 	}
+
+	searchSolicitudByNumero(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = "data=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/search/solicitud/numero", params, { headers: headers }).map(
+			res => res.json()
+		);
+	}
 }

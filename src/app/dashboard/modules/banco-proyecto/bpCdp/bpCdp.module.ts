@@ -6,6 +6,7 @@ import { SelectModule } from 'angular2-select';
 import { BpCdpService } from '../../../../services/bpCdp.service';
 import { BpProyectoService } from '../../../../services/bpProyecto.service';
 import { BpActividadService } from '../../../../services/bpActividad.service';
+import { PnalFuncionarioService } from '../../../../services/pnalFuncionario.service';
 
 import { NewComponent } from './new/new.component';
 import { EditComponent } from './edit/edit.component';
@@ -14,7 +15,7 @@ import { EditComponent } from './edit/edit.component';
     imports: [CommonModule, Ng2BootstrapModule.forRoot(),SelectModule],
     declarations: [NewComponent, EditComponent],
     exports: [NewComponent, EditComponent],
-    providers: [BpCdpService, BpProyectoService, BpActividadService]
+    providers: [BpCdpService, BpProyectoService, BpActividadService, PnalFuncionarioService]
 })
 
 export class BpCdpModule { }

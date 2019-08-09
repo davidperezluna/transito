@@ -43,7 +43,7 @@ constructor(
   ){}
 
     ngOnInit() {
-        this.cdp = new BpCdp(null, null);
+        this.cdp = new BpCdp(null, null, null, null, null, null);
 
         this.numeroProyecto = null;
         this.proyecto = null;

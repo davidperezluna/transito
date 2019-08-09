@@ -105,7 +105,7 @@
         </div>
     </div>
 
-    <app-new *ngIf='formNew' [trazabilidad]="trazabilidad" (ready)="ready($event)"></app-new>
+    <app-new-gdtrazabilidad *ngIf='formNew' [trazabilidad]="trazabilidad" (ready)="ready($event)"></app-new-gdtrazabilidad>
 
-    <app-show *ngIf='formShow' [trazabilidad]="trazabilidad" (ready)="ready($event)" (onNew)="onNew($event)"></app-show>
+    <app-show-gdtrazabilidad *ngIf='formShow' [trazabilidad]="trazabilidad" (ready)="ready($event)" (onNew)="onNew($event)"></app-show-gdtrazabilidad>
 </div>

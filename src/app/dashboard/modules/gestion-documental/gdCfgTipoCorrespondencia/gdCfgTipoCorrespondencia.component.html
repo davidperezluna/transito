@@ -47,6 +47,8 @@
         </div>
       </div>
     </div>
-    <app-edit *ngIf='formEdit' [gdCfgTipoCorrespondencia]="gdCfgTipoCorrespondencia" (ready)="ready($event)"></app-edit>
-    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+
+    <app-edit-gdcfgtipocorrespondencia *ngIf='formEdit' [gdCfgTipoCorrespondencia]="gdCfgTipoCorrespondencia" (ready)="ready($event)"></app-edit-gdcfgtipocorrespondencia>
+    
+    <app-new-gdcfgtipocorrespondencia *ngIf='formNew' (ready)="ready($event)"></app-new-gdcfgtipocorrespondencia>
 </div>

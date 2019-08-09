@@ -46,6 +46,8 @@
         </div>
       </div>
     </div>
-    <app-edit *ngIf='formEdit' [gdCfgMedioCorrespondencia]="gdCfgMedioCorrespondencia" (ready)="ready($event)"></app-edit>
-    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+
+    <app-edit-gdcfgmediocorrespondencia *ngIf='formEdit' [gdCfgMedioCorrespondencia]="gdCfgMedioCorrespondencia" (ready)="ready($event)"></app-edit-gdcfgmediocorrespondencia>
+    
+    <app-new-gdcfgmediocorrespondencia *ngIf='formNew' (ready)="ready($event)"></app-new-gdcfgmediocorrespondencia>
 </div>

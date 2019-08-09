@@ -5,7 +5,7 @@ import { environment } from 'environments/environment';
 import swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-new',
+  selector: 'app-new-gdtrazabilidad',
   templateUrl: './new.component.html'
 })
 export class NewComponent implements OnInit {
