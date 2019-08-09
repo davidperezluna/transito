@@ -18,6 +18,8 @@ export class NewComponent implements OnInit {
   public solicitud: any = null;
   public funcionario: any = null;
 
+  public formSearch: any = true;
+
   constructor(
     private _FuncionarioService: PnalFuncionarioService,
     private _CdpService: BpCdpService,
