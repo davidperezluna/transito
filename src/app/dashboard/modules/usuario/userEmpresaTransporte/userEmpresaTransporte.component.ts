@@ -16,6 +16,7 @@ export class UserEmpresaTransporteComponent implements OnInit {
     public habilitacion: UserEmpresaTransporte;
 
     public nit;
+    public numeroActo;
     public empresa = null;
     public habilitaciones;
     

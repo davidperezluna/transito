@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { VhloTpAsignacionService } from '../../../../services/vhloTpAsignacion.service';
-import { LoginService } from '../../../../services/login.service';
 import { VhloTpAsignacion } from './vhloTpAsignacion.modelo';
+
+import { VhloTpAsignacionService } from '../../../../services/vhloTpAsignacion.service';
+import { UserEmpresaTransporteService } from '../../../../services/userEmpresaTransporte.service';
+
+import { LoginService } from '../../../../services/login.service';
+
 import { DatePipe, CurrencyPipe } from '@angular/common';
 import swal from 'sweetalert2';
 declare var $: any;
@@ -18,7 +22,9 @@ export class VhloTpAsignacionComponent implements OnInit {
     public fecha;
     public date;
 
-    public nit;
+    public nit: any = null;
+    public numeroActo: any = null;
+    
     public empresaHabilitadaRango = null;
 
     public asignacion: VhloTpAsignacion;
@@ -32,6 +38,7 @@ export class VhloTpAsignacionComponent implements OnInit {
 
     constructor(
         private _VhloTpAsignacionService: VhloTpAsignacionService,
+        private _UserEmpresaTransporteService: UserEmpresaTransporteService,
         private _LoginService: LoginService,
     ) { }
 
@@ -156,7 +163,7 @@ export class VhloTpAsignacionComponent implements OnInit {
 
     onSearchEmpresa() {
         let token = this._LoginService.getToken();
-        this._VhloTpAsignacionService.searchEmpresaTransporte(this.nit, token).subscribe(
+        this._UserEmpresaTransporteService.searchByNitAndNumeroActo({ 'nit': this.nit, 'numeroActo': this.numeroActo }, token).subscribe(
             response => {
                 if (response.code == 200) {
                     this.empresaHabilitadaRango = response.data;

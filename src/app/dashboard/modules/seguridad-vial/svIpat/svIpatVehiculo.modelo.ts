@@ -18,6 +18,7 @@ export class SvIpatVehiculo {
         public nitEmpresa: number,
         public matriculadoEn: number,
         public inmovilizado: string,
+        public idParqueadero: number,
         public inmovilizadoEn: number,
         public aDisposicionDe: number,
         public portaTarjetaRegistro: number,
