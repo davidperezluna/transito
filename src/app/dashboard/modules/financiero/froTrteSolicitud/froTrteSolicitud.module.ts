@@ -13,6 +13,12 @@ import { VhloRestriccionService } from '../../../../services/vhloRestriccion.ser
 import { FroFacRetefuenteService } from '../../../../services/froFacRetefuente.service';
 import { FroTrteSolicitudService } from '../../../../services/froTrteSolicitud.service';
 import { FroTrteSolicitudReporteService } from '../../../../services/froTrteSolicitudReporte.service';
+import { VhloPropietarioService } from '../../../../services/vhloPropietario.service';
+import { FroFacTramiteService } from '../../../../services/froFacTramite.service';
+import { FroFacturaService } from '../../../../services/froFactura.service';
+import { UserCiudadanoService } from '../../../../services/userCiudadano.service';
+import { PnalFuncionarioService } from '../../../../services/pnalFuncionario.service';
+import { VhloVehiculoService } from '../../../../services/vhloVehiculo.service';
 
 import { NewRncComponent } from './newRnc/newRnc.component';
 import { NewRnaComponent } from './newRna/newRna.component';
@@ -188,7 +194,13 @@ import { VhloTecnoMecanicaModule } from '../../vehiculo/vhloTecnoMecanica/vhloTe
         VhloAcreedorService,
         FroFacRetefuenteService,
         UserEmpresaService,
-        DefaultService
+        DefaultService,
+        VhloPropietarioService,
+        FroFacTramiteService,
+        FroFacturaService,
+        UserCiudadanoService,
+        PnalFuncionarioService,
+        VhloVehiculoService,
     ]
 })
 

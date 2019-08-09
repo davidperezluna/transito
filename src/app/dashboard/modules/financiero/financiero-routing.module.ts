@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { FroFacTramiteComponent } from './froFactura/froFacTramite/froFacTramite.component';
 import { FroFacParqueaderoComponent } from './froFactura/froFacParqueadero/froFacParqueadero.component';
 import { FroReporteIngresosComponent } from './froReporteIngresos/froReporteIngresos.component';
+import { FroTrteSolicitudComponent } from './froTrteSolicitud/froTrteSolicitud.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,10 @@ const routes: Routes = [
   {
     path: 'froReporteIngresos',
     component: FroReporteIngresosComponent
+  },
+  {
+    path: 'froTrteSolicitud',
+    component: FroTrteSolicitudComponent
   },
 ]; 
 
