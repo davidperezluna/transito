@@ -23,7 +23,9 @@ export class VhloTpRangoComponent implements OnInit {
     public fecha;
     public date;
 
-    public nit;
+    public nit: any = null;
+    public numeroActo: any = null;
+
     public empresaHabilitada = null;
     public rangos;
 
@@ -187,7 +189,7 @@ export class VhloTpRangoComponent implements OnInit {
 
     onSearchEmpresa() {
         let token = this._LoginService.getToken();
-        this._VhloTpRangoService.searchEmpresaTransporte(this.nit, token).subscribe(
+        this._UserEmpresaTransporteService.searchByNitAndNumeroActo({ 'nit': this.nit, 'numeroActo': this.numeroActo }, token).subscribe(
             response => {
                 if (response.code == 200) {
                     this.empresaHabilitada = response.data;

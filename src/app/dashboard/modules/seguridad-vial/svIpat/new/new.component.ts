@@ -1,21 +1,19 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { LoginService } from '../../../../../services/login.service';
-import { SvIpatService } from '../../../../../services/svIpat.service';
-import { PnalFuncionarioService } from '../../../../../services/pnalFuncionario.service';
-import { SvIpatConsecutivoService } from '../../../../../services/svIpatConsecutivo.service';
-import { CfgMunicipioService } from '../../../../../services/cfgMunicipio.service';
-import { SvCfgGravedadAccidenteService } from '../../../../../services/svCfgGravedadAccidente.service';
 
 import { SvIpat } from '../svIpat.modelo';
 import { SvIpatConductor } from '../svIpatConductor.modelo';
 import { SvIpatVehiculo } from '../svIpatVehiculo.modelo';
 import { SvIpatVictima } from '../svIpatVictima.modelo';
 
+import { SvIpatService } from '../../../../../services/svIpat.service';
+import { PnalFuncionarioService } from '../../../../../services/pnalFuncionario.service';
+import { SvIpatConsecutivoService } from '../../../../../services/svIpatConsecutivo.service';
+import { CfgMunicipioService } from '../../../../../services/cfgMunicipio.service';
+import { CfgOrganismoTransitoService } from '../../../../../services/cfgOrganismoTransito.service';
+import { SvCfgGravedadAccidenteService } from '../../../../../services/svCfgGravedadAccidente.service';
 import { SvIpatConductorService } from '../../../../../services/svIpatConductor.services'
 import { SvIpatVehiculoService } from '../../../../../services/svIpatVehiculo.services'
 import { SvIpatVictimaService } from '../../../../../services/svIpatVictima.services'
-
-import { CfgOrganismoTransitoService } from '../../../../../services/cfgOrganismoTransito.service';
 import { SvCfgClaseAccidenteService } from '../../../../../services/svCfgClaseAccidente.service';
 import { SvCfgClaseChoqueService } from '../../../../../services/svCfgClaseChoque.service';
 import { SvCfgObjetoFijoService } from '../../../../../services/svCfgObjetoFijo.service';
@@ -50,14 +48,10 @@ import { SvCfgHipotesisService } from "../../../../../services/svCfgHipotesis.se
 import { SvCfgTipoVictimaService } from "../../../../../services/svCfgTipoVictima.service";
 import { SvCfgGravedadVictimaService } from "../../../../../services/svCfgGravedadVictima.service";
 import { SvCfgUnidadReceptoraService } from "../../../../../services/svCfgUnidadReceptora.service";
-
 import { UserCfgTipoIdentificacionService } from "../../../../../services/userCfgTipoIdentificacion.service";
 import { SvCfgNacionalidadService } from "../../../../../services/svCfgNacionalidad.service";
 import { UserCfgGeneroService } from "../../../../../services/userCfgGenero.service";
-
-import swal from 'sweetalert2';
 import { forEach } from '@angular/router/src/utils/collection';
-import { Utils } from 'ng2-bootstrap';
 import { SvCfgAseguradoraService } from '../../../../../services/svCfgAseguradora.service';
 import { SvCfgControlViaService } from '../../../../../services/svCfgControlVia.service';
 import { SvCfgEntidadAccidenteService } from '../../../../../services/svCfgEntidadAccidente.service';
@@ -67,6 +61,11 @@ import { VhloCfgColorService } from '../../../../../services/vhloCfgColor.servic
 import { VhloCfgModalidadTransporteService } from '../../../../../services/vhloCfgModalidadTransporte.service';
 import { VhloCfgCarroceriaService } from '../../../../../services/vhloCfgCarroceria.service';
 import { VhloCfgRadioAccionService } from '../../../../../services/vhloCfgRadioAccion.service';
+import { PqoCfgPatioService } from "../../../../../services/pqoCfgPatio.service";
+
+import { LoginService } from '../../../../../services/login.service';
+import swal from 'sweetalert2';
+
 import { DatePipe, CurrencyPipe } from '@angular/common';
 
 @Component({
@@ -134,6 +133,7 @@ export class NewComponent implements OnInit {
   public empresas: any;
 
   public inmovilizaciones: any;
+  public parqueaderos: any;
   public tecnomecanicas: any;
   public soats: any;
   public propietariosVehiculo: any;
@@ -278,6 +278,7 @@ export class NewComponent implements OnInit {
     private _CarroceriaService: VhloCfgCarroceriaService,
     private _ModalidadTransporteService: VhloCfgModalidadTransporteService,
     private _RadioAccionService: VhloCfgRadioAccionService,
+    private _PatioService: PqoCfgPatioService,
 
     private _SvIpatConductorService: SvIpatConductorService,
     private _SvIpatVehiculoService: SvIpatVehiculoService,
@@ -285,9 +286,24 @@ export class NewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    swal({
+      title: 'Cargando Formulario!',
+      text: 'Solo tardará unos segundos, por favor espere.',
+      timer: 1500,
+      onOpen: () => {
+        swal.showLoading();
+      }
+    }).then((result) => {
+      if (
+        // Read more about handling dismissals
+        result.dismiss === swal.DismissReason.timer
+      ) {
+      }
+    });
+
     this.ipat = new SvIpat(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     this.ipatConductor = new SvIpatConductor(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    this.ipatVehiculo = new SvIpatVehiculo(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    this.ipatVehiculo = new SvIpatVehiculo(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     this.ipatVictima = new SvIpatVictima(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 
     /* === inicio consecutivo === */
@@ -858,6 +874,20 @@ export class NewComponent implements OnInit {
       this._NacionalidadService.getNacionalidadSelect().subscribe(
         response => {
           this.nacionalidades = response;
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+
+      this._PatioService.select().subscribe(
+        response => {
+          this.parqueaderos = response;
         },
         error => {
           this.errorMessage = <any>error;
