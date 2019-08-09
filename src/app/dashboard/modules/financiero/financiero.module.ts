@@ -45,10 +45,12 @@ import { FroTrteSolicitudModule } from './froTrteSolicitud/froTrteSolicitud.modu
     TooltipModule,
     FinancieroRoutingModule,
     FroFacturaModule,
+    FroReporteIngresosModule
   ],
   declarations: [
     FroFacTramiteComponent,
     FroFacParqueaderoComponent,
+    FroReporteIngresosComponent
   ]
 })
 export class FinancieroModule { }
