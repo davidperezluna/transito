@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { ExportComponent } from "./msvCaracterizacion/export/export.component";
-import { MsvCaracterizacionComponent } from './msvCaracterizacion/msvCaracterizacion.component';
-import { MsvCategoriaComponent } from './msvCategoria/msvCategoria.component';
-import { MsvCriterioComponent } from './msvCriterio/msvCriterio.component';
-import { MsvEvaluacionComponent } from './msvEvaluacion/msvEvaluacion.component';
-import { MsvParametroComponent } from './msvParametro/msvParametro.component';
-import { MsvVariableComponent } from './msvVariable/msvVariable.component';
+import { ExportComponent } from "./svCaracterizacion/export/export.component";
+import { SvCaracterizacionComponent } from './svCaracterizacion/svCaracterizacion.component';
+import { SvCfgCategoriaComponent } from './svCfgCategoria/svCfgCategoria.component';
+import { SvCfgCriterioComponent } from './svCfgCriterio/svCfgCriterio.component';
+import { SvEvaluacionComponent } from './svEvaluacion/svEvaluacion.component';
+import { SvCfgParametroComponent } from './svCfgParametro/svCfgParametro.component';
+import { SvCfgVariableComponent } from './svCfgVariable/svCfgVariable.component';
 import { SvCapacitacionComponent } from "./svCapacitacion/svCapacitacion.component";
 import { ReporteComponent } from './svCapacitacion/reporte/reporte.component';
 import { SvCfgAreaComponent } from "./svCfgArea/svCfgArea.component";
@@ -75,32 +75,32 @@ import { LocationComponent } from './svSenialInventario/location/location.compon
 
 const routes: Routes = [
   {
-    path: 'msvCaracterizacion',
-    component: MsvCaracterizacionComponent
+    path: 'svCaracterizacion',
+    component: SvCaracterizacionComponent
   },
   {
     path: 'svCaracterizacion/export',
     component: ExportComponent
   },
   {
-    path: 'msvCategoria',
-    component: MsvCategoriaComponent
+    path: 'svCfgCategoria',
+    component: SvCfgCategoriaComponent
   },
   {
-    path: 'msvCriterio',
-    component: MsvCriterioComponent
+    path: 'svCfgCriterio',
+    component: SvCfgCriterioComponent
   },
   {
-    path: 'msvEvaluacion',
-    component: MsvEvaluacionComponent
+    path: 'svEvaluacion',
+    component: SvEvaluacionComponent
   },
   {
-    path: 'msvParametro',
-    component: MsvParametroComponent
+    path: 'svCfgParametro',
+    component: SvCfgParametroComponent
   },
   {
-    path: 'msvVariable',
-    component: MsvVariableComponent
+    path: 'svCfgVariable',
+    component: SvCfgVariableComponent
   },
   {
     path: 'svCapacitacion',
