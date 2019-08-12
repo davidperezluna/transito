@@ -4,7 +4,7 @@
         <div class="card">
           <div class="card-header">
             <h5>
-              <b class="text-uppercase">CDP</b>
+              <b class="text-uppercase">Registros de compromiso</b>
               <div class="btn-group pull-right">
                 <button (click)="onNew()" class="btn btn-default">
                   <i class="fa fa-plus"></i>
@@ -24,17 +24,17 @@
                 </tr>
               </thead>
               <tbody>
-                <tr class="odd" *ngFor="let cdp of cdps; let i = index">
+                <tr class="odd" *ngFor="let registro of registros; let i = index">
                   <td>{{ i + 1 }}</td>
-                  <td>{{ cdp.solicitudNumero }}</td>
-                  <td>{{ cdp.actividad.cuenta.proyecto.nombre }}</td>
+                  <td>{{ registro.solicitudNumero }}</td>
+                  <td>{{ registro.cdp.actividad.cuenta.proyecto.nombre }}</td>
                   <td>
                     <div class="btn-group">
                       <!--
-                        <button (click)="onEdit(cdp)" class="btn btn-xs btn-primary" type="button">
+                        <button (click)="onEdit(registro)" class="btn btn-xs btn-primary" type="button">
                           <i class="fa fa-pencil"></i>
                         </button> 
-                        <button (click)="onDelete(cdp.id)"  class="btn btn-xs btn-danger" type="button">
+                        <button (click)="onDelete(registro.id)"  class="btn btn-xs btn-danger" type="button">
                           <i class="fa fa-trash"></i>
                         </button> 
                       -->
@@ -49,5 +49,5 @@
       </div>
   </div>
 
-  <app-new-cdp *ngIf='formNew'></app-new-cdp>
+  <app-new-registrocompromiso *ngIf='formNew'></app-new-registrocompromiso>
 </div>

@@ -71,4 +71,13 @@ export class BpActividadService {
         let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
         return this._http.post(this.url + "/search/insumos", params, { headers: headers }).map(res => res.json());
     }
+
+    searchByProyecto(datos, token) {
+        let json = JSON.stringify(datos);
+        let params = "data=" + json + "&authorization=" + token;
+        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+        return this._http.post(this.url + "/search/proyecto", params, { headers: headers }).map(
+            res => res.json()
+        );
+    }
 }

@@ -3,11 +3,13 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { BpActividadComponent } from './bpActividad/bpActividad.component';
 import { BpCdpComponent } from './bpCdp/bpCdp.component';
+import { BpRegistroCompromisoComponent } from './bpRegistroCompromiso/bpRegistroCompromiso.component';
 import { BpCfgTipoInsumoComponent } from './bpCfgTipoInsumo/bpCfgTipoInsumo.component';
 import { BpCuentaComponent } from './bpCuenta/bpCuenta.component';
 import { BpInsumoComponent } from './bpInsumo/bpInsumo.component';
 import { BpProyectoComponent } from './bpProyecto/bpProyecto.component';
-import { RequestComponent } from './bpCdp/request/request.component';
+import { RequestCdpComponent } from './bpCdp/request/request.component';
+import { RequestCompromisoComponent } from './bpRegistroCompromiso/request/request.component';
 
 const routes: Routes = [
   {
@@ -20,7 +22,15 @@ const routes: Routes = [
   },
   {
     path: 'request',
-    component: RequestComponent
+    component: RequestCdpComponent
+  },
+  {
+    path: 'bpRegistroCompromiso',
+    component: BpRegistroCompromisoComponent
+  },
+  {
+    path: 'requestCompromiso',
+    component: RequestCompromisoComponent
   },
   {
     path: 'bpCfgTipoInsumo',

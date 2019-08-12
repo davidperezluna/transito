@@ -1,6 +1,6 @@
 import { Route } from '@angular/router';
 import { BpCdpComponent } from '.';
-import { RequestComponent } from '.';
+import { RequestCdpComponent } from '.';
 
 export const BpCdpRoutes: Route[] = [
     {
@@ -9,7 +9,7 @@ export const BpCdpRoutes: Route[] = [
     },
     {
       path: 'request',
-      component: RequestComponent
+      component: RequestCdpComponent
     }
 ];
  

@@ -46,7 +46,9 @@
 </div>
 
 <div class="row" *ngIf="formNew">
-    <app-new-actividad [cuenta]="cuenta" (onReady)="onReady()"></app-new-actividad>
+    <div class="col-xs-12 col-lg-12">
+        <app-new-actividad [cuenta]="cuenta" (onReady)="onReady()"></app-new-actividad>
+    </div>
 </div>
 
 <div class="row" *ngIf="formShow">

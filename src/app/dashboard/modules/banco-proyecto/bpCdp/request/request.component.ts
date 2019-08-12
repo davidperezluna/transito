@@ -5,6 +5,7 @@ import { BpCdpService } from '../../../../../services/bpCdp.service';
 import { BpProyectoService } from '../../../../../services/bpProyecto.service';
 import { BpActividadService } from '../../../../../services/bpActividad.service';
 import { LoginService } from '../../../../../services/login.service';
+import { environment } from 'environments/environment'
 import swal from 'sweetalert2';
 declare var $: any;
 
@@ -13,27 +14,26 @@ declare var $: any;
   templateUrl: './request.component.html'
 })
 
-export class RequestComponent implements OnInit {
+export class RequestCdpComponent implements OnInit {
     @Output() ready = new EventEmitter<any>();
     public cdp: BpCdp;
     public errorMessage;
+
+    public apiUrl = environment.apiUrl;
     
     public numeroProyecto: any;
-    public proyecto: any;
+    public proyecto: any = null;
     public actividades: any;
     public solicitudes: any;
+
     public formIndex: any;
     public formSearch: any;
+
     public table: any;
 
     public datos = {
         'idActividad': null
     };
-
-    public search = {
-        'tipoFiltro': null,
-        'filtro': null
-    }
 
 constructor(
   private _CdpService: BpCdpService,
@@ -43,22 +43,25 @@ constructor(
   ){}
 
     ngOnInit() {
-        this.cdp = new BpCdp(null, null, null, null, null, null);
+        this.onInitForms();
 
-        this.numeroProyecto = null;
-        this.proyecto = null;
-        this.actividades = null;
-        this.formIndex = true;
-        this.formSearch = false;
+        swal({
+            title: 'Cargando Tabla!',
+            text: 'Solo tardara unos segundos por favor espere.',
+            onOpen: () => {
+                swal.showLoading()
+            }
+        });
+
+        this.cdp = new BpCdp(null, null, null, null, null, null);
 
         this._CdpService.index().subscribe(
             response => {
                 this.solicitudes = response.data;
                 let timeoutId = setTimeout(() => {
                     this.onInitTable();
+                    swal.close();
                 }, 100);
-
-                swal.close();
             },
             error => {
                 this.errorMessage = <any>error;
@@ -69,10 +72,17 @@ constructor(
                 }
             }
         );
+
+        this.formIndex = true;
+    }
+
+    onInitForms(){
+        this.formIndex = false;
+        this.formSearch = false;
     }
 
     onInitTable() {
-        $('#dataTables-example').DataTable({
+        this.table = $('#dataTables-example').DataTable({
             responsive: true,
             pageLength: 8,
             sPaginationType: 'full_numbers',
@@ -85,13 +95,11 @@ constructor(
                 }
             }
         });
-        this.table = $('#dataTables-example').DataTable();
     }
 
     onNew() {
+        this.onInitForms();
         this.formSearch = true;
-        this.formIndex = false;
-        this.table.destroy();
     }
 
     searchProyecto() {
@@ -105,17 +113,15 @@ constructor(
 
         let token = this._loginService.getToken();
 
-        this.search.tipoFiltro = 1;
-        this.search.filtro = this.numeroProyecto;
-
-        this._ProyectoService.searchByFilter(this.search, token).subscribe(
+        this._ProyectoService.searchByNumero({ 'numero': this.numeroProyecto }, token).subscribe(
             response => {
                 if (response.code == 200) {
                     this.proyecto = response.data;
 
                     this._ActividadService.select({ 'idProyecto': this.proyecto.id }, token).subscribe(
                         response => {
-                                this.actividades = response;
+                            this.actividades = response;
+
                             error => {
                                 this.errorMessage = <any>error;
                                 if (this.errorMessage != null) {
@@ -150,7 +156,7 @@ constructor(
     }
 
     onCancelar(){
-        this.ready.emit(true);
+        this.ngOnInit();
     }
     
     onEnviar(){
@@ -158,7 +164,7 @@ constructor(
         
         this._CdpService.request(this.datos, token).subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                     swal({
                         title: 'Perfecto!',
                         text: response.message,
