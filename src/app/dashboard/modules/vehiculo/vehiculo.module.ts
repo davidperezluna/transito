@@ -7,6 +7,7 @@ import { TooltipModule } from "ngx-tooltip";
 import { FormsModule } from '@angular/forms';
 
 import { VhloCfgNivelServicioComponent } from './vhloCfgNivelServicio/vhloCfgNivelServicio.component';
+import { VhloCfgValorComponent } from './vhloCfgValor/vhloCfgValor.component';
 import { VhloTpAsignacionComponent } from './vhloTpAsignacion/vhloTpAsignacion.component';
 import { VhloTpConvenioComponent } from './vhloTpConvenio/vhloTpConvenio.component';
 import { VhloTpRangoComponent } from './vhloTpRango/vhloTpRango.component';
@@ -15,6 +16,7 @@ import { VhloRnaPreasignacionPlacaComponent } from './vhloRnaPreasignacionPlaca/
 
 import { VehiculoRoutingModule } from './vehiculo-routing.module';
 import { VhloCfgNivelServicioModule } from './vhloCfgNivelServicio/vhloCfgNivelServicio.module';
+import { VhloCfgValorModule } from './vhloCfgValor/vhloCfgValor.module';
 import { VhloTpAsignacionModule } from './vhloTpAsignacion/vhloTpAsignacion.module';
 import { VhloTpConvenioModule } from './vhloTpConvenio/vhloTpConvenio.module';
 import { VhloTpRangoModule } from './vhloTpRango/vhloTpRango.module';
@@ -31,6 +33,7 @@ import { VhloRnaPreasignacionPlacaModule } from './vhloRnaPreasignacionPlaca/vhl
     SelectModule,
     VehiculoRoutingModule,
     VhloCfgNivelServicioModule,
+    VhloCfgValorModule,
     VhloTpAsignacionModule,
     VhloTpConvenioModule,
     VhloTpRangoModule,
@@ -39,6 +42,7 @@ import { VhloRnaPreasignacionPlacaModule } from './vhloRnaPreasignacionPlaca/vhl
   ],
   declarations: [
     VhloCfgNivelServicioComponent,
+    VhloCfgValorComponent,
     VhloTpAsignacionComponent,
     VhloTpConvenioComponent,
     VhloTpRangoComponent,

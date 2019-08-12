@@ -1,13 +1,14 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import { UserCiudadano } from '../userCiudadano.modelo';
 import { UserCiudadanoService } from '../../../../../services/userCiudadano.service';
-import { LoginService } from '../../../../../services/login.service';
 import { UserCfgTipoIdentificacionService } from '../../../../../services/userCfgTipoIdentificacion.service';
 import { UserCfgGeneroService } from '../../../../../services/userCfgGenero.service';
 import { UserCfgGrupoSanguineoService } from '../../../../../services/userCfgGrupoSanguineo.service';
 import { CfgMunicipioService } from '../../../../../services/cfgMunicipio.service';
 import { CfgPaisService } from '../../../../../services/cfgPais.service';
 import { CfgDepartamentoService } from '../../../../../services/cfgDepartamento.service';
+
+import { LoginService } from '../../../../../services/login.service';
 import swal from 'sweetalert2';
  
 @Component({

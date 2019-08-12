@@ -1,14 +1,15 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { VhloVehiculo } from '../vhloCfgValor.modelo';
 import { VhloValorService } from '../../../../../services/vholCfgValor.service';
-import { LoginService } from '../../../../../services/login.service';
+
 import { VhloCfgClaseService } from '../../../../../services/vhloCfgClase.service';
 import { VhloCfgMarcaService } from '../../../../../services/vhloCfgMarca.service';
 import { VhloCfgLineaService } from '../../../../../services/vhloCfgLinea.service';
+import { LoginService } from '../../../../../services/login.service';
 import swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-new',
+  selector: 'app-new-vhlocfgvalor',
   templateUrl: './new.component.html'
 })
 export class NewComponent implements OnInit {
