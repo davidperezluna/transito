@@ -7,15 +7,18 @@ import { TooltipModule } from "ngx-tooltip";
 
 import { BpActividadComponent } from './bpActividad/bpActividad.component';
 import { BpCdpComponent } from './bpCdp/bpCdp.component';
+import { BpRegistroCompromisoComponent } from './bpRegistroCompromiso/bpRegistroCompromiso.component';
 import { BpCfgTipoInsumoComponent } from './bpCfgTipoInsumo/bpCfgTipoInsumo.component';
 import { BpCuentaComponent } from './bpCuenta/bpCuenta.component';
 import { BpInsumoComponent } from './bpInsumo/bpInsumo.component';
 import { BpProyectoComponent } from './bpProyecto/bpProyecto.component';
-import { RequestComponent } from './bpCdp/request/request.component';
+import { RequestCdpComponent } from './bpCdp/request/request.component';
+import { RequestCompromisoComponent } from './bpRegistroCompromiso/request/request.component';
 
 import { BancoProyectoRoutingModule } from './banco-proyecto-routing.module';
 import { BpActividadModule } from './bpActividad/bpActividad.module';
 import { BpCdpModule } from './bpCdp/bpCdp.module';
+import { BpRegistroCompromisoModule } from './bpRegistroCompromiso/bpRegistroCompromiso.module';
 import { BpCfgTipoInsumoModule } from './bpCfgTipoInsumo/bpCfgTipoInsumo.module';
 import { BpCuentaModule } from './bpCuenta/bpCuenta.module';
 import { BpInsumoModule } from './bpInsumo/bpInsumo.module';
@@ -31,6 +34,7 @@ import { BpProyectoModule } from './bpProyecto/bpProyecto.module';
     BancoProyectoRoutingModule,
     BpActividadModule,
     BpCdpModule,
+    BpRegistroCompromisoModule,
     BpCfgTipoInsumoModule,
     BpCuentaModule,
     BpInsumoModule,
@@ -39,11 +43,13 @@ import { BpProyectoModule } from './bpProyecto/bpProyecto.module';
   declarations: [
     BpActividadComponent,
     BpCdpComponent,
+    BpRegistroCompromisoComponent,
     BpCfgTipoInsumoComponent,
     BpCuentaComponent,
     BpInsumoComponent,
     BpProyectoComponent,
-    RequestComponent,
+    RequestCdpComponent,
+    RequestCompromisoComponent,
   ]
 })
 export class BancoProyectoModule { }

@@ -1,17 +1,17 @@
 import { Component, OnInit,Output,EventEmitter } from '@angular/core';
-import { BpCdp } from '../bpCdp.modelo';
-import { BpCdpService } from '../../../../../services/bpCdp.service';
+import { BpRegistroCompromiso } from '../bpRegistroCompromiso.modelo';
+import { BpRegistroCompromisoService } from '../../../../../services/bpRegistroCompromiso.service';
 import { PnalFuncionarioService } from '../../../../../services/pnalFuncionario.service';
 import { LoginService } from '../../../../../services/login.service';
 import swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-new-cdp',
+  selector: 'app-new-registrocompromiso',
   templateUrl: './new.component.html'
 })
 export class NewComponent implements OnInit {
   @Output() ready = new EventEmitter<any>();
-  public cdp: BpCdp;
+  public registro: BpRegistroCompromiso;
   public errorMessage;
 
   public numeroSolicitud: any = null;
@@ -20,9 +20,23 @@ export class NewComponent implements OnInit {
 
   public formSearch: any = true;
 
+  public tiposContrato = [
+    { 'value': 'MÍNIMA CUANTÍA', 'label': 'MÍNIMA CUANTÍA' },
+    { 'value': 'SELECCIÓN ABREVIADA DE MENOR CUANTÍA', 'label': 'SELECCIÓN ABREVIADA DE MENOR CUANTÍA' },
+    { 'value': 'SUBASTA', 'label': 'SUBASTA' },
+    { 'value': 'LICITACIÓN', 'label': 'LICITACIÓN' },
+    { 'value': 'CONCURSO MÉRITO', 'label': 'CONCURSO MÉRITO' },
+    { 'value': 'CONTRATACIÓN DIRECTA', 'label': 'CONTRATACIÓN DIRECTA' },
+  ];
+  
+  public estadosContrato = [
+    { 'value': 'EJECUCIÓN', 'label': 'EJECUCIÓN' },
+    { 'value': 'LIQUIDACIÓN', 'label': 'LIQUIDACIÓN' },
+  ];
+
   constructor(
     private _FuncionarioService: PnalFuncionarioService,
-    private _CdpService: BpCdpService,
+    private _RegistroCompromisoService: BpRegistroCompromisoService,
     private _LoginService: LoginService,
   ){}
 
@@ -35,7 +49,7 @@ export class NewComponent implements OnInit {
       }
     });
 
-    this.cdp = new BpCdp(null, null, null, null, null, null);
+    this.registro = new BpRegistroCompromiso(null, null, null, null, null, null, null);
 
     let token = this._LoginService.getToken();
 
@@ -81,24 +95,10 @@ export class NewComponent implements OnInit {
 
     let token = this._LoginService.getToken();
 
-    this._CdpService.searchSolicitudByNumero({ 'numero': this.numeroSolicitud }, token).subscribe(
+    this._RegistroCompromisoService.searchSolicitudByNumero({ 'numero': this.numeroSolicitud }, token).subscribe(
       response => {
         if (response.code == 200) {
           this.solicitud = response.data;
-
-          /*this._ActividadService.select({ 'idProyecto': this.proyecto.id }, token).subscribe(
-            response => {
-              this.actividades = response;
-              error => {
-                this.errorMessage = <any>error;
-                if (this.errorMessage != null) {
-                  console.log(this.errorMessage);
-                  alert("Error en la petición");
-                }
-              }
-
-            }
-          );*/
 
           swal.close();
         } else {
@@ -125,12 +125,12 @@ export class NewComponent implements OnInit {
   onEnviar(){
     let token = this._LoginService.getToken();
 
-    this.cdp.idFuncionario = this.funcionario.id;
-    this.cdp.id = this.solicitud.id;
+    this.registro.id = this.solicitud.id;
     
-		this._CdpService.register(this.cdp, token).subscribe(
+		this._RegistroCompromisoService.register(this.registro, token).subscribe(
 			response => {
         if(response.status == 'success'){
+          this.ready.emit(true);
           swal({
             title: 'Perfecto!',
             text: response.message,

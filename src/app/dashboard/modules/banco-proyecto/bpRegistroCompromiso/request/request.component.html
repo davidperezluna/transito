@@ -1,0 +1,227 @@
+<div class="row"  *ngIf="formIndex">
+    <div class="col-xs-12 col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <b class="text-uppercase">Solicitudes de registro de compromiso</b>
+                <div class="btn-group pull-right">
+                    <button (click)="onNew()" class="btn btn-default">
+                        <i class="fa fa-plus"></i>
+                        <span class="text">Nuevo</span>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+                <table class="table " id="dataTables-example">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>No. solicitud</th>
+                            <th>No. proyecto</th>
+                            <th>Valor total</th>
+                            <th>Fecha</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="odd" *ngFor="let solicitud of solicitudes; let i = index">
+                            <td>{{ i + 1 }}</td>
+                            <td>{{ solicitud.solicitudNumero }}</td>
+                            <td>{{ solicitud.cdp.actividad.cuenta.proyecto.numero }}</td>
+                            <td>{{ solicitud.cdp.valor | currency: 'COP' }}</td>
+                            <td>{{ solicitud.solicitudFecha }}</td>
+                            <td>
+                                <div class="btn-group">
+                                    <a href="{{ apiUrl }}bancoproyecto/bpcdp/request/{{ solicitud.id }}/pdf" class="btn btn-success" target="_blank">
+                                        <i class="fa fa-file-pdf-o"></i>
+                                        Generar PDF
+                                    </a>
+                                    <!--
+                                            <button (click)="onEdit(solicitud)" class="btn btn-xs btn-primary" type="button">
+                                                <i class="fa fa-file-pdf"></i>
+                                            </button>
+                                            <button (click)="onDelete(solicitud.id)" class="btn btn-xs btn-danger" type="button">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        -->
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- /.table-responsive -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12 col-lg-4" *ngIf="formSearch">
+        <div class="card">
+            <div class="card-header">
+                <b class="text-uppercase">
+                    Solicitud de registro de compromiso
+                </b>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-xs-12 col-lg-12">
+                        <form #formSearch="ngForm">
+                            <div class="input-group">
+                                <input type="numeric" class="form-control" placeholder="Número de CDP" [(ngModel)]="numero" name="numero" required />
+                                <span class="input-group-btn">
+                                    <button (click)="searchCdp()" [disabled]="formSearch.invalid" class="btn btn-default btn-primary" type="button">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
+                            </div> 
+                        </form>
+                    </div>
+                </div>
+
+                <div class="row" *ngIf="cdp">
+                    <div class="col-xs-12 col-lg-12">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th><b class="text-uppercase">Resumen del CDP</b></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <b>Número: </b>
+                                        {{ cdp.numero }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <b>Número proyecto: </b>
+                                        {{ cdp.actividad.cuenta.proyecto.numero }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <b>Nombre proyecto: </b>
+                                        {{ cdp.actividad.cuenta.proyecto.nombre }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <b>Número de cuenta: </b>
+                                        {{ cdp.actividad.cuenta.numero }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <b>Nombre de cuenta: </b>
+                                        {{ cdp.actividad.cuenta.nombre }}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-lg-8" *ngIf="cdp">
+        <div class="row">
+            <div class="col-xs-12 col-lg-6">
+                <div class="card">
+                    <div class="card-header">
+                        <b class="text-uppercase">Registrar solicitud</b>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <div class="row">
+                                <!-- .row -->
+                                <div class="col-xs-12 col-lg-12">
+                                    <b class="text-uppercase">Buscar beneficiario</b>
+                                    <div class="row">
+                                        <div class="col-xs-12 col-lg-4">
+                                            <ng-select [multiple]="false" [options]="tiposIdentificacion"
+                                                [(ngModel)]="tipoIdentificacionSelected" name="idTipoIdentificacion" required></ng-select>
+                                        </div>
+                                        <div class="col-xs-12 col-lg-3">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" placeholder="Identificacion"
+                                                    [(ngModel)]="identificacion" name="identificacion" required />
+                                                <span class="input-group-btn">
+                                                    <button (click)="onSearchCiudadano()" class="btn btn-default btn-success" type="button">
+                                                        <i class="fa fa-search"></i>
+                                                    </button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.row -->
+                        
+                            <div class="row">
+                                <!-- .row -->
+                                <div class="col-xs-12 col-lg-12" *ngIf='ciudadano'>
+                                    <table class="table table-bordered table-striped">
+                                        <tbody>
+                                            <tr class="odd">
+                                                <td>
+                                                    <b>Tipo de identificación</b>
+                                                    <br> {{ ciudadano.tipoIdentificacion.nombre }}
+                                                </td>
+                                                <td>
+                                                    <b>Numero de identificación</b>
+                                                    <br> {{ ciudadano.identificacion }}
+                                                </td>
+                                                <td>
+                                                    <b>Ciudadano</b>
+                                                    <br> {{ ciudadano.primerNombre }} {{ ciudadano.segundoNombre }} {{ ciudadano.primerApellido}} {{ ciudadano.segundoApellido }}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                        
+                                <!--
+                                <div class="col-xs-12 col-lg-12" *ngIf="!ciudadano && formNewCiudadano">
+                                        <app-new-ciudadano (ready)="ready($event)"></app-new-ciudadano>
+                                    </div>
+                                -->
+                            </div>
+                            <!-- /.row -->
+                        </div>
+                        
+                        <form #formNew="ngForm" *ngIf='ciudadano'>
+                            <div class="row">
+                                <div class="col-xs-12 col-lg-12">
+                                    <label>No. cuenta bancaria</label>
+                                    <input type="numeric" class="form-control" [(ngModel)]="datos.cuentaNumero" name="cuentaNumero" required />
+                                </div>
+                                <div class="col-xs-12 col-lg-12">
+                                    <label>Tipo de cuenta</label>
+                                    <ng-select [multiple]="false" [options]="tiposCuenta" [(ngModel)]="datos.cuentaTipo" name="cuentaTipo" required></ng-select>
+                                </div>
+                                <div class="col-xs-12 col-lg-12">
+                                    <label>Nombre del banco</label>
+                                    <input type="text" class="form-control" [(ngModel)]="datos.bancoNombre" name="bancoNombre" required />
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-footer" *ngIf='ciudadano'>
+                        <div class="btn-group">
+                            <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
+                                <i class="fa fa-save"></i>
+                                Enviar
+                            </button>
+                            <button (click)="onCancelar()" [disabled]="formNew.invalid" class="btn btn-default" type="button">
+                                <i class="fa fa-times"></i>
+                                Cancelar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

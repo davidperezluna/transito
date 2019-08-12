@@ -1,45 +1,14 @@
-<div class="row" *ngIf="formSearch">
-    <div class="col-xs-12 col-lg-4">
+<div class="row"  *ngIf="formIndex">
+    <div class="col-xs-12 col-lg-12">
         <div class="card">
             <div class="card-header">
-                <h5 class="text-uppercase">
-                    <b>Solicitud de disponibilidad presupuestal</b>
-                </h5>
-                <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
-            </div>
-            <div class="card-body">
-                <form #formSearch="ngForm">
-                    <div class="form-group row">
-                        <div class="col-xs-12 col-lg-12">
-                            <div class="input-group">
-                                <input type="numeric" class="form-control" placeholder="Número de proyecto" [(ngModel)]="numeroProyecto" name="numeroProyecto" required />
-                                <span class="input-group-btn">
-                                    <button (click)="searchProyecto()" [disabled]="formSearch.invalid" class="btn btn-default btn-primary" type="button">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                </span>
-                            </div> 
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="row" *ngIf='formIndex'>
-    <div class="col-md-12">
-        <div class="card">
-            <div class="card-header">
-                <h5>
-                    <b class="text-uppercase">Solicitudes de CDP</b>
-                    <div class="btn-group pull-right">
-                        <button (click)="onNew()" class="btn btn-default">
-                            <i class="fa fa-plus"></i>
-                            <span class="text">Nuevo</span>
-                        </button>
-                    </div>
-                </h5>
+                <b class="text-uppercase">Solicitudes de CDP</b>
+                <div class="btn-group pull-right">
+                    <button (click)="onNew()" class="btn btn-default">
+                        <i class="fa fa-plus"></i>
+                        <span class="text">Nuevo</span>
+                    </button>
+                </div>
             </div>
             <div class="card-body">
                 <table class="table " id="dataTables-example">
@@ -62,14 +31,18 @@
                             <td>{{ solicitud.solicitudFecha }}</td>
                             <td>
                                 <div class="btn-group">
+                                    <a href="{{ apiUrl }}bancoproyecto/bpcdp/request/{{ solicitud.id }}/pdf" class="btn btn-success" target="_blank">
+                                        <i class="fa fa-file-pdf-o"></i>
+                                        Generar PDF
+                                    </a>
                                     <!--
-                                        <button (click)="onEdit(solicitud)" class="btn btn-xs btn-primary" type="button">
-                                            <i class="fa fa-file-pdf"></i>
-                                        </button>
-                                        <button (click)="onDelete(solicitud.id)" class="btn btn-xs btn-danger" type="button">
-                                            <i class="fa fa-trash"></i>
-                                        </button>
-                                    -->
+                                            <button (click)="onEdit(solicitud)" class="btn btn-xs btn-primary" type="button">
+                                                <i class="fa fa-file-pdf"></i>
+                                            </button>
+                                            <button (click)="onDelete(solicitud.id)" class="btn btn-xs btn-danger" type="button">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        -->
                                 </div>
                             </td>
                         </tr>
@@ -82,15 +55,37 @@
 </div>
 
 <div class="row">
-    <div class="col-xs-12 col-lg-12">
-        <div class="row">
-            <div class="col-xs-12 col-lg-4" *ngIf="proyecto">
-                <div class="card">
-                    <div class="card-header">
-                        <b class="text-uppercase">Resumen de proyecto</b>
+    <div class="col-xs-12 col-lg-4" *ngIf="formSearch">
+        <div class="card">
+            <div class="card-header">
+                <b class="text-uppercase">
+                    Solicitud de disponibilidad presupuestal
+                </b>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-xs-12 col-lg-12">
+                        <form #formSearch="ngForm">
+                            <div class="input-group">
+                                <input type="numeric" class="form-control" placeholder="Número de proyecto" [(ngModel)]="numeroProyecto" name="numeroProyecto" required />
+                                <span class="input-group-btn">
+                                    <button (click)="searchProyecto()" [disabled]="formSearch.invalid" class="btn btn-default btn-primary" type="button">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
+                            </div> 
+                        </form>
                     </div>
-                    <div class="card-body">
+                </div>
+
+                <div class="row" *ngIf="proyecto">
+                    <div class="col-xs-12 col-lg-12">
                         <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th><b class="text-uppercase">Resumen del proyecto</b></th>
+                                </tr>
+                            </thead>
                             <tbody>
                                 <tr>
                                     <td>
@@ -117,12 +112,16 @@
                                     </td>
                                 </tr>
                             </tbody>
-                        </table>      
+                        </table>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
 
-            <div class="col-xs-12 col-lg-6" *ngIf="actividades">
+    <div class="col-xs-12 col-lg-8" *ngIf="actividades">
+        <div class="row">
+            <div class="col-xs-12 col-lg-6">
                 <div class="card">
                     <div class="card-header">
                         <b class="text-uppercase">Registrar solicitud</b>
@@ -142,6 +141,10 @@
                             <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
                                 <i class="fa fa-save"></i>
                                 Enviar
+                            </button>
+                            <button (click)="onCancelar()" [disabled]="formNew.invalid" class="btn btn-default" type="button">
+                                <i class="fa fa-times"></i>
+                                Cancelar
                             </button>
                         </div>
                     </div>

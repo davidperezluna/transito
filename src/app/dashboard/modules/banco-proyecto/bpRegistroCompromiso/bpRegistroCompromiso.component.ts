@@ -1,30 +1,30 @@
 import { Component, OnInit } from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
-import { BpCdpService } from '../../../../services/bpCdp.service';
+import { BpRegistroCompromisoService } from '../../../../services/bpRegistroCompromiso.service';
 import { LoginService } from '../../../../services/login.service';
-import { BpCdp } from './bpCdp.modelo';
+import { BpRegistroCompromiso } from './bpRegistroCompromiso.modelo';
 import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
-  selector: 'app-index-cdp',
-  templateUrl: './bpCdp.component.html'
+  selector: 'app-index-registrocompromiso',
+  templateUrl: './bpRegistroCompromiso.component.html'
 })
-export class BpCdpComponent implements OnInit {
+export class BpRegistroCompromisoComponent implements OnInit {
   public errorMessage;
 	public id;
 
-  public cdps;
+  public registros;
   
 	public formNew = false;
 	public formEdit = false;
   public formIndex = true;
 
   public table:any; 
-  public tipo: BpCdp;
+  public tipo: BpRegistroCompromiso;
 
   constructor(
-    private _CdpService: BpCdpService,
+    private _RegistroCompromisoService: BpRegistroCompromisoService,
 		private _loginService: LoginService,
     ){}
     
@@ -37,9 +37,9 @@ export class BpCdpComponent implements OnInit {
       }
     });
 
-    this._CdpService.index().subscribe(
+    this._RegistroCompromisoService.index().subscribe(
 				response => {
-          this.cdps = response.data;
+          this.registros = response.data;
           
           let timeoutId = setTimeout(() => {  
             this.onInitTable();
@@ -102,7 +102,7 @@ export class BpCdpComponent implements OnInit {
       if (result.value) {
         let token = this._loginService.getToken();
         
-        this._CdpService.delete({'id':id}, token).subscribe(
+        this._RegistroCompromisoService.delete({'id':id}, token).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',
