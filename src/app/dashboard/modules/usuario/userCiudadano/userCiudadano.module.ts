@@ -9,6 +9,13 @@ import { ShowComponent } from './show/show.component';
 import { SelectModule } from 'angular2-select';
 import { TooltipModule } from "ngx-tooltip";
 
+import { UserCfgTipoIdentificacionService } from '../../../../services/userCfgTipoIdentificacion.service';
+import { UserCfgGeneroService } from '../../../../services/userCfgGenero.service';
+import { UserCfgGrupoSanguineoService } from '../../../../services/userCfgGrupoSanguineo.service';
+import { CfgMunicipioService } from '../../../../services/cfgMunicipio.service';
+import { CfgPaisService } from '../../../../services/cfgPais.service';
+import { CfgDepartamentoService } from '../../../../services/cfgDepartamento.service';
+
 @NgModule({
     imports: [CommonModule, Ng2BootstrapModule.forRoot(), SelectModule, TooltipModule],
     declarations: [
@@ -21,7 +28,15 @@ import { TooltipModule } from "ngx-tooltip";
         EditComponent,
         ShowComponent
     ],
-    providers:[UserCiudadanoService]
+    providers:[
+        UserCiudadanoService,
+        UserCfgTipoIdentificacionService,
+        UserCfgGeneroService,
+        UserCfgGrupoSanguineoService,
+        CfgMunicipioService,
+        CfgPaisService,
+        CfgDepartamentoService,
+    ]
 })
 
 export class UserCiudadanoModule { }
