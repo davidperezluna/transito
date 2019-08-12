@@ -8,6 +8,7 @@ import { BpCfgTipoInsumoComponent } from './bpCfgTipoInsumo/bpCfgTipoInsumo.comp
 import { BpCuentaComponent } from './bpCuenta/bpCuenta.component';
 import { BpInsumoComponent } from './bpInsumo/bpInsumo.component';
 import { BpProyectoComponent } from './bpProyecto/bpProyecto.component';
+import { BpOrdenPagoComponent } from './bpOrdenPago/bpOrdenPago.component';
 import { RequestCdpComponent } from './bpCdp/request/request.component';
 import { RequestCompromisoComponent } from './bpRegistroCompromiso/request/request.component';
 
@@ -47,6 +48,10 @@ const routes: Routes = [
   {
     path: 'bpProyecto',
     component: BpProyectoComponent
+  },
+  {
+    path: 'bpOrdenPago',
+    component: BpOrdenPagoComponent
   },
 ];
 

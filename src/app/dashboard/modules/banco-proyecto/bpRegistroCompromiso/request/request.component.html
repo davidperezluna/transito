@@ -31,7 +31,7 @@
                             <td>{{ solicitud.solicitudFecha }}</td>
                             <td>
                                 <div class="btn-group">
-                                    <a href="{{ apiUrl }}bancoproyecto/bpcdp/request/{{ solicitud.id }}/pdf" class="btn btn-success" target="_blank">
+                                    <a href="{{ apiUrl }}bancoproyecto/bpregistrocompromiso/request/{{ solicitud.id }}/pdf" class="btn btn-success" target="_blank">
                                         <i class="fa fa-file-pdf-o"></i>
                                         Generar PDF
                                     </a>
@@ -127,7 +127,7 @@
 
     <div class="col-xs-12 col-lg-8" *ngIf="cdp">
         <div class="row">
-            <div class="col-xs-12 col-lg-6">
+            <div class="col-xs-12 col-lg-12">
                 <div class="card">
                     <div class="card-header">
                         <b class="text-uppercase">Registrar solicitud</b>
@@ -139,11 +139,11 @@
                                 <div class="col-xs-12 col-lg-12">
                                     <b class="text-uppercase">Buscar beneficiario</b>
                                     <div class="row">
-                                        <div class="col-xs-12 col-lg-4">
+                                        <div class="col-xs-12 col-lg-6">
                                             <ng-select [multiple]="false" [options]="tiposIdentificacion"
                                                 [(ngModel)]="tipoIdentificacionSelected" name="idTipoIdentificacion" required></ng-select>
                                         </div>
-                                        <div class="col-xs-12 col-lg-3">
+                                        <div class="col-xs-12 col-lg-6">
                                             <div class="input-group">
                                                 <input type="text" class="form-control" placeholder="Identificacion"
                                                     [(ngModel)]="identificacion" name="identificacion" required />
@@ -193,28 +193,28 @@
                         
                         <form #formNew="ngForm" *ngIf='ciudadano'>
                             <div class="row">
-                                <div class="col-xs-12 col-lg-12">
+                                <div class="col-xs-12 col-lg-4">
                                     <label>No. cuenta bancaria</label>
                                     <input type="numeric" class="form-control" [(ngModel)]="datos.cuentaNumero" name="cuentaNumero" required />
                                 </div>
-                                <div class="col-xs-12 col-lg-12">
+                                <div class="col-xs-12 col-lg-4">
                                     <label>Tipo de cuenta</label>
                                     <ng-select [multiple]="false" [options]="tiposCuenta" [(ngModel)]="datos.cuentaTipo" name="cuentaTipo" required></ng-select>
                                 </div>
-                                <div class="col-xs-12 col-lg-12">
+                                <div class="col-xs-12 col-lg-4">
                                     <label>Nombre del banco</label>
-                                    <input type="text" class="form-control" [(ngModel)]="datos.bancoNombre" name="bancoNombre" required />
+                                    <input type="text" class="form-control text-uppercase" [(ngModel)]="datos.bancoNombre" name="bancoNombre" required />
                                 </div>
                             </div>
                         </form>
                     </div>
                     <div class="card-footer" *ngIf='ciudadano'>
                         <div class="btn-group">
-                            <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
+                            <button (click)="onEnviar()" [disabled]="!ciudadano" class="btn btn-primary" type="button">
                                 <i class="fa fa-save"></i>
                                 Enviar
                             </button>
-                            <button (click)="onCancelar()" [disabled]="formNew.invalid" class="btn btn-default" type="button">
+                            <button (click)="onCancelar()" class="btn btn-default" type="button">
                                 <i class="fa fa-times"></i>
                                 Cancelar
                             </button>

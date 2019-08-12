@@ -1,6 +1,5 @@
 import { Component, OnInit,Output,EventEmitter } from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
-import { BpRegistroCompromiso } from '../bpRegistroCompromiso.modelo';
 import { BpRegistroCompromisoService } from '../../../../../services/bpRegistroCompromiso.service';
 import { BpCdpService } from '../../../../../services/bpCdp.service';
 import { UserCfgTipoIdentificacionService } from '../../../../../services/userCfgTipoIdentificacion.service';
@@ -12,7 +11,7 @@ declare var $: any;
 
 @Component({
     selector: 'app-request-registrocompromiso',
-  templateUrl: './request.component.html'
+    templateUrl: './request.component.html'
 })
 
 export class RequestCompromisoComponent implements OnInit {
@@ -68,7 +67,7 @@ export class RequestCompromisoComponent implements OnInit {
             }
         });
 
-        this._CdpService.index().subscribe(
+        this._RegistroCompromisoService.index().subscribe(
             response => {
                 this.solicitudes = response.data;
                 let timeoutId = setTimeout(() => {
@@ -200,7 +199,9 @@ export class RequestCompromisoComponent implements OnInit {
                     if (response.code == 200) {
                         if (response.data.ciudadano) {
                             this.ciudadano = response.data.ciudadano;
+                            this.datos.idCiudadano = this.ciudadano.id;
                             this.empresa = null;
+                            this.datos.idEmpresa = this.empresa;
                             
                             swal({
                                 title: 'Perfecto!',
@@ -221,7 +222,9 @@ export class RequestCompromisoComponent implements OnInit {
                         }
                     } else {
                         this.ciudadano = null;
+                        this.datos.idCiudadano = this.ciudadano;
                         this.empresa = null;
+                        this.datos.idEmpresa = this.empresa.id;
                         
                         swal({
                             title: 'Error!',

@@ -1,0 +1,55 @@
+<div class="container" >
+  <div class="row" *ngIf="formIndex">
+    <div class="col-xs-12 col-lg-12">
+        <div class="card">
+          <div class="card-header">
+            <h5>
+              <b class="text-uppercase">Registros de compromiso</b>
+              <div class="btn-group pull-right">
+                <button (click)="onNew()" class="btn btn-default">
+                  <i class="fa fa-plus"></i>
+                  <span class="text">Nuevo</span>
+                </button>
+              </div>
+            </h5>
+          </div>
+          <div class="card-body">
+            <table class="table" id="dataTables-example">
+              <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Solicitud</th>
+                    <th>Proyecto</th>
+                    <th>Valor</th>
+                    <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="odd" *ngFor="let orden of ordenes; let i = index">
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ orden.numero }}</td>
+                  <td>{{ orden.regostroCompromiso.cdp.actividad.cuenta.proyecto.nombre }}</td>
+                  <td>{{ orden.valor }}</td>
+                  <td>
+                    <div class="btn-group">
+                      <!--
+                        <button (click)="onEdit(orden)" class="btn btn-xs btn-primary" type="button">
+                          <i class="fa fa-pencil"></i>
+                        </button> 
+                        <button (click)="onDelete(orden.id)"  class="btn btn-xs btn-danger" type="button">
+                          <i class="fa fa-trash"></i>
+                        </button> 
+                      -->
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- /.table-responsive --> 
+          </div>
+        </div>
+      </div>
+  </div>
+
+  <app-new-ordenpago *ngIf='formNew'></app-new-ordenpago>
+</div>

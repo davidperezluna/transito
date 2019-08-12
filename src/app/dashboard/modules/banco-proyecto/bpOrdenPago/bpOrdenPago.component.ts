@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
-import { BpRegistroCompromisoService } from '../../../../services/bpRegistroCompromiso.service';
+import { BpOrdenPagoService } from '../../../../services/bpOrdenPago.service';
 import { LoginService } from '../../../../services/login.service';
 import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
   selector: 'app-index-registrocompromiso',
-  templateUrl: './bpRegistroCompromiso.component.html'
+  templateUrl: './bpOrdenPago.component.html'
 })
-export class BpRegistroCompromisoComponent implements OnInit {
+export class BpOrdenPagoComponent implements OnInit {
   public errorMessage;
 	public id;
 
-  public registros;
+  public ordenes;
   public tipo: any = null;
   
 	public formNew = false;
@@ -23,7 +23,7 @@ export class BpRegistroCompromisoComponent implements OnInit {
   public table:any; 
 
   constructor(
-    private _RegistroCompromisoService: BpRegistroCompromisoService,
+    private _OrdenPagoService: BpOrdenPagoService,
 		private _loginService: LoginService,
     ){}
     
@@ -36,9 +36,9 @@ export class BpRegistroCompromisoComponent implements OnInit {
       }
     });
 
-    this._RegistroCompromisoService.index().subscribe(
+    this._OrdenPagoService.index().subscribe(
 				response => {
-          this.registros = response.data;
+          this.ordenes = response.data;
           
           let timeoutId = setTimeout(() => {  
             this.onInitTable();
@@ -101,7 +101,7 @@ export class BpRegistroCompromisoComponent implements OnInit {
       if (result.value) {
         let token = this._loginService.getToken();
         
-        this._RegistroCompromisoService.delete({'id':id}, token).subscribe(
+        this._OrdenPagoService.delete({'id':id}, token).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',
