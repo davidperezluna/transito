@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { VhloCfgNivelServicioComponent } from './vhloCfgNivelServicio/vhloCfgNivelServicio.component';
+import { VhloCfgValorComponent } from './vhloCfgValor/vhloCfgValor.component';
 import { VhloTpAsignacionComponent } from './vhloTpAsignacion/vhloTpAsignacion.component';
 import { VhloTpConvenioComponent } from './vhloTpConvenio/vhloTpConvenio.component';
 import { VhloTpRangoComponent } from './vhloTpRango/vhloTpRango.component';
@@ -12,6 +13,10 @@ const routes: Routes = [
   {
     path: 'vhloCfgNivelServicio',
     component: VhloCfgNivelServicioComponent
+  },
+  {
+    path: 'vhloCfgValor',
+    component: VhloCfgValorComponent
   },
   {
     path: 'vhloTpAsignacion',
