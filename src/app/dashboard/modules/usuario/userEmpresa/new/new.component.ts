@@ -12,7 +12,7 @@ import { UserCfgEmpresaServicioService } from '../../../../../services/userCfgEm
 import swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-new-empresa',
+  selector: 'app-new-userempresa',
   templateUrl: './new.component.html'
 })
 export class NewEmpresaComponent implements OnInit {

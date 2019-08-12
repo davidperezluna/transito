@@ -36,6 +36,9 @@ import { FroTrteCfgCuentaModule } from './froTrteCfgCuenta/froTrteCfgCuenta.modu
 import { FroTrtePrecioModule } from './froTrtePrecio/froTrtePrecio.module';
 import { FroTrteSolicitudModule } from './froTrteSolicitud/froTrteSolicitud.module';
 
+import { NewRnaComponent } from './froTrteSolicitud/newRna/newRna.component';
+import { NewRnetComponent } from './froTrteSolicitud/newRnet/newRnet.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -53,6 +56,9 @@ import { FroTrteSolicitudModule } from './froTrteSolicitud/froTrteSolicitud.modu
     FroFacParqueaderoComponent,
     FroReporteIngresosComponent,
     FroTrteSolicitudComponent,
+    
+    NewRnaComponent,
+    NewRnetComponent,
   ]
 })
 export class FinancieroModule { }

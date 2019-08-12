@@ -21,8 +21,8 @@ import { PnalFuncionarioService } from '../../../../services/pnalFuncionario.ser
 import { VhloVehiculoService } from '../../../../services/vhloVehiculo.service';
 
 import { NewRncComponent } from './newRnc/newRnc.component';
-import { NewRnaComponent } from './newRna/newRna.component';
-import { NewRnetComponent } from './newRnet/newRnet.component';
+/* import { NewRnaComponent } from './newRna/newRna.component'; */
+/* import { NewRnetComponent } from './newRnet/newRnet.component'; */
 import { NewRnmaComponent } from './newRnma/newRnma.component';
 import { NewRnrsComponent } from './newRnrs/newRnrs.component';
 import { NewInsumoComponent } from './newInsumo/newInsumo.component';
@@ -87,8 +87,8 @@ import { VhloTecnoMecanicaModule } from '../../vehiculo/vhloTecnoMecanica/vhloTe
     ],
     declarations: [
         NewRncComponent,
-        NewRnaComponent,
-        NewRnetComponent,
+        /* NewRnaComponent, */
+        /* NewRnetComponent, */
         NewRnmaComponent,
         NewRnrsComponent,
         NewInsumoComponent,
@@ -137,8 +137,8 @@ import { VhloTecnoMecanicaModule } from '../../vehiculo/vhloTecnoMecanica/vhloTe
     ],
     exports: [
         NewRncComponent,
-        NewRnaComponent,
-        NewRnetComponent,
+        /* NewRnaComponent, */
+        /* NewRnetComponent, */
         NewRnmaComponent,
         NewRnrsComponent,
         NewInsumoComponent,

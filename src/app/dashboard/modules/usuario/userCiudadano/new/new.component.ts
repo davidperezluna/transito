@@ -11,7 +11,7 @@ import { CfgDepartamentoService } from '../../../../../services/cfgDepartamento.
 import swal from 'sweetalert2';
  
 @Component({
-  selector: 'app-new-ciudadano',
+  selector: 'app-new-userciudadano',
   templateUrl: './new.component.html'
 })
 export class NewCiudadanoComponent implements OnInit {

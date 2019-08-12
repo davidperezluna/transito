@@ -4,6 +4,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { UserCfgMenuComponent } from './userCfgMenu/userCfgMenu.component';
 import { UserUsuarioMenuComponent } from './userUsuarioMenu/userUsuarioMenu.component';
 import { UserEmpresaTransporteComponent } from './userEmpresaTransporte/userEmpresaTransporte.component';
+import { UserEmpresaComponent } from './userEmpresa/userEmpresa.component';
+import { UserCiudadanoComponent } from './userCiudadano/userCiudadano.component';
 
 const routes: Routes = [
   {
@@ -18,6 +20,14 @@ const routes: Routes = [
     path: 'userEmpresaTransporte',
     component: UserEmpresaTransporteComponent
   },
+  {
+    path: 'userEmpresa',
+    component: UserEmpresaComponent
+  },
+  {
+    path: 'userCiudadano',
+    component: UserCiudadanoComponent
+  }
 ]; 
 
 @NgModule({

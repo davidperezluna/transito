@@ -106,15 +106,15 @@
     </div>
 
     <div class="col-xs-12 col-lg-9" *ngIf='formNew'>
-      <app-new-ciudadano (ready)="ready($event)"></app-new-ciudadano>
+      <app-new-userciudadano (ready)="ready($event)"></app-new-userciudadano>
     </div>
   
     <div class="col-xs-12 col-lg-9" *ngIf='formEdit'>
-      <app-edit [ciudadano]="ciudadano" (ready)="ready($event)"></app-edit>
+      <app-edit-userciudadano [ciudadano]="ciudadano" (ready)="ready($event)"></app-edit-userciudadano>
     </div>
   
     <div class="col-xs-12 col-lg-9" *ngIf='formShow'>
-      <app-show [ciudadano]="ciudadano" (ready)="ready($event)"></app-show>
+      <app-show-userciudadano [ciudadano]="ciudadano" (ready)="ready($event)"></app-show-userciudadano>
     </div>
   </div>
 </div>
