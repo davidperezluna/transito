@@ -131,13 +131,14 @@ export class NewComponent implements OnInit {
 		this._CdpService.register(this.cdp, token).subscribe(
 			response => {
         if(response.status == 'success'){
-          this.ready.emit(true);
           swal({
             title: 'Perfecto!',
             text: response.message,
             type: 'success',
             confirmButtonText: 'Aceptar'
-          })
+          });
+
+          this.ngOnInit();
         }else{
           swal({
             title: 'Error!',

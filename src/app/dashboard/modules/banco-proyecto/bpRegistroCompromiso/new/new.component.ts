@@ -136,7 +136,9 @@ export class NewComponent implements OnInit {
             text: response.message,
             type: 'success',
             confirmButtonText: 'Aceptar'
-          })
+          });
+
+          this.ngOnInit();
         }else{
           swal({
             title: 'Error!',
