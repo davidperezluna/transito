@@ -8,7 +8,7 @@ import { VhloCfgLineaService } from '../../../../../services/vhloCfgLinea.servic
 import swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-new',
+  selector: 'app-new-vhlocfgvalor',
   templateUrl: './new.component.html'
 })
 export class NewComponent implements OnInit {
