@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { DatePipe } from '@angular/common';
 
 @Component({
-  selector: 'app-show',
+  selector: 'app-show-userciudadano',
   templateUrl: './show.component.html',
   providers: [DatePipe]
 })

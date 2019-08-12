@@ -6,13 +6,13 @@ import { SelectModule } from 'angular2-select';
 import { TooltipModule } from "ngx-tooltip";
 import { FormsModule } from '@angular/forms';
 
-import { MsvCaracterizacionComponent } from './msvCaracterizacion/msvCaracterizacion.component';
-import { ExportComponent } from "./msvCaracterizacion/export/export.component";
-import { MsvCategoriaComponent } from './msvCategoria/msvCategoria.component';
-import { MsvCriterioComponent } from './msvCriterio/msvCriterio.component';
-import { MsvEvaluacionComponent } from './msvEvaluacion/msvEvaluacion.component';
-import { MsvParametroComponent } from './msvParametro/msvParametro.component';
-import { MsvVariableComponent } from './msvVariable/msvVariable.component';
+import { SvCaracterizacionComponent } from './svCaracterizacion/svCaracterizacion.component';
+import { ExportComponent } from "./svCaracterizacion/export/export.component";
+import { SvCfgCategoriaComponent } from './svCfgCategoria/svCfgCategoria.component';
+import { SvCfgCriterioComponent } from './svCfgCriterio/svCfgCriterio.component';
+import { SvEvaluacionComponent } from './svEvaluacion/svEvaluacion.component';
+import { SvCfgParametroComponent } from './svCfgParametro/svCfgParametro.component';
+import { SvCfgVariableComponent } from './svCfgVariable/svCfgVariable.component';
 import { SvCapacitacionComponent } from "./svCapacitacion/svCapacitacion.component";
 import { ReporteComponent } from './svCapacitacion/reporte/reporte.component';
 import { SvCfgAreaComponent } from "./svCfgArea/svCfgArea.component";
@@ -78,12 +78,12 @@ import { SvSenialInventarioComponent } from "./svSenialInventario/svSenialInvent
 import { LocationComponent } from "./svSenialInventario/location/location.component";
 
 
-import { MsvCaracterizacionModule } from "./msvCaracterizacion/msvCaracterizacion.module";
-import { MsvCategoriaModule } from "./msvCategoria/msvCategoria.module";
-import { MsvCriterioModule } from "./msvCriterio/msvCriterio.module";
-import { MsvEvaluacionModule } from "./msvEvaluacion/msvEvaluacion.module";
-import { MsvParametroModule } from "./msvParametro/msvParametro.module";
-import { MsvVariableModule } from "./msvVariable/msvVariable.module";
+import { SvCaracterizacionModule } from "./svCaracterizacion/svCaracterizacion.module";
+import { SvCfgCategoriaModule } from "./svCfgCategoria/svCfgCategoria.module";
+import { SvCfgCriterioModule } from "./svCfgCriterio/svCfgCriterio.module";
+import { SvEvaluacionModule } from "./svEvaluacion/svEvaluacion.module";
+import { SvCfgParametroModule } from "./svCfgParametro/svCfgParametro.module";
+import { SvCfgVariableModule } from "./svCfgVariable/svCfgVariable.module";
 import { SvCapacitacionModule } from "./svCapacitacion/svCapacitacion.module";
 import { SvCfgAreaModule } from "./svCfgArea/svCfgArea.module";
 import { SvCfgAseguradoraModule } from "./svCfgAseguradora/svCfgAseguradora.module";
@@ -158,12 +158,12 @@ import { AgmCoreModule } from '@agm/core';
     Ng2BootstrapModule.forRoot(),
     SelectModule,
     SeguridadVialRoutingModule,
-    MsvCaracterizacionModule,
-    MsvCategoriaModule,
-    MsvCriterioModule,
-    MsvEvaluacionModule,
-    MsvParametroModule,
-    MsvVariableModule,
+    SvCaracterizacionModule,
+    SvCfgCategoriaModule,
+    SvCfgCriterioModule,
+    SvEvaluacionModule,
+    SvCfgParametroModule,
+    SvCfgVariableModule,
     SvCapacitacionModule,
     SvCfgAreaModule,
     SvCfgAseguradoraModule,
@@ -230,13 +230,13 @@ import { AgmCoreModule } from '@agm/core';
     })
   ],
   declarations: [
-    MsvCaracterizacionComponent,
+    SvCaracterizacionComponent,
     ExportComponent,
-    MsvCategoriaComponent,
-    MsvCriterioComponent,
-    MsvEvaluacionComponent,
-    MsvParametroComponent,
-    MsvVariableComponent,
+    SvCfgCategoriaComponent,
+    SvCfgCriterioComponent,
+    SvEvaluacionComponent,
+    SvCfgParametroComponent,
+    SvCfgVariableComponent,
     SvCapacitacionComponent,
     ReporteComponent,
     SvCfgAreaComponent,

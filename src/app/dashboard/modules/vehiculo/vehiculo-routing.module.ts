@@ -6,6 +6,7 @@ import { VhloTpAsignacionComponent } from './vhloTpAsignacion/vhloTpAsignacion.c
 import { VhloTpConvenioComponent } from './vhloTpConvenio/vhloTpConvenio.component';
 import { VhloTpRangoComponent } from './vhloTpRango/vhloTpRango.component';
 import { VhloTpTarjetaOperacionComponent } from './vhloTpTarjetaOperacion/vhloTpTarjetaOperacion.component';
+import { VhloRnaPreasignacionPlacaComponent } from "./vhloRnaPreasignacionPlaca/vhloRnaPreasignacionPlaca.component";
 
 const routes: Routes = [
   {
@@ -28,6 +29,10 @@ const routes: Routes = [
     path: 'vhloTpTarjetaOperacion',
     component: VhloTpTarjetaOperacionComponent
   },
+  {
+      path: 'vhloRnaPreAsignacionPlaca',
+      component: VhloRnaPreasignacionPlacaComponent
+    }
 ]; 
 
 @NgModule({

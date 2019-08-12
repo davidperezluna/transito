@@ -128,11 +128,11 @@
       </div>
       
       <div class="col-xs-12 col-lg-12" *ngIf='formNew'>
-        <app-new-empresa (ready)="ready($event)"></app-new-empresa>
+        <app-new-userempresa (ready)="ready($event)"></app-new-userempresa>
       </div>
   
       <div class="col-xs-12 col-lg-12" *ngIf='formEdit'>
-        <app-edit [empresa]="empresa" (ready)="ready($event)"></app-edit>
+        <app-edit-userempresa [empresa]="empresa" (ready)="ready($event)"></app-edit-userempresa>
       </div>
   
       <div class="col-xs-12 col-lg-12" *ngIf='formShow'>

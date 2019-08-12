@@ -12,7 +12,7 @@ import { VhloCfgModalidadTransporteService } from '../../../../../services/vhloC
 import swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-edit',
+  selector: 'app-edit-userempresa',
   templateUrl: './edit.component.html'
 })
 
