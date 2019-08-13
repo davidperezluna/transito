@@ -31,6 +31,7 @@ export class RequestCompromisoComponent implements OnInit {
 
     public formIndex: any;
     public formSearch: any;
+    public formNew: any;
 
     public table: any;
 
@@ -105,6 +106,7 @@ export class RequestCompromisoComponent implements OnInit {
     onInitForms(){
         this.formIndex = false;
         this.formSearch = false;
+        this.formNew = false;
     }
 
     onInitTable() {
@@ -142,6 +144,7 @@ export class RequestCompromisoComponent implements OnInit {
         this._CdpService.searchByNumero({ 'numero': this.numero }, token).subscribe(
             response => {
                 if (response.code == 200) {
+                    this.formNew = true;
                     this.cdp = response.data;
 
                     swal.close();
@@ -153,6 +156,7 @@ export class RequestCompromisoComponent implements OnInit {
                         confirmButtonText: 'Aceptar'
                     });
 
+                    this.formNew = false;
                     this.cdp = null;
                 }
                 error => {

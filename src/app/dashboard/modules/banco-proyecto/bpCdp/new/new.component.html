@@ -7,7 +7,7 @@
                 <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
             </div>
             <div class="card-body">
-                <div class="row">
+                <div class="row" *ngIf="formSearch">
                     <div class="col-xs-12 col-lg-12">
                         <form #formSearch="ngForm">
                             <label>Buscar solicitud de disponibilidad presupuestal</label>
@@ -86,41 +86,34 @@
                             <td>
                                 <b>Número</b><br>
                                 {{ solicitud.actividad.numero }}
-                                <br>
-                                <b>Nombre</b><br>
+                                <br><b>Nombre</b><br>
                                 {{ solicitud.actividad.nombre }}
-                                <br>
-                                <b>Valor</b><br>
-                                {{ solicitud.actividad.costoTotal }}
                             </td>
                         </tr>
                     </tbody>
                 </table>
         
                 <form #formNew="ngForm">
-                    <div class="form-group row">
-                        <div class="col-xs-12 col-lg-12">
+                    <div class="row">
+                        <div class="col-xs-12 col-lg-4">
                             <label>Fecha expedición</label>
-                            <input class="form-control" [(ngModel)]="cdp.fechaExpedicion" name="fechaExpedicion" type="date"
-                                required>
+                            <input class="form-control" [(ngModel)]="cdp.fechaExpedicion" name="fechaExpedicion" type="date" required>
                         </div>
-        
-                        <div class="col-xs-12 col-lg-12">
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-lg-6">
                             <label>Identificación tercero</label>
-                            <input class="form-control text-uppercase" [(ngModel)]="cdp.terceroIdentificacion"
-                                name="terceroIdentificacion" type="text" required>
+                            <input class="form-control text-uppercase" [(ngModel)]="cdp.terceroIdentificacion" name="terceroIdentificacion" type="text" required>
                         </div>
         
-                        <div class="col-xs-12 col-lg-12">
+                        <div class="col-xs-12 col-lg-6">
                             <label>Nombre tercero</label>
-                            <input class="form-control text-uppercase" [(ngModel)]="cdp.terceroNombre" name="terceroNombre"
-                                type="text" required>
+                            <input class="form-control text-uppercase" [(ngModel)]="cdp.terceroNombre" name="terceroNombre" type="text" required>
                         </div>
         
                         <div class="col-xs-12 col-lg-12">
                             <label>Observaciones</label>
-                            <textarea class="form-control" [(ngModel)]="cdp.observaciones" rows='4' name="observaciones"
-                                required></textarea>
+                            <textarea class="form-control" [(ngModel)]="cdp.observaciones" rows='4' name="observaciones" required></textarea>
                         </div>
                     </div>
                 </form>

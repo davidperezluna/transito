@@ -21,7 +21,7 @@ constructor(
   ){}
 
   ngOnInit() {
-    this.actividad = new BpActividad(null, null, null);
+    this.actividad = new BpActividad(null, null, null, null);
   }
   onCancelar(){
     this.onReady.emit();

@@ -69,6 +69,10 @@ export class BpCdpService {
 		return this._http.get(this.url + "/select").map(res => res.json());
 	}
 
+	indexRegister() {
+		return this._http.get(this.url + "/index/register").map(res => res.json());
+	}
+
 	searchSolicitudByNumero(datos, token) {
 		let json = JSON.stringify(datos);
 		let params = "data=" + json + "&authorization=" + token;

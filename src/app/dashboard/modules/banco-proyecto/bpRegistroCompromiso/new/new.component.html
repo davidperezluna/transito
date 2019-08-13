@@ -98,13 +98,14 @@
                 </table>
         
                 <form #formNew="ngForm">
-                    <div class="form-group row">
-                        <div class="col-xs-12 col-lg-12">
+                    <div class="row">
+                        <div class="col-xs-12 col-lg-4">
                             <label>Fecha expedición</label>
                             <input class="form-control" [(ngModel)]="registro.fechaExpedicion" name="fechaExpedicion" type="date"
                                 required>
                         </div>
-        
+                    </div>
+                    <div class="row">
                         <div class="col-xs-12 col-lg-4">
                             <label>No. contrato</label>
                             <input class="form-control text-uppercase" [(ngModel)]="registro.contratoNumero" name="contratoNumero" type="text" required>

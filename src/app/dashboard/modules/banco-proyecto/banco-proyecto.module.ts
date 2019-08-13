@@ -7,14 +7,14 @@ import { TooltipModule } from "ngx-tooltip";
 
 import { BpActividadComponent } from './bpActividad/bpActividad.component';
 import { BpCdpComponent } from './bpCdp/bpCdp.component';
+import { RequestCdpComponent } from './bpCdp/request/request.component';
 import { BpRegistroCompromisoComponent } from './bpRegistroCompromiso/bpRegistroCompromiso.component';
+import { RequestCompromisoComponent } from './bpRegistroCompromiso/request/request.component';
 import { BpCfgTipoInsumoComponent } from './bpCfgTipoInsumo/bpCfgTipoInsumo.component';
 import { BpCuentaComponent } from './bpCuenta/bpCuenta.component';
 import { BpInsumoComponent } from './bpInsumo/bpInsumo.component';
 import { BpProyectoComponent } from './bpProyecto/bpProyecto.component';
 import { BpOrdenPagoComponent } from './bpOrdenPago/bpOrdenPago.component';
-import { RequestCdpComponent } from './bpCdp/request/request.component';
-import { RequestCompromisoComponent } from './bpRegistroCompromiso/request/request.component';
 
 import { BancoProyectoRoutingModule } from './banco-proyecto-routing.module';
 import { BpActividadModule } from './bpActividad/bpActividad.module';

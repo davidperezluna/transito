@@ -64,7 +64,7 @@ export class NewComponent implements OnInit {
         } else {
           swal({
             title: 'Error!',
-            text: 'Su usuario no tiene autorización para realizar facturación!',
+            text: 'Su usuario no tiene autorización para realizar esta operación!',
             type: 'error',
             confirmButtonText: 'Aceptar'
           });

@@ -37,7 +37,7 @@ export class BpCdpComponent implements OnInit {
       }
     });
 
-    this._CdpService.index().subscribe(
+    this._CdpService.indexRegister().subscribe(
 				response => {
           this.cdps = response.data;
           

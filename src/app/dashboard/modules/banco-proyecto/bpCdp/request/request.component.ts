@@ -28,6 +28,7 @@ export class RequestCdpComponent implements OnInit {
 
     public formIndex: any;
     public formSearch: any;
+    public formNew: any;
 
     public table: any;
 
@@ -79,6 +80,7 @@ constructor(
     onInitForms(){
         this.formIndex = false;
         this.formSearch = false;
+        this.formNew = false;
     }
 
     onInitTable() {
@@ -120,6 +122,7 @@ constructor(
 
                     this._ActividadService.select({ 'idProyecto': this.proyecto.id }, token).subscribe(
                         response => {
+                            this.formNew = true;
                             this.actividades = response;
 
                             error => {

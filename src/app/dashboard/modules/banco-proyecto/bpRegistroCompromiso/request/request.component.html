@@ -28,7 +28,7 @@
                             <td>{{ solicitud.solicitudNumero }}</td>
                             <td>{{ solicitud.cdp.actividad.cuenta.proyecto.numero }}</td>
                             <td>{{ solicitud.cdp.valor | currency: 'COP' }}</td>
-                            <td>{{ solicitud.solicitudFecha }}</td>
+                            <td>{{ (solicitud.solicitudFecha.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td>
                             <td>
                                 <div class="btn-group">
                                     <a href="{{ apiUrl }}bancoproyecto/bpregistrocompromiso/request/{{ solicitud.id }}/pdf" class="btn btn-success" target="_blank">
@@ -107,6 +107,18 @@
                                 </tr>
                                 <tr>
                                     <td>
+                                        <b>Costo proyecto: </b>
+                                        {{ cdp.actividad.cuenta.proyecto.costoTotal }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <b>Saldo proyecto: </b>
+                                        {{ cdp.actividad.cuenta.proyecto.saldoTotal }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
                                         <b>Número de cuenta: </b>
                                         {{ cdp.actividad.cuenta.numero }}
                                     </td>
@@ -125,7 +137,7 @@
         </div>
     </div>
 
-    <div class="col-xs-12 col-lg-8" *ngIf="cdp">
+    <div class="col-xs-12 col-lg-8" *ngIf="cdp && formNew">
         <div class="row">
             <div class="col-xs-12 col-lg-12">
                 <div class="card">
