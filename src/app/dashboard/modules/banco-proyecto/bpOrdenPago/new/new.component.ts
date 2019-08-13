@@ -1,36 +1,40 @@
 import { Component, OnInit,Output,EventEmitter } from '@angular/core';
-import { BpCdp } from '../bpCdp.modelo';
-import { BpCdpService } from '../../../../../services/bpCdp.service';
+import { BpOrdenPago } from '../bpOrdenPago.modelo';
+import { BpOrdenPagoService } from '../../../../../services/bpOrdenPago.service';
+import { BpRegistroCompromisoService } from '../../../../../services/bpRegistroCompromiso.service';
 import { PnalFuncionarioService } from '../../../../../services/pnalFuncionario.service';
 import { LoginService } from '../../../../../services/login.service';
 import swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-new-cdp',
+  selector: 'app-new-ordenpago',
   templateUrl: './new.component.html'
 })
 export class NewComponent implements OnInit {
   @Output() ready = new EventEmitter<any>();
-  public cdp: BpCdp;
+  public ordenPago: BpOrdenPago;
   public errorMessage;
 
-  public numeroSolicitud: any = null;
-  public solicitud: any = null;
+  public numeroRegistroCompromiso: any = null;
+  public registroCompromiso: any = null;
   public funcionario: any = null;
 
-  public formIndex: any;
-  public formSearch: any;
-  public formNew: any;
+  public formSearch: any = true;
+
+  public tiposPago = [
+    { 'value': 'PAGO DE ANTICIPO', 'label': 'PAGO DE ANTICIPO' },
+    { 'value': 'PAGO PARCIAL', 'label': 'PAGO PARCIAL' },
+    { 'value': 'PAGO TOTAL', 'label': 'PAGO TOTAL' },
+  ];
 
   constructor(
     private _FuncionarioService: PnalFuncionarioService,
-    private _CdpService: BpCdpService,
+    private _OrdenPagoService: BpOrdenPagoService,
+    private _RegistroCompromisoService: BpRegistroCompromisoService,
     private _LoginService: LoginService,
   ){}
 
   ngOnInit() {
-    this.onInitForms();
-
     swal({
       title: 'Cargando Datos!',
       text: 'Solo tardara unos segundos por favor espere.',
@@ -39,7 +43,7 @@ export class NewComponent implements OnInit {
       }
     });
 
-    this.cdp = new BpCdp(null, null, null, null, null, null);
+    this.ordenPago = new BpOrdenPago(null, null, null, null, null, null);
 
     let token = this._LoginService.getToken();
 
@@ -49,13 +53,12 @@ export class NewComponent implements OnInit {
       response => {
         if (response.code == 200) {
           this.funcionario = response.data;
-          this.formSearch = true;
 
           swal.close();
         } else {
           swal({
             title: 'Error!',
-            text: 'Su usuario no tiene autorización para realizar esta operación!',
+            text: 'Su usuario no tiene autorización para realizar facturación!',
             type: 'error',
             confirmButtonText: 'Aceptar'
           });
@@ -71,17 +74,11 @@ export class NewComponent implements OnInit {
     );
   }
 
-  onInitForms(){
-    this.formIndex = false;
-    this.formSearch = false;
-    this.formNew = false;
-  }
-
   onCancelar(){
     this.ready.emit(true);
   }
 
-  onSearchSolicitud() {
+  onSearchRegistroCompromiso() {
     swal({
       title: 'Buscando solicitud!',
       text: 'Solo tardara unos segundos por favor espere.',
@@ -92,10 +89,10 @@ export class NewComponent implements OnInit {
 
     let token = this._LoginService.getToken();
 
-    this._CdpService.searchSolicitudByNumero({ 'numero': this.numeroSolicitud }, token).subscribe(
+    this._RegistroCompromisoService.searchByNumero({ 'numero': this.numeroRegistroCompromiso }, token).subscribe(
       response => {
         if (response.code == 200) {
-          this.solicitud = response.data;
+          this.registroCompromiso = response.data;
 
           swal.close();
         } else {
@@ -106,7 +103,7 @@ export class NewComponent implements OnInit {
             confirmButtonText: 'Aceptar'
           });
 
-          this.solicitud = null;
+          this.registroCompromiso = null;
         }
         error => {
           this.errorMessage = <any>error;
@@ -122,12 +119,12 @@ export class NewComponent implements OnInit {
   onEnviar(){
     let token = this._LoginService.getToken();
 
-    this.cdp.idFuncionario = this.funcionario.id;
-    this.cdp.id = this.solicitud.id;
+    this.ordenPago.idRegistroCompromiso = this.registroCompromiso.id;
     
-		this._CdpService.register(this.cdp, token).subscribe(
+		this._OrdenPagoService.register(this.ordenPago, token).subscribe(
 			response => {
-        if(response.code == 200){
+        if(response.status == 'success'){
+          this.ready.emit(true);
           swal({
             title: 'Perfecto!',
             text: response.message,

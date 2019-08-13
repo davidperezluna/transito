@@ -4,7 +4,7 @@
         <div class="card">
           <div class="card-header">
             <h5>
-              <b class="text-uppercase">CDP</b>
+              <b class="text-uppercase">Registros de compromiso</b>
               <div class="btn-group pull-right">
                 <button (click)="onNew()" class="btn btn-default">
                   <i class="fa fa-plus"></i>
@@ -19,40 +19,24 @@
                 <tr>
                     <th>#</th>
                     <th>Solicitud</th>
-                    <th>Número</th>
                     <th>Proyecto</th>
-                    <th>Cuenta</th>
+                    <th>Valor</th>
                     <th>Acciones</th>
                 </tr>
               </thead>
               <tbody>
-                <tr class="odd" *ngFor="let cdp of cdps; let i = index">
+                <tr class="odd" *ngFor="let orden of ordenes; let i = index">
                   <td>{{ i + 1 }}</td>
-                  <td>{{ cdp.solicitudNumero }}</td>
-                  <td>{{ cdp.numero }}</td>
-                  <td>
-                    <b>Nombre</b><br>
-                    {{ cdp.actividad.cuenta.proyecto.nombre }}
-                    <br><b>Costo total</b><br>
-                    {{ cdp.actividad.cuenta.proyecto.costoTotal }}
-                    <br><b>Saldo total</b><br>
-                    {{ cdp.actividad.cuenta.proyecto.saldoTotal }}
-                  </td>
-                  <td>
-                    <b>Número</b><br>
-                    {{ cdp.actividad.cuenta.numero }}
-                    <br><b>Nombre</b><br>
-                    {{ cdp.actividad.cuenta.nombre }}
-                    <br><b>Costo total</b><br>
-                    {{ cdp.actividad.cuenta.costoTotal }}
-                  </td>
+                  <td>{{ orden.numero }}</td>
+                  <td>{{ orden.regostroCompromiso.cdp.actividad.cuenta.proyecto.nombre }}</td>
+                  <td>{{ orden.valor }}</td>
                   <td>
                     <div class="btn-group">
                       <!--
-                        <button (click)="onEdit(cdp)" class="btn btn-xs btn-primary" type="button">
+                        <button (click)="onEdit(orden)" class="btn btn-xs btn-primary" type="button">
                           <i class="fa fa-pencil"></i>
                         </button> 
-                        <button (click)="onDelete(cdp.id)"  class="btn btn-xs btn-danger" type="button">
+                        <button (click)="onDelete(orden.id)"  class="btn btn-xs btn-danger" type="button">
                           <i class="fa fa-trash"></i>
                         </button> 
                       -->
@@ -67,5 +51,5 @@
       </div>
   </div>
 
-  <app-new-cdp *ngIf='formNew'></app-new-cdp>
+  <app-new-ordenpago *ngIf='formNew'></app-new-ordenpago>
 </div>

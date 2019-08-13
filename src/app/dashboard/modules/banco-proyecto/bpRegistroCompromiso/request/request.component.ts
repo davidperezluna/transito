@@ -1,6 +1,5 @@
 import { Component, OnInit,Output,EventEmitter } from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
-import { BpRegistroCompromiso } from '../bpRegistroCompromiso.modelo';
 import { BpRegistroCompromisoService } from '../../../../../services/bpRegistroCompromiso.service';
 import { BpCdpService } from '../../../../../services/bpCdp.service';
 import { UserCfgTipoIdentificacionService } from '../../../../../services/userCfgTipoIdentificacion.service';
@@ -12,7 +11,7 @@ declare var $: any;
 
 @Component({
     selector: 'app-request-registrocompromiso',
-  templateUrl: './request.component.html'
+    templateUrl: './request.component.html'
 })
 
 export class RequestCompromisoComponent implements OnInit {
@@ -32,6 +31,7 @@ export class RequestCompromisoComponent implements OnInit {
 
     public formIndex: any;
     public formSearch: any;
+    public formNew: any;
 
     public table: any;
 
@@ -68,7 +68,7 @@ export class RequestCompromisoComponent implements OnInit {
             }
         });
 
-        this._CdpService.index().subscribe(
+        this._RegistroCompromisoService.index().subscribe(
             response => {
                 this.solicitudes = response.data;
                 let timeoutId = setTimeout(() => {
@@ -106,6 +106,7 @@ export class RequestCompromisoComponent implements OnInit {
     onInitForms(){
         this.formIndex = false;
         this.formSearch = false;
+        this.formNew = false;
     }
 
     onInitTable() {
@@ -143,6 +144,7 @@ export class RequestCompromisoComponent implements OnInit {
         this._CdpService.searchByNumero({ 'numero': this.numero }, token).subscribe(
             response => {
                 if (response.code == 200) {
+                    this.formNew = true;
                     this.cdp = response.data;
 
                     swal.close();
@@ -154,6 +156,7 @@ export class RequestCompromisoComponent implements OnInit {
                         confirmButtonText: 'Aceptar'
                     });
 
+                    this.formNew = false;
                     this.cdp = null;
                 }
                 error => {
@@ -200,7 +203,9 @@ export class RequestCompromisoComponent implements OnInit {
                     if (response.code == 200) {
                         if (response.data.ciudadano) {
                             this.ciudadano = response.data.ciudadano;
+                            this.datos.idCiudadano = this.ciudadano.id;
                             this.empresa = null;
+                            this.datos.idEmpresa = this.empresa;
                             
                             swal({
                                 title: 'Perfecto!',
@@ -221,7 +226,9 @@ export class RequestCompromisoComponent implements OnInit {
                         }
                     } else {
                         this.ciudadano = null;
+                        this.datos.idCiudadano = this.ciudadano;
                         this.empresa = null;
+                        this.datos.idEmpresa = this.empresa.id;
                         
                         swal({
                             title: 'Error!',

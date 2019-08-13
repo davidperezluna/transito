@@ -12,7 +12,7 @@
                         <form #formSearch="ngForm">
                             <label>Buscar solicitud de registro de compromiso</label>
                             <div class="input-group">
-                                <input type="numeric" class="form-control" placeholder="Número de proyecto"
+                                <input type="numeric" class="form-control" placeholder="Número de solicitud"
                                     [(ngModel)]="numeroSolicitud" name="numeroSolicitud" required />
                                 <span class="input-group-btn">
                                     <button (click)="onSearchSolicitud()" [disabled]="formSearch.invalid"
@@ -32,25 +32,25 @@
                                 <tr>
                                     <td>
                                         <b>Número: </b>
-                                        {{ solicitud.actividad.cuenta.proyecto.numero }}
+                                        {{ solicitud.cdp.actividad.cuenta.proyecto.numero }}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <b>Nombre: </b>
-                                        {{ solicitud.actividad.cuenta.proyecto.nombre }}
+                                        {{ solicitud.cdp.actividad.cuenta.proyecto.nombre }}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <b>Fecha: </b>
-                                        {{ solicitud.actividad.cuenta.proyecto.fecha }}
+                                        {{ solicitud.cdp.actividad.cuenta.proyecto.fecha }}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <b>Costo total: </b>
-                                        {{ solicitud.actividad.cuenta.proyecto.costoTotal | currency: 'COP' }}
+                                        {{ solicitud.cdp.actividad.cuenta.proyecto.costoTotal | currency: 'COP' }}
                                     </td>
                                 </tr>
                             </tbody>
@@ -78,45 +78,45 @@
                         <tr>
                             <td>
                                 <b>Número</b><br>
-                                {{ solicitud.actividad.cuenta.numero }}
+                                {{ solicitud.cdp.actividad.cuenta.numero }}
                                 <br>
                                 <b>Nombre</b><br>
-                                {{ solicitud.actividad.cuenta.nombre }}
+                                {{ solicitud.cdp.actividad.cuenta.nombre }}
                             </td>
                             <td>
                                 <b>Número</b><br>
-                                {{ solicitud.actividad.numero }}
+                                {{ solicitud.cdp.actividad.numero }}
                                 <br>
                                 <b>Nombre</b><br>
-                                {{ solicitud.actividad.nombre }}
+                                {{ solicitud.cdp.actividad.nombre }}
                                 <br>
                                 <b>Valor</b><br>
-                                {{ solicitud.actividad.costoTotal }}
+                                {{ solicitud.cdp.actividad.costoTotal }}
                             </td>
                         </tr>
                     </tbody>
                 </table>
         
                 <form #formNew="ngForm">
-                    <div class="form-group row">
-                        <div class="col-xs-12 col-lg-12">
+                    <div class="row">
+                        <div class="col-xs-12 col-lg-4">
                             <label>Fecha expedición</label>
                             <input class="form-control" [(ngModel)]="registro.fechaExpedicion" name="fechaExpedicion" type="date"
                                 required>
                         </div>
-        
-                        <div class="col-xs-12 col-lg-12">
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-lg-4">
                             <label>No. contrato</label>
-                            <input class="form-control text-uppercase" [(ngModel)]="registro.contratoNumero"
-                                name="contratoNumero" type="text" required>
+                            <input class="form-control text-uppercase" [(ngModel)]="registro.contratoNumero" name="contratoNumero" type="text" required>
                         </div>
         
-                        <div class="col-xs-12 col-lg-12">
+                        <div class="col-xs-12 col-lg-4">
                             <label>Tipo contrato</label>
                             <ng-select [multiple]="false" [options]="tiposContrato" [(ngModel)]="registro.contratoTipo" name="contratoTipo" required></ng-select>
                         </div>
         
-                        <div class="col-xs-12 col-lg-12">
+                        <div class="col-xs-12 col-lg-4">
                             <label>Estado contrato</label>
                             <ng-select [multiple]="false" [options]="estadosContrato" [(ngModel)]="registro.contratoEstado" name="contratoEstado" required></ng-select>
                         </div>

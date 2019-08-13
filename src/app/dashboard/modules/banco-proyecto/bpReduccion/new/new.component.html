@@ -1,0 +1,105 @@
+<div class="row">
+    <div class="col-xs-12 col-lg-4">
+        <div class="card">
+            <div class="card-header">
+                <b class="text-uppercase">Registrar orden de pago</b>
+                <br>
+                <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-xs-12 col-lg-12">
+                        <form #formSearch="ngForm">
+                            <label>Buscar registro de compromiso</label>
+                            <div class="input-group">
+                                <input type="numeric" class="form-control" placeholder="Número de registro"
+                                    [(ngModel)]="numeroRegistroCompromiso" name="numeroRegistroCompromiso" required />
+                                <span class="input-group-btn">
+                                    <button (click)="onSearchRegistroCompromiso()" [disabled]="formSearch.invalid"
+                                        class="btn btn-default btn-primary" type="button">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="row" *ngIf="registroCompromiso">
+                    <div class="col-xs-12 col-lg-12">
+                        <table class="table table-bordered table-striped">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <b>Número: </b>
+                                        {{ registroCompromiso.cdp.actividad.cuenta.proyecto.numero }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <b>Nombre: </b>
+                                        {{ registroCompromiso.cdp.actividad.cuenta.proyecto.nombre }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <b>Fecha: </b>
+                                        {{ registroCompromiso.cdp.actividad.cuenta.proyecto.fecha }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <b>Costo total: </b>
+                                        {{ registroCompromiso.cdp.actividad.cuenta.proyecto.costoTotal | currency: 'COP' }}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-lg-8" *ngIf="registroCompromiso">
+        <div class="card">
+            <div class="card-header">
+                <b class="text-uppercase">Registrar orden de pago</b>
+            </div>
+            <div class="card-body">      
+                <form #formNew="ngForm">
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Fecha expedición</label>
+                            <input class="form-control" [(ngModel)]="ordenPago.fecha" name="fecha" type="date"
+                                required>
+                        </div>
+        
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Tipo</label>
+                            <ng-select [multiple]="false" [options]="tiposPago" [(ngModel)]="ordenPago.tipo" name="tipo" required></ng-select>
+                        </div>
+
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Observaciones</label>
+                            <textarea class="form-control" rows="4" [(ngModel)]="ordenPago.concepto" name="concepto"></textarea>
+                        </div>
+                        
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Valor</label>
+                            <input class="form-control text-uppercase" [(ngModel)]="ordenPago.valor" name="valor" type="text" required>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <div class="btn-group">
+                    <button (click)="onEnviar()" class="btn btn-primary" type="button">
+                        <i class="fa fa-save"></i>
+                        Enviar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

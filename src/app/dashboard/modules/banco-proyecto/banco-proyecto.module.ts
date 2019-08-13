@@ -7,13 +7,14 @@ import { TooltipModule } from "ngx-tooltip";
 
 import { BpActividadComponent } from './bpActividad/bpActividad.component';
 import { BpCdpComponent } from './bpCdp/bpCdp.component';
+import { RequestCdpComponent } from './bpCdp/request/request.component';
 import { BpRegistroCompromisoComponent } from './bpRegistroCompromiso/bpRegistroCompromiso.component';
+import { RequestCompromisoComponent } from './bpRegistroCompromiso/request/request.component';
 import { BpCfgTipoInsumoComponent } from './bpCfgTipoInsumo/bpCfgTipoInsumo.component';
 import { BpCuentaComponent } from './bpCuenta/bpCuenta.component';
 import { BpInsumoComponent } from './bpInsumo/bpInsumo.component';
 import { BpProyectoComponent } from './bpProyecto/bpProyecto.component';
-import { RequestCdpComponent } from './bpCdp/request/request.component';
-import { RequestCompromisoComponent } from './bpRegistroCompromiso/request/request.component';
+import { BpOrdenPagoComponent } from './bpOrdenPago/bpOrdenPago.component';
 
 import { BancoProyectoRoutingModule } from './banco-proyecto-routing.module';
 import { BpActividadModule } from './bpActividad/bpActividad.module';
@@ -23,6 +24,7 @@ import { BpCfgTipoInsumoModule } from './bpCfgTipoInsumo/bpCfgTipoInsumo.module'
 import { BpCuentaModule } from './bpCuenta/bpCuenta.module';
 import { BpInsumoModule } from './bpInsumo/bpInsumo.module';
 import { BpProyectoModule } from './bpProyecto/bpProyecto.module';
+import { BpOrdenPagoModule } from './bpOrdenPago/bpOrdenPago.module';
 
 @NgModule({
   imports: [
@@ -39,6 +41,7 @@ import { BpProyectoModule } from './bpProyecto/bpProyecto.module';
     BpCuentaModule,
     BpInsumoModule,
     BpProyectoModule,
+    BpOrdenPagoModule,
   ],
   declarations: [
     BpActividadComponent,
@@ -48,6 +51,7 @@ import { BpProyectoModule } from './bpProyecto/bpProyecto.module';
     BpCuentaComponent,
     BpInsumoComponent,
     BpProyectoComponent,
+    BpOrdenPagoComponent,
     RequestCdpComponent,
     RequestCompromisoComponent,
   ]
