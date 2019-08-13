@@ -97,7 +97,10 @@
                                 <tr>
                                     <th><b>NRO. FACTURA</b></th>
                                     <th><b>NRO. COMPARENDO</b></th>
+                                    <th><b>CÓDIGO INFRACCIÓN</b></th>
                                     <th><b>IDENTIFICACIÓN INFRACTOR</b></th>
+                                    <th><b>NOMBRES INFRACTOR</b></th>
+                                    <th><b>APELLIDOS INFRACTOR</b></th>
                                     <th><b>PORCENTAJE DESCUENTO</b></th>
                                     <th><b>VALOR DESCUENTO</b></th>
                                     <th><b>TOTAL</b></th>
@@ -107,7 +110,10 @@
                                 <tr class="odd" *ngFor="let infraccion of infracciones; let i = index">
                                     <td>{{ infraccion.numeroFactura }}</td>
                                     <td>{{ infraccion.numeroConsecutivo }}</td>
+                                    <td>{{ infraccion.codigoInfraccion }}</td>
                                     <td>{{ infraccion.infractorIdentificacion }}</td>
+                                    <td>{{ infraccion.infractorNombres }}</td>
+                                    <td>{{ infraccion.infractorApellidos }}</td>
                                     <td>{{ infraccion.porcentajeDescuento }}</td>
                                     <td>--</td>
                                     <td>{{ infraccion.total }}</td>
@@ -127,7 +133,8 @@
                                     <td><b>Nombre completo Infractor</b></td>
                                     <td><b>Cod. Infracción</b></td>
                                     <td><b>Nro. Factura</b></td>
-                                    <td><b>Valor</b></td>
+                                    <td><b>Valor Cancelado</b></td>
+                                    <td><b>Valor Adeudado</b></td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -139,6 +146,7 @@
                                     <td>{{ acuerdoPago.codigoInfraccion }}</td>
                                     <td>{{ acuerdoPago.numeroFactura }}</td>
                                     <td>{{ acuerdoPago.total }}</td>
+                                    <td>{{ acuerdoPago.valorAdeudado }}</td>
                                 </tr>
                                 <!-- <tr>
                                     <td colspan="5"><b>TOTAL</b></td>

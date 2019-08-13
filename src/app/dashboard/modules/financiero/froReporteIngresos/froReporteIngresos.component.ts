@@ -244,6 +244,7 @@ export class FroReporteIngresosComponent implements OnInit {
                             title: 'Reporte Infracciones_' + this.nombreOrganismoTransito,
                             messageBottom: 'TOTAL: ' + this.totalInfracciones,
                             extend: 'pdfHtml5',
+                            orientation: 'landscape',
                             text: 'PDF',
                             filename: 'Reporte_Infracciones_' + this.nombreOrganismoTransito + '_' + this.fecha,
                         },
