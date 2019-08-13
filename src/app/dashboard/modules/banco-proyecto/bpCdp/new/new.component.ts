@@ -39,7 +39,7 @@ export class NewComponent implements OnInit {
       }
     });
 
-    this.cdp = new BpCdp(null, null, null, null, null, null);
+    this.cdp = new BpCdp(null, null, null, null, null);
 
     let token = this._LoginService.getToken();
 

@@ -49,7 +49,7 @@ export class NewComponent implements OnInit {
       }
     });
 
-    this.registro = new BpRegistroCompromiso(null, null, null, null, null, null, null);
+    this.registro = new BpRegistroCompromiso(null, null, null, null, null);
 
     let token = this._LoginService.getToken();
 

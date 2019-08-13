@@ -69,9 +69,14 @@
             <div class="card-body">
                 <table class="table table-bordered table-striped">
                     <thead>
-                        <tr>
-                            <td>Cuenta</td>
-                            <td>Actividad</td>
+                        <tr class="text-justify">
+                            <td colspan="2">
+                                <b>Concepto:</b> {{ solicitud.concepto }}
+                            </td>
+                        </tr>
+                        <tr class="text-center">
+                            <td><b class="text-uppercase">Cuenta</b></td>
+                            <td><b class="text-uppercase">Actividad</b></td>
                         </tr>
                     </thead>
                     <tbody>
@@ -99,21 +104,15 @@
                             <label>Fecha expedición</label>
                             <input class="form-control" [(ngModel)]="cdp.fechaExpedicion" name="fechaExpedicion" type="date" required>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12 col-lg-6">
-                            <label>Identificación tercero</label>
-                            <input class="form-control text-uppercase" [(ngModel)]="cdp.terceroIdentificacion" name="terceroIdentificacion" type="text" required>
-                        </div>
-        
-                        <div class="col-xs-12 col-lg-6">
-                            <label>Nombre tercero</label>
-                            <input class="form-control text-uppercase" [(ngModel)]="cdp.terceroNombre" name="terceroNombre" type="text" required>
-                        </div>
+
+                        <div class="col-xs-12 col-lg-8">
+                            <label>Número</label>
+                            <input class="form-control text-uppercase" [(ngModel)]="cdp.numero" name="numero" type="text" required>
+                        </div>                    
         
                         <div class="col-xs-12 col-lg-12">
                             <label>Observaciones</label>
-                            <textarea class="form-control" [(ngModel)]="cdp.observaciones" rows='4' name="observaciones" required></textarea>
+                            <textarea class="form-control" [(ngModel)]="cdp.observaciones" rows='4' name="observaciones"></textarea>
                         </div>
                     </div>
                 </form>

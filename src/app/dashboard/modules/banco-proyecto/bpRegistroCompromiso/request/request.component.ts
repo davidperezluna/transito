@@ -36,6 +36,9 @@ export class RequestCompromisoComponent implements OnInit {
     public table: any;
 
     public datos = {
+        'fecha': null,
+        'valor': null,
+        'concepto': null,
         'cuentaNumero': null,
         'cuentaTipo': null,
         'bancoNombre': null,
