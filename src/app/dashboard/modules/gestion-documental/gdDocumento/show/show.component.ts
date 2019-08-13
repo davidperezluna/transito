@@ -4,6 +4,7 @@ import { CfgDepartamentoService } from '../../../../../services/cfgDepartamento.
 import { CfgMunicipioService } from '../../../../../services/cfgMunicipio.service';
 import { GdCfgTipoCorrespondenciaService } from '../../../../../services/gdCfgTipoCorrespondencia.service';
 import { GdCfgMedioCorrespondenciaService } from '../../../../../services/gdCfgMedioCorrespondencia.service';
+import { CvCdoComparendoService } from '../../../../../services/cvCdoComparendo.service';
 import { LoginService } from '../../../../../services/login.service';
 import { environment } from 'environments/environment';
 import swal from 'sweetalert2';
@@ -31,7 +32,8 @@ export class ShowComponent implements OnInit {
   public departamentoSelected: any;
   public tiposCorrespondencia: any;
   public mediosCorrespondencia: any;
-  public comparendo: any = false;
+  public contravencional: any = false;
+  public comparendo: any = null;
   
   public datos = {
     'observaciones': null,
@@ -45,7 +47,8 @@ constructor(
   private _MunicipioService: CfgMunicipioService,
   private _TipoCorrespondenciaService: GdCfgTipoCorrespondenciaService,
   private _MedioCorrespondenciaService: GdCfgMedioCorrespondenciaService,
-  private _loginService: LoginService,
+  private _ComparendoService: CvCdoComparendoService,
+  private _LoginService: LoginService,
   ){}
 
   ngOnInit() {
@@ -98,6 +101,46 @@ constructor(
     this.ready.emit(true);
   }
 
+  onSearchComparendo() {
+    swal({
+      title: 'Buscando consecutivo',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+
+      let token = this._LoginService.getToken();
+
+
+    /*this._FuncionarioService.show({ 'id': this.search.idFuncionario }, token).subscribe(
+      response => {
+        if (response.status == 'success') {
+          this.funcionario = response.data;
+          this.comparendo.idFuncionario = this.funcionario.id;
+
+          
+        } else {
+          swal({
+            title: 'Error!',
+            text: response.message,
+            type: 'error',
+            confirmButtonText: 'Aceptar'
+          });
+        }
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );*/
+    
+  }
+
   onFileChange(event) {
     if (event.target.files.length > 0) {
       this.fileSelected = event.target.files[0];
@@ -108,7 +151,7 @@ constructor(
   }
 
   onChangedDepartamento(id) {
-    let token = this._loginService.getToken();
+    let token = this._LoginService.getToken();
     if (id) {
       this._MunicipioService.selectByDepartamento({'idDepartamento':id}, token).subscribe(
         response => {
@@ -127,7 +170,7 @@ constructor(
 
   onChangedTipoCorrespondencia(event) {
     if (event !== undefined) {
-      let token = this._loginService.getToken();
+      let token = this._LoginService.getToken();
 
       this._TipoCorrespondenciaService.show({ 'idTipoCorrespondencia': event }, token).subscribe(
         response => {
@@ -152,7 +195,7 @@ constructor(
     if (this.fileSelected) {
       this.datos.documento = this.documento;
 
-      let token = this._loginService.getToken();
+      let token = this._LoginService.getToken();
 
       this._DocumentoService.update(this.file, this.datos, token).subscribe(
         response => {

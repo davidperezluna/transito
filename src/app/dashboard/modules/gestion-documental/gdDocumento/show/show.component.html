@@ -98,13 +98,26 @@
                         <div class="container">
                             <div class="col-xs-12 col-lg-12">
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" [(ngModel)]="comparendo" class="custom-control-input" id="comparendo" name="comparendo">
-                                    <label class="custom-control-label" for="comparendo">Relacionado con comparendo</label>
+                                    <input type="checkbox" [(ngModel)]="contravencional" class="custom-control-input" id="contravencional" name="contravencional">
+                                    <label class="custom-control-label" for="contravencional">Proceso contravencional</label>
                                 </div>
                             </div>
-                            <div class="col-xs-12 col-lg-6" *ngIf="comparendo">
-                                <label>Digite el No. de comparendo </label>
-                                <input class="form-control" [(ngModel)]="documento.numeroComparendo" name="numeroComparendo" type="text">
+
+                            <div class="row" *ngIf="contravencional">
+                                <div class="col-xs-12 col-lg-12">
+                                    <form #formSearch="ngForm">
+                                        <label>Digite el No. de comparendo</label>
+                                        <div class="input-group">
+                                            <input class="form-control" [(ngModel)]="documento.numeroComparendo" name="numeroComparendo" type="text">
+                                            <span class="input-group-btn">
+                                                <button (click)="onSearchComparendo()" [disabled]="formSearch.invalid"
+                                                    class="btn btn-default btn-primary" type="button">
+                                                    <i class="fa fa-search"></i>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                         <div class="col-xs-12 col-lg-12">
