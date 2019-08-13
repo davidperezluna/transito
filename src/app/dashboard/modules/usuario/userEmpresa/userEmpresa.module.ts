@@ -4,10 +4,12 @@ import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { SelectModule } from 'angular2-select';
 
 import { UserEmpresaService } from '../../../../services/userEmpresa.service';
-import { UserEmpresaSucursalService } from '../../../../services/userEmpresaSucursal.service';
+import { CfgMunicipioService } from '../../../../services/cfgMunicipio.service';
 import { UserCfgEmpresaTipoService } from '../../../../services/userCfgEmpresaTipo.service';
+import { UserCiudadanoService } from '../../../../services/userCiudadano.service';
 import { UserCfgEmpresaTipoSociedadService } from '../../../../services/userCfgEmpresaTipoSociedad.service';
-import { UserEmpresaRepresentanteService } from '../../../../services/userEmpresaRepresentante.service';
+import { UserCfgTipoIdentificacionService } from '../../../../services/userCfgTipoIdentificacion.service';
+import { UserCfgEmpresaServicioService } from '../../../../services/userCfgEmpresaServicio.service';
 
 import { NewEmpresaComponent } from './new/new.component';
 import { ShowComponent } from './show/show.component';
@@ -39,10 +41,12 @@ import { EditSucursalComponent } from './sucursal/edit/edit.component';
     ],
     providers: [
         UserEmpresaService,
+        CfgMunicipioService,
         UserCfgEmpresaTipoService,
+        UserCiudadanoService,
         UserCfgEmpresaTipoSociedadService,
-        UserEmpresaSucursalService,
-        UserEmpresaRepresentanteService
+        UserCfgTipoIdentificacionService,
+        UserCfgEmpresaServicioService,
     ]
 })
 
