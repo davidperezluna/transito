@@ -7,9 +7,9 @@ declare var $: any;
 
 @Component({
   selector: 'app-index-registrocompromiso',
-  templateUrl: './bpOrdenPago.component.html'
+  templateUrl: './bpReduccion.component.html'
 })
-export class BpOrdenPagoComponent implements OnInit {
+export class BpReduccionComponent implements OnInit {
   public errorMessage;
 	public id;
 

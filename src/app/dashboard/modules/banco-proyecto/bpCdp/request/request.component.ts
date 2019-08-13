@@ -33,6 +33,9 @@ export class RequestCdpComponent implements OnInit {
     public table: any;
 
     public datos = {
+        'fecha': null,
+        'valor': null,
+        'concepto': null,
         'idActividad': null
     };
 
@@ -54,7 +57,7 @@ constructor(
             }
         });
 
-        this.cdp = new BpCdp(null, null, null, null, null, null);
+        this.cdp = new BpCdp(null, null, null, null, null);
 
         this._CdpService.index().subscribe(
             response => {

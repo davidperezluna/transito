@@ -95,6 +95,12 @@
                                 </tr>
                                 <tr>
                                     <td>
+                                        <b>Concepto: </b>
+                                        {{ cdp.concepto }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
                                         <b>Número proyecto: </b>
                                         {{ cdp.actividad.cuenta.proyecto.numero }}
                                     </td>
@@ -157,8 +163,7 @@
                                         </div>
                                         <div class="col-xs-12 col-lg-6">
                                             <div class="input-group">
-                                                <input type="text" class="form-control" placeholder="Identificacion"
-                                                    [(ngModel)]="identificacion" name="identificacion" required />
+                                                <input type="text" class="form-control" placeholder="Identificacion" [(ngModel)]="identificacion" name="identificacion" required />
                                                 <span class="input-group-btn">
                                                     <button (click)="onSearchCiudadano()" class="btn btn-default btn-success" type="button">
                                                         <i class="fa fa-search"></i>
@@ -206,16 +211,33 @@
                         <form #formNew="ngForm" *ngIf='ciudadano'>
                             <div class="row">
                                 <div class="col-xs-12 col-lg-4">
+                                    <label>Fecha expedición</label>
+                                    <input class="form-control" [(ngModel)]="datos.fecha" name="fecha" type="date" required>
+                                </div>
+
+                                <div class="col-xs-12 col-lg-8">
+                                    <label>Valor</label>
+                                    <input class="form-control" [(ngModel)]="datos.valor" name="valor" type="numeric" required>
+                                </div>
+
+                                <div class="col-xs-12 col-lg-4">
                                     <label>No. cuenta bancaria</label>
                                     <input type="numeric" class="form-control" [(ngModel)]="datos.cuentaNumero" name="cuentaNumero" required />
                                 </div>
+
                                 <div class="col-xs-12 col-lg-4">
                                     <label>Tipo de cuenta</label>
                                     <ng-select [multiple]="false" [options]="tiposCuenta" [(ngModel)]="datos.cuentaTipo" name="cuentaTipo" required></ng-select>
                                 </div>
+
                                 <div class="col-xs-12 col-lg-4">
                                     <label>Nombre del banco</label>
                                     <input type="text" class="form-control text-uppercase" [(ngModel)]="datos.bancoNombre" name="bancoNombre" required />
+                                </div>
+
+                                <div class="col-xs-12 col-lg-12">
+                                    <label>Concepto</label>
+                                    <textarea class="form-control text-uppercase" [(ngModel)]="datos.concepto" rows='4' name="concepto" required></textarea>
                                 </div>
                             </div>
                         </form>
