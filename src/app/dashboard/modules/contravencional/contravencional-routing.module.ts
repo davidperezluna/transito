@@ -34,12 +34,12 @@ const routes: Routes = [
   {
     path: 'cvAuCfgTipo',
     component: CvAuCfgTipoComponent
-  },
+  },*/
   {
     path: 'cvAudiencia',
     component: CvAudienciaComponent
   },
-  {
+  /*{
     path: 'cvCdoCfgDescuento',
     component: CvCdoCfgDescuentoComponent
   },
