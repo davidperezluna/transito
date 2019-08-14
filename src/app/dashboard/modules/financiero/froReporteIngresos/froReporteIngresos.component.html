@@ -118,10 +118,6 @@
                                     <td>--</td>
                                     <td>{{ infraccion.total }}</td>
                                 </tr>
-                                <!-- <tr>
-                                    <td colspan="5"><b>TOTAL</b></td>
-                                    <td>{{ totalInfracciones }}</td>
-                                </tr> -->
                             </tbody>
                         </table>
                         <table class="table" id="dataTables-acuerdosPago" *ngIf="acuerdosPago && acuerdosPago.length > 0">
@@ -133,6 +129,8 @@
                                     <td><b>Nombre completo Infractor</b></td>
                                     <td><b>Cod. Infracción</b></td>
                                     <td><b>Nro. Factura</b></td>
+                                    <td><b>Nro. Cuota Pagada</b></td>
+                                    <td><b>Estado</b></td>
                                     <td><b>Valor Cancelado</b></td>
                                     <td><b>Valor Adeudado</b></td>
                                 </tr>
@@ -145,13 +143,11 @@
                                     <td>{{ acuerdoPago.nombreCompletoInfractor }}</td>
                                     <td>{{ acuerdoPago.codigoInfraccion }}</td>
                                     <td>{{ acuerdoPago.numeroFactura }}</td>
+                                    <td>{{ acuerdoPago.numeroCuotaPagada }}</td>
+                                    <td>{{ acuerdoPago.estado }}</td>
                                     <td>{{ acuerdoPago.total }}</td>
                                     <td>{{ acuerdoPago.valorAdeudado }}</td>
                                 </tr>
-                                <!-- <tr>
-                                    <td colspan="5"><b>TOTAL</b></td>
-                                    <td>{{ totalInfracciones }}</td>
-                                </tr> -->
                             </tbody>
                         </table>
                         <table class="table" id="dataTables-parqueadero" *ngIf="inmovilizaciones && inmovilizaciones.length > 0">
