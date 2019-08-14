@@ -9,7 +9,7 @@ import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
-    selector: 'app-record',
+    selector: 'app-record-frotrteprecio',
     templateUrl: './record.component.html'
 })
 

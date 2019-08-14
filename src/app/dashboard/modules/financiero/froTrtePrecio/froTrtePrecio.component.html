@@ -126,15 +126,15 @@
         </div>
 
         <div class="col-xs-12 col-lg-9" *ngIf='formNew'>
-            <app-new (ready)="ready($event)" (search)="onSearch()" [modulo]="modulo"></app-new>
+            <app-new-frotrteprecio (ready)="ready($event)" (search)="onSearch()" [modulo]="modulo"></app-new-frotrteprecio>
         </div>
 
         <div class="col-xs-12 col-lg-9" *ngIf='formEdit'>
-            <app-edit (ready)="ready($event)" [tramitePrecio]="tramitePrecio"></app-edit>
+            <app-edit-frotrteprecio (ready)="ready($event)" [tramitePrecio]="tramitePrecio"></app-edit-frotrteprecio>
         </div>
     </div>
 
     <div class="col-xs-12 col-lg-12" *ngIf='formRecord'>
-        <app-record (ready)="ready($event)" [modulo]="modulo"></app-record>
+        <app-record-frotrteprecio (ready)="ready($event)" [modulo]="modulo"></app-record-frotrteprecio>
     </div>
 </div>

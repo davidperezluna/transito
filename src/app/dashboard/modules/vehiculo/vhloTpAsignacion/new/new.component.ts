@@ -106,13 +106,27 @@ export class NewComponent implements OnInit {
 
         this._VhloTpAsignacionService.searchVehiculo({ 'placa': this.placa }, token).subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                     this.vehiculo = response.data.vehiculo;
                     this.propietarios = response.data.propietarios;
+
+                    swal({
+                        title: response.title,
+                        text: response.message,
+                        type: response.status,
+                        confirmButtonText: 'Aceptar'
+                    })
 
                     let timeoutId = setTimeout(() => {
                         this.onInitTable();
                     }, 100);
+                } else {
+                    swal({
+                        title: response.title,
+                        text: response.message,
+                        type: response.status,
+                        confirmButtonText: 'Aceptar'
+                    })
                 }
             }
         );

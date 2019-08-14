@@ -133,7 +133,6 @@ export class VhloTpTarjetaOperacionComponent implements OnInit {
     }
 
     onInitTable() {
-        console.log(this.empresaHabilitadaCupo);
         if (this.table) {
             this.table.destroy();
         }
@@ -185,6 +184,7 @@ export class VhloTpTarjetaOperacionComponent implements OnInit {
             response => {
                 if (response.code == 200) {
                     this.empresaHabilitadaCupo = response.data;
+                    console.log(this.empresaHabilitadaCupo);
 
                     this._VhloTpTarjetaOperacionService.searchTarjetasOperacion({ 'idEmpresa': this.empresaHabilitadaCupo.id }, token).subscribe(
                         response => {

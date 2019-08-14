@@ -10,7 +10,7 @@ import swal from 'sweetalert2';
 import { environment } from 'environments/environment'
 
 @Component({
-    selector: 'app-new',
+    selector: 'app-new-frotrteprecio',
     templateUrl: './new.component.html'
 })
 export class NewComponent implements OnInit {
