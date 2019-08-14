@@ -17,7 +17,7 @@ declare var $: any;
 })
 export class VhloTpAsignacionComponent implements OnInit {
     public errorMessage;
-    public table: any;
+    public table: any = null;
     
     public fecha;
     public date;
