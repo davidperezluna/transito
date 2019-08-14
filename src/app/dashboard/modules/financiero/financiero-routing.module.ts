@@ -7,6 +7,7 @@ import { FroReporteIngresosComponent } from './froReporteIngresos/froReporteIngr
 import { FroTrteSolicitudComponent } from './froTrteSolicitud/froTrteSolicitud.component';
 import { NewRnaComponent } from './froTrteSolicitud/newRna/newRna.component';
 import { NewRnetComponent } from './froTrteSolicitud/newRnet/newRnet.component';
+import { FroTrtePrecioComponent } from './froTrtePrecio/froTrtePrecio.component';
 
 const routes: Routes = [
   {
@@ -32,6 +33,10 @@ const routes: Routes = [
   {
     path: 'tramitesolicitud/rnet',
     component: NewRnetComponent
+  },
+  {
+    path: 'froTrtePrecio',
+    component: FroTrtePrecioComponent
   },
 ]; 
 

@@ -50,15 +50,16 @@ import { NewRnetComponent } from './froTrteSolicitud/newRnet/newRnet.component';
     FroFacturaModule,
     FroReporteIngresosModule,
     FroTrteSolicitudModule,
+    FroTrtePrecioModule,
   ],
   declarations: [
     FroFacTramiteComponent,
     FroFacParqueaderoComponent,
     FroReporteIngresosComponent,
     FroTrteSolicitudComponent,
-    
     NewRnaComponent,
     NewRnetComponent,
+    FroTrtePrecioComponent,
   ]
 })
 export class FinancieroModule { }

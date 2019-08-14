@@ -96,6 +96,7 @@
                             <textarea class="form-control" [(ngModel)]="documento.descripcion" name="descripcion" rows="6" required></textarea>
                         </div>
                         <div class="container">
+                            <br>
                             <div class="col-xs-12 col-lg-12">
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" [(ngModel)]="contravencional" class="custom-control-input" id="contravencional" name="contravencional">
@@ -108,7 +109,7 @@
                                     <form #formSearch="ngForm">
                                         <label>Digite el No. de comparendo</label>
                                         <div class="input-group">
-                                            <input class="form-control" [(ngModel)]="documento.numeroComparendo" name="numeroComparendo" type="text">
+                                            <input class="form-control" [(ngModel)]="numeroComparendo" name="numeroComparendo" type="text">
                                             <span class="input-group-btn">
                                                 <button (click)="onSearchComparendo()" [disabled]="formSearch.invalid"
                                                     class="btn btn-default btn-primary" type="button">
@@ -118,7 +119,12 @@
                                         </div>
                                     </form>
                                 </div>
+                                <div class="col-xs-12 col-lg-12" *ngIf="comparendo">
+                                    <b>Fecha: </b>{{ comparendo.fecha }} | <b>Estado: </b>{{ comparendo.estado.nombre }}
+                                </div>
                             </div>
+                            <br>
+                            <br>
                         </div>
                         <div class="col-xs-12 col-lg-12">
                             <label>Adjuntar documento

@@ -25,6 +25,7 @@ export class SearchComponent implements OnInit{
   public acuerdoPago: any = null;
   public amortizaciones: any = null;
   public bienes: any = null;
+  public totalEmbargado: any = 0;
   public table: any;
 
   public filtro: any = null;
@@ -74,7 +75,7 @@ export class SearchComponent implements OnInit{
     'tipo': null,
     'avaluo': null,
     'embargable': false,
-    'valor': null,
+    'observaciones': null,
     'idTrazabilidad': null,
   }
 
@@ -470,8 +471,17 @@ constructor(
   }
 
   onInvestigacion(trazabilidad: any) {
+    swal({
+      title: 'Cargando datos!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+
     this.trazabilidad = trazabilidad;
     if (this.trazabilidad) {
+      this.totalEmbargado = 0;
       this.formRecord = false;
       this.formTrazabilidad = false;
       this.formAcuerdoPago = false;
@@ -493,10 +503,6 @@ constructor(
               type: response.status,
               confirmButtonText: 'Aceptar'
             });
-
-            let timeoutId = setTimeout(() => {
-              this.onInitTable('#dataTables-bienes');
-            }, 100);
           } else {
             this.bienes = null;
 
@@ -520,6 +526,43 @@ constructor(
     }
   }
 
+  onValidateBien(bien) {
+    let token = this._LoginService.getToken();
+    
+    if (bien.valor) {
+      this.totalEmbargado = parseInt(this.totalEmbargado) + parseInt(bien.valor);
+
+      if (this.totalEmbargado > this.trazabilidad.comparendo.valorInfraccion) {
+        swal({
+          title: 'Atención',
+          text: 'El valor solicitado supera el valor actual de la deuda, por lo tanto no se puede asignar.',
+          type: 'warning',
+          confirmButtonText: 'Aceptar'
+        });
+  
+        this.totalEmbargado = parseInt(this.totalEmbargado) - parseInt(bien.valor);
+        bien.valor = null;
+      } else if (bien.valor > bien.avaluo){
+        swal({
+          title: 'Atención',
+          text: 'El valor solicitado supera el valor del avaluo del bien, por lo tanto no se puede asignar.',
+          type: 'warning',
+          confirmButtonText: 'Aceptar'
+        });
+        
+        this.totalEmbargado = parseInt(this.totalEmbargado) - parseInt(bien.valor);
+        bien.valor = null;
+      }else{
+        this.totalEmbargado = 0;
+        this.bienes.forEach((element: any, key: any) => {
+          if (element.valor) {
+            this.totalEmbargado = parseInt(this.totalEmbargado) + parseInt(element.valor);
+          }
+        });
+      }
+    }
+  }
+
   onEnviarBien() {
     let token = this._LoginService.getToken();
 
@@ -539,6 +582,40 @@ constructor(
             title: 'Error!',
             text: response.message,
             type: 'error',
+            confirmButtonText: 'Aceptar'
+          });
+        }
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      }
+    );
+  }
+
+  onUpdateBienes() {
+    let token = this._LoginService.getToken();
+
+    this._TrazabilidadService.updateBienes(this.bienes, token).subscribe(
+      response => {
+        if (response.code == 200) {
+          this.onSearch();
+
+          swal({
+            title: response.title,
+            text: response.message,
+            type: response.status,
+            confirmButtonText: 'Aceptar'
+          });
+        } else {
+          swal({
+            title: response.title,
+            text: response.message,
+            type: response.status,
             confirmButtonText: 'Aceptar'
           });
         }

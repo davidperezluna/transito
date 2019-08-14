@@ -12,6 +12,7 @@ import { GdCfgMedioCorrespondenciaService } from '../../../../services/gdCfgMedi
 import { GdTrazabilidadService } from '../../../../services/gdTrazabilidad.service';
 import { CfgOrganismoTransitoService } from '../../../../services/cfgOrganismoTransito.service';
 import { UserCfgTipoIdentificacionService } from '../../../../services/userCfgTipoIdentificacion.service';
+import { CvCdoComparendoService } from '../../../../services/cvCdoComparendo.service';
 
 import { NewComponent } from './new/new.component';
 import { EditComponent } from './edit/edit.component';
@@ -34,6 +35,7 @@ import { NewCiudadanoComponent } from './newCiudadano/newCiudadano.component';
         GdTrazabilidadService,
         CfgOrganismoTransitoService,
         UserCfgTipoIdentificacionService,
+        CvCdoComparendoService,
     ]
 })
 
