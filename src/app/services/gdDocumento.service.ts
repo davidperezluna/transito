@@ -70,7 +70,7 @@ export class GdDocumentoService {
 		let json = JSON.stringify(datos);
 		formData.append('data', json);
 		formData.append('authorization', token);
-		return this._http.post(this.url + "/update", formData).map(
+		return this._http.post(this.url + "c", formData).map(
 			res => res.json(),
 			this._loogerService.registerLog(token, 'UPDATE', json, this.url)
 		);

@@ -1,9 +1,9 @@
-<hr>
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
         <div class="card">
             <div class="card-header">
-                <h5 class="text-uppercase"><strong>Ordenes de comparendo</strong> <small>búsquedas</small></h5>
+                <b class="text-uppercase">Buscar Ordenes de comparendo</b>
+                <br>
                 <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
             </div>
             <div class="card-body">
@@ -131,9 +131,10 @@
                                         <i class="fa fa-file-text"></i>
                                     </button>
                                     <button *ngIf="trazabilidad.estado.id == 25" (click)="onInvestigacion(trazabilidad)" class="btn btn-xs btn-warning"
-                                        type="button" tooltip="Crear investigación bienes" [tooltipDisabled]="false" [tooltipAnimation]="true"
+                                        type="button" tooltip="Crear investigación bienes" [tooltipDisabled]="false" [tooltipAnimation]="false"
                                         tooltipPlacement="top">
-                                        <i class="fa fa-search"></i>
+                                        <i class="fa fa-save"></i>
+                                        Bienes
                                     </button>
                                 </div>
                             </td>
@@ -308,36 +309,27 @@
                     <div class="form-group">
                         <div class="row">
                             <div class="col-xs-12 col-lg-12">
-                                <label>Nombre
-                                    <b class="text-danger">*</b>
-                                </label>
-                                <input class="form-control" [(ngModel)]="datosInvestigacion.nombre" name="nombre" type="text" required />
+                                <label>Nombre <b class="text-danger">*</b></label>
+                                <input class="form-control text-uppercase" [(ngModel)]="datosInvestigacion.nombre" name="nombre" type="text" required />
                             </div>
                             <div class="col-xs-12 col-lg-12">
-                                <label>Tipo
-                                    <b class="text-danger">*</b>
-                                </label>
+                                <label>Tipo <b class="text-danger">*</b></label>
                                 <ng-select [multiple]="false" [options]="tiposBien" [(ngModel)]="datosInvestigacion.tipo" name="tipo" required>
                                 </ng-select>
                             </div>
                             <div class="col-xs-12 col-lg-12">
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" [(ngModel)]="datosInvestigacion.embargable" class="custom-control-input" id="embargable"
-                                        name="embargable">
+                                    <input type="checkbox" [(ngModel)]="datosInvestigacion.embargable" class="custom-control-input" id="embargable" name="embargable">
                                     <label class="custom-control-label" for="embargable">Embargable</label>
                                 </div>
                             </div>
                             <div class="col-xs-12 col-lg-12">
-                                <label>Avaluo
-                                    <b class="text-danger">*</b>
-                                </label>
+                                <label>Avaluo <b class="text-danger">*</b></label>
                                 <input class="form-control" [(ngModel)]="datosInvestigacion.avaluo" name="avaluo" type="text" required />
                             </div>
-                            <div class="col-xs-12 col-lg-12" *ngIf="datosInvestigacion.embargable">
-                                <label>Valor embargado
-                                    <b class="text-danger">*</b>
-                                </label>
-                                <input class="form-control" [(ngModel)]="datosInvestigacion.valor" name="valor" type="text" required />
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Observaciones</label>
+                                <textarea class="form-control text-uppercase" [(ngModel)]="datosInvestigacion.observaciones" rows='4' name="observaciones"></textarea>
                             </div>
                         </div>
                     </div>
@@ -358,7 +350,7 @@
         </div>
     </div>
 
-    <div class="col-xs-12 col-lg-6" *ngIf="formInvestigacion && bienes">
+    <div class="col-xs-12 col-lg-5" *ngIf="formInvestigacion && bienes">
         <div class="card">
             <div class="card-header">
                 <b class="text-uppercase">
@@ -367,29 +359,43 @@
             </div>
             <div class="card-body">
                 <div class="col-xs-12 col-lg-12">
-                    <table class="table table-bordered" id="dataTables-bienes">
+                    <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th>Bien</th>
-                                <th>Avaluo</th>
-                                <th>Valor</th>
-                                <th>Embargable</th>
+                                <th class="text-right">
+                                    <b class="text-uppercase text-danger">valor adeudado $ {{ trazabilidad.comparendo.valorInfraccion | currency: 'COP' }}</b>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th class="text-uppercase text-center"><b>Detalle</b></th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr class="odd" *ngFor="let bien of bienes; let i = index">
                                 <td>
-                                    <b>Nombre</b><br>
-                                    {{ bien.nombre }}
-                                    <br>
-                                    <b>Tipo</b><br>
-                                    {{ bien.tipo }}
-                                </td>
-                                <td>{{ bien.avaluo | currency: 'COP' }}</td>
-                                <td>{{ bien.valor | currency: 'COP' }}</td>
-                                <td>
+                                    <b>Embargable</b><br>
                                     <span *ngIf="bien.embargable" class="text-success"><b>Si</b></span>
                                     <span *ngIf="!bien.embargable" class="text-danger"><b>No</b></span>
+                                    <br><b>Nombre</b><br>
+                                    {{ bien.nombre }}
+                                    <br><b>Tipo</b><br>
+                                    {{ bien.tipo }}
+                                    <br><b>Avaluo</b><br>
+                                    {{ bien.avaluo | currency: 'COP' }}
+                                    <ng-container *ngIf="bien.embargable">
+                                        <br><b>Limitación</b><br>
+                                        <input (blur)='onValidateBien(bien)' class="form-control" [(ngModel)]="bien.valor" name="valor" type="numeric" value="{{ bien.valor }}" required>
+                                    </ng-container>
+                                </td>
+                            </tr>
+                            <tr *ngIf="totalEmbargado > 0">
+                                <td class="text-right">
+                                    <b class="text-uppercase text-success">Total embargado $ {{ totalEmbargado | currency: 'COP' }}</b>
+                                    <br>
+                                    <button (click)="onUpdateBienes()" class="btn btn-primary" type="button">
+                                        <i class="fa fa-save"></i>
+                                        Registrar embargos
+                                    </button>
                                 </td>
                             </tr>
                         </tbody>

@@ -33,12 +33,14 @@ export class ShowComponent implements OnInit {
   public tiposCorrespondencia: any;
   public mediosCorrespondencia: any;
   public contravencional: any = false;
+  public numeroComparendo: any = null;
   public comparendo: any = null;
   
   public datos = {
     'observaciones': null,
+    'documento': null,
+    'idComparendo': null,
     'idFuncionario': null,
-    'documento': null
   };
 
 constructor(
@@ -103,28 +105,30 @@ constructor(
 
   onSearchComparendo() {
     swal({
-      title: 'Buscando consecutivo',
+      title: 'Buscando comparendo',
       text: 'Solo tardara unos segundos por favor espere.',
       onOpen: () => {
         swal.showLoading()
       }
     });
 
-      let token = this._LoginService.getToken();
+    let token = this._LoginService.getToken();
 
-
-    /*this._FuncionarioService.show({ 'id': this.search.idFuncionario }, token).subscribe(
+    this._ComparendoService.searchByNumber({ 'numero': this.numeroComparendo }, token).subscribe(
       response => {
-        if (response.status == 'success') {
-          this.funcionario = response.data;
-          this.comparendo.idFuncionario = this.funcionario.id;
+        if (response.code == 200) {
+          this.comparendo = response.data;
+          this.datos.idComparendo = this.comparendo.id;
 
-          
+          swal.close();
         } else {
+          this.comparendo = null;
+          this.datos.idComparendo = null;
+
           swal({
-            title: 'Error!',
+            title: response.title,
             text: response.message,
-            type: 'error',
+            type: response.status,
             confirmButtonText: 'Aceptar'
           });
         }
@@ -137,8 +141,7 @@ constructor(
           alert("Error en la petición");
         }
       }
-    );*/
-    
+    );
   }
 
   onFileChange(event) {
