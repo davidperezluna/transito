@@ -25,6 +25,7 @@ export class ShowComponent implements OnInit {
   public formEdit = false;
   public cargar = true;
   public checked: any;
+  public arrayEmpresasTransporte;
 
   constructor(
     private _VhloTpConvenioService: VhloTpConvenioService,
@@ -33,7 +34,6 @@ export class ShowComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.empresa);
     this._VhloTpConvenioService.getVhloTpConvenioEmpresa(this.empresa.id).subscribe(
       response => {
         this.formListaConvenios = true;
@@ -56,7 +56,6 @@ export class ShowComponent implements OnInit {
         }
       }
     );
-
   }
 
   onCancelar() {
@@ -74,13 +73,6 @@ export class ShowComponent implements OnInit {
     this.formListaConvenios = false;
     this.formNew = true;
     this.formEdit = false;
-  }
-  
-  onEdit(convenio: any) {
-    this.convenio = convenio;
-    this.formListaConvenios = false;
-    this.formEdit = true;
-    this.formNew = false;
   }
 
   onInitTable() {
@@ -134,5 +126,40 @@ export class ShowComponent implements OnInit {
         );
       }
     })
+  }
+
+  onEdit(convenio: any) {
+    let token = this._LoginService.getToken();
+
+    this.convenio = convenio;
+    
+    this.formListaConvenios = false;
+    
+    this.formEdit = true;
+    this.formNew = false;
+    
+    this._VhloTpConvenioService.searchEmpresasTransportePublicoByConvenio({'idConvenio': this.convenio.id}, token).subscribe(
+      response => {
+        if (response.code == 200) {
+          this.arrayEmpresasTransporte = response.data;
+          console.log(this.arrayEmpresasTransporte);
+        } else {
+          swal({
+            title: response.title,
+            text: response.message,
+            type: response.status,
+            confirmButtonColor: '#15d4be',
+          })
+        }
+      },
+      error => {
+        this.errorMessage = <any>error;
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+
   }
 }

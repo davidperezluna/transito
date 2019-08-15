@@ -14,6 +14,7 @@ import swal from 'sweetalert2';
 export class EditComponent implements OnInit {
     @Output() ready = new EventEmitter<any>();
     @Input() convenio: any = null;
+    @Input() arrayEmpresasTransporte: any = null;
     public empresasTransportePublico: any;
     public errorMessage;
     public formReady = false;
@@ -28,37 +29,24 @@ export class EditComponent implements OnInit {
     ngOnInit() {
         console.log(this.convenio);
         
-        var datePiper = new DatePipe(this.convenio.fechaConvenio.timestamp);
+        var datePiper = new DatePipe(this.convenio.fechaConvenio);
         this.convenio.fechaConvenio = datePiper.transform(this.convenio.fechaConvenio.timestamp, 'yyyy-MM-dd');
+        console.log(this.convenio.fechaConvenio);
         
-        var datePiper = new DatePipe(this.convenio.fechaActaInicio.timestamp);
-        this.convenio.fechaActaInicio = datePiper.transform(this.convenio.fechaActaInicio.timestamp, 'yyyy-MM-dd');
+        var datePiper2 = new DatePipe(this.convenio.fechaActaInicio.timestamp);
+        this.convenio.fechaActaInicio = datePiper2.transform(this.convenio.fechaActaInicio.timestamp, 'yyyy-MM-dd');
         
-        var datePiper = new DatePipe(this.convenio.fechaActaFin.timestamp);
-        this.convenio.fechaActaFin = datePiper.transform(this.convenio.fechaActaFin.timestamp, 'yyyy-MM-dd');
-
-        this._EmpresaService.selectTransportePublico().subscribe(
-            response => {
-                this.empresasTransportePublico = response;
-            },
-            error => {
-                this.errorMessage = <any>error;
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert('Error en la petición');
-                }
-            }
-        );
+        var datePiper3 = new DatePipe(this.convenio.fechaActaFin.timestamp);
+        this.convenio.fechaActaFin = datePiper3.transform(this.convenio.fechaActaFin.timestamp, 'yyyy-MM-dd');
+        
+        this.empresasTransportePublico = this.arrayEmpresasTransporte;
+    
     }
 
     onCancelar() { this.ready.emit(true); }
 
     onEnviar() {
         let token = this._LoginService.getToken();
-
-        /* this.convenio.empresa = this.empresa.id; */
-
-        console.log(this.convenio);
 
         this._VhloTpConvenioService.edit(this.convenio, token).subscribe(
             response => {

@@ -84,6 +84,10 @@ export class VhloTpAsignacionComponent implements OnInit {
                             confirmButtonText: 'Aceptar'
                         })
                     } else {
+                        let timeoutId = setTimeout(() => {
+                            this.onInitTable();
+                        }, 100);
+
                         swal({
                             title: response.title,
                             text: response.message,
@@ -182,6 +186,10 @@ export class VhloTpAsignacionComponent implements OnInit {
                                     confirmButtonText: 'Aceptar'
                                 })
                             } else {
+                                let timeoutId = setTimeout(() => {
+                                    this.onInitTable();
+                                }, 100);
+                                
                                 swal({
                                     title: response.title,
                                     text: response.message,

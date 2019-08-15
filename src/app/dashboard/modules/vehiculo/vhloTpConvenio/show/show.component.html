@@ -54,7 +54,7 @@
             <div class="card" *ngIf='formListaConvenios'>
                 <div class="card-header">
                     <h5 >
-                        <b class="text-center">Convenios</b>
+                        <b class="text-center">Convenios {{ arrayEmpresasTransporte }}</b>
                         <div class="btn-group pull-right">
                             <button (click)="onNew()" class="btn btn-default">
                                 <i class="fa fa-plus"></i>
@@ -79,9 +79,9 @@
                             <tr class="odd" *ngFor="let convenio of convenios; let i = index">
                                
                                 <td>{{ convenio.numeroConvenio }}</td> 
-                                <td>{{ (convenio.fechaConvenio.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td>
-                                <td>{{ (convenio.fechaActaInicio.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td>
-                                <td>{{ (convenio.fechaActaFin.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td>
+                                <td>{{ (convenio.fechaConvenio.timestamp * 1000) | date: 'yyyy/MM/dd' }}</td>
+                                <td>{{ (convenio.fechaActaInicio.timestamp * 1000) | date: 'yyyy/MM/dd' }}</td>
+                                <td>{{ (convenio.fechaActaFin.timestamp * 1000) | date: 'yyyy/MM/dd' }}</td>
                                 <td>{{ convenio.observacion }}</td>
                                 <td>
                                     <button (click)="onEdit(convenio)" class="btn btn-info btn-xs" type="button">Editar</button> 
@@ -96,7 +96,7 @@
         <!-- fin de lista de convenios -->
         <!--formulario de nuevo convenio-->
         <app-new-vhlotpconvenio *ngIf='formNew' [empresa]="empresa" (ready)="onReady($event)"></app-new-vhlotpconvenio>
-        <app-edit-vhlotpconvenio *ngIf='formEdit' [convenio]="convenio" (ready)="onReady($event)"></app-edit-vhlotpconvenio>
+        <app-edit-vhlotpconvenio *ngIf='formEdit' [convenio]="convenio" [arrayEmpresasTransporte]="arrayEmpresasTransporte" (ready)="onReady($event)"></app-edit-vhlotpconvenio>
         <!-- fin formulario -->
      </div> 
 </div>

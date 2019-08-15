@@ -57,8 +57,6 @@ export class EditComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        console.log(this.habilitacion);
-
         var datePiper = new DatePipe(this.habilitacion.fechaExpedicionActo.timestamp);
         this.habilitacion.fechaExpedicionActo = datePiper.transform(this.habilitacion.fechaExpedicionActo.timestamp, 'yyyy-MM-dd');
         
