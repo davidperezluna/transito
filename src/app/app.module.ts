@@ -45,7 +45,7 @@ import { UserCfgMenuService } from './services/userCfgMenu.service';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,

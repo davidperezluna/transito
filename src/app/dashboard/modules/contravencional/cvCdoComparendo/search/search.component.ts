@@ -564,6 +564,14 @@ constructor(
   }
 
   onEnviarBien() {
+    swal({
+      title: 'Registrando bien!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+
     let token = this._LoginService.getToken();
 
     this._TrazabilidadService.registerBien(this.datosInvestigacion, token).subscribe(
@@ -598,6 +606,14 @@ constructor(
   }
 
   onUpdateBienes() {
+    swal({
+      title: 'Generando embargo!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+
     let token = this._LoginService.getToken();
 
     this._TrazabilidadService.updateBienes(this.bienes, token).subscribe(

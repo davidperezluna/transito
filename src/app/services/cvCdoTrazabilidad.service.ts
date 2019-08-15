@@ -95,11 +95,11 @@ export class CvCdoTrazabilidadService {
 
 	updateBienes(datos, token) {
 		let json = JSON.stringify(datos);
-		let params = "data=" + json + "&authorization=" + token;
+		let params = "data=" + json + "&authorization=" + token;	
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/update/bienes", params, { headers: headers }).map(
 			res => res.json(),
-			this._loogerService.registerLog(token, 'INSERT', json, this.url)
+			this._loogerService.registerLog(token, 'UPDATE', json, this.url)
 		);
 	}
 }
