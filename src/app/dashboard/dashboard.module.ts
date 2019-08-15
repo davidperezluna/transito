@@ -19,7 +19,19 @@ import { RightsidebarComponent } from '../shared';
     Ng2BootstrapModule.forRoot(),
     ToolTipModule
   ],
-  declarations: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],
-  exports: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],
+  declarations: [
+    DashboardComponent, 
+    TopNavComponent, 
+    SidebarComponent, 
+    FooterComponent, 
+    RightsidebarComponent,
+  ],
+  exports: [
+    DashboardComponent,
+    TopNavComponent,
+    SidebarComponent,
+    FooterComponent,
+    RightsidebarComponent
+  ],
 })
 export class DashboardModule { }

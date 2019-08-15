@@ -1,10 +1,10 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
-import { FroReporteIngresosService } from '../../../../services/froReporteIngresos.service';
-import { LoginService } from '../../../../services/login.service';
 import { FroReporteIngresos } from "./froReporteIngresos.modelo";
+import { FroReporteIngresosService } from '../../../../services/froReporteIngresos.service';
 import { FroCfgTipoRecaudoService } from "../../../../services/froCfgTipoRecaudo.service";
 import { PnalFuncionarioService } from "../../../../services/pnalFuncionario.service";
 import { CfgOrganismoTransitoService } from "../../../../services/cfgOrganismoTransito.service";
+import { LoginService } from '../../../../services/login.service';
 
 import swal from 'sweetalert2';
 
@@ -89,7 +89,6 @@ export class FroReporteIngresosComponent implements OnInit {
         private _FroCfgTipoRecaudoService: FroCfgTipoRecaudoService,
         private _OrganismoTransitoService: CfgOrganismoTransitoService,
         private _PnalFuncionarioService: PnalFuncionarioService,
-
         private _LoginService: LoginService,
     ) { }
 

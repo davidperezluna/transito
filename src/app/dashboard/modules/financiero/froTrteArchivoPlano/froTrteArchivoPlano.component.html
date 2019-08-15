@@ -1,0 +1,36 @@
+<div class="container row">
+  <div class="col-xs-12 col-lg-4">
+    <div class="card">
+      <div class="card-header">
+        <b class="text-uppercase">Generar archivos planos</b>
+        <br>
+        <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
+      </div>
+      <div class="card-body">
+        <form #formFiltros="ngForm">
+          <div class="col-xs-12 col-lg-12">
+            <label>Seleccionar tipo reporte <b class="text-danger">*</b></label>
+            <ng-select [multiple]="false" [options]="tiposReporte" [(ngModel)]="datos.tipoReporte" name="tipoReporte" required>
+            </ng-select>
+          </div>
+          <div class="col-xs-12 col-lg-12">
+            <label>Fecha inicial <b class="text-danger">*</b></label>
+            <input class="form-control" type="date" [(ngModel)]="datos.fechaInicial" name="fechaInicial" required>
+          </div>
+          <div class="col-xs-12 col-lg-12">
+            <label>Fecha final <b class="text-danger">*</b></label>
+            <input class="form-control" type="date" [(ngModel)]="datos.fechaFinal" name="fechaFinal" required>
+          </div>
+        </form>
+      </div>
+      <div class="card-footer">
+        <div class="btn-group">
+          <button (click)="onEnviar()" [disabled]="formFiltros.invalid" class="btn btn-primary" type="button">
+            <i class="fa fa-cogs"></i>
+            Generar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

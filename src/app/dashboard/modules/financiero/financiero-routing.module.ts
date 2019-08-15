@@ -8,6 +8,7 @@ import { FroTrteSolicitudComponent } from './froTrteSolicitud/froTrteSolicitud.c
 import { NewRnaComponent } from './froTrteSolicitud/newRna/newRna.component';
 import { NewRnetComponent } from './froTrteSolicitud/newRnet/newRnet.component';
 import { FroTrtePrecioComponent } from './froTrtePrecio/froTrtePrecio.component';
+import { FroTrteArchivoPlanoComponent } from './froTrteArchivoPlano/froTrteArchivoPlano.component';
 
 const routes: Routes = [
   {
@@ -37,6 +38,10 @@ const routes: Routes = [
   {
     path: 'froTrtePrecio',
     component: FroTrtePrecioComponent
+  },
+  {
+    path: 'froTrteArchivoPlano',
+    component: FroTrteArchivoPlanoComponent
   },
 ]; 
 
