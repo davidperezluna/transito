@@ -37,9 +37,12 @@ import { FroTrtePrecioModule } from './froTrtePrecio/froTrtePrecio.module';
 import { FroTrteSolicitudModule } from './froTrteSolicitud/froTrteSolicitud.module';
 import { FroTrteArchivoPlanoModule } from './froTrteArchivoPlano/froTrteArchivoPlano.module';
 
-import { NewRnaComponent } from './froTrteSolicitud/newRna/newRna.component';
-import { NewRnetComponent } from './froTrteSolicitud/newRnet/newRnet.component';
 import { FroTrteArchivoPlanoComponent } from './froTrteArchivoPlano/froTrteArchivoPlano.component';
+
+import { NewRnaComponent } from './froTrteSolicitud/newRna/newRna.component';
+
+import { NewRnetComponent } from './froTrteSolicitud/newRnet/newRnet.component';
+import { NewExpedicionTarjetaOperacionComponent } from './froTrteSolicitud/tramites/tramiteExpedicionTarjetaOperacion/newExpedicionTarjetaOperacion.component';
 
 @NgModule({
   imports: [
@@ -60,10 +63,11 @@ import { FroTrteArchivoPlanoComponent } from './froTrteArchivoPlano/froTrteArchi
     FroFacParqueaderoComponent,
     FroReporteIngresosComponent,
     FroTrteSolicitudComponent,
-    NewRnaComponent,
-    NewRnetComponent,
     FroTrtePrecioComponent,
     FroTrteArchivoPlanoComponent,
+    NewRnaComponent,
+    NewRnetComponent,
+    NewExpedicionTarjetaOperacionComponent,
   ]
 })
 export class FinancieroModule { }

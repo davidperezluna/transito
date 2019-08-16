@@ -27,7 +27,7 @@ import { NewRnmaComponent } from './newRnma/newRnma.component';
 import { NewRnrsComponent } from './newRnrs/newRnrs.component';
 import { NewInsumoComponent } from './newInsumo/newInsumo.component';
 import { NewDuplicadoPlacaComponent } from './tramites/tramiteDuplicadoPlaca/new.duplicadoPlaca.component';
-import { NewExpedicionTarjetaOperacionComponent } from './tramites/tramiteExpedicionTarjetaOperacion/newExpedicionTarjetaOperacion.component';
+//import { NewExpedicionTarjetaOperacionComponent } from './tramites/tramiteExpedicionTarjetaOperacion/newExpedicionTarjetaOperacion.component';
 import { NewDuplicadoTarjetaOperacionComponent } from './tramites/tramiteDuplicadoTarjetaOperacion/new.duplicadoTarjetaOperacion.component';
 import { NewExpedicionTarjetaOperacionCambioNivelServicioComponent } from './tramites/tramiteExpedicionTarjetaOperacionCambioNivelServicio/newExpedicionTarjetaOperacionCambioNivelServicio.component';
 import { NewRenovacionTarjetaOperacionComponent } from './tramites/tramiteRenovacionTarjetaOperacion/newRenovacionTarjetaOperacion.component';
@@ -93,7 +93,7 @@ import { VhloTecnoMecanicaModule } from '../../vehiculo/vhloTecnoMecanica/vhloTe
         NewRnrsComponent,
         NewInsumoComponent,
         NewDuplicadoPlacaComponent,
-        NewExpedicionTarjetaOperacionComponent,
+        //NewExpedicionTarjetaOperacionComponent,
         NewDuplicadoTarjetaOperacionComponent,
         NewExpedicionTarjetaOperacionCambioNivelServicioComponent,
         NewCambioEmpresaComponent,
@@ -143,7 +143,7 @@ import { VhloTecnoMecanicaModule } from '../../vehiculo/vhloTecnoMecanica/vhloTe
         NewRnrsComponent,
         NewInsumoComponent,
         NewDuplicadoPlacaComponent,
-        NewExpedicionTarjetaOperacionComponent,
+        //NewExpedicionTarjetaOperacionComponent,
         NewDuplicadoTarjetaOperacionComponent,
         NewExpedicionTarjetaOperacionCambioNivelServicioComponent,
         NewCambioEmpresaComponent,

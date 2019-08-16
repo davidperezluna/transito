@@ -1,8 +1,4 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { FroTrteSolicitudService } from '../../../../../../services/froTrteSolicitud.service';
-import { FroFacTramiteService } from '../../../../../../services/froFacTramite.service';
-import { PnalFuncionarioService } from '../../../../../../services/pnalFuncionario.service';
-import { VhloTpTarjetaOperacionService } from "../../../../../../services/vhloTpTarjetaOperacion.service";
 import { DatePipe, CurrencyPipe } from '@angular/common';
 import { LoginService } from '../../../../../../services/login.service';
 
@@ -13,6 +9,7 @@ import swal from 'sweetalert2';
     templateUrl: './newExpedicionTarjetaOperacion.html',
     providers: [DatePipe]
 })
+
 export class NewExpedicionTarjetaOperacionComponent implements OnInit {
     @Output() onReadyTramite = new EventEmitter<any>();
     @Input() tramiteFactura: any = null;
@@ -40,16 +37,10 @@ export class NewExpedicionTarjetaOperacionComponent implements OnInit {
     };
 
     constructor(
-        private _TramiteSolicitudService: FroTrteSolicitudService,
-        private _TramiteFacturaService: FroFacTramiteService,
-        private _FuncionarioService: PnalFuncionarioService,
-        private _TarjetaOperacionService: VhloTpTarjetaOperacionService,
         private _LoginService: LoginService,
     ) { }
 
     ngOnInit() {
-        console.log(this.vehiculo);
-
         let token = this._LoginService.getToken();
 
         this.datos.idFuncionario = this.funcionario.id;
