@@ -64,16 +64,16 @@ import { PqoCfgPatioService } from "../../../../services/pqoCfgPatio.service";
 
 import { NewComponent } from './new/new.component';
 import { ShowComponent } from './show/show.component';
-import { ExportComponent } from './export/export.component';
+import { ExportIpatComponent } from './export/export.component';
 import { SelectModule } from 'angular2-select';
 import { SortableModule } from 'ngx-bootstrap/sortable';
 import { ToolTipModule } from 'angular2-tooltip';
 
 @NgModule({
     imports: [CommonModule, Ng2BootstrapModule.forRoot(), SelectModule, SortableModule.forRoot(), ToolTipModule],
-    declarations: [NewComponent, ShowComponent, ExportComponent],
+    declarations: [NewComponent, ShowComponent, ExportIpatComponent],
     
-    exports: [NewComponent, ShowComponent, ExportComponent],
+    exports: [NewComponent, ShowComponent, ExportIpatComponent],
 
     providers: [
         SvIpatService, 

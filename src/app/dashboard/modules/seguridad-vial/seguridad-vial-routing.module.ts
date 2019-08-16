@@ -63,6 +63,7 @@ import { SvCfgVisualComponent } from "./svCfgVisual/svCfgVisual.component";
 import { SvCfgVisualDisminuidaComponent } from "./svCfgVisualDisminuida/svCfgVisualDisminuida.component";
 import { SvCfgZonaComponent } from "./svCfgZona/svCfgZona.component";
 import { SvIpatComponent } from "./svIpat/svIpat.component";
+import { ExportIpatComponent } from "./svIpat/export/export.component";
 import { SvIpatAsignacionComponent } from "./svIpatAsignacion/svIpatAsignacion.component";
 import { SvIpatConsecutivoComponent } from "./svIpatConsecutivo/svIpatConsecutivo.component";
 import { SvIpatImpresoAsignacionComponent } from "./svIpatImpresoAsignacion/svIpatImpresoAsignacion.component";
@@ -324,7 +325,7 @@ const routes: Routes = [
   },
   {
     path: 'svIpat/export',
-    component: ExportComponent
+    component: ExportIpatComponent
   },
   {
     path: 'svIpatAsignacion',

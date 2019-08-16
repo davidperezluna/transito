@@ -55,4 +55,10 @@ export class VhloTpConvenioService {
 		return this._http.get(this.url+"/"+id+"/convenios/por/empresa").map(res => res.json());
 	}
 	
+	searchEmpresasTransportePublicoByConvenio(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = "data=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/search/empresastransportepublico/convenio", params, { headers: headers }).map(res => res.json());
+	}
 }

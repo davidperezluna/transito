@@ -104,7 +104,7 @@ export class NewComponent implements OnInit {
     onSearchVehiculo() {
         let token = this._LoginService.getToken();
 
-        this._VhloTpAsignacionService.searchVehiculo({ 'placa': this.placa }, token).subscribe(
+        this._VhloTpAsignacionService.searchVehiculo({ 'placa': this.placa, 'idClase': this.empresaHabilitadaRango.clase.id }, token).subscribe(
             response => {
                 if (response.code == 200) {
                     this.vehiculo = response.data.vehiculo;

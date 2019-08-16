@@ -18,11 +18,11 @@ import { Utils } from 'ng2-bootstrap';
 declare var $: any;
 
 @Component({
-    selector: 'app-index-svipat',
+    selector: 'app-export-svipat',
     templateUrl: './export.component.html',
     providers: [DatePipe]
 })
-export class ExportComponent implements OnInit {
+export class ExportIpatComponent implements OnInit {
     public errorMessage;
     public formNew = false;
     public formEdit = false;

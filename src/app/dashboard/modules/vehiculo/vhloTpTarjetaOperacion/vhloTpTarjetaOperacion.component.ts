@@ -18,6 +18,7 @@ declare var $: any;
 
 export class VhloTpTarjetaOperacionComponent implements OnInit {
     public errorMessage;
+    
     public table: any;
 
     public fecha;
@@ -101,6 +102,10 @@ export class VhloTpTarjetaOperacionComponent implements OnInit {
                             confirmButtonText: 'Aceptar'
                         })
                     } else {
+                        let timeoutId = setTimeout(() => {
+                            this.onInitTable();
+                        }, 100);
+                        
                         swal({
                             title: response.title,
                             text: response.message,
@@ -184,13 +189,11 @@ export class VhloTpTarjetaOperacionComponent implements OnInit {
             response => {
                 if (response.code == 200) {
                     this.empresaHabilitadaCupo = response.data;
-                    console.log(this.empresaHabilitadaCupo);
 
                     this._VhloTpTarjetaOperacionService.searchTarjetasOperacion({ 'idEmpresa': this.empresaHabilitadaCupo.id }, token).subscribe(
                         response => {
                             if (response.code == 200) {
                                 this.tarjetasOperacion = response.data;
-
                                 let timeoutId = setTimeout(() => {
                                     this.onInitTable();
                                 }, 100);
@@ -201,6 +204,10 @@ export class VhloTpTarjetaOperacionComponent implements OnInit {
                                     confirmButtonText: 'Aceptar'
                                 })
                             } else {
+                                let timeoutId = setTimeout(() => {
+                                    this.onInitTable();
+                                }, 100);
+
                                 swal({
                                     title: response.title,
                                     text: response.message,
