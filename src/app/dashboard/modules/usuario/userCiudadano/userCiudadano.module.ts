@@ -15,6 +15,8 @@ import { UserCfgGrupoSanguineoService } from '../../../../services/userCfgGrupoS
 import { CfgMunicipioService } from '../../../../services/cfgMunicipio.service';
 import { CfgPaisService } from '../../../../services/cfgPais.service';
 import { CfgDepartamentoService } from '../../../../services/cfgDepartamento.service';
+import { UserCfgRoleService } from '../../../../services/userCfgRole.service';
+
 
 @NgModule({
     imports: [CommonModule, Ng2BootstrapModule.forRoot(), SelectModule, TooltipModule],
@@ -36,6 +38,7 @@ import { CfgDepartamentoService } from '../../../../services/cfgDepartamento.ser
         CfgMunicipioService,
         CfgPaisService,
         CfgDepartamentoService,
+        UserCfgRoleService,
     ]
 })
 
