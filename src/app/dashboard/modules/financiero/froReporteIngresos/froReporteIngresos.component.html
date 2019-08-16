@@ -12,7 +12,7 @@
                     <div class="col-xs-12 col-lg-12" *ngIf="tipoRecaudoSelected">
                         <label>Seleccionar OrganismoTransito</label>
                         <ng-select [multiple]="false" [options]="organismosTransito"
-                            [(ngModel)]="organismoTransitoSelected" [disabled]="cargoFuncionario == 2" required name="idOrganismoTransito">
+                            [(ngModel)]="organismoTransitoSelected" [disabled]="funcionario.cargo.id != 2" required name="idOrganismoTransito">
                         </ng-select>
                     </div>
                     <div class="col-xs-12 col-lg-12">

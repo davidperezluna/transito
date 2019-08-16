@@ -27,17 +27,27 @@ export class EditComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        console.log(this.convenio);
+        console.log(this.arrayEmpresasTransporte);
+        var datePiper = new DatePipe('en-US');
+
+        var date = new Date();
+        date.setTime(this.convenio.fechaConvenio.timestamp * 1000);
+
+        this.convenio.fechaConvenio = datePiper.transform(
+            date, 'yyyy-MM-dd'
+        );
         
-        var datePiper = new DatePipe(this.convenio.fechaConvenio);
-        this.convenio.fechaConvenio = datePiper.transform(this.convenio.fechaConvenio.timestamp, 'yyyy-MM-dd');
-        console.log(this.convenio.fechaConvenio);
-        
-        var datePiper2 = new DatePipe(this.convenio.fechaActaInicio.timestamp);
-        this.convenio.fechaActaInicio = datePiper2.transform(this.convenio.fechaActaInicio.timestamp, 'yyyy-MM-dd');
-        
-        var datePiper3 = new DatePipe(this.convenio.fechaActaFin.timestamp);
-        this.convenio.fechaActaFin = datePiper3.transform(this.convenio.fechaActaFin.timestamp, 'yyyy-MM-dd');
+        date.setTime(this.convenio.fechaActaInicio.timestamp * 1000);
+
+        this.convenio.fechaActaInicio = datePiper.transform(
+            date, 'yyyy-MM-dd'
+        );
+       
+        date.setTime(this.convenio.fechaActaFin.timestamp * 1000);
+
+        this.convenio.fechaActaFin = datePiper.transform(
+            date, 'yyyy-MM-dd'
+        );
         
         this.empresasTransportePublico = this.arrayEmpresasTransporte;
     

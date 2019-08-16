@@ -106,7 +106,7 @@ export class FroReporteIngresosComponent implements OnInit {
             response => {
                 if (response.code == 200) {
                     this.funcionario = response.data;
-                    let cargoFuncionario = this.funcionario.cargo.id; 
+                    console.log(this.funcionario);
                     this.organismoTransitoSelected = [this.funcionario.organismoTransito.id];
                 } else {
                     swal({

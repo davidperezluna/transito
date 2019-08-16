@@ -57,11 +57,20 @@ export class EditComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        var datePiper = new DatePipe(this.habilitacion.fechaExpedicionActo.timestamp);
-        this.habilitacion.fechaExpedicionActo = datePiper.transform(this.habilitacion.fechaExpedicionActo.timestamp, 'yyyy-MM-dd');
+        var datePiper = new DatePipe('en-US');
+
+        var date = new Date();
+        date.setTime(this.habilitacion.fechaExpedicionActo.timestamp * 1000);
+
+        this.habilitacion.fechaExpedicionActo = datePiper.transform(
+            date, 'yyyy-MM-dd'
+        );
         
-        var datePiper = new DatePipe(this.habilitacion.fechaEjecutoriaActo.timestamp);
-        this.habilitacion.fechaEjecutoriaActo = datePiper.transform(this.habilitacion.fechaEjecutoriaActo.timestamp, 'yyyy-MM-dd');
+        date.setTime(this.habilitacion.fechaEjecutoriaActo.timestamp * 1000);
+
+        this.habilitacion.fechaEjecutoriaActo = datePiper.transform(
+            date, 'yyyy-MM-dd'
+        );
 
         this._VhloCfgRadioAccionService.select().subscribe(
             response => {
