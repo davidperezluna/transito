@@ -17,7 +17,6 @@ import { CfgPaisService } from '../../../../services/cfgPais.service';
 import { CfgDepartamentoService } from '../../../../services/cfgDepartamento.service';
 import { UserCfgRoleService } from '../../../../services/userCfgRole.service';
 
-
 @NgModule({
     imports: [CommonModule, Ng2BootstrapModule.forRoot(), SelectModule, TooltipModule],
     declarations: [

@@ -13,10 +13,10 @@ const routes: Routes = [
         path: 'banco-proyecto',
         loadChildren: './modules/banco-proyecto/banco-proyecto.module#BancoProyectoModule'
       },
-      /*{
+      {
         path: 'config',
         loadChildren: './modules/config/config.module#ConfigModule'
-      },*/
+      },
       {
         path: 'contravencional',
         loadChildren: './modules/contravencional/contravencional.module#ContravencionalModule'

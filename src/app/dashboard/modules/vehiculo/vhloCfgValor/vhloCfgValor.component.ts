@@ -32,6 +32,8 @@ export class VhloCfgValorComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.onInitForms();
+    
     swal({
       title: 'Cargando Tabla!',
       text: 'Solo tardara unos segundos por favor espere.',
@@ -46,9 +48,9 @@ export class VhloCfgValorComponent implements OnInit {
           this.valores = response.data;
 
           let timeoutId = setTimeout(() => {
-            this.onInitForms();
             this.onInitTable();
             this.formIndex = true;
+            swal.close();
           }, 100);
         }
       },

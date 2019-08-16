@@ -1,18 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CfgAdmFormatoComponent } from './cfgAdmFormato.component';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
+import { SelectModule } from 'angular2-select';
+
 import { CfgAdmFormatoService } from '../../../../services/cfgAdmFormato.service';
+import { CfgAdmFormatoTipoService } from '../../../../services/cfgAdmFormatoTipo.service';
 
 import { NewComponent } from './new/new.component';
 import { EditComponent } from './edit/edit.component';
-import { SelectModule } from 'angular2-select';
 
 @NgModule({
     imports: [CommonModule, Ng2BootstrapModule.forRoot(),SelectModule],
-    declarations: [CfgAdmFormatoComponent,NewComponent,EditComponent],
-    exports: [CfgAdmFormatoComponent, NewComponent,EditComponent],
-    providers:[CfgAdmFormatoService]
+    declarations: [NewComponent,EditComponent],
+    exports: [NewComponent,EditComponent],
+    providers:[
+        CfgAdmFormatoService,
+        CfgAdmFormatoTipoService,
+    ]
 })
 
 export class CfgAdmFormatoModule { }

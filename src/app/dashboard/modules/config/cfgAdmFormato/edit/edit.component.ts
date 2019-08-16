@@ -6,7 +6,7 @@ import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
-  selector: 'app-edit',
+  selector: 'app-edit-cfgadmformato',
   templateUrl: './edit.component.html'
 })
 export class EditComponent implements OnInit{

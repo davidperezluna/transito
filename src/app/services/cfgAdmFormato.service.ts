@@ -25,8 +25,7 @@ export class CfgAdmFormatoService {
 		formData.append('data', json);
 		formData.append('authorization', token);
 		//let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-		return this._http.post(this.url + "/new", formData).map(
-			res => res.json());
+		return this._http.post(this.url + "/new", formData).map(res => res.json());
 	}
 
 	delete(datos, token) {

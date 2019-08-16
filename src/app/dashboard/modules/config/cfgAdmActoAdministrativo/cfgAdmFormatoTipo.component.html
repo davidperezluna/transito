@@ -1,27 +1,24 @@
 <div class="container" >
-  <hr>
   <div class="row" *ngIf='formIndex'>
     <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-            <h5 class="card-title">
-              <strong class="text-uppercase">Configuración</strong>
-              <small>Tipos de formato</small>
+              <b class="text-uppercase">Configuración de tipos de formato</b>
+
               <div class="btn-group pull-right">
                 <button (click)="onNew()" class="btn btn-default">
                   <i class="fa fa-plus"></i>
                   <span class="text">Nuevo</span>
                 </button>
               </div>
-            </h5>
           </div>
           <div class="card-body">
             <table class="table " id="dataTables-example">
               <thead>
                 <tr>
-                    <th>#</th>
-                    <th>Nombre</th>
-                    <th>Acciones</th>
+                  <th>#</th>
+                  <th>Nombre</th>
+                  <th>Acciones</th>
                 </tr>
               </thead>
               <tbody>
@@ -47,6 +44,6 @@
       </div>
     </div>
     
-    <app-edit *ngIf='formEdit' [tipo]="tipo" (ready)="ready($event)"></app-edit>
-    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+    <app-edit-cfgadmactoadministrativo *ngIf='formEdit' [tipo]="tipo" (ready)="ready($event)"></app-edit-cfgadmactoadministrativo>
+    <app-new-cfgadmactoadministrativo *ngIf='formNew' (ready)="ready($event)"></app-new-cfgadmactoadministrativo>
 </div>
