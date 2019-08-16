@@ -35,6 +35,23 @@ export class FroTrteArchivoPlanoComponent implements OnInit {
   onEnviar() {
     let token = this._LoginService.getToken();
     let identity = this._LoginService.getIdentity();
-    
+
+    if (this.datos.tipoReporte) {
+      switch (this.datos.tipoReporte) {
+        case 1:
+
+          break;
+
+        case 2:
+
+          break;
+        
+        case 3:
+
+          break;
+      }
+    }else{
+
+    }
   }
 }
