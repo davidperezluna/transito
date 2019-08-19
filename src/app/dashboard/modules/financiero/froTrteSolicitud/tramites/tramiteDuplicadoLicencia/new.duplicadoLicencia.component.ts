@@ -1,8 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FroTrteSolicitudService } from '../../../../../../services/froTrteSolicitud.service';
-import { FroFacTramiteService } from '../../../../../../services/froFacTramite.service';
 import { UserLicenciaTransitoService } from '../../../../../../services/userLicenciaTransito.service';
-import { PnalFuncionarioService } from '../../../../../../services/pnalFuncionario.service';
 import { LoginService } from '../../../../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -40,8 +37,6 @@ export class NewDuplicadoLicenciaComponent implements OnInit {
     ];
  
     constructor(
-        private _TramiteSolicitudService: FroTrteSolicitudService,
-        private _TramiteFacturaService: FroFacTramiteService,
         private _LicenciaTransitoService: UserLicenciaTransitoService,
         private _LoginService: LoginService,
     ) { }

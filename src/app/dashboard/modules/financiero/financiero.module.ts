@@ -49,7 +49,6 @@ import { NewRncRecategorizacionLicenciaAbajoComponent } from './froTrteSolicitud
 import { NewRncRecategorizacionLicenciaArribaComponent } from './froTrteSolicitud/tramites/tramiteRecategorizacionLicenciaArriba/newRncRecategorizacionLicenciaArriba.component';
 import { NewRncRefrendacionLicenciaComponent } from './froTrteSolicitud/tramites/tramiteRefrendacionLicencia/newRncRefrendacionLicencia.component';
 
-
 import { NewRnaComponent } from './froTrteSolicitud/newRna/newRna.component';
 import { NewRnmaComponent } from './froTrteSolicitud/newRnma/newRnma.component';
 import { NewRnrsComponent } from './froTrteSolicitud/newRnrs/newRnrs.component';

@@ -1,21 +1,15 @@
 import { Component , OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FroTrteSolicitudService } from '../../../../../../services/froTrteSolicitud.service';
-import { FroFacTramiteService } from '../../../../../../services/froFacTramite.service';
-import { VhloVehiculoService } from '../../../../../../services/vhloVehiculo.service';
-import { VhloPropietarioService } from '../../../../../../services/vhloPropietario.service';
-import { UserCiudadanoService } from '../../../../../../services/userCiudadano.service';
-import { UserEmpresaService } from "../../../../../../services/userEmpresa.service";
-import { UserCfgTipoIdentificacionService } from '../../../../../../services/userCfgTipoIdentificacion.service';
-import { PnalFuncionarioService } from '../../../../../../services/pnalFuncionario.service';
-import { LoginService } from '../../../../../../services/login.service';
 import { Router } from "@angular/router";
+import { UserCiudadanoService } from '../../../../../../services/userCiudadano.service';
+import { UserCfgTipoIdentificacionService } from '../../../../../../services/userCfgTipoIdentificacion.service';
+import { LoginService } from '../../../../../../services/login.service';
 import swal from 'sweetalert2';
-
 
 @Component({
     selector: 'app-matricula-inicial',
     templateUrl: './new.matriculaInicial.html',
 })
+
 export class NewMatricualaInicialComponent implements OnInit {
     @Output() onReadyTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;
@@ -63,14 +57,8 @@ export class NewMatricualaInicialComponent implements OnInit {
     };
 
     constructor(
-        private _PropietarioService: VhloPropietarioService,
-        private _VhloVehiculoService: VhloVehiculoService,
-        private _TramiteSolicitudService: FroTrteSolicitudService,
-        private _TramiteFacturaService: FroFacTramiteService,
         private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
         private _CiudadanoService: UserCiudadanoService,
-        private _EmpresaService: UserEmpresaService,
-        private _FuncionarioService: PnalFuncionarioService,
         private _LoginService: LoginService,
         private router: Router,
     ) { }

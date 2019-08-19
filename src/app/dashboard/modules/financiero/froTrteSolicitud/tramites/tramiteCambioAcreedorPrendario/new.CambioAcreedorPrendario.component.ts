@@ -1,14 +1,9 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { VhloCfgPlaca } from '../../../../vehiculo/vhloCfgPlaca/vhloCfgPlaca.modelo';
-import { FroTrteSolicitudService } from '../../../../../../services/froTrteSolicitud.service';
-import { FroFacTramiteService } from '../../../../../../services/froFacTramite.service';
 import { VhloAcreedorService } from '../../../../../../services/vhloAcreedor.service';
-import { VhloPropietarioService } from '../../../../../../services/vhloPropietario.service';
 import { CfgTipoAlertaService } from '../../../../../../services/cfgTipoAlerta.service';
 import { UserCiudadanoService } from '../../../../../../services/userCiudadano.service';
-import { UserEmpresaService } from "../../../../../../services/userEmpresa.service";
 import { UserCfgTipoIdentificacionService } from '../../../../../../services/userCfgTipoIdentificacion.service';
-import { PnalFuncionarioService } from '../../../../../../services/pnalFuncionario.service';
 import { LoginService } from '../../../../../../services/login.service';
 import { Router } from "@angular/router";
 
@@ -62,15 +57,10 @@ export class NewTramiteCambioAcreedorPrendarioComponent implements OnInit {
     public identificacionNuevoAcreedor:any;
 
     constructor(
-        private _TramiteSolicitudService: FroTrteSolicitudService,
-        private _TramiteFacturaService: FroFacTramiteService,
         private _CfgTipoAlertaService: CfgTipoAlertaService,
         private _AcreedorService: VhloAcreedorService,
-        private _PropietarioService: VhloPropietarioService,
         private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
         private _CiudadanoService: UserCiudadanoService,
-        private _EmpresaService: UserEmpresaService,
-        private _FuncionarioService: PnalFuncionarioService,
         private _LoginService: LoginService,
         private router: Router,
     ) { }

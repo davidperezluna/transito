@@ -1,8 +1,5 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { FroTrteSolicitudService } from '../../../../../../services/froTrteSolicitud.service';
-import { FroFacTramiteService } from '../../../../../../services/froFacTramite.service';
 import { UserCiudadanoService } from '../../../../../../services/userCiudadano.service';
-import { PnalFuncionarioService } from '../../../../../../services/pnalFuncionario.service';
 import { LoginService } from '../../../../../../services/login.service';
 import { environment } from 'environments/environment';
 
@@ -41,10 +38,7 @@ export class NewCertificadoTradicionComponent implements OnInit {
     };
 
     constructor(
-        private _TramiteFacturaService: FroFacTramiteService,
-        private _TramiteSolicitudService: FroTrteSolicitudService,
         private _CiudadanoService: UserCiudadanoService,
-        private _FuncionarioService: PnalFuncionarioService,
         private _LoginService: LoginService,
     ) { }
 

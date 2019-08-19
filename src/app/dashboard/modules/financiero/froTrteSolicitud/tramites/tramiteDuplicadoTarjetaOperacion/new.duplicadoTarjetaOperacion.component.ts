@@ -1,11 +1,7 @@
-import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { FroTrteSolicitudService } from '../../../../../../services/froTrteSolicitud.service';
-import { FroFacTramiteService } from '../../../../../../services/froFacTramite.service';
-import { PnalFuncionarioService } from '../../../../../../services/pnalFuncionario.service';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { VhloTpTarjetaOperacionService } from "../../../../../../services/vhloTpTarjetaOperacion.service";
-import { DatePipe, CurrencyPipe } from '@angular/common';
 import { LoginService } from '../../../../../../services/login.service';
-
+import { DatePipe, CurrencyPipe } from '@angular/common';
 import swal from 'sweetalert2';
 
 @Component({
@@ -42,9 +38,6 @@ export class NewRnetDuplicadoTarjetaOperacionComponent implements OnInit {
     };
 
     constructor(
-        private _TramiteSolicitudService: FroTrteSolicitudService,
-        private _TramiteFacturaService: FroFacTramiteService,
-        private _FuncionarioService: PnalFuncionarioService,
         private _TarjetaOperacionService: VhloTpTarjetaOperacionService,
         private _LoginService: LoginService,
     ) { }

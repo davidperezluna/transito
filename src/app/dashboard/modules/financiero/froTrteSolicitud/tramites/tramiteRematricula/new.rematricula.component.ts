@@ -2,7 +2,6 @@ import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@
 import { CfgDepartamentoService } from '../../../../../../services/cfgDepartamento.service';
 import { CfgMunicipioService } from '../../../../../../services/cfgMunicipio.service';
 import { UserCfgTipoIdentificacionService } from '../../../../../../services/userCfgTipoIdentificacion.service';
-import { VhloCfgMotivoCancelacionService } from "../../../../../../services/vhloCfgMotivoCancelacion.service";
 import { VhloVehiculoService } from '../../../../../../services/vhloVehiculo.service';
 import { LoginService } from '../../../../../../services/login.service';
 
@@ -61,7 +60,6 @@ export class NewRematriculaComponent implements OnInit {
         private _DepartamentoService: CfgDepartamentoService,
         private _MunicipioService: CfgMunicipioService,
         private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
-        private _VhloCfgMotivoCancelacionService: VhloCfgMotivoCancelacionService,
         private _VehiculoService: VhloVehiculoService,
         private _LoginService: LoginService,
     ) { }

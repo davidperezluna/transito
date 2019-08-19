@@ -1,7 +1,4 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FroTrteSolicitudService } from '../../../../../../services/froTrteSolicitud.service';
-import { FroFacTramiteService } from '../../../../../../services/froFacTramite.service';
-import { PnalFuncionarioService } from '../../../../../../services/pnalFuncionario.service';
 import { VhloCfgNivelServicioService } from '../../../../../../services/vhloCfgNivelServicio.service';
 import { VhloTpAsignacionService } from '../../../../../../services/vhloTpAsignacion.service';
 import { LoginService } from '../../../../../../services/login.service';
@@ -43,9 +40,6 @@ export class NewRnetExpedicionTarjetaOperacionCambioNivelServicioComponent imple
     };
 
     constructor(
-        private _TramiteFacturaService: FroFacTramiteService,
-        private _TramiteSolicitudService: FroTrteSolicitudService,
-        private _FuncionarioService: PnalFuncionarioService,
         private _NivelServicioService: VhloCfgNivelServicioService,
         private _VhloTpAsignacionService: VhloTpAsignacionService,
         private _LoginService: LoginService,

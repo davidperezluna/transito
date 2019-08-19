@@ -1,12 +1,8 @@
 import { Component , OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { Router } from "@angular/router";
-import { FroTrteSolicitudService } from '../../../../../../services/froTrteSolicitud.service';
-import { FroFacTramiteService } from '../../../../../../services/froFacTramite.service';
 import { FroFacRetefuenteService } from '../../../../../../services/froFacRetefuente.service';
-import { VhloPropietarioService } from '../../../../../../services/vhloPropietario.service';
 import { UserCiudadanoService } from '../../../../../../services/userCiudadano.service';
 import { UserCfgTipoIdentificacionService } from '../../../../../../services/userCfgTipoIdentificacion.service';
-import { PnalFuncionarioService } from '../../../../../../services/pnalFuncionario.service';
 import { LoginService } from '../../../../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -50,13 +46,9 @@ export class NewTraspasoComponent implements OnInit {
     };
 
     constructor(
-        private _PropietarioService: VhloPropietarioService,
-        private _TramiteSolicitudService: FroTrteSolicitudService,
-        private _TramiteFacturaService: FroFacTramiteService,
         private _RetefuenteService: FroFacRetefuenteService,
         private _CiudadanoService: UserCiudadanoService,
         private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
-        private _FuncionarioService: PnalFuncionarioService,
         private _LoginService: LoginService,
         private router: Router,
     ) { }

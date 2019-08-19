@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { DatePipe, CurrencyPipe } from '@angular/common';
 import { LoginService } from '../../../../../../services/login.service';
-
 import swal from 'sweetalert2';
 
 @Component({

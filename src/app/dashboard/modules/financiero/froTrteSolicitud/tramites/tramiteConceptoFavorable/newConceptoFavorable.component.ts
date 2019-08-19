@@ -1,7 +1,4 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FroTrteSolicitudService } from '../../../../../../services/froTrteSolicitud.service';
-import { FroFacTramiteService } from '../../../../../../services/froFacTramite.service';
-import { PnalFuncionarioService } from '../../../../../../services/pnalFuncionario.service';
 import { VhloCfgNivelServicioService } from '../../../../../../services/vhloCfgNivelServicio.service';
 import { UserEmpresaTransporteService } from "../../../../../../services/userEmpresaTransporte.service";
 import { VhloTpAsignacionService } from '../../../../../../services/vhloTpAsignacion.service';
@@ -53,9 +50,6 @@ export class NewRnetConceptoFavorableComponent implements OnInit {
     };
 
     constructor(
-        private _TramiteFacturaService: FroFacTramiteService,
-        private _TramiteSolicitudService: FroTrteSolicitudService,
-        private _FuncionarioService: PnalFuncionarioService,
         private _VhloTpAsignacionService: VhloTpAsignacionService,
         private _UserEmpresaTransporteService: UserEmpresaTransporteService,
         private _NivelServicioService: VhloCfgNivelServicioService,

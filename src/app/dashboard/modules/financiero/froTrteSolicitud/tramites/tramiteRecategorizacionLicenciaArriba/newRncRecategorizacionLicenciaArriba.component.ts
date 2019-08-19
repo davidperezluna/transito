@@ -1,7 +1,4 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FroTrteSolicitudService } from '../../../../../../services/froTrteSolicitud.service';
-import { FroFacTramiteService } from '../../../../../../services/froFacTramite.service';
-import { PnalFuncionarioService } from '../../../../../../services/pnalFuncionario.service';
 import { CfgPaisService } from '../../../../../../services/cfgPais.service';
 import { UserLcCfgCategoriaService } from '../../../../../../services/userLcCfgCategoria.service';
 import { VhloCfgServicioService } from '../../../../../../services/vhloCfgServicio.service';
@@ -44,9 +41,6 @@ export class NewRncRecategorizacionLicenciaArribaComponent implements OnInit {
     };
 
     constructor(
-        private _TramiteFacturaService: FroFacTramiteService,
-        private _TramiteSolicitudService: FroTrteSolicitudService,
-        private _FuncionarioService: PnalFuncionarioService,
         private _PaisService: CfgPaisService,
         private _ServicioService: VhloCfgServicioService,
         private _CategoriaService: UserLcCfgCategoriaService,

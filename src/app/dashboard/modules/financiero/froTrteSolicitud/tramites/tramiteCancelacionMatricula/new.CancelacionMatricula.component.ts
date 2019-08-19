@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { CfgEntidadJudicialService } from "../../../../../../services/cfgEntidadJudicial.service";
 import { VhloCfgMotivoCancelacionService } from "../../../../../../services/vhloCfgMotivoCancelacion.service";
-import { VhloVehiculoService } from '../../../../../../services/vhloVehiculo.service';
 import { LoginService } from '../../../../../../services/login.service';
 
 import swal from 'sweetalert2';

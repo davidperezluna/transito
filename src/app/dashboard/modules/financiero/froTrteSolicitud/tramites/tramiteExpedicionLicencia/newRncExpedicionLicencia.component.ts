@@ -1,8 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { UserCiudadanoService } from '../../../../../../services/userCiudadano.service';
-import { FroTrteSolicitudService } from '../../../../../../services/froTrteSolicitud.service';
-import { FroFacTramiteService } from '../../../../../../services/froFacTramite.service';
-import { PnalFuncionarioService } from '../../../../../../services/pnalFuncionario.service';
 import { UserLcCfgCategoriaService } from '../../../../../../services/userLcCfgCategoria.service';
 import { CfgPaisService } from '../../../../../../services/cfgPais.service';
 import { VhloCfgServicioService } from '../../../../../../services/vhloCfgServicio.service';
@@ -45,9 +42,6 @@ export class NewRncExpedicionLicenciaComponent implements OnInit {
     };
 
     constructor(
-        private _TramiteFacturaService: FroFacTramiteService,
-        private _TramiteSolicitudService: FroTrteSolicitudService,
-        private _FuncionarioService: PnalFuncionarioService,
         private _CiudadanoService: UserCiudadanoService,
         private _CfgPaisService: CfgPaisService,
         private _ServicioService: VhloCfgServicioService,

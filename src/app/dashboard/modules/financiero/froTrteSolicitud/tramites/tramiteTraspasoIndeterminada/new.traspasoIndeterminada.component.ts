@@ -1,13 +1,9 @@
 import { Component , OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FroTrteSolicitudService } from '../../../../../../services/froTrteSolicitud.service';
-import { FroFacTramiteService } from '../../../../../../services/froFacTramite.service';
+import { DatePipe } from '@angular/common';
 import { VhloPropietarioService} from '../../../../../../services/vhloPropietario.service';
-//import { VhloActaTraspasoService } from '../../../../../../services/vhloActaTraspaso.service';
 import { CfgEntidadJudicialService } from '../../../../../../services/cfgEntidadJudicial.service';
 import { UserCiudadanoService } from '../../../../../../services/userCiudadano.service';
-import { PnalFuncionarioService } from '../../../../../../services/pnalFuncionario.service';
 import { LoginService } from '../../../../../../services/login.service';
-import { DatePipe } from '@angular/common';
 import swal from 'sweetalert2';
 
 @Component({
@@ -59,12 +55,9 @@ export class NewTraspasoIndeterminadaComponent implements OnInit {
   };
 
   constructor(
-    private _TramiteSolicitudService: FroTrteSolicitudService,
-    private _TramiteFacturaService: FroFacTramiteService,
     private _CfgEntidadJudicialService: CfgEntidadJudicialService,
     private _PropietarioService: VhloPropietarioService,
     private _CiudadanoService: UserCiudadanoService,
-    private _FuncionarioService: PnalFuncionarioService,
     private _LoginService: LoginService,
     ){}
     

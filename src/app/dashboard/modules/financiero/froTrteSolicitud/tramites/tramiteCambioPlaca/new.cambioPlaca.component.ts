@@ -1,8 +1,4 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { FroTrteSolicitudService } from '../../../../../../services/froTrteSolicitud.service';
-import { FroFacTramiteService } from '../../../../../../services/froFacTramite.service';
-import { VhloVehiculoService } from '../../../../../../services/vhloVehiculo.service';
-import { PnalFuncionarioService } from '../../../../../../services/pnalFuncionario.service';
 import { LoginService } from '../../../../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -37,10 +33,6 @@ export class NewCambioPlacaComponent implements OnInit {
     };
 
     constructor(
-        private _TramiteSolicitudService: FroTrteSolicitudService,
-        private _TramiteFacturaService: FroFacTramiteService,
-        private _VehiculoService: VhloVehiculoService,
-        private _FuncionarioService: PnalFuncionarioService,
         private _LoginService: LoginService,
     ) { }
 

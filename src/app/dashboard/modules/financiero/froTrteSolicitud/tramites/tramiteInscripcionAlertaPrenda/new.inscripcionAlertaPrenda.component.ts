@@ -1,15 +1,11 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FroTrteSolicitudService } from '../../../../../../services/froTrteSolicitud.service';
-import { FroFacTramiteService } from '../../../../../../services/froFacTramite.service';
+import { DatePipe  } from '@angular/common';
+import { Router } from "@angular/router";
 import { VhloCfgTipoAlertaService } from '../../../../../../services/vhloCfgTipoAlerta.service';
-import { VhloAcreedorService } from '../../../../../../services/vhloAcreedor.service';
 import { UserCiudadanoService } from '../../../../../../services/userCiudadano.service';
 import { UserCfgTipoIdentificacionService } from '../../../../../../services/userCfgTipoIdentificacion.service';
 import { CfgEntidadJudicialService } from '../../../../../../services/cfgEntidadJudicial.service';
-import { PnalFuncionarioService } from '../../../../../../services/pnalFuncionario.service';
 import { LoginService } from '../../../../../../services/login.service';
-import { Router } from "@angular/router";
-import { DatePipe  } from '@angular/common';
 
 import swal from 'sweetalert2';
 
@@ -80,14 +76,10 @@ export class NewTramiteInscripcionAlertaPrendaComponent implements OnInit {
     };
 
     constructor(
-        private _TramiteSolicitudService: FroTrteSolicitudService,
-        private _TramiteFacturaService: FroFacTramiteService,
         private _EntidadJudicialService: CfgEntidadJudicialService,
         private _TipoAlertaService: VhloCfgTipoAlertaService,
-        private _AcreedorService: VhloAcreedorService,
         private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
         private _CiudadanoService: UserCiudadanoService,
-        private _FuncionarioService: PnalFuncionarioService,
         private _LoginService: LoginService,
         private router: Router,
     ) { }
