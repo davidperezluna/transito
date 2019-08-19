@@ -10,6 +10,7 @@ import swal from 'sweetalert2';
     selector: 'app-duplicado-placa',
     templateUrl: './new.duplicadoPlaca.html'
 })
+
 export class NewDuplicadoPlacaComponent implements OnInit {
     @Output() onReadyTramite = new EventEmitter<any>();
     @Input() tramiteFactura: any = null;

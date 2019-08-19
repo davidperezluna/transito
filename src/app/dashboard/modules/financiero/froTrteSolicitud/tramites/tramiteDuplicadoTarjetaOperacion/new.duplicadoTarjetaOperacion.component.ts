@@ -13,7 +13,8 @@ import swal from 'sweetalert2';
     templateUrl: './new.duplicadoTarjetaOperacion.html',
     providers: [DatePipe]
 })
-export class NewDuplicadoTarjetaOperacionComponent implements OnInit {
+
+export class NewRnetDuplicadoTarjetaOperacionComponent implements OnInit {
     @Output() onReadyTramite = new EventEmitter<any>();
     @Input() tramiteFactura: any = null;
     @Input() vehiculo: any = null;

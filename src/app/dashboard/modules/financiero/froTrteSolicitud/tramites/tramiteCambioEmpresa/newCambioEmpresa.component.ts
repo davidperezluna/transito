@@ -13,7 +13,8 @@ import swal from 'sweetalert2';
     selector: 'app-cambio-empresa',
     templateUrl: './newCambioEmpresa.html'
 })
-export class NewCambioEmpresaComponent implements OnInit {
+
+export class NewRnetCambioEmpresaComponent implements OnInit {
     @Output() onReadyTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;
     @Input() funcionario: any = null;

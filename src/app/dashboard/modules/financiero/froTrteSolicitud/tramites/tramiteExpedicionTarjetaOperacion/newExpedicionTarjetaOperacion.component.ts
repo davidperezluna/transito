@@ -10,7 +10,7 @@ import swal from 'sweetalert2';
     providers: [DatePipe]
 })
 
-export class NewExpedicionTarjetaOperacionComponent implements OnInit {
+export class NewRnetExpedicionTarjetaOperacionComponent implements OnInit {
     @Output() onReadyTramite = new EventEmitter<any>();
     @Input() tramiteFactura: any = null;
     @Input() vehiculo: any = null;

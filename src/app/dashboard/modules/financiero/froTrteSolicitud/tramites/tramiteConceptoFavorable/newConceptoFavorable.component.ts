@@ -13,7 +13,8 @@ import swal from 'sweetalert2';
     selector: 'app-concepto-favorable',
     templateUrl: './newConceptoFavorable.html'
 })
-export class NewConceptoFavorableComponent implements OnInit {
+
+export class NewRnetConceptoFavorableComponent implements OnInit {
     @Output() onReadyTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;
     @Input() funcionario: any = null;

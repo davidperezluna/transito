@@ -12,7 +12,8 @@ import swal from 'sweetalert2';
     selector: 'app-expedicion-tarjeta-operacion-cambio-nivel-servicio',
     templateUrl: './newExpedicionTarjetaOperacionCambioNivelServicio.html'
 })
-export class NewExpedicionTarjetaOperacionCambioNivelServicioComponent implements OnInit {
+
+export class NewRnetExpedicionTarjetaOperacionCambioNivelServicioComponent implements OnInit {
     @Output() onReadyTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;
     @Input() funcionario: any = null;

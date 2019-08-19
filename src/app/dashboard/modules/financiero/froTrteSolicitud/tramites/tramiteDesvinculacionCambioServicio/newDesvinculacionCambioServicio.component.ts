@@ -14,7 +14,8 @@ import swal from 'sweetalert2';
     templateUrl: './newDesvinculacionCambioServicio.html',
     providers: [DatePipe]
 })
-export class NewDesvinculacionCambioServicioComponent implements OnInit {
+
+export class NewRnetDesvinculacionCambioServicioComponent implements OnInit {
     @Output() onReadyTramite = new EventEmitter<any>();
     @Input() tramiteFactura: any = null;
     @Input() vehiculo: any = null;

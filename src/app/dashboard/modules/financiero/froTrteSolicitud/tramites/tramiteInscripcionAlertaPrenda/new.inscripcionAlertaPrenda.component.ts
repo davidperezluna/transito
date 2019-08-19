@@ -17,6 +17,7 @@ import swal from 'sweetalert2';
     selector: 'app-inscripcion-alerta-prenda',
     templateUrl: './new.inscripcionAlertaPrenda.html'
 })
+
 export class NewTramiteInscripcionAlertaPrendaComponent implements OnInit {
     @Output() onReadyTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;
