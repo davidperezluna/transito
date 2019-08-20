@@ -5,9 +5,9 @@ import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { SelectModule } from 'angular2-select';
 import { TooltipModule } from "ngx-tooltip";
 
+import { FroFacturaComponent } from './froFactura';
 import { FroAcuerdoPagoComponent } from './froAcuerdoPago/froAcuerdoPago.component';
 import { FroCfgTipoRecaudoComponent } from './froCfgTipoRecaudo/froCfgTipoRecaudo.component';
-import { FroFacturaComponent } from './froFactura';
 import { FroFacAcuerdoPagoComponent } from './froFactura';
 import { FroFacInfraccionComponent } from './froFactura';
 import { FroFacTramiteComponent } from './froFactura/froFacTramite/froFacTramite.component';
@@ -36,11 +36,10 @@ import { FroTrteCfgCuentaModule } from './froTrteCfgCuenta/froTrteCfgCuenta.modu
 import { FroTrtePrecioModule } from './froTrtePrecio/froTrtePrecio.module';
 import { FroTrteSolicitudModule } from './froTrteSolicitud/froTrteSolicitud.module';
 import { FroTrteArchivoPlanoModule } from './froTrteArchivoPlano/froTrteArchivoPlano.module';
+import { UserCiudadanoModule } from '../usuario/userCiudadano/userCiudadano.module';
 
 import { FroTrteArchivoPlanoComponent } from './froTrteArchivoPlano/froTrteArchivoPlano.component';
-
 import { NewInsumoComponent } from './froTrteSolicitud/newInsumo/newInsumo.component';
-
 import { NewRncComponent } from './froTrteSolicitud/newRnc/newRnc.component';
 import { NewRncExpedicionLicenciaComponent } from './froTrteSolicitud/tramites/tramiteExpedicionLicencia/newRncExpedicionLicencia.component';
 import { NewRncDuplicadoLicenciaComponent } from './froTrteSolicitud/tramites/tramiteDuplicadoLicencia/newRncDuplicadoLicencia.component';
@@ -48,11 +47,9 @@ import { NewRncExpedicionLicenciaCambioDocumentoComponent } from './froTrteSolic
 import { NewRncRecategorizacionLicenciaAbajoComponent } from './froTrteSolicitud/tramites/tramiteRecategorizacionLicenciaAbajo/newRncRecategorizacionLicenciaAbajo.component';
 import { NewRncRecategorizacionLicenciaArribaComponent } from './froTrteSolicitud/tramites/tramiteRecategorizacionLicenciaArriba/newRncRecategorizacionLicenciaArriba.component';
 import { NewRncRefrendacionLicenciaComponent } from './froTrteSolicitud/tramites/tramiteRefrendacionLicencia/newRncRefrendacionLicencia.component';
-
 import { NewRnaComponent } from './froTrteSolicitud/newRna/newRna.component';
 import { NewRnmaComponent } from './froTrteSolicitud/newRnma/newRnma.component';
 import { NewRnrsComponent } from './froTrteSolicitud/newRnrs/newRnrs.component';
-
 import { NewRnetComponent } from './froTrteSolicitud/newRnet/newRnet.component';
 import { NewBlindajeComponent } from './froTrteSolicitud/tramites/tramiteBlindaje/new.blindaje.component';
 import { NewCambioColorComponent } from './froTrteSolicitud/tramites/tramiteCambioColor/new.cambioColor.component';
@@ -81,7 +78,6 @@ import { NewTramiteLevantamientoAlertaPrendaComponent } from './froTrteSolicitud
 import { NewTramiteCambioAcreedorPrendarioComponent } from './froTrteSolicitud/tramites/tramiteCambioAcreedorPrendario/new.CambioAcreedorPrendario.component';
 import { NewTramiteCambioAcreedorPrendarioPropietarioComponent } from './froTrteSolicitud/tramites/tramiteCambioAcreedorPrendarioPropietario/new.CambioAcreedorPrendarioPropietario.component';
 import { NewTransformacionComponent } from './froTrteSolicitud/tramites/tramiteTransformacion/new.transformacion.component';
-
 import { NewRnetExpedicionTarjetaOperacionComponent } from './froTrteSolicitud/tramites/tramiteExpedicionTarjetaOperacion/newExpedicionTarjetaOperacion.component';
 import { NewRnetDuplicadoTarjetaOperacionComponent } from './froTrteSolicitud/tramites/tramiteDuplicadoTarjetaOperacion/new.duplicadoTarjetaOperacion.component';
 import { NewRnetExpedicionTarjetaOperacionCambioNivelServicioComponent } from './froTrteSolicitud/tramites/tramiteExpedicionTarjetaOperacionCambioNivelServicio/newExpedicionTarjetaOperacionCambioNivelServicio.component';
@@ -98,6 +94,7 @@ import { NewRnetDesvinculacionComunAcuerdoComponent } from './froTrteSolicitud/t
     Ng2BootstrapModule.forRoot(),
     SelectModule,
     TooltipModule,
+    UserCiudadanoModule,
     FinancieroRoutingModule,
     FroFacturaModule,
     FroReporteIngresosModule,
@@ -106,6 +103,7 @@ import { NewRnetDesvinculacionComunAcuerdoComponent } from './froTrteSolicitud/t
     FroTrteArchivoPlanoModule,
   ],
   declarations: [
+    FroFacturaComponent,
     FroFacTramiteComponent,
     FroFacParqueaderoComponent,
     FroReporteIngresosComponent,

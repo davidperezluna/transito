@@ -24,7 +24,7 @@ import { UserCiudadanoModule } from '../../usuario/userCiudadano/userCiudadano.m
 @NgModule({
     imports: [
         CommonModule, 
-        Ng2BootstrapModule.forRoot(),
+        Ng2BootstrapModule.forRoot(), 
         SelectModule,
         UserCiudadanoModule
     ],

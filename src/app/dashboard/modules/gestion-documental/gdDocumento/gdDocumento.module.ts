@@ -22,7 +22,7 @@ import { RecordComponent } from './record/record.component';
 import { NewCiudadanoComponent } from './newCiudadano/newCiudadano.component';
 
 @NgModule({
-    imports: [CommonModule, Ng2BootstrapModule.forRoot(),SelectModule],
+    imports: [CommonModule, Ng2BootstrapModule.forRoot(), SelectModule],
     declarations: [NewComponent, EditComponent, ShowComponent, PrintComponent, RecordComponent,NewCiudadanoComponent],
     exports: [NewComponent, EditComponent, ShowComponent, PrintComponent, RecordComponent, NewCiudadanoComponent],
     providers: [

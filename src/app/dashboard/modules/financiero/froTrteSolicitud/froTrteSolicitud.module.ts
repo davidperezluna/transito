@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
+import { SelectModule } from 'angular2-select';
 
 import { DefaultService } from '../../../../services/default.service';
 import { CfgTipoAlertaService } from '../../../../services/cfgTipoAlerta.service';
@@ -40,13 +41,11 @@ import { UserLcCfgCategoriaService } from '../../../../services/userLcCfgCategor
 //Reportes de tramite solicitud
 import { ReportesComponent } from "./reportes/reportes.component";
 
-import { UserCiudadanoModule } from '../../usuario/userCiudadano/userCiudadano.module';
-
 @NgModule({
     imports: [
         CommonModule,
         Ng2BootstrapModule.forRoot(),
-        UserCiudadanoModule,
+        SelectModule,
     ],
     declarations: [
         ReportesComponent,
