@@ -425,7 +425,7 @@
                     </div>
 
                     <div class="col-xs-12 col-lg-12" *ngIf="tramiteFactura">
-                        <app-expedicion-tarjeta-operacion *ngIf="tramiteFactura.precio.tramite.id == 37" [vehiculo]="vehiculo"
+                        <app-expedicion-tarjeta-operacion *ngIf="tramiteFactura.precio.tramite.id == 5" [vehiculo]="vehiculo"
                             [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura"
                             (onReadyTramite)="onReadyTramite($event)">
                         </app-expedicion-tarjeta-operacion>
@@ -463,7 +463,7 @@
                 <div class="row"
                     *ngIf="requiereSustrato && tramitesFactura && tramitesFactura.length == tramitesRealizados.length && !this.tramiteSolicitud.insumoEntregado">
                     <div class="col-xs-12 col-lg-12">
-                        <app-insumo [factura]="factura" [idModulo]='2' (onReadyInsumo)="onReadyInsumo($event)">
+                        <app-insumo [factura]="factura" [idModulo]='6' (onReadyInsumo)="onReadyInsumo($event)">
                         </app-insumo>
                     </div>
                 </div>

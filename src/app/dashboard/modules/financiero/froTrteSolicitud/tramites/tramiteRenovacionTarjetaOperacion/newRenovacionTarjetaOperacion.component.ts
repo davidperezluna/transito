@@ -54,16 +54,18 @@ export class NewRnetRenovacionTarjetaOperacionComponent implements OnInit {
         this._TarjetaOperacionService.searchTarjetaOperacionByVehiculo({ 'idVehiculo': this.vehiculo.id }, token).subscribe(
             response => {
                 this.tarjetaOperacion = response.data;
-                console.log(this.tarjetaOperacion);
 
-                var datePiper = new DatePipe(this.tarjetaOperacion.fechaVencimiento.timestamp);
-                this.tarjetaOperacion.fechaVencimiento = datePiper.transform(this.tarjetaOperacion.fechaVencimiento.timestamp, 'yyyy-MM-dd');
+                var datePiper = new DatePipe('en-US');
+
+                var date = new Date();
+                date.setTime(this.tarjetaOperacion.fechaVencimiento.timestamp * 1000);
+
+                this.tarjetaOperacion.fechaVencimiento = datePiper.transform(
+                    date, 'yyyy-MM-dd'
+                );
 
                 this.datos.numeroTarjetaOperacion = this.tarjetaOperacion.numeroTarjetaOperacion;
                 this.datos.fechaVencimiento = this.tarjetaOperacion.fechaVencimiento;
-                /* let timeoutId = setTimeout(() => {
-                    this.ngOnInit();
-                }, 100); */
             },
             error => {
                 this.errorMessage = <any>error;
