@@ -47,11 +47,11 @@ export class CfgAdmFormatoService {
 
 	edit(datos, token) {
 		let json = JSON.stringify(datos);
-		//json = encodeURI(json);		
-		let params = "data=" + json + "&authorization=" + token;
-		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-		return this._http.post(this.url + "/edit", params, { headers: headers }).map(
-			res => res.json());
+		let formData = new FormData();
+		formData.append('data', json);
+		formData.append('authorization', token);
+		//let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/edit", formData).map(res => res.json());
 	}
 
 	select() {
