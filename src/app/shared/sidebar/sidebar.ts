@@ -95,6 +95,14 @@ export class SidebarComponent implements OnInit {
       this.addActive = '0';
     } else {
       this.addActive = element;
+
+      swal({
+        title: 'Cargando módulo!',
+        text: 'Solo tardara unos segundos por favor espere.',
+        onOpen: () => {
+          swal.showLoading()
+        }
+      });
     }
   }
 }

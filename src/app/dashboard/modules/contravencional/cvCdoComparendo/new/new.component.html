@@ -2,10 +2,8 @@
     <div class="col-xs-12 col-lg-3"><!-- .col -->
         <div class="card"><!-- .card -->
             <div class="card-header"><!-- .card-header -->
-                <h5 class="card-title"><!-- .card-title -->
-                    <b class="text-uppercase">Registrar comparendo</b> 
-                    <small class="pull-right">Los campos con <b class="text-danger">*</b> son obligatorios</small>
-                </h5><!-- /.card-title -->
+                <b class="text-uppercase">Registrar comparendo</b> 
+                <small class="pull-right">Los campos con <b class="text-danger">*</b> son obligatorios</small>
             </div><!-- /.card-header -->
             <div class="card-body"><!-- .card-body -->
                 <div class="row">
@@ -22,7 +20,7 @@
                                     <input class="form-control text-uppercase" [(ngModel)]="search.numero" name="numero" type="text" required>
                                 </div>
                             </div>
-
+                            <hr>
                             <div class="row"><!-- .row -->
                                 <div class="col-xs-12 col-lg-12">
                                     <div class="btn-group">
@@ -151,9 +149,9 @@
                             </h6>
                             <div class="row">
                                 <div class="col-xs-12 col-lg-12">
-                                    <label>Número <b class="text-danger">*</b></label>
+                                    <label>Número</label>
                                     <div class="input-group">
-                                        <input class="form-control text-uppercase" type="text" [(ngModel)]="comparendo.vehiculoPlaca" name="placa" required>
+                                        <input class="form-control text-uppercase" type="text" [(ngModel)]="comparendo.vehiculoPlaca" name="placa">
                                     </div>
                                 </div>
                             </div>
@@ -165,8 +163,7 @@
                             <div class="row">
                                 <div class="col-xs-12 col-lg-12">
                                     <label>Organismo de transito</label>
-                                    <ng-select [multiple]="false" [options]="organismosTransitoNacional" [(ngModel)]="comparendo.idOrganismoTransitoMatriculado" name="organismoTransitoMatriculado"
-                                        required>
+                                    <ng-select [multiple]="false" [options]="organismosTransitoNacional" [(ngModel)]="comparendo.idOrganismoTransitoMatriculado" name="organismoTransitoMatriculado">
                                     </ng-select>
                                 </div>
                             </div>
@@ -191,7 +188,7 @@
                                 <b>6. Clase Servicio</b>
                             </h6>
                             <div class="col-xs-12 col-lg-12">
-                                <ng-select [multiple]="false" [options]="servicios" [(ngModel)]="comparendo.vehiculoServicio" name="servicio" required></ng-select>
+                                <ng-select [multiple]="false" [options]="servicios" [(ngModel)]="comparendo.vehiculoServicio" name="servicio"></ng-select>
                             </div>
                         </div>
 
@@ -200,7 +197,7 @@
                                 <b>7. Tipo Vehículo</b>
                             </h6>
                             <div class="col-xs-12 col-lg-12">
-                                <ng-select [multiple]="false" [options]="tiposVehiculo" [(ngModel)]="comparendo.vehiculoClase" name="clase" required></ng-select>
+                                <ng-select [multiple]="false" [options]="clases" [(ngModel)]="comparendo.vehiculoClase" name="clase"></ng-select>
                             </div>
                         </div>
                         
@@ -218,7 +215,7 @@
                                 <b>9. Modalidad Transporte</b>
                             </h6>
                             <div class="col-xs-12 col-lg-12" *ngIf="comparendo.vehiculoServicio == 2">
-                                <ng-select [multiple]="false" [options]="modalidadesTransporte" [(ngModel)]="comparendo.vehiculoModalidadTransporte" name="modalidadTransporte" required></ng-select>
+                                <ng-select [multiple]="false" [options]="modalidadesTransporte" [(ngModel)]="comparendo.vehiculoModalidadTransporte" name="modalidadTransporte"></ng-select>
                             </div>
                         </div>
 
@@ -252,9 +249,7 @@
                             <input class="form-control" [(ngModel)]="infractor.licenciaConduccion" name="infractorLicenciaConduccion" type="text">
                         </div>
                         <div class="col-xs-12 col-lg-3">
-                            <label>Categoria
-                                <b class="text-danger">*</b>
-                            </label>
+                            <label>Categoria</label>
                             <ng-select [multiple]="false" [options]="categorias" [(ngModel)]="infractor.idCategoriaLicenciaConduccion" name="infractorCategoria"></ng-select>
                         </div>
                         <div class="col-xs-12 col-lg-3">
@@ -506,8 +501,7 @@
                                 </h6>
                             </div>
                             <div class="col-xs-12 col-lg-12">
-                                <textarea class="form-control" [(ngModel)]="comparendo.observacionesDigitador" name="observacionesDigitador" type="textArea"
-                                    rows="3"></textarea>
+                                <textarea class="form-control" [(ngModel)]="comparendo.observacionesDigitador" name="observacionesDigitador" type="textArea" rows="3"></textarea>
                             </div>
                         </div>
                     </div>
@@ -525,5 +519,14 @@
                 </form>
             </div><!-- /.card-body -->
         </div><!-- /.card -->
+    </div>
+
+    <div class="col-xs-12 col-lg-9" *ngIf='comparendo.id'>
+        <div class="btn-group">
+            <a href="{{ apiUrl }}contravencional/cvcdocomparendo/{{ comparendo.id }}/pdf" class="btn btn-primary" target="_blank">
+                <i class="fa fa-file-pdf-o"></i>
+                Resumen de comparendo
+            </a>
+        </div>
     </div>
 </div>

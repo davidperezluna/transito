@@ -21,6 +21,7 @@ import { VhloCfgClaseService } from '../../../../../services/vhloCfgClase.servic
 import { VhloCfgServicioService } from '../../../../../services/vhloCfgServicio.service';
 import { FroInfraccionService } from '../../../../../services/froInfraccion.service';
 import { LoginService } from '../../../../../services/login.service';
+import { environment } from 'environments/environment'
 import swal from 'sweetalert2';
 
 @Component({
@@ -65,7 +66,7 @@ export class NewComponent implements OnInit {
   public infracciones: any;
 
   public servicios: any;
-  public tiposVehiculo: any;
+  public clases: any;
   public radiosAccion: any;
   public modalidadesTransporte: any;
   public transportesPasajero: any;
@@ -78,6 +79,8 @@ export class NewComponent implements OnInit {
   public gruas: any;
   public tiposIdentificacion: any;
   public comparendoEstados: any;
+
+  public apiUrl = environment.apiUrl;
 
   public search = {
     'idFuncionario': null,
@@ -210,7 +213,8 @@ constructor(
     
 		this._ComparendoService.register(datos,token).subscribe(
 			response => {
-        if(response.status == 'success'){
+        if(response.code == 200){
+          this.comparendo = response.data;
           this.consecutivo = null;
 
           swal({
@@ -467,7 +471,7 @@ constructor(
               
                   this._ClaseService.select().subscribe(
                     response => {
-                      this.tiposVehiculo = response;
+                      this.clases = response;
                     },
                     error => {
                       this.errorMessage = <any>error;
