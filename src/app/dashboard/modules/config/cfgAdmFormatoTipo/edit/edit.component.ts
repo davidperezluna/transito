@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { SvCfgSenialEstadoService } from '../../../../../services/svCfgSenialEstado.service';
+import { CfgAdmFormatoTipoService } from '../../../../../services/cfgAdmFormatoTipo.service';
 import { LoginService } from '../../../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -15,8 +15,8 @@ public respuesta;
 public formReady = false;
 
 constructor(
-  private _SenialEstadoService: SvCfgSenialEstadoService,
-  private _loginService: LoginService,
+  private _CfgAdmFormatoTipoService: CfgAdmFormatoTipoService,
+  private _LoginService: LoginService,
   ){}
 
   ngOnInit(){ console.log(this.tipo);
@@ -25,16 +25,16 @@ constructor(
   onCancelar(){ this.ready.emit(true); }
 
   onEnviar(){
-    let token = this._loginService.getToken();
+    let token = this._LoginService.getToken();
     
-		this._SenialEstadoService.edit(this.tipo,token).subscribe(
+    this._CfgAdmFormatoTipoService.edit(this.tipo, token).subscribe(
 			response => {
-        if(response.status == 'success'){
+        if(response.code == 200){
           this.ready.emit(true);
           swal({
-            title: 'Perfecto!',
+            title: response.title,
             text: response.message,
-            type: 'success',
+            type: response.status,
             confirmButtonText: 'Aceptar'
           })
         }

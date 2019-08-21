@@ -45,7 +45,7 @@ export class CvCdoCfgEstadoComponent implements OnInit {
 				response => {
           this.estados = response.data;
           let timeoutId = setTimeout(() => {  
-            this.iniciarTabla();
+            this.onInitTable();
           }, 100);
 				}, 
 				error => {
@@ -58,8 +58,8 @@ export class CvCdoCfgEstadoComponent implements OnInit {
 				}
       );
   }
-  iniciarTabla(){
-    $('#dataTables-example').DataTable({
+  onInitTable(){
+    this.table = $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,
       sPaginationType: 'full_numbers',
@@ -72,7 +72,6 @@ export class CvCdoCfgEstadoComponent implements OnInit {
         }
       }
    });
-   this.table = $('#dataTables-example').DataTable();
   }
   
   onNew(){
@@ -90,10 +89,10 @@ export class CvCdoCfgEstadoComponent implements OnInit {
     }
   }
   
-  deleteInfraccionCategoria(id:any){
+  onDelete(id:any){
     swal({
       title: '¿Estás seguro?',
-      text: "¡Se eliminara este registro!",
+      text: "¡Se eliminará este registro!",
       type: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#15d4be',
@@ -103,12 +102,12 @@ export class CvCdoCfgEstadoComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._LoginService.getToken();
-        this._EstadoService.delete(token,id).subscribe(
+        this._EstadoService.delete({'id': id}, token).subscribe(
             response => {
                 swal({
-                      title: 'Eliminado!',
-                      text:'Registro eliminado correctamente.',
-                      type:'success',
+                      title: response.title,
+                      text:response.message,
+                      type: response.status,
                       confirmButtonColor: '#15d4be',
                     })
                   this.table.destroy();

@@ -25,6 +25,9 @@ constructor(
     this._FormatoService.select().subscribe(
       response => {
         this.formatos = response;
+        setTimeout(() => {
+          this.estado.idFormato = [this.estado.formato.id];
+        });
       },
       error => {
         this.errorMessage = <any>error;

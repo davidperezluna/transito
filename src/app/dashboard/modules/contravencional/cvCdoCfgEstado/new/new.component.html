@@ -8,26 +8,26 @@
             </div>
             <div class="card-body">
                 <form #formNew="ngForm"> 
-                    <div class="form-group row">
-                        <div class="col-xs-12 col-lg-12">
-                            <label>Nombre <strong class="text-danger">*</strong></label>
-                            <input class="form-control text-uppercase" [(ngModel)]="estado.nombre" name="nombre" type="text" required />
-                        </div>
-                        <div class="col-xs-12 col-lg-12">
-                            <label>Sigla <strong class="text-danger">*</strong></label>
-                            <input class="form-control text-uppercase" [(ngModel)]="estado.sigla" name="sigla" type="text" required />
-                        </div>
-                        <div class="col-xs-12 col-lg-12">
-                            <label>Formato <b class="text-danger">*</b></label>
-                            <ng-select [multiple]="false" [options]="formatos" [(ngModel)]="estado.idFormato" name="idFormato" required>
-                            </ng-select>
-                        </div>
+                    <div class="form-group">
                         <div class="row">
-                            <div class="col-xs-12 col-lg-4">
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Nombre <strong class="text-danger">*</strong></label>
+                                <input class="form-control text-uppercase" [(ngModel)]="estado.nombre" name="nombre" type="text" required />
+                            </div>
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Sigla <strong class="text-danger">*</strong></label>
+                                <input class="form-control text-uppercase" [(ngModel)]="estado.sigla" name="sigla" type="text" required />
+                            </div>
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Formato <b class="text-danger">*</b></label>
+                                <ng-select [multiple]="false" [options]="formatos" [(ngModel)]="estado.idFormato" name="idFormato" required>
+                                </ng-select>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
                                 <label>Días de espera <strong class="text-danger">*</strong></label>
                                 <input class="form-control text-uppercase" [(ngModel)]="estado.dias" name="dias" type="numeric" />
                             </div>
-                            <div class="col-xs-12 col-lg-8">
+                            <div class="col-xs-12 col-lg-6" style="margin-top: 8%;">
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" [(ngModel)]="estado.habiles" class="custom-control-input" id="habiles" name="habiles">
                                     <label class="custom-control-label" for="habiles">Habiles</label>
@@ -71,13 +71,13 @@
             </div>
             <div class="card-footer">
                 <div class="btn-group">
-                    <button (click)="onCancelar()" class="btn btn-default">
-                        <i class="fa fa-times"></i>
-                        Cancelar
-                    </button>
                     <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
                         <i class="fa fa-save"></i>
                         Enviar
+                    </button>
+                    <button (click)="onCancelar()" class="btn btn-default">
+                        <i class="fa fa-times"></i>
+                        Cancelar
                     </button>
                 </div>
             </div>
