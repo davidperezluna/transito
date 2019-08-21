@@ -76,13 +76,10 @@ export class FroReporteIngresosComponent implements OnInit {
     public acuerdosPago;
     public totalAcuerdosPago;
 
-    public arrayExportar = [
-        { value: 1, label: 'EXCEL' },
-        { value: 2, label: 'PDF' },
-    ];
-
     public exportarSelected;
     public funcionario = null;
+    
+    public arrayExportar;
 
     constructor(
         private _FroReporteIngresosService: FroReporteIngresosService,
@@ -106,8 +103,18 @@ export class FroReporteIngresosComponent implements OnInit {
             response => {
                 if (response.code == 200) {
                     this.funcionario = response.data;
-                    console.log(this.funcionario);
                     this.organismoTransitoSelected = [this.funcionario.organismoTransito.id];
+                    
+                    if(this.funcionario.cargo.id == 2) {
+                        this.arrayExportar = [
+                            { value: 1, label: 'EXCEL' },
+                            { value: 2, label: 'PDF' },
+                        ];
+                    } else {
+                        this.arrayExportar = [
+                            { value: 2, label: 'PDF' },
+                        ];
+                    }
                 } else {
                     swal({
                         title: response.title,
