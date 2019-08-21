@@ -20,7 +20,7 @@ export class ShowComponent implements OnInit {
   public municipioSelected: any;
   public tipoSociedadSelected: any;
   public formListaConvenios = false;
-  public table: any;
+  public table: any = null;
   public formNew = false;
   public formEdit = false;
   public cargar = true;
@@ -39,7 +39,13 @@ export class ShowComponent implements OnInit {
         this.formListaConvenios = true;
         if (response.status == "success") {
           this.convenios = response.data;
+          let timeoutId = setTimeout(() => {
+            this.onInitTable();
+          }, 100);
         } else {
+          let timeoutId = setTimeout(() => {
+            this.onInitTable();
+          }, 100);
           swal({
             title: 'Alerta!',
             text: response.message,
@@ -76,6 +82,10 @@ export class ShowComponent implements OnInit {
   }
 
   onInitTable() {
+    if(this.table) {
+      this.table.destroy();
+    }
+    
     this.table = $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,
@@ -130,19 +140,20 @@ export class ShowComponent implements OnInit {
 
   onEdit(convenio: any) {
     let token = this._LoginService.getToken();
-
-    this.convenio = convenio;
     
-    this.formListaConvenios = false;
     
-    this.formEdit = true;
-    this.formNew = false;
-    
-    this._VhloTpConvenioService.searchEmpresasTransportePublicoByConvenio({'idConvenio': this.convenio.id}, token).subscribe(
+    this._VhloTpConvenioService.searchEmpresasTransportePublicoByConvenio({'idConvenio': convenio.id}, token).subscribe(
       response => {
         if (response.code == 200) {
           this.arrayEmpresasTransporte = response.data;
-          console.log(this.arrayEmpresasTransporte);
+
+          this.convenio = convenio;
+      
+          this.formListaConvenios = false;
+          
+          this.formEdit = true;
+          this.formNew = false;
+
         } else {
           swal({
             title: response.title,
@@ -159,7 +170,9 @@ export class ShowComponent implements OnInit {
           alert("Error en la petición");
         }
       }
-    );
+      );
+      
+    
 
   }
 }

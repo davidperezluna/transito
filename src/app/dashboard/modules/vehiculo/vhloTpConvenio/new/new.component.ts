@@ -56,8 +56,6 @@ constructor(
 
     this.convenio.empresa = this.empresa.id;
     
-    console.log(this.convenio);
-
     this._VhloTpConvenioService.register(this.convenio, token).subscribe(
       response => {
         if(response.code == 200){

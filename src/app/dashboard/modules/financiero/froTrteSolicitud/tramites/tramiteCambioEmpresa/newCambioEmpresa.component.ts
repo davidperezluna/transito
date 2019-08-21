@@ -27,6 +27,7 @@ export class NewRnetCambioEmpresaComponent implements OnInit {
 
     public empresaEncontrada;
     public empresaActual;
+    public idAsignacion;
     public arrayCuposDisponibles = null;
 
     public realizado: any = false;
@@ -68,6 +69,7 @@ export class NewRnetCambioEmpresaComponent implements OnInit {
             response => {
                 if(response.code == 200) {
                     this.habilitarFormulario = true;
+                    this.idAsignacion = response.data.asignacion.id;
                     this.empresaActual = response.data.empresaTransporte.empresa.nombre;
                     this.datos.idEmpresaActual = response.data.empresaTransporte.empresa.id;
                     this.datos.numeroCupoActual = response.data.cupo.numero;
@@ -153,7 +155,7 @@ export class NewRnetCambioEmpresaComponent implements OnInit {
     onSearchEmpresaTransporte() {
         let token = this._LoginService.getToken();
 
-        this._UserEmpresaTransporteService.searchByNitAndNumeroActo({'nit': this.nit, 'numeroActo': this.numeroActo}, token).subscribe(
+        this._UserEmpresaTransporteService.searchByNitAndNumeroActo({'idAsignacion': this.idAsignacion, 'nit': this.nit, 'numeroActo': this.numeroActo}, token).subscribe(
             response => {
                 if (response.code == 200) {
                     this.empresaEncontrada = response.data;

@@ -8,7 +8,11 @@
                     <div class="row justify-content-center container">
                         <div class="form-group row">
                             <!-- informacion  especifica de la nueva convenio-->
-                            <div class="col-xs-12 col-lg-6">
+                            <div class="col-xs-12 col-lg-6" *ngIf="!habilitarNumeroConvenio">
+                                <label>Nro. convenio</label>
+                                <h5>{{ convenio.numeroConvenio }}</h5>
+                            </div>
+                            <div class="col-xs-12 col-lg-6" *ngIf="habilitarNumeroConvenio">
                                 <label>Nro. convenio
                                     <span class="text-danger">*</span>
                                 </label>
@@ -16,17 +20,17 @@
                                     placeholder="" type="text" required>
                             </div>
                             <div class="col-xs-12 col-lg-6">
-                                <label>fecha convenio</label>
+                                <label>Fecha convenio</label>
                                 <input class="form-control" [(ngModel)]="convenio.fechaConvenio" name="fechaConvenio"
                                     placeholder="" type="date">
                             </div>
                             <div class="col-xs-12 col-lg-6">
-                                <label>fecha acta Inicio</label>
+                                <label>Fecha acta Inicio</label>
                                 <input class="form-control" [(ngModel)]="convenio.fechaActaInicio"
                                     name="fechaActaInicio" placeholder="" type="date">
                             </div>
                             <div class="col-xs-12 col-lg-6">
-                                <label>fecha acta Fin</label>
+                                <label>Fecha acta Fin</label>
                                 <input class="form-control" [(ngModel)]="convenio.fechaActaFin" name="fechaActaFin"
                                     placeholder="" type="date">
                             </div>

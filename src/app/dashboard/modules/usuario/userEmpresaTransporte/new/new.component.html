@@ -69,17 +69,13 @@
                         required name="idCarroceria">
                     </ng-select>
                 </div>
-                <div class="col-xs-12 col-lg-4" *ngIf="empresaTransporte.idModalidadTransporte">
+                <div class="col-xs-12 col-lg-6" *ngIf="empresaTransporte.idModalidadTransporte">
                     <label>Capacidad mínima <strong class="text-danger">*</strong></label>
-                    <input class="form-control" (blur)="onCalcularCapacidad(empresaTransporte.capacidadMinima, empresaTransporte.capacidadMaxima)" [(ngModel)]="empresaTransporte.capacidadMinima" name="capacidadMinima" type="number">
+                    <input class="form-control" [(ngModel)]="empresaTransporte.capacidadMinima" name="capacidadMinima" type="number">
                 </div>
-                <div class="col-xs-12 col-lg-4" *ngIf="empresaTransporte.idModalidadTransporte">
+                <div class="col-xs-12 col-lg-6" *ngIf="empresaTransporte.idModalidadTransporte">
                     <label>Capacidad máxima <strong class="text-danger">*</strong></label>
-                    <input class="form-control" (blur)="onCalcularCapacidad(empresaTransporte.capacidadMinima, empresaTransporte.capacidadMaxima)" [(ngModel)]="empresaTransporte.capacidadMaxima" name="capacidadMaxima" type="number">
-                </div>
-                <div class="col-xs-12 col-lg-4" *ngIf="empresaTransporte.idModalidadTransporte">
-                    <label>Capacidad <strong class="text-danger">*</strong></label>
-                    <input class="form-control" [(ngModel)]="empresaTransporte.capacidad" name="capacidad" type="number" required disabled>
+                    <input class="form-control" [(ngModel)]="empresaTransporte.capacidadMaxima" name="capacidadMaxima" type="number">
                 </div>
                 <div class="col-xs-12 col-lg-12" *ngIf="empresaTransporte.idClase == 5 ">
                     <div class="custom-control custom-checkbox">

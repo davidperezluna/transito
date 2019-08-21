@@ -24,6 +24,7 @@ export class NewRnetRenovacionTarjetaOperacionComponent implements OnInit {
     public tramiteSolicitud: any = null;
     public motivoList: string[];
     public motivoSelected: any;
+    public mostrarFormulario = false;
 
     public datos = {
         'documentacion': true,
@@ -53,19 +54,32 @@ export class NewRnetRenovacionTarjetaOperacionComponent implements OnInit {
 
         this._TarjetaOperacionService.searchTarjetaOperacionByVehiculo({ 'idVehiculo': this.vehiculo.id }, token).subscribe(
             response => {
-                this.tarjetaOperacion = response.data;
+                if(response.code == 200) {
+                    this.mostrarFormulario = true;
 
-                var datePiper = new DatePipe('en-US');
-
-                var date = new Date();
-                date.setTime(this.tarjetaOperacion.fechaVencimiento.timestamp * 1000);
-
-                this.tarjetaOperacion.fechaVencimiento = datePiper.transform(
-                    date, 'yyyy-MM-dd'
-                );
-
-                this.datos.numeroTarjetaOperacion = this.tarjetaOperacion.numeroTarjetaOperacion;
-                this.datos.fechaVencimiento = this.tarjetaOperacion.fechaVencimiento;
+                    this.tarjetaOperacion = response.data;
+    
+                    var datePiper = new DatePipe('en-US');
+    
+                    var date = new Date();
+                    date.setTime(this.tarjetaOperacion.fechaVencimiento.timestamp * 1000);
+    
+                    this.tarjetaOperacion.fechaVencimiento = datePiper.transform(
+                        date, 'yyyy-MM-dd'
+                    );
+    
+                    this.datos.numeroTarjetaOperacion = this.tarjetaOperacion.numeroTarjetaOperacion;
+                    this.datos.fechaVencimiento = this.tarjetaOperacion.fechaVencimiento;
+                }
+                else {
+                    this.mostrarFormulario = false;
+                    swal({
+                        title: response.title,
+                        text: response.message,
+                        type: response.status,
+                        confirmButtonText: 'Aceptar'
+                    });
+                }
             },
             error => {
                 this.errorMessage = <any>error;

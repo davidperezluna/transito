@@ -184,19 +184,19 @@ export class NewEmpresaComponent implements OnInit {
 
     this._EmpresaService.register(datos, token).subscribe(
       response => {
-        if (response.status == 'success') {
+        if (response.code == 200) {
           this.ready.emit(true);
           swal({
-            title: 'Perfecto!',
-            text: 'Registro exitoso!',
-            type: 'success',
+            title: response.title,
+            text: response.message,
+            type: response.status,
             confirmButtonText: 'Aceptar'
           });
         } else {
           swal({
-            title: 'Error!',
-            text: 'El empresa ya se encuentra registrado',
-            type: 'error',
+            title: response.title,
+            text: response.message,
+            type: response.status,
             confirmButtonText: 'Aceptar'
           })
         }

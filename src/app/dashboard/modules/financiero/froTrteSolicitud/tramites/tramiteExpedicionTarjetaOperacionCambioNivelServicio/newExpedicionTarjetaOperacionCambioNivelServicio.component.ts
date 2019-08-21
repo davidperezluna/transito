@@ -23,6 +23,7 @@ export class NewRnetExpedicionTarjetaOperacionCambioNivelServicioComponent imple
     public realizado: any = false;
     public tramiteSolicitud: any = null;
     public nivelesServicio: any;
+    public mostrarFormulario = false;
     /* public paises: any;
     public categorias: any; */
 
@@ -52,11 +53,22 @@ export class NewRnetExpedicionTarjetaOperacionCambioNivelServicioComponent imple
 
         this._VhloTpAsignacionService.searchCupoByVehiculo({ 'idVehiculo': this.vehiculo.id }, token).subscribe(
             response => {
-                this.cupo = response.data;
+                if(response.code == 200) {
+                    this.mostrarFormulario = true;
+                    this.cupo = response.data;
 
-                let timeoutId = setTimeout(() => {
-                    this.datos.idNivelServicioAnterior = [this.cupo.nivelServicio.id];
-                }, 100);
+                    let timeoutId = setTimeout(() => {
+                        this.datos.idNivelServicioAnterior = [this.cupo.nivelServicio.id];
+                    }, 100); 
+                } else {
+                    this.mostrarFormulario = false;
+                    swal({
+                        title: response.title,
+                        text: response.message,
+                        type: response.status,
+                        confirmButtonText: 'Aceptar'
+                    });
+                }
             },
             error => {
                 this.errorMessage = <any>error;

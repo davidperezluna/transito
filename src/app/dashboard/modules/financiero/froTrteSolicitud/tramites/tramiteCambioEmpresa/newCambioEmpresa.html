@@ -85,15 +85,15 @@
                                                 <tr class="odd">
                                                     <td>
                                                         <b>Nit</b>
-                                                        <br> {{ empresaEncontrada.nit }}
+                                                        <br> {{ empresaEncontrada.empresa.nit }}
                                                     </td>
                                                     <td>
                                                         <b>Nombre</b>
-                                                        <br> {{ empresaEncontrada.nombre }}
+                                                        <br> {{ empresaEncontrada.empresa.nombre }}
                                                     </td>
                                                     <td>
                                                         <b>Teléfono</b>
-                                                        <br> {{ empresaEncontrada.telefono }}
+                                                        <br> {{ empresaEncontrada.empresa.telefono }}
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -103,17 +103,17 @@
                             </div>
                             <div class="col-xs-12 col-lg-6" *ngIf='empresaEncontrada'></div>
                             <div class="col-xs-12 col-lg-4" *ngIf='empresaEncontrada'>
-                                <label>Nuevo Nro. Cupo</label>
+                                <label>Nuevo Nro. Cupo <b class="text-danger">*</b></label>
                                 <ng-select [multiple]="false" [options]="arrayCuposDisponibles" [(ngModel)]="datos.idCupoNuevo" name="cupoDisponible" required>
                                 </ng-select>
                             </div>
                             <div class="col-xs-12 col-lg-4" *ngIf='empresaEncontrada'>
-                                <label>Nuevo Nro. Tarjeta Operación</label>
+                                <label>Nuevo Nro. Tarjeta Operación <b class="text-danger">*</b></label>
                                 <input class="form-control" [(ngModel)]="datos.numeroTarjetaOperacionNuevo" name="numeroTarjetaOperacionNuevo"
                                     type="number" required />
                             </div>
                             <div class="col-xs-12 col-lg-4" *ngIf='empresaEncontrada'>
-                                <label>Nueva Fecha Vigencia</label>
+                                <label>Nueva Fecha Vigencia <b class="text-danger">*</b></label>
                                 <input class="form-control" [(ngModel)]="datos.fechaVigencia" name="fechaVigencia"
                                     type="date" required />
                             </div>
