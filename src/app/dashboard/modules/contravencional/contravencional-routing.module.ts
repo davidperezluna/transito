@@ -42,12 +42,12 @@ const routes: Routes = [
   /*{
     path: 'cvCdoCfgDescuento',
     component: CvCdoCfgDescuentoComponent
-  },
+  },*/
   {
     path: 'cvCdoCfgEstado',
     component: CvCdoCfgEstadoComponent
   },
-  {
+  /*{
     path: 'cvCdoCfgInteres',
     component: CvCdoCfgInteresComponent
   },*/
