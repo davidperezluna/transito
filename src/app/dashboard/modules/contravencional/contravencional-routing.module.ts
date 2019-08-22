@@ -23,7 +23,7 @@ import { CvRestriccionComponent } from './cvRestriccion/cvRestriccion.component'
 import { SearchComponent } from './cvCdoComparendo/search/search.component';
 
 const routes: Routes = [
-  /*{
+  {
     path: 'cvAuCfgAtencion',
     component: CvAuCfgAtencionComponent
   },
@@ -34,7 +34,7 @@ const routes: Routes = [
   {
     path: 'cvAuCfgTipo',
     component: CvAuCfgTipoComponent
-  },*/
+  },
   {
     path: 'cvAudiencia',
     component: CvAudienciaComponent
