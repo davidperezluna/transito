@@ -177,4 +177,22 @@ export class NewComponent implements OnInit {
 
             });
     }
+
+    onCalcularCapacidad(capacidadMinima, capacidadMaxima) {
+        this.empresaTransporte.capacidadDisponible = 0;
+        if (capacidadMinima && capacidadMaxima) {
+            if (capacidadMaxima <= capacidadMinima) {
+                swal({
+                    title: 'Error!',
+                    text: 'La capacidad máxima debe ser mayor a la mínima',
+                    type: 'error',
+                    confirmButtonText: 'Aceptar'
+                })
+
+            } else {
+                this.empresaTransporte.capacidadDisponible = (capacidadMaxima - capacidadMinima) + 1;
+            }
+        }
+
+    }
 }

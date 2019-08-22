@@ -135,7 +135,7 @@ export class NewComponent implements OnInit {
     onEnviar() {
         let token = this._LoginService.getToken();
 
-        this.asignacion.idEmpresa = this.empresaHabilitadaRango.id;
+        this.asignacion.idEmpresaHabilitadaRango = this.empresaHabilitadaRango.id;
         this.asignacion.idVehiculo = this.vehiculo.id;
 
         this._VhloTpAsignacionService.register(this.asignacion, token).subscribe(

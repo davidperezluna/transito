@@ -77,6 +77,10 @@ export class VhloTpRangoComponent implements OnInit {
                             this.onInitTable();
                         }, 100);
                     } else {
+                        let timeoutId = setTimeout(() => {
+                            this.onInitTable();
+                        }, 100);
+
                         swal({
                             title: response.title,
                             text: response.message,
@@ -208,6 +212,10 @@ export class VhloTpRangoComponent implements OnInit {
                                     confirmButtonText: 'Aceptar'
                                 })
                             } else {
+                                let timeoutId = setTimeout(() => {
+                                    this.onInitTable();
+                                }, 100);
+                                
                                 swal({
                                     title: response.title,
                                     text: response.message,

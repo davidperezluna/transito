@@ -34,7 +34,7 @@
                                     <table class="table table-bordered table-striped">
                                         <tr>
                                             <th><b>Tipo de identificación</b></th>
-                                            <th><b>Numero de identificación</b></th>
+                                            <th><b>Número de identificación</b></th>
                                         </tr>
                                         <tr>
                                             <td>{{ empresaHabilitadaRango.empresa.tipoIdentificacion?.nombre }}</td>
@@ -57,12 +57,20 @@
                                             <td>{{ empresaHabilitadaRango.empresa.telefono }}</td>
                                         </tr>
                                         <tr>
-                                            <th><b>Tipo Vehiculo</b></th>
-                                            <th><b>Capacidad Transportadora</b></th>
+                                            <th><b>Tipo Vehículo</b></th>
+                                            <th><b>Capacidad Transportadora (Mínima - Máxima)</b></th>
                                         </tr>
                                         <tr>
                                             <td>{{ empresaHabilitadaRango.clase.nombre }}</td>
-                                            <td>{{ empresaHabilitadaRango.capacidadMinima }} - {{ empresaHabilitadaRango.capacidadMaxima }}</td>
+                                            <td><b style="color: #3700B3">{{ empresaHabilitadaRango.capacidadMinima }} - {{ empresaHabilitadaRango.capacidadMaxima }}</b></td>
+                                        </tr>
+                                        <tr>
+                                            <th><b>Capacidad Transportadora Disponible</b></th>
+                                            <th><b>Capacidad Transportadora Utilizada</b></th>
+                                        </tr>
+                                        <tr>
+                                            <td><b style="color: #B00020">{{ empresaHabilitadaRango.capacidadDisponible }}</b></td>
+                                            <td><b style="color: #B00020">{{ empresaHabilitadaRango.capacidadUtilizada }}</b></td>
                                         </tr>
                                     </table>
                                 </div>
