@@ -22,36 +22,35 @@
                     <div class="col-xs-16 col-lg-6">
                         <div class="row">
                             <div class="col-xs-12 col-lg-12" *ngIf='vehiculo'>
+                                <strong class="text-uppercase">Datos del vehículo</strong>
                                 <table class="table table-bordered table-striped">
                                     <tr>
                                         <th><b>Marca</b></th>
                                         <th><b>Linea</b></th>
+                                        <td><b>Clase</b></td>
                                     </tr>
                                     <tr>
                                         <td>{{ vehiculo.linea.nombre }}</td>
                                         <td>{{ vehiculo.linea.marca.nombre }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td><b>Clase</b></td>
-                                        <td><b>Nro. chasis</b></td>
-                                    </tr>
-                                    <tr>
                                         <td>{{ vehiculo.clase.nombre }}</td>
-                                        <td>{{ vehiculo.chasis }}</td>
                                     </tr>
                                     <tr>
+                                        <td><b>Nro. chasis</b></td>
                                         <td><b>Tipo carroceria</b></td>
                                         <td><b>Nro. motor</b></td>
                                     </tr>
                                     <tr>
+                                        <td>{{ vehiculo.chasis }}</td>
                                         <td>{{ vehiculo.carroceria.nombre }}</td>
                                         <td>{{ vehiculo.motor }}</td>
                                     </tr>
                                     <tr>
+                                        <td><b>Modelo</b></td>
                                         <td><b>Cap. carga</b></td>
                                         <td><b>Nro. pasajeros</b></td>
                                     </tr>
                                     <tr>
+                                        <td>{{ vehiculo.modelo }}</td>
                                         <td>{{ vehiculo.capacidadCarga }}</td>
                                         <td>{{ vehiculo.numeroPasajeros }}</td>
                                     </tr>
@@ -59,13 +58,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xs-16 col-lg-6" *ngIf='vehiculo' style="margin-top: -36%;">
+                    <div class="col-xs-16 col-lg-6" *ngIf='vehiculo' style="margin-top: -28%;">
                         <div class="row">
                             <strong class="text-uppercase">Datos de propietario(s)</strong>
                             <table class="table" id="dataTables-propietario">
                                 <thead>
                                     <tr>
-                                        <!-- <th><b>Tipo Identificación</b></th> -->
+                                        <th><b>Tipo Identificación</b></th>
                                         <th><b>Identificación</b></th>
                                         <th><b>Nombres</b></th>
                                         <th><b>Apellidos</b></th>
@@ -76,10 +75,10 @@
                                 </thead>
                                 <tbody>
                                     <tr class="odd" *ngFor="let propietario of propietarios; let i = index">
-                                        <!-- <td>
+                                        <td>
                                             <span *ngIf="propietario.ciudadano">{{ propietario.ciudadano.tipoIdentificacion.sigla }}</span>
                                             <span *ngIf="propietario.empresa">{{ propietario.empresa.tipoIdentificacion.sigla }}</span>
-                                        </td> -->
+                                        </td>
                                         <td>
                                             <span *ngIf="propietario.ciudadano">{{ propietario.ciudadano.identificacion }}</span>
                                             <span *ngIf="propietario.empresa">{{ propietario.empresa.nit }}</span>
@@ -116,7 +115,7 @@
                         <ng-select [multiple]="false" [options]="cupos" [(ngModel)]="asignacion.idCupo" required name="idCupo">
                         </ng-select>
                     </div>
-                    <div class="col-xs-6 col-lg-6" *ngIf="vehiculo" style="margin-top: -8.5%;">
+                    <div class="col-xs-6 col-lg-6" *ngIf="vehiculo" style="margin-top: -6.3%;">
                         <label>Nivel Servicio <strong class="text-danger">*</strong></label>
                         <ng-select [multiple]="false" [options]="nivelesServicio" [(ngModel)]="asignacion.idNivelServicio" required name="idNivelServicio">
                         </ng-select>
