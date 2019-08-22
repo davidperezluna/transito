@@ -1,139 +1,141 @@
-<div class="row" *ngIf="realizado">
-    <div class="col-xs-12 col-lg-12">
-        <div class="card">
-            <div class="card-header">
-                <span class="badge badge-success">Tramite realizado</span>
-            </div>
-            <div class="card-body text-center">
-                <!-- {{ tramiteSolicitud.resumen }} -->
+<div *ngIf="mostrarFormulario">
+    <div class="row" *ngIf="realizado">
+        <div class="col-xs-12 col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <span class="badge badge-success">Tramite realizado</span>
+                </div>
+                <div class="card-body text-center">
+                    <!-- {{ tramiteSolicitud.resumen }} -->
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<div class="row" *ngIf="!realizado">
-    <div class="col-xs-12 col-lg-12">
-        <div class="card">
-            <div class="card-body ">
-                <b class="text-primary">
-                    Generar Concepto Favorable
-                </b>
-                <small>Todos los campos con
-                    <b class="text-danger">*</b> son obligatorios</small>
-                <hr>
-                <div class="container">
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-xs-12 col-lg-12">
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" [(ngModel)]="datos.documentacion"
-                                        class="custom-control-input" id="documentacion" name="documentacion">
-                                    <label class="custom-control-label" for="documentacion">¿Presenta documentación
-                                        completa?</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row" *ngIf="!datos.documentacion">
-                            <div class="col-xs-12 col-lg-12">
-                                <label>Registre que documentación esta pendiente <b class="text-danger">*</b></label>
-                                <textarea class="form-control" [(ngModel)]="datos.observacion" rows="4"
-                                    name="observacion" required></textarea>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group" *ngIf="datos.documentacion">
-                        <div class="row">
-                            <div class="col-xs-12 col-lg-4">
-                                <label>Empresa actual</label>
-                                <input class="form-control" [(ngModel)]="empresaActual" name="idEmpresaActual"
-                                    type="text" required disabled />
-                            </div>
-                            <div class="col-xs-12 col-lg-4">
-                                <label>Nro. Cupo</label>
-                                <input class="form-control" [(ngModel)]="datos.numeroCupoActual" name="numeroCupoActual"
-                                    type="number" required disabled />
-                            </div>
-                            <div class="col-xs-12 col-lg-4">
-                                <label>Nro. TarjetaOperación</label>
-                                <input class="form-control" [(ngModel)]="datos.numeroTarjetaOperacionActual"
-                                    name="numeroTarjetaOperacionActual" type="number" required disabled />
-                            </div>
-                            <br>
-                            <hr>
-                            <div class="col-xs-12 col-lg-6">
-                                <label>Nro. Acto </label>
-                                <input class="form-control" [(ngModel)]="numeroActo" name="numeroActo" type="number" placeholder="No. acto empresa"
-                                    required />
-                            </div>
-                            <div class="col-xs-12 col-lg-6">
-                                <label>Nit Empresa</label>
-                                <div class="input-group">
-                                    <input class="form-control" [(ngModel)]="nit" name="idEmpresaNueva" type="number"
-                                        placeholder="nit de la empresa" required />
-                                    <span class="input-group-btn">
-                                        <button (click)="onSearchEmpresaTransporte()" [disabled]="nit == null"
-                                            class="btn btn-default" type="button">
-                                            <i class="fa fa-search"></i>
-                                        </button>
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="col-xs-16 col-lg-6" style="margin-top: 2%;">
-                                <div class="row">
-                                    <div class="col-xs-12 col-lg-12" *ngIf='empresaEncontrada'>
-                                        <table class="table table-bordered table-striped">
-                                            <tbody>
-                                                <tr class="odd">
-                                                    <td>
-                                                        <b>Nit</b>
-                                                        <br> {{ empresaEncontrada.nit }}
-                                                    </td>
-                                                    <td>
-                                                        <b>Nombre</b>
-                                                        <br> {{ empresaEncontrada.nombre }}
-                                                    </td>
-                                                    <td>
-                                                        <b>Teléfono</b>
-                                                        <br> {{ empresaEncontrada.telefono }}
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+    <div class="row" *ngIf="!realizado">
+        <div class="col-xs-12 col-lg-12">
+            <div class="card">
+                <div class="card-body ">
+                    <b class="text-primary">
+                        Generar Concepto Favorable
+                    </b>
+                    <small>Todos los campos con
+                        <b class="text-danger">*</b> son obligatorios</small>
+                    <hr>
+                    <div class="container">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-xs-12 col-lg-12">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" [(ngModel)]="datos.documentacion"
+                                            class="custom-control-input" id="documentacion" name="documentacion">
+                                        <label class="custom-control-label" for="documentacion">¿Presenta documentación
+                                            completa?</label>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xs-12 col-lg-6" *ngIf='empresaEncontrada'></div>
-                            <div class="col-xs-12 col-lg-3" *ngIf='empresaEncontrada'>
-                                <label>Nuevo Nro. Cupo</label>
-                                <ng-select [multiple]="false" [options]="arrayCuposDisponibles"
-                                    [(ngModel)]="datos.idCupoNuevo" name="cupoDisponible" required>
-                                </ng-select>
+                            <div class="row" *ngIf="!datos.documentacion">
+                                <div class="col-xs-12 col-lg-12">
+                                    <label>Registre que documentación esta pendiente <b class="text-danger">*</b></label>
+                                    <textarea class="form-control" [(ngModel)]="datos.observacion" rows="4"
+                                        name="observacion" required></textarea>
+                                </div>
                             </div>
-                            <div class="col-xs-12 col-lg-3" *ngIf='empresaEncontrada'>
-                                <label>Nuevo Nro. Tarj. Operación</label>
-                                <input class="form-control" [(ngModel)]="datos.numeroTarjetaOperacionNuevo"
-                                    name="numeroTarjetaOperacionNuevo" type="number" required />
-                            </div>
-                            <div class="col-xs-12 col-lg-3" *ngIf='empresaEncontrada'>
-                                <label>Nueva Fecha Vigencia</label>
-                                <input class="form-control" [(ngModel)]="datos.fechaVigencia" name="fechaVigencia"
-                                    type="date" required />
-                            </div>
-                            <div class="col-xs-12 col-lg-3" *ngIf='empresaEncontrada'>
-                                <label>Número Concepto Favorable</label>
-                                <input class="form-control" [(ngModel)]="datos.numeroConceptoFavorable" name="numeroConceptoFavorable"
-                                    type="number" required />
+                        </div>
+
+                        <div class="form-group" *ngIf="datos.documentacion">
+                            <div class="row">
+                                <div class="col-xs-12 col-lg-4">
+                                    <label>Empresa actual</label>
+                                    <input class="form-control" [(ngModel)]="empresaActual" name="idEmpresaActual"
+                                        type="text" required disabled />
+                                </div>
+                                <div class="col-xs-12 col-lg-4">
+                                    <label>Nro. Cupo</label>
+                                    <input class="form-control" [(ngModel)]="datos.numeroCupoActual" name="numeroCupoActual"
+                                        type="number" required disabled />
+                                </div>
+                                <div class="col-xs-12 col-lg-4">
+                                    <label>Nro. TarjetaOperación</label>
+                                    <input class="form-control" [(ngModel)]="datos.numeroTarjetaOperacionActual"
+                                        name="numeroTarjetaOperacionActual" type="number" required disabled />
+                                </div>
+                                <br>
+                                <hr>
+                                <div class="col-xs-12 col-lg-6">
+                                    <label>Nro. Acto </label>
+                                    <input class="form-control" [(ngModel)]="numeroActo" name="numeroActo" type="number" placeholder="No. acto empresa"
+                                        required />
+                                </div>
+                                <div class="col-xs-12 col-lg-6">
+                                    <label>Nit Empresa</label>
+                                    <div class="input-group">
+                                        <input class="form-control" [(ngModel)]="nit" name="idEmpresaNueva" type="number"
+                                            placeholder="nit de la empresa" required />
+                                        <span class="input-group-btn">
+                                            <button (click)="onSearchEmpresaTransporte()" [disabled]="nit == null"
+                                                class="btn btn-default" type="button">
+                                                <i class="fa fa-search"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-xs-16 col-lg-6" style="margin-top: 2%;">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-lg-12" *ngIf='empresaEncontrada'>
+                                            <table class="table table-bordered table-striped">
+                                                <tbody>
+                                                    <tr class="odd">
+                                                        <td>
+                                                            <b>Nit</b>
+                                                            <br> {{ empresaEncontrada.nit }}
+                                                        </td>
+                                                        <td>
+                                                            <b>Nombre</b>
+                                                            <br> {{ empresaEncontrada.nombre }}
+                                                        </td>
+                                                        <td>
+                                                            <b>Teléfono</b>
+                                                            <br> {{ empresaEncontrada.telefono }}
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-lg-6" *ngIf='empresaEncontrada'></div>
+                                <div class="col-xs-12 col-lg-3" *ngIf='empresaEncontrada'>
+                                    <label>Nuevo Nro. Cupo</label>
+                                    <ng-select [multiple]="false" [options]="arrayCuposDisponibles"
+                                        [(ngModel)]="datos.idCupoNuevo" name="cupoDisponible" required>
+                                    </ng-select>
+                                </div>
+                                <div class="col-xs-12 col-lg-3" *ngIf='empresaEncontrada'>
+                                    <label>Nuevo Nro. Tarj. Operación</label>
+                                    <input class="form-control" [(ngModel)]="datos.numeroTarjetaOperacionNuevo"
+                                        name="numeroTarjetaOperacionNuevo" type="number" required />
+                                </div>
+                                <div class="col-xs-12 col-lg-3" *ngIf='empresaEncontrada'>
+                                    <label>Nueva Fecha Vigencia</label>
+                                    <input class="form-control" [(ngModel)]="datos.fechaVigencia" name="fechaVigencia"
+                                        type="date" required />
+                                </div>
+                                <div class="col-xs-12 col-lg-3" *ngIf='empresaEncontrada'>
+                                    <label>Número Concepto Favorable</label>
+                                    <input class="form-control" [(ngModel)]="datos.numeroConceptoFavorable" name="numeroConceptoFavorable"
+                                        type="number" required />
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="card-footer">
-                <button (click)="onEnviar()" class="btn btn-primary">
-                    <i class="fa fa-save"></i>
-                    Enviar
-                </button>
+                <div class="card-footer">
+                    <button (click)="onEnviar()" class="btn btn-primary">
+                        <i class="fa fa-save"></i>
+                        Enviar
+                    </button>
+                </div>
             </div>
         </div>
     </div>

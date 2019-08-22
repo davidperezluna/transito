@@ -78,17 +78,31 @@
                                 </table>
                             </div>
                             <hr>
-                            <div class="col-xs-12 col-lg-4">
+                            <div class="col-xs-12 col-lg-6">
                                 <label>Fecha resolución</label>
                                 <input class="form-control" [(ngModel)]="datos.fechaResolucion" name="fechaResolucion"
                                     type="date" required/>
                             </div>
-                            <div class="col-xs-12 col-lg-4">
+                            <div class="col-xs-12 col-lg-6">
                                 <label>Fecha solicitud</label>
                                 <input class="form-control" [(ngModel)]="datos.fechaSolicitud" name="fechaSolicitud"
                                     type="date" required/>
                             </div>
-                            <div class="col-xs-12 col-lg-4">
+                            <div class="col-xs-12 col-lg-6" *ngIf='empresaTransporte' style="margin-top: 1%">
+                                <table class="table table-bordered table-striped">
+                                    <tr>
+                                        <th><b>Nit</b></th>
+                                        <th><b>Nombre</b></th>
+                                        <th><b>Número Acto</b></th>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ empresaTransporte.empresa.nit }}</td>
+                                        <td>{{ empresaTransporte.empresa.nombre }}</td>
+                                        <td>{{ empresaTransporte.numeroActo }}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
                                 <label>Representante legal empresa actual</label>
                                 <input class="form-control" [(ngModel)]="datos.representante" name="representante"
                                     type="text" required disabled/>

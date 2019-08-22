@@ -24,6 +24,7 @@ export class NewRnetDesvinculacionComunAcuerdoComponent implements OnInit {
     public tarjetaOperacion;
     public servicios;
     public propietarios;
+    public empresaTransporte;
 
     public table: any; 
 
@@ -57,7 +58,7 @@ export class NewRnetDesvinculacionComunAcuerdoComponent implements OnInit {
         this._VhloTpAsignacionService.searchCupoByVehiculo({ 'idVehiculo': this.vehiculo.id }, token).subscribe(
             response => {
                 this.datos.representante = response.data.empresaTransporte.empresa.empresaRepresentante.ciudadano.primerNombre + ' ' + response.data.empresaTransporte.empresa.empresaRepresentante.ciudadano.primerApellido;
-                
+                this.empresaTransporte = response.data.empresaTransporte;
                 this._VhloPropietarioService.searchByVehiculo({ 'idVehiculo': this.vehiculo.id }, token).subscribe(
                     response => {
                         this.propietarios = response.data;

@@ -141,6 +141,7 @@ export class EditComponent implements OnInit {
                 this.colores = response;
                 setTimeout(() => {
                     this.arrayColoresSelected = this.habilitacion.colores;
+                    console.log(this.habilitacion.colores);
                 });
             },
             error => {

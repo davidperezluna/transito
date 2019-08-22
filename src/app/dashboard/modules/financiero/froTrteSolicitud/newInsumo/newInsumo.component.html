@@ -43,8 +43,10 @@
                         <!-- digitar la nueva licencia de transito  -->
                         <div class="col-xs-12 col-lg-6">
                             <label *ngIf="idModulo == 1">No. de Licencia de conducción</label>
-                            <label *ngIf="idModulo != 1">No. de Licencia de tránsito</label>
-                            <input class="form-control"  type="text" [(ngModel)]="datos.licenciaTransito" name="licenciaTransito" placeholder="Digite No. licencia de transito" required>
+                            <div *ngIf="idModulo != 6">
+                                <label *ngIf="idModulo != 1">No. de Licencia de tránsito</label>
+                                <input class="form-control"  type="text" [(ngModel)]="datos.licenciaTransito" name="licenciaTransito" placeholder="Digite No. licencia de transito" required>
+                            </div>
                         </div>
 
                         <div class="col-xs-12 col-lg-12">

@@ -46,9 +46,6 @@ export class NewRnetDesvinculacionCambioServicioComponent implements OnInit {
         let token = this._LoginService.getToken();
 
         this.datos.idFuncionario = this.funcionario.id;
-        this.datos.idServicioAnterior = [this.vehiculo.servicio.id];
-
-        console.log(this.datos.idServicioAnterior);
 
         if (this.tramitesRealizados.length > 0) {
             this.tramitesRealizados.forEach(tramiteRealizado => {
@@ -73,6 +70,9 @@ export class NewRnetDesvinculacionCambioServicioComponent implements OnInit {
             this._ServicioService.select().subscribe(
                 response => {
                     this.servicios = response;
+                    setTimeout(() => {
+                        this.datos.idServicioAnterior = [this.vehiculo.servicio.id];
+                    });
                 },
                 error => {
                     this.errorMessage = <any>error;
@@ -106,5 +106,18 @@ export class NewRnetDesvinculacionCambioServicioComponent implements OnInit {
                 'idTramiteFactura': this.tramiteFactura.id,
             }
         );
+    }
+
+    onVerificarServicio(e){
+        if(e){
+            if(this.datos.idServicioAnterior == e){
+                swal({
+                    title: 'Atención!',
+                    text: 'El nuevo servicio seleccionado coincide con el servicio anterior del vehículo',
+                    type: 'error',
+                    confirmButtonText: 'Aceptar'
+                });
+            }
+        }
     }
 }

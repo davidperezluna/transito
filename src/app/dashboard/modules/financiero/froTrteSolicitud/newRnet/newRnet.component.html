@@ -346,41 +346,40 @@
                         *ngIf="(requiereSustrato && tramiteSolicitud.insumoEntregado) || !requiereSustrato">
                         <div class="form-group">
                             <div class="row">
-                                <!-- <div class="col-xs-12 col-lg-12">
+                                <div class="col-xs-12 col-lg-6">
                                     <label>Número de folios <b class="text-danger">*</b></label>
                                     <input type="text" class="form-control" placeholder="No. de folios"
                                         [(ngModel)]="tramiteSolicitud.numeroFolios" name="numeroFolios" required />
                                 </div>
 
-                                <div class="col-xs-12 col-lg-12">
+                                <div class="col-xs-12 col-lg-6">
                                     <label>Número de archivador <b class="text-danger">*</b></label>
                                     <input type="text" class="form-control" placeholder="No. de archivador"
                                         [(ngModel)]="tramiteSolicitud.numeroArchivador" name="numeroArchivador"
                                         required />
                                 </div>
 
-                                <div class="col-xs-12 col-lg-12">
+                                <div class="col-xs-12 col-lg-6">
                                     <label>Bandeja <b class="text-danger">*</b></label>
                                     <input type="text" class="form-control" placeholder="Bandeja"
                                         [(ngModel)]="tramiteSolicitud.bandeja" name="bandeja" required />
                                 </div>
 
-                                <div class="col-xs-12 col-lg-12">
+                                <div class="col-xs-12 col-lg-6">
                                     <label>Número de caja <b class="text-danger">*</b></label>
                                     <input type="text" class="form-control" placeholder="No. de caja"
                                         [(ngModel)]="tramiteSolicitud.numeroCaja" name="numeroCaja" required />
-                                </div> -->
+                                </div>
                             </div>
                             <div class="row" *ngIf="requiereRunt">
-                                <div class="col-xs-12 col-lg-12">
+                                <div class="col-xs-12 col-lg-6">
                                     <label>Número de solicitud RUNT <b class="text-danger">*</b></label>
                                     <input type="text" class="form-control" placeholder="No. solicitud RUNT"
                                         [(ngModel)]="tramiteSolicitud.numeroRunt" name="numeroRunt" required />
                                 </div>
-                                <div class="col-xs-12 col-lg-6">
+                                <div class="col-xs-12 col-lg-6" *ngIf="tramiteFactura.precio.tramite.id == 41 || tramiteFactura.precio.tramite.id == 42 || tramiteFactura.precio.tramite.id == 43 || tramiteFactura.precio.tramite.id == 44">
                                     <label>Número de Resolución <b class="text-danger">*</b></label>
-                                    <input type="text" class="form-control" placeholder="No. resolución" [(ngModel)]="numeroResolucion"
-                                        name="numeroResolucion" required />
+                                    <input type="text" class="form-control" placeholder="No. resolución" [(ngModel)]="numeroResolucion" name="numeroResolucion" required />
                                 </div>
                             </div>
                             <br>
@@ -425,7 +424,7 @@
                     </div>
 
                     <div class="col-xs-12 col-lg-12" *ngIf="tramiteFactura">
-                        <app-expedicion-tarjeta-operacion *ngIf="tramiteFactura.precio.tramite.id == 5" [vehiculo]="vehiculo"
+                        <app-expedicion-tarjeta-operacion *ngIf="tramiteFactura.precio.tramite.id == 37" [vehiculo]="vehiculo"
                             [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura"
                             (onReadyTramite)="onReadyTramite($event)">
                         </app-expedicion-tarjeta-operacion>
@@ -445,10 +444,6 @@
                             [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura"
                             (onReadyTramite)="onReadyTramite($event)">
                         </app-cambio-empresa>
-                        <app-concepto-favorable *ngIf="tramiteFactura.precio.tramite.id == 44" [vehiculo]="vehiculo"
-                            [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura"
-                            (onReadyTramite)="onReadyTramite($event)">
-                        </app-concepto-favorable>
                         <app-desvinculacion-cambio-servicio *ngIf="tramiteFactura.precio.tramite.id == 42" [vehiculo]="vehiculo"
                             [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura"
                             (onReadyTramite)="onReadyTramite($event)">
@@ -457,6 +452,10 @@
                             [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura"
                             (onReadyTramite)="onReadyTramite($event)">
                         </app-desvinculacion-comun-acuerdo>
+                        <app-concepto-favorable *ngIf="tramiteFactura.precio.tramite.id == 5" [vehiculo]="vehiculo"
+                            [tramitesRealizados]="tramitesRealizados" [funcionario]="funcionario" [tramiteFactura]="tramiteFactura"
+                            (onReadyTramite)="onReadyTramite($event)">
+                        </app-concepto-favorable>
                     </div>
                 </div>
 
