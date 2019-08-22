@@ -6,12 +6,11 @@ import { SelectModule } from 'angular2-select';
 import { TooltipModule } from "ngx-tooltip";
 
 import { FroFacturaComponent } from './froFactura';
-import { FroAcuerdoPagoComponent } from './froAcuerdoPago/froAcuerdoPago.component';
-import { FroCfgTipoRecaudoComponent } from './froCfgTipoRecaudo/froCfgTipoRecaudo.component';
-import { FroFacAcuerdoPagoComponent } from './froFactura';
-import { FroFacInfraccionComponent } from './froFactura';
 import { FroFacTramiteComponent } from './froFactura/froFacTramite/froFacTramite.component';
+import { FroFacInfraccionComponent } from './froFactura/froFacInfraccion/froFacInfraccion.component';
+import { FroFacAcuerdoPagoComponent } from './froFactura/froFacAcuerdoPago/froFacAcuerdoPago.component';
 import { FroFacParqueaderoComponent } from './froFactura/froFacParqueadero/froFacParqueadero.component';
+import { FroCfgTipoRecaudoComponent } from './froCfgTipoRecaudo/froCfgTipoRecaudo.component';
 import { FroInfraccionComponent } from './froInfraccion/froInfraccion.component';
 import { FroInfrCfgCategoriaComponent } from './froInfrCfgCategoria/froInfrCfgCategoria.component';
 import { FroRecaudoComponent } from './froRecaudo/froRecaudo.component';
@@ -105,6 +104,8 @@ import { NewRnetDesvinculacionComunAcuerdoComponent } from './froTrteSolicitud/t
   declarations: [
     FroFacturaComponent,
     FroFacTramiteComponent,
+    FroFacInfraccionComponent,
+    FroFacAcuerdoPagoComponent,
     FroFacParqueaderoComponent,
     FroReporteIngresosComponent,
     FroTrteSolicitudComponent,

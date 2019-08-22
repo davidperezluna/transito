@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { FroFacTramiteComponent } from './froFactura/froFacTramite/froFacTramite.component';
+import { FroFacInfraccionComponent } from './froFactura/froFacInfraccion/froFacInfraccion.component';
+import { FroFacAcuerdoPagoComponent } from './froFactura/froFacAcuerdoPago/froFacAcuerdoPago.component';
 import { FroFacParqueaderoComponent } from './froFactura/froFacParqueadero/froFacParqueadero.component';
 import { FroReporteIngresosComponent } from './froReporteIngresos/froReporteIngresos.component';
 import { FroTrteSolicitudComponent } from './froTrteSolicitud/froTrteSolicitud.component';
@@ -17,6 +19,14 @@ const routes: Routes = [
   {
     path: 'facturaTramite',
     component: FroFacTramiteComponent
+  },
+  {
+    path: 'facturaInfraccion',
+    component: FroFacInfraccionComponent
+  },
+  {
+    path: 'facturaAcuerdoPago',
+    component: FroFacAcuerdoPagoComponent
   },
   {
     path: 'facturaParqueadero',
