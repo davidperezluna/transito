@@ -8,7 +8,7 @@ declare var $: any;
   selector: 'app-index',
   templateUrl: './imoAsignacion.component.html'
 })
-export class imoAsignacionComponent implements OnInit {
+export class ImoAsignacionComponent implements OnInit {
   public errorMessage;
 
 	public id;

@@ -7,7 +7,7 @@ import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
-  selector: 'app-show',
+  selector: 'app-show-insumo-busqueda',
   templateUrl: './show.component.html',
   providers: [DatePipe]
 })

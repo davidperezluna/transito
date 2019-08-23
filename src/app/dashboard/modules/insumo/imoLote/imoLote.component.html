@@ -200,11 +200,11 @@
     </div>
 
     <div class="col-xs-12 col-md-8 col-lg-8" *ngIf='formNew'>
-      <app-new (onReady)="onReady($event)"></app-new>
+      <app-new-insumo-lote (onReady)="onReady($event)"></app-new-insumo-lote>
     </div>
 
     <div class="col-xs-12 col-md-8 col-lg-8" *ngIf='formEdit'>
-      <app-edit [loteInsumoInsumo]="loteInsumoInsumo" [tipoInsumo]="tipoInsumo" (onReady)="onReady($event)"></app-edit>
+      <app-edit-insumo-lote [loteInsumoInsumo]="loteInsumoInsumo" [tipoInsumo]="tipoInsumo" (onReady)="onReady($event)"></app-edit-insumo-lote>
     </div>
   </div>
 </div>

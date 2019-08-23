@@ -59,6 +59,6 @@
       </div>
     </div>
   </div>
-  <app-edit *ngIf='formEdit' [tipoInsumo]="tipoInsumo" (ready)="ready($event)"></app-edit>
-  <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+  <app-edit-insumo-cfg-tipo *ngIf='formEdit' [tipoInsumo]="tipoInsumo" (ready)="ready($event)"></app-edit-insumo-cfg-tipo>
+  <app-new-insumo-cfg-tipo *ngIf='formNew' (ready)="ready($event)"></app-new-insumo-cfg-tipo>
 </div>

@@ -6,7 +6,7 @@ import { CfgModuloService } from '../../../../../services/cfgModulo.service';
 import swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-new',
+  selector: 'app-new-insumo-cfg-tipo',
   templateUrl: './new.component.html'
 })
 export class NewComponent implements OnInit {

@@ -9,7 +9,7 @@ import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
-  selector: 'app-new',
+  selector: 'app-new-insumo-reasignacion',
   templateUrl: './new.component.html',
   providers: [DatePipe]
 })

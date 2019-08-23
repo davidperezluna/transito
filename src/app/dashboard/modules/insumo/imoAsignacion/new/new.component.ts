@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { DatePipe } from '@angular/common';
-import { rnaAsignacionInsumos } from '../imoAsignacion.modelo';
+import { ImoAsignacion } from '../imoAsignacion.modelo';
 import { ImoLoteService } from '../../../../../services/imoLote.service';
 import { CfgOrganismoTransitoService } from '../../../../../services/cfgOrganismoTransito.service';
 import { ImoCfgTipoService } from '../../../../../services/imoCfgTipo.service';
@@ -11,7 +11,7 @@ import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
-  selector: 'app-new',
+  selector: 'app-new-insumo-asignacion',
   templateUrl: './new.component.html',
   providers: [DatePipe]
 })
@@ -19,7 +19,7 @@ declare var $: any;
 export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
 public apiUrl = environment.apiUrl + 'insumo/imolote';
-public rnaAsignacionInsumos: rnaAsignacionInsumos;
+public rnaAsignacionInsumos: ImoAsignacion;
 public errorMessage;
 
 public empresas:any;
@@ -58,7 +58,7 @@ constructor(
   ngOnInit() {
     this.date = new Date();
     var datePiper = new DatePipe(this.date);
-    this.rnaAsignacionInsumos = new rnaAsignacionInsumos(null,null,null,null,null,null,null,null,null,null);
+    this.rnaAsignacionInsumos = new ImoAsignacion(null,null,null,null,null,null,null,null,null,null);
     this.rnaAsignacionInsumos.fecha = datePiper.transform(this.date,'yyyy-MM-dd');
 
     this._CasoInsumoService.getCasoInsumoInsumoSelect().subscribe(

@@ -63,6 +63,6 @@
         </div>
     </div>
 
-    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
-    <app-show *ngIf='formShow' [idReasignacion]="idReasignacion" (ready)="ready($event)"></app-show>
+    <app-new-insumo-reasignacion *ngIf='formNew' (ready)="ready($event)"></app-new-insumo-reasignacion>
+    <app-show-insumo-reasignacion *ngIf='formShow' [idReasignacion]="idReasignacion" (ready)="ready($event)"></app-show-insumo-reasignacion>
 </div>

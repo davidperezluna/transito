@@ -29,10 +29,10 @@ const routes: Routes = [
         path: 'gestion-documental',
         loadChildren: './modules/gestion-documental/gestion-documental.module#GestionDocumentalModule'
       },
-      /*{
+      {
         path: 'insumo',
         loadChildren: './modules/insumo/insumo.module#InsumoModule'
-      },*/
+      },
       {
         path: 'parqueadero',
         loadChildren: './modules/parqueadero/parqueadero.module#ParqueaderoModule'

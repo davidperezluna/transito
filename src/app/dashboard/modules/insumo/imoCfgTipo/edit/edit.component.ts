@@ -8,7 +8,7 @@ declare var $: any;
 
  
 @Component({
-  selector: 'app-edit',
+  selector: 'app-edit-insumo-cfg-tipo',
   templateUrl: './edit.component.html'
 })
 export class EditComponent {

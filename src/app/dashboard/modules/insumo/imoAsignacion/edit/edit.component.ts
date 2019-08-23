@@ -1,6 +1,6 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import {rnaAsignacionInsumos} from '../imoAsignacion.modelo';
-import {RnaLoteInsumoService} from '../../../../../services/rnaloteInsumos.service';
+import {ImoAsignacion} from '../imoAsignacion.modelo';
+import { RnaLoteInsumoService } from '../../../../../services/rnaloteInsumos.service';
 import { UserEmpresaService } from '../../../../../services/userEmpresa.service';
 import { CfgOrganismoTransitoService } from '../../../../../services/cfgOrganismoTransito.service';
 import { ImoCfgTipoService } from '../../../../../services/imoCfgTipo.service';
@@ -8,7 +8,7 @@ import { LoginService } from '../../../../../services/login.service';
 import swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-edit',
+  selector: 'app-edit-insumo-asignacion',
   templateUrl: './edit.component.html'
 })
 export class EditComponent implements OnInit{
@@ -17,7 +17,6 @@ export class EditComponent implements OnInit{
 @Input() tipoInsumo:any = null;
 
 public errorMessage;
-public respuesta;
 public formReady = false;
 public sedeSelected:any;
 public insumoSelected:any;
@@ -110,8 +109,7 @@ constructor(
     let token = this._loginService.getToken();
 		this._rnaloteInsumosService.edit(this.loteInsumoInsumo,token).subscribe(
 			response => {
-        this.respuesta = response;
-        if(this.respuesta.status == 'success'){
+        if(response.status == 'success'){
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',
