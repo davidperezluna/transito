@@ -15,7 +15,7 @@ export class FroAcuerdoPagoComponent implements OnInit {
 	public valorTotal: any;
 	public ciudadano: any;
 	public comparendos: any = null;
-  public comparendosSelect: any = [];
+  public comparendoSelect: any = null;
 	public numeroIdentificacion: any;
   
   public formIndex = false;
@@ -39,13 +39,11 @@ export class FroAcuerdoPagoComponent implements OnInit {
     private _ComparendoService: CvCdoComparendoService,
   ){}
     
-  ngOnInit() {  }
+  ngOnInit() { 
+    swal.close(); 
+  }
 
   onSearch() {
-    if (this.comparendosSelect.length > 0) {
-      this.comparendosSelect.splice(0, this.comparendosSelect.length);
-    }
-
     swal({
       title: 'Buscando registros!',
       text: 'Solo tardara unos segundos por favor espere.',
@@ -91,25 +89,12 @@ export class FroAcuerdoPagoComponent implements OnInit {
         }
       }
     );
-
   }
-
-  onSelect(idComparendo: any, eve: any) {
-    if (eve.target.checked) {
-      this.comparendosSelect.push(idComparendo);
-    } else {
-      let index = this.comparendosSelect.indexOf(idComparendo);
-      if (index > -1) {
-        this.comparendosSelect.splice(index, 1);
-      }
-    }
-  }
-
 
   onInitTable(){
     this.table = $('#dataTables-example').DataTable({
       responsive: true,
-      pageLength: 8,
+      pageLength: 10,
       sPaginationType: 'full_numbers',
       oLanguage: {
         oPaginate: {

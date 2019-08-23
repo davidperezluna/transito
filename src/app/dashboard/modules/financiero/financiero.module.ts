@@ -5,6 +5,7 @@ import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { SelectModule } from 'angular2-select';
 import { TooltipModule } from "ngx-tooltip";
 
+import { FroAcuerdoPagoComponent } from './froAcuerdoPago/froAcuerdoPago.component';
 import { FroFacturaComponent } from './froFactura';
 import { FroFacTramiteComponent } from './froFactura/froFacTramite/froFacTramite.component';
 import { FroFacInfraccionComponent } from './froFactura/froFacInfraccion/froFacInfraccion.component';
@@ -22,10 +23,10 @@ import { FroTrtePrecioComponent } from './froTrtePrecio/froTrtePrecio.component'
 import { FroTrteSolicitudComponent } from './froTrteSolicitud/froTrteSolicitud.component';
 
 import { FinancieroRoutingModule } from './financiero-routing.module';
-import { FroFacturaModule } from './froFactura/froFactura.module';
 import { FroAcuerdoPagoModule } from './froAcuerdoPago/froAcuerdoPago.module';
-import { FroCfgTipoRecaudoModule } from './froCfgTipoRecaudo/froCfgTipoRecaudo.module';
+import { FroFacturaModule } from './froFactura/froFactura.module';
 import { FroInfraccionModule } from './froInfraccion/froInfraccion.module';
+import { FroCfgTipoRecaudoModule } from './froCfgTipoRecaudo/froCfgTipoRecaudo.module';
 import { FroInfrCfgCategoriaModule } from './froInfrCfgCategoria/froInfrCfgCategoria.module';
 import { FroRecaudoModule } from './froRecaudo/froRecaudo.module';
 import { FroReporteIngresosModule } from './froReporteIngresos/froReporteIngresos.module';
@@ -95,6 +96,7 @@ import { NewRnetDesvinculacionComunAcuerdoComponent } from './froTrteSolicitud/t
     TooltipModule,
     UserCiudadanoModule,
     FinancieroRoutingModule,
+    FroAcuerdoPagoModule,
     FroFacturaModule,
     FroReporteIngresosModule,
     FroTrteSolicitudModule,
@@ -102,6 +104,7 @@ import { NewRnetDesvinculacionComunAcuerdoComponent } from './froTrteSolicitud/t
     FroTrteArchivoPlanoModule,
   ],
   declarations: [
+    FroAcuerdoPagoComponent,
     FroFacturaComponent,
     FroFacTramiteComponent,
     FroFacInfraccionComponent,

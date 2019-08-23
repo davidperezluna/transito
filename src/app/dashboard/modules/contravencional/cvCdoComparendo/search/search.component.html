@@ -66,7 +66,7 @@
                                             </a>
                                         </td>
                                         <td>{{ comparendo.placa }}</td>
-                                        <td>{{ comparendo.fecha }}</td>
+                                        <td>{{ (comparendo.fecha.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td>
                                         <td>{{ comparendo.infractorNombres }} {{ comparendo.infractorApellidos }}</td>
                                         <td>{{ comparendo.infractorIdentificacion }}</td>
                                         <td>{{ comparendo.estado?.nombre }}</td>

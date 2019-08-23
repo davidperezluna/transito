@@ -67,7 +67,7 @@
                                     {{ comparendo.consecutivo.numero }}
                                     <br>
                                     <b>Fecha</b>
-                                    {{ comparendo.fecha }}
+                                    {{ (comparendo.fecha.timestamp * 1000) | date: 'dd/MM/yyyy' }}
                                     <br>
                                     <b>Estado</b>
                                     {{ comparendo.estado?.nombre }}

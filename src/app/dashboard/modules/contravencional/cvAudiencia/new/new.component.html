@@ -39,7 +39,7 @@
                                             <td>
                                                 <strong>Fecha y hora: </strong>
                                                 <br>
-                                                {{ comparendo.fecha }} {{ comparendo.hora }}
+                                                {{ (comparendo.fecha.timestamp * 1000) | date: 'dd/MM/yyyy' }} {{ (comparendo.hora.timestamp * 1000) | date: 'h::m:s A' }}
                                             </td>
                                         </tr>
                                     </tbody>

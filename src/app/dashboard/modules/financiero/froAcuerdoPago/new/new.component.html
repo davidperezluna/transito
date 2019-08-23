@@ -1,6 +1,5 @@
-<hr>
-<div class="row">
-    <div class="col-xs-12 col-lg-4"><!-- .col -->
+<div class="row" *ngIf="comparendo">
+    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3"><!-- .col -->
         <div class="card">
             <div class="card-header">
                 <b class="text-uppercase">Nuevo acuerdo de pago</b>
@@ -9,19 +8,36 @@
             </div>
             <div class="card-body">
                 <form #formNew="ngForm"> 
-                    <div class="form-group row">
+                    <div class="form-group">
                         <div class="row">
-                            <div class="col-xs-12 col-lg-6">
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Valor comparendo <strong class="text-danger">*</strong></label>
+                                <input type="numeric" class="form-control" [(ngModel)]="acuerdoPago.valorBruto" name="valorBruto" required />
+                            </div>
+
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Fecha comparendo <strong class="text-danger">*</strong></label>
+                                <input type="date" class="form-control" [(ngModel)]="acuerdoPago.fechaComparendo" name="fechaComparendo" disabled required />
+                            </div>
+
+                            <div class="col-xs-12 col-lg-12">
                                 <label>No. de cuotas <strong class="text-danger">*</strong></label>
                                 <input type="numeric" class="form-control" [(ngModel)]="acuerdoPago.numeroCuotas" name="numeroCuotas" required />
                             </div>
-                            <div class="col-xs-12 col-lg-6">
-                                <label>Interes <strong class="text-danger">*</strong></label>
+
+                            <div class="col-xs-12 col-lg-12">
+                                <label>% Interes <strong class="text-danger">*</strong></label>
                                 <input type="numeric" class="form-control" [(ngModel)]="interesInicial" name="interesInicial" disabled required />
                             </div>
+
                             <div class="col-xs-12 col-lg-12">
-                                <label>Porcentaje cuota 0 <strong class="text-danger">*</strong></label>
+                                <label>% cuota inicial <strong class="text-danger">*</strong></label>
                                 <input type="numeric" class="form-control" [(ngModel)]="acuerdoPago.porcentajeInicial" name="porcentajeInicial" required />
+                            </div>
+
+                            <div class="col-xs-12 col-lg-12">
+                                <label>% descuento <strong class="text-danger">*</strong></label>
+                                <input type="numeric" class="form-control" [(ngModel)]="acuerdoPago.porcentajeDescuento" name="porcentajeDescuento" required />
                             </div>
                         </div>
                     </div>
@@ -54,30 +70,47 @@
                             <td>
                                 <b>Capital total</b>
                                 <br>
-                                {{ valorBruto | currency: 'COP' }}
+                                {{ acuerdoPago.valorBruto | currency: 'COP' }}
                             </td>
                                 
                             <td>
-                                <b>Interes total</b>
+                                <b>Total interes</b>
                                 <br>
-                                {{ valorMora | currency: 'COP' }}
+                                {{ acuerdoPago.valorMora | currency: 'COP' }}
                             </td>
 
-                            <td colspan="2">
+                            <td>
+                                <b>Descuento {{ acuerdoPago.porcentajeDescuento }} %</b>
+                                <br>
+                                {{ acuerdoPago.valorDescuento | currency: 'COP' }}
+                            </td>
+
+                            <td>
+                                <b>Saldo interes</b>
+                                <br>
+                                {{ (acuerdoPago.valorMora - acuerdoPago.valorDescuento) | currency: 'COP' }}
+                            </td>
+
+                            <td>
                                 <b>Total pagar</b>
-                                <br> {{ valorNeto | currency: 'COP' }}
+                                <br> {{ acuerdoPago.valorNeto | currency: 'COP' }}
                             </td>
                         </tr>
                         <tr  class="odd text-uppercase">
                             <td>
+                                <b>Fecha Inicial</b>
+                                <br>
+                                {{ (acuerdoPago.fechaInicial.timestamp * 1000) | date: 'dd/MM/yyyy' }}
+                            </td>
+                            <td>
                                 <b>Fecha Final</b>
                                 <br>
-                                {{ fechaFinal }}
+                                {{ acuerdoPago.fechaFinal }}
                             </td>
                             <td>
                                 <b>Valor cuota inicial (0)</b>
                                 <br>
-                                {{ valorCuotaInicial | currency: 'COP' }}
+                                {{ acuerdoPago.valorCuotaInicial | currency: 'COP' }}
                             </td>
                             <td>
                                 <b>25% Interes</b>
@@ -104,9 +137,9 @@
                     <tbody>
                         <tr class="odd" *ngFor="let cuota of cuotas; let i = index">
                             <td>{{ i + 1 }}</td>
-                            <td>{{ cuota.valorBruto }}</td>
-                            <td>{{ cuota.valorMora }}</td>
-                            <td>{{ cuota.valorNeto }}</td>
+                            <td>{{ cuota.valorCapital }}</td>
+                            <td>{{ cuota.valorInteres }}</td>
+                            <td>{{ cuota.valorCuota }}</td>
                             <td>{{ cuota.fechaMensual }}</td>
                         </tr>
                     </tbody>
@@ -178,7 +211,7 @@
                         <tr class="odd" *ngFor="let amortizacion of amortizaciones; let i = index">
                             <td>{{ amortizacion.numeroCuota }}</td>
                             <td>{{ amortizacion.valorNeto | currency: 'COP' }}</td>
-                            <td>{{ amortizacion.fechaLimite }}</td>
+                            <td>{{ (amortizacion.fechaLimite.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -199,4 +232,3 @@
             </div>
         </div>
     </div><!-- /.col -->
-</div>

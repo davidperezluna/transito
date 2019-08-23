@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { FroFacTramiteComponent } from './froFactura/froFacTramite/froFacTramite.component';
+import { FroAcuerdoPagoComponent } from './froAcuerdoPago/froAcuerdoPago.component';
 import { FroFacInfraccionComponent } from './froFactura/froFacInfraccion/froFacInfraccion.component';
 import { FroFacAcuerdoPagoComponent } from './froFactura/froFacAcuerdoPago/froFacAcuerdoPago.component';
 import { FroFacParqueaderoComponent } from './froFactura/froFacParqueadero/froFacParqueadero.component';
@@ -16,6 +17,10 @@ import { FroTrtePrecioComponent } from './froTrtePrecio/froTrtePrecio.component'
 import { FroTrteArchivoPlanoComponent } from './froTrteArchivoPlano/froTrteArchivoPlano.component';
 
 const routes: Routes = [
+  {
+    path: 'froAcuerdoPago',
+    component: FroAcuerdoPagoComponent
+  },
   {
     path: 'facturaTramite',
     component: FroFacTramiteComponent

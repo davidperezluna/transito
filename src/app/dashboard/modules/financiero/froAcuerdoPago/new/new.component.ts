@@ -1,36 +1,32 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import { FroAcuerdoPago } from '../froAcuerdoPago.modelo';
 import { FroAcuerdoPagoService } from '../../../../../services/froAcuerdoPago.service';
-import { CvCfgInteresService } from '../../../../../services/cvCfgInteres.service';
-import { CvCfgPorcentajeInicialService } from '../../../../../services/cvCfgPorcentajeInicial.service';
+import { CvCdoComparendoService } from '../../../../../services/cvCdoComparendo.service';
 import { LoginService } from '../../../../../services/login.service';
-import swal from 'sweetalert2';
 import { environment } from 'environments/environment'
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-new-acuerdopago',
-  templateUrl: './new.component.html'
+  templateUrl: './new.component.html',
+  providers: [DatePipe]
 })
+
 export class NewComponent implements OnInit {
   @Output() ready = new EventEmitter<any>();
-  @Input() comparendosSelect: any = null;
+  @Input() comparendoSelect: any = null;
   public acuerdoPago: FroAcuerdoPago;
   public errorMessage;
   public formPreliquidacion = false;
   public formLiquidacion = false;
   
+  public comparendo: any;
   public porcentaje: any;
-  public interes: any;
   public interesInicial: any = null;
-  public valorBruto: any = null;
-  public valorMora: any = null;
-  public valorNeto: any = null;
-  public valorCuotaInicial: any = null;
   public valorPorcentajeInteres: any = null;
   public valorPorcentajeCapital: any = null;
   public totalPagar: any = null;
-  public diasMoraTotal: any = null;
-  public fechaFinal: any;
   public cuotas: any = null;
   public amortizaciones: any = null;
   public trazabilidad: any = null;
@@ -39,10 +35,9 @@ export class NewComponent implements OnInit {
   public apiUrl = environment.apiUrl + 'configuracion';
 
 constructor(
-  private _FroAcuerdoPagoService: FroAcuerdoPagoService,
-  private _InteresService: CvCfgInteresService,
-  private _PorcentajeService: CvCfgPorcentajeInicialService,
-  private _loginService: LoginService,
+  private _AcuerdoPagoService: FroAcuerdoPagoService,
+  private _ComparendoService: CvCdoComparendoService,
+  private _LoginService: LoginService,
   ){}
 
   ngOnInit() {
@@ -54,136 +49,36 @@ constructor(
       }
     });
 
-    this.acuerdoPago = new FroAcuerdoPago(null, null, null, null, null, null, null, null, null, null, null);
+    this.acuerdoPago = new FroAcuerdoPago(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 
     this.acuerdoPago.numeroCuotas = 1;
+    this.acuerdoPago.porcentajeDescuento = 0;
 
-    this._InteresService.searchActive().subscribe(
+    let token = this._LoginService.getToken();
+
+    this._ComparendoService.show({ 'id': this.comparendoSelect }, token).subscribe(
       response => {
-        if (response.status == 'success') {
-          this.interes = response.data;
-          this.interesInicial = this.interes.valor;
-          this.acuerdoPago.idInteres = this.interes.id;
-        } else {
-          swal({
-            title: 'Error!',
-            text: response.message,
-            type: 'error',
-            confirmButtonText: 'Aceptar'
-          })
-        }
-      },
-      error => {
-        this.errorMessage = <any>error;
+        if (response.code == 200) {
+          this.comparendo = response.data;
+          this.acuerdoPago.idComparendo = this.comparendo.id;
+          this.acuerdoPago.valorBruto = this.comparendo.valorInfraccion;
 
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
+          var datePiper = new DatePipe('en-US');
 
-    this._PorcentajeService.searchActive().subscribe(
-      response => {
-        if (response.status == 'success') {
-          this.porcentaje = response.data;
-          this.acuerdoPago.porcentajeInicial = this.porcentaje.valor;
-        } else {
-          swal({
-            title: 'Error!',
-            text: response.message,
-            type: 'error',
-            confirmButtonText: 'Aceptar'
-          })
-        }
-      },
-      error => {
-        this.errorMessage = <any>error;
+          var date = new Date();
+          date.setTime(this.comparendo.fecha.timestamp * 1000);
+          this.acuerdoPago.fechaComparendo = datePiper.transform(
+            date, 'yyyy-MM-dd'
+          );
 
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
-
-    if(this.porcentaje && this.interes){
-      swal.close();
-    }
-  }
-
-  onCancelar(){
-    this.ready.emit(true);
-  }
-
-  onPreliquidar() {
-    swal({
-      title: 'Generando preliquidación!',
-      text: 'Solo tardara unos segundos por favor espere.',
-      onOpen: () => {
-        swal.showLoading()
-      }
-    });
-
-    let token = this._loginService.getToken();
-
-    this._FroAcuerdoPagoService.calculateDateEnd(this.acuerdoPago, token).subscribe(
-      response => {
-        if (response.status == 'success') {
-          this.fechaFinal = response.data.fechaFinal;
-          this.diasMoraTotal = response.data.diasMoraTotal;
-        
-          this.acuerdoPago.fechaFinal = this.fechaFinal;
-          this.acuerdoPago.diasMoraTotal = this.diasMoraTotal;
-          this.acuerdoPago.comparendos = this.comparendosSelect;
-
-          this._FroAcuerdoPagoService.calculateValue(this.acuerdoPago, token).subscribe(
+          this._AcuerdoPagoService.calculateInitValues({ 'idComparendo': this.comparendo.id }, token).subscribe(
             response => {
-              if (response.status == 'success') {
-                this.valorBruto = response.data;
-                this.valorMora = ((this.interes.valor / 100) * this.valorBruto) * this.diasMoraTotal;
-                this.valorNeto = this.valorBruto + this.valorMora;
-                this.valorCuotaInicial = (this.valorNeto) * this.acuerdoPago.porcentajeInicial / 100;
-                this.valorPorcentajeInteres = (this.valorNeto - this.valorCuotaInicial) * (25 / 100);
-                this.valorPorcentajeCapital = (this.valorNeto - this.valorCuotaInicial) * (75 / 100);
+              if (response.code == 200) {
+                this.acuerdoPago.porcentajeInicial = response.data.porcentajeInicial.valor;
+                this.acuerdoPago.idInteres = response.data.interes.id;
+                this.interesInicial = response.data.interes.valor;
 
-                this.acuerdoPago.valorBruto = this.valorBruto;
-                this.acuerdoPago.valorMora = this.valorMora;
-                this.acuerdoPago.valorNeto = this.valorNeto;
-                this.acuerdoPago.valorCuotaInicial = this.valorCuotaInicial;
-
-                this._FroAcuerdoPagoService.calculateDues(this.acuerdoPago, token).subscribe(
-                  response => {
-                    if (response.status == 'success') {
-                      this.cuotas = response.data.cuotas;
-                      this.totalPagar = response.data.totalPagar;
-
-                      this.formPreliquidacion = true;
-
-                      swal({
-                        title: 'Perfecto!',
-                        text: response.message,
-                        type: 'success',
-                        confirmButtonText: 'Aceptar'
-                      });
-                    } else {
-                      swal({
-                        title: 'Error!',
-                        text: response.message,
-                        type: 'error',
-                        confirmButtonText: 'Aceptar'
-                      });
-                    }
-                  },
-                  error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                      console.log(this.errorMessage);
-                      alert("Error en la petición");
-                    }
-                  }
-                );
+                swal.close();
               } else {
                 swal({
                   title: 'Error!',
@@ -219,18 +114,118 @@ constructor(
           alert("Error en la petición");
         }
       }
-    );    
+    );
+  }
+
+  onCancelar(){
+    this.ready.emit(true);
+  }
+
+  
+
+
+  onPreliquidar() {
+    if (this.acuerdoPago.numeroCuotas > 1) {
+      
+      swal({
+        title: 'Generando preliquidación!',
+        text: 'Solo tardara unos segundos por favor espere.',
+        onOpen: () => {
+          swal.showLoading()
+        }
+      });
+  
+      let token = this._LoginService.getToken();
+  
+      this._AcuerdoPagoService.calculateDateEnd(this.acuerdoPago, token).subscribe(
+        response => {
+          if (response.code == 200) {
+            this.acuerdoPago.fechaInicial = response.data.fechaInicial;
+            this.acuerdoPago.fechaFinal = response.data.fechaFinal;
+            this.acuerdoPago.diasMoraTotal = response.data.diasMoraTotal;
+            this.acuerdoPago.valorMora = (this.acuerdoPago.diasMoraTotal * (this.interesInicial / 100) * this.acuerdoPago.valorBruto);
+            if (this.acuerdoPago.porcentajeDescuento > 0){
+              this.acuerdoPago.valorDescuento = this.acuerdoPago.valorMora * (this.acuerdoPago.porcentajeDescuento / 100);
+            }else{
+              this.acuerdoPago.valorDescuento = 0;
+            }
+            this.acuerdoPago.valorNeto = this.acuerdoPago.valorBruto + (this.acuerdoPago.valorMora - this.acuerdoPago.valorDescuento);
+            this.acuerdoPago.valorCuotaInicial = this.acuerdoPago.valorNeto * (this.acuerdoPago.porcentajeInicial / 100);
+  
+            this.valorPorcentajeInteres = (this.acuerdoPago.valorCuotaInicial) * (25 / 100);
+            this.valorPorcentajeCapital = (this.acuerdoPago.valorCuotaInicial) * (75 / 100);
+  
+            this._AcuerdoPagoService.calculateDues(this.acuerdoPago, token).subscribe(
+              response => {
+                if (response.status == 'success') {
+                  this.cuotas = response.data.cuotas;
+                  this.totalPagar = response.data.totalPagar;
+  
+                  this.formPreliquidacion = true;
+  
+                  swal({
+                    title: 'Perfecto!',
+                    text: response.message,
+                    type: 'success',
+                    confirmButtonText: 'Aceptar'
+                  });
+                } else {
+                  swal({
+                    title: 'Error!',
+                    text: response.message,
+                    type: 'error',
+                    confirmButtonText: 'Aceptar'
+                  });
+                }
+              },
+              error => {
+                this.errorMessage = <any>error;
+  
+                if (this.errorMessage != null) {
+                  console.log(this.errorMessage);
+                  alert("Error en la petición");
+                }
+              }
+            );
+          } else {
+            this.acuerdoPago.fechaFinal = null;
+            this.acuerdoPago.diasMoraTotal = null;
+  
+            swal({
+              title: response.title,
+              text: response.message,
+              type: response.status,
+              confirmButtonText: 'Aceptar'
+            })
+          }
+          error => {
+            this.errorMessage = <any>error;
+            if (this.errorMessage != null) {
+              console.log(this.errorMessage);
+              alert("Error en la petición");
+            }
+          }
+        }
+      );
+    }else{
+      swal({
+        title: 'Atención',
+        text: 'El número de cuotas debe ser mayor a 1.',
+        type: 'warning',
+        confirmButtonText: 'Aceptar'
+      });
+    }      
   }
   
   onEnviar(){
-    let token = this._loginService.getToken();
+    let token = this._LoginService.getToken();
 
     let datos = {
       'acuerdoPago':this.acuerdoPago,
       'cuotas':this.cuotas
     }
 
-		this._FroAcuerdoPagoService.register(datos, token).subscribe(
+		this._AcuerdoPagoService.register(datos, token).subscribe(
 			response => {
         if(response.status == 'success'){
           this.amortizaciones = response.data.amortizaciones;

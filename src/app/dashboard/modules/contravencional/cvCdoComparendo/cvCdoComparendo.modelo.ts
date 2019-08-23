@@ -1,7 +1,7 @@
 export class CvCdoComparendo{
 	constructor(
 		public consecutivo:string,
-		public fecha:string,
+		public fecha:any,
 		public hora:string,
 		public minutos:string,
 		public direccion:string,

@@ -4,11 +4,15 @@ export class FroAcuerdoPago{
 		public valorBruto: number,
 		public valorMora: number,
 		public valorNeto: number,
-		public valorCuotaInicial: number,
 		public porcentajeInicial: number,
-		public fechaFinal: string,
+		public valorCuotaInicial: number,
+		public porcentajeDescuento: number,
+		public valorDescuento: number,
+		public fechaComparendo: any,
+		public fechaInicial: any,
+		public fechaFinal: any,
 		public diasMoraTotal: number,
-		public comparendos: string,
+		public idComparendo: number,
 		public idInteres: number,
 		public id: number
 	){}
