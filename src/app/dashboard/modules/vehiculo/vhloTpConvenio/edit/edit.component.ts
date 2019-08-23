@@ -34,7 +34,6 @@ export class EditComponent implements OnInit {
 
     ngOnInit() {
 
-
         let token = this._LoginService.getToken();
         let identity = this._LoginService.getIdentity();
 
@@ -64,13 +63,10 @@ export class EditComponent implements OnInit {
                 }
             }
         );
-
         //====================================================================================================================
-
-
         var datePiper = new DatePipe('en-US');
-
         var date = new Date();
+
         date.setTime(this.convenio.fechaConvenio.timestamp * 1000);
 
         this.convenio.fechaConvenio = datePiper.transform(

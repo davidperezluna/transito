@@ -12,7 +12,7 @@ export class UserEmpresaTransporte {
         public arrayMunicipios: string,
 
         public idCarroceria: number,
-        public capacidad: number,
+        public capacidadDisponible: number,
         public capacidadMinima: number,
         public capacidadMaxima: number,
         public dobleCabina: number,

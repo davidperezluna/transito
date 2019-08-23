@@ -30,7 +30,7 @@ constructor(
 ){}
 
   ngOnInit() {
-    this.convenio = new VhloTpConvenio(null,null,null,null,null,null,null,null);
+    this.convenio = new VhloTpConvenio(null, null, null, null, null, null, null, null, null);
 
     this._EmpresaService.selectTransportePublico().subscribe( 
       response => {

@@ -49,8 +49,8 @@ export class ShowComponent implements OnInit {
           swal({
             title: 'Alerta!',
             text: response.message,
-            type: 'error',
-            confirmButtonColor: '#15d4be',
+            type: response.status,
+            confirmButtonText: 'Aceptar'
           })
         }
       },
@@ -120,7 +120,7 @@ export class ShowComponent implements OnInit {
               title: 'Eliminado!',
               text: response.message,
               type: 'success',
-              confirmButtonColor: '#15d4be',
+              confirmButtonText: 'Aceptar'
             })
             this.formListaConvenios = false;
             this.ngOnInit();
