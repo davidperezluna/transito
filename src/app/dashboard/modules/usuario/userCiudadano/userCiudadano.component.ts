@@ -38,7 +38,9 @@ export class UserCiudadanoComponent implements OnInit {
 		private _LoginService: LoginService,
     ){}
     
-  ngOnInit() { 
+  ngOnInit() {
+    swal.close();
+    
     this.onInitForms();
   }
 
