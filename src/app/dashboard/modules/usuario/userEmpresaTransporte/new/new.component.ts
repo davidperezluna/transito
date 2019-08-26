@@ -181,7 +181,7 @@ export class NewComponent implements OnInit {
     onCalcularCapacidad(capacidadMinima, capacidadMaxima) {
         this.empresaTransporte.capacidadDisponible = 0;
         if (capacidadMinima && capacidadMaxima) {
-            if (capacidadMaxima <= capacidadMinima) {
+            if (capacidadMaxima < capacidadMinima) {
                 swal({
                     title: 'Error!',
                     text: 'La capacidad máxima debe ser mayor a la mínima',
@@ -190,7 +190,7 @@ export class NewComponent implements OnInit {
                 })
 
             } else {
-                this.empresaTransporte.capacidadDisponible = (capacidadMaxima - capacidadMinima) + 1;
+                this.empresaTransporte.capacidadDisponible = capacidadMaxima;
             }
         }
 

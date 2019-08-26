@@ -233,4 +233,22 @@ export class EditComponent implements OnInit {
 
             });
     }
+
+    onCalcularCapacidad(capacidadMinima, capacidadMaxima) {
+        this.habilitacion.capacidadDisponible = 0;
+        if (capacidadMinima && capacidadMaxima) {
+            if (capacidadMaxima < capacidadMinima) {
+                swal({
+                    title: 'Error!',
+                    text: 'La capacidad máxima debe ser mayor a la mínima',
+                    type: 'error',
+                    confirmButtonText: 'Aceptar'
+                })
+
+            } else {
+                this.habilitacion.capacidadDisponible = capacidadMaxima;
+            }
+        }
+
+    }
 }

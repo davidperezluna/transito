@@ -1,72 +1,54 @@
-<div class="container" >
+<div class="container-fluid">
+  <hr>
   <div class="row" *ngIf='formIndex'>
     <div class="col-md-12">
-        <div class="card">
-          <div class="card-header">
-              <h5>
-                <b>Alcaldías</b>
-                <small>Lista de alcaldías</small>
-              </h5>
-          </div>
-          <div class="card-body responsive">
-          	<div class="table-responsive">
-            <table class="table" id="dataTables-example">
-              <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Nombre</th>
-                    <th>Tipo sociedad</th>
-                    <th>Tipo empresa</th>
-                    <th>Municipio</th>                    
-                    <th>NIT</th>
-                    <th>Teléfono</th>
-                    <th>Dirección</th>
-                    <th>Correo</th>                    
-                    <th>Acciones</th>                    
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="odd" *ngFor="let empresa of empresas; let i = index">
-                  <td>{{ empresa.id }}</td>
-                  <td>
-                    {{ empresa.nombre }}
-                  </td>
-                  <td>  
-                    {{ empresa.tipoSociedad.nombre }}                  
-                  </td>
-                  <td>  
-                    {{ empresa.tipoEmpresa.nombre }}                  
-                  </td>
-                  <td>
-                    {{ empresa.municipio.nombre }}
-                  </td>
-                  <td>
-                      {{ empresa.nit }}
-                  </td>
-                  <td>
-                      {{ empresa.telefono }}
-                  </td>
-                  <td>
-                      {{ empresa.direccion }}
-                  </td>
-                  <td>
-                      {{ empresa.correo }}
-                  </td>
-                  <td>
-                    <div class="btn-group">
-                      <button (click)="getConvenio(empresa)" class="btn btn-success" type="button">
-                        Convenios
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            </div>
-            <!-- /.table-responsive -->
-          </div>
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title">
+            <strong class="text-uppercase">Alcaldía</strong>
+            <small>Lista de Alcaldías</small>
+          </h5>
+        </div>
+        <div class="card-body">
+          <table class="table" id="dataTables-example">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>NIT</th>
+                <th>Nombre</th>
+                <th>Tipo sociedad</th>
+                <th>Tipo empresa</th>
+                <th>Municipio</th>
+                <th>Teléfono</th>
+                <th>Dirección</th>
+                <th>Correo</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="odd" *ngFor="let empresa of empresas; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ empresa.nit }}</td>
+                <td>{{ empresa.nombre }}</td>
+                <td>{{ empresa.tipoSociedad.nombre }}</td>
+                <td>{{ empresa.tipoEmpresa.nombre }}</td>
+                <td>{{ empresa.municipio.nombre }}</td>
+                <td>{{ empresa.telefono }}</td>
+                <td>{{ empresa.direccion }}</td>
+                <td>{{ empresa.correo }}</td>
+                <td>
+                  <div class="btn-group">
+                    <button (click)="getConvenio(empresa)" class="btn btn-success" type="button">
+                      Convenios
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
-    <app-show-vhlotpconvenio *ngIf='formShow' [empresa]="empresa" (ready)="ready($event)"></app-show-vhlotpconvenio>
+  </div>
+  <app-show-vhlotpconvenio *ngIf='formShow' [empresa]="empresa" (ready)="ready($event)"></app-show-vhlotpconvenio>
 </div>

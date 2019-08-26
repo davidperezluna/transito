@@ -9,6 +9,10 @@ import { PnalFuncionarioService } from '../../../../services/pnalFuncionario.ser
 import { PnalHorarioService } from '../../../../services/pnalHorario.service';
 import { PnalProrrogaService } from '../../../../services/pnalProrroga.service';
 import { PnalSuspensionService } from '../../../../services/pnalSuspension.service';
+import { PnalCfgTipoNombramientoService } from '../../../../services/pnalCfgTipoNombramiento.service';
+import { PnalCfgCargoService } from '../../../../services/pnalCfgCargo.service';
+import { UserCfgTipoIdentificacionService } from '../../../../services/userCfgTipoIdentificacion.service';
+import { CfgOrganismoTransitoService } from '../../../../services/cfgOrganismoTransito.service';
 
 import { NewComponent } from './new/new.component';
 import { EditComponent } from './edit/edit.component';
@@ -22,7 +26,16 @@ import { DisabledComponent } from './disabled/disabled.component';
     imports: [CommonModule, Ng2BootstrapModule.forRoot(), SelectModule, PopoverModule, TooltipModule],
     declarations: [NewComponent, EditComponent, TimeComponent, ShowComponent, ProrrogaComponent, SuspensionComponent, DisabledComponent],
     exports: [NewComponent, EditComponent, TimeComponent, ShowComponent, ProrrogaComponent, SuspensionComponent, DisabledComponent],
-    providers: [PnalFuncionarioService, PnalHorarioService, PnalProrrogaService, PnalSuspensionService]     
+    providers: [
+        PnalFuncionarioService,
+        PnalHorarioService,
+        PnalProrrogaService,
+        PnalSuspensionService,
+        PnalCfgTipoNombramientoService,
+        PnalCfgCargoService,
+        UserCfgTipoIdentificacionService,
+        CfgOrganismoTransitoService,
+    ]
 })
 
 export class PnalFuncionarioModule { }

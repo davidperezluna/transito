@@ -28,7 +28,7 @@
                                 <div class="col-xs-12 col-lg-12" *ngIf='empresa'>
                                     <table class="table table-bordered table-striped">
                                         <tr>
-                                            <th><b>Tipo de identificación</b></th>
+                                            <th><b>Tipo documento</b></th>
                                             <th><b>Numero de identificación</b></th>
                                         </tr>
                                         <tr>
@@ -60,28 +60,28 @@
                                             <td>{{ empresa.telefono }}</td>
                                         </tr>
                                     </table>
+                                    <hr>
                                     <h5>Datos del representante</h5>
                                     <table class="table table-bordered table-striped">
-                                        <thead>
                                             <tr>
-                                                <th><b>Tipo Identif</b></th>
+                                                <th><b>Tipo documento</b></th>
                                                 <th><b>Identificación</b></th>
-                                                <th><b>Nombre</b></th>
-                                                <th><b>Fec Inicio</b></th>
                                             </tr>
-                                        </thead>
-                                        <tbody>
                                             <tr>
                                                 <td>{{ empresa.empresaRepresentante.ciudadano.tipoIdentificacion.nombre }}</td>
                                                 <td>{{ empresa.empresaRepresentante.ciudadano.identificacion }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th><b>Nombre completo</b></th>
+                                                <th><b>Fecha inicio</b></th>
+                                            </tr>
+                                            <tr>
                                                 <td>{{ empresa.empresaRepresentante.ciudadano.primerNombre }}
                                                     {{ empresa.empresaRepresentante.ciudadano.segundoNombre }}
                                                     {{ empresa.empresaRepresentante.ciudadano.primerApellido }}
                                                     {{ empresa.empresaRepresentante.ciudadano.segundoApellido }}</td>
-                                                <td>{{ empresa.empresaRepresentante.fechaInicial }}
-                                                </td>
+                                                <td>{{ empresa.empresaRepresentante.fechaInicial }}</td>
                                             </tr>
-                                        </tbody>
                                     </table>
                                 </div>
                             </div>
