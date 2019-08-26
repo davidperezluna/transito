@@ -373,9 +373,9 @@
                             </div>
                             <div class="row" *ngIf="requiereRunt">
                                 <div class="col-xs-12 col-lg-6">
-                                    <label>Número de solicitud RUNT <b class="text-danger">*</b></label>
+                                    <label>Número de solicitud RUNT</label>
                                     <input type="text" class="form-control" placeholder="No. solicitud RUNT"
-                                        [(ngModel)]="tramiteSolicitud.numeroRunt" name="numeroRunt" required />
+                                        [(ngModel)]="tramiteSolicitud.numeroRunt" name="numeroRunt" />
                                 </div>
                                 <div class="col-xs-12 col-lg-6" *ngIf="tramiteFactura.precio.tramite.id == 41 || tramiteFactura.precio.tramite.id == 42 || tramiteFactura.precio.tramite.id == 43 || tramiteFactura.precio.tramite.codigo == 44">
                                     <label>Número de Resolución <b class="text-danger">*</b></label>
