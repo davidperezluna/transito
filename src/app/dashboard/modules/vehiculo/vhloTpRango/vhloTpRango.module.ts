@@ -5,6 +5,8 @@ import { SelectModule } from 'angular2-select';
 
 import { UserEmpresaService } from '../../../../services/userEmpresa.service';
 import { VhloTpRangoService } from '../../../../services/vhloTpRango.service';
+import { VhloTpConvenioService } from 'app/services/vhloTpConvenio.service';
+
 import { NewComponent } from './new/new.component';
 /* import { EditComponent } from './edit/edit.component'; */
 
@@ -13,7 +15,11 @@ import { NewComponent } from './new/new.component';
     imports: [CommonModule, Ng2BootstrapModule.forRoot(), SelectModule],
     declarations: [NewComponent],
     exports: [NewComponent],
-    providers: [UserEmpresaService, VhloTpRangoService]
+    providers: [
+        UserEmpresaService,
+        VhloTpRangoService,
+        VhloTpConvenioService
+    ]
 })
 
 export class VhloTpRangoModule { }
