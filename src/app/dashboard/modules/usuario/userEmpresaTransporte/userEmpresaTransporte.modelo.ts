@@ -5,6 +5,7 @@ export class UserEmpresaTransporte {
         public idModalidadTransporte: number,
         public idClase: number,
         public numeroActo: number,
+        public numeroConvenio: number,
         public fechaExpedicionActo: string,
         public fechaEjecutoriaActo: string,
         public numeroEjecutoriaActo: number,

@@ -52,10 +52,15 @@ export class NewRnetDuplicadoTarjetaOperacionComponent implements OnInit {
         this._TarjetaOperacionService.searchTarjetaOperacionByVehiculo({ 'idVehiculo': this.vehiculo.id }, token).subscribe(
             response => {
                 this.tarjetaOperacion = response.data;
-                console.log(this.tarjetaOperacion);
-                /* let timeoutId = setTimeout(() => {
-                    this.ngOnInit();
-                }, 100); */
+
+                var datePiper = new DatePipe('en-US');
+                var date = new Date();
+
+                date.setTime(this.tarjetaOperacion.fechaVencimiento.timestamp * 1000);
+
+                this.tarjetaOperacion.fechaVencimiento = datePiper.transform(
+                    date, 'yyyy-MM-dd'
+                );
             },
             error => {
                 this.errorMessage = <any>error;
@@ -91,16 +96,11 @@ export class NewRnetDuplicadoTarjetaOperacionComponent implements OnInit {
 
    
     onEnviar() {  
-        var datePiper = new DatePipe(this.tarjetaOperacion.fechaVencimiento.timestamp);
-        this.tarjetaOperacion.fechaVencimiento = datePiper.transform(this.tarjetaOperacion.fechaVencimiento.timestamp, 'yyyy-MM-dd');
-
         this.datos.campos = ['duplicadoTarjetaOperacion'];
         this.datos.idTramiteFactura = this.tramiteFactura.id;
         this.datos.idVehiculo = this.vehiculo.id;
         this.datos.idTarjetaOperacion = this.tarjetaOperacion.id;
         this.datos.fechaVencimiento = this.tarjetaOperacion.fechaVencimiento;
-
-        console.log(this.tarjetaOperacion.fechaVencimiento);
 
         let resumen = "No. factura: " + this.tramiteFactura.factura.numero +
                 ',Tarjeta Operación anterior: ' + this.tarjetaOperacion.numeroTarjetaOperacion;

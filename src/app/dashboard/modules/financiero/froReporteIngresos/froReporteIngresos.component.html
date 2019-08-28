@@ -1,5 +1,5 @@
 <div class="container row">
-    <div class="col-xs-12 col-lg-4">
+    <div class="col-xs-12 col-lg-5">
         <div class="card">
             <div class="card-body">
                 <form #formFiltros="ngForm">
@@ -10,7 +10,7 @@
                         </ng-select>
                     </div>
                     <div class="col-xs-12 col-lg-12" *ngIf="tipoRecaudoSelected">
-                        <label>Seleccionar OrganismoTransito</label>
+                        <label>Seleccionar Organismo Tránsito</label>
                         <ng-select [multiple]="false" [options]="organismosTransito"
                             [(ngModel)]="organismoTransitoSelected" [disabled]="funcionario.cargo.id != 2" required name="idOrganismoTransito">
                         </ng-select>

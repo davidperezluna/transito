@@ -58,11 +58,19 @@
                                         </tr>
                                         <tr>
                                             <th><b>Tipo Vehiculo</b></th>
-                                            <th><b>Capacidad Transportadora</b></th>
+                                            <th><b>Capacidad Transportadora (Mínima - Máxima)</b></th>
                                         </tr>
                                         <tr>
                                             <td>{{ empresaHabilitada.clase.nombre }}</td>
-                                            <td>{{ empresaHabilitada.capacidad }}</td>
+                                            <td><b style="color: #3700B3">{{ empresaHabilitada.capacidadMinima }} - {{ empresaHabilitada.capacidadMaxima }}</b></td>
+                                        </tr>
+                                        <tr>
+                                            <th><b>Capacidad Transportadora Disponible</b></th>
+                                            <th><b>Capacidad Transportadora Utilizada</b></th>
+                                        </tr>
+                                        <tr>
+                                            <td><b style="color: #B00020">{{ empresaHabilitada.capacidadDisponible }}</b></td>
+                                            <td><b style="color: #B00020">{{ empresaHabilitada.capacidadUtilizada }}</b></td>
                                         </tr>
                                     </table>
                                 </div>

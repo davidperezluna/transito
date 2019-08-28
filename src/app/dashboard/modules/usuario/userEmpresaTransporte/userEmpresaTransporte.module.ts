@@ -9,6 +9,7 @@ import { VhloCfgModalidadTransporteService } from "../../../../services/vhloCfgM
 import { VhloCfgServicioService } from "../../../../services/vhloCfgServicio.service";
 import { VhloCfgClaseService } from "../../../../services/vhloCfgClase.service";
 import { VhloCfgColorService } from "../../../../services/vhloCfgColor.service";
+import { VhloTpConvenioService } from 'app/services/vhloTpConvenio.service';
 import { VhloCfgCarroceriaService } from "../../../../services/vhloCfgCarroceria.service";
 import { CfgMunicipioService } from "../../../../services/cfgMunicipio.service";
 
@@ -32,6 +33,7 @@ import { EditComponent } from './edit/edit.component';
         VhloCfgServicioService,
         VhloCfgClaseService,
         VhloCfgColorService,
+        VhloTpConvenioService,
         VhloCfgCarroceriaService,
         CfgMunicipioService,
     ]

@@ -7,14 +7,17 @@ import { VhloCfgModalidadTransporteService } from "../../../../../services/vhloC
 import { VhloCfgServicioService } from "../../../../../services/vhloCfgServicio.service";
 import { VhloCfgClaseService } from "../../../../../services/vhloCfgClase.service";
 import { VhloCfgColorService } from "../../../../../services/vhloCfgColor.service";
+import { VhloTpConvenioService } from 'app/services/vhloTpConvenio.service';
 import { VhloCfgCarroceriaService } from "../../../../../services/vhloCfgCarroceria.service";
 import { CfgMunicipioService } from "../../../../../services/cfgMunicipio.service";
 import { LoginService } from '../../../../../services/login.service';
+import { DatePipe, CurrencyPipe } from '@angular/common';
 import swal from 'sweetalert2';
 
 @Component({
     selector: 'app-new-userempresatransporte',
-    templateUrl: './new.component.html'
+    templateUrl: './new.component.html',
+    providers: [DatePipe]
 })
 export class NewComponent implements OnInit {
     @Output() ready = new EventEmitter<any>();
@@ -31,6 +34,9 @@ export class NewComponent implements OnInit {
     public municipios;
 
     public carrocerias;
+    
+    public numeroConvenio: any;
+    public convenio: any;
 
     constructor(
         private _LoginService: LoginService,
@@ -40,13 +46,14 @@ export class NewComponent implements OnInit {
         private _VhloCfgServicioService: VhloCfgServicioService,
         private _VhloCfgClaseService: VhloCfgClaseService,
         private _VhloCfgColorService: VhloCfgColorService,
+        private _VhloTpConvenioService: VhloTpConvenioService,
         private _CfgMunicipioService: CfgMunicipioService,
         
         private _VhloCfgCarroceriaService: VhloCfgCarroceriaService,
     ) { }
 
     ngOnInit() {
-        this.empresaTransporte = new UserEmpresaTransporte(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+        this.empresaTransporte = new UserEmpresaTransporte(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
         this._VhloCfgRadioAccionService.select().subscribe(
             response => {
                 this.radiosAccion = response;
@@ -193,6 +200,59 @@ export class NewComponent implements OnInit {
                 this.empresaTransporte.capacidadDisponible = capacidadMaxima;
             }
         }
-
     }
+
+    onSearchConvenio() {
+        let token = this._LoginService.getToken();
+        this._VhloTpConvenioService.searchByNumeroConvenio({ 'numeroConvenio': this.empresaTransporte.numeroConvenio}, token).subscribe(
+            response => {
+                if (response.code == 200) {
+                    this.convenio = response.data;
+
+                    var datePiper = new DatePipe('en-US');
+                    var date = new Date();
+
+                    date.setTime(this.convenio.fechaConvenio.timestamp * 1000);
+
+                    this.convenio.fechaConvenio = datePiper.transform(
+                        date, 'yyyy/MM/dd'
+                    );
+
+                    date.setTime(this.convenio.fechaActaInicio.timestamp * 1000);
+
+                    this.convenio.fechaActaInicio = datePiper.transform(
+                        date, 'yyyy/MM/dd'
+                    );
+
+                    date.setTime(this.convenio.fechaActaFin.timestamp * 1000);
+
+                    this.convenio.fechaActaFin = datePiper.transform(
+                        date, 'yyyy/MM/dd'
+                    );
+
+                    swal({
+                        title: response.title,
+                        text: response.message,
+                        type: response.status,
+                        confirmButtonText: 'Aceptar'
+                    })
+                } else {
+                    swal({
+                        title: response.title,
+                        text: response.message,
+                        type: response.status,
+                        confirmButtonText: 'Aceptar'
+                    })
+                }
+                error => {
+                    this.errorMessage = <any>error;
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert('Error en la petición');
+                    }
+                }
+            }
+        );
+    }
+
 }

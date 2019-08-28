@@ -36,6 +36,27 @@
                             <span class="badge badge-info"
                                 *ngIf="factura.estado == 'COMPLETAR TRAMITES'">{{ factura.estado }}</span>
                         </div>
+                        <div class="col-xs-12 col-lg-12" *ngIf="imprimirResolucion">
+                            <div class="btn-group">
+                                <a *ngIf="imprimirResolucion && tramiteFactura.precio.tramite.id == 41"
+                                    href="{{ apiUrl }}/{{ vehiculo.id }}/{{ tramiteSolicitud.tramitesRealizados[0].foraneas.idEmpresaActual }}/{{ numeroResolucion }}/resolucion/cambioEmpresa/pdf" class="btn btn-primary" target="_blank">
+                                    <i class="fa fa-file-pdf-o"></i>RESOLUCIÓN CAMBIO EMPRESA
+                                </a>
+                                <a *ngIf="imprimirResolucion && tramiteFactura.precio.tramite.id == 42"
+                                    href="{{ apiUrl }}/{{ vehiculo.id }}/{{ numeroResolucion }}/resolucion/cambioServicio/pdf" class="btn btn-primary" target="_blank">
+                                    <i class="fa fa-file-pdf-o"></i>RESOLUCIÓN CAMBIO SERVICIO
+                                </a>
+                                <a *ngIf="imprimirResolucion && tramiteFactura.precio.tramite.id == 43"
+                                    href="{{ apiUrl }}/{{ vehiculo.id }}/{{ numeroResolucion }}/resolucion/desvinculacionComunAcuerdo/pdf" class="btn btn-primary" target="_blank">
+                                    <i class="fa fa-file-pdf-o"></i>RESOLUCIÓN COMÚN ACUERDO
+                                </a>
+                                <a *ngIf="imprimirResolucion && tramiteFactura.precio.tramite.id == 44"
+                                    href="{{ apiUrl }}/{{ vehiculo.id }}/{{ tramiteSolicitud.tramitesRealizados[0].foraneas.idEmpresaActual }}/{{ tramiteSolicitud.tramitesRealizados[0].foraneas.numeroConceptoFavorable }}/{{ numeroResolucion }}/resolucion/cambioEmpresaConceptoFavorable/pdf"
+                                    class="btn btn-primary" target="_blank">
+                                    <i class="fa fa-file-pdf-o"></i>RESOLUCIÓN CONCEPTO FAVORABLE
+                                </a>
+                            </div>
+                        </div>
                         <div class="col-xs-12 col-lg-12">
                             <div class="btn-group">
                                 <a *ngIf="factura && factura.estado == 'PENDIENTE DOCUMENTACION'"
@@ -389,21 +410,6 @@
                                         <i class="fa fa-save"></i>
                                         Guardar información
                                     </button>
-                                    <a *ngIf="imprimirResolucion && tramiteFactura.precio.tramite.id == 41" href="{{ apiUrl }}/{{ vehiculo.id }}/{{ tramiteSolicitud.tramitesRealizados[0].foraneas.idEmpresaActual }}/{{ numeroResolucion }}/resolucion/cambioEmpresa/pdf"
-                                        class="btn btn-light" target="_blank">
-                                        <i class="fa fa-eye"></i>RESOLUCIÓN CAMBIO EMPRESA
-                                    </a>
-                                    <a *ngIf="imprimirResolucion && tramiteFactura.precio.tramite.id == 42" href="{{ apiUrl }}/{{ vehiculo.id }}/{{ numeroResolucion }}/resolucion/cambioServicio/pdf" class="btn btn-light" target="_blank">
-                                        <i class="fa fa-eye"></i>RESOLUCIÓN CAMBIO SERVICIO
-                                    </a>
-                                    <a *ngIf="imprimirResolucion && tramiteFactura.precio.tramite.id == 43" href="{{ apiUrl }}/{{ vehiculo.id }}/{{ numeroResolucion }}/resolucion/desvinculacionComunAcuerdo/pdf"
-                                        class="btn btn-light" target="_blank">
-                                        <i class="fa fa-eye"></i>RESOLUCIÓN COMÚN ACUERDO
-                                    </a>
-                                    <a *ngIf="imprimirResolucion && tramiteFactura.precio.tramite.id == 44" href="{{ apiUrl }}/{{ vehiculo.id }}/{{ tramiteSolicitud.tramitesRealizados[0].foraneas.idEmpresaActual }}/{{ tramiteSolicitud.tramitesRealizados[0].foraneas.numeroConceptoFavorable }}/{{ numeroResolucion }}/resolucion/cambioEmpresaConceptoFavorable/pdf"
-                                        class="btn btn-light" target="_blank">
-                                        <i class="fa fa-eye"></i>RESOLUCIÓN CONCEPTO FAVORABLE
-                                    </a>
                                 </div>
                             </div>
                         </div>

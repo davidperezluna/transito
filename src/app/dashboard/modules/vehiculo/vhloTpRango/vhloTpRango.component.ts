@@ -197,6 +197,7 @@ export class VhloTpRangoComponent implements OnInit {
             response => {
                 if (response.code == 200) {
                     this.empresaHabilitada = response.data;
+                    console.log(this.empresaHabilitada);
 
                     this._VhloTpRangoService.searchRangos({ 'idEmpresa': this.empresaHabilitada.id }, token).subscribe(
                         response => {

@@ -2,50 +2,88 @@
     <div class="card">
         <div class="card-header">
             <h5 class="card-title">
-                <strong class="text-uppercase">Modalidad Transporte</strong>
+                <strong class="text-uppercase">Habilitación de empresa</strong>
             </h5>
         </div>
         <div class="card-body">
             <form #formNew="ngForm">
                 <div class="form-group row">
-                    <div class="col-xs-6 col-lg-6">
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Número de Convenio <strong class="text-danger">*</strong></label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" [(ngModel)]="empresaTransporte.numeroConvenio" required name="numeroConvenio" />
+                            <span class="input-group-btn">
+                                <button (click)="onSearchConvenio()" class="btn btn-default btn-primary" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-xs-16 col-lg-6"></div>
+                    <div class="col-xs-16 col-lg-6">
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-12" *ngIf='convenio'>
+                                <strong class="text-uppercase">Datos del convenio</strong>
+                                <table class="table table-bordered table-striped">
+                                    <tr>
+                                        <th><b>Nit Alcaldia</b></th>
+                                        <td><b>Fecha Convenio</b></td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ convenio.alcaldia.nit }}</td>
+                                        <td>{{ convenio.fechaConvenio }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Fecha Inicio Convenio</b></td>
+                                        <td><b>Fecha Fin Convenio</b></td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ convenio.fechaActaInicio }}</td>
+                                        <td>{{ convenio.fechaActaFin }}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-lg-6" *ngIf="convenio"></div>
+                    <div class="col-xs-12 col-lg-6" *ngIf="convenio">
                         <label>Radio Acción <strong class="text-danger">*</strong></label>
                         <ng-select [multiple]="false" [options]="radiosAccion" [(ngModel)]="empresaTransporte.idRadioAccion" required name="idRadioAccion">
                         </ng-select>
                     </div>
-                    <div class="col-lg-6 col-md-6">
+                    <div class="col-xs-12 col-lg-6" *ngIf="convenio">
                         <label>Modalidad Transporte <strong class="text-danger">*</strong></label>
                         <ng-select [multiple]="false" [options]="modalidadesTransporte" [(ngModel)]="empresaTransporte.idModalidadTransporte" required name="idModalidadTransporte">
                         </ng-select>
                     </div>
-                    <div class="col-lg-6 col-md-6">
+                    <div class="col-xs-12 col-lg-6" *ngIf="convenio">
                         <label>Clase <strong class="text-danger">*</strong></label>
                         <ng-select [multiple]="false" [options]="clases" [(ngModel)]="empresaTransporte.idClase" required name="idClase">
                         </ng-select>
                     </div>
-                    <div class="col-lg-6 col-md-6">
+                    <div class="col-xs-12 col-lg-6" *ngIf="convenio">
                         <label>Nro. de Acto Administrativo <strong class="text-danger">*</strong></label>
                         <input class="form-control" [(ngModel)]="empresaTransporte.numeroActo" name="numeroActo" type="number" required>
                     </div>
-                    <div class="col-lg-6 col-md-6">
+                    <div class="col-xs-12 col-lg-6" *ngIf="convenio">
                         <label>Fecha Expedición Acto Administrativo <strong class="text-danger">*</strong></label>
                         <input class="form-control" [(ngModel)]="empresaTransporte.fechaExpedicionActo" name="fechaExpedicionActo" type="date" required>
                     </div>
-                    <div class="col-lg-6 col-md-6">
+                    <div class="col-xs-12 col-lg-6" *ngIf="convenio">
                         <label>Nro. de Ejecutoria Acto Administrativo <strong class="text-danger">*</strong></label>
                         <input class="form-control" [(ngModel)]="empresaTransporte.numeroEjecutoriaActo" name="numeroEjecutoriaActo" type="number" required>
                     </div>
-                    <div class="col-lg-6 col-md-6">
+                    <div class="col-xs-12 col-lg-6" *ngIf="convenio">
                         <label>Fecha Ejecutoria Acto Administrativo <strong class="text-danger">*</strong></label>
                         <input class="form-control" [(ngModel)]="empresaTransporte.fechaEjecutoriaActo" name="fechaEjecutoriaActo" type="date" required>
                     </div>
-                    <div class="col-lg-6 col-md-6">
+                    <div class="col-xs-12 col-lg-6" *ngIf="convenio">
                         <label>Color<strong class="text-danger">*</strong></label>
                         <ng-select [multiple]="true" [options]="colores" [(ngModel)]="empresaTransporte.arrayColores" required
                             name="colores">
                         </ng-select>
                     </div>
-                    <div class="col-lg-6 col-md-6">
+                    <div class="col-xs-12 col-lg-6" *ngIf="convenio">
                         <label>Municipio<strong class="text-danger">*</strong></label>
                         <ng-select [multiple]="true" [options]="municipios" [(ngModel)]="empresaTransporte.arrayMunicipios" required
                             name="municipios">
