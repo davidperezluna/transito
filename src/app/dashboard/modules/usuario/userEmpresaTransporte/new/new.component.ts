@@ -4,7 +4,6 @@ import { UserEmpresaTransporte } from "../userEmpresaTransporte.modelo";
 import { UserEmpresaTransporteService } from "../../../../../services/userEmpresaTransporte.service";
 import { VhloCfgRadioAccionService } from "../../../../../services/vhloCfgRadioAccion.service";
 import { VhloCfgModalidadTransporteService } from "../../../../../services/vhloCfgModalidadTransporte.service";
-import { VhloCfgServicioService } from "../../../../../services/vhloCfgServicio.service";
 import { VhloCfgClaseService } from "../../../../../services/vhloCfgClase.service";
 import { VhloCfgColorService } from "../../../../../services/vhloCfgColor.service";
 import { VhloTpConvenioService } from 'app/services/vhloTpConvenio.service';
@@ -28,7 +27,6 @@ export class NewComponent implements OnInit {
 
     public radiosAccion;
     public modalidadesTransporte;
-    public servicios;
     public clases;
     public colores;
     public municipios;
@@ -43,7 +41,6 @@ export class NewComponent implements OnInit {
         private _UserEmpresaTransporteService: UserEmpresaTransporteService,
         private _VhloCfgRadioAccionService: VhloCfgRadioAccionService,
         private _VhloCfgModalidadTransporteService: VhloCfgModalidadTransporteService,
-        private _VhloCfgServicioService: VhloCfgServicioService,
         private _VhloCfgClaseService: VhloCfgClaseService,
         private _VhloCfgColorService: VhloCfgColorService,
         private _VhloTpConvenioService: VhloTpConvenioService,
@@ -70,19 +67,6 @@ export class NewComponent implements OnInit {
         this._VhloCfgModalidadTransporteService.select().subscribe(
             response => {
                 this.modalidadesTransporte = response;
-            },
-            error => {
-                this.errorMessage = <any>error;
-
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert("Error en la petición");
-                }
-            }
-        );
-        this._VhloCfgServicioService.select().subscribe(
-            response => {
-                this.servicios = response;
             },
             error => {
                 this.errorMessage = <any>error;

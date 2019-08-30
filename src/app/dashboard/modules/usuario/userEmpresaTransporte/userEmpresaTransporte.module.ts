@@ -6,7 +6,6 @@ import { SelectModule } from 'angular2-select';
 import { UserEmpresaTransporteService } from '../../../../services/userEmpresaTransporte.service';
 import { VhloCfgRadioAccionService } from "../../../../services/vhloCfgRadioAccion.service";
 import { VhloCfgModalidadTransporteService } from "../../../../services/vhloCfgModalidadTransporte.service";
-import { VhloCfgServicioService } from "../../../../services/vhloCfgServicio.service";
 import { VhloCfgClaseService } from "../../../../services/vhloCfgClase.service";
 import { VhloCfgColorService } from "../../../../services/vhloCfgColor.service";
 import { VhloTpConvenioService } from 'app/services/vhloTpConvenio.service';
@@ -30,7 +29,6 @@ import { EditComponent } from './edit/edit.component';
         UserEmpresaTransporteService,
         VhloCfgRadioAccionService,
         VhloCfgModalidadTransporteService,
-        VhloCfgServicioService,
         VhloCfgClaseService,
         VhloCfgColorService,
         VhloTpConvenioService,

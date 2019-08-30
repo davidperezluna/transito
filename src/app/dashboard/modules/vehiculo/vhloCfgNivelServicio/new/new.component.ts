@@ -1,7 +1,6 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import { VhloCfgNivelServicio } from '../vhloCfgNivelServicio.modelo';
 import { VhloCfgNivelServicioService } from '../../../../../services/vhloCfgNivelServicio.service';
-import { VhloCfgServicioService } from '../../../../../services/vhloCfgServicio.service';
 import { LoginService } from '../../../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -12,31 +11,15 @@ import swal from 'sweetalert2';
 export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
 public nivelServicio: VhloCfgNivelServicio;
-public servicios;
 public errorMessage;
 
 constructor(
   private _NivelServicioService: VhloCfgNivelServicioService,
-  private _ServicioService: VhloCfgServicioService,
   private _LoginService: LoginService,
   ){}
 
   ngOnInit() {
-    this.nivelServicio = new VhloCfgNivelServicio(null,null,null);
-
-    this._ServicioService.select().subscribe(
-      response => {
-        this.servicios = response;
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
+    this.nivelServicio = new VhloCfgNivelServicio(null,null);
   }
 
   onCancelar(){

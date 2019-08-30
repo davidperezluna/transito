@@ -19,7 +19,6 @@
             <thead>
               <tr>
                 <th>Id</th>
-                <th>Servicio</th>
                 <th>Nombre</th>
                 <th>Acciones</th>
               </tr>
@@ -27,7 +26,6 @@
             <tbody>
               <tr class="odd" *ngFor="let nivelServicio of nivelesServicio; let i = index">
                 <td>{{ i + 1 }}</td>
-                <td>{{ nivelServicio.servicio.nombre }}</td>
                 <td>{{ nivelServicio.nombre }}</td>
                 <td>
                   <div class="btn-group">
