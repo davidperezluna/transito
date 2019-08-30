@@ -4,6 +4,7 @@ export class BpRegistroCompromiso{
 		public contratoNumero: string,
 		public contratoTipo: string,
 		public contratoEstado: string,
+		public valorApropiado:number,
 		public id:number
 	){}
 }

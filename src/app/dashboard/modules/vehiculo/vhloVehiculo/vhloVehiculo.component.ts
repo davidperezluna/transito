@@ -37,25 +37,26 @@ export class VhloVehiculoComponent implements OnInit {
     this.formNew = false;
 
 		this._VehiculoService.index().subscribe(
-				response => {
-          this.vehiculos = response.data;
-          
-          let timeoutId = setTimeout(() => {  
-            this.iniciarTabla();
-            swal.close();
-          }, 100);
-				}, 
-				error => {
-					this.errorMessage = <any>error;
+      response => {
+        this.vehiculos = response.data;
+        
+        let timeoutId = setTimeout(() => {  
+          this.onInitTable();
+          swal.close();
+        }, 100);
+      }, 
+      error => {
+        this.errorMessage = <any>error;
 
-					if(this.errorMessage != null){
-						console.log(this.errorMessage);
-						alert("Error en la petición");
-					}
-				}
-      );
+        if(this.errorMessage != null){
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
   }
-  iniciarTabla(){
+
+  onInitTable(){
     $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,

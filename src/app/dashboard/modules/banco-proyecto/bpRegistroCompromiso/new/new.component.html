@@ -110,19 +110,24 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-12 col-lg-4">
+                        <div class="col-xs-12 col-lg-6">
                             <label>No. contrato</label>
                             <input class="form-control text-uppercase" [(ngModel)]="registro.contratoNumero" name="contratoNumero" type="text" required>
                         </div>
         
-                        <div class="col-xs-12 col-lg-4">
+                        <div class="col-xs-12 col-lg-6">
                             <label>Tipo contrato</label>
                             <ng-select [multiple]="false" [options]="tiposContrato" [(ngModel)]="registro.contratoTipo" name="contratoTipo" required></ng-select>
                         </div>
-        
-                        <div class="col-xs-12 col-lg-4">
+
+                        <div class="col-xs-12 col-lg-6">
                             <label>Estado contrato</label>
                             <ng-select [multiple]="false" [options]="estadosContrato" [(ngModel)]="registro.contratoEstado" name="contratoEstado" required></ng-select>
+                        </div>
+
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Valor apropiado</label>
+                            <input class="form-control text-uppercase" [(ngModel)]="registro.valorApropiado" name="valorApropiado" type="text" required>
                         </div>
                     </div>
                 </form>

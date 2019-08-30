@@ -15,7 +15,7 @@ export class NewComponent implements OnInit {
   public errorMessage;
 
   public numeroSolicitud: any = null;
-  public solicitud: any = null;
+  public solicitud: any;
   public funcionario: any = null;
 
   public formIndex: any;
@@ -31,6 +31,8 @@ export class NewComponent implements OnInit {
   ngOnInit() {
     this.onInitForms();
 
+    this.solicitud = null;
+
     swal({
       title: 'Cargando Datos!',
       text: 'Solo tardara unos segundos por favor espere.',
@@ -39,7 +41,7 @@ export class NewComponent implements OnInit {
       }
     });
 
-    this.cdp = new BpCdp(null, null, null, null, null);
+    this.cdp = new BpCdp(null, null, null, null, null, null);
 
     let token = this._LoginService.getToken();
 
@@ -78,7 +80,7 @@ export class NewComponent implements OnInit {
   }
 
   onCancelar(){
-    this.ready.emit(true);
+    this.ngOnInit();
   }
 
   onSearchSolicitud() {
@@ -128,14 +130,14 @@ export class NewComponent implements OnInit {
 		this._CdpService.register(this.cdp, token).subscribe(
 			response => {
         if(response.code == 200){
+          this.solicitud = null;
+
           swal({
             title: 'Perfecto!',
             text: response.message,
             type: 'success',
             confirmButtonText: 'Aceptar'
           });
-
-          this.ngOnInit();
         }else{
           swal({
             title: 'Error!',

@@ -101,6 +101,12 @@
                                 </tr>
                                 <tr>
                                     <td>
+                                        <b>Valor aprobado: </b>
+                                        $ {{ cdp.valorAprobado | currency: 'COP' }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
                                         <b>Número proyecto: </b>
                                         {{ cdp.actividad.cuenta.proyecto.numero }}
                                     </td>
@@ -114,13 +120,13 @@
                                 <tr>
                                     <td>
                                         <b>Costo proyecto: </b>
-                                        {{ cdp.actividad.cuenta.proyecto.costoTotal }}
+                                        {{ cdp.actividad.cuenta.proyecto.costoTotal | currency: 'COP' }}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <b>Saldo proyecto: </b>
-                                        {{ cdp.actividad.cuenta.proyecto.saldoTotal }}
+                                        {{ cdp.actividad.cuenta.proyecto.saldoTotal | currency: 'COP' }}
                                     </td>
                                 </tr>
                                 <tr>
@@ -216,7 +222,7 @@
                                 </div>
 
                                 <div class="col-xs-12 col-lg-8">
-                                    <label>Valor</label>
+                                    <label>Valor a apropiar</label>
                                     <input class="form-control" [(ngModel)]="datos.valor" name="valor" type="numeric" required>
                                 </div>
 

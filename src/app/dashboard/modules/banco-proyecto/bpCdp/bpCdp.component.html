@@ -18,8 +18,7 @@
               <thead>
                 <tr>
                     <th>#</th>
-                    <th>Solicitud</th>
-                    <th>Número</th>
+                    <th>Detalles</th>
                     <th>Proyecto</th>
                     <th>Cuenta</th>
                     <th>Acciones</th>
@@ -28,8 +27,16 @@
               <tbody>
                 <tr class="odd" *ngFor="let cdp of cdps; let i = index">
                   <td>{{ i + 1 }}</td>
-                  <td>{{ cdp.solicitudNumero }}</td>
-                  <td>{{ cdp.numero }}</td>
+                  <td>
+                    <b>No. Solicitud</b><br>
+                    {{ cdp.solicitudNumero }}
+                    <br><b>No. CDP</b><br>
+                    {{ cdp.numero }}
+                    <ng-container *ngIf="cdp.valorAprobado">
+                      <br><b>Valor aprobado</b><br>
+                      {{ cdp.valorAprobado }}
+                    </ng-container>
+                  </td>
                   <td>
                     <b>Nombre</b><br>
                     {{ cdp.actividad.cuenta.proyecto.nombre }}

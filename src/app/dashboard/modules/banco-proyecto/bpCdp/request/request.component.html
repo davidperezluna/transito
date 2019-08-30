@@ -28,7 +28,7 @@
                             <td>{{ solicitud.solicitudNumero }}</td>
                             <td>{{ solicitud.actividad.cuenta.proyecto.numero }}</td>
                             <td>{{ solicitud.valor | currency: 'COP' }}</td>
-                            <td>{{ solicitud.solicitudFecha }}</td>
+                            <td>{{ (solicitud.solicitudFecha.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td>
                             <td>
                                 <div class="btn-group">
                                     <a href="{{ apiUrl }}bancoproyecto/bpcdp/request/{{ solicitud.id }}/pdf" class="btn btn-success" target="_blank">
@@ -102,7 +102,7 @@
                                 <tr>
                                     <td>
                                         <b>Fecha: </b>
-                                        {{ proyecto.fecha }}
+                                        {{ (proyecto.fecha.timestamp * 1000) | date: 'dd/MM/yyyy' }}
                                     </td>
                                 </tr>
                                 <tr>

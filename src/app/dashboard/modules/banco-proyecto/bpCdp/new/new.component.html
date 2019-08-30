@@ -106,8 +106,13 @@
                         </div>
 
                         <div class="col-xs-12 col-lg-8">
-                            <label>Número</label>
+                            <label>Número de CDP</label>
                             <input class="form-control text-uppercase" [(ngModel)]="cdp.numero" name="numero" type="text" required>
+                        </div>  
+
+                        <div class="col-xs-12 col-lg-8">
+                            <label>Valor aprobado</label>
+                            <input class="form-control text-uppercase" [(ngModel)]="cdp.valorAprobado" name="valorAprobado" type="text" required>
                         </div>                    
         
                         <div class="col-xs-12 col-lg-12">
@@ -122,6 +127,10 @@
                     <button (click)="onEnviar()" class="btn btn-primary" type="button">
                         <i class="fa fa-save"></i>
                         Enviar
+                    </button>
+                    <button (click)="onCancelar()" class="btn btn-default" type="button">
+                        <i class="fa fa-times"></i>
+                        Cancelar
                     </button>
                 </div>
             </div>

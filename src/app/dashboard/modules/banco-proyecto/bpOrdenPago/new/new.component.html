@@ -12,11 +12,9 @@
                         <form #formSearch="ngForm">
                             <label>Buscar registro de compromiso</label>
                             <div class="input-group">
-                                <input type="numeric" class="form-control" placeholder="Número de registro"
-                                    [(ngModel)]="numeroRegistroCompromiso" name="numeroRegistroCompromiso" required />
+                                <input type="numeric" class="form-control" placeholder="Número de registro" [(ngModel)]="numeroRegistroCompromiso" name="numeroRegistroCompromiso" required />
                                 <span class="input-group-btn">
-                                    <button (click)="onSearchRegistroCompromiso()" [disabled]="formSearch.invalid"
-                                        class="btn btn-default btn-primary" type="button">
+                                    <button (click)="onSearchRegistroCompromiso()" [disabled]="formSearch.invalid" class="btn btn-default btn-primary" type="button">
                                         <i class="fa fa-search"></i>
                                     </button>
                                 </span>
@@ -51,6 +49,26 @@
                                     <td>
                                         <b>Costo total: </b>
                                         {{ registroCompromiso.cdp.actividad.cuenta.proyecto.costoTotal | currency: 'COP' }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <b>Tercero: </b>
+                                        <ng-container *ngIf="registroCompromiso.ciudadano">
+                                            <b>Nombres y apellidos</b><br>
+                                            {{ registroCompromiso.ciudadano.primerNombre }}
+                                            {{ registroCompromiso.ciudadano.segundoNombre }}
+                                            {{ registroCompromiso.ciudadano.primerApellido }}
+                                            {{ registroCompromiso.ciudadano.segundoApellido }}
+                                            <br><b>Identificación</b><br>
+                                            {{ registroCompromiso.ciudadano.identificacion }}
+                                        </ng-container>
+                                        <ng-container *ngIf="registroCompromiso.empresa">
+                                            <b>Nombres y apellidos</b><br>
+                                            {{ registroCompromiso.empresa.nombre }}
+                                            <br><b>Identificación</b><br>
+                                            {{ registroCompromiso.empresa.nit }}
+                                        </ng-container>
                                     </td>
                                 </tr>
                             </tbody>

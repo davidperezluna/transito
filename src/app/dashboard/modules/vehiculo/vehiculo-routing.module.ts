@@ -7,6 +7,7 @@ import { VhloTpAsignacionComponent } from './vhloTpAsignacion/vhloTpAsignacion.c
 import { VhloTpConvenioComponent } from './vhloTpConvenio/vhloTpConvenio.component';
 import { VhloTpRangoComponent } from './vhloTpRango/vhloTpRango.component';
 import { VhloTpTarjetaOperacionComponent } from './vhloTpTarjetaOperacion/vhloTpTarjetaOperacion.component';
+import { VhloRnaPreregistroComponent } from "./vhloRnaPreregistro/vhloRnaPreregistro.component";
 import { VhloRnaPreasignacionPlacaComponent } from "./vhloRnaPreasignacionPlaca/vhloRnaPreasignacionPlaca.component";
 
 const routes: Routes = [
@@ -35,9 +36,13 @@ const routes: Routes = [
     component: VhloTpTarjetaOperacionComponent
   },
   {
-      path: 'vhloRnaPreAsignacionPlaca',
-      component: VhloRnaPreasignacionPlacaComponent
-    }
+    path: 'vhloRnaPreregistro',
+    component: VhloRnaPreregistroComponent
+  },
+  {
+    path: 'vhloRnaPreAsignacionPlaca',
+    component: VhloRnaPreasignacionPlacaComponent
+  }
 ]; 
 
 @NgModule({

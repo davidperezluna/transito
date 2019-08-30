@@ -57,7 +57,7 @@ constructor(
             }
         });
 
-        this.cdp = new BpCdp(null, null, null, null, null);
+        this.cdp = new BpCdp(null, null, null, null, null, null);
 
         this._CdpService.index().subscribe(
             response => {

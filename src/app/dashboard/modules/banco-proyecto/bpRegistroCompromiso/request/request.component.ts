@@ -231,7 +231,7 @@ export class RequestCompromisoComponent implements OnInit {
                         this.ciudadano = null;
                         this.datos.idCiudadano = this.ciudadano;
                         this.empresa = null;
-                        this.datos.idEmpresa = this.empresa.id;
+                        this.datos.idEmpresa = this.empresa;
                         
                         swal({
                             title: 'Error!',
