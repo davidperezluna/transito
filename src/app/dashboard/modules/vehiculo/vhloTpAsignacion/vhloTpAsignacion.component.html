@@ -97,23 +97,24 @@
                     <table class="table" id="dataTables-example">
                         <thead>
                             <tr>
-                                <th>#</th>
-                                <th>Placa Vehículo</th>
-                                <th>Nro. Cupo</th>
-                                <th>Marca</th>
-                                <th>Línea</th>
-                                <th>Clase</th>
-                                <th>Carrocería</th>
-                                <th>Color</th>
-                                <th>Combustible</th>
-                                <th>Cilindraje</th>
-                                <th>Modelo</th>
-                                <th>Motor</th>
-                                <th>Chasis</th>
-                                <th>Serie</th>
-                                <th>Vin</th>
-                                <th>Mod. Transporte</th>
-                                <th>Acciones</th>
+                                <th><b>#</b></th>
+                                <th><b>Placa Vehículo</b></th>
+                                <th><b>Nro. Cupo</b></th>
+                                <th><b>Nro. Pasajeros</b></th>
+                                <th><b>Marca</b></th>
+                                <th><b>Línea</b></th>
+                                <th><b>Clase</b></th>
+                                <th><b>Carrocería</b></th>
+                                <th><b>Color</b></th>
+                                <th><b>Combustible</b></th>
+                                <th><b>Cilindraje</b></th>
+                                <th><b>Modelo</b></th>
+                                <th><b>Motor</b></th>
+                                <th><b>Chasis</b></th>
+                                <th><b>Serie</b></th>
+                                <th><b>Vin</b></th>
+                                <th><b>Mod. Transporte</b></th>
+                                <th><b>Acciones</b></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -121,6 +122,7 @@
                                 <td>{{ i + 1 }}</td>
                                 <td>{{ asignacion.vehiculo.placa.numero }}</td>
                                 <td>{{ asignacion.cupo.numero }}</td>
+                                <td>{{ asignacion.vehiculo.numeroPasajeros }}</td>
                                 <td>{{ asignacion.vehiculo.linea.marca.nombre }}</td>
                                 <td>{{ asignacion.vehiculo.linea.nombre }}</td>
                                 <td>{{ asignacion.vehiculo.clase.nombre }}</td>

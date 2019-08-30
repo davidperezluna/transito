@@ -136,4 +136,36 @@ export class EditComponent implements OnInit {
                 }
             });
     }
+
+    /* onValidarNumeroConvenio() {
+        let token = this._LoginService.getToken();
+
+        this._VhloTpConvenioService.validateNumeroConvenio({'numeroConvenio': this.convenio.numeroConvenio}, token).subscribe(
+            response => {
+                if (response.code == 200) {
+                    console.log(response.data);
+                    this.ready.emit(true);
+                    swal({
+                        title: response.title,
+                        text: response.message,
+                        type: response.status,
+                        confirmButtonText: 'Aceptar'
+                    })
+                } else {
+                    swal({
+                        title: response.title,
+                        text: response.message,
+                        type: response.status,
+                        confirmButtonText: 'Aceptar'
+                    })
+                }
+                error => {
+                    this.errorMessage = <any>error;
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert('Error en la petición');
+                    }
+                }
+            });
+    } */
 }

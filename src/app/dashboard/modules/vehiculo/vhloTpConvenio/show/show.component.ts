@@ -141,8 +141,14 @@ export class ShowComponent implements OnInit {
   onEdit(convenio: any) {
     let token = this._LoginService.getToken();
     
-    
-    this._VhloTpConvenioService.searchEmpresasTransportePublicoByConvenio({'idConvenio': convenio.id}, token).subscribe(
+    this.convenio = convenio;
+
+    this.formListaConvenios = false;
+
+    this.formEdit = true;
+    this.formNew = false;
+
+    /* this._VhloTpConvenioService.searchEmpresasTransportePublicoByConvenio({'idConvenio': convenio.id}, token).subscribe(
       response => {
         if (response.code == 200) {
           this.arrayEmpresasTransporte = response.data;
@@ -170,9 +176,6 @@ export class ShowComponent implements OnInit {
           alert("Error en la petición");
         }
       }
-      );
-      
-    
-
+    ); */
   }
 }

@@ -8,6 +8,43 @@
         <div class="card-body">
             <form #formNew="ngForm">
                 <div class="form-group row">
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Número de Convenio <strong class="text-danger">*</strong></label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" [(ngModel)]="rango.numeroConvenio" required
+                                name="numeroConvenio" />
+                            <span class="input-group-btn">
+                                <button (click)="onSearchConvenio()" class="btn btn-default btn-primary" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-xs-16 col-lg-6">
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-12" *ngIf='convenio'>
+                                <strong class="text-uppercase">Datos del convenio</strong>
+                                <table class="table table-bordered table-striped">
+                                    <tr>
+                                        <th><b>Nit Alcaldia</b></th>
+                                        <td><b>Fecha Convenio</b></td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ convenio.alcaldia.nit }}</td>
+                                        <td>{{ convenio.fechaConvenio }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Fecha Inicio Convenio</b></td>
+                                        <td><b>Fecha Fin Convenio</b></td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ convenio.fechaActaInicio }}</td>
+                                        <td>{{ convenio.fechaActaFin }}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                     <div class="col-lg-6 col-md-6">
                         <label>Rango Inicio<strong class="text-danger">*</strong></label>
                         <input class="form-control" [(ngModel)]="rango.rangoInicio" name="rangoInicio" type="number" required>
