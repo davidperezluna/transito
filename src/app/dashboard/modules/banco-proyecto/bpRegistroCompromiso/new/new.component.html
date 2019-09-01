@@ -53,6 +53,34 @@
                                         {{ solicitud.cdp.actividad.cuenta.proyecto.costoTotal | currency: 'COP' }}
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td>
+                                        <b class="text-ceneter text-uppercase">Tercero</b>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <b>Nombre: </b>
+                                        <ng-container *ngIf="solicitud.ciudadano">
+                                            {{ solicitud.ciudadano.primerNombre }}
+                                            {{ solicitud.ciudadano.primerApellido }}
+                                        </ng-container>
+                                        <ng-container *ngIf="solicitud.empresa">
+                                            {{ solicitud.empresa.nombre }}
+                                        </ng-container>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <b>Identificación: </b>
+                                        <ng-container *ngIf="solicitud.ciudadano">
+                                            {{ solicitud.ciudadano.identificacion }}
+                                        </ng-container>
+                                        <ng-container *ngIf="solicitud.empresa">
+                                            {{ solicitud.empresa.nit }}
+                                        </ng-container>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -64,7 +92,7 @@
     <div class="col-xs-12 col-lg-8" *ngIf="solicitud">
         <div class="card">
             <div class="card-header">
-                <b class="text-uppercase">Registrar registro de compromiso</b>
+                <b class="text-uppercase">Crear registro de compromiso</b>
             </div>
             <div class="card-body">
                 <table class="table table-bordered table-striped">
@@ -91,12 +119,12 @@
                             <td>
                                 <b>Número</b><br>
                                 {{ solicitud.cdp.actividad.numero }}
-                                <br>
-                                <b>Nombre</b><br>
+                                <br><b>Nombre</b><br>
                                 {{ solicitud.cdp.actividad.nombre }}
-                                <br>
-                                <b>Valor</b><br>
-                                {{ solicitud.cdp.actividad.costoTotal }}
+                                <br><b>Valor</b><br>
+                                $ {{ solicitud.cdp.valor | currency: 'COP' }}
+                                <br><b>Saldo</b><br>
+                                $ {{ solicitud.cdp.saldo | currency: 'COP' }}
                             </td>
                         </tr>
                     </tbody>
@@ -107,6 +135,10 @@
                         <div class="col-xs-12 col-lg-4">
                             <label>Fecha expedición</label>
                             <input class="form-control" [(ngModel)]="registro.fechaExpedicion" name="fechaExpedicion" type="date" required>
+                        </div>
+                        <div class="col-xs-12 col-lg-8">
+                            <label>Número</label>
+                            <input class="form-control" [(ngModel)]="registro.numero" name="numero" type="text" required>
                         </div>
                     </div>
                     <div class="row">
