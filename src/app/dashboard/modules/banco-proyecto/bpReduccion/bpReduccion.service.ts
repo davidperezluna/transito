@@ -1,12 +1,12 @@
 import  {Injectable} from "@angular/core";
 import  {Http, Headers} from "@angular/http";
-import { LoggerService } from "../logger/services/logger.service";
+import { LoggerService } from "../../../../logger/services/logger.service";
 import { environment } from 'environments/environment';
 import  "rxjs/add/operator/map";
 
 @Injectable()
-export class BpRegistroCompromisoService {
-	private url = environment.apiUrl + 'bancoproyecto/bpregistrocompromiso';
+export class BpReduccionService {
+	private url = environment.apiUrl + 'bancoproyecto/bpreduccion';
 	public identity;
 	public token;
 
@@ -29,16 +29,6 @@ export class BpRegistroCompromisoService {
 		);
 	}
 
-	request(datos, token) {
-		let json = JSON.stringify(datos);
-		let params = "data=" + json + "&authorization=" + token;
-		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-		return this._http.post(this.url + "/request", params, { headers: headers }).map(
-			res => res.json(),
-			this._loogerService.registerLog(token, 'INSERT', json, this.url)
-		);
-	}
-
 	delete(datos, token) {
 		let json = JSON.stringify(datos);
 		let params = "data=" + json + "&authorization=" + token;
@@ -52,7 +42,8 @@ export class BpRegistroCompromisoService {
 	show(token, id) {
 		let params = "authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-		return this._http.post(this.url + "/" + id + "/show", params, { headers: headers }).map(res => res.json());
+		return this._http.post(this.url + "/" + id + "/show", params, { headers: headers })
+			.map(res => res.json());
 	}
 
 	edit(datos, token) {
@@ -69,32 +60,10 @@ export class BpRegistroCompromisoService {
 		return this._http.get(this.url + "/select").map(res => res.json());
 	}
 
-	indexRegister() {
-		return this._http.get(this.url + "/index/register").map(res => res.json());
-	}
-
-	searchSolicitudByNumero(datos, token) {
+	searchByFilter(datos, token) {
 		let json = JSON.stringify(datos);
 		let params = "data=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-		return this._http.post(this.url + "/search/solicitud/numero", params, { headers: headers }).map(
-			res => res.json()
-		);
-	}
-
-	searchByNumero(datos, token) {
-		let json = JSON.stringify(datos);
-		let params = "data=" + json + "&authorization=" + token;
-		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-		return this._http.post(this.url + "/search/numero", params, { headers: headers }).map(
-			res => res.json()
-		);
-	}
-
-	searchByNumeroContrato(datos, token) {
-		let json = JSON.stringify(datos);
-		let params = "data=" + json + "&authorization=" + token;
-		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-		return this._http.post(this.url + "/search/numero/contrato", params, { headers: headers }).map(res => res.json());
+		return this._http.post(this.url + "/search/filter", params, { headers: headers }).map(res => res.json());
 	}
 }

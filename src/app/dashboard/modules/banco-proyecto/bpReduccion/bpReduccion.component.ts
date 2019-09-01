@@ -1,33 +1,55 @@
 import { Component, OnInit } from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
-import { BpOrdenPagoService } from '../../../../services/bpOrdenPago.service';
+import { BpReduccionService } from './bpReduccion.service';
 import { LoginService } from '../../../../services/login.service';
 import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
-  selector: 'app-index-registrocompromiso',
+  selector: 'app-index-reduccion',
   templateUrl: './bpReduccion.component.html'
 })
+
 export class BpReduccionComponent implements OnInit {
   public errorMessage;
 	public id;
 
-  public ordenes;
-  public tipo: any = null;
+  public reducciones;
   
-	public formNew = false;
-	public formEdit = false;
-  public formIndex = true;
+	public formNew: any;
+	public formEdit: any;
+  public formIndex: any;
+  public formSearch: any;
+  public formShow: any;
 
-  public table:any; 
+  public table:any;
+
+  public tiposReduccion = [
+    { 'value': 1, 'label': 'CDP' },
+    { 'value': 2, 'label': 'Registro compromiso' },
+  ];
+
+  public search: any = {
+    'tipoReduccion': null,
+    'tipoFiltro': null,
+    'filtro': null
+  }
+
+  public tiposFiltro = [
+    { 'value': 1, 'label': 'Número' },
+    { 'value': 2, 'label': 'Fecha' },
+  ];
 
   constructor(
-    private _OrdenPagoService: BpOrdenPagoService,
+    private _ReduccionService: BpReduccionService,
 		private _loginService: LoginService,
     ){}
     
   ngOnInit() {
+    this.onInitForms();
+
+    this.search = true;
+
     swal({
       title: 'Cargando Tabla!',
       text: 'Solo tardara unos segundos por favor espere.',
@@ -36,24 +58,75 @@ export class BpReduccionComponent implements OnInit {
       }
     });
 
-    this._OrdenPagoService.index().subscribe(
-				response => {
-          this.ordenes = response.data;
-          
-          let timeoutId = setTimeout(() => {  
-            this.onInitTable();
-            swal.close();
-          }, 100);
-				}, 
-				error => {
-					this.errorMessage = <any>error;
+    this._ReduccionService.index().subscribe(
+      response => {
+        this.reducciones = response.data;
+        
+        let timeoutId = setTimeout(() => {  
+          this.onInitTable();
+          swal.close();
+        }, 100);
+      }, 
+      error => {
+        this.errorMessage = <any>error;
 
-					if(this.errorMessage != null){
-						console.log(this.errorMessage);
-						alert("Error en la petición");
-					}
-				}
-      );
+        if(this.errorMessage != null){
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+  }
+
+  onInitForms() {
+    this.formNew = false;
+    this.formEdit = false;
+    this.formShow = false;
+    this.formIndex = false;
+    this.formSearch = false;
+  }
+
+  onSearch() {
+    swal({
+      title: 'Buscando registros!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+
+    let token = this._loginService.getToken();
+
+    this._ReduccionService.searchByFilter(this.search, token).subscribe(
+      response => {
+        if (response.code == 200) {
+          this.reducciones = response.data;
+          this.formIndex = true;
+
+          let timeoutId = setTimeout(() => {
+            this.onInitTable();
+          }, 100);
+          swal.close();
+        } else {
+          this.reducciones = null;
+
+          swal({
+            title: 'Error!',
+            text: response.message,
+            type: 'error',
+            confirmButtonText: 'Aceptar',
+          });
+        }
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
   }
 
   onInitTable(){
@@ -101,7 +174,7 @@ export class BpReduccionComponent implements OnInit {
       if (result.value) {
         let token = this._loginService.getToken();
         
-        this._OrdenPagoService.delete({'id':id}, token).subscribe(
+        this._ReduccionService.delete({'id':id}, token).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',
@@ -123,11 +196,5 @@ export class BpReduccionComponent implements OnInit {
           );
       }
     })
-  }
-
-  onEdit(tipo:any){
-    this.tipo = tipo;
-    this.formEdit = true;
-    this.formIndex = false;
   }
 }

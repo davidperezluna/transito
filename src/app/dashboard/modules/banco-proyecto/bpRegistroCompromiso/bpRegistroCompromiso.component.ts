@@ -104,13 +104,14 @@ export class BpRegistroCompromisoComponent implements OnInit {
         this._RegistroCompromisoService.delete({'id':id}, token).subscribe(
             response => {
                 swal({
-                      title: 'Eliminado!',
-                      text:'Registro eliminado correctamente.',
-                      type:'success',
-                      confirmButtonColor: '#15d4be',
-                    })
-                  this.table.destroy();
-                  this.ngOnInit();
+                  title: 'Eliminado!',
+                  text:'Registro eliminado correctamente.',
+                  type:'success',
+                  confirmButtonColor: '#15d4be',
+                });
+
+                this.table.destroy();
+                this.ngOnInit();
               }, 
             error => {
               this.errorMessage = <any>error;

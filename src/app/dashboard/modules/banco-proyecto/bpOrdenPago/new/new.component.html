@@ -47,8 +47,14 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <b>Costo total: </b>
-                                        {{ registroCompromiso.cdp.actividad.cuenta.proyecto.costoTotal | currency: 'COP' }}
+                                        <b>Valor Solicitado: </b>
+                                        $ {{ registroCompromiso.valor | currency: 'COP' }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <b>Valor saldo: </b>
+                                        $ {{ registroCompromiso.saldo | currency: 'COP' }}
                                     </td>
                                 </tr>
                                 <tr>

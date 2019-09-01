@@ -15,6 +15,7 @@ import { BpCuentaComponent } from './bpCuenta/bpCuenta.component';
 import { BpInsumoComponent } from './bpInsumo/bpInsumo.component';
 import { BpProyectoComponent } from './bpProyecto/bpProyecto.component';
 import { BpOrdenPagoComponent } from './bpOrdenPago/bpOrdenPago.component';
+import { BpReduccionComponent } from './bpReduccion/bpReduccion.component';
 
 import { BancoProyectoRoutingModule } from './banco-proyecto-routing.module';
 import { BpActividadModule } from './bpActividad/bpActividad.module';
@@ -25,6 +26,7 @@ import { BpCuentaModule } from './bpCuenta/bpCuenta.module';
 import { BpInsumoModule } from './bpInsumo/bpInsumo.module';
 import { BpProyectoModule } from './bpProyecto/bpProyecto.module';
 import { BpOrdenPagoModule } from './bpOrdenPago/bpOrdenPago.module';
+import { BpReduccionModule } from './bpReduccion/bpReduccion.module';
 
 @NgModule({
   imports: [
@@ -42,6 +44,7 @@ import { BpOrdenPagoModule } from './bpOrdenPago/bpOrdenPago.module';
     BpInsumoModule,
     BpProyectoModule,
     BpOrdenPagoModule,
+    BpReduccionModule,
   ],
   declarations: [
     BpActividadComponent,
@@ -52,6 +55,7 @@ import { BpOrdenPagoModule } from './bpOrdenPago/bpOrdenPago.module';
     BpInsumoComponent,
     BpProyectoComponent,
     BpOrdenPagoComponent,
+    BpReduccionComponent,
     RequestCdpComponent,
     RequestCompromisoComponent,
   ]

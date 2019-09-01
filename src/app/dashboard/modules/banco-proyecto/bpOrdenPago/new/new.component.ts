@@ -10,6 +10,7 @@ import swal from 'sweetalert2';
   selector: 'app-new-ordenpago',
   templateUrl: './new.component.html'
 })
+
 export class NewComponent implements OnInit {
   @Output() ready = new EventEmitter<any>();
   public ordenPago: BpOrdenPago;
@@ -123,16 +124,15 @@ export class NewComponent implements OnInit {
     
 		this._OrdenPagoService.register(this.ordenPago, token).subscribe(
 			response => {
-        if(response.status == 'success'){
-          this.ready.emit(true);
+        if(response.code == 200){
           swal({
             title: 'Perfecto!',
             text: response.message,
             type: 'success',
             confirmButtonText: 'Aceptar'
           });
-
-          this.ngOnInit();
+          
+          this.ready.emit(true);
         }else{
           swal({
             title: 'Error!',

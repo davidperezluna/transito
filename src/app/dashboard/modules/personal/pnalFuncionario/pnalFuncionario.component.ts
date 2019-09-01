@@ -57,6 +57,14 @@ export class PnalFuncionarioComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    swal({
+      title: 'Cargando información!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+
     this._TipoNombramientoService.select().subscribe(
       response => {
         this.tiposNombramiento = response;
@@ -98,6 +106,8 @@ export class PnalFuncionarioComponent implements OnInit {
         }
       }
     );
+
+    swal.close();
   }
 
   onNew() {

@@ -12,19 +12,20 @@ import swal from 'sweetalert2';
 })
 export class NewComponent implements OnInit {
   @Output() ready = new EventEmitter<any>();
-  public ordenPago: BpReduccion;
+  public reduccion: BpReduccion;
   public errorMessage;
 
-  public numeroRegistroCompromiso: any = null;
-  public registroCompromiso: any = null;
   public funcionario: any = null;
+  public tipoReduccion: any = null;
+  public registroCompromiso: any = null;
+  public cdp: any = null;
+  public numeroRegistroCompromiso: any = null;
 
   public formSearch: any = true;
 
-  public tiposPago = [
-    { 'value': 'PAGO DE ANTICIPO', 'label': 'PAGO DE ANTICIPO' },
-    { 'value': 'PAGO PARCIAL', 'label': 'PAGO PARCIAL' },
-    { 'value': 'PAGO TOTAL', 'label': 'PAGO TOTAL' },
+  public tiposReduccion = [
+    { 'value': 1, 'label': 'CDP' },
+    { 'value': 2, 'label': 'Registro compromiso' },
   ];
 
   constructor(
@@ -43,7 +44,7 @@ export class NewComponent implements OnInit {
       }
     });
 
-    this.ordenPago = new BpReduccion(null, null, null, null, null, null);
+    this.reduccion = new BpReduccion(null, null, null, null, null, null, null);
 
     let token = this._LoginService.getToken();
 
@@ -119,9 +120,9 @@ export class NewComponent implements OnInit {
   onEnviar(){
     let token = this._LoginService.getToken();
 
-    this.ordenPago.idRegistroCompromiso = this.registroCompromiso.id;
+    this.reduccion.idRegistroCompromiso = this.registroCompromiso.id;
     
-		this._OrdenPagoService.register(this.ordenPago, token).subscribe(
+		this._OrdenPagoService.register(this.reduccion, token).subscribe(
 			response => {
         if(response.status == 'success'){
           this.ready.emit(true);

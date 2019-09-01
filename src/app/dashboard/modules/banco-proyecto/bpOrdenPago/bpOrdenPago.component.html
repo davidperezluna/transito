@@ -18,7 +18,7 @@
               <thead>
                 <tr>
                     <th>#</th>
-                    <th>Solicitud</th>
+                    <th>Número</th>
                     <th>Proyecto</th>
                     <th>Valor</th>
                     <th>Acciones</th>
@@ -28,7 +28,7 @@
                 <tr class="odd" *ngFor="let orden of ordenes; let i = index">
                   <td>{{ i + 1 }}</td>
                   <td>{{ orden.numero }}</td>
-                  <td>{{ orden.regostroCompromiso.cdp.actividad.cuenta.proyecto.nombre }}</td>
+                  <td>{{ orden.registroCompromiso.cdp.actividad.cuenta.proyecto.nombre }}</td>
                   <td>{{ orden.valor }}</td>
                   <td>
                     <div class="btn-group">
@@ -51,5 +51,5 @@
       </div>
   </div>
 
-  <app-new-ordenpago *ngIf='formNew'></app-new-ordenpago>
+  <app-new-ordenpago *ngIf='formNew' (ready)="ready($event)"></app-new-ordenpago>
 </div>

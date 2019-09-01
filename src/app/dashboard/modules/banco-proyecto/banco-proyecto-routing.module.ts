@@ -11,6 +11,7 @@ import { BpProyectoComponent } from './bpProyecto/bpProyecto.component';
 import { BpOrdenPagoComponent } from './bpOrdenPago/bpOrdenPago.component';
 import { RequestCdpComponent } from './bpCdp/request/request.component';
 import { RequestCompromisoComponent } from './bpRegistroCompromiso/request/request.component';
+import { BpReduccionComponent } from './bpReduccion/bpReduccion.component';
 
 const routes: Routes = [
   {
@@ -52,6 +53,10 @@ const routes: Routes = [
   {
     path: 'bpOrdenPago',
     component: BpOrdenPagoComponent
+  },
+  {
+    path: 'bpReduccion',
+    component: BpReduccionComponent
   },
 ];
 

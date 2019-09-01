@@ -8,8 +8,27 @@
             </div>
             <div class="card-body">
                 <div class="row">
-                    <div class="col-xs-12 col-lg-12">
-                        <form #formSearch="ngForm">
+                    <form #formSearch="ngForm">
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Tipo de filtro</label>
+                            <ng-select [multiple]="false" [options]="tiposReduccion" [(ngModel)]="tipoReduccion" name="tipoReduccion" required></ng-select>
+                        </div>
+
+                        <div class="col-xs-12 col-lg-12" *ngIf="tipoReduccion == 1">
+                            <label>Buscar CDP</label>
+                            <div class="input-group">
+                                <input type="numeric" class="form-control" placeholder="Número de CDP"
+                                    [(ngModel)]="numeroRegistroCompromiso" name="numeroRegistroCompromiso" required />
+                                <span class="input-group-btn">
+                                    <button (click)="onSearchRegistroCompromiso()" [disabled]="formSearch.invalid"
+                                        class="btn btn-default btn-primary" type="button">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12 col-lg-12" *ngIf="tipoReduccion == 2">
                             <label>Buscar registro de compromiso</label>
                             <div class="input-group">
                                 <input type="numeric" class="form-control" placeholder="Número de registro"
@@ -21,8 +40,8 @@
                                     </button>
                                 </span>
                             </div>
-                        </form>
-                    </div>
+                        </div>
+                    </form>
                 </div>
                 
                 <div class="row" *ngIf="registroCompromiso">
@@ -70,24 +89,19 @@
                 <form #formNew="ngForm">
                     <div class="form-group row">
                         <div class="col-xs-12 col-lg-12">
-                            <label>Fecha expedición</label>
-                            <input class="form-control" [(ngModel)]="ordenPago.fecha" name="fecha" type="date"
+                            <label>Fecha</label>
+                            <input class="form-control" [(ngModel)]="reduccion.fecha" name="fecha" type="date"
                                 required>
-                        </div>
-        
-                        <div class="col-xs-12 col-lg-12">
-                            <label>Tipo</label>
-                            <ng-select [multiple]="false" [options]="tiposPago" [(ngModel)]="ordenPago.tipo" name="tipo" required></ng-select>
                         </div>
 
                         <div class="col-xs-12 col-lg-12">
-                            <label>Observaciones</label>
-                            <textarea class="form-control" rows="4" [(ngModel)]="ordenPago.concepto" name="concepto"></textarea>
+                            <label>Justificacion</label>
+                            <textarea class="form-control" rows="4" [(ngModel)]="reduccion.justificacion" name="justificacion"></textarea>
                         </div>
                         
                         <div class="col-xs-12 col-lg-12">
                             <label>Valor</label>
-                            <input class="form-control text-uppercase" [(ngModel)]="ordenPago.valor" name="valor" type="text" required>
+                            <input class="form-control text-uppercase" [(ngModel)]="reduccion.valor" name="valor" type="text" required>
                         </div>
                     </div>
                 </form>
