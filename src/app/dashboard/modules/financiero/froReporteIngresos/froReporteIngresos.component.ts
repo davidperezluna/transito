@@ -37,6 +37,7 @@ export class FroReporteIngresosComponent implements OnInit {
     public tablaAcuerdosPago = false;
 
     public organismoTransitoSelected;
+    public arrayOrganismosTransito;
     public organismosTransito;
 
     public tramitesPagados;
@@ -90,7 +91,7 @@ export class FroReporteIngresosComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.froReporteIngresos = new FroReporteIngresos(null, null, null, null);
+        this.froReporteIngresos = new FroReporteIngresos(null, null, null, null, null);
 
         this.date = new Date();
         var datePiper = new DatePipe(this.date);
@@ -103,6 +104,7 @@ export class FroReporteIngresosComponent implements OnInit {
             response => {
                 if (response.code == 200) {
                     this.funcionario = response.data;
+                    this.arrayOrganismosTransito = [this.funcionario.organismoTransito.id];
                     this.organismoTransitoSelected = [this.funcionario.organismoTransito.id];
                     
                     if(this.funcionario.cargo.id == 2) {

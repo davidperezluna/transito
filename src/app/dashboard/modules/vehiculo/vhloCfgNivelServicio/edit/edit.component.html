@@ -8,12 +8,6 @@
             <form #formEdit="ngForm">
                 <div class="form-group">
                     <div class="col-xs-12 col-lg-12">
-                        <label>Servicio <strong class="text-danger">*</strong></label>
-                        <ng-select [multiple]="false" [options]="servicios" [(ngModel)]="servicioSelected"
-                            required name="idServicio">
-                        </ng-select>
-                    </div>
-                    <div class="col-xs-12 col-lg-12">
                         <label>Nombre <strong class="text-danger">*</strong></label>
                         <input class="form-control" [(ngModel)]="nivelServicio.nombre" name="nombre" type="text"
                             required>

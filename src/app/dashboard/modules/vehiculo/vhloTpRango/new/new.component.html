@@ -14,7 +14,7 @@
                             <input type="text" class="form-control" [(ngModel)]="rango.numeroConvenio" required
                                 name="numeroConvenio" />
                             <span class="input-group-btn">
-                                <button (click)="onSearchConvenio()" class="btn btn-default btn-primary" type="button">
+                                <button (click)="onSearchConvenio()" [disabled]="!rango.numeroConvenio" class="btn btn-default btn-primary" type="button">
                                     <i class="fa fa-search"></i>
                                 </button>
                             </span>
@@ -71,7 +71,7 @@
             </form>
         </div>
         <div class="card-footer">
-            <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
+            <button (click)="onEnviar()" [disabled]="formNew.invalid || !convenio" class="btn btn-primary" type="button">
                 <i class="fa fa-floppy-o"></i>
                 Enviar
             </button>

@@ -5,7 +5,6 @@ import { DatePipe, CurrencyPipe } from '@angular/common';
 
 import { VhloCfgRadioAccionService } from "../../../../../services/vhloCfgRadioAccion.service";
 import { VhloCfgModalidadTransporteService } from "../../../../../services/vhloCfgModalidadTransporte.service";
-import { VhloCfgServicioService } from "../../../../../services/vhloCfgServicio.service";
 import { VhloCfgClaseService } from "../../../../../services/vhloCfgClase.service";
 import { VhloCfgColorService } from "../../../../../services/vhloCfgColor.service";
 import { CfgMunicipioService } from "../../../../../services/cfgMunicipio.service";
@@ -28,7 +27,6 @@ export class EditComponent implements OnInit {
     
     public radiosAccion;
     public modalidadesTransporte;
-    public servicios;
     public clases;
     public colores;
     public municipios;
@@ -37,7 +35,6 @@ export class EditComponent implements OnInit {
 
     public radioSelected;
     public modalidadTransporteSelected;
-    public servicioSelected;
     public claseSelected;
     public arrayColoresSelected;
     public arrayMunicipiosSelected;
@@ -48,7 +45,6 @@ export class EditComponent implements OnInit {
         private _UserEmpresaTransporteService: UserEmpresaTransporteService,
         private _VhloCfgRadioAccionService: VhloCfgRadioAccionService,
         private _VhloCfgModalidadTransporteService: VhloCfgModalidadTransporteService,
-        private _VhloCfgServicioService: VhloCfgServicioService,
         private _VhloCfgClaseService: VhloCfgClaseService,
         private _VhloCfgColorService: VhloCfgColorService,
         private _CfgMunicipioService: CfgMunicipioService,
@@ -93,22 +89,6 @@ export class EditComponent implements OnInit {
                 this.modalidadesTransporte = response;
                 setTimeout(() => {
                     this.modalidadTransporteSelected = [this.habilitacion.modalidadTransporte.id];
-                });
-            },
-            error => {
-                this.errorMessage = <any>error;
-
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert("Error en la petición");
-                }
-            }
-        );
-        this._VhloCfgServicioService.select().subscribe(
-            response => {
-                this.servicios = response;
-                setTimeout(() => {
-                    this.servicioSelected = [this.habilitacion.servicio.id];
                 });
             },
             error => {
@@ -198,7 +178,6 @@ export class EditComponent implements OnInit {
 
         this.habilitacion.idRadioAccion = this.radioSelected;
         this.habilitacion.idModalidadTransporte = this.modalidadTransporteSelected;
-        this.habilitacion.idServicio = this.servicioSelected;
         this.habilitacion.idClase = this.claseSelected;
         this.habilitacion.arrayColores = this.arrayColoresSelected;
         this.habilitacion.arrayMunicipios = this.arrayMunicipiosSelected;
