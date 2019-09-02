@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
 import { BpOrdenPagoService } from '../../../../services/bpOrdenPago.service';
+import { UserCfgTipoIdentificacionService } from '../../../../services/userCfgTipoIdentificacion.service';
 import { LoginService } from '../../../../services/login.service';
 import swal from 'sweetalert2';
 declare var $: any;
@@ -16,18 +17,29 @@ export class BpOrdenPagoComponent implements OnInit {
   public ordenes;
   public tipo: any = null;
   
-	public formNew = false;
-	public formEdit = false;
-  public formIndex = true;
+	public formNew: any;
+	public formEdit: any;
+  public formIndex: any;
+  public formSearch: any;
 
-  public table:any; 
+  public tiposIdentificacion: any;
+
+  public table:any;
+
+  public search: any = {
+    'identificacion': null,
+    'idTipoIdentificacion': null,
+  }
 
   constructor(
     private _OrdenPagoService: BpOrdenPagoService,
+    private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
 		private _loginService: LoginService,
     ){}
     
   ngOnInit() {
+    this.onInitForms();
+    
     swal({
       title: 'Cargando Tabla!',
       text: 'Solo tardara unos segundos por favor espere.',
@@ -36,7 +48,23 @@ export class BpOrdenPagoComponent implements OnInit {
       }
     });
 
-    this._OrdenPagoService.index().subscribe(
+    this._TipoIdentificacionService.select().subscribe(
+      response => {
+        this.tiposIdentificacion = response;
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert('Error en la petición');
+        }
+      }
+    );
+
+    this.formSearch = true;
+
+    /*this._OrdenPagoService.index().subscribe(
 				response => {
           this.ordenes = response.data;
           
@@ -53,7 +81,14 @@ export class BpOrdenPagoComponent implements OnInit {
 						alert("Error en la petición");
 					}
 				}
-      );
+      );*/
+  }
+
+  onInitForms() {
+    this.formNew = false;
+    this.formEdit = false;
+    this.formIndex = false;
+    this.formSearch = false;
   }
 
   onInitTable(){
@@ -70,6 +105,10 @@ export class BpOrdenPagoComponent implements OnInit {
         }
       }
     });
+  }
+
+  onSearch(){
+
   }
   
   onNew(){

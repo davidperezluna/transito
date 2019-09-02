@@ -1,6 +1,6 @@
 <div class="container" >
   <div class="row">
-    <div class="col-xs-12 col-lg-8" *ngIf="formSearch">
+    <div class="col-xs-12 col-lg-4" *ngIf="formSearch">
       <div class="card">
         <div class="card-header">
           <b class="text-uppercase">Reducciones</b>
@@ -55,7 +55,7 @@
         <div class="card">
           <div class="card-header">
             <h5>
-              <b class="text-uppercase">Registros de compromiso</b>
+              <b class="text-uppercase">Reducciones</b>
               <div class="btn-group pull-right">
                 <button (click)="onNew()" class="btn btn-default">
                   <i class="fa fa-plus"></i>
@@ -81,11 +81,11 @@
                   <td>{{ reduccion.fecha }}</td>
                   <td>{{ reduccion.valor }}</td>
                   <td>
-                    <ng-container *ngIf="reduccion.registroCompromiso">
+                    <ng-container *ngIf="reduccion.tipo == 'RC'">
                       <b>Registro de compromiso No:</b><br>
                       {{ reduccion.registroCompromiso.numero }}
                     </ng-container>
-                    <ng-container *ngIf="reduccion.cdp">
+                    <ng-container *ngIf="reduccion.tipo == 'CDP'">
                       <b>CDP No:</b><br>
                       {{ reduccion.cdp.numero }}
                     </ng-container>
@@ -108,5 +108,5 @@
       </div>
   </div>
 
-  <app-new-reduccion *ngIf='formNew'></app-new-reduccion>
+  <app-new-reduccion *ngIf='formNew' (ready)="ready($event)"></app-new-reduccion>
 </div>

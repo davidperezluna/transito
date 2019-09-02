@@ -7,6 +7,7 @@ import { BpCdpService } from '../../../../services/bpCdp.service';
 import { BpProyectoService } from '../../../../services/bpProyecto.service';
 import { BpActividadService } from '../../../../services/bpActividad.service';
 import { BpOrdenPagoService } from '../../../../services/bpOrdenPago.service';
+import { BpReduccionService } from './bpReduccion.service';
 import { PnalFuncionarioService } from '../../../../services/pnalFuncionario.service';
 import { UserCfgTipoIdentificacionService } from '../../../../services/userCfgTipoIdentificacion.service';
 import { UserCiudadanoService } from '../../../../services/userCiudadano.service';
@@ -23,6 +24,7 @@ import { EditComponent } from './edit/edit.component';
         BpProyectoService,
         BpActividadService,
         BpOrdenPagoService,
+        BpReduccionService,
         PnalFuncionarioService,
         UserCfgTipoIdentificacionService,
         UserCiudadanoService,

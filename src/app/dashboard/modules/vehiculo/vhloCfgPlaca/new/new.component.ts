@@ -1,9 +1,9 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { VhloCfgPlaca } from '../vhloCfgPlaca.modelo';
 import { VhloCfgPlacaService } from '../../../../../services/vhloCfgPlaca.service';
-import { LoginService } from '../../../../../services/login.service';
 import { VhloCfgTipoVehiculoService } from '../../../../../services/vhloCfgTipoVehiculo.service';
 import { CfgOrganismoTransitoService } from '../../../../../services/cfgOrganismoTransito.service';
+import { LoginService } from '../../../../../services/login.service';
 import swal from 'sweetalert2';
 
 @Component({

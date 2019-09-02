@@ -43,6 +43,7 @@ export class UserCfgMenuComponent implements OnInit {
         let timeoutId = setTimeout(() => {  
           this.onInitTable();
         }, 100);
+        
         swal.close();
       }, 
       error => {

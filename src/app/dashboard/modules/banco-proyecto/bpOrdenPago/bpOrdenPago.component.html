@@ -1,14 +1,51 @@
 <div class="container" >
-  <div class="row" *ngIf="formIndex">
-    <div class="col-xs-12 col-lg-12">
+  <div class="row">
+    <div class="col-xs-12 col-lg-4">
+      <div class="card">
+        <div class="card-header">
+          <b class="text-uppercase">Buscar ordenes de pago</b>
+          <br>
+          <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
+        </div>
+        <div class="card-body">
+          <div class="row" *ngIf="formSearch">
+            <form #formSearch="ngForm">
+              <div class="col-xs-12 col-lg-12">
+                <label>Tipo identificación</label>
+                <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="search.idTipoIdentificacion" name="idTipoIdentificacion" required></ng-select>
+              </div>
+              
+              <div class="col-xs-12 col-lg-12">
+                <label>No. identificación</label>
+                <input class="form-control text-uppercase" [(ngModel)]="search.identificacion" name="identificacion" type="text" required>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="btn-group">
+            <button (click)="onSearch()" [disabled]="formSearch.invalid" class="btn btn-default btn-primary" type="button">
+              <i class="fa fa-search"></i>
+              Buscar
+            </button>
+            <button (click)="onNew()" class="btn btn-default">
+              <i class="fa fa-plus"></i>
+              Nuevo
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xs-12 col-lg-8" *ngIf="formIndex">
         <div class="card">
           <div class="card-header">
             <h5>
-              <b class="text-uppercase">Registros de compromiso</b>
+              <b class="text-uppercase">Ordenes de pago</b>
               <div class="btn-group pull-right">
                 <button (click)="onNew()" class="btn btn-default">
                   <i class="fa fa-plus"></i>
-                  <span class="text">Nuevo</span>
+                  Nuevo
                 </button>
               </div>
             </h5>

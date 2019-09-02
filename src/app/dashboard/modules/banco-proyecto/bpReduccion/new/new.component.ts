@@ -1,7 +1,8 @@
 import { Component, OnInit,Output,EventEmitter } from '@angular/core';
 import { BpReduccion } from '../bpReduccion.modelo';
-import { BpOrdenPagoService } from '../../../../../services/bpOrdenPago.service';
+import { BpReduccionService } from '../bpReduccion.service';
 import { BpRegistroCompromisoService } from '../../../../../services/bpRegistroCompromiso.service';
+import { BpCdpService } from '../../../../../services/bpCdp.service';
 import { PnalFuncionarioService } from '../../../../../services/pnalFuncionario.service';
 import { LoginService } from '../../../../../services/login.service';
 import swal from 'sweetalert2';
@@ -10,16 +11,16 @@ import swal from 'sweetalert2';
   selector: 'app-new-reduccion',
   templateUrl: './new.component.html'
 })
+
 export class NewComponent implements OnInit {
   @Output() ready = new EventEmitter<any>();
   public reduccion: BpReduccion;
   public errorMessage;
 
   public funcionario: any = null;
-  public tipoReduccion: any = null;
   public registroCompromiso: any = null;
   public cdp: any = null;
-  public numeroRegistroCompromiso: any = null;
+  public numero: any = null;
 
   public formSearch: any = true;
 
@@ -29,9 +30,10 @@ export class NewComponent implements OnInit {
   ];
 
   constructor(
-    private _FuncionarioService: PnalFuncionarioService,
-    private _OrdenPagoService: BpOrdenPagoService,
+    private _ReduccionService: BpReduccionService,
     private _RegistroCompromisoService: BpRegistroCompromisoService,
+    private _CdpService: BpCdpService,
+    private _FuncionarioService: PnalFuncionarioService,
     private _LoginService: LoginService,
   ){}
 
@@ -44,7 +46,7 @@ export class NewComponent implements OnInit {
       }
     });
 
-    this.reduccion = new BpReduccion(null, null, null, null, null, null, null);
+    this.reduccion = new BpReduccion(null, null, null, null, null, null, null, null, null);
 
     let token = this._LoginService.getToken();
 
@@ -54,6 +56,7 @@ export class NewComponent implements OnInit {
       response => {
         if (response.code == 200) {
           this.funcionario = response.data;
+          this.reduccion.idFuncionario = this.funcionario.id;
 
           swal.close();
         } else {
@@ -79,7 +82,7 @@ export class NewComponent implements OnInit {
     this.ready.emit(true);
   }
 
-  onSearchRegistroCompromiso() {
+  onSearch() {
     swal({
       title: 'Buscando solicitud!',
       text: 'Solo tardara unos segundos por favor espere.',
@@ -90,55 +93,84 @@ export class NewComponent implements OnInit {
 
     let token = this._LoginService.getToken();
 
-    this._RegistroCompromisoService.searchByNumero({ 'numero': this.numeroRegistroCompromiso }, token).subscribe(
-      response => {
-        if (response.code == 200) {
-          this.registroCompromiso = response.data;
+    if (this.reduccion.tipoReduccion == 1) {
+      this._CdpService.searchByNumero({ 'numero': this.numero }, token).subscribe(
+        response => {
+          if (response.code == 200) {
+            this.cdp = response.data;
+            this.reduccion.idCdp = this.cdp.id;
 
-          swal.close();
-        } else {
-          swal({
-            title: 'Atención!',
-            text: response.message,
-            type: 'error',
-            confirmButtonText: 'Aceptar'
-          });
+            swal.close();
+          } else {
+            swal({
+              title: 'Atención!',
+              text: response.message,
+              type: 'error',
+              confirmButtonText: 'Aceptar'
+            });
 
-          this.registroCompromiso = null;
-        }
-        error => {
-          this.errorMessage = <any>error;
-          if (this.errorMessage != null) {
-            console.log(this.errorMessage);
-            alert("Error en la petición");
+            this.cdp = null;
+            this.reduccion.idCdp = this.cdp;
+          }
+          error => {
+            this.errorMessage = <any>error;
+            if (this.errorMessage != null) {
+              console.log(this.errorMessage);
+              alert("Error en la petición");
+            }
           }
         }
-      }
-    );
+      );
+    } else if (this.reduccion.tipoReduccion == 2){
+      this._RegistroCompromisoService.searchByNumero({ 'numero': this.numero }, token).subscribe(
+        response => {
+          if (response.code == 200) {
+            this.registroCompromiso = response.data;
+            this.reduccion.idRegistroCompromiso = this.registroCompromiso.id;
+  
+            swal.close();
+          } else {
+            swal({
+              title: 'Atención!',
+              text: response.message,
+              type: 'error',
+              confirmButtonText: 'Aceptar'
+            });
+  
+            this.registroCompromiso = null;
+            this.reduccion.idRegistroCompromiso = this.registroCompromiso;
+          }
+          error => {
+            this.errorMessage = <any>error;
+            if (this.errorMessage != null) {
+              console.log(this.errorMessage);
+              alert("Error en la petición");
+            }
+          }
+        }
+      );
+    }
   }
   
   onEnviar(){
     let token = this._LoginService.getToken();
-
-    this.reduccion.idRegistroCompromiso = this.registroCompromiso.id;
     
-		this._OrdenPagoService.register(this.reduccion, token).subscribe(
+		this._ReduccionService.register(this.reduccion, token).subscribe(
 			response => {
-        if(response.status == 'success'){
-          this.ready.emit(true);
+        if(response.code == 200){
           swal({
-            title: 'Perfecto!',
+            title: response.title,
             text: response.message,
-            type: 'success',
+            type: response.status,
             confirmButtonText: 'Aceptar'
           });
 
-          this.ngOnInit();
+          this.ready.emit(true);
         }else{
           swal({
-            title: 'Error!',
+            title: response.title,
             text: response.message,
-            type: 'error',
+            type: response.status,
             confirmButtonText: 'Aceptar'
           })
         }

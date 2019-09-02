@@ -11,31 +11,16 @@
                     <form #formSearch="ngForm">
                         <div class="col-xs-12 col-lg-12">
                             <label>Tipo de filtro</label>
-                            <ng-select [multiple]="false" [options]="tiposReduccion" [(ngModel)]="tipoReduccion" name="tipoReduccion" required></ng-select>
+                            <ng-select [multiple]="false" [options]="tiposReduccion" [(ngModel)]="reduccion.tipoReduccion" name="tipoReduccion" required></ng-select>
                         </div>
 
-                        <div class="col-xs-12 col-lg-12" *ngIf="tipoReduccion == 1">
-                            <label>Buscar CDP</label>
+                        <div class="col-xs-12 col-lg-12" *ngIf="reduccion.tipoReduccion">
+                            <label *ngIf="reduccion.tipoReduccion == 1">Buscar CDP</label>
+                            <label *ngIf="reduccion.tipoReduccion == 2">Buscar registro de compromiso</label>
                             <div class="input-group">
-                                <input type="numeric" class="form-control" placeholder="Número de CDP"
-                                    [(ngModel)]="numeroRegistroCompromiso" name="numeroRegistroCompromiso" required />
+                                <input type="numeric" class="form-control" [(ngModel)]="numero" name="numero" required />
                                 <span class="input-group-btn">
-                                    <button (click)="onSearchRegistroCompromiso()" [disabled]="formSearch.invalid"
-                                        class="btn btn-default btn-primary" type="button">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                </span>
-                            </div>
-                        </div>
-
-                        <div class="col-xs-12 col-lg-12" *ngIf="tipoReduccion == 2">
-                            <label>Buscar registro de compromiso</label>
-                            <div class="input-group">
-                                <input type="numeric" class="form-control" placeholder="Número de registro"
-                                    [(ngModel)]="numeroRegistroCompromiso" name="numeroRegistroCompromiso" required />
-                                <span class="input-group-btn">
-                                    <button (click)="onSearchRegistroCompromiso()" [disabled]="formSearch.invalid"
-                                        class="btn btn-default btn-primary" type="button">
+                                    <button (click)="onSearch()" [disabled]="formSearch.invalid" class="btn btn-default btn-primary" type="button">
                                         <i class="fa fa-search"></i>
                                     </button>
                                 </span>
@@ -44,32 +29,71 @@
                     </form>
                 </div>
                 
-                <div class="row" *ngIf="registroCompromiso">
+                <div class="row" *ngIf="registroCompromiso || cdp">
                     <div class="col-xs-12 col-lg-12">
                         <table class="table table-bordered table-striped">
                             <tbody>
                                 <tr>
                                     <td>
                                         <b>Número: </b>
-                                        {{ registroCompromiso.cdp.actividad.cuenta.proyecto.numero }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>Nombre: </b>
-                                        {{ registroCompromiso.cdp.actividad.cuenta.proyecto.nombre }}
+                                        <span *ngIf="cdp">{{ cdp.numero }}</span>
+                                        <span *ngIf="registroCompromiso">{{ registroCompromiso.numero }}</span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <b>Fecha: </b>
-                                        {{ registroCompromiso.cdp.actividad.cuenta.proyecto.fecha }}
+                                        <span *ngIf="cdp">{{ cdp.fecha }}</span>
+                                        <span *ngIf="registroCompromiso">{{ registroCompromiso.fecha }}</span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <b>Costo total: </b>
-                                        {{ registroCompromiso.cdp.actividad.cuenta.proyecto.costoTotal | currency: 'COP' }}
+                                        <b>Valor: </b>
+                                        <span *ngIf="cdp">{{ cdp.valorAprobado | currency: 'COP' }}</span>
+                                        <span *ngIf="registroCompromiso">{{ registroCompromiso.valorApropiado | currency: 'COP' }}</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <b>Saldo: </b>
+                                        <span *ngIf="cdp">{{ cdp.saldo | currency: 'COP' }}</span>
+                                        <span *ngIf="registroCompromiso">{{ registroCompromiso.saldo | currency: 'COP' }}</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <b>Proyecto No: </b>
+                                        <span *ngIf="cdp">{{ cdp.actividad.cuenta.proyecto.numero }}</span>
+                                        <span *ngIf="registroCompromiso">{{ registroCompromiso.cdp.actividad.cuenta.proyecto.numero }}</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <b>Cuenta No: </b>
+                                        <span *ngIf="cdp">{{ cdp.actividad.cuenta.numero }}</span>
+                                        <span *ngIf="registroCompromiso">{{ registroCompromiso.cdp.actividad.cuenta.numero }}</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <b>Cuenta nombre: </b>
+                                        <span *ngIf="cdp">{{ cdp.actividad.cuenta.nombre }}</span>
+                                        <span *ngIf="registroCompromiso">{{ registroCompromiso.cdp.actividad.cuenta.nombre }}</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <b>Actividad No: </b>
+                                        <span *ngIf="cdp">{{ cdp.actividad.numero }}</span>
+                                        <span *ngIf="registroCompromiso">{{ registroCompromiso.cdp.actividad.numero }}</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <b>Actividad nombre: </b>
+                                        <span *ngIf="cdp">{{ cdp.actividad.nombre }}</span>
+                                        <span *ngIf="registroCompromiso">{{ registroCompromiso.cdp.actividad.nombre }}</span>
                                     </td>
                                 </tr>
                             </tbody>
@@ -80,18 +104,26 @@
         </div>
     </div>
 
-    <div class="col-xs-12 col-lg-8" *ngIf="registroCompromiso">
+    <div class="col-xs-12 col-lg-8" *ngIf="registroCompromiso || cdp">
         <div class="card">
             <div class="card-header">
-                <b class="text-uppercase">Registrar orden de pago</b>
+                <b class="text-uppercase">
+                    Registrar reduccion
+                    <span *ngIf="reduccion.tipoReduccion == 1">CDP</span>
+                    <span *ngIf="reduccion.tipoReduccion == 2">Registro compromiso</span>
+                </b>
             </div>
             <div class="card-body">      
                 <form #formNew="ngForm">
-                    <div class="form-group row">
+                    <div class="form-group row">                       
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Número</label>
+                            <input class="form-control" [(ngModel)]="reduccion.numero" name="numero" type="text" required>
+                        </div>
+
                         <div class="col-xs-12 col-lg-12">
                             <label>Fecha</label>
-                            <input class="form-control" [(ngModel)]="reduccion.fecha" name="fecha" type="date"
-                                required>
+                            <input class="form-control" [(ngModel)]="reduccion.fecha" name="fecha" type="date" required>
                         </div>
 
                         <div class="col-xs-12 col-lg-12">
@@ -111,6 +143,10 @@
                     <button (click)="onEnviar()" class="btn btn-primary" type="button">
                         <i class="fa fa-save"></i>
                         Enviar
+                    </button>
+                    <button (click)="onCancelar()" class="btn btn-default" type="button">
+                        <i class="fa fa-times"></i>
+                        Cancelar
                     </button>
                 </div>
             </div>

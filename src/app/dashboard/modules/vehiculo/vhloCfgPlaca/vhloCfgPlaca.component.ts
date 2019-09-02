@@ -18,6 +18,18 @@ export class VhloCfgPlacaComponent implements OnInit {
   public table: any = null;
   public placa: any;
 
+  public tiposBusqueda = [
+    { 'value': 1, 'label': 'ASIGNADAS' },
+    { 'value': 2, 'label': 'FABRICADAS' },
+    { 'value': 3, 'label': 'PREASIGNADAS' },
+    { 'value': 4, 'label': 'UTILIZADAS' },
+    { 'value': 5, 'label': 'CANCELADAS' },
+  ];
+
+  public search: any = {
+    'tipoBusqueda': null,
+  }
+
   constructor(
     private _PlacaService: VhloCfgPlacaService,
     private _LoginService: LoginService,
@@ -60,6 +72,36 @@ export class VhloCfgPlacaComponent implements OnInit {
       }
     );
   }
+
+  onSearch() {
+    swal({
+      title: 'Buscando registros!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+
+    let token = this._LoginService.getToken();
+
+    this._PlacaService.index().subscribe(
+      response => {
+        this.placas = response.data;
+        let timeoutId = setTimeout(() => {
+          this.onInitTable();
+        }, 100);
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+  }
+
   onInitTable() {
     this.table = $('#dataTables-example').DataTable({
       responsive: true,

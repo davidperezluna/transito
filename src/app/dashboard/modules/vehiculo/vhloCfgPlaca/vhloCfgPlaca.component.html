@@ -1,6 +1,44 @@
 <div class="container">
-  <div class="row" *ngIf='formIndex'>
-    <div class="col-md-12">
+  <div class="row">
+    <div class="col-xs-12 col-lg-8" *ngIf="formSearch">
+      <div class="card">
+        <div class="card-header">
+          <b class="text-uppercase">Reducciones</b>
+          <small>Buscar</small>
+        </div>
+        <div class="card-body">
+          <!-- .card-body -->
+          <form #formSearch="ngForm">
+            <div class="form-group">
+              <div class="row">
+                <!-- .row -->
+                <div class="col-xs-12 col-lg-12">
+                  <label>Tipo de filtro</label>
+                  <ng-select [multiple]="false" [options]="tiposBusqueda" [(ngModel)]="search.tipoBusqueda" name="tipoBusqueda" required></ng-select>
+                </div>
+              </div>
+            </div>
+            <!-- /.row -->
+          </form>
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
+          <div class="btn-group">
+            <button (click)="onSearch()" (ready)="ready($event)" [disabled]="formSearch.invalid" class="btn btn-primary"
+              type="button">
+              <i class="fa fa-search"></i>
+              Buscar
+            </button>
+            <button (click)="onNew()" class="btn btn-default">
+              <i class="fa fa-plus"></i>
+              <span class="text">Nuevo</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xs-12 col-lg-8" *ngIf='formIndex'>
       <div class="card">
         <div class="card-header">
           <h5 class="card-title">

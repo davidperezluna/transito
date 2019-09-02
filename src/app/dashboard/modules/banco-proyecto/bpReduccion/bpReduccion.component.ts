@@ -29,53 +29,28 @@ export class BpReduccionComponent implements OnInit {
     { 'value': 2, 'label': 'Registro compromiso' },
   ];
 
+  public tiposFiltro = [
+    { 'value': 1, 'label': 'Número' },
+    { 'value': 2, 'label': 'Fecha' },
+  ];
+
   public search: any = {
     'tipoReduccion': null,
     'tipoFiltro': null,
     'filtro': null
   }
 
-  public tiposFiltro = [
-    { 'value': 1, 'label': 'Número' },
-    { 'value': 2, 'label': 'Fecha' },
-  ];
-
   constructor(
     private _ReduccionService: BpReduccionService,
-		private _loginService: LoginService,
+		private _LoginService: LoginService,
     ){}
     
   ngOnInit() {
     this.onInitForms();
 
-    this.search = true;
+    this.formSearch = true;
 
-    swal({
-      title: 'Cargando Tabla!',
-      text: 'Solo tardara unos segundos por favor espere.',
-      onOpen: () => {
-        swal.showLoading()
-      }
-    });
-
-    this._ReduccionService.index().subscribe(
-      response => {
-        this.reducciones = response.data;
-        
-        let timeoutId = setTimeout(() => {  
-          this.onInitTable();
-          swal.close();
-        }, 100);
-      }, 
-      error => {
-        this.errorMessage = <any>error;
-
-        if(this.errorMessage != null){
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
+    swal.close();
   }
 
   onInitForms() {
@@ -95,7 +70,7 @@ export class BpReduccionComponent implements OnInit {
       }
     });
 
-    let token = this._loginService.getToken();
+    let token = this._LoginService.getToken();
 
     this._ReduccionService.searchByFilter(this.search, token).subscribe(
       response => {
@@ -172,7 +147,7 @@ export class BpReduccionComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.value) {
-        let token = this._loginService.getToken();
+        let token = this._LoginService.getToken();
         
         this._ReduccionService.delete({'id':id}, token).subscribe(
             response => {
