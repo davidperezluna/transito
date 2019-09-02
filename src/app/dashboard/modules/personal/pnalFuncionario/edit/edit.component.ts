@@ -1,5 +1,4 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { PnalFuncionario } from '../pnalFuncionario.modelo';
 import { PnalFuncionarioService } from '../../../../../services/pnalFuncionario.service';
 import { LoginService } from '../../../../../services/login.service';
 import swal from 'sweetalert2';

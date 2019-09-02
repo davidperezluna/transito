@@ -1,6 +1,4 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import {VhloCfgColorService} from '../../../../../services/vhloCfgColor.service';
-//import { PnalFuncionario } from '../pnalFuncionario.modelo';
 import { PnalSuspensionService } from '../../../../../services/pnalSuspension.service';
 import { PnalFuncionarioService } from '../../../../../services/pnalFuncionario.service';
 import {LoginService} from '../../../../../services/login.service';

@@ -104,15 +104,15 @@ export class FroReporteIngresosComponent implements OnInit {
             response => {
                 if (response.code == 200) {
                     this.funcionario = response.data;
-                    this.arrayOrganismosTransito = [this.funcionario.organismoTransito.id];
-                    this.organismoTransitoSelected = [this.funcionario.organismoTransito.id];
-                    
-                    if(this.funcionario.cargo.id == 2) {
+
+                    if(this.funcionario.cargo.id == 2 || this.funcionario.excel == 1) {
+                        this.arrayOrganismosTransito = [this.funcionario.organismoTransito.id];
                         this.arrayExportar = [
                             { value: 1, label: 'EXCEL' },
                             { value: 2, label: 'PDF' },
                         ];
                     } else {
+                        this.organismoTransitoSelected = [this.funcionario.organismoTransito.id];
                         this.arrayExportar = [
                             { value: 2, label: 'PDF' },
                         ];
@@ -481,9 +481,6 @@ export class FroReporteIngresosComponent implements OnInit {
                             type: 'success',
                             confirmButtonText: 'Aceptar'
                         });
-
-                        /* var fileURL = URL.createObjectURL(response);
-                        window.open(fileURL); */
 
                         if (this.table) {
                             this.table.destroy();

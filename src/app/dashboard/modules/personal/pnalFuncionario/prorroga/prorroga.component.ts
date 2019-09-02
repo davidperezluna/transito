@@ -1,5 +1,4 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-//import { PnalFuncionario } from '../pnalFuncionario.modelo';
 import { PnalProrrogaService } from '../../../../../services/pnalProrroga.service';
 import { PnalFuncionarioService } from '../../../../../services/pnalFuncionario.service';
 import {LoginService} from '../../../../../services/login.service';
