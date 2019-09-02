@@ -104,15 +104,18 @@ export class FroReporteIngresosComponent implements OnInit {
             response => {
                 if (response.code == 200) {
                     this.funcionario = response.data;
+                    
+                    let timeoutId = setTimeout(() => {
+                        this.arrayOrganismosTransito = [this.funcionario.organismoTransito.id];
+                        this.organismoTransitoSelected = [this.funcionario.organismoTransito.id];
+                    }, 100);
 
                     if(this.funcionario.cargo.id == 2 || this.funcionario.excel == 1) {
-                        this.arrayOrganismosTransito = [this.funcionario.organismoTransito.id];
                         this.arrayExportar = [
                             { value: 1, label: 'EXCEL' },
                             { value: 2, label: 'PDF' },
                         ];
                     } else {
-                        this.organismoTransitoSelected = [this.funcionario.organismoTransito.id];
                         this.arrayExportar = [
                             { value: 2, label: 'PDF' },
                         ];
@@ -431,6 +434,7 @@ export class FroReporteIngresosComponent implements OnInit {
         let token = this._LoginService.getToken();
         let identity = this._LoginService.getIdentity();
 
+        this.froReporteIngresos.arrayOrganismosTransito = this.arrayOrganismosTransito;
         this.froReporteIngresos.idOrganismoTransito = this.organismoTransitoSelected;
         this.froReporteIngresos.idTipoRecaudo = this.tipoRecaudoSelected;
 
@@ -444,7 +448,6 @@ export class FroReporteIngresosComponent implements OnInit {
         if (this.tipoRecaudoSelected == 1) {
             this._FroReporteIngresosService.pdfTramiteByFecha(datos, token).subscribe(
                 response => {
-                    console.log(response);
                     if(response.type){
                         var fileURL = URL.createObjectURL(response);
                         window.open(fileURL);
@@ -470,7 +473,6 @@ export class FroReporteIngresosComponent implements OnInit {
             this._FroReporteIngresosService.pdfInfraccionByFecha(this.froReporteIngresos, token).subscribe(
                 response => {
                     if(response.code = 200){
-                        console.log(response);
                         this.nombreOrganismoTransito = null;
                         this.nombreOrganismoTransito = response.data.organismoTransito.nombre;
                         this.infracciones = response.data.arrayInfracciones;
@@ -522,8 +524,6 @@ export class FroReporteIngresosComponent implements OnInit {
                             confirmButtonText: 'Aceptar'
                         });
 
-                        /* var fileURL = URL.createObjectURL(response);
-                        window.open(fileURL); */
                         if (this.table) {
                             this.table.destroy();
                         }
@@ -570,8 +570,6 @@ export class FroReporteIngresosComponent implements OnInit {
                             this.nombreOrganismoTransito = response.dataExogena.organismoTransito.nombre;
                             this.arrayRetefuentesExogena = response.dataExogena.arrayRetefuentesExogena;
                             this.totalRetefuentesExogena = response.dataExogena.totalRetefuentesExogena;
-
-                            console.log(this.arrayRetefuentesExogena);
 
                             if (this.table) {
                                 this.table.destroy();

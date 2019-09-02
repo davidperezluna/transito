@@ -108,7 +108,6 @@
                             <th>#</th>
                             <th>Radio Acción</th>
                             <th>Modalidad Transporte</th>
-                            <th>Servicio</th>
                             <th>Clase</th>
                             <th>Fecha Expedicion</th>
                             <th>Acciones</th>
@@ -119,7 +118,6 @@
                             <td>{{ i + 1 }}</td>
                             <td>{{ habilitacion.radioAccion.nombre }}</td>
                             <td>{{ habilitacion.modalidadTransporte.nombre }}</td>
-                            <td>{{ habilitacion.servicio.nombre }}</td>
                             <td>{{ habilitacion.clase.nombre }}</td>
                             <td>{{ (habilitacion.fechaExpedicionActo.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td>
                             <td>

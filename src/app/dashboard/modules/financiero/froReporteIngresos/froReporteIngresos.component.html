@@ -9,13 +9,13 @@
                             required name="idTipoRecaudo">
                         </ng-select>
                     </div>
-                    <div class="col-xs-12 col-lg-12" *ngIf="tipoRecaudoSelected == 1 || funcionario.cargo.id == 2">
+                    <div class="col-xs-12 col-lg-12" *ngIf="tipoRecaudoSelected == 1">
                         <label>Seleccionar Organismo Tránsito</label>
                         <ng-select [multiple]="true" [options]="organismosTransito"
                             [(ngModel)]="arrayOrganismosTransito" [disabled]="funcionario.cargo.id != 2" required name="arrayOrganismosTransito">
                         </ng-select>
                     </div>
-                    <div class="col-xs-12 col-lg-12" *ngIf="tipoRecaudoSelected != 1 || funcionario.cargo.id != 2">
+                    <div class="col-xs-12 col-lg-12" *ngIf="tipoRecaudoSelected && tipoRecaudoSelected != 1 && funcionario.cargo.id != 2">
                         <label>Seleccionar Organismo Tránsito</label>
                         <ng-select [multiple]="false" [options]="organismosTransito"
                             [(ngModel)]="organismoTransitoSelected" [disabled]="funcionario.cargo.id != 2" required name="idOrganismoTransito">
