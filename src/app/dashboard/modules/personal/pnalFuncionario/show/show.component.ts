@@ -14,9 +14,11 @@ export class ShowComponent implements OnInit {
   @Output() ready = new EventEmitter<any>();
   @Input() funcionario:any = null;
   public errorMessage;
+
   public table: any = null;
+
   public horarios: any = null;
-  public registros: any = null;
+  public registro: any = null;
 
 constructor(
   private _FuncionarioService: PnalFuncionarioService,
@@ -48,16 +50,14 @@ constructor(
       this._RegistroCompromisoService.searchByNumeroContrato({ 'numero': this.funcionario.numeroContrato }, token).subscribe(
         response => {
           if (response.code == 200) {
-            this.registros = response.data;
+            this.registro = response.data;
+            
+            
 
-            swal({
-              title: response.title,
-              text: response.message,
-              type: response.status,
-              confirmButtonText: 'Aceptar'
-            });
+            
+            swal.close();
           } else {
-            this.registros = null;
+            this.registro = null;
             
             swal({
               title: response.title,

@@ -58,7 +58,7 @@
                     <th>Número</th>
                     <th>Proyecto</th>
                     <th>Valor</th>
-                    <th>Acciones</th>
+                    <th>Saldo</th>
                 </tr>
               </thead>
               <tbody>
@@ -67,18 +67,7 @@
                   <td>{{ orden.numero }}</td>
                   <td>{{ orden.registroCompromiso.cdp.actividad.cuenta.proyecto.nombre }}</td>
                   <td>{{ orden.valor }}</td>
-                  <td>
-                    <div class="btn-group">
-                      <!--
-                        <button (click)="onEdit(orden)" class="btn btn-xs btn-primary" type="button">
-                          <i class="fa fa-pencil"></i>
-                        </button> 
-                        <button (click)="onDelete(orden.id)"  class="btn btn-xs btn-danger" type="button">
-                          <i class="fa fa-trash"></i>
-                        </button> 
-                      -->
-                    </div>
-                  </td>
+                  <td>{{ orden.registroCompromiso.saldo }}</td>
                 </tr>
               </tbody>
             </table>

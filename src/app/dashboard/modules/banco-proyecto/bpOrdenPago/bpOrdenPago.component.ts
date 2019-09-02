@@ -34,7 +34,7 @@ export class BpOrdenPagoComponent implements OnInit {
   constructor(
     private _OrdenPagoService: BpOrdenPagoService,
     private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
-		private _loginService: LoginService,
+		private _LoginService: LoginService,
     ){}
     
   ngOnInit() {
@@ -63,25 +63,6 @@ export class BpOrdenPagoComponent implements OnInit {
     );
 
     this.formSearch = true;
-
-    /*this._OrdenPagoService.index().subscribe(
-				response => {
-          this.ordenes = response.data;
-          
-          let timeoutId = setTimeout(() => {  
-            this.onInitTable();
-            swal.close();
-          }, 100);
-				}, 
-				error => {
-					this.errorMessage = <any>error;
-
-					if(this.errorMessage != null){
-						console.log(this.errorMessage);
-						alert("Error en la petición");
-					}
-				}
-      );*/
   }
 
   onInitForms() {
@@ -94,7 +75,7 @@ export class BpOrdenPagoComponent implements OnInit {
   onInitTable(){
     this.table = $('#dataTables-example').DataTable({
       responsive: true,
-      pageLength: 8,
+      pageLength: 10,
       sPaginationType: 'full_numbers',
       oLanguage: {
         oPaginate: {
@@ -108,13 +89,52 @@ export class BpOrdenPagoComponent implements OnInit {
   }
 
   onSearch(){
+    swal({
+      title: 'Buscando registros!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
 
+    let token = this._LoginService.getToken();
+
+    this._OrdenPagoService.searchByBeneficiario(this.search, token).subscribe(
+      response => {
+        if (response.code == 200) {
+          this.ordenes = response.data;
+          this.formIndex = true;
+
+          let timeoutId = setTimeout(() => {
+            this.onInitTable();
+          }, 100);
+          swal.close();
+        } else {
+          this.ordenes = null;
+
+          swal({
+            title: 'Error!',
+            text: response.message,
+            type: 'error',
+            confirmButtonText: 'Aceptar',
+          });
+        }
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
   }
   
   onNew(){
+    this.onInitForms();
+    
     this.formNew = true;
-    this.formIndex = false;
-    this.table.destroy();
   }
 
   ready(isCreado:any){
@@ -138,7 +158,7 @@ export class BpOrdenPagoComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.value) {
-        let token = this._loginService.getToken();
+        let token = this._LoginService.getToken();
         
         this._OrdenPagoService.delete({'id':id}, token).subscribe(
             response => {
