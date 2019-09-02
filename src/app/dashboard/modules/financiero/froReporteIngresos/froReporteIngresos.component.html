@@ -9,13 +9,13 @@
                             required name="idTipoRecaudo">
                         </ng-select>
                     </div>
-                    <div class="col-xs-12 col-lg-12" *ngIf="tipoRecaudoSelected == 1 || funcionario.cargo.id == 2">
+                    <div class="col-xs-12 col-lg-12" *ngIf="tipoRecaudoSelected == 1">
                         <label>Seleccionar Organismo Tránsito</label>
                         <ng-select [multiple]="true" [options]="organismosTransito"
                             [(ngModel)]="arrayOrganismosTransito" [disabled]="funcionario.cargo.id != 2" required name="arrayOrganismosTransito">
                         </ng-select>
                     </div>
-                    <div class="col-xs-12 col-lg-12" *ngIf="tipoRecaudoSelected != 1 || funcionario.cargo.id != 2">
+                    <div class="col-xs-12 col-lg-12" *ngIf="tipoRecaudoSelected && tipoRecaudoSelected != 1 && funcionario.cargo.id != 2">
                         <label>Seleccionar Organismo Tránsito</label>
                         <ng-select [multiple]="false" [options]="organismosTransito"
                             [(ngModel)]="organismoTransitoSelected" [disabled]="funcionario.cargo.id != 2" required name="idOrganismoTransito">
@@ -164,9 +164,9 @@
                                     <td><b>Fecha Entrada</b></td>
                                     <td><b>Fecha Salida</b></td>
                                     <td><b>Hora Salida</b></td>
-                                    <td><b>Horas</b></td>
-                                    <td><b>Valor Hora</b></td>
-                                    <td><b>Costo Grua</b></td>
+                                    <td><b>Minutos</b></td>
+                                    <td><b>Valor Parqueadero</b></td>
+                                    <td><b>Valor Grua</b></td>
                                     <td><b>Valor</b></td>
                                 </tr>
                             </thead>
