@@ -22,13 +22,19 @@
                         <tr>
                             <td>
                                 <b>Fecha: </b>
-                                {{ proyecto.fecha }}
+                                {{ (proyecto.fecha.timestamp * 1000) | date: 'dd/MM/yyyy' }}
                             </td>
                         </tr>
                         <tr>
                             <td>
                                 <b>Costo total: </b>
-                                {{ proyecto.costoTotal | currency: 'COP' }}
+                                $ {{ proyecto.costoTotal | currency: 'COP' }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <b>Saldo actual: </b>
+                                $ {{ proyecto.saldoTotal | currency: 'COP' }}
                             </td>
                         </tr>
                     </tbody>

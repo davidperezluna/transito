@@ -44,7 +44,7 @@
                                 <tr>
                                     <td>
                                         <b>Fecha: </b>
-                                        {{ solicitud.cdp.actividad.cuenta.proyecto.fecha }}
+                                        {{ (solicitud.cdp.actividad.cuenta.proyecto.fecha.timestamp * 1000) | date: 'dd/MM/yyyy' }}
                                     </td>
                                 </tr>
                                 <tr>
@@ -121,10 +121,10 @@
                                 {{ solicitud.cdp.actividad.numero }}
                                 <br><b>Nombre</b><br>
                                 {{ solicitud.cdp.actividad.nombre }}
-                                <br><b>Valor</b><br>
+                                <br><b>Valor CDP</b><br>
                                 $ {{ solicitud.cdp.valor | currency: 'COP' }}
-                                <br><b>Saldo</b><br>
-                                $ {{ solicitud.cdp.saldo | currency: 'COP' }}
+                                <br><b>Valor Solicitud de compromiso</b><br>
+                                $ {{ solicitud.valor | currency: 'COP' }}
                             </td>
                         </tr>
                     </tbody>

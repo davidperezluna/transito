@@ -75,7 +75,7 @@
                   <td >{{ i + 1 }}</td>
                   <td >{{ proyecto.numero }}</td>
                   <td >{{ proyecto.nombre }}</td>
-                  <td >{{ proyecto.fecha }}</td>
+                  <td >{{ (proyecto.fecha.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td>
                   <td >{{ proyecto.costoTotal | currency: 'COP' }}</td>
                   <td >{{ proyecto.saldoTotal | currency: 'COP' }}</td>
                   <td>

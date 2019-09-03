@@ -46,11 +46,11 @@
 </div>
 
 <div class="row" *ngIf="formNew">
-    <app-new-cuenta [proyecto]="proyecto" (onReady)="onReady()"></app-new-cuenta>
+    <app-new-cuenta [proyecto]="proyecto" (onReadyCuenta)="onReadyCuenta()"></app-new-cuenta>
 </div>
 
 <div class="row" *ngIf="formShow">
     <div class="col-xs-12 col-lg-12">
-        <app-index-actividad [cuenta]="cuenta"></app-index-actividad>
+        <app-index-actividad [cuenta]="cuenta" (onReadyCuenta)="onReadyCuenta()"></app-index-actividad>
     </div>
 </div>

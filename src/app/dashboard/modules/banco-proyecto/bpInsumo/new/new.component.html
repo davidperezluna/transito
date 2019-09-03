@@ -37,18 +37,19 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-xs-12 col-lg-12">
-                <button (click)="onEnviar()" [disabled]="formInsumo.invalid" class="btn btn-primary"
-                    type="button">
-                    <i class="fa fa-save"></i>
-                    Enviar
-                </button>
-                <button (click)="onCancelar()" class="btn btn-default">
-                    <i class="fa fa-times"></i>
-                    Cancelar
-                </button>
+            <div class="card-footer">
+                <div class="btn-group">
+                    <div class="col-xs-12 col-lg-12">
+                        <button (click)="onEnviar()" [disabled]="formInsumo.invalid" class="btn btn-primary" type="button">
+                            <i class="fa fa-save"></i>
+                            Enviar
+                        </button>
+                        <button (click)="onCancelar()" class="btn btn-default">
+                            <i class="fa fa-times"></i>
+                            Cancelar
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </form>

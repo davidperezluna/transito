@@ -10,7 +10,7 @@ import swal from 'sweetalert2';
 })
 
 export class NewComponent implements OnInit {
-@Output() onReady = new EventEmitter<any>();
+@Output() onReadyActividad = new EventEmitter<any>();
 @Input() cuenta: any = null;
 public actividad: BpActividad;
 public errorMessage;
@@ -23,8 +23,9 @@ constructor(
   ngOnInit() {
     this.actividad = new BpActividad(null, null, null, null);
   }
+  
   onCancelar(){
-    this.onReady.emit();
+    this.onReadyActividad.emit();
   }
   
   onEnviar(){
@@ -35,7 +36,7 @@ constructor(
 		this._ActividadService.register(this.actividad,token).subscribe(
 			response => {
         if(response.status == 'success'){
-          this.onReady.emit();
+          this.onReadyActividad.emit();
 
           swal({
             title: 'Perfecto!',

@@ -11,7 +11,7 @@ import swal from 'sweetalert2';
 })
 
 export class NewComponent implements OnInit {
-  @Output() onReady = new EventEmitter<any>();
+  @Output() onReadyInsumo = new EventEmitter<any>();
   @Input() actividad: any = null;
   public insumo: BpInsumo;
   public errorMessage;
@@ -43,7 +43,7 @@ export class NewComponent implements OnInit {
   }
 
   onCancelar(){
-    this.onReady.emit();
+    this.onReadyInsumo.emit();
   }
 
   onCalcularTotal() {
@@ -72,7 +72,7 @@ export class NewComponent implements OnInit {
 		this._InsumoService.register(this.insumo,token).subscribe(
 			response => {
         if(response.status == 'success'){
-          this.onReady.emit();
+          this.onReadyInsumo.emit();
           
           swal({
             title: 'Perfecto!',

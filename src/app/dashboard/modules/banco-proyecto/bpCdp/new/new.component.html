@@ -44,7 +44,7 @@
                                 <tr>
                                     <td>
                                         <b>Fecha: </b>
-                                        {{ solicitud.actividad.cuenta.proyecto.fecha }}
+                                        {{ (solicitud.actividad.cuenta.proyecto.fecha.timestamp * 1000) | date: 'dd/MM/yyyy' }}
                                     </td>
                                 </tr>
                                 <tr>

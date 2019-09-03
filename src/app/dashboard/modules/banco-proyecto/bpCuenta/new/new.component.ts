@@ -10,7 +10,7 @@ import swal from 'sweetalert2';
 })
 
 export class NewComponent implements OnInit {
-  @Output() onReady = new EventEmitter<any>();
+  @Output() onReadyCuenta = new EventEmitter<any>();
   @Input() proyecto: any = null;
   public cuenta: BpCuenta;
   public errorMessage;
@@ -25,7 +25,7 @@ export class NewComponent implements OnInit {
   }
 
   onCancelar(){
-    this.onReady.emit();
+    this.onReadyCuenta.emit();
   }
   
   onEnviar(){
@@ -36,7 +36,7 @@ export class NewComponent implements OnInit {
 		this._CuentaService.register(this.cuenta,token).subscribe(
 			response => {
         if(response.status == 'success'){
-          this.onReady.emit();
+          this.onReadyCuenta.emit();
           
           swal({
             title: 'Perfecto!',

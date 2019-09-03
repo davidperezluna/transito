@@ -7,6 +7,10 @@
                     <i class="fa fa-plus"></i>
                     <span class="text">Nueva</span>
                 </button>
+                <button (click)="onCancelar()" class="btn btn-xs btn-default">
+                    <i class="fa fa-times"></i>
+                    <span class="text">Cancelar</span>
+                </button>
             </div>
         </div>
         <div class="card-body" *ngIf="insumos && insumos.length > 0">
@@ -47,5 +51,5 @@
 </div>
 
 <div class="row" *ngIf="formNew">
-    <app-new-insumo [actividad]="actividad" (onReady)="onReady()"></app-new-insumo>
+    <app-new-insumo [actividad]="actividad" (onReadyInsumo)="onReadyInsumo()"></app-new-insumo>
 </div>

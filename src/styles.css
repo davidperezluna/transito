@@ -12,3 +12,7 @@
 .ng-invalid:not(form)  {
     border: 2px solid #a94442; /* red */
 }
+
+.card .card-header .btn{
+    margin: 0 !important;
+}

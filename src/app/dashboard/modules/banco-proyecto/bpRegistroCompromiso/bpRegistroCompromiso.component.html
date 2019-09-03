@@ -34,9 +34,9 @@
                     <b>Nombre</b><br>
                     {{ registro.cdp.actividad.cuenta.proyecto.nombre }}
                     <br><b>Costo total</b><br>
-                    {{ registro.cdp.actividad.cuenta.proyecto.costoTotal }}
+                    $ {{ registro.cdp.actividad.cuenta.proyecto.costoTotal | currency: 'COP' }}
                     <br><b>Saldo total</b><br>
-                    {{ registro.cdp.actividad.cuenta.proyecto.saldoTotal }}
+                    $ {{ registro.cdp.actividad.cuenta.proyecto.saldoTotal | currency: 'COP' }}
                   </td>
                   <td>
                     <b>Número</b><br>
@@ -44,7 +44,7 @@
                     <br><b>Nombre</b><br>
                     {{ registro.cdp.actividad.cuenta.nombre }}
                     <br><b>Costo total</b><br>
-                    {{ registro.cdp.actividad.cuenta.costoTotal }}
+                    $ {{ registro.cdp.actividad.cuenta.costoTotal | currency: 'COP' }}
                   </td>
                   <td>
                     <div class="btn-group">

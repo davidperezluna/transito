@@ -3,8 +3,7 @@
     <div class="col-xs-12 col-lg-4" *ngIf="formSearch">
       <div class="card">
         <div class="card-header">
-          <b class="text-uppercase">Reducciones</b>
-          <small>Buscar</small>
+          <b class="text-uppercase">Buscar Reducciones</b>
         </div>
         <div class="card-body">
           <!-- .card-body -->
@@ -22,11 +21,12 @@
                   <ng-select [multiple]="false" [options]="tiposFiltro" [(ngModel)]="search.tipoFiltro" name="tipoFiltro" required></ng-select>
                 </div>
                 <div class="col-xs-12 col-lg-12" *ngIf="search.tipoFiltro == 1">
-                  <label>Número <b class="text-danger">*</b></label>
+                  <label *ngIf="search.tipoFiltro == 1">No. CDP<b class="text-danger">*</b></label>
+                  <label *ngIf="search.tipoFiltro == 2">No. Registro compromiso<b class="text-danger">*</b></label>
                   <input class="form-control text-uppercase" [(ngModel)]="search.filtro" name="filtro" type="text" required>
                 </div>
                 <div class="col-xs-12 col-lg-12" *ngIf="search.tipoFiltro == 2">
-                  <label>Fecha <b class="text-danger">*</b></label>
+                  <label>Fecha de reducción<b class="text-danger">*</b></label>
                   <input class="form-control" [(ngModel)]="search.filtro" name="filtro" type="date" required>
                 </div>
               </div>

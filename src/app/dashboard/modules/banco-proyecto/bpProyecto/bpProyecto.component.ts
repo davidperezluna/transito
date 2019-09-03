@@ -43,6 +43,8 @@ export class BpProyectoComponent implements OnInit {
     this.formShow = false;
     this.formIndex = false;
     this.formSearch = true;
+
+    swal.close();
   }
 
   onSearch() {

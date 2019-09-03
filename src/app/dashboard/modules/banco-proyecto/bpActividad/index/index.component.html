@@ -7,13 +7,17 @@
                     <i class="fa fa-plus"></i>
                     <span class="text">Nueva</span>
                 </button>
+                <button (click)="onCancelar()" class="btn btn-xs btn-default">
+                    <i class="fa fa-times"></i>
+                    <span class="text">Cancelar</span>
+                </button>
             </div>
         </div>
         <div class="card-body" *ngIf="actividades && actividades.length > 0">
             <table class="table" id="dataTables-actividades">
                 <thead>
                     <tr>
-                        <th>Id</th>
+                        <th>#</th>
                         <th>Nombre</th>
                         <th>Costo total</th>
                         <th>Acciones</th>
@@ -21,7 +25,7 @@
                 </thead>
                 <tbody>
                     <tr class="odd" *ngFor="let actividad of actividades; let i = index">
-                        <td>{{ i +1 }}</td>
+                        <td>{{ i + 1 }}</td>
                         <td>{{ actividad.nombre }}</td>
                         <td>{{ actividad.costoTotal | currency: 'COP' }}</td>
                         <td>
@@ -47,12 +51,12 @@
 
 <div class="row" *ngIf="formNew">
     <div class="col-xs-12 col-lg-12">
-        <app-new-actividad [cuenta]="cuenta" (onReady)="onReady()"></app-new-actividad>
+        <app-new-actividad [cuenta]="cuenta" (onReadyActividad)="onReadyActividad()"></app-new-actividad>
     </div>
 </div>
 
 <div class="row" *ngIf="formShow">
     <div class="col-xs-12 col-lg-12">
-        <app-index-insumo [actividad]="actividad"></app-index-insumo>
+        <app-index-insumo [actividad]="actividad" (onReadyActividad)="onReadyActividad()"></app-index-insumo>
     </div>
 </div>

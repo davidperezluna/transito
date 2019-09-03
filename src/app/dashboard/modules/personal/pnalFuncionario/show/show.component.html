@@ -55,22 +55,17 @@
                                     <strong>{{ funcionario.resolucion }}</strong>
                                 </label>
                             </div>
-                            <div class="col-xs-12 col-lg-4" *ngIf="funcionario.tipoNombramiento">
-                                <label>Tipo nombramiento
-                                    <strong>{{ funcionario.tipoNombramiento.nombre }}</strong>     
-                                </label>
-                            </div>
                         </div>
 
                         <div class="form-group row">
                             <div class="col-xs-12 col-lg-4" *ngIf="funcionario.fechaInicial">
                                 <label>Fecha inicio 
-                                    <strong>{{ funcionario.fechaInicial }}</strong>
+                                    <strong>{{ (funcionario.fechaInicial.timestamp * 1000) | date: 'dd/MM/yyyy' }}</strong>
                                 </label>
                             </div>
                             <div class="col-xs-12 col-lg-4" *ngIf="funcionario.fechaFinal">
                                 <label>Fecha fin 
-                                    <strong>{{ funcionario.fechaFinal }}</strong>
+                                    <strong>{{ (funcionario.fechaFinal.timestamp * 1000) | date: 'dd/MM/yyyy' }}</strong>
                                 </label>
                             </div>
                             <div class="col-xs-12 col-lg-4" *ngIf="funcionario.numeroContrato">
@@ -161,9 +156,9 @@
                         <tbody>
                             <tr>
                                 <td>{{ registro.numero }}</td>
-                                <td>{{ registro.fechaExpedicion }}</td>
-                                <td>{{ registro.valorApropiado }}</td>
-                                <td>{{ registro.saldo }}</td>
+                                <td>{{ (registro.fechaExpedicion.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td>
+                                <td>$ {{ registro.valorApropiado | currency: 'COP' }}</td>
+                                <td>$ {{ registro.saldo| currency: 'COP' }}</td>
                                 <td>{{ registro.cdp.numero }}</td>
                             </tr>
                         </tbody>

@@ -9,7 +9,6 @@ declare var $: any;
   templateUrl: './index.component.html'
 })
 export class IndexComponent implements OnInit{
-    @Output() ready = new EventEmitter<any>();
     @Input() proyecto:any = null;
     public errorMessage;
 
@@ -92,11 +91,9 @@ export class IndexComponent implements OnInit{
                 }
             }
         });
-    }   
+    }
 
-    onCancelar(){ this.ready.emit(true); }
-
-    onReady(){ this.ngOnInit(); }
+    onReadyCuenta(){ this.ngOnInit(); }
 
     onNew() {
         this.onInitForms();

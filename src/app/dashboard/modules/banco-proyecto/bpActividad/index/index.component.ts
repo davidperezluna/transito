@@ -11,7 +11,7 @@ declare var $: any;
 })
 
 export class IndexComponent implements OnInit{
-    @Output() ready = new EventEmitter<any>();
+    @Output() onReadyCuenta = new EventEmitter<any>();
     @Input() cuenta:any = null;
     public errorMessage;
 
@@ -97,9 +97,11 @@ export class IndexComponent implements OnInit{
         });
     }
 
-    onCancelar(){ this.ready.emit(true); }
+    onCancelar() {
+        this.onReadyCuenta.emit();
+    }
 
-    onReady() { this.ngOnInit(); }
+    onReadyActividad() { this.ngOnInit(); }
 
     onNew() {
         this.onInitForms();

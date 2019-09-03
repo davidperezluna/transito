@@ -355,7 +355,6 @@ const routes: Routes = [
     path: 'svSenialInventario',
     component: SvSenialInventarioComponent
   },
-
   {
     path: 'senializacion/location',
     component: LocationComponent
