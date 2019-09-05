@@ -24,6 +24,7 @@ export class NewRnetDuplicadoTarjetaOperacionComponent implements OnInit {
     public tramiteSolicitud: any = null;
     public motivoList: string[];
     public motivoSelected: any;
+    public mostrarFormulario = false;
     
     public datos = {
         'documentacion': true,
@@ -43,24 +44,35 @@ export class NewRnetDuplicadoTarjetaOperacionComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        console.log(this.vehiculo);
-        
+
         let token = this._LoginService.getToken();
 
         this.datos.idFuncionario  = this.funcionario.id;
 
         this._TarjetaOperacionService.searchTarjetaOperacionByVehiculo({ 'idVehiculo': this.vehiculo.id }, token).subscribe(
             response => {
-                this.tarjetaOperacion = response.data;
+                if(response.code = 200){
+                    this.mostrarFormulario = true;
+                    this.tarjetaOperacion = response.data;
+    
+                    var datePiper = new DatePipe('en-US');
+                    var date = new Date();
+    
+                    date.setTime(this.tarjetaOperacion.fechaVencimiento.timestamp * 1000);
+    
+                    this.tarjetaOperacion.fechaVencimiento = datePiper.transform(
+                        date, 'yyyy-MM-dd'
+                    );
+                } else {
+                    this.mostrarFormulario = false;
 
-                var datePiper = new DatePipe('en-US');
-                var date = new Date();
-
-                date.setTime(this.tarjetaOperacion.fechaVencimiento.timestamp * 1000);
-
-                this.tarjetaOperacion.fechaVencimiento = datePiper.transform(
-                    date, 'yyyy-MM-dd'
-                );
+                    swal({
+                        title: response.title,
+                        text: response.message,
+                        type: response.satatus,
+                        confirmButtonText: 'Aceptar'
+                    });
+                }
             },
             error => {
                 this.errorMessage = <any>error;
