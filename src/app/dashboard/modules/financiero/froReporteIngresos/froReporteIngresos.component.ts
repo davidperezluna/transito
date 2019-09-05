@@ -112,12 +112,12 @@ export class FroReporteIngresosComponent implements OnInit {
 
                     if(this.funcionario.cargo.id == 2 || this.funcionario.excel == 1) {
                         this.arrayExportar = [
-                            { value: 1, label: 'EXCEL' },
-                            { value: 2, label: 'PDF' },
+                            { value: 'EXCEL', label: 'EXCEL' },
+                            { value: 'PDF', label: 'PDF' },
                         ];
                     } else {
                         this.arrayExportar = [
-                            { value: 2, label: 'PDF' },
+                            { value: 'PDF', label: 'PDF' },
                         ];
                     }
                 } else {
