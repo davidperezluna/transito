@@ -6,9 +6,11 @@ import { SelectModule } from 'angular2-select';
 import { TooltipModule } from "ngx-tooltip";
 import { FormsModule } from '@angular/forms';
 
+import { VhloBuscarModule } from './vhloBuscar/vhloBuscar.module';
 import { VhloCfgNivelServicioComponent } from './vhloCfgNivelServicio/vhloCfgNivelServicio.component';
 import { VhloCfgPlacaComponent } from './vhloCfgPlaca/vhloCfgPlaca.component';
 import { VhloCfgValorComponent } from './vhloCfgValor/vhloCfgValor.component';
+import { VhloPlacaSedeComponent } from './vhloPlacaSede/vhloPlacaSede.component';
 import { VhloTpAsignacionComponent } from './vhloTpAsignacion/vhloTpAsignacion.component';
 import { VhloTpConvenioComponent } from './vhloTpConvenio/vhloTpConvenio.component';
 import { VhloTpRangoComponent } from './vhloTpRango/vhloTpRango.component';
@@ -17,9 +19,11 @@ import { VhloRnaPreregistroComponent } from "./vhloRnaPreregistro/vhloRnaPreregi
 import { VhloRnaPreasignacionPlacaComponent } from './vhloRnaPreasignacionPlaca/vhloRnaPreasignacionPlaca.component';
 
 import { VehiculoRoutingModule } from './vehiculo-routing.module';
+import { VhloBuscarComponent } from './vhloBuscar/vhloBuscar.component';
 import { VhloCfgNivelServicioModule } from './vhloCfgNivelServicio/vhloCfgNivelServicio.module';
 import { VhloCfgPlacaModule } from './vhloCfgPlaca/vhloCfgPlaca.module';
 import { VhloCfgValorModule } from './vhloCfgValor/vhloCfgValor.module';
+import { VhloPlacaSedeModule } from './vhloPlacaSede/vhloPlacaSede.module';
 import { VhloTpAsignacionModule } from './vhloTpAsignacion/vhloTpAsignacion.module';
 import { VhloTpConvenioModule } from './vhloTpConvenio/vhloTpConvenio.module';
 import { VhloTpRangoModule } from './vhloTpRango/vhloTpRango.module';
@@ -36,9 +40,11 @@ import { VhloRnaPreasignacionPlacaModule } from './vhloRnaPreasignacionPlaca/vhl
     Ng2BootstrapModule.forRoot(),
     SelectModule,
     VehiculoRoutingModule,
+    VhloBuscarModule,
     VhloCfgNivelServicioModule,
     VhloCfgPlacaModule,
     VhloCfgValorModule,
+    VhloPlacaSedeModule,
     VhloTpAsignacionModule,
     VhloTpConvenioModule,
     VhloTpRangoModule,
@@ -47,9 +53,11 @@ import { VhloRnaPreasignacionPlacaModule } from './vhloRnaPreasignacionPlaca/vhl
     VhloRnaPreasignacionPlacaModule,
   ],
   declarations: [
+    VhloBuscarComponent,
     VhloCfgNivelServicioComponent,
     VhloCfgPlacaComponent,
     VhloCfgValorComponent,
+    VhloPlacaSedeComponent,
     VhloTpAsignacionComponent,
     VhloTpConvenioComponent,
     VhloTpRangoComponent,

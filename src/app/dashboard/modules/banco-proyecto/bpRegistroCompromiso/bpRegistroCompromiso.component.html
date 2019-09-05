@@ -18,18 +18,28 @@
               <thead>
                 <tr>
                     <th>#</th>
-                    <th>Solicitud</th>
-                    <th>Número</th>
+                    <th>Detalles</th>
                     <th>Proyecto</th>
                     <th>Cuenta</th>
-                    <th>Acciones</th>
                 </tr>
               </thead>
               <tbody>
                 <tr class="odd" *ngFor="let registro of registros; let i = index">
                   <td>{{ i + 1 }}</td>
-                  <td>{{ registro.solicitudNumero }}</td>
-                  <td>{{ registro.numero }}</td>
+                  <td>
+                    <b>No. Solicitud:</b>
+                    <br>{{ registro.solicitudNumero }}<br>
+                    <b>No. registro de compromiso:</b>
+                    <br>{{ registro.numero }}<br>
+                    <b>Valor solicitado:</b>
+                    <br>$ {{ registro.valor | currency: 'COP' }}<br>
+                    <ng-container *ngIf="registro.valorApropiado">
+                      <b>Valor apropiado:</b>
+                      <br>$ {{ registro.valorApropiado | currency: 'COP' }}<br>
+                    </ng-container>
+                    <b>Saldo actual:</b>
+                    <br>$ {{ registro.saldo | currency: 'COP' }}<br>
+                  </td>
                   <td>
                     <b>Nombre</b><br>
                     {{ registro.cdp.actividad.cuenta.proyecto.nombre }}
@@ -45,18 +55,6 @@
                     {{ registro.cdp.actividad.cuenta.nombre }}
                     <br><b>Costo total</b><br>
                     $ {{ registro.cdp.actividad.cuenta.costoTotal | currency: 'COP' }}
-                  </td>
-                  <td>
-                    <div class="btn-group">
-                      <!--
-                        <button (click)="onEdit(registro)" class="btn btn-xs btn-primary" type="button">
-                          <i class="fa fa-pencil"></i>
-                        </button> 
-                        <button (click)="onDelete(registro.id)"  class="btn btn-xs btn-danger" type="button">
-                          <i class="fa fa-trash"></i>
-                        </button> 
-                      -->
-                    </div>
                   </td>
                 </tr>
               </tbody>

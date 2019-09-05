@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import { VhloBuscarComponent } from './vhloBuscar/vhloBuscar.component';
 import { VhloCfgNivelServicioComponent } from './vhloCfgNivelServicio/vhloCfgNivelServicio.component';
 import { VhloCfgPlacaComponent } from './vhloCfgPlaca/vhloCfgPlaca.component';
 import { VhloCfgValorComponent } from './vhloCfgValor/vhloCfgValor.component';
+import { VhloPlacaSedeComponent } from './vhloPlacaSede/vhloPlacaSede.component';
 import { VhloTpAsignacionComponent } from './vhloTpAsignacion/vhloTpAsignacion.component';
 import { VhloTpConvenioComponent } from './vhloTpConvenio/vhloTpConvenio.component';
 import { VhloTpRangoComponent } from './vhloTpRango/vhloTpRango.component';
@@ -13,12 +15,20 @@ import { VhloRnaPreasignacionPlacaComponent } from "./vhloRnaPreasignacionPlaca/
 
 const routes: Routes = [
   {
+    path: 'vhloBuscar',
+    component: VhloBuscarComponent
+  },
+  {
     path: 'vhloCfgNivelServicio',
     component: VhloCfgNivelServicioComponent
   },
   {
     path: 'vhloCfgPlaca',
     component: VhloCfgPlacaComponent
+  },
+  {
+    path: 'vhloPlacaSede',
+    component: VhloPlacaSedeComponent
   },
   {
     path: 'vhloCfgValor',

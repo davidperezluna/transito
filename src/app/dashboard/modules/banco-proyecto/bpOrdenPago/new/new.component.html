@@ -10,14 +10,18 @@
                 <div class="row">
                     <div class="col-xs-12 col-lg-12">
                         <form #formSearch="ngForm">
-                            <label>Buscar registro de compromiso</label>
-                            <div class="input-group">
-                                <input type="numeric" class="form-control" placeholder="Número de registro" [(ngModel)]="numeroRegistroCompromiso" name="numeroRegistroCompromiso" required />
-                                <span class="input-group-btn">
-                                    <button (click)="onSearchRegistroCompromiso()" [disabled]="formSearch.invalid" class="btn btn-default btn-primary" type="button">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                </span>
+                            <div class="row">
+                                <div class="col-xs-12 col-lg-12">
+                                        <label>Buscar registro de compromiso</label>
+                                    <div class="input-group">
+                                        <input type="numeric" class="form-control" placeholder="Número de registro" [(ngModel)]="numeroRegistroCompromiso" name="numeroRegistroCompromiso" required />
+                                        <span class="input-group-btn">
+                                            <button (click)="onSearchRegistroCompromiso()" [disabled]="formSearch.invalid" class="btn btn-default btn-primary" type="button">
+                                                <i class="fa fa-search"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -42,13 +46,19 @@
                                 <tr>
                                     <td>
                                         <b>Fecha: </b>
-                                        {{ registroCompromiso.cdp.actividad.cuenta.proyecto.fecha }}
+                                        {{ (registroCompromiso.cdp.actividad.cuenta.proyecto.fecha.timestamp * 1000) | date: 'dd/MM/yyyy' }}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <b>Valor Solicitado: </b>
                                         $ {{ registroCompromiso.valor | currency: 'COP' }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <b>Valor apropiado: </b>
+                                        $ {{ registroCompromiso.valorApropiado | currency: 'COP' }}
                                     </td>
                                 </tr>
                                 <tr>

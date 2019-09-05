@@ -1,6 +1,7 @@
 import { Component, OnInit,Input, Output, EventEmitter } from '@angular/core';
 import { PnalFuncionarioService } from '../../../../../services/pnalFuncionario.service';
 import { BpRegistroCompromisoService } from '../../../../../services/bpRegistroCompromiso.service';
+import { BpOrdenPagoService } from '../../../../../services/bpOrdenPago.service';
 import { LoginService } from '../../../../../services/login.service';
 import swal from 'sweetalert2';
 declare var $: any;
@@ -19,10 +20,12 @@ export class ShowComponent implements OnInit {
 
   public horarios: any = null;
   public registro: any = null;
+  public ordenesPago: any = null;
 
 constructor(
   private _FuncionarioService: PnalFuncionarioService,
   private _RegistroCompromisoService: BpRegistroCompromisoService,
+  private _OrdenPagoService: BpOrdenPagoService,
   private _LoginService: LoginService,
   ){}
 
@@ -51,9 +54,24 @@ constructor(
         response => {
           if (response.code == 200) {
             this.registro = response.data;
-            
-            
 
+            this._OrdenPagoService.searchByProyecto({ 'idProyecto': this.registro.cdp.actividad.cuenta.proyecto.id }, token).subscribe(
+              response => {
+                if (response.code == 200) {
+                  this.ordenesPago = response.data;
+                } else {
+                  this.ordenesPago = null;
+                }
+              },
+              error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                  console.log(this.errorMessage);
+                  alert('Error en la petición');
+                }
+              }
+            );
             
             swal.close();
           } else {

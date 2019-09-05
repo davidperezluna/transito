@@ -121,9 +121,9 @@ export class BpReduccionComponent implements OnInit {
   }
   
   onNew(){
+    this.onInitForms();
+    
     this.formNew = true;
-    this.formIndex = false;
-    this.table.destroy();
   }
 
   ready(isCreado:any){

@@ -12,7 +12,7 @@
               <div class="row">
                 <!-- .row -->
                 <div class="col-xs-12 col-lg-12">
-                  <label>Tipo de filtro</label>
+                  <label>Tipo de reducción</label>
                   <ng-select [multiple]="false" [options]="tiposReduccion" [(ngModel)]="search.tipoReduccion" name="tipoReduccion"
                     required></ng-select>
                 </div>
@@ -21,8 +21,8 @@
                   <ng-select [multiple]="false" [options]="tiposFiltro" [(ngModel)]="search.tipoFiltro" name="tipoFiltro" required></ng-select>
                 </div>
                 <div class="col-xs-12 col-lg-12" *ngIf="search.tipoFiltro == 1">
-                  <label *ngIf="search.tipoFiltro == 1">No. CDP<b class="text-danger">*</b></label>
-                  <label *ngIf="search.tipoFiltro == 2">No. Registro compromiso<b class="text-danger">*</b></label>
+                  <label *ngIf="search.tipoReduccion == 1">No. CDP <b class="text-danger">*</b></label>
+                  <label *ngIf="search.tipoReduccion == 2">No. Registro compromiso <b class="text-danger">*</b></label>
                   <input class="form-control text-uppercase" [(ngModel)]="search.filtro" name="filtro" type="text" required>
                 </div>
                 <div class="col-xs-12 col-lg-12" *ngIf="search.tipoFiltro == 2">
@@ -72,32 +72,22 @@
                     <th>Fecha</th>
                     <th>Valor</th>
                     <th>Tipo</th>
-                    <th>Acciones</th>
                 </tr>
               </thead>
               <tbody>
                 <tr class="odd" *ngFor="let reduccion of reducciones; let i = index">
                   <td>{{ i + 1 }}</td>
-                  <td>{{ reduccion.fecha }}</td>
-                  <td>{{ reduccion.valor }}</td>
+                  <td>{{ (reduccion.fecha.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td>
+                  <td>$ {{ reduccion.valor | currency: 'COP' }}</td>
                   <td>
                     <ng-container *ngIf="reduccion.tipo == 'RC'">
-                      <b>Registro de compromiso No:</b><br>
+                      <b>Registro de compromiso No:</b>
                       {{ reduccion.registroCompromiso.numero }}
                     </ng-container>
                     <ng-container *ngIf="reduccion.tipo == 'CDP'">
-                      <b>CDP No:</b><br>
+                      <b>CDP No:</b>
                       {{ reduccion.cdp.numero }}
                     </ng-container>
-                  </td>
-                  <td>
-                    <div class="btn-group">
-                      <!--
-                        <button (click)="onDelete(reduccion.id)"  class="btn btn-xs btn-danger" type="button">
-                          <i class="fa fa-trash"></i>
-                        </button> 
-                      -->
-                    </div>
                   </td>
                 </tr>
               </tbody>

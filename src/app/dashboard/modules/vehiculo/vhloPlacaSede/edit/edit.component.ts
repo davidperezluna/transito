@@ -7,7 +7,7 @@ import swal from 'sweetalert2';
 
 
 @Component({
-    selector: 'app-edit',
+    selector: 'app-edit-placasede',
     templateUrl: './edit.component.html'
 })
 export class EditComponent implements OnInit {

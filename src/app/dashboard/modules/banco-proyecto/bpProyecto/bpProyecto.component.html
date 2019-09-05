@@ -4,8 +4,7 @@
       <!-- .col -->
       <div class="card">
         <div class="card-header">
-          <b class="text-uppercase">Proyectos</b>
-          <small>Buscar</small>
+          <b class="text-uppercase">Buscar Proyectos</b>
         </div>
         <div class="card-body">
           <!-- .card-body -->
@@ -80,15 +79,18 @@
                   <td >{{ proyecto.saldoTotal | currency: 'COP' }}</td>
                   <td>
                     <div class="btn-group">
-                      <button (click)="onShow(proyecto)" class="btn btn-xs btn-default" type="button">
-                        <i class="fa fa-eye"></i>
+                      <button (click)="onShow(proyecto)" class="btn btn-xs btn-default" type="button" tooltip="Más información" [tooltipDisabled]="false" [tooltipAnimation]="true" tooltipPlacement="top">
+                        <i class="fa fa-info"></i>
                       </button>
-                      <button (click)="onEdit(proyecto)" class="btn btn-xs btn-primary" type="button">
+                      <button (click)="onEdit(proyecto)" class="btn btn-xs btn-primary" type="button" tooltip="Editar" [tooltipDisabled]="false" [tooltipAnimation]="true" tooltipPlacement="top">
                         <i class="fa fa-edit"></i>
                       </button>
-                      <button (click)="onDelete(proyecto.id)"  class="btn btn-xs btn-danger" type="button">
+                      <button (click)="onDelete(proyecto.id)"  class="btn btn-xs btn-danger" type="button" tooltip="Eliminar" [tooltipDisabled]="false" [tooltipAnimation]="true" tooltipPlacement="top">
                         <i class="fa fa-trash"></i>
-                      </button> 
+                      </button>
+                      <a href="{{ apiUrl }}bancoproyecto/bpproyecto/{{ proyecto.id }}/pdf" class="btn btn-success" target="_blank" tooltip="Generar reporte" [tooltipDisabled]="false" [tooltipAnimation]="true" tooltipPlacement="top" *ngIf="proyecto.costoTotal > proyecto.saldoTotal">
+                        <i class="fas fa-chart-pie"></i>
+                      </a>
                     </div>
                   </td>
                 </tr>

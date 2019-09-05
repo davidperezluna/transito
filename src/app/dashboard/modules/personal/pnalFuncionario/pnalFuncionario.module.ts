@@ -14,6 +14,7 @@ import { PnalCfgCargoService } from '../../../../services/pnalCfgCargo.service';
 import { UserCfgTipoIdentificacionService } from '../../../../services/userCfgTipoIdentificacion.service';
 import { CfgOrganismoTransitoService } from '../../../../services/cfgOrganismoTransito.service';
 import { BpRegistroCompromisoService } from '../../../../services/bpRegistroCompromiso.service';
+import { BpOrdenPagoService } from '../../../../services/bpOrdenPago.service';
 
 import { NewComponent } from './new/new.component';
 import { EditComponent } from './edit/edit.component';
@@ -37,6 +38,7 @@ import { DisabledComponent } from './disabled/disabled.component';
         UserCfgTipoIdentificacionService,
         CfgOrganismoTransitoService,
         BpRegistroCompromisoService,
+        BpOrdenPagoService,
     ]
 })
 

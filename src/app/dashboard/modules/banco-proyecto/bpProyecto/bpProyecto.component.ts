@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { CurrencyPipe } from '@angular/common';
 import { BpProyectoService } from '../../../../services/bpProyecto.service';
 import { LoginService } from '../../../../services/login.service';
 import { BpProyecto } from './bpProyecto.modelo';
+import { environment } from 'environments/environment'
 import swal from 'sweetalert2';
 declare var $: any;
 
@@ -32,9 +32,11 @@ export class BpProyectoComponent implements OnInit {
     { 'value': 2, 'label': 'Fecha' },
   ];
 
+  public apiUrl = environment.apiUrl;
+
   constructor(
     private _BpProyectoService: BpProyectoService,
-		private _loginService: LoginService,
+		private _LoginService: LoginService,
     ){}
     
   ngOnInit() { 
@@ -60,7 +62,7 @@ export class BpProyectoComponent implements OnInit {
       }
     });
 
-    let token = this._loginService.getToken();
+    let token = this._LoginService.getToken();
 
     this._BpProyectoService.searchByFilter(this.search, token).subscribe(
       response => {
@@ -136,7 +138,7 @@ export class BpProyectoComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.value) {
-        let token = this._loginService.getToken();
+        let token = this._LoginService.getToken();
         
         this._BpProyectoService.delete({ 'id': id }, token).subscribe(
             response => {

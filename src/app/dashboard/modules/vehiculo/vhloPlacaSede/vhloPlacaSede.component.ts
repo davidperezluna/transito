@@ -10,6 +10,7 @@ declare var $: any;
     selector: 'app-index',
     templateUrl: './vhloPlacaSede.component.html'
 })
+
 export class VhloPlacaSedeComponent implements OnInit {
     public errorMessage;
     public id;

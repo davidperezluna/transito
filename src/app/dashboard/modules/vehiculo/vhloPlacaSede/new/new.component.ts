@@ -6,10 +6,11 @@ import { VhloPlacaSede } from '../vhloPlacaSede.modelo';
 import swal from 'sweetalert2';
 
 @Component({
-    selector: 'app-new',
+    selector: 'app-new-placasede',
     templateUrl: './new.component.html'
 })
-export class NewVhloPlacaSedeComponent implements OnInit {
+
+export class NewComponent implements OnInit {
     @Output() ready = new EventEmitter<any>();
     @Input() organismoTransito: any = null;
     public asignacion: VhloPlacaSede;

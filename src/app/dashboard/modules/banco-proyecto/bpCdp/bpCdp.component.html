@@ -21,7 +21,6 @@
                     <th>Detalles</th>
                     <th>Proyecto</th>
                     <th>Cuenta</th>
-                    <th>Acciones</th>
                 </tr>
               </thead>
               <tbody>
@@ -32,10 +31,14 @@
                     {{ cdp.solicitudNumero }}
                     <br><b>No. CDP</b><br>
                     {{ cdp.numero }}
+                    <br><b>Valor solicitado</b><br>
+                    $ {{ cdp.valor | currency: 'COP' }}
                     <ng-container *ngIf="cdp.valorAprobado">
                       <br><b>Valor aprobado</b><br>
-                      {{ cdp.valorAprobado }}
+                      $ {{ cdp.valorAprobado | currency: 'COP' }}
                     </ng-container>
+                    <br><b>Saldo actual</b><br>
+                    $ {{ cdp.saldo | currency: 'COP' }}
                   </td>
                   <td>
                     <b>Nombre</b><br>
@@ -52,18 +55,6 @@
                     {{ cdp.actividad.cuenta.nombre }}
                     <br><b>Costo total</b><br>
                     {{ cdp.actividad.cuenta.costoTotal }}
-                  </td>
-                  <td>
-                    <div class="btn-group">
-                      <!--
-                        <button (click)="onEdit(cdp)" class="btn btn-xs btn-primary" type="button">
-                          <i class="fa fa-pencil"></i>
-                        </button> 
-                        <button (click)="onDelete(cdp.id)"  class="btn btn-xs btn-danger" type="button">
-                          <i class="fa fa-trash"></i>
-                        </button> 
-                      -->
-                    </div>
                   </td>
                 </tr>
               </tbody>

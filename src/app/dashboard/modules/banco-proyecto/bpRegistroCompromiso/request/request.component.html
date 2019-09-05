@@ -15,20 +15,39 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>No. solicitud</th>
-                            <th>No. proyecto</th>
-                            <th>Valor total</th>
-                            <th>Fecha</th>
+                            <th>Solicitud</th>
+                            <th>CDP</th>
+                            <th>Proyecto</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr class="odd" *ngFor="let solicitud of solicitudes; let i = index">
                             <td>{{ i + 1 }}</td>
-                            <td>{{ solicitud.solicitudNumero }}</td>
-                            <td>{{ solicitud.cdp.actividad.cuenta.proyecto.numero }}</td>
-                            <td>{{ solicitud.cdp.valor | currency: 'COP' }}</td>
-                            <td>{{ (solicitud.solicitudFecha.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td>
+                            <td>
+                                <b>Número:</b>
+                                <br>{{ solicitud.solicitudNumero }}<br>
+                                <b>Fecha:</b>
+                                <br>{{ (solicitud.solicitudFecha.timestamp * 1000) | date: 'dd/MM/yyyy' }}<br>
+                            </td>
+                            <td>
+                                <b>No. de solicitud:</b>
+                                <br>{{ solicitud.cdp.numero }}<br>
+                                <b>Valor solicitado:</b>
+                                <br>{{ solicitud.cdp.valor | currency: 'COP' }}
+                                <b>Valor Aprobado:</b>
+                                <br>{{ solicitud.cdp.valorAprobado | currency: 'COP' }}
+                                <b>Saldo actual:</b>
+                                <br>{{ solicitud.cdp.saldo | currency: 'COP' }}
+                            </td>
+                            <td>
+                                <b>No. de proyecto:</b>
+                                <br>{{ solicitud.actividad.cuenta.proyecto.numero }}<br>
+                                <b>Valor total:</b>
+                                <br>{{ solicitud.cdp.actividad.cuenta.proyecto.costoTotal | currency: 'COP' }}<br>
+                                <b>Saldo actual:</b>
+                                <br>{{ solicitud.cdp.actividad.cuenta.proyecto.saldoTotal | currency: 'COP' }}
+                            </td>
                             <td>
                                 <div class="btn-group">
                                     <a href="{{ apiUrl }}bancoproyecto/bpregistrocompromiso/request/{{ solicitud.id }}/pdf" class="btn btn-success" target="_blank">
