@@ -34,15 +34,15 @@
                                 <b>No. de solicitud:</b>
                                 <br>{{ solicitud.cdp.numero }}<br>
                                 <b>Valor solicitado:</b>
-                                <br>{{ solicitud.cdp.valor | currency: 'COP' }}
+                                <br>{{ solicitud.cdp.valor | currency: 'COP' }}<br>
                                 <b>Valor Aprobado:</b>
-                                <br>{{ solicitud.cdp.valorAprobado | currency: 'COP' }}
+                                <br>{{ solicitud.cdp.valorAprobado | currency: 'COP' }}<br>
                                 <b>Saldo actual:</b>
                                 <br>{{ solicitud.cdp.saldo | currency: 'COP' }}
                             </td>
                             <td>
                                 <b>No. de proyecto:</b>
-                                <br>{{ solicitud.actividad.cuenta.proyecto.numero }}<br>
+                                <br>{{ solicitud.cdp.actividad.cuenta.proyecto.numero }}<br>
                                 <b>Valor total:</b>
                                 <br>{{ solicitud.cdp.actividad.cuenta.proyecto.costoTotal | currency: 'COP' }}<br>
                                 <b>Saldo actual:</b>
