@@ -121,7 +121,6 @@ export class EditComponent implements OnInit {
                 this.colores = response;
                 setTimeout(() => {
                     this.arrayColoresSelected = this.habilitacion.colores;
-                    console.log(this.habilitacion.colores);
                 });
             },
             error => {
@@ -173,8 +172,6 @@ export class EditComponent implements OnInit {
 
     onEnviar() {
         let token = this._LoginService.getToken();
-
-        console.log(this.arrayColoresSelected);
 
         this.habilitacion.idRadioAccion = this.radioSelected;
         this.habilitacion.idModalidadTransporte = this.modalidadTransporteSelected;

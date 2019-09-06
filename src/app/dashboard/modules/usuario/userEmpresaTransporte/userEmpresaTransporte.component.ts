@@ -213,6 +213,7 @@ export class UserEmpresaTransporteComponent implements OnInit {
 
     onEdit(habilitacion: any) {
         this.habilitacion = habilitacion;
+        console.log(this.habilitacion);
         this.onInitForms();
         this.formEdit = true;
         this.formSearch = true;
