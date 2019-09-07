@@ -49,7 +49,7 @@ export class FroReporteIngresosComponent implements OnInit {
     public comparendos;
     public totalComparendos;
 
-    public tipoArchivoTramite;
+    public tipoArchivoTramite: any = null;
     public tipoArchivo;
     public nombreOrganismoTransito;
 

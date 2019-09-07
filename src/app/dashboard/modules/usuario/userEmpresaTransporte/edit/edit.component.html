@@ -70,35 +70,35 @@
         </div>
         <div class="card-body">
             <div class="form-group row">
-                <div class="col-xs-12 col-lg-6" *ngIf="empresaTransporte.idModalidadTransporte == 3">
+                <div class="col-xs-12 col-lg-6" *ngIf="habilitacion.modalidadTransporte.id == 3">
                     <label>Tipo Carroceria <strong class="text-danger">*</strong></label>
                     <ng-select [multiple]="false" [options]="carrocerias" [(ngModel)]="empresaTransporte.idCarroceria" required
                         name="idCarroceria">
                     </ng-select>
                 </div>
-                <div class="col-xs-12 col-lg-4" *ngIf="empresaTransporte.idModalidadTransporte">
+                <div class="col-xs-12 col-lg-4" *ngIf="habilitacion.modalidadTransporte">
                     <label>Capacidad mínima <strong class="text-danger">*</strong></label>
                     <input class="form-control"
-                        (blur)="onCalcularCapacidad(empresaTransporte.capacidadMinima, empresaTransporte.capacidadMaxima)"
-                        [(ngModel)]="empresaTransporte.capacidadMinima" name="capacidadMinima" type="number">
+                        (blur)="onCalcularCapacidad(habilitacion.capacidadMinima, habilitacion.capacidadMaxima)"
+                        [(ngModel)]="habilitacion.capacidadMinima" name="capacidadMinima" type="number">
                 </div>
-                <div class="col-xs-12 col-lg-4" *ngIf="empresaTransporte.idModalidadTransporte">
+                <div class="col-xs-12 col-lg-4" *ngIf="habilitacion.modalidadTransporte">
                     <label>Capacidad máxima <strong class="text-danger">*</strong></label>
                     <input class="form-control"
-                        (blur)="onCalcularCapacidad(empresaTransporte.capacidadMinima, empresaTransporte.capacidadMaxima)"
-                        [(ngModel)]="empresaTransporte.capacidadMaxima" name="capacidadMaxima" type="number">
+                        (blur)="onCalcularCapacidad(habilitacion.capacidadMinima, habilitacion.capacidadMaxima)"
+                        [(ngModel)]="habilitacion.capacidadMaxima" name="capacidadMaxima" type="number">
                 </div>
-                <div class="col-xs-12 col-lg-2" *ngIf="empresaTransporte.idModalidadTransporte">
+                <div class="col-xs-12 col-lg-2" *ngIf="habilitacion.modalidadTransporte">
                     <label>Capacidad Disponible</label>
-                    <h5 style="text-align: center;">{{ empresaTransporte.capacidadDisponible }}</h5>
+                    <h5 style="text-align: center;">{{ habilitacion.capacidadDisponible }}</h5>
                 </div>
-                <div class="col-xs-12 col-lg-2" *ngIf="empresaTransporte.idModalidadTransporte">
+                <div class="col-xs-12 col-lg-2" *ngIf="habilitacion.modalidadTransporte">
                     <label>Capacidad Utilizada</label>
-                    <h5 style="text-align: center;">0</h5>
+                    <h5 style="text-align: center;">{{ habilitacion.capacidadUtilizada }}</h5>
                 </div>
-                <div class="col-xs-12 col-lg-12" *ngIf="empresaTransporte.idClase == 5 ">
+                <div class="col-xs-12 col-lg-12" *ngIf="habilitacion.clase.id == 5 ">
                     <div class="custom-control custom-checkbox">
-                        <input [(ngModel)]="empresaTransporte.dobleCabina" name="dobleCabina" type="checkbox"
+                        <input [(ngModel)]="habilitacion.dobleCabina" name="dobleCabina" type="checkbox"
                             class="custom-control-input" id="checkbox-dobleCabina" checked="">
                         <label class="custom-control-label" for="checkbox-dobleCabina">Doble Cabina</label>
                     </div>

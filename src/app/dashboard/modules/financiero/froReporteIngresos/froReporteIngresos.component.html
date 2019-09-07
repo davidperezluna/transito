@@ -82,8 +82,10 @@
             </div>
             <div class="card-footer">
                 <div class="btn-group">
-                    <button (click)="onEnviar()" [disabled]="formFiltros.invalid" class="btn btn-primary"
+                    <button (click)="onEnviar()" *ngIf="tipoRecaudoSelected == 1" [disabled]="formFiltros.invalid || tipoArchivoTramite == null" class="btn btn-primary"
                         type="button">Enviar</button>
+                        <button (click)="onEnviar()" *ngIf="tipoRecaudoSelected != 1" [disabled]="formFiltros.invalid" class="btn btn-primary"
+                            type="button">Enviar</button>
                 </div>
             </div>
         </div>
