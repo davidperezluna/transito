@@ -89,6 +89,8 @@ export class EditComponent implements OnInit {
                 this.modalidadesTransporte = response;
                 setTimeout(() => {
                     this.modalidadTransporteSelected = [this.habilitacion.modalidadTransporte.id];
+                    console.log(this.habilitacion.modalidadTransporte.id);
+                    console.log(this.modalidadTransporteSelected);
                 });
             },
             error => {
