@@ -58,7 +58,7 @@ export class FroAcuerdoPagoComponent implements OnInit {
 
     this._ComparendoService.searchByFiltrosForFactura(this.search, token).subscribe(
       response => {
-        if (response.status == 'success') {
+        if (response.code == 200) {
           this.comparendos = response.data.comparendos;
           this.formIndex = true;
 

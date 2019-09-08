@@ -402,7 +402,7 @@ export class ReportesComponent implements OnInit {
         if (this.tipoReporteSelected) {
             this._TrteSolicitudReporteService.searchByFiltros(this.datos, token).subscribe(
                 response => {
-                    if (response.status == 'success') {
+                    if (response.code == 200) {
                         if (response.tramitesSolicitud) {
                             this.onInitDatatables();
 

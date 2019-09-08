@@ -51,7 +51,7 @@ export class EditComponent implements OnInit {
         this.requiereEmpresa.idCarroceria = this.carroceriaSelected;
         this._RequiereEmpresaService.edit(this.requiereEmpresa, token).subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                     this.ready.emit(true);
                     swal({
                         title: 'Perfecto!',

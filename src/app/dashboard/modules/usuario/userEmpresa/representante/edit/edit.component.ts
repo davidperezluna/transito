@@ -59,7 +59,7 @@ export class EditRepresentanteComponent implements OnInit {
 
         this._CiudadanoService.searchByIdentificacion(datos, token).subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                     if (response.data.ciudadano) {
                         this.ciudadano = response.data.ciudadano;
                         this.datos.idCiudadano = this.ciudadano.id;
@@ -93,7 +93,7 @@ export class EditRepresentanteComponent implements OnInit {
 
         this._RepresentanteService.edit(this.datos, token).subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                     this.formEdit = false;
                     this.onReady.emit(true);
 

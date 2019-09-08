@@ -68,7 +68,7 @@ export class EditRevisionComponent implements OnInit {
         this.msvRevision.empresaId = this.miEmpresa.id;
         this._RevisionService.edit(this.msvRevision, token).subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                     this.ready.emit(true);
                     swal({
                         title: 'Perfecto!',

@@ -36,7 +36,7 @@ export class DisabledComponent implements OnInit {
         this.datos.idFuncionario = this.funcionario.id;
         this._FuncionarioService.disabled(this.datos, token).subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                     this.ready.emit(true);
                     swal({
                         title: 'Perfecto!',

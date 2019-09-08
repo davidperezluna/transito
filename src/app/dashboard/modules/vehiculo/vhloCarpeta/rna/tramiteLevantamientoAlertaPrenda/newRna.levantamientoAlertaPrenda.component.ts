@@ -82,7 +82,7 @@ export class NewRnaTramiteLevantamientoAlertaPrendaComponent implements OnInit {
 
         this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                     this.datos.idFuncionario = response.data.id;
                     this.autorizado = true;
 
@@ -167,7 +167,7 @@ export class NewRnaTramiteLevantamientoAlertaPrendaComponent implements OnInit {
 
                         this._VehiculoAcreedorService.searchByVehiculo({ 'idVehiculo': this.vehiculo.id }, token).subscribe(
                             response => {
-                                if (response.status == 'success') {
+                                if (response.code == 200) {
                                     this.datos.acreedores = response.data;
                                 } else {
                                     swal({
@@ -220,7 +220,7 @@ export class NewRnaTramiteLevantamientoAlertaPrendaComponent implements OnInit {
               if (response.code == 200) {
                 this._VehiculoAcreedorService.delete({ 'id': this.datos.idAcreedor }, token).subscribe(
                     response => {
-                        if (response.status == 'success') {
+                        if (response.code == 200) {
                             let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero;
         
                             this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });

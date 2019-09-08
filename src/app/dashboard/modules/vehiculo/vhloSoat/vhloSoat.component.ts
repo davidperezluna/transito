@@ -90,12 +90,12 @@ export class VhloSoatComponent implements OnInit {
         
         this._VehiculoService.searchByPlaca({'numero': this.placa}, token).subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                     this.vehiculo = response.data;
                     this.formHistorial = true;
                     this._SoatService.index({ 'idVehiculo': this.vehiculo.id }, token).subscribe(
                         response => {
-                            if (response.status == 'success') {
+                            if (response.code == 200) {
                                 this.soats = response.data;
                                 swal.close();
 

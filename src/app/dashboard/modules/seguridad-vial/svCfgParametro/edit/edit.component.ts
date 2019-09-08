@@ -50,7 +50,7 @@ export class EditComponent implements OnInit {
         this.parametro.idCategoria = this.categoriaSelected;
         this._ParametroService.editParametro(this.parametro, token).subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                     this.ready.emit(true);
                     swal({
                         title: 'Perfecto!',

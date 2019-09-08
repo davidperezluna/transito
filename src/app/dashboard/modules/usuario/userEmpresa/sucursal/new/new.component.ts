@@ -59,7 +59,7 @@ export class NewSucursalComponent implements OnInit {
 
     this._SucursalService.register(this.sucursal, token).subscribe(
       response => {
-        if (response.status == 'success') {
+        if (response.code == 200) {
           this.onReady.emit(true);
           
           swal({

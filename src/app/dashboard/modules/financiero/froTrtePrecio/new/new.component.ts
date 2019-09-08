@@ -135,7 +135,7 @@ export class NewComponent implements OnInit {
 
         this._TrtePrecioService.register(this.tramitePrecio, token).subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                     swal({
                         title: 'Perfecto!',
                         text: response.message,

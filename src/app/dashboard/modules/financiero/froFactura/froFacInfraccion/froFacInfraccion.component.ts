@@ -68,7 +68,7 @@ export class FroFacInfraccionComponent implements OnInit {
 
     this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
       response => {
-        if (response.status == 'success') {
+        if (response.code == 200) {
           this.funcionario = response.data;
           this.factura.idOrganismoTransito = this.funcionario.organismoTransito.id;
 
@@ -113,7 +113,7 @@ export class FroFacInfraccionComponent implements OnInit {
 
     this._ComparendoService.searchByFiltrosForFactura(this.search, token).subscribe(
       response => {
-        if (response.status == 'success') {
+        if (response.code == 200) {
           this.comparendos = response.data.comparendos;
           this.infractor = response.data.infractor;
           this.formIndex = true;
@@ -121,7 +121,7 @@ export class FroFacInfraccionComponent implements OnInit {
           this.comparendos.forEach((element: any, key: any) => {            
             this._ComparendoService.validateCurso({ 'id':element.id }, token).subscribe(
               response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                   element.curso = true;
                 }else{
                   element.curso = false;
@@ -221,7 +221,7 @@ export class FroFacInfraccionComponent implements OnInit {
 
     this._FacturaService.calculateValue(this.comparendosSelect, token).subscribe(
       response => {
-        if (response.status == 'success') {
+        if (response.code == 200) {
           this.factura.valor = response.data.totalPagar;
           this.factura.interes = response.data.totalInteres;
 
@@ -259,7 +259,7 @@ export class FroFacInfraccionComponent implements OnInit {
 
     this._FacturaService.register({'factura':this.factura}, token).subscribe(
       response => {
-        if (response.status == 'success') {
+        if (response.code == 200) {
           this.factura = response.data;
           this.municipio = response.data.organismoTransito.municipio;
           this.fechaCreacion = response.data.fechaCreacion;

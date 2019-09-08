@@ -146,7 +146,7 @@ export class LocationComponent implements OnInit {
 
         this._SenialUbicacionService.searchByFechasAndMunicipio(this.filtros, token).subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                     this.address = this.municipio.nombre + ", Nariño";
                     this.ubicaciones = response.data;
     

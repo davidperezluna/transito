@@ -1,12 +1,13 @@
-import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { VhloPlacaSede } from '../vhloPlacaSede.modelo';
 import { VhloPlacaSedeService } from '../../../../../services/vhloPlacaSede.service';
 import { VhloCfgTipoVehiculoService } from "../../../../../services/vhloCfgTipoVehiculo.service";
+import { VhloCfgServicioService } from "../../../../../services/vhloCfgServicio.service";
 import { LoginService } from '../../../../../services/login.service';
-import { VhloPlacaSede } from '../vhloPlacaSede.modelo';
 import swal from 'sweetalert2';
 
 @Component({
-    selector: 'app-new-placasede',
+    selector: 'app-new-vhloplacasede',
     templateUrl: './new.component.html'
 })
 
@@ -18,21 +19,36 @@ export class NewComponent implements OnInit {
 
     public organismosTransito: any;
     public tiposVehiculo: any;
-    public tipoVehiculo: any;
+    public servicios: any;
     public modulos: any;
 
     constructor(
+        private _PlacaSedeService: VhloPlacaSedeService,
         private _TipoVehiculoService: VhloCfgTipoVehiculoService,
-        private _VhloPlacaSedeService: VhloPlacaSedeService,
-        private _loginService: LoginService,
+        private _ServicioService: VhloCfgServicioService,
+        private _LoginService: LoginService,
     ) { }
 
     ngOnInit() {
-        this.asignacion = new VhloPlacaSede(null, null, null, null, null);
+        this.asignacion = new VhloPlacaSede(null, null, null, null, null, null);
 
         this._TipoVehiculoService.select().subscribe(
             response => {
                 this.tiposVehiculo = response;
+            },
+            error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert("Error en la petición");
+                }
+            }
+        );
+
+        this._ServicioService.select().subscribe(
+            response => {
+                this.servicios = response;
             },
             error => {
                 this.errorMessage = <any>error;
@@ -48,7 +64,7 @@ export class NewComponent implements OnInit {
     onCancelar() {
         this.ready.emit(true);
     }
-
+    
     onEnviar() {
         swal({
             title: 'Un momento!',
@@ -58,13 +74,13 @@ export class NewComponent implements OnInit {
             }
         });
 
-        let token = this._loginService.getToken();
+        let token = this._LoginService.getToken();
 
         this.asignacion.idOrganismoTransito = this.organismoTransito.id;
 
-        this._VhloPlacaSedeService.register(this.asignacion, token).subscribe(
+        this._PlacaSedeService.register(this.asignacion, token).subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                     swal({
                         title: 'Perfecto!',
                         text: response.message,
@@ -89,28 +105,6 @@ export class NewComponent implements OnInit {
                 }
             }
         );
-    }
-
-    onChangedTipoVehiculo(e) {
-        if (e) {
-            let token = this._loginService.getToken();
-
-            this._TipoVehiculoService.show({'id': e}, token).subscribe(
-                response => {
-                    if (response.status == 'success') {
-                        this.tipoVehiculo = response.data;
-                    }
-                },
-                error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                        console.log(this.errorMessage);
-                        alert("Error en la petición");
-                    }
-                }
-            );
-        }
     }
 }
 

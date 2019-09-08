@@ -68,7 +68,7 @@ export class UserCiudadanoComponent implements OnInit {
 
     this._UserCiudadanoService.searchByFiltros(this.search, token).subscribe(
       response => {
-        if (response.status == 'success') {
+        if (response.code == 200) {
           this.ciudadanos = response.data;
           this.formIndex = true;
           

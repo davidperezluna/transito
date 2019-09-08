@@ -5,17 +5,22 @@ import { SelectModule } from 'angular2-select';
 
 import { VhloPlacaSedeService } from '../../../../services/vhloPlacaSede.service';
 import { VhloCfgTipoVehiculoService } from "../../../../services/vhloCfgTipoVehiculo.service";
+import { VhloCfgServicioService } from "../../../../services/vhloCfgServicio.service";
+import { CfgOrganismoTransitoService } from '../../../../services/cfgOrganismoTransito.service';
 
 import { NewComponent } from './new/new.component';
 import { EditComponent } from './edit/edit.component';
+import { RequestComponent } from './request/request.component';
 
 @NgModule({
     imports: [CommonModule, Ng2BootstrapModule.forRoot(), SelectModule],
-    declarations: [NewComponent, EditComponent],
-    exports: [NewComponent, EditComponent],
+    declarations: [NewComponent, EditComponent, RequestComponent],
+    exports: [NewComponent, EditComponent, RequestComponent],
     providers: [
         VhloPlacaSedeService,
         VhloCfgTipoVehiculoService,
+        VhloCfgServicioService,
+        CfgOrganismoTransitoService,
     ]
 })
 

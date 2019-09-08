@@ -74,7 +74,7 @@ constructor(
       if (result.value) {
         this._TecnoMecanicaService.register(this.tecnomecanica, token).subscribe(
           response => {
-            if (response.status == 'success') {
+            if (response.code == 200) {
               this.ready.emit(true);
               swal({
                 title: 'Perfecto!',
@@ -111,7 +111,7 @@ constructor(
     if (this.tecnomecanica.fechaExpedicion) {
       this._TecnoMecanicaService.getFechaVencimiento({'idVehiculo': this.vehiculo.id, 'fechaExpedicion':this.tecnomecanica.fechaExpedicion}, token).subscribe(
         response => {
-          if (response.status == 'success') {
+          if (response.code == 200) {
             this.tecnomecanica.fechaVencimiento = response.data;
             this.fecha = true;
             //swal.close();

@@ -72,7 +72,7 @@ export class FroTrtePrecioComponent implements OnInit {
 
         this._PrecioService.searchByModulo(this.search, token).subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                     this.tramitesPrecios = response.data.tramitesPrecio;
                     this.modulo = response.data.modulo;
                     this.formIndex = true;
@@ -199,7 +199,7 @@ export class FroTrtePrecioComponent implements OnInit {
 
         this._PrecioService.update({ 'tramitesPrecios': this.tramitesPrecios}, token).subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                     swal({
                         title: 'Perfecto!',
                         text: response.message,

@@ -124,7 +124,7 @@ export class NewTramiteLevantamientoAlertaPrendaComponent implements OnInit {
 
             this._VehiculoAcreedorService.searchByVehiculo({ 'idVehiculo': this.vehiculo.id }, token).subscribe(
                 response => {
-                    if (response.status == 'success') {
+                    if (response.code == 200) {
                         this.datos.acreedores = response.data;
                     } else {
                         swal({
@@ -171,7 +171,7 @@ export class NewTramiteLevantamientoAlertaPrendaComponent implements OnInit {
               if (response.code == 200) {
                 this._VehiculoAcreedorService.delete({ 'id': this.datos.idAcreedor }, token).subscribe(
                     response => {
-                        if (response.status == 'success') {
+                        if (response.code == 200) {
                             
                         } else {
         

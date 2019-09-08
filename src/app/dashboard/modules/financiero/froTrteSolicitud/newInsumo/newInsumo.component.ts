@@ -45,7 +45,7 @@ export class NewInsumoComponent implements OnInit {
 
         this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                     this.funcionario = response.data; 
                     
                     swal.close();
@@ -89,7 +89,7 @@ export class NewInsumoComponent implements OnInit {
 
         this._InsumoService.searchByNumeroAndModulo(datos, token).subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                     this.insumo = response.data;
                     this.datos.idInsumo = response.data.id;
 
@@ -127,7 +127,7 @@ export class NewInsumoComponent implements OnInit {
 
         this._UserCiudadanoService.searchByIdentificacion(datos, token).subscribe(
             response => {
-                if(response.status == 'success'){
+                if(response.code == 200){
                     if (response.data.ciudadano) {
                         this.ciudadano = response.data.ciudadano;
                         this.datos.idCiudadano = this.ciudadano.id;

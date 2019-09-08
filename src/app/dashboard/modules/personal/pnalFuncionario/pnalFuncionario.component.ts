@@ -249,7 +249,7 @@ export class PnalFuncionarioComponent implements OnInit {
     let token = this._loginService.getToken();
     this._FuncionarioService.searchByParametros(this.datos, token).subscribe(
       response => {
-        if (response.status == 'success') {
+        if (response.code == 200) {
           this.datos.nombre = null;
           this.cargoSelected = null;
           this.tipoNombramientoSelected = null;

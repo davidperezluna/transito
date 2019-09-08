@@ -56,7 +56,7 @@ constructor(
 
     this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
       response => {
-        if (response.status == 'success') {
+        if (response.code == 200) {
           this.municipio.idOrganismoTransito = response.data.organismoTransito.id;
 
         } else {
@@ -82,7 +82,7 @@ constructor(
     
 		this._ImpresoMunicipioService.register(this.municipio, token).subscribe(
 			response => {
-        if(response.status == 'success'){
+        if(response.code == 200){
           swal({
             title: 'Perfecto!',
             text: response.message,

@@ -59,7 +59,7 @@ export class NewComponent implements OnInit {
 
         this._FroFacturaServiceService.searchByNumero(token, datos).subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                     this.disabled = false;
                     this.froFactura = response.data;
                     this.froRecaudo.valor = this.froFactura.valor;
@@ -85,7 +85,7 @@ export class NewComponent implements OnInit {
 
         this._FroRecaudoService.register(this.froRecaudo, token).subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                     this.ready.emit(true);
                     swal({
                         title: 'Perfecto!',

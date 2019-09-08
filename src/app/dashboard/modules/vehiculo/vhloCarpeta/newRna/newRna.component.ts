@@ -262,7 +262,7 @@ export class NewRnaComponent implements OnInit {
 
     this._TramiteSolicitudService.register(this.tramiteSolicitud, token).subscribe(
       response => {
-        if (response.status == 'success') {
+        if (response.code == 200) {
           this.ready.emit(true);
 
           swal({
@@ -302,7 +302,7 @@ export class NewRnaComponent implements OnInit {
 
     this._TramiteSolicitudService.register(this.tramiteSolicitud, token).subscribe(
       response => {
-        if (response.status == 'success') {
+        if (response.code == 200) {
           swal({
             title: 'Perfecto!',
             text: 'Registro exitoso!',

@@ -50,7 +50,7 @@ export class NewComponent implements OnInit {
         this.geometria.tipoGeometria = this.tipoGeometriaSelected;
         this._GeometriaService.register(this.geometria, token).subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                     this.ready.emit(true);
                     swal({
                         title: 'Perfecto!',

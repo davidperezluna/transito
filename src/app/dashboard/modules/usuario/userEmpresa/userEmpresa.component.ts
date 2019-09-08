@@ -67,7 +67,7 @@ export class UserEmpresaComponent implements OnInit {
 
     this._EmpresaService.searchByFiltros(this.search, token).subscribe(
       response => {
-        if (response.status == 'success') {
+        if (response.code == 200) {
           this.empresas = response.data;
 
           swal({

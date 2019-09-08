@@ -27,7 +27,7 @@ constructor(
     
 		this._TransportePasajeroService.edit(this.transportePasajero,token).subscribe(
 			response => {
-        if(response.status == 'success'){
+        if(response.code == 200){
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',

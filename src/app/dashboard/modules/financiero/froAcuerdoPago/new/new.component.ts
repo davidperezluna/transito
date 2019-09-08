@@ -157,7 +157,7 @@ constructor(
   
             this._AcuerdoPagoService.calculateDues(this.acuerdoPago, token).subscribe(
               response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                   this.cuotas = response.data.cuotas;
                   this.totalPagar = response.data.totalPagar;
   
@@ -227,7 +227,7 @@ constructor(
 
 		this._AcuerdoPagoService.register(datos, token).subscribe(
 			response => {
-        if(response.status == 'success'){
+        if(response.code == 200){
           this.amortizaciones = response.data.amortizaciones;
           this.trazabilidad = response.data.trazabilidad;
           this.acuerdoPagoNew = response.data.acuerdoPago;

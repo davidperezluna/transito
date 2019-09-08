@@ -63,7 +63,7 @@ constructor(
     
 		this._PnalFuncionarioService.register(this.propietario,token).subscribe(
 			response => {
-        if(response.status == 'success'){
+        if(response.code == 200){
           this.ready.emit(true);
           this._PnalFuncionarioService.cartData.emit(this.propietarios);
           

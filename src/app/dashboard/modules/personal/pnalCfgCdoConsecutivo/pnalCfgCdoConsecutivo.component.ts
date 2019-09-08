@@ -50,7 +50,7 @@ export class PnalCfgCdoConsecutivoComponent implements OnInit {
 
 		this._ConsecutivoService.searchByFuncionario(this.datos, token).subscribe(
 			response => {
-        if(response.status == 'success'){
+        if(response.code == 200){
           this.consecutivos = response.data;
 
           this.onInitTable();

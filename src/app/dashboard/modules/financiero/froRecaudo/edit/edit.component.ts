@@ -59,7 +59,7 @@ export class EditComponent implements OnInit {
         this.froRecaudo.IdFroFactura = this.froFactura.id;
         this._FroRecaudoService.edit(this.froRecaudo, token).subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                     this.ready.emit(true);
                     swal({
                         title: 'Perfecto!',
@@ -88,7 +88,7 @@ export class EditComponent implements OnInit {
 
         this._FroFacturaServiceService.searchByNumero(token,datos).subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                     this.disabled = false;
                     this.froFactura = response.data;
                 }else{

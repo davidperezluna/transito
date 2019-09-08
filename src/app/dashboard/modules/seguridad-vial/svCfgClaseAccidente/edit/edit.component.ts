@@ -30,7 +30,7 @@ export class EditComponent {
     let token = this._loginService.getToken();
     this._CfgClaseAccidenteService.edit(this.claseAccidente, token).subscribe(
       response => {
-        if (response.status == 'success') {
+        if (response.code == 200) {
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',

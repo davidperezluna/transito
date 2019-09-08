@@ -49,7 +49,7 @@ export class ImoActaComponent implements OnInit {
 
     this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
       response => {
-        if (response.status == 'success') {
+        if (response.code == 200) {
           this.funcionario = response.data; 
           this.data.idFuncionario = this.funcionario.id;
         } else {

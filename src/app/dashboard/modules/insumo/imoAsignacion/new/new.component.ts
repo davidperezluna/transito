@@ -131,7 +131,7 @@ constructor(
         response => {
           this.loteInsumo = response.data;
 
-          if (response.status == 'success') {
+          if (response.code == 200) {
             this.numero = this.loteInsumo.cantidad;
 
             swal.close()
@@ -180,7 +180,7 @@ constructor(
 
       this._ImoLoteService.show(datos,token).subscribe( 
         response => {
-          if (response.status == 'success') {
+          if (response.code == 200) {
             this.lotes = response.data;
 
             swal.close()
@@ -321,7 +321,7 @@ constructor(
         
         this._ImoInsumoService.register(datos, token).subscribe(
           response => {
-            if(response.status == 'success'){
+            if(response.code == 200){
               this.numeroActa = response.data;
 
               swal.close();

@@ -100,7 +100,7 @@ export class SuspensionComponent implements OnInit {
     this.suspension.idFuncionario = this.funcionario.id;
     this._PnalSuspensionService.register(this.suspension, token).subscribe(
       response => {
-        if (response.status == 'success') {
+        if (response.code == 200) {
         //this.ready.emit(true);
           this.suspensiones = response.data;
           this.table.destroy();

@@ -53,7 +53,7 @@ constructor(
       let token = this._loginService.getToken();
       this._TrazabilidadService.response(this.file, this.datos,token).subscribe(
         response => {
-          if(response.status == 'success'){
+          if(response.code == 200){
             this.ready.emit(response.data);
 
             swal({

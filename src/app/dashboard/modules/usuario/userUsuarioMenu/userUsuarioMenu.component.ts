@@ -45,7 +45,7 @@ export class UserUsuarioMenuComponent implements OnInit {
 
     this._UserUsuarioMenuService.searchMenus({ 'identificacion': this.numeroIdentificacion }, token).subscribe(
       response => {
-        if (response.status == 'success') {
+        if (response.code == 200) {
           this.usuarioMenus = response.data.usuarioMenus;
           this.formIndex = true;
           

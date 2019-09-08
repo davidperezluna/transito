@@ -51,7 +51,7 @@ export class EditComponent implements OnInit {
         this.claseChoque.idClaseAccidente = this.claseAccidenteSelected;
         this._ClaseChoqueService.edit(this.claseChoque, token).subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                     this.ready.emit(true);
                     swal({
                         title: 'Perfecto!',

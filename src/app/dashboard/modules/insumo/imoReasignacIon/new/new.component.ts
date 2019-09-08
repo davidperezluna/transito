@@ -84,7 +84,7 @@ constructor(
 
 		this._ImoInsumoService.reasignacionSustrato(this.datosAsignacion).subscribe(
 			response => {
-        if(response.status == 'success'){
+        if(response.code == 200){
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',
@@ -117,7 +117,7 @@ constructor(
     this.datosAsignacion.casoInsumo = this.insumoSelected;
     this._ImoInsumoService.isExistencia(this.datosAsignacion).subscribe(
 			response => {
-        if(response.status == 'success'){
+        if(response.code == 200){
           this.isCantidad = false;
           swal({
             title: 'Registro encontrado!',
@@ -165,7 +165,7 @@ constructor(
 
       this._ImoLoteService.showReasignacion(datos,token).subscribe( 
         response => {
-          if (response.status == 'success') {
+          if (response.code == 200) {
             this.lotes = response.data;
             swal.close()
 
@@ -226,7 +226,7 @@ constructor(
     
     this._ImoInsumoService.reasignacionSustrato(datos).subscribe( 
       response => {
-        if (response.status == 'success') {
+        if (response.code == 200) {
           this.lotes = null;
 
           swal({

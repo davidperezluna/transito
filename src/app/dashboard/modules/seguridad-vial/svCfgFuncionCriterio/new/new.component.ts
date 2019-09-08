@@ -54,7 +54,7 @@ export class NewComponent implements OnInit {
 
         this._FuncionCriterioService.register(this.funcionCriterio, token).subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                     this.ready.emit(true);
                     swal({
                         title: 'Perfecto!',

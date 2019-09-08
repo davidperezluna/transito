@@ -310,13 +310,13 @@ export class SvEvaluacionComponent implements OnInit {
 
     this._EmpresaService.showByNitOrNombre(this.datos, token).subscribe(
       response => {
-        if (response.status == 'success') {
+        if (response.code == 200) {
           this.empresaEncontrada = true;
           this.miEmpresa = response.data;
 
           this._RevisionService.showRevisionByEmpresa({'id': this.miEmpresa.id} , token).subscribe(
             response => {
-              if (response.status == 'success') {
+              if (response.code == 200) {
                 this.miRevision = true;
                 this.revisiones = response.data;
               } else {
@@ -381,7 +381,7 @@ export class SvEvaluacionComponent implements OnInit {
       let token = this._loginService.getToken();
       this._MsvCategoriaService.showCategoria(token, e).subscribe(
         response => {
-          if (response.status == 'success') {
+          if (response.code == 200) {
             this.categoria = true;
             if (this.categoriaSelected) {
               this._MsvParametroService.getParametroByCategoriaId(token, e).subscribe(
@@ -458,13 +458,13 @@ export class SvEvaluacionComponent implements OnInit {
           
           this._MsvCalificacionService.register(dataFortalecimiento, token).subscribe(
             response => {
-              if (response.status == 'success') {
+              if (response.code == 200) {
                 this.ready2.emit(true);
 
                 //para recargar lista
                 this._MsvCategoriaService.editEstadoCategoria({'id':this.categoriaSelected}, token). subscribe(
                   response => {
-                    if (response.status == 'success') {
+                    if (response.code == 200) {
                       this._MsvCategoriaService.select().subscribe(
                         response => {
                           this.msvCategorias = null;
@@ -521,13 +521,13 @@ export class SvEvaluacionComponent implements OnInit {
 
           this._MsvCalificacionService.register(dataComportamiento, token).subscribe(
             response => {
-              if (response.status == 'success') {
+              if (response.code == 200) {
                 this.ready2.emit(true);
 
                 //para recargar lista
                 this._MsvCategoriaService.editEstadoCategoria({ 'id': this.categoriaSelected }, token).subscribe(
                   response => {
-                    if (response.status == 'success') {
+                    if (response.code == 200) {
                       this._MsvCategoriaService.select().subscribe(
                         response => {
                           this.msvCategorias = null;
@@ -583,13 +583,13 @@ export class SvEvaluacionComponent implements OnInit {
 
           this._MsvCalificacionService.register(dataVehiculoSeguro, token).subscribe(
             response => {
-              if (response.status == 'success') {
+              if (response.code == 200) {
                 this.ready2.emit(true);
 
                 //para recargar lista
                 this._MsvCategoriaService.editEstadoCategoria({ 'id': this.categoriaSelected }, token).subscribe(
                   response => {
-                    if (response.status == 'success') {
+                    if (response.code == 200) {
                       this._MsvCategoriaService.select().subscribe(
                         response => {
                           this.msvCategorias = null;
@@ -646,13 +646,13 @@ export class SvEvaluacionComponent implements OnInit {
 
           this._MsvCalificacionService.register(dataInfraestructuraSegura, token).subscribe(
             response => {
-              if (response.status == 'success') {
+              if (response.code == 200) {
                 this.ready2.emit(true);
 
                 //para recargar lista
                 this._MsvCategoriaService.editEstadoCategoria({ 'id': this.categoriaSelected }, token).subscribe(
                   response => {
-                    if (response.status == 'success') {
+                    if (response.code == 200) {
                       this._MsvCategoriaService.select().subscribe(
                         response => {
                           this.msvCategorias =null;
@@ -709,13 +709,13 @@ export class SvEvaluacionComponent implements OnInit {
 
           this._MsvCalificacionService.register(dataAtencionVictimas, token).subscribe(
             response => {
-              if (response.status == 'success') {
+              if (response.code == 200) {
                 this.ready2.emit(true);
 
                 //para recargar lista
                 this._MsvCategoriaService.editEstadoCategoria({ 'id': this.categoriaSelected }, token).subscribe(
                   response => {
-                    if (response.status == 'success') {
+                    if (response.code == 200) {
                       this._MsvCategoriaService.select().subscribe(
                         response => {
                           this.msvCategorias = null;
@@ -830,7 +830,7 @@ export class SvEvaluacionComponent implements OnInit {
 
         this._EvaluacionService.register(this.datos2, token).subscribe(
           response => {
-            if (response.status == 'success') {
+            if (response.code == 200) {
               this.ready2.emit(true);
               this.evaluacion = response.data;
               console.log(this.evaluacion);

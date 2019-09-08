@@ -175,14 +175,14 @@ constructor(
 
     this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
       response => { 
-        if(response.status == 'success'){
+        if(response.code == 200){
           this.funcionario = response.data;
           this.vehiculo.idOrganismoTransito = response.data.organismoTransito.id;
         }else{
           this.funcionario = null;
           this._FuncionarioService.searchEmpresa({ 'identificacion': identity.identificacion },token).subscribe(
             response => {
-              if(response.status == 'success'){
+              if(response.code == 200){
               }
             }, 
             error => {
@@ -646,7 +646,7 @@ constructor(
 
         this._RnaPreregistroService.register(this.vehiculo, token).subscribe(
           response => {
-            if (response.status == 'success') {
+            if (response.code == 200) {
               swal({
                 title: 'Perfecto!',
                 text: response.message,

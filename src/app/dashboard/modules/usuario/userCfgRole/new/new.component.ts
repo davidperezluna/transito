@@ -31,7 +31,7 @@ constructor(
     
 		this._UserCfgRoleService.register(this.role,token).subscribe(
 			response => {
-        if(response.status == 'success'){
+        if(response.code == 200){
           swal({
             title: 'Perfecto!',
             text: response.message,

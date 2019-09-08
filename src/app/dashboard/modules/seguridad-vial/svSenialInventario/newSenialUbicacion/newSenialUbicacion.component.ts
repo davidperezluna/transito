@@ -207,7 +207,7 @@ export class NewSenialUbicacionComponent implements OnInit {
 
             this._SenialService.show({ 'id': e }, token).subscribe(
                 response => {
-                    if (response.status == 'success') {
+                    if (response.code == 200) {
                         this.senial = response.data;
                     } else {
                         swal({
@@ -462,7 +462,7 @@ export class NewSenialUbicacionComponent implements OnInit {
 
         this._SvSenialUbicacionService.register(this.file, this.senialUbicacion, token).subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                     this.ready.emit(true);
                     swal({
                         title: 'Perfecto!',

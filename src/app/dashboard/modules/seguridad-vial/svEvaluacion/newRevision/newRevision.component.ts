@@ -56,7 +56,7 @@ constructor(
 
 		this._MsvRevisionService.register(this.msvRevision, token).subscribe(
 			response => {
-        if(response.status == 'success'){
+        if(response.code == 200){
           
           swal({
             title: 'Perfecto!',
@@ -90,7 +90,7 @@ constructor(
     if (this.msvRevision.fechaRecepcion) {
       this._MsvRevisionService.getFechaDevolucion({ 'fechaRecepcion': this.msvRevision.fechaRecepcion }, token).subscribe(
         response => {
-          if (response.status == 'success') {
+          if (response.code == 200) {
             this.msvRevision.fechaDevolucion = response.fechaDevolucion;
             //swal.close();
           } else {

@@ -1,8 +1,8 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { VhloPlacaSede } from './vhloPlacaSede.modelo';
 import { CfgOrganismoTransitoService } from '../../../../services/cfgOrganismoTransito.service';
 import { VhloPlacaSedeService } from '../../../../services/vhloPlacaSede.service';
 import { LoginService } from '../../../../services/login.service';
-import { VhloPlacaSede } from './vhloPlacaSede.modelo';
 import swal from 'sweetalert2';
 declare var $: any;
 
@@ -18,10 +18,13 @@ export class VhloPlacaSedeComponent implements OnInit {
     public asignaciones: any;
     public organismosTransito: any;
     public organismoTransito: any = null;
-    public formNew = false;
-    public formEdit = false;
-    public formIndex = false;
-    public formSearch = true;
+
+    public formSearch: any;
+    public formNew: any;
+    public formEdit: any;
+    public formIndex: any;
+    public formRequest: any;
+
     public table: any = null;
     public asignacion: VhloPlacaSede;
 
@@ -36,12 +39,23 @@ export class VhloPlacaSedeComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+        this.onInitForms();
+
+        swal({
+            title: 'Cargando información!',
+            text: 'Solo tardara unos segundos por favor espere.',
+            onOpen: () => {
+                swal.showLoading()
+            }
+        });
+
         this._OrganismoTransitoService.selectSedes().subscribe(
             response => {
                 this.organismosTransito = response;
                 
                 let timeoutId = setTimeout(() => {
-                    this.onInitTable();
+                    this.formSearch = true;
+                    swal.close();
                 }, 100);
             },
             error => {
@@ -55,10 +69,48 @@ export class VhloPlacaSedeComponent implements OnInit {
         );
     }
 
-    onSearch() {
-        this.formIndex = false;
+    onInitForms(){
+        this.formSearch = false;
         this.formNew = false;
         this.formEdit = false;
+        this.formIndex = false;
+        this.formRequest = false;
+    }
+
+    onChangedOrganismoTransito(e) {
+        if (e) {
+            let token = this._LoginService.getToken();
+
+            this._OrganismoTransitoService.show({ 'id': e }, token).subscribe(
+                response => {
+                    if (response.code == 200) {
+                        this.organismoTransito = response.data;
+                    } else {
+                        this.organismoTransito = null;
+
+                        swal({
+                            title: 'Atención!',
+                            text: response.message,
+                            type: 'warning',
+                            confirmButtonText: 'Aceptar'
+                        });
+                    }
+                },
+                error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                    }
+                }
+            );
+        }
+    }
+
+    onSearch() {
+        this.onInitForms();
+        this.formSearch = true;
 
         swal({
             title: 'Buscando registros!',
@@ -72,12 +124,12 @@ export class VhloPlacaSedeComponent implements OnInit {
 
         this._OrganismoTransitoService.show({ 'id': this.search.idOrganismoTransito }, token).subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                     this.organismoTransito = response.data;
 
                     this._PlacaSedeService.searchByOrganismoTransito(this.search, token).subscribe(
                         response => {
-                            if (response.status == 'success') {
+                            if (response.code == 200) {
                                 this.asignaciones = response.data;
                                 this.formIndex = true;
                                 
@@ -151,35 +203,13 @@ export class VhloPlacaSedeComponent implements OnInit {
     }
 
     onNew() {
-        this.formEdit = false;
-        this.formIndex = false;
+        this.onInitForms();
+        this.formNew = true;
+    }
 
-        let token = this._LoginService.getToken();
-
-        this._OrganismoTransitoService.show({ 'id': this.search.idOrganismoTransito }, token).subscribe(
-            response => {
-                if (response.status == 'success') {
-                    this.organismoTransito = response.data;
-                    this.formNew = true;
-                } else {
-                    this.organismosTransito = null;
-                    swal({
-                        title: 'Atención!',
-                        text: response.message,
-                        type: 'warning',
-                        confirmButtonText: 'Aceptar'
-                    });
-                }
-            },
-            error => {
-                this.errorMessage = <any>error;
-
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert("Error en la petición");
-                }
-            }
-        );
+    onRequest() {
+        this.onInitForms();
+        this.formRequest = true;
     }
 
     ready(isCreado: any) {

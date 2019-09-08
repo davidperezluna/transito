@@ -29,7 +29,7 @@ export class NewComponent implements OnInit {
     
     this._SvCfgGravedadAccidenteService.register(this.cfgGravedad, token).subscribe(
       response => {
-        if (response.status == 'success') {
+        if (response.code == 200) {
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',

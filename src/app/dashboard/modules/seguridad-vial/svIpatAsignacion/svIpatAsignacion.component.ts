@@ -146,7 +146,7 @@ export class SvIpatAsignacionComponent implements OnInit {
 		/* this._AsignacionService.recordByTalonario(this.datos,token).subscribe( */
 		this._AsignacionService.searchFuncionarioAgente(this.datos,token).subscribe(
 			response => {
-        if(response.status == 'success'){
+        if(response.code == 200){
           this.funcionarios = response.data;
           this.onInitTable();
 

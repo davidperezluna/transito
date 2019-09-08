@@ -71,7 +71,7 @@ constructor(
 
       this._SenialTipoService.show({ 'id': e }, token).subscribe(
         response => {
-          if (response.status == 'success') {
+          if (response.code == 200) {
             this.tipo = response.data;
           }else{
             this.tipo = null;
@@ -94,7 +94,7 @@ constructor(
     
     this._SvCfgSenialService.register(this.file, this.senial, token).subscribe(
 			response => {
-        if(response.status == 'success'){
+        if(response.code == 200){
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',

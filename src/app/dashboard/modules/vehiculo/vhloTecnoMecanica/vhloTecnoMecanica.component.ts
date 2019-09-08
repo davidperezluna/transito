@@ -61,13 +61,13 @@ export class VhloTecnoMecanicaComponent implements OnInit {
 
     this._VehiculoService.searchByPlaca({ 'numero': this.placa }, token).subscribe(
       response => {
-        if (response.status == 'success') {
+        if (response.code == 200) {
           this.vehiculo = response.data;
           this.formHistorial = true;
           //Busca el historial de tecno mecanicas por vehiculo encontrado
           this._TecnoMecanicaService.index({'idVehiculo': this.vehiculo.id}, token).subscribe(
             response => {
-              if (response.status == 'success') {
+              if (response.code == 200) {
                 this.tecnoMecanicas = response.data;
                 swal.close();
               } else {

@@ -113,7 +113,7 @@ constructor(
 
     this._ComparendoService.searchByFiltros(this.search, token).subscribe(
 			response => {
-        if (response.status == 'success') {
+        if (response.code == 200) {
           this.comparendos = response.data;
           swal({
             title: 'Perfecto!',
@@ -185,7 +185,7 @@ constructor(
 
       this._ComparendoService.record({ 'id': this.comparendo.id }, token).subscribe(
         response => {
-          if (response.status == 'success') {
+          if (response.code == 200) {
             this.trazabilidades = response.data.trazabilidades;
             this.acuerdoPago = response.data.acuerdoPago;
             this.amortizaciones = response.data.amortizaciones;
@@ -376,7 +376,7 @@ constructor(
 
     this._TrazabilidadService.updateDocumento(this.datos, token).subscribe(
       response => {
-        if (response.status == 'success') {
+        if (response.code == 200) {
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',
@@ -441,7 +441,7 @@ constructor(
 
     this._TrazabilidadService.register(this.datosTrazabilidad, token).subscribe(
       response => {
-        if (response.status == 'success') {
+        if (response.code == 200) {
           this.onSearch();
 
           swal({
@@ -576,7 +576,7 @@ constructor(
 
     this._TrazabilidadService.registerBien(this.datosInvestigacion, token).subscribe(
       response => {
-        if (response.status == 'success') {
+        if (response.code == 200) {
           this.onInvestigacion(this.trazabilidad);
 
           swal({

@@ -107,12 +107,12 @@ constructor(
           this._VehiculoService.update(this.datos,token).subscribe(
             response => {
                 response = response; 
-                if(response.status == 'success'){
+                if(response.code == 200){
                   
                   
                   
                     this._TramiteTrasladoService.register(this.datos, token).subscribe(response => {
-                    if (response.status == 'success') {
+                    if (response.code == 200) {
                       
                     }
                     error => {

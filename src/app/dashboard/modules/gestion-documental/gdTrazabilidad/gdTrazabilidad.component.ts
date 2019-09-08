@@ -55,11 +55,11 @@ export class GdTrazabilidadComponent implements OnInit {
 
     this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
       response => {
-        if (response.status == 'success') {
+        if (response.code == 200) {
           this.funcionario = response.data;
           this._TrazabilidadService.searchByFuncionario({ 'idFuncionario':this.funcionario.id }, token).subscribe(
             response => {
-              if (response.status == 'success') {
+              if (response.code == 200) {
                 this.formIndex = true;
                 this.trazabilidades = response.data;
                 let timeoutId = setTimeout(() => {

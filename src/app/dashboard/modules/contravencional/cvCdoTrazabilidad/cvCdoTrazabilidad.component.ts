@@ -79,7 +79,7 @@ export class CvCdoTrazabilidadComponent implements OnInit {
 
     this._ComparendoService.searchByNumber({'numero':this.numero }, token).subscribe(
       response => {
-        if (response.status == 'success') {
+        if (response.code == 200) {
           this.comparendo = response.data;
           this.formIndex = true;
 
@@ -93,7 +93,7 @@ export class CvCdoTrazabilidadComponent implements OnInit {
 
           this._ComparendoService.record({ 'id': this.comparendo.id }, token).subscribe(
             response => {
-              if (response.status == 'success') {
+              if (response.code == 200) {
                 this.trazabilidades = response.data.trazabilidades;
                 this.acuerdoPago = response.data.acuerdoPago;
 

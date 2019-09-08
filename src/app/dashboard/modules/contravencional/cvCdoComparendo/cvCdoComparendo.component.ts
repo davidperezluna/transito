@@ -136,7 +136,7 @@ export class CvCdoComparendoComponent implements OnInit {
           let token = this._LoginService.getToken();
           this._ComparendoService.setComparendoArchivo(this.txt,polca,token).subscribe(
             response => {
-              if (response.status == 'success') {
+              if (response.code == 200) {
                 swal('Archivo cargado con exito')
                 console.log(response);
               }

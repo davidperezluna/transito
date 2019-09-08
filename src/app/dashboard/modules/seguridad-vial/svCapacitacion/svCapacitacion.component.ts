@@ -109,7 +109,7 @@ export class SvCapacitacionComponent implements OnInit {
 
         this._UserCiudadanoService.searchByIdentificacion({ 'nit': this.capacitacion.nit, 'identificacion': this.capacitacion.identificacion, 'idTipoIdentificacion': this.capacitacion.idTipoIdentificacion }, token).subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                     if (response.data.ciudadano) {
                         this.ciudadano = response.data.ciudadano;
                         this.empresa = false;
@@ -122,7 +122,7 @@ export class SvCapacitacionComponent implements OnInit {
                     if (this.ciudadano) {
                         this._CapacitacionService.buscarCapacitacionByCiudadano({ 'idTipoIdentificacion': this.capacitacion.idTipoIdentificacion, 'identificacion': this.ciudadano.identificacion }, token).subscribe(
                             response => {
-                                if (response.status == 'success') {
+                                if (response.code == 200) {
                                     this.capacitaciones = response.data;
                                     let timeoutId = setTimeout(() => {
                                         this.iniciarTabla();
@@ -148,7 +148,7 @@ export class SvCapacitacionComponent implements OnInit {
                     } else if (this.empresa) {
                         this._CapacitacionService.buscarCapacitacionByCiudadano({ 'idTipoIdentificacion': this.capacitacion.idTipoIdentificacion, 'nit': this.empresa.nit }, token).subscribe(
                             response => {
-                                if (response.status == 'success') {
+                                if (response.code == 200) {
                                     this.capacitaciones = response.data;
                                     let timeoutId = setTimeout(() => {
                                         this.iniciarTabla();
@@ -250,7 +250,7 @@ export class SvCapacitacionComponent implements OnInit {
         let token = this._loginService.getToken();
         /* this._CapacitacionService.onShowByCapacitacion().subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                     swal({
                         title: 'Perfecto!',
                         text: response.message,

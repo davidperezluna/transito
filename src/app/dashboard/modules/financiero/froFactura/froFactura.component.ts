@@ -74,7 +74,7 @@ export class FroFacturaComponent implements OnInit {
 
     this._FacturaService.searchByFilters(this.search, token).subscribe(
       response => {
-        if (response.status == 'success') {
+        if (response.code == 200) {
           this.facturas = response.data;
           this.formIndex = true;
 

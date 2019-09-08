@@ -54,7 +54,7 @@ constructor(
 
     this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
       response => {
-        if (response.status == 'success') {
+        if (response.code == 200) {
           this.datos.idFuncionario = response.data.id;
           this.autorizado = true;
 
@@ -158,13 +158,13 @@ constructor(
           this._VehiculoService.update(this.datos,token).subscribe(
             response => {
                 response = response; 
-                if(response.status == 'success'){
+                if(response.code == 200){
                   let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero +
                     '<br/><b>Organismo transito anterior: </b>' + this.vehiculo.organismoTransito.nombre +
                     '<br/><b>Organismo transito nuevo: </b>' + this.datos.idOrganismoTransitoNew;
       
                   this._TramiteTrasladoService.register(this.datos, token).subscribe(response => {
-                    if (response.status == 'success') {
+                    if (response.code == 200) {
                       this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
                     }
                     error => {

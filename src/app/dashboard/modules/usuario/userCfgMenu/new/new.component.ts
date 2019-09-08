@@ -46,7 +46,7 @@ constructor(
     
 		this._MenuService.register(this.menu,token).subscribe(
 			response => {
-        if(response.status == 'success'){
+        if(response.code == 200){
           this.ready.emit(true);
 
           //this._MenuService.cartData.emit(this.menus);

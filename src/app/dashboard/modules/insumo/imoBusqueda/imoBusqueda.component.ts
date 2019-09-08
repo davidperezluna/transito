@@ -95,7 +95,7 @@ export class ImoBusquedaComponent implements OnInit {
 
     this._ImoLoteService.show(this.datos, token).subscribe(
       response => {
-        if (response.status == 'success') {
+        if (response.code == 200) {
           this.loteInsumos = response.data;
 
           let timeoutId = setTimeout(() => {  
@@ -133,7 +133,7 @@ export class ImoBusquedaComponent implements OnInit {
 
     this._ImoInsumoService.showLote(loteInsumo.id, token).subscribe(
 			response => {
-        if(response.status == 'success'){
+        if(response.code == 200){
           this.insumos = response.data;
           
           this.onInitForms();

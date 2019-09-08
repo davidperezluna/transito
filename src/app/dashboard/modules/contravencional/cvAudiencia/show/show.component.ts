@@ -100,7 +100,7 @@ export class ShowComponent implements OnInit {
 
         this._AudienciaService.updateCuerpo(this.datos, token).subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                     this.ready.emit(false);
 
                     swal({

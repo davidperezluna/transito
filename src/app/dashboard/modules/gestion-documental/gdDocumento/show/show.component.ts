@@ -178,7 +178,7 @@ constructor(
       this._TipoCorrespondenciaService.show({ 'idTipoCorrespondencia': event }, token).subscribe(
         response => {
           response = response;
-          if (response.status == 'success') {
+          if (response.code == 200) {
             this.editable = response.data.editable;
             this.documento.vigencia = response.data.diasVigencia;
           }
@@ -202,7 +202,7 @@ constructor(
 
       this._DocumentoService.update(this.file, this.datos, token).subscribe(
         response => {
-          if (response.status == 'success') {
+          if (response.code == 200) {
             swal({
               title: 'Perfecto!',
               text: response.message,

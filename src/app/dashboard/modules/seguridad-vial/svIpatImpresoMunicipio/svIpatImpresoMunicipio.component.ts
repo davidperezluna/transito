@@ -47,7 +47,7 @@ export class SvIpatImpresoMunicipioComponent implements OnInit {
 
     this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
       response => {
-        if (response.status == 'success') {
+        if (response.code == 200) {
           this.organismoTransito = response.data.organismoTransito;
 
           this._ImpresoMunicipioService.index({ 'idOrganismoTransito': this.organismoTransito.id }).subscribe(

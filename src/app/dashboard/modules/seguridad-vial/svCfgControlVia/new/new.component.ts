@@ -50,7 +50,7 @@ export class NewComponent implements OnInit {
         this.controlVia.tipoControl = this.tipoControlSelected;
         this._ControlViaService.register(this.controlVia, token).subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                     this.ready.emit(true);
                     swal({
                         title: 'Perfecto!',

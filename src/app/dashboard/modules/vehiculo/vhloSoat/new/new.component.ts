@@ -104,7 +104,7 @@ export class NewComponent implements OnInit {
             if (result.value) {
                 this._SoatService.register(this.soat, token).subscribe(                    
                     response => {
-                        if (response.status == 'success') {
+                        if (response.code == 200) {
                             this.ready.emit(true);
                             swal({
                                 title: 'Perfecto!',
@@ -141,7 +141,7 @@ export class NewComponent implements OnInit {
         if (this.soat.fechaExpedicion) {
             this._SoatService.getFechaVencimiento({ 'idVehiculo': this.vehiculo.id, 'fechaExpedicion': this.soat.fechaExpedicion }, token).subscribe(
                 response => {
-                    if (response.status == 'success') {
+                    if (response.code == 200) {
                         this.soat.fechaVencimiento = response.fechaVencimiento;
                         this.soat.fechaVigencia = response.fechaVigencia;
                         this.fecha = true;

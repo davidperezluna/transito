@@ -149,7 +149,7 @@ export class SvSenialInventarioComponent implements OnInit {
 
         this._SenialInventarioService.searchCantidadBySenialAndTipoDestino(this.datos, token).subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                     this.seniales = response.data;
 
                     let timeoutId = setTimeout(() => {

@@ -136,7 +136,7 @@ constructor(
 
     this._EmpresaService.register(datos, token).subscribe(
       response => {
-        if(response.status == 'success'){
+        if(response.code == 200){
           this.readyEmpresa.emit(true);
           swal({
             title: 'Perfecto!',

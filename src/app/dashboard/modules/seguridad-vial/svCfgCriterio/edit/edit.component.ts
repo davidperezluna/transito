@@ -51,7 +51,7 @@ export class EditComponent implements OnInit {
         this.criterio.idVariable = this.variableSelected
         this._CriterioService.editCriterio(this.criterio, token).subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                     this.ready.emit(true);
                     swal({
                         title: 'Perfecto!',

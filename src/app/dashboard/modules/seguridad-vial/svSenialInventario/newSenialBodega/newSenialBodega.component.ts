@@ -90,7 +90,7 @@ export class NewSenialBodegaComponent implements OnInit {
 
             this._SenialService.show({ 'id': e }, token).subscribe(
                 response => {
-                    if (response.status == 'success') {
+                    if (response.code == 200) {
                         this.senial = response.data;
                     } else {
                         swal({
@@ -145,7 +145,7 @@ export class NewSenialBodegaComponent implements OnInit {
 
         this._SenialBodegaService.register(this.file, this.senialBodega, token).subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                     this.ready.emit(true);
                     swal({
                         title: 'Perfecto!',

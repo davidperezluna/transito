@@ -75,7 +75,7 @@ export class EditComponent implements OnInit {
         this.unidadReceptora.municipio = this.municipioSelected;
         this._UnidadReceptoraService.edit(this.unidadReceptora, token).subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                     this.ready.emit(true);
                     swal({
                         title: 'Perfecto!',

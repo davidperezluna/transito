@@ -63,7 +63,7 @@ export class RecordComponent implements OnInit {
 
         this._SenialInventarioService.searchBySenialAndTipoDestino({ 'idSenial': this.senial.id, 'tipoDestino': this.datos.tipoDestino }, token).subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                     this.inventarios = response.data;
 
                     let timeoutId = setTimeout(() => {

@@ -45,7 +45,7 @@ constructor(
 
     this._ComparendoService.searchByState({'idEstado': this.estadoSelected}, token).subscribe(
 			response => {
-        if(response.status == 'success'){
+        if(response.code == 200){
           this.comparendos = response.data;
           swal({
             title: 'Perfecto!',

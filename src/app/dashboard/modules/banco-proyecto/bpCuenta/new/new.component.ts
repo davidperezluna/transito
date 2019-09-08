@@ -35,7 +35,7 @@ export class NewComponent implements OnInit {
     
 		this._CuentaService.register(this.cuenta,token).subscribe(
 			response => {
-        if(response.status == 'success'){
+        if(response.code == 200){
           this.onReadyCuenta.emit();
           
           swal({

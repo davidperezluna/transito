@@ -34,7 +34,7 @@ constructor(
 
     this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
       response => {
-        if (response.status == 'success') {
+        if (response.code == 200) {
           this.funcionario = response.data;
           this.patio.idOrganismoTransito = this.funcionario.organismoTransito.id;
         } else {
@@ -74,7 +74,7 @@ constructor(
     if (this.fileSelected) {
       this._PatioService.register(this.file, this.patio, token).subscribe(
         response => {
-          if (response.status == 'success') {
+          if (response.code == 200) {
             this.ready.emit(true);
             swal({
               title: 'Perfecto!',

@@ -82,7 +82,7 @@ export class FroFacAcuerdoPagoComponent implements OnInit {
 
         this._AcuerdoPagoService.searchByFiltros(this.search, token).subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                     this.acuerdosPago = response.data;
                     this.formIndex = true;
 
@@ -133,7 +133,7 @@ export class FroFacAcuerdoPagoComponent implements OnInit {
 
         this._AcuerdoPagoService.show(acuerdoPago, token).subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                     this.amortizaciones = response.data.amortizaciones;
                     this.acuerdoPago = response.data.acuerdoPago;
                     this.formShow = true;
@@ -206,7 +206,7 @@ export class FroFacAcuerdoPagoComponent implements OnInit {
 
         this._FacturaService.registerByAmortizacion(this.factura, token).subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                     this.onShow(this.acuerdoPago);
 
                     swal({

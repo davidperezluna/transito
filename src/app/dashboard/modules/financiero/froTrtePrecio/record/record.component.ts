@@ -58,7 +58,7 @@ export class RecordComponent implements OnInit {
 
         this._TrtePrecioService.record(this.filtro, token).subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                     this.tramitesPrecio = response.data;
 
                     swal({

@@ -58,7 +58,7 @@ constructor(
     this.horario.idFuncionario = this.funcionario.id;
     this._HorarioService.register(this.horario,token).subscribe(
       response => {        
-        if(response.status == 'success'){
+        if(response.code == 200){
           if(this.agregar == 'true'){
             swal({
               title: 'Perfecto!',

@@ -35,7 +35,7 @@ constructor(
 
     this._AudienciaService.searchLast(token).subscribe(
       response => {
-        if (response.status == 'success') {
+        if (response.code == 200) {
           this.audienciaLast = response.data;
 
           swal({
@@ -90,7 +90,7 @@ constructor(
 
     this._ComparendoService.searchByNumber({ 'numero':this.numeroComparendo }, token).subscribe(
       response => {
-        if (response.status == 'success') {
+        if (response.code == 200) {
           this.comparendo = response.data;
           this.audiencia.idComparendo = this.comparendo.id;
 
@@ -129,7 +129,7 @@ constructor(
     
 		this._AudienciaService.register(this.audiencia, token).subscribe(
 			response => {
-        if(response.status == 'success'){
+        if(response.code == 200){
           this.ready.emit(true);
           
           swal({

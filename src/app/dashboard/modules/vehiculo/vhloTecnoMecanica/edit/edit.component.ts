@@ -62,7 +62,7 @@ export class EditComponent implements OnInit {
 
     this._TecnoMecanicaService.edit(this.tecnoMecanica, token).subscribe(
       response => {
-        if (response.status == 'success') {
+        if (response.code == 200) {
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',
@@ -89,7 +89,7 @@ export class EditComponent implements OnInit {
     if (this.tecnoMecanica.fechaExpedicion) {
       this._TecnoMecanicaService.getFechaVencimiento({ 'fechaExpedicion': this.tecnoMecanica.fechaExpedicion }, token).subscribe(
         response => {
-          if (response.status == 'success') {
+          if (response.code == 200) {
             this.tecnoMecanica.fechaVencimiento = response.data;
             //swal.close();
           } else {

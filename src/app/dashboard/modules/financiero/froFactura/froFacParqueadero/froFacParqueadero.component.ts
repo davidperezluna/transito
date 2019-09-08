@@ -83,7 +83,7 @@ export class FroFacParqueaderoComponent implements OnInit {
 
     this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
       response => {
-        if (response.status == 'success') {
+        if (response.code == 200) {
           this.funcionario = response.data;
           this.factura.idOrganismoTransito = this.funcionario.organismoTransito.id;
 
@@ -349,7 +349,7 @@ export class FroFacParqueaderoComponent implements OnInit {
 
     this._FacturaService.register(datos, token).subscribe(
       response => {
-        if (response.status == 'success') {
+        if (response.code == 200) {
           this.onInitForms();
           this.factura = response.data;         
           this.municipio = response.data.organismoTransito.municipio;

@@ -49,7 +49,7 @@ export class NewComponent implements OnInit {
 
         this._FroTramiteService.register(this.tramite, token).subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                     swal({
                         title: 'Perfecto!',
                         text: response.message,

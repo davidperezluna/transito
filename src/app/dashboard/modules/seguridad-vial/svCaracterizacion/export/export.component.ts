@@ -96,7 +96,7 @@ export class ExportComponent implements OnInit {
         let token = this._LoginService.getToken();
         this._MsvCaracterizacionService.getBuscarRegistros({ 'nit': this.exportCaracterizacion.nit }, token).subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                     this.empresaEncontrada = true;
                     this.registros = response.data;
                     let timeoutId = setTimeout(() => {

@@ -28,7 +28,7 @@ export class EditComponent implements OnInit {
 
         this._LicenciaTransitoService.edit(this.licenciaTransito, token).subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                     this.ready.emit(true);
                     
                     swal({

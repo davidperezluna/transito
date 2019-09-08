@@ -34,7 +34,7 @@ constructor(
 
     this._DocumentoService.template(this.file, token).subscribe(
 			response => {
-        if(response.status == 'success'){
+        if(response.code == 200){
           swal({
             title: 'Perfecto!',
             text: response.message,

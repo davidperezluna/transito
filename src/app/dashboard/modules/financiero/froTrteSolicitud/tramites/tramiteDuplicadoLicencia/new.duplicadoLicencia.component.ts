@@ -73,7 +73,7 @@ export class NewDuplicadoLicenciaComponent implements OnInit {
 
             this._LicenciaTransitoService.searchActual(datos, token).subscribe(
                 response => {
-                    if (response.status == 'success') {
+                    if (response.code == 200) {
                         this.datos.numeroLicenciaActual = response.data.numero;
                     } else {
                         this.datos.numeroLicenciaActual = null;

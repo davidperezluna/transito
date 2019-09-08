@@ -69,7 +69,7 @@ export class NewRnaInsumoComponent implements OnInit {
 
         this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
             response => {
-              if (response.status == 'success') {
+              if (response.code == 200) {
                   this.idOrganismoTransito = response.data.organismoTransito.id;
                 //   let datos = {
                 //         'organismoTransito':1 
@@ -165,7 +165,7 @@ export class NewRnaInsumoComponent implements OnInit {
                 if(this.respuesta.status == 'success'){  
                     this._FacturaInsumoService.register(this.FacturaInsumo,token).subscribe(
                         response => {
-                            if (response.status == 'success') { 
+                            if (response.code == 200) { 
                                 swal({
                                     title: 'Perfecto!',
                                     text: 'Registro exitoso!',
@@ -211,7 +211,7 @@ export class NewRnaInsumoComponent implements OnInit {
         
         this._ImoInsumoService.searchByNumeroAndModulo(token,datos).subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                     this.FacturaInsumo.insumoId = response.data.id;
                     this.isExist = true;
                     this.isError = false

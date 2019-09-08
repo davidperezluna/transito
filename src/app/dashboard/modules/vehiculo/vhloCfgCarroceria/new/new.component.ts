@@ -50,7 +50,7 @@ constructor(
     console.log(this.carroceria);
 		this._CarroceriaService.register(this.carroceria,token).subscribe(
 			response => {
-        if(response.status == 'success'){
+        if(response.code == 200){
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',

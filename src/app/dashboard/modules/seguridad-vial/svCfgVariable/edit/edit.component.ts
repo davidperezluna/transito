@@ -50,7 +50,7 @@ export class EditComponent implements OnInit {
         this.variable.idParametro = this.parametroSelected;
         this._SvCfgVariableService.editVariable(this.variable, token).subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                     this.ready.emit(true);
                     swal({
                         title: 'Perfecto!',

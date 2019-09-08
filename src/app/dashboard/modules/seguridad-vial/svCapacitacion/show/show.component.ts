@@ -28,7 +28,7 @@ export class ShowComponent implements OnInit {
 
         this._CapacitacionService.showByCapacitacion(this.capacitacion, token).subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                     this.capacitados = response.data;
                     
                     let timeoutId = setTimeout(() => {

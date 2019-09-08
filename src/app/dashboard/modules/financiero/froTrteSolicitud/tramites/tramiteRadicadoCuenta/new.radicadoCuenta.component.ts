@@ -29,6 +29,7 @@ export class NewRadicadoCuentaComponent implements OnInit {
     'campos': null,
     'documentacion': true,
     'observacion': null,
+    'estadoPlacas': null,
     'cantidadPlacas': null,
     'empresaAfiliadora': null,
     'idFuncionario': null,
@@ -110,6 +111,7 @@ export class NewRadicadoCuentaComponent implements OnInit {
   
   onEnviar(){     
     this.datos.campos = ['radicado'];
+    this.datos.estadoPlacas = 'SOLICITADA';
     this.datos.idTramiteFactura = this.tramiteFactura.id;
     this.datos.idVehiculo = this.vehiculo.id;
     this.datos.idTipoIdentificacion = this.vehiculo.tipoIdentificacionRadicado;
@@ -120,6 +122,7 @@ export class NewRadicadoCuentaComponent implements OnInit {
                   "Fecha registro: " + this.vehiculo.fechaRegistro +
                   "No. guía llegada: " + this.vehiculo.numeroGuiaRadicado +
                   "Empresa de envío: " + this.vehiculo.empresaEnvioRadicado +
+                  "Estado de placas: " + this.datos.estadoPlacas +
                   "Cantidad de placas: " + this.datos.cantidadPlacas;
 
     this.realizado = true;

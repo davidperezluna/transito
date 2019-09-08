@@ -80,7 +80,7 @@ export class GdDocumentoComponent implements OnInit {
 
     this._DocumentoService.index().subscribe(
       response => {
-        if (response.status == 'success') {
+        if (response.code == 200) {
           this.documentosPendientes = response.data;
           this.formAssign = true;
 
@@ -143,7 +143,7 @@ export class GdDocumentoComponent implements OnInit {
 
       this._DocumentoService.show({'id': idDocumento}, token).subscribe(
         response => {
-          if (response.status == 'success') {
+          if (response.code == 200) {
             this.documentoSelected = response.data;            
           } else {
             swal({
@@ -167,7 +167,7 @@ export class GdDocumentoComponent implements OnInit {
 
       this._FuncionarioService.show({ 'id': event }, token).subscribe(
         response => {
-          if (response.status == 'success') {
+          if (response.code == 200) {
             this.funcionarioSelected = response.data;
 
             let datos = {
@@ -193,7 +193,7 @@ export class GdDocumentoComponent implements OnInit {
               if (result.value) {
                 this._DocumentoService.assign(datos, token).subscribe(
                   response => {
-                    if (response.status == 'success') {
+                    if (response.code == 200) {
                       swal({
                         title: 'Perfecto!',
                         text: response.message,
@@ -322,7 +322,7 @@ export class GdDocumentoComponent implements OnInit {
     
     this._DocumentoService.search(this.search, token).subscribe(
       response => {
-        if (response.status == 'success') {
+        if (response.code == 200) {
           this.formIndex = true;
           this.formAssign = false;
           this.documentos = response.data;
@@ -369,7 +369,7 @@ export class GdDocumentoComponent implements OnInit {
 
     this._DocumentoService.searchByState({ 'state':estado }, token).subscribe(
       response => {
-        if (response.status == 'success') {
+        if (response.code == 200) {
           this.formIndex = true;
           this.formAssign = false;
           this.documentos = response.data;

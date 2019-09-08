@@ -128,7 +128,7 @@ export class NewComponent implements OnInit {
           this.formConfirm = false;
           this.formPdf = true;
 
-          if (response.status == 'success') {
+          if (response.code == 200) {
             this.ready.emit(true);
             swal({
               title: 'Perfecto!',
@@ -167,7 +167,7 @@ export class NewComponent implements OnInit {
           this.formConfirm = false;
           this.formPdf = true;
 
-          if (response.status == 'success') {
+          if (response.code == 200) {
             this.ready.emit(true);
             swal({
               title: 'Perfecto!',
@@ -205,7 +205,7 @@ export class NewComponent implements OnInit {
 
     this._FuncionarioService.searchCiudadano(datos, token).subscribe(
       response => {
-        if (response.status == 'success') {
+        if (response.code == 200) {
           this.ciudadano = response.data;
         } else {
           swal({

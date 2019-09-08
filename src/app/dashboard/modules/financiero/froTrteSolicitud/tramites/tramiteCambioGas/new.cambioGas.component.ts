@@ -136,7 +136,7 @@ export class NewCambioGasComponent implements OnInit {
               if (response.code == 200) {
                 this._VehiculoService.update(this.datos, token).subscribe(
                     response => {
-                        if(response.status == 'success'){
+                        if(response.code == 200){
                             
                         }
                         error => {

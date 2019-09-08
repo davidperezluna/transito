@@ -71,7 +71,7 @@ export class NewComponent implements OnInit {
     
 		this._InsumoService.register(this.insumo,token).subscribe(
 			response => {
-        if(response.status == 'success'){
+        if(response.code == 200){
           this.onReadyInsumo.emit();
           
           swal({

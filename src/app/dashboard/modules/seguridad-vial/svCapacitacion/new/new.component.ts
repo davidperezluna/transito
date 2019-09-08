@@ -240,7 +240,7 @@ export class NewComponent implements OnInit {
         }
         this._CapacitacionService.register(this.file, this.capacitacion, token).subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                     swal({
                         title: 'Perfecto!',
                         text: response.message,
@@ -406,7 +406,7 @@ export class NewComponent implements OnInit {
 
         this._CapacitacionService.cargarCapacitados({"file": this.txt, "capacitacion":this.capacitacion}, token).subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                     this.capacitaciones = response.data;
                     console.log(this.capacitaciones);
                     this.capacitadosEncontrados = true;

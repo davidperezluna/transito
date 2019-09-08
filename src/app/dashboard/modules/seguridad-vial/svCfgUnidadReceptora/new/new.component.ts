@@ -70,7 +70,7 @@ export class NewComponent implements OnInit {
         this.unidadReceptora.municipio = this.municipioSelected;
         this._UnidadReceptoraService.register(this.unidadReceptora, token).subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                     this.ready.emit(true);
                     swal({
                         title: 'Perfecto!',

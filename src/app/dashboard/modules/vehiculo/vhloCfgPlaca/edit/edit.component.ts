@@ -83,7 +83,7 @@ export class EditComponent {
 
     this._CfgPlacaService.edit(this.placa, token).subscribe(
       response => {
-        if (response.status == 'success') {
+        if (response.code == 200) {
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',

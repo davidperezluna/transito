@@ -56,7 +56,7 @@ export class NewRepresentanteComponent implements OnInit {
 
     this._CiudadanoService.searchByIdentificacion(datos, token).subscribe(
       response => {
-        if (response.status == 'success') {
+        if (response.code == 200) {
           if (response.data.ciudadano) {
             this.ciudadano = response.data.ciudadano;
             this.representante.idCiudadano = this.ciudadano.id;
@@ -87,7 +87,7 @@ export class NewRepresentanteComponent implements OnInit {
 
     this._RepresentanteService.register(this.representante, token).subscribe(
       response => {
-        if (response.status == 'success') {
+        if (response.code == 200) {
           this.onReady.emit(true);
 
           swal({

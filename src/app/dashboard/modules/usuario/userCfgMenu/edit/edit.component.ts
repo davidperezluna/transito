@@ -40,7 +40,7 @@ constructor(
     let token = this._loginService.getToken();
 		this._UserCfgMenuService.edit(this.menu,token).subscribe(
 			response => {
-        if(response.status == 'success'){
+        if(response.code == 200){
           this.ready.emit(true);
           this._UserCfgMenuService.cartData.emit(this.menus);  
           swal({

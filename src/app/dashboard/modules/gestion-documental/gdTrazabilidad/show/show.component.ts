@@ -44,7 +44,7 @@ constructor(
 
 		this._TrazabilidadService.process(this.datos, token).subscribe(
 			response => {
-        if(response.status == 'success'){
+        if(response.code == 200){
           if(response.data.aceptada){
             this.onNew.emit(response.data);
           }else{

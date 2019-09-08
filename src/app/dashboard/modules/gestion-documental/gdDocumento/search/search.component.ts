@@ -98,7 +98,7 @@ export class SearchComponent implements OnInit {
     
     this._DocumentoService.search(this.search, token).subscribe(
       response => {
-        if (response.status == 'success') {
+        if (response.code == 200) {
           this.formIndex = true;
           this.documentos = response.data;
 

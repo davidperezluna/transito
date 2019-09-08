@@ -43,7 +43,7 @@ export class ShowComponent implements OnInit {
 
         this._EvaluacionService.showCalificacionByEvaluacion({ 'id': this.revision.id }, token).subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                     this.calificaciones = response.data;
                     swal({
                         title: 'Perfecto!',

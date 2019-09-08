@@ -79,12 +79,12 @@ export class DeleteComponent implements OnInit {
 
     this._VehiculoService.searchByPlaca(datos, token).subscribe(
       response => {
-        if (response.status == 'success') {
+        if (response.code == 200) {
           this.vehiculo = response.data;
 
           this._VehiculoLimitacionService.searchByPlaca({ 'numero': this.placa }, token).subscribe(
             response => {
-              if (response.status == 'success') {
+              if (response.code == 200) {
                 this.limitaciones = response.data;
                 this.formIndex = true;
                 this.formShow = false;
@@ -151,7 +151,7 @@ export class DeleteComponent implements OnInit {
         
         this._VehiculoLimitacionService.delete({ 'id': limitacion.id }, token).subscribe(
           response => {
-            if (response.status == 'success') {
+            if (response.code == 200) {
               swal({
                 title: 'Perfecto!',
                 text: response.message,

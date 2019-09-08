@@ -35,7 +35,7 @@ export class RecordComponent implements OnInit {
 
         this._TrazabilidadService.recordByDocumento({ 'id':this.documento.id }, token).subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                     this.trazabilidades = response.data;
 
                     swal.close();

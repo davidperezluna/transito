@@ -58,7 +58,7 @@ export class EditSucursalComponent implements OnInit {
 
         this._SucursalService.edit(this.sucursal, token).subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                     this.formEdit = false;
                     this.onReady.emit(true);
 

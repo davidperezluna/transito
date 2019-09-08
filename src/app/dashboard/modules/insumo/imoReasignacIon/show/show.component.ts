@@ -44,7 +44,7 @@ constructor(
 
     this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
       response => {
-        if (response.status == 'success') {
+        if (response.code == 200) {
           this.funcionario = response.data; 
         } else {
           this.funcionario = null;

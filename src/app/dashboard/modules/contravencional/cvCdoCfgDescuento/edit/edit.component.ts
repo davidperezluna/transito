@@ -28,7 +28,7 @@ constructor(
 
 		this._DescuentoService.edit(this.descuento,token).subscribe(
 			response => {
-        if(response.status == 'success'){
+        if(response.code == 200){
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',

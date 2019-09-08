@@ -154,11 +154,11 @@ export class UserLicenciaConduccionComponent implements OnInit {
 
         this._UserCiudadanoService.searchByIdentificacion({ 'idTipoIdentificacion': this.tipoIdentificacionSelected,'identificacion': this.identificacion }, token).subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                     this.ciudadano = response.data.ciudadano;
                     this._LicenciaConduccionService.searchByCiudadanoId({ 'idCiudadano': this.ciudadano.id }, token).subscribe(
                         response => {
-                            if (response.status == 'success') {
+                            if (response.code == 200) {
                                 this.licenciasConduccion = response.data;
                                 swal({
                                     title: 'Perfecto!',

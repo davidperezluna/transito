@@ -77,7 +77,7 @@ export class NewComponent implements OnInit {
 
     this._DocumentoService.register(this.documento, token).subscribe(
       response => {
-        if (response.status == 'success') {
+        if (response.code == 200) {
           swal({
             title: 'Perfecto!',
             text: response.message,

@@ -103,7 +103,7 @@ constructor(
 
           this._ImoInsumoService.showLote(this.loteInsumo.id, token).subscribe(
             response => {
-              if(response.status == 'success'){
+              if(response.code == 200){
                 this.insumos = response.data;
                 this.ngOnInit();
               }

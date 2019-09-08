@@ -31,7 +31,7 @@ constructor(
     
 		this._CdaService.register(this.cda,token).subscribe(
 			response => {
-        if(response.status == 'success'){
+        if(response.code == 200){
           this.ready.emit(true);
           
           swal({

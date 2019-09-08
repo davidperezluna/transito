@@ -183,7 +183,7 @@ export class NewEmpresaComponent implements OnInit {
 
     this._EmpresaService.register(datos, token).subscribe(
       response => {
-        if (response.status == 'success') {
+        if (response.code == 200) {
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',

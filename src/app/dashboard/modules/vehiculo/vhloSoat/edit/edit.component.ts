@@ -84,7 +84,7 @@ export class EditComponent implements OnInit {
 
         this._SoatService.edit(this.soat, token).subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                     this.ready.emit(true);
                     swal({
                         title: 'Perfecto!',
@@ -111,7 +111,7 @@ export class EditComponent implements OnInit {
         if (this.soat.fechaExpedicion) {
             this._SoatService.getFechaVencimiento({ 'fechaExpedicion': this.soat.fechaExpedicion }, token).subscribe(
                 response => {
-                    if (response.status == 'success') {
+                    if (response.code == 200) {
                         this.soat.fechaVencimiento = response.fechaVencimiento;
                         this.soat.fechaVigencia = response.fechaVigencia;
                         //swal.close();

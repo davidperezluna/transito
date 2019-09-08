@@ -105,7 +105,7 @@ export class ProrrogaComponent implements OnInit {
     this.prorroga.idFuncionario = this.funcionario.id;
     this._PnalProrrogaService.register(this.prorroga, token).subscribe(
       response => {
-        if (response.status == 'success') {
+        if (response.code == 200) {
           this.prorrogas = response.data;
           this.table.destroy();
           this.ngOnInit();

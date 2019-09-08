@@ -4,6 +4,7 @@ export class VhloPlacaSede {
         public rangoFinal: string,
         public idOrganismoTransito: number,
         public idTipoVehiculo: number,
+        public idServicio: number,
         public id: number,
     ) { }
 }

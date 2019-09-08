@@ -49,7 +49,7 @@ constructor(
     
 		this._ModuloService.register(this.modulo, token).subscribe(
 			response => {
-        if(response.status == 'success'){
+        if(response.code == 200){
           swal({
             title: response.title,
             text: response.message,

@@ -47,7 +47,7 @@ export class NewRnaCambioServicioComponent implements OnInit {
 
         this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                     this.datos.idFuncionario = response.data.id;
                     this.autorizado = true;
 
@@ -152,7 +152,7 @@ export class NewRnaCambioServicioComponent implements OnInit {
                       if (response.code == 200) {
                         this._VehiculoService.update(this.datos, token).subscribe(
                             response => {
-                                if (response.status == 'success') {
+                                if (response.code == 200) {
                                     let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero +
                                         '<br/><b>Servicio anterior </b>' + this.vehiculo.servicio.nombre +
                                         '<br/><b>Servicio nuevo: </b>' + servicioResponse.data.nombre;

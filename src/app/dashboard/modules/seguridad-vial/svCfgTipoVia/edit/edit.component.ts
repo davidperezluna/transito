@@ -51,7 +51,7 @@ export class EditComponent implements OnInit {
         this.tipoVia.tipoArea = this.tipoAreaSelected;
         this._TipoViaService.edit(this.tipoVia, token).subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                     this.ready.emit(true);
                     swal({
                         title: 'Perfecto!',

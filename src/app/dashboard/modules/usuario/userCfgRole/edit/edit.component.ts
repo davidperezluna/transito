@@ -28,7 +28,7 @@ constructor(
     let token = this._loginService.getToken();
 		this._UserCfgRoleService.edit(this.role,token).subscribe(
 			response => {
-        if(response.status == 'success'){
+        if(response.code == 200){
           swal({
             title: 'Perfecto!',
             text: response.message,

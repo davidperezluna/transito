@@ -43,7 +43,7 @@ export class NewRnaDuplicadoPlacaComponent implements OnInit {
 
         this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                     this.datos.idFuncionario = response.data.id;
                     this.autorizado = true;
 

@@ -27,7 +27,7 @@ export class EditComponent {
     let token = this._LoginService.getToken();
     this._SvCfgGravedadAccidenteService.edit(this.cfgGravedad, token).subscribe(
       response => {
-        if (response.status == 'success') {
+        if (response.code == 200) {
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',

@@ -35,7 +35,7 @@ constructor(
     
 		this._ActividadService.register(this.actividad,token).subscribe(
 			response => {
-        if(response.status == 'success'){
+        if(response.code == 200){
           this.onReadyActividad.emit();
 
           swal({

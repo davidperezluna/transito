@@ -1100,7 +1100,7 @@ export class NewComponent implements OnInit {
           });
           this._SvIpatConsecutivoService.searchConsecutivo({ 'organismoTransito': this.organismoTransito, 'numeroConsecutivo': this.numeroConsecutivo }, token).subscribe(
             response => {
-              if (response.status == 'success') {
+              if (response.code == 200) {
                 this.consecutivo = response.data;
                 this.ngOnInit();
                 swal.close();
@@ -1159,7 +1159,7 @@ export class NewComponent implements OnInit {
 
     this._SvIpatService.register(this.ipat, token).subscribe(
       response => {
-        if (response.status == 'success') {
+        if (response.code == 200) {
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',
@@ -1209,7 +1209,7 @@ export class NewComponent implements OnInit {
 
         response => {
           console.log(response.data);
-          if (response.status == 'success') {
+          if (response.code == 200) {
             if (response.data.tipoIdentificacion) {
               this.tipoIdentificacionConductorSelected = [response.data.tipoIdentificacion.id];
             }
@@ -1319,7 +1319,7 @@ export class NewComponent implements OnInit {
       this._SvIpatService.getBuscarVehiculo({ 'placa': this.ipatVehiculo.placa }, token).subscribe(
 
         response => {
-          if (response.status == 'success') {
+          if (response.code == 200) {
             if (response.data.nacionalidad) {
               this.nacionalidadVehiculoSelected = [response.data.nacionalidad.id];
             }
@@ -1395,7 +1395,7 @@ export class NewComponent implements OnInit {
       this._SvIpatService.getBuscarLicenciaConductor({ 'numero': this.ipatConductor.numeroLicenciaConduccion, 'identificacion': this.ipatConductor.identificacion }, token).subscribe(
 
         response => {
-          if (response.status == 'success') {
+          if (response.code == 200) {
             this.licencia = true;
             this.categoriaLcSelected = [response.data.categoria.id];
             this.ipatConductor.restriccion = response.data.restriccion;
@@ -1450,7 +1450,7 @@ export class NewComponent implements OnInit {
       this._SvIpatService.getBuscarAgente({ 'identificacionUsuario': identity.identificacion, 'identificacionAgente': this.ipat.identificacionAgente, 'placaAgente': this.ipat.placaAgente }, token).subscribe(
 
         response => {
-          if (response.status == 'success') {
+          if (response.code == 200) {
             /* this.agente = true; */
             
             this.ipat.identificacionAgente = response.data.ciudadano.identificacion;
@@ -1509,7 +1509,7 @@ export class NewComponent implements OnInit {
       this._SvIpatService.getBuscarVictima({ 'identificacionVictima': this.ipatVictima.identificacion }, token).subscribe(
 
         response => {
-          if (response.status == 'success') {
+          if (response.code == 200) {
             if (response.data.tipoIdentificacion) {
               this.tipoIdentificacionVictimaSelected = [response.data.tipoIdentificacion.id];
             }
@@ -1580,7 +1580,7 @@ export class NewComponent implements OnInit {
       this._SvIpatService.getBuscarTestigo({ 'identificacionTestigo': this.ipat.identificacionTestigo }, token).subscribe(
 
         response => {
-          if (response.status == 'success') {
+          if (response.code == 200) {
             this.testigo = true;
             this.tipoIdentificacionTestigoSelected = [response.data.tipoIdentificacion.id];
             this.ipat.nombresTestigo = response.data.primerNombre + ' ' + response.data.segundoNombre;
@@ -1621,7 +1621,7 @@ export class NewComponent implements OnInit {
     let token = this._LoginService.getToken();
       this._SvIpatService.getCorrespondio(this.ipat, token).subscribe(
         response => {
-          if (response.status == 'success') {
+          if (response.code == 200) {
             this.ipat.correspondio = response.data;
             swal({
               title: 'Perfecto!',
@@ -1689,7 +1689,7 @@ export class NewComponent implements OnInit {
         if (result.value) {
           this._SvIpatConductorService.register(this.ipatConductor, token).subscribe(
             response => {
-              if (response.status == 'success') {
+              if (response.code == 200) {
                 swal({
                   title: 'Perfecto!',
                   text: response.message,
@@ -1746,7 +1746,7 @@ export class NewComponent implements OnInit {
         else if (result.dismiss === swal.DismissReason.cancel) {
           this._SvIpatConductorService.register(this.ipatConductor, token).subscribe(
             response => {
-              if (response.status == 'success') {
+              if (response.code == 200) {
                 swal({
                   title: 'Perfecto!',
                   text: response.message,
@@ -1830,7 +1830,7 @@ export class NewComponent implements OnInit {
         if (result.value) {
           this._SvIpatVehiculoService.register(this.ipatVehiculo, token).subscribe(
             response => {
-              if (response.status == 'success') {
+              if (response.code == 200) {
                 /* ================ cargar select placas vehiculos ===================== */
                 this._SvIpatVehiculoService.selectByConsecutivo(this.consecutivo.numero, token).subscribe(
                   response => {
@@ -1905,7 +1905,7 @@ export class NewComponent implements OnInit {
         } else if (result.dismiss === swal.DismissReason.cancel) {
           this._SvIpatVehiculoService.register(this.ipatVehiculo, token).subscribe(
             response => {
-              if (response.status == 'success') {
+              if (response.code == 200) {
                 /* ================ cargar select placas vehiculos ===================== */
                 this._SvIpatVehiculoService.selectByConsecutivo(this.consecutivo.numero, token).subscribe(
                   response => {
@@ -1988,7 +1988,7 @@ export class NewComponent implements OnInit {
         if (result.value) {
           this._SvIpatVictimaService.register(this.ipatVictima, token).subscribe(
             response => {
-              if (response.status == 'success') {
+              if (response.code == 200) {
                 swal({
                   title: 'Perfecto!',
                   text: response.message,
@@ -2048,7 +2048,7 @@ export class NewComponent implements OnInit {
         else if (result.dismiss === swal.DismissReason.cancel) {
           this._SvIpatVictimaService.register(this.ipatVictima, token).subscribe(
             response => {
-              if (response.status == 'success') {
+              if (response.code == 200) {
                 swal({
                   title: 'Perfecto!',
                   text: response.message,

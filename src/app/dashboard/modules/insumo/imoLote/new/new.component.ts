@@ -137,7 +137,7 @@ constructor(
 
 		this._ImoLoteService.register(this.ImoLote,token).subscribe(
 			response => {
-        if(response.status == 'success'){
+        if(response.code == 200){
           this.onReady.emit(true);
           
           swal({

@@ -53,7 +53,7 @@ export class EditComponent implements OnInit {
         this.hospital.organismoTransito = this.organismoTransitoSelected;
         this._HospitalService.edit(this.hospital, token).subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                     this.ready.emit(true);
                     swal({
                         title: 'Perfecto!',

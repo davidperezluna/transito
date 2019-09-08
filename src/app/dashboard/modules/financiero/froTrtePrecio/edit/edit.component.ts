@@ -179,7 +179,7 @@ export class EditComponent implements OnInit {
 
         this._PrecioService.edit(this.tramitePrecio, token).subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                     this.ready.emit(true);
 
                     swal({

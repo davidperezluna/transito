@@ -53,7 +53,7 @@ constructor(
     
 		this._CvCfgTipoRestriccionService.register(this.tipoRestriccion, token).subscribe(
 			response => {
-        if(response.status == 'success'){
+        if(response.code == 200){
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',

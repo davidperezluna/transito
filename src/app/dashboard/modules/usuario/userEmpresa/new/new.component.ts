@@ -252,7 +252,7 @@ export class NewEmpresaComponent implements OnInit {
     let token = this._LoginService.getToken();
     this._EmpresaService.getBuscarCiudadano({ 'identificacion': this.identificacion }, token).subscribe(
       response => {
-        if (response.status == 'success') {
+        if (response.code == 200) {
           this.ciudadano = response.data;
         } else {
           swal({

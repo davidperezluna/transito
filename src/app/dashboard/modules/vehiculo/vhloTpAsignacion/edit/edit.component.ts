@@ -123,7 +123,7 @@ export class EditComponent implements OnInit {
         this._VhloTpAsignacionService.searchVehiculo({ 'placa': this.placa }, token).subscribe(
             response => {
                 console.log(response);
-                if (response.status == 'success') {
+                if (response.code == 200) {
                     this.vehiculo = response.data.vehiculo;
                     this.propietarios = response.data.propietarios;
                 }

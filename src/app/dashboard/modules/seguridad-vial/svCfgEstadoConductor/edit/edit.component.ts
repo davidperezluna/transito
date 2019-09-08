@@ -28,7 +28,7 @@ export class EditComponent implements OnInit {
         let token = this._loginService.getToken();
         this._EstadoConductorService.edit(this.estadoConductor, token).subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                     this.ready.emit(true);
                     swal({
                         title: 'Perfecto!',

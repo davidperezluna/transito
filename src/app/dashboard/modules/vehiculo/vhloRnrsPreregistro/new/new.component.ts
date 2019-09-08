@@ -57,14 +57,14 @@ ngOnInit() {
   let datos = {'identificacion':identity.identificacion};
   this._FuncionarioService.searchLogin(datos,token).subscribe(
     response => { 
-      if(response.status == 'success'){
+      if(response.code == 200){
         this.persona='funcionario';
         this.sedeOperativa = response.data.sedeOperativa;
         this.sedeOperativaSelected = [this.sedeOperativa.id];
       }else{
         this._FuncionarioService.searchEmpresa(datos,token).subscribe(
           response => {
-            if(response.status == 'success'){
+            if(response.code == 200){
               this.persona='empresa';
             }
       
@@ -185,7 +185,7 @@ ngOnInit() {
 
     this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
       response => {
-        if (response.status == 'success') {
+        if (response.code == 200) {
         } else {
           swal({
             title: 'Alerta!',
@@ -230,7 +230,7 @@ ngOnInit() {
 
     this._RegistroRemolqueService.register(this.registroRemolque, token).subscribe(
 			response => {
-        if(response.status == 'success'){
+        if(response.code == 200){
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',

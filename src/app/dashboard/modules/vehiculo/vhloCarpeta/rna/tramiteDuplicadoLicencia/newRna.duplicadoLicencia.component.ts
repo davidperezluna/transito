@@ -53,7 +53,7 @@ export class NewRnaDuplicadoLicenciaComponent implements OnInit {
 
         this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                     this.datos.idFuncionario = response.data.id;
                     this.autorizado = true;
 
@@ -114,7 +114,7 @@ export class NewRnaDuplicadoLicenciaComponent implements OnInit {
 
                         this._LicenciaTransitoService.searchActual(datos, token).subscribe(
                             response => {
-                                if (response.status == 'success') {
+                                if (response.code == 200) {
                                     this.datos.numeroLicenciaActual = response.data.numero;
                                 } else {
                                     this.datos.numeroLicenciaActual = null;

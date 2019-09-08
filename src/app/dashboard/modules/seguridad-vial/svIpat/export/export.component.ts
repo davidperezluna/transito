@@ -300,7 +300,7 @@ export class ExportIpatComponent implements OnInit {
 
         this._IpatService.cargarIpats({ "file": this.txt}, token).subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                     swal({
                         title: 'Perfecto!',
                         text: response.message,
@@ -333,7 +333,7 @@ export class ExportIpatComponent implements OnInit {
         let token = this._LoginService.getToken();
         this._IpatService.buscarIpat({"file":this.txt, "datos":this.exportIpat}, token).subscribe(
             response => {
-                if(response.status == 'success'){
+                if(response.code == 200){
                     this.ipats = response.data;
                     this.ipatsEncontrados = true;
 

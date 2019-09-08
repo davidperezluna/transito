@@ -7,7 +7,7 @@ import swal from 'sweetalert2';
 
 
 @Component({
-    selector: 'app-edit-placasede',
+    selector: 'app-edit-vhloplacasede',
     templateUrl: './edit.component.html'
 })
 export class EditComponent implements OnInit {
@@ -77,7 +77,7 @@ export class EditComponent implements OnInit {
         
         this._PlacaSedeService.edit(this.asignacion, token).subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                     this.ready.emit(true);
                     swal({
                         title: 'Perfecto!',

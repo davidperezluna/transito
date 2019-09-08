@@ -112,7 +112,7 @@ export class NewComponent implements OnInit {
 
         this._MsvCaracterizacionService.register(this.msvCaracterizacion, token).subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                     this.ready.emit(true);
                     swal({
                         title: 'Perfecto!',
@@ -143,7 +143,7 @@ export class NewComponent implements OnInit {
         let token = this._LoginService.getToken();
         this._MsvCaracterizacionService.getBuscarEmpresa({ 'nit': this.msvCaracterizacion.nit }, token).subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                     this.empresaEncontrada = true;
                     this.empresa = response.data;
                 } else {

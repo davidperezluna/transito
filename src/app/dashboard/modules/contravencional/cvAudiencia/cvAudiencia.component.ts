@@ -71,7 +71,7 @@ export class CvAudienciaComponent implements OnInit {
 
     this._AudienciaService.searchByFiltros(this.search, token).subscribe(
       response => {
-        if (response.status == 'success') {
+        if (response.code == 200) {
           this.audiencias = response.data;
           this.onInitForms();
           this.formIndex = true;

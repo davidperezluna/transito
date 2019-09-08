@@ -131,7 +131,7 @@ constructor(
         if (result.value) {
           this._UserCiudadanoService.register(this.ciudadano, token).subscribe(
             response => {
-              if (response.status == 'success') {
+              if (response.code == 200) {
                 this.onReadyCiudadano.emit(response.data);
                 swal({
                   title: 'Perfecto!',

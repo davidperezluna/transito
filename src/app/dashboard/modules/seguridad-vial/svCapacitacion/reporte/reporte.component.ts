@@ -151,7 +151,7 @@ export class ReporteComponent implements OnInit {
         let token = this._LoginService.getToken();
         this._CapacitacionService.buscarCapacitaciones(this.datos, token).subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                     this.capacitaciones = response.data;
                     this.capacitacionesEncontradas = true;
 

@@ -208,7 +208,7 @@ export class EditComponent implements OnInit {
     
     this._EmpresaService.getBuscarCiudadano({ 'identificacion': this.identificacion }, token).subscribe(
       response => {
-        if (response.status == 'success') {
+        if (response.code == 200) {
           this.ciudadano = response.data;
         } else {
           swal({
@@ -246,7 +246,7 @@ export class EditComponent implements OnInit {
 
     this._EmpresaService.edit(this.empresa, token).subscribe(
       response => {
-        if (response.status == 'success') {
+        if (response.code == 200) {
           this.ready.emit(true);
 
           swal({

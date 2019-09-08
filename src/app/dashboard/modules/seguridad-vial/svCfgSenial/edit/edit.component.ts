@@ -70,7 +70,7 @@ export class EditComponent implements OnInit{
 
       this._SenialTipoService.show({ 'id': e }, token).subscribe(
         response => {
-          if (response.status == 'success') {
+          if (response.code == 200) {
             this.tipo = response.data;
           }else{
             this.tipo = null;
@@ -92,7 +92,7 @@ export class EditComponent implements OnInit{
     let token = this._loginService.getToken();
     this._SvCfgSenialService.edit(this.file, this.senial,token).subscribe(
 			response => {
-        if(response.status == 'success'){
+        if(response.code == 200){
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',

@@ -257,13 +257,13 @@ constructor(
 
       this._FuncionarioService.show({ 'id': this.search.idFuncionario }, token).subscribe(
         response => {
-          if (response.status == 'success') {
+          if (response.code == 200) {
             this.funcionario = response.data;
             this.comparendo.idFuncionario = this.funcionario.id;
   
             this._ConsecutivoService.searchByNumeroAndFuncionario(this.search, token).subscribe(
               response => {
-                if (response.status == 'success') {
+                if (response.code == 200) {
                   swal.close();
 
                   this.consecutivo = response.data;

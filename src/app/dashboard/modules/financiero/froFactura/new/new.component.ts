@@ -51,7 +51,7 @@ constructor(
     
     this._FacturaService.calculateValue(this.comparendosSelect, token).subscribe(
       response => {
-        if (response.status == 'success') {
+        if (response.code == 200) {
           this.factura.valor = response.data.totalPagar;
           this.factura.interes = response.data.totalInteres;
 
@@ -112,7 +112,7 @@ constructor(
     
 		this._FacturaService.register(this.factura, token).subscribe(
 			response => {
-        if(response.status == 'success'){ 
+        if(response.code == 200){ 
           this.factura.id = response.data.id;
           this.municipio = response.data.sedeOperativa.municipio.nombre;
           this.fechaCreacion = response.data.fechaCreacion;
