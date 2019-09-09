@@ -11,6 +11,7 @@ import { UserUsuarioMenuComponent } from './userUsuarioMenu/userUsuarioMenu.comp
 import { UserEmpresaTransporteComponent } from './userEmpresaTransporte/userEmpresaTransporte.component';
 import { UserEmpresaComponent } from './userEmpresa/userEmpresa.component';
 import { UserCiudadanoComponent } from './userCiudadano/userCiudadano.component';
+import { UserLcCfgRestriccionComponent } from './userLcCfgRestriccion/userLcCfgRestriccion.component';
 
 import { UsuarioRoutingModule } from './usuario-routing.module';
 import { UserCfgMenuModule } from './userCfgMenu/userCfgMenu.module';
@@ -18,6 +19,7 @@ import { UserUsuarioMenuModule } from './userUsuarioMenu/userUsuarioMenu.module'
 import { UserEmpresaTransporteModule } from './userEmpresaTransporte/userEmpresaTransporte.module';
 import { UserEmpresaModule } from './userEmpresa/userEmpresa.module';
 import { UserCiudadanoModule } from './userCiudadano/userCiudadano.module';
+import { UserLcCfgRestriccionModule } from './userLcCfgRestriccion/userLcCfgRestriccion.module';
 
 @NgModule({
   imports: [
@@ -33,6 +35,7 @@ import { UserCiudadanoModule } from './userCiudadano/userCiudadano.module';
     UserEmpresaTransporteModule,
     UserEmpresaModule,
     UserCiudadanoModule,
+    UserLcCfgRestriccionModule,
   ],
   declarations: [
     UserCfgMenuComponent,
@@ -40,6 +43,7 @@ import { UserCiudadanoModule } from './userCiudadano/userCiudadano.module';
     UserEmpresaTransporteComponent,
     UserEmpresaComponent,
     UserCiudadanoComponent,
+    UserLcCfgRestriccionComponent,
   ]
 })
 export class UsuarioModule { }

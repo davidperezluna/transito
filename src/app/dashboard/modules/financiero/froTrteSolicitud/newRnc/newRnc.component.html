@@ -2,7 +2,7 @@
     <div class="col-xs-12 col-lg-4">
         <div class="card">
             <div class="card-header">
-                <b class="text-uppercase">Nueva Solicitud de trámite RNC</b>
+                <b class="text-uppercase">Nueva Solicitud de trámite RNA</b>
             </div>
             <div class="card-body">
                 <div class="form-group">
@@ -43,21 +43,15 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
 
-    <div class="col-xs-12 col-lg-8" *ngIf="factura">
-        <div class="card">
-            <div class="card-body">
                 <div class="form-group" *ngIf="factura && factura.estado != 'FINALIZADA' && factura.estado != 'PENDIENTE DOCUMENTACION'">
                     <div class="row">
                         <div class="col-xs-12 col-lg-12">
                             <form #formSearchSolicitante="ngForm">
                                 <label>Buscar solicitante</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Número de identificación" [(ngModel)]="identificacion" name="identificacion" required
-                                    />
+                                    <input type="text" class="form-control" placeholder="Número de identificación" [(ngModel)]="identificacion"
+                                        name="identificacion" required />
                                     <span class="input-group-btn">
                                         <button (click)="onSearchCiudadano()" class="btn btn-primary" type="button">
                                             <i class="fa fa-search"></i>
@@ -66,15 +60,25 @@
                                 </div>
                             </form>
                         </div>
-                     
-                        <div class="col-xs-12 col-lg-12" *ngIf="solicitante && !formNewCiudadano">
+                    </div>
+
+                    <div class="row" *ngIf="solicitante">
+                        <div class="col-xs-12 col-lg-12">
                             <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th class="text-uppercase text-center">
+                                            <b>Resumen de solicitante</b>
+                                        </th>
+                                    </tr>
+                                </thead>
                                 <tbody>
                                     <tr>
                                         <td>
                                             <b>Ciudadano</b>
                                             <br>
-                                            {{ solicitante.primerNombre }} {{ solicitante.segundoNombre }} {{ solicitante.primerApellido }} {{ solicitante.segundoApellido }}
+                                            {{ solicitante.primerNombre }} {{ solicitante.segundoNombre }} {{ solicitante.primerApellido }}
+                                            {{ solicitante.segundoApellido }}
                                         </td>
                                     </tr>
                                     <tr>
@@ -94,14 +98,108 @@
                                 </tbody>
                             </table>
                         </div>
-
-                        <div class="col-xs-12 col-lg-12" *ngIf="!solicitante && formNewCiudadano">
-                            <app-new-userciudadano></app-new-userciudadano>
-                        </div>
                     </div>
                 </div><!-- form-group -->
+            </div>
+        </div>
+    </div>
 
-                <div class="row" *ngIf="documentacionPendiente.length > 0 && factura.estado != 'PENDIENTE DOCUMENTACION' && tramitesFactura && (tramitesFactura.length == tramitesRealizados.length)">
+    <div class="col-xs-12 col-lg-8" *ngIf="factura && solicitante && factura.estado != 'FINALIZADA'">
+        <div class="card">
+            <div class="card-body">
+                <div class="row" *ngIf="solicitante">
+                    <div class="col-xs-12 col-lg-12">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th colspan="2" class="text-uppercase text-center">
+                                        <b>Solicitante</b>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <strong>Nombre: </strong>
+                                        {{ solicitante.primerNombre }} {{ solicitante.primerApellido }}
+                                        <br>
+                                        <strong>Identificación: </strong>
+                                        {{ solicitante.identificacion }}
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="3">
+                                        <button *ngIf='!formApoderado && !apoderado' (click)="onFormApoderado()" class="btn btn-primary">
+                                            <i class="fa fa-save"></i>
+                                            Agregar apoderado
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="row" *ngIf='formApoderado && !apoderado'>
+                    <div class="col-xs-12 col-lg-12">
+                        <div class="input-group">
+                            <input type="number" class="form-control" placeholder="Identificacion apoderado" [(ngModel)]="identificacionApoderado" name="identificacionApoderado" required />
+                            <span class="input-group-btn">
+                                <button (click)="onSearchApoderado()" class="btn" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                                <button (click)="onCloseApoderado()" class="btn btn-danger" type="button">
+                                    <i class="fa fa-close"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-lg-12" *ngIf="apoderado">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <th colspan="3" class="text-center text-uppercase">
+                                    <b>Datos de apoderado</b>
+                                </th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <b>Tipo de identificación</b>
+                                        <br>
+                                        {{ apoderado.tipoIdentificacion.nombre }}
+                                        <br>
+                                        <b>Numero de identificación</b>
+                                        {{ apoderado.identificacion }}
+                                    </td>
+                                    <td>
+                                        <b>Nombres</b>
+                                        <br> {{ apoderado.primerNombre }} {{ apoderado.segundoNombre }}
+                                        <br>
+                                        <b>Apellidos</b>
+                                        {{ apoderado.primerApellido }} {{apoderado.segundoApellido }}
+                                    </td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <button *ngIf="!tramiteSolicitud.idSolicitante" (click)="onAddApoderado()" class="btn btn-primary">
+                                                <i class="fa fa-save"></i>
+                                                Agregar
+                                            </button>
+                                            <button *ngIf='!confirmarSolicitante' class="btn btn-default" (click)="onCloseApoderado()">
+                                                <i class="fa fa-times"></i>
+                                                Cancelar
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="row" *ngIf="documentacionPendiente.length > 0 && tramitesFactura">
                     <div class="col-xs-12 col-lg-12">
                         <div class="form-group">
                             <div class="row">
@@ -118,16 +216,37 @@
                     </div>
                 </div>
         
-                <div class="row" *ngIf="tramitesFactura && tramitesFactura.length == tramitesRealizados.length && factura.estado != 'FINALIZADA'">
+                <div class="row" *ngIf="tramitesFactura && tramitesFactura.length == tramitesRealizados.length">
                     <div class="col-xs-12 col-lg-12" *ngIf="(requiereSustrato && tramiteSolicitud.insumoEntregado) || !requiereSustrato">
                         <div class="form-group">
+                            <div class="row">
+                                <div class="col-xs-12 col-lg-12"> 
+                                    <label>Número de folios <b class="text-danger">*</b></label>
+                                    <input type="text" class="form-control" placeholder="No. de folios" [(ngModel)]="tramiteSolicitud.numeroFolios" name="numeroFolios" required />
+                                </div>
+
+                                <div class="col-xs-12 col-lg-12"> 
+                                    <label>Número de archivador <b class="text-danger">*</b></label>
+                                    <input type="text" class="form-control" placeholder="No. de archivador" [(ngModel)]="tramiteSolicitud.numeroArchivador" name="numeroArchivador" required />
+                                </div>
+
+                                <div class="col-xs-12 col-lg-12"> 
+                                    <label>Bandeja <b class="text-danger">*</b></label>
+                                    <input type="text" class="form-control" placeholder="Bandeja" [(ngModel)]="tramiteSolicitud.bandeja" name="bandeja" required />
+                                </div>
+
+                                <div class="col-xs-12 col-lg-12"> 
+                                    <label>Número de caja <b class="text-danger">*</b></label>
+                                    <input type="text" class="form-control" placeholder="No. de caja" [(ngModel)]="tramiteSolicitud.numeroCaja" name="numeroCaja" required />
+                                </div>
+                            </div>
                             <div class="row" *ngIf="requiereRunt">
                                 <div class="col-xs-12 col-lg-12"> 
                                     <label>Número de solicitud RUNT <b class="text-danger">*</b></label>
                                     <input type="text" class="form-control" placeholder="No. solicitud RUNT" [(ngModel)]="tramiteSolicitud.numeroRunt" name="numeroRunt" required />
                                 </div>
                             </div>
-                            
+                            <br>
                             <div class="row" *ngIf="(requiereRunt && tramiteSolicitud.numeroRunt) || !requiereRunt">
                                 <div class="col-xs-12 col-lg-12">
                                     <button (click)="onEnviar()" class="btn btn-success">
@@ -163,7 +282,7 @@
                 
                 <div class="row"  *ngIf="requiereSustrato && tramitesFactura && tramitesFactura.length == tramitesRealizados.length && !this.tramiteSolicitud.insumoEntregado">
                     <div class="col-xs-12 col-lg-12">
-                        <app-insumo [factura]="factura" [idModulo]='1' (onReadyInsumo)="onReadyInsumo($event)"></app-insumo>
+                        <app-insumo [factura]="factura" [solicitante]="solicitante" [idModulo]='2' (onReadyInsumo)="onReadyInsumo($event)"></app-insumo>
                     </div>
                 </div>
             </div>

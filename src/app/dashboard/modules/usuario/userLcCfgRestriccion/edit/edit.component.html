@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="col-xs-12 col-lg-4">
+    <div class="card">
+      <div class="card-header">
+        <b class="text-uppercase">Editar restriccion licencia de conducción</b>
+        <br>
+        <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
+      </div>
+      <div class="card-body">
+        <form #formNew="ngForm">
+          <div class="form-group row">
+            <div class="col-xs-12 col-lg-12">
+              <label>Nombre <strong class="text-danger">*</strong></label>
+              <input class="form-control" [(ngModel)]="restriccion.nombre" name="nombre" type="text" required />
+            </div>
+            <div class="col-xs-12 col-lg-12">
+              <label>Codigo</label>
+              <input class="form-control" [(ngModel)]="restriccion.codigo" name="codigo" type="text" required />
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="card-footer">
+        <div class="btn-group">
+          <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
+            <i class="fa fa-save"></i>
+            Enviar
+          </button>
+          <button (click)="onCancelar()" class="btn btn-default">
+            <i class="fa fa-times"></i>
+            Cancelar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

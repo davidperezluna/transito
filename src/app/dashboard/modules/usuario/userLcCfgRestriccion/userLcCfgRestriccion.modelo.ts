@@ -1,7 +1,7 @@
-export class UserLcCfgCategoria{
+export class UserLcCfgRestriccion{
 	constructor(
 		public nombre: string,
-		public descripcion: string,
+		public codigo: number,
 		public id:number
 	){}
 }

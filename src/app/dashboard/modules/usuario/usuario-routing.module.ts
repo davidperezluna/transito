@@ -6,6 +6,7 @@ import { UserUsuarioMenuComponent } from './userUsuarioMenu/userUsuarioMenu.comp
 import { UserEmpresaTransporteComponent } from './userEmpresaTransporte/userEmpresaTransporte.component';
 import { UserEmpresaComponent } from './userEmpresa/userEmpresa.component';
 import { UserCiudadanoComponent } from './userCiudadano/userCiudadano.component';
+import { UserLcCfgRestriccionComponent } from './userLcCfgRestriccion/userLcCfgRestriccion.component';
 
 const routes: Routes = [
   {
@@ -27,6 +28,10 @@ const routes: Routes = [
   {
     path: 'userCiudadano',
     component: UserCiudadanoComponent
+  },
+  {
+    path: 'userLcCfgRestriccion',
+    component: UserLcCfgRestriccionComponent
   }
 ]; 
 

@@ -50,13 +50,17 @@
                         </div>
                             
                         <div class="row">
-                            <div class="col-xs-12 col-lg-8">
+                            <div class="col-xs-12 col-lg-12">
                                 <label>Conductor</label>
                                 <input type="text" class="form-control" value="{{ solicitante.primerNombre }} {{ solicitante.primerApellido }}" name="solicitante" readonly>
                             </div>
-                            <div class="col-xs-12 col-lg-4">
+                            <div class="col-xs-12 col-lg-6">
                                 <label>Identificación</label>
                                 <input type="text" class="form-control" value="{{ solicitante.identificacion }}" name="solicitanteIdentificacion" required readonly>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>No. de licencia de conducción</label>
+                                <input type="text" class="form-control" [(ngModel)]="datos.numeroLicencia" value="{{ solicitante.identificacion }}" name="numeroLicencia" required>
                             </div>
                         </div>
 

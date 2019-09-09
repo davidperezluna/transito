@@ -30,6 +30,7 @@ export class NewRncRecategorizacionLicenciaAbajoComponent implements OnInit {
         'campos': null,
         'documentacion': true,
         'observacion': null,
+        'numeroLicencia': null,
         'numero': null,
         'vigencia': null,
         'idFuncionario': null,
@@ -123,7 +124,7 @@ export class NewRncRecategorizacionLicenciaAbajoComponent implements OnInit {
         this.datos.idTramiteFactura = this.tramiteFactura.factura
         this.datos.idSolicitante = this.solicitante.id;
         
-        let resumen = "<b>No. factura<b>" + this.tramiteFactura.factura.numero;
+        let resumen = "No. factura" + this.tramiteFactura.factura.numero;
 
         this.realizado = true;
 

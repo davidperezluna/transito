@@ -23,10 +23,12 @@ export class NewRncComponent implements OnInit {
   
   public numeroFactura: any = null;
   public identificacion: any = null;
+  public identificacionApoderado: any = null;
 
   public funcionario: any = null;
   public factura: any = null;
   public solicitante: any = null;
+  public apoderado: any = null;
 
   public tramitesFactura: any = null;
   public tramiteFactura: any = null;
@@ -39,7 +41,8 @@ export class NewRncComponent implements OnInit {
   public tramitesRealizados: any = [];
   public documentacionPendiente: any = [];
   
-  public formNewCiudadano: any = false;
+  public formNewCiudadano: any;
+  public formApoderado: any;
 
 constructor(
   private _SolicitudService: FroTrteSolicitudService,
@@ -266,6 +269,80 @@ constructor(
         }
       );
     }
+  }
+
+  onFormApoderado() {
+    this.formApoderado = true;
+  }
+
+  onSearchApoderado() {
+    swal({
+      title: 'Buscando apoderado!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+
+    let token = this._LoginService.getToken();
+
+    let datos = {
+      'identificacion': this.identificacionApoderado,
+      'idTipoIdentificacion': 1,
+    }
+
+    this._CiudadanoService.searchByIdentificacion(datos, token).subscribe(
+      response => {
+        if (response.code == 200) {
+          if (response.data.ciudadano) {
+            this.apoderado = response.data.ciudadano;
+
+            swal({
+              title: 'Perfecto!',
+              text: response.message,
+              type: 'success',
+              confirmButtonText: 'Aceptar'
+            });
+          }
+        } else {
+          this.apoderado = null;
+
+          swal({
+            title: 'Error!',
+            text: response.message,
+            type: 'error',
+            confirmButtonText: 'Aceptar'
+          });
+        }
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      }
+    );
+  }
+
+  onAddApoderado() {
+    this.formApoderado = false;
+    if (this.apoderado) {
+      swal({
+        title: 'Perfecto!',
+        text: 'Apoderado agregado',
+        type: 'success',
+        confirmButtonText: 'Aceptar'
+      });
+
+      this.tramiteSolicitud.idSolicitante = this.apoderado.id;
+    }
+  }
+
+  onCloseApoderado() {
+    this.formApoderado = false;
+    this.apoderado = null;
   }
 
   onChangedTramiteFactura(idTramiteFactura) {

@@ -105,7 +105,8 @@
                         <div class="row">
                             <div class="col-xs-12 col-lg-12">
                                 <label>Restricciones <b class="text-danger">*</b></label>
-                                <textarea class="form-control" [(ngModel)]="datos.restriccion" name="restriccion" rows="4" required></textarea>
+                                <ng-select [multiple]="false" [options]="restricciones" [(ngModel)]="datos.idRestriccion" name="idRestriccion" required>
+                                </ng-select>
                             </div>
                         </div>
                     </div>

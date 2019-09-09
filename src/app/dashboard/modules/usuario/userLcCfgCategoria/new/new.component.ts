@@ -1,4 +1,4 @@
-import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { UserLcCfgCategoria } from '../userLcCfgCategoria.modelo';
 import { UserLcCfgCategoriaService } from '../../../../../services/userLcCfgCategoria.service';
 import { LoginService } from '../../../../../services/login.service';

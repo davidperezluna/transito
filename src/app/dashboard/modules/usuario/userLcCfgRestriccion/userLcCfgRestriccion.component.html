@@ -1,0 +1,45 @@
+<hr>
+<div class="container">
+  <div class="row" *ngIf='formIndex'>
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <b class="text-uppercase">Restricciones para Licencia de Conducción</b>
+        </div>
+        <div class="card-body">
+          <table class="table " id="dataTables-example">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="odd" *ngFor="let restriccion of restricciones; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ restriccion.nombre }}</td>
+                <td>{{ restriccion.codigo }}</td>
+                <td>
+                  <button (click)="onEdit(restriccion)" class="btn btn-xs btn-info" type="button">
+                    <i class="fa fa-edit"></i>
+                    Editar
+                  </button>
+                  <button (click)="onDelete(restriccion.id)" class="btn btn-xs btn-danger" type="button">
+                    <i class="fa fa-trash"></i>
+                    Eliminar
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- /.table-responsive -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-edit-userlccfgrestriccion *ngIf='formEdit' [restriccion]="restriccion" (ready)="ready($event)"></app-edit-userlccfgrestriccion>
+  <app-new-userlccfgrestriccion *ngIf='formNew' (ready)="ready($event)"></app-new-userlccfgrestriccion>
+</div>

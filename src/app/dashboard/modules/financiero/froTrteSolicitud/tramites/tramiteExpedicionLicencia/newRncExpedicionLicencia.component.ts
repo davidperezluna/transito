@@ -3,6 +3,7 @@ import { UserCiudadanoService } from '../../../../../../services/userCiudadano.s
 import { UserLcCfgCategoriaService } from '../../../../../../services/userLcCfgCategoria.service';
 import { CfgPaisService } from '../../../../../../services/cfgPais.service';
 import { VhloCfgServicioService } from '../../../../../../services/vhloCfgServicio.service';
+import { UserLcCfgRestriccionService } from '../../../../usuario/userLcCfgRestriccion/userLcCfgRestriccion.service';
 import { LoginService } from '../../../../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -23,6 +24,7 @@ export class NewRncExpedicionLicenciaComponent implements OnInit {
     public paises: any;
     public servicios: any;
     public categorias: any;
+    public restricciones: any;
     public radio: any;
 
     public datos = {
@@ -30,12 +32,12 @@ export class NewRncExpedicionLicenciaComponent implements OnInit {
         'documentacion': true,
         'observacion': null,
         'numero': null,
-        'restriccion': null,
         'fechaExpedicion': null,
         'idFuncionario': null,
         'idPais': null,
         'idCategoria': null,
         'idServicio': null,
+        'idRestriccion': null,
         'idOrganismoTransito': null,
         'idTramiteFactura': null,
         'idSolicitante': null,
@@ -45,7 +47,8 @@ export class NewRncExpedicionLicenciaComponent implements OnInit {
         private _CiudadanoService: UserCiudadanoService,
         private _CfgPaisService: CfgPaisService,
         private _ServicioService: VhloCfgServicioService,
-        private _CfgLicenciaConduccionCategoriaService: UserLcCfgCategoriaService,
+        private _CategoriaService: UserLcCfgCategoriaService,
+        private _RestriccionService: UserLcCfgRestriccionService,
         private _LoginService: LoginService,
     ) { }
 
@@ -72,7 +75,7 @@ export class NewRncExpedicionLicenciaComponent implements OnInit {
                 confirmButtonText: 'Aceptar'
             });
         } else {
-            this._CfgLicenciaConduccionCategoriaService.select().subscribe(
+            this._CategoriaService.select().subscribe(
                 response => {
                     this.categorias = response;
                 },
@@ -103,6 +106,20 @@ export class NewRncExpedicionLicenciaComponent implements OnInit {
             this._ServicioService.select().subscribe(
                 response => {
                     this.servicios = response;
+                },
+                error => {
+                    this.errorMessage = <any>error;
+    
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert('Error en la petición');
+                    }
+                }
+            );
+
+            this._RestriccionService.select().subscribe(
+                response => {
+                    this.restricciones = response;
                 },
                 error => {
                     this.errorMessage = <any>error;

@@ -28,6 +28,7 @@ export class NewRncRecategorizacionLicenciaArribaComponent implements OnInit {
         'campos': null,
         'documentacion': true,
         'observacion': null,
+        'numeroLicencia': null,
         'numero': null,
         'vigencia': null,
         'idFuncionario': null,

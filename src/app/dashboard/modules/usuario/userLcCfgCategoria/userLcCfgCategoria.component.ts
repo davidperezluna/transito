@@ -1,7 +1,7 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { UserLcCfgCategoria } from './userLcCfgCategoria.modelo';
 import { UserLcCfgCategoriaService } from '../../../../services/userLcCfgCategoria.service';
 import { LoginService } from '../../../../services/login.service';
-import { UserLcCfgCategoria } from './userLcCfgCategoria.modelo';
 import swal from 'sweetalert2';
 declare var $: any;
 
@@ -22,7 +22,7 @@ export class UserLcCfgCategoriaComponent implements OnInit {
 
   constructor(
     private _CategoriaService: UserLcCfgCategoriaService,
-		private _loginService: LoginService,
+		private _LoginService: LoginService,
     ){}
     
   ngOnInit() {
@@ -45,7 +45,7 @@ export class UserLcCfgCategoriaComponent implements OnInit {
 				response => {
           this.categorias = response.data;
           let timeoutId = setTimeout(() => {  
-            this.iniciarTabla();
+            this.onInitTable();
           }, 100);
 				}, 
 				error => {
@@ -58,8 +58,9 @@ export class UserLcCfgCategoriaComponent implements OnInit {
 				}
       );
   }
-  iniciarTabla(){
-    $('#dataTables-example').DataTable({
+
+  onInitTable(){
+    this.table = $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,
       sPaginationType: 'full_numbers',
@@ -72,7 +73,6 @@ export class UserLcCfgCategoriaComponent implements OnInit {
         }
       }
    });
-   this.table = $('#dataTables-example').DataTable();
   }
   
   onNew(){
@@ -102,7 +102,7 @@ export class UserLcCfgCategoriaComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.value) {
-        let token = this._loginService.getToken();
+        let token = this._LoginService.getToken();
         this._CategoriaService.delete({'id': id}, token).subscribe(
             response => {
                 swal({
