@@ -92,11 +92,11 @@ export class VhloCfgPlacaService {
         return this._http.post(this.url + '/select/organismotransito', params, { headers: headers }).map(res => res.json());
     }
 
-	selectByOrganismoTransitoAndTipoVehiculo(datos, token) {
+    selectByOrganismoTransitoAndTipoVehiculoAndServicio(datos, token) {
 		let json = JSON.stringify(datos);
 		let params = "data=" + json + "&authorization=" + token;	
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-		return this._http.post(this.url + "/select/organismotransito/tipovehiculo", params, { headers: headers }).map(
+		return this._http.post(this.url + "/select/organismotransito/tipovehiculo/servicio", params, { headers: headers }).map(
 			res => res.json(),
 		);
 	}

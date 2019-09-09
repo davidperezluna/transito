@@ -82,6 +82,34 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <tr *ngIf="vehiculo.linea">
+                                        <td>
+                                            <b>Marca</b>
+                                            <br>
+                                            {{ vehiculo.linea?.marca.nombre }}
+                                        </td>
+                                    </tr>
+                                    <tr *ngIf="vehiculo.linea">
+                                        <td>
+                                            <b>Línea</b>
+                                            <br>
+                                            {{ vehiculo.linea?.nombre }}
+                                        </td>
+                                    </tr>
+                                    <tr *ngIf="vehiculo.clase">
+                                        <td>
+                                            <b>Línea</b>
+                                            <br>
+                                            {{ vehiculo.clase?.nombre }}
+                                        </td>
+                                    </tr>
+                                    <tr *ngIf="vehiculo.carroceria">
+                                        <td>
+                                            <b>Carroceria</b>
+                                            <br>
+                                            {{ vehiculo.carroceria?.nombre }}
+                                        </td>
+                                    </tr>
                                     <tr *ngIf="vehiculo.placa">
                                         <td>
                                             <b>Placa</b>

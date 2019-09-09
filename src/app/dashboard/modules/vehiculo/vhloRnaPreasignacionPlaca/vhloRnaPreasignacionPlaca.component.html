@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid">
     <div class="row" *ngIf='formSearch'>
         <div class="col-xs-12 col-lg-4">
             <div class="card">
@@ -25,8 +25,8 @@
             </div>
         </div>
 
-        <div class="col-xs-12 col-lg-8">
-            <div class="row" *ngIf="vehiculos && formIndex"><!-- .row -->                 
+        <div class="col-xs-12 col-lg-8" *ngIf="vehiculos && formIndex">
+            <div class="row"><!-- .row -->                 
                 <div class="col-xs-12 col-lg-12">
                     <div class="card">
                         <div class="card-header">
@@ -73,6 +73,34 @@
                         <div class="col-xs-12 col-lg-12">
                             <table class="table table-bordered table-striped">
                                 <tbody>
+                                    <tr *ngIf="vehiculo.linea">
+                                        <td>
+                                            <b>Marca</b>
+                                            <br>
+                                            {{ vehiculo.linea?.marca.nombre }}
+                                        </td>
+                                    </tr>
+                                    <tr *ngIf="vehiculo.linea">
+                                        <td>
+                                            <b>Línea</b>
+                                            <br>
+                                            {{ vehiculo.linea?.nombre }}
+                                        </td>
+                                    </tr>
+                                    <tr *ngIf="vehiculo.clase">
+                                        <td>
+                                            <b>Línea</b>
+                                            <br>
+                                            {{ vehiculo.clase?.nombre }}
+                                        </td>
+                                    </tr>
+                                    <tr *ngIf="vehiculo.carroceria">
+                                        <td>
+                                            <b>Carroceria</b>
+                                            <br>
+                                            {{ vehiculo.carroceria?.nombre }}
+                                        </td>
+                                    </tr>
                                     <tr>
                                         <td>
                                             <b>Placa</b>
@@ -104,12 +132,6 @@
                                             {{ vehiculo.serie }}
                                         </td>
                                     </tr>
-                                    <tr *ngIf="vehiculo.clase">
-                                        <td>
-                                            <b>Clase</b>
-                                            {{ vehiculo.clase?.nombre }}
-                                        </td>
-                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -124,6 +146,10 @@
                     <div class="row" *ngIf="funcionario"><!-- .row -->
                         <div class="col-xs-12 col-lg-12">
                             <b class="text-uppercase">Tramite de preasignación de placa</b>   
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Fecha asignación <b class="text-danger">*</b></label>
+                            <input type="date" [(ngModel)]="datos.fechaAsignacion" name="fechaAsignacion" required>
                         </div>
                         <div class="col-xs-12 col-lg-12" *ngIf="placas">
                             <label>Placas disponibles en {{ funcionario.organismoTransito.nombre }} <b class="text-danger">*</b></label>

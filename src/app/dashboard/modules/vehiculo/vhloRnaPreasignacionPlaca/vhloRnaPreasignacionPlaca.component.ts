@@ -31,6 +31,7 @@ export class VhloRnaPreasignacionPlacaComponent implements OnInit {
   public preasignacion:any = false;
 
   public datos = {
+    'fechaAsignacion': null,
     'idVehiculo': null,
     'idOrganismoTransito': null,
     'idPlaca': null,
@@ -54,18 +55,19 @@ export class VhloRnaPreasignacionPlacaComponent implements OnInit {
     this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
         response => {
           if (response.code == 200) {
-              this.funcionario = response.data;
-              this.datos.idOrganismoTransito = this.funcionario.organismoTransito.id;
-            } else {
-              this.funcionario = null;
-              this.datos.idOrganismoTransito = null;
+            this.funcionario = response.data;
+            this.datos.idOrganismoTransito = this.funcionario.organismoTransito.id;
+            swal.close();
+          } else {
+            this.funcionario = null;
+            this.datos.idOrganismoTransito = null;
 
-              swal({
-                  title: 'Error!',
-                  text: 'Usted no tiene permisos para realizar la preasigcón de placa',
-                  type: 'error',
-                  confirmButtonText: 'Aceptar'
-              });
+            swal({
+                title: 'Error!',
+                text: 'Usted no tiene permisos para realizar la preasignación de placa',
+                type: 'error',
+                confirmButtonText: 'Aceptar'
+            });
           }
           error => {
               this.errorMessage = <any>error;
@@ -144,7 +146,13 @@ export class VhloRnaPreasignacionPlacaComponent implements OnInit {
 
     let token = this._LoginService.getToken();
 
-    this._PlacaService.selectByOrganismoTransitoAndTipoVehiculo({ 'idOrganismoTransito': this.funcionario.organismoTransito.id, 'idTipoVehiculo': this.vehiculo.clase.tipoVehiculo.id }, token).subscribe(
+    let datos = { 
+      'idOrganismoTransito': this.funcionario.organismoTransito.id, 
+      'idTipoVehiculo': this.vehiculo.clase.tipoVehiculo.id,
+      'idServicio': this.vehiculo.servicio.id,
+    }
+
+    this._PlacaService.selectByOrganismoTransitoAndTipoVehiculoAndServicio(datos, token).subscribe(
       response => {
         this.placas = response;
       }, 

@@ -11,8 +11,8 @@ import { EditComponent } from './edit/edit.component';
 
 @NgModule({
     imports: [CommonModule, Ng2BootstrapModule.forRoot(),SelectModule],
-    declarations: [UserLcCfgCategoriaComponent,NewComponent,EditComponent],
-    exports: [UserLcCfgCategoriaComponent, NewComponent,EditComponent],
+    declarations: [NewComponent,EditComponent],
+    exports: [NewComponent,EditComponent],
     providers:[UserLcCfgCategoriaService]
 })
 
