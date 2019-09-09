@@ -62,13 +62,19 @@
                         </div>
                         <div class="row">
                             <div class="col-xs-12 col-lg-4">
-                                <label>Categoria duplicar <b class="text-danger">*</b></label>
-                                <ng-select [multiple]="false" [options]="categorias" [(ngModel)]="datos.idCategoria" name="categoria" required>
-                                </ng-select>
+                                <label>No. licencia <b class="text-danger">*</b></label>
+                                <input type="text" class="form-control" [(ngModel)]="datos.numeroLicencia" value="{{ solicitante.identificacion }}" name="numeroLicencia" required>
                             </div>
+                        </div>
+                        <div class="row">
                             <div class="col-xs-12 col-lg-4">
                                 <label>Servicio <b class="text-danger">*</b></label>
-                                <ng-select [multiple]="false" [options]="servicios" [(ngModel)]="datos.idServicio" name="servicio" required>
+                                <ng-select [multiple]="false" [options]="servicios" (ngModelChange)="onChangedServicio($event)" [(ngModel)]="datos.idServicio" name="servicio" required>
+                                </ng-select>
+                            </div>
+                            <div class="col-xs-12 col-lg-4" *ngIf="categorias">
+                                <label>Categoria duplicar <b class="text-danger">*</b></label>
+                                <ng-select [multiple]="false" [options]="categorias" [(ngModel)]="datos.idCategoria" name="categoria" required>
                                 </ng-select>
                             </div>
                         </div>

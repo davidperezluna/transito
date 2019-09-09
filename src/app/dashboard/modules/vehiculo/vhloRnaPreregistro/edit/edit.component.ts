@@ -40,8 +40,8 @@ export class EditComponent implements OnInit {
   public colores:any;
   public marcas:any;
   public combustibles:any;
-  public radioAcciones:any;
-  public modalidadTransportes:any;
+  public radiosAccion: any;
+  public modalidadesTransporte:any;
   public organismosTransito:any;
   public organismosTransitoNacional:any;
 
@@ -78,29 +78,35 @@ export class EditComponent implements OnInit {
   public formApoderado = false;
   public funcionario: any = null;
 
-public tiposMatricula = [
-  {'value':'RADICADO','label':"Radicado de cuenta"},
-  {'value':'MATRICULA','label':"Matricula inicial"},
-  {'value':'IMPORTACION','label':"Importación temporal"},
-  {'value':'CARPETA','label':"Cargue de carpeta"}
-];
+  public tiposPropiedad = [
+    { 'value': 1, 'label': "Leasing" },
+    { 'value': 2, 'label': "Propio" }
+  ];
 
-public datos = {
-  'propietarios': [],
-  'solidario': false,
-  'tipoPropiedad': null,
-  'licenciaTransito': null,
-  'idVehiculo': null,
-};
+  public tiposMatricula = [
+    { 'value': 'RADICADO', 'label': "Radicado de cuenta" },
+    { 'value': 'MATRICULA', 'label': "Matricula inicial" },
+    { 'value': 'IMPORTACION', 'label': "Importación temporal" },
+    { 'value': 'CARPETA', 'label': "Cargue de carpeta" }
+  ];
 
-public radicado = {
-  'numeroDocumento': null,
-  'fechaIngreso': null,
-  'guiaLlegada': null,
-  'empresaEnvio': null,
-  'idOrganismoTransito': null,
-  'idTipoIdentificacion': null,
-};
+  public datos = {
+    'propietarios': [],
+    'solidario': false,
+    'tipoPropiedad': null,
+    'numeroLicencia': null,
+    'fechaLicencia': null,
+    'idVehiculo': null,
+  };
+
+  public radicado = {
+    'numeroDocumento': null,
+    'fechaIngreso': null,
+    'guiaLlegada': null,
+    'empresaEnvio': null,
+    'idOrganismoTransito': null,
+    'idTipoIdentificacion': null,
+  };
 
 constructor(
   private _PropietarioService: VhloPropietarioService,
@@ -376,7 +382,7 @@ constructor(
 
     this._RadioAccionService.select().subscribe(
       response => {
-        this.radioAcciones = response;
+        this.radiosAccion = response;
 
         if (this.vehiculo.radioAccion) {
           setTimeout(() => {
@@ -396,7 +402,7 @@ constructor(
     
     this._ModalidadTransporteService.select().subscribe(
       response => {
-        this.modalidadTransportes = response;
+        this.modalidadesTransporte = response;
 
         if (this.vehiculo.modalidadTransporte) {
           setTimeout(() => {

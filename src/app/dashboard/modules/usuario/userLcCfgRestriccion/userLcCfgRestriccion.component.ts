@@ -29,10 +29,11 @@ export class UserLcCfgRestriccionComponent implements OnInit {
 
     this._RestriccionService.index().subscribe(
       response => {
-        this.restricciones = response;
+        this.restricciones = response.data;
 
         let timeoutId = setTimeout(() => {
           this.onInitTable();
+          this.formIndex = true;
         }, 100);
       },
       error => {

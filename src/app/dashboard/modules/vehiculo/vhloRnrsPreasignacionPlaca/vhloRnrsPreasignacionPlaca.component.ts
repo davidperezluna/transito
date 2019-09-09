@@ -145,7 +145,13 @@ export class VhloRnrsPreasignacionPlacaComponent implements OnInit {
 
     let token = this._LoginService.getToken();
 
-    this._PlacaService.selectByOrganismoTransitoAndTipoVehiculo({ 'idOrganismoTransito': this.funcionario.organismoTransito.id, 'idTipoVehiculo': this.vehiculo.clase.tipoVehiculo.id }, token).subscribe(
+    let datos = { 
+      'idOrganismoTransito': this.funcionario.organismoTransito.id, 
+      'idTipoVehiculo': this.vehiculo.clase.tipoVehiculo.id,
+      'idServicio': this.vehiculo.servicio.id,
+    }
+
+    this._PlacaService.selectByOrganismoTransitoAndTipoVehiculoAndServicio(datos, token).subscribe(
       response => {
         this.placas = response;
       }, 

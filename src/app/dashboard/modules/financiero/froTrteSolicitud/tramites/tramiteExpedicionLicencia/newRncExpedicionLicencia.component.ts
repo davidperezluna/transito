@@ -74,21 +74,7 @@ export class NewRncExpedicionLicenciaComponent implements OnInit {
                 type: 'warning',
                 confirmButtonText: 'Aceptar'
             });
-        } else {
-            this._CategoriaService.select().subscribe(
-                response => {
-                    this.categorias = response;
-                },
-                error => {
-                    this.errorMessage = <any>error;
-    
-                    if (this.errorMessage != null) {
-                        console.log(this.errorMessage);
-                        alert('Error en la petición');
-                    }
-                }
-            );
-    
+        } else {    
             this._CfgPaisService.select().subscribe(
                 response => {
                     this.paises = response;
@@ -171,6 +157,41 @@ export class NewRncExpedicionLicenciaComponent implements OnInit {
                     }
                 }
             ); 
+        }
+    }
+
+    onChangedServicio(id) {
+        if (id) {
+            let token = this._LoginService.getToken();
+
+            let datos = {
+                'idServicio': id,
+                'idTipoVehiculo': this.tramiteFactura.precio.tipoVehiculo.id
+            }
+
+            this._CategoriaService.selectByServicioAndTipoVehiculo(datos, token).subscribe(
+                response => {
+                    if (response.code == 200) {
+                        this.categorias = response.data;
+                    } else {
+                        this.categorias = null;
+
+                        swal({
+                            title: response.title,
+                            text: response.message,
+                            type: response.status,
+                            confirmButtonText: 'Aceptar'
+                        });
+                    }
+                },
+                error => {
+                    this.errorMessage = <any>error;
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert('Error en la petición');
+                    }
+                }
+            );
         }
     }
 

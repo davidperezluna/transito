@@ -66,4 +66,11 @@ export class VhloCfgTipoVehiculoService {
         let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
         return this._http.post(this.url + '/select/modulo', params, { headers: headers }).map(res => res.json());
     }
+
+    selectByCategoria(datos, token) {
+        let json = JSON.stringify(datos);
+        let params = "data=" + json + "&authorization=" + token;
+        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+        return this._http.post(this.url + "/select/categoria", params, { headers: headers }).map(res => res.json());
+    }
 }

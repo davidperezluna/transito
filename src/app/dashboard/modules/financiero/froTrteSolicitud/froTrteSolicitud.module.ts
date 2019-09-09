@@ -37,6 +37,7 @@ import { UserEmpresaService } from '../../../../services/userEmpresa.service';
 import { UserEmpresaTransporteService } from "../../../../services/userEmpresaTransporte.service";
 import { UserLicenciaTransitoService } from '../../../../services/userLicenciaTransito.service';
 import { UserLcCfgCategoriaService } from '../../../../services/userLcCfgCategoria.service';
+import { UserLcCfgRestriccionService } from '../../usuario/userLcCfgRestriccion/userLcCfgRestriccion.service';
 
 //Reportes de tramite solicitud
 import { ReportesComponent } from "./reportes/reportes.component";
@@ -88,6 +89,7 @@ import { ReportesComponent } from "./reportes/reportes.component";
         UserEmpresaTransporteService,
         UserLicenciaTransitoService,
         UserLcCfgCategoriaService,
+        UserLcCfgRestriccionService,
     ]
 })
 
