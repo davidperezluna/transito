@@ -98,6 +98,7 @@
                         <thead>
                             <tr>
                                 <th><b>#</b></th>
+                                <th><b>Acciones</b></th>
                                 <th><b>Placa Vehículo</b></th>
                                 <th><b>Nro. Cupo</b></th>
                                 <th><b>Nro. Pasajeros</b></th>
@@ -114,12 +115,21 @@
                                 <th><b>Serie</b></th>
                                 <th><b>Vin</b></th>
                                 <th><b>Mod. Transporte</b></th>
-                                <th><b>Acciones</b></th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr class="odd" *ngFor="let asignacion of asignaciones; let i = index">
                                 <td>{{ i + 1 }}</td>
+                                <td>
+                                    <div class="btn-group">
+                                        <button (click)="onEdit(asignacion)" class="btn btn-xs btn-info" type="button">
+                                            <i class="fa fa-edit"></i>
+                                        </button>
+                                        <button (click)="onDelete(asignacion.id)" class="btn btn-xs btn-danger" type="button">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
                                 <td>{{ asignacion.vehiculo.placa.numero }}</td>
                                 <td>{{ asignacion.cupo.numero }}</td>
                                 <td>{{ asignacion.vehiculo.numeroPasajeros }}</td>
@@ -136,16 +146,6 @@
                                 <td>{{ asignacion.vehiculo.serie }}</td>
                                 <td>{{ asignacion.vehiculo.vin }}</td>
                                 <td>{{ asignacion.vehiculo.modalidadTransporte.nombre }}</td>
-                                <td>
-                                    <button (click)="onEdit(asignacion)" class="btn btn-xs btn-info" type="button">
-                                        <i class="fa fa-edit"></i>
-                                        Editar
-                                    </button>
-                                    <button (click)="onDelete(asignacion.id)" class="btn btn-xs btn-danger" type="button">
-                                        <i class="fa fa-trash"></i>
-                                        Eliminar
-                                    </button>
-                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -156,7 +156,7 @@
             <app-new-vhlotpasignacion [empresaHabilitadaRango]="empresaHabilitadaRango" (ready)="ready($event)"></app-new-vhlotpasignacion>
         </div>
         <div class="col-xs-12 col-lg-8" *ngIf='formEdit'>
-            <app-edit-vhlotpasignacion [asignacion]="asignacion" (ready)="ready($event)"></app-edit-vhlotpasignacion>
+            <app-edit-vhlotpasignacion [asignacion]="asignacion" [empresaHabilitadaRango]="empresaHabilitadaRango" (ready)="ready($event)"></app-edit-vhlotpasignacion>
         </div>
     </div>
 </div>

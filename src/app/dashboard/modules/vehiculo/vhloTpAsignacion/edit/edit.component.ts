@@ -1,10 +1,11 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
-import { VhloCfgClaseService } from "../../../../../services/vhloCfgClase.service";
-import { VhloCfgServicioService } from "../../../../../services/vhloCfgServicio.service";
+import { VhloCfgNivelServicioService } from "../../../../../services/vhloCfgNivelServicio.service";
 import { VhloTpAsignacionService } from "../../../../../services/vhloTpAsignacion.service";
 import { LoginService } from '../../../../../services/login.service';
+
 import swal from 'sweetalert2';
+declare var $: any;
 
 @Component({
     selector: 'app-edit-vhlotpasignacion',
@@ -13,91 +14,42 @@ import swal from 'sweetalert2';
 export class EditComponent implements OnInit {
     @Output() ready = new EventEmitter<any>();
     @Input() asignacion: any = null;
+    @Input() empresaHabilitadaRango: any = null;
     public errorMessage;
     public empresa;
     public empresaTransporte;
     public vehiculo;
     public propietarios;
+    public nivelesServicio;
+    public idCupoAnterior;
+    
+    public table: any = null;
 
     public placa;
 
-    public clases;
-    public servicios;
     public cupos;
-    
     public cupoSelected;
 
-    public datos = {
-        'idClase': null,
-        'idServicio': null,
-        'nit': null,
-    };
     constructor(
         private _LoginService: LoginService,
-        private _VhloCfgClaseService: VhloCfgClaseService,
-        private _VhloCfgServicioService: VhloCfgServicioService,
+        private _VhloCfgNivelServicioService: VhloCfgNivelServicioService,
         private _VhloTpAsignacionService: VhloTpAsignacionService,
     ) { }
 
     ngOnInit() {
-
-        this.datos.idClase = this.asignacion.empresaTransporte.clase.id;
-        this.datos.idServicio = this.asignacion.empresaTransporte.servicio.id;
-        this.datos.nit = this.asignacion.empresaTransporte.empresa.nit;
-        /* this.onSearchEmpresa(); */
-
         this.placa = this.asignacion.vehiculo.placa.numero;
+        this.idCupoAnterior = this.asignacion.cupo.id;
+        
         this.onSearchVehiculo();
 
-        this._VhloCfgClaseService.select().subscribe(
-            response => {
-                this.clases = response;
-            },
-            error => {
-                this.errorMessage = <any>error;
-
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert("Error en la petición");
-                }
-            }
-        );
-        this._VhloCfgServicioService.select().subscribe(
-            response => {
-                this.servicios = response;
-            },
-            error => {
-                this.errorMessage = <any>error;
-
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert("Error en la petición");
-                }
-            }
-        );
-    }
-
-    onCancelar() {
-        this.ready.emit(true);
-    }
-
-    /* onSearchEmpresa() {
         let token = this._LoginService.getToken();
-        this._VhloTpAsignacionService.searchByServicioAndClase(this.datos, token).subscribe(
+
+        this._VhloTpAsignacionService.searchCuposDisponibles({ 'idEmpresa': this.empresaHabilitadaRango.id }, token).subscribe(
             response => {
                 if (response.code == 200) {
-                    console.log(response);
-                    this.empresa = response.data.empresa;
-                    this.empresaTransporte = response.data;
-                    if (response.cupos) {
-                        this.cupos = response.cupos;
-                    }
-                    swal({
-                        title: response.title,
-                        text: response.message,
-                        type: response.status,
-                        confirmButtonText: 'Aceptar'
-                    })
+                    let timeoutId = setTimeout(() => {
+                        this.cupos = response.data;
+                    }, 100);
                 } else {
                     swal({
                         title: response.title,
@@ -115,29 +67,87 @@ export class EditComponent implements OnInit {
                 }
             }
         );
-    } */
-
-    onSearchVehiculo() {
-        let token = this._LoginService.getToken();
-
-        this._VhloTpAsignacionService.searchVehiculo({ 'placa': this.placa }, token).subscribe(
+        this._VhloCfgNivelServicioService.select().subscribe(
             response => {
-                console.log(response);
-                if (response.code == 200) {
-                    this.vehiculo = response.data.vehiculo;
-                    this.propietarios = response.data.propietarios;
+                this.nivelesServicio = response;
+                let timeoutId = setTimeout(() => {
+                    this.asignacion.idNivelServicio = [this.asignacion.nivelServicio.id];
+                }, 100);
+            },
+            error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert("Error en la petición");
                 }
             }
         );
     }
 
-    /* onEnviar() {
+    onCancelar() {
+        this.ready.emit(true);
+    }
+
+    onSearchVehiculo() {
         let token = this._LoginService.getToken();
 
-        this.asignacion.idEmpresa = this.empresaTransporte.id;
-        this.asignacion.idVehiculo = this.vehiculo.id;
+        this._VhloTpAsignacionService.searchVehiculo({ 'placa': this.placa, 'idClase': this.empresaHabilitadaRango.clase.id }, token).subscribe(
+            response => {
+                if (response.code == 200) {
+                    this.vehiculo = response.data.vehiculo;
+                    this.propietarios = response.data.propietarios;
 
-        this._VhloTpAsignacionService.register(this.asignacion, token).subscribe(
+                    swal({
+                        title: response.title,
+                        text: response.message,
+                        type: response.status,
+                        confirmButtonText: 'Aceptar'
+                    })
+
+                    let timeoutId = setTimeout(() => {
+                        this.onInitTable();
+                    }, 100);
+                } else {
+                    swal({
+                        title: response.title,
+                        text: response.message,
+                        type: response.status,
+                        confirmButtonText: 'Aceptar'
+                    })
+                }
+            }
+        );
+    }
+
+    onInitTable() {
+        if (this.table) {
+            this.table.destroy();
+        }
+
+        this.table = $('#dataTables-propietario').DataTable({
+            responsive: true,
+            pageLength: 10,
+            sPaginationType: 'full_numbers',
+            oLanguage: {
+                oPaginate: {
+                    sFirst: '<i class="fa fa-step-backward"></i>',
+                    sPrevious: '<i class="fa fa-chevron-left"></i>',
+                    sNext: '<i class="fa fa-chevron-right"></i>',
+                    sLast: '<i class="fa fa-step-forward"></i>'
+                }
+            }
+        });
+    }
+
+    onEnviar() {
+        let token = this._LoginService.getToken();
+
+        this.asignacion.idEmpresa = this.empresaHabilitadaRango.id;
+        this.asignacion.idVehiculo = this.vehiculo.id;
+        this.asignacion.idCupo = this.cupoSelected;
+
+        this._VhloTpAsignacionService.edit({'asignacion' : this.asignacion, 'idCupoAnterior': this.idCupoAnterior }, token).subscribe(
             response => {
                 if (response.code == 200) {
                     this.ready.emit(true);
@@ -165,5 +175,5 @@ export class EditComponent implements OnInit {
                 }
 
             });
-    } */
+    }
 }
