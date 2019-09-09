@@ -155,8 +155,8 @@
         <div class="col-xs-12 col-lg-8" *ngIf='formNew'>
             <app-new-vhlotpasignacion [empresaHabilitadaRango]="empresaHabilitadaRango" (ready)="ready($event)"></app-new-vhlotpasignacion>
         </div>
-        <!-- <div class="col-xs-12 col-lg-8" *ngIf='formEdit'>
-            <app-edit [habilitacion]="habilitacion" (ready)="ready($event)"></app-edit>
-        </div> -->
+        <div class="col-xs-12 col-lg-8" *ngIf='formEdit'>
+            <app-edit-vhlotpasignacion [asignacion]="asignacion" (ready)="ready($event)"></app-edit-vhlotpasignacion>
+        </div>
     </div>
 </div>
