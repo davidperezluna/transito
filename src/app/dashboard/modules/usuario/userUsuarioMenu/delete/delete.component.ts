@@ -22,10 +22,12 @@ constructor(
   private _MenuService: UserCfgMenuService,
   private _UserUsuarioMenuService: UserUsuarioMenuService,
   private _LoginService: LoginService,
+		private _loginService: LoginService,
   ){}
 
   ngOnInit() {
     this.usuarioMenu = new UserUsuarioMenu(null, null, null);
+    console.log(this.usuario);
 
     let token = this._LoginService.getToken();
 
@@ -79,8 +81,51 @@ constructor(
 						alert("Error en la petición");
 					}
 				}
-
 		}); 
+  }
+
+  onDeleteAll(){
+    swal({
+      title: '¿Estás seguro?',
+      text: "¡Se eliminara este registro!",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#15d4be',
+      cancelButtonColor: '#ff6262',
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.value) {
+        let token = this._loginService.getToken();
+        this._UserUsuarioMenuService.deleteAll({ 'identificacion': this.usuario.ciudadano.identificacion }, token).subscribe(
+          response => {
+            if (response.code == 200) {
+              swal({
+                title: 'Perfecto!',
+                text: response.message,
+                type: 'success',
+                confirmButtonText: 'Aceptar'
+              });
+            }else{
+              swal({
+                title: 'Atención!',
+                text: response.message,
+                type: 'warning',
+                confirmButtonText: 'Aceptar'
+              });
+            }
+          },
+          error => {
+            this.errorMessage = <any>error;
+    
+            if (this.errorMessage != null) {
+              console.log(this.errorMessage);
+              alert("Error en la petición");
+            }
+          }
+        );
+      }
+    })
   }
 
 }

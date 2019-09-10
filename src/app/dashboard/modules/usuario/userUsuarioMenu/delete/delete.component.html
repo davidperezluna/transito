@@ -40,13 +40,17 @@
             </div>
             <div class="card-footer">
                 <div class="btn-group">
+                    <button (click)="onCancelar()" class="btn btn-default">
+                        <i class="fa fa-times"></i>
+                        Cancelar
+                    </button>
                     <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
                         <i class="fa fa-save"></i>
                         Enviar
                     </button>
-                    <button (click)="onCancelar()" class="btn btn-default">
-                        <i class="fa fa-times"></i>
-                        Cancelar
+                    <button (click)="onDeleteAll(usuario)" class="btn btn-danger">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                        <span class="text">Eliminar Todo</span>
                     </button>
                 </div>
             </div>

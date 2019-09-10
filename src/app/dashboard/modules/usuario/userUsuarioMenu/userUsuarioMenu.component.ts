@@ -11,6 +11,9 @@ declare var $: any;
 export class UserUsuarioMenuComponent implements OnInit {
   public errorMessage;
 	public id;
+  public activo;
+  public calassActivo;
+  public txtActivo;
 
   public usuarioMenus: any = null;
   public numeroIdentificacion: any = null;
@@ -45,6 +48,14 @@ export class UserUsuarioMenuComponent implements OnInit {
 
     this._UserUsuarioMenuService.searchMenus({ 'identificacion': this.numeroIdentificacion }, token).subscribe(
       response => {
+        this.activo = response.data.activo;
+        if(this.activo){
+          this.calassActivo = 'btn-warning';
+          this.txtActivo = 'Inhabilitar';
+        }else{
+          this.calassActivo = 'btn-success';
+          this.txtActivo = 'Habilitar';
+        }
         if (response.code == 200) {
           this.usuarioMenus = response.data.usuarioMenus;
           this.formIndex = true;
@@ -114,6 +125,62 @@ export class UserUsuarioMenuComponent implements OnInit {
     this.formIndex = false;
     this.formDelete = true;
   }
+
+  
+
+  onDeleteUsuarioInhabilitar(){
+    swal({
+      title: '¿Estás seguro?',
+      text: "¡Se inhabilitara el usuario!",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#15d4be',
+      cancelButtonColor: '#ff6262',
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.value) {
+        swal({
+          title: 'Cargando Tabla!',
+          text: 'Solo tardara unos segundos por favor espere.',
+          onOpen: () => {
+            swal.showLoading()
+          }
+        });
+        let token = this._loginService.getToken();
+        this._UserUsuarioMenuService.deleteUsuarioInhabilitar({ 'identificacion': this.numeroIdentificacion }, token).subscribe(
+          response => {
+            swal.close();
+            if (response.code == 200) {
+              this.onSearch();
+              swal({
+                title: 'Perfecto!',
+                text: response.message,
+                type: 'success',
+                confirmButtonText: 'Aceptar'
+              });
+            }else{
+              swal({
+                title: 'Atención!',
+                text: response.message,
+                type: 'warning',
+                confirmButtonText: 'Aceptar'
+              });
+            }
+          },
+          error => {
+            this.errorMessage = <any>error;
+    
+            if (this.errorMessage != null) {
+              console.log(this.errorMessage);
+              alert("Error en la petición");
+            }
+          }
+        );
+      }
+    })
+  }
+
 
   ready(isCreado:any){
     if(isCreado) {
