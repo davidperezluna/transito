@@ -212,7 +212,7 @@ export class EditComponent implements OnInit {
             });
     }
 
-    onCalcularCapacidad(capacidadMinima, capacidadMaxima) {
+    onCalcularCapacidad(capacidadMinima, capacidadMaxima, capacidadUtilizada) {
         this.habilitacion.capacidadDisponible = 0;
         if (capacidadMinima && capacidadMaxima) {
             if (capacidadMaxima < capacidadMinima) {
@@ -224,7 +224,7 @@ export class EditComponent implements OnInit {
                 })
 
             } else {
-                this.habilitacion.capacidadDisponible = capacidadMaxima;
+                this.habilitacion.capacidadDisponible = capacidadMaxima - capacidadUtilizada;
             }
         }
 

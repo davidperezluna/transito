@@ -117,8 +117,6 @@ export class CfgAdmFormatoComponent implements OnInit {
               }
             }
           );
-
-        
       }
     })
   }

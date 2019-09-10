@@ -14,6 +14,7 @@ export class UserEmpresaTransporte {
 
         public idCarroceria: number,
         public capacidadDisponible: number,
+        public capacidadUtilizada: number,
         public capacidadMinima: number,
         public capacidadMaxima: number,
         public dobleCabina: number,

@@ -31,12 +31,16 @@
           <div class="card-header">
             <b class="text-uppercase">Menus</b>
             <div class="pull-right btn-group">
+              <button (click)="onDeleteUsuarioInhabilitar(usuario)" class="btn {{calassActivo}}">
+                <i class="fa fa-ban"></i>
+                <span class="text">{{txtActivo}}</span> 
+              </button>
               <button (click)="onNew(usuario)" class="btn btn-default">
                 <i class="fa fa-plus"></i>
                 <span class="text">Nuevo</span>
               </button>
               <button (click)="onDelete(usuario)" class="btn btn-danger">
-                <i class="fa fa-ban"></i>
+                <i class="fa fa-eraser" aria-hidden="true"></i>
                 <span class="text">Eliminar</span>
               </button>
             </div> 
