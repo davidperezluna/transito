@@ -81,7 +81,7 @@ export class NewRnetComponent implements OnInit {
             }
         });
 
-        this.tramiteSolicitud = new FroTrteSolicitud(null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+        this.tramiteSolicitud = new FroTrteSolicitud(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 
         let token = this._LoginService.getToken();
 
@@ -467,6 +467,7 @@ export class NewRnetComponent implements OnInit {
         this.tramiteSolicitud.tramitesRealizados = this.tramitesRealizados;
         this.tramiteSolicitud.documentacionPendiente = this.documentacionPendiente;
         this.tramiteSolicitud.idFactura = this.factura.id;
+        this.tramiteSolicitud.idModulo = 6;
 
         this._TramiteSolicitudService.register(this.tramiteSolicitud, token).subscribe(
             response => {

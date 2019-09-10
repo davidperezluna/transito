@@ -8,6 +8,10 @@
         <div class="card-body">
             <form #formEdit="ngForm">
                 <div class="form-group row">
+                    <div class="col-lg-6 col-md-6">
+                        <label>Nro. de Acto Administrativo</label>
+                        <h5>{{ habilitacion.numeroActo }}</h5>
+                    </div>
                     <div class="col-xs-6 col-lg-6">
                         <label>Radio Acción <strong class="text-danger">*</strong></label>
                         <ng-select [multiple]="false" [options]="radiosAccion"
@@ -25,11 +29,6 @@
                         <ng-select [multiple]="false" [options]="clases" [(ngModel)]="claseSelected"
                             required name="idClase">
                         </ng-select>
-                    </div>
-                    <div class="col-lg-6 col-md-6">
-                        <label>Nro. de Acto Administrativo <strong class="text-danger">*</strong></label>
-                        <input class="form-control" [(ngModel)]="habilitacion.numeroActo" name="numeroActo"
-                            type="number">
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label>Fecha Expedición Acto Administrativo <strong class="text-danger">*</strong></label>
@@ -85,7 +84,7 @@
                 <div class="col-xs-12 col-lg-4" *ngIf="habilitacion.modalidadTransporte">
                     <label>Capacidad máxima <strong class="text-danger">*</strong></label>
                     <input class="form-control"
-                        (blur)="onCalcularCapacidad(habilitacion.capacidadMinima, habilitacion.capacidadMaxima)"
+                        (blur)="onCalcularCapacidad(habilitacion.capacidadMinima, habilitacion.capacidadMaxima, habilitacion.capacidadUtilizada)"
                         [(ngModel)]="habilitacion.capacidadMaxima" name="capacidadMaxima" type="number">
                 </div>
                 <div class="col-xs-12 col-lg-2" *ngIf="habilitacion.modalidadTransporte">
