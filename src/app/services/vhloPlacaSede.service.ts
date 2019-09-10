@@ -72,4 +72,11 @@ export class VhloPlacaSedeService {
         let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
         return this._http.post(this.url + "/search/request/organismotransito", params, { headers: headers }).map(res => res.json());
     }
+
+    make(datos, token) {
+        let json = JSON.stringify(datos);
+        let params = "data=" + json + "&authorization=" + token;
+        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+        return this._http.post(this.url + "/make", params, { headers: headers }).map(res => res.json());
+    }
 }

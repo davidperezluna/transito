@@ -42,26 +42,6 @@ export class RequestComponent implements OnInit {
       }
     });
 
-    this.formSearch = true;
-    swal.close();
-  }
-
-  onInitForms(){
-    this.formSearch = false;
-    this.formIndex = false;
-  }
-
-  onSearch() {
-    this.onInitForms();
-
-    swal({
-      title: 'Buscando registros!',
-      text: 'Solo tardara unos segundos por favor espere.',
-      onOpen: () => {
-        swal.showLoading()
-      }
-    });
-
     let token = this._LoginService.getToken();
 
     this.search.idOrganismoTransito = this.organismoTransito.id;
@@ -70,9 +50,6 @@ export class RequestComponent implements OnInit {
       response => {
         if (response.code == 200) {
           this.solicitudes = response.data;
-
-          this.formSearch = true;
-          this.formIndex = true;
 
           swal({
             title: response.title,
@@ -86,8 +63,6 @@ export class RequestComponent implements OnInit {
           }, 100);
         } else {
           this.solicitudes = null;
-
-          this.formSearch = true;
 
           swal({
             title: response.title,
@@ -106,6 +81,13 @@ export class RequestComponent implements OnInit {
         }
       }
     );
+
+    swal.close();
+  }
+
+  onInitForms(){
+    this.formSearch = false;
+    this.formIndex = false;
   }
 
   onInitTable() {
@@ -122,6 +104,47 @@ export class RequestComponent implements OnInit {
           sNext: '<i class="fa fa-chevron-right"></i>',
           sLast: '<i class="fa fa-step-forward"></i>'
         }
+      }
+    });
+  }
+
+  onCancelar() {
+    this.ready.emit(true);
+  }
+
+  onMake(id: any) {
+    swal({
+      title: '¿Estás seguro?',
+      text: "¡Se enviaran las placas a fabricación!",
+      type: 'info',
+      showCancelButton: true,
+      confirmButtonColor: '#15d4be',
+      cancelButtonColor: '#ff6262',
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.value) {
+        let token = this._LoginService.getToken();
+        this._PlacaSedeService.delete({ 'id': id }, token).subscribe(
+          response => {
+            swal({
+              title: response.title,
+              text: response.message,
+              type: response.status,
+              confirmButtonColor: '#15d4be',
+            });
+            this.table.destroy();
+            this.ngOnInit();
+          },
+          error => {
+            this.errorMessage = <any>error;
+
+            if (this.errorMessage != null) {
+              console.log(this.errorMessage);
+              alert("Error en la petición");
+            }
+          }
+        );
       }
     });
   }

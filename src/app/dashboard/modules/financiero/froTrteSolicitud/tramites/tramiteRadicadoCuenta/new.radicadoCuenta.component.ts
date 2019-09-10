@@ -129,6 +129,7 @@ export class NewRadicadoCuentaComponent implements OnInit {
                   "Fecha registro: " + this.vehiculo.fechaRegistro +
                   "No. guía llegada: " + this.vehiculo.numeroGuiaRadicado +
                   "Empresa de envío: " + this.vehiculo.empresaEnvioRadicado +
+                  "No. Placa: " + this.vehiculo.placa.numero +
                   "Estado de placas: " + this.datos.estadoPlacas +
                   "Cantidad de placas: " + this.datos.cantidadPlacas;
 

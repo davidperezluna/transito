@@ -1,3 +1,47 @@
-<p>
-  request works!
-</p>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12 col-lg-12"><!-- .col -->
+            <div class="card">
+                <div class="card-header">
+                    <b class="text-uppercase">Placas solicitadas en {{ organismoTransito.nombre }}</b>
+                    <div class="btn-group pull-right">
+                      <button (click)="onCancelar()" class="btn btn-default">
+                        <i class="fa fa-times"></i>
+                        <span class="text">Cancelar</span>
+                      </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table class="table " id="dataTables-example" *ngIf='solicitudes && organismoTransito'>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Sede Operativa</th>
+                                <th>Cantidad</th>
+                                <th>Factura</th>
+                                <th>Fecha</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="odd" *ngFor="let solicitud of solicitudes; let i = index">
+                                <td>{{ i + 1 }}</td>
+                                <td>{{ solicitud.organismoTransito.nombre }}</td>
+                                <td>{{ solicitud.foraneas.cantidadPlacas }}</td>
+                                <td>{{ (solicitud.fecha * 1000) | date: 'dd/MM/yyyy' }}</td>
+                                <td>
+                                    <div class="btn-group">
+                                        <button (click)="onMake(solicitud.id)" class="btn btn-xs btn-danger" type="button">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- /.table-responsive -->
+                </div>
+            </div>
+        </div><!-- .col -->
+    </div>
+</div>

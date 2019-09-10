@@ -32,11 +32,11 @@
                             <i class="fa fa-search"></i>
                             Buscar
                         </button>
-                        <button (click)="onRequest()" class="btn btn-info" *ngIf="search.idOrganismoTransito">
+                        <button (click)="onRequest()" class="btn btn-info" *ngIf="organismoTransito">
                             <i class="fa fa-list"></i>
                             <span class="text">Solicitudes</span>
                         </button>
-                        <button (click)="onNew()" class="btn btn-default" *ngIf="search.idOrganismoTransito">
+                        <button (click)="onNew()" class="btn btn-default" *ngIf="organismoTransito">
                             <i class="fa fa-plus"></i>
                             <span class="text">Nuevo</span>
                         </button>
