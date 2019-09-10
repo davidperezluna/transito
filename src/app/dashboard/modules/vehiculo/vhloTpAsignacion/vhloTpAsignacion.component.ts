@@ -137,7 +137,7 @@ export class VhloTpAsignacionComponent implements OnInit {
                     text: 'Excel',
                     filename: 'Reporte_Cupos_' + this.empresaHabilitadaRango.empresa.nombre + '_' + this.fecha,
                     exportOptions: {
-                        columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15]
+                        columns: [0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]
                     },
                 },
             ],
@@ -176,9 +176,11 @@ export class VhloTpAsignacionComponent implements OnInit {
                         response => {
                             if (response.code == 200) {
                                 this.asignaciones = response.data;
+
                                 let timeoutId = setTimeout(() => {
                                     this.onInitTable();
                                 }, 100);
+
                                 swal({
                                     title: response.title,
                                     text: response.message,
@@ -269,8 +271,5 @@ export class VhloTpAsignacionComponent implements OnInit {
         this.asignacion = asignacion;
         this.formEdit = true;
         this.formIndex = false;
-    }
-    onPrueba(asignacion: any) {
-        console.log("asdadasdsadasdasdasdas");
     }
 }
