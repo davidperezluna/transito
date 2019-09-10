@@ -19,6 +19,12 @@ export class NewCambioPlacaComponent implements OnInit {
     public tipoCambioList: string[];
     public tipoCambioSelected: any;
 
+    public clasificaciones = [
+        { 'value': 'NORMAL', 'label': 'NORMAL' },
+        { 'value': 'CLÁSICA', 'label': 'CLÁSICA' },
+        { 'value': 'ANTIGUA', 'label': 'ANTIGUA' },
+    ];
+
     public datos = {
         'documentacion': true,
         'observacion': null,
@@ -27,6 +33,7 @@ export class NewCambioPlacaComponent implements OnInit {
         'cantidad': null,
         'sustrato': null,
         'campos': null,
+        'clasificacion': null,
         'idFuncionario': null,
         'idVehiculo': null,
         'idTramiteFactura': null,

@@ -52,14 +52,16 @@
                                     required disabled />
                             </div>
                             <div class="col-xs-12 col-lg-6">
+                                <label>Nro. de registro</label>
+                                <input class="form-control" [(ngModel)]="datos.numeroRegistro" name="numeroRegistro" type="text" />
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
                                 <label>Nro. Cuotas (Meses) <b class="text-danger">*</b></label>
-                                <input class="form-control" [(ngModel)]="datos.numeroCuotas" name="numeroCuotas" type="number"
-                                    required />
+                                <input class="form-control" [(ngModel)]="datos.numeroCuotas" name="numeroCuotas" type="number" required />
                             </div>
                             <div class="col-xs-12 col-lg-6">
                                 <label>Pais <b class="text-danger">*</b></label>
-                                <ng-select [multiple]="false" [options]="paises" [(ngModel)]="datos.idPais" name="idPais"
-                                    required>
+                                <ng-select [multiple]="false" [options]="paises" [(ngModel)]="datos.idPais" name="idPais" required>
                                 </ng-select>
                             </div>
                         </div>

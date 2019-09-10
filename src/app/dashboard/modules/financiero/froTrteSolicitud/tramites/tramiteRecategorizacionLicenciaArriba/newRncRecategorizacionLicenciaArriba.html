@@ -60,11 +60,23 @@
                             </div>
                             <div class="col-xs-12 col-lg-6">
                                 <label>No. de licencia de conducción</label>
-                                <input type="text" class="form-control" [(ngModel)]="datos.numeroLicencia" value="{{ solicitante.identificacion }}" name="numeroLicencia" required>
+                                <input type="text" class="form-control" [(ngModel)]="datos.numeroLicencia" name="numeroLicencia" required>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Servicio <b class="text-danger">*</b></label>
+                                <ng-select [multiple]="false" [options]="servicios" (ngModelChange)="onChangedServicio($event)" [(ngModel)]="datos.idServicio" name="idServicio" required>
+                                </ng-select>
+                            </div>
+                            <div class="col-xs-12 col-lg-4">
+                                <label>Vigencia</label>
+                                <input class="form-control" [(ngModel)]="datos.vigencia" name="vigencia" type="date" />
                             </div>
                         </div>
 
-                        <div class="row">
+                        <div class="row" *ngIf="categorias">
                             <div class="col-xs-12 col-lg-3">
                                 <label>Categoria actual <b class="text-danger">*</b></label>
                                 <ng-select [multiple]="false" [options]="categorias" [(ngModel)]="datos.idCategoriaActual" name="categoriaActual" required>
@@ -74,18 +86,6 @@
                                 <label>Categoria nueva <b class="text-danger">*</b></label>
                                 <ng-select [multiple]="false" [options]="categorias" [(ngModel)]="datos.idCategoriaNueva" name="categoriaNueva" required>
                                 </ng-select>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-xs-12 col-lg-6">
-                                <label>Servicio <b class="text-danger">*</b></label>
-                                <ng-select [multiple]="false" [options]="servicios" [(ngModel)]="datos.idServicio" name="idServicio" required>
-                                </ng-select>
-                            </div>
-                            <div class="col-xs-12 col-lg-4">
-                                <label>Vigencia</label>
-                                <input class="form-control" [(ngModel)]="datos.vigencia" name="vigencia" type="date" />
                             </div>
                         </div>
                     </div>

@@ -98,15 +98,35 @@ export class NewRncRefrendacionLicenciaComponent implements OnInit {
                 }
                 }
             );
-    
-            this._CategoriaService.select().subscribe(
+        }
+    }
+
+    onChangedServicio(id) {
+        if (id) {
+            let token = this._LoginService.getToken();
+
+            let datos = {
+                'idServicio': id,
+                'idTipoVehiculo': this.tramiteFactura.precio.tipoVehiculo.id
+            }
+
+            this._CategoriaService.selectByServicioAndTipoVehiculo(datos, token).subscribe(
                 response => {
-                    this.categorias = response;
-                    //this.datos.idCategoriaActual = [this.tramitePrecio.modulo.id];
+                    if (response.code == 200) {
+                        this.categorias = response.data;
+                    } else {
+                        this.categorias = null;
+
+                        swal({
+                            title: response.title,
+                            text: response.message,
+                            type: response.status,
+                            confirmButtonText: 'Aceptar'
+                        });
+                    }
                 },
                 error => {
                     this.errorMessage = <any>error;
-    
                     if (this.errorMessage != null) {
                         console.log(this.errorMessage);
                         alert('Error en la petición');

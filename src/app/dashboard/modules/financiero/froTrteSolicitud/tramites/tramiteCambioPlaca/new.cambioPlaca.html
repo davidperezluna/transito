@@ -51,6 +51,11 @@
                                     </option>
                                 </select>
                             </div>
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Clasificación <span class="text-danger">*</span></label>
+                                <ng-select [multiple]="false" [options]="clasificaciones" [(ngModel)]="datos.clasificacion" name="clasificacion" required>
+                                </ng-select>
+                            </div>
                             <div class="col-xs-12 col-lg-6">
                                 <label>Nueva Placa <b class="text-danger">*</b></label>
                                 <input class="form-control" [(ngModel)]="datos.nuevaPlaca" name="nuevaPlaca" type="text" required />

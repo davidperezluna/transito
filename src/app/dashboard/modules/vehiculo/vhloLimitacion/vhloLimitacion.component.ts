@@ -52,7 +52,7 @@ export class VhloLimitacionComponent implements OnInit {
 
     let token = this._LoginService.getToken();
     
-    this._LimitacionService.searchByPlaca(this.search, token).subscribe(
+    this._LimitacionService.searchByPlacaOrIdentificacion(this.search, token).subscribe(
       response => {
         if (response.code == 200) {
           this.inscripciones = response.data;

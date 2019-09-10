@@ -87,11 +87,13 @@ export class NewTransformacionComponent implements OnInit {
                 confirmButtonText: 'Aceptar'
             });
         }else{
-            this._CarroceriaService.select().subscribe(
+            let token = this._LoginService.getToken();
+
+            this._CarroceriaService.selectByClase({ 'idCLase': this.vehiculo.clase.id }, token ).subscribe(
                 response => {
                     this.carrocerias = response;
                 },
-                error => {
+                error => { 
                     this.errorMessage = <any>error;
 
                     if (this.errorMessage != null) {

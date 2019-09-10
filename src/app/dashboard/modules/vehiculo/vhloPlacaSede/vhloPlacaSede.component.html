@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="row">
         <!-- .row -->
-        <div class="col-xs-12 col-lg-3" *ngIf='formSearch'>
+        <div class="col-xs-12 col-lg-4" *ngIf='formSearch'>
             <!-- .col -->
             <div class="card">
                 <div class="card-header">
@@ -32,13 +32,13 @@
                             <i class="fa fa-search"></i>
                             Buscar
                         </button>
-                        <button (click)="onNew()" class="btn btn-default" *ngIf="search.idOrganismoTransito">
-                            <i class="fa fa-plus"></i>
-                            <span class="text">Nuevo</span>
+                        <button (click)="onRequest()" class="btn btn-info" *ngIf="search.idOrganismoTransito">
+                            <i class="fa fa-list"></i>
+                            <span class="text">Solicitudes</span>
                         </button>
                         <button (click)="onNew()" class="btn btn-default" *ngIf="search.idOrganismoTransito">
                             <i class="fa fa-plus"></i>
-                            <span class="text">Solicitudes</span>
+                            <span class="text">Nuevo</span>
                         </button>
                     </div>
                 </div>
@@ -46,7 +46,7 @@
         </div>
         <!-- /.col -->
 
-        <div class="col-xs-12 col-lg-9" *ngIf='formIndex && organismoTransito'><!-- .col -->
+        <div class="col-xs-12 col-lg-8" *ngIf='formIndex && organismoTransito'><!-- .col -->
             <div class="card">
                 <div class="card-header">
                     <b class="text-uppercase">Asignar placas a {{ organismoTransito.nombre }}</b>
@@ -101,17 +101,16 @@
             </div>
         </div><!-- .col -->
 
-        <div class="col-xs-12 col-lg-9" *ngIf='formNew && organismoTransito'>
+        <div class="col-xs-12 col-lg-8" *ngIf='formNew && organismoTransito'>
             <app-new-vhloplacasede [organismoTransito]="organismoTransito" (ready)="ready($event)"></app-new-vhloplacasede>
         </div>
 
-        <div class="col-xs-12 col-lg-9" *ngIf='formEdit'>
+        <div class="col-xs-12 col-lg-8" *ngIf='formEdit'>
             <app-edit-vhloplacasede [asignacion]="asignacion" (ready)="ready($event)"></app-edit-vhloplacasede>
         </div>
 
-        <div class="col-xs-12 col-lg-9" *ngIf='formRequest'>
+        <div class="col-xs-12 col-lg-8" *ngIf='formRequest'>
             <app-request-vhloplacasede [organismoTransito]="organismoTransito" (ready)="ready($event)"></app-request-vhloplacasede>
         </div>
-
     </div>
 </div>

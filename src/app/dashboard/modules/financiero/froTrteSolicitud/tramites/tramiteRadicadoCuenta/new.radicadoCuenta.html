@@ -90,6 +90,12 @@
                                 <label>Cantidad de placas <b class="text-danger">*</b></label>
                                 <input class="form-control" [(ngModel)]="datos.cantidadPlacas" name="cantidadPlacas" type="text" required />
                             </div>
+
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Clasificación <span class="text-danger">*</span></label>
+                                <ng-select [multiple]="false" [options]="clasificaciones" [(ngModel)]="datos.clasificacion" name="clasificacion" required>
+                                </ng-select>
+                            </div>
                         </div>
                     </div>
                 </div>

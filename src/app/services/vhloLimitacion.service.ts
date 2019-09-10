@@ -59,10 +59,10 @@ export class VhloLimitacionService {
 		);
 	}
 
-	searchByPlaca(datos, token) {
+	searchByPlacaOrIdentificacion(datos, token) {
 		let json = JSON.stringify(datos);
 		let params = "data=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-		return this._http.post(this.url + "/search/placa", params, { headers: headers }).map(res => res.json());
+		return this._http.post(this.url + "/search/placa/identificacion", params, { headers: headers }).map(res => res.json());
 	}
 }
