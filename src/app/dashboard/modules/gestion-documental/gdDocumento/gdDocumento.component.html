@@ -97,7 +97,10 @@
                       <b>Tipo:</b> {{ documento.tipoCorrespondencia.nombre }}
                       <br>
                     </span>
-                    <b>F. radicado:</b> {{ (documento.fechaLLegada.timestamp * 1000) | date: 'dd/MM/yyyy' }}
+                    <ng-container *ngIf="documento.fechaLLegada">
+                      <b>F. radicado:</b>
+                      {{ (documento.fechaLLegada.timestamp * 1000) | date: 'dd/MM/yyyy' }}<br>
+                    </ng-container>
                     <b>F. vencimiento:</b> {{ documento.fechaVencimiento }}
                     <br>
                     <span *ngIf="documento.estado == 'FINALIZADO'">
@@ -121,7 +124,7 @@
                     </button>
                     <button (click)="onPrint(documento)" class="btn btn-xs btn-primary" type="button" *ngIf="documento.estado == 'RESPUESTA REALIZADA'">
                       <i class="fa fa-check"></i>
-                      ENVIAR
+                      Enviar
                     </button>
                     <button (click)="onRecord(documento)" class="btn btn-xs btn-primary" type="button" *ngIf="documento.estado != 'PENDIENTE'">
                       <i class="fa fa-bars"></i>
@@ -205,9 +208,10 @@
                     <b>No. oficio:</b> {{ documento.numeroOficio }}
                   </td>
                   <td>
-                    <b>F. radicado:</b>
-                    <br> {{ (documento.fechaLLegada.timestamp * 1000) | date: 'dd/MM/yyyy' }}
-                    <br>
+                    <ng-container *ngIf="documento.fechaLLegada">
+                      <b>F. radicado:</b>
+                      <br> {{ (documento.fechaLLegada.timestamp * 1000) | date: 'dd/MM/yyyy' }}<br>
+                    </ng-container>
                     <b>F. vencimiento:</b>
                     <br> {{ documento.fechaVencimiento }}
                   </td>

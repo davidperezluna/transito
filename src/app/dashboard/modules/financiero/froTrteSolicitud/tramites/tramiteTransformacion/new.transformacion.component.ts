@@ -89,7 +89,7 @@ export class NewTransformacionComponent implements OnInit {
         }else{
             let token = this._LoginService.getToken();
 
-            this._CarroceriaService.selectByClase({ 'idCLase': this.vehiculo.clase.id }, token ).subscribe(
+            this._CarroceriaService.selectByClase({ 'idClase': this.vehiculo.clase.id }, token ).subscribe(
                 response => {
                     this.carrocerias = response;
                 },

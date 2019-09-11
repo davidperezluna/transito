@@ -3,10 +3,11 @@ import { Router } from "@angular/router";
 import { FroFacRetefuenteService } from '../../../../../../services/froFacRetefuente.service';
 import { UserCiudadanoService } from '../../../../../../services/userCiudadano.service';
 import { UserCfgTipoIdentificacionService } from '../../../../../../services/userCfgTipoIdentificacion.service';
+import { VhloRestriccionService } from '../../../../../../services/vhloRestriccion.service';
 import { LoginService } from '../../../../../../services/login.service';
 import swal from 'sweetalert2';
 
-@Component({ 
+@Component({
     selector: 'app-traspaso',
     templateUrl: './new.traspaso.html', 
 })
@@ -20,6 +21,8 @@ export class NewTraspasoComponent implements OnInit {
     
     public realizado: any = false;
     public tramiteSolicitud: any  = null;
+    public limitaciones: any  = null;
+    public prohibiciones: any  = null;
 
     public tiposIdentificacion: any;
     public identificacionOld: any;
@@ -49,6 +52,7 @@ export class NewTraspasoComponent implements OnInit {
         private _RetefuenteService: FroFacRetefuenteService,
         private _CiudadanoService: UserCiudadanoService,
         private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
+        private _RestriccionService: VhloRestriccionService,
         private _LoginService: LoginService,
         private router: Router,
     ) { }
@@ -61,6 +65,53 @@ export class NewTraspasoComponent implements OnInit {
                 swal.showLoading()
             }
         });
+
+        let token = this._LoginService.getToken();
+
+        let datosLimitacion = {
+            'idVehiculo': this.vehiculo.id,
+            'tipo': 'LIMITACION',
+        };
+
+        this._RestriccionService.searchByVehiculoAndTipo(datosLimitacion, token).subscribe(
+            response => {
+                if (response.code == 200) {
+                    this.limitaciones = response.data;
+                } else {
+                    this.limitaciones = null;
+                }
+            },
+            error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert('Error en la petición');
+                }
+            }
+        );
+
+        /*let datosProhibicion = {
+            'idCiudadano': this.solicitante.id,
+        };
+
+        this._RestriccionService.searchByVehiculoAndTipo(datos, token).subscribe(
+            response => {
+                if (response.code == 200) {
+                    this.limitaciones = response.data;
+                } else {
+                    this.limitaciones = null;
+                }
+            },
+            error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert('Error en la petición');
+                }
+            }
+        );*/
 
         this.datos.idFuncionario  = this.funcionario.id;
         
@@ -104,9 +155,7 @@ export class NewTraspasoComponent implements OnInit {
                 response => {
                     if (response.code == 200) {
                         this.datos.retenciones = response.data;
-                        console.log(this.datos.retenciones);
                         
-
                         swal.close();
                     }else{
                         this.datos.retenciones = null;
@@ -213,7 +262,6 @@ export class NewTraspasoComponent implements OnInit {
         this.datos.campos = ['traspaso'];
         this.datos.idVehiculo = this.vehiculo.id;
         this.datos.idTramiteFactura = this.tramiteFactura.id;
-
 
         let resumen = "No. factura: " + this.tramiteFactura.factura.numero +
             ", Traspaso de " + this.datos.retenciones +

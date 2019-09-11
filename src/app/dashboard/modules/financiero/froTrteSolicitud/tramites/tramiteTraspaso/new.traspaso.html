@@ -1,4 +1,4 @@
-<div class="row" *ngIf="realizado">
+<div class="row" *ngIf="realizado && !limitaciones">
     <!-- .row -->
     <div class="col-xs-12 col-lg-12">
         <!-- .col -->
@@ -13,7 +13,19 @@
     </div>
 </div>
 
-<div class="row" *ngIf="!realizado"><!-- .row -->
+<div class="row" *ngIf="!realizado && limitaciones">
+    <!-- .row -->
+    <div class="col-xs-12 col-lg-12">
+        <!-- .col -->
+        <div class="card">
+            <div class="card-header">
+                <span class="badge badge-danger">Este tramite no se puede realizar porque el vehiculo presenta limitaciones</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" *ngIf="!realizado && !limitaciones"><!-- .row -->
     <div class="col-xs-12 col-lg-12"><!-- .col -->
         <div class="card">
             <div class="card-header">

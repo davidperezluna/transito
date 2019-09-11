@@ -1,4 +1,4 @@
-import { Component, OnInit,Output,EventEmitter } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Output, OnDestroy, EventEmitter } from '@angular/core';
 import { VhloRnaPreregistro } from '../vhloRnaPreregistro.modelo';
 import { CfgOrganismoTransitoService } from '../../../../../services/cfgOrganismoTransito.service';
 import { VhloCfgLineaService } from '../../../../../services/vhloCfgLinea.service';
@@ -17,7 +17,6 @@ import { UserCiudadanoService } from '../../../../../services/userCiudadano.serv
 import { UserEmpresaService } from "../../../../../services/userEmpresa.service";
 import { PnalFuncionarioService } from '../../../../../services/pnalFuncionario.service';
 import { LoginService } from '../../../../../services/login.service';
-
 import swal from 'sweetalert2';
 
 @Component({
@@ -25,7 +24,7 @@ import swal from 'sweetalert2';
   templateUrl: './new.component.html'
 })
 
-export class NewComponent implements OnInit {
+export class NewComponent implements OnInit, AfterViewInit, OnDestroy {
   @Output() ready = new EventEmitter<any>();
   public errorMessage:any;
 
@@ -112,6 +111,16 @@ constructor(
   ){}
 
   ngOnInit() {
+    swal({
+      title: 'Cargando información!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      type: 'info',
+      showConfirmButton: false,
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+    
     this.vehiculo = new VhloRnaPreregistro(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
     
     let token = this._LoginService.getToken();
@@ -287,6 +296,14 @@ constructor(
         }
       }
     );
+  }
+
+  ngAfterViewInit() {
+    swal.close();
+  }
+
+  ngOnDestroy() {
+    console.log('destroyed!!');
   }
 
   onCancelar(){

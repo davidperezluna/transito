@@ -29,7 +29,8 @@ export class NewCambioPlacaComponent implements OnInit {
         'documentacion': true,
         'observacion': null,
         'tipoCambio': null,
-        'nuevaPlaca': null,
+        'placaAnterior': null,
+        'placaNueva': null,
         'cantidad': null,
         'sustrato': null,
         'campos': null,
@@ -45,6 +46,7 @@ export class NewCambioPlacaComponent implements OnInit {
 
     ngOnInit() {
         this.datos.idFuncionario  = this.funcionario.id;
+        this.datos.placaAnterior = this.vehiculo.placa.numero;
         
         if ( this.tramitesRealizados.length > 0) {
             this.tramitesRealizados.forEach(tramiteRealizado => {
@@ -79,8 +81,8 @@ export class NewCambioPlacaComponent implements OnInit {
         this.datos.idVehiculo = this.vehiculo.id;
 
         let resumen = "No. factura:" + this.tramiteFactura.factura.numero +
-                    ', Placa anterior:'+ this.vehiculo.placa.numero +
-                    ', Placa nueva:' + this.datos.nuevaPlaca +
+                    ', Placa anterior:'+ this.datos.placaAnterior +
+                    ', Placa nueva:' + this.datos.placaNueva +
                     ', Cantidad:' + this.datos.cantidad;
 
         this.realizado = true;
