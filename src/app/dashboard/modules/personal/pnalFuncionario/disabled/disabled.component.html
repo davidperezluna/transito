@@ -11,8 +11,7 @@
                         <div class="form-group row">
                             <div class="col-xs-12 col-lg-6">
                                 <label>Motivo de Inhabilidad: <strong class="text-danger">*</strong></label>
-                                <textarea class="form-control" [(ngModel)]="datos.motivoInhabilidad" name="motivoInhabilidad"
-                                    id="restriccion"></textarea>
+                                <textarea class="form-control" [(ngModel)]="datos.motivoInhabilidad" name="motivoInhabilidad" id="restriccion"></textarea>
                             </div>
                         </div>
 
@@ -22,7 +21,7 @@
                                     <i class="fa fa-floppy-o"></i>
                                     Enviar
                                 </button>
-                                <button (click)="onCancelar()" (ready)="ready($event)" class="btn btn-default">
+                                <button (click)="onCancelar()" class="btn btn-default">
                                     <i class="fa fa-times"></i>
                                     Cancelar
                                 </button>

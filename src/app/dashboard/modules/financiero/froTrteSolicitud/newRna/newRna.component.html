@@ -98,7 +98,7 @@
                                     </tr>
                                     <tr *ngIf="vehiculo.clase">
                                         <td>
-                                            <b>Línea</b>
+                                            <b>Clase</b>
                                             <br>
                                             {{ vehiculo.clase?.nombre }}
                                         </td>
@@ -262,7 +262,9 @@
                             </tfoot>
                         </table>
                     </div>
+                </div>
 
+                <div class="row">
                     <div class="col-xs-12 col-lg-12" *ngIf='formApoderado && !apoderado'>
                         <div class="input-group">
                             <input type="number" class="form-control" placeholder="Identificacion apoderado" [(ngModel)]="identificacionApoderado" name="identificacionApoderado" required />

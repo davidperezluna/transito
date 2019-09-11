@@ -23,11 +23,30 @@ import { ShowComponent } from './show/show.component';
 import { ProrrogaComponent } from './prorroga/prorroga.component';
 import { SuspensionComponent } from './suspension/suspension.component';
 import { DisabledComponent } from './disabled/disabled.component';
+import { ReportComponent } from './report/report.component';
 
 @NgModule({
     imports: [CommonModule, Ng2BootstrapModule.forRoot(), SelectModule, PopoverModule, TooltipModule],
-    declarations: [NewComponent, EditComponent, TimeComponent, ShowComponent, ProrrogaComponent, SuspensionComponent, DisabledComponent],
-    exports: [NewComponent, EditComponent, TimeComponent, ShowComponent, ProrrogaComponent, SuspensionComponent, DisabledComponent],
+    declarations: [
+        NewComponent,
+        EditComponent,
+        TimeComponent,
+        ShowComponent,
+        ProrrogaComponent,
+        SuspensionComponent,
+        DisabledComponent,
+        ReportComponent,
+    ],
+    exports: [
+        NewComponent,
+        EditComponent,
+        TimeComponent,
+        ShowComponent,
+        ProrrogaComponent,
+        SuspensionComponent,
+        DisabledComponent,
+        ReportComponent,
+    ],
     providers: [
         PnalFuncionarioService,
         PnalHorarioService,

@@ -1,12 +1,11 @@
-<div class="container">
-  <hr>
+<div class="container-fluid">
   <div class="row" *ngIf='formSearch'>
     <div class="col-md-12 col-lg-8 offset-lg-2">
       <div class="card">
+        <div class="card-header">
+          <b class="text-uppercase">Registro de personal</b>
+        </div>
         <div class="card-body">
-          <h5 class="text-uppercase">Registro de personal</h5>
-          <small></small>
-          <hr>
           <form #formSearch="ngForm">
             <div class="form-group row">
               <div class="col-xs-12 col-lg-3">
@@ -61,7 +60,11 @@
             <i class="fa fa-search"></i>
             Buscar
           </button>
-          <button (click)="onNew()" (ready)="ready($event)" class="btn btn-info" type="button">
+          <button (click)="onReport()" (ready)="ready($event)" class="btn btn-info" type="button">
+            <i class="far fa-calendar-alt"></i>
+            Minutas
+          </button>
+          <button (click)="onNew()" (ready)="ready($event)" class="btn btn-default" type="button">
             <i class="fa fa-plus"></i>
             Nuevo
           </button>
@@ -85,7 +88,7 @@
           <table class="table " id="dataTables-example">
             <thead>
               <tr>
-                <th>Id</th>
+                <th>#</th>
                 <th>Funcionario</th>
                 <th>Contrato/Nombramiento</th>
                 <th>Estado</th>
@@ -205,6 +208,7 @@
   <app-new-pnalfuncionario *ngIf='formNew' (ready)="ready($event)"></app-new-pnalfuncionario>
   <app-edit-pnalfuncionario *ngIf='formEdit' [funcionario]="funcionario" (ready)="ready($event)"></app-edit-pnalfuncionario>
   <app-show-pnalfuncionario *ngIf='formShow' [funcionario]="funcionario" (ready)="ready($event)"></app-show-pnalfuncionario>
+  <app-report-pnalfuncionario *ngIf='formReport' (ready)="ready($event)"></app-report-pnalfuncionario>
   <app-time *ngIf='formTime' [funcionario]="funcionario" (ready)="ready($event)"></app-time>
   <app-prorroga *ngIf='formProrroga' [funcionario]="funcionario" (ready)="ready($event)"></app-prorroga>
   <app-suspension *ngIf='formSuspension' [funcionario]="funcionario" (ready)="ready($event)"></app-suspension>

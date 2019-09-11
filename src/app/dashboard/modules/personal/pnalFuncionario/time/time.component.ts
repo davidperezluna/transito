@@ -20,7 +20,6 @@ public agregar: any;
 public semana: any;
 public table: any;
 
-
 constructor(
   private _HorarioService: PnalHorarioService,
   private _FuncionarioService: PnalFuncionarioService,
@@ -36,7 +35,7 @@ constructor(
       response => {
         this.horarios = response.data;
         setTimeout(() => {
-          this.iniciarTabla();
+          this.onInitTable();
         }, 100);
       },
       error => {
@@ -55,7 +54,9 @@ constructor(
   
   onEnviar(){
     let token = this._loginService.getToken();
+    
     this.horario.idFuncionario = this.funcionario.id;
+
     this._HorarioService.register(this.horario,token).subscribe(
       response => {        
         if(response.code == 200){
@@ -92,8 +93,9 @@ constructor(
       }
     });
   }
-  iniciarTabla() {
-    $('#dataTables-example').DataTable({
+
+  onInitTable() {
+    this.table = $('#dataTables-example').DataTable({
         responsive: true,
         pageLength: 8,
         sPaginationType: 'full_numbers',
@@ -102,14 +104,13 @@ constructor(
             'pdf'
         ],
         oLanguage: {
-            oPaginate: {
-                sFirst: '<<',
-                sPrevious: '<',
-                sNext: '>',
-                sLast: '>>'
-            }
+          oPaginate: {
+            sFirst: '<i class="fa fa-step-backward"></i>',
+            sPrevious: '<i class="fa fa-chevron-left"></i>',
+            sNext: '<i class="fa fa-chevron-right"></i>',
+            sLast: '<i class="fa fa-step-forward"></i>'
+          }
         }
     });
-    this.table = $('#dataTables-example').DataTable();
-}
+  }
 }

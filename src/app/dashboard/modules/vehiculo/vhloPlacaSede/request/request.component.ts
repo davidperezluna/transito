@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { CfgOrganismoTransitoService } from '../../../../../services/cfgOrganismoTransito.service';
 import { VhloPlacaSedeService } from '../../../../../services/vhloPlacaSede.service';
+import { VhloCfgPlacaService } from '../../../../../services/vhloCfgPlaca.service';
 import { LoginService } from '../../../../../services/login.service';
 import swal from 'sweetalert2';
 declare var $: any;
@@ -26,8 +26,8 @@ export class RequestComponent implements OnInit {
   }
 
   constructor(
-    private _OrganismoTransitoService: CfgOrganismoTransitoService,
     private _PlacaSedeService: VhloPlacaSedeService,
+    private _PlacaService: VhloCfgPlacaService,
     private _LoginService: LoginService,
   ) { }
 
@@ -70,6 +70,8 @@ export class RequestComponent implements OnInit {
             type: response.status,
             confirmButtonText: 'Aceptar'
           });
+
+          this.onCancelar();
         }
       },
       error => {
@@ -125,7 +127,8 @@ export class RequestComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._LoginService.getToken();
-        this._PlacaSedeService.delete({ 'id': id }, token).subscribe(
+
+        this._PlacaService.state({ 'id': id, 'estado': 'FABRICADA' }, token).subscribe(
           response => {
             swal({
               title: response.title,
@@ -133,7 +136,7 @@ export class RequestComponent implements OnInit {
               type: response.status,
               confirmButtonColor: '#15d4be',
             });
-            this.table.destroy();
+
             this.ngOnInit();
           },
           error => {
