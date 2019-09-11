@@ -11,10 +11,11 @@ import { CfgOrganismoTransitoService } from '../../../../services/cfgOrganismoTr
 import { NewComponent } from './new/new.component';
 import { EditComponent } from './edit/edit.component';
 import { RequestComponent } from './request/request.component';
+import { DeliveredComponent } from './delivered/delivered.component';
 
 @NgModule({
     imports: [CommonModule, Ng2BootstrapModule.forRoot(), SelectModule],
-    declarations: [NewComponent, EditComponent, RequestComponent],
+    declarations: [NewComponent, EditComponent, RequestComponent, DeliveredComponent],
     exports: [NewComponent, EditComponent, RequestComponent],
     providers: [
         VhloPlacaSedeService,

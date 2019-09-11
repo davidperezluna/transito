@@ -17,15 +17,18 @@ export class PnalFuncionarioComponent implements OnInit {
   public errorMessage;
   public id;
   public funcionarios;
-  public formNew = false;
-  public formEdit = false;
-  public formIndex = false;
-  public formTime = false;
-  public formShow = false;
-  public formSuspension = false;
-  public formDisabled = false;
-  public formProrroga = false;
-  public formSearch = true;
+
+  public formNew: any;
+  public formEdit: any;
+  public formIndex: any;
+  public formReport: any;
+  public formTime: any;
+  public formShow: any;
+  public formSuspension: any;
+  public formDisabled: any;
+  public formProrroga: any;
+  public formSearch: any;
+
   public table: any = null;
   public funcionario: PnalFuncionario;
   public numeroContrato: any;
@@ -35,7 +38,8 @@ export class PnalFuncionarioComponent implements OnInit {
   public cargoSelected: any;
   public organismosTransito: any;
   public organismoTransitoSelected: any;
-  public resumen = {}; public datos = {
+
+  public datos = {
     'nombre': null,
     'identificacion': null,
     'cargo': null,
@@ -57,6 +61,8 @@ export class PnalFuncionarioComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.onInitForms();
+
     swal({
       title: 'Cargando información!',
       text: 'Solo tardara unos segundos por favor espere.',
@@ -108,80 +114,54 @@ export class PnalFuncionarioComponent implements OnInit {
     );
 
     swal.close();
+    this.formSearch = true;
+  }
+
+  onInitForms(){
+    this.formNew = false;
+    this.formEdit = false;
+    this.formIndex = false;
+    this.formReport = false;
+    this.formTime = false;
+    this.formShow = false;
+    this.formSuspension = false;
+    this.formDisabled = false;
+    this.formProrroga = false;
+    this.formSearch = false;
+  }
+
+  onReport() {
+    this.onInitForms();
+    this.formReport = true;
   }
 
   onNew() {
+    this.onInitForms();
     this.formNew = true;
-    this.formSearch = false;
-    this.formTime = false;
-    this.formShow = false;
-    this.formProrroga = false;
-    this.formIndex = false;
-    this.formDisabled = false;
-    if (this.table) {
-      this.table.destroy();
-    }
   }
 
   onProrroga(funcionario: any) {
+    this.onInitForms();
     this.funcionario = funcionario;
     this.formProrroga = true;
-    this.formNew = false;
-    this.formSearch = false;
-    this.formTime = false;
-    this.formShow = false;
-    this.formSuspension = false;
-    this.formIndex = false;
-    this.formDisabled = false;
-    if (this.table) {
-      this.table.destroy();
-    }
   }
 
   onSuspension(funcionario: any) {
+    this.onInitForms();
     this.funcionario = funcionario;
-    this.formProrroga = false;
     this.formSuspension = true;
-    this.formNew = false;
-    this.formSearch = false;
-    this.formTime = false;
-    this.formShow = false;
-    this.formIndex = false;
-    this.formDisabled = false;
-    if (this.table) {
-      this.table.destroy();
-    }
   }
 
-
-
   onTime(funcionario: any) {
+    this.onInitForms();
     this.funcionario = funcionario;
     this.formTime = true;
-    this.formNew = false;
-    this.formSearch = false;
-    this.formSuspension = false;
-    this.formProrroga = false;
-    this.formShow = false;
-    this.formIndex = false;
-    this.formDisabled = false;
-    if (this.table) {
-      this.table.destroy();
-    }
   }
 
   onShow(funcionario: any) {
+    this.onInitForms();
     this.funcionario = funcionario;
     this.formShow = true;
-    this.formTime = false;
-    this.formNew = false;
-    this.formProrroga = false;
-    this.formSearch = false;
-    this.formIndex = false;
-    this.formDisabled = false;
-    if (this.table) {
-      this.table.destroy();
-    }
   }
 
   onDisabled(funcionario: any) {
@@ -198,31 +178,14 @@ export class PnalFuncionarioComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.value) {
-        this.formShow = false;
-        this.formTime = false;
-        this.formNew = false;
-        this.formProrroga = false;
-        this.formSearch = false;
-        this.formIndex = false;
+        this.onInitForms();
         this.formDisabled = true;
-        if (this.table) {
-          this.table.destroy();
-        }
       }
     });
   }
 
   ready(isCreado: any) {
     if (isCreado) {
-      this.formNew = false;
-      this.formEdit = false;
-      this.formTime = false;
-      this.formProrroga = false;
-      this.formIndex = false;
-      this.formShow = false;
-      this.formSuspension = false;
-      this.formSearch = true;
-      this.formDisabled = false;
       this.ngOnInit();
     }
   }
@@ -239,14 +202,10 @@ export class PnalFuncionarioComponent implements OnInit {
       onOpen: () => {
         swal.showLoading();
       }
-    }).then((result) => {
-      if (
-        // Read more about handling dismissals
-        result.dismiss === swal.DismissReason.timer
-      ) {
-      }
     });
+
     let token = this._loginService.getToken();
+
     this._FuncionarioService.searchByParametros(this.datos, token).subscribe(
       response => {
         if (response.code == 200) {
@@ -261,15 +220,16 @@ export class PnalFuncionarioComponent implements OnInit {
           this.datos.nombramiento = null;
           this.datos.numeroContrato = null;
           this.funcionarios = response.data;
-          console.log(this.funcionarios);
+
           if (this.table) {
             this.table.destroy();
-            this.formIndex = false;
           }
+
           setTimeout(() => {
-            this.iniciarTabla();
+            this.onInitTable();
             this.formIndex = true;
           });
+          
           swal.close();
         } else {
           swal({
@@ -303,7 +263,7 @@ export class PnalFuncionarioComponent implements OnInit {
       });
   }
 
-  iniciarTabla() {
+  onInitTable() {
     $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,

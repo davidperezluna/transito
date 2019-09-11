@@ -62,13 +62,13 @@
 
                         <div class="row">
                             <div class="col-xs-12 col-lg-4">
-                                <label>Categoria a refrendar <b class="text-danger">*</b></label>
-                                <ng-select [multiple]="false" [options]="categorias" [(ngModel)]="datos.idCategoria" name="categoria" required>
+                                <label>Servicio <b class="text-danger">*</b></label>
+                                <ng-select [multiple]="false" [options]="servicios" (ngModelChange)="onChangedServicio($event)" [(ngModel)]="datos.idServicio" name="servicio" required>
                                 </ng-select>
                             </div>
-                            <div class="col-xs-12 col-lg-4">
-                                <label>Servicio <b class="text-danger">*</b></label>
-                                <ng-select [multiple]="false" [options]="servicios" [(ngModel)]="datos.idServicio" name="servicio" required>
+                            <div class="col-xs-12 col-lg-4" *ngIf="categorias">
+                                <label>Categoria a refrendar <b class="text-danger">*</b></label>
+                                <ng-select [multiple]="false" [options]="categorias" [(ngModel)]="datos.idCategoria" name="categoria" required>
                                 </ng-select>
                             </div>
                         </div>

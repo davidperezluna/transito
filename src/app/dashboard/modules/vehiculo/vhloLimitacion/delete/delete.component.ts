@@ -82,7 +82,7 @@ export class DeleteComponent implements OnInit {
         if (response.code == 200) {
           this.vehiculo = response.data;
 
-          this._VehiculoLimitacionService.searchByPlaca({ 'numero': this.placa }, token).subscribe(
+          this._VehiculoLimitacionService.searchByPlacaOrIdentificacion({ 'numero': this.placa }, token).subscribe(
             response => {
               if (response.code == 200) {
                 this.limitaciones = response.data;

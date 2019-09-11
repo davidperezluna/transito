@@ -30,14 +30,14 @@
                   <td >{{ infraccionCategoria.descripcion }}</td>
                   <td >{{ infraccionCategoria.smldv }}</td>
                   <td>
-                    <button (click)="onEdit(infraccionCategoria)" class="btn btn-xs btn-info" type="button">
-                      <i class="fa fa-edit"></i>
-                      Editar
-                    </button> 
-                    <button (click)="onDelete(infraccionCategoria.id)"  class="btn btn-xs btn-danger" type="button">
-                      <i class="fa fa-trash"></i>
-                      Eliminar
-                    </button> 
+                    <div class="btn-group">
+                      <button (click)="onEdit(infraccionCategoria)" class="btn btn-xs btn-primary" type="button">
+                        <i class="fa fa-pencil"></i>
+                      </button> 
+                      <button (click)="onDelete(infraccionCategoria.id)"  class="btn btn-xs btn-danger" type="button">
+                        <i class="fa fa-trash"></i>
+                      </button> 
+                    </div>
                   </td>
                 </tr>
               </tbody>
@@ -47,6 +47,6 @@
         </div>
       </div>
     </div>
-    <app-edit *ngIf='formEdit' [infraccionCategoria]="infraccionCategoria" (ready)="ready($event)"></app-edit>
-    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+    <app-edit-froinfrcfgcategoria *ngIf='formEdit' [infraccionCategoria]="infraccionCategoria" (ready)="ready($event)"></app-edit-froinfrcfgcategoria>
+    <app-new-froinfrcfgcategoria *ngIf='formNew' (ready)="ready($event)"></app-new-froinfrcfgcategoria>
 </div>

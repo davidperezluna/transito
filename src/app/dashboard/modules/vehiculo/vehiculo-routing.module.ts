@@ -6,6 +6,7 @@ import { VhloCfgNivelServicioComponent } from './vhloCfgNivelServicio/vhloCfgNiv
 import { VhloCfgPlacaComponent } from './vhloCfgPlaca/vhloCfgPlaca.component';
 import { VhloCfgValorComponent } from './vhloCfgValor/vhloCfgValor.component';
 import { VhloPlacaSedeComponent } from './vhloPlacaSede/vhloPlacaSede.component';
+import { DeliveredComponent } from './vhloPlacaSede/delivered/delivered.component';
 import { VhloTpAsignacionComponent } from './vhloTpAsignacion/vhloTpAsignacion.component';
 import { VhloTpConvenioComponent } from './vhloTpConvenio/vhloTpConvenio.component';
 import { VhloTpRangoComponent } from './vhloTpRango/vhloTpRango.component';
@@ -29,6 +30,10 @@ const routes: Routes = [
   {
     path: 'vhloPlacaSede',
     component: VhloPlacaSedeComponent
+  },
+  {
+    path: 'vhloPlacaEntrega',
+    component: DeliveredComponent
   },
   {
     path: 'vhloCfgValor',

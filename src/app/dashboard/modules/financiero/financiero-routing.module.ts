@@ -1,12 +1,18 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import { FroCfgTipoRecaudoComponent } from './froCfgTipoRecaudo/froCfgTipoRecaudo.component';
+import { FroFacturaComponent } from './froFactura/froFactura.component';
+import { FroTrteCfgConceptoComponent } from './froTrteCfgConcepto/froTrteCfgConcepto.component';
 import { FroFacTramiteComponent } from './froFactura/froFacTramite/froFacTramite.component';
 import { FroAcuerdoPagoComponent } from './froAcuerdoPago/froAcuerdoPago.component';
 import { FroFacInfraccionComponent } from './froFactura/froFacInfraccion/froFacInfraccion.component';
+import { FroInfrCfgCategoriaComponent } from './froInfrCfgCategoria/froInfrCfgCategoria.component';
+import { FroInfraccionComponent } from './froInfraccion/froInfraccion.component';
 import { FroFacAcuerdoPagoComponent } from './froFactura/froFacAcuerdoPago/froFacAcuerdoPago.component';
 import { FroFacParqueaderoComponent } from './froFactura/froFacParqueadero/froFacParqueadero.component';
 import { FroReporteIngresosComponent } from './froReporteIngresos/froReporteIngresos.component';
+import { FroTramiteComponent } from './froTramite/froTramite.component';
 import { FroTrteSolicitudComponent } from './froTrteSolicitud/froTrteSolicitud.component';
 import { NewRncComponent } from './froTrteSolicitud/newRnc/newRnc.component';
 import { NewRnaComponent } from './froTrteSolicitud/newRna/newRna.component';
@@ -22,12 +28,28 @@ const routes: Routes = [
     component: FroAcuerdoPagoComponent
   },
   {
+    path: 'froFactura',
+    component: FroFacturaComponent
+  },
+  {
+    path: 'froTrteCfgConcepto',
+    component: FroTrteCfgConceptoComponent
+  },
+  {
     path: 'facturaTramite',
     component: FroFacTramiteComponent
   },
   {
     path: 'facturaInfraccion',
     component: FroFacInfraccionComponent
+  },
+  {
+    path: 'froInfrCfgCategoria',
+    component: FroInfrCfgCategoriaComponent
+  },
+  {
+    path: 'froInfraccion',
+    component: FroInfraccionComponent
   },
   {
     path: 'facturaAcuerdoPago',
@@ -40,6 +62,10 @@ const routes: Routes = [
   {
     path: 'froReporteIngresos',
     component: FroReporteIngresosComponent
+  },
+  {
+    path: 'froTramite',
+    component: FroTramiteComponent
   },
   {
     path: 'froTrteSolicitud',

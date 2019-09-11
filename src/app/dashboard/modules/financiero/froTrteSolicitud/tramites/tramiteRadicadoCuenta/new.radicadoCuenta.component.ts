@@ -24,6 +24,12 @@ export class NewRadicadoCuentaComponent implements OnInit {
   public tramiteSolicitud: any = null;
   public municipios:any;
   public tiposIdentificacion: any;
+
+  public clasificaciones = [
+    { 'value': 'NORMAL', 'label': 'NORMAL' },
+    { 'value': 'CLÁSICA', 'label': 'CLÁSICA' },
+    { 'value': 'ANTIGUA', 'label': 'ANTIGUA' },
+  ];
   
   public datos = {
     'campos': null,
@@ -32,6 +38,7 @@ export class NewRadicadoCuentaComponent implements OnInit {
     'estadoPlacas': null,
     'cantidadPlacas': null,
     'empresaAfiliadora': null,
+    'clasificacion': null,
     'idFuncionario': null,
     'idVehiculo': null,
     'idMunicipio': null,
@@ -122,6 +129,7 @@ export class NewRadicadoCuentaComponent implements OnInit {
                   "Fecha registro: " + this.vehiculo.fechaRegistro +
                   "No. guía llegada: " + this.vehiculo.numeroGuiaRadicado +
                   "Empresa de envío: " + this.vehiculo.empresaEnvioRadicado +
+                  "No. Placa: " + this.vehiculo.placa.numero +
                   "Estado de placas: " + this.datos.estadoPlacas +
                   "Cantidad de placas: " + this.datos.cantidadPlacas;
 

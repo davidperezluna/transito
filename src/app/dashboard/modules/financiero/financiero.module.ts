@@ -5,8 +5,10 @@ import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { SelectModule } from 'angular2-select';
 import { TooltipModule } from "ngx-tooltip";
 
+import { FroTrteCfgConceptoComponent } from './froTrteCfgConcepto/froTrteCfgConcepto.component';
+import { FroTrteCfgCuentaComponent } from './froTrteCfgCuenta/froTrteCfgCuenta.component';
 import { FroAcuerdoPagoComponent } from './froAcuerdoPago/froAcuerdoPago.component';
-import { FroFacturaComponent } from './froFactura';
+import { FroFacturaComponent } from './froFactura/froFactura.component';
 import { FroFacTramiteComponent } from './froFactura/froFacTramite/froFacTramite.component';
 import { FroFacInfraccionComponent } from './froFactura/froFacInfraccion/froFacInfraccion.component';
 import { FroFacAcuerdoPagoComponent } from './froFactura/froFacAcuerdoPago/froFacAcuerdoPago.component';
@@ -17,11 +19,11 @@ import { FroInfrCfgCategoriaComponent } from './froInfrCfgCategoria/froInfrCfgCa
 import { FroRecaudoComponent } from './froRecaudo/froRecaudo.component';
 import { FroReporteIngresosComponent } from './froReporteIngresos/froReporteIngresos.component';
 import { FroTramiteComponent } from './froTramite/froTramite.component';
-import { FroTrteCfgConceptoComponent } from './froTrteCfgConcepto/froTrteCfgConcepto.component';
-import { FroTrteCfgCuentaComponent } from './froTrteCfgCuenta/froTrteCfgCuenta.component';
 import { FroTrtePrecioComponent } from './froTrtePrecio/froTrtePrecio.component';
 import { FroTrteSolicitudComponent } from './froTrteSolicitud/froTrteSolicitud.component';
 
+import { FroTrteCfgConceptoModule } from './froTrteCfgConcepto/froTrteCfgConcepto.module';
+import { FroTrteCfgCuentaModule } from './froTrteCfgCuenta/froTrteCfgCuenta.module';
 import { FinancieroRoutingModule } from './financiero-routing.module';
 import { FroAcuerdoPagoModule } from './froAcuerdoPago/froAcuerdoPago.module';
 import { FroFacturaModule } from './froFactura/froFactura.module';
@@ -31,8 +33,6 @@ import { FroInfrCfgCategoriaModule } from './froInfrCfgCategoria/froInfrCfgCateg
 import { FroRecaudoModule } from './froRecaudo/froRecaudo.module';
 import { FroReporteIngresosModule } from './froReporteIngresos/froReporteIngresos.module';
 import { FroTramiteModule } from './froTramite/froTramite.module';
-import { FroTrteCfgConceptoModule } from './froTrteCfgConcepto/froTrteCfgConcepto.module';
-import { FroTrteCfgCuentaModule } from './froTrteCfgCuenta/froTrteCfgCuenta.module';
 import { FroTrtePrecioModule } from './froTrtePrecio/froTrtePrecio.module';
 import { FroTrteSolicitudModule } from './froTrteSolicitud/froTrteSolicitud.module';
 import { FroTrteArchivoPlanoModule } from './froTrteArchivoPlano/froTrteArchivoPlano.module';
@@ -96,21 +96,31 @@ import { NewRnetDesvinculacionComunAcuerdoComponent } from './froTrteSolicitud/t
     TooltipModule,
     UserCiudadanoModule,
     FinancieroRoutingModule,
+    FroCfgTipoRecaudoModule,
+    FroTrteCfgConceptoModule,
     FroAcuerdoPagoModule,
     FroFacturaModule,
+    FroInfrCfgCategoriaModule,
+    FroInfraccionModule,
     FroReporteIngresosModule,
+    FroTramiteModule,
     FroTrteSolicitudModule,
     FroTrtePrecioModule,
     FroTrteArchivoPlanoModule,
   ],
   declarations: [
+    FroCfgTipoRecaudoComponent,
+    FroTrteCfgConceptoComponent,
     FroAcuerdoPagoComponent,
     FroFacturaComponent,
+    FroInfrCfgCategoriaComponent,
+    FroInfraccionComponent,
     FroFacTramiteComponent,
     FroFacInfraccionComponent,
     FroFacAcuerdoPagoComponent,
     FroFacParqueaderoComponent,
     FroReporteIngresosComponent,
+    FroTramiteComponent,
     FroTrteSolicitudComponent,
     FroTrtePrecioComponent,
     FroTrteArchivoPlanoComponent,

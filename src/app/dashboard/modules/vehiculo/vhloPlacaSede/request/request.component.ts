@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { CfgOrganismoTransitoService } from '../../../../../services/cfgOrganismoTransito.service';
 import { VhloPlacaSedeService } from '../../../../../services/vhloPlacaSede.service';
+import { VhloCfgPlacaService } from '../../../../../services/vhloCfgPlaca.service';
 import { LoginService } from '../../../../../services/login.service';
 import swal from 'sweetalert2';
 declare var $: any;
@@ -26,8 +26,8 @@ export class RequestComponent implements OnInit {
   }
 
   constructor(
-    private _OrganismoTransitoService: CfgOrganismoTransitoService,
     private _PlacaSedeService: VhloPlacaSedeService,
+    private _PlacaService: VhloCfgPlacaService,
     private _LoginService: LoginService,
   ) { }
 
@@ -36,26 +36,6 @@ export class RequestComponent implements OnInit {
 
     swal({
       title: 'Cargando formulario!',
-      text: 'Solo tardara unos segundos por favor espere.',
-      onOpen: () => {
-        swal.showLoading()
-      }
-    });
-
-    this.formSearch = true;
-    swal.close();
-  }
-
-  onInitForms(){
-    this.formSearch = false;
-    this.formIndex = false;
-  }
-
-  onSearch() {
-    this.onInitForms();
-
-    swal({
-      title: 'Buscando registros!',
       text: 'Solo tardara unos segundos por favor espere.',
       onOpen: () => {
         swal.showLoading()
@@ -71,9 +51,6 @@ export class RequestComponent implements OnInit {
         if (response.code == 200) {
           this.solicitudes = response.data;
 
-          this.formSearch = true;
-          this.formIndex = true;
-
           swal({
             title: response.title,
             text: response.message,
@@ -87,14 +64,14 @@ export class RequestComponent implements OnInit {
         } else {
           this.solicitudes = null;
 
-          this.formSearch = true;
-
           swal({
             title: response.title,
             text: response.message,
             type: response.status,
             confirmButtonText: 'Aceptar'
           });
+
+          this.onCancelar();
         }
       },
       error => {
@@ -106,6 +83,13 @@ export class RequestComponent implements OnInit {
         }
       }
     );
+
+    swal.close();
+  }
+
+  onInitForms(){
+    this.formSearch = false;
+    this.formIndex = false;
   }
 
   onInitTable() {
@@ -122,6 +106,48 @@ export class RequestComponent implements OnInit {
           sNext: '<i class="fa fa-chevron-right"></i>',
           sLast: '<i class="fa fa-step-forward"></i>'
         }
+      }
+    });
+  }
+
+  onCancelar() {
+    this.ready.emit(true);
+  }
+
+  onMake(id: any) {
+    swal({
+      title: '¿Estás seguro?',
+      text: "¡Se enviaran las placas a fabricación!",
+      type: 'info',
+      showCancelButton: true,
+      confirmButtonColor: '#15d4be',
+      cancelButtonColor: '#ff6262',
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.value) {
+        let token = this._LoginService.getToken();
+
+        this._PlacaService.state({ 'id': id, 'estado': 'FABRICADA' }, token).subscribe(
+          response => {
+            swal({
+              title: response.title,
+              text: response.message,
+              type: response.status,
+              confirmButtonColor: '#15d4be',
+            });
+
+            this.ngOnInit();
+          },
+          error => {
+            this.errorMessage = <any>error;
+
+            if (this.errorMessage != null) {
+              console.log(this.errorMessage);
+              alert("Error en la petición");
+            }
+          }
+        );
       }
     });
   }

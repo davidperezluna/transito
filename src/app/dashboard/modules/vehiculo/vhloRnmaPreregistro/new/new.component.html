@@ -388,19 +388,6 @@
                                                     <b>No autorizado</b> para realizar trámites.
                                                 </span>
                                             </td>
-                                            <td *ngIf="propietario.idApoderado">
-                                                <b>Apoderado: </b>
-                                                <br> {{ propietario.apoderadoIdentificacion }}
-                                                <br> {{ propietario.apoderadoNombre }}
-                                                <br>
-                                            </td>
-                                            <td *ngIf="!propietario.idApoderado">
-                                                <div class="btn-group btn-group-justified">
-                                                    <div class="btn-group">
-                                                        <button (click)="onNewApoderado(propietario)" class="btn btn-xs btn-primary">Agregar apoderado</button>
-                                                    </div>
-                                                </div>
-                                            </td>
                                             <td>
                                                 <button (click)="onDeletePropietario(propietario)" class="btn btn-xs btn-danger">Eliminar</button>
                                             </td>
@@ -413,64 +400,6 @@
                             <!-- <app-new-rna-ciudadano *ngIf="ciudadanoNew" [tipoIdentificacion]="tipoIdentificacionSelected" [identificacion]="identificacion" (ready)="ready($event)"></app-new-rna-ciudadano> -->
                         </div>
                     </div>
-
-                    <div class="from-group" *ngIf="formApoderado"><!-- .form-group -->
-                        <div class="row"><!-- .row -->
-                            <!-- agregar apoderado -->
-                            <div class="col-xs-12 col-lg-12">
-                                <b class="text-uppercase">
-                                    Buscar Apoderado
-                                </b>
-                            </div>
-
-                            <div class="col-xs-12 col-lg-12" >
-                                <label>Identificación</label>
-                                <div  class="input-group">
-                                    <input type="number" class="form-control" placeholder="Identificacion apoderado" [(ngModel)]="identificacionApoderado" name="identificacionApoderado" required />
-                                    <span class="input-group-btn">
-                                        <button (click)="onSearchApoderado()" class="btn btn-default" type="button">
-                                            <i class="fa fa-search"></i>
-                                        </button>
-                                    </span>
-                                </div>                                    
-                            </div>
-
-                            <!--si existe el apoderado -->
-                            <div class="col-xs-12 col-lg-12" *ngIf="apoderado">
-                                <table class="table table-bordered table-striped" id="dataTables-example">
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <b>Tipo de identificación</b>
-                                                <br>
-                                                {{ apoderado.tipoIdentificacion.nombre }}
-                                                <br>
-                                                <b>Numero de identificación</b>
-                                                <br>
-                                                {{ apoderado.identificacion }}
-                                            </td>
-                                            <td>
-                                                <b>Nombres y apellidos</b>
-                                                <br>{{ apoderado.primerNombre }}  {{ apoderado.segundoNombre }} {{ apoderado.primerApellido }} {{ apoderado.segundoApellido }}
-                                            </td>
-                                            <td>
-                                                <div class="btn-group">
-                                                    <button (click)="onAddApoderado(apoderado)" class="btn btn-primary">
-                                                        <i class="fa fa-plus"></i>
-                                                        Agregar
-                                                    </button>
-                                                    <button class="btn btn-danger" (click)="onCancelarApoderado()">
-                                                        <i class="fa fa-times"></i>
-                                                        Cancelar
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>  
-                        </div><!-- /.row -->
-                    </div><!-- /.form-group -->
                 </form>
             </div>
             <div class="card-footer">

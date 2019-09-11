@@ -8,7 +8,6 @@
             </div>
             <div class="card-body">
                 <form #formTime="ngForm">
-
                     <div class="form-group row">
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-2">
                             <input type="date" [(ngModel)]="horario.fecha" class="form-control" id="fecha" name="fecha" checked="">
@@ -120,10 +119,10 @@
                 <h5 class="text-uppercase">Horarios actuales</h5>
             </div>
             <div class="card-body">
-                <table class="table " id="dataTables-example">
+                <table class="table" id="dataTables-example">
                     <thead>
                         <tr>
-                            <th>Id</th>
+                            <th>#</th>
                             <th>Jornada</th>
                             <th>Fecha</th>
                             <th>Hora Inicial</th>
@@ -133,7 +132,7 @@
                     </thead>
                     <tbody>
                         <tr class="odd" *ngFor="let horario of horarios; let i = index">
-                            <td>{{ horario.id }}</td>
+                            <td>{{ i + 1 }}</td>
                             <td>{{ horario.jornada }}</td>
                             <td>{{ horario.fecha }}</td>
                             <td>{{ horario.horaInicio }}</td> 

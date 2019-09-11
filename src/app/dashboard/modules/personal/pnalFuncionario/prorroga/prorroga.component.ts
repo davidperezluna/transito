@@ -61,7 +61,7 @@ export class ProrrogaComponent implements OnInit {
       response => {
         this.prorrogas = response.data;
         let timeoutId = setTimeout(() => {
-          this.iniciarTabla();
+          this.onInitTable();
         }, 100);
       },
       error => {
@@ -75,8 +75,8 @@ export class ProrrogaComponent implements OnInit {
     );
   }
   
-  iniciarTabla(){
-    $('#dataTables-example').DataTable({
+  onInitTable(){
+    this.table = $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,
       sPaginationType: 'full_numbers',
@@ -88,8 +88,7 @@ export class ProrrogaComponent implements OnInit {
           sLast: '<i class="fa fa-step-forward"></i>'
         }
       }
-   });
-   this.table = $('#dataTables-example').DataTable();
+    });
   }
   onNew(){
     this.formNew = true;

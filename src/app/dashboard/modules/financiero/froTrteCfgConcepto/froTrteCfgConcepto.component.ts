@@ -1,8 +1,8 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
+import { FroTrteCfgConcepto } from './froTrteCfgConcepto.modelo';
 import { LoginService } from '../../../../services/login.service';
 import { FroTrteCfgConceptoService } from "../../../../services/froTrteCfgConcepto.service";
 import swal from 'sweetalert2';
-import { FroTrteCfgConcepto } from './froTrteCfgConcepto.modelo';
 declare var $: any;
 
 @Component({
@@ -75,6 +75,14 @@ export class FroTrteCfgConceptoComponent implements OnInit {
     }
 
     onNew() {
+        this.formNew = true;
+        this.formIndex = false;
+        if (this.table) {
+            this.table.destroy();
+        }
+    }
+
+    onDelete(id: any) {
         this.formNew = true;
         this.formIndex = false;
         if (this.table) {
