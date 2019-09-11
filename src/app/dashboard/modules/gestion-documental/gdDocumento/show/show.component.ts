@@ -199,7 +199,7 @@ constructor(
       this.datos.documento = this.documento;
 
       let token = this._LoginService.getToken();
-
+ 
       this._DocumentoService.update(this.file, this.datos, token).subscribe(
         response => {
           if (response.code == 200) {

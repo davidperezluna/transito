@@ -10,7 +10,7 @@ declare var $: any;
 
 @Component({
   selector: 'app-new-gddocumento',
-  templateUrl: './new.component.html'
+  templateUrl: './new.component.html' 
 })
 export class NewComponent implements OnInit {
   @Output() ready = new EventEmitter<any>();

@@ -66,11 +66,21 @@ export class GdDocumentoService {
 		return this._http.post(this.url + "/search/state", params, { headers: headers }).map(res => res.json());
 	}
 	
-	update(formData, datos, token) {
+	update(formData, datos, token) { 
 		let json = JSON.stringify(datos);
 		formData.append('data', json);
 		formData.append('authorization', token);
 		return this._http.post(this.url + "/update", formData).map(
+			res => res.json(),
+			this._loogerService.registerLog(token, 'UPDATE', json, this.url)
+		);
+	}
+
+	finish(formData, datos, token) { 
+		let json = JSON.stringify(datos);
+		formData.append('data', json);
+		formData.append('authorization', token);
+		return this._http.post(this.url + "/finish", formData).map(
 			res => res.json(),
 			this._loogerService.registerLog(token, 'UPDATE', json, this.url)
 		);

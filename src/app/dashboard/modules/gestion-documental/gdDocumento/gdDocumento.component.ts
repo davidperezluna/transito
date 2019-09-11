@@ -26,6 +26,7 @@ export class GdDocumentoComponent implements OnInit {
   public formAssign = false;
   public formRecord = false;
   public formSearch = true;
+  public formFinish = false;
   
   public table: any = null; 
   public documento: GdDocumento;
@@ -63,6 +64,7 @@ export class GdDocumentoComponent implements OnInit {
     this.formRecord = false;
     this.formPrint = false;
     this.formAssign = false;
+    this.formFinish = false;
 
     this._FuncionarioService.select().subscribe(
       response => {
@@ -256,6 +258,21 @@ export class GdDocumentoComponent implements OnInit {
     this.formPrint = false;
     this.formAssign = false;
     this.formNew = true;
+    this.formFinish = false;
+  }
+
+  onFinish(documento){
+    this.documento = documento;   
+    if(this.documento){
+      this.formIndex = false;
+      this.formEdit = false;
+      this.formShow = false;
+      this.formRecord = false;
+      this.formPrint = false;
+      this.formAssign = false;
+      this.formNew = false;
+      this.formFinish = true;
+    }
   }
 
   onShow(documento: any){
@@ -266,6 +283,7 @@ export class GdDocumentoComponent implements OnInit {
     this.formPrint = false;
     this.formAssign = false;
     this.formRecord = false;
+    this.formFinish = false;
     this.formShow = true;
   }
 
@@ -278,6 +296,7 @@ export class GdDocumentoComponent implements OnInit {
       this.formShow = false;
       this.formRecord = true;
       this.formAssign = false;
+      this.formFinish = false;
       this.formPrint = false;
     }
   }
@@ -291,6 +310,7 @@ export class GdDocumentoComponent implements OnInit {
       this.formShow = false;
       this.formRecord = false;
       this.formAssign = false;
+      this.formFinish = false;
       this.formPrint = true;
     }
   }
