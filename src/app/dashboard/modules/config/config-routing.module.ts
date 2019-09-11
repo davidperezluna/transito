@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CfgAdmFormatoComponent } from './cfgAdmFormato/cfgAdmFormato.component';
 import { CfgAdmFormatoTipoComponent } from './cfgAdmFormatoTipo/cfgAdmFormatoTipo.component';
+import { CfgFestivoComponent } from './cfgFestivo/cfgFestivo.component';
 
 const routes: Routes = [
   {
@@ -12,6 +13,10 @@ const routes: Routes = [
     path: 'cfgAdmFormatoTipo',
     component: CfgAdmFormatoTipoComponent
   },
+  {
+    path: 'cfgFestivo',
+    component: CfgFestivoComponent
+  }
 ];
 
 @NgModule({

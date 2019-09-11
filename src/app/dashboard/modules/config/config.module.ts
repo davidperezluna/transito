@@ -7,15 +7,24 @@ import { CfgAdmFormatoTipoComponent } from './cfgAdmFormatoTipo/cfgAdmFormatoTip
 import { ConfigRoutingModule } from './config-routing.module';
 import { CfgAdmFormatoModule } from './cfgAdmFormato/cfgAdmFormato.module';
 import { CfgAdmFormatoTipoModule } from './cfgAdmFormatoTipo/cfgAdmFormatoTipo.module';
+import { CfgFestivoModule } from './cfgFestivo/cfgFestivo.module';
+import { TooltipModule } from "ngx-tooltip"; 
 
+
+import { CfgFestivoComponent } from './cfgFestivo/cfgFestivo.component';
+
+ 
 @NgModule({
   imports: [
+    TooltipModule,
     CommonModule,
     ConfigRoutingModule,
     CfgAdmFormatoModule,
     CfgAdmFormatoTipoModule,
+    CfgFestivoModule,
   ],
   declarations: [
+    CfgFestivoComponent,
     CfgAdmFormatoComponent,
     CfgAdmFormatoTipoComponent,
   ]

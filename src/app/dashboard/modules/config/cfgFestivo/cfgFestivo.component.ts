@@ -9,7 +9,7 @@ declare var $: any;
   selector: 'app-index',
   templateUrl: './cfgFestivo.component.html'
 })
-export class cfgFestivoComponent implements OnInit {
+export class CfgFestivoComponent implements OnInit {
   public errorMessage;
 	public id;
 	public respuesta;
@@ -44,7 +44,7 @@ export class cfgFestivoComponent implements OnInit {
 				response => {
           this.cfgFestivos = response.data;
           let timeoutId = setTimeout(() => {  
-            this.iniciarTabla();
+            this.onInitTable();
           }, 100);
 				}, 
 				error => {
@@ -57,8 +57,9 @@ export class cfgFestivoComponent implements OnInit {
 				}
       );
   }
-  iniciarTabla(){
-    $('#dataTables-example').DataTable({
+
+  onInitTable(){
+    this.table = $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,
       sPaginationType: 'full_numbers',
@@ -71,7 +72,6 @@ export class cfgFestivoComponent implements OnInit {
         }
       }
    });
-   this.table = $('#dataTables-example').DataTable();
   }
   
   onNew(){
@@ -88,7 +88,8 @@ export class cfgFestivoComponent implements OnInit {
       this.ngOnInit();
     }
   }
-  deletecfgFestivo(id:any){
+
+  onDelete(id:any){
     swal({
       title: '¿Estás seguro?',
       text: "¡Se eliminara este registro!",
@@ -128,7 +129,7 @@ export class cfgFestivoComponent implements OnInit {
     })
   }
 
-  editcfgFestivo(cfgFestivo:any){
+  onEdit(cfgFestivo:any){
     this.cfgFestivo = cfgFestivo;
     this.formEdit = true;
     this.formIndex = false;

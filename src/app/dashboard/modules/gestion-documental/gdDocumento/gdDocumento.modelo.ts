@@ -1,5 +1,6 @@
 export class GdDocumento{
 	constructor(
+		public numeroCarpeta: number,
 		public numeroRadicado: number,
 		public folios: number,
 		public numeroOficio: string,

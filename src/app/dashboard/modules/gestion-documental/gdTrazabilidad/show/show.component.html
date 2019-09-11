@@ -62,10 +62,10 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        <div class="form-group row" *ngIf="datos.aceptada == 'false'">
                             <div class="col-xs-12 col-lg-12">
                                 <label>Observaciones</label>
-                                <textarea class="form-control" [(ngModel)]="datos.observaciones" name="observaciones" rows="6"></textarea>
+                                <textarea class="form-control" [(ngModel)]="datos.observaciones" name="observaciones" rows="6" required></textarea>
                             </div>
                         </div>
                     </div>
