@@ -55,6 +55,9 @@
               <button class="btn btn-xs btn-success" (click)="onSearchByState('FINALIZADO')">
                 FINALIZADO
               </button>
+              <button class="btn btn-xs btn-info" (click)="onSearchByState('ENVIADO')">
+                SALIDA
+              </button>
             </div>
           </h5>
         </div>
@@ -76,6 +79,7 @@
                     <span class="badge badge-primary" *ngIf="documento.estado == 'ASIGNADO'">{{ documento.estado }}</span>
                     <span class="badge badge-warning" *ngIf="documento.estado == 'EN TRAMITE' || documento.estado == 'RESPUESTA REALIZADA'">{{ documento.estado }}</span>
                     <span class="badge badge-success" *ngIf="documento.estado == 'FINALIZADO'">{{ documento.estado }}</span>
+                    <span class="btn btn-success" *ngIf="documento.estado == 'ENVIADO'">{{ i + 1 }}</span>
                     <br>
                     <b>Peticionario</b>
                     {{ documento.peticionarioNombres }} {{ documento.peticionarioApellidos }}
@@ -117,7 +121,7 @@
                     </button>
                     <button (click)="onPrint(documento)" class="btn btn-xs btn-primary" type="button" *ngIf="documento.estado == 'RESPUESTA REALIZADA'">
                       <i class="fa fa-check"></i>
-                      Finalizar
+                      ENVIAR
                     </button>
                     <button (click)="onRecord(documento)" class="btn btn-xs btn-primary" type="button" *ngIf="documento.estado != 'PENDIENTE'">
                       <i class="fa fa-bars"></i>
@@ -152,6 +156,9 @@
                 <button class="btn btn-xs btn-success" (click)="onSearchByState('FINALIZADO')">
                   FINALIZADO
                 </button>
+                <button class="btn btn-xs btn-info" (click)="onSearchByState('ENVIADO')">
+                  SALIDA
+                </button>
               </div>
             </h5>
           </div>
@@ -172,6 +179,7 @@
                   <td class="btn btn-primary" *ngIf="documento.estado == 'ASIGNADO'">{{ i + 1 }}</td>
                   <td class="btn btn-warning" *ngIf="documento.estado == 'EN TRAMITE' || documento.estado == 'RESPUESTA REALIZADA'">{{ i + 1 }}</td>
                   <td class="btn btn-success" *ngIf="documento.estado == 'FINALIZADO'">{{ i + 1 }}</td>
+                  <td class="btn btn-success" *ngIf="documento.estado == 'ENVIADO'">{{ i + 1 }}</td>
                   <td>
                     <span *ngIf="documento.peticionarioNombres">
                       {{ documento.peticionarioNombres }} {{ documento.peticionarioApellidos }}

@@ -23,7 +23,6 @@
                     <th>Id</th>
                     <th>Fecha</th>
                     <th>Descripción</th>
-                    <th>Estado</th>
                     <th>Acciones</th>
                 </tr>
               </thead>
@@ -32,16 +31,16 @@
                   <td >{{ cfgFestivo.id }}</td>
                   <td >{{ cfgFestivo.fecha }}</td>
                   <td >{{ cfgFestivo.descripcion }}</td>
-                  <td >{{ cfgFestivo.estado }}</td>
                   <td>
-                    <button (click)="editcfgFestivo(cfgFestivo)" class="btn btn-xs btn-info" type="button">
-                      <i class="fa fa-edit"></i>
-                      Editar
-                    </button> 
-                    <button (click)="deletecfgFestivo(cfgFestivo.id)"  class="btn btn-xs btn-danger" type="button">
-                      <i class="fa fa-trash"></i>
-                      Eliminar
-                    </button> 
+                    <div class="btn-group">
+                      <button (click)="onEdit(cfgFestivo)" class="btn btn-xs btn-primary" type="button" tooltip="Editar" [tooltipDisabled]="false" [tooltipAnimation]="true"
+                        tooltipPlacement="top">
+                        <i class="fa fa-edit"></i>
+                      </button>
+                      <button (click)="onDelete(cfgFestivo.id)" class="btn btn-xs btn-danger" type="button" tooltip="Eliminar" [tooltipDisabled]="false" [tooltipAnimation]="true" tooltipPlacement="top">
+                        <i class="fa fa-trash"></i>
+                      </button>
+                    </div>
                   </td>
                 </tr>
               </tbody>
@@ -51,6 +50,6 @@
         </div>
       </div>
     </div>
-    <app-edit *ngIf='formEdit' [cfgFestivo]="cfgFestivo" (ready)="ready($event)"></app-edit>
-    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+    <app-edit-cfgfestivo *ngIf='formEdit' [cfgFestivo]="cfgFestivo" (ready)="ready($event)"></app-edit-cfgfestivo>
+    <app-new-cfgfestivo *ngIf='formNew' (ready)="ready($event)"></app-new-cfgfestivo>
 </div>

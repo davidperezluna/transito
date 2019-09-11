@@ -50,7 +50,7 @@ export class NewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.documento = new GdDocumento(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    this.documento = new GdDocumento(null,null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     this.date = new Date();
 
     this._TipoIdentificacionService.select().subscribe(

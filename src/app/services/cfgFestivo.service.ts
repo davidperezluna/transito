@@ -5,7 +5,7 @@ import  "rxjs/add/operator/map";
 
 @Injectable()
 export class cfgFestivoService {
-	private url = environment.apiUrl + "cfgFestivo";
+	private url = environment.apiUrl + "configuracion/cfgfestivo";
 	public identity;
 	public token;
 

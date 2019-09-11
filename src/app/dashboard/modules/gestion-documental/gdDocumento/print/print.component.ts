@@ -27,7 +27,6 @@ public datos = {
   'fechaEnvio': null,
   'detalleEnvio': null,
   'observaciones': null,
-  'numeroCarpeta': null,
   'idMedioCorrespondenciaEnvio': null,
   'idOrganismoTransito': null,
   'idDocumento': null,
