@@ -54,18 +54,19 @@
                             <div class="col-xs-12 col-lg-6" *ngIf="vehiculo.modalidadTransporte.id == 1 || vehiculo.modalidadTransporte.id == 3">
                                 <b>Tipo documento empresa afiliadora</b>
                                 <br>
-                                {{ vehiculo.tipoIdentificacionRadicado?.nombre }}
+                                {{ vehiculo.empresa?.tipoIdentificacion.nombre }}
                             </div>
         
                             <div class="col-xs-12 col-lg-6" *ngIf="vehiculo.modalidadTransporte.id == 1 || vehiculo.modalidadTransporte.id == 3">
                                 <b>Nro. documento empresa afiliadora</b>
                                 <br>
-                                {{ vehiculo.identificacionRadicado }}
+                                {{ vehiculo.empresa.identificacion }}
                             </div>    
                             
                             <div class="col-xs-12 col-lg-12" *ngIf="vehiculo.modalidadTransporte.id == 1 || vehiculo.modalidadTransporte.id == 3">
-                                <label>Empresa afiliadora<b class="text-danger">*</b></label>
-                                <input class="form-control" [(ngModel)]="datos.empresaAfiliadora" name="empresaAfiliadora" type="text" required />
+                                <b>Empresa afiliadora</b>
+                                <br>
+                                {{ vehiculo.empresa.nombre }}
                             </div>  
                             
                             <div class="col-xs-12 col-lg-3">

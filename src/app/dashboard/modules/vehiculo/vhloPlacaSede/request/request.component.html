@@ -36,7 +36,7 @@
                                 </td>
                                 <td>{{ solicitud.foraneas.cantidadPlacas }}</td>
                                 <td>{{ solicitud.tramiteFactura.factura.numero }}</td>
-                                <td>{{ (solicitud.tramiteFactura.fecha.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td>
+                                <td>{{ (solicitud.fecha.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td>
                                 <td>
                                     <div class="btn-group">
                                         <button (click)="onMake(solicitud.vehiculo.placa.id)" class="btn btn-xs btn-success" type="button">

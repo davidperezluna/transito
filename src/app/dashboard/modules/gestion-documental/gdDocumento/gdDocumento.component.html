@@ -93,7 +93,7 @@
                       <b>Tipo:</b> {{ documento.tipoCorrespondencia.nombre }}
                       <br>
                     </span>
-                    <b>F. radicado:</b> {{ documento.fechaRegistro }}
+                    <b>F. radicado:</b> {{ (documento.fechaLLegada.timestamp * 1000) | date: 'dd/MM/yyyy' }}
                     <b>F. vencimiento:</b> {{ documento.fechaVencimiento }}
                     <br>
                     <span *ngIf="documento.estado == 'FINALIZADO'">
@@ -198,7 +198,7 @@
                   </td>
                   <td>
                     <b>F. radicado:</b>
-                    <br> {{ documento.fechaRegistro }}
+                    <br> {{ (documento.fechaLLegada.timestamp * 1000) | date: 'dd/MM/yyyy' }}
                     <br>
                     <b>F. vencimiento:</b>
                     <br> {{ documento.fechaVencimiento }}
