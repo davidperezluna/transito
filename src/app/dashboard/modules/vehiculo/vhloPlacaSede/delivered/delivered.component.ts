@@ -2,18 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { PnalFuncionarioService } from '../../../../../services/pnalFuncionario.service';
 import { VhloCfgPlacaService } from '../../../../../services/vhloCfgPlaca.service';
 import { LoginService } from '../../../../../services/login.service';
-import { environment } from 'environments/environment';
 import swal from 'sweetalert2';
+declare var $: any;
 
 @Component({
-  selector: 'app-delivered',
+  selector: 'app-delivered-vhloplacasede',
   templateUrl: './delivered.component.html'
 })
 export class DeliveredComponent implements OnInit {
   public errorMessage;
 
   public funcionario: any;
-  public fabricadas: any;
+  public placas: any;
+
+  public table: any;
 
   constructor(
     private _FuncionarioService: PnalFuncionarioService,
@@ -47,16 +49,16 @@ export class DeliveredComponent implements OnInit {
           this._PlacaService.searchByOrganismoTransitoAndEstado(datos, token).subscribe(
             response => {
               if (response.code == 200) {
-                this.funcionario = response.data;
+                this.placas = response.data;
 
                 swal.close();
               } else {
-                this.funcionario = null;
+                this.placas = null;
 
                 swal({
-                  title: 'Error!',
-                  text: 'Usted no tiene permisos para realizar tramites',
-                  type: 'error',
+                  title: response.title,
+                  text: response.message,
+                  type: response.status,
                   confirmButtonText: 'Aceptar'
                 });
               }
@@ -88,5 +90,61 @@ export class DeliveredComponent implements OnInit {
         }
       }
     );
+  }
+
+  onInitTable() {
+    this.table = $('#dataTables-example').DataTable({
+      retrieve: true,
+      paging: false,
+      responsive: true,
+      pageLength: 8,
+      sPaginationType: 'full_numbers',
+      oLanguage: {
+        oPaginate: {
+          sFirst: '<i class="fa fa-step-backward"></i>',
+          sPrevious: '<i class="fa fa-chevron-left"></i>',
+          sNext: '<i class="fa fa-chevron-right"></i>',
+          sLast: '<i class="fa fa-step-forward"></i>'
+        }
+      }
+    });
+  }
+
+  onDelivered(id: any) {
+    swal({
+      title: '¿Estás seguro?',
+      text: "¡La placa pasara a estado UTILIZADA!",
+      type: 'info',
+      showCancelButton: true,
+      confirmButtonColor: '#15d4be',
+      cancelButtonColor: '#ff6262',
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.value) {
+        let token = this._LoginService.getToken();
+
+        this._PlacaService.state({ 'id': id, 'estado': 'UTILIZADA' }, token).subscribe(
+          response => {
+            swal({
+              title: response.title,
+              text: response.message,
+              type: response.status,
+              confirmButtonColor: '#15d4be',
+            });
+
+            this.ngOnInit();
+          },
+          error => {
+            this.errorMessage = <any>error;
+
+            if (this.errorMessage != null) {
+              console.log(this.errorMessage);
+              alert("Error en la petición");
+            }
+          }
+        );
+      }
+    });
   }
 }

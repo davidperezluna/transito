@@ -1,3 +1,41 @@
-<p>
-  delivered works!
-</p>
+<div class="container-fluid">
+  <div class="row" *ngIf="funcionario">
+    <div class="col-xs-12 col-lg-12">
+      <!-- .col -->
+      <div class="card">
+        <div class="card-header">
+          <b class="text-uppercase">Placas fabricadas para {{ funcionario.organismoTransito.nombre }}</b>
+          <div class="btn-group pull-right">
+        </div>
+        <div class="card-body">
+          <table class="table " id="dataTables-example" *ngIf='placas'>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Placa</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="odd" *ngFor="let placa of placas; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ placa.numero }}</td>
+                <td>{{ placa.estado }}</td>
+                <td>
+                  <div class="btn-group">
+                    <button (click)="onDelivered(placa.id)" class="btn btn-xs btn-success" type="button">
+                      <i class="fa fa-check"></i>
+                      Entregar
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- /.table-responsive -->
+        </div>
+      </div>
+    </div><!-- .col -->
+  </div>
+</div>

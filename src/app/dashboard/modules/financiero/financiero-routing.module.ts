@@ -1,11 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import { FroCfgTipoRecaudoComponent } from './froCfgTipoRecaudo/froCfgTipoRecaudo.component';
+import { FroFacturaComponent } from './froFactura/froFactura.component';
 import { FroTrteCfgConceptoComponent } from './froTrteCfgConcepto/froTrteCfgConcepto.component';
 import { FroFacTramiteComponent } from './froFactura/froFacTramite/froFacTramite.component';
 import { FroAcuerdoPagoComponent } from './froAcuerdoPago/froAcuerdoPago.component';
 import { FroFacInfraccionComponent } from './froFactura/froFacInfraccion/froFacInfraccion.component';
 import { FroInfrCfgCategoriaComponent } from './froInfrCfgCategoria/froInfrCfgCategoria.component';
+import { FroInfraccionComponent } from './froInfraccion/froInfraccion.component';
 import { FroFacAcuerdoPagoComponent } from './froFactura/froFacAcuerdoPago/froFacAcuerdoPago.component';
 import { FroFacParqueaderoComponent } from './froFactura/froFacParqueadero/froFacParqueadero.component';
 import { FroReporteIngresosComponent } from './froReporteIngresos/froReporteIngresos.component';
@@ -21,12 +24,16 @@ import { FroTrteArchivoPlanoComponent } from './froTrteArchivoPlano/froTrteArchi
 
 const routes: Routes = [
   {
-    path: 'froTrteCfgConcepto',
-    component: FroTrteCfgConceptoComponent
-  },
-  {
     path: 'froAcuerdoPago',
     component: FroAcuerdoPagoComponent
+  },
+  {
+    path: 'froFactura',
+    component: FroFacturaComponent
+  },
+  {
+    path: 'froTrteCfgConcepto',
+    component: FroTrteCfgConceptoComponent
   },
   {
     path: 'facturaTramite',
@@ -39,6 +46,10 @@ const routes: Routes = [
   {
     path: 'froInfrCfgCategoria',
     component: FroInfrCfgCategoriaComponent
+  },
+  {
+    path: 'froInfraccion',
+    component: FroInfraccionComponent
   },
   {
     path: 'facturaAcuerdoPago',

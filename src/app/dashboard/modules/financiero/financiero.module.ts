@@ -8,7 +8,7 @@ import { TooltipModule } from "ngx-tooltip";
 import { FroTrteCfgConceptoComponent } from './froTrteCfgConcepto/froTrteCfgConcepto.component';
 import { FroTrteCfgCuentaComponent } from './froTrteCfgCuenta/froTrteCfgCuenta.component';
 import { FroAcuerdoPagoComponent } from './froAcuerdoPago/froAcuerdoPago.component';
-import { FroFacturaComponent } from './froFactura';
+import { FroFacturaComponent } from './froFactura/froFactura.component';
 import { FroFacTramiteComponent } from './froFactura/froFacTramite/froFacTramite.component';
 import { FroFacInfraccionComponent } from './froFactura/froFacInfraccion/froFacInfraccion.component';
 import { FroFacAcuerdoPagoComponent } from './froFactura/froFacAcuerdoPago/froFacAcuerdoPago.component';
@@ -96,10 +96,12 @@ import { NewRnetDesvinculacionComunAcuerdoComponent } from './froTrteSolicitud/t
     TooltipModule,
     UserCiudadanoModule,
     FinancieroRoutingModule,
+    FroCfgTipoRecaudoModule,
     FroTrteCfgConceptoModule,
     FroAcuerdoPagoModule,
     FroFacturaModule,
     FroInfrCfgCategoriaModule,
+    FroInfraccionModule,
     FroReporteIngresosModule,
     FroTramiteModule,
     FroTrteSolicitudModule,
@@ -107,10 +109,12 @@ import { NewRnetDesvinculacionComunAcuerdoComponent } from './froTrteSolicitud/t
     FroTrteArchivoPlanoModule,
   ],
   declarations: [
+    FroCfgTipoRecaudoComponent,
     FroTrteCfgConceptoComponent,
     FroAcuerdoPagoComponent,
     FroFacturaComponent,
     FroInfrCfgCategoriaComponent,
+    FroInfraccionComponent,
     FroFacTramiteComponent,
     FroFacInfraccionComponent,
     FroFacAcuerdoPagoComponent,

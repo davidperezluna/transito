@@ -45,8 +45,10 @@
             <div class="card-body">
                 <table class="table " id="dataTables-example">
                     <thead>
-                        <tr>
+                        <tr class="text-uppercase">
                             <th>#</th>
+                            <th>Funcionario</th>
+                            <th>Identificación</th>
                             <th>Jornada</th>
                             <th>Fecha</th>
                             <th>Hora Inicial</th>
@@ -57,10 +59,12 @@
                     <tbody>
                         <tr class="odd" *ngFor="let horario of horarios; let i = index">
                             <td>{{ i + 1 }}</td>
+                            <td>{{ horario.funcionario.ciudadano.primerNombre }} {{ horario.funcionario.ciudadano.primerApellido }}</td>
+                            <td><b>{{ horario.funcionario.ciudadano.tipoIdentificacion.nombre }}</b> {{ horario.funcionario.ciudadano.identificacion }}</td>
                             <td>{{ horario.jornada }}</td>
-                            <td>{{ horario.fecha }}</td>
-                            <td>{{ horario.horaInicio }}</td>
-                            <td>{{ horario.horaFin }}</td>
+                            <td>{{ (horario.fecha.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td>
+                            <td>{{ (horario.horaInicial.timestamp * 1000) | date: 'h:i:s' }}</td>
+                            <td>{{ (horario.horaFinal.timestamp * 1000) | date: 'h:i:s' }}</td>
                             <td>{{ horario.lugar }}</td>
                         </tr>
                     </tbody>

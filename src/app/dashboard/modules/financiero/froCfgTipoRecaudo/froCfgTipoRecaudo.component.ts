@@ -9,6 +9,7 @@ declare var $: any;
     selector: 'app-index',
     templateUrl: './froCfgTipoRecaudo.component.html',
 })
+
 export class FroCfgTipoRecaudoComponent implements OnInit {
     public errorMessage;
     public respuesta;
