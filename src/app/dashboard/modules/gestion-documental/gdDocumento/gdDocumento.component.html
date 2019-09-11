@@ -55,7 +55,7 @@
               <button class="btn btn-xs btn-success" (click)="onSearchByState('FINALIZADO')">
                 FINALIZADO
               </button>
-              <button class="btn btn-xs btn-info" (click)="onSearchByState('ENVIADO')">
+              <button class="btn btn-xs btn-info" (click)="onSearchByState('ENVIADA')">
                 SALIDA
               </button>
             </div>
@@ -79,7 +79,7 @@
                     <span class="badge badge-primary" *ngIf="documento.estado == 'ASIGNADO'">{{ documento.estado }}</span>
                     <span class="badge badge-warning" *ngIf="documento.estado == 'EN TRAMITE' || documento.estado == 'RESPUESTA REALIZADA'">{{ documento.estado }}</span>
                     <span class="badge badge-success" *ngIf="documento.estado == 'FINALIZADO'">{{ documento.estado }}</span>
-                    <span class="btn btn-success" *ngIf="documento.estado == 'ENVIADO'">{{ i + 1 }}</span>
+                    <span class="btn btn-success" *ngIf="documento.estado == 'ENVIADA'">{{ i + 1 }}</span>
                     <br>
                     <b>Peticionario</b>
                     {{ documento.peticionarioNombres }} {{ documento.peticionarioApellidos }}
@@ -128,7 +128,11 @@
                     </button>
                     <button (click)="onRecord(documento)" class="btn btn-xs btn-primary" type="button" *ngIf="documento.estado != 'PENDIENTE'">
                       <i class="fa fa-bars"></i>
-                      Historial
+                      HISTORIAL
+                    </button>
+                    <button (click)="onFinish(documento)" class="btn btn-xs btn-success" type="button" *ngIf="documento.estado == 'ENVIADA'">
+                      <i class="fa fa-bars"></i>
+                      FINALIZAR
                     </button>
                   </div>
                 </td>
@@ -159,7 +163,7 @@
                 <button class="btn btn-xs btn-success" (click)="onSearchByState('FINALIZADO')">
                   FINALIZADO
                 </button>
-                <button class="btn btn-xs btn-info" (click)="onSearchByState('ENVIADO')">
+                <button class="btn btn-xs btn-info" (click)="onSearchByState('ENVIADA')">
                   SALIDA
                 </button>
               </div>
@@ -182,7 +186,7 @@
                   <td class="btn btn-primary" *ngIf="documento.estado == 'ASIGNADO'">{{ i + 1 }}</td>
                   <td class="btn btn-warning" *ngIf="documento.estado == 'EN TRAMITE' || documento.estado == 'RESPUESTA REALIZADA'">{{ i + 1 }}</td>
                   <td class="btn btn-success" *ngIf="documento.estado == 'FINALIZADO'">{{ i + 1 }}</td>
-                  <td class="btn btn-success" *ngIf="documento.estado == 'ENVIADO'">{{ i + 1 }}</td>
+                  <td class="btn btn-success" *ngIf="documento.estado == 'ENVIADA'">{{ i + 1 }}</td>
                   <td>
                     <span *ngIf="documento.peticionarioNombres">
                       {{ documento.peticionarioNombres }} {{ documento.peticionarioApellidos }}
@@ -228,6 +232,10 @@
                       <i class="fa fa-bars"></i>
                       Historial
                     </button>
+                    <button (click)="onFinish(documento)" class="btn btn-xs btn-success" type="button" *ngIf="documento.estado == 'ENVIADA'">
+                      <i class="fa fa-bars"></i>
+                      FINALIZAR
+                    </button>
                   </td>
                 </tr>
               </tbody>
@@ -236,7 +244,9 @@
           </div>
         </div>
       </div>
-      
+      <div class="col-xs-12 col-lg-8" *ngIf='formFinish'>
+        <app-finish-gddocumento [documento]="documento" (ready)="ready($event)"></app-finish-gddocumento>
+      </div>
       <div class="col-xs-12 col-lg-8" *ngIf='formNew'>
         <app-new-gddocumento (ready)="ready($event)" (onShow)="onShow($event)"></app-new-gddocumento>
       </div>
@@ -253,4 +263,5 @@
         <app-print-gddocumento [documento]="documento" (ready)="ready($event)"></app-print-gddocumento>
       </div>
     </div>
-</div>
+  </div>
+  
