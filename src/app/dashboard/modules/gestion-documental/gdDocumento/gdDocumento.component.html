@@ -97,11 +97,13 @@
                       <b>Tipo:</b> {{ documento.tipoCorrespondencia.nombre }}
                       <br>
                     </span>
-                    <ng-container *ngIf="documento.fechaLLegada">
+                    <ng-container *ngIf="documento.fechaLlegada">
                       <b>F. radicado:</b>
-                      {{ (documento.fechaLLegada.timestamp * 1000) | date: 'dd/MM/yyyy' }}<br>
+                      {{ (documento.fechaLlegada.timestamp * 1000) | date: 'dd/MM/yyyy' }}<br>
                     </ng-container>
-                    <b>F. vencimiento:</b> {{ documento.fechaVencimiento }}
+                    <ng-container *ngIf="documento.fechaVencimiento">
+                      <b>F. vencimiento:</b> {{ (documento.fechaVencimiento.timestamp * 1000) | date: 'dd/MM/yyyy' }}
+                    </ng-container>
                     <br>
                     <span *ngIf="documento.estado == 'FINALIZADO'">
                       <b>F. envio:</b> {{ documento.fechaEnvio }}
@@ -212,12 +214,15 @@
                     <b>No. oficio:</b> {{ documento.numeroOficio }}
                   </td>
                   <td>
-                    <ng-container *ngIf="documento.fechaLLegada">
+                    <ng-container *ngIf="documento.fechaLlegada">
+                      <br>
                       <b>F. radicado:</b>
-                      <br> {{ (documento.fechaLLegada.timestamp * 1000) | date: 'dd/MM/yyyy' }}<br>
+                      <br> {{ (documento.fechaLlegada.timestamp * 1000) | date: 'dd/MM/yyyy' }}<br>
                     </ng-container>
-                    <b>F. vencimiento:</b>
-                    <br> {{ documento.fechaVencimiento }}
+                    <ng-container *ngIf="documento.fechaVencimiento">
+                      <br>
+                      <b>F. vencimiento:</b> {{ (documento.fechaVencimiento.timestamp * 1000) | date: 'dd/MM/yyyy' }}
+                    </ng-container>
                   </td>
                   <td>
                     <button (click)="onShow(documento)" class="btn btn-xs btn-primary" type="button" *ngIf="documento.estado == 'PENDIENTE'">

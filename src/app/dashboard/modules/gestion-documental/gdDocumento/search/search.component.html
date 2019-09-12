@@ -96,11 +96,15 @@
                                     <b>No. oficio:</b> {{ documento.numeroOficio }}
                                 </td>
                                 <td>
-                                    <b>F. radicado:</b>
-                                    <br> {{ (documento.fechaLlegada.timestamp * 1000) | date: 'dd/MM/yyyy' }}
-                                    <br>
-                                    <b>F. vencimiento:</b>
-                                    <br> {{ documento.fechaVencimiento }}
+                                    <ng-container *ngIf="documento.fechaLlegada">
+                                        <b>F. radicado:</b>
+                                        <br> {{ (documento.fechaLlegada.timestamp * 1000) | date: 'dd/MM/yyyy' }}
+                                    </ng-container>
+                                    <ng-container *ngIf="documento.fechaVencimiento">
+                                        <br>
+                                        <b>F. radicado:</b>
+                                        <br> {{ (documento.fechaVencimiento.timestamp * 1000) | date: 'dd/MM/yyyy' }}
+                                    </ng-container>
                                 </td>
                                 <td>
                                     <button (click)="onShow(documento)" class="btn btn-xs btn-primary" type="button" *ngIf="documento.estado == 'PENDIENTE'">

@@ -1,0 +1,71 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-lg-3">
+            <div class="card">
+                <div class="card-header">
+                    <b class="text-uppercase">Buscar placa</b>
+                </div>
+                <div class="card-body">
+                    <form #formIndex="ngForm">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-xs-12 col-lg-12">
+                                  <label>Fecha inicial</label>
+                                  <input type="date" class="form-control" [(ngModel)]="search.fechaInicial" name="fechaInicial" required>
+                                </div>
+                                <div class="col-xs-12 col-lg-12">
+                                  <label>Fecha final</label>
+                                  <input type="date" class="form-control" [(ngModel)]="search.fechaFinal" name="fechaFinal" required>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer">
+                    <div class="btn-group">
+                        <button (click)="onSearch()" [disabled]="formIndex.invalid" class="btn btn-primary" type="button">
+                            <i class="fa fa-search"></i>
+                            Buscar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-lg-9" *ngIf='formIndex && placas'>
+            <div class="row">
+                <div class="col-md-12">
+                  <div class="card">
+                    <div class="card-header">
+                      <b class="text-uppercase">Placas encontradas</b>
+                    </div>
+                    <div class="card-body">
+                      <table class="table" id="dataTables-example">
+                        <thead>
+                          <tr>
+                            <th>#</th>
+                            <th>Numero</th>
+                            <th>Estado</th>
+                            <th>Tipo</th>
+                            <th>Organismo Transito</th>
+                            <th>Tramite</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr class="odd" *ngFor="let placa of placas; let i = index">
+                            <td>{{ i + 1}}</td>
+                            <td>{{ placa.numero }}</td>
+                            <td>{{ placa.estado }}</td>
+                            <td>{{ placa.tipoVehiculo }}</td>
+                            <td>{{ placa.organismoTransito }}</td>
+                            <td>{{ placa.tramite }}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
