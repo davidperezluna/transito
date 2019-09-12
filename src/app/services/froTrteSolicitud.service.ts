@@ -109,6 +109,12 @@ export class FroTrteSolicitudService {
 			contentType = res.headers.get('Content-type');
 			return new Blob([res.blob()], { type: contentType })
 		});
+	}
 
+	searchByCambioServicio(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = 'data=' + json + '&authorization=' + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + '/search/cambio/servicio', params, { headers: headers }).map(res => res.json());
 	}
 }
