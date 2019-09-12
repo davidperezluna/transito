@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { VhloCfgServicioService } from "../../../../../../services/vhloCfgServicio.service";
+import { FroTrteSolicitudService } from 'app/services/froTrteSolicitud.service';
 import { LoginService } from '../../../../../../services/login.service';
 import { DatePipe, CurrencyPipe } from '@angular/common';
 import swal from 'sweetalert2';
@@ -37,6 +38,7 @@ export class NewRnetDesvinculacionCambioServicioComponent implements OnInit {
 
     constructor(
         private _ServicioService: VhloCfgServicioService,
+        private _FroTrteSolicitudService: FroTrteSolicitudService,
         private _LoginService: LoginService,
     ) { }
 
@@ -46,6 +48,35 @@ export class NewRnetDesvinculacionCambioServicioComponent implements OnInit {
         let token = this._LoginService.getToken();
 
         this.datos.idFuncionario = this.funcionario.id;
+
+        this._FroTrteSolicitudService.searchByCambioServicio({ 'idVehiculo': this.vehiculo.id }, token).subscribe(
+            response => {
+                if(response.code == 200) {
+                    this.tramiteFactura = response.data;
+                    swal({
+                        title: response.title,
+                        text: response.message,
+                        type: response.status,
+                        confirmButtonText: 'Aceptar'
+                    });
+                } else {
+                    swal({
+                        title: response.title,
+                        text: response.message,
+                        type: response.status,
+                        confirmButtonText: 'Aceptar'
+                    });
+                }
+            },
+            error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert('Error en la petición');
+                }
+            }
+        );
 
         if (this.tramitesRealizados.length > 0) {
             this.tramitesRealizados.forEach(tramiteRealizado => {
