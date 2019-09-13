@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers } from '@angular/http';
+import { Http, Headers, ResponseContentType } from '@angular/http';
 import { environment } from 'environments/environment';
 import { LoggerService } from "../logger/services/logger.service";
 import 'rxjs/add/operator/map';
@@ -100,5 +100,36 @@ export class FroTrteSolicitudService {
 		let params = 'data=' + json + '&authorization=' + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + '/search/cambio/servicio', params, { headers: headers }).map(res => res.json());
+	}
+
+	createFile(datos, token): any {
+		let contentType;
+
+		let json = JSON.stringify(datos);
+
+		let formData = new FormData();
+
+		formData.append('data', json);
+		formData.append('authorization', token);
+
+		return this._http.post(this.url + "/create/file", formData, { 'responseType': ResponseContentType.Blob }).map(res => {
+			contentType = res.headers.get('Content-type');
+			return new Blob([res.blob()], { type: contentType })
+		});
+	}
+
+	pdfExpedicionTarjetaOperacion(datos, token): any {
+		let json = JSON.stringify(datos);
+		let params = "data=" + json + "&authorization=" + token;
+
+		let headers = new Headers(
+			{
+				'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+			}
+		);
+
+		return this._http.post(this.url + "/pdf/expedicion/tarjeta/operacion", params, { 'responseType': ResponseContentType.Blob, headers: headers }).map(res => { return new Blob([res.blob()], { type: 'application/pdf' }) }
+		);
+
 	}
 }

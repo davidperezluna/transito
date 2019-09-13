@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PnalCfgCargoComponent } from './pnalCfgCargo.component';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { PnalCfgCargoService } from '../../../../services/pnalCfgCargo.service';
 
@@ -11,8 +10,8 @@ import { TooltipModule } from "ngx-tooltip";
 
 @NgModule({
     imports: [CommonModule, Ng2BootstrapModule.forRoot(), SelectModule, TooltipModule],
-    declarations: [PnalCfgCargoComponent,NewComponent,EditComponent],
-    exports: [PnalCfgCargoComponent, NewComponent,EditComponent],
+    declarations: [NewComponent,EditComponent],
+    exports: [ NewComponent,EditComponent],
     providers:[PnalCfgCargoService]     
 })
 

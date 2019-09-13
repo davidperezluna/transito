@@ -1,20 +1,25 @@
-import { Component, OnInit } from '@angular/core';
-import { CvMedidaCautelarService } from '../../../../services/cvMedidaCautelar.service';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FroTrteSolicitudService } from '../../../../services/froTrteSolicitud.service';
 import { LoginService } from '../../../../services/login.service';
+import swal from 'sweetalert2';
+declare var $: any;
 
 @Component({
   selector: 'app-fro-trte-archivo-plano',
-  templateUrl: './froTrteArchivoPlano.component.html',
-  styleUrls: ['./froTrteArchivoPlano.component.css']
+  templateUrl: './froTrteArchivoPlano.component.html'
 })
 
-export class FroTrteArchivoPlanoComponent implements OnInit {
+export class FroTrteArchivoPlanoComponent implements OnInit, AfterViewInit {
+  public errorMessage;
 
   public tiposReporte = [
-    { value: 1, label: 'RADICACIONES DE CUENTA' },
-    { value: 2, label: 'PRENDAS' },
-    { value: 3, label: 'MEDIDAS CAUTELARES' },
+    { value: '1', label: 'INFORMACIÓN DE VEHICULOS' },
+    { value: '2', label: 'PROPIETARIOS ACTUALES' },
+    { value: '3', label: 'TRAMITES' },
+    { value: '4', label: 'MEDIDA CAUTELAR' },
+    { value: '5', label: 'CANCELACIÓN MATRICULA' },
+    { value: '6', label: 'PRENDAS' },
+    { value: '7', label: 'RADICADOS DE CUENTA' },
   ];
 
   public datos = {
@@ -24,7 +29,6 @@ export class FroTrteArchivoPlanoComponent implements OnInit {
   }
 
   constructor(
-    private _MedidaCautelarService: CvMedidaCautelarService,
     private _FroTrteSolicitudService: FroTrteSolicitudService,
     private _LoginService: LoginService,
   ) {}
@@ -32,24 +36,46 @@ export class FroTrteArchivoPlanoComponent implements OnInit {
   ngOnInit() {
   }
 
+  ngAfterViewInit() {
+    swal.close();
+  }
+
   onEnviar() {
     let token = this._LoginService.getToken();
     let identity = this._LoginService.getIdentity();
 
     if (this.datos.tipoReporte) {
-      switch (this.datos.tipoReporte) {
-        case 1:
+      this._FroTrteSolicitudService.createFile(this.datos, token).subscribe(
+        response => {
+          if (response.type) {
+            var fileURL = URL.createObjectURL(response);
+            window.open(fileURL);
+          } else {
+            swal({
+              title: 'Error!',
+              text: 'No existen registros para la generación del archivo plano en el rango de las fechas estipuladas.',
+              type: 'error',
+              confirmButtonText: 'Aceptar'
+            });
+            error => {
+              this.errorMessage = <any>error;
 
-          break;
+              if (this.errorMessage != null) {
+                console.log(this.errorMessage);
+                alert("Error en la petición");
+              }
+            }
+          }
+        },
+        error => {
+          this.errorMessage = <any>error;
 
-        case 2:
-
-          break;
-        
-        case 3:
-
-          break;
-      }
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
     }else{
 
     }

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FroTramite } from './froTramite.modelo';
 import { LoginService } from '../../../../services/login.service';
 import { FroTramiteService } from "../../../../services/froTramite.service";
 import swal from 'sweetalert2';
-import { FroTramite } from './froTramite.modelo';
 declare var $: any;
 
 @Component({

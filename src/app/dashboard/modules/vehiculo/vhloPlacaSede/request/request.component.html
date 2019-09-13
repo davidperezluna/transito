@@ -19,6 +19,7 @@
                                 <th>Sede Operativa</th>
                                 <th>Placa</th>
                                 <th>Cantidad</th>
+                                <th>Servicio</th>
                                 <th>Factura</th>
                                 <th>Fecha</th>
                                 <th>Acciones</th>
@@ -35,6 +36,7 @@
                                     <br>{{ solicitud.vehiculo.placa.estado }}
                                 </td>
                                 <td>{{ solicitud.foraneas.cantidadPlacas }}</td>
+                                <td>{{ solicitud.vehiculo.servicio.nombre }}</td>
                                 <td>{{ solicitud.tramiteFactura.factura.numero }}</td>
                                 <td>{{ (solicitud.fecha.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td>
                                 <td>

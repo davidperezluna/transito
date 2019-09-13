@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { VhloBuscarComponent } from './vhloBuscar/vhloBuscar.component';
 import { VhloCfgNivelServicioComponent } from './vhloCfgNivelServicio/vhloCfgNivelServicio.component';
 import { VhloCfgPlacaComponent } from './vhloCfgPlaca/vhloCfgPlaca.component';
+import { VhloCfgPlacaReportComponent } from './vhloCfgPlaca/report/report.component';
 import { VhloCfgValorComponent } from './vhloCfgValor/vhloCfgValor.component';
 import { VhloPlacaSedeComponent } from './vhloPlacaSede/vhloPlacaSede.component';
 import { DeliveredComponent } from './vhloPlacaSede/delivered/delivered.component';
@@ -26,6 +27,10 @@ const routes: Routes = [
   {
     path: 'vhloCfgPlaca',
     component: VhloCfgPlacaComponent
+  },
+  {
+    path: 'vhloCfgPlacaReport',
+    component: VhloCfgPlacaReportComponent
   },
   {
     path: 'vhloPlacaSede',

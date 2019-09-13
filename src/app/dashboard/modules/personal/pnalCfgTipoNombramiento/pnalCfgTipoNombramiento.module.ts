@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PnalCfgTipoNombramientoComponent } from './pnalCfgTipoNombramiento.component';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { PnalCfgTipoNombramientoService } from '../../../../services/pnalCfgTipoNombramiento.service';
 
@@ -11,8 +10,8 @@ import { TooltipModule } from "ngx-tooltip";
 
 @NgModule({
     imports: [CommonModule, Ng2BootstrapModule.forRoot(), SelectModule, TooltipModule],
-    declarations: [PnalCfgTipoNombramientoComponent,NewComponent,EditComponent],
-    exports: [PnalCfgTipoNombramientoComponent, NewComponent,EditComponent],
+    declarations: [NewComponent,EditComponent],
+    exports: [ NewComponent,EditComponent],
     providers:[PnalCfgTipoNombramientoService]     
 })
 

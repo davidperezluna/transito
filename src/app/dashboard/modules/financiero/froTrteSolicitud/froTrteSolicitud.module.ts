@@ -12,7 +12,6 @@ import { CfgOrganismoTransitoService } from '../../../../services/cfgOrganismoTr
 import { CfgPaisService } from '../../../../services/cfgPais.service';
 import { FroFacRetefuenteService } from '../../../../services/froFacRetefuente.service';
 import { FroTrteSolicitudService } from '../../../../services/froTrteSolicitud.service';
-import { FroTrteSolicitudReporteService } from '../../../../services/froTrteSolicitudReporte.service';
 import { FroFacTramiteService } from '../../../../services/froFacTramite.service';
 import { FroFacturaService } from '../../../../services/froFactura.service';
 import { ImoInsumoService } from '../../../../services/imoInsumo.service';
@@ -39,9 +38,6 @@ import { UserLicenciaTransitoService } from '../../../../services/userLicenciaTr
 import { UserLcCfgCategoriaService } from '../../../../services/userLcCfgCategoria.service';
 import { UserLcCfgRestriccionService } from '../../usuario/userLcCfgRestriccion/userLcCfgRestriccion.service';
 
-//Reportes de tramite solicitud
-import { ReportesComponent } from "./reportes/reportes.component";
-
 @NgModule({
     imports: [
         CommonModule,
@@ -49,10 +45,8 @@ import { ReportesComponent } from "./reportes/reportes.component";
         SelectModule,
     ],
     declarations: [
-        ReportesComponent,
     ],
     exports: [
-        ReportesComponent,
     ],
     providers: [
         DefaultService,
@@ -64,7 +58,6 @@ import { ReportesComponent } from "./reportes/reportes.component";
         CfgPaisService,
         FroFacRetefuenteService,
         FroTrteSolicitudService,
-        FroTrteSolicitudReporteService,
         FroFacTramiteService,
         FroFacturaService,
         ImoInsumoService,

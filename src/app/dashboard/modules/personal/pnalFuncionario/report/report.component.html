@@ -45,6 +45,11 @@
             <div class="card-body">
                 <table class="table " id="dataTables-example">
                     <thead>
+                        <tr>
+                            <th colspan="8" class="text-center">
+                                <b>{{ date }}</b>
+                            </th>
+                        </tr>
                         <tr class="text-uppercase">
                             <th>#</th>
                             <th>Funcionario</th>
@@ -63,8 +68,8 @@
                             <td><b>{{ horario.funcionario.ciudadano.tipoIdentificacion.nombre }}</b> {{ horario.funcionario.ciudadano.identificacion }}</td>
                             <td>{{ horario.jornada }}</td>
                             <td>{{ (horario.fecha.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td>
-                            <td>{{ (horario.horaInicial.timestamp * 1000) | date: 'h:i:s' }}</td>
-                            <td>{{ (horario.horaFinal.timestamp * 1000) | date: 'h:i:s' }}</td>
+                            <td>{{ (horario.horaInicial.timestamp * 1000) | date: 'hh:mm:ss a' }}</td>
+                            <td>{{ (horario.horaFinal.timestamp * 1000) | date: 'hh:mm:ss a' }}</td>
                             <td>{{ horario.lugar }}</td>
                         </tr>
                     </tbody>

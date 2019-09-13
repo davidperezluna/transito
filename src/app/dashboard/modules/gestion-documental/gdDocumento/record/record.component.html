@@ -18,12 +18,12 @@
                                 <b>{{ documento.folios }}</b>
                             </label>
                         </div>
-                        <div class="col-xs-12 col-lg-3" *ngIf="documento.fechaLLegada">
+                        <div class="col-xs-12 col-lg-3" *ngIf="documento.fechaLlegada">
                             <label>Fecha de radicado
-                                <b>{{ (documento.fechaLLegada.timestamp * 1000) | date: 'dd/MM/yyyy'  }}</b>
+                                <b>{{ (documento.fechaLlegada.timestamp * 1000) | date: 'dd/MM/yyyy'  }}</b>
                             </label>
                         </div>
-                        <div class="col-xs-12 col-lg-3">
+                        <div class="col-xs-12 col-lg-3" *ngIf="documento.fechaVencimiento">
                             <label>Fecha vencimiento
                                 <b>{{ documento.fechaVencimiento }}</b>
                             </label>

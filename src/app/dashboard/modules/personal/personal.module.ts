@@ -10,6 +10,8 @@ import { PnalCfgCdoBodegaComponent } from './pnalCfgCdoBodega/pnalCfgCdoBodega.c
 import { PnalCfgCdoConsecutivoComponent } from './pnalCfgCdoConsecutivo/pnalCfgCdoConsecutivo.component';
 import { PnalFuncionarioComponent } from './pnalFuncionario/pnalFuncionario.component';
 import { PnalTalonarioComponent } from './pnalTalonario/pnalTalonario.component';
+import { PnalCfgTipoNombramientoComponent } from './pnalCfgTipoNombramiento/pnalCfgTipoNombramiento.component';
+import { PnalCfgCargoComponent } from './pnalCfgCargo/pnalCfgCargo.component';
 
 import { PersonalRoutingModule } from './personal-routing.module';
 import { PnalAsignacionModule } from './pnalAsignacion/pnalAsignacion.module';
@@ -17,6 +19,8 @@ import { PnalCfgCdoBodegaModule } from './pnalCfgCdoBodega/pnalCfgCdoBodega.modu
 import { PnalCfgCdoConsecutivoModule } from './pnalCfgCdoConsecutivo/pnalCfgCdoConsecutivo.module';
 import { PnalFuncionarioModule } from './pnalFuncionario/pnalFuncionario.module';
 import { PnalTalonarioModule } from './pnalTalonario/pnalTalonario.module';
+import { PnalCfgTipoNombramientoModule } from './pnalCfgTipoNombramiento/pnalCfgTipoNombramiento.module';
+import { PnalCfgCargoModule } from './pnalCfgCargo/pnalCfgCargo.module';
 
 @NgModule({
   imports: [
@@ -31,6 +35,8 @@ import { PnalTalonarioModule } from './pnalTalonario/pnalTalonario.module';
     PnalCfgCdoConsecutivoModule,
     PnalFuncionarioModule,
     PnalTalonarioModule,
+    PnalCfgTipoNombramientoModule,
+    PnalCfgCargoModule
   ],
   declarations: [
     PnalAsignacionComponent,
@@ -38,6 +44,8 @@ import { PnalTalonarioModule } from './pnalTalonario/pnalTalonario.module';
     PnalCfgCdoConsecutivoComponent,
     PnalFuncionarioComponent,
     PnalTalonarioComponent,
+    PnalCfgTipoNombramientoComponent,
+    PnalCfgCargoComponent
   ]
 })
 export class PersonalModule { }

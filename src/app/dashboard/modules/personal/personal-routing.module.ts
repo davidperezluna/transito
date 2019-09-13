@@ -6,6 +6,8 @@ import { PnalCfgCdoBodegaComponent } from './pnalCfgCdoBodega/pnalCfgCdoBodega.c
 import { PnalCfgCdoConsecutivoComponent } from './pnalCfgCdoConsecutivo/pnalCfgCdoConsecutivo.component';
 import { PnalFuncionarioComponent } from './pnalFuncionario/pnalFuncionario.component';
 import { PnalTalonarioComponent } from './pnalTalonario/pnalTalonario.component';
+import { PnalCfgTipoNombramientoComponent } from './pnalCfgTipoNombramiento/pnalCfgTipoNombramiento.component';
+import { PnalCfgCargoComponent } from './pnalCfgCargo/pnalCfgCargo.component';
 
 const routes: Routes = [
   {
@@ -27,6 +29,14 @@ const routes: Routes = [
   {
     path: 'pnalTalonario',
     component: PnalTalonarioComponent
+  },
+  {
+    path: 'pnalCfgTipoNombramiento',
+    component: PnalCfgTipoNombramientoComponent
+  },
+  {
+    path: 'pnalCfgCargo',
+    component: PnalCfgCargoComponent
   },
 ];
 

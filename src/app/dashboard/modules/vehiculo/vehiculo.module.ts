@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { VhloBuscarModule } from './vhloBuscar/vhloBuscar.module';
 import { VhloCfgNivelServicioComponent } from './vhloCfgNivelServicio/vhloCfgNivelServicio.component';
 import { VhloCfgPlacaComponent } from './vhloCfgPlaca/vhloCfgPlaca.component';
+import { VhloCfgPlacaReportComponent } from './vhloCfgPlaca/report/report.component';
 import { VhloCfgValorComponent } from './vhloCfgValor/vhloCfgValor.component';
 import { VhloPlacaSedeComponent } from './vhloPlacaSede/vhloPlacaSede.component';
 import { VhloTpAsignacionComponent } from './vhloTpAsignacion/vhloTpAsignacion.component';
@@ -56,6 +57,7 @@ import { VhloRnaPreasignacionPlacaModule } from './vhloRnaPreasignacionPlaca/vhl
     VhloBuscarComponent,
     VhloCfgNivelServicioComponent,
     VhloCfgPlacaComponent,
+    VhloCfgPlacaReportComponent,
     VhloCfgValorComponent,
     VhloPlacaSedeComponent,
     VhloTpAsignacionComponent,

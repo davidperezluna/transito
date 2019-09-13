@@ -22,6 +22,8 @@ export class NewRnetDesvinculacionCambioServicioComponent implements OnInit {
     public tarjetaOperacion;
     public servicios;
 
+    public mostrarFormulario = true;
+
     public realizado: any = false;
     public tramiteSolicitud: any = null;
 
@@ -43,8 +45,6 @@ export class NewRnetDesvinculacionCambioServicioComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        console.log(this.vehiculo);
-
         let token = this._LoginService.getToken();
 
         this.datos.idFuncionario = this.funcionario.id;
@@ -52,7 +52,9 @@ export class NewRnetDesvinculacionCambioServicioComponent implements OnInit {
         this._FroTrteSolicitudService.searchByCambioServicio({ 'idVehiculo': this.vehiculo.id }, token).subscribe(
             response => {
                 if(response.code == 200) {
-                    this.tramiteFactura = response.data;
+                    this.mostrarFormulario = false;
+                    this.onEnviar();
+
                     swal({
                         title: response.title,
                         text: response.message,
@@ -119,7 +121,7 @@ export class NewRnetDesvinculacionCambioServicioComponent implements OnInit {
 
 
     onEnviar() {
-        this.datos.campos = ['desvinculacionCambioServicio'];
+        /* this.datos.campos = ['desvinculacionCambioServicio']; */
         this.datos.idTramiteFactura = this.tramiteFactura.id;
         this.datos.idVehiculo = this.vehiculo.id;
 

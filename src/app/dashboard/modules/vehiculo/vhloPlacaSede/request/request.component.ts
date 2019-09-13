@@ -97,7 +97,7 @@ export class RequestComponent implements OnInit {
       retrieve: true,
       paging: false,
       responsive: true,
-      pageLength: 8,
+      pageLength: 10,
       sPaginationType: 'full_numbers',
       oLanguage: {
         oPaginate: {
