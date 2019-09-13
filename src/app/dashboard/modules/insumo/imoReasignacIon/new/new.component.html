@@ -42,10 +42,10 @@
                                 </ng-select>
                             </div>
     
-                            <!-- <div class="col-lg-4 col-md-4"> 
+                            <div class="col-lg-4 col-md-4"> 
                                 <label>Cantidad*</label>
-                                <input class="form-control" (blur)="isExistencia()" [(ngModel)]="datosAsignacion.cantidad" name="cantidad" placeholder="" type="text" required>
-                            </div>  -->
+                                <input class="form-control" [(ngModel)]="datosAsignacion.cantidad" name="cantidad" placeholder="" type="text" required>
+                            </div> 
                         </div> 
                         </div>    
                     </div>
@@ -56,7 +56,7 @@
                                 Cancelar
                             </button>
                             <!-- <button (click)="onEnviar()" [disabled]="isCantidad" class="btn btn-primary pull-right" type="button">Enviar</button> -->
-                            <button (click)="onSearchLote()" [disabled]="newForm.invalid" class="btn btn-primary" type="button">
+                            <button (click)="isExistencia()" [disabled]="newForm.invalid" class="btn btn-primary" type="button">
                                 <i class="fa fa-search"></i>
                                 Buscar
                             </button>
@@ -66,54 +66,35 @@
             </div>
         </div>
 
-        <div class="card" *ngIf='lotes'>
+        <div class="card" *ngIf='insumos'>
             <div class="card-body">
-                <div class="tab-pane active col-lg-12 col-md-12" id="lotes" role="tabpanel" >
+                <div class="tab-pane active col-lg-12 col-md-12" id="insumos" role="tabpanel" >
                     <br>
                     <br>
                     <table class="table" id="dataTables-example">
                         <thead>
                         <tr>
-                            <th>Detalles</th>
-                            <th>Acciones</th> 
+                            <th>Tipo</th>
+                            <th>Número</th>
+                            <th>Estado</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr class="odd" *ngFor="let lote of lotes; let i = index">
-                            <td >
-                                <b>Proveedor</b>
-                                {{lote.empresa.nombre}}
-                                <br>
-                                <b>Organismo de transito</b>
-                                {{lote.sedeOperativa.nombre}}
-                                <br>
-                                <b>Tipo</b>
-                                {{lote.tipoInsumo.nombre}}
-                                <br> 
-                                <b>Inicio</b>
-                                {{lote.rangoInicio}} 
-                                <b>Fin</b>
-                                {{lote.rangoFin}}
-                                <br>
-                                <b>Cantidad</b>
-                                {{lote.cantidad}}
-                                <br>
-                                <b>Referencia</b>
-                                {{lote.referencia}}
-                                <br>
-                                <b>Fecha</b>
-                                {{ (lote.fecha.timestamp * 1000) | date: 'dd/MM/yyyy' }}
-                            </td>
-                            <td>
-                                <button (click)="onAsignarLote(lote)" class="btn btn-success" type="button">
-                                    <i class="fa fa-exchange"></i>
-                                    Reasignar
-                                </button> 
-                            </td>
+                        <tr class="odd" *ngFor="let insumo of insumos; let i = index">
+                            <td >{{ insumo.tipo.nombre }}</td>
+                            <td >{{ insumo.numero }}</td>
+                            <td >{{ insumo.estado }}</td>
                         </tr>
                         </tbody>
                     </table>
                 </div>
+                <div class="card-footer">
+                    <div class="btn-group">
+                        <button (click)="onEnviar()" class="btn btn-success" type="button">
+                            Enviar
+                        </button>
+                    </div>
+                </div> 
             </div>
         </div>       
     </div>
