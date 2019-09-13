@@ -117,4 +117,19 @@ export class FroTrteSolicitudService {
 			return new Blob([res.blob()], { type: contentType })
 		});
 	}
+
+	pdfExpedicionTarjetaOperacion(datos, token): any {
+		let json = JSON.stringify(datos);
+		let params = "data=" + json + "&authorization=" + token;
+
+		let headers = new Headers(
+			{
+				'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+			}
+		);
+
+		return this._http.post(this.url + "/pdf/expedicion/tarjeta/operacion", params, { 'responseType': ResponseContentType.Blob, headers: headers }).map(res => { return new Blob([res.blob()], { type: 'application/pdf' }) }
+		);
+
+	}
 }

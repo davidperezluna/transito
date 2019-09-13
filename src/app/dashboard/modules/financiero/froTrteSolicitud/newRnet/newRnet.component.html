@@ -55,6 +55,9 @@
                                     class="btn btn-primary" target="_blank">
                                     <i class="fa fa-file-pdf-o"></i>RESOLUCIÓN CONCEPTO FAVORABLE
                                 </a>
+                                <button (click)="onImprimirTarjetaOperacion(tramiteSolicitud.tramitesRealizados[0].foraneas.numeroTarjetaOperacion)" *ngIf="tramiteFactura.precio.tramite.id == 37" class="btn btn-default" type="button">
+                                    IMPRIMIR TARJETA OPERACIÓN
+                                </button>
                             </div>
                         </div>
                         <div class="col-xs-12 col-lg-12">

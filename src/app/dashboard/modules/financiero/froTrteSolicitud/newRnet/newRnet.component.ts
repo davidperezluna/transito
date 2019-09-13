@@ -702,4 +702,32 @@ export class NewRnetComponent implements OnInit {
         })
     }
 
+    onImprimirTarjetaOperacion(numeroTarjetaOperacion) {
+        let token = this._LoginService.getToken();
+        
+        this._TramiteSolicitudService.pdfExpedicionTarjetaOperacion({'numeroTarjetaOperacion': numeroTarjetaOperacion }, token).subscribe(
+            response => {
+                if (response.type) {
+                    var fileURL = URL.createObjectURL(response);
+                    window.open(fileURL);
+                } else {
+                    swal({
+                        title: response.title,
+                        text: response.message,
+                        type: response.status,
+                        confirmButtonText: 'Aceptar'
+                    });
+                    error => {
+                        this.errorMessage = <any>error;
+
+                        if (this.errorMessage != null) {
+                            console.log(this.errorMessage);
+                            alert("Error en la petición");
+                        }
+                    }
+                }
+            }
+        );
+    }
+
 }
