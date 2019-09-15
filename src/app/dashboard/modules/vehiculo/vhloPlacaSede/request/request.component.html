@@ -18,10 +18,7 @@
                                 <th>#</th>
                                 <th>Sede Operativa</th>
                                 <th>Placa</th>
-                                <th>Cantidad</th>
-                                <th>Servicio</th>
-                                <th>Factura</th>
-                                <th>Fecha</th>
+                                <th>Detalles</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -33,12 +30,18 @@
                                     <b>Numero:</b>
                                     <br>{{ solicitud.vehiculo.placa.numero }}<br>
                                     <b>Estado:</b>
-                                    <br>{{ solicitud.vehiculo.placa.estado }}
+                                    <br>{{ solicitud.vehiculo.placa.estado }}<br>
+                                    <b>Cantidad:</b>
+                                    <br>{{ solicitud.foraneas.cantidadPlacas }}
                                 </td>
-                                <td>{{ solicitud.foraneas.cantidadPlacas }}</td>
-                                <td>{{ solicitud.vehiculo.servicio.nombre }}</td>
-                                <td>{{ solicitud.tramiteFactura.factura.numero }}</td>
-                                <td>{{ (solicitud.fecha.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td>
+                                <td>
+                                    <b>Servicio:</b>
+                                    <br>{{ solicitud.vehiculo.servicio.nombre }}<br>
+                                    <b>No. Factura:</b>
+                                    <br>{{ solicitud.tramiteFactura.factura.numero }}<br>
+                                    <b>Fecha de solicitud:</b>
+                                    <br>{{ (solicitud.fecha.timestamp * 1000) | date: 'dd/MM/yyyy' }}
+                                </td>
                                 <td>
                                     <div class="btn-group">
                                         <button (click)="onMake(solicitud.vehiculo.placa.id)" class="btn btn-xs btn-success" type="button">

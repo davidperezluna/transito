@@ -51,19 +51,19 @@
                                 {{ vehiculo.organismoTransitoRadicado?.nombre }}
                             </div>
         
-                            <div class="col-xs-12 col-lg-6" *ngIf="vehiculo.modalidadTransporte.id == 1 || vehiculo.modalidadTransporte.id == 3">
+                            <div class="col-xs-12 col-lg-6" *ngIf="vehiculo.servicio == 2">
                                 <b>Tipo documento empresa afiliadora</b>
                                 <br>
                                 {{ vehiculo.empresa?.tipoIdentificacion.nombre }}
                             </div>
         
-                            <div class="col-xs-12 col-lg-6" *ngIf="vehiculo.modalidadTransporte.id == 1 || vehiculo.modalidadTransporte.id == 3">
+                            <div class="col-xs-12 col-lg-6" *ngIf="vehiculo.servicio == 2">
                                 <b>Nro. documento empresa afiliadora</b>
                                 <br>
                                 {{ vehiculo.empresa.nit }}
                             </div>    
                             
-                            <div class="col-xs-12 col-lg-12" *ngIf="vehiculo.modalidadTransporte.id == 1 || vehiculo.modalidadTransporte.id == 3">
+                            <div class="col-xs-12 col-lg-12" *ngIf="vehiculo.servicio == 2">
                                 <b>Empresa afiliadora</b>
                                 <br>
                                 {{ vehiculo.empresa.nombre }}

@@ -17,7 +17,6 @@ export class ReportComponent implements OnInit {
     public errorMessage;
 
     public horarios: any;
-    public date:any;
 
     public formSearch: any;
     public formIndex: any;
@@ -33,9 +32,9 @@ export class ReportComponent implements OnInit {
 		private _HorarioService: PnalHorarioService,
 		private _LoginService: LoginService,
     ){
-      this.date = new Date();
+      /*this.date = new Date();
       var datePiper = new DatePipe(this.date);
-      this.date = datePiper.transform(this.date,'yyyy-MM-dd');
+      this.date = datePiper.transform(this.date,'yyyy-MM-dd');*/
     }
      
   ngOnInit() {
@@ -55,6 +54,14 @@ export class ReportComponent implements OnInit {
   }
   
   onInitTable(){
+    let date;
+
+    if (this.search.fechaInicial == this.search.fechaInicial) {
+      date = this.search.fechaInicial;
+    } else {
+      date = this.search.fechaInicial+ ' - ' +this.search.fechaFinal;
+    }
+
     this.table = $('#dataTables-example').DataTable({
       responsive: true,
       retrieve: true,
@@ -63,7 +70,12 @@ export class ReportComponent implements OnInit {
       sPaginationType: 'full_numbers',
       dom: 'Bfrtip',
       buttons: [
-        'pdf'
+        {
+          extend: 'pdfHtml5',
+          message: 'SUBDETRA'+
+          '                                    ' +
+          date
+        }
       ],
       oLanguage: {
         oPaginate: {
@@ -75,6 +87,7 @@ export class ReportComponent implements OnInit {
       }
     });
   }
+  
 
   onSearch(){
     swal({

@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { VhloPlacaSede } from './vhloPlacaSede.modelo';
 import { CfgOrganismoTransitoService } from '../../../../services/cfgOrganismoTransito.service';
+import { VhloCfgPlacaService } from '../../../../services/vhloCfgPlaca.service';
 import { VhloPlacaSedeService } from '../../../../services/vhloPlacaSede.service';
 import { LoginService } from '../../../../services/login.service';
 import swal from 'sweetalert2';
@@ -18,12 +19,14 @@ export class VhloPlacaSedeComponent implements OnInit {
     public asignaciones: any;
     public organismosTransito: any;
     public organismoTransito: any = null;
+    public placas: any = null;
 
     public formSearch: any;
     public formNew: any;
     public formEdit: any;
     public formIndex: any;
     public formRequest: any;
+    public formList: any;
 
     public table: any = null;
     public asignacion: VhloPlacaSede;
@@ -35,6 +38,7 @@ export class VhloPlacaSedeComponent implements OnInit {
     constructor(
         private _OrganismoTransitoService: CfgOrganismoTransitoService,
         private _PlacaSedeService: VhloPlacaSedeService,
+        private _PlacaService: VhloCfgPlacaService,
         private _LoginService: LoginService,
     ) { }
 
@@ -75,6 +79,7 @@ export class VhloPlacaSedeComponent implements OnInit {
         this.formEdit = false;
         this.formIndex = false;
         this.formRequest = false;
+        this.formList = false;
     }
 
     onChangedOrganismoTransito(e) {
@@ -141,7 +146,7 @@ export class VhloPlacaSedeComponent implements OnInit {
                                 });
                                 
                                 let timeoutId = setTimeout(() => {
-                                    this.onInitTable();
+                                    this.onInitTable('dataTables-asignacion');
                                 }, 100);
                             } else {
                                 this.asignaciones = null;
@@ -186,8 +191,8 @@ export class VhloPlacaSedeComponent implements OnInit {
         );
     }
 
-    onInitTable() {
-        this.table = $('#dataTables-example').DataTable({
+    onInitTable(table:any) {
+        this.table = $(table).DataTable({
             responsive: true,
             pageLength: 8,
             sPaginationType: 'full_numbers',
@@ -234,6 +239,7 @@ export class VhloPlacaSedeComponent implements OnInit {
         }).then((result) => {
             if (result.value) {
                 let token = this._LoginService.getToken();
+
                 this._PlacaSedeService.delete({ 'id': id }, token).subscribe(
                     response => {
                         swal({
@@ -242,7 +248,7 @@ export class VhloPlacaSedeComponent implements OnInit {
                             type: response.status,
                             confirmButtonColor: '#15d4be',
                         });
-                        this.table.destroy();
+
                         this.ngOnInit();
                     },
                     error => {
@@ -258,6 +264,97 @@ export class VhloPlacaSedeComponent implements OnInit {
         });
     }
     
+    onList(id: any) {
+        swal({
+            title: 'Buscando registros!',
+            text: 'Solo tardara unos segundos por favor espere.',
+            onOpen: () => {
+                swal.showLoading()
+            }
+        });
+
+        let token = this._LoginService.getToken();
+
+        this._PlacaService.searchByAsignacion({ 'idAsignacion': id }, token).subscribe(
+            response => {
+                if (response.code == 200) {
+                    this.placas = response.data;
+                    this.onInitForms();
+                    this.formSearch = true;
+                    
+                    swal({
+                        title: response.title,
+                        text: response.message,
+                        type: response.status,
+                        confirmButtonText: 'Aceptar',
+                    });
+
+                    let timeoutId = setTimeout(() => {
+                        this.onInitTable('dataTables-placas');
+                        this.formList = true;
+                        swal.close();
+                    }, 100);
+                }else{
+                    this.placas = null;
+                    this.formList = false;
+
+                    swal({
+                        title: response.title,
+                        text: response.message,
+                        type: response.status,
+                        confirmButtonText: 'Aceptar',
+                    });
+                }
+            },
+            error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert("Error en la petición");
+                }
+            }
+        );
+    }
+
+    onCancel(id: any) {
+        swal({
+            title: '¿Estás seguro?',
+            text: "¡La placa pasara a estado CANCELADA!",
+            type: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#15d4be',
+            cancelButtonColor: '#ff6262',
+            confirmButtonText: 'Confirmar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.value) {
+                let token = this._LoginService.getToken();
+
+                this._PlacaService.state({ 'id': id, 'estado': 'CANCELADA' }, token).subscribe(
+                    response => {
+                        swal({
+                            title: response.title,
+                            text: response.message,
+                            type: response.status,
+                            confirmButtonColor: '#15d4be',
+                        });
+
+                        this.ngOnInit();
+                    },
+                    error => {
+                        this.errorMessage = <any>error;
+
+                        if (this.errorMessage != null) {
+                            console.log(this.errorMessage);
+                            alert("Error en la petición");
+                        }
+                    }
+                );
+            }
+        });
+    }
+
     onEdit(asignacion: any) {
         this.asignacion = asignacion;
         this.formEdit = true;

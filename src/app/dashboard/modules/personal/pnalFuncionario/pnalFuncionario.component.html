@@ -55,19 +55,21 @@
           </form>
         </div>
         <div class="card-footer">
-          <button (click)="onSearch()" (ready)="ready($event)" [disabled]="formSearch.invalid" class="btn btn-primary"
-            type="button">
-            <i class="fa fa-search"></i>
-            Buscar
-          </button>
-          <button (click)="onReport()" (ready)="ready($event)" class="btn btn-info" type="button">
-            <i class="far fa-calendar-alt"></i>
-            Minutas
-          </button>
-          <button (click)="onNew()" (ready)="ready($event)" class="btn btn-default" type="button">
-            <i class="fa fa-plus"></i>
-            Nuevo
-          </button>
+          <div class="btn-group">
+            <button (click)="onSearch()" (ready)="ready($event)" [disabled]="formSearch.invalid" class="btn btn-primary"
+              type="button">
+              <i class="fa fa-search"></i>
+              Buscar
+            </button>
+            <button (click)="onReport()" (ready)="ready($event)" class="btn btn-info" type="button">
+              <i class="fa fa-calendar-alt"></i>
+              Minutas
+            </button>
+            <button (click)="onNew()" (ready)="ready($event)" class="btn btn-default" type="button">
+              <i class="fa fa-plus"></i>
+              Nuevo
+            </button>
+          </div>
         </div>
       </div>
     </div>

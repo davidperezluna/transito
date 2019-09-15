@@ -58,7 +58,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <table class="table " id="dataTables-example">
+                    <table class="table " id="dataTables-asignacion">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -85,11 +85,57 @@
                                 </td>
                                 <td>
                                     <div class="btn-group">
+                                        <button (click)="onList(asignacion.id)" class="btn btn-xs btn-primary" type="button">
+                                            <i class="fa fa-check"></i>
+                                        </button>
                                         <button (click)="onEdit(asignacion)" class="btn btn-xs btn-info" type="button">
                                             <i class="fa fa-pencil"></i>
                                         </button>
                                         <button (click)="onDelete(asignacion.id)" class="btn btn-xs btn-danger" type="button">
                                             <i class="fa fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- /.table-responsive -->
+                </div>
+            </div>
+        </div><!-- .col -->
+
+        <div class="col-xs-12 col-lg-8" *ngIf='formList && placas'>
+            <!-- .col -->
+            <div class="card">
+                <div class="card-header">
+                    <b class="text-uppercase">Placas disponibles</b>
+                    <div class="btn-group pull-right">
+                        <button (click)="onNew()" class="btn btn-default">
+                            <i class="fa fa-plus"></i>
+                            <span class="text">Nuevo</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table class="table" id="dataTables-placas">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Placa</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="odd" *ngFor="let placa of placas; let i = index">
+                                <td>{{ i + 1 }}</td>
+                                <td>{{ placa.numero }}</td>
+                                <td>{{ placa.estado }}</td>
+                                <td>
+                                    <div class="btn-group">
+                                        <button (click)="onCancel(placa.id)" class="btn btn-xs btn-danger" type="button">
+                                            <i class="fa fa-ban"></i>
+                                            Cancelar
                                         </button>
                                     </div>
                                 </td>

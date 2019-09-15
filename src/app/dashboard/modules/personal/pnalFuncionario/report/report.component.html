@@ -45,31 +45,32 @@
             <div class="card-body">
                 <table class="table " id="dataTables-example">
                     <thead>
-                        <tr>
-                            <th colspan="8" class="text-center">
-                                <b>{{ date }}</b>
-                            </th>
-                        </tr>
                         <tr class="text-uppercase">
                             <th>#</th>
                             <th>Funcionario</th>
-                            <th>Identificación</th>
-                            <th>Jornada</th>
-                            <th>Fecha</th>
-                            <th>Hora Inicial</th>
-                            <th>Hora Final</th>
+                            <th>Detalles</th>
                             <th>Lugar</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr class="odd" *ngFor="let horario of horarios; let i = index">
                             <td>{{ i + 1 }}</td>
-                            <td>{{ horario.funcionario.ciudadano.primerNombre }} {{ horario.funcionario.ciudadano.primerApellido }}</td>
-                            <td><b>{{ horario.funcionario.ciudadano.tipoIdentificacion.nombre }}</b> {{ horario.funcionario.ciudadano.identificacion }}</td>
-                            <td>{{ horario.jornada }}</td>
-                            <td>{{ (horario.fecha.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td>
-                            <td>{{ (horario.horaInicial.timestamp * 1000) | date: 'hh:mm:ss a' }}</td>
-                            <td>{{ (horario.horaFinal.timestamp * 1000) | date: 'hh:mm:ss a' }}</td>
+                            <td>
+                                {{ horario.funcionario.ciudadano.primerNombre }} {{ horario.funcionario.ciudadano.primerApellido }}
+                                <b>Identificación</b>
+                                <br>
+                                <b>{{ horario.funcionario.ciudadano.tipoIdentificacion.sigla }}</b> {{ horario.funcionario.ciudadano.identificacion }}
+                            </td>
+                            <td>
+                                <b>Jornada</b>
+                                <br>{{ horario.jornada }}<br>
+                                <b>Fecha</b>
+                                <br>{{ (horario.fecha.timestamp * 1000) | date: 'dd/MM/yyyy' }}<br>
+                                <b>Hora Inicial</b>
+                                <br>{{ (horario.horaInicial.timestamp * 1000) | date: 'hh:mm:ss a' }}<br>
+                                <b>Hora Final</b>
+                                <br>{{ (horario.horaFinal.timestamp * 1000) | date: 'hh:mm:ss a' }}
+                            </td>
                             <td>{{ horario.lugar }}</td>
                         </tr>
                     </tbody>

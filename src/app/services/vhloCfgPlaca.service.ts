@@ -106,6 +106,13 @@ export class VhloCfgPlacaService {
         return this._http.post(this.url + '/search/organismotransito/estado', params, { headers: headers }).map(res => res.json());
     }
 
+    searchByAsignacion(datos, token) {
+        let json = JSON.stringify(datos);
+        let params = "data=" + json + "&authorization=" + token;
+        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+        return this._http.post(this.url + '/search/asignacion', params, { headers: headers }).map(res => res.json());
+    }
+
     reportByTramites(datos, token) {
         let json = JSON.stringify(datos);
         let params = "data=" + json + "&authorization=" + token;
