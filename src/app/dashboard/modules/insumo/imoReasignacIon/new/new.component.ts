@@ -24,7 +24,7 @@ public sedeDestinoSelected:any;
 public sustratos:any;
 public insumoSelected:any;
 public numero:any;
-public lotes:any;
+public insumos:any;
 public table:any;
 public isCantidad=true;
 public datosAsignacion = {
@@ -115,16 +115,23 @@ constructor(
     this.datosAsignacion.sedeDestino = this.sedeDestinoSelected;
     this.datosAsignacion.sedeOrigen = this.sedeOrigenSelected;
     this.datosAsignacion.casoInsumo = this.insumoSelected;
+    if (this.table) {
+      this.table.destroy()
+    }
     this._ImoInsumoService.isExistencia(this.datosAsignacion).subscribe(
 			response => {
         if(response.code == 200){
           this.isCantidad = false;
+          this.insumos = response.data;
           swal({
             title: 'Registro encontrado!',
             type: 'success',
             text: response.message,
             confirmButtonText: 'Aceptar'
           })
+          setTimeout(() => {
+            this.onInitTable();
+          });
         }else{
           this.isCantidad = true;
           swal({
@@ -166,14 +173,13 @@ constructor(
       this._ImoLoteService.showReasignacion(datos,token).subscribe( 
         response => {
           if (response.code == 200) {
-            this.lotes = response.data;
+            this.insumos = response.data;
             swal.close()
-
             setTimeout(() => {
               this.onInitTable();
             });
           }else{
-            this.lotes = null;
+            this.insumos = null;
 
             swal({
               title: 'Error!',
@@ -210,7 +216,7 @@ constructor(
   this.table = $('#dataTables-example').DataTable();
   }
 
-  onAsignarLote(lote){
+  onEnviar(){
     swal({
       title: 'Enviando datos!',
       text: 'Solo tardara unos segundos por favor espere.',
@@ -218,16 +224,17 @@ constructor(
         swal.showLoading()
       }
     });
+    console.log(1);
 
     let datos = {
-      'lote': lote,
+      'insumos': this.insumos,
       'sedeOperativaDestino': this.sedeDestinoSelected
     }
     
     this._ImoInsumoService.reasignacionSustrato(datos).subscribe( 
       response => {
         if (response.code == 200) {
-          this.lotes = null;
+          this.insumos = null;
 
           swal({
             title: 'Perfecto!',
