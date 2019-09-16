@@ -77,34 +77,6 @@ constructor(
     this.ready.emit(true);
   }
 
-  onEnviar(){
-    this.datosAsignacion.sedeDestino = this.sedeDestinoSelected;
-    this.datosAsignacion.sedeOrigen = this.sedeOrigenSelected;
-    this.datosAsignacion.casoInsumo = this.insumoSelected;
-
-		this._ImoInsumoService.reasignacionSustrato(this.datosAsignacion).subscribe(
-			response => {
-        if(response.code == 200){
-          this.ready.emit(true);
-          swal({
-            title: 'Perfecto!',
-            text: response.message,
-            type: 'success',
-            confirmButtonText: 'Aceptar'
-          });
-        }
-			error => {
-					this.errorMessage = <any>error;
-
-					if(this.errorMessage != null){
-						console.log(this.errorMessage);
-						alert("Error en la petición");
-					}
-				}
-
-		}); 
-  }
-
   changedSedeOperativa(e){
     if (e) {
 
@@ -215,7 +187,7 @@ constructor(
     });
   }
 
-  /*onEnviar(){
+  onEnviar(){
     swal({
       title: 'Enviando datos!',
       text: 'Solo tardara unos segundos por favor espere.',
@@ -262,5 +234,5 @@ constructor(
         }
       }
     );
-  }*/
+  }
 }
