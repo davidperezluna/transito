@@ -198,7 +198,9 @@ constructor(
     console.log(1);
 
     let datos = {
-      'insumos': this.insumos,
+      'insumos': this.insumos, 
+      'sedeOperativaOrigen': this.sedeOrigenSelected,
+      'tipoInsumo': this.insumoSelected,   
       'sedeOperativaDestino': this.sedeDestinoSelected
     }
     
