@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, AfterViewInit, EventEmitter } from '@angular/core';
 import { PnalCfgTipoNombramientoService } from '../../../../services/pnalCfgTipoNombramiento.service';
 import { LoginService } from '../../../../services/login.service';
 import { PnalCfgTipoNombramiento } from './pnalCfgTipoNombramiento.modelo';
@@ -9,7 +9,7 @@ declare var $: any;
   selector: 'app-index',
   templateUrl: './pnalCfgTipoNombramiento.component.html'
 })
-export class PnalCfgTipoNombramientoComponent implements OnInit {
+export class PnalCfgTipoNombramientoComponent implements OnInit, AfterViewInit {
   public errorMessage;
 	public id;
 
@@ -25,42 +25,40 @@ export class PnalCfgTipoNombramientoComponent implements OnInit {
 		private _loginService: LoginService,
     ){}
     
-  ngOnInit() {
-    swal({
-      title: 'Cargando Tabla!',
-      text: 'Solo tardara unos segundos por favor espere.',
-      timer: 1500,
-      onOpen: () => {
-        swal.showLoading()
-      }
-    }).then((result) => {
-      if (
-        // Read more about handling dismissals
-        result.dismiss === swal.DismissReason.timer
-      ) {
-      }
-    })
+    ngOnInit() {
+      swal({
+        title: 'Cargando Tabla!',
+        text: 'Solo tardara unos segundos por favor espere.',
+        onOpen: () => {
+          swal.showLoading()
+        }
+      });
 
-    this._TipoNombramientoService.index().subscribe(
-				response => {
+      this._TipoNombramientoService.index().subscribe(
+        response => {
           this.tiposNombramiento = response.data;
-          let timeoutId = setTimeout(() => {  
-            this.iniciarTabla();
-          }, 100);
-				}, 
-				error => {
-					this.errorMessage = <any>error;
 
-					if(this.errorMessage != null){
-						console.log(this.errorMessage);
-						alert("Error en la petición");
-					}
-				}
+          let timeoutId = setTimeout(() => {  
+            this.onInitTable();
+          }, 100);
+        }, 
+        error => {
+          this.errorMessage = <any>error;
+
+          if(this.errorMessage != null){
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
       );
+    }
+
+  ngAfterViewInit(){
+    swal.close();
   }
 
-  iniciarTabla(){
-    $('#dataTables-example').DataTable({
+  onInitTable(){
+    this.table = $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,
       sPaginationType: 'full_numbers',
@@ -72,8 +70,7 @@ export class PnalCfgTipoNombramientoComponent implements OnInit {
           sLast: '<i class="fa fa-step-forward"></i>'
         }
       }
-   });
-   this.table = $('#dataTables-example').DataTable();
+    });
   }
   
   onNew(){

@@ -200,7 +200,7 @@ constructor(
   }
 
   onInitTable(){
-    $('#dataTables-example').DataTable({
+    this.table = $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,
       sPaginationType: 'full_numbers',
@@ -212,11 +212,10 @@ constructor(
           sLast: '>>'
         }
       }
-  });
-  this.table = $('#dataTables-example').DataTable();
+    });
   }
 
-  onEnviar(){
+  /*onEnviar(){
     swal({
       title: 'Enviando datos!',
       text: 'Solo tardara unos segundos por favor espere.',
@@ -263,5 +262,5 @@ constructor(
         }
       }
     );
-  }
+  }*/
 }
