@@ -57,7 +57,7 @@
                 <div class="row">
                     <div class="col-xs-12 col-lg-6">
                         <label>Adjunto </label>
-                        <input type="file"  class="form-control" [(ngModel)]="fileSelected" (change)="onFileChange($event)" placeholder="Adjuntar" accept=".pdf,.doc,.docx" value="20000" multiple="false" name="file">
+                        <input type="file"  class="form-control" (change)="onFileChange($event)" placeholder="Adjuntar" accept=".pdf,.doc,.docx" value="20000" multiple="false" name="file">
                     </div>
                 </div>
             </div>

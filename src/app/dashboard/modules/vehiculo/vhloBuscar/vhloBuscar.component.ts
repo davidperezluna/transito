@@ -1,4 +1,4 @@
-import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { VhloVehiculoService } from '../../../../services/vhloVehiculo.service';
 import { LoginService } from '../../../../services/login.service';
 import swal from 'sweetalert2';
@@ -9,7 +9,7 @@ declare var $: any;
   templateUrl: './vhloBuscar.component.html'
 })
 
-export class VhloBuscarComponent implements OnInit {
+export class VhloBuscarComponent implements OnInit, AfterViewInit {
   public errorMessage;
   
   public parametro:any;
@@ -59,12 +59,9 @@ constructor(
 
           let timeoutId = setTimeout(() => {
             this.onInitTable();
-          }, 100);
-            
-          swal.close();                  
+          }, 100);                 
         } else {
-          this.vehiculos = null;
-          swal.close();                  
+          this.vehiculos = null;               
         }
         error => {
             this.errorMessage = <any>error;
@@ -75,6 +72,10 @@ constructor(
         }
       }
     );
+  }
+
+  ngAfterViewInit(){
+    swal.close();
   }
 
   onInitTable(){

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
+import { SelectModule } from 'angular2-select';
 
 import { SvSenialInventarioService } from '../../../../services/svSenialInventario.service';
 import { SvSenialBodegaService } from '../../../../services/svSenialBodega.service';
@@ -10,7 +11,7 @@ import { NewSenialBodegaComponent } from './newSenialBodega/newSenialBodega.comp
 import { NewSenialUbicacionComponent } from './newSenialUbicacion/newSenialUbicacion.component';
 import { EditComponent } from './edit/edit.component';
 import { RecordComponent } from './record/record.component';
-import { SelectModule } from 'angular2-select';
+import { ReportComponent } from './report/report.component';
 
 import { AgmCoreModule } from '@agm/core';
 
@@ -27,13 +28,15 @@ import { AgmCoreModule } from '@agm/core';
         NewSenialBodegaComponent,
         NewSenialUbicacionComponent,
         EditComponent,
-        RecordComponent
+        RecordComponent,
+        ReportComponent,
     ],
     exports: [
         NewSenialBodegaComponent,
         NewSenialUbicacionComponent,
         EditComponent,
-        RecordComponent
+        RecordComponent,
+        ReportComponent,
     ],
     providers: [SvSenialInventarioService, SvSenialUbicacionService, SvSenialBodegaService]
 })

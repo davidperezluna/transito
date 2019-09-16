@@ -6,7 +6,7 @@ import { SelectModule } from 'angular2-select';
 import { TooltipModule } from "ngx-tooltip";
 import { FormsModule } from '@angular/forms';
 
-import { VhloBuscarModule } from './vhloBuscar/vhloBuscar.module';
+import { VhloCertificadoTradicionComponent } from './vhloCertificadoTradicion/vhloCertificadoTradicion.component';
 import { VhloCfgNivelServicioComponent } from './vhloCfgNivelServicio/vhloCfgNivelServicio.component';
 import { VhloCfgPlacaComponent } from './vhloCfgPlaca/vhloCfgPlaca.component';
 import { VhloCfgPlacaReportComponent } from './vhloCfgPlaca/report/report.component';
@@ -20,6 +20,8 @@ import { VhloRnaPreregistroComponent } from "./vhloRnaPreregistro/vhloRnaPreregi
 import { VhloRnaPreasignacionPlacaComponent } from './vhloRnaPreasignacionPlaca/vhloRnaPreasignacionPlaca.component';
 
 import { VehiculoRoutingModule } from './vehiculo-routing.module';
+import { VhloBuscarModule } from './vhloBuscar/vhloBuscar.module';
+import { VhloCertificadoTradicionModule } from './vhloCertificadoTradicion/vhloCertificadoTradicion.module';
 import { VhloBuscarComponent } from './vhloBuscar/vhloBuscar.component';
 import { VhloCfgNivelServicioModule } from './vhloCfgNivelServicio/vhloCfgNivelServicio.module';
 import { VhloCfgPlacaModule } from './vhloCfgPlaca/vhloCfgPlaca.module';
@@ -42,6 +44,7 @@ import { VhloRnaPreasignacionPlacaModule } from './vhloRnaPreasignacionPlaca/vhl
     SelectModule,
     VehiculoRoutingModule,
     VhloBuscarModule,
+    VhloCertificadoTradicionModule,
     VhloCfgNivelServicioModule,
     VhloCfgPlacaModule,
     VhloCfgValorModule,
@@ -55,6 +58,7 @@ import { VhloRnaPreasignacionPlacaModule } from './vhloRnaPreasignacionPlaca/vhl
   ],
   declarations: [
     VhloBuscarComponent,
+    VhloCertificadoTradicionComponent,
     VhloCfgNivelServicioComponent,
     VhloCfgPlacaComponent,
     VhloCfgPlacaReportComponent,

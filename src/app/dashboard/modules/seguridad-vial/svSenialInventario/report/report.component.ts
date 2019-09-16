@@ -1,22 +1,23 @@
-import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { PnalHorarioService } from '../../../../../services/pnalHorario.service';
-import {LoginService} from '../../../../../services/login.service';
+import { Component, OnInit, AfterViewInit, Output, EventEmitter } from '@angular/core';
+import { SvSenialUbicacionService } from '../../../../../services/svSenialUbicacion.service';
+import { CfgMunicipioService } from '../../../../../services/cfgMunicipio.service';
+import { LoginService } from '../../../../../services/login.service';
 import swal from 'sweetalert2';
 import { DatePipe  } from '@angular/common';
 declare var $: any;
 
-
 @Component({
-  selector: 'app-report-pnalfuncionario',
+  selector: 'app-report-svsenialinventario',
   templateUrl: './report.component.html',
   providers: [DatePipe]
 })
 
-export class ReportComponent implements OnInit {
+export class ReportComponent implements OnInit, AfterViewInit {
     @Output() ready = new EventEmitter<any>();
     public errorMessage;
 
-    public horarios: any;
+    public municipios: any;
+    public seniales: any;
 
     public formSearch: any;
     public formIndex: any;
@@ -26,10 +27,12 @@ export class ReportComponent implements OnInit {
     public search = {
       'fechaInicial': null,
       'fechaFinal': null,
+      'idMunicipio': null,
   };
 
   constructor(
-		private _HorarioService: PnalHorarioService,
+    private _UbicacionService: SvSenialUbicacionService,
+    private _MunicipioService: CfgMunicipioService,
 		private _LoginService: LoginService,
     ){
       /*this.date = new Date();
@@ -39,8 +42,26 @@ export class ReportComponent implements OnInit {
      
   ngOnInit() {
     this.onInitForms();
-    this.formSearch = true;
 
+    let token = this._LoginService.getToken();
+
+    this._MunicipioService.selectByDepartamento({ 'idDepartamento': 21 }, token).subscribe(
+      response => {
+        this.municipios = response;
+        this.formSearch = true;
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert('Error en la petición');
+        }
+      }
+    );
+  }
+
+  ngAfterViewInit(){
     swal.close();
   }
 
@@ -73,10 +94,6 @@ export class ReportComponent implements OnInit {
         {
           extend: 'pdfHtml5',
           message: date
-        },
-        {
-          extend: 'excel',
-          message: date
         }
       ],
       oLanguage: {
@@ -102,10 +119,10 @@ export class ReportComponent implements OnInit {
 
     let token = this._LoginService.getToken();
     
-    this._HorarioService.searchByFechas(this.search, token).subscribe(
+    this._UbicacionService.searchByFechasAndMunicipio(this.search, token).subscribe(
       response => {
         if (response.code == 200) {
-          this.horarios = response.data;
+          this.seniales = response.data;
 
           let timeoutId = setTimeout(() => {
             this.onInitTable();
@@ -113,7 +130,7 @@ export class ReportComponent implements OnInit {
             swal.close();
           }, 100);
         } else {
-          this.horarios = null;
+          this.seniales = null;
 
           swal({
             title: response.title,

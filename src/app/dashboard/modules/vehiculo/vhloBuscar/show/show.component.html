@@ -11,15 +11,15 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-xs-12 col-lg-4">
-                            <label>Organismo transito</label>
+                            <b>Organismo transito: </b>
                             {{ vehiculo.organismoTransito.nombre }}
                         </div>
                         <div class="col-xs-12 col-lg-4">
-                            <label>Placa</label>
+                            <b>Placa: </b>
                             {{ vehiculo.placa.numero }}
                         </div>
                         <div class="col-xs-12 col-lg-4">
-                            <label>Estado Vehículo</label>
+                            <b>Estado Vehículo: </b>
                             <span *ngIf="vehiculo.activo">ACTIVO</span>
                             <span *ngIf="!vehiculo.activo">INACTIVO</span>
                         </div>
@@ -34,66 +34,66 @@
                         <div class="container">
                             <div class="form-group row">
                                 <div class="col-xs-12 col-lg-4">
-                                    <label>Clase</label>
+                                    <b>Clase: </b>
                                     {{ vehiculo.clase.nombre }}
                                 </div>
                                 <div class="col-xs-12 col-lg-4">
-                                    <label>Marca</label>
+                                    <b>Marca: </b>
                                     {{ vehiculo.linea.marca.nombre }}
                                 </div>
                                 <div class="col-xs-12 col-lg-4">
-                                    <label>Linea</label>
+                                    <b>Linea: </b>
                                     {{ vehiculo.linea.nombre }}
                                 </div>
                                 <div class="col-xs-12 col-lg-4">
-                                    <label>Modelo</label>
+                                    <b>Modelo: </b>
                                     {{ vehiculo.modelo }}
                                 </div>
                                 <div class="col-xs-12 col-lg-4">
-                                    <label>Color</label>
+                                    <b>Color: </b>
                                     {{ vehiculo.color.nombre }}
                                 </div>
                                 <div class="col-xs-12 col-lg-4">
-                                    <label>Tipo servicio</label>
-                                    {{ vehiculo.clase.tipoVehiculo.nombre }}
+                                    <b>Tipo servicio: </b>
+                                    {{ vehiculo.servicio.nombre }}
                                 </div>
                                 <div class="col-xs-12 col-lg-4">
-                                    <label>Cilindraje</label>
+                                    <b>Cilindraje: </b>
                                     {{ vehiculo.cilindraje }}
                                 </div>
                                 <div class="col-xs-12 col-lg-4">
-                                    <label>Número serie</label>
+                                    <b>Número serie: </b>
                                     {{ vehiculo.serie }}
                                 </div>
                                 <div class="col-xs-12 col-lg-4">
-                                    <label>Número de motor</label>
+                                    <b>Número de motor: </b>
                                     {{ vehiculo.motor }}
                                 </div>
                                 <div class="col-xs-12 col-lg-4">
-                                    <label>Número de chasis</label>
+                                    <b>Número de chasis: </b>
                                     {{ vehiculo.chasis }}
                                 </div>
                                 <div class="col-xs-12 col-lg-4">
-                                    <label>Combustible</label>
+                                    <b>Combustible: </b>
                                     {{ vehiculo.combustible.nombre }}
                                 </div>
                                 <div class="col-xs-12 col-lg-4" *ngIf="maquinaria || remolque">
-                                    <label>Peso</label>
+                                    <b>Peso: </b>
                                     <span *ngIf="maquinaria">{{ maquinaria.peso }}</span>
                                     <span *ngIf="remolque">{{ remolque.peso }}</span>
                                 </div>
                                 <div class="col-xs-12 col-lg-4" *ngIf="maquinaria || remolque">
-                                    <label>No. de ejes</label>
+                                    <b>No. de ejes: </b>
                                     <span *ngIf="maquinaria">{{ maquinaria.numeroEjes }}</span>
                                     <span *ngIf="remolque">{{ remolque.numeroEjes }}</span>
                                 </div>
                                 <div class="col-xs-12 col-lg-4" *ngIf="maquinaria || remolque">
-                                    <label>Origen de registro</label>
+                                    <b>Origen de registro: </b>
                                     <span *ngIf="maquinaria">{{ maquinaria.origenRegistro.nombre }}</span>
                                     <span *ngIf="remolque">{{ remolque.origenRegistro.nombre }}</span>
                                 </div>
                                 <div class="col-xs-12 col-lg-4" *ngIf="maquinaria || remolque">
-                                    <label>Condición de ingreso</label>
+                                    <b>Condición de ingreso: </b>
                                     <span *ngIf="maquinaria">{{ maquinaria.condicionIngreso.nombre }}</span>
                                     <span *ngIf="remolque">{{ remolque.condicionIngreso.nombre }}</span>
                                 </div>

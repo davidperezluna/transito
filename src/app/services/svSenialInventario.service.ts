@@ -112,5 +112,4 @@ export class SvSenialInventarioService {
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/search/parametros", params, { headers: headers }).map(res => res.json());
 	}
-
 }

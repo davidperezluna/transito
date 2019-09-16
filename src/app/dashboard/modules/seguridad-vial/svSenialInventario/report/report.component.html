@@ -11,6 +11,13 @@
                 <form #formProrroga="ngForm">
                     <div class="form-group row">
                         <div class="col-xs-12 col-lg-12">
+                            <div class="form-group">
+                                <label>Municipio:</label><br>
+                                <ng-select [multiple]="false" [options]="municipios" [(ngModel)]="search.idMunicipio" name="municipio" required>
+                                </ng-select>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
                             <label>Fecha inicio <strong class="text-danger">*</strong></label>
                             <input class="form-control" [(ngModel)]="search.fechaInicial" name="fechaInicial" type="date" required />
                         </div>
@@ -36,14 +43,14 @@
         </div><!-- /.card -->
     </div>
 
-    <div class="col-xs-12 col-lg-8" *ngIf="horarios && horarios.length > 0">
+    <div class="col-xs-12 col-lg-8" *ngIf="seniales && seniales.length > 0">
         <div class="card">
             <!-- .card -->
             <div class="card-header">
-                <h5 class="text-uppercase">Minutas</h5>
+                <h5 class="text-uppercase">Señales instaladas</h5>
             </div>
             <div class="card-body">
-                <table class="table" id="dataTables-example">
+                <table class="table " id="dataTables-example">
                     <thead>
                         <tr class="text-uppercase">
                             <th>#</th>
@@ -53,7 +60,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="odd" *ngFor="let horario of horarios; let i = index">
+                        <tr class="odd" *ngFor="let horario of seniales; let i = index">
                             <td>{{ i + 1 }}</td>
                             <td>
                                 {{ horario.funcionario.ciudadano.primerNombre }} {{ horario.funcionario.ciudadano.primerApellido }}
@@ -64,20 +71,13 @@
                             </td>
                             <td>
                                 <b>Jornada</b>
-                                <br>
-                                {{ horario.jornada }}
-                                <br>
+                                <br>{{ horario.jornada }}<br>
                                 <b>Fecha</b>
-                                <br>
-                                {{ (horario.fecha.timestamp * 1000) | date: 'dd/MM/yyyy' }}
-                                <br>
+                                <br>{{ (horario.fecha.timestamp * 1000) | date: 'dd/MM/yyyy' }}<br>
                                 <b>Hora Inicial</b>
-                                <br>
-                                {{ (horario.horaInicial.timestamp * 1000) | date: 'hh:mm:ss a' }}
-                                <br>
+                                <br>{{ (horario.horaInicial.timestamp * 1000) | date: 'hh:mm:ss a' }}<br>
                                 <b>Hora Final</b>
-                                <br>
-                                {{ (horario.horaFinal.timestamp * 1000) | date: 'hh:mm:ss a' }}
+                                <br>{{ (horario.horaFinal.timestamp * 1000) | date: 'hh:mm:ss a' }}
                             </td>
                             <td>{{ horario.lugar }}</td>
                         </tr>
