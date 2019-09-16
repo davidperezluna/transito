@@ -704,8 +704,17 @@ export class NewRnetComponent implements OnInit {
 
     onImprimirTarjetaOperacion(numeroTarjetaOperacion) {
         let token = this._LoginService.getToken();
-        
-        this._TramiteSolicitudService.pdfExpedicionTarjetaOperacion({'numeroTarjetaOperacion': numeroTarjetaOperacion }, token).subscribe(
+        let identity = this._LoginService.getIdentity();
+
+        swal({
+            title: 'Generando tarjeta de operación!',
+            text: 'Solo tardará unos segundos, por favor espere.',
+            onOpen: () => {
+                swal.showLoading()
+            }
+        });
+
+        this._TramiteSolicitudService.pdfExpedicionTarjetaOperacion({ 'numeroTarjetaOperacion': numeroTarjetaOperacion, 'identificacion': identity.identificacion  }, token).subscribe(
             response => {
                 if (response.type) {
                     var fileURL = URL.createObjectURL(response);
