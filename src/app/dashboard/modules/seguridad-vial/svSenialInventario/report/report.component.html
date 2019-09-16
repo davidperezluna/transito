@@ -3,32 +3,32 @@
     <div class="col-xs-12 col-lg-4" *ngIf="formSearch">
         <div class="card"><!-- .card -->
             <div class="card-header">
-                <b class="text-uppercase">Reporte de minutas</b>
+                <b class="text-uppercase">Reporte de señales instaladas</b>
                 <br>
                 <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
             </div>
             <div class="card-body">
-                <form #formProrroga="ngForm">
+                <form #formSearch="ngForm">
                     <div class="form-group row">
                         <div class="col-xs-12 col-lg-12">
                             <div class="form-group">
-                                <label>Municipio:</label><br>
-                                <ng-select [multiple]="false" [options]="municipios" [(ngModel)]="search.idMunicipio" name="municipio" required>
+                                <label>Municipio:</label>
+                                <ng-select [multiple]="false" [options]="municipios" [(ngModel)]="search.idMunicipio" name="municipio">
                                 </ng-select>
                             </div>
                         </div>
                         <div class="col-xs-12 col-lg-12">
-                            <label>Fecha inicio <strong class="text-danger">*</strong></label>
+                            <label>Fecha inicial: <strong class="text-danger">*</strong></label>
                             <input class="form-control" [(ngModel)]="search.fechaInicial" name="fechaInicial" type="date" required />
                         </div>
                         <div class="col-xs-12 col-lg-12">
-                            <label>Fecha fin <strong class="text-danger">*</strong></label>
+                            <label>Fecha final: <strong class="text-danger">*</strong></label>
                             <input class="form-control" [(ngModel)]="search.fechaFinal" name="fechaFinal" type="date" required />
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="btn-group">
-                            <button (click)="onSearch()" [disabled]="formProrroga.invalid" class="btn btn-primary" type="button">
+                            <button (click)="onSearch()" [disabled]="formSearch.invalid" class="btn btn-primary" type="button">
                                 <i class="fa fa-search"></i>
                                 Buscar
                             </button>
@@ -54,32 +54,29 @@
                     <thead>
                         <tr class="text-uppercase">
                             <th>#</th>
-                            <th>Funcionario</th>
+                            <th>Fecha y hora</th>
                             <th>Detalles</th>
-                            <th>Lugar</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="odd" *ngFor="let horario of seniales; let i = index">
+                        <tr class="odd" *ngFor="let senial of seniales; let i = index">
                             <td>{{ i + 1 }}</td>
                             <td>
-                                {{ horario.funcionario.ciudadano.primerNombre }} {{ horario.funcionario.ciudadano.primerApellido }}
+                                <b>Fecha: </b>
+                                {{ senial.fecha }}
                                 <br>
-                                <b>Identificación</b>
+                                <b>Hora: </b>
                                 <br>
-                                <b>{{ horario.funcionario.ciudadano.tipoIdentificacion.sigla }}</b> {{ horario.funcionario.ciudadano.identificacion }}
+                                {{ senial.hora }}
                             </td>
                             <td>
-                                <b>Jornada</b>
-                                <br>{{ horario.jornada }}<br>
-                                <b>Fecha</b>
-                                <br>{{ (horario.fecha.timestamp * 1000) | date: 'dd/MM/yyyy' }}<br>
-                                <b>Hora Inicial</b>
-                                <br>{{ (horario.horaInicial.timestamp * 1000) | date: 'hh:mm:ss a' }}<br>
-                                <b>Hora Final</b>
-                                <br>{{ (horario.horaFinal.timestamp * 1000) | date: 'hh:mm:ss a' }}
+                                <b>Municipio:</b>
+                                <br>{{ senial.municipio.nombre }}<br>
+                                <b>Estado:</b>
+                                <br>{{ senial.estado }}<br>
+                                <b>Cantidad:</b>
+                                <br>{{senial.cantidad }}
                             </td>
-                            <td>{{ horario.lugar }}</td>
                         </tr>
                     </tbody>
                 </table>
