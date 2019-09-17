@@ -324,10 +324,9 @@ export class FroFacTramiteComponent implements OnInit {
                         this.onLoadTramites();
                       } else if (this.tramite != null) {
                         this.onLoadTramites();
-                        let timeoutId = setTimeout(() => {
+                        setTimeout(() => {
                           this.tramitePrecioSelected = [95];
-                          console.log(this.tramitePrecioSelected);
-                        }, 100);
+                        });
                       }
 
                       this._PropietarioService.searchByVehiculo({ 'idVehiculo': this.vehiculo.id }, token).subscribe(
