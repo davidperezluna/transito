@@ -69,4 +69,11 @@ export class FroFacTramiteService {
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/search/matricula/inicial/factura", params, { headers: headers }).map(res => res.json());
 	}
+
+	validateTramiteByVehiculo(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = "data=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/validate/tramite/vehiculo", params, { headers: headers }).map(res => res.json());
+	}
 }

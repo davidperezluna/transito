@@ -59,6 +59,8 @@ export class FroFacTramiteComponent implements OnInit {
 
   public table: any = null;
   public idVehiculoValor: any = null;
+  
+  public tramite: any = null;
 
   public propietariosVehiculoRetefuente:any=[]; 
   public valorRetefuenteUnitario:any = 0;
@@ -310,29 +312,75 @@ export class FroFacTramiteComponent implements OnInit {
         response => {
           if (response.code == 200) {
             this.vehiculo = response.data;
-            this.factura.idVehiculo = this.vehiculo.id;
-            console.log(this.vehiculo.servicio.id);
-
-            if(this.vehiculo.servicio.id == 2){
-              this.onLoadTramites();
-    
-              this._PropietarioService.searchByVehiculo({ 'idVehiculo':this.vehiculo.id }, token).subscribe(
+            console.log(this.vehiculo);
+            if(this.vehiculo) {
+              this._FacturaTramiteService.validateTramiteByVehiculo({ 'idVehiculo': this.vehiculo.id }, token).subscribe(
                 response => {
                   if (response.code == 200) {
-                    this.propietarios = response.data;
-                                    
+                    this.tramite = response.data;
+                    
+                    if (this.vehiculo.servicio.id == 2 || this.tramite != null) {
+                      if (this.vehiculo.servicio.id == 2) {
+                        this.onLoadTramites();
+                      } else if (this.tramite != null) {
+                        this.onLoadTramites();
+                        let timeoutId = setTimeout(() => {
+                          this.tramitePrecioSelected = [95];
+                          console.log(this.tramitePrecioSelected);
+                        }, 100);
+                      }
+
+                      this._PropietarioService.searchByVehiculo({ 'idVehiculo': this.vehiculo.id }, token).subscribe(
+                        response => {
+                          if (response.code == 200) {
+                            this.propietarios = response.data;
+
+                            swal.close();
+                          } else {
+                            this.propietarios = null;
+
+                            swal({
+                              title: 'Atención!',
+                              text: response.message,
+                              type: 'warning',
+                              confirmButtonText: 'Aceptar'
+                            });
+                          }
+
+                          error => {
+                            this.errorMessage = <any>error;
+                            if (this.errorMessage != null) {
+                              console.log(this.errorMessage);
+                              alert("Error en la petición");
+                            }
+                          }
+                        }
+                      );
+                    } else {
+                      swal({
+                        title: 'Atención!',
+                        text: 'El vehículo no pertenece a transporte público.',
+                        type: 'warning',
+                        confirmButtonText: 'Aceptar'
+                      });
+                    }
+
+                    swal({
+                      title: response.title,
+                      text: response.message,
+                      type: response.status,
+                      confirmButtonText: 'Aceptar'
+                    });
                     swal.close();
                   } else {
-                    this.propietarios = null;
-    
                     swal({
-                      title: 'Atención!',
+                      title: response.title,
                       text: response.message,
-                      type: 'warning',
+                      type: response.status,
                       confirmButtonText: 'Aceptar'
                     });
                   }
-    
+
                   error => {
                     this.errorMessage = <any>error;
                     if (this.errorMessage != null) {
@@ -342,14 +390,13 @@ export class FroFacTramiteComponent implements OnInit {
                   }
                 }
               );
-              } else {
-                swal({
-                  title: 'Atención!',
-                  text: 'El vehículo no pertenece a transporte público.',
-                  type: 'warning',
-                  confirmButtonText: 'Aceptar'
-                });
-              }
+            }
+
+            this.factura.idVehiculo = this.vehiculo.id;
+            if(this.tramite) {
+              console.log("si tramite");
+            }
+            
             } else {
               this.vehiculo = null;
               this.factura.idVehiculo = null;
