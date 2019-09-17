@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, AfterViewInit, EventEmitter } from '@angular/core';
 import {ImoInsumoService} from '../../../../services/imoInsumo.service';
 import {LoginService} from '../../../../services/login.service';
 import swal from 'sweetalert2';
@@ -8,7 +8,7 @@ declare var $: any;
   selector: 'app-index',
   templateUrl: './imoAsignacion.component.html'
 })
-export class ImoAsignacionComponent implements OnInit {
+export class ImoAsignacionComponent implements OnInit, AfterViewInit {
   public errorMessage;
 
 	public id;
@@ -69,6 +69,10 @@ export class ImoAsignacionComponent implements OnInit {
 		// 			}
 		// 		}
     //   );
+  }
+
+  ngAfterViewInit(){
+    swal.close();
   }
 
   iniciarTablaSustrato(){

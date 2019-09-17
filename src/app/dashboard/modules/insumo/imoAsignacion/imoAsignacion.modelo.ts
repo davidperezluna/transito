@@ -10,6 +10,5 @@ export class ImoAsignacion{
 		public sedeOperativaId:string,
 		public casoInsumoId:string,
 		public loteInsumoId:string,
-		
 	){}
 }

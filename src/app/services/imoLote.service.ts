@@ -38,11 +38,11 @@ export class ImoLoteService {
 		);
 	}
 
-	show(datos, token) {
+	searchByOrganismoTransitoAndModulo(datos, token) {
 		let json = JSON.stringify(datos);
 		let params = "data=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-		return this._http.post(this.url + "/search/sedeoperativa", params, { headers: headers }).map(res => res.json());
+		return this._http.post(this.url + "/search/organismotransito/modulo", params, { headers: headers }).map(res => res.json());
 	}
 
 	showReasignacion(datos, token) {

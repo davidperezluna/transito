@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { VhloVehiculo } from '../cvCdoCurso.modelo';
+import { CvCdoCurso } from '../cvCdoCurso.modelo';
 import { VhloValorService } from '../../../../../services/vholCfgValor.service';
 
 import { VhloCfgClaseService } from '../../../../../services/vhloCfgClase.service';
@@ -15,7 +15,7 @@ import swal from 'sweetalert2';
 
 export class NewComponent implements OnInit {
   @Output() ready = new EventEmitter<any>();
-  public vhloVehiculo: VhloVehiculo;
+  public vhloVehiculo: CvCdoCurso;
   public errorMessage;
   public respuesta;
   public clases: any;
@@ -34,7 +34,7 @@ export class NewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.vhloVehiculo = new VhloVehiculo(null, null, null, null,null);
+    this.vhloVehiculo = new CvCdoCurso(null, null);
 
     this._claseService.select().subscribe(
       response => {
@@ -72,8 +72,7 @@ export class NewComponent implements OnInit {
   
   onEnviar() {
     let token = this._loginService.getToken();
-    this.vhloVehiculo.claseId = this.claseSelected;
-    this.vhloVehiculo.lineaId = this.lineaSelected;
+    this.vhloVehiculo.idEmpresa = this.claseSelected;
     this._VhloValorService.register(this.vhloVehiculo, token).subscribe(
       response => {
         this.respuesta = response;
