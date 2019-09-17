@@ -13,6 +13,7 @@ import { CvCdoCfgDescuentoComponent } from './cvCdoCfgDescuento/cvCdoCfgDescuent
 import { CvCdoCfgEstadoComponent } from './cvCdoCfgEstado/cvCdoCfgEstado.component';
 import { CvCdoCfgInteresComponent } from './cvCdoCfgInteres/cvCdoCfgInteres.component';
 import { CvCdoComparendoComponent } from './cvCdoComparendo/cvCdoComparendo.component';
+import { CvCdoCursoComponent } from './cvCdoCurso/cvCdoCurso.component';
 import { CvCdoNotificacionComponent } from './cvCdoNotificacion/cvCdoNotificacion.component';
 import { CvCdoTrazabilidadComponent } from './cvCdoTrazabilidad/cvCdoTrazabilidad.component';
 import { CvCfgInteresComponent } from './cvCfgInteres/cvCfgInteres.component';
@@ -34,6 +35,7 @@ import { CvCdoCfgDescuentoModule } from './cvCdoCfgDescuento/cvCdoCfgDescuento.m
 import { CvCdoCfgEstadoModule } from './cvCdoCfgEstado/cvCdoCfgEstado.module';
 import { CvCdoCfgInteresModule } from './cvCdoCfgInteres/cvCdoCfgInteres.module';
 import { CvCdoComparendoModule } from './cvCdoComparendo/cvCdoComparendo.module';
+import { CvCdoCursoModule } from './cvCdoCurso/cvCdoCurso.module';
 import { CvCdoNotificacionModule } from './cvCdoNotificacion/cvCdoNotificacion.module';
 import { CvCdoTrazabilidadModule } from './cvCdoTrazabilidad/cvCdoTrazabilidad.module';
 import { CvCfgInteresModule } from './cvCfgInteres/cvCfgInteres.module';
@@ -61,6 +63,7 @@ import { CvRestriccionModule } from './cvRestriccion/cvRestriccion.module';
     CvCdoCfgEstadoModule,
     CvCdoCfgInteresModule,
     CvCdoComparendoModule,
+    CvCdoCursoModule,
     CvCdoNotificacionModule,
     CvCdoTrazabilidadModule,
     CvCfgInteresModule,
@@ -81,6 +84,7 @@ import { CvRestriccionModule } from './cvRestriccion/cvRestriccion.module';
     CvCdoCfgEstadoComponent,
     CvCdoCfgInteresComponent,
     CvCdoComparendoComponent,
+    CvCdoCursoComponent,
     CvCdoNotificacionComponent,
     CvCdoTrazabilidadComponent,
     CvCfgInteresComponent,

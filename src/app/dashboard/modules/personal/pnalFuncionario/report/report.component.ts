@@ -54,13 +54,20 @@ export class ReportComponent implements OnInit {
   }
   
   onInitTable(){
-    let date;
+    let fecha;
+    let date = new Date();
 
+    var options = { weekday: 'long', timeZone: 'America/Bogota' };
+    let dia = date.toLocaleDateString('us-US', options);
+
+ 
     if (this.search.fechaInicial == this.search.fechaInicial) {
-      date = this.search.fechaInicial;
+      fecha = this.search.fechaInicial;
     } else {
-      date = this.search.fechaInicial+ ' - ' +this.search.fechaFinal;
+      fecha = this.search.fechaInicial+ ' - ' +this.search.fechaFinal;
     }
+
+    $('#dataTables-example').append('<caption style="caption-side: bottom">'+dia+'</caption>');
 
     this.table = $('#dataTables-example').DataTable({
       responsive: true,
@@ -72,11 +79,11 @@ export class ReportComponent implements OnInit {
       buttons: [
         {
           extend: 'pdfHtml5',
-          message: date
+          message: fecha
         },
         {
           extend: 'excel',
-          message: date
+          message: fecha
         }
       ],
       oLanguage: {

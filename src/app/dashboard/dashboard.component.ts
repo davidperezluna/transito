@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, AfterContentInit } from '@angular/core';
+import swal from 'sweetalert2';
 
 /**
 *  This class represents the lazy loaded DashboardComponent.
@@ -9,4 +10,8 @@ import { Component } from '@angular/core';
   templateUrl: 'dashboard.component.html'
 })
 
-export class DashboardComponent { }
+export class DashboardComponent implements AfterContentInit {
+  ngAfterContentInit() {
+    swal.close();
+  }
+}

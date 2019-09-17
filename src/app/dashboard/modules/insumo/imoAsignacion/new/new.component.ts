@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { ImoAsignacion } from '../imoAsignacion.modelo';
 import { ImoLoteService } from '../../../../../services/imoLote.service';
@@ -16,7 +16,7 @@ declare var $: any;
   providers: [DatePipe]
 })
 
-export class NewComponent implements OnInit {
+export class NewComponent implements OnInit, AfterViewInit {
 @Output() ready = new EventEmitter<any>();
 public apiUrl = environment.apiUrl + 'insumo/imolote';
 public rnaAsignacionInsumos: ImoAsignacion;
@@ -102,6 +102,10 @@ constructor(
         }
       }
     );
+  }
+
+  ngAfterViewInit(){
+    swal.close();
   }
 
   onCancelar(){
