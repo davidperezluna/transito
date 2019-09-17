@@ -113,7 +113,7 @@ constructor(
   }
 
   isFin() {
-   this.rnaAsignacionInsumos.numero = parseInt(this.rnaAsignacionInsumos.rangoFin) - parseInt(this.rnaAsignacionInsumos.rangoInicio)+1;
+   this.rnaAsignacionInsumos.numero = parseInt(this.rnaAsignacionInsumos.rangoFin) - parseInt(this.rnaAsignacionInsumos.rangoInicio) + 1;
   }
 
   onChangedInsumoInsumo(e){
@@ -131,7 +131,7 @@ constructor(
 
       let token = this._loginService.getToken();
 
-      this._ImoLoteService.show(datos,token).subscribe( 
+      this._ImoLoteService.searchByOrganismoTransitoAndModulo(datos,token).subscribe( 
         response => {
           this.loteInsumo = response.data;
 
@@ -182,7 +182,7 @@ constructor(
 
       let token = this._loginService.getToken();
 
-      this._ImoLoteService.show(datos,token).subscribe( 
+    this._ImoLoteService.searchByOrganismoTransitoAndModulo(datos,token).subscribe( 
         response => {
           if (response.code == 200) {
             this.lotes = response.data;
