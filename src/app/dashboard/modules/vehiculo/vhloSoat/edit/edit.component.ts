@@ -38,7 +38,7 @@ export class EditComponent implements OnInit {
         console.log(this.soat);
         this.estadoSelected = this.soat.estado;
 
-        this._EmpresaService.getEmpresasAseguradoras().subscribe(
+        this._EmpresaService.getAseguradoras().subscribe(
             response => {
                 this.empresas = response;
                 setTimeout(() => {

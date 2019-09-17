@@ -1,0 +1,67 @@
+<div class="row">
+    <div class="col-xs-12 col-lg-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="text-uppercase">Nuevo Valor</h5>
+                <small>Los campos con
+                    <b class="text-danger">*</b> son obligatorios</small>
+            </div>
+            <div class="card-body">
+                <form #formNew="ngForm">
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Clase <b class="text-danger">*</b></label>
+                            <ng-select
+                                [multiple]="false"
+                                [options]="clases"
+                                [(ngModel)]="claseSelected"
+                                required
+                                name="idClase">
+                            </ng-select>
+                        </div> 
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Marca <b class="text-danger">*</b></label>
+                            <ng-select
+                                [multiple]="false"
+                                [options]="marcas"
+                                [(ngModel)]="marcaSelected"
+                                (ngModelChange)="onChangedMarca($event)"
+                                required
+                                name="idMarca">
+                            </ng-select>
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Linea <b class="text-danger">*</b></label>
+                            <ng-select [multiple]="false" [options]="lineas" [(ngModel)]="lineaSelected" name="idLinea" required>
+                            </ng-select>
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Cilindraje</label>
+                            <input class="form-control" type="number" [(ngModel)]="vhloVehiculo.cilindraje" name="cilindraje">
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Valor</label>
+                            <input class="form-control" type="number" [(ngModel)]="vhloVehiculo.valor" name="valor">
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Modelo</label>
+                            <input class="form-control" type="number" [(ngModel)]="vhloVehiculo.anio" name="anio">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <div class="btn-group">
+                    <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
+                        <i class="fa fa-save"></i>
+                        Enviar
+                    </button>
+                    <button (click)="onCancelar()" class="btn btn-default">
+                        <i class="fa fa-times"></i>
+                        Cancelar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

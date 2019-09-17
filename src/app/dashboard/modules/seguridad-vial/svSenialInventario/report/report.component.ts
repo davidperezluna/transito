@@ -28,7 +28,7 @@ export class ReportComponent implements OnInit, AfterViewInit {
       'fechaInicial': null,
       'fechaFinal': null,
       'idMunicipio': null,
-  };
+    };
 
   constructor(
     private _UbicacionService: SvSenialUbicacionService,

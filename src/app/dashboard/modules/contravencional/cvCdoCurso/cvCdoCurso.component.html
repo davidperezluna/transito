@@ -1,0 +1,116 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-lg-4" *ngIf='formSearch'>
+      <div class="card">
+        <div class="card-header">
+          <b class="text-uppercase">Configuración Valor</b>
+        </div>
+        <div class="card-body">
+          <form #formSearch="ngForm">
+            <div class="form-group row">
+              <div class="col-xs-12 col-lg-12">
+                <label>Fecha inicial: <strong class="text-danger">*</strong></label>
+                <input class="form-control" [(ngModel)]="search.fechaInicial" name="fechaInicial" type="date" required />
+              </div>
+              <div class="col-xs-12 col-lg-12">
+                <label>Fecha final: <strong class="text-danger">*</strong></label>
+                <input class="form-control" [(ngModel)]="search.fechaFinal" name="fechaFinal" type="date" required />
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="card-footer">
+          <div class="btn-group">
+            <button (click)="onSearch()" [disabled]="formSearch.invalid" class="btn btn-info">
+              <i class="fa fa-search"></i>
+              <span class="text">Buscar</span>
+            </button>
+            <button (click)="onNew()" class="btn btn-primary">
+              <i class="fa fa-plus"></i>
+              <span class="text">Nuevo</span>
+            </button>
+            <button (click)="onFormUpload()" class="btn btn-default">
+              <i class="fa fa-upload"></i>
+              <span class="text">Archivo</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xs-12 col-lg-8" *ngIf='formIndex'>
+      <table class="table " id="dataTables-example">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Fecha</th>
+            <th>Identificación</th>
+            <th>No. comparendo</th>
+            <th>Empresa</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="odd" *ngFor="let curso of cursos; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ curso.fecha }}</td>
+            <td>{{ curso.identificacion }}</td>
+            <td>{{ curso.comparendo }}</td>
+            <td>{{ curso.empresa.nombre }}</td>
+            <td>
+              <button (click)="onEdit(curso)" class="btn btn-xs btn-info" type="button">Editar
+                <i class="fa fa-edit"></i>
+              </button>
+              <button (click)="onDelete(curso.id)" class="btn btn-xs btn-danger" type="button">Eliminar
+                <i class="fa fa-trash"></i>
+              </button>
+      
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="row" *ngIf='formUpload'>
+    <div class="col-xs-12 col-md-12 col-lg-6">
+      <form #formNew="ngForm">
+        <div class="card">
+          <div class="card-header">
+              <b class="text-uppercase">Cargar archivo de cursos</b>
+          </div>
+          <div class="card-body">
+            <div class="form-group">
+              <div class="row">
+                <div class="col-xs-12 col-lg-6">
+                  <label>Empresa <strong class="text-danger">*</strong></label>
+                  <ng-select [multiple]="false" [options]="empresas" [(ngModel)]="empresaSelected" name="idEmpresa" required>
+                  </ng-select>
+                </div>
+                <div class="col-xs-12 col-lg-12">
+                    <label>Adjuntar documento <b class="text-danger">*</b> <small>(.csv)</small></label>
+                    <input class="form-control" type="file" (change)="onFileChange($event)" required>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer">
+              <div class="btn-group">
+                <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
+                    <i class="fa fa-save"></i>
+                    Enviar
+                </button>
+                <button (click)="ready(true)" class="btn btn-default">
+                    <i class="fa fa-times"></i>
+                    Cancelar
+                </button>
+              </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <app-edit-cvcdocurso *ngIf='formEdit' [curso]="curso" (ready)="ready($event)"></app-edit-cvcdocurso>
+  <app-new-cvcdocurso *ngIf='formNew' (ready)="ready($event)"></app-new-cvcdocurso>
+</div>

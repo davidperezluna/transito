@@ -9,6 +9,7 @@ import { CvCdoCfgDescuentoComponent } from './cvCdoCfgDescuento/cvCdoCfgDescuent
 import { CvCdoCfgEstadoComponent } from './cvCdoCfgEstado/cvCdoCfgEstado.component';
 import { CvCdoCfgInteresComponent } from './cvCdoCfgInteres/cvCdoCfgInteres.component';
 import { CvCdoComparendoComponent } from './cvCdoComparendo/cvCdoComparendo.component';
+import { CvCdoCursoComponent } from './cvCdoCurso/cvCdoCurso.component';
 import { NewComponent } from './cvCdoComparendo/new/new.component';
 import { CvCdoNotificacionComponent } from './cvCdoNotificacion/cvCdoNotificacion.component';
 import { CvCdoTrazabilidadComponent } from './cvCdoTrazabilidad/cvCdoTrazabilidad.component';
@@ -54,6 +55,10 @@ const routes: Routes = [
   {
     path: 'cvCdoComparendo',
     component: CvCdoComparendoComponent
+  },
+  {
+    path: 'cvCdoCurso',
+    component: CvCdoCursoComponent
   },
   /*{
     path: 'cvCdoNotificacion',
