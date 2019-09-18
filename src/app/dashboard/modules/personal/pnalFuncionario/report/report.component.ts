@@ -55,19 +55,18 @@ export class ReportComponent implements OnInit {
   
   onInitTable(){
     let fecha;
-    let date = new Date();
+    let date;
 
     var options = { weekday: 'long', timeZone: 'America/Bogota' };
-    let dia = date.toLocaleDateString('us-US', options);
 
  
     if (this.search.fechaInicial == this.search.fechaInicial) {
-      fecha = this.search.fechaInicial;
+      date = new Date(this.search.fechaInicial)
+      let dia = date.toLocaleDateString('us-US', options);
+      fecha = dia +' '+ this.search.fechaInicial;
     } else {
       fecha = this.search.fechaInicial+ ' - ' +this.search.fechaFinal;
     }
-
-    $('#dataTables-example').append('<caption style="caption-side: bottom">'+dia+'</caption>');
 
     this.table = $('#dataTables-example').DataTable({
       responsive: true,

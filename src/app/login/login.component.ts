@@ -67,6 +67,8 @@ export class LoginComponent implements OnInit {
 										alert("Error en el servidor");
 									}else{
 										if(response.code == 200){
+											
+											
 											localStorage.setItem('token', token);
 											//console.log(localStorage.getItem('token'));
 											// REDIRECCION

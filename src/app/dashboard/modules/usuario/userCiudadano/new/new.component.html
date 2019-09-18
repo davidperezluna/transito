@@ -1,14 +1,13 @@
 <div class="row">
     <div class="col-xs-12 col-lg-10">
-        <div class="card">
-            <div class="card-header">
-                <b class="text-uppercase">Nueva persona natural</b>
-                <br>
-                <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
-            </div>
-            <div class="card-body">
-                <!--. card-body -->
-                <form #newForm="ngForm" class="container">
+        <form #newForm="ngForm" class="container">
+            <div class="card">
+                <div class="card-header">
+                    <b class="text-uppercase">Nueva persona natural</b>
+                    <br>
+                    <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
+                </div>
+                <div class="card-body">              
                     <div class="form-group">
                         <div class="row">
                             <div class="col-xs-12 col-lg-4">
@@ -111,19 +110,18 @@
                             </div>
                         </div>
                     </div>
-                </form>
+                </div>
+                <div class="card-footer">
+                    <button (click)="onEnviar()" class="btn btn-primary" type="button" [disabled]="newForm.invalid || ciudadanoRegistrado">
+                        <i class="fa fa-save"></i>
+                        Enviar
+                    </button>
+                    <button (click)="onCancelar()" class="btn btn-default">
+                        <i class="fa fa-times"></i>
+                        Cancelar
+                    </button>
+                </div>
             </div>
-            <!--. /card-body -->
-            <div class="card-footer">
-                <button (click)="onEnviar()" class="btn btn-primary" type="button" [disabled]="newForm.invalid && ciudadanoRegistrado">
-                    <i class="fa fa-save"></i>
-                    Enviar
-                </button>
-                <button (click)="onCancelar()" class="btn btn-default">
-                    <i class="fa fa-times"></i>
-                    Cancelar
-                </button>
-            </div>
-        </div>
+        </form>
     </div>
 </div>

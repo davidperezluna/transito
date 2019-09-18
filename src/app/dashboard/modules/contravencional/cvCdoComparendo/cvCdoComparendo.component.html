@@ -20,7 +20,7 @@
       </div>
     </div>
 
-    <div class="col-xs-12 col-md-12 col-lg-6" *ngIf="formUpload">
+    <div class="col-xs-12 col-md-12 col-lg-4" *ngIf="formUpload">
       <form #formNew="ngForm">
         <div class="card">
           <div class="card-header">
@@ -40,7 +40,7 @@
                   </ng-select>
                 </div>
                 <div class="col-xs-12 col-lg-12">
-                  <label>Adjuntar documento <b class="text-danger">*</b> <small>(.csv)</small></label>
+                  <label>Adjuntar documento <b class="text-danger">*</b> <small>(.txt)</small></label>
                   <input class="form-control" type="file" (change)="onFileChange($event)" required>
                 </div>
               </div>

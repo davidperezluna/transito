@@ -19,7 +19,7 @@ public sedeOperativaSelected: any;
 public organismoTransito: any = null;
 
 constructor(
-  private _FuncionarioService: PnalTalonarioService,
+  private _TalonarioService: PnalTalonarioService,
   private _OrganismoTransitoService: CfgOrganismoTransitoService,
   private _LoginService: LoginService,
   ){}
@@ -103,7 +103,7 @@ constructor(
 
     let token = this._LoginService.getToken();
 
-    this._FuncionarioService.register(this.talonario, token).subscribe(
+    this._TalonarioService.register(this.talonario, token).subscribe(
       response => {      
         if(response.code == 200){
           swal({

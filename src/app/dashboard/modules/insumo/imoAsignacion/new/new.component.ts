@@ -3,6 +3,7 @@ import { DatePipe } from '@angular/common';
 import { ImoAsignacion } from '../imoAsignacion.modelo';
 import { ImoLoteService } from '../../../../../services/imoLote.service';
 import { CfgOrganismoTransitoService } from '../../../../../services/cfgOrganismoTransito.service';
+import { PnalFuncionarioService } from '../../../../../services/pnalFuncionario.service';
 import { ImoCfgTipoService } from '../../../../../services/imoCfgTipo.service';
 import { ImoInsumoService } from '../../../../../services/imoInsumo.service';
 import { LoginService } from '../../../../../services/login.service';
@@ -19,7 +20,7 @@ declare var $: any;
 export class NewComponent implements OnInit, AfterViewInit {
 @Output() ready = new EventEmitter<any>();
 public apiUrl = environment.apiUrl + 'insumo/imolote';
-public rnaAsignacionInsumos: ImoAsignacion;
+public asignacion: ImoAsignacion;
 public errorMessage;
 
 public empresas:any;
@@ -39,6 +40,9 @@ public insumoSelectedInsumo:any;
 public date:any;
 public numero:any;
 public numeroActa: any = null;
+public funcionarios:any;
+public funcionarioSelected:any;
+
 public table:any;
 
 public tipoInsumo: any = null;
@@ -48,18 +52,27 @@ public tiposInsumo = [
 ];
 
 constructor(
-  private _ImoLoteService: ImoLoteService,
-  private _loginService: LoginService,
   private _OrganismoTransitoService: CfgOrganismoTransitoService,
+  private _FuncionarioService: PnalFuncionarioService,
   private _CasoInsumoService: ImoCfgTipoService,
+  private _ImoLoteService: ImoLoteService,
   private _ImoInsumoService: ImoInsumoService,
+  private _LoginService: LoginService,
   ){}
 
   ngOnInit() {
+    swal({
+      title: 'Cargando formulario!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+
     this.date = new Date();
     var datePiper = new DatePipe(this.date);
-    this.rnaAsignacionInsumos = new ImoAsignacion(null,null,null,null,null,null,null,null,null,null);
-    this.rnaAsignacionInsumos.fecha = datePiper.transform(this.date,'yyyy-MM-dd');
+    this.asignacion = new ImoAsignacion(null,null,null,null,null,null,null,null,null,null,null);
+    this.asignacion.fecha = datePiper.transform(this.date,'yyyy-MM-dd');
 
     this._CasoInsumoService.getCasoInsumoInsumoSelect().subscribe(
       response => {
@@ -102,6 +115,20 @@ constructor(
         }
       }
     );
+
+    this._FuncionarioService.select().subscribe(
+      response => {
+        this.funcionarios = response;
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert('Error en la petición');
+        }
+      }
+    );
   }
 
   ngAfterViewInit(){
@@ -113,7 +140,7 @@ constructor(
   }
 
   isFin() {
-   this.rnaAsignacionInsumos.numero = parseInt(this.rnaAsignacionInsumos.rangoFin) - parseInt(this.rnaAsignacionInsumos.rangoInicio) + 1;
+   this.asignacion.numero = parseInt(this.asignacion.rangoFin) - parseInt(this.asignacion.rangoInicio)+1;
   }
 
   onChangedInsumoInsumo(e){
@@ -124,12 +151,13 @@ constructor(
         onOpen: () => {
           swal.showLoading()
         }
-      })
+      });
+
       let datos={
         'tipoInsumo':this.insumoSelectedInsumo,
       }
 
-      let token = this._loginService.getToken();
+      let token = this._LoginService.getToken();
 
       this._ImoLoteService.searchByOrganismoTransitoAndModulo(datos,token).subscribe( 
         response => {
@@ -163,55 +191,56 @@ constructor(
   }
 
   onSearchLote(){
-      swal({
-        title: 'Enviando datos!',
-        text: 'Solo tardara unos segundos por favor espere.',
-        onOpen: () => {
-          swal.showLoading()
-        }
-      })
-
-      if (this.table) {
-        this.table.destroy()
+    swal({
+      title: 'Enviando datos!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
       }
+    })
 
-      let datos = {
-        'tipoInsumo':this.insumoSelected,
-        'idOrganismoTransito':this.sedeSelected,
-      }
+    if (this.table) {
+      this.table.destroy()
+    }
 
-      let token = this._loginService.getToken();
+    let datos = {
+      'tipoInsumo':this.insumoSelected,
+      'idOrganismoTransito':this.sedeSelected,
+      'idFuncionario': this.funcionarioSelected
+    }
+
+    let token = this._LoginService.getToken();
 
     this._ImoLoteService.searchByOrganismoTransitoAndModulo(datos,token).subscribe( 
-        response => {
-          if (response.code == 200) {
-            this.lotes = response.data;
+      response => {
+        if (response.code == 200) {
+          this.lotes = response.data;
 
-            swal.close()
+          swal.close()
 
-            setTimeout(() => {
-              this.onInitTable();
-            });
-          }else{
-            this.lotes = null;
+          setTimeout(() => {
+            this.onInitTable();
+          });
+        }else{
+          this.lotes = null;
 
-            swal({
-              title: 'Error!',
-              text: 'No existen sustratos para esta sede',
-              type: 'error',
-              confirmButtonText: 'Aceptar'
-            });
-          }
-          
-        error => {
-            this.errorMessage = <any>error;
-            if(this.errorMessage != null){
-              console.log(this.errorMessage);
-              alert("Error en la petición");
-            }
-          }
+          swal({
+            title: 'Error!',
+            text: 'No existen sustratos para esta sede',
+            type: 'error',
+            confirmButtonText: 'Aceptar'
+          });
+        }
+        
+      error => {
+        this.errorMessage = <any>error;
+        if(this.errorMessage != null){
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
 
-      });
+    });
   }
 
 
@@ -314,12 +343,12 @@ constructor(
           }
         })
 
-        let token = this._loginService.getToken();
+        let token = this._LoginService.getToken();
 
-        this.rnaAsignacionInsumos.sedeOperativaId = this.sedeSelected;
+        this.asignacion.sedeOperativaId = this.sedeSelected;
 
         let datos={
-          'asignacionInsumos' : this.rnaAsignacionInsumos,
+          'asignacionInsumos' : this.asignacion,
           'array': this.lotesSeleccionados
         };
         

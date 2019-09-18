@@ -9,7 +9,6 @@ export class LoginService {
 	private url = environment.apiUrl; 
 	public identity;
 	public token; 
-	
 
 	constructor(private _http: Http){}
 
@@ -17,7 +16,6 @@ export class LoginService {
 		let json = JSON.stringify(user);
 		let params = "data="+json;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
-
 		return this._http.post(this.url+"login", params, {headers: headers}).map(res => res.json());
 	}
 
@@ -25,7 +23,6 @@ export class LoginService {
 		let json = JSON.stringify(datos);
 		let params = "data=" + json + "&authorization=" + token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
-
 		return this._http.post(this.url+"logout", params, {headers: headers}).map(res => res.json());
 	}
 
@@ -34,9 +31,7 @@ export class LoginService {
 		let params = "json="+json;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		console.log(params);
-		return this._http.post(this.url+"usuario/new", params, {headers: headers})
-							  .map(res => res.json());
-
+		return this._http.post(this.url+"usuario/new", params, {headers: headers}).map(res => res.json());
 	}
 
 	getIdentity(){
