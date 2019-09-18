@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { VhloCfgServicioService } from "../../../../../../services/vhloCfgServicio.service";
-import { FroTrteSolicitudService } from 'app/services/froTrteSolicitud.service';
+import { FroTrteSolicitudService } from '../../../../../../services/froTrteSolicitud.service';
 import { LoginService } from '../../../../../../services/login.service';
 import { DatePipe, CurrencyPipe } from '@angular/common';
 import swal from 'sweetalert2';

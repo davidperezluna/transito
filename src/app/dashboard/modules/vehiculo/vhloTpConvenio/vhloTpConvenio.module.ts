@@ -6,7 +6,7 @@ import { SelectModule } from 'angular2-select';
 import { UserEmpresaService } from '../../../../services/userEmpresa.service';
 import { VhloTpConvenioService } from '../../../../services/vhloTpConvenio.service';
 import { UserEmpresaTransporteService } from "../../../../services/userEmpresaTransporte.service";
-import { PnalFuncionarioService } from 'app/services/pnalFuncionario.service';
+import { PnalFuncionarioService } from '../../../../services/pnalFuncionario.service';
 
 import { NewComponent } from './new/new.component';
 import { EditComponent } from './edit/edit.component';

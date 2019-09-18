@@ -6,7 +6,7 @@ import { VhloCfgRadioAccionService } from "../../../../../services/vhloCfgRadioA
 import { VhloCfgModalidadTransporteService } from "../../../../../services/vhloCfgModalidadTransporte.service";
 import { VhloCfgClaseService } from "../../../../../services/vhloCfgClase.service";
 import { VhloCfgColorService } from "../../../../../services/vhloCfgColor.service";
-import { VhloTpConvenioService } from 'app/services/vhloTpConvenio.service';
+import { VhloTpConvenioService } from '../../../../../services/vhloTpConvenio.service';
 import { VhloCfgCarroceriaService } from "../../../../../services/vhloCfgCarroceria.service";
 import { CfgMunicipioService } from "../../../../../services/cfgMunicipio.service";
 import { LoginService } from '../../../../../services/login.service';

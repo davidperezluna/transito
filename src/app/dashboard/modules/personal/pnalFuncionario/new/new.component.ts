@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router'
-import { PnalFuncionario } from '../pnalFuncionario.modelo';
+import { PnalFuncionario } from '../PnalFuncionario.modelo';
 import { PnalFuncionarioService } from '../../../../../services/pnalFuncionario.service';
 import { PnalCfgTipoNombramientoService } from '../../../../../services/pnalCfgTipoNombramiento.service';
 import { PnalCfgCargoService } from '../../../../../services/pnalCfgCargo.service';
