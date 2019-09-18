@@ -267,7 +267,6 @@ export class VhloTpAsignacionComponent implements OnInit {
         });
     }
     onEdit(asignacion: any) {
-        console.log("asdadasdsadasdasdasdas");
         this.asignacion = asignacion;
         this.formEdit = true;
         this.formIndex = false;

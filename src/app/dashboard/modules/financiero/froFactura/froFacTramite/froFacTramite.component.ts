@@ -59,6 +59,9 @@ export class FroFacTramiteComponent implements OnInit {
 
   public table: any = null;
   public idVehiculoValor: any = null;
+  public valorVehiculo: any = null;
+  
+  public tramite = false;
 
   public propietariosVehiculoRetefuente:any=[]; 
   public valorRetefuenteUnitario:any = 0;
@@ -310,46 +313,11 @@ export class FroFacTramiteComponent implements OnInit {
         response => {
           if (response.code == 200) {
             this.vehiculo = response.data;
-            this.factura.idVehiculo = this.vehiculo.id;
-            console.log(this.vehiculo.servicio.id);
+            this.onLoadTramites();
 
-            if(this.vehiculo.servicio.id == 2){
-              this.onLoadTramites();
-    
-              this._PropietarioService.searchByVehiculo({ 'idVehiculo':this.vehiculo.id }, token).subscribe(
-                response => {
-                  if (response.code == 200) {
-                    this.propietarios = response.data;
-                                    
-                    swal.close();
-                  } else {
-                    this.propietarios = null;
-    
-                    swal({
-                      title: 'Atención!',
-                      text: response.message,
-                      type: 'warning',
-                      confirmButtonText: 'Aceptar'
-                    });
-                  }
-    
-                  error => {
-                    this.errorMessage = <any>error;
-                    if (this.errorMessage != null) {
-                      console.log(this.errorMessage);
-                      alert("Error en la petición");
-                    }
-                  }
-                }
-              );
-              } else {
-                swal({
-                  title: 'Atención!',
-                  text: 'El vehículo no pertenece a transporte público.',
-                  type: 'warning',
-                  confirmButtonText: 'Aceptar'
-                });
-              }
+            this.factura.idVehiculo = this.vehiculo.id;
+
+            swal.close();
             } else {
               this.vehiculo = null;
               this.factura.idVehiculo = null;
@@ -507,10 +475,13 @@ export class FroFacTramiteComponent implements OnInit {
                       this.valorRetefuenteUnitario = this.valorRetefuente / this.propietarios.length;
                       this.idVehiculoValor = response.data.id;
                     } else {
+                      this.valorRetefuente = 0;
+                      this.idVehiculoValor = null;
+
                       swal({
-                        title: 'No existen valores registrados para calcular la retefuente!',
+                        title: response.title,
                         text: response.message,
-                        type: 'error',
+                        type: response.status,
                         confirmButtonText: 'Aceptar'
                       });
                     }
@@ -626,6 +597,7 @@ export class FroFacTramiteComponent implements OnInit {
       'propietarios': this.propietariosVehiculoRetefuente,
       'retencion': this.valorRetefuenteUnitario,
       'idVehiculoValor': this.idVehiculoValor,
+      'valorVehiculo': this.valorVehiculo
     }
 
     this._FacturaService.register(datos, token).subscribe(
@@ -677,5 +649,72 @@ export class FroFacTramiteComponent implements OnInit {
         }
       }
     );
+  }
+
+  onCalcularValorRetefuenteManual() {
+    this.valorRetefuente = parseInt(this.valorVehiculo) * 0.01;
+    this.valorRetefuenteUnitario = this.valorRetefuente / this.propietarios.length;
+  }
+
+  onChangeTramitePrecio(e) {
+    this.tramite = false;
+
+    if(e) {
+      swal({
+        title: 'Verificando Datos!',
+        text: 'Solo tardará unos segundos, por favor espere.',
+        timer: 1000,
+
+        onOpen: () => {
+          swal.showLoading()
+        }
+      }); 
+
+      if (this.vehiculo.servicio.id != 2) {
+        if (e == 95) {
+          let token = this._LoginService.getToken();
+
+          this._FacturaTramiteService.validateTramiteByVehiculo({ 'idVehiculo': this.vehiculo.id }, token).subscribe(
+            response => {
+              if (response.code == 200) {
+                this.tramite = true;
+
+                swal({
+                  title: response.title,
+                  text: response.message,
+                  type: response.status,
+                  confirmButtonText: 'Aceptar'
+                });
+              } else {
+                this.tramite = false;
+                swal({
+                  title: response.title,
+                  text: response.message,
+                  type: response.status,
+                  confirmButtonText: 'Aceptar'
+                });
+              }
+
+              error => {
+                this.errorMessage = <any>error;
+                if (this.errorMessage != null) {
+                  console.log(this.errorMessage);
+                  alert("Error en la petición");
+                }
+              }
+            }
+          );
+        }
+      } else if(this.vehiculo.servicio.id == 2) {
+        this.tramite = true;
+      } else {
+        swal({
+          title: 'Atención!',
+          text: 'El vehículo no pertenece a transporte público.',
+          type: 'error',
+          confirmButtonText: 'Aceptar'
+        });
+      }
+    }
   }
 }

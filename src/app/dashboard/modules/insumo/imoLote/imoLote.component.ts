@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, AfterViewInit, EventEmitter } from '@angular/core';
 import { ImoLoteService } from '../../../../services/imoLote.service';
 import { CfgOrganismoTransitoService } from '../../../../services/cfgOrganismoTransito.service';
 import { LoginService } from '../../../../services/login.service';
@@ -9,7 +9,7 @@ declare var $: any;
   selector: 'app-index',
   templateUrl: './imoLote.component.html'
 })
-export class ImoLoteComponent implements OnInit {
+export class ImoLoteComponent implements OnInit, AfterViewInit {
   public errorMessage;
 
 	public loteInsumoSustratos;
@@ -39,6 +39,10 @@ export class ImoLoteComponent implements OnInit {
     
   ngOnInit() {
     this.onInitForms();
+  }
+
+  ngAfterViewInit(){
+    swal.close();
   }
 
   onInitForms(){

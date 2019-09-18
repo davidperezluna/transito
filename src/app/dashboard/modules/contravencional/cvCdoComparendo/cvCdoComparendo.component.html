@@ -20,7 +20,7 @@
       </div>
     </div>
 
-    <div class="col-xs-12 col-md-12 col-lg-6" *ngIf="formUpload">
+    <div class="col-xs-12 col-md-12 col-lg-4" *ngIf="formUpload">
       <form #formNew="ngForm">
         <div class="card">
           <div class="card-header">
@@ -40,7 +40,7 @@
                   </ng-select>
                 </div>
                 <div class="col-xs-12 col-lg-12">
-                  <label>Adjuntar documento <b class="text-danger">*</b> <small>(.csv)</small></label>
+                  <label>Adjuntar documento <b class="text-danger">*</b> <small>(.txt)</small></label>
                   <input class="form-control" type="file" (change)="onFileChange($event)" required>
                 </div>
               </div>
@@ -60,6 +60,28 @@
           </div>
         </div>
       </form>
+    </div>
+
+    <div class="col-xs-12 col-md-12 col-lg-8" *ngIf="formDetails">
+      <table class="table " id="dataTables-example">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Detalle</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="odd" *ngFor="let detalle of detalles; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>
+              <ng-container *ngFor="let registro of detalle.registros; let j = index">
+                <span class="badge badge-success" *ngIf="registro.code == 200">{{ registro.message }}</span>
+                <span class="badge badge-danger" *ngIf="registro.code == 400">{{ registro.message }}</span>
+              </ng-container>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 

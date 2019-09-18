@@ -55,7 +55,7 @@ export class NewComponent implements OnInit {
                 }
             }
         );
-        this._EmpresaService.getEmpresasAseguradoras().subscribe(
+        this._EmpresaService.getAseguradoras().subscribe(
             response => {
                 this.empresas = response;
             },

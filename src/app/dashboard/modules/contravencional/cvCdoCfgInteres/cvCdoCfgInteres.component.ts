@@ -38,7 +38,7 @@ export class CvCdoCfgInteresComponent implements OnInit {
 				response => {
           this.intereses = response.data;
           let timeoutId = setTimeout(() => {  
-            this.iniciarTabla();
+            this.onInitTable();
           }, 100);
           swal.close();
 				}, 
@@ -53,7 +53,7 @@ export class CvCdoCfgInteresComponent implements OnInit {
       );
   }
 
-  iniciarTabla(){
+  onInitTable(){
     $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,

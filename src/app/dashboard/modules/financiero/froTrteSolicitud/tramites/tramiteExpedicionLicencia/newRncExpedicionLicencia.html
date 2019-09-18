@@ -16,17 +16,14 @@
 <div class="row" *ngIf="!realizado">
     <!-- .row -->
     <div class="col-xs-12 col-lg-12">
-        <!-- .col -->
-        <div class="card">
-            <div class="card-header">
-                <b class="text-uppercase">
-                    Expedición de licencia
-                </b>
-                <br>
-                <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
-            </div>
-            <div class="card-body">
-                <form>
+        <form #formNew="ngForm">
+            <div class="card">
+                <div class="card-header">
+                    <b class="text-uppercase">Expedición de licencia</b>
+                    <br>
+                    <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
+                </div>
+                <div class="card-body">
                     <div class="form-group">
                         <div class="row">
                             <div class="col-xs-12 col-lg-12">
@@ -43,7 +40,7 @@
                             </div>
                         </div>
                     </div>
-
+    
                     <div class="form-group" *ngIf="datos.documentacion">
                         <div class="row">
                             <div class="col-xs-12 col-lg-12">
@@ -110,15 +107,15 @@
                             </div>
                         </div>
                     </div>
-                </form>
+                </div>
+                <div class="card-footer">
+                    <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary">
+                        <i class="fa fa-save"></i>
+                        Guardar
+                    </button>
+                </div>
             </div>
-            <div class="card-footer">
-                <button (click)="onEnviar()" class="btn btn-primary">
-                    <i class="fa fa-save"></i>
-                    Guardar
-                </button>
-            </div>
-        </div>
+        </form>
     </div>
     <!-- /.col -->
 </div>

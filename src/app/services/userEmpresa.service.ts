@@ -84,8 +84,12 @@ export class UserEmpresaService {
 		return this._http.post(this.url + "/buscar/ciudadano", params, { headers: headers }).map(res => res.json())
 	}
 
-	getEmpresasAseguradoras(){
+	getAseguradoras(){
 		return this._http.get(this.url + "/select/empresas/aseguradoras").map(res => res.json());
+	}
+
+	getCapacitadoras(){
+		return this._http.get(this.url + "/select/empresas/capacitadoras").map(res => res.json());
 	}
 
 	searchByFiltros(datos, token) {

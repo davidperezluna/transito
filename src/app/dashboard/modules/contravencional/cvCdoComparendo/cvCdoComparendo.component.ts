@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { CfgOrganismoTransitoService } from '../../../../services/cfgOrganismoTransito.service';
 import { CvCdoComparendoService } from '../../../../services/cvCdoComparendo.service';
 import { CvCdoComparendo } from './cvCdoComparendo.modelo';
@@ -11,7 +11,7 @@ declare var $: any;
   templateUrl: './cvCdoComparendo.component.html'
 })
 
-export class CvCdoComparendoComponent implements OnInit {
+export class CvCdoComparendoComponent implements OnInit, AfterViewInit {
   public comparendo: CvCdoComparendo;
   public errorMessage:any;
 
@@ -23,8 +23,11 @@ export class CvCdoComparendoComponent implements OnInit {
   public fileSelected: File = null;
 
   public formIndex: any; 
+  public formDetails: any; 
   public formNew: any; 
   public formUpload: any;
+
+  public detalles: any;
 
   public tiposFuente = [
     { 'value': '1', 'label': 'SSTTDN' },
@@ -40,7 +43,7 @@ export class CvCdoComparendoComponent implements OnInit {
     private _ComparendoService: CvCdoComparendoService,
     private _OrganismoTransitoService: CfgOrganismoTransitoService,
 		private _LoginService: LoginService,
-    ){}
+  ){}
 
   ngOnInit() {
     this.onInitForms();
@@ -57,10 +60,7 @@ export class CvCdoComparendoComponent implements OnInit {
       response => {
         this.organismosTransito = response;
 
-        let timeoutId = setTimeout(() => {
-          swal.close();
-          this.formIndex = true;
-        }, 100);
+        this.formIndex = true;
       },
       error => {
         this.errorMessage = <any>error;
@@ -73,8 +73,13 @@ export class CvCdoComparendoComponent implements OnInit {
     );
   }
 
+  ngAfterViewInit(){
+    swal.close();
+  }
+
   onInitForms(){
     this.formIndex = false;
+    this.formDetails = false;
     this.formUpload = false;
     this.formNew = false;
   }
@@ -186,6 +191,10 @@ export class CvCdoComparendoComponent implements OnInit {
       this._ComparendoService.upload(this.file, this.datos, token).subscribe(
         response => {
           if (response.code == 200) {
+            this.detalles = response.data;
+            this.formDetails = true;
+            console.log(this.detalles);
+            
             swal({
               title: response.title,
               text: response.message,
@@ -193,6 +202,9 @@ export class CvCdoComparendoComponent implements OnInit {
               confirmButtonText: 'Aceptar'
             });
           } else {
+            this.detalles = null;
+            this.formDetails = false;
+
             swal({
               title: response.title,
               text: response.message,

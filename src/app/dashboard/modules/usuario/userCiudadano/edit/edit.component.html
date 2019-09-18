@@ -1,13 +1,13 @@
 <div class="row">
     <div class="col-md-12">
-        <div class="card">
-            <div class="card-header">
-                <b class="text-uppercase">Editar persona natural</b>
-                <br>
-                <small>Los campos con <b class="text-danger"> <b class="text-danger">*</b></b> son obligatorios</small>
-            </div>
-            <div class="card-body">
-                <form #editForm="ngForm">
+        <form #editForm="ngForm">
+            <div class="card">
+                <div class="card-header">
+                    <b class="text-uppercase">Editar persona natural</b>
+                    <br>
+                    <small>Los campos con <b class="text-danger"> <b class="text-danger">*</b></b> son obligatorios</small>
+                </div>
+                <div class="card-body">
                     <div class="form-group">
                         <div class="row">
                             <div class="col-xs-12 col-lg-4">
@@ -130,18 +130,18 @@
                             </div>
                         </div>
                     </div> 
-                </form>
+                </div>
+                <div class="card-footer">
+                    <button (click)="onEnviar()" [disabled]="editForm.invalid" class="btn btn-primary" type="button">
+                        <i class="fa fa-floppy-o"></i>
+                        Enviar
+                    </button>
+                    <button (click)="onCancelar()" class="btn btn-default">
+                        <i class="fa fa-times"></i>
+                        Cancelar
+                    </button>
+                </div>
             </div>
-            <div class="card-footer">
-                <button (click)="onEnviar()" [disabled]="editForm.invalid" class="btn btn-primary" type="button">
-                    <i class="fa fa-floppy-o"></i>
-                    Enviar
-                </button>
-                <button (click)="onCancelar()" class="btn btn-default">
-                    <i class="fa fa-times"></i>
-                    Cancelar
-                </button>
-            </div>
-        </div>
+        </form>
     </div>
 </div>

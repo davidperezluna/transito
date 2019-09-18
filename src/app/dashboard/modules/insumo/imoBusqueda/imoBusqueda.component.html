@@ -10,16 +10,23 @@
               <div class="form-group">
                 <div class="row">
                   <div class="col-xs-12 col-lg-12">
+                      <label>Organismo transito <b class="text-danger">*</b></label>
+                      <ng-select [multiple]="false" [options]="organismosTransito" [(ngModel)]="datos.idOrganismoTransito" name="idOrganismoTransito" required>
+                      </ng-select>
+                  </div>
+                  
+                  <div class="col-xs-12 col-lg-12">
+                      <label>Módulo <b class="text-danger">*</b></label>
+                      <ng-select [multiple]="false" [options]="modulos" [(ngModel)]="datos.idModulo" name="idModulo" required>
+                      </ng-select>
+                  </div>
+
+                  <div class="col-xs-12 col-lg-12">
                       <label>Tipo insumo <b class="text-danger">*</b></label>
                       <ng-select [multiple]="false" [options]="tiposInsumos" [(ngModel)]="datos.tipo" name="idTipoInsumo" required>
                       </ng-select>
                   </div>
                   
-                  <div class="col-xs-12 col-lg-12">
-                      <label>Organismo transito <b class="text-danger">*</b></label>
-                      <ng-select [multiple]="false" [options]="organismosTransito" [(ngModel)]="datos.idOrganismoTransito" name="idOrganismoTransito" required>
-                      </ng-select>
-                  </div>
                 </div>
               </div>
             </form>
@@ -80,7 +87,7 @@
                     </ng-container>
                     <ng-container *ngIf="loteInsumo.fecha">
                       <b>Fecha</b>
-                      {{ ( loteInsumo.fecha * 1000) | date: 'dd/MM/yyyy' }}
+                      {{ ( loteInsumo.fecha.timestamp * 1000) | date: 'dd/MM/yyyy' }}
                     </ng-container>
                   </td>
                   <td>
