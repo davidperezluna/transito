@@ -84,17 +84,23 @@
                         <td>
                           <b>No. acta</b>
                           {{ loteInsumoSustrato.numeroActa }}
-                          <br>
-                          <b>Proveedor-Empresa</b>
-                          <br>
-                          {{ loteInsumoSustrato.empresa.nombre }}
-                          <br>
-                          <b>Sede operativa</b>
-                          <br>
-                          {{ loteInsumoSustrato.sedeOperativa.nombre }}
-                          <br>
-                          <b>Insumo</b>
-                          {{ loteInsumoSustrato.tipoInsumo.nombre }}
+                          <ng-container *ngIf="loteInsumoSustrato.empresa">
+                            <br>
+                            <b>Proveedor-Empresa</b>
+                            <br>
+                            {{ loteInsumoSustrato.empresa.nombre }}
+                          </ng-container>
+                          <ng-container *ngIf="loteInsumoSustrato.sedeOperativa">
+                            <br>
+                            <b>Sede operativa</b>
+                            <br>
+                            {{ loteInsumoSustrato.sedeOperativa.nombre }}
+                          </ng-container>
+                          <ng-container *ngIf="loteInsumoSustrato.tipoInsumo">
+                            <br>
+                            <b>Insumo</b>
+                            {{ loteInsumoSustrato.tipoInsumo.nombre }}
+                          </ng-container>
                         </td>
                         <td>
                           <b>Rango inicial</b>
