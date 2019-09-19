@@ -116,7 +116,9 @@ export class NewRncRecategorizacionLicenciaAbajoComponent implements OnInit {
             this._CategoriaService.selectByServicioAndTipoVehiculo(datos, token).subscribe(
                 response => {
                     if (response.code == 200) {
-                        this.categorias = response.data;
+                        setTimeout(() => {
+                            this.categorias = response.data;
+                        });
                     } else {
                         this.categorias = null;
 

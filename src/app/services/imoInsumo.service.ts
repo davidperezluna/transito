@@ -38,9 +38,7 @@ export class ImoInsumoService {
 		let json = JSON.stringify(datos);
 		let params = "data="+json;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
-		return this._http.post(this.url+"/isExistencia", params, {headers: headers}).map(
-			res => res.json(),
-		);
+		return this._http.post(this.url+"/isExistencia", params, {headers: headers}).map(res => res.json(),);
 	}
 	
 	reasignacionSustrato(datos){
@@ -52,11 +50,11 @@ export class ImoInsumoService {
 		);
 	}
 
-	showLote(loteInsumoId, token){
-		let json = JSON.stringify(loteInsumoId);
+	searchByLote(datos, token){
+		let json = JSON.stringify(datos);
 		let params = "data="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
-		return this._http.post(this.url+"/show/loteInsumo", params, {headers: headers}).map(
+		return this._http.post(this.url +"/search/lote", params, {headers: headers}).map(
 			res => res.json(),
 		);
 	}
@@ -91,8 +89,8 @@ export class ImoInsumoService {
 		); 
 	}
  
-	edit(smlmv,token){
-		let json = JSON.stringify(smlmv);
+	edit(datos, token){
+		let json = JSON.stringify(datos);
 		let params = "data="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
  		return this._http.post(this.url+"/edit", params, {headers: headers}).map(

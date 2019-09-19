@@ -24,7 +24,8 @@ export class FroTrtePrecioComponent implements OnInit, AfterViewInit {
     public modulos: any;
     public modulo: any = null;
     public tramitePrecio: any = null;
-    public disableTextbox = true;
+    public disableTextboxDate = true;
+    public disableTextboxValue = true;
     public dateError = false;
 
     public search: any = {
@@ -133,16 +134,24 @@ export class FroTrtePrecioComponent implements OnInit, AfterViewInit {
         });
     }
 
-    onToggleDisable() {
-        this.disableTextbox = !this.disableTextbox;
+    onToggleDisableDate() {
+        this.disableTextboxDate = !this.disableTextboxDate;
     }
 
-    onDisable() {
-        this.disableTextbox = true;
+    onToggleDisableValue() {
+        this.disableTextboxValue = !this.disableTextboxValue;
+    }
+
+    onDisableDate() {
+        this.disableTextboxDate = true;
+    }
+
+    onDisableValue() {
+        this.disableTextboxValue = true;
     }
 
     onValidateDate(tramitePrecioChanged) {
-        this.disableTextbox = true;
+        this.disableTextboxDate = true;
 
         let token = this._LoginService.getToken();
 

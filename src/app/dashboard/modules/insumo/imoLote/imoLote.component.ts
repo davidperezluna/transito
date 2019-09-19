@@ -12,8 +12,9 @@ declare var $: any;
 export class ImoLoteComponent implements OnInit, AfterViewInit {
   public errorMessage;
 
-	public loteInsumoSustratos;
-  public loteInsumoInsumos;
+	public loteSustratos;
+  public loteInsumos;
+  public loteInsumo:any; 
   
 	public formSearch: any;
 	public formNew: any;
@@ -23,7 +24,6 @@ export class ImoLoteComponent implements OnInit, AfterViewInit {
   public tipoInsumo :any;
   public table:any; 
   public totalesTipo:any; 
-  public loteInsumoInsumo:any; 
   public color:any; 
 
   public search = {
@@ -66,8 +66,8 @@ export class ImoLoteComponent implements OnInit, AfterViewInit {
     this._LoteInsumoService.searchByFechas(this.search, token).subscribe(
       response => {
         if (response.code == 200) {
-          this.loteInsumoSustratos = response.data.loteSustratos;
-          this.loteInsumoInsumos = response.data.loteInsumos; 
+          this.loteSustratos = response.data.loteSustratos;
+          this.loteInsumos = response.data.loteInsumos; 
           this.totalesTipo = response.data.totalesTipo; 
   
           let timeoutId = setTimeout(() => {  
@@ -166,15 +166,15 @@ export class ImoLoteComponent implements OnInit, AfterViewInit {
     })
   }
  
-  onEditLoteInsumoSustrato(loteInsumoInsumo:any){
-    this.loteInsumoInsumo = loteInsumoInsumo;
+  onEditLoteInsumoSustrato(loteInsumo:any){
+    this.loteInsumo = loteInsumo;
     this.tipoInsumo = 'SUSTRATO';
     this.formEdit = true;
     this.formIndex = false;
   }
 
-  onEditLoteInsumoInsumo(loteInsumoInsumo:any){
-    this.loteInsumoInsumo = loteInsumoInsumo;
+  onEditLoteInsumoInsumo(loteInsumo:any){
+    this.loteInsumo = loteInsumo;
     this.tipoInsumo = 'INSUMO';
     this.formEdit = true;
     this.formIndex = false;

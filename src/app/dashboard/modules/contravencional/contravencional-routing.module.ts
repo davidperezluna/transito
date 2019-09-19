@@ -79,12 +79,12 @@ const routes: Routes = [
   {
     path: 'cvCfgModulo',
     component: CvCfgModuloComponent
-  },
+  },*/
   {
     path: 'cvCfgPorcentajeInicial',
     component: CvCfgPorcentajeInicialComponent
   },
-  {
+  /*{
     path: 'cvCfgTipoRestriccion',
     component: CvCfgTipoRestriccionComponent
   },
