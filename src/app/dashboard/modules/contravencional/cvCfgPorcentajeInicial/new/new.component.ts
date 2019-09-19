@@ -15,8 +15,8 @@ public errorMessage;
 public respuesta;
 
 constructor(
-  private _EstadoService: CvCfgPorcentajeInicialService,
-  private _loginService: LoginService,
+  private _PorcentajeService: CvCfgPorcentajeInicialService,
+  private _LoginService: LoginService,
   ){}
 
   ngOnInit() {
@@ -28,9 +28,9 @@ constructor(
   }
   
   onEnviar(){
-    let token = this._loginService.getToken();
+    let token = this._LoginService.getToken();
     
-		this._EstadoService.register(this.porcentaje,token).subscribe(
+		this._PorcentajeService.register(this.porcentaje,token).subscribe(
 			response => {
         if(response.code == 200){
           this.ready.emit(true);

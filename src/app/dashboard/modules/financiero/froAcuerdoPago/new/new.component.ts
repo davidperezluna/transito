@@ -121,9 +121,6 @@ constructor(
     this.ready.emit(true);
   }
 
-  
-
-
   onPreliquidar() {
     if (this.acuerdoPago.numeroCuotas > 1) {
       

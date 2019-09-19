@@ -71,10 +71,10 @@
                                     <br>
                                     <b>Estado</b>
                                     {{ comparendo.estado?.nombre }}
-                                    <span *ngIf="comparendo.placa">
+                                    <ng-container *ngIf="comparendo.placa">
                                         <br>
                                         {{ comparendo.placa }}
-                                    </span>
+                                    </ng-container>
                                 </td>
                                 <td>
                                     <b>Código</b>
@@ -82,6 +82,10 @@
                                     <br>
                                     <b>Valor</b>
                                     {{ comparendo.valorInfraccion }}
+                                    <ng-container *ngIf="comparendo.fuga">
+                                        <br>
+                                        <span class="badge badge-danger">Fuga</span>
+                                    </ng-container>
                                 </td>
                                 <td>
                                     <div class="custom-control custom-checkbox" style="margin-top: 3px;">

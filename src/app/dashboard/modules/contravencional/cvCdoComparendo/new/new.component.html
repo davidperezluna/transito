@@ -88,7 +88,7 @@
             <div class="card-body"><!-- .card-body -->
                 <form #formNew="ngForm">
                     <div class="row">
-                        <div class="col-xs-12 col-lg-5">
+                        <div class="col-xs-12 col-lg-12">
                             <h6 class="text-uppercase text-center gradient">
                                 <b>1. fecha y hora</b>
                             </h6>
@@ -114,28 +114,22 @@
                             </div>
                         </div>
 
-                        <div class="col-xs-12 col-lg-7">
+                        <div class="col-xs-12 col-lg-12">
                             <h6 class="text-uppercase text-center gradient">
                                 <b>2. lugar de la infracción</b>
                             </h6>
                             <div class="row">
                                 <div class="col-xs-12 col-lg-6">
-                                    <label>Dirección
-                                        <b class="text-danger">*</b>
-                                    </label>
+                                    <label>Dirección <b class="text-danger">*</b></label>
                                     <input class="form-control" [(ngModel)]="comparendo.direccion" name="direccion" type="text" required>
                                 </div>
                                 <div class="col-xs-12 col-lg-3">
-                                    <label>Municipio
-                                        <b class="text-danger">*</b>
-                                    </label>
+                                    <label>Municipio<b class="text-danger">*</b></label>
                                     <ng-select [multiple]="false" [options]="municipios" [(ngModel)]="comparendo.idMunicipioLugar" name="municipioLugar" required>
                                     </ng-select>
                                 </div>
                                 <div class="col-xs-12 col-lg-3">
-                                    <label>Localidad
-                                        <b class="text-danger">*</b>
-                                    </label>
+                                    <label>Localidad<b class="text-danger">*</b></label>
                                     <input class="form-control" [(ngModel)]="comparendo.localidad" name="localidad" type="text" required>
                                 </div>
                             </div>
@@ -175,8 +169,13 @@
                             <div class="row">
                                 <div class="col-xs-12 col-lg-12">
                                     <label>Código <b class="text-danger">*</b></label>
-                                    <ng-select (ngModelChange)="onChangedInfraccion($event)" [multiple]="false" [options]="infracciones" [(ngModel)]="comparendo.idInfraccion"
-                                        name="infraccion" required></ng-select>
+                                    <ng-select (ngModelChange)="onChangedInfraccion($event)" [multiple]="false" [options]="infracciones" [(ngModel)]="comparendo.idInfraccion" name="infraccion" required></ng-select>
+                                </div>
+                            </div>
+                            <div class="row" *ngIf="infraccion && infraccion.categoria == 5">
+                                <div class="col-xs-12 col-lg-12">
+                                    <label>Grado de alcoholemia <b class="text-danger">*</b></label>
+                                    <input class="form-control text-uppercase" type="number" min="0" [(ngModel)]="comparendo.gradoAlcoholemia" name="gradoAlcoholemia">
                                 </div>
                             </div>
                         </div>

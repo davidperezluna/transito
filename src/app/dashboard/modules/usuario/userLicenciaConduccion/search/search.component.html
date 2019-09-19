@@ -70,12 +70,17 @@
                                             <td>{{ licenciaConduccion.fechaVencimiento }}</td>
                                             <td>{{ licenciaConduccion.estado }}</td>
                                             <td>
-                                                <div class="btn-group">
+                                                <div *ngIf="licenciaConduccion.estado != 'CANCELADA' && licenciaConduccion.estado != 'SUSPENDIDA'" class="btn-group">
                                                     <button (click)="newCancelacion(licenciaConduccion)" class="btn btn-primary btn-xs" type="button">
                                                         Cancelar
                                                     </button>
                                                     <button (click)="newSuspension(licenciaConduccion)" class="btn btn-danger btn-xs" type="button">
                                                         Suspender
+                                                    </button>
+                                                </div>
+                                                <div *ngIf="licenciaConduccion.estado == 'SUSPENDIDA'" class="btn-group">
+                                                    <button (click)="newDevolucion(licenciaConduccion)" class="btn btn-success btn-xs" type="button">
+                                                        Devolución
                                                     </button>
                                                 </div>
                                             </td>
@@ -90,4 +95,29 @@
         </div>
         <app-newCancelacion *ngIf='formCancelacion' [licenciaConduccion]="licenciaConduccion" (ready)="ready($event)"></app-newCancelacion>
         <app-newSuspension *ngIf='formSuspension' [licenciaConduccion]="licenciaConduccion" (ready)="ready($event)"></app-newSuspension>
+        
+        <div class="form-group row" *ngIf='formDevolucion'>
+            <label>Se ha cumplido las horas comunitarias?</label>
+            <div class="col-xs-12 col-lg-3">
+                <div class="custom-control custom-radio">
+                    <input name="correoCertificadoLlegada" [(ngModel)]="datos.horasComunitarias" value=true type="radio" id="radio-tramite1" name="radio-tramite" class="custom-control-input">
+                    <label class="custom-control-label" for="radio-tramite1">SI</label>
+                </div>
+            </div>
+            <div class="col-xs-12 col-lg-3">
+                <div class="custom-control custom-radio">
+                    <input name="correoCertificadoLlegada" [(ngModel)]="datos.horasComunitarias" value=false type="radio" id="radio-tramite2" name="radio-tramite" class="custom-control-input" >
+                    <label class="custom-control-label" for="radio-tramite2">NO</label>
+                </div>
+            </div>
+            <div >
+                <button (click)="newActa(licenciaConduccion)" class="btn btn-success btn-xs" type="button">
+                    Generar Acta.
+                </button>
+                <button (click)="onCancelarDevolucion(licenciaConduccion)" class="btn btn-primary btn-xs" type="button">
+                    Cancelar
+                </button>
+            </div>
+        </div>
+
     </div>

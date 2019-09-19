@@ -168,7 +168,7 @@ constructor(
       'numeroIdentificacion': this.identificacion,
     };
 
-    this.comparendo = new CvCdoComparendo(null,null,null,null,null,null,null,null,null,null,null,null,false,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
+    this.comparendo = new CvCdoComparendo(null,null,null,null,null,null,null,null,null,null,null,null,false,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
 
     this._FuncionarioService.selectAgentes().subscribe(
       response => {
