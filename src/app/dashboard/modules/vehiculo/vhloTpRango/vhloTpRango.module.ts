@@ -5,7 +5,7 @@ import { SelectModule } from 'angular2-select';
 
 import { UserEmpresaService } from '../../../../services/userEmpresa.service';
 import { VhloTpRangoService } from '../../../../services/vhloTpRango.service';
-import { VhloTpConvenioService } from 'app/services/vhloTpConvenio.service';
+import { VhloTpConvenioService } from '../../../../services/vhloTpConvenio.service';
 
 import { NewComponent } from './new/new.component';
 /* import { EditComponent } from './edit/edit.component'; */

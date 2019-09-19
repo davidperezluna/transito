@@ -1,0 +1,61 @@
+<div class="row ">
+    <div class="col-xs-12 col-lg-10 ">
+        <div class="card">
+            <div class="card-body ">
+                <h5 class="m-0">Suspender Licencia de Conducción</h5>
+                <hr>
+                <form #formNew="ngForm">
+                    <div class="row justify-content-center container">
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Fecha Resolución acto o providencia
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input class="form-control" [(ngModel)]="formCancelacion.fechaResolucion"
+                                    name="fechaResolucion" type="date" required>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Fecha inicio
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input class="form-control" [(ngModel)]="formCancelacion.fechaInicio"
+                                    name="fechaInicio" type="date" required>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Fecha fin
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input class="form-control" [(ngModel)]="formCancelacion.fechaFin"
+                                    name="fechaFin" type="date" required>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Tipo de acto
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input class="form-control" [(ngModel)]="formCancelacion.tipoActo"
+                                    name="tipoActo" type="text" required>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Nro. Resolución acto o providencia
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input class="form-control" [(ngModel)]="formCancelacion.numResolucion"
+                                    name="numResolucion" type="text" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
+                            <i class="fa fa-floppy-o"></i>
+                            Enviar
+                        </button>
+                        <button (click)="onCancelar()" class="btn btn-default">
+                            <i class="fa fa-times"></i>
+                            Cancelar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { DatePipe, CurrencyPipe } from '@angular/common';
 import { VhloTpConvenioService } from "../../../../../services/vhloTpConvenio.service";
 import { UserEmpresaService } from '../../../../../services/userEmpresa.service';
-import { PnalFuncionarioService } from 'app/services/pnalFuncionario.service';
+import { PnalFuncionarioService } from '../../../../../services/pnalFuncionario.service';
 import { LoginService } from '../../../../../services/login.service';
 import swal from 'sweetalert2';
 

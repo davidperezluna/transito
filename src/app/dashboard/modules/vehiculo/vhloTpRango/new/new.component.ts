@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { VhloTpRango } from "../vhloTpRango.modelo";
 import { VhloTpRangoService } from "../../../../../services/vhloTpRango.service";
-import { VhloTpConvenioService } from 'app/services/vhloTpConvenio.service';
+import { VhloTpConvenioService } from '../../../../../services/vhloTpConvenio.service';
 import { LoginService } from '../../../../../services/login.service';
 
 import { DatePipe, CurrencyPipe } from '@angular/common';
