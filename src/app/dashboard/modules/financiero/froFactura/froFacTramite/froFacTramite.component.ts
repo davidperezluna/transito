@@ -4,6 +4,7 @@ import { FroFacTramite } from './froFacTramite.modelo';
 import { FroFacturaService } from '../../../../../services/froFactura.service';
 import { FroTrtePrecioService } from '../../../../../services/froTrtePrecio.service';
 import { FroFacTramiteService } from '../../../../../services/froFacTramite.service';
+import { FroTrteSolicitudService } from 'app/services/froTrteSolicitud.service';
 import { PnalFuncionarioService } from '../../../../../services/pnalFuncionario.service';
 import { CfgModuloService } from '../../../../../services/cfgModulo.service';
 import { UserCfgTipoIdentificacionService } from '../../../../../services/userCfgTipoIdentificacion.service';
@@ -77,7 +78,7 @@ export class FroFacTramiteComponent implements OnInit, AfterViewInit {
     private _PropietarioService: VhloPropietarioService,
     private _VehiculoService: VhloVehiculoService,
     private _TramitePrecioService: FroTrtePrecioService,
-    private _FacturaTramiteService: FroFacTramiteService,
+    private _FroTrteSolicitudService: FroTrteSolicitudService,
     private _VhloValorService: VhloValorService,
     private _LoginService: LoginService,
   ){}
@@ -676,7 +677,7 @@ export class FroFacTramiteComponent implements OnInit, AfterViewInit {
         if (e == 95) {
           let token = this._LoginService.getToken();
 
-          this._FacturaTramiteService.validateTramiteByVehiculo({ 'idVehiculo': this.vehiculo.id }, token).subscribe(
+          this._FroTrteSolicitudService.searchByCambioServicio({ 'idVehiculo': this.vehiculo.id }, token).subscribe(
             response => {
               if (response.code == 200) {
                 this.tramite = true;
