@@ -40,18 +40,18 @@ const routes: Routes = [
     path: 'cvAudiencia',
     component: CvAudienciaComponent
   },
-  /*{
+  {
     path: 'cvCdoCfgDescuento',
     component: CvCdoCfgDescuentoComponent
-  },*/
+  },
   {
     path: 'cvCdoCfgEstado',
     component: CvCdoCfgEstadoComponent
   },
-  /*{
+  {
     path: 'cvCdoCfgInteres',
     component: CvCdoCfgInteresComponent
-  },*/
+  },
   {
     path: 'cvCdoComparendo',
     component: CvCdoComparendoComponent
@@ -60,10 +60,10 @@ const routes: Routes = [
     path: 'cvCdoCurso',
     component: CvCdoCursoComponent
   },
-  /*{
+  {
     path: 'cvCdoNotificacion',
     component: CvCdoNotificacionComponent
-  },*/
+  },
   {
     path: 'cvCdoTrazabilidad',
     component: CvCdoTrazabilidadComponent
@@ -72,7 +72,7 @@ const routes: Routes = [
     path: 'search',
     component: SearchComponent
   },
-  /*{
+  {
     path: 'cvCfgInteres',
     component: CvCfgInteresComponent
   },
@@ -103,7 +103,7 @@ const routes: Routes = [
   {
     path: 'cvRestriccion',
     component: CvRestriccionComponent
-  },*/
+  },
 ]; 
 
 @NgModule({

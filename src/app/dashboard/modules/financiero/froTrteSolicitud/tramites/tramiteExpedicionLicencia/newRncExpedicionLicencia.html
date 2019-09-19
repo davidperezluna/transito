@@ -91,8 +91,7 @@
                             </div>
                             <div class="col-xs-12 col-lg-4" *ngIf="categorias">
                                 <label>Categoria <b class="text-danger">*</b></label>
-                                <ng-select [multiple]="false" [options]="categorias" [(ngModel)]="datos.idCategoria" name="idCategoria" required>
-                                </ng-select>
+                                <ng-select [multiple]="false" [options]="categorias" [(ngModel)]="datos.idCategoria" name="idCategoria" required></ng-select>
                             </div>
                             <div class="col-xs-12 col-lg-4" *ngIf="datos.idCategoria">
                                 <label>Fecha Expedición <b class="text-danger">*</b></label>

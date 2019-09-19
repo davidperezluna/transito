@@ -22,29 +22,24 @@ export class CvCfgPorcentajeInicialComponent implements OnInit {
 
   constructor(
     private _ConectorService: CvCfgPorcentajeInicialService,
-		private _loginService: LoginService,
+		private _LoginService: LoginService,
     ){}
     
   ngOnInit() {
     swal({
       title: 'Cargando Tabla!',
       text: 'Solo tardara unos segundos por favor espere.',
-      timer: 1500,
       onOpen: () => {
         swal.showLoading()
       }
-    }).then((result) => {
-      if (
-        // Read more about handling dismissals
-        result.dismiss === swal.DismissReason.timer
-      ) {
-      }
-    })
+    });
+
     this._ConectorService.index().subscribe(
 				response => {
           this.porcentajes = response.data;
           let timeoutId = setTimeout(() => {  
-            this.iniciarTabla();
+            this.onInitTable();
+            swal.close();
           }, 100);
 				}, 
 				error => {
@@ -58,8 +53,8 @@ export class CvCfgPorcentajeInicialComponent implements OnInit {
       );
   }
 
-  iniciarTabla(){
-    $('#dataTables-example').DataTable({
+  onInitTable(){
+    this.table = $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,
       sPaginationType: 'full_numbers',
@@ -71,8 +66,7 @@ export class CvCfgPorcentajeInicialComponent implements OnInit {
           sLast: '<i class="fa fa-step-forward"></i>'
         }
       }
-   });
-   this.table = $('#dataTables-example').DataTable();
+    });
   }
   
   onNew(){
@@ -102,7 +96,7 @@ export class CvCfgPorcentajeInicialComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.value) {
-        let token = this._loginService.getToken();
+        let token = this._LoginService.getToken();
         this._ConectorService.delete({'id':id},token).subscribe(
             response => {
                 swal({

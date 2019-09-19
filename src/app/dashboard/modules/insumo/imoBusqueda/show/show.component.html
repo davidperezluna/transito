@@ -4,7 +4,7 @@
       <div class="card-header">
           <b class="text-uppercase">{{ loteInsumo.tipoInsumo.nombre }} {{ loteInsumo.sedeOperativa.nombre }}</b>
       </div>
-      <div class="card-body">
+      <div class="card-body" *ngIf="insumos">
         <table class="table" id="dataTables-example-sustratos">
           <thead>
             <tr>

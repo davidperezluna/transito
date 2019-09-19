@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Output, Input, EventEmitter } from '@angular/core';
 import { FroTrtePrecioService } from "../../../../services/froTrtePrecio.service";
 import { CfgModuloService } from '../../../../services/cfgModulo.service';
 import { LoginService } from '../../../../services/login.service';
@@ -10,7 +10,7 @@ declare var $: any;
     templateUrl: './froTrtePrecio.component.html'
 })
 
-export class FroTrtePrecioComponent implements OnInit {
+export class FroTrtePrecioComponent implements OnInit, AfterViewInit {
     public errorMessage;
 
     public formNew = false;
@@ -24,13 +24,13 @@ export class FroTrtePrecioComponent implements OnInit {
     public modulos: any;
     public modulo: any = null;
     public tramitePrecio: any = null;
-    public disableTextbox = true;
+    public disableTextboxDate = true;
+    public disableTextboxValue = true;
     public dateError = false;
 
     public search: any = {
         'idModulo': null,
     }
-
 
     constructor(
         private _PrecioService: FroTrtePrecioService,
@@ -52,6 +52,10 @@ export class FroTrtePrecioComponent implements OnInit {
                 }
             }
         );
+    }
+
+    ngAfterViewInit(){
+        swal.close();
     }
 
     onSearch() {
@@ -130,16 +134,24 @@ export class FroTrtePrecioComponent implements OnInit {
         });
     }
 
-    onToggleDisable() {
-        this.disableTextbox = !this.disableTextbox;
+    onToggleDisableDate() {
+        this.disableTextboxDate = !this.disableTextboxDate;
     }
 
-    onDisable() {
-        this.disableTextbox = true;
+    onToggleDisableValue() {
+        this.disableTextboxValue = !this.disableTextboxValue;
+    }
+
+    onDisableDate() {
+        this.disableTextboxDate = true;
+    }
+
+    onDisableValue() {
+        this.disableTextboxValue = true;
     }
 
     onValidateDate(tramitePrecioChanged) {
-        this.disableTextbox = true;
+        this.disableTextboxDate = true;
 
         let token = this._LoginService.getToken();
 

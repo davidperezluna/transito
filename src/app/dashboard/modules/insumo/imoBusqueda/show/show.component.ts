@@ -13,23 +13,50 @@ declare var $: any;
 })
 export class ShowComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
-@Input() insumos:any = null;
 @Input() loteInsumo:any = null;
 public errorMessage;
 
 public apiUrl = environment.apiUrl + 'insumo/imolote';
 
+public insumos:any;
+
 public table:any;
 
 constructor(
   private _LoginService: LoginService,
-  private _ImoInsumoService: ImoInsumoService,
+  private _InsumoService: ImoInsumoService,
   ){}
 
   ngOnInit() {
-    let timeoutId = setTimeout(() => {  
-      this.onInitTable();
-    }, 200);
+    swal({
+      title: 'Cargando registros!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+
+    let token = this._LoginService.getToken();
+
+    this._InsumoService.searchByLote({ 'idLote': this.loteInsumo.id }, token).subscribe(
+      response => {
+        if (response.code == 200) {
+          this.insumos = response.data;
+
+          let timeoutId = setTimeout(() => {
+            this.onInitTable();
+            swal.close();
+          }, 200);
+        }
+        error => {
+          this.errorMessage = <any>error;
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      }
+    );
   }
 
   onInitTable(){
@@ -40,8 +67,10 @@ constructor(
     } );*/
 
     this.table = $('#dataTables-example-sustratos').DataTable({
+      retrieve: true,
+      paging: false,
       responsive: true,
-      pageLength: 8,
+      pageLength: 10,
       sPaginationType: 'full_numbers',
       oLanguage: {
         oPaginate: {
@@ -92,30 +121,16 @@ constructor(
 
         let token = this._LoginService.getToken();
 
-        this._ImoInsumoService.delete({ 'id': id, 'motivo': result.value }, token).subscribe(
+        this._InsumoService.delete({ 'id': id, 'motivo': result.value }, token).subscribe(
           response => {
-          swal({
-            title: 'Perfecto!',
-            text: 'Sustrato anulado con éxito.',
-            type: 'success',
-            confirmButtonColor: '#15d4be',
-          });
+            swal({
+              title: 'Perfecto!',
+              text: 'Sustrato anulado con éxito.',
+              type: 'success',
+              confirmButtonColor: '#15d4be',
+            });
 
-          this._ImoInsumoService.showLote(this.loteInsumo.id, token).subscribe(
-            response => {
-              if(response.code == 200){
-                this.insumos = response.data;
-                this.ngOnInit();
-              }
-              error => {
-                this.errorMessage = <any>error;
-    
-                if(this.errorMessage != null){
-                  console.log(this.errorMessage);
-                  alert("Error en la petición");
-                }
-              }    
-            }); 
+            this.ngOnInit();
           }, 
           error => {
             this.errorMessage = <any>error;

@@ -1,5 +1,4 @@
 import { Component, OnInit, AfterViewInit, EventEmitter } from '@angular/core';
-import { ImoLote } from "../imoLote/imoLote.modelo";
 import { CfgOrganismoTransitoService } from '../../../../services/cfgOrganismoTransito.service';
 import { CfgModuloService } from '../../../../services/cfgModulo.service';
 import { ImoInsumoService } from '../../../../services/imoInsumo.service';
@@ -35,8 +34,9 @@ export class ImoBusquedaComponent implements OnInit, AfterViewInit {
     'idOrganismoTransito': null,
     'idModulo': null,
   }
+
   public loteInsumos:any;
-  public loteInsumo: ImoLote;
+  public loteInsumo: any;
   public insumos:any;
 
   constructor(
@@ -98,8 +98,10 @@ export class ImoBusquedaComponent implements OnInit, AfterViewInit {
 
   onInitTable(){
     this.table = $('#dataTables-example').DataTable({
+      retrieve: true,
+      paging: false,
       responsive: true,
-      pageLength: 8,
+      pageLength: 10,
       sPaginationType: 'full_numbers',
       oLanguage: {
         oPaginate: {
@@ -156,26 +158,8 @@ export class ImoBusquedaComponent implements OnInit, AfterViewInit {
   }
 
   onShow(loteInsumo: any){
-    let token = this._LoginService.getToken();
-    
-    this.loteInsumo = loteInsumo;
-
-    this._ImoInsumoService.showLote(loteInsumo.id, token).subscribe(
-			response => {
-        if(response.code == 200){
-          this.insumos = response.data;
-          
-          this.onInitForms();
-          this.formShow = true;
-        }
-        error => {
-          this.errorMessage = <any>error;
-          if(this.errorMessage != null){
-            console.log(this.errorMessage);
-            alert("Error en la petición");
-          }
-        }
-      }
-    ); 
+    this.onInitForms();
+    this.formShow = true;   
+    this.loteInsumo = loteInsumo; 
   }
 }

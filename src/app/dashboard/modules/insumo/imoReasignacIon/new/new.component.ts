@@ -17,33 +17,28 @@ export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
 public errorMessage;
 
-public empresaSelected:any;
 public sedes:any;
-public sedeOrigenSelected:any;
-public sedeDestinoSelected:any;
 public sustratos:any;
-public insumoSelected:any;
-public numero:any;
 public insumos:any;
+public numero:any;
 public table:any;
-public isCantidad=true;
-public datosAsignacion = {
-  'sedeOrigen': null,
-  'sedeDestino': null,
+
+public datos = {
   'casoInsumo': null,
   'cantidad': null,
+  'idOrganismoTransitoOrigen': null,
+  'idOrganismoTransitoDestino': null,
 };
 
 constructor(
   private _OrganismoTransitoService: CfgOrganismoTransitoService,
   private _CasoInsumoService: ImoCfgTipoService,
-  private _ImoInsumoService: ImoInsumoService,
-  private _ImoLoteService: ImoLoteService,
-  private _loginService: LoginService,
+  private _InsumoService: ImoInsumoService,
+  private _LoteService: ImoLoteService,
+  private _LoginService: LoginService,
   ){}
 
   ngOnInit() {
-
     this._OrganismoTransitoService.selectSedes().subscribe(
       response => {
         this.sedes = response;
@@ -71,41 +66,38 @@ constructor(
         }
       }
     );
-
   }
+
   onCancelar(){
     this.ready.emit(true);
   }
 
-  changedSedeOperativa(e){
-    if (e) {
+  onSearch(){
+    swal({
+      title: 'Cargando Tabla!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
 
-    }
-  }
-
-  isExistencia(){
-    this.datosAsignacion.sedeDestino = this.sedeDestinoSelected;
-    this.datosAsignacion.sedeOrigen = this.sedeOrigenSelected;
-    this.datosAsignacion.casoInsumo = this.insumoSelected;
-    if (this.table) {
-      this.table.destroy()
-    }
-    this._ImoInsumoService.isExistencia(this.datosAsignacion).subscribe(
+    this._InsumoService.isExistencia(this.datos).subscribe(
 			response => {
         if(response.code == 200){
-          this.isCantidad = false;
           this.insumos = response.data;
+
           swal({
             title: 'Registro encontrado!',
             type: 'success',
             text: response.message,
             confirmButtonText: 'Aceptar'
-          })
+          });
+
           setTimeout(() => {
             this.onInitTable();
+            swal.close();
           });
         }else{
-          this.isCantidad = true;
           swal({
             title: 'Error!',
             type: 'error',
@@ -136,13 +128,13 @@ constructor(
       if (this.table) {
         this.table.destroy()
       }
-      let datos={
-        'tipoInsumo':this.insumoSelected,
-        'idOrganismoTransito':this.sedeOrigenSelected,
+      let datos = {
+        'tipoInsumo':this.datos.casoInsumo,
+        'idOrganismoTransito':this.datos.idOrganismoTransitoOrigen,
       }
-      let token = this._loginService.getToken();
+      let token = this._LoginService.getToken();
 
-      this._ImoLoteService.showReasignacion(datos,token).subscribe( 
+      this._LoteService.showReasignacion(datos,token).subscribe( 
         response => {
           if (response.code == 200) {
             this.insumos = response.data;
@@ -177,11 +169,11 @@ constructor(
       pageLength: 8,
       sPaginationType: 'full_numbers',
       oLanguage: {
-          oPaginate: {
-          sFirst: '<<',
-          sPrevious: '<',
-          sNext: '>',
-          sLast: '>>'
+        oPaginate: {
+          sFirst: '<i class="fa fa-step-backward"></i>',
+          sPrevious: '<i class="fa fa-chevron-left"></i>',
+          sNext: '<i class="fa fa-chevron-right"></i>',
+          sLast: '<i class="fa fa-step-forward"></i>'
         }
       }
     });
@@ -199,12 +191,12 @@ constructor(
 
     let datos = {
       'insumos': this.insumos, 
-      'sedeOperativaOrigen': this.sedeOrigenSelected,
-      'tipoInsumo': this.insumoSelected,   
-      'sedeOperativaDestino': this.sedeDestinoSelected
+      'tipoInsumo': this.datos.casoInsumo,   
+      'idOrganismoTransitoOrigen': this.datos.idOrganismoTransitoOrigen,
+      'idOrganismoTransitoDestino': this.datos.idOrganismoTransitoDestino,
     }
     
-    this._ImoInsumoService.reasignacionSustrato(datos).subscribe( 
+    this._InsumoService.reasignacionSustrato(datos).subscribe( 
       response => {
         if (response.code == 200) {
           this.insumos = null;

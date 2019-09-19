@@ -10,7 +10,7 @@ import { NewComponent } from './new/new.component';
 import { EditComponent } from './edit/edit.component';
 
 @NgModule({
-    imports: [CommonModule, Ng2BootstrapModule.forRoot(),SelectModule, TooltipModule],
+    imports: [CommonModule, Ng2BootstrapModule.forRoot(), SelectModule, TooltipModule],
     declarations: [NewComponent,EditComponent],
     exports: [NewComponent,EditComponent],
     providers:[CvCfgPorcentajeInicialService]

@@ -8,6 +8,7 @@ import { UserEmpresaComponent } from './userEmpresa/userEmpresa.component';
 import { UserCiudadanoComponent } from './userCiudadano/userCiudadano.component';
 import { UserLcCfgCategoriaComponent } from './userLcCfgCategoria/userLcCfgCategoria.component';
 import { UserLcCfgRestriccionComponent } from './userLcCfgRestriccion/userLcCfgRestriccion.component';
+import { UserLicenciaConduccionComponent } from './userLicenciaConduccion/userLicenciaConduccion.component';
 import { SearchComponent } from './userLicenciaConduccion/search/search.component';
 
 const routes: Routes = [
@@ -38,6 +39,10 @@ const routes: Routes = [
   {
     path: 'userLcCfgRestriccion',
     component: UserLcCfgRestriccionComponent
+  },
+  {
+    path: 'userLicenciaConduccion',
+    component: UserLicenciaConduccionComponent
   },
   {
     path: 'searchLicencia',

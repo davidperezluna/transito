@@ -74,6 +74,13 @@ export class FroFacturaService {
 		return this._http.post(this.url + '/search/numero', params, { headers: headers }).map(res => res.json());
 	}
 
+	validateExcedente(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = 'data=' + json + '&authorization=' + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + '/validate/excedente', params, { headers: headers }).map(res => res.json());
+	}
+
 	calculateValue(datos, token) {
 		let json = JSON.stringify(datos);
 		let params = "data=" + json + "&authorization=" + token;

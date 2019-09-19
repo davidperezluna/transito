@@ -22,7 +22,7 @@ export class NewRncRecategorizacionLicenciaAbajoComponent implements OnInit {
     public tramiteSolicitud: any = null;
     public paises: any;
     public servicios: any;
-    public categorias: any;
+    public categorias: any = null;
 
     public tramiteFacturaSelected: any;
 
@@ -116,7 +116,9 @@ export class NewRncRecategorizacionLicenciaAbajoComponent implements OnInit {
             this._CategoriaService.selectByServicioAndTipoVehiculo(datos, token).subscribe(
                 response => {
                     if (response.code == 200) {
-                        this.categorias = response.data;
+                        setTimeout(() => {
+                            this.categorias = response.data;
+                        });
                     } else {
                         this.categorias = null;
 

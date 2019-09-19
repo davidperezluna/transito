@@ -80,54 +80,56 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr *ngFor="let loteInsumoSustrato of loteInsumoSustratos; let i = index">
+                      <tr *ngFor="let loteSustrato of loteSustratos; let i = index">
                         <td>
                           <b>No. acta</b>
-                          {{ loteInsumoSustrato.numeroActa }}
-                          <ng-container *ngIf="loteInsumoSustrato.empresa">
+                          {{ loteSustrato.numeroActa }}
+                          <ng-container *ngIf="loteSustrato.empresa">
                             <br>
                             <b>Proveedor-Empresa</b>
                             <br>
-                            {{ loteInsumoSustrato.empresa.nombre }}
+                            {{ loteSustrato.empresa.nombre }}
                           </ng-container>
-                          <ng-container *ngIf="loteInsumoSustrato.sedeOperativa">
+                          <ng-container *ngIf="loteSustrato.sedeOperativa">
                             <br>
                             <b>Sede operativa</b>
                             <br>
-                            {{ loteInsumoSustrato.sedeOperativa.nombre }}
+                            {{ loteSustrato.sedeOperativa.nombre }}
                           </ng-container>
-                          <ng-container *ngIf="loteInsumoSustrato.tipoInsumo">
+                          <ng-container *ngIf="loteSustrato.tipoInsumo">
                             <br>
                             <b>Insumo</b>
-                            {{ loteInsumoSustrato.tipoInsumo.nombre }}
+                            {{ loteSustrato.tipoInsumo.nombre }}
                           </ng-container>
                         </td>
                         <td>
                           <b>Rango inicial</b>
-                          {{ loteInsumoSustrato.rangoInicio }}
+                          {{ loteSustrato.rangoInicio }}
                           <br>
                           <b>Rango final</b>
-                          {{ loteInsumoSustrato.rangoFin }}
+                          {{ loteSustrato.rangoFin }}
                           <br>
                           <b>Cantidad</b>
-                          {{ loteInsumoSustrato.cantidad }}
-                          <br>
-                          <b>Referencia</b>
-                          {{ loteInsumoSustrato.referencia }}
+                          {{ loteSustrato.cantidad }}
+                          <ng-container *ngIf="loteSustrato.referencia">
+                            <br>
+                            <b>Referencia</b>
+                            {{ loteSustrato.referencia }}
+                          </ng-container>
                         </td>
                         <td>
                           <b>Fecha</b>
-                          {{ (loteInsumoSustrato.fecha.timestamp * 1000) | date: 'dd/MM/yyyy' }}
+                          {{ (loteSustrato.fecha.timestamp * 1000) | date: 'dd/MM/yyyy' }}
                           <br>
                           <b>Estado</b>
-                          {{ loteInsumoSustrato.estado }}
+                          {{ loteSustrato.estado }}
                         </td>
                         <td>
                           <div class="btn-group">
-                            <button (click)="onEditLoteInsumoSustrato(loteInsumoSustrato)" class="btn btn-xs btn-primary" type="button">
+                            <button (click)="onEditLoteInsumoSustrato(loteSustrato)" class="btn btn-xs btn-primary" type="button">
                               <i class="fa fa-pencil"></i>
                             </button> 
-                            <!-- <button (click)="deleteRnaLoteInsumo(loteInsumoSustrato.id)"  class="btn btn-xs btn-danger" type="button">
+                            <!-- <button (click)="deleteRnaLoteInsumo(loteSustrato.id)"  class="btn btn-xs btn-danger" type="button">
                               <i class="fa fa-trash"></i>
                             </button>  -->
                           </div>
@@ -147,34 +149,40 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr class="odd" *ngFor="let loteInsumoInsumo of loteInsumoInsumos; let i = index">
+                          <tr class="odd" *ngFor="let loteInsumo of loteInsumos; let i = index">
                             <td>
                               <b>No.Acta</b>
-                              {{ loteInsumoInsumo.numeroActa }}
-                              <br>
-                              <b>Empresa</b>
-                              {{ loteInsumoInsumo.empresa.nombre }}
-                              <br>
-                              <b>Insumo</b>
-                              {{ loteInsumoInsumo.tipoInsumo.nombre }}
+                              {{ loteInsumo.numeroActa }}
+                              <ng-container *ngIf="loteInsumo.empresa">
+                                <br>
+                                <b>Empresa</b>
+                                {{ loteInsumo.empresa.nombre }}
+                              </ng-container>
+                              <ng-container *ngIf="loteInsumo.tipoInsumo">
+                                <br>
+                                <b>Insumo</b>
+                                {{ loteInsumo.tipoInsumo.nombre }}
+                              </ng-container>
                             </td>
                             <td>
                               <b>Cantidad</b>
-                              {{ loteInsumoInsumo.cantidad }}
+                              {{ loteInsumo.cantidad }}
                               <br>
-                              <b>Referencia</b>
-                              {{ loteInsumoInsumo.referencia }}
-                              <br>
+                              <ng-container *ngIf="loteInsumo.referencia">
+                                <b>Referencia</b>
+                                {{ loteInsumo.referencia }}
+                                <br>
+                              </ng-container>
                               <b>Fecha</b>
-                              {{ (loteInsumoInsumo.fecha.timestamp * 1000) | date: 'dd/MM/yyyy' }}
+                              {{ (loteInsumo.fecha.timestamp * 1000) | date: 'dd/MM/yyyy' }}
                             </td>
                             <td>
                               <div class="btn-group">
-                                <button (click)="onEditLoteInsumoInsumo(loteInsumoInsumo)" class="btn btn-xs btn-primary" type="button">
+                                <button (click)="onEditLoteInsumoInsumo(loteInsumo)" class="btn btn-xs btn-primary" type="button">
                                     <i class="fa fa-pencil"></i>
                                 </button> 
                               </div>
-                              <!-- <button (click)="deleteRnaLoteInsumo(loteInsumoInsumo.id)"  class="btn btn-outline-danger" type="button">Eliminar</button>  -->
+                              <!-- <button (click)="deleteRnaLoteInsumo(loteInsumo.id)"  class="btn btn-outline-danger" type="button">Eliminar</button>  -->
                             </td>
                           </tr>
                         </tbody> 
@@ -210,7 +218,7 @@
     </div>
 
     <div class="col-xs-12 col-md-8 col-lg-8" *ngIf='formEdit'>
-      <app-edit-insumo-lote [loteInsumoInsumo]="loteInsumoInsumo" [tipoInsumo]="tipoInsumo" (onReady)="onReady($event)"></app-edit-insumo-lote>
+      <app-edit-insumo-lote [loteInsumo]="loteInsumo" [tipoInsumo]="tipoInsumo" (onReady)="onReady($event)"></app-edit-insumo-lote>
     </div>
   </div>
 </div>

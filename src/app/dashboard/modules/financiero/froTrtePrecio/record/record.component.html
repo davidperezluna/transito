@@ -59,17 +59,24 @@
                     <tbody>
                         <tr class="odd" *ngFor="let tramitePrecio of tramitesPrecio; let i = index">
                             <td>{{ i + 1 }}</td>
-                            <td>{{ tramitePrecio.tramite.nombre }}</td>
+                            <td>
+                                <b>Nombre:  </b>
+                                <br>
+                                {{ tramitePrecio.tramite.nombre }}
+                                <br>
+                                <b>Tipo de vehciulo: </b>
+                                {{ tramitePrecio.tipoVehiculo.nombre }}
+                            </td>
                             <td>
                                 <b>Inicial</b>
                                 <br>
-                                {{ tramitePrecio.fechaInicial }}
-                                <span *ngIf="tramitePrecio.fechaFinal">
+                                {{ (tramitePrecio.fechaInicial.timestamp * 1000) | date: 'dd/MM/yyyy' }}
+                                <ng-container *ngIf="tramitePrecio.fechaFinal">
                                     <br>
                                     <b>Final</b>
                                     <br>
-                                    {{ tramitePrecio.fechaFinal }}
-                                </span>
+                                    {{ (tramitePrecio.fechaFinal.timestamp * 1000) | date: 'dd/MM/yyyy' }}
+                                </ng-container>
                             </td>
                             <td>
                                 <b>Vr. trámite</b>

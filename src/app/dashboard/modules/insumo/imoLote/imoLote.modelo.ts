@@ -11,6 +11,5 @@ export class ImoLote{
 		public idEmpresa:string,
 		public idOrganismoTransito:string,
 		public imoCfgTipo:string,
-		
 	){}
 }
