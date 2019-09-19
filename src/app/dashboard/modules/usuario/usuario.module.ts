@@ -14,7 +14,6 @@ import { UserCiudadanoComponent } from './userCiudadano/userCiudadano.component'
 import { UserLcCfgCategoriaComponent } from './userLcCfgCategoria/userLcCfgCategoria.component';
 import { SearchComponent } from './userLicenciaConduccion/search/search.component';
 import { UserLcCfgRestriccionComponent } from './userLcCfgRestriccion/userLcCfgRestriccion.component';
-import { UserLicenciaConduccionComponent } from './userLicenciaConduccion/userLicenciaConduccion.component';
 import { newCancelacionComponent } from './userLicenciaConduccion/newCancelacion/newCancelacion.component';
 import { newSuspensionComponent } from './userLicenciaConduccion/newSuspension/newSuspension.component';
 
@@ -27,8 +26,7 @@ import { UserCiudadanoModule } from './userCiudadano/userCiudadano.module';
 import { UserLcCfgCategoriaModule } from './userLcCfgCategoria/userLcCfgCategoria.module';
 import { UserLcCfgRestriccionModule } from './userLcCfgRestriccion/userLcCfgRestriccion.module';
 import { UserLicenciaConduccionModule } from './userLicenciaConduccion/userLicenciaConduccion.module';
-/*import { UserLicenciaConduccionService } from '../../../services/userLicenciaConduccion.service';
-import { UserLicenciaConduccionRestriccionService } from '../../../services/userLicenciaConduccionRestriccion.service';*/
+
 
 
 @NgModule({
@@ -58,7 +56,6 @@ import { UserLicenciaConduccionRestriccionService } from '../../../services/user
     UserLcCfgCategoriaComponent,
     SearchComponent,
     UserLcCfgRestriccionComponent,
-    UserLicenciaConduccionComponent,
     newCancelacionComponent,
     newSuspensionComponent,
   ],
