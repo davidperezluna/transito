@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { FroFacTramite } from './froFacTramite.modelo';
 import { FroFacturaService } from '../../../../../services/froFactura.service';
@@ -22,7 +22,7 @@ declare var $: any;
   providers: [DatePipe]
 })
 
-export class FroFacTramiteComponent implements OnInit {
+export class FroFacTramiteComponent implements OnInit, AfterViewInit {
   public errorMessage;
   public factura: FroFacTramite;
 
@@ -134,8 +134,6 @@ export class FroFacTramiteComponent implements OnInit {
           );
 
           this.formNew = true;
-
-          swal.close();
         } else {
           swal({
             title: 'Error!',
@@ -155,6 +153,10 @@ export class FroFacTramiteComponent implements OnInit {
         }
       }
     );
+  }
+
+  ngAfterViewInit(){
+    swal.close();
   }
 
   onInitForms(){

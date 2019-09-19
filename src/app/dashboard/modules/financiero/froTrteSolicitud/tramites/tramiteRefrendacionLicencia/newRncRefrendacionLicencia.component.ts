@@ -22,7 +22,7 @@ export class NewRncRefrendacionLicenciaComponent implements OnInit {
     public tramiteSolicitud: any = null;
     public servicios: any;
     public paises: any;
-    public categorias: any;
+    public categorias: any = null;
     
     public tramiteFacturaSelected: any;
 

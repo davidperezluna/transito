@@ -22,7 +22,7 @@ export class NewRncRecategorizacionLicenciaArribaComponent implements OnInit {
     public tramiteSolicitud: any = null;
     public paises: any;
     public servicios: any;
-    public categorias: any;
+    public categorias: any = null;
     
     public datos = {
         'campos': null,

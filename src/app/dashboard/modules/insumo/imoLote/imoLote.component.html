@@ -151,12 +151,16 @@
                             <td>
                               <b>No.Acta</b>
                               {{ loteInsumoInsumo.numeroActa }}
-                              <br>
-                              <b>Empresa</b>
-                              {{ loteInsumoInsumo.empresa.nombre }}
-                              <br>
-                              <b>Insumo</b>
-                              {{ loteInsumoInsumo.tipoInsumo.nombre }}
+                              <ng-container *ngIf="loteInsumoInsumo.empresa">
+                                <br>
+                                <b>Empresa</b>
+                                {{ loteInsumoInsumo.empresa.nombre }}
+                              </ng-container>
+                              <ng-container *ngIf="loteInsumoInsumo.tipoInsumo">
+                                <br>
+                                <b>Insumo</b>
+                                {{ loteInsumoInsumo.tipoInsumo.nombre }}
+                              </ng-container>
                             </td>
                             <td>
                               <b>Cantidad</b>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Output, Input, EventEmitter } from '@angular/core';
 import { FroTrtePrecioService } from "../../../../services/froTrtePrecio.service";
 import { CfgModuloService } from '../../../../services/cfgModulo.service';
 import { LoginService } from '../../../../services/login.service';
@@ -10,7 +10,7 @@ declare var $: any;
     templateUrl: './froTrtePrecio.component.html'
 })
 
-export class FroTrtePrecioComponent implements OnInit {
+export class FroTrtePrecioComponent implements OnInit, AfterViewInit {
     public errorMessage;
 
     public formNew = false;
@@ -30,7 +30,6 @@ export class FroTrtePrecioComponent implements OnInit {
     public search: any = {
         'idModulo': null,
     }
-
 
     constructor(
         private _PrecioService: FroTrtePrecioService,
@@ -52,6 +51,10 @@ export class FroTrtePrecioComponent implements OnInit {
                 }
             }
         );
+    }
+
+    ngAfterViewInit(){
+        swal.close();
     }
 
     onSearch() {

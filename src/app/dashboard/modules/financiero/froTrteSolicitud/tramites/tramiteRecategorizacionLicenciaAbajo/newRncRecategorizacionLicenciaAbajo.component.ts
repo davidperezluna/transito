@@ -22,7 +22,7 @@ export class NewRncRecategorizacionLicenciaAbajoComponent implements OnInit {
     public tramiteSolicitud: any = null;
     public paises: any;
     public servicios: any;
-    public categorias: any;
+    public categorias: any = null;
 
     public tramiteFacturaSelected: any;
 
