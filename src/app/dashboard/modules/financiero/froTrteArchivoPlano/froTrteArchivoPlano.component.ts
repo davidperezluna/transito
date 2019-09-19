@@ -1,6 +1,9 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FroTrteSolicitudService } from '../../../../services/froTrteSolicitud.service';
+import { CfgOrganismoTransitoService } from 'app/services/cfgOrganismoTransito.service';
+import { CfgModuloService } from 'app/services/cfgModulo.service';
 import { LoginService } from '../../../../services/login.service';
+import { environment } from 'environments/environment';
 import swal from 'sweetalert2';
 declare var $: any;
 
@@ -11,6 +14,12 @@ declare var $: any;
 
 export class FroTrteArchivoPlanoComponent implements OnInit, AfterViewInit {
   public errorMessage;
+  
+  public docsUrl = environment.docsUrl;
+  public organismosTransito;
+  public modulos;
+
+  public archivo: any = null;
 
   public tiposReporte = [
     { value: '1', label: 'INFORMACIÓN DE VEHICULOS' },
@@ -24,16 +33,45 @@ export class FroTrteArchivoPlanoComponent implements OnInit, AfterViewInit {
 
   public datos = {
     'tipoReporte': null,
+    'idOrganismoTransito': null,
+    'idModulo': null,
     'fechaInicial': null,
     'fechaFinal': null,
   }
 
   constructor(
     private _FroTrteSolicitudService: FroTrteSolicitudService,
+    private _OrganismoTransitoService: CfgOrganismoTransitoService,
+    private _ModuloService: CfgModuloService,
     private _LoginService: LoginService,
   ) {}
 
   ngOnInit() {
+    this._OrganismoTransitoService.selectSedes().subscribe(
+      response => {
+        this.organismosTransito = response;
+      },
+      error => {
+        this.errorMessage = <any>error;
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+    this._ModuloService.select().subscribe(
+      response => {
+        this.modulos = response;
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
   }
 
   ngAfterViewInit() {
@@ -47,7 +85,24 @@ export class FroTrteArchivoPlanoComponent implements OnInit, AfterViewInit {
     if (this.datos.tipoReporte) {
       this._FroTrteSolicitudService.createFile(this.datos, token).subscribe(
         response => {
-          if (response.type) {
+          if(response.code == 200) {
+            this.archivo = response.data;
+
+            swal({
+              title: response.title,
+              text: response.message,
+              type: response.status,
+              confirmButtonText: 'Aceptar'
+            });
+          } else {
+            swal({
+              title: response.title,
+              text: response.message,
+              type: response.status,
+              confirmButtonText: 'Aceptar'
+            });
+          }
+          /* if (response.type) {
             var fileURL = URL.createObjectURL(response);
             window.open(fileURL);
           } else {
@@ -65,7 +120,7 @@ export class FroTrteArchivoPlanoComponent implements OnInit, AfterViewInit {
                 alert("Error en la petición");
               }
             }
-          }
+          } */
         },
         error => {
           this.errorMessage = <any>error;
