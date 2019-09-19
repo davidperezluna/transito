@@ -56,6 +56,7 @@ export class NewRnaComponent implements OnInit {
   public documentacionPendiente: any = [];
   public ciudadanos: any = [];
   public restricciones: any = null;
+  public excedentes: any = null;
   
   public formApoderado = false;
   public formNewCiudadano: any = false;
@@ -335,11 +336,37 @@ export class NewRnaComponent implements OnInit {
             this.factura = response.data;
             this.tramiteSolicitud.idFactura = this.factura.id;
 
-            swal.close();
+            this._FacturaService.validateExcedente({ 'id': this.factura.id }, token).subscribe(
+              response => {
+                if (response.code == 200) {
+                  this.excedentes = response.data;
+
+                  swal({
+                    title: 'Atención!',
+                    text: response.message,
+                    type: 'warning',
+                    confirmButtonText: 'Aceptar'
+                  });
+                } else {                  
+                  this.excedentes = null;
+                  
+                  swal.close();
+                }
+                error => {
+                  this.errorMessage = <any>error;
+                  if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert("Error en la petición");
+                  }
+                }
+              }
+            );
           } else {
+            //En caso de que la factura exista pero no se encuentre en estado pagada
             if (response.data) {
               this.factura = response.data;
             }
+            //Si la factura no fue encontrada
             this.factura = null;
             this.tramitesFactura = null;
             this.propietarios = null;

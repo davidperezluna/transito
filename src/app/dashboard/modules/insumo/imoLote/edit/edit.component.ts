@@ -14,7 +14,7 @@ import swal from 'sweetalert2';
 })
 export class EditComponent implements OnInit{
 @Output() onReady = new EventEmitter<any>();
-@Input() loteInsumoInsumo:any = null;
+@Input() loteInsumo:any = null;
 @Input() tipoInsumo:any = null;
 
 public errorMessage;
@@ -36,14 +36,14 @@ constructor(
   ){}
 
   ngOnInit(){ 
-    var datePiper = new DatePipe(this.loteInsumoInsumo.fecha.timestamp);
-    this.loteInsumoInsumo.fecha = datePiper.transform(this.loteInsumoInsumo.fecha.timestamp, 'yyyy-MM-dd');
+    var datePiper = new DatePipe(this.loteInsumo.fecha.timestamp);
+    this.loteInsumo.fecha = datePiper.transform(this.loteInsumo.fecha.timestamp, 'yyyy-MM-dd');
 
     this._EmpresaService.select().subscribe(
       response => {
         this.empresas = response;
         setTimeout(() => {
-           this.empresaSelected = [this.loteInsumoInsumo.empresa.id];
+           this.empresaSelected = [this.loteInsumo.empresa.id];
         });
       }, 
       error => {
@@ -59,7 +59,7 @@ constructor(
       response => {
         this.insumos = response; 
         setTimeout(() => {
-          this.insumoSelected = [this.loteInsumoInsumo.tipoInsumo.id];
+          this.insumoSelected = [this.loteInsumo.tipoInsumo.id];
         },100);
       }, 
       error => {
@@ -76,7 +76,7 @@ constructor(
       response => {
         this.sustratos = response;
         setTimeout(() => {
-          this.insumoSelected = Number[this.loteInsumoInsumo.tipoInsumo.id];
+          this.insumoSelected = Number[this.loteInsumo.tipoInsumo.id];
         });
       }, 
       error => {
@@ -94,7 +94,7 @@ constructor(
         response => {
           this.organismosTransito = response;
           setTimeout(() => {
-            this.organismoTransitoSelect = [this.loteInsumoInsumo.sedeOperativa.id];
+            this.organismoTransitoSelect = [this.loteInsumo.sedeOperativa.id];
           });
         }, 
         error => {
@@ -112,11 +112,11 @@ constructor(
   onCancelar(){ this.onReady.emit(true); }
 
   onEnviar(){
-    this.loteInsumoInsumo.empresaId = this.empresaSelected;
-    this.loteInsumoInsumo.sedeOperativaId = this.organismoTransitoSelect;
-    this.loteInsumoInsumo.casoInsumoId = this.insumoSelected;
+    this.loteInsumo.empresaId = this.empresaSelected;
+    this.loteInsumo.sedeOperativaId = this.organismoTransitoSelect;
+    this.loteInsumo.casoInsumoId = this.insumoSelected;
     let token = this._loginService.getToken();
-		this._rnaloteInsumosService.edit(this.loteInsumoInsumo,token).subscribe(
+		this._rnaloteInsumosService.edit(this.loteInsumo,token).subscribe(
 			response => {
         if(response.code == 200){
           this.onReady.emit(true);
@@ -139,7 +139,7 @@ constructor(
 		}); 
   }
   isFin() {
-    this.loteInsumoInsumo.cantidad = parseInt(this.loteInsumoInsumo.rangoFin) - parseInt(this.loteInsumoInsumo.rangoInicio)+1;
+    this.loteInsumo.cantidad = parseInt(this.loteInsumo.rangoFin) - parseInt(this.loteInsumo.rangoInicio)+1;
    }
 
 }

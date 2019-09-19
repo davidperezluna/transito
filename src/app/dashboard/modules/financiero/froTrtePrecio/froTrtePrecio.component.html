@@ -83,10 +83,11 @@
                                     {{ tramitePrecio.tipoVehiculo.nombre }}
                                 </td>
                                 <td>
-                                    <input class="form-control" [(ngModel)]="tramitePrecio.fechaInicial" name="fechaInicial" type="date" [value]="(tramitePrecio.fechaInicial.timestamp * 1000) | date: 'yyyy-MM-dd'" required (click)='onToggleDisable()' (blur)='onValidateDate(tramitePrecio)' [readonly]="disableTextbox">
+                                    <input class="form-control" [(ngModel)]="tramitePrecio.fechaInicial" name="fechaInicial" type="date" required (click)='onToggleDisableDate()' (blur)='onValidateDate(tramitePrecio)' [readonly]="disableTextboxDate">
+                                    {{ (tramitePrecio.fechaInicial.timestamp * 1000) | date: 'yyyy-MM-dd' }}
                                 </td>
                                 <td>
-                                    <input class="form-control" [(ngModel)]="tramitePrecio.valor" name="valor" type="number" required (click)='onToggleDisable()' (blur)='onDisable()' [readonly]="disableTextbox">
+                                    <input class="form-control" [(ngModel)]="tramitePrecio.valor" name="valor" type="number" required (click)='onToggleDisableValue()' (blur)='onDisableValue()' [readonly]="disableTextboxValue">
                                 </td>
                                 <td>
                                     <div *ngIf="tramitePrecio.conceptos">

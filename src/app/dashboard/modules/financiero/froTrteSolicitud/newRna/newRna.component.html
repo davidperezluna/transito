@@ -22,7 +22,7 @@
                         </div>
                     </div>
 
-                    <div class="row" *ngIf='factura'>
+                    <div class="row" *ngIf='factura && !excedentes'>
                         <div class="col-xs-12 col-lg-12">
                             <span class="badge badge-success" *ngIf="factura.estado == 'PAGADA'">{{ factura.estado }}</span>
                             <span class="badge badge-danger" *ngIf="factura.estado == 'PENDIENTE DOCUMENTACION'">{{ factura.estado }}</span>

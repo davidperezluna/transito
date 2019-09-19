@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Http, Headers } from "@angular/http";
+import { Router, ActivatedRoute } from '@angular/router';
+import { environment } from 'environments/environment';
 declare var $: any;
 
 @Component({
@@ -7,9 +10,12 @@ declare var $: any;
   styleUrls: ['./app.component.css']
 })
 
-
-
 export class AppComponent implements OnInit {
+  private url = environment.apiUrl;
+  public isTokenAvaialable:any;
+  private _http: Http;
+  private _router: Router
+
   ngOnInit() {
     /* Resposnsive Utility hide menu */
     if ($(window).width() >= 1440 && $('body').hasClass('no-menu-show') !== true) {
@@ -44,6 +50,35 @@ export class AppComponent implements OnInit {
       }
     });
 
+    /*let token = localStorage.getItem("token");
 
+    if (token) {
+      this.isTokenAvaialable = true;
+
+      this._http.get(this.url + + 'your mthod to validate token' + token).subscribe(response => {
+        if (response == true) {
+          if (window.location.pathname == "") {
+            this._router.navigate(['/login', { outlets: { 'r2': ['dashboard'] } }]);
+          }
+        } else if (response == false) {
+
+          this.logout('Server restarted.Please login again!!');
+        } else {
+
+          this.logout('Session expired.Please login again.!!');
+        }
+
+      }, (err: HttpErrorResponse) => {
+        //this.toastr.warning('Server restarted.Please login again!!', 'Alert');
+        localStorage.removeItem("token");
+        this.isTokenAvaialable = false;
+        this.logout('Server restarted.Please login again!!');
+      });
+    } else {
+      this.isTokenAvaialable = false;
+      this._router.navigate(['']);
+      localStorage.removeItem("token");
+      this.isTokenAvaialable = false;
+    }*/
   }
 }

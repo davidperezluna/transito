@@ -1,50 +1,33 @@
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-xs-12 col-lg-4">
         <div class="card">
             <div class="card-header">
-                <b class="text-uppercase">reasignacion de insumos</b>
+                <b class="text-uppercase">Reasignacion de insumos</b>
             </div>
             <div class="card-body">
                 <form #newForm="ngForm">
-                    <div class="row justify-content-center">
-                        <div class="card-body col-md-12"> 
-                        <div class="form-group row">    
-                            <div class="col-lg-4 col-md-4">
+                    <div class="row">
+                        <div class="card-body"> 
+                        <div class="row">    
+                            <div class="col-xs-12 col-lg-12">
                                 <label>Sede origen <b class="text-danger">*</b></label>
-                                <ng-select
-                                    [multiple]="false"
-                                    [options]="sedes"
-                                    [(ngModel)]="sedeOrigenSelected"
-                                    (ngModelChange)="changedSedeOperativa($event)"
-                                    required
-                                    name="sedeOrigenId">
+                                <ng-select [multiple]="false" [options]="sedes" [(ngModel)]="datos.idOrganismoTransitoOrigen" name="idOrganismoTransitoOrigen" required>
                                 </ng-select>
                             </div>
-                            <div class="col-lg-4 col-md-4">
+                            <div class="col-xs-12 col-lg-12">
                                 <label>Sede destino <b class="text-danger">*</b></label>
-                                <ng-select
-                                    [multiple]="false"
-                                    [options]="sedes"
-                                    [(ngModel)]="sedeDestinoSelected"
-                                    (ngModelChange)="changedSedeOperativa($event)"
-                                    required
-                                    name="sedeDestinoId">
+                                <ng-select [multiple]="false" [options]="sedes" [(ngModel)]="datos.idOrganismoTransitoDestino" name="idOrganismoTransitoDestino" required>
                                 </ng-select>
                             </div>
-                            <div class="col-lg-4 col-md-4">
+                            <div class="col-xs-12 col-lg-12">
                                 <label>Sustrato <b class="text-danger">*</b></label>
-                                <ng-select
-                                    [multiple]="false"
-                                    [options]="sustratos"
-                                    [(ngModel)]="insumoSelected"
-                                    required
-                                    name="insumoSustratoId">
+                                <ng-select [multiple]="false" [options]="sustratos" [(ngModel)]="datos.casoInsumo" required name="idInsumo">
                                 </ng-select>
                             </div>
     
-                            <div class="col-lg-4 col-md-4"> 
-                                <label>Cantidad*</label>
-                                <input class="form-control" [(ngModel)]="datosAsignacion.cantidad" name="cantidad" placeholder="" type="text" required>
+                            <div class="col-xs-12 col-lg-12"> 
+                                <label>Cantidad <b class="text-danger">*</b></label>
+                                <input class="form-control" [(ngModel)]="datos.cantidad" name="cantidad" type="text" required>
                             </div> 
                         </div> 
                         </div>    
@@ -56,7 +39,7 @@
                                 Cancelar
                             </button>
                             <!-- <button (click)="onEnviar()" [disabled]="isCantidad" class="btn btn-primary pull-right" type="button">Enviar</button> -->
-                            <button (click)="isExistencia()" [disabled]="newForm.invalid" class="btn btn-primary" type="button">
+                            <button (click)="onSearch()" [disabled]="newForm.invalid" class="btn btn-primary" type="button">
                                 <i class="fa fa-search"></i>
                                 Buscar
                             </button>
@@ -64,27 +47,30 @@
                     </div>    
                 </form>
             </div>
-        </div>
+        </div>      
+    </div>
 
+    <div class="col-xs-12 col-lg-8">  
         <div class="card" *ngIf='insumos'>
+            <div class="card-header">
+                <b class="text-uppercase">Lista de insumos disponibles</b>
+            </div>
             <div class="card-body">
-                <div class="tab-pane active col-lg-12 col-md-12" id="insumos" role="tabpanel" >
-                    <br>
-                    <br>
+                <div class="col-xs-12 col-lg-12">
                     <table class="table" id="dataTables-example">
                         <thead>
-                        <tr>
-                            <th>Tipo</th>
-                            <th>Número</th>
-                            <th>Estado</th>
-                        </tr>
+                            <tr>
+                                <th>Tipo</th>
+                                <th>Número</th>
+                                <th>Estado</th>
+                            </tr>
                         </thead>
                         <tbody>
-                        <tr class="odd" *ngFor="let insumo of insumos; let i = index">
-                            <td >{{ insumo.tipo.nombre }}</td>
-                            <td >{{ insumo.numero }}</td>
-                            <td >{{ insumo.estado }}</td>
-                        </tr>
+                            <tr class="odd" *ngFor="let insumo of insumos; let i = index">
+                                <td>{{ insumo.tipo.nombre }}</td>
+                                <td>{{ insumo.numero }}</td>
+                                <td>{{ insumo.estado }}</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -94,8 +80,8 @@
                             Enviar
                         </button>
                     </div>
-                </div> 
+                </div>
             </div>
-        </div>       
+        </div>
     </div>
 </div> 
