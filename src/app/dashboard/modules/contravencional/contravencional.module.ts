@@ -26,6 +26,8 @@ import { CvMedidaCautelarComponent } from './cvMedidaCautelar/cvMedidaCautelar.c
 import { CvRestriccionComponent } from './cvRestriccion/cvRestriccion.component';
 import { SearchComponent } from './cvCdoComparendo/search/search.component';        
 import { ExportComparendoComponent } from './cvCdoComparendo/export/export.component';        
+import { ExportInventarioComponent } from './rpcccInventarioDocumental/export/export.component';
+import { RpcccInventarioDocumentalComponent } from './rpcccInventarioDocumental/rpcccInventarioDocumental.component';        
 
 import { ContravencionalRoutingModule } from './contravencional-routing.module';
 import { CvAuCfgAtencionModule } from './cvAuCfgAtencion/cvAuCfgAtencion.module';
@@ -47,6 +49,7 @@ import { CvLcCfgMotivoModule } from './cvLcCfgMotivo/cvLcCfgMotivo.module';
 import { CvLcCfgTipoRestriccionModule } from './cvLcCfgTipoRestriccion/cvLcCfgTipoRestriccion.module';
 import { CvMedidaCautelarModule } from './cvMedidaCautelar/cvMedidaCautelar.module';
 import { CvRestriccionModule } from './cvRestriccion/cvRestriccion.module';
+import { RpcccInventarioDocumentalModule } from './rpcccInventarioDocumental/rpcccInventarioDocumental.module';        
 
 @NgModule({
   imports: [
@@ -75,6 +78,7 @@ import { CvRestriccionModule } from './cvRestriccion/cvRestriccion.module';
     CvLcCfgTipoRestriccionModule,
     CvMedidaCautelarModule,
     CvRestriccionModule,
+    RpcccInventarioDocumentalModule
   ],
   declarations: [
     CvAuCfgAtencionComponent,
@@ -98,6 +102,8 @@ import { CvRestriccionModule } from './cvRestriccion/cvRestriccion.module';
     CvRestriccionComponent,
     SearchComponent,
     ExportComparendoComponent,
+    ExportInventarioComponent,
+    RpcccInventarioDocumentalComponent
   ]
 })
 export class ContravencionalModule { }

@@ -1,0 +1,75 @@
+<div class="container">
+    <hr>
+    <div class="row" *ngIf='formIndex'>
+        <div class="col-xs-12 col-lg-12">
+            <div class=" card">
+                <div class="card-header">
+                    <h5 class="card-title">
+                        <small>Acta de Entrega de Comparendos</small>
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <form #formNew="ngForm">
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Agente transito<strong class="text-danger">*</strong></label>
+                                <ng-select [multiple]="false" [options]="agentes" [(ngModel)]="agenteSelected" required
+                                    name="agenteId">
+                                </ng-select>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Sede Operativa<strong class="text-danger">*</strong></label>
+                                <ng-select [multiple]="false" [options]="sedes" [(ngModel)]="sedeSelected" required
+                                    name="sedeOperativaId">
+                                </ng-select>
+                            </div>
+                            <div class="col-xs-12 col-lg-3">
+                                <label>Fecha desde<strong class="text-danger">*</strong></label>
+                                <input class="form-control" [(ngModel)]="datos.fechaDesde" name="fechaDesde" type="date"
+                                    required />
+                            </div>
+                            <div class="col-xs-12 col-lg-3">
+                                <label>Fecha hasta<strong class="text-danger">*</strong></label>
+                                <input class="form-control" [(ngModel)]="datos.fechaHasta" name="fechaHasta" type="date"
+                                    required />
+                            </div>
+                        </div>
+                    </form>
+                    <div class="card-footer">
+                        <button (click)="onCancelar()" class="btn btn-default">Cancelar</button>
+                        <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary">Enviar</button>
+                    </div>
+                </div>
+                <div class="card-body" style="overflow-x: auto">
+                    <table class="table" id="dataTables-example">
+                        <thead>
+                            <tr>
+                                <th>PLACA AGENTE</th>
+                                <th>No COMPARENDO</th>
+                                <th>FECHA</th>
+                                <th>CEDULA</th>
+                                <th>PLACA</th>
+                                <th>INFRACCION</th>
+                                <th>INMOVILIZADO</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="odd" *ngFor="let comparendo of comparendos; let i = index">
+                                <td>{{ comparendo.agenteTransito.numeroPlaca }}</td>
+                                <td>{{ comparendo.consecutivo.consecutivo }}</td>
+                                <td>{{ comparendo.fecha }}</td>
+                                <td>{{ comparendo.infractorIdentificacion }}</td>
+                                <td>{{ comparendo.placa }}</td>
+                                <td>{{ comparendo.infraccion.codigo }}</td>
+                                <td>
+                                    <span *ngIf="comparendo.infraccion.inmoviliza">Si</span> 
+                                    <span *ngIf="!comparendo.infraccion.inmoviliza">No</span> 
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

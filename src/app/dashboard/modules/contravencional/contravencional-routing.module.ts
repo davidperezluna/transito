@@ -23,6 +23,8 @@ import { CvMedidaCautelarComponent } from './cvMedidaCautelar/cvMedidaCautelar.c
 import { CvRestriccionComponent } from './cvRestriccion/cvRestriccion.component';
 import { SearchComponent } from './cvCdoComparendo/search/search.component';
 import { ExportComparendoComponent } from './cvCdoComparendo/export/export.component';
+import { ExportInventarioComponent } from './rpcccInventarioDocumental/export/export.component';
+import { RpcccInventarioDocumentalComponent } from './rpcccInventarioDocumental/rpcccInventarioDocumental.component';
 
 const routes: Routes = [
   {
@@ -109,6 +111,14 @@ const routes: Routes = [
     path: 'cvRestriccion',
     component: CvRestriccionComponent
   },
+  {
+    path: 'cvInventarioDocumental',
+    component: RpcccInventarioDocumentalComponent
+  },
+  {
+    path: 'cvInventarioDocumental/export',
+    component: ExportInventarioComponent
+  }
 ]; 
 
 @NgModule({
