@@ -16,6 +16,7 @@ import { SearchComponent } from './userLicenciaConduccion/search/search.componen
 import { UserLcCfgRestriccionComponent } from './userLcCfgRestriccion/userLcCfgRestriccion.component';
 import { newCancelacionComponent } from './userLicenciaConduccion/newCancelacion/newCancelacion.component';
 import { newSuspensionComponent } from './userLicenciaConduccion/newSuspension/newSuspension.component';
+import { SearchCiudadanoComponent } from './userLicenciaConduccion/searchCiudadano/searchCiudadano.component';
 
 import { UsuarioRoutingModule } from './usuario-routing.module';
 import { UserCfgMenuModule } from './userCfgMenu/userCfgMenu.module';
@@ -58,6 +59,7 @@ import { UserLicenciaConduccionModule } from './userLicenciaConduccion/userLicen
     UserLcCfgRestriccionComponent,
     newCancelacionComponent,
     newSuspensionComponent,
+    SearchCiudadanoComponent,
   ],
   providers: [
     /*UserLicenciaConduccionService,

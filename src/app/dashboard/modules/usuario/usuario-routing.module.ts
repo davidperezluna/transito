@@ -10,6 +10,7 @@ import { UserLcCfgCategoriaComponent } from './userLcCfgCategoria/userLcCfgCateg
 import { UserLcCfgRestriccionComponent } from './userLcCfgRestriccion/userLcCfgRestriccion.component';
 import { UserLicenciaConduccionComponent } from './userLicenciaConduccion/userLicenciaConduccion.component';
 import { SearchComponent } from './userLicenciaConduccion/search/search.component';
+import { SearchCiudadanoComponent } from './userLicenciaConduccion/searchCiudadano/searchCiudadano.component';
 
 const routes: Routes = [
   {
@@ -47,6 +48,10 @@ const routes: Routes = [
   {
     path: 'searchLicencia',
     component: SearchComponent
+  },
+  {
+    path: 'searchCiudadano',
+    component: SearchCiudadanoComponent
   }
 ]; 
 
