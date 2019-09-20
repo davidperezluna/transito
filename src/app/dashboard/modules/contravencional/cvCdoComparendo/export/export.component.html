@@ -39,7 +39,6 @@
                                 <th>Categoria licencia conducción infractor</th>
                                 <th>Divipo Organismo expedición licencia conducción infractor</th>
                                 <th>Fecha vencimiento licencia conducción infractor</th>
-                                
                                 <th>Código tipo infractor</th>
                                 <th>No. Licencia transito</th>
                                 <th>Divipo licencia transito</th>
@@ -49,7 +48,6 @@
                                 <th>nombre empresa</th>
                                 <th>nit empresa</th>
                                 <th>tarjeta operación</th>
-                                
                                 <th>No. placa agente</th>
                                 <th>Observaciones comparendo</th>
                                 <th>Fuga</th>
@@ -57,13 +55,10 @@
                                 <th>Inmovilizacón</th>
                                 <th>Patio inmovilización</th>
                                 <th>dirección patio inmovilización</th>
-
-
                                 <th>identificación testigo</th>
                                 <th>nombres y apellidos testigo</th>
                                 <th>direción residencia testigo</th>
                                 <th>telefono testigo</th>
-
                                 <th>valor comparendo</th>
                                 <th>valores adicionales</th>
                                 <th>Cod. organismo reporta</th>
@@ -109,7 +104,7 @@
                                 <td>{{ comparendo.numeroLicenciaTransito }}</td>
                                 <td>{{ comparendo.organismoTransitoMatriculado.divipo }}</td>
                                 <td>{{ comparendo.propietarioIdentificacion }}</td>
-                                <td>{{ comparendo.propietarioTipoDocumento.codigo }}</td>
+                                <td>{{ comparendo.propietarioTipoIdentificacion.codigo }}</td>
                                 <td>{{ comparendo.propietarioNombres }}{{ comparendo.propietarioApellidos }}</td>
                                 <td>{{ comparendo.empresaNombre }}</td>
                                 <td>{{ comparendo.empresaNit }}</td>
@@ -118,22 +113,13 @@
                                 <td>{{ comparendo.observacionesAgente }}</td>
                                 <td>{{ comparendo.fuga }}</td>
                                 <td>{{ comparendo.accidente }}</td>
-
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <!-- <td>{{ inmovilizacion.id }}</td>
-                                <td>{{ inmovilizacion.patio.nombre }}</td>
-                                <td>{{ inmovilizacion.patio.direccion }}</td>
-                                <td>{{ inmovilizacion.grua.numeroInterno }}</td>
-                                <td>{{ inmovilizacion.grua.placa }}</td>
-                                <td>{{ inmovilizacion.consecutivo }}</td> -->
-
                                 <td>{{ comparendo.ciudadanoTestigoIdentificacion }}</td>
                                 <td>{{ comparendo.ciudadanoTestigoNombres }}{{ comparendo.ciudadanoTestigoApellidos }}</td>
                                 <td>{{ comparendo.ciudadanoTestigoDireccion }}</td>
                                 <td>{{ comparendo.ciudadanoTestigoTelefono }}</td>
-
                                 <td>{{ comparendo.valorPagar }}</td>
                                 <td>{{ comparendo.valorAdicional }}</td>
                                 <td>{{ comparendo.organismoTransito?.divipo }}</td>
@@ -143,12 +129,7 @@
                                 <td>{{ comparendo.valorInfraccion }}</td>
                                 <td>N</td>
                                 <td></td>
-                                <td></td>
                                 <td>{{ comparendo.gradoAlcoholemia }}</td>
-                                <!--<td>{{ comparendo.numeroRegistros }}}</td>
-                                <td>{{ comparendo.sumatoriaRegistros }}}</td>
-                                <td>{{ comparendo.numeroOficio }}}</td>
-                                <td>{{ comparendo.codigoChequeo }}}</td>-->
                             </tr>
                         </tbody>
                     </table>
