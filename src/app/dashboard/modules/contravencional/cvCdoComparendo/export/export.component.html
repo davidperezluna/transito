@@ -77,23 +77,23 @@
                         <tbody>
                             <tr class="odd" *ngFor="let comparendo of comparendos; let i = index">
                                 <td>{{ comparendo.consecutivo.id }}</td>    
-                                <td>{{ comparendo.fecha }}</td>    
-                                <td>{{ comparendo.hora }}</td>
+                                <td>{{ (comparendo.fecha.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td>    
+                                <td>{{ (comparendo.hora.timestamp * 1000) | date: 'HH:mm' }}</td>
                                 <td>{{ comparendo.direccion }}</td>
                                 <td>{{ comparendo.municipio.nombre }}</td>
                                 <td>{{ comparendo.localidad }}</td>
                                 <td>{{ comparendo.placa }}</td>
-                                <td>{{ comparendo.clase }}</td>
-                                <td>{{ comparendo.servicio }}</td>
+                                <td>{{ comparendo.clase.nombre }}</td>
+                                <td>{{ comparendo.servicio.nombre }}</td>
                                 <td>{{ comparendo.radioAccion }}</td>
-                                <td>{{ comparendo.modalidadTransporte }}</td>
+                                <td>{{ comparendo.modalidadTransporte.nombre }}</td>
                                 <!--<td>{{ comparendo.vehiculo.numeroPasajeros }}</td>-->
                                 <td>{{ comparendo.transporteEspecial }}</td>
                                 <td>{{ comparendo.infractorIdentificacion }}</td>
                                 <td>{{ comparendo.infractorTipoDocumento }}</td>
                                 <td>{{ comparendo.infractorNombres }}</td>
                                 <td>{{ comparendo.infractorApellidos }}</td>
-                                <td>{{ comparendo.infractorFechaNacimiento }}</td>
+                                <td>{{ (comparendo.infractorFechaNacimiento.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td>
                                 <td>{{ comparendo.infractorEmail }}</td>
                                 <td>{{ comparendo.infractorTelefono }}</td>
                                 <td>{{ comparendo.infractorMunicipioResidencia }}</td>

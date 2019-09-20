@@ -1,6 +1,7 @@
 export class CvCdoCfgEstado{
 	constructor(
 		public nombre: string,
+		public codigo: string,
 		public sigla: string,
 		public dias: number,
 		public simit: boolean,

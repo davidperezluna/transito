@@ -8,7 +8,7 @@ declare var $: any;
     selector: 'app-index-cvcdocomparendo',
     templateUrl: './export.component.html'
 })
-export class ExportComponent implements OnInit {
+export class ExportComparendoComponent implements OnInit {
     public errorMessage;
     public id;
     public respuesta;

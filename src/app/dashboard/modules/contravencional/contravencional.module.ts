@@ -25,6 +25,7 @@ import { CvLcCfgTipoRestriccionComponent } from './cvLcCfgTipoRestriccion/cvLcCf
 import { CvMedidaCautelarComponent } from './cvMedidaCautelar/cvMedidaCautelar.component';
 import { CvRestriccionComponent } from './cvRestriccion/cvRestriccion.component';
 import { SearchComponent } from './cvCdoComparendo/search/search.component';        
+import { ExportComparendoComponent } from './cvCdoComparendo/export/export.component';        
 
 import { ContravencionalRoutingModule } from './contravencional-routing.module';
 import { CvAuCfgAtencionModule } from './cvAuCfgAtencion/cvAuCfgAtencion.module';
@@ -96,6 +97,7 @@ import { CvRestriccionModule } from './cvRestriccion/cvRestriccion.module';
     CvMedidaCautelarComponent,
     CvRestriccionComponent,
     SearchComponent,
+    ExportComparendoComponent,
   ]
 })
 export class ContravencionalModule { }

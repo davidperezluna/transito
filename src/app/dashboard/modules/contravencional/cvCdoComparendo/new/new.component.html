@@ -172,7 +172,7 @@
                                     <ng-select (ngModelChange)="onChangedInfraccion($event)" [multiple]="false" [options]="infracciones" [(ngModel)]="comparendo.idInfraccion" name="infraccion" required></ng-select>
                                 </div>
                             </div>
-                            <div class="row" *ngIf="infraccion && infraccion.categoria == 5">
+                            <div class="row" *ngIf="infraccion && infraccion.categoria.id == 5">
                                 <div class="col-xs-12 col-lg-12">
                                     <label>Grado de alcoholemia <b class="text-danger">*</b></label>
                                     <input class="form-control text-uppercase" type="number" min="0" [(ngModel)]="comparendo.gradoAlcoholemia" name="gradoAlcoholemia">

@@ -57,6 +57,10 @@
                   <b>Fecha</b>
                   <br>
                   {{ (comparendo.fecha.timestamp * 1000) | date: 'dd/MM/yyyy' }}
+                  <ng-container *ngIf="comparendo.fuga">
+                    <br>
+                    <span class="badge badge-danger">Fuga</span>
+                  </ng-container>
                 </td>
                 <td>
                   <b>Código</b>

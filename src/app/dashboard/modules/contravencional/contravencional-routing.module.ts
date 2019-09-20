@@ -22,6 +22,7 @@ import { CvLcCfgTipoRestriccionComponent } from './cvLcCfgTipoRestriccion/cvLcCf
 import { CvMedidaCautelarComponent } from './cvMedidaCautelar/cvMedidaCautelar.component';
 import { CvRestriccionComponent } from './cvRestriccion/cvRestriccion.component';
 import { SearchComponent } from './cvCdoComparendo/search/search.component';
+import { ExportComparendoComponent } from './cvCdoComparendo/export/export.component';
 
 const routes: Routes = [
   {
@@ -71,6 +72,10 @@ const routes: Routes = [
   {
     path: 'search',
     component: SearchComponent
+  },
+  {
+    path: 'cvCdoComparendo/export',
+    component: ExportComparendoComponent
   },
   {
     path: 'cvCfgInteres',

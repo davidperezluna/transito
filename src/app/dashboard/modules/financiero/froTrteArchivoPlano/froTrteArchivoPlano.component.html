@@ -13,11 +13,21 @@
             <ng-select [multiple]="false" [options]="tiposReporte" [(ngModel)]="datos.tipoReporte" name="tipoReporte" required>
             </ng-select>
           </div>
-          <div class="col-xs-12 col-lg-12">
+          <div class="col-xs-12 col-lg-12" *ngIf="datos.tipoReporte && datos.tipoReporte != 4">
+            <label>Seleccionar organismo tránsito <b class="text-danger">*</b></label>
+            <ng-select [multiple]="false" [options]="organismosTransito" [(ngModel)]="datos.idOrganismoTransito" name="idOrganismoTransito" required>
+            </ng-select>
+          </div>
+          <div class="col-xs-12 col-lg-12" *ngIf="datos.idOrganismoTransito && datos.tipoReporte != 4">
+            <label>Módulo</label>
+            <ng-select [multiple]="false" [options]="modulos" [(ngModel)]="datos.idModulo" required name="idModulo">
+            </ng-select>
+          </div>
+          <div class="col-xs-12 col-lg-12" *ngIf="datos.idModulo || datos.tipoReporte == 4">
             <label>Fecha inicial <b class="text-danger">*</b></label>
             <input class="form-control" type="date" [(ngModel)]="datos.fechaInicial" name="fechaInicial" required>
           </div>
-          <div class="col-xs-12 col-lg-12">
+          <div class="col-xs-12 col-lg-12" *ngIf="datos.idModulo || datos.tipoReporte == 4">
             <label>Fecha final <b class="text-danger">*</b></label>
             <input class="form-control" type="date" [(ngModel)]="datos.fechaFinal" name="fechaFinal" required>
           </div>
@@ -29,6 +39,10 @@
             <i class="fa fa-cogs"></i>
             Generar
           </button>
+          <a *ngIf="archivo"
+            href="{{ docsUrl }}{{ archivo }}" class="btn btn-success" target="_blank">
+            <i class="fa fa-file-pdf-o"></i>Descargar
+          </a>
         </div>
       </div>
     </div>

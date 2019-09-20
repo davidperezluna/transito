@@ -102,21 +102,29 @@ export class FroTrteSolicitudService {
 		return this._http.post(this.url + '/search/cambio/servicio', params, { headers: headers }).map(res => res.json());
 	}
 
-	createFile(datos, token): any {
-		let contentType;
-
+	createFile(datos, token) {
 		let json = JSON.stringify(datos);
+		let params = 'data=' + json + '&authorization=' + token;
 
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + '/create/file', params, { headers: headers }).map(res => res.json());
+	}
+
+	/* createFile(datos, token): any {
+		let contentType;
+		
+		let json = JSON.stringify(datos);
+		
 		let formData = new FormData();
-
+		
 		formData.append('data', json);
 		formData.append('authorization', token);
-
+		
 		return this._http.post(this.url + "/create/file", formData, { 'responseType': ResponseContentType.Blob }).map(res => {
 			contentType = res.headers.get('Content-type');
-			return new Blob([res.blob()], { type: contentType })
+			return new Blob([res.blob()], { type: 'text/html; charset=utf-8' })
 		});
-	}
+	} */
 
 	pdfExpedicionTarjetaOperacion(datos, token): any {
 		let json = JSON.stringify(datos);

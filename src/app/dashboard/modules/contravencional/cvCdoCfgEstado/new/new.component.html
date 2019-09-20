@@ -3,7 +3,8 @@
     <div class="col-xs-12 col-lg-4">
         <div class="card">
             <div class="card-header">
-                <h5 class="text-uppercase">Nuevo estado de comparendo</h5>
+                <b class="text-uppercase">Nuevo estado de comparendo</b>
+                <br>
                 <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
             </div>
             <div class="card-body">
@@ -13,6 +14,10 @@
                             <div class="col-xs-12 col-lg-12">
                                 <label>Nombre <strong class="text-danger">*</strong></label>
                                 <input class="form-control text-uppercase" [(ngModel)]="estado.nombre" name="nombre" type="text" required />
+                            </div>
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Código <small>(SIMIT)</small> <strong class="text-danger">*</strong></label>
+                                <input class="form-control" [(ngModel)]="estado.codigo" name="codigo" type="numeric" min="0" required />
                             </div>
                             <div class="col-xs-12 col-lg-12">
                                 <label>Sigla <strong class="text-danger">*</strong></label>
