@@ -31,7 +31,6 @@ import { EditComponent } from './edit/edit.component';
 import { StateComponent } from './state/state.component';
 import { ShowComponent } from './show/show.component';
 import { DocumentComponent } from './document/document.component';
-import { ExportComponent } from './export/export.component';
 
 @NgModule({
     imports: [
@@ -46,7 +45,6 @@ import { ExportComponent } from './export/export.component';
         StateComponent,
         ShowComponent,
         DocumentComponent,
-        ExportComponent
     ],
     exports: [
         NewComponent,
@@ -54,7 +52,6 @@ import { ExportComponent } from './export/export.component';
         StateComponent,
         ShowComponent,
         DocumentComponent,
-        ExportComponent
     ],
     providers:[
         CvCdoComparendoService,
