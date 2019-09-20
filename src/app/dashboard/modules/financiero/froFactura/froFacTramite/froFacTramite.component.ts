@@ -4,7 +4,7 @@ import { FroFacTramite } from './froFacTramite.modelo';
 import { FroFacturaService } from '../../../../../services/froFactura.service';
 import { FroTrtePrecioService } from '../../../../../services/froTrtePrecio.service';
 import { FroFacTramiteService } from '../../../../../services/froFacTramite.service';
-import { FroTrteSolicitudService } from 'app/services/froTrteSolicitud.service';
+import { FroTrteSolicitudService } from '../../../../../services/froTrteSolicitud.service';
 import { PnalFuncionarioService } from '../../../../../services/pnalFuncionario.service';
 import { CfgModuloService } from '../../../../../services/cfgModulo.service';
 import { UserCfgTipoIdentificacionService } from '../../../../../services/userCfgTipoIdentificacion.service';

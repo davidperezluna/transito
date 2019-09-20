@@ -128,13 +128,13 @@ constructor(
       if (this.table) {
         this.table.destroy()
       }
-      let datos = {
+      let data = {
         'tipoInsumo':this.datos.casoInsumo,
         'idOrganismoTransito':this.datos.idOrganismoTransitoOrigen,
       }
       let token = this._LoginService.getToken();
 
-      this._LoteService.showReasignacion(datos,token).subscribe( 
+      this._LoteService.showReasignacion(data,token).subscribe( 
         response => {
           if (response.code == 200) {
             this.insumos = response.data;
