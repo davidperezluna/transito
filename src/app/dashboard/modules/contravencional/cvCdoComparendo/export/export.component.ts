@@ -1,53 +1,50 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { CvCdoComparendo } from '../cvCdoComparendo.modelo';
-import { CvCdoComparendoService } from '../../../../../services/cvCdoComparendo.service';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { CfgOrganismoTransitoService } from '../../../../../services/cfgOrganismoTransito.service';
+import { CvCdoComparendoService } from 'app/services/cvCdoComparendo.service';
+import { LoginService } from '../../../../../services/login.service';
+import { environment } from 'environments/environment';
 import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
-    selector: 'app-index-cvcdocomparendo',
+    selector: 'app-cvcdocomparendo-export',
     templateUrl: './export.component.html'
 })
-export class ExportComparendoComponent implements OnInit {
+
+export class CvCdoComparendoExportComponent implements OnInit, AfterViewInit {
     public errorMessage;
-    public id;
-    public respuesta;
-    public formNew = false;
-    public formEdit = false;
-    public formIndex = true;
-    public table: any;
-    public comparendos: CvCdoComparendo;
+
+    public docsUrl = environment.docsUrl;
+    public organismosTransito;
+
+    public archivo: any = null;
+
+    public tiposReporte = [
+        { value: '1', label: 'COMPARENDOS' },
+        { value: '2', label: 'RESOLUCIONES' },
+        { value: '3', label: 'RECAUDOS' },
+    ];
+
+    public datos = {
+        'tipoReporte': null,
+        'idOrganismoTransito': null,
+        'fechaInicial': null,
+        'fechaFinal': null,
+    }
 
     constructor(
-        private _ComparendoService: CvCdoComparendoService,
+        private _CvCdoComparendoService : CvCdoComparendoService,
+        private _OrganismoTransitoService: CfgOrganismoTransitoService,
+        private _LoginService: LoginService,
     ) { }
 
     ngOnInit() {
-        swal({
-            title: 'Cargando Tabla!',
-            text: 'Solo tardará unos segundos, por favor espere.',
-            timer: 1500,
-            onOpen: () => {
-                swal.showLoading();
-            }
-        }).then((result) => {
-            if (
-                // Read more about handling dismissals
-                result.dismiss === swal.DismissReason.timer
-            ) {
-            }
-        });
-        this._ComparendoService.export().subscribe(
+        this._OrganismoTransitoService.selectSedes().subscribe(
             response => {
-                this.comparendos = response.data;
-                console.log(this.comparendos);
-                let timeoutId = setTimeout(() => {
-                    this.iniciarTabla();
-                }, 100);
+                this.organismosTransito = response;
             },
             error => {
                 this.errorMessage = <any>error;
-
                 if (this.errorMessage != null) {
                     console.log(this.errorMessage);
                     alert("Error en la petición");
@@ -55,33 +52,66 @@ export class ExportComparendoComponent implements OnInit {
             }
         );
     }
-    iniciarTabla() {
-        $('#dataTables-example').DataTable({
-            responsive: true,
-            pageLength: 8,
-            sPaginationType: 'full_numbers',
-            dom: 'Bfrtip',
-            buttons: [
-                'excel', 'csv'
-            ],
-            oLanguage: {
-                oPaginate: {
-                    sFirst: '<<',
-                    sPrevious: '<',
-                    sNext: '>',
-                    sLast: '>>'
-                } 
-            }
-        });
-        this.table = $('#dataTables-example').DataTable();
+
+    ngAfterViewInit() {
+        swal.close();
     }
 
-    ready(isCreado: any) {
-        if (isCreado) {
-            this.formNew = false;
-            this.formEdit = false;
-            this.formIndex = true;
-            this.ngOnInit();
+    onEnviar() {
+        let token = this._LoginService.getToken();
+        let identity = this._LoginService.getIdentity();
+
+        if (this.datos.tipoReporte) {
+            this._CvCdoComparendoService.createFile(this.datos, token).subscribe(
+                response => {
+                    if (response.code == 200) {
+                        this.archivo = response.data;
+
+                        swal({
+                            title: response.title,
+                            text: response.message,
+                            type: response.status,
+                            confirmButtonText: 'Aceptar'
+                        });
+                    } else {
+                        swal({
+                            title: response.title,
+                            text: response.message,
+                            type: response.status,
+                            confirmButtonText: 'Aceptar'
+                        });
+                    }
+                    /* if (response.type) {
+                      var fileURL = URL.createObjectURL(response);
+                      window.open(fileURL);
+                    } else {
+                      swal({
+                        title: 'Error!',
+                        text: 'No existen registros para la generación del archivo plano en el rango de las fechas estipuladas.',
+                        type: 'error',
+                        confirmButtonText: 'Aceptar'
+                      });
+                      error => {
+                        this.errorMessage = <any>error;
+          
+                        if (this.errorMessage != null) {
+                          console.log(this.errorMessage);
+                          alert("Error en la petición");
+                        }
+                      }
+                    } */
+                },
+                error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                    }
+                }
+            );
+        } else {
+
         }
     }
 }

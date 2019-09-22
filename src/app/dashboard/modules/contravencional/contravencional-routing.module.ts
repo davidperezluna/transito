@@ -22,7 +22,7 @@ import { CvLcCfgTipoRestriccionComponent } from './cvLcCfgTipoRestriccion/cvLcCf
 import { CvMedidaCautelarComponent } from './cvMedidaCautelar/cvMedidaCautelar.component';
 import { CvRestriccionComponent } from './cvRestriccion/cvRestriccion.component';
 import { SearchComponent } from './cvCdoComparendo/search/search.component';
-import { ExportComparendoComponent } from './cvCdoComparendo/export/export.component';
+import { CvCdoComparendoExportComponent } from './cvCdoComparendo/export/export.component';
 import { ExportInventarioComponent } from './rpcccInventarioDocumental/export/export.component';
 import { RpcccInventarioDocumentalComponent } from './rpcccInventarioDocumental/rpcccInventarioDocumental.component';
 
@@ -77,7 +77,7 @@ const routes: Routes = [
   },
   {
     path: 'cvCdoComparendo/export',
-    component: ExportComparendoComponent
+    component: CvCdoComparendoExportComponent
   },
   {
     path: 'cvCfgInteres',
