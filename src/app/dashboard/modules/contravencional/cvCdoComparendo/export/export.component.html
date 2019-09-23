@@ -75,8 +75,16 @@
                             <tr class="odd" *ngFor="let comparendo of comparendos; let i = index">
                                 <td>{{ i + 1 }}</td>    
                                 <td>{{ comparendo.consecutivo.numero }}</td>    
-                                <td>{{ (comparendo.fecha.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td>    
-                                <td>{{ (comparendo.hora.timestamp * 1000) | date: 'HH:mm' }}</td>
+                                <td>
+                                    <ng-container *ngIf="comparendo.fecha">
+                                        {{ (comparendo.fecha.timestamp * 1000) | date: 'dd/MM/yyyy' }}
+                                    </ng-container>
+                                </td>    
+                                <td>
+                                    <ng-container *ngIf="comparendo.hora">
+                                        {{ (comparendo.hora.timestamp * 1000) | date: 'HH:mm' }}
+                                    </ng-container>
+                                </td>
                                 <td>{{ comparendo.direccion }}</td>
                                 <td>{{ comparendo.municipio?.codigoDane }}</td>
                                 <td>{{ comparendo.localidad }}</td>
@@ -91,25 +99,33 @@
                                 <td>{{ comparendo.infractorTipoIdentificacion?.codigo }}</td>
                                 <td>{{ comparendo.infractorNombres }}</td>
                                 <td>{{ comparendo.infractorApellidos }}</td>
-                                <td>{{ (comparendo.infractorFechaNacimiento.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td>
+                                <td>
+                                    <ng-container *ngIf="comparendo.infractorFechaNacimiento">
+                                        {{ (comparendo.infractorFechaNacimiento.timestamp * 1000) | date: 'dd/MM/yyyy' }}
+                                    </ng-container>
+                                </td>
                                 <td>{{ comparendo.infractorDireccion }}</td>
                                 <td>{{ comparendo.infractorEmail }}</td>
                                 <td>{{ comparendo.infractorTelefono }}</td>
                                 <td>{{ comparendo.infractorMunicipioResidencia }}</td>
                                 <td>{{ comparendo.infractorNumeroLicenciaConduccion }}</td>
                                 <td>{{ comparendo.categoria }}</td>
-                                <td>{{ comparendo.organismoTransitoMatriculado.divipo }}</td>
-                                <td>{{ (comparendo.fechaVencimiento.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td>
-                                <td>{{ comparendo.tipoInfractor.id }}</td>
+                                <td>{{ comparendo.organismoTransitoMatriculado?.divipo }}</td>
+                                <td>
+                                    <ng-container *ngIf="comparendo.fechaVencimiento">
+                                        {{ (comparendo.fechaVencimiento.timestamp * 1000) | date: 'dd/MM/yyyy' }}
+                                    </ng-container>
+                                </td>
+                                <td>{{ comparendo.tipoInfractor?.id }}</td>
                                 <td>{{ comparendo.numeroLicenciaTransito }}</td>
-                                <td>{{ comparendo.organismoTransitoMatriculado.divipo }}</td>
+                                <td>{{ comparendo.organismoTransitoMatriculado?.divipo }}</td>
                                 <td>{{ comparendo.propietarioIdentificacion }}</td>
-                                <td>{{ comparendo.propietarioTipoIdentificacion.codigo }}</td>
+                                <td>{{ comparendo.propietarioTipoIdentificacion?.codigo }}</td>
                                 <td>{{ comparendo.propietarioNombres }}{{ comparendo.propietarioApellidos }}</td>
                                 <td>{{ comparendo.empresaNombre }}</td>
                                 <td>{{ comparendo.empresaNit }}</td>
                                 <td>{{ comparendo.tarjetaOperacion }}</td>
-                                <td>{{ comparendo.agenteTransito.numeroPlaca }}</td>
+                                <td>{{ comparendo.agenteTransito?.numeroPlaca }}</td>
                                 <td>{{ comparendo.observacionesAgente }}</td>
                                 <td>{{ comparendo.fuga }}</td>
                                 <td>{{ comparendo.accidente }}</td>

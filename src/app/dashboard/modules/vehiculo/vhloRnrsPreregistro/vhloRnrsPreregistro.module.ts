@@ -7,13 +7,13 @@ import {SelectModule} from 'angular2-select';
 import { VhloRnrsPreregistroService } from '../../../../services/vhloRnrsPreregistro.service';
 import { UsuarioService } from '../../../../services/usuario.service';
 
-import { VhloRnrsPreregistroComponent } from './vhloRnrsPreregistro.component';
 import { NewRegistroRemolqueComponent } from './new/new.component';
 import { EditComponent } from './edit/edit.component';
+
 @NgModule({
-    declarations: [VhloRnrsPreregistroComponent,NewRegistroRemolqueComponent,EditComponent],
+    declarations: [NewRegistroRemolqueComponent,EditComponent],
     imports: [CommonModule, ChartsModule, Ng2BootstrapModule.forRoot(),SelectModule],
-    exports: [VhloRnrsPreregistroComponent, NewRegistroRemolqueComponent,EditComponent],
+    exports: [NewRegistroRemolqueComponent,EditComponent],
     providers:[VhloRnrsPreregistroService,UsuarioService]
 })
  

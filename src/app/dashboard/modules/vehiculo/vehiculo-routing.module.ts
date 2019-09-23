@@ -15,6 +15,8 @@ import { VhloTpRangoComponent } from './vhloTpRango/vhloTpRango.component';
 import { VhloTpTarjetaOperacionComponent } from './vhloTpTarjetaOperacion/vhloTpTarjetaOperacion.component';
 import { VhloRnaPreregistroComponent } from "./vhloRnaPreregistro/vhloRnaPreregistro.component";
 import { VhloRnaPreasignacionPlacaComponent } from "./vhloRnaPreasignacionPlaca/vhloRnaPreasignacionPlaca.component";
+import { VhloRnmaPreregistroComponent } from "./vhloRnmaPreregistro/vhloRnmaPreregistro.component";
+import { VhloRnrsPreregistroComponent } from './vhloRnrsPreregistro/vhloRnrsPreregistro.component';
 
 const routes: Routes = [
   {
@@ -72,7 +74,15 @@ const routes: Routes = [
   {
     path: 'vhloRnaPreAsignacionPlaca',
     component: VhloRnaPreasignacionPlacaComponent
-  }
+  },
+  {
+    path: 'vhloRnmaPreregistro',
+    component: VhloRnmaPreregistroComponent
+  },
+  {
+    path: 'vhloRnrsPreregistro',
+    component: VhloRnrsPreregistroComponent
+  },
 ]; 
 
 @NgModule({

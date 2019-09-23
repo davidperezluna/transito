@@ -3,8 +3,8 @@ import { VhloRnaPreregistro } from './vhloRnaPreregistro.modelo';
 import { VhloRnaPreregistroService } from '../../../../services/vhloRnaPreregistro.service';
 import { VhloVehiculoService } from '../../../../services/vhloVehiculo.service';
 import { LoginService } from '../../../../services/login.service';
-declare var $: any;
 import swal from 'sweetalert2';
+declare var $: any;
 
 @Component({
   selector: 'app-index',

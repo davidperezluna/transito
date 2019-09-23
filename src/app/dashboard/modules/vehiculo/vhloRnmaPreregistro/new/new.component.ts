@@ -1,5 +1,5 @@
 import { Component, OnInit,Output,EventEmitter } from '@angular/core';
-import { VhloRnaPreregistro } from '../vhloRnaPreregistro.modelo';
+import { VhloRnaPreregistro } from '../vhloRnmaPreregistro.modelo';
 import { CfgOrganismoTransitoService } from '../../../../../services/cfgOrganismoTransito.service';
 import { VhloCfgLineaService } from '../../../../../services/vhloCfgLinea.service';
 import { VhloCfgClaseService } from '../../../../../services/vhloCfgClase.service';
@@ -21,7 +21,7 @@ import { LoginService } from '../../../../../services/login.service';
 import swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-new',
+  selector: 'app-new-rnmapreregistro',
   templateUrl: './new.component.html'
 })
 

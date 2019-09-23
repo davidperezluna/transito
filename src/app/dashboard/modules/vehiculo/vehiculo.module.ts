@@ -18,6 +18,8 @@ import { VhloTpRangoComponent } from './vhloTpRango/vhloTpRango.component';
 import { VhloTpTarjetaOperacionComponent } from './vhloTpTarjetaOperacion/vhloTpTarjetaOperacion.component';
 import { VhloRnaPreregistroComponent } from "./vhloRnaPreregistro/vhloRnaPreregistro.component";
 import { VhloRnaPreasignacionPlacaComponent } from './vhloRnaPreasignacionPlaca/vhloRnaPreasignacionPlaca.component';
+import { VhloRnmaPreregistroComponent } from "./vhloRnmaPreregistro/vhloRnmaPreregistro.component";
+import { VhloRnrsPreregistroComponent } from './vhloRnrsPreregistro/vhloRnrsPreregistro.component';
 
 import { VehiculoRoutingModule } from './vehiculo-routing.module';
 import { VhloBuscarModule } from './vhloBuscar/vhloBuscar.module';
@@ -33,6 +35,8 @@ import { VhloTpRangoModule } from './vhloTpRango/vhloTpRango.module';
 import { VhloTpTarjetaOperacionModule } from './vhloTpTarjetaOperacion/vhloTpTarjetaOperacion.module';
 import { VhloRnaPreregistroModule } from "./vhloRnaPreregistro/vhloRnaPreregistro.module";
 import { VhloRnaPreasignacionPlacaModule } from './vhloRnaPreasignacionPlaca/vhloRnaPreasignacionPlaca.module';
+import { VhloRnmaPreregistroModule } from "./vhloRnmaPreregistro/vhloRnmaPreregistro.module";
+import { VhloRnrsPreregistroModule } from './vhloRnrsPreregistro/vhloRnrsPreregistro.module';
 
 @NgModule({
   imports: [
@@ -55,6 +59,8 @@ import { VhloRnaPreasignacionPlacaModule } from './vhloRnaPreasignacionPlaca/vhl
     VhloTpTarjetaOperacionModule,
     VhloRnaPreregistroModule,
     VhloRnaPreasignacionPlacaModule,
+    VhloRnmaPreregistroModule,
+    VhloRnrsPreregistroModule,
   ],
   declarations: [
     VhloBuscarComponent,
@@ -70,6 +76,8 @@ import { VhloRnaPreasignacionPlacaModule } from './vhloRnaPreasignacionPlaca/vhl
     VhloTpTarjetaOperacionComponent,
     VhloRnaPreregistroComponent,
     VhloRnaPreasignacionPlacaComponent,
+    VhloRnmaPreregistroComponent,
+    VhloRnrsPreregistroComponent,
   ]
 })
 export class VehiculoModule { }
