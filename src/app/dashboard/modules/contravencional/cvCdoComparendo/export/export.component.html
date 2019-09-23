@@ -1,4 +1,56 @@
-<div class="container">
+<div class="container row">
+    <div class="col-xs-12 col-lg-4">
+        <div class="card">
+            <div class="card-header">
+                <b class="text-uppercase">Generación de archivos planos para carga a SIMIT (comparendos, recaudos y resoluciones).</b>
+                <br>
+                <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
+            </div>
+            <div class="card-body">
+                <form #formFiltros="ngForm">
+                    <div class="col-xs-12 col-lg-12">
+                        <label>Seleccionar tipo reporte <b class="text-danger">*</b></label>
+                        <ng-select [multiple]="false" [options]="tiposReporte" [(ngModel)]="datos.tipoReporte"
+                            name="tipoReporte" required>
+                        </ng-select>
+                    </div>
+                    <div class="col-xs-12 col-lg-12" *ngIf="datos.tipoReporte">
+                        <label>Seleccionar organismo tránsito <b class="text-danger">*</b></label>
+                        <ng-select [multiple]="false" [options]="organismosTransito"
+                            [(ngModel)]="datos.idOrganismoTransito" name="idOrganismoTransito" required>
+                        </ng-select>
+                    </div>
+                    <div class="col-xs-12 col-lg-12" *ngIf="datos.idOrganismoTransito">
+            <label>Fecha inicial <b class=" text-danger">*</b></label>
+                        <input class="form-control" type="date" [(ngModel)]="datos.fechaInicial" name="fechaInicial"
+                            required>
+                    </div>
+                    <div class="col-xs-12 col-lg-12" *ngIf="datos.idOrganismoTransito">
+                        <label>Fecha final <b class=" text-danger">*</b></label>
+                        <input class="form-control" type="date" [(ngModel)]="datos.fechaFinal" name="fechaFinal"
+                            required>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <div class="btn-group">
+                    <button (click)="onEnviar()" [disabled]="formFiltros.invalid" class="btn btn-primary" type="button">
+                        <i class="fa fa-cogs"></i>
+                        Generar
+                    </button>
+                    <a *ngIf="archivo" href="{{ docsUrl }}{{ archivo }}" download="{{ archivo }}"
+                        class="btn btn-success" target="_blank">
+                        <i class="fa fa-file-pdf-o"></i>Descargar
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- <div class="container">
     <hr>
     <div class="row" *ngIf='formIndex'>
         <div class="col-md-12">
@@ -149,9 +201,8 @@
                             </tr>
                         </tbody>
                     </table>
-                    <!-- /.table-responsive -->
                 </div>
             </div>
         </div>
     </div>
-</div>
+</div> -->
