@@ -1,7 +1,5 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { RnmaPreregistro } from '../rnmaPreregistro.modelo';
-import { RnmaPreregistroModule } from '../rnmaPreregistro.module';
-import { RnmaPreregistroService } from '../../../services/rnmaPreregistro.service';
+import { VhloMaquinariaService } from '../../../services/vhloMaquinaria.service';
 import { LoginService } from '../../../services/login.service';
 import {VhloCfgColorService} from '../../../services/vhloCfgColor.service';
 import { TipoVehiculoService } from '../../../services/tipoVehiculo.service';
@@ -22,7 +20,7 @@ export class EditComponent implements OnInit{
 @Output() ready = new EventEmitter<any>();
 @Input() registroMaquinaria:any = null;
 @Input() vehiculo:any = null;
-@Input() cfgPlaca:any = null;
+@Input() placa:any = null;
 
 public errorMessage;
 public habilitar:any;
@@ -73,7 +71,7 @@ public tiposCabina =[
 ]
 
 constructor(
-  private _RegistroMaquinariaService: RnmaPreregistroService,
+  private _RegistroMaquinariaService: VhloMaquinariaService,
   private _loginService: LoginService,
   private _colorService: VhloCfgColorService,
   private _lineaService: VhloCfgLineaService,
@@ -281,7 +279,7 @@ constructor(
         }else{
           swal({
             title: 'Error!',
-            text: 'El vehiculo '+ this.registroMaquinaria.cfgPlaca +' ya se encuentra registrado',
+            text: 'El vehiculo '+ this.registroMaquinaria.placa +' ya se encuentra registrado',
             type: 'error',
             confirmButtonText: 'Aceptar'
           })

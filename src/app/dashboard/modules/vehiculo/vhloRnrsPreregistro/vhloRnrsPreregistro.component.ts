@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { VhloRegistroRemolque } from './vhloRnrsPreregistro.modelo';
-import { VhloRnrsPreregistroService } from '../../../../services/vhloRnrsPreregistro.service';
+import { VhloRemolqueService } from '../../../../services/vhloRemolque.service';
 import { LoginService } from '../../../../services/login.service';
 
 declare var $: any;
@@ -24,7 +24,7 @@ export class VhloRnrsPreregistroComponent implements OnInit {
   public registroRemolque: VhloRegistroRemolque;
 
   constructor(
-    private _RegistroRemolqueService: VhloRnrsPreregistroService,
+    private _RegistroRemolqueService: VhloRemolqueService,
 		private _LoginService: LoginService,
 	
 		

@@ -1,6 +1,5 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { VhloRegistroRemolque } from '../vhloRnrsPreregistro.modelo';
-import { VhloRnrsPreregistroService } from '../../../../../services/vhloRnrsPreregistro.service';
+import { VhloRemolqueService } from '../../../../../services/vhloRemolque.service';
 import { VhloCfgCarroceriaService } from '../../../../../services/vhloCfgCarroceria.service';
 import { VhloCfgMarcaService } from '../../../../../services/vhloCfgMarca.service';
 import { VhloCfgLineaService } from '../../../../../services/vhloCfgLinea.service';
@@ -63,7 +62,7 @@ public tiposCabina =[
 ]
 
 constructor(
-  private _RegistroRemolqueService: VhloRnrsPreregistroService,
+  private _RegistroRemolqueService: VhloRemolqueService,
   private _LineaService: VhloCfgLineaService,
   private _ClaseService: VhloCfgClaseService,
   private _MarcaService: VhloCfgMarcaService,

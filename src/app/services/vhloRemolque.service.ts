@@ -5,7 +5,7 @@ import { LoggerService } from "../logger/services/logger.service";
 import { environment } from 'environments/environment';
 
 @Injectable()
-export class VhloRnrsPreregistroService {
+export class VhloRemolqueService {
 	private url = environment.apiUrl + "vehiculo/vhloremolque";
 	public identity;
 	public token; 

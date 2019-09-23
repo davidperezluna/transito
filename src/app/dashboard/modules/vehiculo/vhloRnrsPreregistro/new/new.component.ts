@@ -1,6 +1,6 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import { VhloRegistroRemolque } from '../vhloRnrsPreregistro.modelo';
-import { VhloRnrsPreregistroService } from '../../../../../services/vhloRnrsPreregistro.service';
+import { VhloRemolqueService } from '../../../../../services/vhloRemolque.service';
 import { VhloCfgCarroceriaService } from '../../../../../services/vhloCfgCarroceria.service';
 import { VhloCfgMarcaService } from '../../../../../services/vhloCfgMarca.service';
 import { VhloCfgLineaService } from '../../../../../services/vhloCfgLinea.service';
@@ -17,7 +17,7 @@ import swal from 'sweetalert2';
   templateUrl: './new.component.html'
 })
 
-export class NewRegistroRemolqueComponent implements OnInit {
+export class NewComponent implements OnInit {
   @Output() ready = new EventEmitter<any>();
   
   public registroRemolque: VhloRegistroRemolque;
@@ -39,7 +39,7 @@ export class NewRegistroRemolqueComponent implements OnInit {
   public btnRadicado:any = 'Preregistro para matricula inicial';
 
 constructor(
-  private _RegistroRemolqueService: VhloRnrsPreregistroService,
+  private _RegistroRemolqueService: VhloRemolqueService,
   private _LineaService: VhloCfgLineaService,
   private _ClaseService: VhloCfgClaseService,
   private _MarcaService: VhloCfgMarcaService,
