@@ -10,6 +10,7 @@ import swal from 'sweetalert2';
   selector: 'app-index',
   templateUrl: './vhloRnrsPreregistro.component.html'
 })
+
 export class VhloRnrsPreregistroComponent implements OnInit {
   public errorMessage;
 	public id;

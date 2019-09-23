@@ -1,17 +1,17 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { VhloRnaPreregistro } from './vhloRnaPreregistro.modelo';
+import { VhloRnaPreregistro } from './vhloRnmaPreregistro.modelo';
 import { VhloRnaPreregistroService } from '../../../../services/vhloRnaPreregistro.service';
 import { VhloVehiculoService } from '../../../../services/vhloVehiculo.service';
 import { LoginService } from '../../../../services/login.service';
-declare var $: any;
 import swal from 'sweetalert2';
+declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './vhloRnaPreregistro.component.html'
+  templateUrl: './vhloRnmaPreregistro.component.html'
 })
 
-export class VhloRnaPreregistroComponent implements OnInit {
+export class VhloRnmaPreregistroComponent implements OnInit {
   public errorMessage;
 
 	public vehiculos;
@@ -25,8 +25,6 @@ export class VhloRnaPreregistroComponent implements OnInit {
     private _VehiculoService: VhloVehiculoService,
 		private _RnaPreregistroService: VhloRnaPreregistroService,
 		private _loginService: LoginService,
-	
-		
   ){}
   
   ngOnInit() {
