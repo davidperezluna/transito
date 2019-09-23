@@ -1,15 +1,11 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { TramiteSolicitudService } from '../../../../../services/tramiteSolicitud.service';
-import { TramiteFacturaService } from '../../../../../services/tramiteFactura.service';
-import { LoginService } from '../../../../../services/login.service';
+import { FacturaInsumo } from './facturaInsumo.modelo';
 import { ImoInsumoService } from '../../../../../services/imoInsumo.service';
 import { PnalFuncionarioService } from '../../../../../services/pnalFuncionario.service';
 import { UserCiudadanoService } from '../../../../../services/userCiudadano.service';
-import { FacturaInsumo } from './facturaInsumo.modelo';
 import { FacturaInsumoService } from '../../../../../services/facturaInsumo.service';
 import { VhloPropietarioService } from '../../../../../services/vhloPropietario.service';
-
-
+import { LoginService } from '../../../../../services/login.service';
 import swal from 'sweetalert2';
 import { log } from 'util';
 
@@ -41,31 +37,29 @@ export class NewRnaInsumoComponent implements OnInit {
     public insumo:any;
     public ciudadanoEncontrado=1;
     public FacturaInsumo: FacturaInsumo;
-    public resumen = {};     public datos = {
+    
+    public datos = {
         'cedula': 0,
         'licenciaTransito': "",
         'vehiculoId': ""
-      }
+    }
     
-
     constructor(
         private  _ImoInsumoService: ImoInsumoService,
-        private _TramiteSolicitudService: TramiteSolicitudService,
-        private _loginService: LoginService,
-        private _tramiteFacturaService: TramiteFacturaService,
         private _FuncionarioService: PnalFuncionarioService,
         private _UserCiudadanoService: UserCiudadanoService,
         private _CiudadanoVehiculoService: VhloPropietarioService,
         private _FacturaInsumoService: FacturaInsumoService,
+        private _LoginService: LoginService,
     ) {
         this.FacturaInsumo = new FacturaInsumo(null, null, null, null, null);
         
      } 
 
     ngOnInit() {
-        let token = this._loginService.getToken();
+        let token = this._LoginService.getToken();
 
-        let identity = this._loginService.getIdentity();
+        let identity = this._LoginService.getIdentity();
 
         this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
             response => {
@@ -122,7 +116,7 @@ export class NewRnaInsumoComponent implements OnInit {
     }
 
     onKeyCiudadano(){
-        let token = this._loginService.getToken();
+        let token = this._LoginService.getToken();
         let identificacion = {
 			'numeroIdentificacion' : this.FacturaInsumo.ciudadanoId,
         };
@@ -150,7 +144,7 @@ export class NewRnaInsumoComponent implements OnInit {
     }
    
     enviarTramite(){
-        let token = this._loginService.getToken();
+        let token = this._LoginService.getToken();
 
         this.datos.licenciaTransito = this.licenciaTransito;
         this.datos.cedula  = this.ciudadanoPropietario.usuario.identificacion;
@@ -201,7 +195,7 @@ export class NewRnaInsumoComponent implements OnInit {
     }
 
     onKeyValidateInsumo(){
-        let token = this._loginService.getToken();
+        let token = this._LoginService.getToken();
 
         let datos = {
             'numero': this.numeroInsumo,

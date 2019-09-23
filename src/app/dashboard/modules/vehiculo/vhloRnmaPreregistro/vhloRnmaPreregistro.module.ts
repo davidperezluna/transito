@@ -10,16 +10,22 @@ import { VhloCfgModalidadTransporteService } from '../../../../services/vhloCfgM
 
 import { NewComponent } from './new/new.component';
 import { EditComponent } from './edit/edit.component';
-import { NewCiudadanoComponent } from './newCiudadano/newCiudadano.component';
-import { NewEmpresaComponent } from './newEmpresa/newEmpresa.component';
 
 import { SelectModule } from 'angular2-select';
 
 @NgModule({
     imports: [CommonModule, ChartsModule, Ng2BootstrapModule.forRoot(),SelectModule],
-    declarations: [NewComponent,EditComponent,NewCiudadanoComponent,NewEmpresaComponent],
-    exports: [NewComponent,EditComponent,NewCiudadanoComponent,NewEmpresaComponent],
-    providers:[VhloRnaPreregistroService,VhloCfgCarroceriaService,VhloCfgRadioAccionService,VhloCfgModalidadTransporteService]
+    declarations: [NewComponent,EditComponent],
+    exports: [
+        NewComponent,
+        EditComponent
+    ],
+    providers:[
+        VhloRnaPreregistroService,
+        VhloCfgCarroceriaService,
+        VhloCfgRadioAccionService,
+        VhloCfgModalidadTransporteService
+    ]
 }) 
 
 export class VhloRnmaPreregistroModule { }
