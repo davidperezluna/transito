@@ -1,6 +1,0 @@
-export class Reporte{
-	constructor(
-		
-
-	){}
-}

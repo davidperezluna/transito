@@ -1,19 +1,15 @@
-<div class="container" >
-  <hr>
+<div class="container">
   <div class="row" *ngIf='formIndex'>
     <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-            <h5 class="card-title">
-              <strong class="text-uppercase">Vehiculo</strong>
-              <small>Tipos de maquinaria</small>
+              <b class="text-uppercase">Configuración de Tipos de maquinaria</b>
               <div class="btn-group pull-right">
                 <button (click)="onNew()" class="btn btn-default">
                   <i class="fa fa-plus"></i>
                   <span class="text">Nuevo</span>
                 </button>
               </div>
-            </h5>
           </div>
           <div class="card-body">
             <table class="table " id="dataTables-example">
@@ -49,6 +45,6 @@
       </div>
     </div>
     
-    <app-edit *ngIf='formEdit' [tipoMaquinaria]="tipoMaquinaria" (ready)="ready($event)"></app-edit>
-    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+    <app-edit-vhlocfgtipomaquinaria *ngIf='formEdit' [tipoMaquinaria]="tipoMaquinaria" (ready)="ready($event)"></app-edit-vhlocfgtipomaquinaria>
+    <app-new-vhlocfgtipomaquinaria *ngIf='formNew' (ready)="ready($event)"></app-new-vhlocfgtipomaquinaria>
 </div>
