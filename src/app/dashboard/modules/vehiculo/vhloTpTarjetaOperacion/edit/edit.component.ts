@@ -27,9 +27,6 @@ export class EditComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        console.log(this.empresaHabilitadaCupo);
-        console.log(this.tarjetaOperacion);
-
         this.placa = this.tarjetaOperacion[0].asignacion.vehiculo.placa.numero;
 
         //busca el vehiculo

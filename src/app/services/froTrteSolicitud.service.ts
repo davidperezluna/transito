@@ -101,6 +101,10 @@ export class FroTrteSolicitudService {
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + '/search/cambio/servicio', params, { headers: headers }).map(res => res.json());
 	}
+	
+	calcularFechaVencimiento() {
+		return this._http.get(this.url + '/calcular/fecha/vencimiento').map(res => res.json());
+	}
 
 	createFile(datos, token) {
 		let json = JSON.stringify(datos);

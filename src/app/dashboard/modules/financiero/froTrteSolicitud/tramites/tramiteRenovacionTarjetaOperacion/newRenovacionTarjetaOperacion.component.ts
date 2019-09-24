@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { DatePipe, CurrencyPipe } from '@angular/common';
 import { VhloTpTarjetaOperacionService } from "../../../../../../services/vhloTpTarjetaOperacion.service";
+import { FroTrteSolicitudService } from 'app/services/froTrteSolicitud.service';
 import { LoginService } from '../../../../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -41,6 +42,7 @@ export class NewRnetRenovacionTarjetaOperacionComponent implements OnInit {
     };
 
     constructor(
+        private _FroTrteSolicitudService: FroTrteSolicitudService,
         private _TarjetaOperacionService: VhloTpTarjetaOperacionService,
         private _LoginService: LoginService,
     ) { }
@@ -110,6 +112,29 @@ export class NewRnetRenovacionTarjetaOperacionComponent implements OnInit {
                 type: 'warning',
                 confirmButtonText: 'Aceptar'
             });
+        } else {
+            this._FroTrteSolicitudService.calcularFechaVencimiento().subscribe(
+                response => {
+                    this.datos.nuevaFechaVencimiento = response.data;
+
+                    var datePiper = new DatePipe('en-US');
+                    var date = new Date();
+
+                    date.setTime(this.datos.nuevaFechaVencimiento.timestamp * 1000);
+
+                    this.datos.nuevaFechaVencimiento = datePiper.transform(
+                        date, 'yyyy-MM-dd'
+                    );
+                },
+                error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                    }
+                }
+            );
         }
     }
 
