@@ -29,7 +29,7 @@ import { VhloCfgTipoAlertaService } from '../../../../services/vhloCfgTipoAlerta
 import { VhloTpAsignacionService } from '../../../../services/vhloTpAsignacion.service';
 import { VhloTpTarjetaOperacionService } from "../../../../services/vhloTpTarjetaOperacion.service";
 import { PnalFuncionarioService } from '../../../../services/pnalFuncionario.service';
-import { TramiteTrasladoService } from '../../../../services/tramiteTraslado.service';
+//import { TramiteTrasladoService } from '../../../../services/tramiteTraslado.service';
 import { UserCfgTipoIdentificacionService } from '../../../../services/userCfgTipoIdentificacion.service';
 import { UserCiudadanoService } from '../../../../services/userCiudadano.service';
 import { UserEmpresaService } from '../../../../services/userEmpresa.service';
@@ -75,7 +75,7 @@ import { UserLcCfgRestriccionService } from '../../usuario/userLcCfgRestriccion/
         VhloTpAsignacionService,
         VhloTpTarjetaOperacionService,
         PnalFuncionarioService,
-        TramiteTrasladoService,
+        //TramiteTrasladoService,
         UserCfgTipoIdentificacionService,
         UserCiudadanoService,
         UserEmpresaService,

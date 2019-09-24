@@ -3,7 +3,7 @@ import { FacturaInsumo } from './facturaInsumo.modelo';
 import { ImoInsumoService } from '../../../../../services/imoInsumo.service';
 import { PnalFuncionarioService } from '../../../../../services/pnalFuncionario.service';
 import { UserCiudadanoService } from '../../../../../services/userCiudadano.service';
-import { FacturaInsumoService } from '../../../../../services/facturaInsumo.service';
+//import { FacturaInsumoService } from '../../../../../services/facturaInsumo.service';
 import { VhloPropietarioService } from '../../../../../services/vhloPropietario.service';
 import { LoginService } from '../../../../../services/login.service';
 import swal from 'sweetalert2';
@@ -49,7 +49,7 @@ export class NewRnaInsumoComponent implements OnInit {
         private _FuncionarioService: PnalFuncionarioService,
         private _UserCiudadanoService: UserCiudadanoService,
         private _CiudadanoVehiculoService: VhloPropietarioService,
-        private _FacturaInsumoService: FacturaInsumoService,
+        //private _FacturaInsumoService: FacturaInsumoService,
         private _LoginService: LoginService,
     ) {
         this.FacturaInsumo = new FacturaInsumo(null, null, null, null, null);
@@ -153,7 +153,7 @@ export class NewRnaInsumoComponent implements OnInit {
         this.FacturaInsumo.entregado = this.tarjetaEntregada;
         this.FacturaInsumo.idFactura = this.factura.id;
         
-        this._CiudadanoVehiculoService.edit(this.datos,token).subscribe(
+        /*this._CiudadanoVehiculoService.edit(this.datos,token).subscribe(
             response => { 
                 this.respuesta = response;
                 if(this.respuesta.status == 'success'){  
@@ -187,7 +187,7 @@ export class NewRnaInsumoComponent implements OnInit {
                     }
             }
             
-        );
+        );*/
     }
 
     onCancelar(){

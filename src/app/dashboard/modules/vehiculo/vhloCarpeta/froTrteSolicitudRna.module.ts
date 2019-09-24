@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TramiteTrasladoService } from '../../../../services/tramiteTraslado.service';
-import { FacturaInsumoService } from '../../../../services/facturaInsumo.service';
+/*import { TramiteTrasladoService } from '../../../../services/tramiteTraslado.service';
+import { FacturaInsumoService } from '../../../../services/facturaInsumo.service';*/
 import { FroTrteSolicitudRnaComponent } from './froTrteSolicitudRna.component';
 import { FroTrteSolicitudRnaService } from '../../../../services/froTrteSolicitudRna.service';
 import { UserEmpresaService } from '../../../../services/userEmpresa.service';
@@ -117,10 +117,10 @@ import { TooltipModule, Tooltip } from "ngx-tooltip";
         NewRnaProrrogaImportacionTemporalComponent,
     ],
     providers: [
-        FacturaInsumoService, 
+        //FacturaInsumoService, 
         FroTrteSolicitudRnaService, 
         CfgTipoAlertaService, 
-        TramiteTrasladoService, 
+        //TramiteTrasladoService, 
         VhloAcreedorService, 
         UserEmpresaService,
         DefaultService

@@ -4,7 +4,7 @@ import { LoginService } from '../../../../../services/login.service';
 import { UserCfgTipoIdentificacionService } from '../../../../../services/userCfgTipoIdentificacion.service';
 import { CfgOrganismoTransitoService } from '../../../../../services/cfgOrganismoTransito.service';
 import { UserCiudadanoService } from '../../../../../services/userCiudadano.service';
-import { RncLicenciaConduccionService } from '../../../../../services/rncLicenciaConduccion.service';
+import { UserLicenciaConduccionService } from '../../../../../services/userLicenciaConduccion.service';
 import swal from 'sweetalert2';
 declare var $: any;
 
@@ -31,7 +31,7 @@ export class NewComponent implements OnInit {
   public sedeOperativaSelected: any;
 
   constructor(
-    private _LicenciaConduccionService: RncLicenciaConduccionService,
+    private _LicenciaConduccionService: UserLicenciaConduccionService,
     private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
     private _OrganismoTransitoService: CfgOrganismoTransitoService,
     private _UserCiudadanoService: UserCiudadanoService,
@@ -88,7 +88,7 @@ export class NewComponent implements OnInit {
         if(this.respuesta.status == 'success'){
           this.ciudadano = response.data;
 
-          this._LicenciaConduccionService.recordByCiudadanoId({ 'ciudadanoId': this.ciudadano.id },token).subscribe(
+          /*this._LicenciaConduccionService.recordByCiudadanoId({ 'ciudadanoId': this.ciudadano.id },token).subscribe(
             response => {
               this.respuesta = response;
               if (this.respuesta.status == 'success') {
@@ -116,7 +116,7 @@ export class NewComponent implements OnInit {
                   alert("Error en la petición");
                 }
               }
-          }); 
+          }); */
           
         }else{
           swal({

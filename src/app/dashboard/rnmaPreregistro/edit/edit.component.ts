@@ -2,7 +2,7 @@ import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@ang
 import { VhloMaquinariaService } from '../../../services/vhloMaquinaria.service';
 import { LoginService } from '../../../services/login.service';
 import {VhloCfgColorService} from '../../../services/vhloCfgColor.service';
-import { TipoVehiculoService } from '../../../services/tipoVehiculo.service';
+import { VhloCfgTipoVehiculoService } from '../../../services/vhloCfgTipoVehiculo.service';
 import {VhloCfgClaseService} from '../../../services/vhloCfgClase.service';
 import {VhloCfgCarroceriaService} from '../../../services/vhloCfgCarroceria.service';
 import {VhloCfgLineaService} from '../../../services/vhloCfgLinea.service';
@@ -75,7 +75,7 @@ constructor(
   private _loginService: LoginService,
   private _colorService: VhloCfgColorService,
   private _lineaService: VhloCfgLineaService,
-  private _tipoVehiculoService: TipoVehiculoService,
+  private _TipoVehiculoService: VhloCfgTipoVehiculoService,
   private _claseService: VhloCfgClaseService,
   private _marcaService: VhloCfgMarcaService,
   private _carroceriaService: VhloCfgCarroceriaService,
@@ -117,7 +117,7 @@ constructor(
       }
     );
 
-     this._tipoVehiculoService.getTipoVehiculoSelect().subscribe(
+     this._TipoVehiculoService.select().subscribe(
       response => {
         this.tiposVehiculo = response;
         setTimeout(() => {

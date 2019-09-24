@@ -2,7 +2,7 @@ import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@ang
 import { Banco } from '../../../../banco/banco.modelo';
 import { VhloVehiculo } from '../../vhloVehiculo/vhloVehiculo.modelo';
 import { BancoService } from '../../../../../services/banco.service';
-import { VehiculoAcreedorService } from '../../../../../services/vehiculoAcreedor.service';
+import { VhloAcreedorService } from '../../../../../services/vhloAcreedor.service';
 import { LoginService } from '../../../../../services/login.service';
 
 import swal from 'sweetalert2';
@@ -27,7 +27,7 @@ public acreedorNew = false;
 constructor(
   private _BancoService: BancoService,
   private _loginService: LoginService,
-  private _VehiculoAcreedorService: VehiculoAcreedorService,
+  private _VhloAcreedorService: VhloAcreedorService,
 ){}
 
   ngOnInit() {

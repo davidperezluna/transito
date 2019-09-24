@@ -1,7 +1,6 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import { FroTrteSolicitudRna } from '../froTrteSolicitudRna.modelo';
-import { TramiteSolicitudService } from '../../../../../services/tramiteSolicitud.service';
-import { TramiteFacturaService } from '../../../../../services/tramiteFactura.service';
+//import { TramiteSolicitudService } from '../../../../../services/tramiteSolicitud.service';
 import { LoginService } from '../../../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -19,9 +18,8 @@ export class EditComponent implements OnInit{
   public tramiteFacturaSelected: any;
 
 constructor(
-  private _tramiteSolicitudService: TramiteSolicitudService,
+  //private _tramiteSolicitudService: TramiteSolicitudService,
   private _loginService: LoginService,
-  private _tramiteFacturaService: TramiteFacturaService,
   ){}
 
   ngOnInit(){ console.log(this.tramiteSolicitud);
@@ -44,7 +42,7 @@ constructor(
 
   onEnviar(){
     let token = this._loginService.getToken();
-		this._tramiteSolicitudService.editTramiteSolicitud(this.tramiteSolicitud,token).subscribe(
+		/*this._tramiteSolicitudService.editTramiteSolicitud(this.tramiteSolicitud,token).subscribe(
 			response => {
         this.respuesta = response;
         console.log(this.respuesta);
@@ -64,7 +62,7 @@ constructor(
 						alert('Error en la petición');
 					}
 				}
-		});
+		});*/
   }
 
 }

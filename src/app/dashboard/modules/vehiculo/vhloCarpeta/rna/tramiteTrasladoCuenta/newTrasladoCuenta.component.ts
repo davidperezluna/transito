@@ -1,6 +1,6 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import { CfgOrganismoTransitoService } from '../../../../../../services/cfgOrganismoTransito.service';
-import { TramiteTrasladoService } from '../../../../../../services/tramiteTraslado.service';
+//import { TramiteTrasladoService } from '../../../../../../services/tramiteTraslado.service';
 import { FroTrteSolicitudService } from '../../../../../../services/froTrteSolicitud.service';
 import { FroFacTramiteService } from '../../../../../../services/froFacTramite.service';
 import { VhloVehiculoService } from '../../../../../../services/vhloVehiculo.service';
@@ -38,7 +38,7 @@ export class NewTrasladoCuentaComponent implements OnInit {
   };
 
 constructor(
-  private _TramiteTrasladoService: TramiteTrasladoService,
+  //private _TramiteTrasladoService: TramiteTrasladoService,
   private _TramiteSolicitudService: FroTrteSolicitudService,
   private _TramiteFacturaService: FroFacTramiteService,
   private _VehiculoService: VhloVehiculoService,
@@ -163,7 +163,7 @@ constructor(
                     '<br/><b>Organismo transito anterior: </b>' + this.vehiculo.organismoTransito.nombre +
                     '<br/><b>Organismo transito nuevo: </b>' + this.datos.idOrganismoTransitoNew;
       
-                  this._TramiteTrasladoService.register(this.datos, token).subscribe(response => {
+                  /*this._TramiteTrasladoService.register(this.datos, token).subscribe(response => {
                     if (response.code == 200) {
                       this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
                     }
@@ -176,7 +176,7 @@ constructor(
                       }
                     }
                   }
-                );
+                );*/
               }
             }
           );
