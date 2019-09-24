@@ -20,7 +20,7 @@ import swal from 'sweetalert2';
 export class NewComponent implements OnInit {
   @Output() ready = new EventEmitter<any>();
   
-  public registroRemolque: VhloRegistroRemolque;
+  public remolque: VhloRegistroRemolque;
   public errorMessage:any;
 
   public marcas:any; 
@@ -35,11 +35,39 @@ export class NewComponent implements OnInit {
   public sedeOperativaSelected:any;
   public propietarios:any;
   public propietarioSelected:any;
-  public radicado=false;
-  public btnRadicado:any = 'Preregistro para matricula inicial';
+  public funcionario: any = null;
+
+  public tiposPropiedad = [
+    { 'value': 1, 'label': "Leasing" },
+    { 'value': 2, 'label': "Propio" }
+  ];
+
+  public tiposMatricula = [
+    { 'value': 'RADICADO', 'label': "Radicado de cuenta" },
+    { 'value': 'MATRICULA', 'label': "Matricula inicial" },
+    { 'value': 'IMPORTACION', 'label': "Importación temporal" },
+    { 'value': 'CARPETA', 'label': "Cargue de carpeta" }
+  ];
+
+  public datos = {
+    'propietarios': [],
+    'solidario': false,
+    'tipoPropiedad': null,
+    'numeroLicencia': null,
+    'fechaLicencia': null,
+    'idVehiculo': null,
+  };
+
+  public radicado = {
+    'fechaIngreso': null,
+    'guiaLlegada': null,
+    'empresaEnvio': null,
+    'idOrganismoTransito': null,
+    'idTipoIdentificacion': null,
+  };
 
 constructor(
-  private _RegistroRemolqueService: VhloRemolqueService,
+  private _RemolqueService: VhloRemolqueService,
   private _LineaService: VhloCfgLineaService,
   private _ClaseService: VhloCfgClaseService,
   private _MarcaService: VhloCfgMarcaService,
@@ -47,8 +75,8 @@ constructor(
   private _OrigenRegistroService: VhloCfgOrigenRegistroService,
   private _CondicionIngresoService: VhloCfgCondicionIngresoService,
   private _FuncionarioService: PnalFuncionarioService,
+  private _OrganismoTransitoService: CfgOrganismoTransitoService,
   private _LoginService: LoginService,
-  private _OrganismoTransitoService: CfgOrganismoTransitoService
 ){}
 
 ngOnInit() {
@@ -88,7 +116,7 @@ ngOnInit() {
       }
   });
 
-  this.registroRemolque = new VhloRegistroRemolque(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
+  this.remolque = new VhloRegistroRemolque(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
   
   this._OrganismoTransitoService.selectSedes().subscribe(
     response => {
@@ -181,7 +209,7 @@ ngOnInit() {
   onEnviar(){
     let token = this._LoginService.getToken();
     let identity = this._LoginService.getIdentity();
-    this.registroRemolque.idSedeOperativa = this.sedeOperativaSelected;
+    this.remolque.idSedeOperativa = this.sedeOperativaSelected;
 
     this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
       response => {
@@ -205,12 +233,12 @@ ngOnInit() {
     );
 
     var html = 'los datos de la maquinaria a ingresar son:<br>'+
-               'Placa: <b>'+this.registroRemolque.placa+'</b><br>'+
-               'Serie: <b>'+this.registroRemolque.serie+'</b><br>'+
-               'Carga util: <b>'+this.registroRemolque.cargaUtil+'</b><br>'+
-               'Peso vacio: <b>'+this.registroRemolque.pesoVacio+'</b><br>'+
-               'Referencia: <b>'+this.registroRemolque.referencia+'</b><br>';
-               'Ficha tecnica: <b>'+this.registroRemolque.numeroFth+'</b><br>'+
+               'Placa: <b>'+this.remolque.placa+'</b><br>'+
+               'Serie: <b>'+this.remolque.serie+'</b><br>'+
+               'Carga util: <b>'+this.remolque.cargaUtil+'</b><br>'+
+               'Peso vacio: <b>'+this.remolque.pesoVacio+'</b><br>'+
+               'Referencia: <b>'+this.remolque.referencia+'</b><br>';
+               'Ficha tecnica: <b>'+this.remolque.numeroFth+'</b><br>'+
                
 
    swal({
@@ -228,7 +256,7 @@ ngOnInit() {
     }).then((result) => {
         if (result.value) {
 
-    this._RegistroRemolqueService.register(this.registroRemolque, token).subscribe(
+    this._RemolqueService.register(this.remolque, token).subscribe(
 			response => {
         if(response.code == 200){
           this.ready.emit(true);
@@ -282,15 +310,6 @@ ngOnInit() {
           }
         }
       );
-    }
-  }
-  onRadicado(){
-    if(this.radicado) {
-      this.radicado = false; 
-      this.btnRadicado = 'Preregistro para matricula inicial';
-    }else{
-      this.btnRadicado = 'Preregistro para radicado de cuenta';
-      this.radicado = true; 
     }
   }
 }

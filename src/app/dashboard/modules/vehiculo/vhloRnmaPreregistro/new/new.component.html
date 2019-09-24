@@ -1,419 +1,202 @@
 <div class="row">
     <div class="col-xs-12 col-lg-8">
-        <div class="card">
-            <div class="card-header">
-                <b class="text-uppercase">Nuevo vehiculo RNA <span *ngIf="funcionario">({{ funcionario.organismoTransito.nombre }})</span></b>
-                <br>
-                <small>Los campos con <b class="text-danger"> <b class="text-danger">*</b></b> son obligatorios</small>
-            </div>
-            <div class="card-body">
-                <form #formNew="ngForm">
+        <form #formNew="ngForm">
+            <div class="card">
+                <div class="card-header">
+                    <b class="text-uppercase">Nuevo vehiculo RNMA <span *ngIf="funcionario">({{ funcionario.organismoTransito.nombre }})</span></b>
+                    <br>
+                    <small>Los campos con <b class="text-danger"> <b class="text-danger">*</b></b> son obligatorios</small>
+                </div>
+                <div class="card-body">
                     <div class="form-group">
                         <div class="row">
                             <div class="col-xs-12 col-lg-12">
-                                <label>Tipo de registro <span class="text-danger"> <b class="text-danger">*</b></span></label>
-                                <ng-select [multiple]="false" [options]="tiposMatricula" [(ngModel)]="vehiculo.tipoMatricula" required name="tipoMatricula">
+                                <label>Tipo de registro <b class="text-danger">*</b></label>
+                                <ng-select [multiple]="false" [options]="tiposMatricula" [(ngModel)]="maquinaria.tipoMatricula" required name="tipoMatricula">
                                 </ng-select>
                             </div>
                         </div>
 
                         <div class="row">
-                            <div class="col-lg-6"  *ngIf="vehiculo.tipoMatricula != 'MATRICULA'">
-                                <label>Placa <b class="text-danger">*</b></label>
-                                <input class="form-control text-uppercase" [(ngModel)]="vehiculo.placa" name="placa" type="text" required>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Fecha Factura<b class="text-danger">*</b></label>
+                                <input class="form-control" [(ngModel)]="maquinaria.fechaFactura" name="fechaFactura" type="date">
                             </div>
-                            <div class="col-lg-6">
-                                <label>Valor</label>
-                                <input class="form-control" [(ngModel)]="vehiculo.valor" type="text"  name="valor" required>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>No Factura de compra<b class="text-danger">*</b></label>
+                                <input class="form-control" [(ngModel)]="maquinaria.numeroFactura" name="numeroFactura" type="text" required>
                             </div>
-                        </div>
+                            <div class="col-xs-12 col-lg-3 col-md-3">
+                                <label>No. de Registro <b class="text-danger">*</b></label>
+                                <input class="form-control" [(ngModel)]="maquinaria.placa" name="placa" type="text" required>
+                            </div>
+                            <div class="col-xs-12 col-lg-3 col-md-3">
+                                <label>No. serie <b class="text-danger">*</b></label>
+                                <input class="form-control" [(ngModel)]="maquinaria.serie" name="serie" type="text" required>
+                            </div>
+                            <div class="col-xs-12 col-lg-3 col-md-3">
+                                <label>No. VIN <b class="text-danger">*</b></label>
+                                <input class="form-control" [(ngModel)]="maquinaria.vin" name="vin" type="text" required>
+                            </div>
+                            <div class="col-xs-12 col-lg-3 col-md-3">
+                                <label>No. chasis <b class="text-danger">*</b></label>
+                                <input class="form-control" [(ngModel)]="maquinaria.chasis" name="chasis" type="text" required>
+                            </div>
+                            <div class="col-xs-12 col-lg-3 col-md-3">
+                                <label>No. motor <b class="text-danger">*</b></label>
+                                <input class="form-control" [(ngModel)]="maquinaria.motor" name="motor" type="text" required>
+                            </div>
+                            <div class="col-xs-12 col-lg-3 col-md-3">
+                                <label>Condición de ingreso <b class="text-danger">*</b></label>
+                                <ng-select [multiple]="false" [options]="condicionesIngreso" [(ngModel)]="maquinaria.idCondicionIngreso" name="condicion" required>
+                                </ng-select>
+                            </div>
+                            <div class="col-xs-12 col-lg-3 col-md-3">
+                                <label>Fecha de ingreso <b class="text-danger">*</b></label>
+                                <input class="form-control" [(ngModel)]="maquinaria.fechaIngreso" name="fechaIngreso" type="date" required>
+                            </div>
+                            <div class="col-xs-12 col-lg-3 col-md-3">
+                                <label>Color <b class="text-danger">*</b></label>
+                                <ng-select [multiple]="false" [options]="colores" [(ngModel)]="maquinaria.idColor" required name="color">
+                                </ng-select>
+                            </div>
                         
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <label>No Factura de compra</label>
-                                <input class="form-control" [(ngModel)]="vehiculo.numeroFactura" name="numeroFactura" type="text">
-                            </div> 
-                            <div class="col-lg-3">
-                                <label>Fecha Factura</label>
-                                <input class="form-control" [(ngModel)]="vehiculo.fechaFactura" name="fechaFactura" type="date">
+                            <div class="col-xs-12 col-md-3">
+                                <label>Tipo maquinaria <b class="text-danger">*</b></label>
+                                <ng-select [multiple]="false" [options]="tiposMaquinaria" [(ngModel)]="maquinaria.idClaseMaquinaria" (ngModelChange)="onChangedTipoMaquinaria($event)" required name="tipoMaquinaria">
+                                </ng-select>
                             </div>
-                        </div>
-
-                        <div class="row"><!-- .row -->
+                        
+                            <div class="col-xs-12 col-lg-3">
+                                <label>Clase de maquinaria <b class="text-danger">*</b></label>
+                                <ng-select *ngIf="clasesMaquinaria" [multiple]="false" [options]="clasesMaquinaria" [(ngModel)]="maquinaria.idClaseMaquinaria" required name="claseMaquinaria">
+                                </ng-select>
+                            </div>
+                        
                             <div class="col-xs-12 col-lg-3">
                                 <label>Marca <b class="text-danger">*</b></label>
-                                <ng-select [multiple]="false" [options]="marcas" [(ngModel)]="vehiculo.idMarca" (ngModelChange)="onChangedMarca($event)" name="idMarca" required>
+                                <ng-select [multiple]="false" [options]="marcas" (ngModelChange)="onChangedMarca($event)" name="idMarca" required>
                                 </ng-select>
                             </div>
+                        
                             <div class="col-xs-12 col-lg-3">
                                 <label>Linea <b class="text-danger">*</b></label>
-                                <ng-select [multiple]="false" [options]="lineas" [(ngModel)]="vehiculo.idLinea" name="idLinea" required>
+                                <ng-select *ngIf="lineas" [multiple]="false" [options]="lineas" [(ngModel)]="maquinaria.idLinea" required name="linea">
                                 </ng-select>
                             </div>
-                            <div class="col-xs-12 col-lg-3">
-                                <label>Clase <b class="text-danger">*</b></label>
-                                <ng-select [multiple]="false" [options]="clases" [(ngModel)]="vehiculo.idClase" (ngModelChange)="onChangedClase($event)" name="idClase" required>
-                                </ng-select>
+
+                            <div class="col-xs-12 col-lg-3 col-md-3">
+                                <label>Modelo <small>(Año)</small> <b class="text-danger">*</b></label>
+                                <input class="form-control" [(ngModel)]="maquinaria.modelo" name="modelo" type="text" required>
                             </div>
+
                             <div class="col-xs-12 col-lg-3">
                                 <label>Carrocería <b class="text-danger">*</b></label>
-                                <ng-select [multiple]="false" [options]="carrocerias" [(ngModel)]="vehiculo.idCarroceria" name="idCarroceria" required>
+                                <ng-select [multiple]="false" [options]="carrocerias" [(ngModel)]="maquinaria.idCarroceria" required name="carroceria">
                                 </ng-select>
                             </div>
-                            <div class="col-xs-12 col-lg-3">
-                                <label>Servicio <b class="text-danger">*</b></label>
-                                <ng-select [multiple]="false" [options]="servicios" [(ngModel)]="vehiculo.idServicio" name="idServicio" required>
+
+                            <div class="col-xs-12 col-lg-3 col-md-3">
+                                <label>Peso <b class="text-danger">*</b></label>
+                                <input class="form-control" [(ngModel)]="maquinaria.peso" name="peso" type="text" required>
+                            </div>
+
+                            <div class="col-xs-12 col-lg-3 col-md-3">
+                                <label>Carga útil maxima <b class="text-danger">*</b></label>
+                                <input class="form-control" [(ngModel)]="maquinaria.cargaUtilMaxima" name="cargaUtilMaxima" type="text" required>
+                            </div>
+
+                            <div class="col-xs-12 col-lg-3 col-md-3">
+                                <label>Rodaje <b class="text-danger">*</b></label>
+                                <ng-select [multiple]="false" [options]="tiposRodaje" [(ngModel)]="maquinaria.idTipoRodaje" required name="tipoRodaje">
                                 </ng-select>
                             </div>
-                            <div class="col-xs-12 col-lg-3"> 
-                                <label>Color <b class="text-danger">*</b></label>
-                                <ng-select [multiple]="false" [options]="colores" [(ngModel)]="vehiculo.idColor"name="idColor" required>
+
+                            <div class="col-xs-12 col-lg-3 col-md-3">
+                                <label>Nro. ejes <b class="text-danger">*</b></label>
+                                <input class="form-control" [(ngModel)]="maquinaria.numeroEjes" name="numeroEjes" type="text" required>
+                            </div>
+
+                            <div class="col-xs-12 col-lg-3 col-md-3">
+                                <label>Nro. llantas <b class="text-danger">*</b></label>
+                                <input class="form-control" [(ngModel)]="maquinaria.numeroLlantas" name="numeroLlantas" type="text" required>
+                            </div>
+
+                            <div class="col-xs-12 col-lg-3 col-md-3">
+                                <label>Tipo cabina <b class="text-danger">*</b></label>
+                                <ng-select [multiple]="false" [options]="tiposCabina" [(ngModel)]="maquinaria.idTipoCabina" required name="tipoCabina">
                                 </ng-select>
+                            </div>
+
+                            <div class="col-xs-12 col-lg-3 col-md-3">
+                                <label>Alto <b class="text-danger">*</b></label>
+                                <input class="form-control" [(ngModel)]="maquinaria.alto" name="alto" type="text" required>
+                            </div>
+
+                            <div class="col-xs-12 col-lg-3 col-md-3">
+                                <label>Largo <b class="text-danger">*</b></label>
+                                <input class="form-control" [(ngModel)]="maquinaria.largo" name="largo" type="text" required>
+                            </div>
+
+                            <div class="col-xs-12 col-lg-3 col-md-3">
+                                <label>Ancho <b class="text-danger">*</b></label>
+                                <input class="form-control" [(ngModel)]="maquinaria.ancho" name="ancho" type="text" required>
                             </div>
 
                             <div class="col-xs-12 col-lg-3">
                                 <label>Combustible <b class="text-danger">*</b></label>
-                                <ng-select [multiple]="false" [options]="combustibles" [(ngModel)]="vehiculo.idCombustible" name="idCombustible" required>
+                                <ng-select [multiple]="false" [options]="combustibles" [(ngModel)]="maquinaria.idCombustible" required name="combustible">
                                 </ng-select>
                             </div>
 
-                            <div class="col-xs-12 col-lg-3" *ngIf="!funcionario">
-                                <label>Organismo de transito <b class="text-danger">*</b></label>
-                                <ng-select [multiple]="false" [options]="organismosTransito" [(ngModel)]="vehiculo.idOrganismoTransito" name="idOrganismoTransito" required>
-                                </ng-select>
-                            </div> 
-
-                            <div class="col-xs-12 col-lg-3">
-                                <label>Numero Manifiesto</label> 
-                                <input class="form-control" [(ngModel)]="vehiculo.numeroManifiesto" name="numeroManifiesto">
-                            </div>
-
-                            <div class="col-xs-12 col-lg-3">
-                                <label>Fecha Manifiesto</label>
-                                <input class="form-control" type="date" [(ngModel)]="vehiculo.fechaManifiesto" name="fechaManifiesto">
-                            </div>
-
-                            <div class="col-xs-12 col-lg-3">
-                                <label>Cilindraje</label>
-                                <input class="form-control" type="text" [(ngModel)]="vehiculo.cilindraje" name="cilindraje">
-                            </div>
-
-                            <div class="col-xs-12 col-lg-3">
-                                <label>Modelo</label>
-                                <input class="form-control" type="text" [(ngModel)]="vehiculo.modelo" name="modelo">
-                            </div>
-
-                            <div class="col-xs-12 col-lg-3">
-                                <label>Motor</label>
-                                <input class="form-control" type="text" type="text" [(ngModel)]="vehiculo.motor" name="motor">
-                            </div>
-
-                            <div class="col-xs-12 col-lg-3">
-                                <label>Chasis</label>
-                                <input (blur)="onUpdate()" class="form-control" type="text" [(ngModel)]="vehiculo.chasis" name="chasis">
-                            </div>
-
-                            <div class="col-xs-12 col-lg-3">
-                                <label>Serie</label>
-                                <input class="form-control" type="text" type="text" [(ngModel)]="vehiculo.serie" name="serie">
-                            </div>
-                            
-                            <div class="col-xs-12 col-lg-3">
-                                <label>Vin</label>
-                                <input class="form-control" type="text" [(ngModel)]="vehiculo.vin" name="vin">
-                            </div>
-                            
-                            <div class="col-xs-12 col-lg-3" *ngIf='vehiculo.idServicio == 2'>
-                                <label>Radio Acción <b class="text-danger">*</b></label>
-                                <ng-select [multiple]="false" [options]="radiosAccion" [(ngModel)]="vehiculo.idRadioAccion" name="idRadioAccion" required>
-                                </ng-select>
-                            </div>
-                            
-                            <div class="col-xs-12 col-lg-3">
-                                <label>Modalidad Transporte <b class="text-danger">*</b></label>
-                                <ng-select [multiple]="false" [options]="modalidadesTransporte" [(ngModel)]="vehiculo.idModalidadTransporte" name="idModalidadTransporte"
-                                    required>
+                            <div class="col-xs-12 col-lg-3 col-md-3">
+                                <label>Origen vehiculo <b class="text-danger">*</b></label>
+                                <ng-select [multiple]="false" [options]="origenesRegistro" [(ngModel)]="maquinaria.idOrigenRegistro" required name="origenRegistro">
                                 </ng-select>
                             </div>
 
-                            <div class="col-xs-12 col-lg-3">
-                                <label>Numero ejes</label>
-                                <input class="form-control" type="text" type="text" [(ngModel)]="vehiculo.numeroEjes" name="numeroEjes">
-                            </div>
-                            
-                            <div class="col-xs-12 col-lg-3" *ngIf='vehiculo.idModalidadTransporte == 1 || vehiculo.idModalidadTransporte == 3'>
-                                <label>Numero pasajeros</label>
-                                <input class="form-control" type="text" type="text" [(ngModel)]="vehiculo.numeroPasajeros" name="numeroPasajeros">
-                            </div>
-                            
-                            <div class="col-xs-12 col-lg-3" *ngIf='vehiculo.idModalidadTransporte == 2 || vehiculo.idModalidadTransporte == 3'>
-                                <label>Capacidad carga</label>
-                                <input class="form-control" type="text" type="text" [(ngModel)]="vehiculo.capacidadCarga" name="capacidadCarga">
-                            </div>
-                        </div><!-- .row -->
-
-                        <div class="row" *ngIf="vehiculo.tipoMatricula == 'RADICADO'">
-                            <div class="col-xs-12 col-lg-12">
-                                <label>Organismo de transito de que proviene <b class="text-danger">*</b></label>
-                                <ng-select [multiple]="false" [options]="organismosTransitoNacional" [(ngModel)]="radicado.idOrganismoTransito" name="idOrganismoTransitoProviene" required>
+                            <div class="col-xs-12 col-lg-3 col-md-3">
+                                <label>Subpartida arancelaria <b class="text-danger">*</b></label>
+                                <ng-select [multiple]="false" [options]="subpartidasArancelarias" [(ngModel)]="maquinaria.idSubpartidaArancelaria" required name="subpartidaArancelaria">
                                 </ng-select>
                             </div>
-                            
-                            <div class="col-xs-12 col-lg-6">
-                                <label>No. licencia transito llegada</label>
-                                <input class="form-control" type="text" type="text" [(ngModel)]="datos.numeroLicencia" name="numeroLicencia">
-                            </div>
-                            <!--
-    
-                                <div class="col-xs-12 col-lg-3">
-                                    <label>Fecha de expedición <b class="text-danger">*</b></label>
-                                    <input class="form-control" [(ngModel)]="datos.fechaLicencia" name="fechaLicencia" type="date" required />
-                                </div>
-                            -->
-                            
-                            <div class="col-xs-12 col-lg-6">
-                                <label>Fecha de ingreso <b class="text-danger">*</b></label>
-                                <input class="form-control" [(ngModel)]="radicado.fechaIngreso" name="fechaIngreso" type="date" required />
-                            </div>
-        
-                            <div class="col-xs-12 col-lg-6">
-                                <label>Nro. guiá de llegada <b class="text-danger">*</b></label>
-                                <input class="form-control" [(ngModel)]="radicado.guiaLlegada" name="guiaLlegada" type="text" required />
-                            </div>
-        
-                            <div class="col-xs-12 col-lg-6">
-                                <label>Empresa de envió <b class="text-danger">*</b></label>
-                                <input class="form-control text-uppercase" [(ngModel)]="radicado.empresaEnvio" name="empresaEnvio" type="text" required />
-                            </div>
-                        </div>
 
-                        <div class="row" *ngIf="vehiculo.idServicio == 2">
-                            <div class="col-xs-12 col-lg-12">
-                                <b class="text-uppercase">Buscar empresa de afiliación</b>
-                            </div>
-                            <div class="col-xs-12 col-lg-12">
-                                <label>NIT</label>
-                                <div class="input-group">
-                                    <input type="number" class="form-control" [(ngModel)]="nitEmpresaTransporte" name="nitEmpresaTransporte" required />
-                                    <span class="input-group-btn">
-                                        <button (click)="onSearchEmpresaTransporte()" class="btn btn-primary" type="button">
-                                            <i class="fa fa-search"></i>
-                                        </button>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row" *ngIf="empresaTransporte">
-                            <div class="col-xs-12 col-lg-12">
-                                <table class="table table-bordered table-striped">
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <b>NIT: </b>
-                                                <br>
-                                                {{ empresaTransporte.nit }}
-                                            </td>
-                                            <td>
-                                                <b>Nombre: </b>
-                                                <br> 
-                                                {{ empresaTransporte.nombre }}
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-
-                        <div class="row" *ngIf="vehiculo.tipoMatricula == 'RADICADO' || vehiculo.tipoMatricula == 'IMPORTACION'">
-                            <div class="col-xs-12 col-lg-12">
-                                <label>Tipo de propiedad
-                                    <span class="text-danger">
-                                        <b class="text-danger">*</b>
-                                    </span>
-                                </label>
-                                <ng-select [multiple]="false" [options]="tiposPropiedad" [(ngModel)]="datos.tipoPropiedad" name="tipoPropiedad" required>
+                            <div class="col-xs-12 col-lg-3 col-md-3">
+                                <label>Empresa activacion de GPS <b class="text-danger">*</b></label>
+                                <ng-select [multiple]="false" [options]="empresasGps" [(ngModel)]="maquinaria.idEmpresaGps" required name="empresaGps">
                                 </ng-select>
                             </div>
-                        </div>
 
-                
-                        <div class="row" *ngIf="datos.tipoPropiedad && (vehiculo.tipoMatricula == 'RADICADO' || vehiculo.tipoMatricula == 'IMPORTACION' || vehiculo.tipoMatricula == 'MATRICULA') ">
-                            <!--Cuando es de tipo propio -->
-                            <div class="col-xs-12 col-lg-12">
-                                <br>
-                                <div class="custom-control custom-checkbox">
-                                    <input [(ngModel)]="datos.solidario" name="solidario" type="checkbox" class="custom-control-input" id="solidario" checked="">
-                                    <label class="custom-control-label" for="solidario">¿Tiene permisos para hacer tramites?</label>
-                                </div>
-                            </div>
-                    
-                            <div class="col-xs-8 col-lg-6">
-                                <label>Tipo de identificación <b class="text-danger">*</b></label>
-                                <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionSelected" name="idTipoIdentificacion" required >
-                                </ng-select>
-                            </div>
-                    
-                            <!--tipo identificacion ciudadano -->
-                            <div class="col-xs-8 col-lg-6" *ngIf="tipoIdentificacionSelected != 4">
-                                <label>Identificación</label>
-                                <div class="input-group">
-                                    <input type="number" class="form-control" placeholder="Identificacion" [(ngModel)]="identificacion" name="identificacion" required />
-                                    <span class="input-group-btn">
-                                        <button (click)="onSearchCiudadano()"class="btn btn-default" type="button">
-                                            <i class="fa fa-search"></i>
-                                        </button>
-                                    </span>
-                                </div>
+                            <div class="col-xs-12 col-lg-3 col-md-3">
+                                <label>Numero de activacion Gps <b class="text-danger">*</b></label>
+                                <input class="form-control" [(ngModel)]="maquinaria.numeroActivacionGps" name="numeroActivacionGps" type="text" required>
                             </div>
 
-                            <!--tipo identificacion nit -->
-                            <div class="col-xs-8 col-lg-6" *ngIf="tipoIdentificacionSelected == 4">
-                                <label>NIT</label>
-                                <div class="input-group">
-                                    <input type="number" class="form-control" placeholder="NIT" [(ngModel)]="nit" name="nit" required />
-                                    <span class="input-group-btn">
-                                        <button (click)="onSearchEmpresa()" class="btn btn-primary" type="button">
-                                            <i class="fa fa-search"></i>
-                                        </button>
-                                    </span>
-                                </div>
+                            <div class="col-xs-12 col-lg-3 col-md-3">
+                                <label>Tipo de dispositivo <small>(provedor nacional)</small> <b class="text-danger">*</b></label>
+                                <input class="form-control" [(ngModel)]="maquinaria.tipoDispositivo" name="tipoDispositivo" type="number" min="1" max="2" required>
                             </div>
-
-                            <div class="col-xs-12 col-lg-12" *ngIf="ciudadano">
-                                <div class="row">
-                                    <div class="col-xs-12 col-lg-12">
-                                        <div class="custom-control custom-checkbox">
-                                            <input [(ngModel)]="datos.solidario" name="solidario" type="checkbox" class="custom-control-input" id="solidario" checked="">
-                                            <label class="custom-control-label" for="solidario">¿Tiene permisos para hacer tramites?</label>
-                                        </div>
-                                    </div>
-                                    <table class="table table-bordered table-striped" id="dataTables-example">
-                                        <tbody>
-                                            <tr>
-                                                <td>
-                                                    <b>Tipo de identificación: </b>
-                                                    <br> {{ ciudadano.tipoIdentificacion.nombre }}
-                                                    <br>
-                                                    <b>Numero de identificación: </b>
-                                                    <br> {{ ciudadano.identificacion }}
-                                                </td>
-                                                <td>
-                                                    <b>Nombres y apellidos: </b>
-                                                    <br> {{ ciudadano.primerNombre }} {{ ciudadano.segundoNombre }} {{ ciudadano.primerApellido }} {{ ciudadano.segundoApellido
-                                                    }}
-                                                </td>
-                                                <td>
-                                                    <div class="btn-group btn-group-justified">
-                                                        <div class="btn-group">
-                                                            <button (click)="onAddCiudadano()" class="btn btn-primary">
-                                                                <i class="fa fa-plus"></i>
-                                                                Agregar
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                            
+                            <div class="col-xs-12 col-lg-3 col-md-3">
+                                <label>Numero de importacion <b class="text-danger">*</b></label>
+                                <input class="form-control" [(ngModel)]="maquinaria.numeroImportacion" name="numeroImportacion" type="text" required>
                             </div>
-
-                            <div class="col-xs-12 col-lg-12" *ngIf="empresa">
-                                <!-- Empresa -->
-                                <div class="row">
-                                    <div class="col-xs-12 col-lg-12">
-                                        <div class="custom-control custom-checkbox">
-                                            <input [(ngModel)]="datos.solidario" name="solidario" type="checkbox" class="custom-control-input" id="solidario" checked="">
-                                            <label class="custom-control-label" for="solidario">¿Tiene permisos para hacer tramites?</label>
-                                        </div>
-                                    </div>
-                                    <table class="table table-bordered table-striped" id="dataTables-example">
-                                        <tbody>
-                                            <tr>
-                                                <td>
-                                                    <b>NIT: </b>
-                                                    <br> {{ empresa.nit }}
-                                                    <br>
-                                                    <b>Nombre: </b>
-                                                    <br> {{ empresa.nombre }}
-                                                    <br>
-                                                    <b>Representante legal: </b>
-                                                    <br> {{ empresa.ciudadano.primerNombre }} {{ empresa.ciudadano.primerApellido }}
-                                                </td>
-                                                <td>
-                                                    <b>Tipo empresa: </b>
-                                                    <br> {{ empresa.nombre }}
-                                                    <br>
-                                                    <b>Municipio: </b>
-                                                    <br> {{ empresa.municipio.nombre }}
-                                                    <b>Dirección: </b>
-                                                    <br> {{ empresa.direccion }}
-                                                </td>
-                                                <td>
-                                                    <div class="btn-group">
-                                                        <button (click)="onAddEmpresa()" class="btn btn-primary">
-                                                            <i class="fa fa-plus"></i>
-                                                            Agregar
-                                                        </button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-
-                            <div class="col-xs-12 col-lg-12" *ngIf="datos.propietarios && datos.propietarios.length > 0">
-                                <table class="table table-bordered table-striped" id="dataTables-example">
-                                    <br>
-                                    <thead>
-                                        <tr>
-                                            <th colspan="3" class="text-center">
-                                                <b class="text-uppercase">Propietarios a registrar</b>
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr *ngFor="let propietario of datos.propietarios; let i = index">
-                                            <td>
-                                                <b>Solicitante: </b>
-                                                <br> {{ propietario.identificacion }}
-                                                <br> {{ propietario.nombre }}
-                                                <br>
-                                                <span *ngIf="propietario.permiso" class="text-success">
-                                                    <b>Autorizado</b> para realizar trámites.
-                                                </span>
-                                                <span *ngIf="!propietario.permiso" class="text-danger">
-                                                    <b>No autorizado</b> para realizar trámites.
-                                                </span>
-                                            </td>
-                                            <td>
-                                                <button (click)="onDeletePropietario(propietario)" class="btn btn-xs btn-danger">Eliminar</button>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                                            
-                            <!--si no existe un ciudadano -->
-                            <!-- <app-new-rna-ciudadano *ngIf="ciudadanoNew" [tipoIdentificacion]="tipoIdentificacionSelected" [identificacion]="identificacion" (ready)="ready($event)"></app-new-rna-ciudadano> -->
                         </div>
                     </div>
-                </form>
-            </div>
-            <div class="card-footer">
-                <div class="btn-group">
-                    <button (click)="onEnviar()" class="btn btn-primary">
-                        <i class="fa fa-save"></i>
-                        Enviar
-                    </button>
-                    <button (click)="onCancelar()" class="btn btn-default">
-                        <i class="fa fa-times"></i>
-                        Cancelar
-                    </button>
                 </div>
-            </div>    
-        </div>
+                <div class="card-footer">
+                    <div class="btn-group">
+                        <button (click)="onEnviar()" class="btn btn-primary">
+                            <i class="fa fa-save"></i>
+                            Enviar
+                        </button>
+                        <button (click)="onCancelar()" class="btn btn-default">
+                            <i class="fa fa-times"></i>
+                            Cancelar
+                        </button>
+                    </div>
+                </div>    
+            </div>
+        </form>
     </div>
 </div>

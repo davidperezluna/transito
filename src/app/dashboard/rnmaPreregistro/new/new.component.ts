@@ -41,11 +41,11 @@ export class NewRegistroMaquinariaComponent implements OnInit {
   public condicionesIngreso:any;
   public tiposMaquinaria:any;
   public tiposRodaje:any;
-  public persona:any='empresa';
   public tiposCabina:any;
   public clasesMaquinaria:any = null;
   public empresasGps:any;
   public subpartidasArancelarias:any;
+  public persona:any='empresa';
   public btnRadicado:string = "Preregistro para matricula inicial";
 
   public tiposMatricula = [

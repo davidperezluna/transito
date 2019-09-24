@@ -1,5 +1,5 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { VhloRnaPreregistro } from './vhloRnmaPreregistro.modelo';
+import { Component, OnInit, AfterViewInit, Output, EventEmitter } from '@angular/core';
+import { VhloRnmaPreregistro } from './vhloRnmaPreregistro.modelo';
 import { VhloMaquinariaService } from '../../../../services/vhloMaquinaria.service';
 import { VhloVehiculoService } from '../../../../services/vhloVehiculo.service';
 import { LoginService } from '../../../../services/login.service';
@@ -11,7 +11,7 @@ declare var $: any;
   templateUrl: './vhloRnmaPreregistro.component.html'
 })
 
-export class VhloRnmaPreregistroComponent implements OnInit {
+export class VhloRnmaPreregistroComponent implements OnInit, AfterViewInit {
   public errorMessage;
 
   public vehiculos;
@@ -23,14 +23,11 @@ export class VhloRnmaPreregistroComponent implements OnInit {
 
   public table:any = null; 
 
-  public vehiculo: VhloRnaPreregistro;
+  public vehiculo: VhloRnmaPreregistro;
 
-  public datos = {
-    'numeroRegistro': null,
-    'numeroVin': null,
-    'numeroSerie': null,
-    'numeroMotor': null,
-    'numeroChasis': null,
+  public search = {
+    'filtro': null,
+    'idModulo': 3,
   }
 
   constructor(
@@ -40,7 +37,12 @@ export class VhloRnmaPreregistroComponent implements OnInit {
   ){}
   
   ngOnInit() {
+    this.onInitForms();
     this.formSearch = true;
+  }
+
+  ngAfterViewInit(){
+    swal.close();
   }
 
   onInitForms(){

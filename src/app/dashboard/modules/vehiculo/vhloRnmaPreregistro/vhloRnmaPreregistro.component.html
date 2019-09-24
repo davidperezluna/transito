@@ -1,43 +1,16 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-xs-12 col-lg-8" *ngIf='formIndex'>
+    <div class="col-xs-12 col-lg-4" *ngIf='formSearch'>
       <div class="card">
         <div class="card-header">
           <b class="text-uppercase">Buscar maquinaria amarilla</b>
-          <br>
-          <small>Filtros</small>
         </div>
         <div class="card-body">
           <div class="row">
             <div class="col-xs-12 col-lg-12">
               <div class="form-group">
-                <label>Número Placa</label>
-                <input class="form-control text-uppercase" [(ngModel)]="datos.numeroRegistro" name="numeroRegistro" type="text"
-                  required />
-              </div>
-            </div>
-            <div class="col-xs-12 col-lg-12">
-              <div class="form-group">
-                <label>Número VIN</label>
-                <input class="form-control" [(ngModel)]="datos.numeroVin" name="numeroVin" type="text" required />
-              </div>
-            </div>
-            <div class="col-xs-12 col-lg-12">
-              <div class="form-group">
-                <label>Número Serie</label>
-                <input class="form-control" [(ngModel)]="datos.numeroSerie" name="numeroSerie" type="text" required />
-              </div>
-            </div>
-            <div class="col-xs-12 col-lg-12">
-              <div class="form-group">
-                <label>Número Motor</label>
-                <input class="form-control" [(ngModel)]="datos.numeroMotor" name="numeroMotor" type="text" required />
-              </div>
-            </div>
-            <div class="col-xs-12 col-lg-12">
-              <div class="form-group">
-                <label>Número Chasis</label>
-                <input class="form-control" [(ngModel)]="datos.numeroChasis" name="numeroChasis" type="text" required />
+                <label>Parametro de búsqueda<br> <small>(No. registro, No VIN, No. Serie, No. motor, No. Motor, No. Chasis)</small></label>
+                <input class="form-control text-uppercase" [(ngModel)]="search.filtro" name="filtro" type="text" required />
               </div>
             </div>
           </div>
@@ -51,6 +24,10 @@
                     <button (click)="onSearch()" class="btn btn-default btn-primary" type="button">
                       <i class="fa fa-search"></i>
                       Buscar
+                    </button>
+                    <button (click)="onNew()" class="btn btn-default">
+                      <i class="fa fa-plus"></i>
+                      Nuevo
                     </button>
                   </div>
                 </div>
@@ -76,7 +53,7 @@
           <table class="table " id="dataTables-example">
             <thead>
               <tr>
-                <th>Placa </th>
+                <th>No. de registro</th>
                 <th>Motor</th>
                 <th>Clase</th>
                 <th>Cilindraje</th>

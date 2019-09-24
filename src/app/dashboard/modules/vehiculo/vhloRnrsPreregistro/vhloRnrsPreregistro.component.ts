@@ -13,57 +13,42 @@ import swal from 'sweetalert2';
 
 export class VhloRnrsPreregistroComponent implements OnInit {
   public errorMessage;
-	public id;
-	public respuesta;
-  public vehiculos;
-  public registrosRemolque;
-  public formIndex = true;
-  public formNew = false;
-  public formEdit= false;
-  public table:any; 
-  public registroRemolque: VhloRegistroRemolque;
+
+  public remolques;
+
+  public formSearch: any;
+  public formIndex: any;
+  public formNew: any;
+  public formEdit: any;
+
+  public table:any;
+
+  public remolque: VhloRegistroRemolque;
+
+  public search = {
+    'filtro': null,
+    'idModulo': 4,
+  }
 
   constructor(
-    private _RegistroRemolqueService: VhloRemolqueService,
+    private _RemolqueService: VhloRemolqueService,
 		private _LoginService: LoginService,
-	
-		
-    ){}
-    
+  ){}
+
   ngOnInit() {
-    swal({
-      title: 'Cargando Tabla!',
-      text: 'Solo tardara unos segundos por favor espere.',
-      onOpen: () => {
-        swal.showLoading()
-      }
-    });
+    this.onInitForms();
+    this.formSearch = true;
+  }
 
-    this.formEdit=false;
-    this.formNew=false;
-
-    this._RegistroRemolqueService.index().subscribe(
-      response => {
-        this.registrosRemolque = response.data;
-
-        let timeoutId = setTimeout(() => {
-          this.iniciarTabla();
-        }, 100);
-        swal.close();
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
+  onInitForms() {
+    this.formSearch = false;
+    this.formIndex = false;
+    this.formNew = false;
+    this.formEdit = false;
   }
    
-  iniciarTabla(){
-    $('#dataTables-example').DataTable({
+  onInitTable(){
+    this.table = $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,
       sPaginationType: 'full_numbers',
@@ -75,14 +60,55 @@ export class VhloRnrsPreregistroComponent implements OnInit {
           sLast: '<i class="fa fa-step-forward"></i>'
         }
       }
-   });
-   this.table = $('#dataTables-example').DataTable();
+    });
   }
-  onNew(){
-    this.formIndex = false;
+
+  onSearch() {
+    this.onInitForms();
+
+    swal({
+      title: 'Buscando registros!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      type: 'info',
+      showConfirmButton: false,
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+
+    this._RemolqueService.index().subscribe(
+      response => {
+        this.remolques = response.data;
+
+        let timeoutId = setTimeout(() => {
+          this.onInitTable();
+          this.formIndex = true;
+          swal.close();
+        }, 100);
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+  }
+
+  onNew() {
+    this.onInitForms();
+
     this.formNew = true;
-    this.table.destroy();
   }
+
+  onEdit(remolque: any) {
+    this.onInitForms();
+    this.remolque = remolque;
+    this.formEdit = true;
+  }
+  
   ready(isCreado:any){
       if(isCreado) {
         this.formNew = false;
@@ -90,13 +116,8 @@ export class VhloRnrsPreregistroComponent implements OnInit {
         this.ngOnInit();
       }
   }
-  editRemolque(registroRemolque:any){
-    this.registroRemolque = registroRemolque;
-    this.formIndex = false;
-    this.formEdit = true;
-  }
-  deleteRemolque(id:any){
 
+  onDelete(id:any){
     swal({
       title: '¿Estás seguro?',
       text: "¡Se eliminara este registro!",
@@ -109,7 +130,7 @@ export class VhloRnrsPreregistroComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._LoginService.getToken();
-        this._RegistroRemolqueService.delete(token,id).subscribe(
+        this._RemolqueService.delete(token,id).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',
@@ -117,8 +138,7 @@ export class VhloRnrsPreregistroComponent implements OnInit {
                       type:'success',
                       confirmButtonColor: '#15d4be',
                     })
-                  this.table.destroy();
-                  this.respuesta= response;
+
                   this.ngOnInit();
               }, 
             error => {

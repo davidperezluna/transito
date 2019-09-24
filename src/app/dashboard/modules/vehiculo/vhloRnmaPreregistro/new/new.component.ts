@@ -1,8 +1,9 @@
 import { Component, OnInit,Output,EventEmitter } from '@angular/core';
-import { VhloRnaPreregistro } from '../vhloRnmaPreregistro.modelo';
+import { VhloRnmaPreregistro } from '../vhloRnmaPreregistro.modelo';
 import { CfgOrganismoTransitoService } from '../../../../../services/cfgOrganismoTransito.service';
 import { VhloCfgLineaService } from '../../../../../services/vhloCfgLinea.service';
 import { VhloCfgClaseService } from '../../../../../services/vhloCfgClase.service';
+import { VhloCfgClaseMaquinariaService } from '../../../../../services/vhloCfgClaseMaquinaria.service';
 import { VhloCfgCarroceriaService } from '../../../../../services/vhloCfgCarroceria.service';
 import { VhloCfgServicioService } from '../../../../../services/vhloCfgServicio.service';
 import { VhloCfgColorService } from '../../../../../services/vhloCfgColor.service';
@@ -14,7 +15,6 @@ import { VhloPropietarioService } from '../../../../../services/vhloPropietario.
 import { VhloRnaPreregistroService } from '../../../../../services/vhloRnaPreregistro.service';
 import { UserCfgTipoIdentificacionService } from '../../../../../services/userCfgTipoIdentificacion.service';
 import { UserCiudadanoService } from '../../../../../services/userCiudadano.service';
-import { UserEmpresaService } from "../../../../../services/userEmpresa.service";
 import { PnalFuncionarioService } from '../../../../../services/pnalFuncionario.service';
 import { LoginService } from '../../../../../services/login.service';
 
@@ -29,7 +29,7 @@ export class NewComponent implements OnInit {
   @Output() ready = new EventEmitter<any>();
   public errorMessage:any;
 
-  public vehiculo: VhloRnaPreregistro;
+  public maquinaria: VhloRnmaPreregistro;
 
   public lineas:any;
   public clases:any;
@@ -42,6 +42,14 @@ export class NewComponent implements OnInit {
   public modalidadesTransporte:any;
   public organismosTransito:any;
   public organismosTransitoNacional:any;
+  public origenesRegistro: any;
+  public condicionesIngreso: any;
+  public tiposMaquinaria: any;
+  public tiposRodaje: any;
+  public tiposCabina: any;
+  public clasesMaquinaria: any = null;
+  public empresasGps: any;
+  public subpartidasArancelarias: any;
   public empresaSelected:any;
   public tipoIdentificacionSelected:any;
 
@@ -107,12 +115,12 @@ constructor(
   private _FuncionarioService: PnalFuncionarioService,
   private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
   private _CiudadanoService: UserCiudadanoService,
-  private _EmpresaService: UserEmpresaService,
+  private _ClaseMaquinariaService: VhloCfgClaseMaquinariaService,
   private _LoginService: LoginService,
   ){}
 
   ngOnInit() {
-    this.vehiculo = new VhloRnaPreregistro(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
+    this.maquinaria = new VhloRnmaPreregistro(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
     
     let token = this._LoginService.getToken();
     let identity = this._LoginService.getIdentity();
@@ -177,7 +185,7 @@ constructor(
       response => { 
         if(response.code == 200){
           this.funcionario = response.data;
-          this.vehiculo.idOrganismoTransito = response.data.organismoTransito.id;
+          this.maquinaria.idOrganismoTransito = response.data.organismoTransito.id;
         }else{
           this.funcionario = null;
           this._FuncionarioService.searchEmpresa({ 'identificacion': identity.identificacion },token).subscribe(
@@ -334,8 +342,8 @@ constructor(
   }
 
   onUpdate(){
-    this.vehiculo.vin = this.vehiculo.chasis;
-    this.vehiculo.serie = this.vehiculo.chasis;
+    this.maquinaria.vin = this.maquinaria.chasis;
+    this.maquinaria.serie = this.maquinaria.chasis;
   }
 
   onSearchEmpresaTransporte() {
@@ -359,7 +367,7 @@ constructor(
         if (response.code == 200) {
           if (response.data.empresa) {
             this.empresaTransporte = response.data.empresa;
-            this.vehiculo.idEmpresa = this.empresaTransporte.id;
+            //this.maquinaria.idEmpresa = this.empresaTransporte.id;
 
             swal({
               title: 'Perfecto!',
@@ -370,7 +378,7 @@ constructor(
           }
         } else {
           this.empresaTransporte = null;
-          this.vehiculo.idEmpresa = null;
+          //this.maquinaria.idEmpresa = null;
 
           swal({
             title: 'Error!',
@@ -388,6 +396,25 @@ constructor(
         }
       }
     );
+  }
+
+  onChangedTipoMaquinaria(e) {
+    if (e) {
+      let token = this._LoginService.getToken()
+
+      this._ClaseMaquinariaService.searchByTipoMaquinariaSelect({ 'idTipoMaquinaria': e }, token).subscribe(
+        response => {
+          this.clasesMaquinaria = response;
+        },
+        error => {
+          this.errorMessage = <any>error;
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+    }
   }
 
   onSearchCiudadano() {
@@ -620,9 +647,9 @@ constructor(
   onEnviar() {
     let token = this._LoginService.getToken();
 
-    this.vehiculo.radicado = this.radicado;
+    //this.maquinaria.radicado = this.radicado;
 
-    var html = 'Que desea pre-registrar el vehiculo como:  <b>'+ this.vehiculo.tipoMatricula +
+    var html = 'Que desea pre-registrar el maquinaria como:  <b>'+ this.maquinaria.tipoMatricula +
                 '</b><br>Recuerde que solo podrá editar datos generales del vehículo.';
 
     swal({
@@ -644,7 +671,7 @@ constructor(
           }
         });
 
-        this._RnaPreregistroService.register(this.vehiculo, token).subscribe(
+        this._RnaPreregistroService.register(this.maquinaria, token).subscribe(
           response => {
             if (response.code == 200) {
               swal({
@@ -654,7 +681,7 @@ constructor(
                 confirmButtonText: 'Aceptar'
               });
               
-              if (this.vehiculo.tipoMatricula == 'RADICADO' || this.vehiculo.tipoMatricula == 'IMPORTACION') {
+              if (this.maquinaria.tipoMatricula == 'RADICADO' || this.maquinaria.tipoMatricula == 'IMPORTACION') {
                 this.datos.idVehiculo = response.data.id;
                 
                 this._PropietarioService.register(this.datos, token).subscribe(
