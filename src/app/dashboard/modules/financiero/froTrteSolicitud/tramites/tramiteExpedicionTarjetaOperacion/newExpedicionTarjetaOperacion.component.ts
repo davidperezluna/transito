@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
+import { FroTrteSolicitudService } from "../../../../../../services/froTrteSolicitud.service";
 import { DatePipe, CurrencyPipe } from '@angular/common';
 import { LoginService } from '../../../../../../services/login.service';
 import swal from 'sweetalert2';
@@ -36,6 +37,7 @@ export class NewRnetExpedicionTarjetaOperacionComponent implements OnInit {
     };
 
     constructor(
+        private _FroTrteSolicitudService: FroTrteSolicitudService,
         private _LoginService: LoginService,
     ) { }
 
@@ -63,6 +65,29 @@ export class NewRnetExpedicionTarjetaOperacionComponent implements OnInit {
                 type: 'warning',
                 confirmButtonText: 'Aceptar'
             });
+        } else {
+            this._FroTrteSolicitudService.calcularFechaVencimiento().subscribe(
+                response => {
+                    this.datos.fechaVencimiento = response.data;
+
+                    var datePiper = new DatePipe('en-US');
+                    var date = new Date();
+
+                    date.setTime(this.datos.fechaVencimiento.timestamp * 1000);
+
+                    this.datos.fechaVencimiento = datePiper.transform(
+                        date, 'yyyy-MM-dd'
+                    );
+                },
+                error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                    }
+                }
+            );
         }
     }
 

@@ -1,145 +1,47 @@
-<div class="container">
-    <hr>
-    <div class="row" *ngIf='formIndex'>
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="card-title">
-                        <small>SISTEMA INTEGRADO DE INFORMACIÓN SOBRE MULTAS Y SANCIONES POR INFRACCIONES DE TRANSITO</small>
-                    </h5>
-                </div>
-                <div class="card-body" style="overflow-x: auto">
-                    <table class="table" id="dataTables-example">
-                        <thead>
-                            <tr>
-                                <th>CONSECUTIVO</th>
-                                <th>FECHA</th>
-                                <th>HORA</th>
-                                <th>DIRECCIÓN</th>
-                                <th>MUNICIPIO</th>
-                                <th>LOCALIDAD</th>
-                                <th>PLACA VEHICULO</th>
-                                <th>TIPO VEHICULO</th>
-                                <th>TIPO SERVICIO</th>
-                                <th>RADIO ACCIÓN</th>
-                                <th>MODALIDAD TRANSPORTE</th>
-                                <!--<th>NUMERO PASAJEROS</th>-->
-                                <th>Transporte Pasajeros</th>
-                                <th>IDENTIFICACION INFRACTOR</th>
-                                <th>TIPO IDENTIFICACION INFRACTOR</th>
-                                <th>NOMBRE INFRACTOR</th>
-                                <th>APELLIDO INFRACTOR</th>
-                                <th>EDAD INFRACTOR</th>
-                                <th>EMAIL INFRACTOR</th>
-                                <th>TELEFONO INFRACTOR</th>
-                                <th>CIUDAD INFRACTOR</th>
-                                <th>LICENICA CONDUCCIÓN</th>
-                                <th>CATEGORIA</th>
-                                <th>SECRETARIA EXPEDICION</th>
-                                <th>FECHA VENCIMIENTO</th>
-                                <th>TIPO INFRACTOR</th>
-                                <th>LICENCIA TRANSITO</th>
-                                <!--<th>DIVISION LICENCIA TRANSITO</th>-->
-                                <th>IDENTIFICACION PROPIETARIO</th>
-                                <th>TIPO DOCUMENTO PROPIETARIO</th>
-                                <th>NOMBRE PROPIETARIO</th>
-                                <th>NOMBRE EMPRESA</th>
-                                <th>NIT EMPRESA</th>
-                                <th>TARJETA OPERACION</th>
-                                <th>NUMERO DE PLACA AGENTE DE TRANSITO</th>
-                                <th>OBSERVACIONES AGENTE</th>
-                                <th>FUGA</th>
-                                <th>ACCIDENTE</th>
-                                <!--<th>INMOVILIZACION ID</th>
-                                <th>PATIO INMOVILIZACION</th>
-                                <th>DIRECCION PATIO INMOVILIZACION</th>
-                                <th>NUMERO INTERNO</th>
-                                <th>PLACA GRUA</th>
-                                <th>CONSECUTIVO INMOVILIZACION</th>-->
-                                <th>IDENTIFICACION CIUDADANO TESTIGO</th>
-                                <th>NOMBRES TESTIGO</th>
-                                <th>TELEFONO TESTIGO</th>
-                                <th>VALOR ADICIONAL</th>
-                                <!--<th>ORGANISMO</th>-->
-                                <th>ESTADO COMPARENDO</th>
-                                <th>POLCA</th>
-                                <th>CODIGO INFRACCION</th>
-                                <th>VALOR INFRACCION</th>
-                                <th>FOTOMULTA</th>
-                                <th>FECHA NOTIFICACION</th>
-                                <th>GRADO ALCOHOL</th>
-                                <!--<th>NUMERO DE REGISTROS</th>
-                                <th>SUMATORIA REGISTROS</th>
-                                <th>NUMERO DE OFICIO</th>
-                                <th>CODIGO DE CHEQUEO</th>-->
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="odd" *ngFor="let comparendo of comparendos; let i = index">
-                                <td>{{ comparendo.consecutivo.id }}</td>    
-                                <td>{{ (comparendo.fecha.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td>    
-                                <td>{{ (comparendo.hora.timestamp * 1000) | date: 'HH:mm' }}</td>
-                                <td>{{ comparendo.direccion }}</td>
-                                <td>{{ comparendo.municipio.nombre }}</td>
-                                <td>{{ comparendo.localidad }}</td>
-                                <td>{{ comparendo.placa }}</td>
-                                <td>{{ comparendo.clase.nombre }}</td>
-                                <td>{{ comparendo.servicio.nombre }}</td>
-                                <td>{{ comparendo.radioAccion }}</td>
-                                <td>{{ comparendo.modalidadTransporte.nombre }}</td>
-                                <!--<td>{{ comparendo.vehiculo.numeroPasajeros }}</td>-->
-                                <td>{{ comparendo.transporteEspecial }}</td>
-                                <td>{{ comparendo.infractorIdentificacion }}</td>
-                                <td>{{ comparendo.infractorTipoDocumento }}</td>
-                                <td>{{ comparendo.infractorNombres }}</td>
-                                <td>{{ comparendo.infractorApellidos }}</td>
-                                <td>{{ (comparendo.infractorFechaNacimiento.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td>
-                                <td>{{ comparendo.infractorEmail }}</td>
-                                <td>{{ comparendo.infractorTelefono }}</td>
-                                <td>{{ comparendo.infractorMunicipioResidencia }}</td>
-                                <td>{{ comparendo.infractorNumeroLicenciaConduccion }}</td>
-                                <td>{{ comparendo.categoria }}</td>
-                                <td>{{ comparendo.organismoTransitoMatriculado.nombre }}</td>
-                                <td>{{ comparendo.numeroLicenciaTransito }}</td>
-                                <td>{{ comparendo.tipoInfractor.nombre }}</td>
-                                <td>{{ comparendo.numeroLicenciaTransito }}</td>
-                                <!--<td>{{ comparendo.divLicenciaTransito }}</td>-->
-                                <td>{{ comparendo.propietarioIdentificacion }}</td>
-                                <td>{{ comparendo.propietarioTipoDocumento }}</td>
-                                <td>{{ comparendo.propietarioNombre }}{{ comparendo.propietarioApellidos }}</td>
-                                <td>{{ comparendo.empresaNombre }}</td>
-                                <td>{{ comparendo.empresaNit }}</td>
-                                <td>{{ comparendo.tarjetaOperacion }}</td>
-                                <td>{{ comparendo.agenteTransito.numeroPlaca }}</td>
-                                <td>{{ comparendo.observacionesAgente }}</td>
-                                <td>{{ comparendo.fuga }}</td>
-                                <td>{{ comparendo.accidente }}</td>
-                                <!--<td>{{ inmovilizacion.id }}</td>
-                                <td>{{ inmovilizacion.patio.nombre }}</td>
-                                <td>{{ inmovilizacion.patio.direccion }}</td>
-                                <td>{{ inmovilizacion.grua.numeroInterno }}</td>
-                                <td>{{ inmovilizacion.grua.placa }}</td>
-                                <td>{{ inmovilizacion.consecutivo }}</td>-->
-                                <td>{{ comparendo.ciudadanoTestigoIdentificacion }}</td>
-                                <td>{{ comparendo.ciudadanoTestigoNombres }}{{ comparendo.ciudadanoTestigoApellidos }}</td>
-                                <td>{{ comparendo.ciudadanoTestigoTelefono }}</td>
-                                <td>{{ comparendo.valorAdicional }}</td>
-                                <!--<td>{{ comparendo.organismo }}</td>-->
-                                <td>{{ comparendo.estado.nombre }}</td>
-                                <td>{{ comparendo.polca }}</td>
-                                <td>{{ comparendo.codigoInfraccion }}</td>
-                                <td>{{ comparendo.valorInfraccion }}</td>
-                                <td>{{ comparendo.fotomulta }}</td>
-                                <td>{{ comparendo.fechaNotificacion }}</td>
-                                <td>{{ comparendo.gradoAlcohol }}</td>
-                                <!--<td>{{ comparendo.numeroRegistros }}}</td>
-                                <td>{{ comparendo.sumatoriaRegistros }}}</td>
-                                <td>{{ comparendo.numeroOficio }}}</td>
-                                <td>{{ comparendo.codigoChequeo }}}</td>-->
-                            </tr>
-                        </tbody>
-                    </table>
-                    <!-- /.table-responsive -->
+<div class="container row">
+    <div class="col-xs-12 col-lg-4">
+        <div class="card">
+            <div class="card-header">
+                <b class="text-uppercase">Generación de archivos planos para carga a SIMIT (comparendos, recaudos y resoluciones).</b>
+                <br>
+                <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
+            </div>
+            <div class="card-body">
+                <form #formFiltros="ngForm">
+                    <div class="col-xs-12 col-lg-12">
+                        <label>Seleccionar tipo reporte <b class="text-danger">*</b></label>
+                        <ng-select [multiple]="false" [options]="tiposReporte" [(ngModel)]="datos.tipoReporte"
+                            name="tipoReporte" required>
+                        </ng-select>
+                    </div>
+                    <div class="col-xs-12 col-lg-12" *ngIf="datos.tipoReporte">
+                        <label>Seleccionar organismo tránsito <b class="text-danger">*</b></label>
+                        <ng-select [multiple]="false" [options]="organismosTransito"
+                            [(ngModel)]="datos.idOrganismoTransito" name="idOrganismoTransito" required>
+                        </ng-select>
+                    </div>
+                    <div class="col-xs-12 col-lg-12" *ngIf="datos.idOrganismoTransito">
+            <label>Fecha inicial <b class=" text-danger">*</b></label>
+                        <input class="form-control" type="date" [(ngModel)]="datos.fechaInicial" name="fechaInicial"
+                            required>
+                    </div>
+                    <div class="col-xs-12 col-lg-12" *ngIf="datos.idOrganismoTransito">
+                        <label>Fecha final <b class=" text-danger">*</b></label>
+                        <input class="form-control" type="date" [(ngModel)]="datos.fechaFinal" name="fechaFinal"
+                            required>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <div class="btn-group">
+                    <button (click)="onEnviar()" [disabled]="formFiltros.invalid" class="btn btn-primary" type="button">
+                        <i class="fa fa-cogs"></i>
+                        Generar
+                    </button>
+                    <a *ngIf="archivo" href="{{ docsUrl }}{{ archivo }}" download="{{ archivo }}"
+                        class="btn btn-success" target="_blank">
+                        <i class="fa fa-file-pdf-o"></i>Descargar
+                    </a>
                 </div>
             </div>
         </div>

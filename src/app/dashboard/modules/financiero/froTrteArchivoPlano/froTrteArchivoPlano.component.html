@@ -10,12 +10,14 @@
         <form #formFiltros="ngForm">
           <div class="col-xs-12 col-lg-12">
             <label>Seleccionar tipo reporte <b class="text-danger">*</b></label>
-            <ng-select [multiple]="false" [options]="tiposReporte" [(ngModel)]="datos.tipoReporte" name="tipoReporte" required>
+            <ng-select [multiple]="false" [options]="tiposReporte" [(ngModel)]="datos.tipoReporte" name="tipoReporte"
+              required>
             </ng-select>
           </div>
           <div class="col-xs-12 col-lg-12" *ngIf="datos.tipoReporte && datos.tipoReporte != 4">
             <label>Seleccionar organismo tránsito <b class="text-danger">*</b></label>
-            <ng-select [multiple]="false" [options]="organismosTransito" [(ngModel)]="datos.idOrganismoTransito" name="idOrganismoTransito" required>
+            <ng-select [multiple]="false" [options]="organismosTransito" [(ngModel)]="datos.idOrganismoTransito"
+              name="idOrganismoTransito" required>
             </ng-select>
           </div>
           <div class="col-xs-12 col-lg-12" *ngIf="datos.idOrganismoTransito && datos.tipoReporte != 4">
@@ -39,8 +41,8 @@
             <i class="fa fa-cogs"></i>
             Generar
           </button>
-          <a *ngIf="archivo"
-            href="{{ docsUrl }}{{ archivo }}" class="btn btn-success" target="_blank">
+          <a *ngIf="archivo" href="{{ docsUrl }}{{ archivo }}" download="{{ archivo }}" class="btn btn-success"
+            target="_blank">
             <i class="fa fa-file-pdf-o"></i>Descargar
           </a>
         </div>

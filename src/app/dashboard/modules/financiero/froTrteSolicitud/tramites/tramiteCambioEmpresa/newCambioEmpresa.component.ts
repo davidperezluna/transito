@@ -2,13 +2,16 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { VhloCfgNivelServicioService } from '../../../../../../services/vhloCfgNivelServicio.service';
 import { UserEmpresaTransporteService } from "../../../../../../services/userEmpresaTransporte.service";
 import { VhloTpAsignacionService } from '../../../../../../services/vhloTpAsignacion.service';
+import { FroTrteSolicitudService } from 'app/services/froTrteSolicitud.service';
+import { DatePipe, CurrencyPipe } from '@angular/common';
 import { LoginService } from '../../../../../../services/login.service';
 
 import swal from 'sweetalert2';
 
 @Component({
     selector: 'app-cambio-empresa',
-    templateUrl: './newCambioEmpresa.html'
+    templateUrl: './newCambioEmpresa.html',
+    providers: [DatePipe]
 })
 
 export class NewRnetCambioEmpresaComponent implements OnInit {
@@ -56,6 +59,7 @@ export class NewRnetCambioEmpresaComponent implements OnInit {
         private _VhloTpAsignacionService: VhloTpAsignacionService,
         private _UserEmpresaTransporteService: UserEmpresaTransporteService,
         private _NivelServicioService: VhloCfgNivelServicioService,
+        private _FroTrteSolicitudService: FroTrteSolicitudService,
         private _LoginService: LoginService,
     ) { }
 
@@ -114,6 +118,29 @@ export class NewRnetCambioEmpresaComponent implements OnInit {
                 confirmButtonText: 'Aceptar'
             });
         } else {
+            this._FroTrteSolicitudService.calcularFechaVencimiento().subscribe(
+                response => {
+                    this.datos.fechaVigencia = response.data;
+
+                    var datePiper = new DatePipe('en-US');
+                    var date = new Date();
+
+                    date.setTime(this.datos.fechaVigencia.timestamp * 1000);
+
+                    this.datos.fechaVigencia = datePiper.transform(
+                        date, 'yyyy-MM-dd'
+                    );
+                },
+                error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                    }
+                }
+            );
+
             this._NivelServicioService.select().subscribe(
                 response => {
                     this.nivelesServicio = response;

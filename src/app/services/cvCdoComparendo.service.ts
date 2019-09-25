@@ -120,4 +120,11 @@ export class CvCdoComparendoService {
 		formData.append('authorization', token);
 		return this._http.post(this.url + "/upload", formData).map(res => res.json());
 	}
+
+	createFile(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = 'data=' + json + '&authorization=' + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + '/create/file', params, { headers: headers }).map(res => res.json());
+	}
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import {ImoAsignacion} from '../imoAsignacion.modelo';
-import { RnaLoteInsumoService } from '../../../../../services/rnaloteInsumos.service';
+//import { RnaLoteInsumoService } from '../../../../../services/rnaloteInsumos.service';
 import { UserEmpresaService } from '../../../../../services/userEmpresa.service';
 import { CfgOrganismoTransitoService } from '../../../../../services/cfgOrganismoTransito.service';
 import { ImoCfgTipoService } from '../../../../../services/imoCfgTipo.service';
@@ -27,7 +27,7 @@ public empresas:any;
 public sustratos:any;
 
 constructor(
-  private _rnaloteInsumosService: RnaLoteInsumoService,
+  //private _rnaloteInsumosService: RnaLoteInsumoService,
   private _loginService: LoginService,
   private _EmpresaService: UserEmpresaService,
   private _OrganismoTransitoService: CfgOrganismoTransitoService,
@@ -107,7 +107,7 @@ constructor(
     this.loteInsumoInsumo.sedeOperativaId = this.sedeSelected;
     this.loteInsumoInsumo.casoInsumoId = this.insumoSelected;
     let token = this._loginService.getToken();
-		this._rnaloteInsumosService.edit(this.loteInsumoInsumo,token).subscribe(
+		/*this._rnaloteInsumosService.edit(this.loteInsumoInsumo,token).subscribe(
 			response => {
         if(response.code == 200){
           this.ready.emit(true);
@@ -126,7 +126,7 @@ constructor(
 					}
 				}
 
-		}); 
+		}); */
   }
   isFin() {
     this.loteInsumoInsumo.cantidad = parseInt(this.loteInsumoInsumo.rangoFin) - parseInt(this.loteInsumoInsumo.rangoInicio)+1;

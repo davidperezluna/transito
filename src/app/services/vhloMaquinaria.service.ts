@@ -4,10 +4,10 @@ import  "rxjs/add/operator/map";
 import { environment } from 'environments/environment';
 
 @Injectable()
-export class VhloRnaPreregistroService {
-	private url = environment.apiUrl + "vehiculo/vhlovehiculo";
+export class VhloMaquinariaService {
+	private url = environment.apiUrl + "vehiculo/vhlomaquinaria";
 	public identity;
-	public token;
+	public token; 
 
 	constructor(private _http: Http){}
 
@@ -15,15 +15,17 @@ export class VhloRnaPreregistroService {
 		return this._http.get(this.url+"/").map(res => res.json());
 	}
 
-	register(datos, token){
+	register(datos,token){
 		let json = JSON.stringify(datos);
 		let params = "data="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
-		return this._http.post(this.url+"/new", params, {headers: headers}).map(res => res.json());
+		return this._http.post(this.url+"/new", params, {headers: headers})
+							  .map(res => res.json());
 	}
 
 	delete(token,id){
-		let params = "authorization="+token;
+		let json = JSON.stringify(id);
+		let params = "data="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/"+id+"/delete", params, {headers: headers})
 							  .map(res => res.json());
@@ -32,14 +34,18 @@ export class VhloRnaPreregistroService {
 	show(token,id){
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
-		return this._http.post(this.url+"/show/"+id, params, {headers: headers}).map(res => res.json());
+		return this._http.post(this.url+"/show/"+id, params, {headers: headers})
+							  .map(res => res.json());
+
 	}
 
-	edit(vehiculo,token){
-		let json = JSON.stringify(vehiculo);
+	edit(datos,token){
+		let json = JSON.stringify(datos);		
 		let params = "data="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
- 		return this._http.post(this.url+"/edit", params, {headers: headers}).map(res => res.json());
+ 			return this._http.post(this.url+"/edit", params, {headers: headers})
+							  .map(res => res.json());
+
 	}
 
 	select(){

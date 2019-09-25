@@ -1,17 +1,53 @@
-vhloRnrsPreregistro<div class="container" >
-  <hr>
-  <div class="row" *ngIf='formIndex'>
-      <div class="col-md-12">
+<div class="container-fluid" >
+  <div class="row">
+    <div class="col-xs-12 col-lg-4" *ngIf='formSearch'>
+      <div class="card">
+        <div class="card-header">
+          <b class="text-uppercase">Buscar maquinaria amarilla</b>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-xs-12 col-lg-12">
+              <div class="form-group">
+                <label>Parametro de búsqueda<br> <small>(Placa, No VIN, No. Serie, No. motor, No. Motor, No. Chasis)</small></label>
+                <input class="form-control text-uppercase" [(ngModel)]="search.filtro" name="filtro" type="text" required />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="row">
+            <div class="col-xs-12 col-lg-12">
+              <div class="form-group">
+                <div class="btn-group btn-group-justified">
+                  <div class="btn-group">
+                    <button (click)="onSearch()" class="btn btn-default btn-primary" type="button">
+                      <i class="fa fa-search"></i>
+                      Buscar
+                    </button>
+                    <button (click)="onNew()" class="btn btn-default">
+                      <i class="fa fa-plus"></i>
+                      Nuevo
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+      <div class="col-xs-12col-lg-8" *ngIf='formIndex'>
         <div class="card">
           <div class="card-header">
-            <h5 class="card-title">Vehículos Registrados <small>remolques </small>
-              <div class="btn-group pull-right">
-                <button (click)="onNew()" class="btn btn-default">
-                  <i class="fa fa-save"></i>
-                  Nuevo
-                </button>
-              </div>
-            </h5>
+            <b class="text-uppercase">Vehículos Registrados RNRS</b>
+            <div class="btn-group pull-right">
+              <button (click)="onNew()" class="btn btn-default">
+                <i class="fa fa-save"></i>
+                Nuevo
+              </button>
+            </div>
           </div>
           <div class="card-body">
             <table class="table " id="dataTables-example">
@@ -30,22 +66,22 @@ vhloRnrsPreregistro<div class="container" >
                 </tr>
               </thead>
               <tbody>
-                <tr class="odd" *ngFor="let registroRemolque of registrosRemolque; let i = index">
-                  <td>{{ registroRemolque.vehiculo.placa?.numero }}</td>
-                  <td>{{ registroRemolque.vehiculo.linea?.marca.nombre }}</td>
-                  <td>{{ registroRemolque.vehiculo.clase?.nombre }}</td>
-                  <td>{{ registroRemolque.vehiculo.serie}}</td>
-                  <td>{{ registroRemolque.vehiculo.vin}}</td>
-                  <td>{{ registroRemolque.numeroEjes }}</td>
-                  <td>{{ registroRemolque.origenRegistro?.nombre }}</td>
-                  <td>{{ registroRemolque.numeroFth }}</td>
-                  <td>{{ registroRemolque.condicionIngreso?.nombre }}</td>
+                <tr class="odd" *ngFor="let remolque of remolques; let i = index">
+                  <td>{{ remolque.vehiculo.placa?.numero }}</td>
+                  <td>{{ remolque.vehiculo.linea?.marca.nombre }}</td>
+                  <td>{{ remolque.vehiculo.clase?.nombre }}</td>
+                  <td>{{ remolque.vehiculo.serie}}</td>
+                  <td>{{ remolque.vehiculo.vin}}</td>
+                  <td>{{ remolque.numeroEjes }}</td>
+                  <td>{{ remolque.origenRegistro?.nombre }}</td>
+                  <td>{{ remolque.numeroFth }}</td>
+                  <td>{{ remolque.condicionIngreso?.nombre }}</td>
                   <td>
                     <div class="btn-group">
-                      <button (click)="editRemolque(registroRemolque)" class="btn btn-primary" type="button" >
+                      <button (click)="onEdit(remolque)" class="btn btn-primary" type="button" >
                         <i class="fa fa-pencil"></i>
                       </button> 
-                      <button (click)="deleteRemolque(registroRemolque.id)"  class="btn btn-danger" type="button">
+                      <button (click)="onDelete(remolque.id)"  class="btn btn-danger" type="button">
                         <i class="fa fa-trash"></i>
                       </button> 
                     </div>
@@ -58,7 +94,7 @@ vhloRnrsPreregistro<div class="container" >
         </div>
       </div>
     </div>
-    <app-edit *ngIf='formEdit' [registroRemolque]="registroRemolque" (ready)="ready($event)"></app-edit>
-    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new> 
+    <app-edit-rnrspreregistro *ngIf='formEdit' [remolque]="remolque" (ready)="ready($event)"></app-edit-rnrspreregistro>
+    <app-new-rnrspreregistro *ngIf='formNew' (ready)="ready($event)"></app-new-rnrspreregistro> 
 
 </div>

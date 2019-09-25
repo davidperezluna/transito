@@ -1,6 +1,6 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import { RnmaPreregistro} from '../rnmaPreregistro.modelo';
-import { RnmaPreregistroService } from '../../../services/rnmaPreregistro.service';
+import { VhloMaquinariaService } from '../../../services/vhloMaquinaria.service';
 import { VhloCfgColorService } from '../../../services/vhloCfgColor.service';
 import { VhloCfgCarroceriaService } from '../../../services/vhloCfgCarroceria.service';
 import { VhloCfgLineaService } from '../../../services/vhloCfgLinea.service';
@@ -41,11 +41,11 @@ export class NewRegistroMaquinariaComponent implements OnInit {
   public condicionesIngreso:any;
   public tiposMaquinaria:any;
   public tiposRodaje:any;
-  public persona:any='empresa';
   public tiposCabina:any;
   public clasesMaquinaria:any = null;
   public empresasGps:any;
   public subpartidasArancelarias:any;
+  public persona:any='empresa';
   public btnRadicado:string = "Preregistro para matricula inicial";
 
   public tiposMatricula = [
@@ -56,7 +56,7 @@ export class NewRegistroMaquinariaComponent implements OnInit {
   ];
 
 constructor(
-  private _RegistroMaquinariaService: RnmaPreregistroService,
+  private _RegistroMaquinariaService: VhloMaquinariaService,
   private _LoginService: LoginService,
   private _LineaService: VhloCfgLineaService,
   private _ColorService: VhloCfgColorService,

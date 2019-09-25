@@ -3,13 +3,6 @@ import { rpcccInventarioDocumentalComponent } from './rpcccInventarioDocumental.
 import { ExportComponent } from './export/export.component';
 
 export const RpcccInventarioDocumentalRoutes: Route[] = [
-    {
-      path: 'rpcccInventarioDocumental',
-      component: rpcccInventarioDocumentalComponent
-    },
-    {
-      path: 'rpcccInventarioDocumental/export',
-      component: ExportComponent
-    }
+    
 ];
  

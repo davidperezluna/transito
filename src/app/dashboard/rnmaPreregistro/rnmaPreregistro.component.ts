@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RnmaPreregistroService } from '../../services/rnmaPreregistro.service';
+import { VhloMaquinariaService } from '../../services/vhloMaquinaria.service';
 import { RnmaPreregistro } from './rnmaPreregistro.modelo';
 import { LoginService } from '../../services/login.service';
 declare var $: any;
@@ -22,7 +22,7 @@ export class RnmaPreregistroComponent implements OnInit {
   public registroMaquinaria: RnmaPreregistro;
 
   constructor(
-		private _PreregistroService: RnmaPreregistroService,
+		private _PreregistroService: VhloMaquinariaService,
 		private _loginService: LoginService,
   ){}
   

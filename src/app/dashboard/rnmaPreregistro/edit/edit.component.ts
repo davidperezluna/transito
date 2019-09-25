@@ -1,10 +1,8 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { RnmaPreregistro } from '../rnmaPreregistro.modelo';
-import { RnmaPreregistroModule } from '../rnmaPreregistro.module';
-import { RnmaPreregistroService } from '../../../services/rnmaPreregistro.service';
+import { VhloMaquinariaService } from '../../../services/vhloMaquinaria.service';
 import { LoginService } from '../../../services/login.service';
 import {VhloCfgColorService} from '../../../services/vhloCfgColor.service';
-import { TipoVehiculoService } from '../../../services/tipoVehiculo.service';
+import { VhloCfgTipoVehiculoService } from '../../../services/vhloCfgTipoVehiculo.service';
 import {VhloCfgClaseService} from '../../../services/vhloCfgClase.service';
 import {VhloCfgCarroceriaService} from '../../../services/vhloCfgCarroceria.service';
 import {VhloCfgLineaService} from '../../../services/vhloCfgLinea.service';
@@ -22,7 +20,7 @@ export class EditComponent implements OnInit{
 @Output() ready = new EventEmitter<any>();
 @Input() registroMaquinaria:any = null;
 @Input() vehiculo:any = null;
-@Input() cfgPlaca:any = null;
+@Input() placa:any = null;
 
 public errorMessage;
 public habilitar:any;
@@ -73,11 +71,11 @@ public tiposCabina =[
 ]
 
 constructor(
-  private _RegistroMaquinariaService: RnmaPreregistroService,
+  private _RegistroMaquinariaService: VhloMaquinariaService,
   private _loginService: LoginService,
   private _colorService: VhloCfgColorService,
   private _lineaService: VhloCfgLineaService,
-  private _tipoVehiculoService: TipoVehiculoService,
+  private _TipoVehiculoService: VhloCfgTipoVehiculoService,
   private _claseService: VhloCfgClaseService,
   private _marcaService: VhloCfgMarcaService,
   private _carroceriaService: VhloCfgCarroceriaService,
@@ -119,7 +117,7 @@ constructor(
       }
     );
 
-     this._tipoVehiculoService.getTipoVehiculoSelect().subscribe(
+     this._TipoVehiculoService.select().subscribe(
       response => {
         this.tiposVehiculo = response;
         setTimeout(() => {
@@ -281,7 +279,7 @@ constructor(
         }else{
           swal({
             title: 'Error!',
-            text: 'El vehiculo '+ this.registroMaquinaria.cfgPlaca +' ya se encuentra registrado',
+            text: 'El vehiculo '+ this.registroMaquinaria.placa +' ya se encuentra registrado',
             type: 'error',
             confirmButtonText: 'Aceptar'
           })

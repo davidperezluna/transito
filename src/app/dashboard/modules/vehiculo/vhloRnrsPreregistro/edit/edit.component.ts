@@ -1,6 +1,5 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { VhloRegistroRemolque } from '../vhloRnrsPreregistro.modelo';
-import { VhloRnrsPreregistroService } from '../../../../../services/vhloRnrsPreregistro.service';
+import { VhloRemolqueService } from '../../../../../services/vhloRemolque.service';
 import { VhloCfgCarroceriaService } from '../../../../../services/vhloCfgCarroceria.service';
 import { VhloCfgMarcaService } from '../../../../../services/vhloCfgMarca.service';
 import { VhloCfgLineaService } from '../../../../../services/vhloCfgLinea.service';
@@ -11,19 +10,16 @@ import { LoginService } from '../../../../../services/login.service';
 import swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-edit',
+  selector: 'app-edit-rnrspreregistro',
   templateUrl: './edit.component.html'
 })
 
 export class EditComponent implements OnInit{
 @Output() ready = new EventEmitter<any>();
-@Input() registroRemolque:any = null;
-@Input() vehiculo:any = null;
-@Input() cfgPlaca:any = null;
+@Input() remolque:any = null;
 
 public errorMessage;
-public habilitar:any;
-public respuesta;
+public habilitar:any
 public formReady = false;
 
 public carrocerias:any;
@@ -63,7 +59,7 @@ public tiposCabina =[
 ]
 
 constructor(
-  private _RegistroRemolqueService: VhloRnrsPreregistroService,
+  private _RegistroRemolqueService: VhloRemolqueService,
   private _LineaService: VhloCfgLineaService,
   private _ClaseService: VhloCfgClaseService,
   private _MarcaService: VhloCfgMarcaService,
@@ -93,7 +89,7 @@ constructor(
       response => {
         this.carrocerias = response;
         setTimeout(() => {
-          this.carroceriaSelected = [this.registroRemolque.vehiculo.carroceria.id];
+          this.carroceriaSelected = [this.remolque.vehiculo.carroceria.id];
         });
       },
       error => {
@@ -109,12 +105,12 @@ constructor(
       response => {
         this.lineas = response;
         setTimeout(() => {
-            this.lineaSelected = [this.registroRemolque.vehiculo.linea.id]; 
+            this.lineaSelected = [this.remolque.vehiculo.linea.id]; 
             this._MarcaService.getMarcaSelect().subscribe(
               response => {
                 this.marcas = response;
                 setTimeout(() => {
-                    this.marcaSelected = [this.registroRemolque.vehiculo.linea.marca.id];
+                    this.marcaSelected = [this.remolque.vehiculo.linea.marca.id];
                 })
               }, 
               error => { 
@@ -142,7 +138,7 @@ constructor(
       response => {
         this.origenRegistros = response;
         setTimeout(() => {
-          this.origenRegistroSelected = [this.registroRemolque.origenRegistro.id];
+          this.origenRegistroSelected = [this.remolque.origenRegistro.id];
         });
       },
       error => {
@@ -158,7 +154,7 @@ constructor(
       response => {
         this.condicionIngresos = response;
         setTimeout(() => {
-          this.condicionIngresoSelected = [this.registroRemolque.condicionIngreso.id];
+          this.condicionIngresoSelected = [this.remolque.condicionIngreso.id];
         });
       },
       error => {
@@ -173,7 +169,7 @@ constructor(
       response => {
         this.clases = response;
         setTimeout(() => {
-          this.claseSelected = [this.registroRemolque.vehiculo.clase.id];
+          this.claseSelected = [this.remolque.vehiculo.clase.id];
         });
       },
       error => {
@@ -193,12 +189,12 @@ constructor(
 
     let token = this._LoginService.getToken();
 
-    this.registroRemolque.origenRegistroId = this.origenRegistroSelected;
-    this.registroRemolque.condicionIngresoId = this.condicionIngresoSelected;
+    this.remolque.origenRegistroId = this.origenRegistroSelected;
+    this.remolque.condicionIngresoId = this.condicionIngresoSelected;
     
-    this.registroRemolque.vehiculoCarroceriaId = this.carroceriaSelected;
-    this.registroRemolque.vehiculoMarcaId = this.marcaSelected;
-    this.registroRemolque.vehiculoClaseId = this.claseSelected;
+    this.remolque.vehiculoCarroceriaId = this.carroceriaSelected;
+    this.remolque.vehiculoMarcaId = this.marcaSelected;
+    this.remolque.vehiculoClaseId = this.claseSelected;
 
     var html = 'los datos de la Remolque sera editados !<br>';
    
@@ -217,10 +213,9 @@ constructor(
     }).then((result) => {
         if (result.value) {
 
-    this._RegistroRemolqueService.edit(this.registroRemolque,token).subscribe(
+    this._RegistroRemolqueService.edit(this.remolque,token).subscribe(
 			response => {
-        this.respuesta = response;
-        if(this.respuesta.status == 'success'){
+        if(response.code == 200){
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',
@@ -231,7 +226,7 @@ constructor(
         }else{
           swal({
             title: 'Error!',
-            text: 'El vehiculo '+ this.registroRemolque.placa+' ya se encuentra registrado',
+            text: 'El vehiculo '+ this.remolque.placa+' ya se encuentra registrado',
             type: 'error',
             confirmButtonText: 'Aceptar'
           })
