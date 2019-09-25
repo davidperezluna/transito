@@ -5,8 +5,8 @@ import { environment } from 'environments/environment';
 import "rxjs/add/operator/map";
 
 @Injectable()
-export class UserLicenciaConduccionRestriccionService {
-    private url = environment.apiUrl + 'usuario/userlicenciaconduccionrestriccion';
+export class UserLcRestriccionService {
+    private url = environment.apiUrl + 'usuario/userlcrestriccion';
     public identity;
     public token;
 

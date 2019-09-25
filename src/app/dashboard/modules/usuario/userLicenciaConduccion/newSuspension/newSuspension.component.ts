@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { UserLicenciaConduccionRestriccionService } from '../../../../../services/userLicenciaConduccionRestriccion.service';
+import { UserLcRestriccionService } from '../../../../../services/userLcRestriccion.service';
 import { LoginService } from '../../../../../services/login.service';
 
 import swal from 'sweetalert2';
@@ -23,7 +23,7 @@ export class newSuspensionComponent implements OnInit {
     public errorMessage;
     constructor(
         private _LoginService: LoginService,
-        private _UserLicenciaConduccionRestriccionService: UserLicenciaConduccionRestriccionService,
+        private _UserLcRestriccionService: UserLcRestriccionService,
     ) { }
 
     ngOnInit() {
@@ -35,7 +35,7 @@ export class newSuspensionComponent implements OnInit {
     // enviar a guarda
     onEnviar() {
         let token = this._LoginService.getToken();
-        this._UserLicenciaConduccionRestriccionService.register(this.formCancelacion, token).subscribe(
+        this._UserLcRestriccionService.register(this.formCancelacion, token).subscribe(
             response => {
             if (response.code == 200) {
                 this.ready.emit(true);

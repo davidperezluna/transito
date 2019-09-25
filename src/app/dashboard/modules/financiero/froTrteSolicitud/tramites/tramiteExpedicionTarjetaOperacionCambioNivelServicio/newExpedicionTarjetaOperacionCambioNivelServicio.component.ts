@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { VhloCfgNivelServicioService } from '../../../../../../services/vhloCfgNivelServicio.service';
 import { VhloTpAsignacionService } from '../../../../../../services/vhloTpAsignacion.service';
-import { FroTrteSolicitudService } from 'app/services/froTrteSolicitud.service';
+import { FroTrteSolicitudService } from '../../../../../../services/froTrteSolicitud.service';
 import { DatePipe, CurrencyPipe } from '@angular/common';
 import { LoginService } from '../../../../../../services/login.service';
 

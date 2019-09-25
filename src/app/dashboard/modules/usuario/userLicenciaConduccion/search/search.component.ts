@@ -4,7 +4,7 @@ import { UserLicenciaConduccionService } from '../../../../../services/userLicen
 import { LoginService } from '../../../../../services/login.service';
 import { UserCfgTipoIdentificacionService } from '../../../../../services/userCfgTipoIdentificacion.service';
 import { UserCiudadanoService } from '../../../../../services/userCiudadano.service';
-import { UserLicenciaConduccionRestriccionService } from '../../../../../services/userLicenciaConduccionRestriccion.service';
+import { UserLcRestriccionService } from '../../../../../services/userLcRestriccion.service';
 
 
 import swal from 'sweetalert2';
@@ -41,7 +41,7 @@ export class SearchComponent implements OnInit {
         private _LoginService: LoginService,
         private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
         private _UserCiudadanoService: UserCiudadanoService,
-        private _UserLicenciaConduccionRestriccionService: UserLicenciaConduccionRestriccionService,
+        private _UserLcRestriccionService: UserLcRestriccionService,
     ) { }
 
     ngOnInit() {
@@ -137,7 +137,7 @@ export class SearchComponent implements OnInit {
     newActa(){
         let token = this._LoginService.getToken();
         this.datos.idLicenciaConduccion = this.licenciaConduccion.id;
-        this._UserLicenciaConduccionRestriccionService.pdfGenerarAuto(this.datos, token).subscribe((response)=>{     
+        this._UserLcRestriccionService.pdfGenerarAuto(this.datos, token).subscribe((response)=>{     
             var fileURL = URL.createObjectURL(response);
             var myWindow = window.open(fileURL);
             myWindow.focus();

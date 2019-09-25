@@ -13,7 +13,7 @@ import { CfgEntidadJudicialService } from '../../../../services/cfgEntidadJudici
 import { UserLcProhibicionService } from '../../../../services/userLcProhibicion.service';
 
 import { UserLicenciaConduccionService } from '../../../../services/userLicenciaConduccion.service';
-import { UserLicenciaConduccionRestriccionService } from '../../../../services/userLicenciaConduccionRestriccion.service';
+import { UserLcRestriccionService } from '../../../../services/userLcRestriccion.service';
 
 import { NewComponent } from './new/new.component';
 import { EditComponent } from './edit/edit.component';
@@ -31,7 +31,7 @@ import { SelectModule } from 'angular2-select';
         UserCiudadanoService,
         CfgPaisService,
         UserLicenciaConduccionService,
-        UserLicenciaConduccionRestriccionService,
+        UserLcRestriccionService,
         CfgEntidadJudicialService,
         UserLcProhibicionService
     ]

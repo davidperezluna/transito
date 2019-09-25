@@ -3,7 +3,7 @@ import { UserLcProhibicionService } from '../../../../../services/userLcProhibic
 import { LoginService } from '../../../../../services/login.service';
 import { UserCfgTipoIdentificacionService } from '../../../../../services/userCfgTipoIdentificacion.service';
 import { UserCiudadanoService } from '../../../../../services/userCiudadano.service';
-import { UserLicenciaConduccionRestriccionService } from '../../../../../services/userLicenciaConduccionRestriccion.service';
+import { UserLcRestriccionService } from '../../../../../services/userLcRestriccion.service';
 import { CfgEntidadJudicialService } from '../../../../../services/cfgEntidadJudicial.service';
 
 import swal from 'sweetalert2';

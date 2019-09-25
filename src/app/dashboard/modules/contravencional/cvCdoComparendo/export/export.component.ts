@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { CfgOrganismoTransitoService } from '../../../../../services/cfgOrganismoTransito.service';
-import { CvCdoComparendoService } from 'app/services/cvCdoComparendo.service';
+import { CvCdoComparendoService } from '../../../../../services/cvCdoComparendo.service';
 import { LoginService } from '../../../../../services/login.service';
 import { environment } from 'environments/environment';
 import swal from 'sweetalert2';
