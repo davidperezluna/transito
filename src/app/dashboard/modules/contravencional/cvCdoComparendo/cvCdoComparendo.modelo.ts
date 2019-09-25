@@ -15,7 +15,7 @@ export class CvCdoComparendo{
 		public anulado:boolean,
 		public fechaNotificacion:string,
 		public infraccionValorAdicional:string,
-		public gradoAlcoholemia:number,
+		public gradoAlcoholemia:string,
 		public licenciaTransitoNumero:string,
 		public vehiculoPlaca:string,
 		public vehiculoClase:string,

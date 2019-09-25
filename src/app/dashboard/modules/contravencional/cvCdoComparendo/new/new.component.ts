@@ -82,6 +82,13 @@ export class NewComponent implements OnInit {
 
   public apiUrl = environment.apiUrl;
 
+  public gradosAlcoholemia = [
+    { 'value': 'UNO', 'label': "UNO" },
+    { 'value': 'DOS', 'label': "DOS" },
+    { 'value': 'TRES', 'label': "TRES" },
+    { 'value': 'RENUENCIA', 'label': "RENUENCIA" },
+  ];
+
   public search = {
     'idFuncionario': null,
     'numero': null,
@@ -147,7 +154,7 @@ constructor(
   private _ServicioService: VhloCfgServicioService,
   private _FroInfraccionService: FroInfraccionService,
   private _TipoInfractorService: CfgTipoInfractorService,
-  private _CfgLicenciaConduccionCategoriaService: UserLcCfgCategoriaService,
+  private _LicenciaConduccionCategoriaService: UserLcCfgCategoriaService,
   private _LoginService: LoginService,
   ){}
   
@@ -385,7 +392,7 @@ constructor(
                     }
                   );
               
-                  this._CfgLicenciaConduccionCategoriaService.select().subscribe(
+                  this._LicenciaConduccionCategoriaService.select().subscribe(
                     response => {
                       this.categorias = response;
                     },
