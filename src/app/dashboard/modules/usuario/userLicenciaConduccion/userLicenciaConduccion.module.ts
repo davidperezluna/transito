@@ -9,6 +9,9 @@ import { VhloCfgServicioService } from '../../../../services/vhloCfgServicio.ser
 import { UserCiudadanoService } from '../../../../services/userCiudadano.service';
 import { CfgPaisService } from '../../../../services/cfgPais.service';
 
+import { CfgEntidadJudicialService } from '../../../../services/cfgEntidadJudicial.service';
+import { UserLcProhibicionService } from '../../../../services/userLcProhibicion.service';
+
 import { UserLicenciaConduccionService } from '../../../../services/userLicenciaConduccion.service';
 import { UserLicenciaConduccionRestriccionService } from '../../../../services/userLicenciaConduccionRestriccion.service';
 
@@ -28,7 +31,9 @@ import { SelectModule } from 'angular2-select';
         UserCiudadanoService,
         CfgPaisService,
         UserLicenciaConduccionService,
-        UserLicenciaConduccionRestriccionService
+        UserLicenciaConduccionRestriccionService,
+        CfgEntidadJudicialService,
+        UserLcProhibicionService
     ]
 })
 

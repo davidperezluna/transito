@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FroTrteSolicitudService } from '../../../../services/froTrteSolicitud.service';
-import { CfgOrganismoTransitoService } from 'app/services/cfgOrganismoTransito.service';
-import { CfgModuloService } from 'app/services/cfgModulo.service';
+import { CfgOrganismoTransitoService } from '../../../../services/cfgOrganismoTransito.service';
+import { CfgModuloService } from '../../../../services/cfgModulo.service';
 import { LoginService } from '../../../../services/login.service';
 import { environment } from 'environments/environment';
 import swal from 'sweetalert2';

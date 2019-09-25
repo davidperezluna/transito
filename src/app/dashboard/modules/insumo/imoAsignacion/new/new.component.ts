@@ -204,7 +204,7 @@ constructor(
     }
 
     let datos = {
-      'tipoInsumo':this.insumoSelected,
+      'tipo':this.insumoSelected,
       'idOrganismoTransito':this.sedeSelected,
       'idFuncionario': this.funcionarioSelected
     }
@@ -352,12 +352,11 @@ constructor(
           'array': this.lotesSeleccionados,
           'idFuncionario': this.funcionarioSelected,
         };
-        
+
         this._ImoInsumoService.register(datos, token).subscribe(
           response => {
             if(response.code == 200){
               this.numeroActa = response.data;
-
               swal.close();
             }else{
               swal({

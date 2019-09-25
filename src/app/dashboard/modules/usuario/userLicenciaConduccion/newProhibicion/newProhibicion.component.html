@@ -1,0 +1,216 @@
+<div class="container-fluid">
+        <hr>
+        <div class="row" *ngIf='formIndex'>
+            <div class="col-xs-12 col-lg-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="text-uppercase">Buscar</h5>
+                        <hr>
+                        <form #formIndex="ngForm">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-xs-12 col-lg-12">
+                                        <label>Tipo identificación</label>
+                                        <ng-select [multiple]="false" [options]="tiposIdentificacion"
+                                            [(ngModel)]="tipoIdentificacionSelected" name="tiposIdentificacion" required>
+                                        </ng-select>
+                                    </div>
+                                    <div class="col-xs-12 col-lg-12">
+                                        <label>Identificación</label>
+                                        <input class="form-control" [(ngModel)]="identificacion" name="identificacion"
+                                            type="number" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-footer">
+                        <div class="btn-group">
+                            <button (click)="onSearchCiudadano()" [disabled]="formIndex.invalid" class="btn btn-primary"
+                                type="button">
+                                <i class="fa fa-search"></i>
+                                Buscar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="col-xs-12 col-lg-8" *ngIf='ciudadano'>
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">
+                            <b class="text-uppercase">Ciudadano</b>
+                            <small>Registrados</small>
+                        </h5>
+                    </div>
+                    <div class="card-body"> 
+                        <table class="table table-bordered table-striped">
+                            <tbody>
+                                <tr class="odd">
+                                    <td>
+                                        <b>Tipo de identificación</b>
+                                        <br> {{ ciudadano.tipoIdentificacion.nombre }}
+                                    </td>
+                                    <td>
+                                        <b>Numero de identificación</b>
+                                        <br> {{ ciudadano.identificacion }}
+                                    </td>
+                                    <td>
+                                        <b>Ciudadano</b>
+                                        <br> {{ ciudadano.primerNombre }} {{ ciudadano.segundoNombre }} {{ ciudadano.primerApellido
+                                        }} {{ ciudadano.segundoApellido }}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>   
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">
+                            <b class="text-uppercase">Datos de la gravedad</b>
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Tipo novedad</label>
+                                <ng-select [multiple]="false" [options]="tiposNovedad"
+                                    [(ngModel)]="prohibicion.tipoNovedad" name="tiposNovedad" required>
+                                </ng-select>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Tipo orden</label>
+                                <ng-select [multiple]="false" [options]="tiposOrden"
+                                    [(ngModel)]="prohibicion.tipoOrden" name="tiposOrden" required>
+                                </ng-select>
+                            </div>
+        
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Numero proceso
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input class="form-control" [(ngModel)]="prohibicion.numProceso"
+                                    name="numProceso" type="text" required>
+                            </div>
+                            <div class="col-xs-12 col-lg-6" *ngIf="prohibicion.tipoOrden == 'ORGANISMODETRANSITO'">
+                                <label>Numero resolución
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input class="form-control" [(ngModel)]="prohibicion.numResolucion"
+                                    name="numResolucion" type="text" required>
+                            </div>
+                            <div class="col-xs-12 col-lg-6" *ngIf="prohibicion.tipoOrden == 'ORDENJUDICIAL'">
+                                <label>Juzgado</label>
+                                <ng-select [multiple]="false" [options]="entidadesJudiciales"
+                                    [(ngModel)]="prohibicion.idJuzgado" name="idJuzgado" required>
+                                </ng-select>
+                            </div>
+                            <div class="col-xs-12 col-lg-6" *ngIf="prohibicion.tipoOrden == 'ORGANISMODETRANSITO'">
+                                <label>Fecha resolución
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input class="form-control" [(ngModel)]="prohibicion.fechaResolucion"
+                                    name="fechaResolucion" type="date" required>
+                            </div>
+                            <div class="col-xs-12 col-lg-6" *ngIf="prohibicion.tipoOrden == 'ORDENJUDICIAL'">
+                                <label>Fecha orden
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input class="form-control" [(ngModel)]="prohibicion.fechaOrden"
+                                    name="fechaOrden" type="date" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" *ngIf="prohibicion.tipoNovedad == 'SUSPENSION'">
+                    <div class="card-header">
+                        <h5 class="card-title">
+                            <b class="text-uppercase">Datos de la novedad suspension</b>
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-lg-6" >
+                                <label>Fecha inicio suspension
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input class="form-control" [(ngModel)]="prohibicion.fechaInicio"
+                                    name="fechaInicio" type="date" required>
+                            </div>
+                            <div class="col-xs-12 col-lg-6" >
+                                <label>Fecha culminación suspension
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input class="form-control" [(ngModel)]="prohibicion.fechaFin"
+                                    name="fechaFin" type="date" required>
+                            </div>
+                            <div class="col-xs-12 col-lg-6" >
+                                <label>Plazo suspension
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input class="form-control" [(ngModel)]="prohibicion.fechaPlazo"
+                                    name="fechaPlazo" type="date" required>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Motivo</label>
+                                <ng-select [multiple]="false" [options]="motivosSuspension"
+                                    [(ngModel)]="prohibicion.motivo" name="motivosSuspension" required>
+                                </ng-select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="btn-group">
+                            <button (click)="onEnviar()" class="btn btn-primary"
+                                type="button">
+                                <i class="fa fa-floppy-o"></i>
+                                Enviar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" *ngIf="prohibicion.tipoNovedad == 'CANCELACION'">
+                    <div class="card-header">
+                        <h5 class="card-title">
+                            <b class="text-uppercase">Datos de la novedad cancelación</b>
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-lg-6" >
+                                <label>Fecha inicio cancelación
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input class="form-control" [(ngModel)]="prohibicion.fechaInicio"
+                                    name="fechaInicio" type="date" required>
+                            </div>
+                            <div class="col-xs-12 col-lg-6" >
+                                <label>Fecha culminación cancelación
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input class="form-control" [(ngModel)]="prohibicion.fechaFin"
+                                    name="fechaFin" type="date" required>
+                            </div>
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Motivo</label>
+                                <ng-select [multiple]="false" [options]="motivosCancelacion"
+                                    [(ngModel)]="prohibicion.motivo" name="motivosCancelacion" required>
+                                </ng-select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="btn-group">
+                            <button (click)="onEnviar()" class="btn btn-primary"
+                                type="button">
+                                <i class="fa fa-floppy-o"></i>
+                                Enviar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
