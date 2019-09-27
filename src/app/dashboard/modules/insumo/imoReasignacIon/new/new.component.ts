@@ -29,6 +29,7 @@ public datos = {
   'idOrganismoTransitoOrigen': null,
   'idOrganismoTransitoDestino': null,
 };
+public sustratosSelect: any = [];
 
 constructor(
   private _OrganismoTransitoService: CfgOrganismoTransitoService,
@@ -190,7 +191,7 @@ constructor(
     console.log(1);
 
     let datos = {
-      'insumos': this.insumos, 
+      'insumos': this.sustratosSelect, 
       'tipoInsumo': this.datos.casoInsumo,   
       'idOrganismoTransitoOrigen': this.datos.idOrganismoTransitoOrigen,
       'idOrganismoTransitoDestino': this.datos.idOrganismoTransitoDestino,
@@ -211,6 +212,7 @@ constructor(
           setTimeout(() => {
             this.onInitTable();
           });
+
         }else{
           swal({
             title: 'Error!',
@@ -229,4 +231,16 @@ constructor(
       }
     );
   }
+
+  onSelectSustrato(insumo: any, eve: any) {
+    if (eve.target.checked) {
+      this.sustratosSelect.push(insumo);
+    } else {
+      let index = this.sustratosSelect.indexOf(insumo);
+      if (index > -1) {
+        this.sustratosSelect.splice(index, 1);
+      }
+    }
+    console.log(this.sustratosSelect); 
+  } 
 }

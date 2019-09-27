@@ -170,7 +170,7 @@ export class FroFacInfraccionComponent implements OnInit {
     }
   }
 
-  onSelectComparendo(comparendo: any, eve: any) {
+  onSelectComparendo(comparendo: any, eve: any) { 
     if (eve.target.checked) {
       this.comparendosSelect.push(comparendo);
       this.valorTotal = this.valorTotal + comparendo.valorInfraccion;
@@ -181,7 +181,7 @@ export class FroFacInfraccionComponent implements OnInit {
         this.comparendosSelect.splice(index, 1);
       }
     }
-  }
+  } 
 
   onInitTable(){
     if (this.table) {
