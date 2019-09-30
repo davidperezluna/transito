@@ -141,6 +141,7 @@ export class SearchComponent implements OnInit {
             var fileURL = URL.createObjectURL(response);
             var myWindow = window.open(fileURL);
             myWindow.focus();
+            this.ready(true);
         });
     }
 
@@ -149,8 +150,8 @@ export class SearchComponent implements OnInit {
             this.onSearchCiudadano();
             this.formSuspension = false;
             this.formCancelacion = false;
+            this.formDevolucion = false;
             this.formIndex = true;
-        this.formDevolucion = true;
 
         }
     }
