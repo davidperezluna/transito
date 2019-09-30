@@ -17,7 +17,7 @@ export class ReportComponent implements OnInit, AfterViewInit {
     public errorMessage;
 
     public municipios: any;
-    public seniales: any;
+    public ubicaciones: any;
 
     public formSearch: any;
     public formIndex: any;
@@ -48,7 +48,6 @@ export class ReportComponent implements OnInit, AfterViewInit {
     this._MunicipioService.selectByDepartamento({ 'idDepartamento': 21 }, token).subscribe(
       response => {
         this.municipios = response;
-        this.formSearch = true;
       },
       error => {
         this.errorMessage = <any>error;
@@ -59,6 +58,8 @@ export class ReportComponent implements OnInit, AfterViewInit {
         }
       }
     );
+
+    this.formSearch = true;
   }
 
   ngAfterViewInit(){
@@ -84,17 +85,14 @@ export class ReportComponent implements OnInit, AfterViewInit {
     }
 
     this.table = $('#dataTables-example').DataTable({
-      responsive: true,
       retrieve: true,
       paging: false,
+      responsive: true,
       pageLength: 10,
       sPaginationType: 'full_numbers',
       dom: 'Bfrtip',
       buttons: [
-        {
-          extend: 'pdfHtml5',
-          message: date
-        }
+        'excel', 'pdf'
       ],
       oLanguage: {
         oPaginate: {
@@ -106,11 +104,10 @@ export class ReportComponent implements OnInit, AfterViewInit {
       }
     });
   }
-  
 
   onSearch(){
     swal({
-      title: 'Cargando !',
+      title: 'Buscando registros!',
       text: 'Solo tardará unos segundos, por favor espere.',
       onOpen: () => {
         swal.showLoading();
@@ -122,7 +119,7 @@ export class ReportComponent implements OnInit, AfterViewInit {
     this._UbicacionService.searchByFechasAndMunicipio(this.search, token).subscribe(
       response => {
         if (response.code == 200) {
-          this.seniales = response.data;
+          this.ubicaciones = response.data;
 
           let timeoutId = setTimeout(() => {
             this.onInitTable();
@@ -130,7 +127,7 @@ export class ReportComponent implements OnInit, AfterViewInit {
             swal.close();
           }, 100);
         } else {
-          this.seniales = null;
+          this.ubicaciones = null;
 
           swal({
             title: response.title,

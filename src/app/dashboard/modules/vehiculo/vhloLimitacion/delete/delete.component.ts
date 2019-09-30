@@ -12,7 +12,7 @@ declare var $: any;
   providers: [DatePipe]
 })
 
-export class DeleteComponent implements OnInit {
+export class VhloLimitacionDeleteComponent implements OnInit {
   public errorMessage;
 
   public table: any = null;
