@@ -5,8 +5,9 @@ import { environment } from 'environments/environment';
 import "rxjs/add/operator/map";
 
 @Injectable()
-export class FroRecaudoService {
-    private url = environment.apiUrl + 'financiero/frorecaudo';
+
+export class FroFacTransferenciaService {
+    private url = environment.apiUrl + 'financiero/frofactransferencia';
     public identity;
     public token;
 
@@ -55,7 +56,10 @@ export class FroRecaudoService {
         );
     }
 
-    getTipoControlSelect() {
-        return this._http.get(this.url + "/select").map(res => res.json());
+    reportTransfer(datos, token) {
+        let json = JSON.stringify(datos);
+        let params = "data=" + json + "&authorization=" + token;
+        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+        return this._http.post(this.url + "/report/transfer", params, { headers: headers }).map(res => res.json());
     }
 }

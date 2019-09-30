@@ -1,13 +1,9 @@
-<div class="container">
-  <hr>
-  <div class="row" *ngIf='formSearch'>
-    <div class="col-xs-12 col-lg-4"><!-- .col -->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-12 col-lg-4" *ngIf='formSearch'><!-- .col -->
       <div class="card">
         <div class="card-header">
-            <h5 class="text-uppercase">
-              <b>Señalización</b>
-              <small>Buscar</small>
-            </h5>
+            <b class="text-uppercase">Señalización</b>
         </div>
         <div class="card-body">
           <form #formSearch="ngForm">
@@ -43,6 +39,10 @@
             <button (click)="onSearch()" (ready)="ready($event)" [disabled]="formSearch.invalid" class="btn btn-primary" type="button">
               <i class="fa fa-search"></i>
               Buscar
+            </button>
+            <button (click)="onReport()"  class="btn btn-default" type="button">
+              <i class="fa fa-file"></i>
+              Reporte
             </button>
           </div>
         </div>
@@ -180,6 +180,9 @@
     <div class="col-xs-12 col-lg-8" *ngIf='formNewBodega'><!-- .col -->
       <app-new-senial-bodega [idTipoSenial]="datos.idTipoSenial" (ready)="ready($event)"></app-new-senial-bodega>
     </div><!-- /.col -->
-  </div>
 
+    <div class="col-xs-12 col-lg-12" *ngIf='formReport'><!-- .col -->
+      <app-report-svsenialinventario></app-report-svsenialinventario>
+    </div><!-- /.col -->
+  </div>
 </div>

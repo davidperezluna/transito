@@ -1,4 +1,4 @@
-export class FroRecaudo {
+export class FroFacTransferencia {
     constructor(
         public id: number,
         public fecha: string,

@@ -8,6 +8,7 @@ declare var $: any;
   selector: 'app-index',
   templateUrl: './vhloLimitacion.component.html'
 })
+
 export class VhloLimitacionComponent implements OnInit {
   public errorMessage;
 

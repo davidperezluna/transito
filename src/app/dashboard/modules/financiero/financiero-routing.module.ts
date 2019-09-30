@@ -11,6 +11,7 @@ import { FroInfrCfgCategoriaComponent } from './froInfrCfgCategoria/froInfrCfgCa
 import { FroInfraccionComponent } from './froInfraccion/froInfraccion.component';
 import { FroFacAcuerdoPagoComponent } from './froFactura/froFacAcuerdoPago/froFacAcuerdoPago.component';
 import { FroFacParqueaderoComponent } from './froFactura/froFacParqueadero/froFacParqueadero.component';
+import { FroFacTransferenciaComponent } from './froFacTransferencia/froFacTransferencia.component';
 import { FroReporteIngresosComponent } from './froReporteIngresos/froReporteIngresos.component';
 import { FroTramiteComponent } from './froTramite/froTramite.component';
 import { FroTrteSolicitudComponent } from './froTrteSolicitud/froTrteSolicitud.component';
@@ -58,6 +59,10 @@ const routes: Routes = [
   {
     path: 'facturaParqueadero',
     component: FroFacParqueaderoComponent
+  },
+  {
+    path: 'froFacTransferencia',
+    component: FroFacTransferenciaComponent
   },
   {
     path: 'froReporteIngresos',

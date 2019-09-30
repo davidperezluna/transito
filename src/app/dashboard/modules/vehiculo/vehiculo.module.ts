@@ -12,6 +12,8 @@ import { VhloCfgPlacaComponent } from './vhloCfgPlaca/vhloCfgPlaca.component';
 import { VhloCfgPlacaReportComponent } from './vhloCfgPlaca/report/report.component';
 import { VhloCfgValorComponent } from './vhloCfgValor/vhloCfgValor.component';
 import { VhloPlacaSedeComponent } from './vhloPlacaSede/vhloPlacaSede.component';
+import { VhloLimitacionComponent } from './vhloLimitacion/vhloLimitacion.component';
+import { VhloLimitacionDeleteComponent } from './vhloLimitacion/delete/delete.component';
 import { VhloTpAsignacionComponent } from './vhloTpAsignacion/vhloTpAsignacion.component';
 import { VhloTpConvenioComponent } from './vhloTpConvenio/vhloTpConvenio.component';
 import { VhloTpRangoComponent } from './vhloTpRango/vhloTpRango.component';
@@ -28,6 +30,7 @@ import { VhloBuscarComponent } from './vhloBuscar/vhloBuscar.component';
 import { VhloCfgNivelServicioModule } from './vhloCfgNivelServicio/vhloCfgNivelServicio.module';
 import { VhloCfgPlacaModule } from './vhloCfgPlaca/vhloCfgPlaca.module';
 import { VhloCfgValorModule } from './vhloCfgValor/vhloCfgValor.module';
+import { VhloLimitacionModule } from './vhloLimitacion/vhloLimitacion.module';
 import { VhloPlacaSedeModule } from './vhloPlacaSede/vhloPlacaSede.module';
 import { VhloTpAsignacionModule } from './vhloTpAsignacion/vhloTpAsignacion.module';
 import { VhloTpConvenioModule } from './vhloTpConvenio/vhloTpConvenio.module';
@@ -52,6 +55,7 @@ import { VhloRnrsPreregistroModule } from './vhloRnrsPreregistro/vhloRnrsPreregi
     VhloCfgNivelServicioModule,
     VhloCfgPlacaModule,
     VhloCfgValorModule,
+    VhloLimitacionModule,
     VhloPlacaSedeModule,
     VhloTpAsignacionModule,
     VhloTpConvenioModule,
@@ -69,6 +73,8 @@ import { VhloRnrsPreregistroModule } from './vhloRnrsPreregistro/vhloRnrsPreregi
     VhloCfgPlacaComponent,
     VhloCfgPlacaReportComponent,
     VhloCfgValorComponent,
+    VhloLimitacionComponent,
+    VhloLimitacionDeleteComponent,
     VhloPlacaSedeComponent,
     VhloTpAsignacionComponent,
     VhloTpConvenioComponent,

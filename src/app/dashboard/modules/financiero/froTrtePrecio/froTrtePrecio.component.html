@@ -84,7 +84,7 @@
                                 </td>
                                 <td>
                                     <input class="form-control" [(ngModel)]="tramitePrecio.fechaInicial" name="fechaInicial" type="date" required (click)='onToggleDisableDate()' (blur)='onValidateDate(tramitePrecio)' [readonly]="disableTextboxDate">
-                                    {{ (tramitePrecio.fechaInicial.timestamp * 1000) | date: 'yyyy-MM-dd' }}
+                                    <b>Actual: </b>{{ (tramitePrecio.fechaInicial.timestamp * 1000) | date: 'yyyy-MM-dd' }}
                                 </td>
                                 <td>
                                     <input class="form-control" [(ngModel)]="tramitePrecio.valor" name="valor" type="number" required (click)='onToggleDisableValue()' (blur)='onDisableValue()' [readonly]="disableTextboxValue">

@@ -16,7 +16,7 @@ import { FroFacParqueaderoComponent } from './froFactura/froFacParqueadero/froFa
 import { FroCfgTipoRecaudoComponent } from './froCfgTipoRecaudo/froCfgTipoRecaudo.component';
 import { FroInfraccionComponent } from './froInfraccion/froInfraccion.component';
 import { FroInfrCfgCategoriaComponent } from './froInfrCfgCategoria/froInfrCfgCategoria.component';
-import { FroRecaudoComponent } from './froRecaudo/froRecaudo.component';
+import { FroFacTransferenciaComponent } from './froFacTransferencia/froFacTransferencia.component';
 import { FroReporteIngresosComponent } from './froReporteIngresos/froReporteIngresos.component';
 import { FroTramiteComponent } from './froTramite/froTramite.component';
 import { FroTrtePrecioComponent } from './froTrtePrecio/froTrtePrecio.component';
@@ -30,7 +30,7 @@ import { FroFacturaModule } from './froFactura/froFactura.module';
 import { FroInfraccionModule } from './froInfraccion/froInfraccion.module';
 import { FroCfgTipoRecaudoModule } from './froCfgTipoRecaudo/froCfgTipoRecaudo.module';
 import { FroInfrCfgCategoriaModule } from './froInfrCfgCategoria/froInfrCfgCategoria.module';
-import { FroRecaudoModule } from './froRecaudo/froRecaudo.module';
+import { FroFacTransferenciaModule } from './froFacTransferencia/froFacTransferencia.module';
 import { FroReporteIngresosModule } from './froReporteIngresos/froReporteIngresos.module';
 import { FroTramiteModule } from './froTramite/froTramite.module';
 import { FroTrtePrecioModule } from './froTrtePrecio/froTrtePrecio.module';
@@ -102,6 +102,7 @@ import { NewRnetDesvinculacionComunAcuerdoComponent } from './froTrteSolicitud/t
     FroFacturaModule,
     FroInfrCfgCategoriaModule,
     FroInfraccionModule,
+    FroFacTransferenciaModule,
     FroReporteIngresosModule,
     FroTramiteModule,
     FroTrteSolicitudModule,
@@ -119,6 +120,7 @@ import { NewRnetDesvinculacionComunAcuerdoComponent } from './froTrteSolicitud/t
     FroFacInfraccionComponent,
     FroFacAcuerdoPagoComponent,
     FroFacParqueaderoComponent,
+    FroFacTransferenciaComponent,
     FroReporteIngresosComponent,
     FroTramiteComponent,
     FroTrteSolicitudComponent,

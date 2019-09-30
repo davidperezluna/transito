@@ -7,8 +7,10 @@ import { VhloCfgNivelServicioComponent } from './vhloCfgNivelServicio/vhloCfgNiv
 import { VhloCfgPlacaComponent } from './vhloCfgPlaca/vhloCfgPlaca.component';
 import { VhloCfgPlacaReportComponent } from './vhloCfgPlaca/report/report.component';
 import { VhloCfgValorComponent } from './vhloCfgValor/vhloCfgValor.component';
+import { VhloLimitacionComponent } from './vhloLimitacion/vhloLimitacion.component';
+import { VhloLimitacionDeleteComponent } from './vhloLimitacion/delete/delete.component';
 import { VhloPlacaSedeComponent } from './vhloPlacaSede/vhloPlacaSede.component';
-import { DeliveredComponent } from './vhloPlacaSede/delivered/delivered.component';
+import { VhloPlacaSedeDeliveredComponent } from './vhloPlacaSede/delivered/delivered.component';
 import { VhloTpAsignacionComponent } from './vhloTpAsignacion/vhloTpAsignacion.component';
 import { VhloTpConvenioComponent } from './vhloTpConvenio/vhloTpConvenio.component';
 import { VhloTpRangoComponent } from './vhloTpRango/vhloTpRango.component';
@@ -40,12 +42,20 @@ const routes: Routes = [
     component: VhloCfgPlacaReportComponent
   },
   {
+    path: 'limitacion/levantamiento',
+    component: VhloLimitacionDeleteComponent
+  },
+  {
+    path: 'vhloLimitacion',
+    component: VhloLimitacionComponent
+  },
+  {
     path: 'vhloPlacaSede',
     component: VhloPlacaSedeComponent
   },
   {
     path: 'vhloPlacaEntrega',
-    component: DeliveredComponent
+    component: VhloPlacaSedeDeliveredComponent
   },
   {
     path: 'vhloCfgValor',
