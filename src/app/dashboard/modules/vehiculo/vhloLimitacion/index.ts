@@ -3,4 +3,3 @@
 */
 export * from './vhloLimitacion.component';
 export * from './delete/delete.component';
-export * from './vhloLimitacion.routes';

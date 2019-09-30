@@ -9,7 +9,8 @@ declare var $: any;
   selector: 'app-delivered-vhloplacasede',
   templateUrl: './delivered.component.html'
 })
-export class DeliveredComponent implements OnInit {
+
+export class VhloPlacaSedeDeliveredComponent implements OnInit {
   public errorMessage;
 
   public funcionario: any;

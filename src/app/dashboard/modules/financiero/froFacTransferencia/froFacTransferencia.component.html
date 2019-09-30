@@ -1,0 +1,72 @@
+<div class="row">
+    <div class="col-xs-12 col-lg-4" *ngIf="formSearch">
+        <!-- .col -->
+        <div class="card">
+            <div class="card-header">
+                <b class="text-uppercase">Reporte de tranferencias</b>
+            </div>
+            <div class="card-body">
+                <form #formSearch="ngForm">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Fecha inicial</label>
+                                <input class="form-control" [(ngModel)]="search.fechaInicial" name="fechaInicial"
+                                    type="date" required>
+                            </div>
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Fecha final</label>
+                                <input class="form-control" [(ngModel)]="search.fechaFinal" name="fechaFinal"
+                                    type="date" required>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <button (click)="onSearch()" [disabled]="formSearch.invalid" class="btn btn-primary" type="button">
+                    <i class="fa fa-search"></i>
+                    Buscar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-lg-8" *ngIf="formIndex">
+        <div class="card">
+            <div class="card-header">
+                <b class="text-uppercase">Tranferencias encontradas</b>
+            </div>
+            <div class="card-body">
+                <table class="table" id="dataTables-example">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Sede operativa</th>
+                            <th>No. Factura</th>
+                            <th>Tipo</th>
+                            <th>Fecha</th>
+                            <th>STTDN</th>
+                            <th>SIMIT</th>
+                            <th>POLCA</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="odd" *ngFor="let transferencia of transferencias; let i = index">
+                            <td>{{ i + 1 }}</td>
+                            <td>{{ transferencia.factura.organismoTransito.nombre }}</td>
+                            <td>{{ transferencia.factura.numero }}</td>
+                            <td>{{ transferencia.tipo }}</td>
+                            <td>{{ (transferencia.fecha.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td>
+                            <td>${{ transferencia.valorSttdn }}</td>
+                            <td>${{ transferencia.valorSimit }}</td>
+                            <td>${{ transferencia.valorPolca }}</td>
+                            <td>${{ transferencia.factura.valorNeto }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

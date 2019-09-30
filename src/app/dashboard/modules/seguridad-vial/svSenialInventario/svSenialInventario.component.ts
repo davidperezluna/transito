@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, AfterViewInit, EventEmitter } from '@angular/core';
 import { SvSenialInventarioService } from '../../../../services/svSenialInventario.service';
 import { SvSenialBodegaService } from '../../../../services/svSenialBodega.service';
 import { CfgMunicipioService } from '../../../../services/cfgMunicipio.service';
@@ -13,13 +13,16 @@ declare var $: any;
     templateUrl: './svSenialInventario.component.html'
 })
 
-export class SvSenialInventarioComponent implements OnInit {
+export class SvSenialInventarioComponent implements OnInit, AfterViewInit {
     public errorMessage;
-    public formRecord = false;
-    public formNewBodega = false;
-    public formNewMunicipio = false;
-    public formIndex = false;
-    public formSearch = true;
+
+    public formReport: any;
+    public formRecord: any;
+    public formNewBodega: any;
+    public formNewMunicipio: any;
+    public formIndex: any;
+    public formSearch: any;
+
     public table: any = null;
     
     public municipios: any = null;
@@ -56,6 +59,8 @@ export class SvSenialInventarioComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+        this.onInitForms();
+
         this._TipoSenialService.select().subscribe(
                 response => {
                     this.tiposSenial = response;
@@ -69,13 +74,25 @@ export class SvSenialInventarioComponent implements OnInit {
                 }
             }
         );
+
+        this.formSearch = true;
+    }
+
+    ngAfterViewInit(){
+        swal.close();
+    }
+
+    onInitForms(){
+        this.formReport = false;
+        this.formRecord = false;
+        this.formNewBodega = false;
+        this.formNewMunicipio = false;
+        this.formIndex = false;
+        this.formSearch = false;
     }
 
     ready(isCreado: any) {
         if (isCreado) {
-            this.formIndex = false;
-            this.formNewBodega = false;
-            this.formNewMunicipio = false;
             this.ngOnInit();
         }
     }
@@ -179,12 +196,9 @@ export class SvSenialInventarioComponent implements OnInit {
     }
 
     onInitTable() {
-        if (this.table) {
-            this.table.empty();
-            this.table.destroy();
-        }
-        
         this.table = $('#dataTables-example').DataTable({
+            retrieve: true,
+            paging: false,
             responsive: true,
             pageLength: 8,
             sPaginationType: 'full_numbers',
@@ -199,41 +213,35 @@ export class SvSenialInventarioComponent implements OnInit {
         });
     }
 
+    onReport() {
+        this.onInitForms();
+        this.formReport = true;
+    }
+
     onLocation(inventario) {
+        this.onInitForms();
+
         this.inventario = inventario;
-        this.formRecord = false;
-        this.formIndex = false;
-        if (this.table) {
-            this.table.destroy();
-        }
     }
 
     onRecord(senial, datos) {
+        this.onInitForms();
+
         this.senial = senial;
         this.datos = datos;
         
         this.formRecord = true;
-        this.formIndex = false;
-        if (this.table) {
-            this.table.destroy();
-        }
     }
 
     onNewSenialMunicipio() {
+        this.onInitForms();
+
         this.formNewMunicipio = true;
-        this.formNewBodega = false;
-        this.formIndex = false;
-        if (this.table) {
-            this.table.destroy();
-        }
     }
 
     onNewSenialBodega() {
+        this.onInitForms();
+
         this.formNewBodega = true;
-        this.formNewMunicipio = false;
-        this.formIndex = false;
-        if (this.table) {
-            this.table.destroy();
-        }
     }
 }
