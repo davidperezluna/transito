@@ -1,4 +1,5 @@
-import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter, NgZone} from '@angular/core';
+import { MouseEvent, MapsAPILoader } from '@agm/core';
 
 import { SvIpat } from '../svIpat.modelo';
 import { SvIpatConductor } from '../svIpatConductor.modelo';
@@ -71,10 +72,16 @@ import { DatePipe, CurrencyPipe } from '@angular/common';
 @Component({
   selector: 'app-new-svipat',
   templateUrl: './new.component.html',
-  providers: [DatePipe]
+  providers: [DatePipe],
+  styles: [`
+        agm-map {
+        height: 500px;
+        }
+    `],
 })
 export class NewComponent implements OnInit {
   @Output() ready = new EventEmitter<any>();
+  @Output() mapReady: EventEmitter<any> = new EventEmitter<any>();
   @Input() consecutivo: any = null;
   public ipat: SvIpat;
   public ipatConductor: SvIpatConductor;
@@ -220,6 +227,27 @@ export class NewComponent implements OnInit {
   public contMuertos = 0;
   public contAcompaniantes = 0;
 
+  public address: any = null;
+  public zoom: number = 15;
+  public lat: number = 1.2246233;
+  public lng: number = -77.2808208;
+  public map: any;
+  public markers: marker[] = [];
+  public arrayDemarcaciones: any = [];
+  public geocoder: any;
+  public LatLng: any;
+
+  public demarcacionNew = {
+    'cantidad': null,
+    'area': null,
+    'ancho': null,
+    'largo': null,
+    'total': null,
+    'tramoVial': null,
+    'idLinea': null,
+    'idUnidadMedida': null
+  }
+
   constructor(
     private _SvIpatService: SvIpatService,
 
@@ -283,6 +311,8 @@ export class NewComponent implements OnInit {
     private _SvIpatConductorService: SvIpatConductorService,
     private _SvIpatVehiculoService: SvIpatVehiculoService,
     private _SvIpatVictimaService: SvIpatVictimaService,
+
+    private __zone: NgZone
   ) { }
 
   ngOnInit() {
@@ -301,7 +331,7 @@ export class NewComponent implements OnInit {
       }
     });
 
-    this.ipat = new SvIpat(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    this.ipat = new SvIpat(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     this.ipatConductor = new SvIpatConductor(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     this.ipatVehiculo = new SvIpatVehiculo(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     this.ipatVictima = new SvIpatVictima(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
@@ -1150,6 +1180,7 @@ export class NewComponent implements OnInit {
   onEnviar() {
     let token = this._LoginService.getToken();
 
+    this.ipat.markers = this.markers;
     this.ipat.tipoIdentificacionPropietario = this.tipoIdentificacionPropietarioSelected;
     this.ipat.tipoIdentificacionAgente = this.tipoIdentificacionAgenteSelected;
     this.ipat.tipoIdentificacionTestigo = this.tipoIdentificacionTestigoSelected;
@@ -2102,4 +2133,113 @@ export class NewComponent implements OnInit {
       }
     }
   }
+
+  //para georeferenciacion de ipat
+  onRemoveDemarcacion(demarcacion) {
+    this.arrayDemarcaciones = this.arrayDemarcaciones.filter(h => h !== demarcacion);
+  }
+
+  mapLoad(map) {
+    this.map = map;
+  }
+
+  clickedMarker(label: string, index: number) {
+    console.log(`clicked the marker: ${label || index}`)
+  }
+
+  onRightClick(index: number) {
+    /*var marker = this.markers[index]; // find the marker by given id
+    marker.setMap(null);*/
+    //this.markers.splice(index, 1);
+    console.log('clicked right the marker:' + this.markers[index]);
+  }
+
+  onSearchGeo() {
+    if (this.address) {
+      this._SvIpatService.getLatLng(this.address).subscribe(
+        result => {
+          this.__zone.run(() => {
+            this.lat = result.lat();
+            this.lng = result.lng();
+          });
+        },
+        error => console.log(error),
+        () => console.log('Geocoding completed!')
+      );
+    } else {
+      swal({
+        title: 'Error!',
+        text: 'La ubicación no ha sido diligenciada.',
+        type: 'error',
+        confirmButtonText: 'Aceptar'
+      });
+    }
+  }
+
+  mapClicked($event: MouseEvent) {
+    /* if (this.senialUbicacion.cantidad > 0) { */
+      console.log(this.markers.length);
+
+      if (this.markers.length == 0) {
+        this._SvIpatService.getAddress($event.coords).subscribe(
+          result => {
+            this.__zone.run(() => {
+              this.address = result;
+
+              this.markers.push({
+                lat: $event.coords.lat,
+                lng: $event.coords.lng,
+                draggable: true,
+                label: result
+                /* label: result + "<br>(" + this.senial.tipoSenial.nombre + ")" + "<br>(" + this.senial.nombre + ")" */
+              });
+            });
+          },
+          error => console.log(error),
+          () => console.log('Geocoding completed!')
+        );
+      } else if (this.markers.length != 0) {
+        this.markers = [];
+        
+        this._SvIpatService.getAddress($event.coords).subscribe(
+          result => {
+            this.__zone.run(() => {
+              this.address = result;
+
+              this.markers.push({
+                lat: $event.coords.lat,
+                lng: $event.coords.lng,
+                draggable: true,
+                label: result
+                /* label: result + "<br>(" + this.senial.tipoSenial.nombre + ")" + "<br>(" + this.senial.nombre + ")" */
+              });
+            });
+          },
+          error => console.log(error),
+          () => console.log('Geocoding completed!')
+        );
+      }
+      else {
+        swal({
+          title: 'Atención!',
+          text: 'El número de georeferenciaciones no puede ser mayor a la cantidad a asignar al municipio,',
+          type: 'warning',
+          confirmButtonText: 'Aceptar'
+        });
+      }
+    /* } */
+  }
+
+  markerDragEnd(m: marker, $event: MouseEvent) {
+    console.log('dragEnd', m, $event);
+  }
+
+}
+
+// just an interface for type safety.
+interface marker {
+  lat: number;
+  lng: number;
+  label?: string;
+  draggable: boolean;
 }

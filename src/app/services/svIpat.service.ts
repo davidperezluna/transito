@@ -1,6 +1,7 @@
 import  {Injectable} from '@angular/core';
 import  {Http, Response,Headers} from '@angular/http';
 import { environment } from 'environments/environment';
+import { Observable, Observer } from 'rxjs';
 import  'rxjs/add/operator/map';
 
 @Injectable()
@@ -140,5 +141,39 @@ export class SvIpatService {
 		return this._http.post(this.url + "/ipat/consecutivo", params, { headers: headers }).map(
 			res => res.json()
 		);
+	}
+
+	getLatLng(address: string) {
+		console.log('Getting Coords - ', address);
+		let geocoder = new google.maps.Geocoder();
+		return Observable.create(observer => {
+			geocoder.geocode({ 'address': address }, function (results, status) {
+				if (status == google.maps.GeocoderStatus.OK) {
+					observer.next(results[0].geometry.location);
+					observer.complete();
+				} else {
+					console.log('Error - ', results, ' & Status - ', status);
+					observer.next({});
+					observer.complete();
+				}
+			});
+		})
+	}
+
+	getAddress(coords: any) {
+		console.log('Getting Address - ', coords);
+		let geocoder = new google.maps.Geocoder();
+		return Observable.create(observer => {
+			geocoder.geocode({ 'location': coords }, function (results, status) {
+				if (status == google.maps.GeocoderStatus.OK) {
+					observer.next(results[0].formatted_address);
+					observer.complete();
+				} else {
+					console.log('Error - ', results, ' & Status - ', status);
+					observer.next({});
+					observer.complete();
+				}
+			});
+		})
 	}
 }
