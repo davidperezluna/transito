@@ -5,7 +5,7 @@ import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
-  selector: 'app-report-cfgplaca',
+  selector: 'app-report-vhlo-cfg-placa',
   templateUrl: './report.component.html'
 })
 

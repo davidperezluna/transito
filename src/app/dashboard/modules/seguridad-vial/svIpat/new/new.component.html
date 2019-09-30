@@ -1592,9 +1592,47 @@
                 </div>
             </div>
         </div>
+        <div class="card" *ngIf="consecutivo">
+            <div class="card-header">
+                <h5 class="card-title text-uppercase text-center gradient" style="margin-top: 2%; border-radius: 60px;">
+                    <strong class="text-uppercase">11. Georeferenciación</strong>
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="form-group row">
+                    <div class="col-lg-12 col-xs-12">
+                
+                        <div class="input-group">
+                            <input type="text" class="form-control" [(ngModel)]="address"
+                                placeholder="Dirección a buscar: Pasto, Nariño.." name="address" />
+                            <span class="input-group-btn">
+                                <button (click)="onSearchGeo()" class="btn btn-default btn-primary" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                        </div>
+                        <br>
+                        <div class="col-lg-12 col-xs-6" align="center">
+                            <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [disableDefaultUI]="false" [zoomControl]="false"
+                                [usePanning]="true" (mapClick)="mapClicked($event)" (mapReady)="mapLoad($event)">
+                
+                                <agm-marker *ngFor="let marker of markers; let i = index" [latitude]="marker.lat"
+                                    [longitude]="marker.lng" (markerRightClick)="onRightClick(i)"
+                                    (markerClick)="clickedMarker(marker.label, i)" [markerDraggable]="marker.draggable"
+                                    (dragEnd)="markerDragEnd(marker, $event)">
+                
+                                    <agm-info-window>
+                                        <strong>{{ marker.label }}</strong>
+                                    </agm-info-window>
+                                </agm-marker>
+                            </agm-map>
+                        </div>
+                    </div>
+                </div><!-- /.row -->
+            </div>
+        </div>
     </form>
     <div class="card-footer">
-        <!-- <button (click)="onEnviar()" [disabled]="formNew.invalid && ipat.haySemaforo && ipat.hayTestigo && ipat.portaPlaca && ipat.mismoConductor" class="btn btn-primary">Finalizar</button> -->
         <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary">Finalizar</button>
         <button (click)="onCancelar()" class="btn btn-default">Cancelar</button>
     </div>

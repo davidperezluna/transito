@@ -7,7 +7,7 @@ import swal from 'sweetalert2';
 
 
 @Component({
-  selector: 'app-edit',
+  selector: 'app-edit-vhlo-cfg-placa',
   templateUrl: './edit.component.html'
 })
 export class EditComponent {

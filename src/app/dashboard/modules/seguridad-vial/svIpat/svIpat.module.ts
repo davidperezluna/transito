@@ -69,8 +69,19 @@ import { SelectModule } from 'angular2-select';
 import { SortableModule } from 'ngx-bootstrap/sortable';
 import { ToolTipModule } from 'angular2-tooltip';
 
+import { AgmCoreModule } from '@agm/core';
+
 @NgModule({
-    imports: [CommonModule, Ng2BootstrapModule.forRoot(), SelectModule, SortableModule.forRoot(), ToolTipModule],
+    imports: [
+        CommonModule,
+        Ng2BootstrapModule.forRoot(),
+        SelectModule,
+        SortableModule.forRoot(),
+        ToolTipModule,
+        AgmCoreModule.forRoot({
+            apiKey: 'AIzaSyCZLRPtun19mn3xqSZi08dPp-1R4P2A2B4'
+        })
+    ],
     declarations: [NewComponent, ShowComponent, ExportIpatComponent],
     
     exports: [NewComponent, ShowComponent, ExportIpatComponent],

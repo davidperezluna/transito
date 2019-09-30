@@ -5,6 +5,7 @@ export class SvIpat{
 
 		public idGravedad:number,
 		public lugar: string,
+		public markers: any,
 		public fechaAccidente:string,
 		public horaAccidente:string,
 		public fechaLevantamiento:string,
