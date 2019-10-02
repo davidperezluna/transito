@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { PnalAsignacion } from './pnalAsignacion.modelo';
 import { PnalAsignacionService } from '../../../../services/pnalAsignacion.service';
 import { LoginService } from '../../../../services/login.service';
 import { environment } from 'environments/environment';
@@ -23,7 +22,7 @@ export class PnalAsignacionComponent implements OnInit {
 
   public table: any;
   
-  public asignacion: PnalAsignacion;
+  public asignacion: any;
 
   constructor(
     private _AsignacionService: PnalAsignacionService,

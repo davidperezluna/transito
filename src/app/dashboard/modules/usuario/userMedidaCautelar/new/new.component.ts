@@ -3,7 +3,6 @@ import { UserMedidaCautelar } from '../userMedidaCautelar.modelo';
 import { VhloCfgLimitacionTipoProcesoService } from '../../../../../services/vhloCfgLimitacionTipoProceso.service';
 import { VhloCfgLimitacionCausalService } from '../../../../../services/vhloCfgLimitacionCausal.service';
 import { VhloVehiculoService } from '../../../../../services/vhloVehiculo.service';
-import { VhloPropietarioService } from '../../../../../services/vhloPropietario.service';
 import { UserMedidaCautelarService } from '../../../../../services/userMedidaCautelar.service';
 import { UserCfgTipoMedidaCautelarService } from '../../../../../services/userCfgTipoMedidaCautelar.service';
 import { UserCiudadanoService } from '../../../../../services/userCiudadano.service';
@@ -15,7 +14,7 @@ import { LoginService } from '../../../../../services/login.service';
 import swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-new',
+  selector: 'app-new-user-medida-cautelar',
   templateUrl: './new.component.html'
 })
 export class NewComponent implements OnInit {

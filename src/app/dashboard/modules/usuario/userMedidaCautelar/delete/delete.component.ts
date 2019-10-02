@@ -9,7 +9,7 @@ import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
-  selector: 'app-delete',
+  selector: 'app-delete-user-medida-cautelar',
   templateUrl: './delete.component.html',
   providers: [DatePipe]
 })
