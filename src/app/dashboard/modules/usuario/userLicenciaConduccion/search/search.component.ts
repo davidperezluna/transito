@@ -25,11 +25,12 @@ export class SearchComponent implements OnInit {
 
     public table: any;
     public datos = {
-        'horasComunitarias':null,
+        'horasComunitarias': false,
         'idLicenciaConduccion':null 
     };
 
     public formIndex = true;
+    public formNewLicencia = false;
     public formCancelacion = false;
     public formSuspension = false;
     public formDevolucion = false;
@@ -50,6 +51,7 @@ export class SearchComponent implements OnInit {
             response => {
               this.tiposIdentificacion = response;
             },
+            
             error => {
               this.errorMessage = <any>error;
       
@@ -57,6 +59,7 @@ export class SearchComponent implements OnInit {
                 console.log(this.errorMessage);
                 alert('Error en la petición');
               }
+
             }
           );
 
@@ -83,12 +86,23 @@ export class SearchComponent implements OnInit {
                                     this.onInitTable();
                                 }, 200);
                             } else {
-                                swal({
-                                    title: 'Alerta!',
-                                    text: response.message,
-                                    type: 'error',
-                                    confirmButtonText: 'Aceptar'
-                                });
+                                if(response.code == 401){
+                                    swal({
+                                        title: 'Alerta!',
+                                        text: response.message,
+                                        type: 'error',
+                                        confirmButtonText: 'Aceptar'
+                                    });
+                                }else{
+                                    this.formNewLicencia=true;
+                                    this.formIndex=false;
+                                    swal({
+                                        title: 'Alerta!',
+                                        text: response.message,
+                                        type: 'error',
+                                        confirmButtonText: 'Aceptar'
+                                    });
+                                }
                             error => {
                                 this.errorMessage = <any>error;
                                 if (this.errorMessage != null) {
@@ -143,7 +157,7 @@ export class SearchComponent implements OnInit {
             myWindow.focus();
             this.ready(true);
         });
-    }
+    } 
 
     ready(isCreado: any) {
         if (isCreado) {
@@ -151,6 +165,7 @@ export class SearchComponent implements OnInit {
             this.formSuspension = false;
             this.formCancelacion = false;
             this.formDevolucion = false;
+            this.formNewLicencia = false;
             this.formIndex = true;
 
         }
@@ -159,6 +174,7 @@ export class SearchComponent implements OnInit {
     newCancelacion(licenciaConduccion: any){
         this.licenciaConduccion = licenciaConduccion;
         this.formIndex = false;
+        this.formNewLicencia = false;
         this.formSuspension = false;
         this.formCancelacion = true;
         this.formDevolucion = false;
@@ -168,6 +184,7 @@ export class SearchComponent implements OnInit {
     newDevolucion(licenciaConduccion: any){
         this.licenciaConduccion = licenciaConduccion;
         this.formIndex = false;
+        this.formNewLicencia = false;
         this.formSuspension = false;
         this.formCancelacion = false;
         this.formDevolucion = true;
@@ -176,6 +193,7 @@ export class SearchComponent implements OnInit {
     onCancelarDevolucion(licenciaConduccion: any){
         this.licenciaConduccion = licenciaConduccion;
         this.formIndex = true;
+        this.formNewLicencia = false;
         this.formSuspension = false;
         this.formCancelacion = false;
         this.formDevolucion = false;
@@ -184,6 +202,7 @@ export class SearchComponent implements OnInit {
     newSuspension(licenciaConduccion: any){
         this.licenciaConduccion = licenciaConduccion;
         this.formIndex = false;
+        this.formNewLicencia = false;
         this.formCancelacion = false;
         this.formSuspension = true;
         this.formDevolucion = false;

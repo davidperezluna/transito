@@ -35,7 +35,11 @@
                     </div>
                 </div>
             </div>
-    
+
+            <div class="col-xs-12 col-lg-9" *ngIf='formNewLicencia'>
+                <app-new (ready)="ready($event)"></app-new>
+            </div>
+            
             <div class="col-xs-12 col-lg-9" *ngIf='formIndex'>
                 <div class="row" *ngIf='licenciasConduccion?.length > 0'>
                     <div class="col-xs-12">
@@ -62,7 +66,7 @@
                                     </thead>
                                     <tbody>
                                         <tr class="odd" *ngFor="let licenciaConduccion of licenciasConduccion; let i = index">
-                                            <td>{{ licenciaConduccion.id }}</td>
+                                            <td>{{ licenciaConduccion.id }}</td> 
                                             <td>{{ licenciaConduccion.categoria.nombre }}</td>
                                             <td>{{ licenciaConduccion.numero }}</td>
                                             <td>{{ licenciaConduccion.organismoTransito.nombre }}</td>
@@ -96,28 +100,43 @@
         <app-newCancelacion *ngIf='formCancelacion' [licenciaConduccion]="licenciaConduccion" (ready)="ready($event)"></app-newCancelacion>
         <app-newSuspension *ngIf='formSuspension' [licenciaConduccion]="licenciaConduccion" (ready)="ready($event)"></app-newSuspension>
         
-        <div class="form-group row" *ngIf='formDevolucion'>
-            <label>Se ha cumplido las horas comunitarias?</label>
-            <div class="col-xs-12 col-lg-3">
-                <div class="custom-control custom-radio">
-                    <input name="correoCertificadoLlegada" [(ngModel)]="datos.horasComunitarias" value=true type="radio" id="radio-tramite1" name="radio-tramite" class="custom-control-input">
-                    <label class="custom-control-label" for="radio-tramite1">SI</label>
+
+        <div class="col-xs-12 col-lg-9" *ngIf='formDevolucion'>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">
+                                <b class="text-uppercase">Horas comunitarias</b>
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group container row">
+                                <label>Se ha cumplido las horas comunitarias?</label>
+                                <div class="col-xs-12 col-lg-3">
+                                    <div class="custom-control custom-radio">
+                                        <input name="correoCertificadoLlegada" [(ngModel)]="datos.horasComunitarias" value='true' type="radio" id="radio-tramite1" name="radio-tramite" class="custom-control-input">
+                                        <label class="custom-control-label" for="radio-tramite1">SI</label>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-lg-3">
+                                    <div class="custom-control custom-radio">
+                                        <input name="correoCertificadoLlegada" [(ngModel)]="datos.horasComunitarias" value='false' type="radio" id="radio-tramite2" name="radio-tramite" class="custom-control-input" >
+                                        <label class="custom-control-label" for="radio-tramite2">NO</label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <button  (click)="newActa(licenciaConduccion)" [disabled]="datos.horasComunitarias == 'false'" class="btn btn-success btn-xs" type="button">
+                                        Generar Acta
+                                    </button>
+                                    <button (click)="onCancelarDevolucion(licenciaConduccion)" class="btn btn-primary btn-xs" type="button">
+                                        Cancelar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="col-xs-12 col-lg-3">
-                <div class="custom-control custom-radio">
-                    <input name="correoCertificadoLlegada" [(ngModel)]="datos.horasComunitarias" value=false type="radio" id="radio-tramite2" name="radio-tramite" class="custom-control-input" >
-                    <label class="custom-control-label" for="radio-tramite2">NO</label>
-                </div>
-            </div>
-            <div >
-                <button (click)="newActa(licenciaConduccion)" class="btn btn-success btn-xs" type="button">
-                    Generar Acta.
-                </button>
-                <button (click)="onCancelarDevolucion(licenciaConduccion)" class="btn btn-primary btn-xs" type="button">
-                    Cancelar
-                </button>
             </div>
         </div>
-
     </div>
