@@ -56,7 +56,7 @@ constructor(
         'idOrganismoTransito': e,
       }
 
-      this._AsignacionService.findActivo(datos, token).subscribe(
+      this._AsignacionService.findActivoByOrganismoTransito(datos, token).subscribe(
         response => {
           if (response.code == 200) {
             this.asignacionRealizada = response.data;

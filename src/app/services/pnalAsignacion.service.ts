@@ -71,10 +71,10 @@ export class PnalAsignacionService {
  		return this._http.post(this.url+"/record/funcionario", params, {headers: headers}).map(res => res.json());
 	}
 
-	findActivo(datos, token) {
+	findActivoByOrganismoTransito(datos, token) {
 		let json = JSON.stringify(datos);
 		let params = "data=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-		return this._http.post(this.url + "/find/activo", params, { headers: headers }).map(res => res.json());
+		return this._http.post(this.url + "/find/activo/organismotransito", params, { headers: headers }).map(res => res.json());
 	}
 }
