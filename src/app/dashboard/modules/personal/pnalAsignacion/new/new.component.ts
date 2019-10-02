@@ -19,6 +19,7 @@ public errorMessage;
 
 public organismosTransito: any;
 public asignacionRealizada: any = null;
+public asignacionActiva: any = null;
 
 constructor(
   private _AsignacionService: PnalAsignacionService,
@@ -45,6 +46,45 @@ constructor(
   
   onCancelar(){
     this.ready.emit(true);
+  }
+
+  onChangedOrganismoTransito(e) {
+    if (e) {
+      let token = this._LoginService.getToken();
+
+      let datos = {
+        'idOrganismoTransito': e,
+      }
+
+      this._AsignacionService.findActivo(datos, token).subscribe(
+        response => {
+          if (response.code == 200) {
+            this.asignacionRealizada = response.data;
+
+            swal({
+              title: 'Perfecto!',
+              text: response.message,
+              type: 'success',
+              confirmButtonText: 'Aceptar'
+            });
+          } else {
+            swal({
+              title: 'Error!',
+              text: response.message,
+              type: 'error',
+              confirmButtonText: 'Aceptar'
+            })
+          }
+          error => {
+            this.errorMessage = <any>error;
+            if (this.errorMessage != null) {
+              console.log(this.errorMessage);
+              alert("Error en la petición");
+            }
+          }
+        }
+      );
+    }
   }
 
   onCalcularTotal() {

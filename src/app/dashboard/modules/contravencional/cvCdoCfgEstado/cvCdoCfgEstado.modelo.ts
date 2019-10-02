@@ -9,6 +9,7 @@ export class CvCdoCfgEstado{
 		public actualiza: boolean,
 		public finaliza: boolean,
 		public reparto: boolean,
+		public notificacion: boolean,
 		public idFormato:number,
 		public id:number
 	){}
