@@ -17,6 +17,7 @@ import { UserLcCfgRestriccionComponent } from './userLcCfgRestriccion/userLcCfgR
 import { newCancelacionComponent } from './userLicenciaConduccion/newCancelacion/newCancelacion.component';
 import { newSuspensionComponent } from './userLicenciaConduccion/newSuspension/newSuspension.component';
 import { newProhibicionComponent } from './userLicenciaConduccion/newProhibicion/newProhibicion.component';
+import { UserMedidaCautelarComponent } from './userMedidaCautelar/userMedidaCautelar.component';
 
 import { UsuarioRoutingModule } from './usuario-routing.module';
 import { UserCfgMenuModule } from './userCfgMenu/userCfgMenu.module';
@@ -27,7 +28,7 @@ import { UserCiudadanoModule } from './userCiudadano/userCiudadano.module';
 import { UserLcCfgCategoriaModule } from './userLcCfgCategoria/userLcCfgCategoria.module';
 import { UserLcCfgRestriccionModule } from './userLcCfgRestriccion/userLcCfgRestriccion.module';
 import { UserLicenciaConduccionModule } from './userLicenciaConduccion/userLicenciaConduccion.module';
-
+import { UserMedidaCautelarModule } from './userMedidaCautelar/userMedidaCautelar.module';
 
 
 @NgModule({
@@ -47,6 +48,7 @@ import { UserLicenciaConduccionModule } from './userLicenciaConduccion/userLicen
     UserLcCfgCategoriaModule,
     UserLcCfgRestriccionModule,
     UserLicenciaConduccionModule,
+    UserMedidaCautelarModule
   ],
   declarations: [
     UserCfgMenuComponent,
@@ -60,6 +62,7 @@ import { UserLicenciaConduccionModule } from './userLicenciaConduccion/userLicen
     newCancelacionComponent,
     newSuspensionComponent,
     newProhibicionComponent,
+    UserMedidaCautelarComponent
   ],
   providers: [
     /*UserLicenciaConduccionService,

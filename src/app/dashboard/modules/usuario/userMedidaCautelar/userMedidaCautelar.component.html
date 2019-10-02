@@ -99,11 +99,11 @@
     </div>
     
     <div class="col-xs-12 col-md-8 col-lg-12" *ngIf='formNew'>
-      <app-new (onReady)="onReady($event)"></app-new> 
+      <app-new-user-medida-cautelar (onReady)="onReady($event)"></app-new-user-medida-cautelar> 
     </div>
 
     <div class="col-xs-12 col-md-8 col-lg-12" *ngIf='formDelete'>
-      <app-delete [medidaCautelar]="medidaCautelar" (onReady)="onReady($event)"></app-delete> 
+      <app-delete-user-medida-cautelar [medidaCautelar]="medidaCautelar" (onReady)="onReady($event)"></app-delete-user-medida-cautelar> 
     </div>
   </div>
 </div>
