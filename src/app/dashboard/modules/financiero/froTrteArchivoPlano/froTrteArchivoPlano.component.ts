@@ -19,7 +19,7 @@ export class FroTrteArchivoPlanoComponent implements OnInit, AfterViewInit {
   public organismosTransito;
   public modulos;
 
-  public archivo: any = null;
+  public archivos: any = null;
 
   public tiposReporte = [
     { value: '1', label: 'INFORMACIÓN DE VEHICULOS' },
@@ -32,7 +32,7 @@ export class FroTrteArchivoPlanoComponent implements OnInit, AfterViewInit {
   ];
 
   public datos = {
-    'tipoReporte': null,
+    /* 'tipoReporte': null, */
     'idOrganismoTransito': null,
     'idModulo': null,
     'fechaInicial': null,
@@ -82,57 +82,35 @@ export class FroTrteArchivoPlanoComponent implements OnInit, AfterViewInit {
     let token = this._LoginService.getToken();
     let identity = this._LoginService.getIdentity();
 
-    if (this.datos.tipoReporte) {
-      this._FroTrteSolicitudService.createFile(this.datos, token).subscribe(
-        response => {
-          if(response.code == 200) {
-            this.archivo = response.data;
+    this._FroTrteSolicitudService.createFile(this.datos, token).subscribe(
+      response => {
+        if(response.code == 200) {
+          console.log(response.data);
+          this.archivos = response.data;
 
-            swal({
-              title: response.title,
-              text: response.message,
-              type: response.status,
-              confirmButtonText: 'Aceptar'
-            });
-          } else {
-            swal({
-              title: response.title,
-              text: response.message,
-              type: response.status,
-              confirmButtonText: 'Aceptar'
-            });
-          }
-          /* if (response.type) {
-            var fileURL = URL.createObjectURL(response);
-            window.open(fileURL);
-          } else {
-            swal({
-              title: 'Error!',
-              text: 'No existen registros para la generación del archivo plano en el rango de las fechas estipuladas.',
-              type: 'error',
-              confirmButtonText: 'Aceptar'
-            });
-            error => {
-              this.errorMessage = <any>error;
-
-              if (this.errorMessage != null) {
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
-            }
-          } */
-        },
-        error => {
-          this.errorMessage = <any>error;
-
-          if (this.errorMessage != null) {
-            console.log(this.errorMessage);
-            alert("Error en la petición");
-          }
+          swal({
+            title: response.title,
+            text: response.message,
+            type: response.status,
+            confirmButtonText: 'Aceptar'
+          });
+        } else {
+          swal({
+            title: response.title,
+            text: response.message,
+            type: response.status,
+            confirmButtonText: 'Aceptar'
+          });
         }
-      );
-    }else{
+      },
+      error => {
+        this.errorMessage = <any>error;
 
-    }
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
   }
 }
