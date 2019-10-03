@@ -2,6 +2,46 @@
     <div class="col-xs-12 col-lg-10 ">
         <div class="card">
             <div class="card-body ">
+                <h5 class="m-0">Suspension</h5>
+                <hr>
+                <div class='row'>
+                    <div class="col-xs-12 col-lg-6">
+                        <label><b>Numero licencia:</b> {{licenciaConduccion.numero}}
+                        </label>
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <label><b>Categoria:</b> {{ licenciaConduccion.categoria.nombre }}
+                        </label>
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <label><b>Documento:</b> {{licenciaConduccion.ciudadano.identificacion}}
+                        </label>
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <label><b>Tipo documento:</b> {{licenciaConduccion.ciudadano.tipoIdentificacion.nombre}}
+                        </label>
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <label><b>Primer nombre:</b> {{licenciaConduccion.ciudadano.primerNombre}}
+                        </label>
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <label><b>Segundo nombre:</b> {{licenciaConduccion.ciudadano.segundoNombre}}
+                        </label>
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <label><b>Primer apellido:</b> {{licenciaConduccion.ciudadano.primerApellido}}
+                        </label>
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <label><b>Segundo apellido:</b> {{licenciaConduccion.ciudadano.segundoApellido}}
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body ">
                 <h5 class="m-0">Suspender Licencia de Conducción</h5>
                 <hr>
                 <form #formNew="ngForm">
@@ -57,5 +97,6 @@
                 </form>
             </div>
         </div>
+        
     </div>
 </div>
