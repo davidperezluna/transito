@@ -44,7 +44,7 @@
             </button>
           </div>
           <hr>
-          <div *ngFor="let archivo of archivos; let i = index" style="margin-left: 3%">
+          <div *ngFor="let archivo of archivos; let i = index" style="margin-left: 3%; margin-bottom: 1%">
             <a *ngIf="archivo != null" href="{{ docsUrl }}{{ archivo }}" download="{{ archivo }}" class="btn btn-success"
               target="_blank">
               <i class="fa fa-file-pdf-o"></i>{{ archivo }}
