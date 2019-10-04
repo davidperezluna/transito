@@ -17,6 +17,7 @@ import { UserLcCfgRestriccionComponent } from './userLcCfgRestriccion/userLcCfgR
 import { newCancelacionComponent } from './userLicenciaConduccion/newCancelacion/newCancelacion.component';
 import { newSuspensionComponent } from './userLicenciaConduccion/newSuspension/newSuspension.component';
 import { newProhibicionComponent } from './userLicenciaConduccion/newProhibicion/newProhibicion.component';
+import { reporteProhibicionComponent } from './userLicenciaConduccion/reporteProhibicion/reporteProhibicion.component';
 import { UserMedidaCautelarComponent } from './userMedidaCautelar/userMedidaCautelar.component';
 
 import { UsuarioRoutingModule } from './usuario-routing.module';
@@ -62,7 +63,8 @@ import { UserMedidaCautelarModule } from './userMedidaCautelar/userMedidaCautela
     newCancelacionComponent,
     newSuspensionComponent,
     newProhibicionComponent,
-    UserMedidaCautelarComponent
+    UserMedidaCautelarComponent,
+    reporteProhibicionComponent
   ],
   providers: [
     /*UserLicenciaConduccionService,

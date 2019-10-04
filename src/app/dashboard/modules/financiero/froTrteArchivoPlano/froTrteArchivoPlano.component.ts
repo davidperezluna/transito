@@ -17,7 +17,7 @@ export class FroTrteArchivoPlanoComponent implements OnInit, AfterViewInit {
   
   public docsUrl = environment.docsUrl;
   public organismosTransito;
-  public modulos;
+  public modulos; 
 
   public archivos: any = null;
 
@@ -86,7 +86,7 @@ export class FroTrteArchivoPlanoComponent implements OnInit, AfterViewInit {
       response => {
         if(response.code == 200) {
           console.log(response.data);
-          this.archivos = response.data;
+          this.archivos = response.data; 
 
           swal({
             title: response.title,

@@ -26,7 +26,7 @@ export class SearchComponent implements OnInit {
     public table: any;
     public datos = {
         'horasComunitarias': false,
-        'idLicenciaConduccion':null 
+        'idLicenciaConduccion':null, 
     };
 
     public formIndex = true;
@@ -36,6 +36,8 @@ export class SearchComponent implements OnInit {
     public formDevolucion = false;
 
     public ciudadano: any = null;
+    public comparendoSelect: any = null;
+    public comparendos: any = null;
 
     constructor(
         private _LicenciaConduccionService: UserLicenciaConduccionService,
@@ -51,7 +53,7 @@ export class SearchComponent implements OnInit {
             response => {
               this.tiposIdentificacion = response;
             },
-            
+
             error => {
               this.errorMessage = <any>error;
       
@@ -75,7 +77,8 @@ export class SearchComponent implements OnInit {
                     this._LicenciaConduccionService.searchByCiudadanoId({ 'idCiudadano': this.ciudadano.id }, token).subscribe(
                         response => {
                             if (response.code == 200) {
-                                this.licenciasConduccion = response.data;
+                                this.licenciasConduccion = response.data.licenciasConduccion;
+                                this.comparendos = response.data.comparendos;
                                 swal({
                                     title: 'Perfecto!',
                                     text: response.message,
@@ -133,6 +136,20 @@ export class SearchComponent implements OnInit {
 
     onInitTable() {
         this.table = $('#dataTables-example').DataTable({
+            responsive: false,
+            pageLength: 6,
+            sPaginationType: 'full_numbers',
+            buttons: 'Excel',
+            oLanguage: {
+                oPaginate: {
+                    sFirst: '<i class="fa fa-step-backward"></i>',
+                    sPrevious: '<i class="fa fa-chevron-left"></i>',
+                    sNext: '<i class="fa fa-chevron-right"></i>',
+                    sLast: '<i class="fa fa-step-forward"></i>'
+                }
+            }
+        });
+        this.table = $('#dataTables-example-comparendos').DataTable({
             responsive: false,
             pageLength: 6,
             sPaginationType: 'full_numbers',

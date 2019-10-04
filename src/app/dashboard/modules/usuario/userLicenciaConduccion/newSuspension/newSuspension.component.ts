@@ -11,6 +11,7 @@ import swal from 'sweetalert2';
 export class newSuspensionComponent implements OnInit {
     @Output() ready = new EventEmitter<any>();
     @Input() licenciaConduccion: any = null;
+    @Input() comparendoSelect: any = null;
     formCancelacion = {
         'fechaInicio':null,
         'fechaFin':null,
@@ -19,6 +20,7 @@ export class newSuspensionComponent implements OnInit {
         'numResolucion':null,
         'tipo':'SUSPENSION',
         'idLicenciaConduccion':null,
+        'idComparendo':null,
     };
     public errorMessage;
     constructor(
@@ -28,6 +30,7 @@ export class newSuspensionComponent implements OnInit {
 
     ngOnInit() {
         this.formCancelacion.idLicenciaConduccion = this.licenciaConduccion.id;
+        this.formCancelacion.idComparendo = this.comparendoSelect;
     }
     onCancelar() {
         this.ready.emit(true);
