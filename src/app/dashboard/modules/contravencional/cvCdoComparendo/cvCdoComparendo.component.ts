@@ -32,6 +32,7 @@ export class CvCdoComparendoComponent implements OnInit, AfterViewInit {
   public tiposFuente = [
     { 'value': '1', 'label': 'SSTTDN' },
     { 'value': '2', 'label': 'POLCA' },
+    { 'value': '3', 'label': 'SIMIT' },
   ];
 
   public datos = {

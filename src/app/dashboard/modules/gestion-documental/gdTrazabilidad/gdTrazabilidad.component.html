@@ -67,9 +67,9 @@
                                     {{ trazabilidad.estado }}
                                 </td>
                                 <td>
-                                    <b>F. radicado:</b>{{ trazabilidad.documento.fechaRegistro }}
+                                    <b>F. Llegada:</b>{{ (trazabilidad.documento.fechaLlegada.timestamp * 1000) | date: 'dd/MM/yyyy' }}
                                     <br>
-                                    <b>F. vencimiento:</b>{{ trazabilidad.documento.fechaVencimiento }}
+                                    <b>F. vencimiento:</b>{{ (trazabilidad.documento.fechaVencimiento.timestamp * 1000) | date: 'dd/MM/yyyy' }}
                                 </td>
                                 <td>
                                     {{ trazabilidad.responsable.ciudadano.usuario.primerNombre }} {{ trazabilidad.responsable.ciudadano.usuario.primerApellido }}

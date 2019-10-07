@@ -36,7 +36,7 @@ export class SearchComponent implements OnInit{
   public formInvestigacion: any = false;
   public formatos: any = null;
 
-  public apiUrl = environment.apiUrl + 'configuracion';
+  public apiUrl = environment.apiUrl;
 
   public search: any = {
     'tipoFiltro': null,
@@ -87,7 +87,8 @@ constructor(
   private _LoginService: LoginService,
   ){}
 
-  ngOnInit(){    
+  ngOnInit(){
+    swal.close();
   }
 
   onCancelar(){

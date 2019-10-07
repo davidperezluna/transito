@@ -59,14 +59,7 @@ constructor(
       this._AsignacionService.findActivoByOrganismoTransito(datos, token).subscribe(
         response => {
           if (response.code == 200) {
-            this.asignacionRealizada = response.data;
-
-            swal({
-              title: 'Perfecto!',
-              text: response.message,
-              type: 'success',
-              confirmButtonText: 'Aceptar'
-            });
+            this.asignacionActiva = response.data;
           } else {
             swal({
               title: 'Error!',

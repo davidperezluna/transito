@@ -45,7 +45,6 @@
                     </form>
                     <div class="card-footer">
                         <button (click)="onEnviar()" [disabled]="formFiltros.invalid" class="btn btn-primary">Enviar</button>
-                        <button (click)="onCancelar()" class="btn btn-default">Cancelar</button>
                     </div>
                 </div>
             </div>
@@ -91,17 +90,17 @@
                                 <td>
                                     <span *ngIf="capacitacion.discapacidad">Si</span>
                                     <span *ngIf="!capacitacion.discapacidad">No</span>
-                                    <span *ngIf="capacitacion.discapacidad == NULL">Registra</span>
+                                    <span *ngIf="!capacitacion.discapacidad == null">Registra</span>
                                 </td>
                                 <td>
                                     <span *ngIf="capacitacion.victima">Si</span>
                                     <span *ngIf="!capacitacion.victima">No</span>
-                                    <span *ngIf="capacitacion.victima == NULL">Registra</span>
+                                    <span *ngIf="capacitacion.victima == null">Registra</span>
                                 </td>
                                 <td>
                                     <span *ngIf="capacitacion.comunidad">Si</span>
                                     <span *ngIf="!capacitacion.comunidad">No</span>
-                                    <span *ngIf="capacitacion.comunidad == NULL">Registra</span>
+                                    <span *ngIf="capacitacion.comunidad == null">Registra</span>
                                 </td>
                             </tr>
                         </tbody>
