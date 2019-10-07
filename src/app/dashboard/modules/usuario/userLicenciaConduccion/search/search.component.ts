@@ -167,7 +167,9 @@ export class SearchComponent implements OnInit {
 
     newActa(){
         let token = this._LoginService.getToken();
+        
         this.datos.idLicenciaConduccion = this.licenciaConduccion.id;
+
         this._UserLcRestriccionService.pdfGenerarAuto(this.datos, token).subscribe((response)=>{     
             var fileURL = URL.createObjectURL(response);
             var myWindow = window.open(fileURL);
