@@ -7,6 +7,7 @@ import { GdDocumentoComponent } from './gdDocumento/gdDocumento.component';
 import { GdTrazabilidadComponent } from './gdTrazabilidad/gdTrazabilidad.component';
 import { TemplateComponent } from './gdDocumento/template/template.component';
 import { SearchComponent } from './gdDocumento/search/search.component';
+import { ReportComponent } from './gdDocumento/report/report.component';
 
 const routes: Routes = [
   {
@@ -32,6 +33,10 @@ const routes: Routes = [
   {
     path: 'search',
     component: SearchComponent
+  },
+  {
+    path: 'report',
+    component: ReportComponent
   },
 ];
 

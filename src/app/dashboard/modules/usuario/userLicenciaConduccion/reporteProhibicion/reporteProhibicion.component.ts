@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { UserLcProhibicionService } from '../../../../../services/userLcProhibicion.service';
 import { LoginService } from '../../../../../services/login.service';
-import { UserCiudadanoService } from '../../../../../services/userCiudadano.service';
 import { environment } from 'environments/environment';
 
 import swal from 'sweetalert2';
@@ -32,7 +31,6 @@ export class reporteProhibicionComponent implements OnInit {
 
     constructor(
         private _LoginService: LoginService,
-        private _UserCiudadanoService: UserCiudadanoService,
         private _UserLcProhibicionService: UserLcProhibicionService,
     ) { }
 
@@ -65,19 +63,27 @@ export class reporteProhibicionComponent implements OnInit {
         let token = this._LoginService.getToken();
         this._UserLcProhibicionService.reporte(this.data,token).subscribe( 
             response => {
-                this.archivo = response.data;
-                console.log(response);
-                console.log(this.archivo);
-                swal({
-                    title: 'Perfecto!',
-                    text: 'Registro exitoso!',
-                    type: 'success',
-                    confirmButtonText: 'Aceptar'
-                });
+                if(response.code == 200){
+                    this.archivo = response.data;
+                    console.log(response);
+                    console.log(this.archivo);
+                    swal({
+                        title: 'Perfecto!',
+                        text: 'Registro exitoso!',
+                        type: 'success',
+                        confirmButtonText: 'Aceptar'
+                    });
+                }else{
+                    swal({
+                        title: 'Perfecto!',
+                        text: response.message,
+                        type: 'error',
+                        confirmButtonText: 'Aceptar'
+                    });
+                }
             },
             error => {
                 this.errorMessage = <any>error;
-        
                 if (this.errorMessage != null) {
                 console.log(this.errorMessage);
                 alert("Error en la petición");

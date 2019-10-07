@@ -1,5 +1,5 @@
-import  {Injectable} from "@angular/core";
-import  {Http, Response,Headers} from "@angular/http";
+import { Injectable } from "@angular/core";
+import { Http, Headers, ResponseContentType } from "@angular/http";
 import { LoggerService } from "../logger/services/logger.service";
 import { environment } from 'environments/environment';
 import  "rxjs/add/operator/map";
@@ -108,5 +108,12 @@ export class GdDocumentoService {
 		return this._http.post(this.url + "/template", formData).map(
 			res => res.json()
 		);
+	}
+
+	report(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = "data=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/report", params, { headers: headers }).map(res => res.json());
 	}
 }

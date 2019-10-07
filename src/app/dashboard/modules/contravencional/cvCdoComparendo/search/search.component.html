@@ -70,7 +70,7 @@
                                         <td>{{ comparendo.infractorNombres }} {{ comparendo.infractorApellidos }}</td>
                                         <td>{{ comparendo.infractorIdentificacion }}</td>
                                         <td>{{ comparendo.estado?.nombre }}</td>
-                                        <td>{{ comparendo.infraccion.codigo }}</td>
+                                        <td>{{ comparendo.infraccion?.codigo }}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -85,12 +85,19 @@
         <div class="card">
             <div class="card-header">
                 <h5 class="text-uppercase">
-                    <strong>Trazabilidad de comparendo No. {{ comparendo.consecutivo.consecutivo }}
-                    </strong>
-                    <button (click)="onTrazabilidad()" class="btn btn-xs btn-primary pull-right" type="button">
-                        <i class="fa fa-plus"></i>
-                        Crear trazabilidad
-                    </button>
+                    <b>Trazabilidad de comparendo No. {{ comparendo.consecutivo.numero }}</b>
+                    <br>
+                    <small>Expediente No. {{ comparendo.expedienteNumero }}</small>
+                    <div class="btn-group pull-right">
+                        <a href="{{ apiUrl }}contravencional/cvcdocomparendo/{{ comparendo.id }}/hojacontrol/pdf" class="btn btn-xs btn-success" target="_blank">
+                            <i class="fa fa-file"></i>
+                            Hoja de control
+                        </a>
+                        <button (click)="onTrazabilidad()" class="btn btn-xs btn-primary" type="button">
+                            <i class="fa fa-plus"></i>
+                            Crear trazabilidad
+                        </button>
+                    </div>
                 </h5>
             </div>
             <div class="card-body container">
@@ -109,7 +116,7 @@
                             <td>
                                 {{ trazabilidad.estado.nombre }}
                                 <br>
-                                {{ trazabilidad.fecha }} {{ (trazabilidad.hora.timestamp * 1000) | date: 'hh:mm:ss a' }}
+                                {{ (trazabilidad.fecha.timestamp * 1000) | date: 'dd/MM/yyyy' }} {{ (trazabilidad.hora.timestamp * 1000) | date: 'hh:mm:ss a' }}
                             </td>
                             <td>
                                 <i class="fa fa-check text-success" *ngIf="trazabilidad.activo"></i>
@@ -117,10 +124,10 @@
                             </td>
                             <td>
                                 <div class="btn-group">
-                                    <a *ngIf="trazabilidad.estado.id == 14"  href="{{ apiUrl }}/minuta/estados/{{ trazabilidad.id }}/pdf" class="btn btn-xs btn-primary" target="_blank" tooltip="Minuta de estados" [tooltipDisabled]="false" [tooltipAnimation]="true" tooltipPlacement="top">
+                                    <a *ngIf="trazabilidad.estado.id == 14"  href="{{ apiUrl }}configuracion/minuta/estados/{{ trazabilidad.id }}/pdf" class="btn btn-xs btn-primary" target="_blank" tooltip="Minuta de estados" [tooltipDisabled]="false" [tooltipAnimation]="true" tooltipPlacement="top">
                                         <i class="fa fa-file-pdf-o"></i>
                                     </a>
-                                    <a *ngIf="trazabilidad.actoAdministrativo" href="{{ apiUrl }}/cfgadmactoadministrativo/{{ trazabilidad.id }}/pdf" class="btn btn-xs btn-success" target="_blank" tooltip="Ver acto admtivo." [tooltipDisabled]="false" [tooltipAnimation]="true" tooltipPlacement="top">
+                                    <a *ngIf="trazabilidad.actoAdministrativo" href="{{ apiUrl }}configuracion/cfgadmactoadministrativo/{{ trazabilidad.id }}/pdf" class="btn btn-xs btn-success" target="_blank" tooltip="Ver acto admtivo." [tooltipDisabled]="false" [tooltipAnimation]="true" tooltipPlacement="top">
                                         <i class="fa fa-file-pdf-o"></i>
                                         {{ trazabilidad.actoAdministrativo.numero }}
                                     </a>

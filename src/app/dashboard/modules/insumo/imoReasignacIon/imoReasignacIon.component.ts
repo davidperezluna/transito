@@ -146,6 +146,6 @@ constructor(
       var fileURL = URL.createObjectURL(response);
       window.open(fileURL);
       swal.close();
-    })
+    });
   }
 }

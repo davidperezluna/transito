@@ -106,7 +106,7 @@
                     </ng-container>
                     <br>
                     <span *ngIf="documento.estado == 'FINALIZADO'">
-                      <b>F. envio:</b> {{ documento.fechaEnvio }}
+                      <b>F. envio:</b> {{ (documento.fechaEnvio.timestamp * 1000) | date: 'dd/MM/yyyy' }}
                       <br>
                     </span>
                     <div class="row" *ngIf="(documento.estado == 'PENDIENTE' || documento.estado == 'RECHAZADO') && documento.url">

@@ -11,6 +11,7 @@ import { GdDocumentoComponent } from './gdDocumento/gdDocumento.component';
 import { GdTrazabilidadComponent } from './gdTrazabilidad/gdTrazabilidad.component';
 import { TemplateComponent } from './gdDocumento/template/template.component';
 import { SearchComponent } from './gdDocumento/search/search.component';
+import { ReportComponent } from './gdDocumento/report/report.component';
 
 import { GestionDocumentalRoutingModule } from './gestion-documental-routing.module';
 import { GdCfgMedioCorrespondenciaModule } from './gdCfgMedioCorrespondencia/gdCfgMedioCorrespondencia.module';
@@ -39,6 +40,7 @@ import { GdTrazabilidadModule } from './gdTrazabilidad/gdTrazabilidad.module';
     GdTrazabilidadComponent,
     TemplateComponent,
     SearchComponent,
+    ReportComponent,
   ]
 })
 export class GestionDocumentalModule { }

@@ -39,7 +39,7 @@ export class SearchComponent implements OnInit {
 
   constructor(
     private _DocumentoService: GdDocumentoService,
-		private _loginService: LoginService,
+		private _LoginService: LoginService,
     ){}
     
   ngOnInit() {    
@@ -50,9 +50,11 @@ export class SearchComponent implements OnInit {
     this.formIndex = false;
     this.formShow = false;
     this.formPrint = false;
+
+    swal.close();
   }
 
-  iniciarTabla(){
+  onInitTable(){
     $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,
@@ -94,7 +96,7 @@ export class SearchComponent implements OnInit {
       }
     });
 
-    let token = this._loginService.getToken();
+    let token = this._LoginService.getToken();
     
     this._DocumentoService.search(this.search, token).subscribe(
       response => {
@@ -107,7 +109,7 @@ export class SearchComponent implements OnInit {
           }
 
           let timeoutId = setTimeout(() => {
-            this.iniciarTabla();
+            this.onInitTable();
           }, 100);
 
           swal.close();
@@ -143,7 +145,7 @@ export class SearchComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.value) {
-        let token = this._loginService.getToken();
+        let token = this._LoginService.getToken();
         this._DocumentoService.delete(token, id).subscribe(
           response => {
             swal({
