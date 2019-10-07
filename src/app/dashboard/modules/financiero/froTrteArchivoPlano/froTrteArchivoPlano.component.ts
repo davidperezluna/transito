@@ -32,7 +32,6 @@ export class FroTrteArchivoPlanoComponent implements OnInit, AfterViewInit {
   ];
 
   public datos = {
-    /* 'tipoReporte': null, */
     'idOrganismoTransito': null,
     'idModulo': null,
     'fechaInicial': null,

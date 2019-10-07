@@ -58,6 +58,9 @@
                                 <button (click)="onImprimirTarjetaOperacion(tramiteSolicitud.tramitesRealizados[0].foraneas.numeroTarjetaOperacion)" *ngIf="tramiteFactura.precio.tramite.id == 37 || tramiteFactura.precio.tramite.id == 38 || tramiteFactura.precio.tramite.id == 39 || tramiteFactura.precio.tramite.id == 40 || tramiteFactura.precio.tramite.id == 41" class="btn btn-default" type="button">
                                     IMPRIMIR TARJETA OPERACIÓN
                                 </button>
+                                <button (click)="onImprimirTarjetaControl(tramiteSolicitud.tramitesRealizados[0].foraneas.numeroTarjetaOperacion, tramiteSolicitud.tramitesRealizados[0].foraneas.numeroTarjetaControl)" *ngIf="tramiteFactura.precio.tramite.id == 37 || tramiteFactura.precio.tramite.id == 38 || tramiteFactura.precio.tramite.id == 39 || tramiteFactura.precio.tramite.id == 40 || tramiteFactura.precio.tramite.id == 41" class="btn btn-default" type="button">
+                                    IMPRIMIR TARJETA CONTROL
+                                </button>
                             </div>
                         </div>
                         <div class="col-xs-12 col-lg-12">
@@ -463,13 +466,13 @@
                         </app-concepto-favorable>
                     </div>
                 </div>
-                <div class="row"
+                <!-- <div class="row"
                     *ngIf="requiereSustrato && tramitesFactura && tramitesFactura.length == tramitesRealizados.length && !this.tramiteSolicitud.insumoEntregado">
                     <div class="col-xs-12 col-lg-12">
                         <app-insumo [factura]="factura" [idModulo]='6' (onReadyInsumo)="onReadyInsumo($event)">
                         </app-insumo>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>

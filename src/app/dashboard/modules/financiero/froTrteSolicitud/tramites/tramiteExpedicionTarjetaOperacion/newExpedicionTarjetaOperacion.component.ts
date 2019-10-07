@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { FroTrteSolicitudService } from "../../../../../../services/froTrteSolicitud.service";
+import { ImoInsumoService } from "../../../../../../services/imoInsumo.service";
 import { DatePipe, CurrencyPipe } from '@angular/common';
 import { LoginService } from '../../../../../../services/login.service';
 import swal from 'sweetalert2';
@@ -30,6 +31,7 @@ export class NewRnetExpedicionTarjetaOperacionComponent implements OnInit {
         'observacion': null,
         'campos': null,
         'numeroTarjetaOperacion': null,
+        'numeroTarjetaControl': null,
         'fechaVencimiento': null,
         'idVehiculo': null,
         'idFuncionario': null,
@@ -38,6 +40,7 @@ export class NewRnetExpedicionTarjetaOperacionComponent implements OnInit {
 
     constructor(
         private _FroTrteSolicitudService: FroTrteSolicitudService,
+        private _ImoInsumoService: ImoInsumoService,
         private _LoginService: LoginService,
     ) { }
 
@@ -88,6 +91,50 @@ export class NewRnetExpedicionTarjetaOperacionComponent implements OnInit {
                     }
                 }
             );
+
+            this._ImoInsumoService.searchFirstInsumoByModulo({ 'idModulo': 6 }, token).subscribe(
+                response => {
+                    if (response.code == 200) {
+                        this.datos.numeroTarjetaOperacion = response.data.numero;
+                    } else {
+                        swal({
+                            title: response.title,
+                            text: response.message,
+                            type: response.status,
+                            confirmButtonText: 'Aceptar'
+                        })
+                    }
+                    error => {
+                        this.errorMessage = <any>error;
+
+                        if (this.errorMessage != null) {
+                            console.log(this.errorMessage);
+                            alert("Error en la petición");
+                        }
+                    }
+                });
+
+            this._ImoInsumoService.searchFirstNumeroTarjetaControl({ 'idModulo': 6 }, token).subscribe(
+                response => {
+                    if (response.code == 200) {
+                        this.datos.numeroTarjetaControl = response.data.numero;
+                    } else {
+                        swal({
+                            title: response.title,
+                            text: response.message,
+                            type: response.status,
+                            confirmButtonText: 'Aceptar'
+                        })
+                    }
+                    error => {
+                        this.errorMessage = <any>error;
+
+                        if (this.errorMessage != null) {
+                            console.log(this.errorMessage);
+                            alert("Error en la petición");
+                        }
+                    }
+                });
         }
     }
 
