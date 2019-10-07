@@ -11,6 +11,7 @@ import swal from 'sweetalert2';
 export class newCancelacionComponent implements OnInit {
     @Output() ready = new EventEmitter<any>();
     @Input() licenciaConduccion: any = null;
+    @Input() comparendoSelect: any = null;
     formCancelacion = {
         'fechaCancelacion':null,
         'fechaResolucion':null,
@@ -18,6 +19,7 @@ export class newCancelacionComponent implements OnInit {
         'numResolucion':null,
         'tipo':'CANCELACION',
         'idLicenciaConduccion':null,
+        'idComparendo':null,
     };
     public errorMessage;
 
@@ -28,6 +30,7 @@ export class newCancelacionComponent implements OnInit {
 
     ngOnInit() {
       this.formCancelacion.idLicenciaConduccion = this.licenciaConduccion.id;
+      this.formCancelacion.idComparendo = this.comparendoSelect;
     }
     onCancelar() {
         this.ready.emit(true);

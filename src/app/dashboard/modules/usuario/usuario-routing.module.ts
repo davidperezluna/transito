@@ -11,6 +11,7 @@ import { UserLcCfgRestriccionComponent } from './userLcCfgRestriccion/userLcCfgR
 import { UserLicenciaConduccionComponent } from './userLicenciaConduccion/userLicenciaConduccion.component';
 import { SearchComponent } from './userLicenciaConduccion/search/search.component';
 import { newProhibicionComponent } from './userLicenciaConduccion/newProhibicion/newProhibicion.component';
+import { reporteProhibicionComponent } from './userLicenciaConduccion/reporteProhibicion/reporteProhibicion.component';
 import { UserMedidaCautelarComponent } from './userMedidaCautelar/userMedidaCautelar.component';
   
 const routes: Routes = [ 
@@ -53,6 +54,10 @@ const routes: Routes = [
   {
     path: 'newProhibicion',
     component: newProhibicionComponent
+  },
+  {
+    path: 'reporteProhibicion',
+    component: reporteProhibicionComponent
   },
   
   {

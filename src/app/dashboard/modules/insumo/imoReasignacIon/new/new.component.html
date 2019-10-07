@@ -63,7 +63,7 @@
                                 <th>Tipo</th>
                                 <th>Número</th>
                                 <th>Estado</th>
-                                <th>Select</th>
+                                <th>Seleccionar</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -71,9 +71,12 @@
                                 <td>{{ insumo.tipo.nombre }}</td>
                                 <td>{{ insumo.numero }}</td>
                                 <td>{{ insumo.estado }}</td>
-                                <td><input type="checkbox" value="{{insumo.id}}" (change)="onSelectSustrato(insumo, $event)" class="custom-control-input"
-                                    id="seleccion-{{insumo.id}}">
-                                <label class="custom-control-label" for="seleccion-{{insumo.id}}"></label></td>
+                                <td>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" value="{{insumo.id}}" (change)="onSelectSustrato(insumo, $event)" class="custom-control-input" id="seleccion-{{insumo.id}}">
+                                        <label class="custom-control-label" for="seleccion-{{insumo.id}}"></label>
+                                    </div>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
