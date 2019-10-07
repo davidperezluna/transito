@@ -65,15 +65,24 @@ export class reporteProhibicionComponent implements OnInit {
         let token = this._LoginService.getToken();
         this._UserLcProhibicionService.reporte(this.data,token).subscribe( 
             response => {
-                this.archivo = response.data;
-                console.log(response);
-                console.log(this.archivo);
-                swal({
-                    title: 'Perfecto!',
-                    text: 'Registro exitoso!',
-                    type: 'success',
-                    confirmButtonText: 'Aceptar'
-                });
+                if(response.code == 200){
+                    this.archivo = response.data;
+                    console.log(response);
+                    console.log(this.archivo);
+                    swal({
+                        title: 'Perfecto!',
+                        text: 'Registro exitoso!',
+                        type: 'success',
+                        confirmButtonText: 'Aceptar'
+                    });
+                }else{
+                    swal({
+                        title: 'Perfecto!',
+                        text: response.message,
+                        type: 'error',
+                        confirmButtonText: 'Aceptar'
+                    });
+                }
             },
             error => {
                 this.errorMessage = <any>error;
