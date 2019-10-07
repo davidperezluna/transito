@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { UserLcProhibicionService } from '../../../../../services/userLcProhibicion.service';
 import { LoginService } from '../../../../../services/login.service';
-import { UserCiudadanoService } from '../../../../../services/userCiudadano.service';
 import { environment } from 'environments/environment';
 
 import swal from 'sweetalert2';
@@ -32,7 +31,6 @@ export class reporteProhibicionComponent implements OnInit {
 
     constructor(
         private _LoginService: LoginService,
-        private _UserCiudadanoService: UserCiudadanoService,
         private _UserLcProhibicionService: UserLcProhibicionService,
     ) { }
 
