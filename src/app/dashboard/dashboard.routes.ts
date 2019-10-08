@@ -3,12 +3,14 @@ import { CommonModule } from '@angular/common';
 
 import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard.component'; 
+import { HomeRoutes } from './home/home.routes';
 
 const routes: Routes = [
   {
     path: '',
     component: DashboardComponent,
     children: [
+      ...HomeRoutes,
       {
         path: 'banco-proyecto',
         loadChildren: './modules/banco-proyecto/banco-proyecto.module#BancoProyectoModule'

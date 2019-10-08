@@ -2,7 +2,7 @@
     <div class="col-xs-12 col-lg-4" *ngIf="formSearch">
         <div class="card"><!-- .card -->
             <div class="card-header">
-                <b class="text-uppercase">Reporte de señales instaladas</b>
+                <b class="text-uppercase">Reporte de gestión documental</b>
                 <br>
                 <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
             </div>
@@ -39,7 +39,7 @@
         <div class="card">
             <!-- .card -->
             <div class="card-header">
-                <b class="text-uppercase">Señales instaladas</b>
+                <b class="text-uppercase">Documentos registrados</b>
             </div>
             <div class="card-body">
                 <table class="table " id="dataTables-example">
@@ -59,8 +59,8 @@
                             <td>{{ i + 1 }}</td>
                             <td>{{ documento.numeroRadicado }}</td>
                             <td>{{ documento.tipoCorrespondencia?.nombre }}</td>
-                            <td>{{ documento.fechaLlegada }}</td>
-                            <td>{{ documento.fechaVencimiento }}</td>
+                            <td>{{ (documento.fechaLlegada.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td>
+                            <td>{{ (documento.fechaVencimiento.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td>
                             <td>{{ documento.peticionarioNombres }} {{ documento.peticionarioApellidos }}</td>
                             <td>{{ documento.identificacion }}</td>
                         </tr>

@@ -7,6 +7,7 @@ import { TooltipModule } from "ngx-tooltip";
 import { FormsModule } from '@angular/forms';
 
 import { UserCfgMenuComponent } from './userCfgMenu/userCfgMenu.component';
+import { UserCfgTipoIdentificacionComponent } from './userCfgTipoIdentificacion/userCfgTipoIdentificacion.component';
 import { UserUsuarioMenuComponent } from './userUsuarioMenu/userUsuarioMenu.component';
 import { UserEmpresaTransporteComponent } from './userEmpresaTransporte/userEmpresaTransporte.component';
 import { UserEmpresaComponent } from './userEmpresa/userEmpresa.component';
@@ -22,6 +23,7 @@ import { UserMedidaCautelarComponent } from './userMedidaCautelar/userMedidaCaut
 
 import { UsuarioRoutingModule } from './usuario-routing.module';
 import { UserCfgMenuModule } from './userCfgMenu/userCfgMenu.module';
+import { UserCfgTipoIdentificacionModule } from './userCfgTipoIdentificacion/userCfgTipoIdentificacion.module';
 import { UserUsuarioMenuModule } from './userUsuarioMenu/userUsuarioMenu.module';
 import { UserEmpresaTransporteModule } from './userEmpresaTransporte/userEmpresaTransporte.module';
 import { UserEmpresaModule } from './userEmpresa/userEmpresa.module';
@@ -42,6 +44,7 @@ import { UserMedidaCautelarModule } from './userMedidaCautelar/userMedidaCautela
     FormsModule,
     UsuarioRoutingModule,
     UserCfgMenuModule,
+    UserCfgTipoIdentificacionModule,
     UserUsuarioMenuModule,
     UserEmpresaTransporteModule,
     UserEmpresaModule,
@@ -53,6 +56,7 @@ import { UserMedidaCautelarModule } from './userMedidaCautelar/userMedidaCautela
   ],
   declarations: [
     UserCfgMenuComponent,
+    UserCfgTipoIdentificacionComponent,
     UserUsuarioMenuComponent,
     UserEmpresaTransporteComponent,
     UserEmpresaComponent,

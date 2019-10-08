@@ -56,11 +56,11 @@ export class AppComponent implements OnInit {
       this.isTokenAvaialable = true;
 
       this._http.get(this.url + + 'your mthod to validate token' + token).subscribe(response => {
-        if (response == true) {
+        if (response) {
           if (window.location.pathname == "") {
             this._router.navigate(['/login', { outlets: { 'r2': ['dashboard'] } }]);
           }
-        } else if (response == false) {
+        } else if (!response) {
 
           this.logout('Server restarted.Please login again!!');
         } else {

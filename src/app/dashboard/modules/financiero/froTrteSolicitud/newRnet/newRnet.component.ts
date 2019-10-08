@@ -739,4 +739,41 @@ export class NewRnetComponent implements OnInit {
         );
     }
 
+    onImprimirTarjetaControl(numeroTarjetaOperacion, numeroTarjetaControl)  {
+        let token = this._LoginService.getToken();
+        let identity = this._LoginService.getIdentity();
+
+        swal({
+            title: 'Generando tarjeta de control!',
+            text: 'Solo tardará unos segundos, por favor espere.',
+            onOpen: () => {
+                swal.showLoading()
+            }
+        });
+
+        this._TramiteSolicitudService.pdfExpedicionTarjetaControl({ 'numeroTarjetaOperacion': numeroTarjetaOperacion, 'numeroTarjetaControl': numeroTarjetaControl, 'identificacion': identity.identificacion  }, token).subscribe(
+            response => {
+                if (response.type) {
+                    var fileURL = URL.createObjectURL(response);
+                    window.open(fileURL);
+                } else {
+                    swal({
+                        title: response.title,
+                        text: response.message,
+                        type: response.status,
+                        confirmButtonText: 'Aceptar'
+                    });
+                    error => {
+                        this.errorMessage = <any>error;
+
+                        if (this.errorMessage != null) {
+                            console.log(this.errorMessage);
+                            alert("Error en la petición");
+                        }
+                    }
+                }
+            }
+        );
+    }
+
 }
