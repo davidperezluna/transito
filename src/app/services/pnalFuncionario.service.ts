@@ -1,5 +1,5 @@
-import  {Injectable} from "@angular/core";
-import  {Http, Headers} from "@angular/http";
+import { Injectable } from "@angular/core";
+import { Http, Headers } from "@angular/http";
 import { LoggerService } from "../logger/services/logger.service";
 import { environment } from 'environments/environment';
 import { EventEmitter } from '@angular/core';

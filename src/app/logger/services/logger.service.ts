@@ -3,33 +3,43 @@ import { Http, Headers  } from '@angular/http';
 import { environment } from 'environments/environment';
 import { Observable } from 'rxjs/Observable';
 import { Log } from '../clases/log';
+import { LoginService } from '../../services/login.service';
 
 @Injectable()
 export class LoggerService {
-  private url = environment.apiUrl + 'cfgauditoria';
+  private url = environment.apiUrl + 'configuracion/cfgauditoria';
   public identity;
   public token;
+  public funcionario;
+  public errorMessage;
   
   constructor(
+    private _LoginService: LoginService,
     private _http: Http
   ) { }
 
   public saveLog(log:Log,token:any):Observable<Log>
-  {
+  {    
     let json = JSON.stringify(log);
-		let params = "json="+json+"&authorization="+token;
+		let params = "data="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/new", params, {headers: headers})
-                .map(res => res.json());
+      .map(res => res.json()
+    );
   }
 
   public registerLog(token:string,action:string,json:string,url:string)
 	{
-		let log = new Log;
+    let identity = this._LoginService.getIdentity();
+
+    let log = new Log;
+    
 		log.token = token;
 		log.url = url;
 		log.json = json;
 		log.action = action;
+    log.identificacion = identity.identificacion;
+    
 		this.saveLog(log,token).subscribe(res => {});
 	}
 }

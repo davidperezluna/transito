@@ -4,5 +4,5 @@ export class Log {
     public token:string;
     public json:string;
     public action:string;
+    public identificacion:number;
 }
-
