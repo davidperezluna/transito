@@ -61,7 +61,7 @@ export class ExitComponent implements OnInit {
     private _TipoCorrespondenciaService: GdCfgTipoCorrespondenciaService,
     private _MedioCorrespondenciaService: GdCfgMedioCorrespondenciaService,
     private _MunicipioService: CfgMunicipioService,
-    private _FuncionarioService: PnalFuncionarioService,
+    private _FuncionarioService: PnalFuncionarioService, 
   ) { }
 
   ngOnInit() {

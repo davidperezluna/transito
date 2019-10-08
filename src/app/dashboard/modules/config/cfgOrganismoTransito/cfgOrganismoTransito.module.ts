@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CfgOrganismoTransitoComponent } from './cfgOrganismoTransito.component';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { SelectModule } from 'angular2-select';
-import { TooltipModule } from "ngx-tooltip"; 
+import { TooltipModule } from "ngx-tooltip";  
 
 import { CfgOrganismoTransitoService } from '../../../../services/cfgOrganismoTransito.service';
 
