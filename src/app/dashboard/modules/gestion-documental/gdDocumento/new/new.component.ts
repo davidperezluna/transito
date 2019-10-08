@@ -71,6 +71,7 @@ export class NewComponent implements OnInit {
   onCancelar() {
     this.ready.emit(true);
   }
+  
 
   onRegister() {
     let token = this._loginService.getToken();

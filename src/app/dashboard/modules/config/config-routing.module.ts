@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { CfgAdmFormatoComponent } from './cfgAdmFormato/cfgAdmFormato.component';
 import { CfgAdmFormatoTipoComponent } from './cfgAdmFormatoTipo/cfgAdmFormatoTipo.component';
 import { CfgFestivoComponent } from './cfgFestivo/cfgFestivo.component';
+import { CfgClaveComponent } from './cfgClave/cfgClave.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path: 'cfgFestivo',
     component: CfgFestivoComponent
+  },
+  {
+    path: 'cfgClave',
+    component: CfgClaveComponent
   }
 ];
 

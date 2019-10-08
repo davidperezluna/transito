@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
 		};
 	}
 	
-    onDesaparece(){
+    onClose(){
       this.login = false;
 	}
 	
@@ -72,7 +72,7 @@ export class LoginComponent implements OnInit {
 											localStorage.setItem('token', token);
 											//console.log(localStorage.getItem('token'));
 											// REDIRECCION
-											this._router.navigate(["dashboard"]);
+											this._router.navigate(["dashboard/home"]);
 										}
 									}
 								},

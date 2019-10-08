@@ -20,12 +20,23 @@ import { ShowComponent } from './show/show.component';
 import { PrintComponent } from './print/print.component';
 import { FinishComponent } from './finish/finish.component';
 import { RecordComponent } from './record/record.component';
-import { NewCiudadanoComponent } from './newCiudadano/newCiudadano.component';
 
 @NgModule({
     imports: [CommonModule, Ng2BootstrapModule.forRoot(), SelectModule],
-    declarations: [NewComponent, EditComponent, ShowComponent,FinishComponent, PrintComponent, RecordComponent,NewCiudadanoComponent],
-    exports: [NewComponent, EditComponent, ShowComponent,FinishComponent, PrintComponent, RecordComponent, NewCiudadanoComponent],
+    declarations: [
+        NewComponent,
+        EditComponent,
+        ShowComponent,FinishComponent,
+        PrintComponent,
+        RecordComponent
+    ],
+    exports: [
+        NewComponent,
+        EditComponent,
+        ShowComponent,FinishComponent,
+        PrintComponent,
+        RecordComponent
+    ],
     providers: [
         GdDocumentoService,
         PnalFuncionarioService,

@@ -160,7 +160,7 @@ export class newProhibicionComponent implements OnInit {
             response => {
                 this.entidadesJudiciales = response;
                 swal({
-                    title: 'Perfecto!',
+                    title: 'Error!',
                     text: 'Registro exitoso!',
                     type: 'success',
                     confirmButtonText: 'Aceptar'

@@ -9,6 +9,8 @@ import { TemplateComponent } from './gdDocumento/template/template.component';
 import { SearchComponent } from './gdDocumento/search/search.component';
 import { ReportComponent } from './gdDocumento/report/report.component';
 
+import { ExitComponent } from './gdDocumento/exit/exit.component';
+
 const routes: Routes = [
   {
     path: 'gdCfgMedioCorrespondencia',
@@ -38,6 +40,10 @@ const routes: Routes = [
     path: 'report',
     component: ReportComponent
   },
+  {
+    path: 'exit',
+    component: ExitComponent
+  }
 ];
 
 

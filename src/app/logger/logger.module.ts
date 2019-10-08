@@ -6,7 +6,9 @@ import { LoggerService } from './services/logger.service';
   imports: [
     CommonModule
   ],
-  providers:[LoggerService],
+  providers:[
+    LoggerService,
+  ],
   declarations: []
 })
 export class LoggerModule { }

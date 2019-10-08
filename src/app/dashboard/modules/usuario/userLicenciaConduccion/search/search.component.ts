@@ -52,7 +52,8 @@ export class SearchComponent implements OnInit {
         this._TipoIdentificacionService.select().subscribe(
             response => {
               this.tiposIdentificacion = response;
-            },
+              swal.close();
+            }, 
 
             error => {
               this.errorMessage = <any>error;

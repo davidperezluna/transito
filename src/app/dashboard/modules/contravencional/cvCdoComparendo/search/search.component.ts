@@ -58,8 +58,6 @@ export class SearchComponent implements OnInit{
   }
 
   public datosTrazabilidad = {
-    'fecha': null,
-    'hora': null,
     'observaciones': null,
     'idComparendo': null,
     'idComparendoEstado': null,

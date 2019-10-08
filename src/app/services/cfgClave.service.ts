@@ -1,12 +1,12 @@
-import { Injectable } from "@angular/core";
-import { Http, Headers } from "@angular/http";
-import { LoggerService } from "../logger/services/logger.service";
+import  {Injectable} from "@angular/core";
+import  {Http, Response,Headers} from "@angular/http";
 import { environment } from 'environments/environment';
+import { LoggerService } from "../logger/services/logger.service";
 import  "rxjs/add/operator/map";
 
 @Injectable()
-export class CvAuCfgAtencionService {
-	private url = environment.apiUrl + 'contravencional/cvaucfgatencion';
+export class CfgClaveService {
+	private url = environment.apiUrl + "configuracion/cfgclave";
 	public identity;
 	public token;
 
@@ -21,7 +21,7 @@ export class CvAuCfgAtencionService {
 
 	register(datos, token) {
 		let json = JSON.stringify(datos);
-		let params = "data=" + json + "&authorization=" + token;
+		let params = "data=" + json + "&authorization=" + token;	
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/new", params, { headers: headers }).map(
 			res => res.json(),
@@ -31,11 +31,10 @@ export class CvAuCfgAtencionService {
 
 	delete(datos, token) {
 		let json = JSON.stringify(datos);
-		let params = "data=" + json + "&authorization=" + token;
+		let params = "data=" + json + "&authorization=" + token;	
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/delete", params, { headers: headers }).map(
-			res => res.json(),
-			this._loogerService.registerLog(token, 'DELETE', json, this.url)
+			res => res.json()
 		);
 	}
 

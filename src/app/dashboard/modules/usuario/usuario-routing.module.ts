@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { UserCfgMenuComponent } from './userCfgMenu/userCfgMenu.component';
+import { UserCfgTipoIdentificacionComponent } from './userCfgTipoIdentificacion/userCfgTipoIdentificacion.component';
 import { UserUsuarioMenuComponent } from './userUsuarioMenu/userUsuarioMenu.component';
 import { UserEmpresaTransporteComponent } from './userEmpresaTransporte/userEmpresaTransporte.component';
 import { UserEmpresaComponent } from './userEmpresa/userEmpresa.component';
@@ -18,6 +19,10 @@ const routes: Routes = [
   {
     path: 'userCfgMenu',
     component: UserCfgMenuComponent
+  },
+  {
+    path: 'userCfgTipoIdentificacion',
+    component: UserCfgTipoIdentificacionComponent
   },
   {
     path: 'userUsuarioMenu',
