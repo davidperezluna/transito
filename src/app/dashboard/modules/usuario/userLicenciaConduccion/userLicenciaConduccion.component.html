@@ -97,6 +97,6 @@
             </div>
         </div>
     </div>
-    <app-edit *ngIf='formEdit' [licenciaConduccion]="licenciaConduccion" (ready)="ready($event)"></app-edit>
-    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+    <app-edit-userlicenciaconduccion *ngIf='formEdit' [licenciaConduccion]="licenciaConduccion" (ready)="ready($event)"></app-edit-userlicenciaconduccion>
+    <app-new-userlicenciaconduccion *ngIf='formNew' (ready)="ready($event)"></app-new-userlicenciaconduccion>
 </div>

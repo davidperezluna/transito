@@ -11,7 +11,6 @@ import { TopNavComponent } from '../shared';
 import { SidebarComponent } from '../shared';
 import { FooterComponent } from '../shared';
 import { RightsidebarComponent } from '../shared';
-
 import { HomeModule } from './home/home.module';
 
 @NgModule({

@@ -3,6 +3,7 @@ import { CvCdoCfgEstadoService } from '../../../../../services/cvCdoCfgEstado.se
 import { CfgAdmFormatoService } from '../../../../../services/cfgAdmFormato.service';
 import { LoginService } from '../../../../../services/login.service';
 import swal from 'sweetalert2';
+import { log } from 'util';
 
 @Component({
   selector: 'app-edit-cvcdocfgestado',
@@ -18,13 +19,14 @@ export class EditComponent implements OnInit{
 constructor(
   private _EstadoService: CvCdoCfgEstadoService,
   private _FormatoService: CfgAdmFormatoService,
-  private _loginService: LoginService,
+  private _LoginService: LoginService,
   ){}
 
-  ngOnInit(){ 
+  ngOnInit(){  
     this._FormatoService.select().subscribe(
       response => {
         this.formatos = response;
+
         setTimeout(() => {
           this.estado.idFormato = [this.estado.formato.id];
         });
@@ -43,17 +45,18 @@ constructor(
   onCancelar(){ this.ready.emit(true); }
 
   onEnviar(){
-    let token = this._loginService.getToken();
-		this._EstadoService.edit(this.estado,token).subscribe(
+    let token = this._LoginService.getToken();
+
+		this._EstadoService.edit(this.estado, token).subscribe(
 			response => {
         if(response.code == 200){
-          this.ready.emit(true);
+          this.ready.emit(true); 
           swal({
             title: 'Perfecto!',
             text: response.message,
             type: 'success',
             confirmButtonText: 'Aceptar'
-          })
+          });
         }
 			error => {
 					this.errorMessage = <any>error;
