@@ -18,6 +18,7 @@ export class PrintComponent implements OnInit {
   public errorMessage;
 
   public date: any;
+  
 
   public trazabilidades: any = null;
   public mediosCorrespondencia: any;

@@ -28,7 +28,7 @@ export class GdDocumentoService {
 			this._loogerService.registerLog(token, 'INSERT', json, this.url)
 		);
 	}
-
+	
 	delete(datos, token){
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
@@ -85,6 +85,17 @@ export class GdDocumentoService {
 			this._loogerService.registerLog(token, 'UPDATE', json, this.url)
 		);
 	}
+
+	exit(formData, datos, token) {	
+		let json = JSON.stringify(datos);
+		formData.append('data', json);
+		formData.append('authorization', token);
+		return this._http.post(this.url + "/exit", formData).map(
+			res => res.json(),
+			this._loogerService.registerLog(token, 'UPDATE', json, this.url)
+		);
+	}
+
 
 	assign(datos, token){	
 		let json = JSON.stringify(datos);

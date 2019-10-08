@@ -19,6 +19,8 @@ import { GdCfgTipoCorrespondenciaModule } from './gdCfgTipoCorrespondencia/gdCfg
 import { GdDocumentoModule } from './gdDocumento/gdDocumento.module';
 import { GdTrazabilidadModule } from './gdTrazabilidad/gdTrazabilidad.module';
 
+import { ExitComponent } from './gdDocumento/exit/exit.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -41,6 +43,7 @@ import { GdTrazabilidadModule } from './gdTrazabilidad/gdTrazabilidad.module';
     TemplateComponent,
     SearchComponent,
     ReportComponent,
+    ExitComponent,
   ]
 })
 export class GestionDocumentalModule { }

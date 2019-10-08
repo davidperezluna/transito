@@ -11,7 +11,7 @@ export class GdDocumento{
 		public telefono: string,
 		public correo: string,
 		public descripcion: string,
-		public detalleLlegada: string,
+		public detalleLlegada: string, 
 		public fechaLlegada: string,
 		public vigencia: number,
 		public entidadNombre: string,

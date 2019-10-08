@@ -23,7 +23,6 @@ export class FinishComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.documento);
   }
 
   onFileChange(event) {

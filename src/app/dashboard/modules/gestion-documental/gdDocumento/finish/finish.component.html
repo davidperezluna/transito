@@ -17,13 +17,13 @@
 
         <div class="form-group row">
             <div  class="col-xs-12 col-lg-12">
-                <button (click)="onCancelar()" class="btn btn-default">
-                    <i class="fa fa-times"></i>
-                    Cancelar
-                </button>
                 <button (click)="onRegister()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
                     <i class="fa fa-save"></i>
                     Enviar
+                </button>
+                <button (click)="onCancelar()" class="btn btn-default">
+                    <i class="fa fa-times"></i>
+                    Cancelar
                 </button>
             </div>
         </div>

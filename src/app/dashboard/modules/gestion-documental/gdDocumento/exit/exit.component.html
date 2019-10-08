@@ -1,0 +1,187 @@
+
+<div class="col-xs-12 col-lg-12" *ngIf="formNewDocumento">
+    <form #formNew="ngForm">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="text-uppercase"><strong>Radicar de documento</strong></h5>
+                <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
+                <div class="form-group row">
+                    <div class="col-xs-12 col-lg-6">
+                        <label>No. de Radicado salida</label>
+                        <input class="form-control" [(ngModel)]="documento.numeroRadicado" name="numeroRadicado" type="text" placeholder="(Generado por el sistema)" readonly>
+                    </div>
+                    <div class="col-xs-12 col-lg-3">
+                        <label>No. de folios <b class="text-danger">*</b></label>
+                        <input class="form-control" [(ngModel)]="documento.folios" name="folios" type="text" required>
+                    </div>
+                    <div class="col-xs-12 col-lg-3">
+                        <label>Fecha y Hora</label>
+                        <input class="form-control" value="{{ date|date:('dd/MM/yyyy HH:mm:ss a') }}" readonly type="text">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Tipo Identificacion peticionario</label>
+                        <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="documento.idTipoIdentificacion" name="tipoIdentificacion">
+                        </ng-select>
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Identificación peticionario</label>
+                        <input class="form-control" [(ngModel)]="documento.identificacion" name="identificacion" type="text">
+                    </div>
+                    <div class="col-xs-12 col-lg-4">
+                        <label>Nombres</label>
+                        <input class="form-control text-uppercase" [(ngModel)]="documento.peticionarioNombres" name="nombres" type="text">
+                    </div>
+                    <div class="col-xs-12 col-lg-4">
+                        <label>Apellidos</label>
+                        <input class="form-control text-uppercase" [(ngModel)]="documento.peticionarioApellidos" name="apellidos" type="text">
+                    </div>
+                    <div class="col-xs-12 col-lg-4">
+                        <label>Cargo</label>
+                        <input class="form-control text-uppercase" [(ngModel)]="documento.entidadCargo" name="entidadCargo" type="text">
+                    </div>
+                    <div class="col-xs-12 col-lg-4">
+                        <label>Entidad</label>
+                        <input class="form-control text-uppercase" [(ngModel)]="documento.entidadNombre" name="entidadNombre" type="text">
+                    </div>
+                </div>   
+                
+                <div class="form-group row">
+                    <div class="col-xs-12 col-lg-12">
+                        <label>Dirección</label>
+                        <input class="form-control" [(ngModel)]="documento.direccion" name="direccion" type="text">
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Telefono</label>
+                        <input class="form-control" [(ngModel)]="documento.telefono" name="telefono" type="text">
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Correo</label>
+                        <input class="form-control" [(ngModel)]="documento.correo" name="correo" type="text">
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Departamento</label>
+                        <ng-select [multiple]="false" [options]="departamentos" [(ngModel)]="departamentoSelected" (ngModelChange)="onChangedDepartamento($event)"
+                            name="departamento">
+                        </ng-select>
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Municipio</label>
+                        <ng-select [multiple]="false" [options]="municipios" [(ngModel)]="documento.municipio" name="municipio"></ng-select>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Tipo Correspondencia
+                            <b class="text-danger">*</b>
+                        </label>
+                        <ng-select [multiple]="false" [options]="tiposCorrespondencia" [(ngModel)]="documento.idTipoCorrespondencia"
+                            name="tipoCorrespondencia" required>
+                        </ng-select>
+                    </div>
+                    <div class="col-xs-12 col-lg-12">
+                        <label>Asunto y Concepto
+                            <b class="text-danger">*</b>
+                        </label>
+                        <textarea class="form-control" [(ngModel)]="documento.descripcion" name="descripcion" rows="6" required></textarea>
+                    </div>
+                    <div class="container">
+                        <br>
+                        <div class="col-xs-12 col-lg-12">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" [(ngModel)]="contravencional" class="custom-control-input" id="contravencional" name="contravencional">
+                                <label class="custom-control-label" for="contravencional">Proceso contravencional</label>
+                            </div>
+                        </div>
+
+                        <div class="row" *ngIf="contravencional">
+                            <div class="col-xs-12 col-lg-12">
+                                <form #formSearch="ngForm">
+                                    <label>Digite el No. de comparendo</label>
+                                    <div class="input-group">
+                                        <input class="form-control" [(ngModel)]="numeroComparendo" name="numeroComparendo" type="text">
+                                        <span class="input-group-btn">
+                                            <button (click)="onSearchComparendo()" [disabled]="formSearch.invalid"
+                                                class="btn btn-default btn-primary" type="button">
+                                                <i class="fa fa-search"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-xs-12 col-lg-12" *ngIf="comparendo">
+                                <b>Fecha: </b>{{ comparendo.fecha }} | <b>Estado: </b>{{ comparendo.estado.nombre }}
+                            </div>
+                        </div>
+                        <br>
+                        <br>
+                    </div>
+                    <div class="col-xs-12 col-lg-12">
+                        <label>Adjuntar documento
+                            <b class="text-danger">*</b>
+                        </label>
+                        <b *ngIf="documento.url">
+                            <a href="{{ docsUrl }}{{ documento.url }}" target="_blank">
+                                Vista previa
+                            </a>
+                        </b>
+                        <input *ngIf="!documento.url" class="form-control" type="file" (change)="onFileChange($event)" required>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-xs-12 col-lg-12">
+                        <label>Observaciones</label>
+                        <textarea class="form-control" [(ngModel)]="datos.observaciones" name="observaciones" rows="6"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Medio Correspondencia <b class="text-danger">*</b></label>
+                        <ng-select [multiple]="false" [options]="mediosCorrespondencia" [(ngModel)]="datos.idMedioCorrespondenciaEnvio" name="idMedioCorrespondenciaEnvio"
+                            required>
+                        </ng-select>
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Fecha envio <b class="text-danger">*</b></label>
+                        <input class="form-control" [(ngModel)]="datos.fechaEnvio" name="fechaEnvio" type="date" required>
+                    </div>
+                    <div class="col-xs-12 col-lg-12">
+                        <label>Detalle de envio
+                            <b class="text-danger">*</b>
+                        </label>
+                        <textarea class="form-control" [(ngModel)]="datos.detalleEnvio" name="detalleEnvio" required rows="4"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-xs-12 col-lg-12">
+                        <label>Observaciones</label>
+                        <textarea class="form-control" [(ngModel)]="datos.observaciones" name="observaciones" rows="6"></textarea>
+                    </div>
+                    <div class="col-xs-12 col-lg-12">
+                        <label>Almacenado en carpeta No:</label>
+                        <input class="form-control" [(ngModel)]="documento.numeroCarpeta" name="fechaEnvio" type="text">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div  class="col-xs-12 col-lg-12">
+                <button (click)="onCancelar()" class="btn btn-default">
+                    <i class="fa fa-times"></i>
+                    Cancelar
+                </button>
+                <button (click)="onRegister()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
+                    <i class="fa fa-save"></i>
+                    Enviar
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
