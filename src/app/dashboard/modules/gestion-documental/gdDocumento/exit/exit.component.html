@@ -42,16 +42,17 @@
                         <label>Cargo</label>
                         <input class="form-control text-uppercase" [(ngModel)]="documento.entidadCargo" name="entidadCargo" type="text">
                     </div>
-                    <div class="col-xs-12 col-lg-4">
-                        <label>Entidad</label>
-                        <input class="form-control text-uppercase" [(ngModel)]="documento.entidadNombre" name="entidadNombre" type="text">
-                    </div>
+                    
                 </div>   
                 
                 <div class="form-group row">
-                    <div class="col-xs-12 col-lg-12">
+                    <div class="col-xs-12 col-lg-6">
                         <label>Dirección</label>
                         <input class="form-control" [(ngModel)]="documento.direccion" name="direccion" type="text">
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Entidad</label>
+                        <input class="form-control text-uppercase" [(ngModel)]="documento.entidadNombre" name="entidadNombre" type="text">
                     </div>
                     <div class="col-xs-12 col-lg-6">
                         <label>Telefono</label>
@@ -74,7 +75,7 @@
                 </div>
 
                 <div class="form-group row">
-                    <div class="col-xs-12 col-lg-6">
+                    <div class="col-xs-12 col-lg-12">
                         <label>Tipo Correspondencia
                             <b class="text-danger">*</b>
                         </label>
@@ -129,13 +130,6 @@
                             </a>
                         </b>
                         <input *ngIf="!documento.url" class="form-control" type="file" (change)="onFileChange($event)" required>
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <div class="col-xs-12 col-lg-12">
-                        <label>Observaciones</label>
-                        <textarea class="form-control" [(ngModel)]="datos.observaciones" name="observaciones" rows="6"></textarea>
                     </div>
                 </div>
 
