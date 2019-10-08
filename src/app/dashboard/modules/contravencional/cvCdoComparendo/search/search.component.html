@@ -213,14 +213,6 @@
                 <form #formNewTrazabilidad="ngForm">
                     <div class="form-group">
                         <div class="row"><!-- .row -->
-                            <div class="col-xs-12 col-lg-4">
-                                <label>Fecha <strong class="text-danger">*</strong></label>
-                                <input type="date" class="form-control text-uppercase" [(ngModel)]="datosTrazabilidad.fecha" name="fecha" required />
-                            </div>
-                            <div class="col-xs-12 col-lg-4">
-                                <label>Hora <strong class="text-danger">*</strong></label>
-                                <input type="time" class="form-control text-uppercase" [(ngModel)]="datosTrazabilidad.hora" name="hora" required />
-                            </div>
                             <div class="col-xs-12 col-lg-6">
                                 <label>Estado <strong class="text-danger">*</strong></label>
                                 <ng-select (ngModelChange)="onChangedEstado($event)" [multiple]="false" [options]="estados" [(ngModel)]="datosTrazabilidad.idComparendoEstado" name="idComparendoEstado" required>
