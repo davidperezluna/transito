@@ -11,7 +11,7 @@ import swal from 'sweetalert2';
     providers: [DatePipe]
 })
 
-export class NewRnetExpedicionTarjetaOperacionComponent implements OnInit {
+export class NewRnetExpedicionTarjetaOperacionComponent implements OnInit, AfterViewInit {
     @Output() onReadyTramite = new EventEmitter<any>();
     @Input() tramiteFactura: any = null;
     @Input() vehiculo: any = null;
@@ -69,6 +69,14 @@ export class NewRnetExpedicionTarjetaOperacionComponent implements OnInit {
                 confirmButtonText: 'Aceptar'
             });
         } else {
+            swal({
+                title: 'Buscando consecutivos!',
+                text: 'Solo tardará unos segundos, por favor espere.',
+                onOpen: () => {
+                    swal.showLoading()
+                }
+            });
+           
             this._FroTrteSolicitudService.calcularFechaVencimiento().subscribe(
                 response => {
                     this.datos.fechaVencimiento = response.data;
@@ -138,6 +146,9 @@ export class NewRnetExpedicionTarjetaOperacionComponent implements OnInit {
         }
     }
 
+    ngAfterViewInit() {
+        swal.close();
+    }
 
     onEnviar() {
         /* var datePiper = new DatePipe(this.tarjetaOperacion.fechaVencimiento.timestamp);
