@@ -83,15 +83,13 @@
         <div class="col-xs-12 col-lg-8" *ngIf='formIndex'>
             <div class="card">
                 <div class="card-header">
-                    <h5 class="card-title">
-                        <strong class="text-uppercase">Asignaciones de Cupo para {{ empresaHabilitadaRango.empresa.nombre }}</strong>
-                        <div class="btn-group pull-right">
-                            <button (click)="onNew(empresaHabilitadaRango)" class="btn btn-default">
-                                <i class="fa fa-plus"></i>
-                                Nuevo
-                            </button>
-                        </div>
-                    </h5>
+                    <b class="text-uppercase">Asignaciones de Cupo para {{ empresaHabilitadaRango.empresa.nombre }}</b>
+                    <div class="btn-group pull-right">
+                        <button (click)="onNew(empresaHabilitadaRango)" class="btn btn-default">
+                            <i class="fa fa-plus"></i>
+                            Nuevo
+                        </button>
+                    </div>
                 </div>
                 <div class="card-body">
                     <table class="table" id="dataTables-example">
