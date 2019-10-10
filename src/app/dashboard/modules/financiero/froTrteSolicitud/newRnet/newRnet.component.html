@@ -55,10 +55,10 @@
                                     class="btn btn-primary" target="_blank">
                                     <i class="fa fa-file-pdf-o"></i>RESOLUCIÓN CONCEPTO FAVORABLE
                                 </a>
-                                <button (click)="onImprimirTarjetaOperacion(tramiteSolicitud.tramitesRealizados[0].foraneas.numeroTarjetaOperacion)" *ngIf="tramiteFactura.precio.tramite.id == 37 || tramiteFactura.precio.tramite.id == 38 || tramiteFactura.precio.tramite.id == 39 || tramiteFactura.precio.tramite.id == 40 || tramiteFactura.precio.tramite.id == 41" class="btn btn-default" type="button">
+                                <button style="margin-right: 30%;" (click)="onImprimirTarjetaOperacion(tramiteSolicitud.tramitesRealizados[0].foraneas.numeroTarjetaOperacion)" *ngIf="tramiteFactura.precio.tramite.id == 37 || tramiteFactura.precio.tramite.id == 38 || tramiteFactura.precio.tramite.id == 39 || tramiteFactura.precio.tramite.id == 40 || tramiteFactura.precio.tramite.id == 41" class="btn btn-primary" type="button">
                                     IMPRIMIR TARJETA OPERACIÓN
                                 </button>
-                                <button (click)="onImprimirTarjetaControl(tramiteSolicitud.tramitesRealizados[0].foraneas.numeroTarjetaOperacion, tramiteSolicitud.tramitesRealizados[0].foraneas.numeroTarjetaControl)" *ngIf="tramiteFactura.precio.tramite.id == 37 || tramiteFactura.precio.tramite.id == 38 || tramiteFactura.precio.tramite.id == 39 || tramiteFactura.precio.tramite.id == 40 || tramiteFactura.precio.tramite.id == 41" class="btn btn-default" type="button">
+                                <button (click)="onImprimirTarjetaControl(tramiteSolicitud.tramitesRealizados[0].foraneas.numeroTarjetaOperacion, tramiteSolicitud.tramitesRealizados[0].foraneas.numeroTarjetaControl)" *ngIf="tramiteFactura.precio.tramite.id == 37 || tramiteFactura.precio.tramite.id == 38 || tramiteFactura.precio.tramite.id == 39 || tramiteFactura.precio.tramite.id == 40 || tramiteFactura.precio.tramite.id == 41" class="btn btn-primary" type="button">
                                     IMPRIMIR TARJETA CONTROL
                                 </button>
                             </div>
