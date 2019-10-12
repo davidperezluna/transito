@@ -18,15 +18,15 @@ export class GdDocumentoComponent implements OnInit {
   public funcionarios: any;
   public funcionarioSelected: any;
   
-	public formNew = false;
-	public formEdit = false;
-	public formIndex = false;
-  public formPrint = false;
-  public formShow = false;
-  public formAssign = false;
-  public formRecord = false;
-  public formSearch = true;
-  public formFinish = false;
+	public formNew: any;
+	public formEdit: any;
+	public formIndex: any;
+  public formPrint: any;
+  public formShow: any;
+  public formAssign: any;
+  public formRecord: any;
+  public formSearch: any;
+  public formFinish: any;
   
   public table: any = null; 
   public documento: GdDocumento;
@@ -52,19 +52,13 @@ export class GdDocumentoComponent implements OnInit {
 		private _loginService: LoginService,
     ){}
     
-  ngOnInit() {    
+  ngOnInit() {  
+    this.onInitForms();
+    this.formSearch = true;
+     
     if (this.table) {
       this.table.destroy();
     }
-
-    this.formIndex = false;
-    this.formNew = false;
-    this.formEdit = false;
-    this.formShow = false;
-    this.formRecord = false;
-    this.formPrint = false;
-    this.formAssign = false;
-    this.formFinish = false;
 
     this._FuncionarioService.select().subscribe(
       response => {
@@ -111,6 +105,18 @@ export class GdDocumentoComponent implements OnInit {
         'examen de los documentos públicos o expida copia de los mismos. Termino para Resolver 10 días </p>',
     });
   }
+
+  onInitForms() {
+    this.formIndex = false;
+    this.formNew = false;
+    this.formEdit = false;
+    this.formShow = false;
+    this.formRecord = false;
+    this.formPrint = false;
+    this.formAssign = false;
+    this.formFinish = false;
+  }
+
 
   onInitTable(){
     this.table = $('#dataTables-example').DataTable({

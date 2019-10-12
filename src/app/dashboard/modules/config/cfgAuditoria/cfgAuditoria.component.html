@@ -1,39 +1,71 @@
-<div class="container" >
-  <hr>
+<div class="container-fluid">
+  <div class="col-xs-12 col-lg-3" *ngIf='formSearch'>
+    <div class="card">
+      <div class="card-header">
+        <b class="text-uppercase">Buscar documentos</b>
+      </div>
+      <div class="card-body">
+        <form #formSearch="ngForm">
+          <div class="form-group">
+            <div class="row">
+              <div class="col-xs-12 col-lg-12">
+                <label>Fecha inicial</label>
+                
+              </div>
+              <div class="col-xs-12 col-lg-12">
+                <label>Fecha final</label>
+                
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="card-footer">
+        <div class="btn-group">
+          <button (click)="onSearch()" [disabled]="formSearch.invalid" class="btn btn-default" type="button" disabled>
+            <i class="fa fa-search"></i>
+            Buscar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="row" *ngIf='formIndex'>
     <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-            <h5 class="card-title">
-              <b class="text-uppercase">Configuración</b>
-              <br>
-              <small>Auditorias</small>
-            </h5>
+            <b class="text-uppercase">Auditorias</b>
           </div>
           <div class="card-body">
             <table class="table " id="dataTables-example">
               <thead>
                 <tr>
-                    <th>Id</th>
+                    <th>#</th>
                     <th>Url</th>
                     <th>Fecha</th>
                     <th>Datos</th>
-                    <th>Acción</th>
-                    <th></th>
+                    <th>Petición</th>
+                    <th>Funcionario</th>
+                    <th>IP</th>
+                    <th>Acciones</th>
                 </tr>
               </thead>
               <tbody>
                 <tr class="odd" *ngFor="let auditoria of auditorias; let i = index">
-                  <td >{{ auditoria.id }}</td>
+                  <td >{{ i + 1 }}</td>
                   <td >{{ auditoria.url }}</td>
                   <td >{{ auditoria.fecha }}</td>
                   <td >{{ auditoria.datos }}</td>
                   <td >{{ auditoria.accion }}</td>
+                  <td >{{ auditoria.funcionario?.ciudadano.primerNombre }} {{ auditoria.funcionario?.ciudadano.primerApellido }}</td>
+                  <td >{{ auditoria.ip }}</td>
                   <td>
-                    <button (click)="edit(auditoria)" class="btn btn-xs btn-info" type="button">
-                      <i class="fa fa-edit"></i>
-                      Editar
-                    </button> 
+                    <div class="btn-group">
+                      <button (click)="onEdit(auditoria)" class="btn btn-xs btn-info" type="button">
+                        <i class="fa fa-pencil"></i>
+                      </button> 
+                    </div>
                   </td>
                 </tr>
               </tbody>
@@ -42,7 +74,8 @@
           </div>
         </div>
       </div>
-    </div>
-    <app-edit *ngIf='formEdit' [auditoria]="auditoria" (ready)="ready($event)"></app-edit>
-    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+  </div>
+  
+  <app-edit-cfgauditoria *ngIf='formEdit' [auditoria]="auditoria" (ready)="ready($event)"></app-edit-cfgauditoria>
+  <app-new-cfgauditoria *ngIf='formNew' (ready)="ready($event)"></app-new-cfgauditoria>
 </div>

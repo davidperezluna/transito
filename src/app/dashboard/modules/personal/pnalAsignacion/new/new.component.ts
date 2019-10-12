@@ -50,6 +50,14 @@ constructor(
 
   onChangedOrganismoTransito(e) {
     if (e) {
+      swal({
+        title: 'Cargando información!',
+        text: 'Solo tardara unos segundos por favor espere.',
+        onOpen: () => {
+          swal.showLoading()
+        }
+      });
+
       let token = this._LoginService.getToken();
 
       let datos = {
@@ -60,6 +68,8 @@ constructor(
         response => {
           if (response.code == 200) {
             this.asignacionActiva = response.data;
+
+            swal.close();
           } else {
             swal({
               title: 'Error!',

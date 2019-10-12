@@ -1,4 +1,5 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
+import { CvCdoCfgEstado } from '../cvCdoCfgEstado.modelo';
 import { CvCdoCfgEstadoService } from '../../../../../services/cvCdoCfgEstado.service';
 import { CfgAdmFormatoService } from '../../../../../services/cfgAdmFormato.service';
 import { LoginService } from '../../../../../services/login.service';
@@ -13,7 +14,6 @@ export class EditComponent implements OnInit{
   @Output() ready = new EventEmitter<any>();
   @Input() estado:any = null;
   public errorMessage;
-  public formReady = false;
   public formatos;
 
 constructor(
@@ -22,14 +22,26 @@ constructor(
   private _LoginService: LoginService,
   ){}
 
-  ngOnInit(){  
+  ngOnInit(){
+    swal({
+      title: 'Cargando información!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+
     this._FormatoService.select().subscribe(
       response => {
         this.formatos = response;
 
-        setTimeout(() => {
-          this.estado.idFormato = [this.estado.formato.id];
-        });
+        if (this.estado.formato) {
+          setTimeout(() => {
+            this.estado.idFormato = [this.estado.formato.id];
+          });
+        }
+
+        swal.close();
       },
       error => {
         this.errorMessage = <any>error;
@@ -47,27 +59,28 @@ constructor(
   onEnviar(){
     let token = this._LoginService.getToken();
 
-		this._EstadoService.edit(this.estado, token).subscribe(
-			response => {
-        if(response.code == 200){
-          this.ready.emit(true); 
+    this._EstadoService.edit(this.estado, token).subscribe(
+      response => {
+        if (response.code == 200) {
           swal({
             title: 'Perfecto!',
             text: response.message,
             type: 'success',
             confirmButtonText: 'Aceptar'
           });
+          
+          this.ready.emit(true);
         }
-			error => {
-					this.errorMessage = <any>error;
+        error => {
+          this.errorMessage = <any>error;
 
-					if(this.errorMessage != null){
-						console.log(this.errorMessage);
-						alert("Error en la petición");
-					}
-				}
-
-		}); 
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      }
+    ); 
   }
 
 }

@@ -19,13 +19,15 @@ export class LoggerService {
   ) { }
 
   public saveLog(log:Log,token:any):Observable<Log>
-  {    
+  {      
     let json = JSON.stringify(log);
-		let params = "data="+json+"&authorization="+token;
-		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
-		return this._http.post(this.url+"/new", params, {headers: headers})
-      .map(res => res.json()
-    );
+
+    let formData = new FormData();
+
+    formData.append('data', json);
+    formData.append('authorization', token);
+    
+    return this._http.post(this.url + "/new", formData).map(res => res.json());
   }
 
   public registerLog(token:string,action:string,json:string,url:string)
@@ -40,6 +42,6 @@ export class LoggerService {
 		log.action = action;
     log.identificacion = identity.identificacion;
     
-		this.saveLog(log,token).subscribe(res => {});
+		this.saveLog(log, token).subscribe(res => {});
 	}
 }

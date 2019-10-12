@@ -29,7 +29,6 @@ import { ExitComponent } from './gdDocumento/exit/exit.component';
     SelectModule,
     TooltipModule,
     GestionDocumentalRoutingModule,
-    GestionDocumentalRoutingModule,
     GdCfgMedioCorrespondenciaModule,
     GdCfgTipoCorrespondenciaModule,
     GdDocumentoModule,

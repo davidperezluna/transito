@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { CfgAuditoriaService } from '../../../../services/cfgAuditoria.service';
 import {LoginService} from '../../../../services/login.service';
 import { CfgAuditoria } from './cfgAuditoria.modelo';
@@ -9,56 +9,72 @@ declare var $: any;
   selector: 'app-index',
   templateUrl: './cfgAuditoria.component.html'
 })
-export class CfgAuditoriaComponent implements OnInit {
+export class CfgAuditoriaComponent implements OnInit, AfterViewInit {
   public errorMessage;
-	public id;
-	public respuesta;
-	public auditorias;
-	public formNew = false;
-	public formEdit = false;
-  public formIndex = true;
+  public auditorias;
+  
+  public formSearch: any;
+  public formIndex: any;
+	public formNew: any;
+	public formEdit: any;
+
   public table:any; 
   public auditoria: CfgAuditoria;
 
   constructor(
     private _AuditoriaService: CfgAuditoriaService,
-		private _loginService: LoginService,
+		private _LoginService: LoginService,
     ){}
     
   ngOnInit() {
+    this.onInitForms();
+
+    this.formSearch = true;
+  }
+
+  ngAfterViewInit(){
+    swal.close();
+  }
+
+  onInitForms(){
+    this.formSearch = false;
+    this.formIndex = false;
+    this.formNew = false;
+    this.formEdit = false;
+  }
+
+  onSearch(){
     swal({
-      title: 'Cargando Tabla!',
+      title: 'Buscando registros!',
       text: 'Solo tardara unos segundos por favor espere.',
       timer: 1500,
       onOpen: () => {
         swal.showLoading()
       }
-    }).then((result) => {
-      if (
-        // Read more about handling dismissals
-        result.dismiss === swal.DismissReason.timer
-      ) {
-      }
-    })
-    this._AuditoriaService.index().subscribe(
-				response => {
-          this.auditorias = response.data;
-          let timeoutId = setTimeout(() => {  
-            this.iniciarTabla();
-          }, 100);
-				}, 
-				error => {
-					this.errorMessage = <any>error;
+    });
 
-					if(this.errorMessage != null){
-						console.log(this.errorMessage);
-						alert("Error en la petición");
-					}
-				}
-      );
+    this._AuditoriaService.index().subscribe(
+      response => {
+        this.auditorias = response.data;
+        let timeoutId = setTimeout(() => {
+          this.onInitTable();
+        }, 100);
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
   }
-  iniciarTabla(){
-    $('#dataTables-example').DataTable({
+
+  onInitTable(){
+    this.table = $('#dataTables-example').DataTable({
+      retrieve: true,
+      paging: false,
       responsive: true,
       pageLength: 10,
       sPaginationType: 'full_numbers',
@@ -70,8 +86,7 @@ export class CfgAuditoriaComponent implements OnInit {
           sLast: '<i class="fa fa-step-forward"></i>'
         }
       }
-   });
-   this.table = $('#dataTables-example').DataTable();
+    });
   }
   
   onNew(){
@@ -88,7 +103,8 @@ export class CfgAuditoriaComponent implements OnInit {
       this.ngOnInit();
     }
   }
-  delete(id:any){
+
+  onDelete(id:any){
     swal({
       title: '¿Estás seguro?',
       text: "¡Se eliminara este registro!",
@@ -100,18 +116,18 @@ export class CfgAuditoriaComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.value) {
-        let token = this._loginService.getToken();
+        let token = this._LoginService.getToken();
+
         this._AuditoriaService.delete(token,id).subscribe(
             response => {
                 swal({
-                      title: 'Eliminado!',
-                      text:'Registro eliminado correctamente.',
-                      type:'success',
-                      confirmButtonColor: '#15d4be',
-                    })
-                  this.table.destroy();
-                  this.respuesta= response;
-                  this.ngOnInit();
+                  title: 'Eliminado!',
+                  text:'Registro eliminado correctamente.',
+                  type:'success',
+                  confirmButtonColor: '#15d4be',
+                });
+
+                this.ngOnInit();
               }, 
             error => {
               this.errorMessage = <any>error;
@@ -122,13 +138,11 @@ export class CfgAuditoriaComponent implements OnInit {
               }
             }
           );
-
-        
       }
     })
   }
 
-  edit(auditoria:any){
+  onEdit(auditoria:any){
     this.auditoria = auditoria;
     this.formEdit = true;
     this.formIndex = false;
