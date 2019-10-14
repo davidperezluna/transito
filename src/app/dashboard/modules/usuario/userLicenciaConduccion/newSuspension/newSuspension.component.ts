@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { UserLcRestriccionService } from '../../../../../services/userLcRestriccion.service';
 import { LoginService } from '../../../../../services/login.service';
+import { CfgAdmFormatoService } from '../../../../../services/cfgAdmFormato.service';
 
 import swal from 'sweetalert2';
 
@@ -26,6 +27,7 @@ export class newSuspensionComponent implements OnInit {
     constructor(
         private _LoginService: LoginService,
         private _UserLcRestriccionService: UserLcRestriccionService,
+        private _FormatoService: CfgAdmFormatoService,
     ) { }
 
     ngOnInit() {
