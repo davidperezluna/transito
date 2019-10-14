@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, AfterViewChecked } from '@angular/core';
 import { CvCdoCfgEstado } from './cvCdoCfgEstado.modelo';
 import { CvCdoCfgEstadoService } from '../../../../services/cvCdoCfgEstado.service';
 import { LoginService } from '../../../../services/login.service';
@@ -10,15 +10,17 @@ declare var $: any;
   templateUrl: './cvCdoCfgEstado.component.html'
 })
 
-export class CvCdoCfgEstadoComponent implements OnInit {
+export class CvCdoCfgEstadoComponent implements OnInit, AfterViewChecked {
   public errorMessage;
-	public id;
 
-	public estados;
+  public estados;
+  
 	public formNew = false;
 	public formEdit = false;
   public formIndex = true;
+
   public table: any;
+
   public estado: CvCdoCfgEstado;
 
   constructor(
@@ -30,36 +32,38 @@ export class CvCdoCfgEstadoComponent implements OnInit {
     swal({
       title: 'Cargando Tabla!',
       text: 'Solo tardara unos segundos por favor espere.',
-      timer: 1500,
       onOpen: () => {
         swal.showLoading()
       }
-    }).then((result) => {
-      if (
-        // Read more about handling dismissals
-        result.dismiss === swal.DismissReason.timer
-      ) {
-      }
-    })
-    this._EstadoService.index().subscribe(
-				response => {
-          this.estados = response.data;
-          let timeoutId = setTimeout(() => {  
-            this.onInitTable();
-          }, 100);
-				}, 
-				error => {
-					this.errorMessage = <any>error;
+    });
 
-					if(this.errorMessage != null){
-						console.log(this.errorMessage);
-						alert("Error en la petición");
-					}
-				}
-      );
+    this._EstadoService.index().subscribe(
+      response => {
+        this.estados = response.data;
+
+        let timeoutId = setTimeout(() => {  
+          this.onInitTable();
+        }, 100);
+      }, 
+      error => {
+        this.errorMessage = <any>error;
+
+        if(this.errorMessage != null){
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
   }
+
+  ngAfterViewChecked(){
+    swal.close();
+  }
+
   onInitTable(){
     this.table = $('#dataTables-example').DataTable({
+      retrieve: true,
+      paging: false,
       responsive: true,
       pageLength: 8,
       sPaginationType: 'full_numbers',

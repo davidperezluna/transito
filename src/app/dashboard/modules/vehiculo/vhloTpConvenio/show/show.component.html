@@ -55,15 +55,13 @@
         <div class="table-responsive">
             <div class="card" *ngIf='formListaConvenios'>
                 <div class="card-header">
-                    <h5>
-                        <b class="text-center">Convenios</b>
-                        <div class="btn-group pull-right">
-                            <button (click)="onNew()" class="btn btn-default">
-                                <i class="fa fa-plus"></i>
-                                <span class="text">Nuevo</span>
-                            </button>
-                        </div>
-                    </h5>
+                    <b class="text-uppercase">Convenios para {{ empresa.nombre }}</b>
+                    <div class="btn-group pull-right">
+                        <button (click)="onNew()" class="btn btn-default">
+                            <i class="fa fa-plus"></i>
+                            <span class="text">Nuevo</span>
+                        </button>
+                    </div>
                 </div>
                 <div class="card-body">
                     <table class="table " id="dataTables-example">

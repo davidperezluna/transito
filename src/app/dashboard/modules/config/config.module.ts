@@ -1,36 +1,47 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { Ng2BootstrapModule } from 'ng2-bootstrap';
+import { SelectModule } from 'angular2-select';
+import { TooltipModule } from "ngx-tooltip";
 
 import { CfgAdmFormatoComponent } from './cfgAdmFormato/cfgAdmFormato.component';
 import { CfgAdmFormatoTipoComponent } from './cfgAdmFormatoTipo/cfgAdmFormatoTipo.component';
+import { CfgAuditoriaComponent } from './cfgAuditoria/cfgAuditoria.component';
 import { CfgFestivoComponent } from './cfgFestivo/cfgFestivo.component';
 import { CfgClaveComponent } from './cfgClave/cfgClave.component';
+import { CfgOrganismoTransitoComponent } from './cfgOrganismoTransito/cfgOrganismoTransito.component';
 
 import { ConfigRoutingModule } from './config-routing.module';
 import { CfgAdmFormatoModule } from './cfgAdmFormato/cfgAdmFormato.module';
 import { CfgAdmFormatoTipoModule } from './cfgAdmFormatoTipo/cfgAdmFormatoTipo.module';
+import { CfgAuditoriaModule } from './cfgAuditoria/cfgAuditoria.module';
 import { CfgFestivoModule } from './cfgFestivo/cfgFestivo.module';
 import { CfgClaveModule } from './cfgClave/cfgClave.module';
-import { TooltipModule } from "ngx-tooltip"; 
-
-
-
+import { CfgOrganismoTransitoModule } from './cfgOrganismoTransito/cfgOrganismoTransito.module';
  
 @NgModule({
   imports: [
-    TooltipModule,
     CommonModule,
+    RouterModule,
+    Ng2BootstrapModule.forRoot(),
+    SelectModule,
+    TooltipModule,
     ConfigRoutingModule,
     CfgAdmFormatoModule,
     CfgAdmFormatoTipoModule,
+    CfgAuditoriaModule,
     CfgFestivoModule,
     CfgClaveModule,
+    CfgOrganismoTransitoModule,
   ],
   declarations: [
     CfgFestivoComponent,
     CfgAdmFormatoComponent,
     CfgAdmFormatoTipoComponent,
+    CfgAuditoriaComponent,
     CfgClaveComponent,
+    CfgOrganismoTransitoComponent,
   ]
 })
 export class ConfigModule { }
