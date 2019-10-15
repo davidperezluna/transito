@@ -29,13 +29,44 @@
                                     <table class="table table-bordered table-striped">
                                         <tr>
                                             <th><b>Placa</b></th>
-                                            <th><b>Modelo</b></th>
+                                            <th><b>Marca</b></th>
                                         </tr>
                                         <tr>
                                             <td>{{ vehiculo.placa.numero }}</td>
-                                            <td>{{ vehiculo.modelo }}</td>
+                                            <td>{{ vehiculo.linea.marca.nombre }}</td>
                                         </tr>
-                                        
+                                        <tr>
+                                            <th><b>Linea</b></th>
+                                            <th><b>Clase</b></th>
+                                        </tr>
+                                        <tr>
+                                            <td>{{ vehiculo.linea.nombre }}</td>
+                                            <td>{{ vehiculo.clase.nombre }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th><b>Carroceria</b></th>
+                                            <th><b>Motor</b></th>
+                                        </tr>
+                                        <tr>
+                                            <td>{{ vehiculo.carroceria.nombre }}</td>
+                                            <td>{{ vehiculo.motor }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th><b>Chasis</b></th>
+                                            <th><b>Serie</b></th>
+                                        </tr>
+                                        <tr>
+                                            <td>{{ vehiculo.chasis }}</td>
+                                            <td>{{ vehiculo.serie }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th><b>Vin</b></th>
+                                            <th><b>Estado</b></th>
+                                        </tr>
+                                        <tr>
+                                            <td>{{ vehiculo.vin }}</td>
+                                            <td>{{ vehiculo.tipoMatricula }}</td>
+                                        </tr>
                                     </table>
                                 </div>
                             </div>
@@ -48,7 +79,7 @@
             <div class="card">
                 <div class="card-header">
                     <b class="text-uppercase">Devolucion por radicado de cuenta</b>
-                    <div class="btn-group pull-right">
+                    <div class="btn-group pull-right" *ngIf="!devolucion.activo">
                         <button (click)="onNew()" class="btn btn-success  btn-round " data-target="#themepicker"
                             data-toggle="modal">
                             <i class="fa fa-plus"></i>
@@ -57,43 +88,28 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <table class="table" id="dataTables-example">
+                    <table class="table" id="dataTables-example" *ngIf="devolucion">
                         <thead>
                             <tr>
-                                <th>Placa Vehiculo</th>
-                                <th>Marca</th>
-                                <th>Linea</th>
-                                <th>Clase</th>
-                                <th>Carroceria</th>
-                                <th>Color</th>
-                                <th>Combustible</th>
-                                <th>Cilindraje</th>
-                                <th>Modelo</th>
-                                <th>Motor</th>
-                                <th>Chasis</th>
-                                <th>Serie</th>
-                                <th>Vin</th>
-                                <th>Mod. Transprote</th>
-                                <th>Estado</th>
+                                <th>O. T.</th>
+                                <th>No. Lic. tránsito</th>
+                                <th>Fecha ingreso</th>
+                                <th>No. guia</th>
+                                <th>Empresa envío</th>
+                                <th>Activo</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr class="odd">
-                                <td>{{ vehiculo.placa.numero }}</td>
-                                <td>{{ vehiculo.linea.marca.nombre }}</td>
-                                <td>{{ vehiculo.linea.nombre }}</td>
-                                <td>{{ vehiculo.clase.nombre }}</td>
-                                <td>{{ vehiculo.carroceria.nombre }}</td>
-                                <td>{{ vehiculo.color.nombre }}</td>
-                                <td>{{ vehiculo.combustible.nombre }}</td>
-                                <td>{{ vehiculo.cilindraje }}</td>
-                                <td>{{ vehiculo.modelo }}</td>
-                                <td>{{ vehiculo.motor }}</td>
-                                <td>{{ vehiculo.chasis }}</td>
-                                <td>{{ vehiculo.serie }}</td>
-                                <td>{{ vehiculo.vin }}</td>
-                                <td>{{ vehiculo.modalidadTransporte.nombre }}</td>
-                                <td>{{ vehiculo.tipoMatricula }}</td>
+                                <td>{{ devolucion.vehiculo.organismoTransito.nombre }}</td>
+                                <td>{{ devolucion.numeroLicenciaTransito }}</td>
+                                <td>{{ devolucion.fechaIngreso }}</td>
+                                <td>{{ devolucion.numeroGuiaLlegada }}</td>
+                                <td>{{ devolucion.empresaEnvio }}</td>
+                                <td>
+                                    <span *ngIf="devolucion.activo">SI</span>
+                                    <span *ngIf="!devolucion.activo">NO</span>
+                                </td>
                             </tr>
                         </tbody>
                     </table>

@@ -2,13 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { VhloDevolucionRadicadoService } from '../../../../services/vhloDevolucionRadicado.service';
 import { VhloVehiculoService } from '../../../../services/vhloVehiculo.service';
 import { VhloPropietarioService } from '../../../../services/vhloPropietario.service';
+import { DatePipe, CurrencyPipe } from '@angular/common';
 import { LoginService } from '../../../../services/login.service';
 import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
     selector: 'app-index',
-    templateUrl: './vhloDevolucionRadicado.component.html'
+    templateUrl: './vhloDevolucionRadicado.component.html',
+    providers: [DatePipe]
 })
 export class VhloDevolucionRadicadoComponent implements OnInit {
     public errorMessage;
@@ -21,6 +23,7 @@ export class VhloDevolucionRadicadoComponent implements OnInit {
     public table: any = null;
     public placa: any;
     public devoluciones: any;
+    public devolucion: any;
     
     public vehiculo: any;
     public propietarios: any;
@@ -43,10 +46,6 @@ export class VhloDevolucionRadicadoComponent implements OnInit {
                 swal.showLoading()
             }
         });
-        
-        let timeoutId = setTimeout(() => {
-            this.onInitTable();
-        }, 100);
     }
 
     onInitForms() {
@@ -130,11 +129,6 @@ export class VhloDevolucionRadicadoComponent implements OnInit {
         })
     }
 
-    /* onEdit(valor: any) {
-        this.formEdit = true;
-        this.formIndex = false;
-    } */
-
     onSearchVehiculo() {
         swal({
             title: 'Buscando vehiculo!',
@@ -148,9 +142,49 @@ export class VhloDevolucionRadicadoComponent implements OnInit {
         this._VhloVehiculoService.searchByPlaca({ 'numero': this.placa }, token).subscribe(
             response => {
                 if (response.code == 200) {
-                    this.formIndex = true;
-
                     this.vehiculo = response.data;
+                    
+                    
+                    this._VhloDevolucionRadicadoService.searchByVehiculo({ 'idVehiculo': this.vehiculo.id }, token).subscribe(
+                        response => {
+                            if (response.code == 200) {
+                                this.devolucion = response.data;
+                                
+                                var datePiper = new DatePipe('en-US');
+                                var date = new Date();
+
+                                date.setTime(this.devolucion.fechaIngreso.timestamp * 1000);
+
+                                this.devolucion.fechaIngreso = datePiper.transform(
+                                    date, 'yyyy-MM-dd'
+                                );
+
+                                let timeoutId = setTimeout(() => {
+                                    this.onInitTable();
+                                }, 100);
+                                
+                                this.formIndex = true;
+                                swal.close();
+                            } else {
+                                this.devolucion = null;
+
+                                swal({
+                                    title: 'Atención!',
+                                    text: response.message,
+                                    type: 'warning',
+                                    confirmButtonText: 'Aceptar'
+                                });
+                            }
+
+                            error => {
+                                this.errorMessage = <any>error;
+                                if (this.errorMessage != null) {
+                                    console.log(this.errorMessage);
+                                    alert("Error en la petición");
+                                }
+                            }
+                        }
+                    );
 
                     this._VhloPropietarioService.searchByVehiculo({ 'idVehiculo': this.vehiculo.id }, token).subscribe(
                         response => {
@@ -198,8 +232,5 @@ export class VhloDevolucionRadicadoComponent implements OnInit {
                 }
             }
         );     
-    }
-
-    onEnviar() {
     }
 }
