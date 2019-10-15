@@ -248,25 +248,27 @@
             <!-- /.table-responsive --> 
           </div>
         </div>
-      </div>
-      <div class="col-xs-12 col-lg-8" *ngIf='formFinish'>
-        <app-finish-gddocumento [documento]="documento" (ready)="ready($event)"></app-finish-gddocumento>
-      </div>
-      <div class="col-xs-12 col-lg-8" *ngIf='formNew'>
-        <app-new-gddocumento (ready)="ready($event)" (onShow)="onShow($event)"></app-new-gddocumento>
-      </div>
-      
-      <div class="col-xs-12 col-lg-8" *ngIf='formShow'>
-        <app-show-gddocumento [documento]="documento" (ready)="ready($event)"></app-show-gddocumento>
-      </div>
+    </div>
 
-      <div class="col-xs-12 col-lg-8" *ngIf='formRecord'>
-        <app-record-gddocumento [documento]="documento" (ready)="ready($event)"></app-record-gddocumento>
-      </div>
+    <div class="col-xs-12 col-lg-8" *ngIf='formFinish'>
+      <app-finish-gddocumento [documento]="documento" (ready)="ready($event)"></app-finish-gddocumento>
+    </div>
+    
+    <div class="col-xs-12 col-lg-8" *ngIf='formNew'>
+      <app-new-gddocumento (ready)="ready($event)" (onShow)="onShow($event)"></app-new-gddocumento>
+    </div>
+    
+    <div class="col-xs-12 col-lg-8" *ngIf='formShow'>
+      <app-show-gddocumento [documento]="documento" (ready)="ready($event)"></app-show-gddocumento>
+    </div>
 
-      <div class="col-xs-12 col-lg-8" *ngIf='formPrint'>
-        <app-print-gddocumento [documento]="documento" (ready)="ready($event)"></app-print-gddocumento>
-      </div>
+    <div class="col-xs-12 col-lg-8" *ngIf='formRecord'>
+      <app-record-gddocumento [documento]="documento" (ready)="ready($event)"></app-record-gddocumento>
+    </div>
+
+    <div class="col-xs-12 col-lg-8" *ngIf='formPrint'>
+      <app-print-gddocumento [documento]="documento" (ready)="ready($event)"></app-print-gddocumento>
     </div>
   </div>
+</div>
   

@@ -8,6 +8,7 @@ import { VhloCfgClaseService } from '../../../../services/vhloCfgClase.service';
 import { VhloCfgServicioService } from '../../../../services/vhloCfgServicio.service';
 import { UserCiudadanoService } from '../../../../services/userCiudadano.service';
 import { CfgPaisService } from '../../../../services/cfgPais.service';
+import { CfgAdmFormatoService } from '../../../../services/cfgAdmFormato.service';
 
 import { CfgEntidadJudicialService } from '../../../../services/cfgEntidadJudicial.service';
 import { UserLcProhibicionService } from '../../../../services/userLcProhibicion.service';
@@ -33,7 +34,8 @@ import { SelectModule } from 'angular2-select';
         UserLicenciaConduccionService,
         UserLcRestriccionService,
         CfgEntidadJudicialService,
-        UserLcProhibicionService
+        UserLcProhibicionService,
+        CfgAdmFormatoService
     ]
 })
 

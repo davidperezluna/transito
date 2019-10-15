@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { CfgOrganismoTransito } from './cfgOrganismoTransito.modelo';
 import { CfgOrganismoTransitoService } from '../../../../services/cfgOrganismoTransito.service';
 import { LoginService } from '../../../../services/login.service';
-import { CfgOrganismoTransito } from './cfgOrganismoTransito.modelo';
 import swal from 'sweetalert2';
 declare var $: any;
 
@@ -9,9 +9,11 @@ declare var $: any;
   selector: 'app-index',
   templateUrl: './cfgOrganismoTransito.component.html'
 })
+
 export class CfgOrganismoTransitoComponent implements OnInit {
   public errorMessage;
-	public organismos;
+  public organismos;
+  
 	public formNew = false;
 	public formEdit = false;
   public formIndex = true;

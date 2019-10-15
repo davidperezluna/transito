@@ -24,7 +24,6 @@ constructor(
   ngOnInit() {
     this.estado = new CvCdoCfgEstado(null, null, null, null, null, null, false, false, false, false, null, null);
 
-
     this._FormatoService.select().subscribe(
       response => {
         this.formatos = response;
@@ -47,9 +46,9 @@ constructor(
   onEnviar(){
     let token = this._loginService.getToken();
     
-		this._EstadoService.register(this.estado,token).subscribe(
-			response => {
-        if(response.code == 200){
+    this._EstadoService.register(this.estado, token).subscribe(
+      response => {
+        if (response.code == 200) {
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',
@@ -57,7 +56,7 @@ constructor(
             type: 'success',
             confirmButtonText: 'Aceptar'
           })
-        }else{
+        } else {
           swal({
             title: 'Error!',
             text: response.message,
@@ -65,15 +64,15 @@ constructor(
             confirmButtonText: 'Aceptar'
           })
         }
-			error => {
-					this.errorMessage = <any>error;
-					if(this.errorMessage != null){
-						console.log(this.errorMessage);
-						alert("Error en la petición");
-					}
-				}
-
-		}); 
+        error => {
+          this.errorMessage = <any>error;
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      }
+    ); 
   }
 
 }
