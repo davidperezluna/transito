@@ -61,7 +61,14 @@ constructor(
             this.onInitTable();
           }, 100);                 
         } else {
-          this.vehiculos = null;               
+          this.vehiculos = null;
+          
+          swal({
+            title: 'Error!',
+            text: response.message,
+            type: 'error',
+            confirmButtonText: 'Aceptar'
+          });
         }
         error => {
             this.errorMessage = <any>error;
