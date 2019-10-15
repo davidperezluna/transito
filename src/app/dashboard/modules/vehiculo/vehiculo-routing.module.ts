@@ -19,6 +19,7 @@ import { VhloRnaPreregistroComponent } from "./vhloRnaPreregistro/vhloRnaPreregi
 import { VhloRnaPreasignacionPlacaComponent } from "./vhloRnaPreasignacionPlaca/vhloRnaPreasignacionPlaca.component";
 import { VhloRnmaPreregistroComponent } from "./vhloRnmaPreregistro/vhloRnmaPreregistro.component";
 import { VhloRnrsPreregistroComponent } from './vhloRnrsPreregistro/vhloRnrsPreregistro.component';
+import { VhloDevolucionRadicadoComponent } from './vhloDevolucionRadicado/vhloDevolucionRadicado.component';
 
 const routes: Routes = [
   {
@@ -92,6 +93,10 @@ const routes: Routes = [
   {
     path: 'vhloRnrsPreregistro',
     component: VhloRnrsPreregistroComponent
+  },
+  {
+    path: 'vhloDevolucionRadicado',
+    component: VhloDevolucionRadicadoComponent
   },
 ]; 
 
