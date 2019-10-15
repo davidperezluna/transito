@@ -6,56 +6,54 @@
         </div>
         <div class="card-body">
             <div class="col-xs-12 col-sm-12 col-lg-12" *ngIf="propietarios">
-                <div class="col-xs-12 col-lg-12">
-                    <table class="table" id="dataTables-propietario">
-                        <thead>
-                            <tr>
-                                <th><b>Tipo Identificación</b></th>
-                                <th><b>Identificación</b></th>
-                                <th><b>Nombres</b></th>
-                                <th><b>Apellidos</b></th>
-                                <th><b>Dirección</b></th>
-                                <th><b>Teléfono</b></th>
-                                <th><b>Ciudad</b></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="odd" *ngFor="let propietario of propietarios; let i = index">
-                                <td>
-                                    <span *ngIf="propietario.ciudadano">{{ propietario.ciudadano.tipoIdentificacion.sigla }}</span>
-                                    <span *ngIf="propietario.empresa">{{ propietario.empresa.tipoIdentificacion.sigla }}</span>
-                                </td>
-                                <td>
-                                    <span *ngIf="propietario.ciudadano">{{ propietario.ciudadano.identificacion }}</span>
-                                    <span *ngIf="propietario.empresa">{{ propietario.empresa.nit }}</span>
-                                </td>
-                                <td>
-                                    <span *ngIf="propietario.ciudadano">{{ propietario.ciudadano.primerNombre }}
-                                        {{ propietario.ciudadano?.segundoNombre }}</span>
-                                    <span *ngIf="propietario.empresa">{{ propietario.empresa.nombre }}</span>
-                                </td>
-                                <td>
-                                    <span *ngIf="propietario.ciudadano">{{ propietario.ciudadano.primerApellido }}
-                                        {{ propietario.ciudadano?.segundoApellido }}</span>
-                                    <span *ngIf="propietario.empresa"></span>
-                                </td>
-                                <td>
-                                    <span *ngIf="propietario.ciudadano">{{ propietario.ciudadano.direccionPersonal }}</span>
-                                    <span *ngIf="propietario.empresa">{{ propietario.empresa.direccion }}</span>
-                                </td>
-                                <td>
-                                    <span
-                                        *ngIf="propietario.ciudadano">{{ propietario.ciudadano.municipioResidencia.codigoDane }}</span>
-                                    <span *ngIf="propietario.empresa">{{ propietario.empresa.municipio.codigoDane }}</span>
-                                </td>
-                                <td>
-                                    <span *ngIf="propietario.ciudadano">{{ propietario.ciudadano.telefonoCelular }}</span>
-                                    <span *ngIf="propietario.empresa">{{ propietario.empresa.telefono }}</span>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                <table class="table" id="dataTables-propietario">
+                    <thead>
+                        <tr>
+                            <th><b>Tipo Identificación</b></th>
+                            <th><b>Identificación</b></th>
+                            <th><b>Nombres</b></th>
+                            <th><b>Apellidos</b></th>
+                            <th><b>Dirección</b></th>
+                            <th><b>Teléfono</b></th>
+                            <th><b>Ciudad</b></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="odd" *ngFor="let propietario of propietarios; let i = index">
+                            <td>
+                                <span *ngIf="propietario.ciudadano">{{ propietario.ciudadano.tipoIdentificacion.sigla }}</span>
+                                <span *ngIf="propietario.empresa">{{ propietario.empresa.tipoIdentificacion.sigla }}</span>
+                            </td>
+                            <td>
+                                <span *ngIf="propietario.ciudadano">{{ propietario.ciudadano.identificacion }}</span>
+                                <span *ngIf="propietario.empresa">{{ propietario.empresa.nit }}</span>
+                            </td>
+                            <td>
+                                <span *ngIf="propietario.ciudadano">{{ propietario.ciudadano.primerNombre }}
+                                    {{ propietario.ciudadano?.segundoNombre }}</span>
+                                <span *ngIf="propietario.empresa">{{ propietario.empresa.nombre }}</span>
+                            </td>
+                            <td>
+                                <span *ngIf="propietario.ciudadano">{{ propietario.ciudadano.primerApellido }}
+                                    {{ propietario.ciudadano?.segundoApellido }}</span>
+                                <span *ngIf="propietario.empresa"></span>
+                            </td>
+                            <td>
+                                <span *ngIf="propietario.ciudadano">{{ propietario.ciudadano.direccionPersonal }}</span>
+                                <span *ngIf="propietario.empresa">{{ propietario.empresa.direccion }}</span>
+                            </td>
+                            <td>
+                                <span
+                                    *ngIf="propietario.ciudadano">{{ propietario.ciudadano.municipioResidencia.codigoDane }}</span>
+                                <span *ngIf="propietario.empresa">{{ propietario.empresa.municipio.codigoDane }}</span>
+                            </td>
+                            <td>
+                                <span *ngIf="propietario.ciudadano">{{ propietario.ciudadano.telefonoCelular }}</span>
+                                <span *ngIf="propietario.empresa">{{ propietario.empresa.telefono }}</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
