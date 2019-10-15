@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
     scaleShowVerticalLines: false,
     responsive: true,
     title: {
-      display: false,
+      display: true,
       text: 'Grafica de tipo de correspondencia',
     },
     legend: {
@@ -49,7 +49,7 @@ export class HomeComponent implements OnInit {
   public barChartType: any = 'bar';
   public barChartLegend: any = true;
   public barChartData: any[] = [
-    { data: [65, 80, 81, 56, 10], label: 'Cantidad' },
+    { data: [65, 80, 81, 56, 20], label: 'Cantidad' },
   ];
 
   ngOnInit() {
