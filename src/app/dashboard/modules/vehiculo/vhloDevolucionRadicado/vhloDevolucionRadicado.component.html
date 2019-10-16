@@ -65,7 +65,10 @@
                                         </tr>
                                         <tr>
                                             <td>{{ vehiculo.vin }}</td>
-                                            <td>{{ vehiculo.tipoMatricula }}</td>
+                                            <td>
+                                                <span class="badge badge-success" *ngIf="vehiculo.tipoMatricula == 'RADICADO'">{{ vehiculo.tipoMatricula }}</span>
+                                                <span class="badge badge-danger" *ngIf="vehiculo.tipoMatricula == 'DEVOLUCION'">{{ vehiculo.tipoMatricula }}</span>
+                                            </td>
                                         </tr>
                                     </table>
                                 </div>
@@ -79,8 +82,8 @@
             <div class="card">
                 <div class="card-header">
                     <b class="text-uppercase">Devolucion por radicado de cuenta</b>
-                    <div class="btn-group pull-right" *ngIf="!devolucion.activo">
-                        <button (click)="onNew()" class="btn btn-success  btn-round " data-target="#themepicker"
+                    <div class="btn-group pull-right">
+                        <button *ngIf="devolucion == null || devolucion.activo == 0" (click)="onNew()" class="btn btn-success  btn-round " data-target="#themepicker"
                             data-toggle="modal">
                             <i class="fa fa-plus"></i>
                             <span class="text">Nuevo</span>
