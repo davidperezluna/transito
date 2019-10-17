@@ -402,12 +402,14 @@
                             <div class="row" *ngIf="inmovilizacionOld">
                                 <div class="col-xs-12 col-lg-6">
                                     <label>Patio</label>
-                                    <span>{{ inmovilizacionOld.patio.nombre }}</span>
+                                    <span *ngIf="inmovilizacionOld.patio">{{ inmovilizacionOld.patio.nombre }}</span>
+                                    <span *ngIf="!inmovilizacionOld.patio">No aplica</span>
                                 </div>
                                 <div class="col-xs-12 col-lg-6">
                                     <div class="form-group">
                                         <label>Grúa</label>
-                                        <span>{{ inmovilizacionOld.grua.codigo }} - {{ inmovilizacionOld.grua.placa }}</span>
+                                        <span *ngIf="inmovilizacionOld.grua">{{ inmovilizacionOld.grua.codigo }} - {{ inmovilizacionOld.grua.placa }}</span>
+                                        <span *ngIf="!inmovilizacionOld.grua">No aplica</span>
                                     </div>
                                 </div>
                             </div>

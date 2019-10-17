@@ -3,7 +3,7 @@ export class FroInfraccion{
 		public codigo: string,
 		public nombre: string,
 		public descripcion: string,
-		public retiene: boolean,
+		public suspende: boolean,
 		public inmoviliza: boolean,
 		public dias: number,
 		public idInfraccionCategoria: number,

@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { VhloPlacaSede } from './vhloPlacaSede.modelo';
-import { CfgOrganismoTransitoService } from '../../../../services/cfgOrganismoTransito.service';
+import { CfgModuloService } from '../../../../services/cfgModulo.service';
+import { CfgOrganismoTransitoService } from '../../../../services/cfgOrganismoTransito.service';7
 import { VhloCfgPlacaService } from '../../../../services/vhloCfgPlaca.service';
 import { VhloPlacaSedeService } from '../../../../services/vhloPlacaSede.service';
 import { LoginService } from '../../../../services/login.service';
@@ -14,9 +15,9 @@ declare var $: any;
 
 export class VhloPlacaSedeComponent implements OnInit {
     public errorMessage;
-    public id;
 
     public asignaciones: any;
+    public modulos: any;
     public organismosTransito: any;
     public organismoTransito: any = null;
     public placas: any = null;
@@ -33,9 +34,11 @@ export class VhloPlacaSedeComponent implements OnInit {
 
     public search: any = {
         'idOrganismoTransito': null,
+        'idModulo': null,
     }
 
     constructor(
+        private _ModuloService: CfgModuloService,
         private _OrganismoTransitoService: CfgOrganismoTransitoService,
         private _PlacaSedeService: VhloPlacaSedeService,
         private _PlacaService: VhloCfgPlacaService,
@@ -61,6 +64,20 @@ export class VhloPlacaSedeComponent implements OnInit {
                     this.formSearch = true;
                     swal.close();
                 }, 100);
+            },
+            error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert("Error en la petición");
+                }
+            }
+        );
+
+        this._ModuloService.select().subscribe(
+            response => {
+                this.modulos = response;
             },
             error => {
                 this.errorMessage = <any>error;
@@ -132,7 +149,7 @@ export class VhloPlacaSedeComponent implements OnInit {
                 if (response.code == 200) {
                     this.organismoTransito = response.data;
 
-                    this._PlacaSedeService.searchByOrganismoTransito(this.search, token).subscribe(
+                    this._PlacaSedeService.searchByOrganismoTransitoAndServicio(this.search, token).subscribe(
                         response => {
                             if (response.code == 200) {
                                 this.asignaciones = response.data;
