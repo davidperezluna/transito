@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { PnalCfgCdoConsecutivo } from './pnalCfgCdoConsecutivo.modelo';
 import { PnalCfgCdoConsecutivoService } from '../../../../services/pnalCfgCdoConsecutivo.service';
 import { PnalFuncionarioService } from '../../../../services/pnalFuncionario.service';
@@ -11,7 +11,7 @@ declare var $: any;
   templateUrl: './pnalCfgCdoConsecutivo.component.html'
 })
 
-export class PnalCfgCdoConsecutivoComponent implements OnInit {
+export class PnalCfgCdoConsecutivoComponent implements OnInit, AfterViewInit {
   public errorMessage;
 
 	public consecutivos;
@@ -34,6 +34,10 @@ export class PnalCfgCdoConsecutivoComponent implements OnInit {
     ){}
     
   ngOnInit() {}
+
+  ngAfterViewInit(){
+    swal.close();
+  }
 
   onSearch(){   
     swal({

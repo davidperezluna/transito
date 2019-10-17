@@ -66,6 +66,13 @@ export class VhloPlacaSedeService {
         return this._http.post(this.url + "/search/organismotransito", params, { headers: headers }).map(res => res.json());
     }
 
+    searchByOrganismoTransitoAndServicio(datos, token) {
+        let json = JSON.stringify(datos);
+        let params = "data=" + json + "&authorization=" + token;
+        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+        return this._http.post(this.url + "/search/organismotransito/servicio", params, { headers: headers }).map(res => res.json());
+    }
+
     searchRequestByOrganismoTransito(datos, token) {
         let json = JSON.stringify(datos);
         let params = "data=" + json + "&authorization=" + token;
