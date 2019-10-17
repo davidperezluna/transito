@@ -88,6 +88,7 @@ export class VhloDevolucionRadicadoComponent implements OnInit {
     ready(isCreado: any) {
         if (isCreado) {
             this.ngOnInit();
+            this.onSearchVehiculo();
         }
     }
 
@@ -139,14 +140,16 @@ export class VhloDevolucionRadicadoComponent implements OnInit {
         });
         let token = this._LoginService.getToken();
 
-        this._VhloVehiculoService.searchByPlaca({ 'numero': this.placa }, token).subscribe(
+        this._VhloVehiculoService.searchByPlacaForDevolucion({ 'numero': this.placa }, token).subscribe(
             response => {
                 if (response.code == 200) {
+                    swal.close();
                     this.vehiculo = response.data;
-                    
-                    
+
                     this._VhloDevolucionRadicadoService.searchByVehiculo({ 'idVehiculo': this.vehiculo.id }, token).subscribe(
                         response => {
+                            this.formIndex = true;
+
                             if (response.code == 200) {
                                 this.devolucion = response.data;
                                 
@@ -163,15 +166,14 @@ export class VhloDevolucionRadicadoComponent implements OnInit {
                                     this.onInitTable();
                                 }, 100);
                                 
-                                this.formIndex = true;
                                 swal.close();
                             } else {
                                 this.devolucion = null;
 
                                 swal({
-                                    title: 'Atención!',
+                                    title: response.title,
                                     text: response.message,
-                                    type: 'warning',
+                                    type: response.status,
                                     confirmButtonText: 'Aceptar'
                                 });
                             }
@@ -213,12 +215,13 @@ export class VhloDevolucionRadicadoComponent implements OnInit {
                         }
                     );
                 } else {
+                    swal.close();
                     this.vehiculo = null;
 
                     swal({
-                        title: 'Atención!',
+                        title: response.title,
                         text: response.message,
-                        type: 'warning',
+                        type: response.status,
                         confirmButtonText: 'Aceptar'
                     });
                 }
