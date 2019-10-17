@@ -42,44 +42,44 @@
                         <div class="row"><!-- .row -->
                             <div class="col-xs-12 col-lg-3">
                                 <label>Marca <b class="text-danger">*</b></label>
-                                <ng-select [multiple]="false" [options]="marcas" [(ngModel)]="vehiculo.idMarca" (ngModelChange)="onChangedMarca($event)" name="idMarca" required>
+                                <ng-select [multiple]="false" [options]="marcas" [(ngModel)]="marcaSelected" (ngModelChange)="onChangedMarca($event)" name="idMarca" required>
                                 </ng-select>
                             </div>
                             <div class="col-xs-12 col-lg-3">
                                 <label>Linea <b class="text-danger">*</b></label>
-                                <ng-select [multiple]="false" [options]="lineas" [(ngModel)]="vehiculo.idLinea" name="idLinea" required>
+                                <ng-select [multiple]="false" [options]="lineas" [(ngModel)]="lineaSelected" name="idLinea" required>
                                 </ng-select>
                             </div>
                             <div class="col-xs-12 col-lg-3">
                                 <label>Clase <b class="text-danger">*</b></label>
-                                <ng-select [multiple]="false" [options]="clases" [(ngModel)]="vehiculo.idClase" (ngModelChange)="onChangedClase($event)" name="idClase" required>
+                                <ng-select [multiple]="false" [options]="clases" [(ngModel)]="claseSelected" (ngModelChange)="onChangedClase($event)" name="idClase" required>
                                 </ng-select>
                             </div>
                             <div class="col-xs-12 col-lg-3">
                                 <label>Carrocería <b class="text-danger">*</b></label>
-                                <ng-select [multiple]="false" [options]="carrocerias" [(ngModel)]="vehiculo.idCarroceria" name="idCarroceria" required>
+                                <ng-select [multiple]="false" [options]="carrocerias" [(ngModel)]="carroceriaSelected" name="idCarroceria" required>
                                 </ng-select>
                             </div>
                             <div class="col-xs-12 col-lg-3">
                                 <label>Servicio <b class="text-danger">*</b></label>
-                                <ng-select [multiple]="false" [options]="servicios" [(ngModel)]="vehiculo.idServicio" name="idServicio" required>
+                                <ng-select [multiple]="false" [options]="servicios" [(ngModel)]="servicioSelected" name="idServicio" required>
                                 </ng-select>
                             </div>
                             <div class="col-xs-12 col-lg-3"> 
                                 <label>Color <b class="text-danger">*</b></label>
-                                <ng-select [multiple]="false" [options]="colores" [(ngModel)]="vehiculo.idColor"name="idColor" required>
+                                <ng-select [multiple]="false" [options]="colores" [(ngModel)]="colorSelected"name="idColor" required>
                                 </ng-select>
                             </div>
 
                             <div class="col-xs-12 col-lg-3">
                                 <label>Combustible <b class="text-danger">*</b></label>
-                                <ng-select [multiple]="false" [options]="combustibles" [(ngModel)]="vehiculo.idCombustible" name="idCombustible" required>
+                                <ng-select [multiple]="false" [options]="combustibles" [(ngModel)]="combustibleSelected" name="idCombustible" required>
                                 </ng-select>
                             </div>
 
                             <div class="col-xs-12 col-lg-3" *ngIf="!funcionario">
                                 <label>Organismo de transito <b class="text-danger">*</b></label>
-                                <ng-select [multiple]="false" [options]="organismosTransito" [(ngModel)]="vehiculo.idOrganismoTransito" name="idOrganismoTransito" required>
+                                <ng-select [multiple]="false" [options]="organismosTransito" [(ngModel)]="organismoTransitoSelected" name="idOrganismoTransito" required>
                                 </ng-select>
                             </div> 
 
@@ -125,13 +125,13 @@
                             
                             <div class="col-xs-12 col-lg-3" *ngIf='vehiculo.idServicio == 2'>
                                 <label>Radio Acción <b class="text-danger">*</b></label>
-                                <ng-select [multiple]="false" [options]="radiosAccion" [(ngModel)]="vehiculo.idRadioAccion" name="idRadioAccion" required>
+                                <ng-select [multiple]="false" [options]="radiosAccion" [(ngModel)]="radioAccionSelected" name="idRadioAccion" required>
                                 </ng-select>
                             </div>
                             
                             <div class="col-xs-12 col-lg-3">
                                 <label>Modalidad Transporte <b class="text-danger">*</b></label>
-                                <ng-select [multiple]="false" [options]="modalidadesTransporte" [(ngModel)]="vehiculo.idModalidadTransporte" name="idModalidadTransporte"
+                                <ng-select [multiple]="false" [options]="modalidadesTransporte" [(ngModel)]="modalidadTransporteSelected" name="idModalidadTransporte"
                                     required>
                                 </ng-select>
                             </div>
@@ -151,6 +151,45 @@
                                 <input class="form-control" type="text" type="text" [(ngModel)]="vehiculo.capacidadCarga" name="capacidadCarga">
                             </div>
                         </div><!-- .row -->
+
+                        <div class="row" *ngIf="servicioSelected == 2">
+                            <div class="col-xs-12 col-lg-12">
+                                <b class="text-uppercase">Buscar empresa de afiliación</b>
+                            </div>
+                            <div class="col-xs-12 col-lg-12">
+                                <label>NIT</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" [(ngModel)]="nitEmpresaTransporte" name="nitEmpresaTransporte"
+                                        required />
+                                    <span class="input-group-btn">
+                                        <button (click)="onSearchEmpresaTransporte()" class="btn btn-primary" type="button">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row" *ngIf="empresaTransporte">
+                            <div class="col-xs-12 col-lg-12">
+                                <table class="table table-bordered table-striped">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <b>NIT: </b>
+                                                <br>
+                                                {{ empresaTransporte.nit }}
+                                            </td>
+                                            <td>
+                                                <b>Nombre: </b>
+                                                <br>
+                                                {{ empresaTransporte.nombre }}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
 
                         <div class="row" *ngIf="vehiculo.tipoMatricula == 'RADICADO'">
                             <div class="col-xs-12 col-lg-12">

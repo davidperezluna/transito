@@ -77,6 +77,7 @@ export class EditComponent implements OnInit {
 
   public formApoderado = false;
   public funcionario: any = null;
+  public propietarios: any = null;
 
   public tiposPropiedad = [
     { 'value': 1, 'label': "Leasing" },
@@ -100,12 +101,11 @@ export class EditComponent implements OnInit {
   };
 
   public radicado = {
-    'numeroDocumento': null,
     'fechaIngreso': null,
     'guiaLlegada': null,
     'empresaEnvio': null,
+    'numeroLicencia': null,
     'idOrganismoTransito': null,
-    'idTipoIdentificacion': null,
   };
 
 constructor(
@@ -129,7 +129,7 @@ constructor(
   private _LoginService: LoginService,
   ){}
 
-  ngOnInit() {   
+  ngOnInit() {
     swal({
       title: 'Cargando Formulario!',
       text: 'Solo tardara unos segundos por favor espere.',
@@ -137,6 +137,54 @@ constructor(
         swal.showLoading()
       }
     });
+
+    let token = this._LoginService.getToken();
+    let identity = this._LoginService.getIdentity();
+
+    //Traer propietarios por vehiculo
+    if(this.vehiculo.tipoMatricula == 'RADICADO'){ 
+      this._PropietarioService.searchByVehiculo({ 'idVehiculo': this.vehiculo.id }, token).subscribe(
+        response => {
+          if (response.code == 200) {
+            this.propietarios = response.data;
+            swal.close();
+
+            //Foreach
+            this.propietarios.forEach((element: any, key: any) => {
+              this.datos.propietarios.push(
+                {
+                  'idPropietario': element.ciudadano.id,
+                  'identificacion': element.ciudadano.identificacion,
+                  'nombre': element.ciudadano.primerNombre + " " + element.ciudadano.segundoNombre,
+                  'permiso': this.datos.solidario,
+                  'tipo': 'Ciudadano',
+                  'idApoderado': null,
+                  'apoderadoIdentificacion': null,
+                  'apoderado.nombre': null,
+                });
+            });
+            //
+          } else {
+            this.propietarios = null;
+
+            swal({
+              title: 'Atención!',
+              text: response.message,
+              type: 'warning',
+              confirmButtonText: 'Aceptar'
+            });
+          }
+
+          error => {
+            this.errorMessage = <any>error;
+            if (this.errorMessage != null) {
+              console.log(this.errorMessage);
+              alert("Error en la petición");
+            }
+          }
+        }
+      );
+    }
 
     if (this.vehiculo.placa) {
       this.vehiculo.placa = this.vehiculo.placa.numero;
@@ -156,9 +204,6 @@ constructor(
     this.vehiculo.fechaManifiesto = datePiper.transform(
       date, 'yyyy-MM-dd'
     );
-
-    let token = this._LoginService.getToken();
-    let identity = this._LoginService.getIdentity();
 
     this._TipoIdentificacionService.select().subscribe(
       response => {
@@ -421,6 +466,33 @@ constructor(
         }
       }
     );
+
+    this.datos.numeroLicencia = this.vehiculo.numeroLicenciaRadicado;
+
+    var datePiper = new DatePipe('en-US');
+
+    var date = new Date();
+    date.setTime(this.vehiculo.fechaRegistroRadicado.timestamp * 1000);
+    this.vehiculo.fechaRegistroRadicado = datePiper.transform(
+      date, 'yyyy-MM-dd'
+    );
+
+    this.radicado.fechaIngreso = this.vehiculo.fechaRegistroRadicado;
+    this.radicado.guiaLlegada = this.vehiculo.numeroGuiaRadicado;
+    this.radicado.empresaEnvio = this.vehiculo.empresaEnvioRadicado;
+    this.radicado.numeroLicencia = this.datos.numeroLicencia;
+
+    if(this.vehiculo.pignorado) {
+      this.datos.tipoPropiedad = [1];
+    } else {
+      this.datos.tipoPropiedad = [2];
+    }
+
+    if(this.vehiculo.servicio.id = 2 && this.vehiculo.empresa != null){
+      this.nitEmpresaTransporte = this.vehiculo.empresa.nit;
+      this.onSearchEmpresaTransporte();
+    }
+      
   }
 
   onCancelar(){
@@ -761,6 +833,7 @@ constructor(
     this.vehiculo.idOrganismoTransito = this.sedeOperativaSelected;
     this.vehiculo.idRadioAccion = this.radioAccionSelected;
     this.vehiculo.idModalidadTransporte = this.modalidadTransporteSelected;
+    this.vehiculo.idEmpresa = this.empresaTransporte.id;
      
     var html = 'los datos del Automotor seran editados !<br>';
    
@@ -779,7 +852,7 @@ constructor(
     }).then((result) => {
         if (result.value) {
 
-    this._VehiculoService.edit(this.vehiculo, token).subscribe(
+    this._VehiculoService.edit({ 'vehiculo': this.vehiculo, 'radicado': this.radicado }, token).subscribe(
 			response => {
         if(response.code == 200){
           this.ready.emit(true);
@@ -839,6 +912,5 @@ constructor(
           }
         );
     }
-    }
-
+  }
 }

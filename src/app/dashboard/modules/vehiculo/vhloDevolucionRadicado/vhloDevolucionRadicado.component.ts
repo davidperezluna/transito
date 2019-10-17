@@ -196,13 +196,6 @@ export class VhloDevolucionRadicadoComponent implements OnInit {
                                 swal.close();
                             } else {
                                 this.propietarios = null;
-
-                                swal({
-                                    title: 'Atención!',
-                                    text: response.message,
-                                    type: 'warning',
-                                    confirmButtonText: 'Aceptar'
-                                });
                             }
 
                             error => {

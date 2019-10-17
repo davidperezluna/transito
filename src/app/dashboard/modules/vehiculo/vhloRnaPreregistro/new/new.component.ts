@@ -81,13 +81,13 @@ export class NewComponent implements OnInit, AfterViewInit, OnDestroy {
     'fechaLicencia': null,
     'idVehiculo': null,
   };
-
+  
   public radicado = {
     'fechaIngreso': null,
     'guiaLlegada': null,
     'empresaEnvio': null,
+    'numeroLicencia': null,
     'idOrganismoTransito': null,
-    'idTipoIdentificacion': null,
   };
 
 constructor(
@@ -638,6 +638,7 @@ constructor(
     let token = this._LoginService.getToken();
 
     this.vehiculo.radicado = this.radicado;
+    this.radicado.numeroLicencia = this.datos.numeroLicencia;
 
     var html = 'Que desea pre-registrar el vehiculo como:  <b>'+ this.vehiculo.tipoMatricula +
                 '</b><br>Recuerde que solo podrá editar datos generales del vehículo.';
