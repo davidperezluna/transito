@@ -88,7 +88,8 @@ export class EditComponent implements OnInit {
     { 'value': 'RADICADO', 'label': "Radicado de cuenta" },
     { 'value': 'MATRICULA', 'label': "Matricula inicial" },
     { 'value': 'IMPORTACION', 'label': "Importación temporal" },
-    { 'value': 'CARPETA', 'label': "Cargue de carpeta" }
+    { 'value': 'CARPETA', 'label': "Cargue de carpeta" },
+    { 'value': 'DEVOLUCION', 'label': "Devolución por radicado de cuenta" },
   ];
 
   public datos = {
@@ -320,7 +321,7 @@ constructor(
       response => {
         this.servicios = response;
         setTimeout(() => {
-            this.servicioSelected = [this.vehiculo.servicio.id];
+            this.servicioSelected = [this.vehiculo.servicio.codigo];
         });
       }, 
       error => {
