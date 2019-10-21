@@ -6,10 +6,14 @@ import { SelectModule } from 'angular2-select';
 import { TooltipModule } from "ngx-tooltip";
 import { FormsModule } from '@angular/forms';
 
+import { VhloBuscarComponent } from './vhloBuscar/vhloBuscar.component';
 import { VhloCertificadoTradicionComponent } from './vhloCertificadoTradicion/vhloCertificadoTradicion.component';
+import { VhloCfgClaseMaquinariaComponent } from './vhloCfgClaseMaquinaria/vhloCfgClaseMaquinaria.component';
+import { VhloCfgCondicionIngresoComponent } from './vhloCfgCondicionIngreso/vhloCfgCondicionIngreso.component';
 import { VhloCfgNivelServicioComponent } from './vhloCfgNivelServicio/vhloCfgNivelServicio.component';
 import { VhloCfgPlacaComponent } from './vhloCfgPlaca/vhloCfgPlaca.component';
 import { VhloCfgPlacaReportComponent } from './vhloCfgPlaca/report/report.component';
+import { VhloCfgTipoMaquinariaComponent } from './vhloCfgTipoMaquinaria/vhloCfgTipoMaquinaria.component';
 import { VhloCfgValorComponent } from './vhloCfgValor/vhloCfgValor.component';
 import { VhloPlacaSedeComponent } from './vhloPlacaSede/vhloPlacaSede.component';
 import { VhloLimitacionComponent } from './vhloLimitacion/vhloLimitacion.component';
@@ -27,9 +31,11 @@ import { VhloDevolucionRadicadoComponent } from './vhloDevolucionRadicado/vhloDe
 import { VehiculoRoutingModule } from './vehiculo-routing.module';
 import { VhloBuscarModule } from './vhloBuscar/vhloBuscar.module';
 import { VhloCertificadoTradicionModule } from './vhloCertificadoTradicion/vhloCertificadoTradicion.module';
-import { VhloBuscarComponent } from './vhloBuscar/vhloBuscar.component';
+import { VhloCfgClaseMaquinariaModule } from './vhloCfgClaseMaquinaria/vhloCfgClaseMaquinaria.module';
+import { VhloCfgCondicionIngresoModule } from './vhloCfgCondicionIngreso/vhloCfgCondicionIngreso.module';
 import { VhloCfgNivelServicioModule } from './vhloCfgNivelServicio/vhloCfgNivelServicio.module';
 import { VhloCfgPlacaModule } from './vhloCfgPlaca/vhloCfgPlaca.module';
+import { VhloCfgTipoMaquinariaModule } from './vhloCfgTipoMaquinaria/vhloCfgTipoMaquinaria.module';
 import { VhloCfgValorModule } from './vhloCfgValor/vhloCfgValor.module';
 import { VhloLimitacionModule } from './vhloLimitacion/vhloLimitacion.module';
 import { VhloPlacaSedeModule } from './vhloPlacaSede/vhloPlacaSede.module';
@@ -54,8 +60,11 @@ import { VhloDevolucionRadicadoModule } from './vhloDevolucionRadicado/vhloDevol
     VehiculoRoutingModule,
     VhloBuscarModule,
     VhloCertificadoTradicionModule,
+    VhloCfgClaseMaquinariaModule,
+    VhloCfgCondicionIngresoModule,
     VhloCfgNivelServicioModule,
     VhloCfgPlacaModule,
+    VhloCfgTipoMaquinariaModule,
     VhloCfgValorModule,
     VhloLimitacionModule,
     VhloPlacaSedeModule,
@@ -72,9 +81,12 @@ import { VhloDevolucionRadicadoModule } from './vhloDevolucionRadicado/vhloDevol
   declarations: [
     VhloBuscarComponent,
     VhloCertificadoTradicionComponent,
+    VhloCfgClaseMaquinariaComponent,
+    VhloCfgCondicionIngresoComponent,
     VhloCfgNivelServicioComponent,
     VhloCfgPlacaComponent,
     VhloCfgPlacaReportComponent,
+    VhloCfgTipoMaquinariaComponent,
     VhloCfgValorComponent,
     VhloLimitacionComponent,
     VhloLimitacionDeleteComponent,

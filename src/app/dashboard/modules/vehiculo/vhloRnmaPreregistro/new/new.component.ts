@@ -108,7 +108,7 @@ constructor(
   private _ServicioService: VhloCfgServicioService,
   private _ColorService: VhloCfgColorService,
   private _CombustibleService: VhloCfgCombustibleService,
-  private _CfgRadioAccionService: VhloCfgRadioAccionService,
+  private _RadioAccionService: VhloCfgRadioAccionService,
   private _ModalidadTransporteService: VhloCfgModalidadTransporteService,
   private _RnaPreregistroService: VhloRnaPreregistroService,
   private _OrganismoTransitoService: CfgOrganismoTransitoService,
@@ -269,7 +269,7 @@ constructor(
       }
     );
 
-    this._CfgRadioAccionService.select().subscribe(
+    this._RadioAccionService.select().subscribe(
       response => {
         this.radiosAccion = response;
       },  

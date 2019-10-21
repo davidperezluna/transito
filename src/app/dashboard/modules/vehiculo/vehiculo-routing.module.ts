@@ -3,9 +3,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { VhloBuscarComponent } from './vhloBuscar/vhloBuscar.component';
 import { VhloCertificadoTradicionComponent } from './vhloCertificadoTradicion/vhloCertificadoTradicion.component';
+import { VhloCfgClaseMaquinariaComponent } from './vhloCfgClaseMaquinaria/vhloCfgClaseMaquinaria.component';
+import { VhloCfgCondicionIngresoComponent } from './vhloCfgCondicionIngreso/vhloCfgCondicionIngreso.component';
 import { VhloCfgNivelServicioComponent } from './vhloCfgNivelServicio/vhloCfgNivelServicio.component';
 import { VhloCfgPlacaComponent } from './vhloCfgPlaca/vhloCfgPlaca.component';
 import { VhloCfgPlacaReportComponent } from './vhloCfgPlaca/report/report.component';
+import { VhloCfgTipoMaquinariaComponent } from './vhloCfgTipoMaquinaria/vhloCfgTipoMaquinaria.component';
 import { VhloCfgValorComponent } from './vhloCfgValor/vhloCfgValor.component';
 import { VhloLimitacionComponent } from './vhloLimitacion/vhloLimitacion.component';
 import { VhloLimitacionDeleteComponent } from './vhloLimitacion/delete/delete.component';
@@ -29,6 +32,14 @@ const routes: Routes = [
   {
     path: 'VhloCertificadoTradicionComponent',
     component: VhloCertificadoTradicionComponent
+  },
+  {
+    path: 'vhloCfgClaseMaquinaria',
+    component: VhloCfgClaseMaquinariaComponent
+  },
+  {
+    path: 'vhloCfgCondicionIngreso',
+    component: VhloCfgCondicionIngresoComponent
   },
   {
     path: 'vhloCfgNivelServicio',
@@ -57,6 +68,10 @@ const routes: Routes = [
   {
     path: 'vhloPlacaEntrega',
     component: VhloPlacaSedeDeliveredComponent
+  },
+  {
+    path: 'vhloCfgTipoMaquinaria',
+    component: VhloCfgTipoMaquinariaComponent
   },
   {
     path: 'vhloCfgValor',
