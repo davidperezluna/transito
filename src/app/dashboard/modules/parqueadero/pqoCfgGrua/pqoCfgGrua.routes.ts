@@ -1,10 +1,5 @@
 import { Route } from '@angular/router';
 import { PqoCfgGruaComponent } from '.';
 
-export const PqoCfgGruaRoutes: Route[] = [
-    {
-      path: 'pqoCfgGrua',
-      component: PqoCfgGruaComponent
-    }
-];
+export const PqoCfgGruaRoutes: Route[] = [];
  
