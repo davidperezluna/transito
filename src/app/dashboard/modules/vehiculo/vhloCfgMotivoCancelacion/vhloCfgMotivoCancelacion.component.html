@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid">
     <div class="row" *ngIf='formIndex'>
         <div class="col-md-12">
             <div class="card">
@@ -44,6 +44,8 @@
             </div>
         </div>
     </div>
-    <app-edit *ngIf='formEdit' [motivoCancelacion]="motivoCancelacion" (ready)="ready($event)"></app-edit>
-    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+
+    <app-edit-vhlocfgmotivocancelacion *ngIf='formEdit' [motivoCancelacion]="motivoCancelacion" (ready)="ready($event)"></app-edit-vhlocfgmotivocancelacion>
+    
+    <app-new-vhlocfgmotivocancelacion *ngIf='formNew' (ready)="ready($event)"></app-new-vhlocfgmotivocancelacion>
 </div>

@@ -7,7 +7,7 @@
                     Asignar Sustrato
                 </b>
                 <hr>
-                <div class="container">
+                <div class="container-fluid">
                     <form #formSustrato="ngForm" class="container"> 
                         <!-- <div class="col-xs-12 col-lg-12">
                             <label>Insumos*</label>
@@ -22,7 +22,7 @@
                             </span>
                         </div>  
 
-                        <div class="container" *ngIf="isExist">
+                        <div class="container-fluid" *ngIf="isExist">
                             <!-- digitar la nueva licencia de transito  -->
                             <div class="col-xs-12 col-lg-12">
                                 <br>
@@ -94,7 +94,7 @@
 
                 </div>
             </div>
-            <div class="container">
+            <div class="container-fluid">
                 <button (click)="enviarTramite()"  [disabled]="formSustrato.invalid" class="btn btn-success">Enviar</button>
             </div>
         </div>

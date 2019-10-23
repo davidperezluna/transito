@@ -1,4 +1,4 @@
-<div class="container" >
+<div class="container-fluid" >
   <hr>
   <div class="row" *ngIf='formIndex'>
     <div class="col-md-12">
@@ -47,6 +47,7 @@
       </div>
     </div>
     
-    <app-edit *ngIf='formEdit' [origenRegistro]="origenRegistro" (ready)="ready($event)"></app-edit>
-    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+    <app-edit-vhlocfgorigenregistro *ngIf='formEdit' [origenRegistro]="origenRegistro" (ready)="ready($event)"></app-edit-vhlocfgorigenregistro>
+    
+    <app-new-vhlocfgorigenregistro *ngIf='formNew' (ready)="ready($event)"></app-new-vhlocfgorigenregistro>
 </div>

@@ -6,12 +6,12 @@ import { LoginService } from '../../../../../services/login.service';
 import swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-new',
+  selector: 'app-new-vhlocfgtransporteespecial',
   templateUrl: './new.component.html'
 })
 export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
-public radioAccion: VhloCfgTransporteEspecial;
+public transporteEspecial: VhloCfgTransporteEspecial;
 public errorMessage;
 
 public transportesPasajero;
@@ -23,7 +23,7 @@ constructor(
   ){}
 
   ngOnInit() {
-    this.radioAccion = new VhloCfgTransporteEspecial(null, null, null);
+    this.transporteEspecial = new VhloCfgTransporteEspecial(null, null, null);
 
     this._TransportePasajeroService.select().subscribe(
       response => {
@@ -48,7 +48,7 @@ constructor(
   onEnviar(){
     let token = this._loginService.getToken();
     
-		this._TransporteEspecialService.register(this.radioAccion,token).subscribe(
+		this._TransporteEspecialService.register(this.transporteEspecial,token).subscribe(
 			response => {
         if(response.code == 200){
           this.ready.emit(true);

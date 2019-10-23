@@ -6,7 +6,7 @@ import swal from 'sweetalert2';
 
 
 @Component({
-    selector: 'app-edit',
+    selector: 'app-edit-vhlocfgmotivocancelacion',
     templateUrl: './edit.component.html'
 })
 export class EditComponent {

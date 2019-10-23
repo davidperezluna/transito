@@ -1,19 +1,20 @@
 <div class="col-xs-12 col-lg-6">
     <div class="card">
         <div class="card-header">
-            <h5 class="text-uppercase">Editar Motivo Cancelación</h5>
+            <b class="text-uppercase">Editar Motivo Cancelación</b>
+            <br>
             <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
         </div>
         <div class="card-body">
             <form #formEdit="ngForm">
-                <div class="form-group">
+                <div class="row">
                     <div class="col-xs-12 col-lg-12">
-                        <label>Código<strong class="text-danger">*</strong></label>
+                        <label>Código<b class="text-danger">*</b></label>
                         <input class="form-control" [(ngModel)]="motivoCancelacion.codigo" name="codigo" type="number"
                             required>
                     </div>
                     <div class="col-xs-12 col-lg-12">
-                        <label>Nombre <strong class="text-danger">*</strong></label>
+                        <label>Nombre <b class="text-danger">*</b></label>
                         <input class="form-control" [(ngModel)]="motivoCancelacion.nombre" name="nombre" type="text"
                             required>
                     </div>

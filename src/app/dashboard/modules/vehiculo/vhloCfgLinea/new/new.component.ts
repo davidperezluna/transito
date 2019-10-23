@@ -6,7 +6,7 @@ import {VhloCfgMarcaService} from '../../../../../services/vhloCfgMarca.service'
 import swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-new',
+  selector: 'app-new-vhlocfglinea',
   templateUrl: './new.component.html'
 })
 export class NewComponent implements OnInit {

@@ -8,7 +8,7 @@
             <form #formNew="ngForm">
                 <div class="form-group row">
                     <div class="col-xs-12 col-lg-6">
-                        <label>Placa <strong class="text-danger">*</strong></label>
+                        <label>Placa <b class="text-danger">*</b></label>
                         <div class="input-group">
                             <input type="text" class="form-control" [(ngModel)]="placa" required name="placa" />
                             <span class="input-group-btn">
@@ -111,12 +111,12 @@
                         </div>
                     </div>
                     <div class="col-xs-6 col-lg-6" *ngIf="vehiculo" style="margin-top: 4%;"> 
-                        <label>Cupos Disponibles <strong class="text-danger">*</strong></label>
+                        <label>Cupos Disponibles <b class="text-danger">*</b></label>
                         <ng-select [multiple]="false" [options]="cupos" [(ngModel)]="asignacion.idCupo" required name="idCupo">
                         </ng-select>
                     </div>
                     <div class="col-xs-6 col-lg-6" *ngIf="vehiculo" style="margin-top: -6.3%;">
-                        <label>Nivel Servicio <strong class="text-danger">*</strong></label>
+                        <label>Nivel Servicio <b class="text-danger">*</b></label>
                         <ng-select [multiple]="false" [options]="nivelesServicio" [(ngModel)]="asignacion.idNivelServicio" required name="idNivelServicio">
                         </ng-select>
                     </div>

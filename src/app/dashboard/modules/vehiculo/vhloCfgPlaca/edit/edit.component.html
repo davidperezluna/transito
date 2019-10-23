@@ -11,22 +11,16 @@
                 <form #formEdit="ngForm">
                     <div class="form-group row">
                         <div class="col-xs-12 col-lg-12">
-                            <label>Número
-                                <strong class="text-danger">*</strong>
-                            </label>
-                            <input class="form-control" [(ngModel)]="cfgPlaca.numero" name="numero" placeholder="" type="text" required>
+                            <label>Número <b class="text-danger">*</b></label>
+                            <input class="form-control" [(ngModel)]="placa.numero" name="numero"  type="text" required>
                         </div>
                         <div class="col-xs-12 col-lg-12">
-                            <label>Tipo Vehiculo
-                                <strong class="text-danger">*</strong>
-                            </label>
+                            <label>Tipo Vehiculo <b class="text-danger">*</b></label>
                             <ng-select [multiple]="false" [options]="tiposVehiculo" [(ngModel)]="tipoVehiculoSelected" required name="idTipoVehiculo">
                             </ng-select>
                         </div>
                         <div class="col-xs-12 col-lg-12">
-                            <label>Organismo Transito
-                                <strong class="text-danger">*</strong>
-                            </label>
+                            <label>Organismo Transito <b class="text-danger">*</b></label>
                             <ng-select [multiple]="false" [options]="organismosTransito" [(ngModel)]="organismoTransitoSelected" required name="idOrganismoTransito">
                             </ng-select>
                         </div>

@@ -3,7 +3,6 @@ import { VhloRnmaPreregistro } from '../vhloRnmaPreregistro.modelo';
 import { CfgOrganismoTransitoService } from '../../../../../services/cfgOrganismoTransito.service';
 import { VhloCfgLineaService } from '../../../../../services/vhloCfgLinea.service';
 import { VhloCfgClaseService } from '../../../../../services/vhloCfgClase.service';
-import { VhloCfgClaseMaquinariaService } from '../../../../../services/vhloCfgClaseMaquinaria.service';
 import { VhloCfgCarroceriaService } from '../../../../../services/vhloCfgCarroceria.service';
 import { VhloCfgServicioService } from '../../../../../services/vhloCfgServicio.service';
 import { VhloCfgColorService } from '../../../../../services/vhloCfgColor.service';
@@ -115,7 +114,6 @@ constructor(
   private _FuncionarioService: PnalFuncionarioService,
   private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
   private _CiudadanoService: UserCiudadanoService,
-  private _ClaseMaquinariaService: VhloCfgClaseMaquinariaService,
   private _LoginService: LoginService,
   ){}
 
@@ -402,7 +400,7 @@ constructor(
     if (e) {
       let token = this._LoginService.getToken()
 
-      this._ClaseMaquinariaService.searchByTipoMaquinariaSelect({ 'idTipoMaquinaria': e }, token).subscribe(
+      /*this._ClaseMaquinariaService.searchByTipoMaquinariaSelect({ 'idTipoMaquinaria': e }, token).subscribe(
         response => {
           this.clasesMaquinaria = response;
         },
@@ -413,7 +411,7 @@ constructor(
             alert("Error en la petición");
           }
         }
-      );
+      );*/
     }
   }
 

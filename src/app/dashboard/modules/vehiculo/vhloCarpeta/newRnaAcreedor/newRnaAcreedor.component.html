@@ -1,20 +1,20 @@
 <div class="row ">
-    <div class="container">
+    <div class="container-fluid">
         <div class="card">
         <div class="card-body ">
-            <h5 class="m-0">Nuevo Acreedor</h5>
+            <b class="text-uppercase">Nuevo Acreedor</h5>
             <hr> 
             <div class="row justify-content-center container">
                 <div class="form-group row">
                     
                     <div class="col-xs-12 col-lg-12 row">
                         <label>Nombre*</label>
-                        <input class="form-control" [(ngModel)]="banco.nombre" name="nombre" placeholder="" type="text" required>
+                        <input class="form-control" [(ngModel)]="banco.nombre" name="nombre"  type="text" required>
                     </div>
                 </div>   
         </div>
             <div class="card-footer">
-                <button (click)="onCancelar()" class="btn btn-default">Cancelar</button>
+                <button (click)="onCancelar()" class="btn btn-default"><i class="fa fa-times"></i>Cancelar</button>
                 <button (click)="onEnviar()" class="btn btn-success pull-right">Registrar</button>
             </div>   
         </div>

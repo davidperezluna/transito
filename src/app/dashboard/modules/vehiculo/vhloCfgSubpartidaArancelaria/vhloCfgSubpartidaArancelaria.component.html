@@ -1,4 +1,4 @@
-<div class="container" >
+<div class="container-fluid" >
   <hr>
   <div class="row" *ngIf='formIndex'>
     <div class="col-md-12">
@@ -47,6 +47,7 @@
       </div>
     </div>
     
-    <app-edit *ngIf='formEdit' [subpartidaArancelaria]="subpartidaArancelaria" (ready)="ready($event)"></app-edit>
-    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+    <app-edit-vhlocfgsubpartidaarancelaria *ngIf='formEdit' [subpartidaArancelaria]="subpartidaArancelaria" (ready)="ready($event)"></app-edit-vhlocfgsubpartidaarancelaria>
+    
+    <app-new-vhlocfgsubpartidaarancelaria *ngIf='formNew' (ready)="ready($event)"></app-new-vhlocfgsubpartidaarancelaria>
 </div>

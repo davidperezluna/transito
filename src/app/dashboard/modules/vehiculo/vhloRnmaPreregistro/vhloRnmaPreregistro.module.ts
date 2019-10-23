@@ -7,7 +7,6 @@ import { CfgOrganismoTransitoService } from '../../../../services/cfgOrganismoTr
 import { VhloMaquinariaService } from '../../../../services/vhloMaquinaria.service';
 import { VhloCfgLineaService } from '../../../../services/vhloCfgLinea.service';
 import { VhloCfgClaseService } from '../../../../services/vhloCfgClase.service';
-import { VhloCfgClaseMaquinariaService } from '../../../../services/vhloCfgClaseMaquinaria.service';
 import { VhloCfgCarroceriaService } from '../../../../services/vhloCfgCarroceria.service';
 import { VhloCfgServicioService } from '../../../../services/vhloCfgServicio.service';
 import { VhloCfgColorService } from '../../../../services/vhloCfgColor.service';
@@ -38,7 +37,6 @@ import { SelectModule } from 'angular2-select';
         VhloMaquinariaService,
         VhloCfgLineaService,
         VhloCfgClaseService,
-        VhloCfgClaseMaquinariaService,
         VhloCfgCarroceriaService,
         VhloCfgServicioService,
         VhloCfgColorService,

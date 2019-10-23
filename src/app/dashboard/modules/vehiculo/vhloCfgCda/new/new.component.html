@@ -1,20 +1,22 @@
 <hr>
 <div class="row">
-    <div class="col-xs-12 col-lg-4">
+    <div class="col-xs-12 col-md-6 col-lg-4">
         <div class="card">
             <div class="card-header">
-                <h5 class="text-uppercase">Nuevo CDA</h5>
+                <b class="text-uppercase">Nuevo CDA</b>
+                <br>
                 <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
             </div>
             <div class="card-body">
                 <form #formNew="ngForm"> 
-                    <div class="form-group row">
+                    <div class="row">
                         <div class="col-xs-12 col-lg-12">
-                            <label>Nombre <strong class="text-danger">*</strong></label>
+                            <label>Nombre <b class="text-danger">*</b></label>
                             <input type="text" class="form-control" [(ngModel)]="cda.nombre" name="nombre" required />
                         </div>
+
                         <div class="col-xs-12 col-lg-12">
-                            <label>NIT <strong class="text-danger">*</strong></label>
+                            <label>NIT <b class="text-danger">*</b></label>
                             <input type="text" class="form-control" [(ngModel)]="cda.nit" name="nit" required />
                         </div>
                     </div>
@@ -22,13 +24,13 @@
             </div>
             <div class="card-footer">
                 <div class="btn-group">
-                    <button (click)="onCancelar()" class="btn btn-default">
-                        <i class="fa fa-times"></i>
-                        Cancel
-                    </button>
                     <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
                         <i class="fa fa-save"></i>
                         Enviar
+                    </button>
+                    <button (click)="onCancelar()" class="btn btn-default">
+                        <i class="fa fa-times"></i>
+                        Cancelar
                     </button>
                 </div>
             </div>

@@ -5,7 +5,7 @@ import swal from 'sweetalert2';
 
 
 @Component({
-  selector: 'app-edit',
+  selector: 'app-edit-vhlocfglimitaciontipoproceso',
   templateUrl: './edit.component.html'
 })
 export class EditComponent {

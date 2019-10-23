@@ -9,6 +9,7 @@ declare var $: any;
   selector: 'app-index',
   templateUrl: './vhloCfgRadioAccion.component.html'
 })
+
 export class VhloCfgRadioAccionComponent implements OnInit {
   public errorMessage;
 	public id;

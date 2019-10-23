@@ -1,8 +1,8 @@
 <div class="row ">
-    <div class="container">
+    <div class="container-fluid">
         <div class="card">
         <div class="card-body ">
-            <h5 class="m-0">Nueva persona natural</h5>
+            <b class="text-uppercase">Nueva persona natural</h5>
             <hr> 
             <div class="row justify-content-center container">
                 <div class="form-group row">
@@ -13,12 +13,12 @@
                     </div>
                     <div class="col-xs-12 col-lg-6">
                         <label>Identificacion*</label>
-                        <input class="form-control" [(ngModel)]="ciudadano.identificacion" name="identificacion" placeholder="" type="number"
+                        <input class="form-control" [(ngModel)]="ciudadano.identificacion" name="identificacion"  type="number"
                             required> 
                     </div>
                     <div class="col-xs-12 col-lg-6">
                         <label>Fecha Expedición Documento</label>
-                        <input class="form-control" [(ngModel)]="ciudadano.fechaExpedicionDocumento" name="fechaExpedicionDocumento" placeholder=""
+                        <input class="form-control" [(ngModel)]="ciudadano.fechaExpedicionDocumento" name="fechaExpedicionDocumento" 
                             type="date" required>
                     </div>
                     <div class="col-xs-12 col-lg-6">
@@ -33,19 +33,19 @@
                     </div>
                     <div class="col-xs-12 col-lg-6">
                         <label>Primer Nombre*</label>
-                        <input class="form-control" [(ngModel)]="ciudadano.primerNombre" name="primerNombre" placeholder="" type="text" required>
+                        <input class="form-control" [(ngModel)]="ciudadano.primerNombre" name="primerNombre"  type="text" required>
                     </div>
                     <div class="col-xs-12 col-lg-6">
                         <label>Segundo Nombre*</label>
-                        <input class="form-control" [(ngModel)]="ciudadano.segundoNombre" name="segundoNombre" placeholder="" type="text" required>
+                        <input class="form-control" [(ngModel)]="ciudadano.segundoNombre" name="segundoNombre"  type="text" required>
                     </div>
                     <div class="col-xs-12 col-lg-6">
                         <label>Primer Apellido*</label>
-                        <input class="form-control" [(ngModel)]="ciudadano.primerApellido" name="primerApellido" placeholder="" type="text" required>
+                        <input class="form-control" [(ngModel)]="ciudadano.primerApellido" name="primerApellido"  type="text" required>
                     </div>
                     <div class="col-xs-12 col-lg-6">
                         <label>Segundo Apellido*</label>
-                        <input class="form-control" [(ngModel)]="ciudadano.segundoApellido" name="segundoApellido" placeholder="" type="text" required>
+                        <input class="form-control" [(ngModel)]="ciudadano.segundoApellido" name="segundoApellido"  type="text" required>
                     </div>
                     <div class="col-xs-12 col-lg-6">
                         <label>Grupo Sanguineo*</label>
@@ -54,7 +54,7 @@
                     </div>
                     <div class="col-xs-12 col-lg-6">
                         <label>Fecha Nacimiento*</label>
-                        <input class="form-control" [(ngModel)]="ciudadano.fechaNacimiento" name="fechaNacimiento" placeholder=""
+                        <input class="form-control" [(ngModel)]="ciudadano.fechaNacimiento" name="fechaNacimiento" 
                             type="date" required>
                     </div>
                     <div class="col-xs-12 col-lg-6">
@@ -79,28 +79,28 @@
                     </div>
                     <div class="col-xs-12 col-lg-6">
                         <label>Telefono celular*</label>
-                        <input class="form-control" [(ngModel)]="ciudadano.telefonoCelular" name="telefonoCelular" placeholder="" type="text" required>
+                        <input class="form-control" [(ngModel)]="ciudadano.telefonoCelular" name="telefonoCelular"  type="text" required>
                     </div>
                     <div class="col-xs-12 col-lg-6">
                         <label>Telefono fijo</label>
-                        <input class="form-control" [(ngModel)]="ciudadano.telefonoFijo" name="telefonoFijo" placeholder="" type="text">
+                        <input class="form-control" [(ngModel)]="ciudadano.telefonoFijo" name="telefonoFijo"  type="text">
                     </div>
                     <div class="col-xs-12 col-lg-6">
                         <label>Direccion Residencia</label>
-                        <input class="form-control" [(ngModel)]="ciudadano.direccionPersonal" name="direccionPersonal" placeholder="" type="text" required>
+                        <input class="form-control" [(ngModel)]="ciudadano.direccionPersonal" name="direccionPersonal"  type="text" required>
                     </div>
                     <div class="col-xs-12 col-lg-6">
                         <label>Direccion Trabajo</label>
-                        <input class="form-control" [(ngModel)]="ciudadano.direccionTrabajo" name="direccionTrabajo" placeholder="" type="text" required>
+                        <input class="form-control" [(ngModel)]="ciudadano.direccionTrabajo" name="direccionTrabajo"  type="text" required>
                     </div>
                     <div class="col-xs-12 col-lg-6">
                         <label>Correo</label>
-                        <input class="form-control" [(ngModel)]="ciudadano.correo" name="correo" placeholder="" type="email" required>
+                        <input class="form-control" [(ngModel)]="ciudadano.correo" name="correo"  type="email" required>
                     </div>
                 </div>   
         </div>
             <div class="card-footer">
-                <button (click)="onCancelar()" class="btn btn-default">Cancelar</button>
+                <button (click)="onCancelar()" class="btn btn-default"><i class="fa fa-times"></i>Cancelar</button>
                 <button (click)="onEnviar()" class="btn btn-success pull-right">Registrar</button>
             </div>   
         </div>

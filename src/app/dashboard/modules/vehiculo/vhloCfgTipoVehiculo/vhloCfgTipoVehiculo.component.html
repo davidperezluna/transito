@@ -1,49 +1,50 @@
-<div class="container">
-    <hr>
+<div class="container-fluid">
     <div class="row" *ngIf='formIndex'>
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
                     <h5 class="card-title">
-                        <strong class="text-uppercase">Configuración</strong>
-                        <small>Tipos de vehiculo</small>
+                        <b class="text-uppercase">Tipos de vehiculo</b>
                         <div class="btn-group pull-right">
                             <button (click)="onNew()" class="btn btn-default">
                                 <i class="fa fa-plus"></i>
                                 <span>Nuevo</span>
                             </button>
                         </div>
-                        </h5>
-                        </div>
-                        <div class="card-body">
-                            <table class="table " id="dataTables-example">
-                                <thead>
-                                    <tr>
-                                        <th>Id</th>
-                                        <th>Nombre</th>
-                                        <th>Módulo</th>
-                                        <th>Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr class="odd" *ngFor="let tipo of estados; let i = index">
-                                        <td>{{ tipo.id }}</td>
-                                        <td>{{ tipo.nombre }}</td>
-                                        <td>{{ tipo.modulo.nombre }}</td>
-                                        <td>
-                                            <button (click)="onEdit(tipo)" class="btn btn-xs btn-info" type="button">
-                                                <i class="fa fa-edit"></i>Editar</button>
-                                            <button (click)="deleteTipoVehiculo(tipo.id)" class="btn btn-xs btn-danger" type="button">
-                                                <i class="fa fa-trash"></i>Eliminar</button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <!-- /.table-responsive -->
-                        </div>
-                        </div>
-                        </div>
-                        </div>
-                        <app-edit *ngIf='formEdit' [tipo]="tipo" (ready)="ready($event)"></app-edit>
-                        <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
-                        </div>
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <table class="table " id="dataTables-example">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Nombre</th>
+                                <th>Módulo</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="odd" *ngFor="let tipo of estados; let i = index">
+                                <td>{{ i + 1 }}</td>
+                                <td>{{ tipo.nombre }}</td>
+                                <td>{{ tipo.modulo.nombre }}</td>
+                                <td>
+                                    <button (click)="onEdit(tipo)" class="btn btn-xs btn-info" type="button">
+                                        <i class="fa fa-edit"></i>Editar</button>
+                                    <button (click)="deleteTipoVehiculo(tipo.id)" class="btn btn-xs btn-danger"
+                                        type="button">
+                                        <i class="fa fa-trash"></i>Eliminar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- /.table-responsive -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <app-edit-vhlocfgtipovehiculo *ngIf='formEdit' [tipo]="tipo" (ready)="ready($event)"></app-edit-vhlocfgtipovehiculo>
+
+    <app-new-vhlocfgtipovehiculo *ngIf='formNew' (ready)="ready($event)"></app-new-vhlocfgtipovehiculo>
+</div>
