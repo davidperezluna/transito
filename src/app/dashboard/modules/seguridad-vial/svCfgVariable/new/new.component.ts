@@ -27,7 +27,7 @@ export class NewComponent implements OnInit {
 
     ngOnInit() {
         this.variable = new SvCfgVariable(null, null, null);
-        this._SvCfgParametroService.getParametroSelect().subscribe(
+        this._SvCfgParametroService.select().subscribe(
             response => {
                 this.parametros = response;
             },

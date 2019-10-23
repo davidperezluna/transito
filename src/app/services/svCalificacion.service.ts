@@ -5,7 +5,7 @@ import { environment } from 'environments/environment';
 
 @Injectable()
 export class SvCalificacionService {
-	private url = environment.apiUrl + 'msvcalificacion';
+	private url = environment.apiUrl + 'seguridadvial/svcalificacion';
 	public identity;
 	public token;
 

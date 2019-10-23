@@ -25,7 +25,7 @@ constructor(
 
   onEnviar(){
     let token = this._loginService.getToken();
-		this._evaluacionService.editEvaluacion(this.msvEvaluacion,token).subscribe(
+		this._evaluacionService.edit(this.msvEvaluacion,token).subscribe(
 			response => {
         this.respuesta = response;
         console.log(this.respuesta);

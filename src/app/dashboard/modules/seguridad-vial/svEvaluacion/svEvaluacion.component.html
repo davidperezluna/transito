@@ -116,16 +116,20 @@
                                     {{revision.consecutivo}}
                                  </td>
                                  <td>
-                                    {{revision.fechaRecepcion}}
+                                    {{ (revision.fechaRecepcion.timestamp * 1000) | date: 'dd/MM/yyyy'}}
                                  </td>
                                  <td>
-                                    {{revision.fechaRevision}}
+                                    {{ (revision.fechaRevision.timestamp * 1000) | date: 'dd/MM/yyyy'}}
                                  </td>
                                  <td>
-                                    {{revision.fechaDevolucion}}
+                                    <span *ngIf="revision.fechaDevolucion">
+                                       {{ (revision.fechaDevolucion.timestamp * 1000) | date: 'dd/MM/yyyy'}}
+                                    </span>
                                  </td>
                                  <td>
-                                    {{revision.fechaOtorgamiento}}
+                                    <span *ngIf="revision.fechaOtorgamiento">
+                                       {{ (revision.fechaOtorgamiento.timestamp * 1000) | date: 'dd/MM/yyyy'}}
+                                    </span>
                                  </td>
                                  <td>
                                     {{revision.funcionario.ciudadano.primerNombre}}

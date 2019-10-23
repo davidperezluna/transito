@@ -41,7 +41,7 @@ export class SvCfgCriterioComponent implements OnInit {
             ) {
             }
         });
-        this._CriterioService.getCriterio().subscribe(
+        this._CriterioService.index().subscribe(
             response => {
                 this.criterios = response.data;
                 let timeoutId = setTimeout(() => {
@@ -106,7 +106,7 @@ export class SvCfgCriterioComponent implements OnInit {
             if (result.value) {
                 let token = this._LoginService.getToken();
 
-                this._CriterioService.deleteCriterio({ 'id': id }, token).subscribe(
+                this._CriterioService.delete({ 'id': id }, token).subscribe(
                     response => {
                         swal({
                             title: 'Eliminado!',

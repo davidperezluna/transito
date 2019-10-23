@@ -105,7 +105,7 @@ export class SvCfgCategoriaComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._LoginService.getToken();
-        this._CategoriaService.deleteCategoria(token,id).subscribe(
+        this._CategoriaService.delete({'id': id}, token).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',

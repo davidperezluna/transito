@@ -51,8 +51,8 @@ constructor(
   onEnviar(){
     let token = this._loginService.getToken();
 
-    this.msvRevision.funcionarioId = this.contratistaSelected;
-    this.msvRevision.empresaId = this.miEmpresa.id;
+    this.msvRevision.idFuncionario = this.contratistaSelected;
+    this.msvRevision.idEmpresa = this.miEmpresa.id;
 
 		this._MsvRevisionService.register(this.msvRevision, token).subscribe(
 			response => {

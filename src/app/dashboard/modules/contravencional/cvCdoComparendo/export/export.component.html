@@ -34,13 +34,13 @@
             </div>
             <div class="card-footer">
                 <div class="btn-group">
-                    <button (click)="onEnviar()" [disabled]="formFiltros.invalid" class="btn btn-primary" type="button">
+                    <button (click)="onEnviar()" style="margin-right: 2%;" [disabled]="formFiltros.invalid" class="btn btn-primary" type="button">
                         <i class="fa fa-cogs"></i>
                         Generar
                     </button>
                     <a *ngIf="archivo" href="{{ docsUrl }}{{ archivo }}" download="{{ archivo }}"
                         class="btn btn-success" target="_blank">
-                        <i class="fa fa-file-pdf-o"></i>Descargar
+                        <i class="fa fa-file-pdf-o"></i>Descargar {{ archivo }}
                     </a>
                 </div>
             </div>
