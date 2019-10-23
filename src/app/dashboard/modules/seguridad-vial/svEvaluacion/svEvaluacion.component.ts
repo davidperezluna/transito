@@ -253,7 +253,7 @@ export class SvEvaluacionComponent implements OnInit {
       this.formNewRevision = false;
       this.formEditRevision = false;
       this.ngOnInit();
-      this.onKeyValidateEvaluacion();
+      this.onSearchEmpresa();
     }
   }
 
@@ -293,7 +293,7 @@ export class SvEvaluacionComponent implements OnInit {
     })
   }
 
-  onKeyValidateEvaluacion() {
+  onSearchEmpresa() {
     swal({
       title: 'Buscando Empresa!',
       text: 'Solo tardará unos segundos por favor espere.',
@@ -835,7 +835,7 @@ export class SvEvaluacionComponent implements OnInit {
             if (response.code == 200) {
               this.ready2.emit(true);
               this.evaluacion = response.data;
-              this.onKeyValidateEvaluacion();
+              this.onSearchEmpresa();
               swal({
                 title: 'Perfecto!',
                 html: response.message,

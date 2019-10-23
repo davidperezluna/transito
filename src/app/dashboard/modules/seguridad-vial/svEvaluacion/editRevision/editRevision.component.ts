@@ -2,12 +2,14 @@ import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@
 import { SvRevisionService } from '../../../../../services/svRevision.service';
 import { PnalFuncionarioService } from '../../../../../services/pnalFuncionario.service';
 import { SvEvaluacionService } from "../../../../../services/svEvaluacion.service";
+import { DatePipe, CurrencyPipe } from '@angular/common';
 import { LoginService } from '../../../../../services/login.service';
 import swal from 'sweetalert2';
 
 @Component({
     selector: 'app-edit-revision-svevaluacion',
-    templateUrl: './editRevision.component.html'
+    templateUrl: './editRevision.component.html',
+    providers: [DatePipe]
 })
 export class EditRevisionComponent implements OnInit {
     @Output() ready = new EventEmitter<any>();
@@ -27,7 +29,44 @@ export class EditRevisionComponent implements OnInit {
     ) { }
 
     ngOnInit() { 
+        console.log(this.msvRevision);
         let token = this._LoginService.getToken();
+
+        var datePiper = new DatePipe('en-US');
+        var date = new Date();
+
+        if (this.msvRevision.fechaRecepcion) {
+            date.setTime(this.msvRevision.fechaRecepcion.timestamp * 1000);
+
+            this.msvRevision.fechaRecepcion = datePiper.transform(
+                date, 'yyyy-MM-dd'
+            );
+        }
+        
+        if (this.msvRevision.fechaRevision) {
+            date.setTime(this.msvRevision.fechaRevision.timestamp * 1000);
+
+            this.msvRevision.fechaRevision = datePiper.transform(
+                date, 'yyyy-MM-dd'
+            );
+        }
+
+        if (this.msvRevision.fechaDevolucion) {
+            date.setTime(this.msvRevision.fechaDevolucion.timestamp * 1000);
+
+            this.msvRevision.fechaDevolucion = datePiper.transform(
+                date, 'yyyy-MM-dd'
+            );
+        }
+
+        if(this.msvRevision.fechaOtorgamiento) {
+            date.setTime(this.msvRevision.fechaOtorgamiento.timestamp * 1000);
+
+            this.msvRevision.fechaOtorgamiento = datePiper.transform(
+                date, 'yyyy-MM-dd'
+            );
+        }
+        
         this._MsvEvaluacionService.findAvalByEvaluacion(this.msvRevision, token).subscribe(
             response => {
                 this.aval = response.data.aval;

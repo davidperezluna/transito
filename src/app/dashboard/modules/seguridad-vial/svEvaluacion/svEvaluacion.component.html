@@ -21,7 +21,7 @@
                         <input type="number" class="form-control" placeholder="NIT" [(ngModel)]="datos.parametro2"
                            name="parametro2" required />
                         <span class="input-group-btn">
-                           <button (click)="onKeyValidateEvaluacion()" class="btn btn-default btn-primary"
+                           <button (click)="onSearchEmpresa()" class="btn btn-default btn-primary" style="margin-top: 5%" [disabled]="!datos.parametro && !datos.parametro2"
                               type="button"><i class="fa fa-search"></i></button>
                         </span>
                      </div>
@@ -153,7 +153,7 @@
                                  <td>
                                     <div class="btn-group">
                                        <!-- <button (click)="onShow(revision)" class="btn btn-light"><i class="fa fa-eye"></i></button> -->
-                                       <a href="{{ apiUrl }}/{{ revision.id }}/calificacion/pdf" class="btn btn-light" target="_blank">
+                                       <a href="{{ apiUrl }}/{{ revision.id }}/calificacion/pdf" *ngIf="revision.evaluacion" class="btn btn-light" target="_blank">
                                           <i class="fa fa-eye"></i>
                                        </a>
                                        <button (click)="editRevision(revision)" class="btn btn-xs btn-primary" type="button"> <i class="fa fa-edit"></i></button>

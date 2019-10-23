@@ -13,7 +13,7 @@ export class NewRevisionComponent implements OnInit {
 @Output() ready = new EventEmitter<any>( );
 @Input() miEmpresa: any = null;
 
-public msvRevision: SvRevision;
+public revision: SvRevision;
 public contratistas: any;
 public contratistaSelected: any;
 public empresas: any;
@@ -22,13 +22,13 @@ public errorMessage;
 public formNew = false;
 
 constructor(
-  private _MsvRevisionService: SvRevisionService,
+  private _SvRevisionService: SvRevisionService,
   private _PnalFuncionarioService: PnalFuncionarioService,
   private _loginService: LoginService,
   ){}
 
   ngOnInit() {
-    this.msvRevision = new SvRevision(null, null, null, null, null, null, null, null, null, null, null, null,null,null,null,null);
+    this.revision = new SvRevision(null, null, null, null, null, null, null, null, null, null, null, null,null,null,null,null);
 
     this._PnalFuncionarioService.selectContratistas().subscribe(
       response => {
@@ -51,10 +51,10 @@ constructor(
   onEnviar(){
     let token = this._loginService.getToken();
 
-    this.msvRevision.idFuncionario = this.contratistaSelected;
-    this.msvRevision.idEmpresa = this.miEmpresa.id;
+    this.revision.idFuncionario = this.contratistaSelected;
+    this.revision.idEmpresa = this.miEmpresa.id;
 
-		this._MsvRevisionService.register(this.msvRevision, token).subscribe(
+		this._SvRevisionService.register(this.revision, token).subscribe(
 			response => {
         if(response.code == 200){
           swal({
@@ -86,11 +86,11 @@ constructor(
   onCalcularDevolucion() {
     let token = this._loginService.getToken();
 
-    if (this.msvRevision.fechaRecepcion) {
-      this._MsvRevisionService.getFechaDevolucion({ 'fechaRecepcion': this.msvRevision.fechaRecepcion }, token).subscribe(
+    if (this.revision.fechaRecepcion) {
+      this._SvRevisionService.getFechaDevolucion({ 'fechaRecepcion': this.revision.fechaRecepcion }, token).subscribe(
         response => {
           if (response.code == 200) {
-            this.msvRevision.fechaDevolucion = response.fechaDevolucion;
+            this.revision.fechaDevolucion = response.fechaDevolucion;
             //swal.close();
           } else {
             swal({
