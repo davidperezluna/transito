@@ -253,6 +253,7 @@ export class SvEvaluacionComponent implements OnInit {
       this.formNewRevision = false;
       this.formEditRevision = false;
       this.ngOnInit();
+      this.onKeyValidateEvaluacion();
     }
   }
 
@@ -834,7 +835,7 @@ export class SvEvaluacionComponent implements OnInit {
             if (response.code == 200) {
               this.ready2.emit(true);
               this.evaluacion = response.data;
-              console.log(this.evaluacion);
+              this.onKeyValidateEvaluacion();
               swal({
                 title: 'Perfecto!',
                 html: response.message,

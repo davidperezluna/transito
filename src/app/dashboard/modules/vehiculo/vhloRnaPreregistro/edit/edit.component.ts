@@ -194,17 +194,22 @@ constructor(
     var datePiper = new DatePipe('en-US');
 
     var date = new Date();
-    date.setTime(this.vehiculo.fechaFactura.timestamp * 1000);
 
-    this.vehiculo.fechaFactura = datePiper.transform(
-      date, 'yyyy-MM-dd'
-    );
+    if(this.vehiculo.fechaFactura) {
+      date.setTime(this.vehiculo.fechaFactura.timestamp * 1000);
 
-    date.setTime(this.vehiculo.fechaManifiesto.timestamp * 1000);
+      this.vehiculo.fechaFactura = datePiper.transform(
+        date, 'yyyy-MM-dd'
+      ); 
+    }
 
-    this.vehiculo.fechaManifiesto = datePiper.transform(
-      date, 'yyyy-MM-dd'
-    );
+    if (this.vehiculo.fechaManifiesto) {
+      date.setTime(this.vehiculo.fechaManifiesto.timestamp * 1000);
+
+      this.vehiculo.fechaManifiesto = datePiper.transform(
+        date, 'yyyy-MM-dd'
+      );
+    }
 
     this._TipoIdentificacionService.select().subscribe(
       response => {
@@ -429,12 +434,11 @@ constructor(
     this._RadioAccionService.select().subscribe(
       response => {
         this.radiosAccion = response;
-
-        if (this.vehiculo.radioAccion) {
-          setTimeout(() => {
+        setTimeout(() => {
+          if (this.vehiculo.radioAccion) {
               this.radioAccionSelected = [this.vehiculo.radioAccion.id];
-          });
-        }
+            }
+        });
       }, 
       error => {
         this.errorMessage = <any>error;

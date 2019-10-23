@@ -57,7 +57,6 @@ constructor(
 		this._MsvRevisionService.register(this.msvRevision, token).subscribe(
 			response => {
         if(response.code == 200){
-          
           swal({
             title: 'Perfecto!',
             text: response.message,

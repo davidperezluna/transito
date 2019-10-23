@@ -420,12 +420,6 @@
                                                 <br> {{ propietario.identificacion }}
                                                 <br> {{ propietario.nombre }}
                                                 <br>
-                                                <span *ngIf="propietario.permiso" class="text-success">
-                                                    <b>Autorizado</b> para realizar trámites.
-                                                </span>
-                                                <span *ngIf="!propietario.permiso" class="text-danger">
-                                                    <b>No autorizado</b> para realizar trámites.
-                                                </span>
                                             </td>
                                             <td *ngIf="propietario.idApoderado">
                                                 <b>Apoderado: </b>
