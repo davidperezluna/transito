@@ -3,10 +3,35 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { VhloBuscarComponent } from './vhloBuscar/vhloBuscar.component';
 import { VhloCertificadoTradicionComponent } from './vhloCertificadoTradicion/vhloCertificadoTradicion.component';
+import { VhloCfgCarroceriaComponent } from './vhloCfgCarroceria/vhloCfgCarroceria.component';
+import { VhloCfgCdaComponent } from './vhloCfgCda/vhloCfgCda.component';
+import { VhloCfgClaseComponent } from './vhloCfgClase/vhloCfgClase.component';
+import { VhloCfgColorComponent } from './vhloCfgColor/vhloCfgColor.component';
+import { VhloCfgCombustibleComponent } from './vhloCfgCombustible/vhloCfgCombustible.component';
+import { VhloCfgCondicionIngresoComponent } from './vhloCfgCondicionIngreso/vhloCfgCondicionIngreso.component';
+import { VhloCfgEmpresaGpsComponent } from './vhloCfgEmpresaGps/vhloCfgEmpresaGps.component';
+import { VhloCfgLimitacionCausalComponent } from './vhloCfgLimitacionCausal/vhloCfgLimitacionCausal.component';
+import { VhloCfgLimitacionTipoComponent } from './vhloCfgLimitacionTipo/vhloCfgLimitacionTipo.component';
+import { VhloCfgLimitacionTipoProcesoComponent } from './vhloCfgLimitacionTipoProceso/vhloCfgLimitacionTipoProceso.component';
+import { VhloCfgLineaComponent } from './vhloCfgLinea/vhloCfgLinea.component';
+import { VhloCfgMarcaComponent } from './vhloCfgMarca/vhloCfgMarca.component';
+import { VhloCfgModalidadTransporteComponent } from './vhloCfgModalidadTransporte/vhloCfgModalidadTransporte.component';
+import { VhloCfgMotivoCancelacionComponent } from './vhloCfgMotivoCancelacion/vhloCfgMotivoCancelacion.component';
 import { VhloCfgNivelServicioComponent } from './vhloCfgNivelServicio/vhloCfgNivelServicio.component';
+import { VhloCfgOrigenRegistroComponent } from './vhloCfgOrigenRegistro/vhloCfgOrigenRegistro.component';
 import { VhloCfgPlacaComponent } from './vhloCfgPlaca/vhloCfgPlaca.component';
-import { VhloCfgPlacaReportComponent } from './vhloCfgPlaca/report/report.component';
+import { VhloCfgRadioAccionComponent } from './vhloCfgRadioAccion/vhloCfgRadioAccion.component';
+import { VhloCfgServicioComponent } from './vhloCfgServicio/vhloCfgServicio.component';
+import { VhloCfgSubpartidaArancelariaComponent } from './vhloCfgSubpartidaArancelaria/vhloCfgSubpartidaArancelaria.component';
+import { VhloCfgTipoAlertaComponent } from './vhloCfgTipoAlerta/vhloCfgTipoAlerta.component';
+import { VhloCfgTipoCabinaComponent } from './vhloCfgTipoCabina/vhloCfgTipoCabina.component';
+import { VhloCfgTipoMaquinariaComponent } from './vhloCfgTipoMaquinaria/vhloCfgTipoMaquinaria.component';
+import { VhloCfgTipoRodajeComponent } from './vhloCfgTipoRodaje/vhloCfgTipoRodaje.component';
+import { VhloCfgTipoVehiculoComponent } from './vhloCfgTipoVehiculo/vhloCfgTipoVehiculo.component';
+import { VhloCfgTransporteEspecialComponent } from './vhloCfgTransporteEspecial/vhloCfgTransporteEspecial.component';
+import { VhloCfgTransportePasajeroComponent } from './vhloCfgTransportePasajero/vhloCfgTransportePasajero.component';
 import { VhloCfgValorComponent } from './vhloCfgValor/vhloCfgValor.component';
+import { VhloCfgPlacaReportComponent } from './vhloCfgPlaca/report/report.component';
 import { VhloLimitacionComponent } from './vhloLimitacion/vhloLimitacion.component';
 import { VhloLimitacionDeleteComponent } from './vhloLimitacion/delete/delete.component';
 import { VhloPlacaSedeComponent } from './vhloPlacaSede/vhloPlacaSede.component';
@@ -31,13 +56,118 @@ const routes: Routes = [
     component: VhloCertificadoTradicionComponent
   },
   {
+    path: 'vhloCfgCarroceria',
+    component: VhloCfgCarroceriaComponent
+  },
+  {
+    path: 'vhloCfgCda',
+    component: VhloCfgCdaComponent
+  },
+  {
+    path: 'vhloCfgClase',
+    component: VhloCfgClaseComponent
+  },
+  {
+    path: 'vhloCfgColor',
+    component: VhloCfgColorComponent
+  },
+  {
+    path: 'vhloCfgCombustible',
+    component: VhloCfgCombustibleComponent
+  },
+  {
+    path: 'vhloCfgCondicionIngreso',
+    component: VhloCfgCondicionIngresoComponent
+  },
+  { 
+    path: 'vhloCfgEmpresaGps',
+    component: VhloCfgEmpresaGpsComponent 
+  },
+  { 
+    path: 'vhloCfgLimitacionCausal',
+    component: VhloCfgLimitacionCausalComponent 
+  },
+  { 
+    path: 'vhloCfggLimitacionTipo',
+    component: VhloCfgLimitacionTipoComponent 
+  },
+  { 
+    path: 'vhloCfgLimitacionTipoProceso',
+    component: VhloCfgLimitacionTipoProcesoComponent 
+  },
+  { 
+    path: 'vhloCfgLineaComponent',
+    component: VhloCfgLineaComponent 
+  },
+  { 
+    path: 'vhloCfgMarcaComponent',
+    component: VhloCfgMarcaComponent 
+  },
+  { 
+    path: 'vhloCfgModalidadTransporte',
+    component: VhloCfgModalidadTransporteComponent 
+  },
+  { 
+    path: 'vhloCfgMotivoCancelacion',
+    component: VhloCfgMotivoCancelacionComponent 
+  },
+  {
     path: 'vhloCfgNivelServicio',
     component: VhloCfgNivelServicioComponent
+  },
+  { 
+    path: 'vhloCfgOrigenRegistro',
+    component: VhloCfgOrigenRegistroComponent 
   },
   {
     path: 'vhloCfgPlaca',
     component: VhloCfgPlacaComponent
   },
+  { 
+    path: 'vhloCfgRadioAccion',
+    component: VhloCfgRadioAccionComponent 
+  },
+  { 
+    path: 'vhloCfgServicio',
+    component: VhloCfgServicioComponent 
+  },
+  { 
+    path: 'vhloCfgSubpartidaArancelaria',
+    component: VhloCfgSubpartidaArancelariaComponent 
+  },
+  { 
+    path: 'vhloCfgTipoAlerta',
+    component: VhloCfgTipoAlertaComponent 
+  },
+  { 
+    path: 'vhloCfgTipoCabina',
+    component: VhloCfgTipoCabinaComponent 
+  },
+  {
+    path: 'vhloCfgTipoMaquinaria',
+    component: VhloCfgTipoMaquinariaComponent
+  },
+  { 
+    path: 'vhloCfgTipoRodaje',
+    component: VhloCfgTipoRodajeComponent 
+  },
+  { 
+    path: 'vhloCfgTipoVehiculo',
+    component: VhloCfgTipoVehiculoComponent 
+  },
+  { 
+    path: 'vhloCfgTransporteEspecial',
+    component: VhloCfgTransporteEspecialComponent 
+  },
+  { 
+    path: 'vhloCfgTransportePasajero',
+    component: VhloCfgTransportePasajeroComponent 
+  },
+  {
+    path: 'vhloCfgValor',
+    component: VhloCfgValorComponent
+  },
+  
   {
     path: 'vhloCfgPlacaReport',
     component: VhloCfgPlacaReportComponent
@@ -57,10 +187,6 @@ const routes: Routes = [
   {
     path: 'vhloPlacaEntrega',
     component: VhloPlacaSedeDeliveredComponent
-  },
-  {
-    path: 'vhloCfgValor',
-    component: VhloCfgValorComponent
   },
   {
     path: 'vhloTpAsignacion',

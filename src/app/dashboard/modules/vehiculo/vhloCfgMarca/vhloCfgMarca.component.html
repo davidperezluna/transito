@@ -1,5 +1,5 @@
 <hr>
-<div class="container" >
+<div class="container-fluid" >
   <div class="row" *ngIf='formIndex'>
     <div class="col-md-12">
         <div class="card">
@@ -39,6 +39,8 @@
         </div>
       </div>
     </div>
-    <app-edit *ngIf='formEdit' [marca]="marca" (ready)="ready($event)"></app-edit>
-    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+
+    <app-edit-vhlocfgmarca *ngIf='formEdit' [marca]="marca" (ready)="ready($event)"></app-edit-vhlocfgmarca>
+    
+    <app-new-vhlocfgmarca *ngIf='formNew' (ready)="ready($event)"></app-new-vhlocfgmarca>
 </div>

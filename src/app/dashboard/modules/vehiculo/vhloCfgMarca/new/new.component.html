@@ -1,13 +1,13 @@
 <div class="row">
     <div class="col-md-12">
         <div class="card">
-        <div class="card-body">
-            <h5 class="m-0">Nueva marca</h5>
-            <hr>
-            <form #newForm="ngForm">
-                <div class="row justify-content-center">
-                    <div class="col-md-10 ">
-                        <div class="form-group row">
+            <div class="card-header">
+                <b class="text-uppercase">Nueva marca</b>
+            </div>
+            <div class="card-body">
+                <form #newForm="ngForm">
+
+                    <div class="row">
                         <div class="col-lg-6 col-md-6">
                             <label>Nombre*</label>
                             <input class="form-control" [(ngModel)]="marca.nombre" name="nombre" type="text" required>
@@ -16,14 +16,13 @@
                             <label>Codigo Mt*</label>
                             <input class="form-control" [(ngModel)]="marca.codigo" name='codigo' type="text" requerid>
                         </div>
-                        </div>
-                    </div>    
-                </div>
-            </form>
+                    </div>
+                </form>
+            </div>
             <div class="card-footer">
-                <button (click)="onCancelar()" class="btn btn-default">Cancelar</button>
                 <button (click)="onEnviar()" [disabled]="newForm.invalid" class="btn btn-primary" type="button">Enviar</button>
-            </div>    
+                <button (click)="onCancelar()" class="btn btn-default"><i class="fa fa-times"></i>Cancelar</button>
+            </div>
         </div>
     </div>
 </div>

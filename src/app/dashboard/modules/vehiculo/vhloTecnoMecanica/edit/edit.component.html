@@ -9,25 +9,25 @@
                 <form #formEdit="ngForm"> 
                     <div class="form-group row">
                         <div class="col-xs-12 col-lg-4">
-                            <label>Nro. de control <strong class="text-danger">*</strong></label>
+                            <label>Nro. de control <b class="text-danger">*</b></label>
                             <p><b>{{ tecnoMecanica.numeroControl }}</b></p>
                         </div>
                         <div class="col-xs-12 col-lg-4">
-                            <label>CDA <strong class="text-danger">*</strong></label>
+                            <label>CDA <b class="text-danger">*</b></label>
                             <ng-select [multiple]="false" [options]="cdas" [(ngModel)]="cdaSelected" name="cdas" required>
                             </ng-select>
                         </div>
                         <div class="col-xs-12 col-lg-4">
-                            <label>Estado <strong class="text-danger">*</strong></label>
+                            <label>Estado <b class="text-danger">*</b></label>
                             <ng-select [multiple]="false" [options]="estados" [(ngModel)]="estadoSelected" required name="idEstado"></ng-select>
                         </div>
                         <div class="col-xs-12 col-lg-6">
-                            <label>Fecha expedición <strong class="text-danger">*</strong></label>
+                            <label>Fecha expedición <b class="text-danger">*</b></label>
                             <input type="date" class="form-control" (blur)="onCalcularVencimiento()" [(ngModel)]="tecnoMecanica.fechaExpedicion"
                                 name="fechaExpedicion" required />
                         </div>
                         <div class="col-xs-12 col-lg-6">
-                            <label>Fecha vencimiento <strong class="text-danger">*</strong></label>
+                            <label>Fecha vencimiento <b class="text-danger">*</b></label>
                             <input type="date" class="form-control" [(ngModel)]="tecnoMecanica.fechaVencimiento" name="fechaVencimiento"
                                 required />
                         </div>

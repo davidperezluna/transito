@@ -1,9 +1,10 @@
 <div class="row ">
     <div class="col-xs-12 col-lg-12 ">
         <div class="card">
-            <div class="card-body ">
-                <h5 class="m-0">Editar Convenio</h5>
-                <hr>
+            <div class="card-header">
+                <b class="text-uppercase">Editar Convenio</b>
+            </div>
+            <div class="card-body">
                 <form #formEdit="ngForm">
                     <div class="row justify-content-center container">
                         <div class="form-group row">
@@ -16,13 +17,13 @@
                                     <span class="text-danger">*</span>
                                 </label>
                                 <!-- <input class="form-control" (blur)="onValidarNumeroConvenio()" [(ngModel)]="convenio.numeroConvenio" name="numeroConvenio"
-                                    placeholder="" type="text" required> -->
+                                     type="text" required> -->
                                     <h5>{{ convenio.numeroConvenio }}</h5>
                             </div>
                             <div class="col-xs-12 col-lg-6">
                                 <label>Fecha convenio</label>
                                 <input class="form-control" [(ngModel)]="convenio.fechaConvenio" name="fechaConvenio"
-                                    placeholder="" type="date">
+                                     type="date">
                             </div>
                             <div class="col-xs-12 col-lg-4">
                                 <label>Fecha acta Inicio</label>
@@ -39,7 +40,7 @@
                             <div class="col-xs-12 col-lg-12">
                                 <label>Observación</label>
                                 <textarea class="form-control" [(ngModel)]="convenio.observacion" name="observacion"
-                                    placeholder=""></textarea>
+                                    ></textarea>
                             </div>
                         </div>
                     </div>

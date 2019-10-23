@@ -1,39 +1,44 @@
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-xs-12 col-md-6 col-lg-4">
         <div class="card">
-        <div class="card-body">
-            <h5 class="m-0">formulario para el editar una cuenta</h5>
-            <hr> 
-            <div class="row justify-content-center">
-                <div class="col-md-10 ">
-                    <form  #lineaForm="ngForm">
-                        <div class="form-group row">
-                        <div class="col-lg-4 col-md-4">
-                            <label>Nombre*</label>
-                            <input class="form-control" [(ngModel)]="carroceria.nombre" name="nombre" type="text" required>
-                        </div>
-                        <div class="col-lg-4 col-md-4">
-                            <label>Código MT*</label>
-                            <input class="form-control" [(ngModel)]="carroceria.codigo" name='codigo' type="textArea">
-                        </div> 
-                        <div class="col-lg-4 col-md-4">
-                            <label>Clase*</label>
-                            <ng-select
-                                [multiple]="false"
-                                [options]="clases"
-                                [(ngModel)]="claseSelected"
-                                required
-                                name="claseId">
-                            </ng-select>
-                        </div>
-                        </div>    
-                    </form>    
-                </div>   
-                       </div>
-            <div class="card-footer">
-                <button (click)="onCancelar()" class="btn btn-default">Cancelar</button>
-                <button (click)="onEnviar()"  [disabled]="lineaForm.invalid" class="btn btn-outline-primary pull-right" type="button">Enviar</button>
-            </div>    
+            <div class="card-header">
+                <b class="text-uppercase">Editar carroceria</b>
+                <br>
+                <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-10 ">
+                        <form #formEdit="ngForm">
+                            <div class="row">
+                                <div class="col-xs-12 col-lg-12">
+                                    <label>Nombre <b class="text-danger">*</b></label>
+                                    <input class="form-control" [(ngModel)]="carroceria.nombre" name="nombre" type="text" required>
+                                </div>
+                                <div class="col-xs-12 col-lg-12">
+                                    <label>Código MT <b class="text-danger">*</b></label>
+                                    <input class="form-control" [(ngModel)]="carroceria.codigo" name='codigo' type="textArea">
+                                </div>
+                                <div class="col-xs-12 col-lg-12">
+                                    <label>Clase <b class="text-danger">*</b></label>
+                                    <ng-select [multiple]="false" [options]="clases" [(ngModel)]="claseSelected" required name="idClase">
+                                    </ng-select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button (click)="onEnviar()" [disabled]="formEdit.invalid" class="btn btn-primary" type="button">
+                        <i class="fa fa-save"></i>
+                        Enviar
+                    </button>
+                    <button (click)="onCancelar()" class="btn btn-default">
+                        <i class="fa fa-times"></i>
+                        Cancelar
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 </div>

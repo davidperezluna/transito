@@ -8,6 +8,7 @@ declare var $: any;
   selector: 'app-index',
   templateUrl: './vhloCfgColor.component.html'
 })
+
 export class VhloCfgColorComponent implements OnInit {
   public errorMessage;
 	public id;

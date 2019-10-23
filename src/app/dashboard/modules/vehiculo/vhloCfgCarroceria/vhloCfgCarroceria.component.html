@@ -1,4 +1,4 @@
-<div class="container" >
+<div class="container-fluid" >
   <div  class="row align-items-center justify-content-between">
     <div class="col text-right ">
       <div class="btn-group pull-right">
@@ -39,6 +39,6 @@
         </div>
       </div>
     </div>
-    <app-edit *ngIf='formEdit' [carroceria]="carroceria" (ready)="ready($event)"></app-edit>
-    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+    <app-edit-vhlocfgcarroceria *ngIf='formEdit' [carroceria]="carroceria" (ready)="ready($event)"></app-edit-vhlocfgcarroceria>
+    <app-new-vhlocfgcarroceria *ngIf='formNew' (ready)="ready($event)"></app-new-vhlocfgcarroceria>
 </div>

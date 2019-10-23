@@ -1,20 +1,21 @@
-<hr>
 <div class="row">
     <div class="col-xs-12 col-lg-4">
         <div class="card">
             <div class="card-header">
-                <h5 class="text-uppercase">Nuevo Tipo de vehículo</h5>
+                <b class="text-uppercase">Nuevo Tipo de vehículo</b>
+                <br>
                 <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
             </div>
             <div class="card-body">
                 <form #formNew="ngForm">
-                    <div class="form-group row">
+                    <div class="row">
                         <div class="col-xs-12 col-lg-12">
-                            <label>Nombre <strong class="text-danger">*</strong></label>
-                            <input class="form-control" placeholder="" type="text" [(ngModel)]="tipoVehiculo.nombre" required name="nombre">
+                            <label>Nombre <b class="text-danger">*</b></label>
+                            <input class="form-control"  type="text" [(ngModel)]="tipoVehiculo.nombre" required name="nombre">
                         </div>
+                        
                         <div class="col-xs-12 col-lg-12">
-                            <label>Módulo <strong class="text-danger">*</strong></label>
+                            <label>Módulo <b class="text-danger">*</b></label>
                             <ng-select [multiple]="false" [options]="modulos" [(ngModel)]="tipoVehiculo.idModulo" required name="idModulo">
                             </ng-select>
                         </div>

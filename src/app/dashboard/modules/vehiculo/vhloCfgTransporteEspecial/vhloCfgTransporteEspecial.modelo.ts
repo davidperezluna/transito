@@ -1,7 +1,7 @@
 export class VhloCfgTransporteEspecial{
 	constructor(
 		public nombre: string,
-		public idTipoTransporte:number,
+		public idTransportePasajero:number,
 		public id:number
 	){}
 }

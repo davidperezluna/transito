@@ -1,24 +1,23 @@
-<hr>
 <div class="row">
     <div class="col-xs-12 col-lg-4">
         <div class="card">
             <div class="card-header">
-                <h5 class="text-uppercase">Editar radio de acción</h5>
+                <b class="text-uppercase">Editar radio de acción</b>
+                <br>
                 <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
             </div>
             <div class="card-body">
                 <form #formEdit="ngForm"> 
-                    <div class="form-group row">
+                    <div class="row">
                         <div class="col-xs-12 col-lg-12">
-                            <label>Nombre <strong class="text-danger">*</strong></label>
-                            <input class="form-control" [(ngModel)]="transporteEspecial.nombre" name="nombre" type="numeric" required />
+                            <label>Nombre <b class="text-danger">*</b></label>
+                            <input class="form-control" [(ngModel)]="transporteEspecial.nombre" name="nombre" type="text" required />
                         </div>
+                        
                         <div class="col-xs-12 col-lg-6">
-                            <div class="form-group">
-                                <label>Transporte de pasajeros <b class="text-danger">*</b></label>
-                                <ng-select [multiple]="false" [options]="transportesPasajero" [(ngModel)]="transporteEspecial.transportePasajero" (ngModelChange)="changedModulo($event)" required
-                                name="transportePasajero"></ng-select>
-                            </div>
+                            <label>Transporte de pasajeros <b class="text-danger">*</b></label>
+                            <ng-select [multiple]="false" [options]="transportesPasajero" [(ngModel)]="transporteEspecial.transportePasajero" required name="idTransportePasajero">
+                            </ng-select>
                         </div>
                     </div>
                 </form>

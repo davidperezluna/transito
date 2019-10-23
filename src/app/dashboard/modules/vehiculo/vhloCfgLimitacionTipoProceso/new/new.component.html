@@ -1,25 +1,27 @@
 <div class="row">
     <div class="col-md-12">
         <div class="card">
+            <div class="card-header">
+                <b class="text-uppercase">Nuevo tipo de proceso</b>
+            </div>
             <div class="card-body">
-                <h5 class="m-0">formulario para el ingreso de un nuevo tipo de proceso</h5>
-                <hr>
                 <form #formNew="ngForm">
-                    <div class="row justify-content-center">
-                        <div class="col-md-10 ">
-                            <div class="form-group row">
-                            <div class="col-lg-6 col-md-5">
-                                <label>Nombre*</label>
-                                <input class="form-control" [(ngModel)]="cfgTipoProceso.nombre" name="nombre" placeholder="" type="text" required>
-                            </div>
-                            </div>
-                        </div>    
-                    </div>
-                    <div class="card-footer">
-                        <button (click)="onCancelar()" class="btn btn-default">Cancelar</button>
-                        <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-outline-primary pull-right" type="button">Enviar</button>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-5">
+                            <label>Nombre <b class="text-danger">*</b></label>
+                            <input class="form-control" [(ngModel)]="tipoProceso.nombre" name="nombre" type="text" required>
+                        </div>
                     </div>
                 </form>
+            </div>
+            <div class="card-footer">
+                <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
+                    <i class="fa fa-save"></i>
+                    Enviar
+                </button>
+                <button (click)="onCancelar()" class="btn btn-default">
+                    <i class="fa fa-times"></i>Cancelar
+                </button>
             </div>
         </div>
     </div>

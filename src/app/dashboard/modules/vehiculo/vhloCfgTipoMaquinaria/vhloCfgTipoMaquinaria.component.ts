@@ -9,6 +9,7 @@ declare var $: any;
   selector: 'app-index',
   templateUrl: './vhloCfgTipoMaquinaria.component.html'
 })
+
 export class VhloCfgTipoMaquinariaComponent implements OnInit {
   public errorMessage;
 	public id;

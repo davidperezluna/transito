@@ -25,7 +25,7 @@
                 <small>Todos los campos con
                     <b class="text-danger">*</b> son obligatorios</small>
                 <hr>
-                <div class="container">
+                <div class="container-fluid">
                     <div class="form-group">
                         <div class="row">
                             <div class="col-xs-12 col-lg-6">
@@ -33,7 +33,7 @@
                                     <span class="text-danger">*</span>
                                 </label>
                                 <select class="form-control" name="motivoList" [(ngModel)]="datos.motivo" required>
-                                    <option *ngFor="let motivo of motivoList" [value]="blindaje"> {{motivo}}
+                                    <option *ngFor="let motivo of motivoList" [value]="motivo"> {{motivo}}
                                     </option>
                                 </select>
                             </div>
@@ -50,7 +50,7 @@
                 </div>
             </div>
             <div class="card-footer">
-                <button (click)="onCancelar()" class="btn btn-default">Cancelar</button>
+                <button class="btn btn-default"><i class="fa fa-times"></i>Cancelar</button>
                 <button (click)="onEnviar()" class="btn btn-primary">Enviar</button>
             </div>
         </div>

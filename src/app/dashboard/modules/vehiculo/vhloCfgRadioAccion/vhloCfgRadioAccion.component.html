@@ -1,4 +1,4 @@
-<div class="container" >
+<div class="container-fluid" >
   <hr>
   <div class="row" *ngIf='formIndex'>
     <div class="col-md-12">
@@ -46,6 +46,8 @@
         </div>
       </div>
     </div>
-    <app-edit *ngIf='formEdit' [radioAccion]="radioAccion" (ready)="ready($event)"></app-edit>
-    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+
+    <app-edit-vhlocfgradioaccion *ngIf='formEdit' [radioAccion]="radioAccion" (ready)="ready($event)"></app-edit-vhlocfgradioaccion>
+    
+    <app-new-vhlocfgradioaccion *ngIf='formNew' (ready)="ready($event)"></app-new-vhlocfgradioaccion>
 </div>

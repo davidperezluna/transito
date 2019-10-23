@@ -1,32 +1,35 @@
-import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import {VhloCfgClase} from '../vhloCfgClase.modelo';
-import {VhloCfgClaseService} from '../../../../../services/vhloCfgClase.service';
-import {LoginService} from '../../../../../services/login.service';
-import {VhloCfgTipoVehiculoService} from '../../../../../services/vhloCfgTipoVehiculo.service';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { VhloCfgClaseService } from '../../../../../services/vhloCfgClase.service';
+import { LoginService } from '../../../../../services/login.service';
+import { VhloCfgTipoVehiculoService } from '../../../../../services/vhloCfgTipoVehiculo.service';
+import { VhloCfgTipoMaquinariaService } from '../../../../../services/vhloCfgTipoMaquinaria.service';
 import swal from 'sweetalert2';
 
 
 @Component({
-  selector: 'app-edit',
+  selector: 'app-edit-vhlocfgclase',
   templateUrl: './edit.component.html'
 })
+
 export class EditComponent {
 @Output() ready = new EventEmitter<any>();
 @Input() clase:any = null;
 public errorMessage;
-public respuesta;
+
 public tiposVehiculo:any;
+public tiposMaquinaria: any;
+
 public tipoVehiculoSelected:any;
-// public tipoIdentificacion: Array<any>
+public tipoMaquinariaSelected:any;
 
 constructor(
   private _ClaseService:  VhloCfgClaseService,
-  private _loginService: LoginService,
   private _TipoVehiculoService: VhloCfgTipoVehiculoService,
+  private _TipoMaquinariaService: VhloCfgTipoMaquinariaService,
+  private _LoginService: LoginService,
   ){}
 
   ngOnInit() {
-
     this._TipoVehiculoService.select().subscribe(
       response => {
         this.tiposVehiculo = response;
@@ -44,23 +47,47 @@ constructor(
       }
     );
 
+    this._TipoMaquinariaService.select().subscribe(
+      response => {
+        this.tiposMaquinaria = response;
+
+        if(this.clase.tipoVehiculo.id == 5){
+          setTimeout(() => {
+            this.tipoMaquinariaSelected = [this.clase.tipoMaquinaria.id];
+          });
+        }
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
   }
 
 
   onCancelar(){
     this.ready.emit(true);
   }
+
   onEnviar(){
-    let token = this._loginService.getToken();
+    let token = this._LoginService.getToken();
+
     this.clase.idTipoVehiculo = this.tipoVehiculoSelected;
+    this.clase.idTipoMaquinaria = this.tipoMaquinariaSelected;
+
 		this._ClaseService.edit(this.clase,token).subscribe(
 			response => {
         if (response.code == 200){
           this.ready.emit(true);
+
           swal({
-            title: 'Perfecto!',
-            text: 'El registro se ha modificado con exito',
-            type: 'success',
+            title: response.title,
+            text: response.message,
+            type: response.status,
             confirmButtonText: 'Aceptar'
           })
         }

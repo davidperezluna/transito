@@ -9,6 +9,7 @@ declare var $: any;
   selector: 'app-index',
   templateUrl: './vhloCfgEmpresaGps.component.html'
 })
+
 export class VhloCfgEmpresaGpsComponent implements OnInit {
   public errorMessage;
 	public id;

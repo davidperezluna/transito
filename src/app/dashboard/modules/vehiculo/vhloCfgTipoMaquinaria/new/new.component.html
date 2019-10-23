@@ -2,20 +2,20 @@
     <div class="col-xs-12 col-lg-4">
         <div class="card">
             <div class="card-header">
-                <h5 class="text-uppercase">Nuevo tipo de maquinaria</h5>
+                <b class="text-uppercase">Nuevo tipo de maquinaria</b>
+                <br>
                 <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
             </div>
             <div class="card-body">
                 <form #formNew="ngForm"> 
-                    <div class="form-group row">
+                    <div class="row">
                         <div class="col-xs-12 col-lg-12">
-                            <label>Nombre <strong class="text-danger">*</strong></label>
+                            <label>Nombre <b class="text-danger">*</b></label>
                             <input type="text" class="form-control" [(ngModel)]="tipoMaquinaria.nombre" name="nombre" required />
                         </div>
-                    </div>
-                    <div class="form-group row">
+
                         <div class="col-xs-12 col-lg-12">
-                            <label>Código <strong class="text-danger">*</strong></label>
+                            <label>Código <b class="text-danger">*</b></label>
                             <input type="text" class="form-control" [(ngModel)]="tipoMaquinaria.codigo" name="codigo" required />
                         </div>
                     </div>

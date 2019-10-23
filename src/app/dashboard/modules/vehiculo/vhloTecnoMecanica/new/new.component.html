@@ -8,27 +8,27 @@
             <form #formNew="ngForm">
                 <div class="form-group row">
                     <div class="col-xs-12 col-lg-6">
-                        <label>Nro. de control <strong class="text-danger">*</strong></label>
+                        <label>Nro. de control <b class="text-danger">*</b></label>
                         <input type="number" class="form-control" [(ngModel)]="tecnomecanica.numeroControl" name="numeroControl"
                             required autofocus />
                     </div>
                     <div class="col-xs-12 col-lg-6">
-                        <label>CDA <strong class="text-danger">*</strong></label>
+                        <label>CDA <b class="text-danger">*</b></label>
                         <ng-select [multiple]="false" [options]="cdas" [(ngModel)]="cdaSelected" name="cdas" required>
                         </ng-select>
                     </div>
                     <div class="col-xs-12 col-lg-6">
-                        <label>Estado <strong class="text-danger">*</strong></label>
+                        <label>Estado <b class="text-danger">*</b></label>
                         <ng-select [multiple]="false" [options]="estados" [(ngModel)]="estadoSelected" required
                             name="idEstado"></ng-select>
                     </div>
                     <div class="col-xs-12 col-lg-6">
-                        <label>Fecha expedición <strong class="text-danger">*</strong></label>
+                        <label>Fecha expedición <b class="text-danger">*</b></label>
                         <input type="date" class="form-control" (blur)="onCalcularVencimiento()"
                             [(ngModel)]="tecnomecanica.fechaExpedicion" name="fechaExpedicion" required />
                     </div>
                     <div class="col-xs-12 col-lg-6">
-                        <label>Fecha vencimiento <strong class="text-danger">*</strong></label>
+                        <label>Fecha vencimiento <b class="text-danger">*</b></label>
                         <input type="date" class="form-control" [(ngModel)]="tecnomecanica.fechaVencimiento" [disabled]="fecha"
                             name="fechaVencimiento" required />
                     </div>

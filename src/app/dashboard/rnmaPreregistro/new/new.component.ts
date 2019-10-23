@@ -9,7 +9,6 @@ import { VhloCfgMarcaService } from '../../../services/vhloCfgMarca.service';
 import { VhloCfgTipoMaquinariaService } from '../../../services/vhloCfgTipoMaquinaria.service';
 import { VhloCfgTipoRodajeService } from '../../../services/vhloCfgTipoRodaje.service';
 import { VhloCfgTipoCabinaService } from '../../../services/vhloCfgTipoCabina.service';
-import { VhloCfgClaseMaquinariaService } from '../../../services/vhloCfgClaseMaquinaria.service';
 import { VhloCfgOrigenRegistroService } from '../../../services/vhloCfgOrigenRegistro.service';
 import { VhloCfgEmpresaGpsService } from '../../../services/vhloCfgEmpresaGps.service';
 import { VhloCfgCondicionIngresoService } from '../../../services/vhloCfgCondicionIngreso.service';
@@ -63,7 +62,6 @@ constructor(
   private _TipoMaquinariaService: VhloCfgTipoMaquinariaService,
   private _TipoRodajeService: VhloCfgTipoRodajeService,
   private _TipoCabinaService: VhloCfgTipoCabinaService,
-  private _ClaseMaquinariaService: VhloCfgClaseMaquinariaService,
   private _CondicionIngresoService: VhloCfgCondicionIngresoService,
   private _MarcaService: VhloCfgMarcaService,
   private _CarroceriaService: VhloCfgCarroceriaService,
@@ -343,7 +341,7 @@ ngOnInit() {
     if (e) {
       let token = this._LoginService.getToken()
       
-      this._ClaseMaquinariaService.searchByTipoMaquinariaSelect({'idTipoMaquinaria': e}, token).subscribe(
+      /*this._ClaseMaquinariaService.searchByTipoMaquinariaSelect({'idTipoMaquinaria': e}, token).subscribe(
         response => {
           this.clasesMaquinaria = response;
         },
@@ -354,7 +352,7 @@ ngOnInit() {
             alert("Error en la petición");
           }
         }
-      );
+      );*/
     }
   }
 

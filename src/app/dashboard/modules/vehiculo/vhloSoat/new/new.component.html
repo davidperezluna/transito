@@ -8,31 +8,31 @@
             <form #formNew="ngForm">
                 <div class="form-group row">
                     <div class="col-xs-12 col-lg-6">
-                        <label>No. de poliza <strong class="text-danger">*</strong></label>
+                        <label>No. de poliza <b class="text-danger">*</b></label>
                         <input type="text" class="form-control" [(ngModel)]="soat.numeroPoliza" name="numeroPoliza" required/>
                     </div>
                     <div class="col-xs-12 col-lg-6">
-                        <label>Estado <strong class="text-danger">*</strong></label>
+                        <label>Estado <b class="text-danger">*</b></label>
                         <ng-select [multiple]="false" [options]="estados" [(ngModel)]="estadoSelected" required name="idEstado"></ng-select>
                     </div>
                     <div class="col-xs-12 col-lg-4">
-                        <label>Fecha de Expedición <strong class="text-danger">*</strong></label>
+                        <label>Fecha de Expedición <b class="text-danger">*</b></label>
                         <input type="date" class="form-control" (blur)="onCalcularVencimiento()" [(ngModel)]="soat.fechaExpedicion" name="fechaExpedicion" required autofocus/>
                     </div>
                     <div class="col-xs-12 col-lg-4">
-                        <label>Fecha de Vigencia <strong class="text-danger">*</strong></label>
+                        <label>Fecha de Vigencia <b class="text-danger">*</b></label>
                         <input type="date" class="form-control" [(ngModel)]="soat.fechaVigencia" [disabled]="fecha" name="fechaVigencia" required/>
                     </div>
                     <div class="col-xs-12 col-lg-4">
-                        <label>Fecha Vencimiento<strong class="text-danger">*</strong></label>
+                        <label>Fecha Vencimiento<b class="text-danger">*</b></label>
                         <input type="date" class="form-control" [(ngModel)]="soat.fechaVencimiento" [disabled]="fecha" name="fechaVencimiento" required />
                     </div> 
                     <div class="col-xs-12 col-lg-6">
-                        <label>Nombre Empresa <strong class="text-danger">*</strong></label>
+                        <label>Nombre Empresa <b class="text-danger">*</b></label>
                         <ng-select [multiple]="false" [options]="empresas" [(ngModel)]="empresaSelected" required name="idEmpresa"></ng-select>
                     </div>
                     <div class="col-xs-12 col-lg-6">
-                        <label>Ciudad Expedición <strong class="text-danger">*</strong></label>
+                        <label>Ciudad Expedición <b class="text-danger">*</b></label>
                         <ng-select [multiple]="false" [options]="municipios" [(ngModel)]="municipioSelected" required name="municipio"></ng-select>
                     </div>
                 </div>

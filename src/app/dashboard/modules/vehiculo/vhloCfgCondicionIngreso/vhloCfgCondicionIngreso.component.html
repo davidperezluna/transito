@@ -1,4 +1,4 @@
-<div class="container" >
+<div class="container-fluid" >
   <hr>
   <div class="row" *ngIf='formIndex'>
     <div class="col-md-12">
@@ -47,6 +47,6 @@
       </div>
     </div>
     
-    <app-edit *ngIf='formEdit' [condicionIngreso]="condicionIngreso" (ready)="ready($event)"></app-edit>
-    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+    <app-edit-vhlocfgcondicioningreso *ngIf='formEdit' [condicionIngreso]="condicionIngreso" (ready)="ready($event)"></app-edit-vhlocfgcondicioningreso>
+    <app-new-vhlocfgcondicioningreso *ngIf='formNew' (ready)="ready($event)"></app-new-vhlocfgcondicioningreso>
 </div>

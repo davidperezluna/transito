@@ -10,22 +10,22 @@
                 <form #formEdit="ngForm">
                     <div class="form-group row">
                         <div class="col-xs-12 col-lg-12">
-                            <label>Seleccionar Sede Operativa <strong class="text-danger">*</strong></label>
+                            <label>Seleccionar Sede Operativa <b class="text-danger">*</b></label>
                             <ng-select [multiple]="false" [options]="organismosTransito" [(ngModel)]="sedeOperativaSelected"  name="sedeOperativa" required>
                             </ng-select>
                         </div>
                         <div class="col-xs-12 col-lg-12">
-                            <label>Tipo de vehículo <strong class="text-danger">*</strong></label>
+                            <label>Tipo de vehículo <b class="text-danger">*</b></label>
                             <ng-select [multiple]="false" [options]="tiposVehiculos" [(ngModel)]="tipoVehiculoSelected" name="tipoVehiculo" required>
                             </ng-select>
                         </div>
                         <div class="row">
                             <div class="col-xs-12 col-lg-6">
-                                <label>Rango inicio <strong class="text-danger">*</strong></label>
+                                <label>Rango inicio <b class="text-danger">*</b></label>
                                 <input style="text-transform:uppercase" class="form-control" type="text" maxlength="6" [(ngModel)]="asignacion.rangoInicial" name="rangoInicial" required>
                             </div>
                             <div class="col-xs-12 col-lg-6">
-                                <label>Rango final <strong class="text-danger">*</strong></label>
+                                <label>Rango final <b class="text-danger">*</b></label>
                                 <input style="text-transform:uppercase" class="form-control" type="text" maxlength="6" [(ngModel)]="asignacion.rangoFinal" name="rangoFinal" required>
                             </div>
                         </div>

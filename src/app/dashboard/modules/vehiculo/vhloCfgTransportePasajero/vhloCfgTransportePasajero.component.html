@@ -1,4 +1,4 @@
-<div class="container" >
+<div class="container-fluid" >
   <hr>
   <div class="row" *ngIf='formIndex'>
     <div class="col-md-12">
@@ -46,6 +46,8 @@
         </div>
       </div>
     </div>
-    <app-edit *ngIf='formEdit' [transportePasajero]="transportePasajero" (ready)="ready($event)"></app-edit>
-    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+
+    <app-edit-vhlocfgtransportepasajero *ngIf='formEdit' [transportePasajero]="transportePasajero" (ready)="ready($event)"></app-edit-vhlocfgtransportepasajero>
+    
+    <app-new-vhlocfgtransportepasajero *ngIf='formNew' (ready)="ready($event)"></app-new-vhlocfgtransportepasajero>
 </div>
