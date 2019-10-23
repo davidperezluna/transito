@@ -24,7 +24,7 @@ export class SvEvaluacionComponent implements OnInit {
 
   public errorMessage;
   
-  public apiUrl = environment.apiUrl + 'msvevaluacion';
+  public apiUrl = environment.apiUrl + 'seguridadvial/svevaluacion';
   
   public idUsuario;
   public msvEvaluaciones;
@@ -184,7 +184,7 @@ export class SvEvaluacionComponent implements OnInit {
       ) {
       }
     })
-    this._EvaluacionService.getEvaluacion().subscribe(
+    this._EvaluacionService.index().subscribe(
       response => {
         this.msvEvaluaciones = response.data;
       },
@@ -269,7 +269,7 @@ export class SvEvaluacionComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._EvaluacionService.deleteEvaluacion(token, id).subscribe(
+        this._EvaluacionService.delete({'id': id }, token).subscribe(
           response => {
             swal({
               title: 'Eliminado!',
@@ -379,12 +379,13 @@ export class SvEvaluacionComponent implements OnInit {
       }, 100);
 
       let token = this._loginService.getToken();
-      this._MsvCategoriaService.showCategoria(token, e).subscribe(
+      console.log(e);
+      this._MsvCategoriaService.show({'id': e}, token).subscribe(
         response => {
           if (response.code == 200) {
             this.categoria = true;
             if (this.categoriaSelected) {
-              this._MsvParametroService.getParametroByCategoriaId(token, e).subscribe(
+              this._MsvParametroService.getParametroByCategoriaId({'id': e}, token).subscribe(
                 response => {
                   this.msvParametros = response.data;
                   if (this.datosFortalecimiento.parametros != null && this.categoriaSelected == 1) {

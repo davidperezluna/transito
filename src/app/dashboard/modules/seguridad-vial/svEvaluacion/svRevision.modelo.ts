@@ -11,10 +11,10 @@ export class SvRevision{
 		public fechaVisitaControl2: string,
 		public observacionVisita2: string,
 		public estado: boolean,
-		public empresaId: number,
+		public idEmpresa: number,
 		public personaContacto: string,
 		public cargo: string,
-		public funcionarioId: number,
+		public idFuncionario: number,
 		public correo: string
 
 	){}

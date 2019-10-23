@@ -48,7 +48,7 @@ export class EditComponent implements OnInit {
     onEnviar() {
         let token = this._loginService.getToken();
         this.parametro.idCategoria = this.categoriaSelected;
-        this._ParametroService.editParametro(this.parametro, token).subscribe(
+        this._ParametroService.edit(this.parametro, token).subscribe(
             response => {
                 if (response.code == 200) {
                     this.ready.emit(true);

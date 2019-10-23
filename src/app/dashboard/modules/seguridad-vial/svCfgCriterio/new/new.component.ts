@@ -27,7 +27,7 @@ export class NewComponent implements OnInit {
     ngOnInit() {
         this.criterio = new SvCfgCriterio(null, null, null);
 
-        this._VariableService.getVariableSelect().subscribe(
+        this._VariableService.select().subscribe(
             response => {
                 this.variables = response;
             },

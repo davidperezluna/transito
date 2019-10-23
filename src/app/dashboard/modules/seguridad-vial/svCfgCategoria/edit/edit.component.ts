@@ -24,7 +24,7 @@ constructor(
 
   onEnviar(){
     let token = this._loginService.getToken();
-		this._CategoriaService.editCategoria(this.categoria, token).subscribe(
+		this._CategoriaService.edit(this.categoria, token).subscribe(
 			response => {
         if(response.code == 200){
           this.ready.emit(true);

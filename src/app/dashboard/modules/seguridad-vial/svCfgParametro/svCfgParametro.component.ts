@@ -105,7 +105,7 @@ export class SvCfgParametroComponent implements OnInit {
             if (result.value) {
                 let token = this._LoginService.getToken();
 
-                this._ParametroService.deleteParametro({ 'id': id }, token).subscribe(
+                this._ParametroService.delete({ 'id': id }, token).subscribe(
                     response => {
                         swal({
                             title: 'Eliminado!',

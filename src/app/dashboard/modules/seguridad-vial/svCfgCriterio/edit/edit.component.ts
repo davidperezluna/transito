@@ -26,7 +26,7 @@ export class EditComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this._VariableService.getVariableSelect().subscribe(
+        this._VariableService.select().subscribe(
             response => {
                 this.variables = response;
                 setTimeout(() => {
@@ -49,7 +49,7 @@ export class EditComponent implements OnInit {
     onEnviar() {
         let token = this._loginService.getToken();
         this.criterio.idVariable = this.variableSelected
-        this._CriterioService.editCriterio(this.criterio, token).subscribe(
+        this._CriterioService.edit(this.criterio, token).subscribe(
             response => {
                 if (response.code == 200) {
                     this.ready.emit(true);

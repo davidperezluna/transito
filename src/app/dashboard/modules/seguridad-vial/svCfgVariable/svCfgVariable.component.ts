@@ -105,7 +105,7 @@ export class SvCfgVariableComponent implements OnInit {
             if (result.value) {
                 let token = this._LoginService.getToken();
 
-                this._SvCfgVariableService.deleteVariable({ 'id': id }, token).subscribe(
+                this._SvCfgVariableService.delete({ 'id': id }, token).subscribe(
                     response => {
                         swal({
                             title: 'Eliminado!',

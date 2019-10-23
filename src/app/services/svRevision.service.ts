@@ -6,7 +6,7 @@ import { environment } from 'environments/environment';
 
 @Injectable()
 export class SvRevisionService {
-	private url = environment.apiUrl + 'msvrevision';
+	private url = environment.apiUrl + 'seguridadvial/svrevision';
 	public identity;
 	public token;
 
@@ -27,19 +27,16 @@ export class SvRevisionService {
 		let json = JSON.stringify(datos);
 		let params = "data="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
-		return this._http.post(this.url+"/delete", params, {headers: headers})
-							  .map(res => res.json());
+		return this._http.post(this.url+"/delete", params, {headers: headers}).map(res => res.json());
 	}
 
 	show(datos, token){
 		let json = JSON.stringify(datos);
 		let params = "data=" + json + "&authorization=" + token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
-		return this._http.post(this.url+"/show", params, {headers: headers})
-							  .map(res => res.json());
+		return this._http.post(this.url+"/show", params, {headers: headers}).map(res => res.json());
 	}
 
-	// tslint:disable-next-line:one-line
 	edit(datos,token){
 		let json = JSON.stringify(datos);
 		let params = "data="+json+"&authorization="+token;
@@ -53,7 +50,7 @@ export class SvRevisionService {
 
 	getFechaDevolucion(datos, token) {
 		let json = JSON.stringify(datos);
-		let params = "json=" + json + "&authorization=" + token;
+		let params = "data=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/get/fecha/devolucion", params, { headers: headers }).map(
 			res => res.json()

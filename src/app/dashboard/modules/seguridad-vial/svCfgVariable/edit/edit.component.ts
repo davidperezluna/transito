@@ -25,7 +25,7 @@ export class EditComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this._SvCfgParametroService.getParametroSelect().subscribe(
+        this._SvCfgParametroService.select().subscribe(
             response => {
                 this.parametros = response;
                 setTimeout(() => {
@@ -48,7 +48,7 @@ export class EditComponent implements OnInit {
     onEnviar() {
         let token = this._LoginService.getToken();
         this.variable.idParametro = this.parametroSelected;
-        this._SvCfgVariableService.editVariable(this.variable, token).subscribe(
+        this._SvCfgVariableService.edit(this.variable, token).subscribe(
             response => {
                 if (response.code == 200) {
                     this.ready.emit(true);
