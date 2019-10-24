@@ -11,6 +11,7 @@ import { CfgAuditoriaComponent } from './cfgAuditoria/cfgAuditoria.component';
 import { CfgFestivoComponent } from './cfgFestivo/cfgFestivo.component';
 import { CfgClaveComponent } from './cfgClave/cfgClave.component';
 import { CfgOrganismoTransitoComponent } from './cfgOrganismoTransito/cfgOrganismoTransito.component';
+import { CfgTipoInfractorComponent } from './cfgTipoInfractor/cfgTipoInfractor.component';
 
 import { ConfigRoutingModule } from './config-routing.module';
 import { CfgAdmFormatoModule } from './cfgAdmFormato/cfgAdmFormato.module';
@@ -19,7 +20,8 @@ import { CfgAuditoriaModule } from './cfgAuditoria/cfgAuditoria.module';
 import { CfgFestivoModule } from './cfgFestivo/cfgFestivo.module';
 import { CfgClaveModule } from './cfgClave/cfgClave.module';
 import { CfgOrganismoTransitoModule } from './cfgOrganismoTransito/cfgOrganismoTransito.module';
- 
+import { CfgTipoInfractorModule } from './cfgTipoInfractor/cfgTipoInfractor.module';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -34,6 +36,7 @@ import { CfgOrganismoTransitoModule } from './cfgOrganismoTransito/cfgOrganismoT
     CfgFestivoModule,
     CfgClaveModule,
     CfgOrganismoTransitoModule,
+    CfgTipoInfractorModule,
   ],
   declarations: [
     CfgFestivoComponent,
@@ -42,6 +45,8 @@ import { CfgOrganismoTransitoModule } from './cfgOrganismoTransito/cfgOrganismoT
     CfgAuditoriaComponent,
     CfgClaveComponent,
     CfgOrganismoTransitoComponent,
+    CfgTipoInfractorComponent,
   ]
 })
+
 export class ConfigModule { }
