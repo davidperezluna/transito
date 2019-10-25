@@ -11,19 +11,19 @@
                     <div class="form-group row">
                         <div class="col-xs-12 col-lg-12">
                             <label>No. de Radicado <strong class="text-danger">*</strong></label>
-                            <input class="form-control" [(ngModel)]="msvRevision.numeroRadicado" name="numeroRadicado" type="number" required />
+                            <input class="form-control" [(ngModel)]="revision.numeroRadicado" name="numeroRadicado" type="number" required />
                         </div>
                         <div class="col-xs-12 col-lg-12">
                             <label>Fecha recepción <strong class="text-danger">*</strong></label>
-                            <input class="form-control" (blur)="onCalcularDevolucion()" [(ngModel)]="msvRevision.fechaRecepcion" name="fechar" type="date" required />
+                            <input class="form-control" (blur)="onCalcularDevolucion()" [(ngModel)]="revision.fechaRecepcion" name="fechar" type="date" required />
                         </div>
                         <div class="col-xs-12 col-lg-12">
                             <label>Fecha revisión <strong class="text-danger">*</strong></label>
-                            <input class="form-control" [(ngModel)]="msvRevision.fechaRevision" name="fechaRevision" type="date" required />
+                            <input class="form-control" [(ngModel)]="revision.fechaRevision" name="fechaRevision" type="date" required />
                         </div>
                         <div class="col-xs-12 col-lg-12">
                             <label>Fecha devolución</label>
-                            <input class="form-control" [(ngModel)]="msvRevision.fechaDevolucion" name="fechad" type="date" disabled required />
+                            <input class="form-control" [(ngModel)]="revision.fechaDevolucion" name="fechad" type="date" disabled required />
                         </div>
                         <div class="col-xs-12 col-lg-12">
                             <label>Funcionario que revisa <strong class="text-danger">*</strong></label>
@@ -32,15 +32,15 @@
                         </div>
                         <div class="col-xs-12 col-lg-12">
                             <label>Persona Contacto <strong class="text-danger">*</strong></label>
-                            <input class="form-control" [(ngModel)]="msvRevision.personaContacto" name="personac" type="text" required />
+                            <input class="form-control" [(ngModel)]="revision.personaContacto" name="personac" type="text" required />
                         </div>
                         <div class="col-xs-12 col-lg-12">
                             <label>Cargo del contacto <strong class="text-danger">*</strong></label>
-                            <input class="form-control" [(ngModel)]="msvRevision.cargo" name="cargo" type="text" required />
+                            <input class="form-control" [(ngModel)]="revision.cargo" name="cargo" type="text" required />
                         </div>
                         <div class="col-xs-12 col-lg-12">
                             <label>Correo del contacto <strong class="text-danger">*</strong></label>
-                            <input class="form-control" [(ngModel)]="msvRevision.correo" name="correo" type="text" required />
+                            <input class="form-control" [(ngModel)]="revision.correo" name="correo" type="text" required />
                         </div>
                     </div>
                 </form>
