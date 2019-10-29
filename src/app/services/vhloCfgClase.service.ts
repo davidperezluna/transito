@@ -66,8 +66,15 @@ export class VhloCfgClaseService {
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/select/modulo", params, { headers: headers }).map(res => res.json());
 	}
-
+	
 	getClaseParaMaquinariaSelect(){
 		return this._http.get(this.url+"/maquinaria/select").map(res => res.json());
+	}
+	
+	selectByTipoMaquinaria(datos, token){
+		let json = JSON.stringify(datos);
+		let params = "data=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/select/tipomaquinaria", params, { headers: headers }).map(res => res.json());
 	}
 }

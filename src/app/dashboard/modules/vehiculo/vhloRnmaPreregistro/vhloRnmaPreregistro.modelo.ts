@@ -29,6 +29,7 @@ export class VhloRnmaPreregistro{
 		public idTipoRodaje: number,
 		public idTipoCabina: number,
 		public idClaseMaquinaria: number,
+		public idTipoMaquinaria: number,
 		public idCondicionIngreso: number,
 		public idOrigenRegistro: number,
 		public idEmpresaGps: number,
