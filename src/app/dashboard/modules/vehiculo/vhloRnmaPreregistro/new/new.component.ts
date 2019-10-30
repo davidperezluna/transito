@@ -11,10 +11,17 @@ import { VhloCfgRadioAccionService } from '../../../../../services/vhloCfgRadioA
 import { VhloCfgModalidadTransporteService } from '../../../../../services/vhloCfgModalidadTransporte.service';
 import { VhloCfgMarcaService } from '../../../../../services/vhloCfgMarca.service';
 import { VhloPropietarioService } from '../../../../../services/vhloPropietario.service';
-import { VhloRnaPreregistroService } from '../../../../../services/vhloRnaPreregistro.service';
+import { VhloMaquinariaService } from '../../../../../services/vhloMaquinaria.service';
 import { UserCfgTipoIdentificacionService } from '../../../../../services/userCfgTipoIdentificacion.service';
 import { UserCiudadanoService } from '../../../../../services/userCiudadano.service';
 import { PnalFuncionarioService } from '../../../../../services/pnalFuncionario.service';
+import { VhloCfgTipoMaquinariaService } from '../../../../../services/vhloCfgTipoMaquinaria.service';
+import { VhloCfgCondicionIngresoService } from '../../../../../services/vhloCfgCondicionIngreso.service';
+import { VhloCfgTipoRodajeService } from '../../../../../services/vhloCfgTipoRodaje.service';
+import { VhloCfgTipoCabinaService } from '../../../../../services/vhloCfgTipoCabina.service';
+import { VhloCfgOrigenRegistroService } from '../../../../../services/vhloCfgOrigenRegistro.service';
+import { VhloCfgSubpartidaArancelariaService } from '../../../../../services/vhloCfgSubpartidaArancelaria.service';
+import { VhloCfgEmpresaGpsService } from '../../../../../services/vhloCfgEmpresaGps.service';
 import { LoginService } from '../../../../../services/login.service';
 
 import swal from 'sweetalert2';
@@ -109,16 +116,23 @@ constructor(
   private _CombustibleService: VhloCfgCombustibleService,
   private _RadioAccionService: VhloCfgRadioAccionService,
   private _ModalidadTransporteService: VhloCfgModalidadTransporteService,
-  private _RnaPreregistroService: VhloRnaPreregistroService,
+  private _MaquinariaService: VhloMaquinariaService,
   private _OrganismoTransitoService: CfgOrganismoTransitoService,
   private _FuncionarioService: PnalFuncionarioService,
   private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
   private _CiudadanoService: UserCiudadanoService,
+  private _TipoMaquinariaService: VhloCfgTipoMaquinariaService,
+  private _CondicionIngresoService: VhloCfgCondicionIngresoService,
+  private _TipoRodajeService: VhloCfgTipoRodajeService,
+  private _TipoCabinaService: VhloCfgTipoCabinaService,
+  private _OrigenRegistroService: VhloCfgOrigenRegistroService,
+  private _SubpartidaArancelariaService: VhloCfgSubpartidaArancelariaService,
+  private _EmpresaGpsService: VhloCfgEmpresaGpsService,
   private _LoginService: LoginService,
   ){}
 
   ngOnInit() {
-    this.maquinaria = new VhloRnmaPreregistro(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
+    this.maquinaria = new VhloRnmaPreregistro(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
     
     let token = this._LoginService.getToken();
     let identity = this._LoginService.getIdentity();
@@ -293,6 +307,104 @@ constructor(
         }
       }
     );
+
+    this._TipoMaquinariaService.select().subscribe(
+      response => {
+        this.tiposMaquinaria = response;
+      },  
+      error => {
+        this.errorMessage = <any>error;
+
+        if(this.errorMessage != null){
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+
+    this._CondicionIngresoService.select().subscribe(
+      response => {
+        this.condicionesIngreso = response;
+      },  
+      error => {
+        this.errorMessage = <any>error;
+
+        if(this.errorMessage != null){
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+
+    this._TipoRodajeService.select().subscribe(
+      response => {
+        this.tiposRodaje = response;
+      },  
+      error => {
+        this.errorMessage = <any>error;
+
+        if(this.errorMessage != null){
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+
+    this._TipoCabinaService.select().subscribe(
+      response => {
+        this.tiposCabina = response;
+      },  
+      error => {
+        this.errorMessage = <any>error;
+
+        if(this.errorMessage != null){
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+
+    this._OrigenRegistroService.select().subscribe(
+      response => {
+        this.origenesRegistro = response;
+      },  
+      error => {
+        this.errorMessage = <any>error;
+
+        if(this.errorMessage != null){
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+
+    this._SubpartidaArancelariaService.select().subscribe(
+      response => {
+        this.subpartidasArancelarias = response;
+      },  
+      error => {
+        this.errorMessage = <any>error;
+
+        if(this.errorMessage != null){
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+
+    this._EmpresaGpsService.select().subscribe(
+      response => {
+        this.empresasGps = response;
+      },  
+      error => {
+        this.errorMessage = <any>error;
+
+        if(this.errorMessage != null){
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
   }
 
   onCancelar(){
@@ -400,9 +512,11 @@ constructor(
     if (e) {
       let token = this._LoginService.getToken()
 
-      /*this._ClaseMaquinariaService.searchByTipoMaquinariaSelect({ 'idTipoMaquinaria': e }, token).subscribe(
+      this._ClaseService.selectByTipoMaquinaria({ 'idTipoMaquinaria': e }, token).subscribe(
         response => {
           this.clasesMaquinaria = response;
+          console.log(response);
+          console.log(this.clasesMaquinaria);
         },
         error => {
           this.errorMessage = <any>error;
@@ -411,7 +525,7 @@ constructor(
             alert("Error en la petición");
           }
         }
-      );*/
+      );
     }
   }
 
@@ -669,13 +783,13 @@ constructor(
           }
         });
 
-        this._RnaPreregistroService.register(this.maquinaria, token).subscribe(
+        this._MaquinariaService.register(this.maquinaria, token).subscribe(
           response => {
             if (response.code == 200) {
               swal({
-                title: 'Perfecto!',
+                title: response.title,
                 text: response.message,
-                type: 'success',
+                type: response.status,
                 confirmButtonText: 'Aceptar'
               });
               

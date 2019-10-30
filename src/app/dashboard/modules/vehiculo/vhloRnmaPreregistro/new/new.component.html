@@ -26,9 +26,13 @@
                                 <label>No Factura de compra<b class="text-danger">*</b></label>
                                 <input class="form-control" [(ngModel)]="maquinaria.numeroFactura" name="numeroFactura" type="text" required>
                             </div>
-                            <div class="col-xs-12 col-lg-3 col-md-3">
+                            <div class="col-xs-12 col-lg-3 col-md-3" *ngIf="maquinaria.tipoMatricula != 'MATRICULA'">
                                 <label>No. de Registro <b class="text-danger">*</b></label>
                                 <input class="form-control" [(ngModel)]="maquinaria.placa" name="placa" type="text" required>
+                            </div>
+                            <div class="col-lg-6">
+                                <label>Valor</label>
+                                <input class="form-control" [(ngModel)]="maquinaria.valor" type="number" name="valor" required>
                             </div>
                             <div class="col-xs-12 col-lg-3 col-md-3">
                                 <label>No. serie <b class="text-danger">*</b></label>
@@ -61,24 +65,26 @@
                                 </ng-select>
                             </div>
                         
-                            <div class="col-xs-12 col-md-3">
+                            <div class="col-xs-12 col-lg-3">
                                 <label>Tipo maquinaria <b class="text-danger">*</b></label>
-                                <ng-select [multiple]="false" [options]="tiposMaquinaria" [(ngModel)]="maquinaria.idClaseMaquinaria" (ngModelChange)="onChangedTipoMaquinaria($event)" required name="tipoMaquinaria">
+                                <ng-select [multiple]="false" [options]="tiposMaquinaria" (ngModelChange)="onChangedTipoMaquinaria($event)" [(ngModel)]="maquinaria.idTipoMaquinaria" required
+                                    name="tipoMaquinaria">
                                 </ng-select>
                             </div>
-                        
+
                             <div class="col-xs-12 col-lg-3">
                                 <label>Clase de maquinaria <b class="text-danger">*</b></label>
-                                <ng-select *ngIf="clasesMaquinaria" [multiple]="false" [options]="clasesMaquinaria" [(ngModel)]="maquinaria.idClaseMaquinaria" required name="claseMaquinaria">
+                                <ng-select *ngIf="clasesMaquinaria" [multiple]="false" [options]="clasesMaquinaria" (ngModelChange)="onChangedClase($event)" [(ngModel)]="maquinaria.idClaseMaquinaria" required name="claseMaquinaria">
                                 </ng-select>
                             </div>
                         
                             <div class="col-xs-12 col-lg-3">
                                 <label>Marca <b class="text-danger">*</b></label>
-                                <ng-select [multiple]="false" [options]="marcas" (ngModelChange)="onChangedMarca($event)" name="idMarca" required>
+                                <ng-select [multiple]="false" [options]="marcas" (ngModelChange)="onChangedMarca($event)" [(ngModel)]="maquinaria.idMarca" required
+                                    name="marca">
                                 </ng-select>
                             </div>
-                        
+
                             <div class="col-xs-12 col-lg-3">
                                 <label>Linea <b class="text-danger">*</b></label>
                                 <ng-select *ngIf="lineas" [multiple]="false" [options]="lineas" [(ngModel)]="maquinaria.idLinea" required name="linea">
