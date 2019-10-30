@@ -49,7 +49,7 @@ export class GdDocumentoComponent implements OnInit {
   constructor(
     private _DocumentoService: GdDocumentoService,
     private _FuncionarioService: PnalFuncionarioService,
-		private _loginService: LoginService,
+		private _LoginService: LoginService,
     ){}
     
   ngOnInit() {  
@@ -147,7 +147,7 @@ export class GdDocumentoComponent implements OnInit {
     
     if (event) {
       console.log(event);
-      let token = this._loginService.getToken();
+      let token = this._LoginService.getToken();
 
       this._DocumentoService.show({'id': idDocumento}, token).subscribe(
         response => {
@@ -344,7 +344,7 @@ export class GdDocumentoComponent implements OnInit {
       }
     });
 
-    let token = this._loginService.getToken();
+    let token = this._LoginService.getToken();
     
     this._DocumentoService.search(this.search, token).subscribe(
       response => {
@@ -391,7 +391,7 @@ export class GdDocumentoComponent implements OnInit {
       }
     });
 
-    let token = this._loginService.getToken();
+    let token = this._LoginService.getToken();
 
     this._DocumentoService.searchByState({ 'state':estado }, token).subscribe(
       response => {
@@ -437,7 +437,7 @@ export class GdDocumentoComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.value) {
-        let token = this._loginService.getToken();
+        let token = this._LoginService.getToken();
         this._DocumentoService.delete(token, id).subscribe(
           response => {
             swal({
