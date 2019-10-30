@@ -45,7 +45,7 @@ export class NewComponent implements OnInit {
   constructor(
     private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
     private _DocumentoService: GdDocumentoService,
-    private _loginService: LoginService,
+    private _LoginService: LoginService,
     private router: Router
   ) { }
 
@@ -74,7 +74,15 @@ export class NewComponent implements OnInit {
   
 
   onRegister() {
-    let token = this._loginService.getToken();
+    swal({
+      title: 'Registrando documento!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+
+    let token = this._LoginService.getToken();
 
     this._DocumentoService.register(this.documento, token).subscribe(
       response => {

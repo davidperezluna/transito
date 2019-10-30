@@ -25,12 +25,14 @@ constructor(
 
   onEnviar(){
     let token = this._loginService.getToken();
+
 		this._tipoCorrespondenciaService.edit(this.tipoCorrespondencia,token).subscribe(
 			response => {
         this.respuesta = response;
         console.log(this.respuesta);
         if(this.respuesta.status == 'success'){
           this.ready.emit(true);
+
           swal({
             title: 'Perfecto!',
             text: 'El registro se ha modificado con exito',
@@ -49,5 +51,4 @@ constructor(
 
 		}); 
   }
-
 }
