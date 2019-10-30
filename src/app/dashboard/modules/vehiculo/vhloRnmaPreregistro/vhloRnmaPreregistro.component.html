@@ -10,7 +10,7 @@
             <div class="col-xs-12 col-lg-12">
               <div class="form-group">
                 <label>Parametro de búsqueda<br> <small>(No. registro, No VIN, No. Serie, No. motor, No. Motor, No. Chasis)</small></label>
-                <input class="form-control text-uppercase" [(ngModel)]="search.filtro" name="filtro" type="text" required />
+                <input class="form-control text-uppercase" [(ngModel)]="filtro" name="filtro" type="text" required />
               </div>
             </div>
           </div>
@@ -21,7 +21,7 @@
               <div class="form-group">
                 <div class="btn-group btn-group-justified">
                   <div class="btn-group">
-                    <button (click)="onSearch()" class="btn btn-default btn-primary" type="button">
+                    <button (click)="onSearch()" class="btn btn-default btn-primary" [disabled]="!filtro" type="button">
                       <i class="fa fa-search"></i>
                       Buscar
                     </button>
@@ -42,12 +42,6 @@
       <div class="card">
         <div class="card-header">
           <b class="text-uppercase">Maquinaria registrada</b>
-          <div class="btn-group pull-right">
-            <button (click)="onNew()" class="btn btn-default">
-              <i class="fa fa-plus"></i>
-              Nuevo
-            </button>
-          </div>
         </div>
         <div class="card-body">
           <table class="table " id="dataTables-example">
@@ -66,37 +60,37 @@
               </tr>
             </thead>
             <tbody>
-              <tr class="odd" *ngFor="let vehiculo of vehiculos; let i = index">
+              <tr class="odd">
                 <td>
-                  <span *ngIf="vehiculo.placa">
-                    {{ vehiculo.placa.numero }}
+                  <span *ngIf="maquinaria.vehiculo.placa">
+                    {{ maquinaria.vehiculo.placa.numero }}
                   </span>
-                  <span *ngIf="!vehiculo.placa">
+                  <span *ngIf="!maquinaria.vehiculo.placa">
                     Sin Asignar
                   </span>
                 </td>
-                <td>{{ vehiculo.motor }}</td>
-                <td>{{ vehiculo.clase?.nombre }}</td>
-                <td>{{ vehiculo.cilindraje }}</td>
-                <td>{{ vehiculo.modelo }}</td>
+                <td>{{ maquinaria.vehiculo.motor }}</td>
+                <td>{{ maquinaria.vehiculo.clase?.nombre }}</td>
+                <td>{{ maquinaria.vehiculo.cilindraje }}</td>
+                <td>{{ maquinaria.vehiculo.modelo }}</td>
                 <td>
-                  <span *ngIf="vehiculo.linea">
-                      {{vehiculo.linea?.marca.nombre}}
+                  <span *ngIf="maquinaria.vehiculo.linea">
+                      {{maquinaria.vehiculo.linea?.marca.nombre}}
                   </span>
                 </td>
                 <td>
-                  <span *ngIf="vehiculo.linea">
-                      {{vehiculo.linea?.nombre}}
+                  <span *ngIf="maquinaria.vehiculo.linea">
+                      {{maquinaria.vehiculo.linea?.nombre}}
                   </span>
                 </td>
-                <td>{{vehiculo.valor}}</td> 
-                <td>{{vehiculo.chasis}}</td> 
+                <td>{{maquinaria.vehiculo.valor}}</td> 
+                <td>{{maquinaria.vehiculo.chasis}}</td> 
                 <td>
                   <div class="btn-group">
-                    <button (click)="onEdit(vehiculo)" class="btn btn-xs btn-primary" type="button">
+                    <button (click)="onEdit(maquinaria)" class="btn btn-xs btn-primary" type="button">
                       <i class="fa fa-pencil"></i>
                     </button> 
-                    <button (click)="onDelete(vehiculo.id)"  class="btn btn-xs btn-danger" type="button">
+                    <button (click)="onDelete(maquinaria.id)"  class="btn btn-xs btn-danger" type="button">
                       <i class="fa fa-trash"></i>
                     </button> 
                   </div>
@@ -108,8 +102,9 @@
         </div>
       </div>
     </div>
+    <div class="col-xs-12 col-lg-8">
+      <app-edit-rnmapreregistro *ngIf='formEdit' [maquinaria]="vehiculo" (ready)="ready($event)"></app-edit-rnmapreregistro>
+      <app-new-rnmapreregistro *ngIf='formNew' (ready)="ready($event)"></app-new-rnmapreregistro>
+    </div>
   </div>
-
-  <app-edit-rnmapreregistro *ngIf='formEdit' [vehiculo]="vehiculo" (ready)="ready($event)"></app-edit-rnmapreregistro>
-  <app-new-rnmapreregistro *ngIf='formNew' (ready)="ready($event)"></app-new-rnmapreregistro>
 </div>

@@ -8,6 +8,7 @@ export class VhloRnmaPreregistro{
 		public modelo: string,
 		public idColor: number,
 		public idLinea: number,
+		public idMarca: number,
 		public idCarroceria: number,
 		public idCombustible: number,
 		public fechaIngreso: string,

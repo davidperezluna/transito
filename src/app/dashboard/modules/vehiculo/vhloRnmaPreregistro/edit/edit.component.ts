@@ -1,24 +1,25 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { DatePipe } from '@angular/common';
 import { CfgOrganismoTransitoService } from '../../../../../services/cfgOrganismoTransito.service';
-import { CfgMunicipioService } from '../../../../../services/cfgMunicipio.service';
 import { VhloCfgLineaService } from '../../../../../services/vhloCfgLinea.service';
 import { VhloCfgClaseService } from '../../../../../services/vhloCfgClase.service';
 import { VhloCfgCarroceriaService } from '../../../../../services/vhloCfgCarroceria.service';
-import { VhloCfgServicioService } from '../../../../../services/vhloCfgServicio.service';
 import { VhloCfgColorService } from '../../../../../services/vhloCfgColor.service';
 import { VhloCfgCombustibleService } from '../../../../../services/vhloCfgCombustible.service';
-import { VhloVehiculoService } from '../../../../../services/vhloVehiculo.service';
-import { VhloCfgMarcaService } from '../../../../../services/vhloCfgMarca.service';
 import { VhloCfgRadioAccionService } from '../../../../../services/vhloCfgRadioAccion.service';
 import { VhloCfgModalidadTransporteService } from '../../../../../services/vhloCfgModalidadTransporte.service';
-import { VhloPropietarioService } from '../../../../../services/vhloPropietario.service';
-import { VhloRnaPreregistroService } from '../../../../../services/vhloRnaPreregistro.service';
-import { UserCfgTipoIdentificacionService } from '../../../../../services/userCfgTipoIdentificacion.service';
-import { UserCiudadanoService } from '../../../../../services/userCiudadano.service';
-import { UserEmpresaService } from "../../../../../services/userEmpresa.service";
+import { VhloCfgMarcaService } from '../../../../../services/vhloCfgMarca.service';
+import { VhloMaquinariaService } from '../../../../../services/vhloMaquinaria.service';
 import { PnalFuncionarioService } from '../../../../../services/pnalFuncionario.service';
+import { VhloCfgTipoMaquinariaService } from '../../../../../services/vhloCfgTipoMaquinaria.service';
+import { VhloCfgCondicionIngresoService } from '../../../../../services/vhloCfgCondicionIngreso.service';
+import { VhloCfgTipoRodajeService } from '../../../../../services/vhloCfgTipoRodaje.service';
+import { VhloCfgTipoCabinaService } from '../../../../../services/vhloCfgTipoCabina.service';
+import { VhloCfgOrigenRegistroService } from '../../../../../services/vhloCfgOrigenRegistro.service';
+import { VhloCfgSubpartidaArancelariaService } from '../../../../../services/vhloCfgSubpartidaArancelaria.service';
+import { VhloCfgEmpresaGpsService } from '../../../../../services/vhloCfgEmpresaGps.service';
 import { LoginService } from '../../../../../services/login.service';
+
+import { DatePipe } from '@angular/common';
 import swal from 'sweetalert2';
 
 @Component({
@@ -29,42 +30,57 @@ import swal from 'sweetalert2';
 
 export class EditComponent implements OnInit {
   @Output() ready = new EventEmitter<any>();
-  @Input() vehiculo:any = null;
+  @Input() maquinaria:any = null;
   public errorMessage:any;
 
-  public municipios:any;
-  public lineas:any;
-  public clases:any;
-  public carrocerias:any;
-  public servicios:any;
-  public colores:any;
-  public marcas:any;
-  public combustibles:any;
-  public radioAcciones:any;
-  public modalidadTransportes:any;
-  public organismosTransito:any;
-  public organismosTransitoNacional:any;
+  public lineas: any;
+  public clases: any;
+  public carrocerias: any;
+  public servicios: any;
+  public colores: any;
+  public marcas: any;
+  public combustibles: any;
+  public radiosAccion: any;
+  public modalidadesTransporte: any;
+  public organismosTransito: any;
+  public organismosTransitoNacional: any;
+  public origenesRegistro: any;
+  public condicionesIngreso: any;
+  public tiposMaquinaria: any;
+  public tiposRodaje: any;
+  public tiposCabina: any;
+  public clasesMaquinaria: any = null;
+  public empresasGps: any;
+  public subpartidasArancelarias: any;
 
-  public fechaFactura:any;
-  public fechaManifiesto:any;
-  public municipioSelected:any;
-  public lineaSelected:any;
-  public claseSelected:any;
-  public carroceriaSelected:any;
-  public servicioSelected:any;
-  public colorSelected:any;
-  public marcaSelected:any;
-  public combustibleSelected:any;
-  public radioAccionSelected:any;
-  public modalidadTransporteSelected:any;
-  public sedeOperativaSelected:any;
 
-  public tipoIdentificacionSelected:any;
+  public empresaSelected: any;
+  public tipoIdentificacionSelected: any;
+
+  public lineaSelected: any;
+  public claseSelected: any;
+  public carroceriaSelected: any;
+  public servicioSelected: any;
+  public colorSelected: any;
+  public marcaSelected: any;
+  public combustibleSelected: any;
+  public radioAccioSelected: any;
+  public modalidadTransporteSelected: any;
+  public organismoTransitoSelected: any;
+  public organismoTransitoNacionaSelected: any;
+  public origenRegistroSelected: any;
+  public condicionIngresoSelected: any;
+  public tipoMaquinariaSelected: any;
+  public tipoRodajeSelected: any;
+  public tipoCabinaSelected: any;
+  public claseMaquinariaSelected: any = null;
+  public empresaGpsSelected: any;
+  public subpartidaArancelariaSelected: any;
 
   public ciudadano: any = null;
   public apoderado: any = null;
   public propietarioSelected: any;
-  public apoderadoSelected:any;
+  public apoderadoSelected: any;
 
   public empresa: any = null;
   public empresaTransporte: any = null;
@@ -78,52 +94,59 @@ export class EditComponent implements OnInit {
   public formApoderado = false;
   public funcionario: any = null;
 
-public tiposMatricula = [
-  {'value':'RADICADO','label':"Radicado de cuenta"},
-  {'value':'MATRICULA','label':"Matricula inicial"},
-  {'value':'IMPORTACION','label':"Importación temporal"},
-  {'value':'CARPETA','label':"Cargue de carpeta"}
-];
+  public tiposPropiedad = [
+    { 'value': 1, 'label': "Leasing" },
+    { 'value': 2, 'label': "Propio" }
+  ];
 
-public datos = {
-  'propietarios': [],
-  'solidario': false,
-  'tipoPropiedad': null,
-  'licenciaTransito': null,
-  'idVehiculo': null,
-};
+  public tiposMatricula = [
+    { 'value': 'RADICADO', 'label': "Radicado de cuenta" },
+    { 'value': 'MATRICULA', 'label': "Matricula inicial" },
+    { 'value': 'IMPORTACION', 'label': "Importación temporal" },
+    { 'value': 'CARPETA', 'label': "Cargue de carpeta" }
+  ];
 
-public radicado = {
-  'numeroDocumento': null,
-  'fechaIngreso': null,
-  'guiaLlegada': null,
-  'empresaEnvio': null,
-  'idOrganismoTransito': null,
-  'idTipoIdentificacion': null,
-};
+  public datos = {
+    'propietarios': [],
+    'solidario': false,
+    'tipoPropiedad': null,
+    'numeroLicencia': null,
+    'fechaLicencia': null,
+    'idVehiculo': null,
+  };
 
-constructor(
-  private _PropietarioService: VhloPropietarioService,
-  private _PreregistroService: VhloRnaPreregistroService,
-  private _MunicipioService: CfgMunicipioService,
-  private _LineaService: VhloCfgLineaService,
-  private _ClaseService: VhloCfgClaseService,
-  private _CarroceriaService: VhloCfgCarroceriaService,
-  private _ServicioService: VhloCfgServicioService,
-  private _MarcaService: VhloCfgMarcaService,
-  private _ColorService: VhloCfgColorService,
-  private _CombustibleService: VhloCfgCombustibleService,
-  private _VehiculoService: VhloVehiculoService,
-  private _OrganismoTransitoService: CfgOrganismoTransitoService,
-  private _RadioAccionService: VhloCfgRadioAccionService,
-  private _ModalidadTransporteService: VhloCfgModalidadTransporteService,
-  private _FuncionarioService: PnalFuncionarioService,
-  private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
-  private _CiudadanoService: UserCiudadanoService,
-  private _LoginService: LoginService,
+  public radicado = {
+    'fechaIngreso': null,
+    'guiaLlegada': null,
+    'empresaEnvio': null,
+    'idOrganismoTransito': null,
+    'idTipoIdentificacion': null,
+  };
+
+  constructor(
+    private _MarcaService: VhloCfgMarcaService,
+    private _LineaService: VhloCfgLineaService,
+    private _ClaseService: VhloCfgClaseService,
+    private _CarroceriaService: VhloCfgCarroceriaService,
+    private _ColorService: VhloCfgColorService,
+    private _CombustibleService: VhloCfgCombustibleService,
+    private _RadioAccionService: VhloCfgRadioAccionService,
+    private _ModalidadTransporteService: VhloCfgModalidadTransporteService,
+    private _MaquinariaService: VhloMaquinariaService,
+    private _OrganismoTransitoService: CfgOrganismoTransitoService,
+    private _FuncionarioService: PnalFuncionarioService,
+    private _TipoMaquinariaService: VhloCfgTipoMaquinariaService,
+    private _CondicionIngresoService: VhloCfgCondicionIngresoService,
+    private _TipoRodajeService: VhloCfgTipoRodajeService,
+    private _TipoCabinaService: VhloCfgTipoCabinaService,
+    private _OrigenRegistroService: VhloCfgOrigenRegistroService,
+    private _SubpartidaArancelariaService: VhloCfgSubpartidaArancelariaService,
+    private _EmpresaGpsService: VhloCfgEmpresaGpsService,
+    private _LoginService: LoginService,
   ){}
 
   ngOnInit() {   
+    console.log(this.maquinaria);
     swal({
       title: 'Cargando Formulario!',
       text: 'Solo tardara unos segundos por favor espere.',
@@ -132,182 +155,44 @@ constructor(
       }
     });
 
-    if (this.vehiculo.placa) {
-      this.vehiculo.placa = this.vehiculo.placa.numero;
-    }
+    let token = this._LoginService.getToken();
+    let identity = this._LoginService.getIdentity();
+
+    setTimeout(() => {
+      this.onChangedTipoMaquinaria(this.maquinaria.tipoMaquinaria.id);
+      this.onChangedClase(this.maquinaria.vehiculo.clase.id);
+    });
 
     var datePiper = new DatePipe('en-US');
 
     var date = new Date();
-    date.setTime(this.vehiculo.fechaFactura.timestamp * 1000);
+    date.setTime(this.maquinaria.fechaIngreso.timestamp * 1000);
 
-    this.vehiculo.fechaFactura = datePiper.transform(
+    this.maquinaria.fechaIngreso = datePiper.transform(
       date, 'yyyy-MM-dd'
     );
 
-    date.setTime(this.vehiculo.fechaManifiesto.timestamp * 1000);
+    date.setTime(this.maquinaria.vehiculo.fechaFactura.timestamp * 1000);
 
-    this.vehiculo.fechaManifiesto = datePiper.transform(
+    this.maquinaria.vehiculo.fechaFactura = datePiper.transform(
       date, 'yyyy-MM-dd'
     );
 
-    let token = this._LoginService.getToken();
-    let identity = this._LoginService.getIdentity();
 
-    this._TipoIdentificacionService.select().subscribe(
+    this._MarcaService.getMarcaSelect().subscribe(
       response => {
-        this.tiposIdentificacion = response;
+        this.marcas = response;
+
+        setTimeout(() => {
+          this.lineaSelected = [this.maquinaria.vehiculo.linea.id];
+          this.marcaSelected = [this.maquinaria.vehiculo.linea.marca.id];
+        })
+
       },
       error => {
         this.errorMessage = <any>error;
 
-        if(this.errorMessage != null){
-          console.log(this.errorMessage);
-          alert('Error en la petición');
-        }
-      }
-    );
-
-    this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
-      response => { 
-        if(response.code == 200){
-          this.funcionario = response.data;
-          this.vehiculo.idOrganismoTransito = response.data.organismoTransito.id;
-        }else{
-          this.funcionario = null;
-          this._FuncionarioService.searchEmpresa({ 'identificacion': identity.identificacion },token).subscribe(
-            response => {
-              if(response.code == 200){
-              }
-            }, 
-            error => {
-              this.errorMessage = <any>error;
-      
-              if(this.errorMessage != null){
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
-            }
-          );
-        }
-      error => {
-          this.errorMessage = <any>error;
-          if(this.errorMessage != null){
-            console.log(this.errorMessage); 
-            alert('Error en la petición');
-          }
-        }
-      }
-    );
-    
-    this._LineaService.select().subscribe(
-      response => {
-        this.lineas = response;
-        setTimeout(() => {
-            this.lineaSelected = [this.vehiculo.linea.id]; 
-            this._MarcaService.getMarcaSelect().subscribe(
-              response => {
-                this.marcas = response;
-                setTimeout(() => {
-                    this.marcaSelected = [this.vehiculo.linea.marca.id];
-                })
-              }, 
-              error => { 
-                this.errorMessage = <any>error;
-        
-                if(this.errorMessage != null){
-                  console.log(this.errorMessage);
-                  alert("Error en la petición");
-                }
-              }
-            );
-        });
-      }, 
-      error => { 
-        this.errorMessage = <any>error;
-        if(this.errorMessage != null){
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
-
-    this._ClaseService.select().subscribe(
-      response => {
-        this.clases = response;
-        setTimeout(() => {
-            this.claseSelected = [this.vehiculo.clase.id];
-        });
-      }, 
-      error => {
-        this.errorMessage = <any>error;
-
-        if(this.errorMessage != null){
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
-
-    this._CarroceriaService.select().subscribe(
-      response => {
-        this.carrocerias = response;
-
-        setTimeout(() => {
-            this.carroceriaSelected = [this.vehiculo.carroceria.id];
-        });
-      }, 
-      error => {
-        this.errorMessage = <any>error;
-        if(this.errorMessage != null){
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
-    this._ServicioService.select().subscribe(
-      response => {
-        this.servicios = response;
-        setTimeout(() => {
-            this.servicioSelected = [this.vehiculo.servicio.id];
-        });
-      }, 
-      error => {
-        this.errorMessage = <any>error;
-
-        if(this.errorMessage != null){
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
-
-    this._ColorService.select().subscribe(
-      response => {
-        this.colores = response;
-        setTimeout(() => {
-            this.colorSelected = [this.vehiculo.color.id];
-        });
-      },  
-      error => {
-        this.errorMessage = <any>error;
-        if(this.errorMessage != null){
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
-
-    this._CombustibleService.select().subscribe(
-      response => {
-        this.combustibles = response;
-        setTimeout(() => {
-            this.combustibleSelected = [this.vehiculo.combustible.id];
-        });
-      },  
-      error => {
-        this.errorMessage = <any>error;
-        if(this.errorMessage != null){
+        if (this.errorMessage != null) {
           console.log(this.errorMessage);
           alert("Error en la petición");
         }
@@ -317,17 +202,11 @@ constructor(
     this._OrganismoTransitoService.selectSedes().subscribe(
       response => {
         this.organismosTransito = response;
-
-        if (this.vehiculo.organismoTransito) {
-          setTimeout(() => {
-              this.sedeOperativaSelected = [this.vehiculo.organismoTransito.id];
-          });
-        }
-      }, 
+      },
       error => {
         this.errorMessage = <any>error;
 
-        if(this.errorMessage != null){
+        if (this.errorMessage != null) {
           console.log(this.errorMessage);
           alert("Error en la petición");
         }
@@ -337,37 +216,80 @@ constructor(
     this._OrganismoTransitoService.select().subscribe(
       response => {
         this.organismosTransitoNacional = response;
-
-        if (this.vehiculo.organismoTransitoRadicado) {
-          setTimeout(() => {
-            this.radicado.idOrganismoTransito = [this.vehiculo.organismoTransitoRadicado.id];
-          });
-        }
-      }, 
+      },
       error => {
         this.errorMessage = <any>error;
 
-        if(this.errorMessage != null){
+        if (this.errorMessage != null) {
           console.log(this.errorMessage);
           alert("Error en la petición");
         }
       }
     );
 
-    this._MunicipioService.select().subscribe(
+    this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
       response => {
-        this.municipios = response;
+        if (response.code == 200) {
+          this.funcionario = response.data;
+          this.maquinaria.idOrganismoTransito = response.data.organismoTransito.id;
+        } else {
+          this.funcionario = null;
+          this._FuncionarioService.searchEmpresa({ 'identificacion': identity.identificacion }, token).subscribe(
+            response => {
+              if (response.code == 200) {
+              }
+            },
+            error => {
+              this.errorMessage = <any>error;
 
-        if (this.vehiculo.municipio) {
-          setTimeout(() => {
-              this.municipioSelected = [this.vehiculo.municipio.id];
-          });
+              if (this.errorMessage != null) {
+                console.log(this.errorMessage);
+                alert("Error en la petición");
+              }
+            }
+          );
         }
-      }, 
+        error => {
+          this.errorMessage = <any>error;
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert('Error en la petición');
+          }
+        }
+      }
+    );
+
+    this._ColorService.select().subscribe(
+      response => {
+        this.colores = response;
+
+        setTimeout(() => {
+          this.colorSelected = [this.maquinaria.vehiculo.color.id];
+        })
+        
+      },
       error => {
         this.errorMessage = <any>error;
 
-        if(this.errorMessage != null){
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+
+    this._CombustibleService.select().subscribe(
+      response => {
+        this.combustibles = response;
+
+        setTimeout(() => {
+          this.combustibleSelected = [this.maquinaria.vehiculo.combustible.id];
+        })
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
           console.log(this.errorMessage);
           alert("Error en la petición");
         }
@@ -376,40 +298,153 @@ constructor(
 
     this._RadioAccionService.select().subscribe(
       response => {
-        this.radioAcciones = response;
-
-        if (this.vehiculo.radioAccion) {
-          setTimeout(() => {
-              this.radioAccionSelected = [this.vehiculo.radioAccion.id];
-          });
-        }
-      }, 
+        this.radiosAccion = response;
+      },
       error => {
         this.errorMessage = <any>error;
-
-        if(this.errorMessage != null){
+        if (this.errorMessage != null) {
           console.log(this.errorMessage);
           alert("Error en la petición");
         }
       }
     );
-    
+
     this._ModalidadTransporteService.select().subscribe(
       response => {
-        this.modalidadTransportes = response;
-
-        if (this.vehiculo.modalidadTransporte) {
-          setTimeout(() => {
-              this.modalidadTransporteSelected = [this.vehiculo.modalidadTransporte.id];
-          });
-        }
-
-        swal.close();
-      }, 
+        this.modalidadesTransporte = response;
+      },
       error => {
         this.errorMessage = <any>error;
 
-        if(this.errorMessage != null){
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+
+    this._TipoMaquinariaService.select().subscribe(
+      response => {
+        this.tiposMaquinaria = response;
+
+        setTimeout(() => {
+          this.tipoMaquinariaSelected = [this.maquinaria.tipoMaquinaria.id];
+        })
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+
+    this._CondicionIngresoService.select().subscribe(
+      response => {
+        this.condicionesIngreso = response;
+
+        setTimeout(() => {
+          this.condicionIngresoSelected  = [this.maquinaria.condicionIngreso.id];
+        })
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+
+    this._TipoRodajeService.select().subscribe(
+      response => {
+        this.tiposRodaje = response;
+
+        setTimeout(() => {
+          this.tipoRodajeSelected = [this.maquinaria.tipoRodaje.id];
+        })
+
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+
+    this._TipoCabinaService.select().subscribe(
+      response => {
+        this.tiposCabina = response;
+
+        setTimeout(() => {
+          this.tipoCabinaSelected = [this.maquinaria.tipoCabina.id];
+        })
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+
+    this._OrigenRegistroService.select().subscribe(
+      response => {
+        this.origenesRegistro = response;
+
+        setTimeout(() => {
+          this.origenRegistroSelected = [this.maquinaria.origenRegistro.id];
+        })
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+
+    this._SubpartidaArancelariaService.select().subscribe(
+      response => {
+        this.subpartidasArancelarias = response;
+
+        setTimeout(() => {
+          this.subpartidaArancelariaSelected = [this.maquinaria.subpartidaArancelaria.id];
+        })
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+
+    this._EmpresaGpsService.select().subscribe(
+      response => {
+        this.empresasGps = response;
+
+        setTimeout(() => {
+          this.empresaGpsSelected = [this.maquinaria.empresaGps.id];
+        })
+        swal.close();
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
           console.log(this.errorMessage);
           alert("Error en la petición");
         }
@@ -440,13 +475,39 @@ constructor(
     }
   }
 
-  onChangedClase(e){
+  onChangedTipoMaquinaria(e) {
     if (e) {
       let token = this._LoginService.getToken()
 
+      this._ClaseService.selectByTipoMaquinaria({ 'idTipoMaquinaria': e }, token).subscribe(
+        response => {
+          this.clasesMaquinaria = response;
+          setTimeout(() => {
+            this.claseSelected = [this.maquinaria.vehiculo.clase.id];
+          })
+
+        },
+        error => {
+          this.errorMessage = <any>error;
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+    }
+  }
+
+  onChangedClase(e){
+    if (e) {
+      let token = this._LoginService.getToken()
       this._CarroceriaService.selectByClase({'idClase':e}, token).subscribe(
         response => {
           this.carrocerias = response;
+
+          setTimeout(() => {
+            this.carroceriaSelected = [this.maquinaria.vehiculo.carroceria.id];
+          });
         }, 
         error => { 
           this.errorMessage = <any>error;
@@ -460,7 +521,7 @@ constructor(
     }
   }
 
-  onUpdate(){
+  /* onUpdate(){
     this.vehiculo.vin = this.vehiculo.chasis;
     this.vehiculo.serie = this.vehiculo.chasis;
   }
@@ -744,73 +805,6 @@ constructor(
     this.formApoderado = false;
   }
 
-  onEnviar(){
-    let token = this._LoginService.getToken();
-    this.vehiculo.idLinea = this.lineaSelected;
-    this.vehiculo.idClase = this.claseSelected;
-    this.vehiculo.idCarroceria = this.carroceriaSelected;
-    this.vehiculo.idServicio = this.servicioSelected;
-    this.vehiculo.idColor = this.colorSelected;
-    this.vehiculo.idCombustible = this.combustibleSelected;
-    this.vehiculo.idOrganismoTransito = this.sedeOperativaSelected;
-    this.vehiculo.idRadioAccion = this.radioAccionSelected;
-    this.vehiculo.idModalidadTransporte = this.modalidadTransporteSelected;
-     
-    var html = 'los datos del Automotor seran editados !<br>';
-   
-   swal({
-      title: 'Actualización de automotor!',
-      type: 'warning',
-      html:html,
-      showCancelButton: true,
-      focusConfirm: false,
-      confirmButtonText:
-        '<i class="fa fa-thumbs-up"></i> Editar!',
-      confirmButtonAriaLabel: 'Thumbs up, great!',
-      cancelButtonText:
-      '<i class="fa fa-thumbs-down"></i> No editar',
-      cancelButtonAriaLabel: 'Thumbs down',
-    }).then((result) => {
-        if (result.value) {
-
-    this._VehiculoService.edit(this.vehiculo, token).subscribe(
-			response => {
-        if(response.code == 200){
-          this.ready.emit(true);
-          
-          swal({
-            title: 'Perfecto!',
-            text: 'Registro exitoso!',
-            type: 'success',
-            confirmButtonText: 'Aceptar'
-          })
-        }else{
-          swal({
-            title: 'Error!',
-            text: response.message,
-            type: 'error',
-            confirmButtonText: 'Aceptar'
-          })
-        }
-			error => {
-					this.errorMessage = <any>error;
-
-					if(this.errorMessage != null){
-						console.log(this.errorMessage);
-						alert("Error en la petición");
-					}
-				}
-
-    }); 
-      } else if (
-        // Read more about handling dismissals
-        result.dismiss === swal.DismissReason.cancel
-      ) {
-
-      }
-    })
-  }
-
   changedDepartamento(e){
     if (this.marcaSelected) {
       let token = this._LoginService.getToken()
@@ -833,6 +827,74 @@ constructor(
           }
         );
     }
-    }
+    } */
 
+  onEnviar() {
+    let token = this._LoginService.getToken();
+
+    this.maquinaria.idCondicionIngreso = this.condicionIngresoSelected;
+    this.maquinaria.idColor = this.colorSelected;
+    this.maquinaria.idTipoMaquinaria = this.tipoMaquinariaSelected ;
+    this.maquinaria.idClaseMaquinaria = this.claseMaquinariaSelected ;
+    this.maquinaria.idMarca = this.marcaSelected ;
+    this.maquinaria.idLinea = this.lineaSelected ;
+    this.maquinaria.idCarroceria = this.carroceriaSelected ;
+    this.maquinaria.idTipoRodaje = this.tipoRodajeSelected ;
+    this.maquinaria.idTipoCabina = this.tipoCabinaSelected ;
+    this.maquinaria.idCombustible = this.combustibleSelected ;
+    this.maquinaria.idOrigenRegistro = this.origenRegistroSelected ;
+    this.maquinaria.idSubpartidaArancelaria = this.subpartidaArancelariaSelected ;
+    this.maquinaria.idEmpresaGps = this.empresaGpsSelected ;
+
+    swal({
+      title: 'Actualización de automotor!',
+      type: 'warning',
+      html: 'Los datos del Automotor serán editados !<br>',
+      showCancelButton: true,
+      focusConfirm: false,
+      confirmButtonText:
+        '<i class="fa fa-thumbs-up"></i> Editar!',
+      confirmButtonAriaLabel: 'Thumbs up, great!',
+      cancelButtonText:
+        '<i class="fa fa-thumbs-down"></i> No editar',
+      cancelButtonAriaLabel: 'Thumbs down',
+    }).then((result) => {
+      if (result.value) {
+
+        this._MaquinariaService.edit(this.maquinaria, token).subscribe(
+          response => {
+            if (response.code == 200) {
+              this.ready.emit(true);
+
+              swal({
+                title: response.title,
+                text: response.message,
+                type: response.status,
+                confirmButtonText: 'Aceptar'
+              })
+            } else {
+              swal({
+                title: response.title,
+                text: response.message,
+                type: response.status,
+                confirmButtonText: 'Aceptar'
+              })
+            }
+            error => {
+              this.errorMessage = <any>error;
+
+              if (this.errorMessage != null) {
+                console.log(this.errorMessage);
+                alert("Error en la petición");
+              }
+            }
+
+          });
+      } else if (
+        // Read more about handling dismissals
+        result.dismiss === swal.DismissReason.cancel
+      ) {
+}
+    })
+  }
 }
