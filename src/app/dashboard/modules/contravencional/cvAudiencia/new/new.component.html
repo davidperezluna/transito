@@ -7,7 +7,6 @@
                 <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
             </div>
             <div class="card-body">
-                <form #formNew="ngForm"> 
                     <div class="form-group">
                         <div class="row">
                             <div class="col-xs-12 col-lg-12">
@@ -46,50 +45,134 @@
                                 </table>
                             </div>
 
-                            <div class="col-xs-12 col-lg-6">
-                                <label>Fecha <strong class="text-danger">*</strong></label>
-                                <input type="date" class="form-control" [(ngModel)]="audiencia.fecha" name="fecha" required />
-                            </div>
-
-                            <div class="col-xs-12 col-lg-6">
-                                <label>Hora <strong class="text-danger">*</strong></label>
-                                <input type="time" class="form-control" [(ngModel)]="audiencia.hora" name="hora" required />
-                            </div>
-
                             <div class="col-xs-12 col-lg-12">
-                                <label>Tipo</label>
-                                <ng-select [multiple]="false" [options]="tipos" [(ngModel)]="audiencia.idTipo" name="idTipo" required>
-                                </ng-select>
+                                <button *ngIf='!formApoderado && !apoderado' (click)="onAddApoderado()" class="btn btn-primary">
+                                    <i class="fa fa-save"></i>
+                                    Agregar apoderado
+                                </button>
                             </div>
 
-                            <div class="col-xs-12 col-md-12 col-lg-12 col-xl-12">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h5 class="card-title pull-left">Audiencias programadas</h5>
-                                    </div>
-                                    <div class="card-body">
-                                        <div id='calendar'></div>
-                                    </div>
-                                    <div class="card-footer"> </div>
+                            <div class="col-xs-12 col-lg-12" *ngIf='formApoderado && !apoderado'>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" placeholder="Identificacion apoderado" [(ngModel)]="datosApoderado.identificacion" name="datosApoderado.identificacion" required />
+                                    <span class="input-group-btn">
+                                        <button (click)="onSearchApoderado()" class="btn" type="button">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                        <button (click)="onCloseApoderado()" class="btn btn-danger" type="button">
+                                            <i class="fa fa-close"></i>
+                                        </button>
+                                    </span>
                                 </div>
+                            </div>
+                        
+                            <div class="col-xs-12 col-lg-12" *ngIf="apoderado">
+                                <table class="table table-bordered table-striped">
+                                    <thead>
+                                        <th class="text-center text-uppercase">
+                                            <b>Datos de apoderado</b>
+                                        </th>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <b>Tipo de identificación</b>
+                                                {{ apoderado.tipoIdentificacion.nombre }}
+                                                <br>
+                                                <b>Numero de identificación</b>
+                                                {{ apoderado.identificacion }}
+                                                <br>
+                                                <b>Nombres</b>
+                                                {{ apoderado.primerNombre }} {{ apoderado.segundoNombre }}
+                                                <br>
+                                                <b>Apellidos</b>
+                                                {{ apoderado.primerApellido }} {{apoderado.segundoApellido }}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <div class="col-xs-12 col-lg-12" *ngIf="audiencias && formIndex">
+                                <table class="table " id="dataTables-example">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Comparendo</th>
+                                            <th>Detalles</th>
+                                            <th>Tipo</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="odd" *ngFor="let audiencia of audiencias; let i = index">
+                                            <td>{{ i + 1 }}</td>
+                                            <td>{{ audiencia.comparendo.consecutivo.numero }}</td>
+                                            <td>
+                                                <b>Fecha:</b> {{ (audiencia.fecha.timestamp * 1000) | date: 'dd/MM/yyyy' }}
+                                                <br>
+                                                <b>Hora:</b> {{ (audiencia.hora.timestamp) | date: 'hh:mm:ss a' }}
+                                            </td>
+                                            <td>{{ audiencia.tipo.nombre }}</td>
+                                            <td>
+                                                <div class="btn-group">
+                                                    <a *ngIf="audiencia.cuerpo"
+                                                        href="{{ apiUrl }}contravencional/cvaudiencia/{{ audiencia.id }}/pdf"
+                                                        class="btn btn-xs btn-success" target="_blank">
+                                                        <i class="fa fa-file-pdf-o"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
-                </form>
-            </div>
-            <div class="card-footer">
-                <div class="btn-group">
-                    <button *ngIf="comparendo" (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
-                        <i class="fa fa-save"></i>
-                        Enviar
-                    </button>
-                    
-                    <button (click)="onCancelar()" class="btn btn-default">
-                        <i class="fa fa-times"></i>
-                        Cancelar
-                    </button>
-                </div>
             </div>
         </div>
+    </div>
+
+    <div class="col-xs-12 col-lg-8">
+        <form #formNew="ngForm">
+            <div class="card">
+                <div class="card-header">
+                    <b class="text-uppercase">Nueva audiencia</b>
+                    <br>
+                    <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
+                </div>
+                <div class="card-body">
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Fecha <strong class="text-danger">*</strong></label>
+                        <input type="date" class="form-control" [(ngModel)]="audiencia.fecha" name="fecha" required />
+                    </div>
+                    
+                    <div class="col-xs-12 col-md-12 col-lg-12 col-xl-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title pull-left">Audiencias programadas</h5>
+                            </div>
+                            <div class="card-body">
+                                <div id='calendar'></div>
+                            </div>
+                            <div class="card-footer"> </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="btn-group">
+                        <button *ngIf="comparendo" (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary"
+                            type="button">
+                            <i class="fa fa-save"></i>
+                            Enviar
+                        </button>
+                        <button (click)="onCancelar()" class="btn btn-default">
+                            <i class="fa fa-times"></i>
+                            Cancelar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
 </div>

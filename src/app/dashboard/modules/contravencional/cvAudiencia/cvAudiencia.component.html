@@ -1,32 +1,26 @@
   <div class="row">
-    <!-- .row -->
     <div class="col-xs-12 col-lg-4" *ngIf='formSearch'>
-      <!-- .col -->
       <div class="card">
         <div class="card-header">
           <b class="text-uppercase">Buscar Audiencias</b>
         </div>
         <div class="card-body">
-          <!-- .card-body -->
           <form #formSearch="ngForm">
             <div class="form-group">
               <div class="row">
-                <!-- .row -->
                 <div class="col-xs-12 col-lg-12">
                   <label>Tipo de filtro</label>
                   <ng-select [multiple]="false" [options]="tiposFiltro" [(ngModel)]="search.tipoFiltro" name="tipoFiltro" required></ng-select>
                 </div>
-                <div class="col-xs-12 col-lg-12">
+                <div class="col-xs-12 col-lg-12" *ngIf="search.tipoFiltro">
                   <label>Filtro</label>
                   <input *ngIf="search.tipoFiltro == 1 || search.tipoFiltro == 2" class="form-control" [(ngModel)]="search.filtro" name="filtro" type="numeric" required>
                   <input *ngIf="search.tipoFiltro == 3" class="form-control" [(ngModel)]="search.filtro" name="filtro" type="date" required>
                 </div>
               </div>
             </div>
-            <!-- /.row -->
           </form>
         </div>
-        <!-- /.card-body -->
         <div class="card-footer">
           <div class="btn-group">
             <button (click)="onSearch()" (ready)="ready($event)" [disabled]="formSearch.invalid" class="btn btn-primary" type="button">
@@ -41,7 +35,6 @@
         </div>
       </div>
     </div>
-    <!-- /.col -->
 
     <div class="col-xs-12 col-lg-12" *ngIf="audiencias && formIndex">
       <div class="card">
@@ -50,7 +43,11 @@
             <b class="text-uppercase">RPCCC</b>
             <small>Programación de audiencias</small>
             <div class="btn-group pull-right">
-              <button (click)="onNew()" class="btn btn-default">
+              <button (click)="onCancel()" class="btn btn-default">
+                <i class="fa fa-times"></i>
+                <span class="text">Cancelar</span>
+              </button>
+              <button (click)="onNew()" class="btn btn-primary">
                 <i class="fa fa-plus"></i>
                 <span class="text">Nuevo</span>
               </button>
@@ -91,7 +88,6 @@
               </tr>
             </tbody>
           </table>
-          <!-- /.table-responsive --> 
         </div>
       </div>
     </div>

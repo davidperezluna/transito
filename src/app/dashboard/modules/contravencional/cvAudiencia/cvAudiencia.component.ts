@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { CvAudiencia } from './cvAudiencia.modelo';
 import { CvAudienciaService } from '../../../../services/cvAudiencia.service';
 import { LoginService } from '../../../../services/login.service';
@@ -10,7 +10,7 @@ declare var $: any;
   selector: 'app-index',
   templateUrl: './cvAudiencia.component.html'
 })
-export class CvAudienciaComponent implements OnInit {
+export class CvAudienciaComponent implements OnInit, AfterViewInit {
   public errorMessage;
   
   public apiUrl = environment.apiUrl;
@@ -48,12 +48,20 @@ export class CvAudienciaComponent implements OnInit {
     this.formSearch = true;
   }
 
+  ngAfterViewInit(){
+    swal.close();
+  }
+
   onInitForms(){
     this.formNew = false;
     this.formEdit = false;
     this.formIndex = false;
     this.formShow = false;
     this.formSearch = false;
+  }
+
+  onCancel(){
+    this.ngOnInit();
   }
 
   onSearch() {
@@ -112,12 +120,10 @@ export class CvAudienciaComponent implements OnInit {
 
 
   onInitTable(){
-    if (this.table) {
-      this.table.destroy();
-    }
-
     this.table = $('#dataTables-example').DataTable({
       responsive: true,
+      retrieve: true,
+      paging: false,
       pageLength: 8,
       sPaginationType: 'full_numbers',
       oLanguage: {
