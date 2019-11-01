@@ -15,6 +15,7 @@ export class VhloRnmaPreregistroComponent implements OnInit, AfterViewInit {
   public errorMessage;
 
   public vehiculos;
+  public maquinaria: null;
   
   public formSearch: any;
   public formIndex: any;
@@ -25,10 +26,12 @@ export class VhloRnmaPreregistroComponent implements OnInit, AfterViewInit {
 
   public vehiculo: VhloRnmaPreregistro;
 
-  public search = {
+  /* public search = {
     'filtro': null,
     'idModulo': 3,
-  }
+  } */
+
+  public filtro = null;
 
   constructor(
     private _VehiculoService: VhloVehiculoService,
@@ -74,6 +77,8 @@ export class VhloRnmaPreregistroComponent implements OnInit, AfterViewInit {
   }
 
   onSearch(){
+    let token = this._LoginService.getToken();
+
     this.onInitForms();
 
     swal({
@@ -86,12 +91,13 @@ export class VhloRnmaPreregistroComponent implements OnInit, AfterViewInit {
       }
     });
 
-    this._MaquinariaService.index().subscribe(
+    this._MaquinariaService.searhByFilter({'filtro': this.filtro}, token).subscribe(
       response => {
-        this.vehiculos = response.data;
+        this.maquinaria = response.data;
 
         let timeoutId = setTimeout(() => {
           this.onInitTable();
+          this.formSearch = true;
           this.formIndex = true;
           swal.close();
         }, 100);
@@ -110,12 +116,14 @@ export class VhloRnmaPreregistroComponent implements OnInit, AfterViewInit {
   onNew(){
     this.onInitForms();
 
+    this.formSearch = true;
     this.formNew = true;
   }
 
-  onEdit(vehiculo:any){
+  onEdit(maquinaria:any){
     this.onInitForms();
-    this.vehiculo = vehiculo;
+    this.vehiculo = maquinaria;
+    this.formSearch = true;
     this.formEdit = true;
   }
   
