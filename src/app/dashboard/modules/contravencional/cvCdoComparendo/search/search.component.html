@@ -97,6 +97,10 @@
                             <i class="fa fa-plus"></i>
                             Crear trazabilidad
                         </button>
+                        <button (click)="onInventarioDocumental(trazabilidad, comparendo)" class="btn btn-xs btn-warning" type="button">
+                            <i class="fa fa-plus"></i>
+                            Inventario Documental
+                        </button>
                     </div>
                 </h5>
             </div>
@@ -142,6 +146,10 @@
                                         tooltipPlacement="top">
                                         <i class="fa fa-save"></i>
                                         Bienes
+                                    </button>
+                                    <button (click)="onFolios(trazabilidad)" class="btn btn-xs btn-info" type="button" tooltip="Folios" [tooltipDisabled]="false" [tooltipAnimation]="true"
+                                        tooltipPlacement="top">
+                                        <i class="fa fa-file-text"></i><b *ngIf="!trazabilidad.folios">Folios 0</b><b *ngIf="trazabilidad.folios">Folios {{ trazabilidad.folios }}</b>
                                     </button>
                                 </div>
                             </td>
@@ -399,6 +407,94 @@
                             </tr>
                         </tbody>
                     </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 col-lg-6" *ngIf='formFolios'>
+        <div class="card">
+            <div class="card-header">
+                <h5 class="text-uppercase">
+                    <b>Crear número de folios</b>
+                </h5>
+                <small>Los campos con
+                    <b class="text-danger">*</b> son obligatorios</small>
+            </div>
+            <div class="card-body">
+                <form #formFolios="ngForm">
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Número
+                                <strong class="text-danger">*</strong>
+                            </label>
+                            <input class="form-control" [(ngModel)]="datosFolios.numero" name="numeroFolios" type="number" required />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <div class="btn-group">
+                    <button (click)="onEnviarFolios()" [disabled]="formFolios.invalid" class="btn btn-primary" type="button">
+                        <i class="fa fa-save"></i>
+                        Enviar
+                    </button>
+                    <button (click)="onSearch()" class="btn btn-default">
+                        <i class="fa fa-times"></i>
+                        Cancelar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 col-lg-9" *ngIf='formInventarioDocumental'>
+        <div class="card">
+            <div class="card-header">
+                <h5 class="text-uppercase">
+                    <b>Crear Inventario Documental</b>
+                </h5>
+                <small>Los campos con
+                    <b class="text-danger">*</b> son obligatorios</small>
+            </div>
+            <div class="card-body">
+                <form #formInventarioDocumental="ngForm">
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Número Orden
+                                <strong class="text-danger">*</strong>
+                            </label>
+                            <input class="form-control" [(ngModel)]="datosInventario.numeroOrden" name="numeroOrden" type="number" required />
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Código
+                                <strong class="text-danger">*</strong>
+                            </label>
+                            <input class="form-control" [(ngModel)]="datosInventario.codigo" name="codigo" type="number" required />
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Caja
+                                <strong class="text-danger">*</strong>
+                            </label>
+                            <input class="form-control" [(ngModel)]="datosInventario.caja" name="caja" type="number" required />
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Carpeta
+                                <strong class="text-danger">*</strong>
+                            </label>
+                            <input class="form-control" [(ngModel)]="datosInventario.carpeta" name="carpeta" type="number" required />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <div class="btn-group">
+                    <button (click)="onEnviarInventarioDocumental()" [disabled]="formFolios.invalid" class="btn btn-primary" type="button">
+                        <i class="fa fa-save"></i>
+                        Enviar
+                    </button>
+                    <button (click)="onSearch()" class="btn btn-default">
+                        <i class="fa fa-times"></i>
+                        Cancelar
+                    </button>
                 </div>
             </div>
         </div>

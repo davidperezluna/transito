@@ -32,6 +32,8 @@ export class SearchComponent implements OnInit{
   public formRecord: any = false;
   public formTrazabilidad: any = false;
   public formDocument: any = false;
+  public formFolios: any = false;
+  public formInventarioDocumental: any = false;
   public formAcuerdoPago: any = false;
   public formInvestigacion: any = false;
   public formatos: any = null;
@@ -61,6 +63,19 @@ export class SearchComponent implements OnInit{
     'observaciones': null,
     'idComparendo': null,
     'idComparendoEstado': null,
+  }
+
+  public datosFolios = {
+    'idTrazabilidad': null,
+    'numero': null,
+  }
+
+  public datosInventario = {
+    'idComparendo': null,
+    'numeroOrden': null,
+    'codigo': null,
+    'caja': null,
+    'carpeta': null,
   }
 
   public tiposBien = [
@@ -103,6 +118,8 @@ constructor(
     });
 
     this.formDocument = false;
+    this.formFolios = false;
+    this.formInventarioDocumental = false;
     this.formInvestigacion = false;
     this.formTrazabilidad = false;
     this.formRecord = false;
@@ -167,6 +184,8 @@ constructor(
     if (this.comparendo) {
       this.formRecord = true;
       this.formDocument = false;
+      this.formFolios = false;
+      this.formInventarioDocumental = false;
       this.formInvestigacion = false;
       this.formTrazabilidad = false;
       this.formAcuerdoPago = false;
@@ -291,6 +310,28 @@ constructor(
       this.formInvestigacion = false;
       this.formDocument = true;
     }
+  }
+
+  onFolios(trazabilidad: any) {
+    this.trazabilidad = trazabilidad;
+    this.formRecord = false;
+    this.formTrazabilidad = false;
+    this.formAcuerdoPago = false;
+    this.formInvestigacion = false;
+    this.formDocument = false;
+    this.formFolios = true;
+  }
+
+  onInventarioDocumental(trazabilidad: any, comparendo: any) {
+    this.comparendo = comparendo;
+    this.trazabilidad = trazabilidad;
+    this.formRecord = false;
+    this.formTrazabilidad = false;
+    this.formAcuerdoPago = false;
+    this.formInvestigacion = false;
+    this.formDocument = false;
+    this.formFolios = false;
+    this.formInventarioDocumental = true;
   }
 
   onChangedEstado(e) {
@@ -423,6 +464,8 @@ constructor(
     this.formAcuerdoPago = false;
     this.formInvestigacion = false;
     this.formDocument = false;
+    this.formFolios = false;
+    this.formInventarioDocumental = false;
   }
 
   onAcuerdoPago() {
@@ -431,6 +474,8 @@ constructor(
     this.formAcuerdoPago = true;
     this.formInvestigacion = false;
     this.formDocument = false;
+    this.formFolios = false;
+    this.formInventarioDocumental = false;
   }
 
   onEnviarTrazabilidad() {
@@ -485,6 +530,8 @@ constructor(
       this.formTrazabilidad = false;
       this.formAcuerdoPago = false;
       this.formDocument = false;
+      this.formFolios = false;
+      this.formInventarioDocumental = false;
       this.formInvestigacion = true;
       
       this.datosInvestigacion.idTrazabilidad = trazabilidad.id;
@@ -616,6 +663,94 @@ constructor(
     let token = this._LoginService.getToken();
 
     this._TrazabilidadService.updateBienes(this.bienes, token).subscribe(
+      response => {
+        if (response.code == 200) {
+          this.onSearch();
+
+          swal({
+            title: response.title,
+            text: response.message,
+            type: response.status,
+            confirmButtonText: 'Aceptar'
+          });
+        } else {
+          swal({
+            title: response.title,
+            text: response.message,
+            type: response.status,
+            confirmButtonText: 'Aceptar'
+          });
+        }
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      }
+    );
+  }
+
+  onEnviarFolios() {
+    swal({
+      title: 'Guardando número de folios!',
+      text: 'Solo tardará unos segundos, por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+
+    let token = this._LoginService.getToken();
+
+    this.datosFolios.idTrazabilidad = this.trazabilidad.id;
+
+    this._TrazabilidadService.updateFolios(this.datosFolios, token).subscribe(
+      response => {
+        if (response.code == 200) {
+          this.onSearch();
+
+          swal({
+            title: response.title,
+            text: response.message,
+            type: response.status,
+            confirmButtonText: 'Aceptar'
+          });
+        } else {
+          swal({
+            title: response.title,
+            text: response.message,
+            type: response.status,
+            confirmButtonText: 'Aceptar'
+          });
+        }
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      }
+    );
+  }
+
+  onEnviarInventarioDocumental() {
+    swal({
+      title: 'Guardando inventario documental!',
+      text: 'Solo tardará unos segundos, por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+
+    let token = this._LoginService.getToken();
+
+    this.datosInventario.idComparendo = this.comparendo.id;
+
+    this._TrazabilidadService.updateInventarioDocumental(this.datosInventario, token).subscribe(
       response => {
         if (response.code == 200) {
           this.onSearch();
