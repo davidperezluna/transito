@@ -85,6 +85,11 @@
     
                         <div class="row">
                             <div class="col-xs-12 col-lg-4">
+                                <label>Clase Vehículo <b class="text-danger">*</b></label>
+                                <ng-select [multiple]="false" [options]="clases" [(ngModel)]="datos.idClase" name="idClase" required>
+                                </ng-select>
+                            </div>
+                            <div class="col-xs-12 col-lg-4">
                                 <label>Servicio <b class="text-danger">*</b></label>
                                 <ng-select [multiple]="false" [options]="servicios" (ngModelChange)="onChangedServicio($event)" [(ngModel)]="datos.idServicio" name="idServicio" required>
                                 </ng-select>

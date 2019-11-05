@@ -4,6 +4,11 @@ import { SvCaracterizacionService } from '../../../../../services/svCaracterizac
 import { CfgMunicipioService } from "../../../../../services/cfgMunicipio.service";
 import { UserLcCfgCategoriaService } from "../../../../../services/userLcCfgCategoria.service";
 import { UserCfgGeneroService } from "../../../../../services/userCfgGenero.service";
+
+import { UserCfgGrupoSanguineoService } from "../../../../../services/userCfgGrupoSanguineo.service";
+
+
+
 import { LoginService } from '../../../../../services/login.service';
 import { DatePipe, CurrencyPipe } from '@angular/common';
 import swal from 'sweetalert2';
@@ -22,6 +27,7 @@ export class NewComponent implements OnInit {
     public municipios: any;
     public categoriasLicenciaConduccion: any;
     public generos: any;
+    public gruposSanguineos: any;
 
     public empresaEncontrada = false;
     public empresa: any;
@@ -54,6 +60,8 @@ export class NewComponent implements OnInit {
         private _MunicipioService: CfgMunicipioService,
         private _CfgLicenciaConduccionCategoriaService: UserLcCfgCategoriaService,
         private _GeneroService: UserCfgGeneroService,
+        
+        private _GrupoSanguineoService: UserCfgGrupoSanguineoService,
 
     ) { }
 
@@ -91,6 +99,19 @@ export class NewComponent implements OnInit {
         this._GeneroService.select().subscribe(
             response => {
                 this.generos = response;
+            },
+            error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert("Error en la petición");
+                }
+            }
+        );
+        this._GrupoSanguineoService.select().subscribe(
+            response => {
+                this.gruposSanguineos = response;
             },
             error => {
                 this.errorMessage = <any>error;

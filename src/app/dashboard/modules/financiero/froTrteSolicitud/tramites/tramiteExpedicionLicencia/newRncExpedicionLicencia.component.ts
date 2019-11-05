@@ -1,9 +1,9 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { UserCiudadanoService } from '../../../../../../services/userCiudadano.service';
 import { UserLcCfgCategoriaService } from '../../../../../../services/userLcCfgCategoria.service';
-import { CfgPaisService } from '../../../../../../services/cfgPais.service';
 import { VhloCfgServicioService } from '../../../../../../services/vhloCfgServicio.service';
-import { UserLcCfgRestriccionService } from '../../../../usuario/userLcCfgRestriccion/userLcCfgRestriccion.service';
+import { UserLcCfgRestriccionService } from '../../../../../../services/userLcCfgRestriccion.service';
+import { VhloCfgClaseService } from '../../../../../../services/vhloCfgClase.service';
 import { LoginService } from '../../../../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -23,6 +23,7 @@ export class NewRncExpedicionLicenciaComponent implements OnInit {
     public tramiteSolicitud: any = null;
     public paises: any;
     public servicios: any;
+    public clases: any;
     public categorias: any = null;
     public restricciones: any;
     public radio: any;
@@ -37,6 +38,7 @@ export class NewRncExpedicionLicenciaComponent implements OnInit {
         'idPais': null,
         'idCategoria': null,
         'idServicio': null,
+        'idClase': null,
         'idRestriccion': null,
         'idOrganismoTransito': null,
         'idTramiteFactura': null,
@@ -45,14 +47,15 @@ export class NewRncExpedicionLicenciaComponent implements OnInit {
 
     constructor(
         private _CiudadanoService: UserCiudadanoService,
-        private _CfgPaisService: CfgPaisService,
         private _ServicioService: VhloCfgServicioService,
         private _CategoriaService: UserLcCfgCategoriaService,
-        private _RestriccionService: UserLcCfgRestriccionService,
+        private _LcRestriccionService: UserLcCfgRestriccionService,
+        private _ClaseService: VhloCfgClaseService,
         private _LoginService: LoginService,
     ) { }
 
     ngOnInit() {
+        let token = this._LoginService.getToken();
         this.datos.idFuncionario  = this.funcionario.id;
         
         if ( this.tramitesRealizados.length > 0) {
@@ -74,21 +77,7 @@ export class NewRncExpedicionLicenciaComponent implements OnInit {
                 type: 'warning',
                 confirmButtonText: 'Aceptar'
             });
-        } else {    
-            this._CfgPaisService.select().subscribe(
-                response => {
-                    this.paises = response;
-                },
-                error => {
-                    this.errorMessage = <any>error;
-            
-                    if(this.errorMessage != null){
-                    console.log(this.errorMessage);
-                    alert('Error en la petición');
-                    }
-                }
-            );
-    
+        } else {        
             this._ServicioService.select().subscribe(
                 response => {
                     this.servicios = response;
@@ -103,9 +92,23 @@ export class NewRncExpedicionLicenciaComponent implements OnInit {
                 }
             );
 
-            this._RestriccionService.select().subscribe(
+            this._LcRestriccionService.select().subscribe(
                 response => {
                     this.restricciones = response;
+                },
+                error => {
+                    this.errorMessage = <any>error;
+    
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert('Error en la petición');
+                    }
+                }
+            );
+
+            this._ClaseService.selectByTipoVehiculo({ 'idTipoVehiculo': this.tramiteFactura.precio.tipoVehiculo.id}, token).subscribe(
+                response => {
+                    this.clases = response;
                 },
                 error => {
                     this.errorMessage = <any>error;
@@ -198,7 +201,7 @@ export class NewRncExpedicionLicenciaComponent implements OnInit {
     }
 
     onEnviar() {
-        this.datos.campos = ['expedicion'];
+        this.datos.campos = ['expedicionLicenciaConduccion'];
         this.datos.numero = this.solicitante.identificacion;
         this.datos.idOrganismoTransito = this.funcionario.organismoTransito.id;
         this.datos.idTramiteFactura = this.tramiteFactura.id;
