@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { UserLcCfgRestriccion } from '../userLcCfgRestriccion.modelo';
-import { UserLcCfgRestriccionService } from '../userLcCfgRestriccion.service';
+import { UserLcCfgRestriccionService } from '../../../../../services/userLcCfgRestriccion.service';
 import { LoginService } from '../../../../../services/login.service';
 import swal from 'sweetalert2';
 

@@ -4,6 +4,7 @@ import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { SelectModule } from 'angular2-select';
 
 import { SvCaracterizacionService } from '../../../../services/svCaracterizacion.service';
+import { UserCfgGrupoSanguineoService } from "../../../../services/userCfgGrupoSanguineo.service";
 
 import { NewComponent } from './new/new.component';
 import { EditComponent } from './edit/edit.component';
@@ -13,7 +14,10 @@ import { EditComponent } from './edit/edit.component';
     imports: [CommonModule, Ng2BootstrapModule.forRoot(), SelectModule],
     declarations: [NewComponent,EditComponent],
     exports: [NewComponent,EditComponent],
-    providers:[SvCaracterizacionService]
+    providers:[
+        SvCaracterizacionService,
+        UserCfgGrupoSanguineoService
+    ]
 })
 
 export class SvCaracterizacionModule { }

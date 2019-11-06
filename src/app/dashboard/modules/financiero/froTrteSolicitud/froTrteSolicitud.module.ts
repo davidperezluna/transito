@@ -36,7 +36,8 @@ import { UserEmpresaService } from '../../../../services/userEmpresa.service';
 import { UserEmpresaTransporteService } from "../../../../services/userEmpresaTransporte.service";
 import { UserLicenciaTransitoService } from '../../../../services/userLicenciaTransito.service';
 import { UserLcCfgCategoriaService } from '../../../../services/userLcCfgCategoria.service';
-import { UserLcCfgRestriccionService } from '../../usuario/userLcCfgRestriccion/userLcCfgRestriccion.service';
+import { UserLcCfgRestriccionService } from '../../../../services/userLcCfgRestriccion.service';
+import { VhloCfgClaseService } from '../../../../services/vhloCfgClase.service';
 
 @NgModule({
     imports: [
@@ -83,6 +84,12 @@ import { UserLcCfgRestriccionService } from '../../usuario/userLcCfgRestriccion/
         UserLicenciaTransitoService,
         UserLcCfgCategoriaService,
         UserLcCfgRestriccionService,
+        VhloCfgClaseService,
+        UserCiudadanoService,
+        UserLcCfgCategoriaService,
+        VhloCfgServicioService,
+        UserLcCfgRestriccionService,
+        VhloCfgClaseService,
     ]
 })
 

@@ -43,7 +43,68 @@
         <div class="col-xs-12 col-lg-8">
             <div class="card" *ngIf="empresaEncontrada">
                 <div class="card-header">
-                    <h5 class="text-uppercase">Datos Caracterización Empresa</h5>
+                    <h5 class="text-uppercase">Ficha de control de documentación para conductores</h5>
+                    <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
+                </div>
+                <div class="card-body">
+                    <form #formNew="ngForm">
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Nombres <strong class="text-danger">*</strong></label>
+                                <input class="form-control" type="text" [(ngModel)]="msvCaracterizacion.nombres" name="nombres" required>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Identificación <strong class="text-danger">*</strong></label>
+                                <input class="form-control" type="number" [(ngModel)]="msvCaracterizacion.identificacion" name="identificacion" required>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Lugar expedición documento <strong class="text-danger">*</strong></label>
+                                <input class="form-control" type="number" [(ngModel)]="msvCaracterizacion.lugarExpedicionDocumento" name="lugarExpedicionDocumento"
+                                    required>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>RH <strong class="text-danger">*</strong></label>
+                                <ng-select [multiple]="false" [options]="gruposSanguineos" [(ngModel)]="msvCaracterizacion.idGrupoSanguineo" required
+                                    name="idGrupoSanguineo">
+                                </ng-select>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Fecha Nacimiento<strong class="text-danger">*</strong></label>
+                                <input class="form-control" type="date" [(ngModel)]="msvCaracterizacion.fechaNacimiento" name="fechaNacimiento" required>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Género <strong class="text-danger">*</strong></label>
+                                <ng-select [multiple]="false" [options]="generos" [(ngModel)]="msvCaracterizacion.idGenero" required
+                                    name="idGenero">
+                                </ng-select>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Nivel Educativo <strong class="text-danger">*</strong></label>
+                                <ng-select [multiple]="false" [options]="nivelesEducativos" [(ngModel)]="msvCaracterizacion.idNivelEducativo" required
+                                    name="idNivelEducativo">
+                                </ng-select>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Grupo de trabajo al que pertenece <strong class="text-danger">*</strong></label>
+                                <ng-select [multiple]="false" [options]="gruposTrabajo" [(ngModel)]="msvCaracterizacion.grupoTrabajo" required
+                                    name="grupoTrabajo">
+                                </ng-select>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Tipo vinculación <strong class="text-danger">*</strong></label>
+                                <ng-select [multiple]="false" [options]="tiposVinculacion" [(ngModel)]="msvCaracterizacion.tipoVinculacion" required
+                                    name="tipoVinculacion">
+                                </ng-select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-lg-8">
+            <div class="card" *ngIf="empresaEncontrada">
+                <div class="card-header">
+                    <h5 class="text-uppercase">Datos Empresa</h5>
                     <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
                 </div>
                 <div class="card-body">

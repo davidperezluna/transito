@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserLcCfgRestriccionService } from './userLcCfgRestriccion.service';
+import { UserLcCfgRestriccionService } from '../../../../services/userLcCfgRestriccion.service';
 import { LoginService } from '../../../../services/login.service';
 import swal from 'sweetalert2';
 declare var $: any;
