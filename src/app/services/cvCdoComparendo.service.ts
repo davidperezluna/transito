@@ -142,8 +142,6 @@ export class CvCdoComparendoService {
 			contentType = res.headers.get('Content-type');
 			if (contentType == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
 				return new Blob([res.blob()], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' })
-			} else if (contentType == 'application/pdf') {
-				return new Blob([res.blob()], { type: 'application/pdf' })
 			}
 		});
 	}

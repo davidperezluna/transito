@@ -54,6 +54,7 @@ export class InventoryComponent implements OnInit {
             type: 'error',
             confirmButtonText: 'Aceptar'
           });
+          
           error => {
             this.errorMessage = <any>error;
 
