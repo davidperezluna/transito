@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
+    <div class="card">
+      <div class="card-header">
+        <b class="text-uppercase">Inventario documental</b>
+        <br>
+        <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
+      </div>
+      <div class="card-body">
+        <form #formSearch="ngForm">
+          <div class="form-group row">
+            <div class="col-xs-12 col-lg-12">
+              <label>Fecha inicial</label>
+              <input class="form-control text-uppercase" [(ngModel)]="search.fechaInicial" name="fechaInicial" type="text" required>
+            </div>
+            <div class="col-xs-12 col-lg-12">
+              <label>Fecha final</label>
+              <input class="form-control text-uppercase" [(ngModel)]="search.fechaFinal" name="fechaFinal" type="text" required>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="card-footer">
+        <div class="btn-group">
+          <button (click)="onSearch()" [disabled]="formSearch.invalid" class="btn btn-primary" type="button">
+            <i class="fa fa-search"></i>
+            Buscar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,5 +1,5 @@
 import  {Injectable} from "@angular/core";
-import  {Http, Response,Headers} from "@angular/http";
+import { Http, ResponseContentType, Headers} from "@angular/http";
 import  "rxjs/add/operator/map";
 import { environment } from 'environments/environment';
 
@@ -126,5 +126,25 @@ export class CvCdoComparendoService {
 		let params = 'data=' + json + '&authorization=' + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + '/create/file', params, { headers: headers }).map(res => res.json());
+	}
+
+	createExcelInventory(datos, token): any {
+		let contentType;
+
+		let json = JSON.stringify(datos);
+
+		let formData = new FormData();
+
+		formData.append('data', json);
+		formData.append('authorization', token);
+
+		return this._http.post(this.url + "/create/excel/inventory", formData, { 'responseType': ResponseContentType.Blob }).map(res => {
+			contentType = res.headers.get('Content-type');
+			if (contentType == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
+				return new Blob([res.blob()], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' })
+			} else if (contentType == 'application/pdf') {
+				return new Blob([res.blob()], { type: 'application/pdf' })
+			}
+		});
 	}
 }

@@ -3,6 +3,7 @@ import { CvCdoComparendoComponent } from '.';
 import { NewComponent } from '.';
 import { StateComponent } from '.';
 import { SearchComponent } from '.';
+import { InventoryComponent } from '.';
 
 export const CvCdoComparendoRoutes: Route[] = [
     {
@@ -23,6 +24,11 @@ export const CvCdoComparendoRoutes: Route[] = [
     {
       path: 'comparendoSearch',
       component: SearchComponent
+    },
+
+    {
+      path: 'comparendoInventory',
+      component: InventoryComponent
     },
 ];
  
