@@ -15,15 +15,17 @@
             <table class="table " id="dataTables-example">
               <thead>
                 <tr>
-                    <th>Id</th>
+                    <th>#</th>
                     <th>Nombre</th>
+                    <th>Codigo</th>
                     <th>Acciones</th>
                 </tr>
               </thead>
               <tbody>
                 <tr class="odd" *ngFor="let estado of estados; let i = index">
-                  <td >{{ estado.id }}</td>
+                  <td >{{ i + 1 }}</td>
                   <td >{{ estado.nombre }}</td>
+                  <td >{{ estado.codigo }}</td>
                   <td>
                     <div class="btn-group">
                       <button (click)="onEdit(estado)" class="btn btn-xs btn-primary" type="button">

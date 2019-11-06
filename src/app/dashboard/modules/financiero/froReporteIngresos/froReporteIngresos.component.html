@@ -5,8 +5,7 @@
                 <form #formFiltros="ngForm">
                     <div class="col-xs-12 col-lg-12">
                         <label>Seleccionar tipo reporte</label>
-                        <ng-select [multiple]="false" [options]="tiposRecaudo" [(ngModel)]="tipoRecaudoSelected"
-                            required name="idTipoRecaudo">
+                        <ng-select [multiple]="false" [options]="tiposRecaudo" [(ngModel)]="tipoRecaudoSelected" required name="idTipoRecaudo">
                         </ng-select>
                     </div>
                     <div class="col-xs-12 col-lg-12" *ngIf="tipoRecaudoSelected == 1">
@@ -33,8 +32,7 @@
                     </div>
                     <div class="col-xs-12 col-lg-12" *ngIf="tipoRecaudoSelected == 1">
                         <label>Exportar en</label>
-                        <ng-select [multiple]="false" [options]="arrayExportar" [(ngModel)]="exportarSelected" required
-                            name="exportar">
+                        <ng-select [multiple]="false" [options]="arrayExportar" [(ngModel)]="exportarSelected" required name="exportar">
                         </ng-select>
                     </div>
                     <div class="col-xs-12 col-lg-12" *ngIf="tipoRecaudoSelected == 4">

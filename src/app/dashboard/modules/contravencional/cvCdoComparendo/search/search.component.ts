@@ -1,4 +1,4 @@
-import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { CvCdoComparendoService } from '../../../../../services/cvCdoComparendo.service';
 import { CfgAdmFormatoService } from '../../../../../services/cfgAdmFormato.service';
 import { CvCdoTrazabilidadService } from '../../../../../services/cvCdoTrazabilidad.service';
