@@ -33,6 +33,7 @@ export class NewComponent implements OnInit {
     public empresa: any;
     public representante: any;
     public edad: any;
+    public cont = 0;
 
     public arrayFactoresRiesgo = [
         { value: 'ESTADO INFRAESTRUCTURA', label: 'ESTADO INFRAESTRUCTURA'},
@@ -54,6 +55,29 @@ export class NewComponent implements OnInit {
         { value: 'OTRA', label: 'OTRA' },
     ];
 
+    public arrayEquipoPrevencion = [
+        { value: 'GATO', label: 'GATO' },
+        { value: 'UNA CRUCETA', label: 'UNA CRUCETA' },
+        { value: 'SEÑALES DE CARRETERA', label: 'SEÑALES DE CARRETERA' },
+        { value: 'BOTIQUIN', label: 'BOTIQUIN' },
+        { value: 'EXTINTOR', label: 'EXTINTOR' },
+        { value: 'TACOS', label: 'TACOS' },
+        { value: 'HERRAMIENTAS', label: 'HERRAMIENTAS' },
+        { value: 'LLANTA DE REPUESTO', label: 'LLANTA DE REPUESTO' },
+        { value: 'LINTERNA', label: 'LINTERNA' },
+        { value: 'CHALECO REFLECTIVO', label: 'CHALECO REFLECTIVO' }
+    ];
+
+    public datos = {
+        'id': null,
+        'fechaServicio': null,
+        'actividadRealizada': null,
+        'problemasPresentados': null,
+        'nombreRepuestoCambiado': null,
+        'responsableMantenimiento': null,
+        'precio': null
+    }   
+
     constructor(
         private _MsvCaracterizacionService: SvCaracterizacionService,
         private _LoginService: LoginService,
@@ -66,7 +90,7 @@ export class NewComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.msvCaracterizacion = new SvCaracterizacion(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+        this.msvCaracterizacion = new SvCaracterizacion(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, [], null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
         this.date = new Date;
         var datePiper = new DatePipe(this.date);
         this.msvCaracterizacion.fecha = datePiper.transform(this.date, 'yyyy-MM-dd');
@@ -185,4 +209,40 @@ export class NewComponent implements OnInit {
             }
         );
     }
+
+    onAddMantenimiento() {
+        this.cont ++;
+        this.datos.id = this.cont;
+
+        //Agrega el trámite seleccionado al arreglo
+        this.onCreateArray();
+    }
+
+    onCreateArray() {
+
+        this.msvCaracterizacion.arrayRelacionMantenimiento.push(
+            {
+                'id': this.cont,
+                'fechaServicio': this.datos.fechaServicio,
+                'actividadRealizada': this.datos.actividadRealizada,
+                'problemasPresentados': this.datos.problemasPresentados,
+                'nombreRepuestoCambiado': this.datos.nombreRepuestoCambiado,
+                'responsableMantenimiento': this.datos.responsableMantenimiento,
+                'precio': this.datos.precio
+            }
+        );
+
+        this.datos.fechaServicio = '';
+        this.datos.actividadRealizada = '';
+        this.datos.problemasPresentados = '';
+        this.datos.nombreRepuestoCambiado = '';
+        this.datos.responsableMantenimiento = '';
+        this.datos.precio = '';
+    }
+
+    onDeleteMantenimiento(mantenimiento) {
+        this.cont--;
+        this.msvCaracterizacion.arrayRelacionMantenimiento = this.msvCaracterizacion.arrayRelacionMantenimiento.filter(h => h !== mantenimiento);
+    }
+
 }
