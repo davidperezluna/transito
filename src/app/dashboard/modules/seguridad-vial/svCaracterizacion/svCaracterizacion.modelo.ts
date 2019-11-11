@@ -38,7 +38,7 @@ export class SvCaracterizacion{
 		public nombres: string,
 		public apellidos: string,
 		public identificacion: number,
-		public lugarExpedicionDocumento: string,
+		public idLugarExpedicionDocumento: string,
 		public idGrupoSanguineo: number,
 		public clc: string,
 		public fechaVigencia: string,

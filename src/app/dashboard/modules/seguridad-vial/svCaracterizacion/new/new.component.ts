@@ -4,10 +4,11 @@ import { SvCaracterizacionService } from '../../../../../services/svCaracterizac
 import { CfgMunicipioService } from "../../../../../services/cfgMunicipio.service";
 import { UserLcCfgCategoriaService } from "../../../../../services/userLcCfgCategoria.service";
 import { UserCfgGeneroService } from "../../../../../services/userCfgGenero.service";
-
 import { UserCfgGrupoSanguineoService } from "../../../../../services/userCfgGrupoSanguineo.service";
-
-
+import { VhloCfgTipoVehiculoService } from 'app/services/vhloCfgTipoVehiculo.service';
+import { VhloCfgLineaService } from 'app/services/vhloCfgLinea.service';
+import { VhloCfgMarcaService } from 'app/services/vhloCfgMarca.service';
+import { VhloCfgColorService } from 'app/services/vhloCfgColor.service';
 
 import { LoginService } from '../../../../../services/login.service';
 import { DatePipe, CurrencyPipe } from '@angular/common';
@@ -28,6 +29,10 @@ export class NewComponent implements OnInit {
     public categoriasLicenciaConduccion: any;
     public generos: any;
     public gruposSanguineos: any;
+    public tiposVehiculo: any;
+    public lineas: any;
+    public marcas: any;
+    public colores: any;
 
     public empresaEncontrada = false;
     public empresa: any;
@@ -68,6 +73,12 @@ export class NewComponent implements OnInit {
         { value: 'CHALECO REFLECTIVO', label: 'CHALECO REFLECTIVO' }
     ];
 
+    public arrayNivelesEducativos = [
+        { value: 'BACHILLER', label: 'BACHILLER' },
+        { value: 'TÉCNICO', label: 'TÉCNICO' },
+        { value: 'PROFESIONAL', label: 'PROFESIONAL' },
+    ];
+
     public datos = {
         'id': null,
         'fechaServicio': null,
@@ -84,7 +95,10 @@ export class NewComponent implements OnInit {
         private _MunicipioService: CfgMunicipioService,
         private _CfgLicenciaConduccionCategoriaService: UserLcCfgCategoriaService,
         private _GeneroService: UserCfgGeneroService,
-        
+        private _TipoVehiculoService: VhloCfgTipoVehiculoService,
+        private _LineaService: VhloCfgLineaService,
+        private _MarcaService: VhloCfgMarcaService,
+        private _ColorService: VhloCfgColorService,
         private _GrupoSanguineoService: UserCfgGrupoSanguineoService,
 
     ) { }
@@ -136,6 +150,45 @@ export class NewComponent implements OnInit {
         this._GrupoSanguineoService.select().subscribe(
             response => {
                 this.gruposSanguineos = response;
+            },
+            error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert("Error en la petición");
+                }
+            }
+        );
+        this._TipoVehiculoService.select().subscribe(
+            response => {
+                this.tiposVehiculo = response;
+            },
+            error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert("Error en la petición");
+                }
+            }
+        );
+        this._MarcaService.select().subscribe(
+            response => {
+                this.marcas = response;
+            },
+            error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert("Error en la petición");
+                }
+            }
+        );
+        this._ColorService.select().subscribe(
+            response => {
+                this.colores = response;
             },
             error => {
                 this.errorMessage = <any>error;
@@ -243,6 +296,26 @@ export class NewComponent implements OnInit {
     onDeleteMantenimiento(mantenimiento) {
         this.cont--;
         this.msvCaracterizacion.arrayRelacionMantenimiento = this.msvCaracterizacion.arrayRelacionMantenimiento.filter(h => h !== mantenimiento);
+    }
+
+    onChangedMarca(e) {
+        if (e) {
+            
+            let token = this._LoginService.getToken()
+            this._LineaService.selectByMarca({'idMarca': e}, token).subscribe(
+                response => {
+                    this.lineas = response;
+                },
+                error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                    }
+                }
+            );
+        }
     }
 
 }

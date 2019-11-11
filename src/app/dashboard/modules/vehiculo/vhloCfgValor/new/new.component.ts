@@ -49,7 +49,7 @@ export class NewComponent implements OnInit {
       }
     );
 
-    this._MarcaService.getMarcaSelect().subscribe(
+    this._MarcaService.select().subscribe(
       response => {
         this.marcas = response;
       }, 

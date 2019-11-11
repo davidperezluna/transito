@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { SelectModule } from 'angular2-select';
 import { TooltipModule } from "ngx-tooltip";
+import { ChartsModule } from 'ng2-charts';
 
 import { CvCdoComparendoService } from '../../../../services/cvCdoComparendo.service';
 import { CfgOrganismoTransitoService } from '../../../../services/cfgOrganismoTransito.service';
@@ -38,7 +39,8 @@ import { InventoryComponent } from './inventory/inventory.component';
         CommonModule, 
         Ng2BootstrapModule.forRoot(),
         SelectModule,
-        TooltipModule
+        TooltipModule,
+        ChartsModule
     ],
     declarations: [
         NewComponent,
