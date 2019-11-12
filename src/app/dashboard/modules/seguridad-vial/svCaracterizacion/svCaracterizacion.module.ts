@@ -5,6 +5,10 @@ import { SelectModule } from 'angular2-select';
 
 import { SvCaracterizacionService } from '../../../../services/svCaracterizacion.service';
 import { UserCfgGrupoSanguineoService } from "../../../../services/userCfgGrupoSanguineo.service";
+import { VhloCfgTipoVehiculoService } from 'app/services/vhloCfgTipoVehiculo.service';
+import { VhloCfgLineaService } from 'app/services/vhloCfgLinea.service';
+import { VhloCfgMarcaService } from 'app/services/vhloCfgMarca.service';
+import { VhloCfgColorService } from 'app/services/vhloCfgColor.service';
 
 import { NewComponent } from './new/new.component';
 import { EditComponent } from './edit/edit.component';
@@ -16,7 +20,11 @@ import { EditComponent } from './edit/edit.component';
     exports: [NewComponent,EditComponent],
     providers:[
         SvCaracterizacionService,
-        UserCfgGrupoSanguineoService
+        UserCfgGrupoSanguineoService,
+        VhloCfgTipoVehiculoService,
+        VhloCfgLineaService,
+        VhloCfgMarcaService,
+        VhloCfgColorService,
     ]
 })
 

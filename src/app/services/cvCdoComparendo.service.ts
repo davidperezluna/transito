@@ -120,7 +120,7 @@ export class CvCdoComparendoService {
 		formData.append('authorization', token);
 		return this._http.post(this.url + "/upload", formData).map(res => res.json());
 	}
-
+	
 	createFile(datos, token) {
 		let json = JSON.stringify(datos);
 		let params = 'data=' + json + '&authorization=' + token;
@@ -130,19 +130,27 @@ export class CvCdoComparendoService {
 
 	createExcelInventory(datos, token): any {
 		let contentType;
-
+		
 		let json = JSON.stringify(datos);
-
+		
 		let formData = new FormData();
-
+		
 		formData.append('data', json);
 		formData.append('authorization', token);
-
+		
 		return this._http.post(this.url + "/create/excel/inventory", formData, { 'responseType': ResponseContentType.Blob }).map(res => {
 			contentType = res.headers.get('Content-type');
 			if (contentType == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
 				return new Blob([res.blob()], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' })
 			}
 		});
+		
+	}
+
+	generateReporte(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = "data=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/generate/reporte", params, { headers: headers }).map(res => res.json());
 	}
 }

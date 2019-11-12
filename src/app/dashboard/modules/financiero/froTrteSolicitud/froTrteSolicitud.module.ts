@@ -38,6 +38,7 @@ import { UserLicenciaTransitoService } from '../../../../services/userLicenciaTr
 import { UserLcCfgCategoriaService } from '../../../../services/userLcCfgCategoria.service';
 import { UserLcCfgRestriccionService } from '../../../../services/userLcCfgRestriccion.service';
 import { VhloCfgClaseService } from '../../../../services/vhloCfgClase.service';
+import { UserLicenciaConduccionService } from 'app/services/userLicenciaConduccion.service';
 
 @NgModule({
     imports: [
@@ -90,6 +91,7 @@ import { VhloCfgClaseService } from '../../../../services/vhloCfgClase.service';
         VhloCfgServicioService,
         UserLcCfgRestriccionService,
         VhloCfgClaseService,
+        UserLicenciaConduccionService
     ]
 })
 

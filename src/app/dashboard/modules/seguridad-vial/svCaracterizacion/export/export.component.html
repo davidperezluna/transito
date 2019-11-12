@@ -8,16 +8,25 @@
                 <div class="form-group row">
                     <div class="col-xs-12 col-lg-6" style="margin-top: 2%">
                         <div class="input-group">
-                            <input type="number" class="form-control" placeholder="NIT Empresa" [(ngModel)]="exportCaracterizacion.nit" name="nit"
-                                required />
+                            <input type="number" class="form-control" placeholder="NIT Empresa"
+                                [(ngModel)]="exportCaracterizacion.nit" name="nit" required />
                             <span class="input-group-btn">
-                                <button (click)="onSearchRegistros()" class="btn btn-default btn-primary" type="button"><i
-                                        class="fa fa-search"></i></button>
+                                <button (click)="onSearchRegistros()" class="btn btn-default btn-primary"
+                                    type="button"><i class="fa fa-search"></i></button>
                             </span>
                         </div>
                     </div>
                 </div>
-                <div *ngIf="empresaEncontrada">
+            </form>
+        </div>
+    </div>
+    <div class="card" *ngIf="empresaEncontrada">
+        <div class="card-header">
+            <h5 class="text-uppercase">Busqueda de caracterización de Empresa</h5>
+        </div>
+        <div class="card-body">
+            <div class="form-group row">
+                <div class="col-xs-12 col-lg-12">
                     <table class="table " id="dataTables-example">
                         <br>
                         <thead>
@@ -31,7 +40,7 @@
                                 <th>Apellidos</th>
                                 <th>CLC</th>
                                 <th>Fecha Vigencia</th>
-                                <th>Edad</th>
+                                <th>Fecha Nacimiento</th>
                                 <th>Genero</th>
                                 <th>Grupo Trabajo</th>
                                 <th>Otro Grupo Trabajo</th>
@@ -49,9 +58,8 @@
                                 <th>Trayecto (Km)</th>
                                 <th>Tiempo trayecto (Hrs)</th>
                                 <th>Km mensuales recorridos (Km)</th>
-                                <th>Riesgo</th>
                                 <th>Factores de Riesgo</th>
-                                <th>Otros factores riesgo (Km)</th>
+                                <th>Otros factores riesgo</th>
                                 <th>Causas Riesgo</th>
                                 <th>Otras Causas Riesgo</th>
                                 <th>Riesgo Percibido</th>
@@ -62,15 +70,15 @@
                             <tr class="odd" *ngFor="let registro of registros; let i = index">
                                 <td>{{ i + 1 }}</td>
                                 <td>{{ registro.empresa.nombre }}</td>
-                                <td>{{ registro.fecha }}</td>
-                                <td>{{ registro.ciudad }}</td>
+                                <td>{{ (registro.fecha.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td>
+                                <td>{{ registro.ciudad.nombre }}</td>
                                 <td>{{ registro.cedula }}</td>
                                 <td>{{ registro.nombres }}</td>
                                 <td>{{ registro.apellidos }}</td>
                                 <td>{{ registro.clc }}</td>
-                                <td>{{ registro.fechaVigencia }}</td>
-                                <td>{{ registro.edad }}</td>
-                                <td>{{ registro.genero }}</td>
+                                <td>{{ (registro.fechaVigencia.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td>
+                                <td>{{ (registro.fechaNacimiento.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td>
+                                <td>{{ registro.genero.sigla }}</td>
                                 <td>{{ registro.grupoTrabajo }}</td>
                                 <td>{{ registro.otroGrupoTrabajo }}</td>
                                 <td>{{ registro.tipoContrato }}</td>
@@ -80,7 +88,7 @@
                                     <span *ngIf="registro.accidenteTransito">Si</span>
                                     <span *ngIf="!registro.accidenteTransito">No</span>
                                 </td>
-                                <td>{{ registro.cincunstancias }}</td>
+                                <td>{{ registro.circunstancias }}</td>
                                 <td>
                                     <span *ngIf="registro.incidente">Si</span>
                                     <span *ngIf="!registro.incidente">No</span>
@@ -96,18 +104,17 @@
                                 <td>{{ registro.trayecto }}</td>
                                 <td>{{ registro.tiempoTrayecto }}</td>
                                 <td>{{ registro.kmMensualesRecorridos }}</td>
-                                <td>{{ registro.riesgo }}</td>
                                 <td>{{ registro.principalFactorRiesgo }}</td>
                                 <td>{{ registro.otroFactorRiesgo }}</td>
                                 <td>{{ registro.causaRiesgo }}</td>
                                 <td>{{ registro.otraCausaRiesgo }}</td>
-                                <td>{{ registro.riesgoPercido }}</td>
+                                <td>{{ registro.riesgo }}</td>
                                 <td>{{ registro.propuestaReduccionRiesgo }}</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
 </div>

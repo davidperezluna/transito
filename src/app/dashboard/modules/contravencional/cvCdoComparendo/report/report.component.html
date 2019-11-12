@@ -1,0 +1,63 @@
+<div class="container row">
+    <div class="col-xs-12 col-lg-4">
+        <div class="card">
+            <div class="card-header">
+                <b class="text-uppercase">Generación de reportes de comparendos</b>
+                <br>
+                <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
+            </div>
+            <div class="card-body">
+                <form #formFiltros="ngForm">
+                    <div class="col-xs-12 col-lg-12">
+                        <label>Seleccionar tipo reporte <b class="text-danger">*</b></label>
+                        <ng-select [multiple]="false" [options]="tiposReporte" [(ngModel)]="datos.tipoReporte"
+                            name="tipoReporte" required>
+                        </ng-select>
+                    </div>
+                    <div class="col-xs-12 col-lg-12" *ngIf="datos.tipoReporte">
+                        <label>Seleccionar organismo tránsito <b class="text-danger">*</b></label>
+                        <ng-select [multiple]="false" [options]="organismosTransito"
+                            [(ngModel)]="datos.idOrganismoTransito" name="idOrganismoTransito" required>
+                        </ng-select>
+                    </div>
+                    <div class="col-xs-12 col-lg-12" *ngIf="datos.idOrganismoTransito">
+                        <label>Fecha inicial <b class=" text-danger">*</b></label>
+                        <input class="form-control" type="date" [(ngModel)]="datos.fechaInicial" name="fechaInicial"
+                            required>
+                    </div>
+                    <div class="col-xs-12 col-lg-12" *ngIf="datos.idOrganismoTransito">
+                        <label>Fecha final <b class=" text-danger">*</b></label>
+                        <input class="form-control" type="date" [(ngModel)]="datos.fechaFinal" name="fechaFinal"
+                            required>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <div class="btn-group">
+                    <button (click)="onEnviar()" style="margin-right: 2%;" [disabled]="formFiltros.invalid"
+                        class="btn btn-primary" type="button">
+                        <i class="fa fa-cogs"></i>
+                        Generar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 col-lg-8" *ngIf="comparendos">
+        <div class="card">
+            <div class="card-header">
+                <h5 *ngIf="graficaInfracciones"class="card-title pull-left">Estadisticas <small> infracciones más comunes</small></h5>
+                <h5 *ngIf="graficaEdades"class="card-title pull-left">Estadisticas <small> edades más comunes en que se realizan comparendos    </small></h5>
+            </div>
+            <div class="card-body">
+                <div *ngIf="comparendos">
+                <canvas *ngIf="graficaInfracciones" baseChart height="125" [datasets]="barChartDataInfracciones" [labels]="barChartLabelsInfracciones" [options]="barChartOptionsInfracciones" [legend]="barChartLegendInfracciones" [chartType]="barChartTypeInfracciones">
+                </canvas>
+                <canvas *ngIf="graficaEdades" baseChart height="125" [datasets]="barChartDataEdades" [labels]="barChartLabelsEdades" [options]="barChartOptionsEdades" [legend]="barChartLegendEdades" [chartType]="barChartTypeEdades">
+                </canvas>
+                </div>
+            </div>
+            <div class="card-footer"> </div>
+        </div>
+    </div>
+</div>

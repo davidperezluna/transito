@@ -24,6 +24,7 @@ import { CvRestriccionComponent } from './cvRestriccion/cvRestriccion.component'
 import { SearchComponent } from './cvCdoComparendo/search/search.component';
 import { InventoryComponent } from './cvCdoComparendo/inventory/inventory.component';
 import { CvCdoComparendoExportComponent } from './cvCdoComparendo/export/export.component';
+import { CvCdoComparendoReportComponent } from './cvCdoComparendo/report/report.component';
 import { ExportInventarioComponent } from './rpcccInventarioDocumental/export/export.component';
 import { RpcccInventarioDocumentalComponent } from './rpcccInventarioDocumental/rpcccInventarioDocumental.component';
 
@@ -83,6 +84,10 @@ const routes: Routes = [
   {
     path: 'cvCdoComparendo/export',
     component: CvCdoComparendoExportComponent
+  },
+  {
+    path: 'cvCdoComparendo/report',
+    component: CvCdoComparendoReportComponent
   },
   {
     path: 'cvCfgInteres',

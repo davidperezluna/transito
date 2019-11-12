@@ -62,7 +62,7 @@ constructor(
   ngOnInit() {
     this.vehiculo = new VhloVehiculo(null, null, null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
     
-    this._MarcaService.getMarcaSelect().subscribe(
+    this._MarcaService.select().subscribe(
       response => {
         this.marcas = response;
       }, 

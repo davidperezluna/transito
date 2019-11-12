@@ -154,7 +154,7 @@ constructor(
           this.lineas = response;
           setTimeout(() => {
               this.lineaSelected = [this.registroMaquinaria.vehiculo.linea.id]; 
-              this._marcaService.getMarcaSelect().subscribe(
+              this._marcaService.select().subscribe(
                 response => {
                   this.marcas = response;
                   setTimeout(() => {

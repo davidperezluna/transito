@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { TooltipModule } from "ngx-tooltip";
 import { FormsModule } from '@angular/forms';
 import { SelectModule } from 'angular2-select';
+import { ChartsModule } from 'ng2-charts';
 
 import { CvAuCfgAtencionComponent } from './cvAuCfgAtencion/cvAuCfgAtencion.component';
 import { CvAuCfgHorarioComponent } from './cvAuCfgHorario/cvAuCfgHorario.component';
@@ -27,6 +28,7 @@ import { CvRestriccionComponent } from './cvRestriccion/cvRestriccion.component'
 import { SearchComponent } from './cvCdoComparendo/search/search.component';        
 import { InventoryComponent } from './cvCdoComparendo/inventory/inventory.component';        
 import { CvCdoComparendoExportComponent } from './cvCdoComparendo/export/export.component';        
+import { CvCdoComparendoReportComponent } from './cvCdoComparendo/report/report.component';        
 import { ExportInventarioComponent } from './rpcccInventarioDocumental/export/export.component';
 import { RpcccInventarioDocumentalComponent } from './rpcccInventarioDocumental/rpcccInventarioDocumental.component';        
 
@@ -59,6 +61,7 @@ import { RpcccInventarioDocumentalModule } from './rpcccInventarioDocumental/rpc
     TooltipModule,
     FormsModule,
     SelectModule,
+    ChartsModule,
     ContravencionalRoutingModule,
     CvAuCfgAtencionModule,
     CvAuCfgHorarioModule,
@@ -105,7 +108,8 @@ import { RpcccInventarioDocumentalModule } from './rpcccInventarioDocumental/rpc
     InventoryComponent,
     CvCdoComparendoExportComponent,
     ExportInventarioComponent,
-    RpcccInventarioDocumentalComponent
+    RpcccInventarioDocumentalComponent,
+    CvCdoComparendoReportComponent,
   ]
 })
 export class ContravencionalModule { }

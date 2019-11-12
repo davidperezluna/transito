@@ -25,7 +25,7 @@ constructor(
 
   ngOnInit(){
     
-    this._marcaService.getMarcaSelect().subscribe(
+    this._marcaService.select().subscribe(
         response => {
           this.marcas = response;
           setTimeout(() => {
