@@ -33,7 +33,9 @@ export class UserUsuarioMenuComponent implements OnInit {
 		private _loginService: LoginService,
     ){}
     
-  ngOnInit() { }
+  ngOnInit() {
+    swal.close();
+  }
 
   onSearch() {
     swal({
