@@ -147,10 +147,10 @@ export class CvCdoComparendoService {
 		
 	}
 
-	generateReporte(datos, token) {
+	generateReport(datos, token) {
 		let json = JSON.stringify(datos);
 		let params = "data=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-		return this._http.post(this.url + "/generate/reporte", params, { headers: headers }).map(res => res.json());
+		return this._http.post(this.url + "/generate/report", params, { headers: headers }).map(res => res.json());
 	}
 }

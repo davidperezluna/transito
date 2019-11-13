@@ -81,7 +81,7 @@ export class CvCdoComparendoReportComponent implements OnInit, AfterViewInit {
         let token = this._LoginService.getToken();
 
         if (this.datos.tipoReporte) {
-            this._CvCdoComparendoService.generateReporte(this.datos, token).subscribe(
+            this._CvCdoComparendoService.generateReport(this.datos, token).subscribe(
                 response => {
                     if (response.code == 200) {
                         this.comparendos = response.data;
