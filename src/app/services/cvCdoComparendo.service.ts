@@ -142,17 +142,15 @@ export class CvCdoComparendoService {
 			contentType = res.headers.get('Content-type');
 			if (contentType == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
 				return new Blob([res.blob()], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' })
-			} else if (contentType == 'application/pdf') {
-				return new Blob([res.blob()], { type: 'application/pdf' })
 			}
 		});
 		
 	}
 
-	generateReporte(datos, token) {
+	generateReport(datos, token) {
 		let json = JSON.stringify(datos);
 		let params = "data=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-		return this._http.post(this.url + "/generate/reporte", params, { headers: headers }).map(res => res.json());
+		return this._http.post(this.url + "/generate/report", params, { headers: headers }).map(res => res.json());
 	}
 }

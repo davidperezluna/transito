@@ -45,7 +45,7 @@ export class HomeComponent implements OnInit {
       }]
     }
   };
-  public barChartLabels: string[] = ['TUTELA', 'DERECHO PETICION', 'SOLICITUD DE INFORMACIÓN', 'INVITACIONES', 'RESPUESTAS STTD'];
+  public barChartLabels: string[] = ['TU', 'DP', 'SI', 'I', 'RSTTD'];
   public barChartType: any = 'bar';
   public barChartLegend: any = true;
   public barChartData: any[] = [

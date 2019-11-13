@@ -415,19 +415,19 @@ constructor(
     if (e) {
       let token = this._LoginService.getToken()
       
-        this._LineaService.selectByMarca({'idMarca':e}, token).subscribe(
-          response => {
-            this.lineas = response;
-          }, 
-          error => { 
-            this.errorMessage = <any>error;
-    
-            if(this.errorMessage != null){
-              console.log(this.errorMessage);
-              alert("Error en la petición");
-            }
+      this._LineaService.selectByMarca({'idMarca':e}, token).subscribe(
+        response => {
+          this.lineas = response;
+        }, 
+        error => { 
+          this.errorMessage = <any>error;
+  
+          if(this.errorMessage != null){
+            console.log(this.errorMessage);
+            alert("Error en la petición");
           }
-        );
+        }
+      );
     }
   }
 
