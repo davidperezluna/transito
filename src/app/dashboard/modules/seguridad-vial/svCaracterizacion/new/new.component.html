@@ -754,12 +754,11 @@
                             <label>Principales factores de riesgo con los que se encuentra (tanto los trayectos
                                 ida-vuelta del
                                 domicilio al trabajo como en los desplazamientos en misión) <strong class="text-danger">*</strong></label>
-                            <ng-select [multiple]="true" [options]="arrayFactoresRiesgo"
-                                [(ngModel)]="msvCaracterizacion.arrayFactoresRiesgo" required
+                            <ng-select [multiple]="true" [options]="arrayFactoresRiesgo" (ngModelChange)="onChangedFactorRiesgo($event)" [(ngModel)]="msvCaracterizacion.arrayFactoresRiesgo" required
                                 name="principalFactorRiesgo">
                             </ng-select>
                         </div>
-                        <div class="col-xs-12 col-lg-6" *ngIf="msvCaracterizacion.arrayFactoresRiesgo == 'OTRO'">
+                        <div class="col-xs-12 col-lg-6" *ngIf="mostrarOtroFactorRiesgo">
                             <label>Otro factor riesgo</label>
                             <input class="form-control" type="text" [(ngModel)]="msvCaracterizacion.otroFactorRiesgo"
                                 name="otroFactorRiesgo">
@@ -768,10 +767,10 @@
                             <label>Causas que motivan el riesgo (indique todos los que considere adecuados, en su
                                 caso) <strong class="text-danger">*</strong></label>
                             <ng-select [multiple]="true" [options]="arrayCausasRiesgo"
-                                [(ngModel)]="msvCaracterizacion.arrayCausasRiesgo" required name="causaRiesgo">
+                                [(ngModel)]="msvCaracterizacion.arrayCausasRiesgo" (ngModelChange)="onChangedCausaRiesgo($event)" required name="causaRiesgo">
                             </ng-select>
                         </div>
-                        <div class="col-xs-12 col-lg-6" *ngIf="msvCaracterizacion.arrayCausasRiesgo == 'OTRA'">
+                        <div class="col-xs-12 col-lg-6" *ngIf="mostrarOtraCausaRiesgo">
                             <label>Cuales</label>
                             <input class="form-control" type="text" [(ngModel)]="msvCaracterizacion.otroCausaRiesgo"
                                 name="otroCausaRiesgo">

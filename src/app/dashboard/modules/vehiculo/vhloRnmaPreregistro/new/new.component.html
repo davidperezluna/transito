@@ -26,7 +26,8 @@
                                 <label>No Factura de compra<b class="text-danger">*</b></label>
                                 <input class="form-control" [(ngModel)]="maquinaria.numeroFactura" name="numeroFactura" type="text" required>
                             </div>
-                            <div class="col-xs-12 col-lg-3 col-md-3" *ngIf="maquinaria.tipoMatricula != 'MATRICULA'">
+                            <!-- <div class="col-xs-12 col-lg-3 col-md-3" *ngIf="maquinaria.tipoMatricula != 'MATRICULA'"> -->
+                            <div class="col-xs-12 col-lg-3 col-md-3">
                                 <label>No. de Registro <b class="text-danger">*</b></label>
                                 <input class="form-control" [(ngModel)]="maquinaria.placa" name="placa" type="text" required>
                             </div>

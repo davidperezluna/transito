@@ -30,7 +30,6 @@ export class NewComponent implements OnInit {
   public condicionIngresos:any;
   public clases:any;
   public persona:any='empresa';
-  public sedeOperativa:any;
   public organismosTransito:any;
   public sedeOperativaSelected:any;
   public propietarios:any;
@@ -86,9 +85,9 @@ ngOnInit() {
   this._FuncionarioService.searchLogin(datos,token).subscribe(
     response => { 
       if(response.code == 200){
+        this.funcionario = response.data;
         this.persona='funcionario';
-        this.sedeOperativa = response.data.sedeOperativa;
-        this.sedeOperativaSelected = [this.sedeOperativa.id];
+        this.sedeOperativaSelected = [this.funcionario.organismoTransito.id];
       }else{
         this._FuncionarioService.searchEmpresa(datos,token).subscribe(
           response => {
@@ -116,7 +115,7 @@ ngOnInit() {
       }
   });
 
-  this.remolque = new VhloRegistroRemolque(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
+  this.remolque = new VhloRegistroRemolque(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
   
   this._OrganismoTransitoService.selectSedes().subscribe(
     response => {

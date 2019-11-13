@@ -23,6 +23,7 @@ export class NewComponent implements OnInit, AfterViewInit {
   public numeroComparendo: any = null;
   public comparendo: any = null;
   public audienciaLast: any = null;
+  public fechaDisponible: any = null;
   public audiencias: any = null;
   public tipos: any = null;
   public apoderado: any;
@@ -65,6 +66,7 @@ constructor(
       response => {
         if (response.code == 200) {
           this.audienciaLast = response.data;
+          this.fechaDisponible = response.data.fechaDisponible;
 
           swal({
             title: 'Perfecto!',
@@ -129,7 +131,7 @@ constructor(
           this.comparendo = response.data;
           this.audiencia.idComparendo = this.comparendo.id;
 
-          this._AudienciaService.searchByComparendo({ 'idComprendo': this.comparendo.id }, token).subscribe(
+          this._AudienciaService.searchByComparendo({ 'idComparendo': this.comparendo.id }, token).subscribe(
             response => {
               if (response.code == 200) {
                 this.audiencias = response.data;
@@ -141,7 +143,12 @@ constructor(
                   confirmButtonText: 'Aceptar'
                 });
               }else{
-
+                swal({
+                  title: response.title,
+                  text: response.message,
+                  type: response.status,
+                  confirmButtonText: 'Aceptar'
+                });
               }
             },
             error => {

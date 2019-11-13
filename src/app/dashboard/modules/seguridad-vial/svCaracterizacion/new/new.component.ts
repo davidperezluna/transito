@@ -34,6 +34,9 @@ export class NewComponent implements OnInit {
     public marcas: any;
     public colores: any;
 
+    public mostrarOtroFactorRiesgo = false;
+    public mostrarOtraCausaRiesgo = false;
+
     public empresaEncontrada = false;
     public empresa: any;
     public representante: any;
@@ -315,6 +318,26 @@ export class NewComponent implements OnInit {
                     }
                 }
             );
+        }
+    }
+    
+    onChangedFactorRiesgo(e) {
+        if (e) {
+            if (e.includes('OTRO')) {
+                this.mostrarOtroFactorRiesgo = true;
+            } else {
+                this.mostrarOtroFactorRiesgo = false;
+            }
+        }
+    }
+    
+    onChangedCausaRiesgo(e) {
+        if (e) {
+            if (e.includes('OTRA')) {
+                this.mostrarOtraCausaRiesgo = true;
+            } else {
+                this.mostrarOtraCausaRiesgo = false;
+            }
         }
     }
 

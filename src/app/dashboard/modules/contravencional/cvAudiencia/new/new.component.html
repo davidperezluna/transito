@@ -38,7 +38,7 @@
                                             <td>
                                                 <strong>Fecha y hora: </strong>
                                                 <br>
-                                                {{ (comparendo.fecha.timestamp * 1000) | date: 'dd/MM/yyyy' }} {{ (comparendo.hora.timestamp * 1000) | date: 'h::m:s A' }}
+                                                {{ (comparendo.fecha.timestamp * 1000) | date: 'dd/MM/yyyy' }} {{ (comparendo.hora.timestamp * 1000) | date: 'hh:mm:ss a' }}
                                             </td>
                                         </tr>
                                     </tbody>
@@ -142,6 +142,10 @@
                     <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
                 </div>
                 <div class="card-body">
+                    <div class="col-xs-12 col-lg-12">
+                        <p>Fecha Disponible : {{ (fechaDisponible.timestamp * 1000) | date: 'dd/MM/yyyy' }}</p>
+                        <!-- <input type="date" class="form-control" [(ngModel)]="fechaDisponible" name="fechaDisponible" required /> -->
+                    </div>
                     <div class="col-xs-12 col-lg-6">
                         <label>Fecha <strong class="text-danger">*</strong></label>
                         <input type="date" class="form-control" [(ngModel)]="audiencia.fecha" name="fecha" required />
