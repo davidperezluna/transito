@@ -47,6 +47,7 @@ import { VhloTpTarjetaOperacionComponent } from './vhloTpTarjetaOperacion/vhloTp
 import { VhloRnaPreregistroComponent } from "./vhloRnaPreregistro/vhloRnaPreregistro.component";
 import { VhloRnaPreasignacionPlacaComponent } from './vhloRnaPreasignacionPlaca/vhloRnaPreasignacionPlaca.component';
 import { VhloRnmaPreregistroComponent } from "./vhloRnmaPreregistro/vhloRnmaPreregistro.component";
+import { VhloRnrsPreasignacionPlacaComponent } from "./vhloRnrsPreasignacionPlaca/vhloRnrsPreasignacionPlaca.component";
 import { VhloRnrsPreregistroComponent } from './vhloRnrsPreregistro/vhloRnrsPreregistro.component';
 import { VhloDevolucionRadicadoComponent } from './vhloDevolucionRadicado/vhloDevolucionRadicado.component';
 
@@ -90,6 +91,7 @@ import { VhloTpTarjetaOperacionModule } from './vhloTpTarjetaOperacion/vhloTpTar
 import { VhloRnaPreregistroModule } from "./vhloRnaPreregistro/vhloRnaPreregistro.module";
 import { VhloRnaPreasignacionPlacaModule } from './vhloRnaPreasignacionPlaca/vhloRnaPreasignacionPlaca.module';
 import { VhloRnmaPreregistroModule } from "./vhloRnmaPreregistro/vhloRnmaPreregistro.module";
+import { VhloRnrsPreasignacionPlacaModule } from "./vhloRnrsPreasignacionPlaca/vhloRnrsPreasignacionPlaca.module";
 import { VhloRnrsPreregistroModule } from './vhloRnrsPreregistro/vhloRnrsPreregistro.module';
 import { VhloDevolucionRadicadoModule } from './vhloDevolucionRadicado/vhloDevolucionRadicado.module';
 
@@ -145,6 +147,7 @@ import { VhloDevolucionRadicadoModule } from './vhloDevolucionRadicado/vhloDevol
     VhloRnaPreregistroModule,
     VhloRnaPreasignacionPlacaModule,
     VhloRnmaPreregistroModule,
+    VhloRnrsPreasignacionPlacaModule,
     VhloRnrsPreregistroModule,
     VhloDevolucionRadicadoModule,
   ],
@@ -191,6 +194,7 @@ import { VhloDevolucionRadicadoModule } from './vhloDevolucionRadicado/vhloDevol
     VhloRnaPreregistroComponent,
     VhloRnaPreasignacionPlacaComponent,
     VhloRnmaPreregistroComponent,
+    VhloRnrsPreasignacionPlacaComponent,
     VhloRnrsPreregistroComponent,
     VhloDevolucionRadicadoComponent,
   ]

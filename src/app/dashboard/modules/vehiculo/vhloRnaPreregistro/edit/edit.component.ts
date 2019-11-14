@@ -477,10 +477,12 @@ constructor(
     var datePiper = new DatePipe('en-US');
 
     var date = new Date();
-    date.setTime(this.vehiculo.fechaRegistroRadicado.timestamp * 1000);
-    this.vehiculo.fechaRegistroRadicado = datePiper.transform(
-      date, 'yyyy-MM-dd'
-    );
+    if (this.vehiculo.fechaRegistroRadicado) {
+      date.setTime(this.vehiculo.fechaRegistroRadicado.timestamp * 1000);
+      this.vehiculo.fechaRegistroRadicado = datePiper.transform(
+        date, 'yyyy-MM-dd'
+      );
+    }
 
     this.radicado.fechaIngreso = this.vehiculo.fechaRegistroRadicado;
     this.radicado.guiaLlegada = this.vehiculo.numeroGuiaRadicado;
