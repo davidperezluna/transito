@@ -10,40 +10,41 @@ import swal from 'sweetalert2';
 })
 export class EditComponent {
 @Output() ready = new EventEmitter<any>();
-  @Input() cfgTipoProceso:any = null;
+  @Input() tipoProceso:any = null;
 public errorMessage;
-public respuesta;
 
 constructor(
   private _CfgTipoProcesoService: VhloCfgLimitacionTipoProcesoService,
-  private _loginService: LoginService,
+  private _LoginService: LoginService,
   ){
   }
 
-  ngOnInit() {
-
-
-
-  }
-
+  ngOnInit() {}
 
   onCancelar(){
     this.ready.emit(true);
   }
+
   onEnviar(){
-    let token = this._loginService.getToken();
-    this._CfgTipoProcesoService.edit(this.cfgTipoProceso,token).subscribe(
+    let token = this._LoginService.getToken();
+
+    this._CfgTipoProcesoService.edit(this.tipoProceso,token).subscribe(
 			response => {
-        this.respuesta = response;
-        console.log(this.respuesta);
-        if(this.respuesta.status == 'success'){
+        if(response.code == 200){
           this.ready.emit(true);
           swal({
-            title: 'Perfecto!',
-            text: 'El registro se ha modificado con exito',
-            type: 'success',
+            title: response.title,
+            text: response.message,
+            type: response.status,
             confirmButtonText: 'Aceptar'
-          })
+          });
+        } else {
+          swal({
+            title: response.title,
+            text: response.message,
+            type: response.status,
+            confirmButtonText: 'Aceptar'
+          });
         }
 			error => {
 					this.errorMessage = <any>error;
@@ -53,8 +54,6 @@ constructor(
 						alert("Error en la petición");
 					}
 				}
-
 		}); 
   }
-
 }

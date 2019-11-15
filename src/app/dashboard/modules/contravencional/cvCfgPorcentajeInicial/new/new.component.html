@@ -10,7 +10,7 @@
                 <form #formNew="ngForm"> 
                     <div class="form-group row">
                         <div class="col-xs-12 col-lg-6">
-                            <label>Año <strong class="text-danger">*</strong></label>
+                            <label>Fecha <strong class="text-danger">*</strong></label>
                             <input type="date" class="form-control" [(ngModel)]="porcentaje.anio" name="anio" required />
                         </div>
                         <div class="col-xs-12 col-lg-6">
@@ -22,13 +22,13 @@
             </div>
             <div class="card-footer">
                 <div class="btn-group">
-                    <button (click)="onCancelar()" class="btn btn-default">
-                        <i class="fa fa-times"></i>
-                        Cancel
-                    </button>
                     <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
                         <i class="fa fa-save"></i>
                         Enviar
+                    </button>
+                    <button (click)="onCancelar()" class="btn btn-default">
+                        <i class="fa fa-times"></i>
+                        Cancelar
                     </button>
                 </div>
             </div>

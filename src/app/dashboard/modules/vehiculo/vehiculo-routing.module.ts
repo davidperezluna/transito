@@ -53,7 +53,7 @@ const routes: Routes = [
     component: VhloBuscarComponent
   },
   {
-    path: 'VhloCertificadoTradicionComponent',
+    path: 'vhloCertificadoTradicion',
     component: VhloCertificadoTradicionComponent
   },
   {
@@ -89,7 +89,7 @@ const routes: Routes = [
     component: VhloCfgLimitacionCausalComponent 
   },
   { 
-    path: 'vhloCfggLimitacionTipo',
+    path: 'vhloCfgLimitacionTipo',
     component: VhloCfgLimitacionTipoComponent 
   },
   { 
@@ -97,11 +97,11 @@ const routes: Routes = [
     component: VhloCfgLimitacionTipoProcesoComponent 
   },
   { 
-    path: 'vhloCfgLineaComponent',
+    path: 'vhloCfgLinea',
     component: VhloCfgLineaComponent 
   },
   { 
-    path: 'vhloCfgMarcaComponent',
+    path: 'vhloCfgMarca',
     component: VhloCfgMarcaComponent 
   },
   { 

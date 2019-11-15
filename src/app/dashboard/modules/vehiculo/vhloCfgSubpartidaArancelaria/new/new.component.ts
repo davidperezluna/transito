@@ -19,7 +19,7 @@ constructor(
   ){}
 
   ngOnInit() {
-    this.subpartidaArancelaria = new VhloCfgSubpartidaArancelaria(null, null);
+    this.subpartidaArancelaria = new VhloCfgSubpartidaArancelaria(null, null, null);
   }
 
   onCancelar(){

@@ -100,7 +100,7 @@ export class VhloCfgLimitacionTipoComponent implements OnInit {
       if (result.value) {
         let token = this._LoginService.getToken();
         
-        this._LimitacionService.delete(token,id).subscribe(
+        this._LimitacionService.delete({'id': id}, token).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',

@@ -11,9 +11,7 @@ declare var $: any;
 
 export class VhloCfgLimitacionCausalComponent implements OnInit {
   public errorMessage;
-
 	public id;
-	public respuesta;
   public cfgCausalesLimitacion;
 	public formNew = false;
 	public formEdit = false;
@@ -90,7 +88,6 @@ export class VhloCfgLimitacionCausalComponent implements OnInit {
       }
   }
   deleteCausalLimitacion(id:any){
-
     swal({
       title: '¿Estás seguro?',
       text: "¡Se eliminara este registro!",
@@ -103,16 +100,15 @@ export class VhloCfgLimitacionCausalComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._CfgCausalLimitacionService.delete(token,id).subscribe(
+        this._CfgCausalLimitacionService.delete({'id': id}, token).subscribe(
             response => {
                 swal({
-                      title: 'Eliminado!',
-                      text:'Registro eliminado correctamente.',
-                      type:'success',
+                      title: response.title,
+                      text: response.message,
+                      type: response.status,
                       confirmButtonColor: '#15d4be',
                     })
                   this.table.destroy();
-                  this.respuesta= response;
                   this.ngOnInit();
               }, 
             error => {
