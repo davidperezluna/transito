@@ -1,44 +1,48 @@
-<div class="container-fluid" >
-  <div  class="row align-items-center justify-content-between">
-    <div class="col text-right ">
-      <div class="btn-group pull-right">
-        <button (click)="onNew()" class="btn btn-outline-success  btn-round " data-target="#themepicker" data-toggle="modal"><span class="text">Nuevo</span> <i class="ti-save ml-2"></i></button>
-      </div>
-    </div>
-  </div>
-  <div class="row" *ngIf='formIndex'>
-    <div class="col-md-12">
-        <div class="card">
-          <div class="card-header">
-            <h5 class="card-title">Carrocerías <small>Registradas</small></h5>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-12 col-lg-12" *ngIf='formIndex'>
+      <div class="card">
+        <div class="card-header">
+          <b class="text-uppercase">Carrocerías</b><small> Registradas</small>
+          <div class="btn-group pull-right">
+            <button (click)="onNew()" class="btn btn-default"><span class="text">Nuevo</span> <i
+                class="fa fa-plus"></i></button>
           </div>
-          <div class="card-body">
-            <table class="table " id="dataTables-example">
-              <thead>
-                <tr>
-                  <th>Id</th>
-                    <th>Nombre</th>
-                    <th>Clase</th>
-                    <th>Código Mt</th>
-                    <th>Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="odd" *ngFor="let carroceria of carrocerias; let i = index">
-                  <td >{{carroceria.id}}</td>
-                  <td >{{carroceria.nombre}}</td>
-                  <td >{{carroceria.clase.nombre}}</td>
-                  <td >{{carroceria.codigo}}</td>
-                  <td><button (click)="edit(carroceria)" class="btn btn-outline-info" type="button">Editar</button> 
-                    <button (click)="deleteCarroceria(carroceria.id)"  class="btn btn-outline-danger" type="button">Eliminar  </button> </td>
-                </tr>
-              </tbody>
-            </table>
-            <!-- /.table-responsive --> 
-          </div>
+        </div>
+        <div class="card-body">
+          <table class="table " id="dataTables-example">
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Clase</th>
+                <th>Código Mt</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="odd" *ngFor="let carroceria of carrocerias; let i = index">
+                <td>{{carroceria.id}}</td>
+                <td>{{carroceria.nombre}}</td>
+                <td>{{carroceria.clase.nombre}}</td>
+                <td>{{carroceria.codigo}}</td>
+                <td>
+                  <div class="btn-group">
+                    <button (click)="edit(carroceria)" class="btn btn-xs btn-primary" type="button" tooltip="Editar" [tooltipDisabled]="false" [tooltipAnimation]="true" tooltipPlacement="top">
+                      <i class="fa fa-pencil"></i>
+                    </button>
+                    <button (click)="deleteCarroceria(carroceria.id)" class="btn btn-xs btn-danger" type="button" tooltip="Eliminar" [tooltipDisabled]="false" [tooltipAnimation]="true" tooltipPlacement="top">
+                      <i class="fa fa-trash"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
-    <app-edit-vhlocfgcarroceria *ngIf='formEdit' [carroceria]="carroceria" (ready)="ready($event)"></app-edit-vhlocfgcarroceria>
-    <app-new-vhlocfgcarroceria *ngIf='formNew' (ready)="ready($event)"></app-new-vhlocfgcarroceria>
+  </div>
+  <app-edit-vhlocfgcarroceria *ngIf='formEdit' [carroceria]="carroceria" (ready)="ready($event)"></app-edit-vhlocfgcarroceria>
+  <app-new-vhlocfgcarroceria *ngIf='formNew' (ready)="ready($event)"></app-new-vhlocfgcarroceria>
 </div>

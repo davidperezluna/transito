@@ -28,12 +28,20 @@ constructor(
 			response => {
         if(response.code == 200){
           this.ready.emit(true);
+          
           swal({
-            title: 'Perfecto!',
+            title: response.title,
             text: response.message,
-            type: 'success',
+            type: response.status,
             confirmButtonText: 'Aceptar'
-          })
+          });
+        } else{
+          swal({
+            title: response.title,
+            text: response.message,
+            type: response.status,
+            confirmButtonText: 'Aceptar'
+          });
         }
 			error => {
 					this.errorMessage = <any>error;
