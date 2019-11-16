@@ -1,27 +1,30 @@
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-xs-12 col-lg-4">
         <div class="card">
             <div class="card-header">
                 <b class="text-uppercase">Nuevo un servicio</b>
+                <br>
+                <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
             </div>
             <div class="card-body">
                 <form #formNew="ngForm">
                     <div class="row">
-                        <div class="col-lg-6">
+                        <div class="col-xs-12 col-lg-12">
                             <label>Nombre <b class="text-danger">*</b></label>
                             <input class="form-control" [(ngModel)]="servicio.nombre" name="nombre" type="text" required>
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-xs-12 col-lg-12">
                             <label>Codigo <b class="text-danger">*</b></label>
-                            <input class="form-control" [(ngModel)]="servicio.codigo" name="codigo" type="text" required>
+                            <input class="form-control" [(ngModel)]="servicio.codigo" name="codigo" type="number" required>
                         </div>
                     </div>
-
                 </form>
             </div>
             <div class="card-footer">
-                <button (click)="onCancelar()" class="btn btn-default"><i class="fa fa-times"></i>Cancelar</button>
-                <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">Enviar</button>
+                <div class="btn-group">
+                    <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">Enviar</button>
+                    <button (click)="onCancelar()" class="btn btn-default"><i class="fa fa-times"></i>Cancelar</button>
+                </div>
             </div>
         </div>
     </div>

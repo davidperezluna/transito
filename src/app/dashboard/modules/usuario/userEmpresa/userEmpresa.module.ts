@@ -11,6 +11,9 @@ import { UserCfgEmpresaTipoSociedadService } from '../../../../services/userCfgE
 import { UserCfgTipoIdentificacionService } from '../../../../services/userCfgTipoIdentificacion.service';
 import { UserCfgEmpresaServicioService } from '../../../../services/userCfgEmpresaServicio.service';
 
+import { UserEmpresaRepresentanteService } from '../../../../services/userEmpresaRepresentante.service';
+import { UserEmpresaSucursalService } from '../../../../services/userEmpresaSucursal.service';
+
 import { NewEmpresaComponent } from './new/new.component';
 import { ShowComponent } from './show/show.component';
 import { EditComponent } from './edit/edit.component';
@@ -47,6 +50,8 @@ import { EditSucursalComponent } from './sucursal/edit/edit.component';
         UserCfgEmpresaTipoSociedadService,
         UserCfgTipoIdentificacionService,
         UserCfgEmpresaServicioService,
+        UserEmpresaRepresentanteService,
+        UserEmpresaSucursalService
     ]
 })
 

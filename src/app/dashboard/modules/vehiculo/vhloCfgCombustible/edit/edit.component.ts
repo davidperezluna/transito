@@ -26,12 +26,19 @@ constructor(
 
 		this._CombustibleService.edit(this.combustible,token).subscribe(
 			response => {
-        if(response == 'success'){
+        if(response.code == 200){
           this.ready.emit(true);
           swal({
-            title: 'Perfecto!',
-            text: 'El registro se ha modificado con exito',
-            type: 'success',
+            title: response.title,
+            text: response.message,
+            type: response.status,
+            confirmButtonText: 'Aceptar'
+          })
+        } else {
+          swal({
+            title: response.title,
+            text: response.message,
+            type: response.status,
             confirmButtonText: 'Aceptar'
           })
         }

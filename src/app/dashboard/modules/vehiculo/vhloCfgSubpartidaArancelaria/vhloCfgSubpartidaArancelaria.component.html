@@ -1,53 +1,55 @@
-<div class="container-fluid" >
+<div class="container-fluid">
   <hr>
   <div class="row" *ngIf='formIndex'>
-    <div class="col-md-12">
-        <div class="card">
-          <div class="card-header">
-            <h5 class="card-title">
-              <strong class="text-uppercase">Vehiculo</strong>
-              <small>Subpartidas Arancelarias</small>
-              <div class="btn-group pull-right">
-                <button (click)="onNew()" class="btn btn-default">
-                  <i class="fa fa-plus"></i>
-                  <span class="text">Nuevo</span>
-                </button>
-              </div>
-            </h5>
-          </div>
-          <div class="card-body">
-            <table class="table " id="dataTables-example">
-              <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Código</th>
-                    <th>Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="odd" *ngFor="let subpartidaArancelaria of subpartidasArancelarias; let i = index">
-                  <td >{{ i + 1 }}</td>
-                  <td >{{ subpartidaArancelaria.codigo }}</td>
-                  <td>
-                    <button (click)="onEdit(subpartidaArancelaria)" class="btn btn-xs btn-info" type="button">
-                      <i class="fa fa-edit"></i>
-                      Editar
-                    </button> 
-                    <button (click)="onDelete(subpartidaArancelaria.id)"  class="btn btn-xs btn-danger" type="button">
+    <div class="col-xs-12 col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title">
+            <strong class="text-uppercase">Vehiculo</strong>
+            <small>Subpartidas Arancelarias</small>
+            <div class="btn-group pull-right">
+              <button (click)="onNew()" class="btn btn-default">
+                <i class="fa fa-plus"></i>
+                <span class="text">Nuevo</span>
+              </button>
+            </div>
+          </h5>
+        </div>
+        <div class="card-body">
+          <table class="table " id="dataTables-example">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Valor</th>
+                <th>Código</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="odd" *ngFor="let subpartidaArancelaria of subpartidasArancelarias; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ subpartidaArancelaria.valor }}</td>
+                <td>{{ subpartidaArancelaria.codigo }}</td>
+                <td>
+                  <div class="btn-group">
+                    <button (click)="onEdit(subpartidaArancelaria)" class="btn btn-xs btn-primary" type="button"
+                      tooltip="Editar" [tooltipDisabled]="false" [tooltipAnimation]="true" tooltipPlacement="top">
+                      <i class="fa fa-pencil"></i>
+                    </button>
+                    <button (click)="onDelete(subpartidaArancelaria.id)" class="btn btn-xs btn-danger" type="button"
+                      tooltip="Eliminar" [tooltipDisabled]="false" [tooltipAnimation]="true" tooltipPlacement="top">
                       <i class="fa fa-trash"></i>
-                      Eliminar
-                    </button> 
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <!-- /.table-responsive --> 
-          </div>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- /.table-responsive -->
         </div>
       </div>
     </div>
-    
-    <app-edit-vhlocfgsubpartidaarancelaria *ngIf='formEdit' [subpartidaArancelaria]="subpartidaArancelaria" (ready)="ready($event)"></app-edit-vhlocfgsubpartidaarancelaria>
-    
-    <app-new-vhlocfgsubpartidaarancelaria *ngIf='formNew' (ready)="ready($event)"></app-new-vhlocfgsubpartidaarancelaria>
+  </div>
+  <app-edit-vhlocfgsubpartidaarancelaria *ngIf='formEdit' [subpartidaArancelaria]="subpartidaArancelaria" (ready)="ready($event)"></app-edit-vhlocfgsubpartidaarancelaria>
+  <app-new-vhlocfgsubpartidaarancelaria *ngIf='formNew' (ready)="ready($event)"></app-new-vhlocfgsubpartidaarancelaria>
 </div>

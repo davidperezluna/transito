@@ -1,17 +1,18 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import { CvCfgPorcentajeInicialService } from '../../../../../services/cvCfgPorcentajeInicial.service';
 import { LoginService } from '../../../../../services/login.service';
 import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-edit-cvcfgporcentajeinicial',
-  templateUrl: './edit.component.html'
+  templateUrl: './edit.component.html',
+  providers: [DatePipe]
 })
 export class EditComponent implements OnInit{
 @Output() ready = new EventEmitter<any>();
 @Input() porcentaje:any = null;
 public errorMessage;
-public respuesta;
 public formReady = false;
 
 constructor(
@@ -19,7 +20,17 @@ constructor(
   private _loginService: LoginService,
   ){}
 
-  ngOnInit(){ console.log(this.porcentaje); }
+  ngOnInit(){ 
+    console.log(this.porcentaje);
+    var datePiper = new DatePipe('en-US');
+
+    var date = new Date();
+    date.setTime(this.porcentaje.anio.timestamp * 1000);
+    this.porcentaje.anio = datePiper.transform(
+      date, 'yyyy-MM-dd'
+    );
+
+  }
 
   onCancelar(){ this.ready.emit(true); }
 

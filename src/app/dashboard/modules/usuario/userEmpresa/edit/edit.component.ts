@@ -91,6 +91,7 @@ export class EditComponent implements OnInit {
       }
     );
 
+    console.log(this.empresa);
     this._ModalidadTransporteService.select().subscribe(
       response => {
         this.modalidadTransportes = response;

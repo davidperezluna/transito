@@ -19,7 +19,7 @@ constructor(
   ){}
 
   ngOnInit() {
-    this.empresaGps = new VhloCfgEmpresaGps(null, null);
+    this.empresaGps = new VhloCfgEmpresaGps(null, null, null, null);
   }
 
   onCancelar(){
@@ -34,28 +34,26 @@ constructor(
         if(response.code == 200){
           this.ready.emit(true);
           swal({
-            title: 'Perfecto!',
+            title: response.title,
             text: response.message,
-            type: 'success',
+            type: response.status,
             confirmButtonText: 'Aceptar'
           })
         }else{
           swal({
-            title: 'Error!',
+            title: response.title,
             text: response.message,
-            type: 'error',
+            type: response.status,
             confirmButtonText: 'Aceptar'
           })
         }
 			error => {
-					this.errorMessage = <any>error;
-					if(this.errorMessage != null){
-						console.log(this.errorMessage);
-						alert("Error en la petición");
-					}
-				}
-
+        this.errorMessage = <any>error;
+        if(this.errorMessage != null){
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
 		}); 
   }
-
 }

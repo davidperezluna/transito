@@ -12,7 +12,6 @@ export class VhloCfgLimitacionTipoProcesoComponent implements OnInit {
   public errorMessage;
   
 	public id;
-	public respuesta;
   public cfgTipoProcesos;
 	public formNew = false;
 	public formEdit = false;
@@ -45,7 +44,7 @@ export class VhloCfgLimitacionTipoProcesoComponent implements OnInit {
 				response => {
           this.cfgTipoProcesos = response.data;
           let timeoutId = setTimeout(() => {  
-            this.iniciarTabla();
+            this.onInitTable();
           }, 100);
 				}, 
 				error => {
@@ -58,8 +57,8 @@ export class VhloCfgLimitacionTipoProcesoComponent implements OnInit {
 				}
       );
   }
-  iniciarTabla(){
-    $('#dataTables-example').DataTable({
+  onInitTable(){
+    this.table = $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,
       sPaginationType: 'full_numbers',
@@ -72,8 +71,8 @@ export class VhloCfgLimitacionTipoProcesoComponent implements OnInit {
         }
       }
    });
-   this.table = $('#dataTables-example').DataTable();
   }
+
   onNew(){
     this.formNew = true;
     this.formIndex = false;
@@ -103,7 +102,7 @@ export class VhloCfgLimitacionTipoProcesoComponent implements OnInit {
       if (result.value) {
         let token = this._loginService.getToken();
         
-        this._CfgTipoProcesoService.delete(token,id).subscribe(
+        this._CfgTipoProcesoService.delete({'id': id}, token).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',
@@ -112,7 +111,6 @@ export class VhloCfgLimitacionTipoProcesoComponent implements OnInit {
                       confirmButtonColor: '#15d4be',
                     })
                   this.table.destroy();
-                  this.respuesta= response;
                   this.ngOnInit();
               }, 
             error => {

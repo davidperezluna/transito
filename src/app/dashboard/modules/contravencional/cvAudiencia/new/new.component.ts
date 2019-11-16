@@ -67,7 +67,7 @@ constructor(
         if (response.code == 200) {
           this.audienciaLast = response.data;
           this.fechaDisponible = response.data.fechaDisponible;
-
+          
           swal({
             title: 'Perfecto!',
             text: response.message,

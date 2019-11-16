@@ -1,27 +1,20 @@
 <div class="container-fluid" >
-  <div  class="row align-items-center justify-content-between">
-    <div class="col-11 col-sm-12 page-title">
-      <h3>Limitacion</h3>
-      <p>aquí podrás visualizar las limitaciones inscritas e inscribir nuevas</p>
-    </div>
-    <div class="col text-right ">
-      <div class="btn-group pull-right">
-        <button (click)="onNew()" class="btn btn-outline-success  btn-round " data-target="#themepicker" data-toggle="modal"><span class="text">Nuevo</span> <i class="ti-save ml-2"></i></button>
-      </div>
-    </div>
-    
-  </div>
   <div class="row" *ngIf='formIndex'>
-    <div class="col-md-12">
+    <div class="col-xs-12 col-lg-12">
         <div class="card">
           <div class="card-header">
-            <h5 class="card-title">Limitaciones <small>Registradas</small></h5>
+            <b class="text-uppercase">Tipo de limitación</b>
+            <div class="btn-group pull-right">
+              <button (click)="onNew()" class="btn btn-default">
+                <i class="fa fa-plus"></i>Nuevo
+              </button>
+            </div>
           </div>
           <div class="card-body">
             <table class="table " id="dataTables-example">
               <thead>
                 <tr>
-                  <th>Id</th>
+                  <th>#</th>
                   <th>Nombre</th>
                   <th>Acciones</th>
                 </tr>
@@ -30,8 +23,16 @@
                 <tr class="odd" *ngFor="let limitacion of limitaciones; let i = index">
                   <td >{{limitacion.id}}</td>
                   <td >{{limitacion.nombre}}</td>
-                  <td><button (click)="editLimitacion(limitacion)" class="btn btn-outline-info" type="button">Editar</button> 
-                    <button (click)="deleteLimitacion(limitacion.id)"  class="btn btn-outline-danger" type="button">Eliminar  </button> </td>
+                  <td>
+                    <div class="btn-group">
+                      <button (click)="editLimitacion(limitacion)" class="btn btn-xs btn-primary" type="button" tooltip="Editar" [tooltipDisabled]="false" [tooltipAnimation]="true" tooltipPlacement="top">
+                        <i class="fa fa-pencil"></i>
+                      </button> 
+                      <button (click)="deleteLimitacion(limitacion.id)" class="btn btn-xs btn-danger" type="button" tooltip="Eliminar" [tooltipDisabled]="false" [tooltipAnimation]="true" tooltipPlacement="top">
+                        <i class="fa fa-trash"></i>
+                      </button> 
+                    </div>
+                  </td>
                 </tr>
               </tbody>
             </table>

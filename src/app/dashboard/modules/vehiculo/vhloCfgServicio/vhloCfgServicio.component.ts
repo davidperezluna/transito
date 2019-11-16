@@ -44,7 +44,7 @@ export class VhloCfgServicioComponent implements OnInit {
 				response => {
           this.servicios = response.data;
           let timeoutId = setTimeout(() => {  
-            this.iniciarTabla();
+            this.onInitTable();
           }, 100);
 				}, 
 				error => {
@@ -57,8 +57,8 @@ export class VhloCfgServicioComponent implements OnInit {
 				}
       );
   }
-  iniciarTabla(){
-    $('#dataTables-example').DataTable({
+  onInitTable(){
+    this.table = $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,
       sPaginationType: 'full_numbers',
@@ -71,8 +71,8 @@ export class VhloCfgServicioComponent implements OnInit {
         }
       }
    });
-   this.table = $('#dataTables-example').DataTable();
   }
+
   onNew(){
     this.formNew = true;
     this.formIndex = false;
@@ -87,8 +87,8 @@ export class VhloCfgServicioComponent implements OnInit {
         this.ngOnInit();
       }
   }
-  deleteServicio(id:any){
 
+  deleteServicio(id:any){
     swal({
       title: '¿Estás seguro?',
       text: "¡Se eliminara este registro!",
@@ -102,7 +102,7 @@ export class VhloCfgServicioComponent implements OnInit {
       if (result.value) {
         let token = this._loginService.getToken();
         
-        this._ServicioService.delete(token,id).subscribe(
+        this._ServicioService.delete({'id': id}, token).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',

@@ -46,7 +46,7 @@ constructor(
 
   onEnviar(){
     let token = this._LoginService.getToken();
-
+    this.modulo.idFuncionario = this.funcionarioSelected;
 		this._ModuloService.edit(this.modulo, token).subscribe(
 			response => {
         if(response.code == 200){
