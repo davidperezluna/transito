@@ -12,6 +12,7 @@ import swal from 'sweetalert2';
   templateUrl: './edit.component.html',
   providers: [DatePipe]
 })
+
 export class EditComponent implements OnInit{
 @Output() onReady = new EventEmitter<any>();
 @Input() loteInsumo:any = null;
@@ -19,20 +20,28 @@ export class EditComponent implements OnInit{
 
 public errorMessage;
 public formReady = false;
-public organismoTransitoSelect:any;
+
+public tiposInsumo:any;
 public insumoSelected;
-public empresaSelected:any;
-public insumos:any;
-public organismosTransito:any;
+
 public empresas:any;
+public empresaSelected:any;
+
+public organismosTransito:any;
+public organismoTransitoSelect:any;
+
 public sustratos:any;
+public insumos: any;
+
+public insumoInsumoSelected:any;
+public empresaInsumoSelected:any;
 
 constructor(
-  private _rnaloteInsumosService: ImoLoteService,
-  private _loginService: LoginService,
+  private _loteInsumosService: ImoLoteService,
   private _EmpresaService: UserEmpresaService,
   private _OrganismoTransitoService: CfgOrganismoTransitoService,
   private _CasoInsumoService: ImoCfgTipoService,
+  private _loginService: LoginService,
   ){}
 
   ngOnInit(){ 
@@ -42,6 +51,7 @@ constructor(
     this._EmpresaService.select().subscribe(
       response => {
         this.empresas = response;
+        
         setTimeout(() => {
            this.empresaSelected = [this.loteInsumo.empresa.id];
         });
@@ -55,9 +65,11 @@ constructor(
         }
       } 
     );
+
     this._CasoInsumoService.getCasoInsumoInsumoSelect().subscribe(
       response => {
-        this.insumos = response; 
+        this.tiposInsumo = response;
+
         setTimeout(() => {
           this.insumoSelected = [this.loteInsumo.tipoInsumo.id];
         },100);
@@ -88,11 +100,26 @@ constructor(
         }
       }
     );
-      console.log(this.tipoInsumo);
+
+    this._CasoInsumoService.getCasoInsumoInsumoSelect().subscribe(
+      response => {
+        this.insumos = response;
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+
     if (this.tipoInsumo == 'SUSTRATO') {
       this._OrganismoTransitoService.selectSedes().subscribe(
         response => {
           this.organismosTransito = response;
+
           setTimeout(() => {
             this.organismoTransitoSelect = [this.loteInsumo.sedeOperativa.id];
           });
@@ -116,7 +143,7 @@ constructor(
     this.loteInsumo.sedeOperativaId = this.organismoTransitoSelect;
     this.loteInsumo.casoInsumoId = this.insumoSelected;
     let token = this._loginService.getToken();
-		this._rnaloteInsumosService.edit(this.loteInsumo,token).subscribe(
+		this._loteInsumosService.edit(this.loteInsumo,token).subscribe(
 			response => {
         if(response.code == 200){
           this.onReady.emit(true);
