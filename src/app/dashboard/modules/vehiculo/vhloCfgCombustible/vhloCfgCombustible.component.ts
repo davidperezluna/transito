@@ -101,7 +101,7 @@ export class VhloCfgCombustibleComponent implements OnInit {
       if (result.value) {
         let token = this._loginService.getToken();
         
-        this._CombustibleService.delete(token,id).subscribe(
+        this._CombustibleService.delete({'id': id}, token).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',
