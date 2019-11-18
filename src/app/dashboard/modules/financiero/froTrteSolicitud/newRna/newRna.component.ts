@@ -60,14 +60,6 @@ export class NewRnaComponent implements OnInit {
   
   public formApoderado = false;
   public formNewCiudadano: any = false;
-
-  public datosFacturaArchivo = {
-    'numeroFolios': null,
-    'numeroArchivador': null,
-    'bandeja': null,
-    'numeroCaja': null,
-    'idFactura': null,
-  };
   
   constructor(
     private _TramiteSolicitudService: FroTrteSolicitudService,
@@ -541,9 +533,7 @@ export class NewRnaComponent implements OnInit {
     this.tramiteSolicitud.documentacionPendiente = this.documentacionPendiente;
     this.tramiteSolicitud.idFactura = this.factura.id;
 
-    this.datosFacturaArchivo.idFactura = this.factura.id;
-
-    this._TramiteSolicitudService.register({'tramiteSolicitud': this.tramiteSolicitud, 'datosFacturaArchivo': this.datosFacturaArchivo}, token).subscribe(
+    this._TramiteSolicitudService.register(this.tramiteSolicitud, token).subscribe(
 			response => {
         if(response.code == 200){
           this.factura = response.data.factura;

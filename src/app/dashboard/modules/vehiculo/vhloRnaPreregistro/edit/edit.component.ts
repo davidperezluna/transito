@@ -311,7 +311,9 @@ constructor(
         this.carrocerias = response;
 
         setTimeout(() => {
+          if (this.vehiculo.carroceria) {
             this.carroceriaSelected = [this.vehiculo.carroceria.id];
+          }
         });
       }, 
       error => {
@@ -326,7 +328,9 @@ constructor(
       response => {
         this.servicios = response;
         setTimeout(() => {
+          if (this.vehiculo.servicio) {
             this.servicioSelected = [this.vehiculo.servicio.codigo];
+          }
         });
       }, 
       error => {
@@ -343,7 +347,9 @@ constructor(
       response => {
         this.colores = response;
         setTimeout(() => {
+          if (this.vehiculo.color) {
             this.colorSelected = [this.vehiculo.color.id];
+          }
         });
       },  
       error => {
@@ -359,7 +365,9 @@ constructor(
       response => {
         this.combustibles = response;
         setTimeout(() => {
+          if (this.vehiculo.combustible) {
             this.combustibleSelected = [this.vehiculo.combustible.id];
+          }
         });
       },  
       error => {
@@ -377,7 +385,9 @@ constructor(
 
         if (this.vehiculo.organismoTransito) {
           setTimeout(() => {
+            if (this.vehiculo.organismoTransito) {
               this.sedeOperativaSelected = [this.vehiculo.organismoTransito.id];
+            }
           });
         }
       }, 
@@ -495,9 +505,11 @@ constructor(
       this.datos.tipoPropiedad = [2];
     }
 
-    if(this.vehiculo.servicio.id = 2 && this.vehiculo.empresa != null){
-      this.nitEmpresaTransporte = this.vehiculo.empresa.nit;
-      this.onSearchEmpresaTransporte();
+    if (this.vehiculo.servicio) {
+      if(this.vehiculo.servicio.id = 2 && this.vehiculo.empresa != null){
+        this.nitEmpresaTransporte = this.vehiculo.empresa.nit;
+        this.onSearchEmpresaTransporte();
+      }
     }
       
   }
