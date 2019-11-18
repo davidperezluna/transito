@@ -16,7 +16,9 @@
                         </div>
                         <div class="col-xs-12 col-lg-4">
                             <b>Placa: </b>
-                            {{ vehiculo.placa.numero }}
+                            <ng-container *ngIf="vehiculo.placa">
+                                {{ vehiculo.placa.numero }}
+                            </ng-container>
                         </div>
                         <div class="col-xs-12 col-lg-4">
                             <b>Estado Vehículo: </b>
