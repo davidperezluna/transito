@@ -53,20 +53,29 @@ constructor(
     this._VehiculoService.searchByParameters(this.datos, token).subscribe(
       response => {
         if (response.code == 200) {
+          swal.close();                
           this.vehiculos = response.data;
           this.formIndex = true;
           this.formShow = false;
 
           let timeoutId = setTimeout(() => {
             this.onInitTable();
-          }, 100);                 
+          }, 100); 
+
+          //vaciar los campos 
+          this.datos.numeroPlaca = '';
+          this.datos.numeroVin = '';
+          this.datos.numeroSerie = '';
+          this.datos.numeroMotor = '';
+          this.datos.numeroChasis = '';
+          this.datos.propietario = '';
         } else {
           this.vehiculos = null;
           
           swal({
-            title: 'Error!',
+            title: response.title,
             text: response.message,
-            type: 'error',
+            type: response.status,
             confirmButtonText: 'Aceptar'
           });
         }
