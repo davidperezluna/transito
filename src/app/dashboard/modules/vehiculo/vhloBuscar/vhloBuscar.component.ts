@@ -63,12 +63,12 @@ constructor(
           }, 100); 
 
           //vaciar los campos 
-          this.datos.numeroPlaca = '';
-          this.datos.numeroVin = '';
-          this.datos.numeroSerie = '';
-          this.datos.numeroMotor = '';
-          this.datos.numeroChasis = '';
-          this.datos.propietario = '';
+          this.datos.numeroPlaca = null;
+          this.datos.numeroVin = null;
+          this.datos.numeroSerie = null;
+          this.datos.numeroMotor = null;
+          this.datos.numeroChasis = null;
+          this.datos.propietario = null;
         } else {
           this.vehiculos = null;
           
@@ -99,7 +99,8 @@ constructor(
       this.table.destroy();
     }
 
-    this.table = $('#dataTables-example').DataTable({
+    this.table = $('#dataTables-vehiculos').DataTable({
+      destroy: true,
       responsive: true,
       pageLength: 8,
       sPaginationType: 'full_numbers',

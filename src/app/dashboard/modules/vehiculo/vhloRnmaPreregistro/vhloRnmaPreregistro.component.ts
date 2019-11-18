@@ -22,7 +22,7 @@ export class VhloRnmaPreregistroComponent implements OnInit, AfterViewInit {
   public formNew: any;
   public formEdit: any;
 
-  public table:any = null; 
+  public table: any = null; 
 
   public vehiculo: VhloRnmaPreregistro;
 
@@ -42,6 +42,11 @@ export class VhloRnmaPreregistroComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.onInitForms();
     this.formSearch = true;
+
+    let timeoutId = setTimeout(() => {
+      this.onInitTable();
+    }, 100);
+
   }
 
   ngAfterViewInit(){
@@ -50,7 +55,7 @@ export class VhloRnmaPreregistroComponent implements OnInit, AfterViewInit {
 
   onInitForms(){
     this.formSearch = false;
-    this.formIndex = false;
+    /* this.formIndex = false; */
     this.formNew = false;
     this.formEdit = false;
   }
@@ -59,7 +64,8 @@ export class VhloRnmaPreregistroComponent implements OnInit, AfterViewInit {
     if (this.table) {
       this.table.destroy();
     }
-
+    
+    console.log(this.table);
     this.table = $('#dataTables-example').DataTable({
       destroy: true,
       responsive: true,
@@ -79,7 +85,7 @@ export class VhloRnmaPreregistroComponent implements OnInit, AfterViewInit {
   onSearch(){
     let token = this._LoginService.getToken();
 
-    this.onInitForms();
+    /* this.onInitForms(); */
 
     swal({
       title: 'Buscando registros!',
@@ -93,14 +99,32 @@ export class VhloRnmaPreregistroComponent implements OnInit, AfterViewInit {
 
     this._MaquinariaService.searhByFilter({'filtro': this.filtro}, token).subscribe(
       response => {
-        this.maquinaria = response.data;
+        if(response.code == 200) {
+          this.maquinaria = response.data;
 
-        let timeoutId = setTimeout(() => {
-          this.onInitTable();
+          swal({
+            title: response.title,
+            text: response.message,
+            type: response.status,
+            confirmButtonText: 'Aceptar'
+          });
+  
+          let timeoutId = setTimeout(() => {
+            this.formSearch = true;
+            this.formIndex = true;
+            this.onInitTable();
+            swal.close();
+          }, 200);
+        } else {
           this.formSearch = true;
-          this.formIndex = true;
-          swal.close();
-        }, 100);
+
+          swal({
+            title: response.title,
+            text: response.message,
+            type: response.status,
+            confirmButtonText: 'Aceptar'
+          });
+        }
       },
       error => {
         this.errorMessage = <any>error;

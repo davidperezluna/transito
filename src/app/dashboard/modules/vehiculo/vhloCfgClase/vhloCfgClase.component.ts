@@ -57,7 +57,7 @@ export class VhloCfgClaseComponent implements OnInit {
       );
   }
   iniciarTabla(){
-    $('#dataTables-example').DataTable({
+    this.table = $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,
       sPaginationType: 'full_numbers',
@@ -70,7 +70,6 @@ export class VhloCfgClaseComponent implements OnInit {
         }
       }
    });
-   this.table = $('#dataTables-example').DataTable();
   }
   onNew(){
     this.formNew = true;
