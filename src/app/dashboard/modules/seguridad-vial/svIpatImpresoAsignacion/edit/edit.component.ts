@@ -1,11 +1,13 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { SvIpatImpresoBodegaService } from '../../../../../services/svIpatImpresoBodega.service';
 import { LoginService } from '../../../../../services/login.service';
+import { DatePipe, CurrencyPipe } from '@angular/common';
 import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-edit-svipatimpresoasignacion',
-  templateUrl: './edit.component.html'
+  templateUrl: './edit.component.html',
+  providers: [DatePipe]
 })
 export class EditComponent implements OnInit{
   @Output() ready = new EventEmitter<any>();
@@ -17,7 +19,18 @@ constructor(
   private _LoginService: LoginService,
   ){}
 
-  ngOnInit(){ }
+  ngOnInit(){ 
+    console.log(this.asignacion);
+
+    var datePiper = new DatePipe('en-US');
+    var date = new Date();
+
+    date.setTime(this.asignacion.fecha.timestamp * 1000);
+
+    this.asignacion.fecha = datePiper.transform(
+      date, 'yyyy-MM-dd'
+    );
+  }
 
   onCancelar(){ this.ready.emit(true); }
 

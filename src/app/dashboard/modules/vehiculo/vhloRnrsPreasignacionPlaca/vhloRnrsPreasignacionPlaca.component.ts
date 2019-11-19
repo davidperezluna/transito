@@ -4,13 +4,15 @@ import { VhloCfgPlacaService } from '../../../../services/vhloCfgPlaca.service';
 import { PnalFuncionarioService } from '../../../../services/pnalFuncionario.service';
 import { CfgOrganismoTransitoService } from '../../../../services/cfgOrganismoTransito.service';
 import { LoginService } from '../../../../services/login.service';
+import { DatePipe, CurrencyPipe } from '@angular/common';
 import { environment } from 'environments/environment'
 import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './vhloRnrsPreasignacionPlaca.component.html'
+  templateUrl: './vhloRnrsPreasignacionPlaca.component.html',
+  providers: [DatePipe]
 })
 
 export class VhloRnrsPreasignacionPlacaComponent implements OnInit {
@@ -35,6 +37,7 @@ export class VhloRnrsPreasignacionPlacaComponent implements OnInit {
     'idVehiculo': null,
     'idOrganismoTransito': null,
     'idPlaca': null,
+    'fechaAsignacion': null,
   };
 
   public apiUrl = environment.apiUrl;
@@ -148,12 +151,21 @@ export class VhloRnrsPreasignacionPlacaComponent implements OnInit {
     let datos = { 
       'idOrganismoTransito': this.funcionario.organismoTransito.id, 
       'idTipoVehiculo': this.vehiculo.clase.tipoVehiculo.id,
-      'idServicio': this.vehiculo.servicio.id,
+      'idServicio': null,
     }
 
     this._PlacaService.selectByOrganismoTransitoAndTipoVehiculoAndServicio(datos, token).subscribe(
       response => {
         this.placas = response;
+
+        this.datos.fechaAsignacion = new Date();
+        
+        var datePiper = new DatePipe('en-US');
+        var date = new Date();
+        
+        this.datos.fechaAsignacion = datePiper.transform(
+          date, 'yyyy-MM-dd'
+        );
       }, 
       error => {
         this.errorMessage = <any>error;
