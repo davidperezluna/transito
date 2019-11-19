@@ -38,8 +38,8 @@ export class NewEmpresaComponent implements OnInit {
   public municipioResidenciaSelected: any;
   public tipoEmpresaSelected: any;
   public tipoEmpresas: any;
-  public modalidadTransporteSelect: any;
-  public modalidadTransportes: any;
+  /* public modalidadTransporteSelect: any;
+  public modalidadTransportes: any; */
   public tipoEntidadSelected: any;
   public municipioNacimientoSelected: any;
   public formNewSucursal = false;
@@ -66,7 +66,7 @@ export class NewEmpresaComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.empresa = new UserEmpresa(null,null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    this.empresa = new UserEmpresa(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 
     this._UserCfgEmpresaTipoService.select().subscribe(
       response => {
@@ -175,7 +175,7 @@ export class NewEmpresaComponent implements OnInit {
     this.empresa.idTipoEmpresa = this.tipoEmpresaSelected;
     this.empresa.idCiudadano = this.ciudadano.id;
     this.empresa.tipoEntidad = this.tipoEntidadSelected;
-    this.empresa.idModalidadTransporte = this.modalidadTransporteSelect;
+    /* this.empresa.idModalidadTransporte = this.modalidadTransporteSelect; */
 
     let datos = {
       'empresa': this.empresa,

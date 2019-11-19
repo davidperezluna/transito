@@ -64,7 +64,8 @@
                       <th>#</th>
                       <th>Factura</th>
                       <th>Tramite</th>
-                      <th>Placa</th>
+                      <th *ngIf="tramiteSolicitud.vehiculo.placa.tipoVehiculo.modulo != 3">Placa</th>
+                      <th *ngIf="tramiteSolicitud.vehiculo.placa.tipoVehiculo.modulo == 3">Número Registro</th>
                       <th>Fecha</th>
                       <th>Acciones</th>
                   </tr>

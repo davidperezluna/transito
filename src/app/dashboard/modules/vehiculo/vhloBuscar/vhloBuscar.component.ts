@@ -95,13 +95,12 @@ constructor(
   }
 
   onInitTable(){
-    if (this.table) {
-      this.table.destroy();
-    }
+    
 
     this.table = $('#dataTables-vehiculos').DataTable({
-      destroy: true,
       responsive: true,
+      retrieve: true,
+      paging: false,
       pageLength: 8,
       sPaginationType: 'full_numbers',
       oLanguage: {

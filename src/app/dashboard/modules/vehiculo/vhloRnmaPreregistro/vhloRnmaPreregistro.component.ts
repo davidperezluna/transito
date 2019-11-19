@@ -42,11 +42,6 @@ export class VhloRnmaPreregistroComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.onInitForms();
     this.formSearch = true;
-
-    let timeoutId = setTimeout(() => {
-      this.onInitTable();
-    }, 100);
-
   }
 
   ngAfterViewInit(){
@@ -55,20 +50,16 @@ export class VhloRnmaPreregistroComponent implements OnInit, AfterViewInit {
 
   onInitForms(){
     this.formSearch = false;
-    /* this.formIndex = false; */
+    this.formIndex = false;
     this.formNew = false;
     this.formEdit = false;
   }
 
   onInitTable(){
-    if (this.table) {
-      this.table.destroy();
-    }
-    
-    console.log(this.table);
     this.table = $('#dataTables-example').DataTable({
-      destroy: true,
       responsive: true,
+      retrieve: true,
+      paging: false,
       pageLength: 10,
       sPaginationType: 'full_numbers',
       oLanguage: {
@@ -85,7 +76,7 @@ export class VhloRnmaPreregistroComponent implements OnInit, AfterViewInit {
   onSearch(){
     let token = this._LoginService.getToken();
 
-    /* this.onInitForms(); */
+    this.onInitForms();
 
     swal({
       title: 'Buscando registros!',
@@ -109,9 +100,11 @@ export class VhloRnmaPreregistroComponent implements OnInit, AfterViewInit {
             confirmButtonText: 'Aceptar'
           });
   
+          this.onInitForms();
+          this.formSearch = true;
+          this.formIndex = true;
+
           let timeoutId = setTimeout(() => {
-            this.formSearch = true;
-            this.formIndex = true;
             this.onInitTable();
             swal.close();
           }, 200);

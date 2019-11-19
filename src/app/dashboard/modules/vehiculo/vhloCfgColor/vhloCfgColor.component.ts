@@ -1,5 +1,6 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
 import {VhloCfgColorService} from '../../../../services/vhloCfgColor.service';
+import { Http, Headers } from "@angular/http";
 import {LoginService} from '../../../../services/login.service';
 import swal from 'sweetalert2';
 declare var $: any;
@@ -11,14 +12,17 @@ declare var $: any;
 
 export class VhloCfgColorComponent implements OnInit {
   public errorMessage;
+  
 	public id;
-	public respuesta;
 	public colors;
+	public colores;
 	public formNew = false;
 	public formEdit = false;
   public formIndex = true;
   public table:any; 
   public color:any; 
+  public dtOptions:any; 
+  public http: any = Http;
 
   constructor(
 		private _ColorService: VhloCfgColorService,
@@ -29,23 +33,22 @@ export class VhloCfgColorComponent implements OnInit {
     swal({
       title: 'Cargando Tabla!',
       text: 'Solo tardara unos segundos por favor espere.',
-      timer: 1500,
       onOpen: () => {
         swal.showLoading()
       }
-    }).then((result) => {
-      if (
-        // Read more about handling dismissals
-        result.dismiss === swal.DismissReason.timer
-      ) {
-      }
     });
 
-		this._ColorService.index().subscribe(
+    let timeoutId = setTimeout(() => {
+      this.onInitTable();
+    }, 100);
+
+    
+
+		/*this._ColorService.index().subscribe(
       response => {
         this.colors = response.data;
         let timeoutId = setTimeout(() => {
-          this.iniciarTabla();
+          this.onInitTable();
         }, 100);
       },
       error => {
@@ -56,11 +59,58 @@ export class VhloCfgColorComponent implements OnInit {
           alert("Error en la petición");
         }
       }
-    );
+    );*/
   }
   
-  iniciarTabla(){
-    $('#dataTables-example').DataTable({
+  onInitTable(){
+    this.table = $('#dataTables-example').DataTable({
+      responsive: true,
+      pageLength: 10,
+      sPaginationType: 'full_numbers',
+      oLanguage: {
+        oPaginate: {
+          sFirst: '<i class="fa fa-step-backward"></i>',
+          sPrevious: '<i class="fa fa-chevron-left"></i>',
+          sNext: '<i class="fa fa-chevron-right"></i>',
+          sLast: '<i class="fa fa-step-forward"></i>'
+        }
+      },
+      paging: true,
+      serverSide: true,
+      processing: true,
+      ajax: () => {
+        this._ColorService.index().subscribe(
+          response => {
+            this.colors = response.data;
+          }
+        );
+
+        /*this.http
+          .get(
+            'http://myapi.com',
+            {
+              params: params,
+              headers: new Headers().set(
+                'token',
+                localStorage.getItem('token')
+              )
+            }
+          )
+          .subscribe(resp => {
+
+            this.result = resp['data'];
+
+            callback({
+              recordsTotal: resp['length'],
+              recordsFiltered: resp['length'],
+              data: []
+            });
+          });*/
+      }
+    });
+
+
+    /*$('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,
       sPaginationType: 'full_numbers',
@@ -73,12 +123,12 @@ export class VhloCfgColorComponent implements OnInit {
         }
       }
    });
-   this.table = $('#dataTables-example').DataTable();
+   this.table = $('#dataTables-example').DataTable();*/
   }
+  
   onNew(){
     this.formNew = true;
     this.formIndex = false;
-    this.table.destroy();
   }
 
   ready(isCreado:any){
@@ -89,8 +139,8 @@ export class VhloCfgColorComponent implements OnInit {
         this.ngOnInit();
       }
   }
-  deleteColor(id:any){
 
+  deleteColor(id:any){
     swal({
       title: '¿Estás seguro?',
       text: "¡Se eliminara este registro!",
@@ -110,9 +160,7 @@ export class VhloCfgColorComponent implements OnInit {
                       text:'Registro eliminado correctamente.',
                       type:'success',
                       confirmButtonColor: '#15d4be',
-                    })
-                  this.table.destroy();
-                  this.respuesta= response;
+                    });
                   this.ngOnInit();
               }, 
             error => {

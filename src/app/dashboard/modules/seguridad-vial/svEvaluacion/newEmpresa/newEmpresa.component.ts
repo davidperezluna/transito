@@ -65,7 +65,7 @@ export class NewEmpresaComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.empresa = new UserEmpresa(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    this.empresa = new UserEmpresa(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 
     this._TipoEmpresaService.select().subscribe(
       response => {

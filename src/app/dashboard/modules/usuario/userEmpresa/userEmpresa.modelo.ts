@@ -25,7 +25,7 @@ export class UserEmpresa{
 		public idMunicipio: number,
 		public idTipoSociedad: number,
 		public idCiudadano: number,
-		public idModalidadTransporte: number,
+		/* public idModalidadTransporte: number, */
 		public id: number,
 	){}
 }

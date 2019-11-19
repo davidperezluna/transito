@@ -7,13 +7,14 @@ import { UserCiudadanoService } from '../../../../../services/userCiudadano.serv
 import { UserCfgEmpresaTipoSociedadService } from '../../../../../services/userCfgEmpresaTipoSociedad.service';
 import { UserCfgTipoIdentificacionService } from '../../../../../services/userCfgTipoIdentificacion.service';
 import { UserCfgEmpresaServicioService } from '../../../../../services/userCfgEmpresaServicio.service';
-import { VhloCfgModalidadTransporteService } from '../../../../../services/vhloCfgModalidadTransporte.service';
+import { DatePipe } from '@angular/common';
 
 import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-edit-userempresa',
-  templateUrl: './edit.component.html'
+  templateUrl: './edit.component.html',
+  providers: [DatePipe]
 })
 
 export class EditComponent implements OnInit {
@@ -22,10 +23,6 @@ export class EditComponent implements OnInit {
 
   public errorMessage;
   public formReady = false;
-
-
-  public modalidadTransporteSelect;
-  public modalidadTransportes;
 
   public tipoEmpresa;
   public tipoEmpresaSelected;
@@ -71,10 +68,28 @@ export class EditComponent implements OnInit {
     private _EmpresaServicioService: UserCfgEmpresaServicioService,
     private _LoginService: LoginService,
     private _UserCfgEmpresaTipoService: UserCfgEmpresaTipoService,
-    private _ModalidadTransporteService: VhloCfgModalidadTransporteService
   ) { }
 
   ngOnInit() {
+    console.log(this.empresa);
+
+    this.identificacion = this.empresa.empresaRepresentante.ciudadano.identificacion;
+    this.onSearchCiudadano();
+
+    //para la fecha de inicio del representante legal
+    var datePiper = new DatePipe('en-US');
+    var date = new Date();
+
+    console.log(this.empresa.empresaRepresentante.fechaInicial); 
+
+    date.setTime(this.empresa.empresaRepresentante.fechaInicial.timestamp * 1000);
+
+    this.empresa.empresaRepresentante.fechaInicial = datePiper.transform(
+      date, 'yyyy-MM-dd'
+    );
+
+    //=======
+
     this._UserCfgEmpresaTipoService.select().subscribe(
       response => {
         this.tipoEmpresas = response;
@@ -88,27 +103,6 @@ export class EditComponent implements OnInit {
           console.log(this.errorMessage);
           alert('Error en la petición');
         } 
-      }
-    );
-
-    console.log(this.empresa);
-    this._ModalidadTransporteService.select().subscribe(
-      response => {
-        this.modalidadTransportes = response;
-        setTimeout(() => {
-          if(this.empresa.modalidadTransporte == null){
-            this.modalidadTransporteSelect = [0];
-          } else {
-            this.modalidadTransporteSelect = [this.empresa.modalidadTransporte.id];
-          }
-        });
-      },
-      error => {
-        this.errorMessage = <any>error;
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert('Error en la petición');
-        }
       }
     );
 
@@ -198,6 +192,23 @@ export class EditComponent implements OnInit {
         }
       }
     );
+
+    this._EmpresaTipoService.select().subscribe(
+      response => {
+        this.tipoEmpresas = response;
+        setTimeout(() => {
+          this.tipoEmpresaSelected = [this.empresa.tipoEmpresa.id];
+          this.formReady = true;
+        });
+      },
+      error => {
+        this.errorMessage = <any>error;
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
   }
 
   onCancelar() {
@@ -206,7 +217,7 @@ export class EditComponent implements OnInit {
 
   onSearchCiudadano() {
     let token = this._LoginService.getToken();
-    
+
     this._EmpresaService.getBuscarCiudadano({ 'identificacion': this.identificacion }, token).subscribe(
       response => {
         if (response.code == 200) {
@@ -243,7 +254,6 @@ export class EditComponent implements OnInit {
 
     this.empresa.idEmpresaServicio = this.servicioSelected;
     this.empresa.idTipoEmpresa = this.tipoEmpresaSelected;
-    this.empresa.idModalidadTransporte = this.modalidadTransporteSelect;
 
     this._EmpresaService.edit(this.empresa, token).subscribe(
       response => {
