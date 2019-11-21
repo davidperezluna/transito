@@ -1,6 +1,6 @@
 export class SvIpatImpresoAsignacion{
 	constructor(
-		public fecha: any,
+		public fecha: string,
 		public cantidad: number,
 		public idOrganismoTransito: number,
 		public id:number

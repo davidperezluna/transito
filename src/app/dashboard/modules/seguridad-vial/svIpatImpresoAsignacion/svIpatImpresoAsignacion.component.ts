@@ -44,7 +44,7 @@ export class SvIpatImpresoAsignacionComponent implements OnInit {
       response => {
         this.asignaciones = response.data;
         let timeoutId = setTimeout(() => {  
-          this.iniciarTabla();
+          this.onInitTable();
         }, 100);
         swal.close();
       }, 
@@ -87,13 +87,11 @@ export class SvIpatImpresoAsignacionComponent implements OnInit {
     );
   }
 
-  iniciarTabla(){
-    if (this.table) {
-      this.table.destroy();
-    }
-
-    $('#dataTables-example').DataTable({
+  onInitTable(){
+    this.table = $('#dataTables-example').DataTable({
       responsive: true,
+      retrieve: true,
+      paging: false,
       pageLength: 8,
       sPaginationType: 'full_numbers',
       oLanguage: {
@@ -105,8 +103,6 @@ export class SvIpatImpresoAsignacionComponent implements OnInit {
         }
       }
    });
-
-   this.table = $('#dataTables-example').DataTable();
   }
   
   onNew(){

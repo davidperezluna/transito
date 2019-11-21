@@ -14,7 +14,6 @@ export class VhloCfgColorComponent implements OnInit {
   public errorMessage;
   
 	public id;
-	public colors;
 	public colores;
 	public formNew = false;
 	public formEdit = false;
@@ -81,7 +80,7 @@ export class VhloCfgColorComponent implements OnInit {
       ajax: () => {
         this._ColorService.index().subscribe(
           response => {
-            this.colors = response.data;
+            this.colores = response.data;
           }
         );
 

@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <hr>
-    <div class="row" *ngIf='formIndex'>
-        <div class="col-xs-12 col-lg-4">
+    <div class="row" >
+        <div class="col-xs-12 col-lg-4" *ngIf='formSearch'>
             <div class="card">
                 <div class="card-body">
                     <h5 class="text-uppercase">Historial de licencias de conducción</h5>
@@ -39,64 +39,65 @@
                 </div>
             </div>
         </div>
-
         <div class="col-xs-12 col-lg-8" *ngIf='formIndex'>
-            <div class="row" *ngIf='licenciasConduccion?.length > 0'>
-                <div class="col-xs-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5 class="card-title">
-                                <b class="text-uppercase">Licencias de conducción</b>
-                                <small>Registrados</small>
-                            </h5>
-                        </div>
-                        <div class="card-body">
-                            <table class="table " id="dataTables-example">
-                                <thead>
-                                    <tr>
-                                        <th>Id</th>
-                                        <th>Categoria</th>
-                                        <th>Número</th>
-                                        <th>O.T. Expide</th>
-                                        <th>Fecha expedición</th>
-                                        <th>Fecha vencimiento</th>
-                                        <th>Estado</th>
-                                        <th>Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr class="odd" *ngFor="let licenciaConduccion of licenciasConduccion; let i = index">
-                                        <td>{{ licenciaConduccion.id }}</td>
-                                        <td>{{ licenciaConduccion.categoria.nombre }}</td>
-                                        <td>{{ licenciaConduccion.numero }}</td>
-                                        <td>{{ licenciaConduccion.organismoTransito.nombre }}</td>
-                                        <td>{{ licenciaConduccion.fechaExpedicion }}</td>
-                                        <td>{{ licenciaConduccion.fechaVencimiento }}</td>
-                                        <td>{{ licenciaConduccion.estado }}
-                                            <!-- <label class="label label-success text-success"
-                                                *ngIf="licenciaConduccion.activo">Activo</label>
-                                            <label class="label label-danger text-danger"
-                                                *ngIf="!licenciaConduccion.activo">Inactivo</label> -->
-                                        </td>
-                                        <td>
-                                            <div class="btn-group">
-                                                <button (click)="onEdit(licenciaConduccion)" class="btn btn-primary btn-xs" type="button">
-                                                    <i class="fa fa-pencil"></i>
-                                                </button>
-                                                <button (click)="onDelete(licenciaConduccion.id)" class="btn btn-danger btn-xs" type="button">
-                                                    <i class="fa fa-trash"></i>
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+            <div class="col-xs-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">
+                            <b class="text-uppercase">Licencias de conducción</b>
+                            <small>Registradas</small>
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <table class="table " id="dataTables-example">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Categoria</th>
+                                    <th>Número</th>
+                                    <th>O.T. Expide</th>
+                                    <th>Fecha expedición</th>
+                                    <th>Fecha vencimiento</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="odd" *ngFor="let licenciaConduccion of licenciasConduccion; let i = index">
+                                    <td>{{ i + 1 }}</td>
+                                    <td>{{ licenciaConduccion.categoria.nombre }}</td>
+                                    <td>{{ licenciaConduccion.numero }}</td>
+                                    <td>{{ licenciaConduccion.organismoTransito.nombre }}</td>
+                                    <td>{{ (licenciaConduccion.fechaExpedicion.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td>
+                                    <td>{{ (licenciaConduccion.fechaVencimiento.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td>
+                                    <td>{{ licenciaConduccion.estado }}
+                                        <!-- <label class="label label-success text-success"
+                                            *ngIf="licenciaConduccion.activo">Activo</label>
+                                        <label class="label label-danger text-danger"
+                                            *ngIf="!licenciaConduccion.activo">Inactivo</label> -->
+                                    </td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <button (click)="onEdit(licenciaConduccion)" class="btn btn-primary btn-xs" type="button">
+                                                <i class="fa fa-pencil"></i>
+                                            </button>
+                                            <button (click)="onDelete(licenciaConduccion.id)" class="btn btn-danger btn-xs" type="button">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="col-xs-12 col-lg-8" *ngIf='formNew'>
+            <app-new-userlicenciaconduccion (ready)="ready($event)"></app-new-userlicenciaconduccion>
+        </div>
+        <div class="col-xs-12 col-lg-8" *ngIf='formEdit'>
+            <app-edit-userlicenciaconduccion [licenciaConduccion]="licenciaConduccion" (ready)="ready($event)"></app-edit-userlicenciaconduccion>
+        </div>
     </div>
-    <app-edit-userlicenciaconduccion *ngIf='formEdit' [licenciaConduccion]="licenciaConduccion" (ready)="ready($event)"></app-edit-userlicenciaconduccion>
-    <app-new-userlicenciaconduccion *ngIf='formNew' (ready)="ready($event)"></app-new-userlicenciaconduccion>
 </div>

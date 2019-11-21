@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { SvIpatImpresoBodegaService } from '../../../../../services/svIpatImpresoBodega.service';
+import { SvIpatImpresoAsignacionService } from '../../../../../services/svIpatImpresoAsignacion.service';
 import { LoginService } from '../../../../../services/login.service';
 import { DatePipe, CurrencyPipe } from '@angular/common';
 import swal from 'sweetalert2';
@@ -13,23 +13,25 @@ export class EditComponent implements OnInit{
   @Output() ready = new EventEmitter<any>();
   @Input() asignacion:any = null;
   public errorMessage;
+  public cantidad: any;
 
 constructor(
-  private _ImpresoBodegaService: SvIpatImpresoBodegaService,
+  private _ImpresoAsignacionService: SvIpatImpresoAsignacionService,
   private _LoginService: LoginService,
   ){}
 
   ngOnInit(){ 
     console.log(this.asignacion);
-
     var datePiper = new DatePipe('en-US');
     var date = new Date();
 
     date.setTime(this.asignacion.fecha.timestamp * 1000);
 
     this.asignacion.fecha = datePiper.transform(
-      date, 'yyyy-MM-dd'
+      date, 'yyyy/MM/dd'
     );
+
+    this.cantidad = this.asignacion.cantidadDisponible;
   }
 
   onCancelar(){ this.ready.emit(true); }
@@ -37,14 +39,16 @@ constructor(
   onEnviar(){
     let token = this._LoginService.getToken();
 
-		this._ImpresoBodegaService.edit(this.asignacion, token).subscribe(
+    this.asignacion.cantidadDisponible = this.cantidad;
+
+		this._ImpresoAsignacionService.edit(this.asignacion, token).subscribe(
 			response => {
         if(response.code == 200){
           this.ready.emit(true);
           swal({
-            title: 'Perfecto!',
+            title: response.title,
             text: response.message,
-            type: 'success',
+            type: response.status,
             confirmButtonText: 'Aceptar'
           })
         }

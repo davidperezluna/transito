@@ -6,7 +6,7 @@ import { LoginService } from '../../../../../services/login.service';
 import swal from 'sweetalert2';
 
 @Component({
-    selector: 'app-edit',
+    selector: 'app-edit-vhlo-soat',
     templateUrl: './edit.component.html'
 })
 
@@ -22,8 +22,13 @@ export class EditComponent implements OnInit {
     public municipios;
     
     public estadoSelected;
-    public estados = [
+    /* public estados = [
         { value: 'UTILIZADO', label: 'UTILIZADO' },
+        { value: 'VENCIDO', label: 'VENCIDO' },
+    ]; */
+    
+    public estados = [
+        { value: 'VIGENTE', label: 'VIGENTE' },
         { value: 'VENCIDO', label: 'VENCIDO' },
     ];
 
@@ -35,7 +40,6 @@ export class EditComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        console.log(this.soat);
         this.estadoSelected = this.soat.estado;
 
         this._EmpresaService.getAseguradoras().subscribe(

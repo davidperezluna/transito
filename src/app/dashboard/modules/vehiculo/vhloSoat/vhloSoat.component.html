@@ -100,8 +100,8 @@
                         </table>
                     </div>
                 </div>
-                <app-new *ngIf='formNew' [vehiculo]="vehiculo" (ready)="ready($event)"></app-new>
-                <app-edit *ngIf='formEdit' [soat]="soat" (ready)="ready($event)"></app-edit>
+                <app-new-vhlo-soat *ngIf='formNew' [vehiculo]="vehiculo" (ready)="ready($event)"></app-new-vhlo-soat>
+                <app-edit-vhlo-soat *ngIf='formEdit' [soat]="soat" (ready)="ready($event)"></app-edit-vhlo-soat>
             </div>
         </div>
     </div>

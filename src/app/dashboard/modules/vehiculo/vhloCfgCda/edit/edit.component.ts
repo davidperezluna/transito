@@ -19,13 +19,13 @@ constructor(
   private _loginService: LoginService,
   ){}
 
-  ngOnInit(){ console.log(this.cda);
-   }
+  ngOnInit(){ }
 
   onCancelar(){ this.ready.emit(true); }
 
   onEnviar(){
     let token = this._loginService.getToken();
+    
 		this._CdaService.edit(this.cda,token).subscribe(
 			response => {
         if(response.code == 200){

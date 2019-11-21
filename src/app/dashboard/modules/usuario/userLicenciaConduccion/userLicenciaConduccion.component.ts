@@ -27,7 +27,8 @@ export class UserLicenciaConduccionComponent implements OnInit {
 
     public formNew = false;
     public formEdit = false;
-    public formIndex = true;
+    public formSearch = true;
+    public formIndex = false;
     public formShow = false;
     public table: any;
     public licenciaConduccion: UserLicenciaConduccion;
@@ -159,7 +160,8 @@ export class UserLicenciaConduccionComponent implements OnInit {
                     this._LicenciaConduccionService.searchByCiudadanoId({ 'idCiudadano': this.ciudadano.id }, token).subscribe(
                         response => {
                             if (response.code == 200) {
-                                this.licenciasConduccion = response.data;
+                                this.licenciasConduccion = response.data.licenciasConduccion;
+                                this.formIndex = true;
                                 swal({
                                     title: 'Perfecto!',
                                     text: response.message,

@@ -11,8 +11,6 @@ declare var $: any;
 })
 export class VhloCfgCarroceriaComponent implements OnInit {
   public errorMessage;
-	public id;
-	public respuesta;
 	public carrocerias;
 	public formNew = false;
 	public formEdit = false;
@@ -44,7 +42,7 @@ export class VhloCfgCarroceriaComponent implements OnInit {
 				response => {
           this.carrocerias = response.data;
           let timeoutId = setTimeout(() => {  
-            this.iniciarTabla();
+            this.onInitTable();
           }, 100);
 				}, 
 				error => {
@@ -57,8 +55,8 @@ export class VhloCfgCarroceriaComponent implements OnInit {
 				}
       );
   }
-  iniciarTabla(){
-    $('#dataTables-example').DataTable({
+  onInitTable(){
+    this.table = $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,
       sPaginationType: 'full_numbers',
@@ -71,8 +69,8 @@ export class VhloCfgCarroceriaComponent implements OnInit {
         }
       }
    });
-   this.table = $('#dataTables-example').DataTable();
   }
+
   onNew(){
     this.formNew = true;
     this.formIndex = false;
@@ -87,8 +85,8 @@ export class VhloCfgCarroceriaComponent implements OnInit {
         this.ngOnInit();
       }
   }
-  deleteCarroceria(id:any){
 
+  deleteCarroceria(id:any){
     swal({
       title: '¿Estás seguro?',
       text: "¡Se eliminara este registro!",
@@ -102,7 +100,7 @@ export class VhloCfgCarroceriaComponent implements OnInit {
       if (result.value) {
         let token = this._loginService.getToken();
         
-        this._CarroceriaService.delete(token,id).subscribe(
+        this._CarroceriaService.delete({'id': id}, token).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',
@@ -111,7 +109,6 @@ export class VhloCfgCarroceriaComponent implements OnInit {
                       confirmButtonColor: '#15d4be',
                     })
                   this.table.destroy();
-                  this.respuesta= response;
                   this.ngOnInit();
               }, 
             error => {

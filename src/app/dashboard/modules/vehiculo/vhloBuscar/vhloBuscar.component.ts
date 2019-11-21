@@ -95,8 +95,6 @@ constructor(
   }
 
   onInitTable(){
-    
-
     this.table = $('#dataTables-vehiculos').DataTable({
       responsive: true,
       retrieve: true,

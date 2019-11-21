@@ -100,7 +100,7 @@ export class VhloCfgClaseComponent implements OnInit {
       if (result.value) {
         let token = this._loginService.getToken();
         
-        this._ClaseService.delete(token,id).subscribe(
+        this._ClaseService.delete({'id': id}, token).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',

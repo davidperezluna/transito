@@ -22,18 +22,17 @@ constructor(
   ngOnInit() {
     this.color = new VhloCfgColor(null,null);
   }
+
   onCancelar(){
     this.ready.emit(true);
   }
+  
   onEnviar(){
     let token = this._loginService.getToken();
 
 		this._ColorService.register(this.color,token).subscribe(
 			response => {
-        this.respuesta = response;
-        console.log(this.respuesta);
-        
-        if(this.respuesta.status == 'success'){
+        if(response.code == true){
           this.ready.emit(true);
           
           swal({

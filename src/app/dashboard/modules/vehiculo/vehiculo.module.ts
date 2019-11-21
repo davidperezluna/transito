@@ -50,6 +50,9 @@ import { VhloRnmaPreregistroComponent } from "./vhloRnmaPreregistro/vhloRnmaPrer
 import { VhloRnrsPreasignacionPlacaComponent } from "./vhloRnrsPreasignacionPlaca/vhloRnrsPreasignacionPlaca.component";
 import { VhloRnrsPreregistroComponent } from './vhloRnrsPreregistro/vhloRnrsPreregistro.component';
 import { VhloDevolucionRadicadoComponent } from './vhloDevolucionRadicado/vhloDevolucionRadicado.component';
+import { VhloSoatComponent } from './vhloSoat/vhloSoat.component';
+import { VhloVehiculoComponent } from './vhloVehiculo/vhloVehiculo.component';
+import { VhloTecnoMecanicaComponent } from './vhloTecnoMecanica/vhloTecnoMecanica.component';
 
 import { VehiculoRoutingModule } from './vehiculo-routing.module';
 import { VhloBuscarModule } from './vhloBuscar/vhloBuscar.module';
@@ -94,6 +97,9 @@ import { VhloRnmaPreregistroModule } from "./vhloRnmaPreregistro/vhloRnmaPreregi
 import { VhloRnrsPreasignacionPlacaModule } from "./vhloRnrsPreasignacionPlaca/vhloRnrsPreasignacionPlaca.module";
 import { VhloRnrsPreregistroModule } from './vhloRnrsPreregistro/vhloRnrsPreregistro.module';
 import { VhloDevolucionRadicadoModule } from './vhloDevolucionRadicado/vhloDevolucionRadicado.module';
+import { VhloSoatModule } from './vhloSoat/vhloSoat.module';
+import { VhloVehiculoModule } from './vhloVehiculo/vhloVehiculo.module';
+import { VhloTecnoMecanicaModule } from './vhloTecnoMecanica/vhloTecnoMecanica.module';
 
 @NgModule({
   imports: [
@@ -150,6 +156,9 @@ import { VhloDevolucionRadicadoModule } from './vhloDevolucionRadicado/vhloDevol
     VhloRnrsPreasignacionPlacaModule,
     VhloRnrsPreregistroModule,
     VhloDevolucionRadicadoModule,
+    VhloSoatModule,
+    VhloVehiculoModule,
+    VhloTecnoMecanicaModule,
   ],
   declarations: [
     VhloBuscarComponent,
@@ -197,6 +206,9 @@ import { VhloDevolucionRadicadoModule } from './vhloDevolucionRadicado/vhloDevol
     VhloRnrsPreasignacionPlacaComponent,
     VhloRnrsPreregistroComponent,
     VhloDevolucionRadicadoComponent,
+    VhloSoatComponent,
+    VhloVehiculoComponent,
+    VhloTecnoMecanicaComponent,
   ]
 })
 export class VehiculoModule { }

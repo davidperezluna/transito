@@ -9,7 +9,7 @@ import { CfgMunicipioService } from '../../../../../services/cfgMunicipio.servic
 import swal from 'sweetalert2';
 
 @Component({
-    selector: 'app-new',
+    selector: 'app-new-vhlo-soat',
     templateUrl: './new.component.html'
 })
 export class NewComponent implements OnInit {

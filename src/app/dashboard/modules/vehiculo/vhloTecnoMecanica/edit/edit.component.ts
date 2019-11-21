@@ -5,7 +5,7 @@ import { LoginService } from '../../../../../services/login.service';
 import swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-edit',
+  selector: 'app-edit-vhlo-tecnomecanica',
   templateUrl: './edit.component.html'
 })
 
@@ -87,7 +87,7 @@ export class EditComponent implements OnInit {
     let token = this._LoginService.getToken();
 
     if (this.tecnoMecanica.fechaExpedicion) {
-      this._TecnoMecanicaService.getFechaVencimiento({ 'fechaExpedicion': this.tecnoMecanica.fechaExpedicion }, token).subscribe(
+      this._TecnoMecanicaService.getFechaVencimiento({ 'idVehiculo': this.tecnoMecanica.vehiculo.id, 'fechaExpedicion': this.tecnoMecanica.fechaExpedicion }, token).subscribe(
         response => {
           if (response.code == 200) {
             this.tecnoMecanica.fechaVencimiento = response.data;

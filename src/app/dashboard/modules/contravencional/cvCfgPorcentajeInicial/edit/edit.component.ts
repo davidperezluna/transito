@@ -9,54 +9,59 @@ import swal from 'sweetalert2';
   templateUrl: './edit.component.html',
   providers: [DatePipe]
 })
-export class EditComponent implements OnInit{
-@Output() ready = new EventEmitter<any>();
-@Input() porcentaje:any = null;
-public errorMessage;
-public formReady = false;
+export class EditComponent implements OnInit {
+  @Output() ready = new EventEmitter<any>();
+  @Input() porcentaje: any = null;
+  public errorMessage;
+  public anioSelected;
+  public formReady = false;
+  public anios = [];
 
-constructor(
-  private _PorcentajeService: CvCfgPorcentajeInicialService,
-  private _loginService: LoginService,
-  ){}
+  constructor(
+    private _PorcentajeService: CvCfgPorcentajeInicialService,
+    private _loginService: LoginService,
+  ) { }
 
-  ngOnInit(){ 
-    console.log(this.porcentaje);
-    var datePiper = new DatePipe('en-US');
+  ngOnInit() {
+    this.anioSelected = [this.porcentaje.anio];
+    let date = new Date();
 
-    var date = new Date();
-    date.setTime(this.porcentaje.anio.timestamp * 1000);
-    this.porcentaje.anio = datePiper.transform(
-      date, 'yyyy-MM-dd'
-    );
+    for (let i = 2000; i < date.getFullYear() + 1; i++) {
+      let obj = {
+        value: i,
+        label: i
+      };
+      this.anios.push(obj);
+    }
 
   }
 
-  onCancelar(){ this.ready.emit(true); }
+  onCancelar() { this.ready.emit(true); }
 
-  onEnviar(){
+  onEnviar() {
     let token = this._loginService.getToken();
-		this._PorcentajeService.edit(this.porcentaje,token).subscribe(
-			response => {
-        if(response.code == 200){
+
+    this.porcentaje.anio = this.anioSelected;
+    this._PorcentajeService.edit(this.porcentaje, token).subscribe(
+      response => {
+        if (response.code == 200) {
           this.ready.emit(true);
           swal({
-            title: 'Perfecto!',
+            title: response.title,
             text: response.message,
-            type: 'success',
+            type: response.status,
             confirmButtonText: 'Aceptar'
           })
         }
-			error => {
-					this.errorMessage = <any>error;
+        error => {
+          this.errorMessage = <any>error;
 
-					if(this.errorMessage != null){
-						console.log(this.errorMessage);
-						alert("Error en la petición");
-					}
-				}
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
 
-		}); 
+      });
   }
-
 }

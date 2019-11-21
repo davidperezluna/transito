@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { VhloVehiculoComponent } from './vhloVehiculo.component';
 import { VhloVehiculoService } from '../../../../services/vhloVehiculo.service';
 import { VhloCfgCarroceriaService } from '../../../../services/vhloCfgCarroceria.service';
 
@@ -12,8 +11,8 @@ import { SelectModule } from 'angular2-select';
 
 @NgModule({
     imports: [CommonModule, ChartsModule, Ng2BootstrapModule.forRoot(),SelectModule],
-    declarations: [VhloVehiculoComponent,NewVehiculoComponent,EditComponent],
-    exports: [VhloVehiculoComponent, NewVehiculoComponent,EditComponent],
+    declarations: [NewVehiculoComponent,EditComponent],
+    exports: [NewVehiculoComponent,EditComponent],
     providers:[VhloVehiculoService,VhloCfgCarroceriaService]
 })
 

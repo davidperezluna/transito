@@ -100,8 +100,8 @@
             </table>
           </div>
         </div>
-        <app-new *ngIf="formNew" [vehiculo]="vehiculo" (ready)="ready($event)"></app-new>
-        <app-edit *ngIf='formEdit' [tecnoMecanica]="tecnoMecanica" (ready)="ready($event)"></app-edit>
+        <app-new-vhlo-tecnomecanica *ngIf="formNew" [vehiculo]="vehiculo" (ready)="ready($event)"></app-new-vhlo-tecnomecanica>
+        <app-edit-vhlo-tecnomecanica *ngIf='formEdit' [tecnoMecanica]="tecnoMecanica" (ready)="ready($event)"></app-edit-vhlo-tecnomecanica>
       </div>
     </div>
   </div>

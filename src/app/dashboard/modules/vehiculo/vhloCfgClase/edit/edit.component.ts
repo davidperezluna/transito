@@ -20,7 +20,7 @@ public tiposVehiculo:any;
 public tiposMaquinaria: any;
 
 public tipoVehiculoSelected:any;
-public tipoMaquinariaSelected:any;
+public tipoMaquinariaSelected:any = null;
 
 constructor(
   private _ClaseService:  VhloCfgClaseService,

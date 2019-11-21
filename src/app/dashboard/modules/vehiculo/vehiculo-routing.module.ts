@@ -46,6 +46,9 @@ import { VhloRnmaPreregistroComponent } from "./vhloRnmaPreregistro/vhloRnmaPrer
 import { VhloRnrsPreasignacionPlacaComponent } from "./vhloRnrsPreasignacionPlaca/vhloRnrsPreasignacionPlaca.component";
 import { VhloRnrsPreregistroComponent } from './vhloRnrsPreregistro/vhloRnrsPreregistro.component';
 import { VhloDevolucionRadicadoComponent } from './vhloDevolucionRadicado/vhloDevolucionRadicado.component';
+import { VhloSoatComponent } from './vhloSoat/vhloSoat.component';
+import { VhloVehiculoComponent } from './vhloVehiculo/vhloVehiculo.component';
+import { VhloTecnoMecanicaComponent } from './vhloTecnoMecanica';
 
 const routes: Routes = [
   {
@@ -174,7 +177,7 @@ const routes: Routes = [
     component: VhloCfgPlacaReportComponent
   },
   {
-    path: 'limitacion/levantamiento',
+    path: 'vhloLimitacion/levantamiento',
     component: VhloLimitacionDeleteComponent
   },
   {
@@ -229,6 +232,18 @@ const routes: Routes = [
     path: 'vhloDevolucionRadicado',
     component: VhloDevolucionRadicadoComponent
   },
+  {
+    path: 'vhloSoat',
+    component: VhloSoatComponent
+  },
+  {
+    path: 'vhloVehiculo',
+    component: VhloVehiculoComponent
+  },
+  {
+    path: 'vhloTecnoMecanica',
+    component: VhloTecnoMecanicaComponent
+  }
 ]; 
 
 @NgModule({
