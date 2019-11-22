@@ -71,16 +71,12 @@ export class EditComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.empresa);
-
     this.identificacion = this.empresa.empresaRepresentante.ciudadano.identificacion;
     this.onSearchCiudadano();
 
     //para la fecha de inicio del representante legal
     var datePiper = new DatePipe('en-US');
     var date = new Date();
-
-    console.log(this.empresa.empresaRepresentante.fechaInicial); 
 
     date.setTime(this.empresa.empresaRepresentante.fechaInicial.timestamp * 1000);
 
