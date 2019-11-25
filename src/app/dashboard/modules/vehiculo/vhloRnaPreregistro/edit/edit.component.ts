@@ -148,6 +148,7 @@ constructor(
         response => {
           if (response.code == 200) {
             this.propietarios = response.data;
+            console.log(this.propietarios);
             swal.close();
 
             //Foreach
