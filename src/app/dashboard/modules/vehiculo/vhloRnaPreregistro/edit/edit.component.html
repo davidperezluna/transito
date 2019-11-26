@@ -318,7 +318,7 @@
                             </div>
                         </div>
 
-                        <div class="col-xs-12 col-lg-12" *ngIf="ciudadano && tipoMatricula == 'RADICADO'">
+                        <div class="col-xs-12 col-lg-12" *ngIf="ciudadano && vehiculo.tipoMatricula == 'RADICADO'">
                             <div class="row">
                                 <div class="col-xs-12 col-lg-12">
                                     <div class="custom-control custom-checkbox">
@@ -360,7 +360,7 @@
                             </div>
                         </div>
 
-                        <div class="col-xs-12 col-lg-12" *ngIf="empresa && tipoMatricula == 'RADICADO'">
+                        <div class="col-xs-12 col-lg-12" *ngIf="empresa && vehiculo.tipoMatricula == 'RADICADO'">
                             <!-- Empresa -->
                             <div class="row">
                                 <div class="col-xs-12 col-lg-12">
@@ -408,14 +408,13 @@
                             </div>
                         </div>
 
-                        <div class="col-xs-12 col-lg-12"
-                            *ngIf="datos.propietarios && datos.propietarios.length > 0 && tipoMatricula == 'RADICADO'">
+                        <div class="col-xs-12 col-lg-12" *ngIf="datos.propietarios && datos.propietarios.length > 0 && vehiculo.tipoMatricula == 'RADICADO'">
                             <table class="table table-bordered table-striped" id="dataTables-example">
                                 <br>
                                 <thead>
                                     <tr>
                                         <th colspan="3" class="text-center">
-                                            <b class="text-uppercase">Propietarios a registrar</b>
+                                            <b class="text-uppercase">Propietarios actuales</b>
                                         </th>
                                     </tr>
                                 </thead>
@@ -426,6 +425,12 @@
                                             <br> {{ propietario.identificacion }}
                                             <br> {{ propietario.nombre }}
                                             <br>
+                                            <span *ngIf="propietario.permiso" class="text-success">
+                                                <b>Autorizado</b> para realizar trámites.
+                                            </span>
+                                            <span *ngIf="!propietario.permiso" class="text-danger">
+                                                <b>No autorizado</b> para realizar trámites.
+                                            </span>
                                         </td>
                                         <td *ngIf="propietario.idApoderado">
                                             <b>Apoderado: </b>
@@ -433,14 +438,14 @@
                                             <br> {{ propietario.apoderadoNombre }}
                                             <br>
                                         </td>
-                                        <td *ngIf="!propietario.idApoderado">
+                                        <!-- <td *ngIf="!propietario.idApoderado">
                                             <div class="btn-group btn-group-justified">
                                                 <div class="btn-group">
                                                     <button (click)="onNewApoderado(propietario)"
                                                         class="btn btn-xs btn-primary">Agregar apoderado</button>
                                                 </div>
                                             </div>
-                                        </td>
+                                        </td> -->
                                         <td>
                                             <button (click)="onDeletePropietario(propietario)"
                                                 class="btn btn-xs btn-danger">Eliminar</button>
@@ -455,7 +460,7 @@
                     </div>
                 </div>
 
-                <div class="from-group" *ngIf="formApoderado && tipoMatricula == 'RADICADO'">
+                <div class="from-group" *ngIf="formApoderado && vehiculo.tipoMatricula == 'RADICADO'">
                     <!-- .form-group -->
                     <div class="row">
                         <!-- .row -->

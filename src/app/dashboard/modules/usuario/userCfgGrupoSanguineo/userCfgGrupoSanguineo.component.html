@@ -40,6 +40,6 @@
         </div>
       </div>
     </div>
-    <app-edit *ngIf='formEdit' [grupoSanguineo]="grupoSanguineo" (ready)="ready($event)"></app-edit>
-    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+    <app-edit-usercfggruposanguineo *ngIf='formEdit' [grupoSanguineo]="grupoSanguineo" (ready)="ready($event)"></app-edit-usercfggruposanguineo>
+    <app-new-usercfggruposanguineo *ngIf='formNew' (ready)="ready($event)"></app-new-usercfggruposanguineo>
 </div>

@@ -88,7 +88,6 @@ export class VhloRnaPreregistroComponent implements OnInit, AfterViewInit {
       response => {
         if (response.code == 200) {
           this.vehiculoEncontrado = response.data[0];
-          console.log(this.vehiculoEncontrado);
 
           swal({
             title: response.title,

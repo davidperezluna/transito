@@ -104,7 +104,7 @@ export class UserCfgTipoIdentificacionComponent implements OnInit {
       if (result.value) {
         let token = this._loginService.getToken();
 
-        this._TipoIdentificacionService.delete(token, id).subscribe(
+        this._TipoIdentificacionService.delete({'id': id}, token).subscribe(
           response => {
             swal({
               title: 'Eliminado!',

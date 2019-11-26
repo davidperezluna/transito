@@ -46,6 +46,6 @@
         </div>
       </div>
     </div>
-    <app-edit *ngIf='formEdit' [empresaServicio]="empresaServicio" (ready)="ready($event)"></app-edit>
-    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+    <app-edit-usercfgempresaservicio *ngIf='formEdit' [empresaServicio]="empresaServicio" (ready)="ready($event)"></app-edit-usercfgempresaservicio>
+    <app-new-usercfgempresaservicio *ngIf='formNew' (ready)="ready($event)"></app-new-usercfgempresaservicio>
 </div>

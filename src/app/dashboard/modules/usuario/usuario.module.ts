@@ -20,6 +20,11 @@ import { newSuspensionComponent } from './userLicenciaConduccion/newSuspension/n
 import { newProhibicionComponent } from './userLicenciaConduccion/newProhibicion/newProhibicion.component';
 import { reporteProhibicionComponent } from './userLicenciaConduccion/reporteProhibicion/reporteProhibicion.component';
 import { UserMedidaCautelarComponent } from './userMedidaCautelar/userMedidaCautelar.component';
+import { UserCfgGrupoSanguineoComponent } from './userCfgGrupoSanguineo';
+import { UserCfgGeneroComponent } from './userCfgGenero';
+import { UserCfgGrupoEtnicoComponent } from './userCfgGrupoEtnico';
+import { UserCfgEmpresaTipoComponent } from './userCfgEmpresaTipo';
+import { UserCfgEmpresaServicioComponent } from './userCfgEmpresaServicio';
 
 import { UsuarioRoutingModule } from './usuario-routing.module';
 import { UserCfgMenuModule } from './userCfgMenu/userCfgMenu.module';
@@ -32,6 +37,11 @@ import { UserLcCfgCategoriaModule } from './userLcCfgCategoria/userLcCfgCategori
 import { UserLcCfgRestriccionModule } from './userLcCfgRestriccion/userLcCfgRestriccion.module';
 import { UserLicenciaConduccionModule } from './userLicenciaConduccion/userLicenciaConduccion.module';
 import { UserMedidaCautelarModule } from './userMedidaCautelar/userMedidaCautelar.module';
+import { UserCfgGrupoSanguineoModule } from './userCfgGrupoSanguineo/userCfgGrupoSanguineo.module';
+import { UserCfgGeneroModule } from './userCfgGenero/userCfgGenero.module';
+import { UserCfgGrupoEtnicoModule } from './userCfgGrupoEtnico/userCfgGrupoEtnico.module';
+import { UserCfgEmpresaTipoModule } from './userCfgEmpresaTipo/userCfgEmpresaTipo.module';
+import { UserCfgEmpresaServicioModule } from './userCfgEmpresaServicio/userCfgEmpresaServicio.module';
 
 
 @NgModule({
@@ -52,7 +62,12 @@ import { UserMedidaCautelarModule } from './userMedidaCautelar/userMedidaCautela
     UserLcCfgCategoriaModule,
     UserLcCfgRestriccionModule,
     UserLicenciaConduccionModule,
-    UserMedidaCautelarModule
+    UserMedidaCautelarModule,
+    UserCfgGrupoSanguineoModule,
+    UserCfgGeneroModule,
+    UserCfgGrupoEtnicoModule,
+    UserCfgEmpresaTipoModule,
+    UserCfgEmpresaServicioModule,
   ],
   declarations: [
     UserCfgMenuComponent,
@@ -68,11 +83,13 @@ import { UserMedidaCautelarModule } from './userMedidaCautelar/userMedidaCautela
     newSuspensionComponent,
     newProhibicionComponent,
     UserMedidaCautelarComponent,
-    reporteProhibicionComponent
+    reporteProhibicionComponent,
+    UserCfgGrupoSanguineoComponent,
+    UserCfgGeneroComponent,
+    UserCfgGrupoEtnicoComponent,
+    UserCfgEmpresaTipoComponent,
+    UserCfgEmpresaServicioComponent,
   ],
-  providers: [
-    /*UserLicenciaConduccionService,
-    UserLicenciaConduccionRestriccionService*/
-  ]
+  providers: []
 })
 export class UsuarioModule { }
