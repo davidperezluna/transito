@@ -45,6 +45,10 @@ const routes: Routes = [
     component: FroFacInfraccionComponent
   },
   {
+    path: 'froCfgTipoRecaudo',
+    component: FroCfgTipoRecaudoComponent
+  },
+  {
     path: 'froInfrCfgCategoria',
     component: FroInfrCfgCategoriaComponent
   },
