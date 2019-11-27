@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { VhloRnaPreregistro } from './vhloRnaPreregistro.modelo';
 import { VhloRnaPreregistroService } from '../../../../services/vhloRnaPreregistro.service';
 import { VhloVehiculoService } from '../../../../services/vhloVehiculo.service';
@@ -11,66 +11,51 @@ declare var $: any;
   templateUrl: './vhloRnaPreregistro.component.html'
 })
 
-export class VhloRnaPreregistroComponent implements OnInit {
+export class VhloRnaPreregistroComponent implements OnInit, AfterViewInit {
   public errorMessage;
 
-	public vehiculos;
-  public formIndex = true;
-  public formNew = false;
-  public formEdit= false;
+	public vehiculoEncontrado;
+  
+  public formSearch : any;
+  public formIndex : any;
+  public formNew : any;
+  public formEdit: any;
+
   public table:any = null; 
+
+  public filtro = null;
+
   public vehiculo: VhloRnaPreregistro;
 
   constructor(
     private _VehiculoService: VhloVehiculoService,
 		private _RnaPreregistroService: VhloRnaPreregistroService,
-		private _loginService: LoginService,
+		private _LoginService: LoginService,
 	
 		
   ){}
-  
+
   ngOnInit() {
-    swal({
-      title: 'Cargando información!',
-      text: 'Solo tardara unos segundos por favor espere.',
-      type: 'info',
-      showConfirmButton: false,
-      onOpen: () => {
-        swal.showLoading()
-      }
-    });
+    this.onInitForms();
+    this.formSearch = true;
+  }
 
-    this.formEdit=false;
-    this.formNew=false;
+  ngAfterViewInit() {
+    swal.close();
+  }
 
-		this._RnaPreregistroService.index().subscribe(
-				response => {
-          this.vehiculos = response.data;
-      
-          let timeoutId = setTimeout(() => {  
-            this.onInitTable();
-            swal.close();
-          }, 100);
-				}, 
-				error => {
-					this.errorMessage = <any>error;
-
-					if(this.errorMessage != null){
-						console.log(this.errorMessage);
-						alert("Error en la petición");
-					}
-				}
-      );
+  onInitForms() {
+    this.formSearch = false;
+    this.formIndex = false;
+    this.formNew = false;
+    this.formEdit = false;
   }
 
   onInitTable(){
-    if (this.table) {
-      this.table.destroy();
-    }
-
     this.table = $('#dataTables-example').DataTable({
-      destroy: true,
       responsive: true,
+      retrieve: true,
+      paging: false,
       pageLength: 10,
       sPaginationType: 'full_numbers',
       oLanguage: {
@@ -84,23 +69,82 @@ export class VhloRnaPreregistroComponent implements OnInit {
     });
   }
 
+  onSearch() {
+    let token = this._LoginService.getToken();
+
+    this.onInitForms();
+
+    swal({
+      title: 'Buscando registros!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      type: 'info',
+      showConfirmButton: false,
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+
+    this._RnaPreregistroService.searhByFilter({ 'filtro': this.filtro }, token).subscribe(
+      response => {
+        if (response.code == 200) {
+          this.vehiculoEncontrado = response.data[0];
+
+          swal({
+            title: response.title,
+            text: response.message,
+            type: response.status,
+            confirmButtonText: 'Aceptar'
+          });
+
+          this.onInitForms();
+          this.formSearch = true;
+          this.formIndex = true;
+
+          let timeoutId = setTimeout(() => {
+            this.onInitTable();
+            swal.close();
+          }, 200);
+        } else {
+          this.formSearch = true;
+
+          swal({
+            title: response.title,
+            text: response.message,
+            type: response.status,
+            confirmButtonText: 'Aceptar'
+          });
+        }
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+  }
+
   onNew(){
+    this.onInitForms();
+
+    this.formSearch = true;
     this.formNew = true;
-    this.formIndex = false;
-    this.table.destroy();
   }
 
   ready(isCreado:any){
-      if(isCreado) {
-        this.formNew = false;
-        this.formIndex = true;
-        this.ngOnInit();
-      }
+    if (isCreado) {
+      this.formNew = false;
+      this.formIndex = true;
+      this.ngOnInit();
+    }
   }
 
   onEdit(vehiculo:any){
+    this.onInitForms();
     this.vehiculo = vehiculo;
-    this.formIndex = false;
+    this.formSearch = true;
     this.formEdit = true;
   }
   
@@ -126,7 +170,7 @@ export class VhloRnaPreregistroComponent implements OnInit {
           }
         });
 
-        let token = this._loginService.getToken();
+        let token = this._LoginService.getToken();
 
         this._VehiculoService.delete({ 'id': id}, token).subscribe(
           response => {

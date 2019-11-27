@@ -5,7 +5,7 @@
         <div class="card">
           <div class="card-header">
             <h5>
-              <b class="text-uppercase">Organismos de transito</b>
+              <b class="text-uppercase">Tipos de Empresa</b>
               <div class="btn-group pull-right">
                 <button (click)="onNew()" class="btn btn-default">
                   <i class="fa fa-plus"></i>
@@ -47,6 +47,6 @@
       </div>
     </div>
     
-    <app-edit *ngIf='formEdit' [tipo]="tipo" (ready)="ready($event)"></app-edit>
-    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+    <app-edit-usercfgempresatipo *ngIf='formEdit' [tipo]="tipo" (ready)="ready($event)"></app-edit-usercfgempresatipo>
+    <app-new-usercfgempresatipo *ngIf='formNew' (ready)="ready($event)"></app-new-usercfgempresatipo>
 </div>

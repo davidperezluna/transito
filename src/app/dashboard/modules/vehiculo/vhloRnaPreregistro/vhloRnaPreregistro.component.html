@@ -1,20 +1,53 @@
 <div class="container-fluid">
-  <div class="row" *ngIf='formIndex'>
-      <div class="col-md-12">
+  <div class="row">
+      <div class="col-xs-12 col-lg-4" *ngIf='formSearch'>
         <div class="card">
           <div class="card-header">
-            <b class="text-uppercase">Vehículos registrados</b>
-            <div class="btn-group pull-right">
-              <button (click)="onNew()" class="btn btn-default">
-                <i class="fa fa-plus"></i>
-                Nuevo
-              </button>
+            <b class="text-uppercase">Buscar vehículo</b>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-xs-12 col-lg-12">
+                <div class="form-group">
+                  <label>Parametro de búsqueda<br> <small>(No. registro, No VIN, No. Serie, No. motor, No. Motor, No.
+                      Chasis)</small></label>
+                  <input class="form-control text-uppercase" [(ngModel)]="filtro" name="filtro" type="text" required />
+                </div>
+              </div>
             </div>
+          </div>
+          <div class="card-footer">
+            <div class="row">
+              <div class="col-xs-12 col-lg-12">
+                <div class="form-group">
+                  <div class="btn-group btn-group-justified">
+                    <div class="btn-group">
+                      <button (click)="onSearch()" class="btn btn-default btn-primary" [disabled]="!filtro" type="button">
+                        <i class="fa fa-search"></i>
+                        Buscar
+                      </button>
+                      <button (click)="onNew()" class="btn btn-default">
+                        <i class="fa fa-plus"></i>
+                        Nuevo
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-lg-8" *ngIf='formIndex'>
+        <div class="card">
+          <div class="card-header">
+            <b class="text-uppercase">Vehículo registrado</b>
           </div>
           <div class="card-body">
             <table class="table " id="dataTables-example">
               <thead>
                 <tr>
+                  <th>Acciones</th>
                   <th>Placa </th>
                   <th>Motor</th>
                   <th>Clase</th>
@@ -24,45 +57,44 @@
                   <th>línea</th> 
                   <th>Valor</th>
                   <th>chasis</th>
-                  <th>Acciones</th>
                 </tr>
               </thead>
               <tbody>
-                <tr class="odd" *ngFor="let vehiculo of vehiculos; let i = index">
+                <tr class="odd">
                   <td>
-                    <span *ngIf="vehiculo.placa">
-                      {{ vehiculo.placa.numero }}
+                    <div class="btn-group">
+                      <button (click)="onEdit(vehiculoEncontrado)" class="btn btn-xs btn-primary" type="button">
+                        <i class="fa fa-pencil"></i>
+                      </button>
+                      <button (click)="onDelete(vehiculoEncontrado.id)" class="btn btn-xs btn-danger" type="button">
+                        <i class="fa fa-trash"></i>
+                      </button>
+                    </div>
+                  </td>
+                  <td>
+                    <span *ngIf="vehiculoEncontrado.placa">
+                      {{ vehiculoEncontrado.placa.numero }}
                     </span>
-                    <span *ngIf="!vehiculo.placa">
+                    <span *ngIf="!vehiculoEncontrado.placa">
                       Sin Asignar
                     </span>
                   </td>
-                  <td>{{ vehiculo.motor }}</td>
-                  <td>{{ vehiculo.clase?.nombre }}</td>
-                  <td>{{ vehiculo.cilindraje }}</td>
-                  <td>{{ vehiculo.modelo }}</td>
+                  <td>{{ vehiculoEncontrado.motor }}</td>
+                  <td>{{ vehiculoEncontrado.clase?.nombre }}</td>
+                  <td>{{ vehiculoEncontrado.cilindraje }}</td>
+                  <td>{{ vehiculoEncontrado.modelo }}</td>
                   <td>
-                    <span *ngIf="vehiculo.linea">
-                        {{vehiculo.linea?.marca.nombre}}
+                    <span *ngIf="vehiculoEncontrado.linea">
+                        {{vehiculoEncontrado.linea?.marca.nombre}}
                     </span>
                   </td>
                   <td>
-                    <span *ngIf="vehiculo.linea">
-                        {{vehiculo.linea?.nombre}}
+                    <span *ngIf="vehiculoEncontrado.linea">
+                        {{vehiculoEncontrado.linea?.nombre}}
                     </span>
                   </td>
-                  <td>{{vehiculo.valor}}</td> 
-                  <td>{{vehiculo.chasis}}</td> 
-                  <td>
-                    <div class="btn-group">
-                      <button (click)="onEdit(vehiculo)" class="btn btn-xs btn-primary" type="button">
-                        <i class="fa fa-pencil"></i>
-                      </button> 
-                      <button (click)="onDelete(vehiculo.id)"  class="btn btn-xs btn-danger" type="button">
-                        <i class="fa fa-trash"></i>
-                      </button> 
-                    </div>
-                  </td>
+                  <td>{{vehiculoEncontrado.valor}}</td> 
+                  <td>{{vehiculoEncontrado.chasis}}</td> 
                 </tr>
               </tbody>
             </table> 
@@ -70,7 +102,9 @@
           </div>
         </div>
       </div>
+      <div class="col-xs-12 col-lg-8">
+        <app-edit-vhlo-rna-preregistro *ngIf='formEdit' [vehiculo]="vehiculo" (ready)="ready($event)"></app-edit-vhlo-rna-preregistro>
+        <app-new-vhlo-rna-preregistro *ngIf='formNew' (ready)="ready($event)"></app-new-vhlo-rna-preregistro>
+      </div>
     </div>
-    <app-edit-vhlo-rna-preregistro *ngIf='formEdit' [vehiculo]="vehiculo" (ready)="ready($event)"></app-edit-vhlo-rna-preregistro>
-    <app-new-vhlo-rna-preregistro *ngIf='formNew' (ready)="ready($event)"></app-new-vhlo-rna-preregistro>
 </div>

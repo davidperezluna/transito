@@ -49,6 +49,6 @@
         </div>
     </div>
 
-    <app-edit *ngIf='formEdit' [grupoEtnico]="grupoEtnico" (ready)="ready($event)"></app-edit>
-    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+    <app-edit-usercfggrupoetnico *ngIf='formEdit' [grupoEtnico]="grupoEtnico" (ready)="ready($event)"></app-edit-usercfggrupoetnico>
+    <app-new-usercfggrupoetnico *ngIf='formNew' (ready)="ready($event)"></app-new-usercfggrupoetnico>
 </div>

@@ -157,7 +157,7 @@ constructor(
                   'idPropietario': element.ciudadano.id,
                   'identificacion': element.ciudadano.identificacion,
                   'nombre': element.ciudadano.primerNombre + " " + element.ciudadano.segundoNombre,
-                  'permiso': this.datos.solidario,
+                  'permiso': element.permiso,
                   'tipo': 'Ciudadano',
                   'idApoderado': null,
                   'apoderadoIdentificacion': null,
@@ -870,42 +870,77 @@ constructor(
       cancelButtonAriaLabel: 'Thumbs down',
     }).then((result) => {
         if (result.value) {
+          this._VehiculoService.edit({ 'vehiculo': this.vehiculo, 'radicado': this.radicado }, token).subscribe(
+            response => {
+              if(response.code == 200){
+                //para eliminar los registros anteriores
+                this.datos.idVehiculo = this.vehiculo.id;
+                this._PropietarioService.searchAndDeleteByVehiculo(this.datos, token).subscribe(
+                  response => {
+                    if (response.code == 200) {
+                      console.log("los registros se eliminaron correctamente");
 
-    this._VehiculoService.edit({ 'vehiculo': this.vehiculo, 'radicado': this.radicado }, token).subscribe(
-			response => {
-        if(response.code == 200){
-          this.ready.emit(true);
-          
-          swal({
-            title: 'Perfecto!',
-            text: 'Registro exitoso!',
-            type: 'success',
-            confirmButtonText: 'Aceptar'
-          })
-        }else{
-          swal({
-            title: 'Error!',
-            text: response.message,
-            type: 'error',
-            confirmButtonText: 'Aceptar'
-          })
-        }
-			error => {
-					this.errorMessage = <any>error;
+                      this._PropietarioService.register(this.datos, token).subscribe(
+                        response => {
+                          if (response.code == 200) {
+                            this.ready.emit(true);
+                          }
+                        },
+                        error => {
+                          this.errorMessage = <any>error;
 
-					if(this.errorMessage != null){
-						console.log(this.errorMessage);
-						alert("Error en la petición");
-					}
-				}
+                          if (this.errorMessage != null) {
+                            console.log(this.errorMessage);
+                            alert('Error en la petición');
+                          }
+                        }
+                      );
+                    } else {
+                      swal({
+                        title: 'Error!',
+                        text: response.message,
+                        type: response.status,
+                        confirmButtonText: 'Aceptar'
+                      })
+                    }
+                  },
+                  error => {
+                    this.errorMessage = <any>error;
 
-    }); 
-      } else if (
-        // Read more about handling dismissals
-        result.dismiss === swal.DismissReason.cancel
-      ) {
+                    if (this.errorMessage != null) {
+                      console.log(this.errorMessage);
+                      alert('Error en la petición');
+                    }
+                  }
+                );
+                
+                swal({
+                  title: response.title,
+                  text: response.message,
+                  type: response.status,
+                  confirmButtonText: 'Aceptar'
+                })
+              }else{
+                swal({
+                  title: 'Error!',
+                  text: response.message,
+                  type: response.status,
+                  confirmButtonText: 'Aceptar'
+                })
+              }
+            error => {
+                this.errorMessage = <any>error;
 
-      }
+                if(this.errorMessage != null){
+                  console.log(this.errorMessage);
+                  alert("Error en la petición");
+                }
+              }
+
+          }
+        ); 
+      } else if (result.dismiss === swal.DismissReason.cancel) 
+      {}
     })
   }
 

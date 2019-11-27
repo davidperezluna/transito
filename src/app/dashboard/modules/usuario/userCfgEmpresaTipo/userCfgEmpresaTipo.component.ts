@@ -109,7 +109,6 @@ export class UserCfgEmpresaTipoComponent implements OnInit {
                       type:'success',
                       confirmButtonColor: '#15d4be',
                     })
-                  this.table.destroy();
                   this.ngOnInit();
               }, 
             error => {

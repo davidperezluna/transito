@@ -14,6 +14,11 @@ import { SearchComponent } from './userLicenciaConduccion/search/search.componen
 import { newProhibicionComponent } from './userLicenciaConduccion/newProhibicion/newProhibicion.component';
 import { reporteProhibicionComponent } from './userLicenciaConduccion/reporteProhibicion/reporteProhibicion.component';
 import { UserMedidaCautelarComponent } from './userMedidaCautelar/userMedidaCautelar.component';
+import { UserCfgGrupoSanguineoComponent } from './userCfgGrupoSanguineo';
+import { UserCfgGeneroComponent } from './userCfgGenero';
+import { UserCfgGrupoEtnicoComponent } from './userCfgGrupoEtnico';
+import { UserCfgEmpresaTipoComponent } from './userCfgEmpresaTipo';
+import { UserCfgEmpresaServicioComponent } from './userCfgEmpresaServicio';
   
 const routes: Routes = [ 
   {
@@ -68,6 +73,36 @@ const routes: Routes = [
   {
     path: 'userMedidaCautelar',
     component: UserMedidaCautelarComponent
+  },
+  
+  {
+    path: 'userCfgGrupoSanguineo',
+    component: UserCfgGrupoSanguineoComponent
+  },
+  
+  {
+    path: 'userCfgGenero',
+    component: UserCfgGeneroComponent
+  },
+  
+  {
+    path: 'userCfgGrupoEtnico',
+    component: UserCfgGrupoEtnicoComponent
+  },
+  
+  {
+    path: 'userCfgEmpresaTipo',
+    component: UserCfgEmpresaTipoComponent
+  },
+  
+  {
+    path: 'userCfgEmpresaServicio',
+    component: UserCfgEmpresaServicioComponent
+  },
+  
+  {
+    path: 'userCfgTipoIdentificacion',
+    component: UserCfgTipoIdentificacionComponent
   },
 ]; 
 

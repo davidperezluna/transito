@@ -32,8 +32,8 @@
                   <td >{{tipoIdentificacion.sigla}}</td>
                   <td>
                     <div class="btn-group">
-                      <button (click)="editTipoIdentificacion(tipoIdentificacion)" class="btn btn-info" type="button">Editar</button> 
-                      <button (click)="deleteTipoIdentificacion(tipoIdentificacion.id)"  class="btn btn-danger" type="button">Eliminar  </button> 
+                      <button (click)="onEdit(tipoIdentificacion)" class="btn btn-info" type="button">Editar</button> 
+                      <button (click)="onDelete(tipoIdentificacion.id)"  class="btn btn-danger" type="button">Eliminar  </button> 
                     </div>
                   </td>
                 </tr>
@@ -44,6 +44,6 @@
         </div>
       </div>
     </div>
-    <app-edit *ngIf='formEdit' [tipoIdentificacion]="tipoIdentificacion" (ready)="ready($event)"></app-edit>
-    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+    <app-edit-usercfgtipoidentificacion *ngIf='formEdit' [tipoIdentificacion]="tipoIdentificacion" (ready)="ready($event)"></app-edit-usercfgtipoidentificacion>
+    <app-new-usercfgtipoidentificacion *ngIf='formNew' (ready)="ready($event)"></app-new-usercfgtipoidentificacion>
 </div>

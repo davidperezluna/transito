@@ -73,7 +73,7 @@ export class VhloPropietarioService {
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/search/vehiculo", params, { headers: headers }).map(res => res.json());
 	}
-
+	
 	searchByPlaca(datos, token) {
 		let json = JSON.stringify(datos);
 		let params = "data=" + json + "&authorization=" + token;
@@ -93,5 +93,12 @@ export class VhloPropietarioService {
 		let params = "data=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/update", params, { headers: headers }).map(res => res.json());
+	}
+	
+	searchAndDeleteByVehiculo(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = "data=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/search/delete/vehiculo", params, { headers: headers }).map(res => res.json());
 	}
 }

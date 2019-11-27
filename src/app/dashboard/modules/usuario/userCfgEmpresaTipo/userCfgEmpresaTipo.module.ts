@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UserCfgEmpresaTipoComponent } from './userCfgEmpresaTipo.component';
 import { UserCfgEmpresaTipoService } from '../../../../services/userCfgEmpresaTipo.service';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 
@@ -12,8 +11,8 @@ import { TooltipModule } from "ngx-tooltip";
 
 @NgModule({
     imports: [CommonModule, Ng2BootstrapModule.forRoot(), SelectModule, TooltipModule],
-    declarations: [UserCfgEmpresaTipoComponent,NewComponent,EditComponent],
-    exports: [UserCfgEmpresaTipoComponent, NewComponent,EditComponent],
+    declarations: [NewComponent,EditComponent],
+    exports: [NewComponent,EditComponent],
     providers:[UserCfgEmpresaTipoService]
 })
 
