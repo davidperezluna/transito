@@ -17,7 +17,7 @@ import swal from 'sweetalert2';
   providers: [DatePipe]
 })
 
-export class EditComponent implements OnInit {
+export class EditComponent implements OnInit, AfterViewInit {
   @Output() ready = new EventEmitter<any>();
   @Input() empresa: any = null;
 
@@ -50,6 +50,7 @@ export class EditComponent implements OnInit {
   public tipoEntidadSelected: any;
   
   public identificacion;
+  public nuevaFechaInicial;
   public ciudadano;
 
   public tiposEntidad = [
@@ -71,6 +72,14 @@ export class EditComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    swal({
+      title: 'Cargando Formulario!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+
     this.identificacion = this.empresa.empresaRepresentante.ciudadano.identificacion;
     this.onSearchCiudadano();
 
@@ -84,6 +93,7 @@ export class EditComponent implements OnInit {
       date, 'yyyy-MM-dd'
     );
 
+    this.nuevaFechaInicial = this.empresa.empresaRepresentante.fechaInicial;
     //=======
 
     this._UserCfgEmpresaTipoService.select().subscribe(
@@ -236,22 +246,25 @@ export class EditComponent implements OnInit {
       }
     );
   }
+
+  ngAfterViewInit() {
+    swal.close();
+  }
   
   onEnviar() {
     let token = this._LoginService.getToken();
 
     this.empresa.idMunicipio = this.municipioSelected;
     this.empresa.idTipoSociedad = this.tipoSociedadSelected;
+    this.empresa.idTipoEmpresa = this.tipoEmpresaSelected;
     this.empresa.idTipoIdentificacion = 4;
+    this.empresa.idEmpresaServicio = this.servicioSelected;
 
     if(this.ciudadano){
       this.empresa.idCiudadano = this.ciudadano.id;
     }
 
-    this.empresa.idEmpresaServicio = this.servicioSelected;
-    this.empresa.idTipoEmpresa = this.tipoEmpresaSelected;
-
-    this._EmpresaService.edit(this.empresa, token).subscribe(
+    this._EmpresaService.edit({'idCiudadano': this.ciudadano.id, 'nuevaFechaInicial': this.nuevaFechaInicial, 'idRepresentante': this.empresa.empresaRepresentante.id, 'empresa': this.empresa}, token).subscribe(
       response => {
         if (response.code == 200) {
           this.ready.emit(true);

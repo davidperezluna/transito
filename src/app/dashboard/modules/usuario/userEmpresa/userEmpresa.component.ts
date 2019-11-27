@@ -127,18 +127,20 @@ export class UserEmpresaComponent implements OnInit {
   onNew(){
     this.onInitForms();
     this.formNew = true;
+    this.formSearch = true;
   }
-
+  
   ready(isCreado:any){
-      if(isCreado) {
-        this.ngOnInit();
-      }
+    if(isCreado) {
+      this.ngOnInit();
+    }
   }
-
+  
   onEdit(empresa:any){
     this.empresa = empresa;
     this.onInitForms();
     this.formEdit = true;
+    this.formSearch = true;
   }
 
   onShow(empresa:any){

@@ -141,7 +141,7 @@
                             <input class="form-control" type="text" [(ngModel)]="vehiculo.vin" name="vin">
                         </div>
 
-                        <div class="col-xs-12 col-lg-3" *ngIf='vehiculo.idServicio == 2'>
+                        <div class="col-xs-12 col-lg-3" *ngIf='servicioSelected == 2'>
                             <label>Radio Acción <b class="text-danger">*</b></label>
                             <ng-select [multiple]="false" [options]="radiosAccion" [(ngModel)]="radioAccionSelected"
                                 name="idRadioAccion" required>
@@ -194,7 +194,7 @@
                         </div>
                     </div>
 
-                    <div class="row" *ngIf="empresaTransporte">
+                    <div class="row" *ngIf="empresaTransporte && servicioSelected == 2">
                         <div class="col-xs-12 col-lg-12">
                             <table class="table table-bordered table-striped">
                                 <tbody>
@@ -263,7 +263,7 @@
                                     <b class="text-danger">*</b>
                                 </span>
                             </label>
-                            <ng-select [multiple]="false" [options]="tiposPropiedad" [(ngModel)]="datos.tipoPropiedad"
+                            <ng-select [multiple]="false" [disabled]="!realizoTramites" [options]="tiposPropiedad" [(ngModel)]="datos.tipoPropiedad"
                                 name="tipoPropiedad" required>
                             </ng-select>
                         </div>
@@ -272,95 +272,97 @@
 
                     <!-- <div class="row" *ngIf="datos.tipoPropiedad && (vehiculo.tipoMatricula == 'RADICADO' || vehiculo.tipoMatricula == 'IMPORTACION' || vehiculo.tipoMatricula == 'MATRICULA') "> -->
                     <div class="row" *ngIf="datos.tipoPropiedad && vehiculo.tipoMatricula == 'RADICADO'">
-                        <!--Cuando es de tipo propio -->
-                        <div class="col-xs-12 col-lg-12">
-                            <br>
-                            <div class="custom-control custom-checkbox">
-                                <input [(ngModel)]="datos.solidario" name="solidario" type="checkbox"
-                                    class="custom-control-input" id="solidario" checked="">
-                                <label class="custom-control-label" for="solidario">¿Tiene permisos para hacer
-                                    tramites?</label>
-                            </div>
-                        </div>
-
-                        <div class="col-xs-8 col-lg-6">
-                            <label>Tipo de identificación <b class="text-danger">*</b></label>
-                            <ng-select [multiple]="false" [options]="tiposIdentificacion"
-                                [(ngModel)]="tipoIdentificacionSelected" name="idTipoIdentificacion" required>
-                            </ng-select>
-                        </div>
-
-                        <!--tipo identificacion ciudadano -->
-                        <div class="col-xs-8 col-lg-6" *ngIf="tipoIdentificacionSelected != 4">
-                            <label>Identificación</label>
-                            <div class="input-group">
-                                <input type="number" class="form-control" placeholder="Identificacion"
-                                    [(ngModel)]="identificacion" name="identificacion" required />
-                                <span class="input-group-btn">
-                                    <button (click)="onSearchCiudadano()" class="btn btn-default" type="button">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                </span>
-                            </div>
-                        </div>
-
-                        <!--tipo identificacion nit -->
-                        <div class="col-xs-8 col-lg-6" *ngIf="tipoIdentificacionSelected == 4">
-                            <label>NIT</label>
-                            <div class="input-group">
-                                <input type="number" class="form-control" placeholder="NIT" [(ngModel)]="nit" name="nit"
-                                    required />
-                                <span class="input-group-btn">
-                                    <button (click)="onSearchEmpresa()" class="btn btn-primary" type="button">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                </span>
-                            </div>
-                        </div>
-
-                        <div class="col-xs-12 col-lg-12" *ngIf="ciudadano && vehiculo.tipoMatricula == 'RADICADO'">
-                            <div class="row">
-                                <div class="col-xs-12 col-lg-12">
-                                    <div class="custom-control custom-checkbox">
-                                        <input [(ngModel)]="datos.solidario" name="solidario" type="checkbox"
-                                            class="custom-control-input" id="solidario" checked="">
-                                        <label class="custom-control-label" for="solidario">¿Tiene permisos para hacer
-                                            tramites?</label>
-                                    </div>
+                        <div *ngIf="!realizoTramites">
+                            <!--Cuando es de tipo propio -->
+                            <div class="col-xs-12 col-lg-12">
+                                <br>
+                                <div class="custom-control custom-checkbox">
+                                    <input [(ngModel)]="datos.solidario" name="solidario" type="checkbox"
+                                        class="custom-control-input" id="solidario" checked="">
+                                    <label class="custom-control-label" for="solidario">¿Tiene permisos para hacer
+                                        tramites?</label>
                                 </div>
-                                <table class="table table-bordered table-striped" id="dataTables-example">
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <b>Tipo de identificación: </b>
-                                                <br> {{ ciudadano.tipoIdentificacion.nombre }}
-                                                <br>
-                                                <b>Numero de identificación: </b>
-                                                <br> {{ ciudadano.identificacion }}
-                                            </td>
-                                            <td>
-                                                <b>Nombres y apellidos: </b>
-                                                <br> {{ ciudadano.primerNombre }} {{ ciudadano.segundoNombre }}
-                                                {{ ciudadano.primerApellido }} {{ ciudadano.segundoApellido
-                                                    }}
-                                            </td>
-                                            <td>
-                                                <div class="btn-group btn-group-justified">
-                                                    <div class="btn-group">
-                                                        <button (click)="onAddCiudadano()" class="btn btn-primary">
-                                                            <i class="fa fa-plus"></i>
-                                                            Agregar
-                                                        </button>
+                            </div>
+
+                            <div class="col-xs-8 col-lg-6">
+                                <label>Tipo de identificación <b class="text-danger">*</b></label>
+                                <ng-select [multiple]="false" [options]="tiposIdentificacion"
+                                    [(ngModel)]="tipoIdentificacionSelected" name="idTipoIdentificacion" required>
+                                </ng-select>
+                            </div>
+
+                            <!--tipo identificacion ciudadano -->
+                            <div class="col-xs-8 col-lg-6" *ngIf="tipoIdentificacionSelected != 4">
+                                <label>Identificación</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" placeholder="Identificacion"
+                                        [(ngModel)]="identificacion" name="identificacion" required />
+                                    <span class="input-group-btn">
+                                        <button (click)="onSearchCiudadano()" class="btn btn-default" type="button">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!--tipo identificacion nit -->
+                            <div class="col-xs-8 col-lg-6" *ngIf="tipoIdentificacionSelected == 4">
+                                <label>NIT</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" placeholder="NIT" [(ngModel)]="nit" name="nit"
+                                        required />
+                                    <span class="input-group-btn">
+                                        <button (click)="onSearchEmpresa()" class="btn btn-primary" type="button">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-lg-12" *ngIf="ciudadano && vehiculo.tipoMatricula == 'RADICADO'">
+                                <div class="row">
+                                    <div class="col-xs-12 col-lg-12">
+                                        <div class="custom-control custom-checkbox">
+                                            <input [(ngModel)]="datos.solidario" name="solidario" type="checkbox"
+                                                class="custom-control-input" id="solidario" checked="">
+                                            <label class="custom-control-label" for="solidario">¿Tiene permisos para hacer
+                                                tramites?</label>
+                                        </div>
+                                    </div>
+                                    <table class="table table-bordered table-striped" id="dataTables-example">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <b>Tipo de identificación: </b>
+                                                    <br> {{ ciudadano.tipoIdentificacion.nombre }}
+                                                    <br>
+                                                    <b>Numero de identificación: </b>
+                                                    <br> {{ ciudadano.identificacion }}
+                                                </td>
+                                                <td>
+                                                    <b>Nombres y apellidos: </b>
+                                                    <br> {{ ciudadano.primerNombre }} {{ ciudadano.segundoNombre }}
+                                                    {{ ciudadano.primerApellido }} {{ ciudadano.segundoApellido
+                                                        }}
+                                                </td>
+                                                <td>
+                                                    <div class="btn-group btn-group-justified">
+                                                        <div class="btn-group">
+                                                            <button (click)="onAddCiudadano()" class="btn btn-primary">
+                                                                <i class="fa fa-plus"></i>
+                                                                Agregar
+                                                            </button>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="col-xs-12 col-lg-12" *ngIf="empresa && vehiculo.tipoMatricula == 'RADICADO'">
+                        <div class="col-xs-12 col-lg-12" *ngIf="empresa && vehiculo.tipoMatricula == 'RADICADO'  && !realizoTramites">
                             <!-- Empresa -->
                             <div class="row">
                                 <div class="col-xs-12 col-lg-12">
@@ -446,7 +448,7 @@
                                                 </div>
                                             </div>
                                         </td> -->
-                                        <td>
+                                        <td *ngIf="!realizoTramites">
                                             <button (click)="onDeletePropietario(propietario)"
                                                 class="btn btn-xs btn-danger">Eliminar</button>
                                         </td>

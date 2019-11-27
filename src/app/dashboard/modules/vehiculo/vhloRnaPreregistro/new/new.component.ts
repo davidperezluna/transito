@@ -668,7 +668,7 @@ constructor(
               swal({
                 title: 'Perfecto!',
                 text: response.message,
-                type: 'success',
+                type: response.status,
                 confirmButtonText: 'Aceptar'
               });
               

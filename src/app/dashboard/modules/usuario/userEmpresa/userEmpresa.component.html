@@ -1,4 +1,4 @@
-<div class="container-fluid" >
+<div class="container-fluid">
   <hr>
   <div class="row">
     <div class="col-xs-12 col-lg-4" *ngIf='formSearch'>
@@ -6,7 +6,7 @@
       <div class="card">
         <div class="card-header">
           <b class="text-uppercase">
-              Buscar empresas
+            Buscar empresas
           </b>
         </div>
         <div class="card-body">
@@ -16,11 +16,13 @@
                 <!-- .row -->
                 <div class="col-xs-12 col-lg-12">
                   <label>Tipo de filtro</label>
-                  <ng-select [multiple]="false" [options]="tiposFiltro" [(ngModel)]="search.tipoFiltro" name="tipoFiltro" required></ng-select>
+                  <ng-select [multiple]="false" [options]="tiposFiltro" [(ngModel)]="search.tipoFiltro"
+                    name="tipoFiltro" required></ng-select>
                 </div>
                 <div class="col-xs-12 col-lg-12">
                   <label>Filtro</label>
-                  <input class="form-control text-uppercase" [(ngModel)]="search.filtro" name="filtro" type="text" required>
+                  <input class="form-control text-uppercase" [(ngModel)]="search.filtro" name="filtro" type="text"
+                    required>
                 </div>
               </div>
             </div>
@@ -30,7 +32,8 @@
         <!-- /.card-body -->
         <div class="card-footer">
           <div class="btn-group">
-            <button (click)="onSearch()" (ready)="ready($event)" [disabled]="formSearch.invalid" class="btn btn-primary" type="button">
+            <button (click)="onSearch()" (ready)="ready($event)" [disabled]="formSearch.invalid" class="btn btn-primary"
+              type="button">
               <i class="fa fa-search"></i>
               Buscar
             </button>
@@ -45,27 +48,27 @@
 
     <!-- /.col -->
     <div class="col-xs-12 col-lg-8" *ngIf='formIndex'>
-        <div class="card">
-          <div class="card-header">
-            <b class="text-uppercase">Inscripción de persona jurídica</b>
-            <div class="btn-group pull-right">
-              <button (click)="onNew()" class="btn btn-default">
-                <i class="fa fa-plus"></i>
-                Nuevo
-              </button>
-            </div>
+      <div class="card">
+        <div class="card-header">
+          <b class="text-uppercase">Inscripción de persona jurídica</b>
+          <div class="btn-group pull-right">
+            <button (click)="onNew()" class="btn btn-default">
+              <i class="fa fa-plus"></i>
+              Nuevo
+            </button>
           </div>
-          <div class="card-body responsive">
-          	<div class="table-responsive">
+        </div>
+        <div class="card-body responsive">
+          <div class="table-responsive">
             <table class="table" id="dataTables-example">
               <thead>
                 <tr>
-                    <th>#</th>
-                    <th>Empresa</th>
-                    <th>Tipo de sociedad</th>
-                    <th>Ubicación</th>                 
-                    <th>Contacto</th>                 
-                    <th>Acciones</th>                    
+                  <th>#</th>
+                  <th>Empresa</th>
+                  <th>Tipo de sociedad</th>
+                  <th>Ubicación</th>
+                  <th>Contacto</th>
+                  <th>Acciones</th>
                 </tr>
               </thead>
               <tbody>
@@ -98,22 +101,28 @@
                     <br>
                     {{ empresa.telefono }}
                     <br>
-                    <b>Correo</b> 
+                    <b>Correo</b>
                     <br>
                     {{ empresa.correo }}
                   </td>
                   <td>
                     <div class="btn-group">
-                      <button (click)="onShow(empresa)" class="btn btn-xs btn-info" type="button" tooltip="Detalles" [tooltipDisabled]="false" [tooltipAnimation]="true" tooltipPlacement="top">
+                      <button (click)="onShow(empresa)" class="btn btn-xs btn-info" type="button" tooltip="Detalles"
+                        [tooltipDisabled]="false" [tooltipAnimation]="true" tooltipPlacement="top">
                         <i class="fa fa-info"></i>
                       </button>
-                      <button (click)="onEdit(empresa)" class="btn btn-xs btn-primary" type="button" tooltip="Editar" [tooltipDisabled]="false" [tooltipAnimation]="true" tooltipPlacement="top">
+                      <button (click)="onEdit(empresa)" class="btn btn-xs btn-primary" type="button" tooltip="Editar"
+                        [tooltipDisabled]="false" [tooltipAnimation]="true" tooltipPlacement="top">
                         <i class="fa fa-pencil"></i>
-                      </button> 
-                      <button *ngIf="empresa.activo" (click)="onDelete(empresa.id)" class="btn btn-xs btn-danger" type="button" tooltip="Eliminar" [tooltipDisabled]="false" [tooltipAnimation]="true" tooltipPlacement="top">
+                      </button>
+                      <button *ngIf="empresa.activo" (click)="onDelete(empresa.id)" class="btn btn-xs btn-danger"
+                        type="button" tooltip="Eliminar" [tooltipDisabled]="false" [tooltipAnimation]="true"
+                        tooltipPlacement="top">
                         <i class="fa fa-trash"></i>
                       </button>
-                      <button *ngIf="!empresa.activo" (click)="onActive(empresa.id)" class="btn btn-xs btn-success" type="button" tooltip="Eliminar" [tooltipDisabled]="false" [tooltipAnimation]="true" tooltipPlacement="top">
+                      <button *ngIf="!empresa.activo" (click)="onActive(empresa.id)" class="btn btn-xs btn-success"
+                        type="button" tooltip="Eliminar" [tooltipDisabled]="false" [tooltipAnimation]="true"
+                        tooltipPlacement="top">
                         <i class="fa fa-check"></i>
                       </button>
                     </div>
@@ -121,23 +130,23 @@
                 </tr>
               </tbody>
             </table>
-            </div>
-            <!-- /.table-responsive   -->
           </div>
+          <!-- /.table-responsive   -->
         </div>
       </div>
-      
-      <div class="col-xs-12 col-lg-12" *ngIf='formNew'>
-        <app-new-userempresa (ready)="ready($event)"></app-new-userempresa>
-      </div>
-  
-      <div class="col-xs-12 col-lg-12" *ngIf='formEdit'>
-        <app-edit-userempresa [empresa]="empresa" (ready)="ready($event)"></app-edit-userempresa>
-      </div>
-  
-      <div class="col-xs-12 col-lg-12" *ngIf='formShow'>
-        <sucursal-show [empresa]="empresa" (ready)="ready($event)"></sucursal-show>
-      </div>
     </div>
-    
+
+    <div class="col-xs-12 col-lg-8" *ngIf='formNew'>
+      <app-new-userempresa (ready)="ready($event)"></app-new-userempresa>
+    </div>
+
+    <div class="col-xs-12 col-lg-8" *ngIf='formEdit'>
+      <app-edit-userempresa [empresa]="empresa" (ready)="ready($event)"></app-edit-userempresa>
+    </div>
+
+    <div class="col-xs-12 col-lg-12" *ngIf='formShow'>
+      <sucursal-show [empresa]="empresa" (ready)="ready($event)"></sucursal-show>
+    </div>
+  </div>
+
 </div>

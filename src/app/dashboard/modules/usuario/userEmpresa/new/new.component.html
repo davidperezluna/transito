@@ -1,184 +1,193 @@
-<div class="row ">
-    <div class="col-xs-12 col-lg-10">
-        <div class="card">
-            <div class="card-header">
-                <b class="text-uppercase">Nueva persona jurídica</b>
-                <br>
-                <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
-            </div>
-            <div class="card-body ">
-                <form  #formNew="ngForm">
-                    <div class="row">
-                        <div class="form-group row">
-                            <div class="col-xs-12 col-lg-9">
-                                <label>Razon social
-                                    <span class="text-danger">*</span>
-                                </label>
-                                <input class="form-control" [(ngModel)]="empresa.nombre" name="nombre" type="text" required>
-                            </div>
-                            <div class="col-xs-12 col-lg-3">
-                                <label>Sigla</label>
-                                <input class="form-control" [(ngModel)]="empresa.sigla" name="sigla" type="text">
-                            </div>
-                            <div class="col-xs-12 col-lg-4">
-                                <label>Nro. NIT <span class="text-danger">*</span></label>
-                                <input class="form-control" [(ngModel)]="empresa.nit" name="nit" type="text" required>
-                            </div>
-                            <div class="col-xs-12 col-lg-4">
-                                <label>DV <span class="text-danger">*</span></label>
-                                <input class="form-control" [(ngModel)]="empresa.dv" name="dv" type="text" required>
-                            </div>
-                            <div class="col-xs-12 col-lg-4">
-                                <label>Tipo identificación
-                                    <span class="text-danger">*</span>
-                                </label>
-                                <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionSelected" required name="tipoIdentificacionId">
-                                </ng-select>
-                            </div>
-                            <div class="col-xs-12 col-lg-3">
-                                <label>Capital pagado</label>
-                                <input class="form-control" [(ngModel)]="empresa.capitalPagado" name="capitalPagado" type="text">
-                            </div>
-                            <div class="col-xs-12 col-lg-3">
-                                <label>Patrimonio liquido</label>
-                                <input class="form-control" [(ngModel)]="empresa.capitalLiquido" name="capitalLiquido" type="text">
-                            </div>
-                            <div class="col-xs-12 col-lg-3" style="margin-top:3%">
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" [(ngModel)]="empresa.empresaPrestadora" class="custom-control-input"
-                                        id="empresaPrestadora" name="empresaPrestadora" checked="">
-                                    <label class="custom-control-label" for="empresaPrestadora">Empresa
-                                        prestadora</label>
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-lg-3">
-                                <label>Certificado existencial</label>
-                                <input class="form-control" [(ngModel)]="empresa.certificadoExistencial" name="certificadoExistencial" type="text">
-                            </div>
-                            <div class="col-xs-12 col-lg-4">
-                                <label>Tipo sociedad
-                                    <span class="text-danger">*</span>
-                                </label>
-                                <ng-select [multiple]="false" [options]="tiposSociedad" [(ngModel)]="tipoSociedadSelected" required name="idTipoSociedad">
-                                </ng-select>
-                            </div>
+<div class="col-xs-12 col-lg-12">
+    <div class="card">
+        <div class="card-header">
+            <b class="text-uppercase">Nueva persona jurídica</b>
+            <br>
+            <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
+        </div>
+        <div class="card-body ">
+            <form #formNew="ngForm">
+                <div class="form-group row">
+                    <div class="col-xs-12 col-lg-9">
+                        <label>Razon social
+                            <span class="text-danger">*</span>
+                        </label>
+                        <input class="form-control" [(ngModel)]="empresa.nombre" name="nombre" type="text" required>
+                    </div>
+                    <div class="col-xs-12 col-lg-3">
+                        <label>Sigla</label>
+                        <input class="form-control" [(ngModel)]="empresa.sigla" name="sigla" type="text">
+                    </div>
+                    <div class="col-xs-12 col-lg-4">
+                        <label>Nro. NIT <span class="text-danger">*</span></label>
+                        <input class="form-control" [(ngModel)]="empresa.nit" name="nit" type="number" required>
+                    </div>
+                    <div class="col-xs-12 col-lg-4">
+                        <label>DV <span class="text-danger">*</span></label>
+                        <input class="form-control" [(ngModel)]="empresa.dv" name="dv" type="text" required>
+                    </div>
+                    <div class="col-xs-12 col-lg-4">
+                        <label>Tipo identificación
+                            <span class="text-danger">*</span>
+                        </label>
+                        <ng-select [multiple]="false" [options]="tiposIdentificacion"
+                            [(ngModel)]="tipoIdentificacionSelected" required name="tipoIdentificacionId">
+                        </ng-select>
+                    </div>
+                    <div class="col-xs-12 col-lg-3">
+                        <label>Capital pagado</label>
+                        <input class="form-control" [(ngModel)]="empresa.capitalPagado" name="capitalPagado"
+                            type="number">
+                    </div>
+                    <div class="col-xs-12 col-lg-3">
+                        <label>Patrimonio liquido</label>
+                        <input class="form-control" [(ngModel)]="empresa.capitalLiquido" name="capitalLiquido"
+                            type="number">
+                    </div>
+                    <div class="col-xs-12 col-lg-3" style="margin-top:3%">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" [(ngModel)]="empresa.empresaPrestadora" class="custom-control-input"
+                                id="empresaPrestadora" name="empresaPrestadora" checked="">
+                            <label class="custom-control-label" for="empresaPrestadora">Empresa
+                                prestadora</label>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-lg-3">
+                        <label>Certificado existencial</label>
+                        <input class="form-control" [(ngModel)]="empresa.certificadoExistencial"
+                            name="certificadoExistencial" type="text">
+                    </div>
+                    <div class="col-xs-12 col-lg-4">
+                        <label>Tipo sociedad
+                            <span class="text-danger">*</span>
+                        </label>
+                        <ng-select [multiple]="false" [options]="tiposSociedad" [(ngModel)]="tipoSociedadSelected"
+                            required name="idTipoSociedad">
+                        </ng-select>
+                    </div>
 
-                            <div class="col-xs-12 col-lg-4">
-                                <label>Servicio
-                                    <span class="text-danger">*</span>
-                                </label>
-                                <ng-select [multiple]="false" [options]="servicios" [(ngModel)]="servicioSelected" required name="idServicio">
-                                </ng-select>
-                            </div>
+                    <div class="col-xs-12 col-lg-4">
+                        <label>Servicio
+                            <span class="text-danger">*</span>
+                        </label>
+                        <ng-select [multiple]="false" [options]="servicios" [(ngModel)]="servicioSelected" required
+                            name="idServicio">
+                        </ng-select>
+                    </div>
 
-                            <div class="col-xs-12 col-lg-4">
-                                <label>Tipo entidad<span class="text-danger">*</span>
-                                </label>
-                                <ng-select [multiple]="false" [options]="tiposEntidad" [(ngModel)]="tipoEntidadSelected" required
-                                    name="tipoEntidadSelected">
-                                </ng-select>
-                            </div>
-                            <div class="col-xs-12 col-lg-4">
-                                <label>Municipio
-                                    <span class="text-danger">*</span>
-                                </label>
-                                <ng-select [multiple]="false" [options]="municipios" [(ngModel)]="municipioSelected" required name="idMunicipio">
-                                </ng-select>
-                            </div>
-                            <div class="col-xs-12 col-lg-4">
-                                <label>Nro. Registro mercantil <span class="text-danger">*</span></label>
-                                <input class="form-control" [(ngModel)]="empresa.nroRegistroMercantil" name="nroRegistroMercantil" type="text" required>
-                            </div>
-                            <div class="col-xs-12 col-lg-4">
-                                <label> Vencimiento de registro mercantil
-                                </label>
-                                <input class="form-control" [(ngModel)]="empresa.fechaVencimientoRegistroMercantil" name="fechaVencimientoRegistroMercantil" type="date" />
-                                <br>
-                            </div>
-                            <hr>
-                            <h5 class="col-xs-12 col-lg-12">Más información</h5>
-                            <div class="col-xs-12 col-lg-4">
-                                <label>Dirección <b class="text-danger">*</b></label>
-                                <input class="form-control" [(ngModel)]="empresa.direccion" name="direccion" type="text">
-                            </div>
-                            <div class="col-xs-12 col-lg-4">
-                                <label>Telefono</label>
-                                <input class="form-control" [(ngModel)]="empresa.telefono" name="telefono" type="number" min="0">
-                            </div>
-                            <div class="col-xs-12 col-lg-4">
-                                <label>Celular</label>
-                                <input class="form-control" [(ngModel)]="empresa.celular" name="celular" type="number" min="0">
-                            </div>
-                            <div class="col-xs-12 col-lg-4">
-                                <label>Fax</label>
-                                <input class="form-control" [(ngModel)]="empresa.fax" name="fax" type="email">
-                            </div>
-                            <div class="col-xs-12 col-lg-4">
-                                <label>Correo electrónico</label>
-                                <input class="form-control" [(ngModel)]="empresa.correo" name="correo" type="email">
-                            </div> 
+                    <div class="col-xs-12 col-lg-4">
+                        <label>Tipo entidad<span class="text-danger">*</span>
+                        </label>
+                        <ng-select [multiple]="false" [options]="tiposEntidad" [(ngModel)]="tipoEntidadSelected"
+                            required name="tipoEntidadSelected">
+                        </ng-select>
+                    </div>
+                    <div class="col-xs-12 col-lg-4">
+                        <label>Municipio
+                            <span class="text-danger">*</span>
+                        </label>
+                        <ng-select [multiple]="false" [options]="municipios" [(ngModel)]="municipioSelected" required
+                            name="idMunicipio">
+                        </ng-select>
+                    </div>
+                    <div class="col-xs-12 col-lg-4">
+                        <label>Nro. Registro mercantil <span class="text-danger">*</span></label>
+                        <input class="form-control" [(ngModel)]="empresa.nroRegistroMercantil"
+                            name="nroRegistroMercantil" type="number" required>
+                    </div>
+                    <div class="col-xs-12 col-lg-4">
+                        <label> Vencimiento de registro mercantil
+                        </label>
+                        <input class="form-control" [(ngModel)]="empresa.fechaVencimientoRegistroMercantil"
+                            name="fechaVencimientoRegistroMercantil" type="date" />
+                        <br>
+                    </div>
+                    <hr>
+                    <h5 class="col-xs-12 col-lg-12">Más información</h5>
+                    <div class="col-xs-12 col-lg-4">
+                        <label>Dirección <b class="text-danger">*</b></label>
+                        <input class="form-control" [(ngModel)]="empresa.direccion" name="direccion" type="text" required>
+                    </div>
+                    <div class="col-xs-12 col-lg-4">
+                        <label>Telefono</label>
+                        <input class="form-control" [(ngModel)]="empresa.telefono" name="telefono" type="number"
+                            min="0">
+                    </div>
+                    <div class="col-xs-12 col-lg-4">
+                        <label>Celular</label>
+                        <input class="form-control" [(ngModel)]="empresa.celular" name="celular" type="number" min="0">
+                    </div>
+                    <div class="col-xs-12 col-lg-4">
+                        <label>Fax</label>
+                        <input class="form-control" [(ngModel)]="empresa.fax" name="fax" type="number">
+                    </div>
+                    <div class="col-xs-12 col-lg-4">
+                        <label>Correo electrónico</label>
+                        <input class="form-control" [(ngModel)]="empresa.correo" name="correo" type="email">
+                    </div>
 
-                            <div class="col-xs-12 col-lg-4">
-                                <label>Tipo empresa
-                                    <span class="text-danger">*</span>
-                                </label>
-                                <ng-select [multiple]="false" [options]="tipoEmpresas" [(ngModel)]="tipoEmpresaSelected" required name="idTipoEmpresa">
-                                </ng-select>
-                            </div>
-                            <hr>
-                            <h5 class="col-xs-16 col-lg-12">Datos representante</h5>
-                            <div class="col-xs-16 col-lg-6">
-                                <div class="input-group" style="margin-top: 6%;">
-                                    <input type="number" class="form-control" placeholder="Nro. identificación" [(ngModel)]="identificacion" name="identificacion" />
-                                    <span class="input-group-btn">
-                                        <button (click)="onSearchCiudadano()" class="btn btn-default btn-primary" type="button">
-                                            <i class="fa fa-search"></i>
-                                        </button>
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="col-xs-16 col-lg-6">
-                                <label>Fecha de inicio<span class="text-danger">*</span></label>
-                                <input class="form-control" [(ngModel)]="empresa.fechaInicial" name="fechaInicial" type="date" />
-                            </div>
-                            <div class="col-xs-16 col-lg-6">
-                                <div class="row">
-                                    <div class="col-xs-12 col-lg-12" *ngIf='ciudadano'>
-                                        <table class="table table-bordered table-striped">
-                                            <tbody>
-                                                <tr class="odd">
-                                                    <td>
-                                                        <b>Tipo de identificación</b>
-                                                        <br> {{ ciudadano.tipoIdentificacion?.nombre }}
-                                                    </td>
-                                                    <td>
-                                                        <b>Numero de identificación</b>
-                                                        <br> {{ ciudadano.identificacion }}
-                                                    </td>
-                                                    <td>
-                                                        <b>Ciudadano</b>
-                                                        <br> {{ ciudadano.primerNombre }} {{ ciudadano.primerApellido }}
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
+                    <div class="col-xs-12 col-lg-4">
+                        <label>Tipo empresa
+                            <span class="text-danger">*</span>
+                        </label>
+                        <ng-select [multiple]="false" [options]="tipoEmpresas" [(ngModel)]="tipoEmpresaSelected"
+                            required name="idTipoEmpresa">
+                        </ng-select>
+                    </div>
+                    <hr>
+                    <h5 class="col-xs-16 col-lg-12">Datos representante</h5>
+                    <div class="col-xs-16 col-lg-6">
+                        <div class="input-group" style="margin-top: 6%;">
+                            <input type="number" class="form-control" placeholder="Nro. identificación"
+                                [(ngModel)]="identificacion" name="identificacion" required/>
+                            <span class="input-group-btn">
+                                <button (click)="onSearchCiudadano()" [disabled]="!identificacion" class="btn btn-default btn-primary" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-xs-16 col-lg-6">
+                        <label>Fecha de inicio<span class="text-danger">*</span></label>
+                        <input class="form-control" [(ngModel)]="empresa.fechaInicial" name="fechaInicial"
+                            type="date" required>
+                    </div>
+                    <div class="col-xs-16 col-lg-6">
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-12" *ngIf='ciudadano'>
+                                <table class="table table-bordered table-striped">
+                                    <tbody>
+                                        <tr class="odd">
+                                            <td>
+                                                <b>Tipo de identificación</b>
+                                                <br> {{ ciudadano.tipoIdentificacion?.nombre }}
+                                            </td>
+                                            <td>
+                                                <b>Numero de identificación</b>
+                                                <br> {{ ciudadano.identificacion }}
+                                            </td>
+                                            <td>
+                                                <b>Ciudadano</b>
+                                                <br> {{ ciudadano.primerNombre }} {{ ciudadano.primerApellido }}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
-                </form>    
-            </div>
-            <div class="card-footer">
-                <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
-                    <i class="fa fa-floppy-o"></i>
-                    Enviar
-                </button>
-                <button (click)="onCancelar()" class="btn btn-default">
-                    <i class="fa fa-times"></i>
-                    Cancelar
-                </button>
-            </div>
+                </div>
+            </form>
+        </div>
+        <div class="card-footer">
+            <button (click)="onEnviar()" [disabled]="formNew.invalid || !ciudadano" class="btn btn-primary" type="button">
+                <i class="fa fa-floppy-o"></i>
+                Enviar
+            </button>
+            <button (click)="onCancelar()" class="btn btn-default">
+                <i class="fa fa-times"></i>
+                Cancelar
+            </button>
         </div>
     </div>
 </div>

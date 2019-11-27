@@ -18,6 +18,7 @@ import { UserCfgTipoIdentificacionService } from '../../../../../services/userCf
 import { UserCiudadanoService } from '../../../../../services/userCiudadano.service';
 import { UserEmpresaService } from "../../../../../services/userEmpresa.service";
 import { PnalFuncionarioService } from '../../../../../services/pnalFuncionario.service';
+import { FroTrteSolicitudService } from 'app/services/froTrteSolicitud.service';
 import { LoginService } from '../../../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -78,6 +79,8 @@ export class EditComponent implements OnInit {
   public formApoderado = false;
   public funcionario: any = null;
   public propietarios: any = null;
+  
+  public realizoTramites = true;
 
   public tiposPropiedad = [
     { 'value': 1, 'label': "Leasing" },
@@ -127,6 +130,7 @@ constructor(
   private _FuncionarioService: PnalFuncionarioService,
   private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
   private _CiudadanoService: UserCiudadanoService,
+  private _TramiteSolicitudService: FroTrteSolicitudService,
   private _LoginService: LoginService,
   ){}
 
@@ -150,21 +154,31 @@ constructor(
             this.propietarios = response.data;
             swal.close();
 
-            //Foreach
-            this.propietarios.forEach((element: any, key: any) => {
-              this.datos.propietarios.push(
-                {
-                  'idPropietario': element.ciudadano.id,
-                  'identificacion': element.ciudadano.identificacion,
-                  'nombre': element.ciudadano.primerNombre + " " + element.ciudadano.segundoNombre,
-                  'permiso': element.permiso,
-                  'tipo': 'Ciudadano',
-                  'idApoderado': null,
-                  'apoderadoIdentificacion': null,
-                  'apoderado.nombre': null,
-                });
-            });
-            //
+            this._TramiteSolicitudService.searchByVehiculo({ 'idVehiculo': this.vehiculo.id }, token).subscribe(
+              response => {
+                if (response.code == 200) {
+                  this.realizoTramites = true;
+
+                  //Foreach
+                  this.propietarios.forEach((element: any, key: any) => {
+                    this.datos.propietarios.push(
+                      {
+                        'idPropietario': element.ciudadano.id,
+                        'identificacion': element.ciudadano.identificacion,
+                        'nombre': element.ciudadano.primerNombre + " " + element.ciudadano.segundoNombre,
+                        'permiso': element.permiso,
+                        'tipo': 'Ciudadano',
+                        'idApoderado': null,
+                        'apoderadoIdentificacion': null,
+                        'apoderado.nombre': null,
+                      });
+                  });
+                  //
+                  swal.close();
+                } else {
+                  this.realizoTramites = false;
+                }
+              });
           } else {
             this.propietarios = null;
 
@@ -512,6 +526,7 @@ constructor(
       }
     }
       
+
   }
 
   onCancelar(){
@@ -875,51 +890,66 @@ constructor(
               if(response.code == 200){
                 //para eliminar los registros anteriores
                 this.datos.idVehiculo = this.vehiculo.id;
-                this._PropietarioService.searchAndDeleteByVehiculo(this.datos, token).subscribe(
-                  response => {
-                    if (response.code == 200) {
-                      console.log("los registros se eliminaron correctamente");
-
-                      this._PropietarioService.register(this.datos, token).subscribe(
-                        response => {
-                          if (response.code == 200) {
-                            this.ready.emit(true);
-                          }
-                        },
-                        error => {
-                          this.errorMessage = <any>error;
-
-                          if (this.errorMessage != null) {
-                            console.log(this.errorMessage);
-                            alert('Error en la petición');
-                          }
-                        }
-                      );
-                    } else {
-                      swal({
-                        title: 'Error!',
-                        text: response.message,
-                        type: response.status,
-                        confirmButtonText: 'Aceptar'
-                      })
-                    }
-                  },
-                  error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                      console.log(this.errorMessage);
-                      alert('Error en la petición');
-                    }
-                  }
-                );
                 
+                if(!this.realizoTramites && this.vehiculo.tipoMatricula == 'RADICADO')
+                {
+                  this._PropietarioService.searchAndDeleteByVehiculo(this.datos, token).subscribe(
+                    response => {
+                      if (response.code == 200) {
+                        console.log("los registros se eliminaron correctamente");
+
+                        this._PropietarioService.register(this.datos, token).subscribe(
+                          response => {
+                            if (response.code == 200) {
+                              /* this.ready.emit(true); */
+                            }
+                          },
+                          error => {
+                            this.errorMessage = <any>error;
+
+                            if (this.errorMessage != null) {
+                              console.log(this.errorMessage);
+                              alert('Error en la petición');
+                            }
+                          }
+                        );
+
+
+                      } else {
+                        swal({
+                          title: 'Error!',
+                          text: response.message,
+                          type: response.status,
+                          confirmButtonText: 'Aceptar'
+                        })
+                      }
+                    },
+                    error => {
+                      this.errorMessage = <any>error;
+
+                      if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert('Error en la petición');
+                      }
+                    }
+                  );
+                  
+                  swal({
+                    title: response.title,
+                    text: response.message,
+                    type: response.status,
+                    confirmButtonText: 'Aceptar'
+                  })
+                }
+
                 swal({
                   title: response.title,
                   text: response.message,
                   type: response.status,
                   confirmButtonText: 'Aceptar'
                 })
+                
+                this.ready.emit(true);
               }else{
                 swal({
                   title: 'Error!',

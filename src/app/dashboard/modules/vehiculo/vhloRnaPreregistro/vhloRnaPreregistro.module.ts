@@ -19,6 +19,7 @@ import { UserCfgTipoIdentificacionService } from '../../../../services/userCfgTi
 import { UserCiudadanoService } from '../../../../services/userCiudadano.service';
 import { UserEmpresaService } from "../../../../services/userEmpresa.service";
 import { PnalFuncionarioService } from '../../../../services/pnalFuncionario.service';
+import { FroTrteSolicitudService } from 'app/services/froTrteSolicitud.service';
 
 import { NewComponent } from './new/new.component';
 import { EditComponent } from './edit/edit.component';
@@ -46,6 +47,7 @@ import { SelectModule } from 'angular2-select';
         UserCiudadanoService,
         UserEmpresaService,
         PnalFuncionarioService,
+        FroTrteSolicitudService
     ]
 }) 
 
