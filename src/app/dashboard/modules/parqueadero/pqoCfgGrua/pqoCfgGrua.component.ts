@@ -1,68 +1,76 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, AfterViewChecked } from '@angular/core';
+import { PqoCfgGrua } from './pqoCfgGrua.modelo';
 import { PqoCfgGruaService } from '../../../../services/pqoCfgGrua.service';
 import { LoginService } from '../../../../services/login.service';
-import { PqoCfgGrua } from './pqoCfgGrua.modelo';
 import swal from 'sweetalert2';
-import { Router } from "@angular/router";
 declare var $: any;
 
 @Component({
   selector: 'app-index',
   templateUrl: './pqoCfgGrua.component.html'
 })
-export class PqoCfgGruaComponent implements OnInit {
+export class PqoCfgGruaComponent implements OnInit, AfterViewChecked {
   public errorMessage;
-	public id;
-	public respuesta;
+
 	public gruas;
-	public formNew = false;
-	public formEdit = false;
-	public formShow = false;
-  public formIndex = true;
+  public formIndex: any;
+	public formNew: any;
+	public formEdit: any;
+	public formShow: any;
   public table:any; 
   public grua: PqoCfgGrua;
 
   constructor(
     private _GruaService: PqoCfgGruaService,
-    private _loginService: LoginService,
-    private router: Router,
+    private _LoginService: LoginService,
     ){}
     
   ngOnInit() {
     swal({
       title: 'Cargando Tabla!',
       text: 'Solo tardara unos segundos por favor espere.',
-      timer: 1500,
       onOpen: () => {
         swal.showLoading()
       }
-    }).then((result) => {
-      if (
-        // Read more about handling dismissals
-        result.dismiss === swal.DismissReason.timer
-      ) {
-      }
-    })
-    this._GruaService.index().subscribe(
-				response => {
-          this.gruas = response.data;
-          let timeoutId = setTimeout(() => {
-            this.onInitTable();
-          }, 100);
-				}, 
-				error => {
-					this.errorMessage = <any>error;
+    });
 
-					if(this.errorMessage != null){
-						console.log(this.errorMessage);
-						alert("Error en la petición");
-					}
-				}
-      );
+    this.onInitForms();
+    this.formIndex = true;
+    
+    this._GruaService.index().subscribe(
+      response => {
+        this.gruas = response.data;
+        
+        let timeoutId = setTimeout(() => {
+          this.onInitTable();
+        }, 100);
+      }, 
+      error => {
+        this.errorMessage = <any>error;
+
+        if(this.errorMessage != null){
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+  }
+
+  ngAfterViewChecked(){
+    swal.close();
+  }
+
+  onInitForms(){
+    this.formIndex = false;
+    this.formNew = false;
+    this.formEdit = false;
+    this.formShow = false;
   }
 
   onInitTable(){
     this.table = $('#dataTables-example').DataTable({
+      retrieve: true,
+      paging: false,
       responsive: true,
       pageLength: 8,
       sPaginationType: 'full_numbers',
@@ -78,28 +86,18 @@ export class PqoCfgGruaComponent implements OnInit {
   }
 
   onNew(){
-    this.formIndex = false;
-    this.formShow = false;
-    this.formEdit = false;
+    this.onInitForms();
     this.formNew = true;
-    this.table.destroy();
   }
 
   onCiudadanos(grua:any){
     this.grua = grua;
-    this.formIndex = false;
-    this.formEdit = false;
-    this.formNew = false;
+    this.onInitForms();
     this.formShow = true;
-    this.table.destroy();
   } 
 
   ready(isCreado:any){
     if(isCreado) {
-      this.formNew = false;
-      this.formEdit = false;
-      this.formShow = false;
-      this.formIndex = true;
       this.ngOnInit();
     }
   }
@@ -116,18 +114,16 @@ export class PqoCfgGruaComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.value) {
-        let token = this._loginService.getToken();
+        let token = this._LoginService.getToken();
         this._GruaService.delete(token,id).subscribe(
             response => {
                 swal({
-                      title: 'Eliminado!',
-                      text:'Registro eliminado correctamente.',
-                      type:'success',
-                      confirmButtonColor: '#15d4be',
-                    })
-                  this.table.destroy();
-                  this.respuesta= response;
-                  this.ngOnInit();
+                  title: 'Eliminado!',
+                  text:'Registro eliminado correctamente.',
+                  type:'success',
+                  confirmButtonColor: '#15d4be',
+                });
+                this.ngOnInit();
               }, 
             error => {
               this.errorMessage = <any>error;

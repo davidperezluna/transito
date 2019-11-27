@@ -47,6 +47,13 @@ export class InventoryComponent implements OnInit {
         if (response.type) {
           var fileURL = URL.createObjectURL(response);
           window.open(fileURL);
+
+          swal({
+            title: 'Perfecto!',
+            text: 'Reporte generado con éxito.',
+            type: 'success',
+            confirmButtonText: 'Aceptar'
+          });
         } else {
           swal({
             title: 'Error!',

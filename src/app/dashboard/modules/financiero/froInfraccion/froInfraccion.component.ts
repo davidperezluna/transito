@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, AfterContentInit, EventEmitter } from '@angular/core';
 import { FroInfraccion } from './froInfraccion.modelo';
 import { FroInfraccionService } from '../../../../services/froInfraccion.service';
 import { LoginService } from '../../../../services/login.service';
@@ -10,7 +10,7 @@ declare var $: any;
   templateUrl: './froInfraccion.component.html'
 })
 
-export class FroInfraccionComponent implements OnInit {
+export class FroInfraccionComponent implements OnInit, AfterContentInit {
   public errorMessage;
 	public id;
 	public infracciones;
@@ -29,35 +29,32 @@ export class FroInfraccionComponent implements OnInit {
     swal({
       title: 'Cargando Tabla!',
       text: 'Solo tardara unos segundos por favor espere.',
-      timer: 1500,
       onOpen: () => {
         swal.showLoading()
       }
-    }).then((result) => {
-      if (
-        // Read more about handling dismissals
-        result.dismiss === swal.DismissReason.timer
-      ) {
-      }
-    })
+    });
 
     this._InfraccionService.index().subscribe(
-				response => {
-          this.infracciones = response.data;
+      response => {
+        this.infracciones = response.data;
 
-          let timeoutId = setTimeout(() => {  
-            this.onInitTable();
-          }, 100);
-				}, 
-				error => {
-					this.errorMessage = <any>error;
+        let timeoutId = setTimeout(() => {  
+          this.onInitTable();
+        }, 100);
+      }, 
+      error => {
+        this.errorMessage = <any>error;
 
-					if(this.errorMessage != null){
-						console.log(this.errorMessage);
-						alert("Error en la petición");
-					}
-				}
-      );
+        if(this.errorMessage != null){
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+  }
+
+  ngAfterContentInit(){
+    swal.close();
   }
 
   onInitTable(){

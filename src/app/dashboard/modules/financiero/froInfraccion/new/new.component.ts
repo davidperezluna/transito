@@ -46,6 +46,14 @@ constructor(
   }
   
   onEnviar(){
+    swal({
+      title: 'Guardando información',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+
     let token = this._loginService.getToken();
 
 		this._InfraccionService.register(this.infraccion,token).subscribe(
