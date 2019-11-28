@@ -83,6 +83,7 @@ export class CvAudienciaComponent implements OnInit, AfterViewInit {
           this.audiencias = response.data;
           this.onInitForms();
           this.formIndex = true;
+          this.formSearch = true;
 
           swal({
             title: 'Perfecto!',
@@ -98,6 +99,7 @@ export class CvAudienciaComponent implements OnInit, AfterViewInit {
           this.audiencias = null;
           this.onInitForms();
           this.formIndex = false;
+          this.formSearch = true;
 
           swal({
             title: 'Alerta!',
