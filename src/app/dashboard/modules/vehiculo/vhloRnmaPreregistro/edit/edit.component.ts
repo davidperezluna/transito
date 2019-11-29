@@ -17,6 +17,8 @@ import { VhloCfgTipoCabinaService } from '../../../../../services/vhloCfgTipoCab
 import { VhloCfgOrigenRegistroService } from '../../../../../services/vhloCfgOrigenRegistro.service';
 import { VhloCfgSubpartidaArancelariaService } from '../../../../../services/vhloCfgSubpartidaArancelaria.service';
 import { VhloCfgEmpresaGpsService } from '../../../../../services/vhloCfgEmpresaGps.service';
+import { VhloPropietarioService } from 'app/services/vhloPropietario.service';
+import { FroTrteSolicitudService } from 'app/services/froTrteSolicitud.service';
 import { LoginService } from '../../../../../services/login.service';
 
 import { DatePipe } from '@angular/common';
@@ -93,6 +95,9 @@ export class EditComponent implements OnInit {
 
   public formApoderado = false;
   public funcionario: any = null;
+  public propietarios: any = null;
+
+  public realizoTramites = true;
 
   public tiposPropiedad = [
     { 'value': 1, 'label': "Leasing" },
@@ -124,6 +129,7 @@ export class EditComponent implements OnInit {
   };
 
   constructor(
+    private _PropietarioService: VhloPropietarioService,
     private _MarcaService: VhloCfgMarcaService,
     private _LineaService: VhloCfgLineaService,
     private _ClaseService: VhloCfgClaseService,
@@ -142,6 +148,7 @@ export class EditComponent implements OnInit {
     private _OrigenRegistroService: VhloCfgOrigenRegistroService,
     private _SubpartidaArancelariaService: VhloCfgSubpartidaArancelariaService,
     private _EmpresaGpsService: VhloCfgEmpresaGpsService,
+    private _TramiteSolicitudService: FroTrteSolicitudService,
     private _LoginService: LoginService,
   ){}
 
@@ -157,6 +164,61 @@ export class EditComponent implements OnInit {
 
     let token = this._LoginService.getToken();
     let identity = this._LoginService.getIdentity();
+
+    //Traer propietarios por vehiculo
+    if (this.maquinaria.vehiculo.tipoMatricula == 'RADICADO') {
+      this._PropietarioService.searchByVehiculo({ 'idVehiculo': this.maquinaria.vehiculo.id }, token).subscribe(
+        response => {
+          if (response.code == 200) {
+            this.propietarios = response.data;
+
+            //Foreach
+            this.propietarios.forEach((element: any, key: any) => {
+              this.datos.propietarios.push(
+                {
+                  'idPropietario': element.ciudadano.id,
+                  'identificacion': element.ciudadano.identificacion,
+                  'nombre': element.ciudadano.primerNombre + " " + element.ciudadano.segundoNombre,
+                  'permiso': element.permiso,
+                  'tipo': 'Ciudadano',
+                  'idApoderado': null,
+                  'apoderadoIdentificacion': null,
+                  'apoderado.nombre': null,
+                });
+            });
+            //
+
+            this._TramiteSolicitudService.searchByVehiculo({ 'idVehiculo': this.maquinaria.vehiculo.id }, token).subscribe(
+              response => {
+                if (response.code == 200) {
+                  this.realizoTramites = true;
+                  swal.close();
+                } else {
+                  this.realizoTramites = false;
+                  swal.close();
+                }
+              });
+          } else {
+            this.propietarios = null;
+
+            swal({
+              title: 'Atención!',
+              text: response.message,
+              type: response.status,
+              confirmButtonText: 'Aceptar'
+            });
+          }
+
+          error => {
+            this.errorMessage = <any>error;
+            if (this.errorMessage != null) {
+              console.log(this.errorMessage);
+              alert("Error en la petición");
+            }
+          }
+        }
+      );
+    }
 
     setTimeout(() => {
       this.onChangedTipoMaquinaria(this.maquinaria.tipoMaquinaria.id);
