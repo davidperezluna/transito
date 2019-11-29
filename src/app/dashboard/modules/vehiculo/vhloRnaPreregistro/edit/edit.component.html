@@ -161,15 +161,13 @@
                                 name="numeroEjes">
                         </div>
 
-                        <div class="col-xs-12 col-lg-3"
-                            *ngIf='vehiculo.idModalidadTransporte == 1 || vehiculo.idModalidadTransporte == 3'>
+                        <div class="col-xs-12 col-lg-3" *ngIf='modalidadTransporteSelected == 1 || modalidadTransporteSelected == 3'>
                             <label>Numero pasajeros</label>
                             <input class="form-control" type="text" type="text" [(ngModel)]="vehiculo.numeroPasajeros"
                                 name="numeroPasajeros">
                         </div>
 
-                        <div class="col-xs-12 col-lg-3"
-                            *ngIf='vehiculo.idModalidadTransporte == 2 || vehiculo.idModalidadTransporte == 3'>
+                        <div class="col-xs-12 col-lg-3" *ngIf='modalidadTransporteSelected == 2 || modalidadTransporteSelected == 3'>
                             <label>Capacidad carga</label>
                             <input class="form-control" type="text" type="text" [(ngModel)]="vehiculo.capacidadCarga"
                                 name="capacidadCarga">
@@ -263,7 +261,7 @@
                                     <b class="text-danger">*</b>
                                 </span>
                             </label>
-                            <ng-select [multiple]="false" [disabled]="!realizoTramites" [options]="tiposPropiedad" [(ngModel)]="datos.tipoPropiedad"
+                            <ng-select [multiple]="false" [disabled]="realizoTramites" [options]="tiposPropiedad" [(ngModel)]="datos.tipoPropiedad"
                                 name="tipoPropiedad" required>
                             </ng-select>
                         </div>
@@ -272,9 +270,9 @@
 
                     <!-- <div class="row" *ngIf="datos.tipoPropiedad && (vehiculo.tipoMatricula == 'RADICADO' || vehiculo.tipoMatricula == 'IMPORTACION' || vehiculo.tipoMatricula == 'MATRICULA') "> -->
                     <div class="row" *ngIf="datos.tipoPropiedad && vehiculo.tipoMatricula == 'RADICADO'">
-                        <div *ngIf="!realizoTramites">
+                        <!-- <div class="col-xs-12 col-lg-12" *ngIf="!realizoTramites"> -->
                             <!--Cuando es de tipo propio -->
-                            <div class="col-xs-12 col-lg-12">
+                            <div class="col-xs-12 col-lg-12" *ngIf="!realizoTramites">
                                 <br>
                                 <div class="custom-control custom-checkbox">
                                     <input [(ngModel)]="datos.solidario" name="solidario" type="checkbox"
@@ -284,7 +282,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-xs-8 col-lg-6">
+                            <div class="col-xs-12 col-lg-6" *ngIf="!realizoTramites">
                                 <label>Tipo de identificación <b class="text-danger">*</b></label>
                                 <ng-select [multiple]="false" [options]="tiposIdentificacion"
                                     [(ngModel)]="tipoIdentificacionSelected" name="idTipoIdentificacion" required>
@@ -292,13 +290,13 @@
                             </div>
 
                             <!--tipo identificacion ciudadano -->
-                            <div class="col-xs-8 col-lg-6" *ngIf="tipoIdentificacionSelected != 4">
+                            <div class="col-xs-12 col-lg-6" *ngIf="tipoIdentificacionSelected != 4 &&!realizoTramites">
                                 <label>Identificación</label>
                                 <div class="input-group">
                                     <input type="number" class="form-control" placeholder="Identificacion"
                                         [(ngModel)]="identificacion" name="identificacion" required />
                                     <span class="input-group-btn">
-                                        <button (click)="onSearchCiudadano()" class="btn btn-default" type="button">
+                                        <button (click)="onSearchCiudadano()" class="btn btn-default" [disabled]="!tipoIdentificacionSelected || !identificacion" type="button">
                                             <i class="fa fa-search"></i>
                                         </button>
                                     </span>
@@ -306,7 +304,7 @@
                             </div>
 
                             <!--tipo identificacion nit -->
-                            <div class="col-xs-8 col-lg-6" *ngIf="tipoIdentificacionSelected == 4">
+                            <div class="col-xs-12 col-lg-6" *ngIf="tipoIdentificacionSelected == 4 && !realizoTramites">
                                 <label>NIT</label>
                                 <div class="input-group">
                                     <input type="number" class="form-control" placeholder="NIT" [(ngModel)]="nit" name="nit"
@@ -319,16 +317,16 @@
                                 </div>
                             </div>
 
-                            <div class="col-xs-12 col-lg-12" *ngIf="ciudadano && vehiculo.tipoMatricula == 'RADICADO'">
+                            <div class="col-xs-12 col-lg-12" *ngIf="ciudadano && vehiculo.tipoMatricula == 'RADICADO' && !realizoTramites">
                                 <div class="row">
-                                    <div class="col-xs-12 col-lg-12">
+                                    <!-- <div class="col-xs-12 col-lg-12">
                                         <div class="custom-control custom-checkbox">
                                             <input [(ngModel)]="datos.solidario" name="solidario" type="checkbox"
                                                 class="custom-control-input" id="solidario" checked="">
                                             <label class="custom-control-label" for="solidario">¿Tiene permisos para hacer
                                                 tramites?</label>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <table class="table table-bordered table-striped" id="dataTables-example">
                                         <tbody>
                                             <tr>
@@ -360,7 +358,7 @@
                                     </table>
                                 </div>
                             </div>
-                        </div>
+                        <!-- </div> -->
 
                         <div class="col-xs-12 col-lg-12" *ngIf="empresa && vehiculo.tipoMatricula == 'RADICADO'  && !realizoTramites">
                             <!-- Empresa -->
@@ -410,7 +408,7 @@
                             </div>
                         </div>
 
-                        <div class="col-xs-12 col-lg-12" *ngIf="datos.propietarios && datos.propietarios.length > 0 && vehiculo.tipoMatricula == 'RADICADO'">
+                        <div style="margin-top: 5%" class="col-xs-12 col-lg-12" *ngIf="datos.propietarios && datos.propietarios.length > 0 && vehiculo.tipoMatricula == 'RADICADO'">
                             <table class="table table-bordered table-striped" id="dataTables-example">
                                 <br>
                                 <thead>

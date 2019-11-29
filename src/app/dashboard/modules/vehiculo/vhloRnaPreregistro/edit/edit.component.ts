@@ -30,42 +30,42 @@ import swal from 'sweetalert2';
 
 export class EditComponent implements OnInit {
   @Output() ready = new EventEmitter<any>();
-  @Input() vehiculo:any = null;
-  public errorMessage:any;
+  @Input() vehiculo: any = null;
+  public errorMessage: any;
 
-  public municipios:any;
-  public lineas:any;
-  public clases:any;
-  public carrocerias:any;
-  public servicios:any;
-  public colores:any;
-  public marcas:any;
-  public combustibles:any;
+  public municipios: any;
+  public lineas: any;
+  public clases: any;
+  public carrocerias: any;
+  public servicios: any;
+  public colores: any;
+  public marcas: any;
+  public combustibles: any;
   public radiosAccion: any;
-  public modalidadesTransporte:any;
-  public organismosTransito:any;
-  public organismosTransitoNacional:any;
+  public modalidadesTransporte: any;
+  public organismosTransito: any;
+  public organismosTransitoNacional: any;
 
-  public fechaFactura:any;
-  public fechaManifiesto:any;
-  public municipioSelected:any;
-  public lineaSelected:any;
-  public claseSelected:any;
-  public carroceriaSelected:any;
-  public servicioSelected:any;
-  public colorSelected:any;
-  public marcaSelected:any;
-  public combustibleSelected:any;
-  public radioAccionSelected:any;
-  public modalidadTransporteSelected:any;
-  public sedeOperativaSelected:any;
+  public fechaFactura: any;
+  public fechaManifiesto: any;
+  public municipioSelected: any;
+  public lineaSelected: any;
+  public claseSelected: any;
+  public carroceriaSelected: any;
+  public servicioSelected: any;
+  public colorSelected: any;
+  public marcaSelected: any;
+  public combustibleSelected: any;
+  public radioAccionSelected: any;
+  public modalidadTransporteSelected: any;
+  public sedeOperativaSelected: any;
 
-  public tipoIdentificacionSelected:any;
+  public tipoIdentificacionSelected: any;
 
   public ciudadano: any = null;
   public apoderado: any = null;
   public propietarioSelected: any;
-  public apoderadoSelected:any;
+  public apoderadoSelected: any;
 
   public empresa: any = null;
   public empresaTransporte: any = null;
@@ -79,7 +79,7 @@ export class EditComponent implements OnInit {
   public formApoderado = false;
   public funcionario: any = null;
   public propietarios: any = null;
-  
+
   public realizoTramites = true;
 
   public tiposPropiedad = [
@@ -112,27 +112,27 @@ export class EditComponent implements OnInit {
     'idOrganismoTransito': null,
   };
 
-constructor(
-  private _PropietarioService: VhloPropietarioService,
-  private _PreregistroService: VhloRnaPreregistroService,
-  private _MunicipioService: CfgMunicipioService,
-  private _LineaService: VhloCfgLineaService,
-  private _ClaseService: VhloCfgClaseService,
-  private _CarroceriaService: VhloCfgCarroceriaService,
-  private _ServicioService: VhloCfgServicioService,
-  private _MarcaService: VhloCfgMarcaService,
-  private _ColorService: VhloCfgColorService,
-  private _CombustibleService: VhloCfgCombustibleService,
-  private _VehiculoService: VhloVehiculoService,
-  private _OrganismoTransitoService: CfgOrganismoTransitoService,
-  private _RadioAccionService: VhloCfgRadioAccionService,
-  private _ModalidadTransporteService: VhloCfgModalidadTransporteService,
-  private _FuncionarioService: PnalFuncionarioService,
-  private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
-  private _CiudadanoService: UserCiudadanoService,
-  private _TramiteSolicitudService: FroTrteSolicitudService,
-  private _LoginService: LoginService,
-  ){}
+  constructor(
+    private _PropietarioService: VhloPropietarioService,
+    private _PreregistroService: VhloRnaPreregistroService,
+    private _MunicipioService: CfgMunicipioService,
+    private _LineaService: VhloCfgLineaService,
+    private _ClaseService: VhloCfgClaseService,
+    private _CarroceriaService: VhloCfgCarroceriaService,
+    private _ServicioService: VhloCfgServicioService,
+    private _MarcaService: VhloCfgMarcaService,
+    private _ColorService: VhloCfgColorService,
+    private _CombustibleService: VhloCfgCombustibleService,
+    private _VehiculoService: VhloVehiculoService,
+    private _OrganismoTransitoService: CfgOrganismoTransitoService,
+    private _RadioAccionService: VhloCfgRadioAccionService,
+    private _ModalidadTransporteService: VhloCfgModalidadTransporteService,
+    private _FuncionarioService: PnalFuncionarioService,
+    private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
+    private _CiudadanoService: UserCiudadanoService,
+    private _TramiteSolicitudService: FroTrteSolicitudService,
+    private _LoginService: LoginService,
+  ) { }
 
   ngOnInit() {
     swal({
@@ -147,36 +147,36 @@ constructor(
     let identity = this._LoginService.getIdentity();
 
     //Traer propietarios por vehiculo
-    if(this.vehiculo.tipoMatricula == 'RADICADO'){ 
+    if (this.vehiculo.tipoMatricula == 'RADICADO') {
       this._PropietarioService.searchByVehiculo({ 'idVehiculo': this.vehiculo.id }, token).subscribe(
         response => {
           if (response.code == 200) {
             this.propietarios = response.data;
-            swal.close();
+
+            //Foreach
+            this.propietarios.forEach((element: any, key: any) => {
+              this.datos.propietarios.push(
+                {
+                  'idPropietario': element.ciudadano.id,
+                  'identificacion': element.ciudadano.identificacion,
+                  'nombre': element.ciudadano.primerNombre + " " + element.ciudadano.segundoNombre,
+                  'permiso': element.permiso,
+                  'tipo': 'Ciudadano',
+                  'idApoderado': null,
+                  'apoderadoIdentificacion': null,
+                  'apoderado.nombre': null,
+                });
+            });
+            //
 
             this._TramiteSolicitudService.searchByVehiculo({ 'idVehiculo': this.vehiculo.id }, token).subscribe(
               response => {
                 if (response.code == 200) {
                   this.realizoTramites = true;
-
-                  //Foreach
-                  this.propietarios.forEach((element: any, key: any) => {
-                    this.datos.propietarios.push(
-                      {
-                        'idPropietario': element.ciudadano.id,
-                        'identificacion': element.ciudadano.identificacion,
-                        'nombre': element.ciudadano.primerNombre + " " + element.ciudadano.segundoNombre,
-                        'permiso': element.permiso,
-                        'tipo': 'Ciudadano',
-                        'idApoderado': null,
-                        'apoderadoIdentificacion': null,
-                        'apoderado.nombre': null,
-                      });
-                  });
-                  //
                   swal.close();
                 } else {
                   this.realizoTramites = false;
+                  swal.close();
                 }
               });
           } else {
@@ -185,7 +185,7 @@ constructor(
             swal({
               title: 'Atención!',
               text: response.message,
-              type: 'warning',
+              type: response.status,
               confirmButtonText: 'Aceptar'
             });
           }
@@ -209,12 +209,12 @@ constructor(
 
     var date = new Date();
 
-    if(this.vehiculo.fechaFactura) {
+    if (this.vehiculo.fechaFactura) {
       date.setTime(this.vehiculo.fechaFactura.timestamp * 1000);
 
       this.vehiculo.fechaFactura = datePiper.transform(
         date, 'yyyy-MM-dd'
-      ); 
+      );
     }
 
     if (this.vehiculo.fechaManifiesto) {
@@ -232,7 +232,7 @@ constructor(
       error => {
         this.errorMessage = <any>error;
 
-        if(this.errorMessage != null){
+        if (this.errorMessage != null) {
           console.log(this.errorMessage);
           alert('Error en la petición');
         }
@@ -240,63 +240,63 @@ constructor(
     );
 
     this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
-      response => { 
-        if(response.code == 200){
+      response => {
+        if (response.code == 200) {
           this.funcionario = response.data;
           this.vehiculo.idOrganismoTransito = response.data.organismoTransito.id;
-        }else{
+        } else {
           this.funcionario = null;
-          this._FuncionarioService.searchEmpresa({ 'identificacion': identity.identificacion },token).subscribe(
+          this._FuncionarioService.searchEmpresa({ 'identificacion': identity.identificacion }, token).subscribe(
             response => {
-              if(response.code == 200){
+              if (response.code == 200) {
               }
-            }, 
+            },
             error => {
               this.errorMessage = <any>error;
-      
-              if(this.errorMessage != null){
+
+              if (this.errorMessage != null) {
                 console.log(this.errorMessage);
                 alert("Error en la petición");
               }
             }
           );
         }
-      error => {
+        error => {
           this.errorMessage = <any>error;
-          if(this.errorMessage != null){
-            console.log(this.errorMessage); 
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
             alert('Error en la petición');
           }
         }
       }
     );
-    
+
     this._LineaService.select().subscribe(
       response => {
         this.lineas = response;
         setTimeout(() => {
-            this.lineaSelected = [this.vehiculo.linea.id]; 
-            this._MarcaService.select().subscribe(
-              response => {
-                this.marcas = response;
-                setTimeout(() => {
-                    this.marcaSelected = [this.vehiculo.linea.marca.id];
-                })
-              }, 
-              error => { 
-                this.errorMessage = <any>error;
-        
-                if(this.errorMessage != null){
-                  console.log(this.errorMessage);
-                  alert("Error en la petición");
-                }
+          this.lineaSelected = [this.vehiculo.linea.id];
+          this._MarcaService.select().subscribe(
+            response => {
+              this.marcas = response;
+              setTimeout(() => {
+                this.marcaSelected = [this.vehiculo.linea.marca.id];
+              })
+            },
+            error => {
+              this.errorMessage = <any>error;
+
+              if (this.errorMessage != null) {
+                console.log(this.errorMessage);
+                alert("Error en la petición");
               }
-            );
+            }
+          );
         });
-      }, 
-      error => { 
+      },
+      error => {
         this.errorMessage = <any>error;
-        if(this.errorMessage != null){
+        if (this.errorMessage != null) {
           console.log(this.errorMessage);
           alert("Error en la petición");
         }
@@ -307,13 +307,13 @@ constructor(
       response => {
         this.clases = response;
         setTimeout(() => {
-            this.claseSelected = [this.vehiculo.clase.id];
+          this.claseSelected = [this.vehiculo.clase.id];
         });
-      }, 
+      },
       error => {
         this.errorMessage = <any>error;
 
-        if(this.errorMessage != null){
+        if (this.errorMessage != null) {
           console.log(this.errorMessage);
           alert("Error en la petición");
         }
@@ -329,10 +329,10 @@ constructor(
             this.carroceriaSelected = [this.vehiculo.carroceria.id];
           }
         });
-      }, 
+      },
       error => {
         this.errorMessage = <any>error;
-        if(this.errorMessage != null){
+        if (this.errorMessage != null) {
           console.log(this.errorMessage);
           alert("Error en la petición");
         }
@@ -346,11 +346,11 @@ constructor(
             this.servicioSelected = [this.vehiculo.servicio.codigo];
           }
         });
-      }, 
+      },
       error => {
         this.errorMessage = <any>error;
 
-        if(this.errorMessage != null){
+        if (this.errorMessage != null) {
           console.log(this.errorMessage);
           alert("Error en la petición");
         }
@@ -365,10 +365,10 @@ constructor(
             this.colorSelected = [this.vehiculo.color.id];
           }
         });
-      },  
+      },
       error => {
         this.errorMessage = <any>error;
-        if(this.errorMessage != null){
+        if (this.errorMessage != null) {
           console.log(this.errorMessage);
           alert("Error en la petición");
         }
@@ -383,10 +383,10 @@ constructor(
             this.combustibleSelected = [this.vehiculo.combustible.id];
           }
         });
-      },  
+      },
       error => {
         this.errorMessage = <any>error;
-        if(this.errorMessage != null){
+        if (this.errorMessage != null) {
           console.log(this.errorMessage);
           alert("Error en la petición");
         }
@@ -404,11 +404,11 @@ constructor(
             }
           });
         }
-      }, 
+      },
       error => {
         this.errorMessage = <any>error;
 
-        if(this.errorMessage != null){
+        if (this.errorMessage != null) {
           console.log(this.errorMessage);
           alert("Error en la petición");
         }
@@ -424,11 +424,11 @@ constructor(
             this.radicado.idOrganismoTransito = [this.vehiculo.organismoTransitoRadicado.id];
           });
         }
-      }, 
+      },
       error => {
         this.errorMessage = <any>error;
 
-        if(this.errorMessage != null){
+        if (this.errorMessage != null) {
           console.log(this.errorMessage);
           alert("Error en la petición");
         }
@@ -441,14 +441,14 @@ constructor(
 
         if (this.vehiculo.municipio) {
           setTimeout(() => {
-              this.municipioSelected = [this.vehiculo.municipio.id];
+            this.municipioSelected = [this.vehiculo.municipio.id];
           });
         }
-      }, 
+      },
       error => {
         this.errorMessage = <any>error;
 
-        if(this.errorMessage != null){
+        if (this.errorMessage != null) {
           console.log(this.errorMessage);
           alert("Error en la petición");
         }
@@ -460,36 +460,36 @@ constructor(
         this.radiosAccion = response;
         setTimeout(() => {
           if (this.vehiculo.radioAccion) {
-              this.radioAccionSelected = [this.vehiculo.radioAccion.id];
-            }
+            this.radioAccionSelected = [this.vehiculo.radioAccion.id];
+          }
         });
-      }, 
+      },
       error => {
         this.errorMessage = <any>error;
 
-        if(this.errorMessage != null){
+        if (this.errorMessage != null) {
           console.log(this.errorMessage);
           alert("Error en la petición");
         }
       }
     );
-    
+
     this._ModalidadTransporteService.select().subscribe(
       response => {
         this.modalidadesTransporte = response;
 
         if (this.vehiculo.modalidadTransporte) {
           setTimeout(() => {
-              this.modalidadTransporteSelected = [this.vehiculo.modalidadTransporte.id];
+            this.modalidadTransporteSelected = [this.vehiculo.modalidadTransporte.id];
           });
         }
 
         swal.close();
-      }, 
+      },
       error => {
         this.errorMessage = <any>error;
 
-        if(this.errorMessage != null){
+        if (this.errorMessage != null) {
           console.log(this.errorMessage);
           alert("Error en la petición");
         }
@@ -513,57 +513,37 @@ constructor(
     this.radicado.empresaEnvio = this.vehiculo.empresaEnvioRadicado;
     this.radicado.numeroLicencia = this.datos.numeroLicencia;
 
-    if(this.vehiculo.pignorado) {
+    if (this.vehiculo.pignorado) {
       this.datos.tipoPropiedad = [1];
     } else {
       this.datos.tipoPropiedad = [2];
     }
 
     if (this.vehiculo.servicio) {
-      if(this.vehiculo.servicio.id = 2 && this.vehiculo.empresa != null){
+      if (this.vehiculo.servicio.id = 2 && this.vehiculo.empresa != null) {
         this.nitEmpresaTransporte = this.vehiculo.empresa.nit;
         this.onSearchEmpresaTransporte();
       }
     }
-      
+
 
   }
 
-  onCancelar(){
+  onCancelar() {
     this.ready.emit(true);
   }
 
-  onChangedMarca(e){
+  onChangedMarca(e) {
     if (e) {
       let token = this._LoginService.getToken()
-        this._LineaService.selectByMarca({'idMarca':e}, token).subscribe(
-          response => {
-            this.lineas = response;
-          }, 
-          error => { 
-            this.errorMessage = <any>error;
-    
-            if(this.errorMessage != null){
-              console.log(this.errorMessage);
-              alert("Error en la petición");
-            }
-          }
-        );
-    }
-  }
-
-  onChangedClase(e){
-    if (e) {
-      let token = this._LoginService.getToken()
-
-      this._CarroceriaService.selectByClase({'idClase':e}, token).subscribe(
+      this._LineaService.selectByMarca({ 'idMarca': e }, token).subscribe(
         response => {
-          this.carrocerias = response;
-        }, 
-        error => { 
+          this.lineas = response;
+        },
+        error => {
           this.errorMessage = <any>error;
-  
-          if(this.errorMessage != null){
+
+          if (this.errorMessage != null) {
             console.log(this.errorMessage);
             alert("Error en la petición");
           }
@@ -572,7 +552,27 @@ constructor(
     }
   }
 
-  onUpdate(){
+  onChangedClase(e) {
+    if (e) {
+      let token = this._LoginService.getToken()
+
+      this._CarroceriaService.selectByClase({ 'idClase': e }, token).subscribe(
+        response => {
+          this.carrocerias = response;
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+    }
+  }
+
+  onUpdate() {
     this.vehiculo.vin = this.vehiculo.chasis;
     this.vehiculo.serie = this.vehiculo.chasis;
   }
@@ -856,7 +856,7 @@ constructor(
     this.formApoderado = false;
   }
 
-  onEnviar(){
+  onEnviar() {
     let token = this._LoginService.getToken();
     this.vehiculo.idLinea = this.lineaSelected;
     this.vehiculo.idClase = this.claseSelected;
@@ -868,79 +868,70 @@ constructor(
     this.vehiculo.idRadioAccion = this.radioAccionSelected;
     this.vehiculo.idModalidadTransporte = this.modalidadTransporteSelected;
     this.vehiculo.idEmpresa = this.empresaTransporte.id;
-     
+
     var html = 'los datos del Automotor seran editados !<br>';
-   
-   swal({
+
+    swal({
       title: 'Actualización de automotor!',
       type: 'warning',
-      html:html,
+      html: html,
       showCancelButton: true,
       focusConfirm: false,
       confirmButtonText:
         '<i class="fa fa-thumbs-up"></i> Editar!',
       confirmButtonAriaLabel: 'Thumbs up, great!',
       cancelButtonText:
-      '<i class="fa fa-thumbs-down"></i> No editar',
+        '<i class="fa fa-thumbs-down"></i> No editar',
       cancelButtonAriaLabel: 'Thumbs down',
     }).then((result) => {
-        if (result.value) {
-          this._VehiculoService.edit({ 'vehiculo': this.vehiculo, 'radicado': this.radicado }, token).subscribe(
-            response => {
-              if(response.code == 200){
-                //para eliminar los registros anteriores
-                this.datos.idVehiculo = this.vehiculo.id;
-                
-                if(!this.realizoTramites && this.vehiculo.tipoMatricula == 'RADICADO')
-                {
-                  this._PropietarioService.searchAndDeleteByVehiculo(this.datos, token).subscribe(
-                    response => {
-                      if (response.code == 200) {
-                        console.log("los registros se eliminaron correctamente");
+      if (result.value) {
+        this._VehiculoService.edit({ 'vehiculo': this.vehiculo, 'radicado': this.radicado }, token).subscribe(
+          response => {
+            if (response.code == 200) {
+              //para eliminar los registros anteriores
+              this.datos.idVehiculo = this.vehiculo.id;
 
-                        this._PropietarioService.register(this.datos, token).subscribe(
-                          response => {
-                            if (response.code == 200) {
-                              /* this.ready.emit(true); */
-                            }
-                          },
-                          error => {
-                            this.errorMessage = <any>error;
+              if (!this.realizoTramites && this.vehiculo.tipoMatricula == 'RADICADO') {
+                this._PropietarioService.searchAndDeleteByVehiculo(this.datos, token).subscribe(
+                  response => {
+                    if (response.code == 200) {
+                      console.log("los registros se eliminaron correctamente");
 
-                            if (this.errorMessage != null) {
-                              console.log(this.errorMessage);
-                              alert('Error en la petición');
-                            }
+                      this._PropietarioService.register(this.datos, token).subscribe(
+                        response => {
+                          if (response.code == 200) {
+                            /* this.ready.emit(true); */
                           }
-                        );
+                        },
+                        error => {
+                          this.errorMessage = <any>error;
+
+                          if (this.errorMessage != null) {
+                            console.log(this.errorMessage);
+                            alert('Error en la petición');
+                          }
+                        }
+                      );
 
 
-                      } else {
-                        swal({
-                          title: 'Error!',
-                          text: response.message,
-                          type: response.status,
-                          confirmButtonText: 'Aceptar'
-                        })
-                      }
-                    },
-                    error => {
-                      this.errorMessage = <any>error;
-
-                      if (this.errorMessage != null) {
-                        console.log(this.errorMessage);
-                        alert('Error en la petición');
-                      }
+                    } else {
+                      swal({
+                        title: 'Error!',
+                        text: response.message,
+                        type: response.status,
+                        confirmButtonText: 'Aceptar'
+                      })
                     }
-                  );
-                  
-                  swal({
-                    title: response.title,
-                    text: response.message,
-                    type: response.status,
-                    confirmButtonText: 'Aceptar'
-                  })
-                }
+                  },
+                  error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                      console.log(this.errorMessage);
+                      alert('Error en la petición');
+                    }
+                  }
+                );
 
                 swal({
                   title: response.title,
@@ -948,53 +939,60 @@ constructor(
                   type: response.status,
                   confirmButtonText: 'Aceptar'
                 })
-                
-                this.ready.emit(true);
-              }else{
-                swal({
-                  title: 'Error!',
-                  text: response.message,
-                  type: response.status,
-                  confirmButtonText: 'Aceptar'
-                })
               }
-            error => {
-                this.errorMessage = <any>error;
 
-                if(this.errorMessage != null){
-                  console.log(this.errorMessage);
-                  alert("Error en la petición");
-                }
+              swal({
+                title: response.title,
+                text: response.message,
+                type: response.status,
+                confirmButtonText: 'Aceptar'
+              })
+
+              this.ready.emit(true);
+            } else {
+              swal({
+                title: 'Error!',
+                text: response.message,
+                type: response.status,
+                confirmButtonText: 'Aceptar'
+              })
+            }
+            error => {
+              this.errorMessage = <any>error;
+
+              if (this.errorMessage != null) {
+                console.log(this.errorMessage);
+                alert("Error en la petición");
               }
+            }
 
           }
-        ); 
-      } else if (result.dismiss === swal.DismissReason.cancel) 
-      {}
+        );
+      } else if (result.dismiss === swal.DismissReason.cancel) { }
     })
   }
 
-  changedDepartamento(e){
+  changedDepartamento(e) {
     if (this.marcaSelected) {
       let token = this._LoginService.getToken()
-        this._LineaService.selectByMarca(this.marcaSelected, token).subscribe(
-          response => {
-            console.log(response.data[0]);
-            if (response.data[0] != null) {
-              this.lineas = response.data;
-            }else{
-              this.lineas = [];
-            }
-          }, 
-          error => { 
-            this.errorMessage = <any>error;
-    
-            if(this.errorMessage != null){
-              console.log(this.errorMessage);
-              alert("Error en la petición");
-            }
+      this._LineaService.selectByMarca(this.marcaSelected, token).subscribe(
+        response => {
+          console.log(response.data[0]);
+          if (response.data[0] != null) {
+            this.lineas = response.data;
+          } else {
+            this.lineas = [];
           }
-        );
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
     }
   }
 }
