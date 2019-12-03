@@ -8,7 +8,6 @@ export class VhloRegistroRemolque{
 		public pesoVacio: string,
 		public referencia: string,
 		public numeroFth: string,
-		/* public numeroRunt: string, */
 		public modelo: string,
 		public placa: string,
 		public serie: string,
@@ -17,8 +16,6 @@ export class VhloRegistroRemolque{
 		public numeroFactura:string,
 		public fechaFactura:string,
 		public valor:string,
-		public idOrigenRegistro: string,
-		public idCondicionIngreso: string,
 		public idCarroceria: number,
 		public idMarca: number,
 		public idLinea: number,

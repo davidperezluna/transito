@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter , AfterViewInit} from '@angular/core';
 import { VhloRegistroRemolque } from './vhloRnrsPreregistro.modelo';
 import { VhloRemolqueService } from '../../../../services/vhloRemolque.service';
 import { LoginService } from '../../../../services/login.service';
@@ -11,10 +11,8 @@ import swal from 'sweetalert2';
   templateUrl: './vhloRnrsPreregistro.component.html'
 })
 
-export class VhloRnrsPreregistroComponent implements OnInit {
+export class VhloRnrsPreregistroComponent implements OnInit, AfterViewInit {
   public errorMessage;
-
-  public remolques;
 
   public formSearch: any;
   public formIndex: any;
@@ -22,13 +20,12 @@ export class VhloRnrsPreregistroComponent implements OnInit {
   public formEdit: any;
 
   public table:any;
-
+  
+  public remolqueEncontrado:any;
+  
   public remolque: VhloRegistroRemolque;
-
-  public search = {
-    'filtro': null,
-    'idModulo': 4,
-  }
+  
+  public filtro:any;
 
   constructor(
     private _RemolqueService: VhloRemolqueService,
@@ -38,6 +35,10 @@ export class VhloRnrsPreregistroComponent implements OnInit {
   ngOnInit() {
     this.onInitForms();
     this.formSearch = true;
+  }
+
+  ngAfterViewInit() {
+    swal.close();
   }
 
   onInitForms() {
@@ -50,6 +51,8 @@ export class VhloRnrsPreregistroComponent implements OnInit {
   onInitTable(){
     this.table = $('#dataTables-example').DataTable({
       responsive: true,
+      retrieve: true,
+      paging: false,
       pageLength: 8,
       sPaginationType: 'full_numbers',
       oLanguage: {
@@ -64,6 +67,8 @@ export class VhloRnrsPreregistroComponent implements OnInit {
   }
 
   onSearch() {
+    let token = this._LoginService.getToken();
+
     this.onInitForms();
 
     swal({
@@ -76,15 +81,36 @@ export class VhloRnrsPreregistroComponent implements OnInit {
       }
     });
 
-    this._RemolqueService.index().subscribe(
+    this._RemolqueService.searhByFilter({ 'filtro': this.filtro }, token).subscribe(
       response => {
-        this.remolques = response.data;
+        if (response.code == 200) {
+          this.remolqueEncontrado = response.data;
 
-        let timeoutId = setTimeout(() => {
-          this.onInitTable();
+          swal({
+            title: response.title,
+            text: response.message,
+            type: response.status,
+            confirmButtonText: 'Aceptar'
+          });
+
+          this.onInitForms();
+          this.formSearch = true;
           this.formIndex = true;
-          swal.close();
-        }, 100);
+
+          let timeoutId = setTimeout(() => {
+            this.onInitTable();
+            swal.close();
+          }, 200);
+        } else {
+          this.formSearch = true;
+
+          swal({
+            title: response.title,
+            text: response.message,
+            type: response.status,
+            confirmButtonText: 'Aceptar'
+          });
+        }
       },
       error => {
         this.errorMessage = <any>error;
@@ -100,9 +126,10 @@ export class VhloRnrsPreregistroComponent implements OnInit {
   onNew() {
     this.onInitForms();
 
+    this.formSearch = true;
     this.formNew = true;
   }
-
+  
   onEdit(remolque: any) {
     this.onInitForms();
     this.remolque = remolque;
@@ -110,11 +137,12 @@ export class VhloRnrsPreregistroComponent implements OnInit {
   }
   
   ready(isCreado:any){
-      if(isCreado) {
-        this.formNew = false;
-        this.formIndex = true;
-        this.ngOnInit();
-      }
+    if(isCreado) {
+      this.ngOnInit();
+      this.formSearch = true;
+      this.formIndex = true;
+      this.onSearch();
+    }
   }
 
   onDelete(id:any){

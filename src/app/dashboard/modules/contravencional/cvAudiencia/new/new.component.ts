@@ -1,9 +1,10 @@
-import { Component, OnInit, AfterViewInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Output, Input, EventEmitter } from '@angular/core';
 import { CvAudiencia } from '../cvAudiencia.modelo';
 import { CvAudienciaService } from '../../../../../services/cvAudiencia.service';
 import { CvCdoComparendoService } from '../../../../../services/cvCdoComparendo.service';
 import { CvAuCfgTipoService } from '../../../../../services/cvAuCfgTipo.service';
 import { UserCiudadanoService } from '../../../../../services/userCiudadano.service';
+import { DatePipe } from '@angular/common';
 import { LoginService } from '../../../../../services/login.service';
 import { environment } from 'environments/environment'
 import swal from 'sweetalert2';
@@ -11,19 +12,22 @@ declare var $: any;
 
 @Component({
   selector: 'app-new-cvaudiencia',
-  templateUrl: './new.component.html'
+  templateUrl: './new.component.html',
+  providers: [DatePipe]
 })
 export class NewComponent implements OnInit, AfterViewInit {
   @Output() ready = new EventEmitter<any>();
+  @Input() comparendo: any = null;
   public audiencia: CvAudiencia;
   public errorMessage;
 
   public apiUrl = environment.apiUrl;
   
   public numeroComparendo: any = null;
-  public comparendo: any = null;
+  /* public comparendo: any = null; */
   public audienciaLast: any = null;
-  public fechaDisponible: any = null;
+  /* public fechaDisponible: any = null; */
+  public fechaUltimaAudiencia: any = null;
   public audiencias: any = null;
   public tipos: any = null;
   public apoderado: any;
@@ -41,7 +45,7 @@ constructor(
   ){}
 
   ngOnInit() {
-    this.onInitForms();
+    /* this.onInitForms(); */
 
     swal({
       title: 'Cargando formulario!',
@@ -66,7 +70,24 @@ constructor(
       response => {
         if (response.code == 200) {
           this.audienciaLast = response.data;
-          this.fechaDisponible = response.data.fechaDisponible;
+          this.fechaUltimaAudiencia = response.data.fechaUltimaAudiencia;
+          
+          var datePiper = new DatePipe('en-US');
+
+          var date = new Date();
+          date.setTime(response.data.fechaDisponible.timestamp * 1000);
+          response.data.fechaDisponible = datePiper.transform(
+            date, 'yyyy-MM-dd'
+          );
+
+          date.setTime(response.data.horaDisponible.timestamp * 1000);
+          response.data.horaDisponible = datePiper.transform(
+            date, 'hh:mm:ss'
+          );
+
+          console.log(response.data);
+          this.audiencia.fecha = response.data.fechaDisponible;
+          this.audiencia.hora = response.data.horaDisponible;
           
           swal({
             title: 'Perfecto!',
@@ -114,7 +135,7 @@ constructor(
     this.ready.emit(true);
   }
 
-  onSearchComparendo() {
+  /* onSearchComparendo() {
     swal({
       title: 'Buscando registros!',
       text: 'Solo tardara unos segundos por favor espere.',
@@ -180,7 +201,7 @@ constructor(
         }
       }
     );
-  }
+  } */
 
   onAddApoderado() {
     this.formApoderado = true;
@@ -248,16 +269,16 @@ constructor(
           this.ready.emit(true);
           
           swal({
-            title: 'Perfecto!',
+            title: response.title,
             text: response.message,
-            type: 'success',
+            type: response.status,
             confirmButtonText: 'Aceptar'
           })
         }else{
           swal({
-            title: 'Error!',
+            title: response.title,
             text: response.message,
-            type: 'error',
+            type: response.status,
             confirmButtonText: 'Aceptar'
           })
         }

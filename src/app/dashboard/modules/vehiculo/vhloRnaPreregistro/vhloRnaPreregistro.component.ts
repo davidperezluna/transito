@@ -135,9 +135,9 @@ export class VhloRnaPreregistroComponent implements OnInit, AfterViewInit {
 
   ready(isCreado:any){
     if (isCreado) {
-      this.formNew = false;
-      this.formIndex = true;
       this.ngOnInit();
+      this.formSearch = true;
+      this.formIndex = true;
       this.onSearch();
     }
   }

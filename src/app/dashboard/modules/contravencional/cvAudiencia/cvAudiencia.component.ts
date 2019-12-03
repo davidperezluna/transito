@@ -25,6 +25,7 @@ export class CvAudienciaComponent implements OnInit, AfterViewInit {
 
   public table:any = null; 
   public audiencia: CvAudiencia;
+  public comparendo:any = null; 
 
   public search: any = {
     'tipoFiltro': null,
@@ -73,7 +74,7 @@ export class CvAudienciaComponent implements OnInit, AfterViewInit {
       }
     });
 
-    this.formIndex = false;
+    this.onInitForms();
 
     let token = this._LoginService.getToken();
 
@@ -139,9 +140,10 @@ export class CvAudienciaComponent implements OnInit, AfterViewInit {
     });
   }
   
-  onNew(){
+  onNew(comparendo: any) {
+    this.comparendo = comparendo;
     this.onInitForms();
-
+    this.formSearch = true;
     this.formNew = true;
   }
 
@@ -193,17 +195,13 @@ export class CvAudienciaComponent implements OnInit, AfterViewInit {
 
   onShow(audiencia: any) {
     this.audiencia = audiencia;
-    this.formEdit = false;
+    this.onInitForms();
     this.formShow = true;
-    this.formNew = false;
-    this.formIndex = false;
   }
 
   onEdit(audiencia:any){
     this.audiencia = audiencia;
+    this.onInitForms();
     this.formEdit = true;
-    this.formIndex = false;
-    this.formShow = false;
-    this.formNew = false;
   }
 }

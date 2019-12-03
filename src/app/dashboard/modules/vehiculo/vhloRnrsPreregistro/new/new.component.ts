@@ -9,6 +9,10 @@ import { VhloCfgCondicionIngresoService } from '../../../../../services/vhloCfgC
 import { VhloCfgClaseService } from '../../../../../services/vhloCfgClase.service';
 import { PnalFuncionarioService } from '../../../../../services/pnalFuncionario.service';
 import { CfgOrganismoTransitoService } from '../../../../../services/cfgOrganismoTransito.service';
+import { UserCfgTipoIdentificacionService } from 'app/services/userCfgTipoIdentificacion.service';
+import { UserCiudadanoService } from 'app/services/userCiudadano.service';
+import { VhloPropietarioService } from 'app/services/vhloPropietario.service';
+
 import { LoginService } from '../../../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -34,6 +38,19 @@ export class NewComponent implements OnInit {
   public sedeOperativaSelected:any;
   public propietarios:any;
   public propietarioSelected:any;
+  public apoderadoSelected:any;
+  
+  public tipoIdentificacionSelected: any;
+  public tiposIdentificacion: any;
+  
+  public identificacion:any;
+  public identificacionApoderado:any;
+  
+  public ciudadano: any = null;
+  public apoderado: any = null;
+  public empresa: any = null;
+
+  public formApoderado = false;
   public funcionario: any = null;
 
   public tiposPropiedad = [
@@ -75,6 +92,9 @@ constructor(
   private _CondicionIngresoService: VhloCfgCondicionIngresoService,
   private _FuncionarioService: PnalFuncionarioService,
   private _OrganismoTransitoService: CfgOrganismoTransitoService,
+  private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
+  private _CiudadanoService: UserCiudadanoService,
+  private _PropietarioService: VhloPropietarioService,
   private _LoginService: LoginService,
 ){}
 
@@ -82,6 +102,21 @@ ngOnInit() {
   let token = this._LoginService.getToken();
   let identity = this._LoginService.getIdentity();
   let datos = {'identificacion':identity.identificacion};
+
+  this._TipoIdentificacionService.select().subscribe(
+    response => {
+      this.tiposIdentificacion = response;
+    },
+    error => {
+      this.errorMessage = <any>error;
+
+      if (this.errorMessage != null) {
+        console.log(this.errorMessage);
+        alert('Error en la petición');
+      }
+    }
+  );
+
   this._FuncionarioService.searchLogin(datos,token).subscribe(
     response => { 
       if(response.code == 200){
@@ -115,7 +150,7 @@ ngOnInit() {
       }
   });
 
-  this.remolque = new VhloRegistroRemolque(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
+  this.remolque = new VhloRegistroRemolque(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
   
   this._OrganismoTransitoService.selectSedes().subscribe(
     response => {
@@ -201,6 +236,10 @@ ngOnInit() {
   );     
   }
 
+  ngOnDestroy() {
+    console.log('destroyed!!');
+  }
+
   onCancelar(){
     this.ready.emit(true);
   }
@@ -231,7 +270,7 @@ ngOnInit() {
       }
     );
 
-    var html = 'los datos de la maquinaria a ingresar son:<br>'+
+    var html = 'Los datos del remolque a registrar son:<br>'+
                'Placa: <b>'+this.remolque.placa+'</b><br>'+
                'Serie: <b>'+this.remolque.serie+'</b><br>'+
                'Carga util: <b>'+this.remolque.cargaUtil+'</b><br>'+
@@ -241,7 +280,7 @@ ngOnInit() {
                
 
    swal({
-      title: 'Preregistro de maquinaria!',
+      title: 'Preregistro de remolque y semiremolque!',
       type: 'warning',
       html:html,
       showCancelButton: true,
@@ -254,42 +293,66 @@ ngOnInit() {
       cancelButtonAriaLabel: 'Thumbs down',
     }).then((result) => {
         if (result.value) {
+        this._RemolqueService .register(this.remolque, token).subscribe(
+          response => {
+            if (response.code == 200) {
+              swal({
+                title: 'Perfecto!',
+                text: response.message,
+                type: response.status,
+                confirmButtonText: 'Aceptar'
+              });
 
-    this._RemolqueService.register(this.remolque, token).subscribe(
-			response => {
-        if(response.code == 200){
-          this.ready.emit(true);
-          swal({
-            title: 'Perfecto!',
-            text: response.message,
-            type: 'success',
-            confirmButtonText: 'Aceptar'
-          })
-        }else{
-          swal({
-            title: 'Error!',
-            text: response.message,
-            type: 'error',
-            confirmButtonText: 'Aceptar'
-          })
-        }
-			error => {
-					this.errorMessage = <any>error;
+              if (this.remolque.tipoMatricula == 'RADICADO' || this.remolque.tipoMatricula == 'IMPORTACION') {
+                this.datos.idVehiculo = response.data.id;
 
-					if(this.errorMessage != null){
-						console.log(this.errorMessage);
-						alert("Error en la petición");
-					}
-				}
+                this._PropietarioService.register(this.datos, token).subscribe(
+                  response => {
+                    if (response.code == 200) {
+                      this.ready.emit(true);
+                    }
+                  },
+                  error => {
+                    this.errorMessage = <any>error;
 
-    }); 
-        } else if (
-          // Read more about handling dismissals
-          result.dismiss === swal.DismissReason.cancel
-        ) {
+                    if (this.errorMessage != null) {
+                      console.log(this.errorMessage);
+                      alert('Error en la petición');
+                    }
+                  }
+                );
+              } else {
+                this.ready.emit(true);
 
-        }
-      })
+                swal({
+                  title: 'Perfecto!',
+                  text: response.message,
+                  type: 'success',
+                  confirmButtonText: 'Aceptar'
+                })
+              }
+
+            } else {
+              swal({
+                title: 'Error!',
+                text: response.message,
+                type: 'error',
+                confirmButtonText: 'Aceptar'
+              })
+            }
+            error => {
+              this.errorMessage = <any>error;
+
+              if (this.errorMessage != null) {
+                console.log(this.errorMessage);
+                alert("Error en la petición");
+              }
+            }
+
+          }
+        );
+      }
+    });
   }
 
   onChangedMarca(e) {
@@ -310,5 +373,207 @@ ngOnInit() {
         }
       );
     }
+  }
+
+  onChangedClase(e) {
+    if (e) {
+      let token = this._LoginService.getToken()
+
+      this._CarroceriaService.selectByClase({ 'idClase': e }, token).subscribe(
+        response => {
+          this.carrocerias = response;
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+    }
+  }
+
+  /* onUpdate() {
+    this.remolque.vehiculo.vin = this.remolque.vehiculo.chasis;
+    this.remolque.vehiculo.serie = this.remolque.vehiculo.chasis;
+  } */
+
+  onSearchCiudadano() {
+    swal({
+      title: 'Buscando ciudadano!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+
+    let token = this._LoginService.getToken();
+
+    let datos = {
+      'identificacion': this.identificacion,
+      'idTipoIdentificacion': this.tipoIdentificacionSelected,
+    }
+
+    this._CiudadanoService.searchByIdentificacion(datos, token).subscribe(
+      response => {
+        if (response.code == 200) {
+          if (response.data.ciudadano) {
+            this.ciudadano = response.data.ciudadano;
+
+            swal({
+              title: 'Perfecto!',
+              text: response.message,
+              type: 'success',
+              confirmButtonText: 'Aceptar'
+            });
+          }
+        } else {
+          this.ciudadano = null;
+
+          swal({
+            title: 'Error!',
+            text: response.message,
+            type: 'error',
+            confirmButtonText: 'Aceptar'
+          });
+        }
+        error => {
+          this.errorMessage = <any>error;
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert('Error en la petición');
+          }
+        }
+      }
+    );
+  }
+
+  onSearchApoderado() {
+    swal({
+      title: 'Buscando apoderado!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+
+    let token = this._LoginService.getToken();
+
+    let datos = {
+      'identificacion': this.identificacionApoderado,
+      'idTipoIdentificacion': 1,
+    }
+
+    this._CiudadanoService.searchByIdentificacion(datos, token).subscribe(
+      response => {
+        if (response.code == 200) {
+          if (response.data.ciudadano) {
+            this.apoderado = response.data.ciudadano;
+          } else {
+            this.apoderado = response.data.empresa;
+          }
+
+          swal({
+            title: 'Perfecto!',
+            text: response.message,
+            type: 'success',
+            confirmButtonText: 'Aceptar'
+          });
+        } else {
+          this.apoderado = null;
+
+          swal({
+            title: 'Error!',
+            text: response.message,
+            type: 'error',
+            confirmButtonText: 'Aceptar'
+          });
+        }
+        error => {
+          this.errorMessage = <any>error;
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert('Error en la petición');
+          }
+        }
+      }
+    );
+  }
+
+  onAddCiudadano() {
+    let agregado = this.datos.propietarios.includes(this.ciudadano.identificacion, 1);
+
+    if (agregado) {
+      swal({
+        title: 'Error!',
+        text: 'El registro seleccionado ya se encuentra agregado como propietario.',
+        type: 'error',
+        confirmButtonText: 'Aceptar'
+      });
+    } else {
+      this.datos.propietarios.push(
+        {
+          'idPropietario': this.ciudadano.id,
+          'identificacion': this.ciudadano.identificacion,
+          'nombre': this.ciudadano.primerNombre + " " + this.ciudadano.segundoNombre,
+          'permiso': this.datos.solidario,
+          'tipo': 'Ciudadano',
+          'idApoderado': null,
+          'apoderadoIdentificacion': null,
+          'apoderado.Nombre': null,
+        }
+      );
+    }
+  }
+
+  onAddEmpresa() {
+    this.datos.propietarios.push(
+      {
+        'idPropietario': this.empresa.id,
+        'identificacion': this.empresa.nit,
+        'nombre': this.empresa.nombre,
+        'permiso': this.datos.solidario,
+        'tipo': 'Empresa',
+        'idApoderado': null,
+        'apoderadoIdentificacion': null,
+        'apoderado.Nombre': null,
+      }
+    );
+  }
+
+  onDeletePropietario(propietario: any): void {
+    this.datos.propietarios = this.datos.propietarios.filter(h => h !== propietario);
+  }
+
+  onNewApoderado(propietario: any) {
+    let agregado = this.datos.propietarios.includes(propietario.identificacion, 1);
+
+    if (agregado) {
+      swal({
+        title: 'Error!',
+        text: 'El registro seleccionado ya se encuentra agregado como apoderado.',
+        type: 'error',
+        confirmButtonText: 'Aceptar'
+      });
+    } else {
+      this.formApoderado = true;
+      this.propietarioSelected = this.datos.propietarios.filter(h => h == propietario);
+      this.propietarioSelected = this.propietarioSelected[0];
+    }
+  }
+
+  onAddApoderado(apoderado) {
+    let posicion = this.datos.propietarios.indexOf(this.propietarioSelected);
+
+    this.datos.propietarios[posicion].idApoderado = apoderado.id;
+    this.datos.propietarios[posicion].apoderadoIdentificacion = apoderado.identificacion;
+    this.datos.propietarios[posicion].apoderadoNombre = apoderado.primerNombre + " " + apoderado.primerApellido;
+  }
+
+  onCancelarApoderado() {
+    this.apoderado = null;
+    this.formApoderado = false;
   }
 }
