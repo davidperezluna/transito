@@ -68,6 +68,7 @@ export class SearchComponent implements OnInit{
   public datosFolios = {
     'idTrazabilidad': null,
     'numero': null,
+    'rango': null,
   }
 
   public datosInventario = {
@@ -76,6 +77,11 @@ export class SearchComponent implements OnInit{
     'codigo': null,
     'caja': null,
     'carpeta': null,
+    'fechaInicial': null,
+    'fechaFinal': null,
+    'rango': null,
+    'soporte': null,
+    'frecuencia': null,
   }
 
   public tiposBien = [
