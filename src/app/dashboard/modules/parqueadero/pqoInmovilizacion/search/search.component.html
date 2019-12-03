@@ -83,45 +83,80 @@
         </div>
     </div>
 
-    <div class="col-xs-12 col-lg-4" *ngIf="formExit">
-        <div class="card">
-            <div class="card-header">
-                <b class="text-uppercase">Autorizar salida</b>
-            </div>
-            <div class="card-body">
-                <form #formNew="ngForm">
-                    <div class="form-group">
-                        <div class="row" *ngIf="comparendo">
-                            <div class="col-xs-12 col-lg-12">
-                                <a href="{{ apiUrlComparendo }}/{{ comparendo.id }}/pdf" class="btn btn-primary" target="_blank">
-                                    <i class="fa fa-file-pdf-o"></i>
-                                    Visualizar comparendo
-                                </a>
+    <div class="row" *ngIf="formExit">
+        <div class="col-xs-12 col-lg-4">
+            <div class="card">
+                <div class="card-header">
+                    <b class="text-uppercase">Autorizar salida</b>
+                </div>
+                <div class="card-body">
+                    <form #formNew="ngForm">
+                        <div class="form-group">
+                            <div class="row" *ngIf="comparendo">
+                                <div class="col-xs-12 col-lg-12">
+                                    <a href="{{ apiUrlComparendo }}/{{ comparendo.id }}/pdf" class="btn btn-primary" target="_blank">
+                                        <i class="fa fa-file-pdf-o"></i>
+                                        Visualizar comparendo
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-lg-12">
+                                    <label>Observaciones
+                                        <strong class="text-danger">*</strong>
+                                    </label>
+                                    <textarea class="form-control" [(ngModel)]="datos.observaciones" name="observaciones" rows="4"></textarea>
+                                </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-xs-12 col-lg-12">
-                                <label>Observaciones
-                                    <strong class="text-danger">*</strong>
-                                </label>
-                                <textarea class="form-control" [(ngModel)]="datos.observaciones" name="observaciones" rows="4"></textarea>
-                            </div>
-                        </div>
+                    </form>
+                </div>
+                <div class="card-footer">
+                    <div class="btn-group">
+                        <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
+                            <i class="fa fa-search"></i>
+                            Enviar
+                        </button>
+                        <button (click)="onCancelar()" class="btn btn-default" type="button">
+                            <i class="fa fa-times"></i>
+                            Cancelar
+                        </button>
                     </div>
-                </form>
+                </div>
             </div>
-            <div class="card-footer">
-                <div class="btn-group">
-                    <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
-                        <i class="fa fa-search"></i>
-                        Enviar
-                    </button>
-                    <button (click)="onCancelar()" class="btn btn-default" type="button">
-                        <i class="fa fa-times"></i>
-                        Cancelar
-                    </button>
+        </div>
+
+        <div class="col-xs-12 col-lg-8">
+            <div class="card">
+                <div class="card-body">
+                    <h3>La autorización de salida está a cargo de la Subsecretaría de Transito y Transporte de Nariño y para tal efecto el
+                    solicitante debe aportar los requisitos establecidos a continuación.</h3>
+                    <ul>
+                        <li>Comparendo: Debe ser legible la información del agente y verse el número que se encuentra en la parte superior derecha.</li>
+                        <li>Inventario del vehículo: Si no le fue entregado deberá manifestar el motivo por el cual no lo presenta en la carta de autorización.</li>
+                        <li>Licencia de tránsito</li>
+                        <li>Soat</li>
+                        <li>Revisión técnico mecánica</li>
+                        <li>Carta de autorización emitida por el propietario la empresa vinculada, ya que son los únicos que podrán autorizar a un tercero para que realice el retiro del vehículo.</li>
+                        <li>Si el propietario es quien autoriza, debe adjuntar fotocopia de la cédula.</li>
+                        <li>Si es la empresa vinculada quien autoriza, debe adjuntar fotocopia de cédula y cámara de comercio no mayor a 90 días.</li>
+                        <li>Fotocopia de la cédula de la persona autorizada</li>
+                        <li>Tarjeta de operación</li>
+                    </ul>
+
+                    <h3>Documentos requeridos para solicitar orden de salida y liquidación de patios oficiales por comparendo</h3>
+                    
+                    <li>Original del comparendo.</li>
+                    <li>Original del documento de identidad o contraseña certificada por la Registraduría.</li>
+                    <li>Original de la licencia de conducción.</li>
+                    <li>Original de la licencia de transito (Tarjeta de propiedad).</li>
+                    <li>Original del seguro obligatorio (SOAT) vigente.</li>
+                    <li>Original del inventario del vehículo y factura de grúa (si se prestó este servicio).</li>
+                    <li>Si es persona jurídica, certificado de Cámara de Comercio y Representación Legal.</li>
+                    <li>Si el vehículo de transporte público presentar la tarjeta de operación, en original y copia (en el caso de comparendo de transporte se deben presentar dos fotocopias de cada documento.</li>
                 </div>
             </div>
         </div>
     </div>
+
 </div>

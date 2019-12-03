@@ -175,12 +175,20 @@
                             <div class="row" *ngIf="infraccion && infraccion.categoria.id == 5">
                                 <div class="col-xs-12 col-lg-12">
                                     <label>Grado de alcoholemia <b class="text-danger">*</b></label>
-                                    <ng-select [multiple]="false" [options]="gradosAlcoholemia" [(ngModel)]="comparendo.gradoAlcoholemia" name="gradoAlcoholemia" required>
+                                    <ng-select [multiple]="false" [options]="gradosAlcoholemia" [(ngModel)]="comparendo.gradoAlcoholemia"
+                                        name="gradoAlcoholemia" required>
                                     </ng-select>
+                                </div>
+                                <div class="col-xs-12 col-lg-12">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" [(ngModel)]="comparendo.renuencia" class="custom-control-input" id="renuencia" name="renuencia">
+                                        <label class="custom-control-label" for="renuencia">Renuencia</label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
 
                     <div class="row">
                         <div class="col-xs-12 col-lg-4">
@@ -472,7 +480,7 @@
                                 </div>
                             </div>
                     
-                            <div class="col-xs-12 col-lg-3">
+                            <div class="col-xs-12 col-lg-3" *ngIf="!comparendo.renuencia">
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" [(ngModel)]="comparendo.fuga" class="custom-control-input" id="fuga" name="fuga">
                                     <label class="custom-control-label" for="fuga">Fuga</label>
