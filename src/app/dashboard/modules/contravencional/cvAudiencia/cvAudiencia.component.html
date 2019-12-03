@@ -28,10 +28,60 @@
               <i class="fa fa-search"></i>
               Buscar
             </button>
-            <!-- <button (click)="onNew()" class="btn btn-default">
+            <button *ngIf="comparendo" (click)="onNew(comparendo)" class="btn btn-default">
               <i class="fa fa-plus"></i>
               <span class="text">Nuevo</span>
-            </button> -->
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xs-12 col-lg-8" *ngIf='formComparendos'>
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">
+            <h6 class="text-uppercase text-center">
+              <b>Comparendos encontrados</b>
+            </h6>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="form-group row">
+            <div class="col-lg-12">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTables-example">
+                  <thead>
+                    <tr>
+                      <th>No.</th>
+                      <th>Consecutivo</th>
+                      <th>Placa</th>
+                      <th>Fecha</th>
+                      <th>Infractor</th>
+                      <th>NIP</th>
+                      <th>Estado</th>
+                      <th>Infracción</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="odd" *ngFor="let comparendo of comparendos; let i = index">
+                      <td>{{ i + 1 }}</td>
+                      <td>
+                        <a (click)="onShowAudiencias(comparendo)" class="text-primary" style="cursor: pointer;">
+                          <b>{{ comparendo.consecutivo.numero }}</b>
+                        </a>
+                      </td>
+                      <td>{{ comparendo.placa }}</td>
+                      <td>{{ (comparendo.fecha.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td>
+                      <td>{{ comparendo.infractorNombres }} {{ comparendo.infractorApellidos }}</td>
+                      <td>{{ comparendo.infractorIdentificacion }}</td>
+                      <td>{{ comparendo.estado?.nombre }}</td>
+                      <td>{{ comparendo.infraccion?.codigo }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -74,10 +124,10 @@
                     <a *ngIf="audiencia.cuerpo" href="{{ apiUrl }}contravencional/cvaudiencia/{{ audiencia.id }}/pdf" class="btn btn-xs btn-success" target="_blank" tooltip="Imprimir acta" [tooltipDisabled]="false" [tooltipAnimation]="true" tooltipPlacement="top">
                       <i class="fa fa-file-pdf-o"></i>
                     </a>
-                    <button (click)="onNew(audiencia.comparendo)" class="btn btn-primary" tooltip="Nueva audiencia" [tooltipDisabled]="false" [tooltipAnimation]="true" tooltipPlacement="top">
+                    <!-- <button (click)="onNew(audiencia.comparendo)" class="btn btn-primary" tooltip="Nueva audiencia" [tooltipDisabled]="false" [tooltipAnimation]="true" tooltipPlacement="top">
                       <i class="fa fa-plus"></i>
                       <span class="text"></span>
-                    </button>
+                    </button> -->
                   </div>
                 </td>
               </tr>

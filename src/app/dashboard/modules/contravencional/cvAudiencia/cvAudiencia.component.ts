@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { CvAudiencia } from './cvAudiencia.modelo';
 import { CvAudienciaService } from '../../../../services/cvAudiencia.service';
+import { CvCdoComparendoService } from 'app/services/cvCdoComparendo.service';
 import { LoginService } from '../../../../services/login.service';
 import { environment } from 'environments/environment'
 import swal from 'sweetalert2';
@@ -16,12 +17,14 @@ export class CvAudienciaComponent implements OnInit, AfterViewInit {
   public apiUrl = environment.apiUrl;
 
   public audiencias;
+  public comparendos;
   
 	public formNew: any;
 	public formEdit: any;
   public formIndex: any;
   public formShow: any;
   public formSearch: any;
+  public formComparendos: any;
 
   public table:any = null; 
   public audiencia: CvAudiencia;
@@ -40,6 +43,7 @@ export class CvAudienciaComponent implements OnInit, AfterViewInit {
 
   constructor(
     private _AudienciaService: CvAudienciaService,
+    private _ComparendoService: CvCdoComparendoService,
 		private _LoginService: LoginService,
     ){}
     
@@ -59,6 +63,7 @@ export class CvAudienciaComponent implements OnInit, AfterViewInit {
     this.formIndex = false;
     this.formShow = false;
     this.formSearch = false;
+    this.formComparendos = false;
   }
 
   onCancel(){
@@ -78,10 +83,69 @@ export class CvAudienciaComponent implements OnInit, AfterViewInit {
 
     let token = this._LoginService.getToken();
 
-    this._AudienciaService.searchByFiltros(this.search, token).subscribe(
+    this._ComparendoService.searchByFiltros(this.search, token).subscribe(
+      response => {
+        if (response.code == 200) {
+          this.comparendos = response.data;
+
+          this.onInitForms();
+          this.formComparendos = true;
+          this.formSearch = true;
+
+          swal({
+            title: 'Perfecto!',
+            text: response.message,
+            type: 'success',
+            confirmButtonText: 'Aceptar'
+          });
+
+          let timeoutId = setTimeout(() => {
+            this.onInitTable();
+          }, 100);
+        } else {
+          this.audiencias = null;
+          this.onInitForms();
+          this.formIndex = false;
+          this.formSearch = true;
+
+          swal({
+            title: 'Alerta!',
+            text: response.message,
+            type: 'warning',
+            confirmButtonText: 'Aceptar'
+          })
+        }
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      }
+    );
+  }
+
+  onShowAudiencias(comparendo: any) {
+    swal({
+      title: 'Buscando registros!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+
+    this.onInitForms();
+
+    let token = this._LoginService.getToken();
+    this.comparendo = comparendo;
+
+    this._AudienciaService.searchByComparendo({'idComparendo': comparendo.id}, token).subscribe(
       response => {
         if (response.code == 200) {
           this.audiencias = response.data;
+
           this.onInitForms();
           this.formIndex = true;
           this.formSearch = true;
@@ -120,7 +184,6 @@ export class CvAudienciaComponent implements OnInit, AfterViewInit {
       }
     );
   }
-
 
   onInitTable(){
     this.table = $('#dataTables-example').DataTable({
