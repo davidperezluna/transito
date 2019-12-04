@@ -55,9 +55,9 @@
                 <th>Serie</th>
                 <th>Vin</th>
                 <th>Numero de ejes</th>
-                <th>Origen del destino</th>
+                <!-- <th>Origen del destino</th> -->
                 <th>Numero Fth</th>
-                <th>Condicion Ingreso</th>
+                <!-- <th>Condicion Ingreso</th> -->
                 <th>Acciones</th>
               </tr>
             </thead>
@@ -68,10 +68,10 @@
                 <td>{{ remolqueEncontrado.vehiculo.clase?.nombre }}</td>
                 <td>{{ remolqueEncontrado.vehiculo.serie}}</td>
                 <td>{{ remolqueEncontrado.vehiculo.vin}}</td>
-                <td>{{ remolqueEncontrado.numeroEjes }}</td>
-                <td>{{ remolqueEncontrado.origenRegistro?.nombre }}</td>
+                <td>{{ remolqueEncontrado.vehiculo.numeroEjes }}</td>
+                <!-- <td>{{ remolqueEncontrado.origenRegistro?.nombre }}</td> -->
                 <td>{{ remolqueEncontrado.numeroFth }}</td>
-                <td>{{ remolqueEncontrado.condicionIngreso?.nombre }}</td>
+                <!-- <td>{{ remolqueEncontrado.condicionIngreso?.nombre }}</td> -->
                 <td>
                   <div class="btn-group">
                     <button (click)="onEdit(remolque)" class="btn btn-primary" type="button">
@@ -90,7 +90,7 @@
       </div>
     </div>
     <div class="col-xs-12 col-lg-8">
-      <app-edit-rnrspreregistro *ngIf='formEdit' [remolque]="remolque" (ready)="ready($event)"></app-edit-rnrspreregistro>
+      <app-edit-rnrspreregistro *ngIf='formEdit' [remolque]="remolqueEncontrado" (ready)="ready($event)"></app-edit-rnrspreregistro>
       <app-new-rnrspreregistro *ngIf='formNew' (ready)="ready($event)"></app-new-rnrspreregistro>
     </div>
   </div>

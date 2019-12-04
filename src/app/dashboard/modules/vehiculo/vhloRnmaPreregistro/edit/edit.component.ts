@@ -926,7 +926,58 @@ export class EditComponent implements OnInit {
         this._MaquinariaService.edit(this.maquinaria, token).subscribe(
           response => {
             if (response.code == 200) {
-              this.ready.emit(true);
+              //para eliminar los registros anteriores
+              this.datos.idVehiculo = this.maquinaria.vehiculo.id;
+
+              if (!this.realizoTramites && this.maquinaria.vehiculo.tipoMatricula == 'RADICADO') {
+                this._PropietarioService.searchAndDeleteByVehiculo(this.datos, token).subscribe(
+                  response => {
+                    if (response.code == 200) {
+                      console.log("los registros se eliminaron correctamente");
+
+                      this._PropietarioService.register(this.datos, token).subscribe(
+                        response => {
+                          if (response.code == 200) {
+                            /* this.ready.emit(true); */
+                          }
+                        },
+                        error => {
+                          this.errorMessage = <any>error;
+
+                          if (this.errorMessage != null) {
+                            console.log(this.errorMessage);
+                            alert('Error en la petición');
+                          }
+                        }
+                      );
+
+
+                    } else {
+                      swal({
+                        title: 'Error!',
+                        text: response.message,
+                        type: response.status,
+                        confirmButtonText: 'Aceptar'
+                      })
+                    }
+                  },
+                  error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                      console.log(this.errorMessage);
+                      alert('Error en la petición');
+                    }
+                  }
+                );
+
+                swal({
+                  title: response.title,
+                  text: response.message,
+                  type: response.status,
+                  confirmButtonText: 'Aceptar'
+                })
+              }
 
               swal({
                 title: response.title,
@@ -934,6 +985,8 @@ export class EditComponent implements OnInit {
                 type: response.status,
                 confirmButtonText: 'Aceptar'
               })
+
+              this.ready.emit(true);
             } else {
               swal({
                 title: response.title,

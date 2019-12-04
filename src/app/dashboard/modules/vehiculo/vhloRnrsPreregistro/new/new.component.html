@@ -19,9 +19,9 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-12 col-lg-4" *ngIf="remolque.tipoMatricula != 'RADICADO'">
+                        <div class="col-xs-12 col-lg-4" *ngIf="remolque.tipoMatricula && remolque.tipoMatricula != 'RADICADO'">
                             <label>Valor</label>
-                            <input class="form-control" [(ngModel)]="remolque.valor" type="text" name="valor" required>
+                            <input class="form-control" [(ngModel)]="remolque.valor" type="text" name="valor">
                         </div>
                         <div class="col-xs-12 col-lg-4">
                             <label>No Factura de compra <b class="text-danger"></b></label>
@@ -40,19 +40,19 @@
                             <input class="form-control text-uppercase" [(ngModel)]="remolque.placa" name="placa"
                                 type="text" required>
                         </div>
-                        <div class="col-xs-12 col-lg-3">
+                        <div class="col-xs-12 col-lg-4">
                             <label>Nro. serie
                                 <b class="text-danger">*</b>
                             </label>
                             <input class="form-control" [(ngModel)]="remolque.serie" name="serie" type="number" required>
                         </div>
-                        <div class="col-xs-12 col-lg-3">
+                        <div class="col-xs-12 col-lg-4">
                             <label>Nro. VIN
                                 <b class="text-danger">*</b>
                             </label>
                             <input class="form-control" [(ngModel)]="remolque.vin" name="vin" type="number" required>
                         </div>
-                        <div class="col-xs-12 col-lg-3">
+                        <div class="col-xs-12 col-lg-4">
                             <label>Modelo <small>(Año)</small>
                                 <b class="text-danger">*</b>
                             </label>
@@ -211,14 +211,6 @@
                     
                         <div class="col-xs-12 col-lg-12" *ngIf="ciudadano">
                             <div class="row">
-                                <!-- <div class="col-xs-12 col-lg-12">
-                                    <div class="custom-control custom-checkbox">
-                                        <input [(ngModel)]="datos.solidario" name="solidario" type="checkbox" class="custom-control-input"
-                                            id="solidario" checked="">
-                                        <label class="custom-control-label" for="solidario">¿Tiene permisos para hacer
-                                            tramites?</label>
-                                    </div>
-                                </div> -->
                                 <table class="table table-bordered table-striped" id="dataTables-example">
                                     <tbody>
                                         <tr>
@@ -331,9 +323,6 @@
                                 </tbody>
                             </table>
                         </div>
-                    
-                        <!--si no existe un ciudadano -->
-                        <!-- <app-new-rna-ciudadano *ngIf="ciudadanoNew" [tipoIdentificacion]="tipoIdentificacionSelected" [identificacion]="identificacion" (ready)="ready($event)"></app-new-rna-ciudadano> -->
                     </div>
                 </div>
             </form>

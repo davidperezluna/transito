@@ -133,6 +133,7 @@ export class VhloRnrsPreregistroComponent implements OnInit, AfterViewInit {
   onEdit(remolque: any) {
     this.onInitForms();
     this.remolque = remolque;
+    this.formSearch = true;
     this.formEdit = true;
   }
   

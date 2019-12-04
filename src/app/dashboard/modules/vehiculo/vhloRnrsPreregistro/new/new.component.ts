@@ -35,7 +35,7 @@ export class NewComponent implements OnInit {
   public clases:any;
   public persona:any='empresa';
   public organismosTransito:any;
-  public sedeOperativaSelected:any;
+  public organismoTransitoSelected:any;
   public propietarios:any;
   public propietarioSelected:any;
   public apoderadoSelected:any;
@@ -122,7 +122,9 @@ ngOnInit() {
       if(response.code == 200){
         this.funcionario = response.data;
         this.persona='funcionario';
-        this.sedeOperativaSelected = [this.funcionario.organismoTransito.id];
+        /* this.organismoTransitoSelected = [this.funcionario.organismoTransito.id]; */
+        this.remolque.idOrganismoTransito = this.funcionario.organismoTransito.id;
+
       }else{
         this._FuncionarioService.searchEmpresa(datos,token).subscribe(
           response => {
@@ -152,7 +154,7 @@ ngOnInit() {
 
   this.remolque = new VhloRegistroRemolque(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
   
-  this._OrganismoTransitoService.selectSedes().subscribe(
+  /* this._OrganismoTransitoService.selectSedes().subscribe(
     response => {
       this.organismosTransito = response;
     }, 
@@ -164,7 +166,7 @@ ngOnInit() {
         alert("Error en la petición");
       }
     }
-  );
+  ); */
   this._CarroceriaService.select().subscribe(
     response => {
       this.carrocerias = response;
@@ -246,29 +248,6 @@ ngOnInit() {
 
   onEnviar(){
     let token = this._LoginService.getToken();
-    let identity = this._LoginService.getIdentity();
-    this.remolque.idSedeOperativa = this.sedeOperativaSelected;
-
-    this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
-      response => {
-        if (response.code == 200) {
-        } else {
-          swal({
-            title: 'Alerta!',
-            text: response.message,
-            type: 'error',
-            confirmButtonText: 'Aceptar'
-          });
-        }
-        error => {
-          this.errorMessage = <any>error;
-          if (this.errorMessage != null) {
-            console.log(this.errorMessage);
-            alert('Error en la petición');
-          }
-        }
-      }
-    );
 
     var html = 'Los datos del remolque a registrar son:<br>'+
                'Placa: <b>'+this.remolque.placa+'</b><br>'+
@@ -293,18 +272,19 @@ ngOnInit() {
       cancelButtonAriaLabel: 'Thumbs down',
     }).then((result) => {
         if (result.value) {
-        this._RemolqueService .register(this.remolque, token).subscribe(
+        this._RemolqueService.register(this.remolque, token).subscribe(
           response => {
             if (response.code == 200) {
               swal({
-                title: 'Perfecto!',
+                title: response.title,
                 text: response.message,
                 type: response.status,
                 confirmButtonText: 'Aceptar'
               });
 
               if (this.remolque.tipoMatricula == 'RADICADO' || this.remolque.tipoMatricula == 'IMPORTACION') {
-                this.datos.idVehiculo = response.data.id;
+                console.log("si entra al registro de propietarios");
+                this.datos.idVehiculo = response.data.vehiculo.id;
 
                 this._PropietarioService.register(this.datos, token).subscribe(
                   response => {
@@ -325,18 +305,18 @@ ngOnInit() {
                 this.ready.emit(true);
 
                 swal({
-                  title: 'Perfecto!',
+                  title: response.title,
                   text: response.message,
-                  type: 'success',
+                  type: response.status,
                   confirmButtonText: 'Aceptar'
                 })
               }
 
             } else {
               swal({
-                title: 'Error!',
+                title: response.title,
                 text: response.message,
-                type: 'error',
+                type: response.status,
                 confirmButtonText: 'Aceptar'
               })
             }
