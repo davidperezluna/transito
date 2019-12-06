@@ -20,14 +20,14 @@ public remolque: any = null;
 public propietarios: any;
 
 constructor(
-  private _loginService: LoginService,
+  private _LoginService: LoginService,
   private _VehiculoService: VhloVehiculoService,
   private _PropietarioService: VhloPropietarioService,
   
   ){}
 
   ngOnInit() {
-    let token = this._loginService.getToken();
+    let token = this._LoginService.getToken();
 
     this._VehiculoService.showMaquinariaOrRemolque({ 'idVehiculo': this.vehiculo.id },token).subscribe(
       response => {               

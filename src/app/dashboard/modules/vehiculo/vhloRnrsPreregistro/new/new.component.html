@@ -162,8 +162,7 @@
                             </ng-select>
                         </div> -->
                     </div>
-                    <div class="row"
-                        *ngIf="remolque.tipoMatricula == 'RADICADO' || remolque.tipoMatricula == 'IMPORTACION' || remolque.tipoMatricula == 'MATRICULA'">
+                    <div class="row" *ngIf="remolque.vehiculo.tipoMatricula == 'RADICADO' || remolque.vehiculo.tipoMatricula == 'IMPORTACION'">
                         <!--Cuando es de tipo propio -->
                         <div class="col-xs-12 col-lg-12">
                             <br>

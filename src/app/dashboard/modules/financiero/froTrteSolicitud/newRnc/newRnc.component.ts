@@ -119,7 +119,7 @@ constructor(
     }else {
       let token = this._LoginService.getToken();
 
-      this._FacturaService.searchByNumero({ 'numeroFactura': this.numeroFactura }, token).subscribe(
+      this._FacturaService.searchByNumero({ 'numeroFactura': this.numeroFactura, 'idModulo': 1}, token).subscribe(
         response => {
           if (response.code == 200) {
             this.factura = response.data;

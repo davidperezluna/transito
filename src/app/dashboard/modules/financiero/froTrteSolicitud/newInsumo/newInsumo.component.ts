@@ -41,6 +41,7 @@ export class NewInsumoComponent implements OnInit {
 
     ngOnInit() {
         this.ciudadano = this.solicitante;
+        console.log(this.ciudadano);
         
         let token = this._LoginService.getToken();
 

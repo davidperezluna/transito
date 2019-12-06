@@ -153,7 +153,7 @@ export class NewRnmaComponent implements OnInit {
       }
     );*/
 
-    this._VehiculoService.searchByPlaca({'numero': this.placa }, token).subscribe(
+    this._VehiculoService.searchByPlacaAndModulo({'numero': this.placa, 'idModulo': 3 }, token).subscribe(
       response => {
         if (response.code == 200) {
           this.vehiculo = response.data;
@@ -328,7 +328,7 @@ export class NewRnmaComponent implements OnInit {
     if (this.numeroFactura) {
       let token = this._LoginService.getToken();
 
-      this._FacturaService.searchByNumero({ 'numeroFactura': this.numeroFactura }, token).subscribe(
+      this._FacturaService.searchByNumero({ 'numeroFactura': this.numeroFactura, 'idModulo': 3 }, token).subscribe(
         response => {
           if (response.code == 200) {
             this.factura = response.data;

@@ -256,10 +256,13 @@
                             </tfoot>
                         </table>
                     </div>
+                </div>
 
+                <div class="row">
                     <div class="col-xs-12 col-lg-12" *ngIf='formApoderado && !apoderado'>
                         <div class="input-group">
-                            <input type="number" class="form-control" placeholder="Identificacion apoderado" [(ngModel)]="identificacionApoderado" name="identificacionApoderado" required />
+                            <input type="number" class="form-control" placeholder="Identificacion apoderado"
+                                [(ngModel)]="identificacionApoderado" name="identificacionApoderado" required />
                             <span class="input-group-btn">
                                 <button (click)="onSearchApoderado()" class="btn" type="button">
                                     <i class="fa fa-search"></i>
@@ -270,7 +273,7 @@
                             </span>
                         </div>
                     </div>
-
+                    
                     <div class="col-xs-12 col-lg-12" *ngIf="apoderado">
                         <table class="table table-bordered table-striped">
                             <thead>
@@ -297,13 +300,13 @@
                                     </td>
                                     <td>
                                         <div class="btn-group">
-                                            <button *ngIf="!tramiteSolicitud.idSolicitante" (click)="onAddApoderado()" class="btn btn-primary">
+                                            <button *ngIf="!tramiteSolicitud.idSolicitante" (click)="onAddApoderado()"
+                                                class="btn btn-primary">
                                                 <i class="fa fa-save"></i>
                                                 Agregar
                                             </button>
-                                            <button *ngIf='!confirmarSolicitante' class="btn btn-default" (click)="onCloseApoderado()">
-                                                <i class="fa fa-times"></i>
-                                                Cancelar
+                                            <button *ngIf='!confirmarSolicitante' class="btn btn-xs btn-danger" (click)="onCloseApoderado()">
+                                                Eliminar
                                             </button>
                                         </div>
                                     </td>
@@ -439,7 +442,7 @@
                 
                 <div class="row"  *ngIf="requiereSustrato && tramitesFactura && tramitesFactura.length == tramitesRealizados.length && !this.tramiteSolicitud.insumoEntregado">
                     <div class="col-xs-12 col-lg-12">
-                        <app-insumo [factura]="factura" [idModulo]='3' (onReadyInsumo)="onReadyInsumo($event)"></app-insumo>
+                        <app-insumo [factura]="factura" [solicitante]="solicitante" [idModulo]='3' (onReadyInsumo)="onReadyInsumo($event)"></app-insumo>
                     </div>
                 </div>
             </div>
