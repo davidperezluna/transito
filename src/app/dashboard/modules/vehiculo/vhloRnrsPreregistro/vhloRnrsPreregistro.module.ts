@@ -16,6 +16,9 @@ import { VhloCfgCondicionIngresoService } from '../../../../services/vhloCfgCond
 import { VhloCfgClaseService } from '../../../../services/vhloCfgClase.service';
 import { PnalFuncionarioService } from '../../../../services/pnalFuncionario.service';
 import { CfgOrganismoTransitoService } from '../../../../services/cfgOrganismoTransito.service';
+import { UserCfgTipoIdentificacionService } from 'app/services/userCfgTipoIdentificacion.service';
+import { UserCiudadanoService } from 'app/services/userCiudadano.service';
+import { VhloPropietarioService } from 'app/services/vhloPropietario.service';
 
 
 @NgModule({
@@ -32,6 +35,9 @@ import { CfgOrganismoTransitoService } from '../../../../services/cfgOrganismoTr
         VhloCfgClaseService,
         PnalFuncionarioService,
         CfgOrganismoTransitoService,
+        UserCfgTipoIdentificacionService,
+        UserCiudadanoService,
+        VhloPropietarioService
     ]
 })
  

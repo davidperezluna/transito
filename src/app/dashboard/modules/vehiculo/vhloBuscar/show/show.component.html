@@ -62,11 +62,11 @@
                                     <b>Color: </b>
                                     {{ vehiculo.color?.nombre }}
                                 </div>
-                                <div class="col-xs-12 col-lg-4">
+                                <div class="col-xs-12 col-lg-4" *ngIf="!maquinaria || !remolque">
                                     <b>Tipo servicio: </b>
                                     {{ vehiculo.servicio?.nombre }}
                                 </div>
-                                <div class="col-xs-12 col-lg-4">
+                                <div class="col-xs-12 col-lg-4" *ngIf="!maquinaria || !remolque">
                                     <b>Cilindraje: </b>
                                     {{ vehiculo.cilindraje }}
                                 </div>
