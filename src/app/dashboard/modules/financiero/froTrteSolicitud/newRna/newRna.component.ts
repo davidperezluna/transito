@@ -161,33 +161,59 @@ export class NewRnaComponent implements OnInit {
           this.vehiculo = response.data;
           this.tramiteSolicitud.idVehiculo = this.vehiculo.id;
 
-          this._RestriccionService.searchByVehiculo({ 'idVehiculo': this.vehiculo.id }, token).subscribe(
+          this._FacturaService.getLastByVehiculo({ 'idVehiculo': this.vehiculo.id, 'idFactura': this.factura.id }, token).subscribe(
             response => {
               if (response.code == 200) {
-                this.restricciones = response.data;
+                //asigna los datos de ubicación del archivo
+                if(response.data != null) {
+                  this.tramiteSolicitud.numeroArchivador = response.data.numeroArchivador;
+                  this.tramiteSolicitud.bandeja = response.data.bandeja;
+                  this.tramiteSolicitud.numeroCaja = response.data.numeroCaja;
+                }
+                this._RestriccionService.searchByVehiculo({ 'idVehiculo': this.vehiculo.id }, token).subscribe(
+                  response => {
+                    if (response.code == 200) {
+                      this.restricciones = response.data;
 
-                swal({
-                  title: 'Vehiculo con '+response.message,
-                  text: "¿Esta seguro que desea continuar?",
-                  type: 'warning',
-                  showCancelButton: true,
-                  confirmButtonColor: '#15d4be',
-                  cancelButtonColor: '#ff6262',
-                  confirmButtonText: 'Confirmar',
-                  cancelButtonText: 'Cancelar'
-                }).then((result) => {
-                  if (result.value) {
-                    this.onSearchTramites();
-                  }else{
-                    this.vehiculo = null;
-                    this.tramiteSolicitud.idVehiculo = null;
+                      swal({
+                        title: 'Vehiculo con ' + response.message,
+                        text: "¿Esta seguro que desea continuar?",
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#15d4be',
+                        cancelButtonColor: '#ff6262',
+                        confirmButtonText: 'Confirmar',
+                        cancelButtonText: 'Cancelar'
+                      }).then((result) => {
+                        if (result.value) {
+                          this.onSearchTramites();
+                        } else {
+                          this.vehiculo = null;
+                          this.tramiteSolicitud.idVehiculo = null;
+                        }
+                      });
+                    } else if (response.code == 401) {
+                      this.onSearchTramites();
+                    } else {
+                      this.restricciones = null;
+
+                      swal({
+                        title: response.title,
+                        text: response.message,
+                        type: response.status,
+                        confirmButtonText: 'Aceptar'
+                      });
+                    }
+                    error => {
+                      this.errorMessage = <any>error;
+                      if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                      }
+                    }
                   }
-                });
-              } else if(response.code == 401){                
-                this.onSearchTramites();
-              }else{
-                this.restricciones = null;
-
+                );
+              } else {
                 swal({
                   title: response.title,
                   text: response.message,
@@ -195,6 +221,7 @@ export class NewRnaComponent implements OnInit {
                   confirmButtonText: 'Aceptar'
                 });
               }
+
               error => {
                 this.errorMessage = <any>error;
                 if (this.errorMessage != null) {
@@ -202,8 +229,7 @@ export class NewRnaComponent implements OnInit {
                   alert("Error en la petición");
                 }
               }
-            }
-          );
+            });
         } else{
           this.vehiculo = null;
           this.tramiteSolicitud.idVehiculo = null;
