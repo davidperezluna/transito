@@ -358,7 +358,7 @@ export class NewMatricualaInicialComponent implements OnInit {
         this.datos.tipoPropiedad = this.tipoPropiedadSelected;
         this.datos.idTramiteFactura = this.tramiteFactura.id;
 
-        let resumen = "<b>No. factura: " + this.tramiteFactura.factura.numero;
+        let resumen = "No. factura: " + this.tramiteFactura.factura.numero;
 
         this.realizado = true;
 

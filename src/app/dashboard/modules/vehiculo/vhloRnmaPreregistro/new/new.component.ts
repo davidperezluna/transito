@@ -101,8 +101,8 @@ export class NewComponent implements OnInit {
     'fechaIngreso': null,
     'guiaLlegada': null,
     'empresaEnvio': null,
+    'numeroLicencia': null,
     'idOrganismoTransito': null,
-    'idTipoIdentificacion': null,
   };
 
 constructor(
@@ -132,7 +132,7 @@ constructor(
   ){}
 
   ngOnInit() {
-    this.maquinaria = new VhloRnmaPreregistro(null, null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
+    this.maquinaria = new VhloRnmaPreregistro(null, null, null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
     
     let token = this._LoginService.getToken();
     let identity = this._LoginService.getIdentity();
@@ -759,7 +759,8 @@ constructor(
   onEnviar() {
     let token = this._LoginService.getToken();
 
-    //this.maquinaria.radicado = this.radicado;
+    this.maquinaria.radicado = this.radicado;
+    this.radicado.numeroLicencia = this.datos.numeroLicencia;
 
     var html = 'Que desea pre-registrar el maquinaria como:  <b>'+ this.maquinaria.tipoMatricula +
                 '</b><br>Recuerde que solo podrá editar datos generales del vehículo.';

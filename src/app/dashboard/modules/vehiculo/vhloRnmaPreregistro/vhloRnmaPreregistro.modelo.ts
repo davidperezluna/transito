@@ -26,6 +26,7 @@ export class VhloRnmaPreregistro{
 		public fechaFactura: string,
 		public valor: string,
 		public tipoMatricula: string,
+		public radicado: any,
 		public idSubpartidaArancelaria: number,
 		public idTipoRodaje: number,
 		public idTipoCabina: number,

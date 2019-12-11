@@ -31,6 +31,7 @@ export class NewRnmaComponent implements OnInit {
   public propietarios: any = null;
   public acreedores: any = null;
   public ciudadano: any = false;
+  public solicitante: any = false;
   public funcionario: any = null;
 
   public vehiculoFiltro: any;
@@ -732,7 +733,31 @@ export class NewRnmaComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.value) {
-        this.confirmarSolicitante = true;
+        let token = this._LoginService.getToken();
+
+        this._CiudadanoService.show({ 'id': this.tramiteSolicitud.idCiudadano }, token).subscribe(
+          response => {
+            if (response.code == 200) {
+              this.solicitante = response.data;
+              this.confirmarSolicitante = true;
+            } else {
+              swal({
+                title: 'Error!',
+                text: response.message,
+                type: 'error',
+                confirmButtonText: 'Aceptar'
+              });
+            }
+            error => {
+              this.errorMessage = <any>error;
+
+              if (this.errorMessage != null) {
+                console.log(this.errorMessage);
+                alert("Error en la petición");
+              }
+            }
+          }
+        );
       }
     })
   }

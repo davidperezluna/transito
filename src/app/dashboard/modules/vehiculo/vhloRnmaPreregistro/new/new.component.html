@@ -190,6 +190,49 @@
                             </div>
                         </div>
 
+                        <div class="row" *ngIf="maquinaria.tipoMatricula == 'RADICADO'">
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Organismo de transito de que proviene <b class="text-danger">*</b></label>
+                                <ng-select [multiple]="false" [options]="organismosTransitoNacional" [(ngModel)]="radicado.idOrganismoTransito"
+                                    name="idOrganismoTransitoProviene" required>
+                                </ng-select>
+                            </div>
+                        
+                            <div class="col-xs-12 col-lg-6">
+                                <label>No. licencia transito llegada</label>
+                                <input class="form-control" type="text" type="text" [(ngModel)]="datos.numeroLicencia" name="numeroLicencia">
+                            </div>
+
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Fecha de ingreso <b class="text-danger">*</b></label>
+                                <input class="form-control" [(ngModel)]="radicado.fechaIngreso" name="fechaIngreso" type="date" required />
+                            </div>
+                        
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Nro. guiá de llegada <b class="text-danger">*</b></label>
+                                <input class="form-control" [(ngModel)]="radicado.guiaLlegada" name="guiaLlegada" type="text" required />
+                            </div>
+                        
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Empresa de envió <b class="text-danger">*</b></label>
+                                <input class="form-control text-uppercase" [(ngModel)]="radicado.empresaEnvio" name="empresaEnvio" type="text"
+                                    required />
+                            </div>
+                        </div>
+
+                        <div class="row" *ngIf="maquinaria.tipoMatricula == 'RADICADO' || maquinaria.tipoMatricula == 'IMPORTACION'">
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Tipo de propiedad
+                                    <span class="text-danger">
+                                        <b class="text-danger">*</b>
+                                    </span>
+                                </label>
+                                <ng-select [multiple]="false" [options]="tiposPropiedad" [(ngModel)]="datos.tipoPropiedad" name="tipoPropiedad"
+                                    required>
+                                </ng-select>
+                            </div>
+                        </div>
+
                         <div class="row" *ngIf="maquinaria.tipoMatricula == 'RADICADO' || maquinaria.tipoMatricula == 'IMPORTACION'">
                             <!--Cuando es de tipo propio -->
                             <div class="col-xs-12 col-lg-12">
