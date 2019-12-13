@@ -40,25 +40,25 @@ export class NewRnrsComponent implements OnInit {
   public idTramiteFactura: any = null;
 
   public confirmarSolicitante = false;
-  
-  public tramites:any;
-  public tramiteMatriculaInicial:any = null;
+
+  public tramites: any;
+  public tramiteMatriculaInicial: any = null;
   public certificadoTradicion = false;
   public identificacionApoderado: any = null;
   public identificacionCiudadano: any = null;
   public apoderado: any = null;
   public placa: any = null;
-  
+
   public requiereSustrato = false;
   public requiereRunt = false;
   public tramitesRealizados: any = [];
   public documentacionPendiente: any = [];
   public ciudadanos: any = [];
   public restricciones: any = null;
-  
+
   public formApoderado = false;
   public formNewCiudadano: any = false;
-  
+
   constructor(
     private _TramiteSolicitudService: FroTrteSolicitudService,
     private _TramiteFacturaService: FroFacTramiteService,
@@ -89,26 +89,26 @@ export class NewRnrsComponent implements OnInit {
     this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
       response => {
         if (response.code == 200) {
-          this.funcionario = response.data; 
+          this.funcionario = response.data;
           this.tramiteSolicitud.idFuncionario = this.funcionario.id;
-          
+
           swal.close();
         } else {
           this.funcionario = null;
 
           swal({
-              title: 'Error!',
-              text: 'Usted no tiene permisos para realizar tramites',
-              type: 'error',
-              confirmButtonText: 'Aceptar'
+            title: 'Error!',
+            text: 'Usted no tiene permisos para realizar tramites',
+            type: 'error',
+            confirmButtonText: 'Aceptar'
           });
         }
         error => {
-            this.errorMessage = <any>error;
-            if (this.errorMessage != null) {
-                console.log(this.errorMessage);
-                alert('Error en la petición');
-            }
+          this.errorMessage = <any>error;
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert('Error en la petición');
+          }
         }
       }
     );
@@ -153,39 +153,66 @@ export class NewRnrsComponent implements OnInit {
       }
     );*/
 
-    this._VehiculoService.searchByPlacaAndModulo({ 'numero': this.placa, 'idModulo': 4}, token).subscribe(
+    this._VehiculoService.searchByPlacaAndModulo({ 'numero': this.placa, 'idModulo': 4 }, token).subscribe(
       response => {
         if (response.code == 200) {
           this.vehiculo = response.data;
           this.tramiteSolicitud.idVehiculo = this.vehiculo.id;
 
-          this._RestriccionService.searchByVehiculo({ 'idVehiculo': this.vehiculo.id }, token).subscribe(
+          this._FacturaService.getLastByVehiculo({ 'idVehiculo': this.vehiculo.id, 'idFactura': this.factura.id }, token).subscribe(
             response => {
               if (response.code == 200) {
-                this.restricciones = response.data;
+                //asigna los datos de ubicación del archivo
+                if (response.data != null) {
+                  this.tramiteSolicitud.numeroArchivador = response.data.numeroArchivador;
+                  this.tramiteSolicitud.bandeja = response.data.bandeja;
+                  this.tramiteSolicitud.numeroCaja = response.data.numeroCaja;
+                }
 
-                swal({
-                  title: 'Vehiculo con '+response.message,
-                  text: "¿Esta seguro que desea continuar?",
-                  type: 'warning',
-                  showCancelButton: true,
-                  confirmButtonColor: '#15d4be',
-                  cancelButtonColor: '#ff6262',
-                  confirmButtonText: 'Confirmar',
-                  cancelButtonText: 'Cancelar'
-                }).then((result) => {
-                  if (result.value) {
-                    this.onSearchTramites();
-                  }else{
-                    this.vehiculo = null;
-                    this.tramiteSolicitud.idVehiculo = null;
+                this._RestriccionService.searchByVehiculo({ 'idVehiculo': this.vehiculo.id }, token).subscribe(
+                  response => {
+                    if (response.code == 200) {
+                      this.restricciones = response.data;
+
+                      swal({
+                        title: 'Vehiculo con ' + response.message,
+                        text: "¿Esta seguro que desea continuar?",
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#15d4be',
+                        cancelButtonColor: '#ff6262',
+                        confirmButtonText: 'Confirmar',
+                        cancelButtonText: 'Cancelar'
+                      }).then((result) => {
+                        if (result.value) {
+                          this.onSearchTramites();
+                        } else {
+                          this.vehiculo = null;
+                          this.tramiteSolicitud.idVehiculo = null;
+                        }
+                      });
+                    } else if (response.code == 401) {
+                      this.onSearchTramites();
+                    } else {
+                      this.restricciones = null;
+
+                      swal({
+                        title: response.title,
+                        text: response.message,
+                        type: response.status,
+                        confirmButtonText: 'Aceptar'
+                      });
+                    }
+                    error => {
+                      this.errorMessage = <any>error;
+                      if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                      }
+                    }
                   }
-                });
-              } else if(response.code == 401){                
-                this.onSearchTramites();
-              }else{
-                this.restricciones = null;
-
+                );
+              } else {
                 swal({
                   title: response.title,
                   text: response.message,
@@ -193,6 +220,7 @@ export class NewRnrsComponent implements OnInit {
                   confirmButtonText: 'Aceptar'
                 });
               }
+
               error => {
                 this.errorMessage = <any>error;
                 if (this.errorMessage != null) {
@@ -200,9 +228,8 @@ export class NewRnrsComponent implements OnInit {
                   alert("Error en la petición");
                 }
               }
-            }
-          );
-        } else{
+            });
+        } else {
           this.vehiculo = null;
           this.tramiteSolicitud.idVehiculo = null;
 
@@ -225,7 +252,7 @@ export class NewRnrsComponent implements OnInit {
     );
   }
 
-  onSearchTramites(){
+  onSearchTramites() {
     swal({
       title: 'Cargando tramites!',
       text: 'Solo tardara unos segundos por favor espere.',
@@ -245,7 +272,7 @@ export class NewRnrsComponent implements OnInit {
 
           if (response.data.propietarios) {
             this.propietarios = response.data.propietarios;
-          }            
+          }
 
           swal.close();
         } else {
@@ -272,7 +299,7 @@ export class NewRnrsComponent implements OnInit {
     );
   }
 
-  onSearchPropietarios(){
+  onSearchPropietarios() {
     swal({
       title: 'Buscando propietarios!',
       text: 'Solo tardara unos segundos por favor espere.',
@@ -361,7 +388,7 @@ export class NewRnrsComponent implements OnInit {
           }
         }
       );
-    }else{
+    } else {
       swal({
         title: 'Error!',
         text: 'Debe digitar un número de factura.',
@@ -379,12 +406,12 @@ export class NewRnrsComponent implements OnInit {
         swal.showLoading()
       }
     });
-    
+
     let token = this._LoginService.getToken();
 
     this._FacturaService.complete({ 'id': this.factura.id }, token).subscribe(
-			response => {
-        if(response.code == 200){
+      response => {
+        if (response.code == 200) {
           this.factura = response.data;
 
           swal({
@@ -393,7 +420,7 @@ export class NewRnrsComponent implements OnInit {
             type: response.status,
             confirmButtonText: 'Aceptar'
           });
-        }else{
+        } else {
           swal({
             title: response.title,
             text: response.message,
@@ -401,13 +428,13 @@ export class NewRnrsComponent implements OnInit {
             confirmButtonText: 'Aceptar'
           });
         }
-			error => {
-					this.errorMessage = <any>error;
-					if(this.errorMessage != null){
-						console.log(this.errorMessage);
-						alert("Error en la petición");
-					}
-				}
+        error => {
+          this.errorMessage = <any>error;
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
       }
     );
   }
@@ -448,11 +475,11 @@ export class NewRnrsComponent implements OnInit {
             }
           }
         }
-      );     
+      );
     }
   }
 
-  onReadyTramite(datos:any){
+  onReadyTramite(datos: any) {
     if (datos.documentacion) {
       this.tramitesRealizados.push(
         {
@@ -461,7 +488,7 @@ export class NewRnrsComponent implements OnInit {
           'idTramiteFactura': datos.idTramiteFactura,
         }
       );
-    }else{
+    } else {
       this.documentacionPendiente.push(
         {
           'documentacion': datos.documentacion,
@@ -479,7 +506,7 @@ export class NewRnrsComponent implements OnInit {
     });
   }
 
-  onReadyInsumo(datos:any){    
+  onReadyInsumo(datos: any) {
     this.tramiteSolicitud.insumoEntregado = datos;
 
     swal({
@@ -506,8 +533,8 @@ export class NewRnrsComponent implements OnInit {
     this.tramiteSolicitud.idFactura = this.factura.id;
 
     this._TramiteSolicitudService.register(this.tramiteSolicitud, token).subscribe(
-			response => {
-        if(response.code == 200){
+      response => {
+        if (response.code == 200) {
           this.factura = response.data.factura;
           this.certificadoTradicion = response.data.certificadoTradicion;
 
@@ -517,16 +544,16 @@ export class NewRnrsComponent implements OnInit {
             type: 'success',
             confirmButtonText: 'Aceptar'
           });
-        }else if(response.code == 401){
+        } else if (response.code == 401) {
           this.factura = response.data.factura;
-          
+
           swal({
             title: 'Atención!',
             text: response.message,
             type: 'warning',
             confirmButtonText: 'Aceptar'
           });
-        }else{
+        } else {
           swal({
             title: 'Error!',
             text: response.message,
@@ -534,13 +561,13 @@ export class NewRnrsComponent implements OnInit {
             confirmButtonText: 'Aceptar'
           });
         }
-			error => {
-					this.errorMessage = <any>error;
-					if(this.errorMessage != null){
-						console.log(this.errorMessage);
-						alert("Error en la petición");
-					}
-				}
+        error => {
+          this.errorMessage = <any>error;
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
       }
     );
   }
@@ -736,5 +763,4 @@ export class NewRnrsComponent implements OnInit {
       }
     })
   }
- 
 }

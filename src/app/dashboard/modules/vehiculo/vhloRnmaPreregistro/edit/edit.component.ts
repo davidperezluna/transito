@@ -166,7 +166,7 @@ export class EditComponent implements OnInit {
     let identity = this._LoginService.getIdentity();
 
     //Traer propietarios por vehiculo
-    if (this.maquinaria.vehiculo.tipoMatricula == 'RADICADO') {
+    if (this.maquinaria.vehiculo.tipoMatricula == 'RADICADO' || this.maquinaria.vehiculo.tipoMatricula == 'IMPORTACION') {
       this._PropietarioService.searchByVehiculo({ 'idVehiculo': this.maquinaria.vehiculo.id }, token).subscribe(
         response => {
           if (response.code == 200) {

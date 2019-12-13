@@ -10,12 +10,14 @@ import { VhloPropietarioService } from 'app/services/vhloPropietario.service';
 import { FroTrteSolicitudService } from 'app/services/froTrteSolicitud.service';
 import { UserCfgTipoIdentificacionService } from '../../../../../services/userCfgTipoIdentificacion.service';
 import { UserCiudadanoService } from '../../../../../services/userCiudadano.service';
+import { DatePipe } from '@angular/common';
 import { LoginService } from '../../../../../services/login.service';
 import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-edit-rnrspreregistro',
-  templateUrl: './edit.component.html'
+  templateUrl: './edit.component.html',
+  providers: [DatePipe]
 })
 
 export class EditComponent implements OnInit {
@@ -121,7 +123,7 @@ export class EditComponent implements OnInit {
     let token = this._LoginService.getToken();
 
     //Traer propietarios por vehiculo
-    if (this.remolque.vehiculo.tipoMatricula == 'RADICADO') {
+    if (this.remolque.vehiculo.tipoMatricula == 'RADICADO' || this.remolque.vehiculo.tipoMatricula == 'IMPORTACION') {
       swal({
         title: 'Buscando propietarios!',
         text: 'Solo tardará unos segundos, por favor espere.',
@@ -186,6 +188,18 @@ export class EditComponent implements OnInit {
             }
           }
         }
+      );
+    }
+
+    var datePiper = new DatePipe('en-US');
+
+    var date = new Date();
+
+    if (this.remolque.vehiculo.fechaFactura) {
+      date.setTime(this.remolque.vehiculo.fechaFactura.timestamp * 1000);
+
+      this.remolque.vehiculo.fechaFactura = datePiper.transform(
+        date, 'yyyy-MM-dd'
       );
     }
 
@@ -283,18 +297,16 @@ export class EditComponent implements OnInit {
         }
       }
     ); */
-    this._ClaseService.select().subscribe(
+    this._ClaseService.selectByModulo({ 'idModulo': 4 }, token).subscribe(
       response => {
         this.clases = response;
-        setTimeout(() => {
-          this.claseSelected = [this.remolque.vehiculo.clase.id];
-        });
       },
       error => {
         this.errorMessage = <any>error;
+
         if (this.errorMessage != null) {
           console.log(this.errorMessage);
-          alert('Error en la petición');
+          alert("Error en la petición");
         }
       }
     );

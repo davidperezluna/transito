@@ -147,7 +147,7 @@ export class EditComponent implements OnInit {
     let identity = this._LoginService.getIdentity();
 
     //Traer propietarios por vehiculo
-    if (this.vehiculo.tipoMatricula == 'RADICADO') {
+    if (this.vehiculo.tipoMatricula == 'RADICADO' || this.vehiculo.tipoMatricula == 'IMPORTACION') {
       this._PropietarioService.searchByVehiculo({ 'idVehiculo': this.vehiculo.id }, token).subscribe(
         response => {
           if (response.code == 200) {
@@ -303,12 +303,9 @@ export class EditComponent implements OnInit {
       }
     );
 
-    this._ClaseService.select().subscribe(
+    this._ClaseService.selectByModulo({ 'idModulo': 2 }, token).subscribe(
       response => {
         this.clases = response;
-        setTimeout(() => {
-          this.claseSelected = [this.vehiculo.clase.id];
-        });
       },
       error => {
         this.errorMessage = <any>error;

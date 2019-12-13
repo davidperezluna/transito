@@ -233,7 +233,7 @@
                             </div>
                         </div>
 
-                        <div class="row" *ngIf="maquinaria.tipoMatricula == 'RADICADO' || maquinaria.tipoMatricula == 'IMPORTACION'">
+                        <div class="row" *ngIf="datos.tipoPropiedad && (maquinaria.tipoMatricula == 'RADICADO' || maquinaria.tipoMatricula == 'IMPORTACION')">
                             <!--Cuando es de tipo propio -->
                             <div class="col-xs-12 col-lg-12">
                                 <br>

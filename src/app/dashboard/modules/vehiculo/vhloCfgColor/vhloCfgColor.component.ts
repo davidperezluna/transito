@@ -11,6 +11,10 @@ declare var $: any;
 })
 
 export class VhloCfgColorComponent implements OnInit {
+  @ViewChild('dateTable') table; 
+  dataTable: any;
+  dtOptions: any;
+
   public errorMessage;
 
   public id;
@@ -18,7 +22,7 @@ export class VhloCfgColorComponent implements OnInit {
   public formNew = false;
   public formEdit = false;
   public formIndex = true;
-  public table: any;
+  /* public table: any; */
   public color: any;
 
   constructor(
@@ -35,7 +39,7 @@ export class VhloCfgColorComponent implements OnInit {
       }
     });
 
-    this._ColorService.index().subscribe(
+    /* this._ColorService.index().subscribe(
       response => {
         this.colores = response.data;
         console.log(this.colores);
@@ -52,20 +56,47 @@ export class VhloCfgColorComponent implements OnInit {
           alert("Error en la petición");
         }
       }
-    )
+    ) */
 
-    let timeoutId = setTimeout(() => {
-      this.onInitTable();
-    }, 100);
+    this.dtOptions = {
+      'ajax': {
+        url: '/vehiculo/vhloCfgColor/',
+        type: 'GET'
+      },
+      columns:  [
+        {
+          title: 'Nombre',
+          data: 'nombre'
+        }
+      ]
+    };
+    this.dataTable = $(this.table.nativeElement);
+    this.dataTable.DataTable(this.dtOptions);
   }
 
   onInitTable() {
     let token = this._loginService.getToken();
 
     this.table = $('#dataTables-example').DataTable({
-      processing: true,
-      serverSide: true,
-      ajax: this.colores,
+      /* processing: true,
+      serverSide: true, */
+      /* ajax: this._ColorService.index().subscribe(
+        response => {
+          this.colores = response.data;
+
+          let timeoutId = setTimeout(() => {
+            this.onInitTable();
+          }, 100);
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      ), */
       /* responsive: true,
       retrieve: true,
       paging: false, */

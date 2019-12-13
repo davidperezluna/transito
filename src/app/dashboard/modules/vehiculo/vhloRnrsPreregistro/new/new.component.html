@@ -163,6 +163,18 @@
                         </div> -->
                     </div>
                     <div class="row" *ngIf="remolque.tipoMatricula == 'RADICADO' || remolque.tipoMatricula == 'IMPORTACION'">
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Tipo de propiedad
+                                <span class="text-danger">
+                                    <b class="text-danger">*</b>
+                                </span>
+                            </label>
+                            <ng-select [multiple]="false" [options]="tiposPropiedad" [(ngModel)]="datos.tipoPropiedad" name="tipoPropiedad"
+                                required>
+                            </ng-select>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="datos.tipoPropiedad && (remolque.tipoMatricula == 'RADICADO' || remolque.tipoMatricula == 'IMPORTACION')">
                         <!--Cuando es de tipo propio -->
                         <div class="col-xs-12 col-lg-12">
                             <br>

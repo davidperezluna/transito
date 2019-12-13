@@ -218,7 +218,7 @@
                                 name="numeroImportacion" type="text" required>
                         </div>
                     </div>
-                    <div class="row" *ngIf="maquinaria.vehiculo.tipoMatricula == 'RADICADO'">
+                    <div class="row" *ngIf="(maquinaria.vehiculo.tipoMatricula == 'RADICADO' || maquinaria.vehiculo.tipoMatricula == 'IMPORTACION')">
                         <!-- <div class="col-xs-12 col-lg-12" *ngIf="!realizoTramites"> -->
                         <!--Cuando es de tipo propio -->
                         <div class="col-xs-12 col-lg-12" *ngIf="!realizoTramites">
@@ -266,16 +266,8 @@
                             </div>
                         </div>
                     
-                        <div class="col-xs-12 col-lg-12" *ngIf="ciudadano && maquinaria.vehiculo.tipoMatricula == 'RADICADO' && !realizoTramites">
+                        <div class="col-xs-12 col-lg-12" *ngIf="ciudadano && (maquinaria.vehiculo.tipoMatricula == 'RADICADO' || maquinaria.vehiculo.tipoMatricula == 'IMPORTACION') && !realizoTramites">
                             <div class="row">
-                                <!-- <div class="col-xs-12 col-lg-12">
-                                                            <div class="custom-control custom-checkbox">
-                                                                <input [(ngModel)]="datos.solidario" name="solidario" type="checkbox"
-                                                                    class="custom-control-input" id="solidario" checked="">
-                                                                <label class="custom-control-label" for="solidario">¿Tiene permisos para hacer
-                                                                    tramites?</label>
-                                                            </div>
-                                                        </div> -->
                                 <table class="table table-bordered table-striped" id="dataTables-example">
                                     <tbody>
                                         <tr>
@@ -289,8 +281,7 @@
                                             <td>
                                                 <b>Nombres y apellidos: </b>
                                                 <br> {{ ciudadano.primerNombre }} {{ ciudadano.segundoNombre }}
-                                                {{ ciudadano.primerApellido }} {{ ciudadano.segundoApellido
-                                                                            }}
+                                                {{ ciudadano.primerApellido }} {{ ciudadano.segundoApellido }}
                                             </td>
                                             <td>
                                                 <div class="btn-group btn-group-justified">
@@ -309,7 +300,7 @@
                         </div>
                         <!-- </div> -->
                     
-                        <div class="col-xs-12 col-lg-12" *ngIf="empresa && maquinaria.vehiculo.tipoMatricula == 'RADICADO'">
+                        <div class="col-xs-12 col-lg-12" *ngIf="empresa && (maquinaria.vehiculo.tipoMatricula == 'RADICADO' || maquinaria.vehiculo.tipoMatricula == 'IMPORTACION')">
                             <!-- Empresa -->
                             <div class="row">
                                 <div class="col-xs-12 col-lg-12">
@@ -358,7 +349,7 @@
                         </div>
                     
                         <div style="margin-top: 5%" class="col-xs-12 col-lg-12"
-                            *ngIf="datos.propietarios && datos.propietarios.length > 0 && maquinaria.vehiculo.tipoMatricula == 'RADICADO'">
+                            *ngIf="datos.propietarios && datos.propietarios.length > 0 && (maquinaria.vehiculo.tipoMatricula == 'RADICADO' || maquinaria.vehiculo.tipoMatricula == 'IMPORTACION')">
                             <table class="table table-bordered table-striped" id="dataTables-example">
                                 <br>
                                 <thead>
@@ -388,17 +379,8 @@
                                             <br> {{ propietario.apoderadoNombre }}
                                             <br>
                                         </td>
-                                        <!-- <td *ngIf="!propietario.idApoderado">
-                                                                <div class="btn-group btn-group-justified">
-                                                                    <div class="btn-group">
-                                                                        <button (click)="onNewApoderado(propietario)"
-                                                                            class="btn btn-xs btn-primary">Agregar apoderado</button>
-                                                                    </div>
-                                                                </div>
-                                                            </td> -->
                                         <td *ngIf="!realizoTramites">
-                                            <button (click)="onDeletePropietario(propietario)"
-                                                class="btn btn-xs btn-danger">Eliminar</button>
+                                            <button (click)="onDeletePropietario(propietario)" class="btn btn-xs btn-danger">Eliminar</button>
                                         </td>
                                     </tr>
                                 </tbody>

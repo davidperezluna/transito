@@ -287,7 +287,19 @@
                             </ng-select>
                         </div> -->
                     </div>
-                    <div class="row" *ngIf="remolque.vehiculo.tipoMatricula == 'RADICADO'">
+                    <div class="row" *ngIf="remolque.vehiculo.tipoMatricula == 'RADICADO' || remolque.vehiculo.tipoMatricula == 'IMPORTACION'">
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Tipo de propiedad
+                                <span class="text-danger">
+                                    <b class="text-danger">*</b>
+                                </span>
+                            </label>
+                            <ng-select [multiple]="false" [options]="tiposPropiedad" [(ngModel)]="datos.tipoPropiedad" name="tipoPropiedad"
+                                required>
+                            </ng-select>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="remolque.vehiculo.tipoMatricula == 'RADICADO' || remolque.vehiculo.tipoMatricula == 'IMPORTACION'">
                         <!--Cuando es de tipo propio -->
                         <div class="col-xs-12 col-lg-12" *ngIf="!realizoTramites">
                             <br>
@@ -334,7 +346,7 @@
                             </div>
                         </div>
                     
-                        <div class="col-xs-12 col-lg-12" *ngIf="ciudadano && remolque.vehiculo.tipoMatricula == 'RADICADO' && !realizoTramites">
+                        <div class="col-xs-12 col-lg-12" *ngIf="ciudadano && (remolque.vehiculo.tipoMatricula == 'RADICADO' || remolque.vehiculo.tipoMatricula == 'IMPORTACION') && !realizoTramites">
                             <div class="row">
                                 <table class="table table-bordered table-striped" id="dataTables-example">
                                     <tbody>

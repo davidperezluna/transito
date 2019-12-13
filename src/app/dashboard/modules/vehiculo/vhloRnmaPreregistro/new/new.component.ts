@@ -225,7 +225,7 @@ constructor(
       }
     );
     
-    this._ClaseService.selectByModulo({ 'idModulo': 2 }, token).subscribe(
+    this._ClaseService.selectByModulo({ 'idModulo': 3 }, token).subscribe(
       response => {
         this.clases = response;
       }, 
