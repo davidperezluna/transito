@@ -4,6 +4,7 @@ import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { PqoCfgTarifaService } from '../../../../services/pqoCfgTarifa.service';
 import { PqoCfgPatioService } from '../../../../services/pqoCfgPatio.service';
 import { VhloCfgTipoVehiculoService } from '../../../../services/vhloCfgTipoVehiculo.service';
+import { CfgSmlmvService } from '../../../../services/cfgSmlmv.service';
 
 import { NewComponent } from './new/new.component';
 import { EditComponent } from './edit/edit.component';
@@ -17,7 +18,8 @@ import { SelectModule } from 'angular2-select';
         PqoCfgTarifaService,
         PqoCfgTarifaService,
         PqoCfgPatioService,
-        VhloCfgTipoVehiculoService
+        VhloCfgTipoVehiculoService,
+        CfgSmlmvService
     ]
 })
 

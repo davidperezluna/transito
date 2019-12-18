@@ -10,12 +10,28 @@
                 <form #formEdit="ngForm"> 
                     <div class="form-group row">
                         <div class="col-xs-12 col-lg-12">
-                            <label>Valor <strong class="text-danger">*</strong></label>
-                            <input class="form-control" [(ngModel)]="tarifa.valor" name="valor" type="numeric" required />
+                            <label>Valor hora <strong class="text-danger">*</strong></label>
+                            <input class="form-control" [(ngModel)]="tarifa.valorHora" name="valorHora" type="numeric" required />
                         </div>
                         <div class="col-xs-12 col-lg-12">
-                            <label>Año <strong class="text-danger">*</strong></label>
-                            <input class="form-control" [(ngModel)]="tarifa.anio" name="anio" type="numeric" maxlength="4" required />
+                            <label>No. acto administrativo</label>
+                            <input class="form-control" [(ngModel)]="tarifa.numeroActoAdministrativo" name="numeroActoAdministrativo"
+                                type="text" />
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Fecha <b class="text-danger">*</b></label>
+                            <input class="form-control" [(ngModel)]="tarifa.fecha" name="fecha" type="date" required />
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Patio <strong class="text-danger">*</strong></label>
+                            <ng-select [multiple]="false" [options]="patios" [(ngModel)]="tarifa.idPatio" name="idPatio" required>
+                            </ng-select>
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Tipo vehiculo <strong class="text-danger">*</strong></label>
+                            <ng-select [multiple]="false" [options]="tiposVehiculo" [(ngModel)]="tarifa.idTipoVehiculo"
+                                name="idTipoVehiculo" required>
+                            </ng-select>
                         </div>
                     </div>
                 </form>
