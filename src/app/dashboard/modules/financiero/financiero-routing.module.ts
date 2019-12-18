@@ -22,6 +22,7 @@ import { NewRnrsComponent } from './froTrteSolicitud/newRnrs/newRnrs.component';
 import { NewRnetComponent } from './froTrteSolicitud/newRnet/newRnet.component';
 import { FroTrtePrecioComponent } from './froTrtePrecio/froTrtePrecio.component';
 import { FroTrteArchivoPlanoComponent } from './froTrteArchivoPlano/froTrteArchivoPlano.component';
+import { FroTrteHojaControlComponent } from './froTrteHojaControl/froTrteHojaControl.component';
 
 const routes: Routes = [
   {
@@ -107,6 +108,10 @@ const routes: Routes = [
   {
     path: 'froTrteArchivoPlano',
     component: FroTrteArchivoPlanoComponent
+  },
+  {
+    path: 'froTrteHojaControl',
+    component: FroTrteHojaControlComponent
   },
 ]; 
 

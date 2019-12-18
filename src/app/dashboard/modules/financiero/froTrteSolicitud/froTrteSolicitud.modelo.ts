@@ -5,6 +5,7 @@ export class FroTrteSolicitud{
 		public numeroArchivador: number,
 		public bandeja: number,
 		public numeroCaja: number,
+		public rango: number,
 		public tramitesRealizados: any,
 		public documentacionPendiente: any,
 		public insumoEntregado: any,
