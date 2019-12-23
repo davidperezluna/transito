@@ -47,7 +47,14 @@
                                 <tbody>
                                 <tr class="odd" *ngFor="let vehiculo of vehiculos; let i=index">
                                     <td><button (click)="onShow(vehiculo)" class="btn btn-primary" type="button">Detalles</button></td>
-                                    <td >{{ vehiculo.placa?.numero }}</td>
+                                    <td>
+                                        <span *ngIf="vehiculo.placa">
+                                            {{ vehiculo.placa.numero }}
+                                        </span>
+                                        <span *ngIf="!vehiculo.placa">
+                                            Sin Asignar
+                                        </span>
+                                    </td>
                                     <td >{{ vehiculo.motor }}</td>
                                     <td >{{ vehiculo.chasis }}</td>
                                     <td >{{ vehiculo.vin }}</td>
