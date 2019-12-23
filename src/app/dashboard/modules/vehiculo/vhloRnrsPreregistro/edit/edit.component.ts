@@ -300,6 +300,9 @@ export class EditComponent implements OnInit {
     this._ClaseService.selectByModulo({ 'idModulo': 4 }, token).subscribe(
       response => {
         this.clases = response;
+        setTimeout(() => {
+          this.claseSelected = [this.remolque.vehiculo.clase.id];
+        })
       },
       error => {
         this.errorMessage = <any>error;

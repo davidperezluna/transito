@@ -63,6 +63,7 @@ export class FroFacTramiteComponent implements OnInit, AfterViewInit {
   public valorVehiculo: any = null;
   
   public tramite = false;
+  public idTramite: any = null;
 
   public propietariosVehiculoRetefuente:any=[]; 
   public valorRetefuenteUnitario:any = 0;
@@ -80,6 +81,7 @@ export class FroFacTramiteComponent implements OnInit, AfterViewInit {
     private _TramitePrecioService: FroTrtePrecioService,
     private _FroTrteSolicitudService: FroTrteSolicitudService,
     private _VhloValorService: VhloValorService,
+    private _FroTrtePrecioService: FroTrtePrecioService,
     private _LoginService: LoginService,
   ){}
     
@@ -718,6 +720,27 @@ export class FroFacTramiteComponent implements OnInit, AfterViewInit {
           confirmButtonText: 'Aceptar'
         });
       }
+    }
+  }
+
+  onChangedTamitePrecio(e) {
+    if (e) {
+      let token = this._LoginService.getToken();
+
+      this._FroTrtePrecioService.searchTramiteById({ 'idTramitePrecio': e }, token).subscribe(
+        response => {
+          this.idTramite = response.data;
+
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
     }
   }
 }

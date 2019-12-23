@@ -15,6 +15,7 @@ export class NewInsumoComponent implements OnInit {
     @Input() factura: any = null;
     @Input() solicitante: any = null;
     @Input() idModulo: any = null;
+    @Input() idTramite: any = null;
     public errorMessage;
 
     public realizado: any = false;

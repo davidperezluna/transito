@@ -5,6 +5,7 @@ import { FroFacTramiteService } from '../../../../../services/froFacTramite.serv
 import { FroFacturaService } from '../../../../../services/froFactura.service';
 import { UserCiudadanoService } from '../../../../../services/userCiudadano.service';
 import { PnalFuncionarioService } from '../../../../../services/pnalFuncionario.service';
+import { FroTrtePrecioService } from 'app/services/froTrtePrecio.service';
 import { LoginService } from '../../../../../services/login.service';
 import { environment } from 'environments/environment';
 import { forEach } from '@angular/router/src/utils/collection';
@@ -20,6 +21,7 @@ export class NewRncComponent implements OnInit {
   public errorMessage;
 
   public apiUrl = environment.apiUrl + 'financiero/frotrtesolicitud';
+  public idTramite: any;
   
   public numeroFactura: any = null;
   public identificacion: any = null;
@@ -50,6 +52,7 @@ constructor(
   private _FacturaService: FroFacturaService,
   private _CiudadanoService: UserCiudadanoService,
   private _FuncionarioService: PnalFuncionarioService,
+  private _FroTrtePrecioService: FroTrtePrecioService,
   private _LoginService: LoginService,
 ){}
 
@@ -361,6 +364,23 @@ constructor(
         response => {
           if (response.code == 200) {
             this.tramiteFactura = response.data;
+
+            //para obtener el id del tramite
+            console.log(this.tramiteFactura);
+            this._FroTrtePrecioService.searchTramiteById({ 'idTramitePrecio': this.tramiteFactura.precio.tramite.id }, token).subscribe(
+              response => {
+                this.idTramite = response.data;
+
+              },
+              error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                  console.log(this.errorMessage);
+                  alert("Error en la petición");
+                }
+              }
+            );
 
             swal.close();
           } else {

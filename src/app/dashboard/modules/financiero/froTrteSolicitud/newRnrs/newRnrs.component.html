@@ -445,7 +445,7 @@
                 
                 <div class="row"  *ngIf="requiereSustrato && tramitesFactura && tramitesFactura.length == tramitesRealizados.length && !this.tramiteSolicitud.insumoEntregado">
                     <div class="col-xs-12 col-lg-12">
-                        <app-insumo [factura]="factura" [idModulo]='2' (onReadyInsumo)="onReadyInsumo($event)"></app-insumo>
+                        <app-insumo [factura]="factura" [idTramite]="idTramite" [idModulo]='2' (onReadyInsumo)="onReadyInsumo($event)"></app-insumo>
                     </div>
                 </div>
             </div>

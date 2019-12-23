@@ -255,8 +255,7 @@ export class NewComponent implements OnInit {
       'Carga util: <b>' + this.remolque.cargaUtil + '</b><br>' +
       'Peso vacio: <b>' + this.remolque.pesoVacio + '</b><br>' +
       'Referencia: <b>' + this.remolque.referencia + '</b><br>';
-    'Ficha tecnica: <b>' + this.remolque.numeroFth + '</b><br>' +
-
+      'Ficha tecnica: <b>' + this.remolque.numeroFth + '</b><br>' +
 
       swal({
         title: 'Preregistro de remolque y semiremolque!',

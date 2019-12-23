@@ -8,6 +8,7 @@ import { VhloRestriccionService } from '../../../../../services/vhloRestriccion.
 import { VhloPropietarioService } from '../../../../../services/vhloPropietario.service';
 import { PnalFuncionarioService } from '../../../../../services/pnalFuncionario.service';
 import { VhloVehiculoService } from '../../../../../services/vhloVehiculo.service';
+import { FroTrtePrecioService } from 'app/services/froTrtePrecio.service';
 import { LoginService } from '../../../../../services/login.service';
 import { environment } from 'environments/environment';
 import swal from 'sweetalert2';
@@ -25,6 +26,7 @@ export class NewRnmaComponent implements OnInit {
   public apiUrl = environment.apiUrl + 'financiero/frotrtesolicitud';
 
   public numeroFactura: any;
+  public idTramite: any;
 
   public factura: any = null;
   public vehiculo: any = null;
@@ -69,6 +71,7 @@ export class NewRnmaComponent implements OnInit {
     private _PropietarioService: VhloPropietarioService,
     private _VehiculoService: VhloVehiculoService,
     private _FuncionarioService: PnalFuncionarioService,
+    private _FroTrtePrecioService: FroTrtePrecioService,
     private _LoginService: LoginService,
   ) { }
 
@@ -450,6 +453,23 @@ export class NewRnmaComponent implements OnInit {
         response => {
           if (response.code == 200) {
             this.tramiteFactura = response.data;
+
+            //para obtener el id del tramite
+            console.log(this.tramiteFactura);
+            this._FroTrtePrecioService.searchTramiteById({ 'idTramitePrecio': this.tramiteFactura.precio.tramite.id }, token).subscribe(
+              response => {
+                this.idTramite = response.data;
+
+              },
+              error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                  console.log(this.errorMessage);
+                  alert("Error en la petición");
+                }
+              }
+            );
 
             swal.close();
           } else {

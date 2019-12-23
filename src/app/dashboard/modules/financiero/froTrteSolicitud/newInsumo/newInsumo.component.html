@@ -49,13 +49,12 @@
                             </div>
                         </div>
 
-                        <div class="col-xs-12 col-lg-12">
+                        <div class="col-xs-12 col-lg-12" *ngIf="idTramite == 30">
                             <label>Observaciones </label>
                             <textarea class="form-control" [(ngModel)]="datos.descripcion" name="descripcion" rows="4"></textarea>
                         </div>
 
                         <hr>
-
                         <!-- Aquien se entrega documento -->
                         <div class="col-xs-12 col-lg-12" >
                             <div class="custom-control custom-checkbox">
@@ -79,8 +78,7 @@
                     </div>
 
                     <!--si existe un ciudadano -->
-                    <!-- <div class="row" *ngIf="ciudadano && datos.entregada && insumo"> -->
-                    <div class="row">
+                    <div class="row" *ngIf="ciudadano && datos.entregada && insumo">
                         <b class="text-uppercase">
                             Detalles de ciudadano 
                         </b>
@@ -110,7 +108,7 @@
             </div>
             <div class="card-footer">
                 <div class="btn-group">
-                    <button (click)="onEnviar()"  [disabled]="!insumo && !ciudadano" class="btn btn-primary">
+                    <button (click)="onEnviar()"  [disabled]="!insumo || !datos.entregada" class="btn btn-primary">
                         <i class="fa fa-save"></i>
                         Guardar
                     </button>

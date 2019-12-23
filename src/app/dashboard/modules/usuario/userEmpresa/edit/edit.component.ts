@@ -93,6 +93,12 @@ export class EditComponent implements OnInit, AfterViewInit {
       date, 'yyyy-MM-dd'
     );
 
+    date.setTime(this.empresa.fechaVencimientoRegistroMercantil.timestamp * 1000);
+
+    this.empresa.fechaVencimientoRegistroMercantil = datePiper.transform(
+      date, 'yyyy-MM-dd'
+    );
+
     this.nuevaFechaInicial = this.empresa.empresaRepresentante.fechaInicial;
     //=======
 
