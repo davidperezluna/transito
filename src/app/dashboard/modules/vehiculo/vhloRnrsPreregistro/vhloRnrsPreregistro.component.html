@@ -73,7 +73,14 @@
                     </button>
                   </div>
                 </td>
-                <td>{{ remolqueEncontrado.vehiculo.placa?.numero }}</td>
+                <td>
+                  <span *ngIf="remolqueEncontrado.vehiculo.placa">
+                    {{ remolqueEncontrado.vehiculo.placa.numero }}
+                  </span>
+                  <span *ngIf="!remolqueEncontrado.vehiculo.placa">
+                    Sin Asignar
+                  </span>
+                </td>
                 <td>{{ remolqueEncontrado.vehiculo.linea?.marca.nombre }}</td>
                 <td>{{ remolqueEncontrado.vehiculo.clase?.nombre }}</td>
                 <td>{{ remolqueEncontrado.vehiculo.serie}}</td>
