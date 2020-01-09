@@ -37,7 +37,7 @@ export class CvAudienciaComponent implements OnInit, AfterViewInit {
 
   public tiposFiltro = [
     { 'value': '1', 'label': 'Identificación' },
-    { 'value': '2', 'label': 'No. de comparendo' },
+    { 'value': '4', 'label': 'No. de comparendo' },
     { 'value': '3', 'label': 'Fecha' },
   ];
 

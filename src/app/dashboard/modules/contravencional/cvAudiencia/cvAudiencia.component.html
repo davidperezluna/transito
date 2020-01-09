@@ -15,7 +15,7 @@
                 </div>
                 <div class="col-xs-12 col-lg-12" *ngIf="search.tipoFiltro">
                   <label>Filtro</label>
-                  <input *ngIf="search.tipoFiltro == 1 || search.tipoFiltro == 2" class="form-control" [(ngModel)]="search.filtro" name="filtro" type="numeric" required>
+                  <input *ngIf="search.tipoFiltro == 1 || search.tipoFiltro == 4" class="form-control" [(ngModel)]="search.filtro" name="filtro" type="numeric" required>
                   <input *ngIf="search.tipoFiltro == 3" class="form-control" [(ngModel)]="search.filtro" name="filtro" type="date" required>
                 </div>
               </div>
