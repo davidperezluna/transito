@@ -1,26 +1,30 @@
-import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { VhloCfgColorService } from '../../../../services/vhloCfgColor.service';
-import { Http, Headers } from "@angular/http";
+
+import { Http } from '@angular/http';
 import { LoginService } from '../../../../services/login.service';
 import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './vhloCfgColor.component.html'
+  templateUrl: './vhloCfgColor.component.html',
 })
 
 export class VhloCfgColorComponent implements OnInit {
   public errorMessage;
+  
+  public dtOptions: any;
 
   public id;
   public colores;
+  public data;
   public formNew = false;
   public formEdit = false;
   public formIndex = true;
   public table: any;
   public color: any;
-
+  
   constructor(
     private _ColorService: VhloCfgColorService,
     private _loginService: LoginService,
@@ -35,51 +39,36 @@ export class VhloCfgColorComponent implements OnInit {
       }
     });
 
-    this._ColorService.index().subscribe(
-      response => {
-        this.colores = response.data;
-        console.log(this.colores);
-
-        let timeoutId = setTimeout(() => {
-          this.onInitTable();
-        }, 100);
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    )
-
     let timeoutId = setTimeout(() => {
       this.onInitTable();
     }, 100);
+
   }
-
+  
   onInitTable() {
-    let token = this._loginService.getToken();
 
+    let token = this._loginService.getToken();
     this.table = $('#dataTables-example').DataTable({
       processing: true,
       serverSide: true,
-      ajax: this.colores,
-      /* responsive: true,
+      responsive: true,
       retrieve: true,
-      paging: false, */
+      paging: false,
       pageLength: 8,
-      sPaginationType: 'full_numbers',
-      oLanguage: {
-        oPaginate: {
-          sFirst: '<i class="fa fa-step-backward"></i>',
-          sPrevious: '<i class="fa fa-chevron-left"></i>',
-          sNext: '<i class="fa fa-chevron-right"></i>',
-          sLast: '<i class="fa fa-step-forward"></i>'
+      ajax: (dataTablesParameters: any, callback) => {
+        /* this._ColorService.prueba(this.dtOptions.pageLength, dataTablesParameters.start, token).subscribe(resp => { */
+          this._ColorService.pagination(dataTablesParameters.start, token).subscribe(resp => {
+            this.colores = resp.data;
+            callback({
+              recordsTotal: resp.cant,
+              recordsFiltered: resp.cant,
+              data: []
+              
+            });
+            console.log(this.colores);
+          });
         }
-      }
-    });
+      });
   }
 
   onNew() {
@@ -96,7 +85,7 @@ export class VhloCfgColorComponent implements OnInit {
     }
   }
 
-  deleteColor(id: any) {
+  onDelete(id: any) {
     swal({
       title: '¿Estás seguro?',
       text: "¡Se eliminara este registro!",
@@ -109,7 +98,7 @@ export class VhloCfgColorComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._ColorService.delete(token, id).subscribe(
+        this._ColorService.delete({'id': id}, token).subscribe(
           response => {
             swal({
               title: 'Eliminado!',
@@ -134,30 +123,9 @@ export class VhloCfgColorComponent implements OnInit {
     })
   }
 
-  editColor(color: any) {
+  onEdit(color: any) {
     this.color = color;
     this.formEdit = true;
     this.formIndex = false;
-  }
-
-  prueba() {
-    /* let token = this._loginService.getToken();
-    this._ColorService.pagination(1, token).subscribe(
-      response => {
-        this.colores = response.data;
-
-        let timeoutId = setTimeout(() => {
-          this.onInitTable();
-        }, 100);
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    ); */
   }
 }

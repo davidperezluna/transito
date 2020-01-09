@@ -48,7 +48,8 @@
               <thead>
                 <tr>
                   <th>Acciones</th>
-                  <th>Placa </th>
+                  <th>Estado</th>
+                  <th>Placa</th>
                   <th>Motor</th>
                   <th>Clase</th>
                   <th>Cilindraje</th>
@@ -70,6 +71,10 @@
                         <i class="fa fa-trash"></i>
                       </button>
                     </div>
+                  </td>
+                  <td>
+                    <span *ngIf="vehiculoEncontrado.activo" class="text-success">Activo</span>
+                    <span *ngIf="!vehiculoEncontrado.activo" class="text-danger">Inactivo</span>
                   </td>
                   <td>
                     <span *ngIf="vehiculoEncontrado.placa">

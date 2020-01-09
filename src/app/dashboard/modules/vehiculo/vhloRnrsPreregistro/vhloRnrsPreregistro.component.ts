@@ -49,10 +49,12 @@ export class VhloRnrsPreregistroComponent implements OnInit, AfterViewInit {
   }
    
   onInitTable(){
+    if(this.table) {
+      this.table.destroy();
+    }
+
     this.table = $('#dataTables-example').DataTable({
       responsive: true,
-      retrieve: true,
-      paging: false,
       pageLength: 8,
       sPaginationType: 'full_numbers',
       oLanguage: {
@@ -99,7 +101,6 @@ export class VhloRnrsPreregistroComponent implements OnInit, AfterViewInit {
 
           let timeoutId = setTimeout(() => {
             this.onInitTable();
-            swal.close();
           }, 200);
         } else {
           this.formSearch = true;
@@ -133,6 +134,7 @@ export class VhloRnrsPreregistroComponent implements OnInit, AfterViewInit {
   onEdit(remolque: any) {
     this.onInitForms();
     this.remolque = remolque;
+    this.formSearch = true;
     this.formEdit = true;
   }
   
@@ -141,7 +143,7 @@ export class VhloRnrsPreregistroComponent implements OnInit, AfterViewInit {
       this.ngOnInit();
       this.formSearch = true;
       this.formIndex = true;
-      this.onSearch();
+      /* this.onSearch(); */
     }
   }
 

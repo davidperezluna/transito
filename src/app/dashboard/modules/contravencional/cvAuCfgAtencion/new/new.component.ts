@@ -27,7 +27,7 @@ constructor(
   ){}
 
   ngOnInit() {
-    this.atencion = new CvAuCfgAtencion(null, null, null, null, null, null);
+    this.atencion = new CvAuCfgAtencion(null, null);
   }
 
   onCancelar(){

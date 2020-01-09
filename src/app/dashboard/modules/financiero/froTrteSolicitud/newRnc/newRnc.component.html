@@ -157,7 +157,8 @@
                         </div>
                     </div>
 
-                    <div class="col-xs-12 col-lg-12" *ngIf="apoderado">
+                    <!-- <div class="col-xs-12 col-lg-12" *ngIf="apoderado"> -->
+                    <div class="col-xs-12 col-lg-12">
                         <table class="table table-bordered table-striped">
                             <thead>
                                 <th colspan="3" class="text-center text-uppercase">
@@ -225,6 +226,12 @@
                                     <input type="text" class="form-control" placeholder="No. de folios" [(ngModel)]="tramiteSolicitud.numeroFolios" name="numeroFolios" required />
                                 </div>
 
+                                <div class="col-xs-12 col-lg-12">
+                                    <label>Rango <b class="text-danger">*</b></label>
+                                    <input type="text" class="form-control" placeholder="Rango" [(ngModel)]="tramiteSolicitud.rango" name="rango"
+                                        required />
+                                </div>
+
                                 <div class="col-xs-12 col-lg-12"> 
                                     <label>Número de archivador <b class="text-danger">*</b></label>
                                     <input type="text" class="form-control" placeholder="No. de archivador" [(ngModel)]="tramiteSolicitud.numeroArchivador" name="numeroArchivador" required />
@@ -282,7 +289,7 @@
                 
                 <div class="row"  *ngIf="requiereSustrato && tramitesFactura && tramitesFactura.length == tramitesRealizados.length && !this.tramiteSolicitud.insumoEntregado">
                     <div class="col-xs-12 col-lg-12">
-                        <app-insumo [factura]="factura" [solicitante]="solicitante" [idModulo]='1' (onReadyInsumo)="onReadyInsumo($event)"></app-insumo>
+                        <app-insumo [factura]="factura" [idTramite]="idTramite" [solicitante]="solicitante" [idModulo]='1' (onReadyInsumo)="onReadyInsumo($event)"></app-insumo>
                     </div>
                 </div>
             </div>

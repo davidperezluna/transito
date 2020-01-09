@@ -67,4 +67,14 @@ export class VhloCfgColorService{
 		return this._http.post(this.url + "/" + datos + "/color/pagination/all", params, { headers: headers }).map(
 			res => res.json());
 	}
+
+	prueba(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = "data=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/prueba", params, { headers: headers }).map(
+			res => res.json(),
+			this._loogerService.registerLog(token, 'INSERT', json, this.url)
+		);
+	}
 }

@@ -8,6 +8,7 @@ import { VhloRestriccionService } from '../../../../../services/vhloRestriccion.
 import { VhloPropietarioService } from '../../../../../services/vhloPropietario.service';
 import { PnalFuncionarioService } from '../../../../../services/pnalFuncionario.service';
 import { VhloVehiculoService } from '../../../../../services/vhloVehiculo.service';
+import { FroTrtePrecioService } from 'app/services/froTrtePrecio.service';
 import { LoginService } from '../../../../../services/login.service';
 import { environment } from 'environments/environment';
 import swal from 'sweetalert2';
@@ -25,6 +26,7 @@ export class NewRnaComponent implements OnInit {
   public apiUrl = environment.apiUrl + 'financiero/frotrtesolicitud';
 
   public numeroFactura: any;
+  public idTramite: any;
 
   public factura: any = null;
   public vehiculo: any = null;
@@ -70,6 +72,7 @@ export class NewRnaComponent implements OnInit {
     private _PropietarioService: VhloPropietarioService,
     private _VehiculoService: VhloVehiculoService,
     private _FuncionarioService: PnalFuncionarioService,
+    private _FroTrtePrecioService: FroTrtePrecioService,
     private _LoginService: LoginService,
   ) { }
 
@@ -82,7 +85,7 @@ export class NewRnaComponent implements OnInit {
       }
     });
 
-    this.tramiteSolicitud = new FroTrteSolicitud(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    this.tramiteSolicitud = new FroTrteSolicitud(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 
     let token = this._LoginService.getToken();
 
@@ -155,39 +158,65 @@ export class NewRnaComponent implements OnInit {
       }
     );*/
 
-    this._VehiculoService.searchByPlaca({'numero': this.placa }, token).subscribe(
+    this._VehiculoService.searchByPlacaAndModulo({ 'numero': this.placa, 'idModulo': 2  }, token).subscribe(
       response => {
         if (response.code == 200) {
           this.vehiculo = response.data;
           this.tramiteSolicitud.idVehiculo = this.vehiculo.id;
 
-          this._RestriccionService.searchByVehiculo({ 'idVehiculo': this.vehiculo.id }, token).subscribe(
+          this._FacturaService.getLastByVehiculo({ 'idVehiculo': this.vehiculo.id, 'idFactura': this.factura.id }, token).subscribe(
             response => {
               if (response.code == 200) {
-                this.restricciones = response.data;
+                //asigna los datos de ubicación del archivo
+                if(response.data != null) {
+                  this.tramiteSolicitud.numeroArchivador = response.data.numeroArchivador;
+                  this.tramiteSolicitud.bandeja = response.data.bandeja;
+                  this.tramiteSolicitud.numeroCaja = response.data.numeroCaja;
+                }
+                this._RestriccionService.searchByVehiculo({ 'idVehiculo': this.vehiculo.id }, token).subscribe(
+                  response => {
+                    if (response.code == 200) {
+                      this.restricciones = response.data;
 
-                swal({
-                  title: 'Vehiculo con '+response.message,
-                  text: "¿Esta seguro que desea continuar?",
-                  type: 'warning',
-                  showCancelButton: true,
-                  confirmButtonColor: '#15d4be',
-                  cancelButtonColor: '#ff6262',
-                  confirmButtonText: 'Confirmar',
-                  cancelButtonText: 'Cancelar'
-                }).then((result) => {
-                  if (result.value) {
-                    this.onSearchTramites();
-                  }else{
-                    this.vehiculo = null;
-                    this.tramiteSolicitud.idVehiculo = null;
+                      swal({
+                        title: 'Vehiculo con ' + response.message,
+                        text: "¿Esta seguro que desea continuar?",
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#15d4be',
+                        cancelButtonColor: '#ff6262',
+                        confirmButtonText: 'Confirmar',
+                        cancelButtonText: 'Cancelar'
+                      }).then((result) => {
+                        if (result.value) {
+                          this.onSearchTramites();
+                        } else {
+                          this.vehiculo = null;
+                          this.tramiteSolicitud.idVehiculo = null;
+                        }
+                      });
+                    } else if (response.code == 401) {
+                      this.onSearchTramites();
+                    } else {
+                      this.restricciones = null;
+
+                      swal({
+                        title: response.title,
+                        text: response.message,
+                        type: response.status,
+                        confirmButtonText: 'Aceptar'
+                      });
+                    }
+                    error => {
+                      this.errorMessage = <any>error;
+                      if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                      }
+                    }
                   }
-                });
-              } else if(response.code == 401){                
-                this.onSearchTramites();
-              }else{
-                this.restricciones = null;
-
+                );
+              } else {
                 swal({
                   title: response.title,
                   text: response.message,
@@ -195,6 +224,7 @@ export class NewRnaComponent implements OnInit {
                   confirmButtonText: 'Aceptar'
                 });
               }
+
               error => {
                 this.errorMessage = <any>error;
                 if (this.errorMessage != null) {
@@ -202,8 +232,7 @@ export class NewRnaComponent implements OnInit {
                   alert("Error en la petición");
                 }
               }
-            }
-          );
+            });
         } else{
           this.vehiculo = null;
           this.tramiteSolicitud.idVehiculo = null;
@@ -330,7 +359,7 @@ export class NewRnaComponent implements OnInit {
     if (this.numeroFactura) {
       let token = this._LoginService.getToken();
 
-      this._FacturaService.searchByNumero({ 'numeroFactura': this.numeroFactura }, token).subscribe(
+      this._FacturaService.searchByNumero({ 'numeroFactura': this.numeroFactura, 'idModulo': 2 }, token).subscribe(
         response => {
           if (response.code == 200) {
             this.factura = response.data;
@@ -451,11 +480,28 @@ export class NewRnaComponent implements OnInit {
 
     if (idTramiteFactura) {
       let token = this._LoginService.getToken();
-
+      
       this._TramiteFacturaService.show({ 'id': idTramiteFactura }, token).subscribe(
         response => {
           if (response.code == 200) {
             this.tramiteFactura = response.data;
+
+            //para obtener el id del tramite
+            console.log(this.tramiteFactura);
+            this._FroTrtePrecioService.searchTramiteById({ 'idTramitePrecio': this.tramiteFactura.precio.tramite.id }, token).subscribe(
+              response => {
+                this.idTramite = response.data;
+
+              },
+              error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                  console.log(this.errorMessage);
+                  alert("Error en la petición");
+                }
+              }
+            );
 
             swal.close();
           } else {

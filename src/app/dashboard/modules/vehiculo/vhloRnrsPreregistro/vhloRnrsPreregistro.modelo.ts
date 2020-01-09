@@ -20,7 +20,7 @@ export class VhloRegistroRemolque{
 		public idMarca: number,
 		public idLinea: number,
 		public idClase: number,
-		public idSedeOperativa: number,
+		public idOrganismoTransito: number,
 		public id: number,
 	){}
 }

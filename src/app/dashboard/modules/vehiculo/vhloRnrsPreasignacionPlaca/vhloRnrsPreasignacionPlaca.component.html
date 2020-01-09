@@ -36,23 +36,29 @@
                             <table class="table" id="dataTables-example">
                                 <thead>
                                 <tr>
+                                    <th>Acciones</th>
                                     <th>Placa</th>
                                     <th>Motor</th>
                                     <th>Chasis</th>
                                     <th>VIN</th>
                                     <th>Serie</th>
-                                    <th>Acciones</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr class="odd" *ngFor="let vehiculo of vehiculos; let i=index">
-                                    <td >{{ vehiculo.placa?.numero }}</td>
+                                    <td><button (click)="onShow(vehiculo)" class="btn btn-primary" type="button">Detalles</button></td>
+                                    <td>
+                                        <span *ngIf="vehiculo.placa">
+                                            {{ vehiculo.placa.numero }}
+                                        </span>
+                                        <span *ngIf="!vehiculo.placa">
+                                            Sin Asignar
+                                        </span>
+                                    </td>
                                     <td >{{ vehiculo.motor }}</td>
                                     <td >{{ vehiculo.chasis }}</td>
                                     <td >{{ vehiculo.vin }}</td>
                                     <td >{{ vehiculo.serie }}</td>
-                                    <td><button (click)="onShow(vehiculo)" class="btn btn-primary" type="button">Detalles</button> 
-                                    </td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -126,7 +132,7 @@
                             <b class="text-uppercase">Tramite de preasignación de placa</b>   
                         </div>
                         <div class="col-xs-12 col-lg-6" *ngIf="placas">
-                            <label>Placas disponibles en {{ funcionario.organismoTransito.nombre }} <b class="text-danger">*</b></label>
+                            <label>Placas disponibles en {{ funcionario.organismoTransito.municipio }} <b class="text-danger">*</b></label>
                             <ng-select [multiple]="false" [options]="placas" [(ngModel)]="datos.idPlaca" name="idPlaca" required>
                             </ng-select>
                         </div>

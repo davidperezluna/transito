@@ -17,8 +17,16 @@ export class VhloBuscarComponent implements OnInit, AfterViewInit {
   public vehiculos: any = null;
   public formShow:any = false;
   public formIndex:any = false;
-
+  
   public table:any = null;
+  
+  public moduloSelected: any;
+
+  public modulos = [
+    { 'value': '1', 'label': 'RNA' },
+    { 'value': '2', 'label': 'RNMA' },
+    { 'value': '3', 'label': 'RNRS' },
+  ];
   
   public datos = {
     'numeroPlaca': null,

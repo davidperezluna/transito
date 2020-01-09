@@ -15,7 +15,8 @@
                             {{ vehiculo.organismoTransito.nombre }}
                         </div>
                         <div class="col-xs-12 col-lg-4">
-                            <b>Placa: </b>
+                            <b *ngIf="!maquinaria">Placa: </b>
+                            <b *ngIf="maquinaria">Número registro: </b>
                             <ng-container *ngIf="vehiculo.placa">
                                 {{ vehiculo.placa.numero }}
                             </ng-container>
@@ -27,7 +28,9 @@
                         </div>
                         <div class="col-xs-12 col-lg-4">
                             <b>Tipo Matricula: </b>
-                            <span>{{ vehiculo.tipoMatricula }}</span>
+                            <span *ngIf="vehiculo">{{ vehiculo.tipoMatricula }}</span>
+                            <span *ngIf="maquinaria">{{ maquinaria.vehiculo.tipoMatricula }}</span>
+                            <span *ngIf="remolque">{{ remolque.vehiculo.tipoMatricula }}</span>
                         </div>
                     </div>
                 </div>
@@ -41,15 +44,15 @@
                             <div class="form-group row">
                                 <div class="col-xs-12 col-lg-4">
                                     <b>Clase: </b>
-                                    {{ vehiculo.clase.nombre }}
+                                    {{ vehiculo.clase?.nombre }}
                                 </div>
                                 <div class="col-xs-12 col-lg-4">
                                     <b>Marca: </b>
-                                    {{ vehiculo.linea.marca.nombre }}
+                                    {{ vehiculo.linea.marca?.nombre }}
                                 </div>
                                 <div class="col-xs-12 col-lg-4">
                                     <b>Linea: </b>
-                                    {{ vehiculo.linea.nombre }}
+                                    {{ vehiculo.linea?.nombre }}
                                 </div>
                                 <div class="col-xs-12 col-lg-4">
                                     <b>Modelo: </b>
@@ -57,13 +60,13 @@
                                 </div>
                                 <div class="col-xs-12 col-lg-4">
                                     <b>Color: </b>
-                                    {{ vehiculo.color.nombre }}
+                                    {{ vehiculo.color?.nombre }}
                                 </div>
-                                <div class="col-xs-12 col-lg-4">
+                                <div class="col-xs-12 col-lg-4" *ngIf="maquinaria == null || remolque == null">
                                     <b>Tipo servicio: </b>
-                                    {{ vehiculo.servicio.nombre }}
+                                    {{ vehiculo.servicio?.nombre }}
                                 </div>
-                                <div class="col-xs-12 col-lg-4">
+                                <div class="col-xs-12 col-lg-4" *ngIf="maquinaria == null || remolque == null">
                                     <b>Cilindraje: </b>
                                     {{ vehiculo.cilindraje }}
                                 </div>
@@ -81,7 +84,7 @@
                                 </div>
                                 <div class="col-xs-12 col-lg-4">
                                     <b>Combustible: </b>
-                                    {{ vehiculo.combustible.nombre }}
+                                    {{ vehiculo.combustible?.nombre }}
                                 </div>
                                 <div class="col-xs-12 col-lg-4" *ngIf="maquinaria || remolque">
                                     <b>Peso: </b>
@@ -90,18 +93,18 @@
                                 </div>
                                 <div class="col-xs-12 col-lg-4" *ngIf="maquinaria || remolque">
                                     <b>No. de ejes: </b>
-                                    <span *ngIf="maquinaria">{{ maquinaria.numeroEjes }}</span>
-                                    <span *ngIf="remolque">{{ remolque.numeroEjes }}</span>
+                                    <span *ngIf="maquinaria">{{ maquinaria.vehiculo.numeroEjes }}</span>
+                                    <span *ngIf="remolque">{{ remolque.vehiculo.numeroEjes }}</span>
                                 </div>
                                 <div class="col-xs-12 col-lg-4" *ngIf="maquinaria || remolque">
                                     <b>Origen de registro: </b>
-                                    <span *ngIf="maquinaria">{{ maquinaria.origenRegistro.nombre }}</span>
-                                    <span *ngIf="remolque">{{ remolque.origenRegistro.nombre }}</span>
+                                    <span *ngIf="maquinaria">{{ maquinaria.origenRegistro?.nombre }}</span>
+                                    <span *ngIf="remolque">{{ remolque.origenRegistro?.nombre }}</span>
                                 </div>
                                 <div class="col-xs-12 col-lg-4" *ngIf="maquinaria || remolque">
                                     <b>Condición de ingreso: </b>
-                                    <span *ngIf="maquinaria">{{ maquinaria.condicionIngreso.nombre }}</span>
-                                    <span *ngIf="remolque">{{ remolque.condicionIngreso.nombre }}</span>
+                                    <span *ngIf="maquinaria">{{ maquinaria.condicionIngreso?.nombre }}</span>
+                                    <span *ngIf="remolque">{{ remolque.condicionIngreso?.nombre }}</span>
                                 </div>
                             </div>
                         </div>

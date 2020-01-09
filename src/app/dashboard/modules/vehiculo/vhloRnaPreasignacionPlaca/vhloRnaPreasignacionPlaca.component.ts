@@ -4,13 +4,15 @@ import { VhloCfgPlacaService } from '../../../../services/vhloCfgPlaca.service';
 import { PnalFuncionarioService } from '../../../../services/pnalFuncionario.service';
 import { CfgOrganismoTransitoService } from '../../../../services/cfgOrganismoTransito.service';
 import { LoginService } from '../../../../services/login.service';
+import { DatePipe, CurrencyPipe } from '@angular/common';
 import { environment } from 'environments/environment'
 import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './vhloRnaPreasignacionPlaca.component.html'
+  templateUrl: './vhloRnaPreasignacionPlaca.component.html',
+  providers: [DatePipe]
 })
 export class VhloRnaPreasignacionPlacaComponent implements OnInit {
   public errorMessage;
@@ -155,6 +157,15 @@ export class VhloRnaPreasignacionPlacaComponent implements OnInit {
     this._PlacaService.selectByOrganismoTransitoAndTipoVehiculoAndServicio(datos, token).subscribe(
       response => {
         this.placas = response;
+
+        this.datos.fechaAsignacion = new Date();
+
+        var datePiper = new DatePipe('en-US');
+        var date = new Date();
+
+        this.datos.fechaAsignacion = datePiper.transform(
+          date, 'yyyy-MM-dd'
+        );
       }, 
       error => {
         this.errorMessage = <any>error;

@@ -640,8 +640,7 @@ constructor(
     this.vehiculo.radicado = this.radicado;
     this.radicado.numeroLicencia = this.datos.numeroLicencia;
 
-    var html = 'Que desea pre-registrar el vehiculo como:  <b>'+ this.vehiculo.tipoMatricula +
-                '</b><br>Recuerde que solo podrá editar datos generales del vehículo.';
+    var html = 'Que desea pre-registrar el vehiculo como:  <b>'+ this.vehiculo.tipoMatricula + '.';
 
     swal({
       title: '¿Está seguro?',

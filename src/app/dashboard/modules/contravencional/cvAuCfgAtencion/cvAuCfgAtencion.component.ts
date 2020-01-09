@@ -20,7 +20,7 @@ export class CvAuCfgAtencionComponent implements OnInit {
 
   constructor(
     private _AtencionService: CvAuCfgAtencionService,
-		private _loginService: LoginService,
+		private _LoginService: LoginService,
     ){}
     
   ngOnInit() {
@@ -36,7 +36,7 @@ export class CvAuCfgAtencionComponent implements OnInit {
 				response => {
           this.atenciones = response.data;
           let timeoutId = setTimeout(() => {  
-            this.iniciarTabla();
+            this.onInitTable();
           }, 100);
           swal.close();
 				}, 
@@ -51,12 +51,12 @@ export class CvAuCfgAtencionComponent implements OnInit {
       );
   }
 
-  iniciarTabla(){
+  onInitTable(){
     if (this.table) {
       this.table.destroy();
     }
 
-    $('#dataTables-example').DataTable({
+    this.table = $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,
       sPaginationType: 'full_numbers',
@@ -69,8 +69,6 @@ export class CvAuCfgAtencionComponent implements OnInit {
         }
       }
    });
-
-   this.table = $('#dataTables-example').DataTable();
   }
   
   onNew(){
@@ -90,7 +88,7 @@ export class CvAuCfgAtencionComponent implements OnInit {
   onDelete(id:any){
     swal({
       title: '¿Estás seguro?',
-      text: "¡Se eliminara este registro!",
+      text: "¡Se eliminará este registro!",
       type: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#15d4be',
@@ -99,7 +97,7 @@ export class CvAuCfgAtencionComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.value) {
-        let token = this._loginService.getToken();
+        let token = this._LoginService.getToken();
         
         this._AtencionService.delete({'id':id}, token).subscribe(
             response => {
@@ -109,7 +107,6 @@ export class CvAuCfgAtencionComponent implements OnInit {
                       type:'success',
                       confirmButtonColor: '#15d4be',
                     })
-                  this.table.destroy();
                   this.ngOnInit();
               }, 
             error => {

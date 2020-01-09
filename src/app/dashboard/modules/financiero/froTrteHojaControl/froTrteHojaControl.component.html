@@ -1,0 +1,91 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-12 col-lg-4" *ngIf='formSearch'>
+      <div class="card">
+        <div class="card-header">
+          <b class="text-uppercase">Buscar vehículo</b>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-xs-12 col-lg-12">
+              <div class="form-group">
+                <label>Placa</label>
+                <input class="form-control text-uppercase" [(ngModel)]="filtro" name="filtro" type="text" required />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="row">
+            <div class="col-xs-12 col-lg-12">
+              <div class="form-group">
+                <div class="btn-group btn-group-justified">
+                  <div class="btn-group">
+                    <button (click)="onSearch()" class="btn btn-default btn-primary" [disabled]="!filtro" type="button">
+                      <i class="fa fa-search"></i>
+                      Buscar
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 col-lg-8" *ngIf='formIndex'>
+      <div class="card">
+        <div class="card-header">
+          <b class="text-uppercase">Vehículo registrado</b>
+        </div>
+        <div class="card-body">
+          <table class="table " id="dataTables-example">
+            <thead>
+              <tr>
+                <th>Estado</th>
+                <th>Placa</th>
+                <th>Clase</th>
+                <th>Cilindraje</th>
+                <th>Modelo</th>
+                <th>Marca</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="odd">
+                <td>
+                  <span *ngIf="vehiculoEncontrado.activo" class="text-success">Activo</span>
+                  <span *ngIf="!vehiculoEncontrado.activo" class="text-danger">Inactivo</span>
+                </td>
+                <td>
+                  <span *ngIf="vehiculoEncontrado.placa">
+                    {{ vehiculoEncontrado.placa.numero }}
+                  </span>
+                  <span *ngIf="!vehiculoEncontrado.placa">
+                    Sin Asignar
+                  </span>
+                </td>
+                <td>{{ vehiculoEncontrado.clase?.nombre }}</td>
+                <td>{{ vehiculoEncontrado.cilindraje }}</td>
+                <td>{{ vehiculoEncontrado.modelo }}</td>
+                <td>
+                  <span *ngIf="vehiculoEncontrado.linea">
+                    {{vehiculoEncontrado.linea?.marca.nombre}}
+                  </span>
+                </td>
+                <td>
+                  <div class="btn-group">
+                    <a href="{{ apiUrl }}/{{ vehiculoEncontrado.id }}/hojacontrol/pdf" class="btn btn-info" target="_blank">
+                      <i class="fa fa-file-pdf-o"></i>
+                    </a>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- /.table-responsive -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

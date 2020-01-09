@@ -1,7 +1,7 @@
-<div class="container" >
+<div class="container-fluid">
   <hr>
   <div class="row" *ngIf='formIndex'>
-    <div class="col-md-12">
+    <div class="col-xs-12 col-lg-12">
         <div class="card">
           <div class="card-header">
             <h5>
@@ -29,16 +29,22 @@
               <tbody>
                 <tr class="odd" *ngFor="let atencion of atenciones; let i = index">
                   <td>{{ i + 1 }}</td>
-                  <td>{{ atencion.dia }}</td>
                   <td>
-                    <b>Hora inicial:</b> {{ atencion.horaManianaInicial }}
-                    <br>
-                    <b>Hora final:</b> {{ atencion.horaManianaFinal }}
+                    <span *ngIf="atencion.dia == 1">LUNES</span>
+                    <span *ngIf="atencion.dia == 2">MARTES</span>
+                    <span *ngIf="atencion.dia == 3">MIÉRCOLES</span>
+                    <span *ngIf="atencion.dia == 4">JUEVES</span>
+                    <span *ngIf="atencion.dia == 5">VIERNES</span>
                   </td>
                   <td>
-                    <b>Hora inicial:</b> {{ atencion.horaTardeInicial }}
+                    <b>Hora inicial:</b> {{ (atencion.horaManianaInicial.timestamp * 1000) | date: 'h:mm:ss a' }}
                     <br>
-                    <b>Hora final:</b> {{ atencion.horaTardeFinal }}
+                    <b>Hora final:</b> {{ (atencion.horaManianaFinal.timestamp * 1000) | date: 'h:mm:ss a' }}
+                  </td>
+                  <td>
+                    <b>Hora inicial:</b> {{ (atencion.horaTardeInicial.timestamp * 1000) | date: 'h:mm:ss a' }}
+                    <br>
+                    <b>Hora final:</b> {{ (atencion.horaTardeFinal.timestamp * 1000) | date: 'h:mm:ss a' }}
                   </td>
                   <td>
                     <div class="btn-group">
@@ -59,7 +65,8 @@
         </div>
       </div>
     </div>
-    
-    <app-edit-cvaucfgatencion *ngIf='formEdit' [atencion]="atencion" (ready)="ready($event)"></app-edit-cvaucfgatencion>
-    <app-new-cvaucfgatencion *ngIf='formNew' (ready)="ready($event)"></app-new-cvaucfgatencion>
+    <div class="col-xs-12 col-lg-4">
+      <app-edit-cvaucfgatencion *ngIf='formEdit' [atencion]="atencion" (ready)="ready($event)"></app-edit-cvaucfgatencion>
+      <app-new-cvaucfgatencion *ngIf='formNew' (ready)="ready($event)"></app-new-cvaucfgatencion>
+    </div>
 </div>
