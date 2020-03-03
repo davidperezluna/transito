@@ -35,6 +35,7 @@ public idPaisResidencia: any;
 public idDepartamentoNacimiento:any;
 public idDepartamentoResidencia:any;
 public correo:any;
+public password:any;
 
 constructor(
   private _CiudadanoService: UserCiudadanoService,
@@ -226,6 +227,7 @@ constructor(
     let token = this._loginService.getToken();
 
     this.ciudadano.usuario.correo = this.correo;
+    this.ciudadano.usuario.password = this.password;
 
     this._CiudadanoService.edit({ 'ciudadano': this.ciudadano }, token).subscribe(
 			response => {

@@ -6,7 +6,7 @@ import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
-  selector: 'app-index',
+  selector: 'app-index-cfgorganismotransito',
   templateUrl: './cfgOrganismoTransito.component.html'
 })
 

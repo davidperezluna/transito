@@ -6,6 +6,7 @@ import { CfgAuditoriaComponent } from './cfgAuditoria/cfgAuditoria.component';
 import { CfgFestivoComponent } from './cfgFestivo/cfgFestivo.component';
 import { CfgClaveComponent } from './cfgClave/cfgClave.component';
 import { CfgTipoInfractorComponent } from './cfgTipoInfractor/cfgTipoInfractor.component';
+import { CfgOrganismoTransitoComponent } from './cfgOrganismoTransito/cfgOrganismoTransito.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,10 @@ const routes: Routes = [
   {
     path: 'cfgTipoInfractor',
     component: CfgTipoInfractorComponent
+  },
+  {
+    path: 'cfgOrganismoTransito',
+    component: CfgOrganismoTransitoComponent
   }
 ];
 
