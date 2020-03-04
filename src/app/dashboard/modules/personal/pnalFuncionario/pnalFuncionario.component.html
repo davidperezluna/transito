@@ -115,7 +115,6 @@
                   </small>
                   <br>
                   <strong>Sede operativa:</strong>
-                  <br>
                   <small>
                     {{ funcionario.organismoTransito.nombre }}
                   </small>
@@ -152,15 +151,13 @@
                   </div>
                   <ng-container *ngIf="funcionario.fechaInicial">
                     <strong>Fecha inicio:</strong>
-                    <br>
                     <small>
                       {{ (funcionario.fechaInicial.timestamp * 1000) | date: 'yyyy-MM-dd' }}
                     </small>
-                    <br>
                   </ng-container>
+                  <br>
                   <ng-container *ngIf="funcionario.fechaFinal">
                     <strong>Fecha fin:</strong>
-                    <br>
                     <small>
                       {{ (funcionario.fechaFinal.timestamp * 1000) | date: 'yyyy-MM-dd' }}
                     </small>
@@ -176,11 +173,11 @@
                 <td *ngIf='funcionario.inhabilidad'>Finalizado</td>
                 <td>
                   <div class="btn-group">
-                    <button (click)="onShow(funcionario)" (ready)="ready($event)" class="btn btn-xs btn-default"
+                    <button (click)="onShow(funcionario)" (ready)="ready($event)" class="btn btn-xs btn-primary"
                       type="button" tooltip="Más información" [tooltipDisabled]="false" [tooltipAnimation]="true" tooltipPlacement="top">
                       <i class="fa fa-eye"></i>
                     </button>
-                    <button (click)="onTime(funcionario)" (ready)="ready($event)" class="btn btn-xs btn-primary"
+                    <button (click)="onTime(funcionario)" (ready)="ready($event)" class="btn btn-xs btn-info"
                       type="button" *ngIf="funcionario.tipoNombramiento.horarios" tooltip="Gestión de horarios" [tooltipDisabled]="false" [tooltipAnimation]="true" tooltipPlacement="top">
                       <i class="fa fa-clock-o"></i>
                     </button>
@@ -195,6 +192,10 @@
                     <button (click)="onDisabled(funcionario)" (ready)="ready($event)" class="btn btn-xs btn-warning"
                       type="button" *ngIf="funcionario.activo" tooltip="Terminación de contrato o Traslado de dependencia" [tooltipDisabled]="false" [tooltipAnimation]="true" tooltipPlacement="top">
                       <i class="fa fa-times"></i>
+                    </button>
+                    <button (click)="onChangeSede(funcionario)" (ready)="ready($event)" class="btn btn-xs btn-light" type="button" *ngIf="funcionario.activo"
+                      tooltip="Cambio sede operativa" [tooltipDisabled]="false" [tooltipAnimation]="true" tooltipPlacement="top">
+                      <i class="fa fa-refresh"></i>
                     </button>
                   </div>
                 </td>
@@ -215,4 +216,5 @@
   <app-prorroga *ngIf='formProrroga' [funcionario]="funcionario" (ready)="ready($event)"></app-prorroga>
   <app-suspension *ngIf='formSuspension' [funcionario]="funcionario" (ready)="ready($event)"></app-suspension>
   <app-disabled *ngIf='formDisabled' [funcionario]="funcionario" (ready)="ready($event)"></app-disabled>
+  <app-change-sede *ngIf='formChangeSede' [funcionario]="funcionario" (ready)="ready($event)"></app-change-sede>
 </div>

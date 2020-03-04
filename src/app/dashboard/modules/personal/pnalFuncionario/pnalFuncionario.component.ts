@@ -26,6 +26,7 @@ export class PnalFuncionarioComponent implements OnInit {
   public formShow: any;
   public formSuspension: any;
   public formDisabled: any;
+  public formChangeSede: any;
   public formProrroga: any;
   public formSearch: any;
 
@@ -64,7 +65,7 @@ export class PnalFuncionarioComponent implements OnInit {
     this.onInitForms();
 
     swal({
-      title: 'Cargando información!',
+      title: 'Cargando información!!!',
       text: 'Solo tardara unos segundos por favor espere.',
       onOpen: () => {
         swal.showLoading()
@@ -126,6 +127,7 @@ export class PnalFuncionarioComponent implements OnInit {
     this.formShow = false;
     this.formSuspension = false;
     this.formDisabled = false;
+    this.formChangeSede = false;
     this.formProrroga = false;
     this.formSearch = false;
   }
@@ -336,5 +338,25 @@ export class PnalFuncionarioComponent implements OnInit {
     this.funcionario = funcionario;
     this.formEdit = true;
     this.formSearch = false;
+  }
+
+  onChangeSede(funcionario: any) {
+    this.funcionario = funcionario;
+
+    swal({
+      title: '¿Estás seguro?',
+      text: "¡Se cambiará de sede a este registro!",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#15d4be',
+      cancelButtonColor: '#ff6262',
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.value) {
+        this.onInitForms();
+        this.formChangeSede = true;
+      }
+    });
   }
 }

@@ -6,16 +6,17 @@
                 <h5 class="text-uppercase">Registro de personal</h5>
                 <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
             </div>
+            <form #formNew="ngForm">
             <div class="card-body">
-                <form #formNew="ngForm">
                     <div *ngIf='!formConfirm'>
                         <div class="form-group row">
-                            <div class="col-xs-16 col-lg-6" style="margin-top: 2%;">
-                                <div class="input-group" style="margin-top: 6%;">
-                                    <input type="number" class="form-control" placeholder="Nro. identificación" [(ngModel)]="identificacion"
+                            <div class="col-xs-16 col-lg-6">
+                                <label>Identificación <strong class="text-danger">*</strong></label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" [(ngModel)]="identificacion"
                                         required name="identificacion" />
                                     <span class="input-group-btn">
-                                        <button (click)="onSearchCiudadano()" class="btn btn-default btn-primary" type="button">
+                                        <button (click)="onSearchCiudadano()" [disabled]="!identificacion" style="margin-top: 6%;" class="btn btn-default btn-primary" type="button">
                                             <i class="fa fa-search"></i>
                                         </button>
                                     </span>
@@ -139,75 +140,28 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <div class="col-xs-12 col-lg-3 offset-lg-3">
-                                <div class="custom-control custom-radio">
-                                    <input name="inhabilidad" [(ngModel)]="funcionario.activo" value="true" type="radio"
-                                        id="customRadio1" name="customRadio" class="custom-control-input">
-                                    <label class="custom-control-label" for="customRadio1">Dar de alta</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xs-12 col-lg-12">
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" [(ngModel)]="funcionario.excel" class="custom-control-input" id="excel" name="excel">
-                                        <label class="custom-control-label" for="excel">Exporta a EXCEL</label>
-                                    </div>
+                            <div class="col-xs-12 col-lg-12">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" [(ngModel)]="funcionario.excel" class="custom-control-input" id="excel" name="excel">
+                                    <label class="custom-control-label" for="excel">Exporta a EXCEL</label>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="form-group row">
-                            <div class="btn-group">
-                                <button (click)="onEnviar()" [disabled]="formNew.invalid"
-                                    class="btn btn-primary" type="button">
-                                    <i class="fa fa-save"></i>
-                                    Enviar
-                                </button>
-                                <button (click)="onCancelar()" class="btn btn-default">
-                                    <i class="fa fa-times"></i>
-                                    Cancelar
-                                </button>
-                            </div>
-                        </div>
                     </div>
-                    <div class="form-group row" *ngIf='formConfirm'>
-                        <div class="col-xs-12 col-lg-3 offset-lg-3">
-                            <div class="custom-control custom-radio">
-                                <input name="confirm" [(ngModel)]="funcionario.inhabilidad" value="true" type="radio"
-                                    id="customRadio3" name="customRadioConfirm" class="custom-control-input">
-                                <label class="custom-control-label" for="customRadio3">Si</label>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-lg-3">
-                            <div class="custom-control custom-radio">
-                                <input name="confirm" [(ngModel)]="funcionario.inhabilidad" value="false" type="radio"
-                                    id="customRadio4" name="customRadioConfirm" class="custom-control-input">
-                                <label class="custom-control-label" for="customRadio4">No</label>
-                            </div>
-                        </div>
-
-                        <div class="col-xs-12 col-lg-8 offset-lg-2" *ngIf='funcionario.inhabilidad == "true"'>
-                            <textarea class="form-control" [(ngModel)]="funcionario.novedad" rows='5' name="novedad"
-                                required></textarea>
-                        </div>
-
-                        <div class="btn-group">
-                            <button (click)="onConfirm()" class="btn btn-primary" type="button">
-                                <i class="fa fa-save"></i>
-                                Enviar
-                            </button>
-                            <button (click)="onCancelarConfirm()" class="btn btn-default">
-                                <i class="fa fa-times"></i>
-                                Cancelar
-                            </button>
-                        </div>
-                    </div>
-                </form>
-                <!-- <div class="form-group row" *ngIf='formPdf'>
-                    <a href="">
-                        Generar PDF
-                    </a>
-                </div> -->
+                </div>
+            </form>
+            <div class="card-footer">
+                <div class="btn-group">
+                    <button (click)="onEnviar()" [disabled]="formNew.invalid"
+                        class="btn btn-primary" type="button">
+                        <i class="fa fa-save"></i>
+                        Enviar
+                    </button>
+                    <button (click)="onCancelar()" class="btn btn-default">
+                        <i class="fa fa-times"></i>
+                        Cancelar
+                    </button>
+                </div>
             </div>
         </div>
     </div>

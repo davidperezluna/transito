@@ -18,9 +18,6 @@ import swal from 'sweetalert2';
 export class NewComponent implements OnInit {
   @Output() ready = new EventEmitter<any>();
   public funcionario: PnalFuncionario;
-  public formConfirm = false;
-  public formPdf = false;
-  public pdf: any;
   public tiposNombramiento: any;
   public tipoNombramientoSelected: any;
   public cargos: any;
@@ -47,7 +44,7 @@ export class NewComponent implements OnInit {
 
   ngOnInit() {
 
-    this.funcionario = new PnalFuncionario(null, null, null, null, null, null, null, null, false, null, null, null, null, null, null, null);
+    this.funcionario = new PnalFuncionario(null, null, null, null, null, null, null, null, null, null, null, null, null);
 
     this._TipoNombramientoService.select().subscribe(
       response => {
@@ -110,10 +107,6 @@ export class NewComponent implements OnInit {
     this.ready.emit(true);
   }
 
-  onCancelarConfirm() {
-    this.formConfirm = false;
-  }
-
   onEnviar() {
     let token = this._loginService.getToken();
 
@@ -122,82 +115,44 @@ export class NewComponent implements OnInit {
     this.funcionario.idTipoNombramiento = this.tipoNombramientoSelected;
     this.funcionario.idCargo = this.cargoSelected;
 
-    if (this.funcionario.activo == 'true') {
-      this._FuncionarioService.register(this.funcionario, token).subscribe(
-        response => {
-          this.formConfirm = false;
-          this.formPdf = true;
+    this._FuncionarioService.register(this.funcionario, token).subscribe(
+      response => {
+        if (response.code == 200) {
+          this.ready.emit(true);
 
-          if (response.code == 200) {
-            this.ready.emit(true);
-            swal({
-              title: 'Perfecto!',
-              text: 'Registro exitoso!',
-              type: 'success',
-              confirmButtonText: 'Aceptar'
-            });
-          } else {
-            swal({
-              title: 'Error!',
-              text: 'El funcionario ya se encuentra registrado',
-              type: 'error',
-              confirmButtonText: 'Aceptar'
-            })
+          swal({
+            title: response.title,
+            text: response.message,
+            type: response.status,
+            confirmButtonText: 'Aceptar'
+          });
+        } else {
+          swal({
+            title: response.title,
+            text: response.message,
+            type: response.status,
+            confirmButtonText: 'Aceptar'
+          })
+        }
+        error => {
+          this.errorMessage = <any>error;
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
           }
-          error => {
-            this.errorMessage = <any>error;
-            if (this.errorMessage != null) {
-              console.log(this.errorMessage);
-              alert("Error en la petición");
-            }
-          }
-        });
-    } else {
-      this.formConfirm = true;
-      this.formPdf = false;
-    }
-  }
-
-  onConfirm() {
-    let token = this._loginService.getToken();
-
-    if (this.funcionario.inhabilidad == 'true') {
-      this._FuncionarioService.register(this.funcionario, token).subscribe(
-        response => {
-          this.formConfirm = false;
-          this.formPdf = true;
-
-          if (response.code == 200) {
-            this.ready.emit(true);
-            swal({
-              title: 'Perfecto!',
-              text: 'Registro exitoso!',
-              type: 'success',
-              confirmButtonText: 'Aceptar'
-            });
-          } else {
-            swal({
-              title: 'Error!',
-              text: 'El funcionario ya se encuentra registrado',
-              type: 'error',
-              confirmButtonText: 'Aceptar'
-            })
-          }
-          error => {
-            this.errorMessage = <any>error;
-            if (this.errorMessage != null) {
-              console.log(this.errorMessage);
-              alert("Error en la petición");
-            }
-          }
-        });
-    } else {
-      this.formConfirm = false;
-      this.formPdf = false;
-    }
+        }
+      });
   }
 
   onSearchCiudadano() {
+    swal({
+      title: 'Buscando Ciudadano!',
+      text: 'Solo tardará unos segundos, por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+
     let token = this._loginService.getToken();
     let datos = {
       'identificacion': this.identificacion
@@ -207,7 +162,10 @@ export class NewComponent implements OnInit {
       response => {
         if (response.code == 200) {
           this.ciudadano = response.data;
+          swal.close();
         } else {
+          swal.close();
+
           swal({
             title: 'Alerta',
             text: response.message,
@@ -222,7 +180,7 @@ export class NewComponent implements OnInit {
             cancelButtonAriaLabel: 'Thumbs down',
           }).then((result) => {
             if (result.value) {
-              this.router.navigate(['/dashboard/userCiudadano']);
+              this.router.navigate(['/dashboard/usuario/userCiudadano']);
             }
           });
 

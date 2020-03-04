@@ -23,6 +23,7 @@ import { ShowComponent } from './show/show.component';
 import { ProrrogaComponent } from './prorroga/prorroga.component';
 import { SuspensionComponent } from './suspension/suspension.component';
 import { DisabledComponent } from './disabled/disabled.component';
+import { ChangeSedeComponent } from './changeSede/changeSede.component';
 import { ReportComponent } from './report/report.component';
 
 @NgModule({
@@ -35,6 +36,7 @@ import { ReportComponent } from './report/report.component';
         ProrrogaComponent,
         SuspensionComponent,
         DisabledComponent,
+        ChangeSedeComponent,
         ReportComponent,
     ],
     exports: [
@@ -45,6 +47,7 @@ import { ReportComponent } from './report/report.component';
         ProrrogaComponent,
         SuspensionComponent,
         DisabledComponent,
+        ChangeSedeComponent,
         ReportComponent,
     ],
     providers: [

@@ -1,0 +1,130 @@
+<hr>
+<div class="row">
+    <div class="col-xs-12 col-lg-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="text-uppercase">Datos de personal</h5>
+            </div>
+            <div class="card-body">
+                <form #formShow="ngForm">
+                    <div *ngIf='!formConfirm'>
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Tipo identificación: <strong>{{ funcionario.ciudadano.tipoIdentificacion.nombre }}</strong>
+                                </label>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Identificación: <strong>{{ funcionario.ciudadano.identificacion }}</strong>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Primer nombre:
+                                    <strong>{{ funcionario.ciudadano.primerNombre }}</strong>
+                                </label>
+                            </div>
+                            <div class="col-xs-12 col-lg-6" *ngIf="funcionario.ciudadano.segundoNombre">
+                                <label>Segundo nombre:
+                                    <strong>{{ funcionario.ciudadano.segundoNombre }}</strong>
+                                </label>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Primer apellido: <strong>{{ funcionario.ciudadano.primerApellido }}</strong></label>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Segundo apellido: <strong>{{ funcionario.ciudadano.segundoApellido }}</strong></label>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Tipo Nombramiento:
+                                    <strong>{{ funcionario.tipoNombramiento.nombre }}</strong>
+                                </label>
+                            </div>
+                            <div class="col-xs-12 col-lg-4" *ngIf="funcionario.numeroPlaca">
+                                <label>Numero de placa
+                                    <strong>{{ funcionario.numeroPlaca }}</strong>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-lg-4" *ngIf="funcionario.actaPosesion">
+                                <label>Acta de posesion: <strong>{{ funcionario.actaPosesion }}</strong></label>
+                            </div>
+                            <div class="col-xs-12 col-lg-4" *ngIf="funcionario.resolucion">
+                                <label>Resolución: 
+                                    <strong>{{ funcionario.resolucion }}</strong>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-lg-4" *ngIf="funcionario.fechaInicial">
+                                <label>Fecha inicio 
+                                    <strong>{{ (funcionario.fechaInicial.timestamp * 1000) | date: 'dd/MM/yyyy' }}</strong>
+                                </label>
+                            </div>
+                            <div class="col-xs-12 col-lg-4" *ngIf="funcionario.fechaFinal">
+                                <label>Fecha fin <br>
+                                    <strong>{{ (funcionario.fechaFinal.timestamp * 1000) | date: 'dd/MM/yyyy' }}</strong>
+                                </label>
+                            </div>
+                            <div class="col-xs-12 col-lg-4" *ngIf="funcionario.numeroContrato">
+                                <label>Número contrato 
+                                    <strong>{{ funcionario.numeroContrato }}</strong>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Cargo: <strong>{{ funcionario.cargo.nombre }}</strong></label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 col-lg-8">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="text-uppercase">Datos Sede Operativa</h5>
+            </div>
+            <form #formChangeSede="ngForm">
+                <div class="card-body">
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Sede operativa actual: <strong class="text-danger">*</strong></label>
+                            <ng-select [multiple]="false" [options]="organismosTransito" [(ngModel)]="organismoTransitoSelected"
+                                    name="organismoTransitoSelected" required disabled>
+                            </ng-select>
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Sede operativa nueva: <strong class="text-danger">*</strong></label>
+                            <ng-select [multiple]="false" [options]="organismosTransito" [(ngModel)]="datos.idOrganismoTransito"
+                                    name="idOrganismoTransito" required>
+                            </ng-select>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="btn-group">
+                        <button (click)="onEnviar()" [disabled]="formChangeSede.invalid" class="btn btn-primary" type="button">
+                            <i class="fa fa-floppy-o"></i>
+                            Enviar
+                        </button>
+                        <button (click)="onCancelar()" class="btn btn-default">
+                            <i class="fa fa-times"></i>
+                            Cancelar
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
