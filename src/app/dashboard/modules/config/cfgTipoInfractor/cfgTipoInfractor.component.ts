@@ -11,9 +11,10 @@ declare var $: any;
 })
 export class CfgTipoInfractorComponent implements OnInit {
   public errorMessage;
-	public id;
+
 	public respuesta;
 	public tipos;
+	public tipo;
 	public formNew = false;
 	public formEdit = false;
   public formIndex = true;
@@ -128,8 +129,8 @@ export class CfgTipoInfractorComponent implements OnInit {
     })
   }
 
-  onEdit(smlmv:any){
-    this.smlmv = smlmv;
+  onEdit(tipo:any){
+    this.tipo = tipo;
     this.formEdit = true;
     this.formIndex = false;
   }

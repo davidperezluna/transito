@@ -3,7 +3,7 @@ export class CfgOrganismoTransito{
 		public nombre: any,
 		public divipo: string,
 		public jurisdiccion: string,
-		public ciudad: string,
+		public municipio: string,
 		public asignacionRango: boolean,
 		public sede: boolean,
 		public departamento: string,

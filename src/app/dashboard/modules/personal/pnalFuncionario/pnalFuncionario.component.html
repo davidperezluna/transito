@@ -136,6 +136,7 @@
                     <small>
                       {{ funcionario.numeroContrato }}
                     </small>
+                    <br>
                   </div>
                   <div *ngIf='funcionario.tipoNombramiento.id == 1'>
                     <strong>Tipo nombramiento:</strong>
@@ -163,14 +164,14 @@
                     </small>
                   </ng-container>
                 </td>
-                <td *ngIf='funcionario.activo'>En ejecución</td>
-                <td *ngIf='!funcionario.activo'>Finalizado</td>
-                <td *ngIf='funcionario.inhabilidad'>Inhabilitado</td>
-                <td *ngIf='funcionario.modificatorio'>Modificatorio</td>
-                <td *ngIf='!funcionario.modificatorio'>Contrato principal</td>
-                <td *ngIf='funcionario.activo'>Activo</td>
-                <td *ngIf='!funcionario.activo && !funcionario.inhabilidad'>Suspendido</td>
-                <td *ngIf='funcionario.inhabilidad'>Finalizado</td>
+                <td *ngIf='funcionario.activo'><label class="badge bg-success">En ejecución</label></td>
+                <td *ngIf='!funcionario.activo'><label class="badge bg-danger">Finalizado</label></td>
+                <td *ngIf='funcionario.inhabilidad'><label class="badge bg-danger">Inhabilitado</label></td>
+                <td *ngIf='funcionario.modificatorio'><label class="badge bg-warning">Modificatorio</label></td>
+                <td *ngIf='!funcionario.modificatorio'><label class="badge bg-primary">Contrato principal</label></td>
+                <td *ngIf='funcionario.activo'><label class="badge bg-info">Activo</label></td>
+                <td *ngIf='!funcionario.activo && !funcionario.inhabilidad'><label class="badge bg-danger">Suspendido</label></td>
+                <td *ngIf='funcionario.inhabilidad'><label class="badge bg-danger">Finalizado</label></td>
                 <td>
                   <div class="btn-group">
                     <button (click)="onShow(funcionario)" (ready)="ready($event)" class="btn btn-xs btn-primary"

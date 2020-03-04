@@ -50,22 +50,23 @@ export class UserUsuarioMenuComponent implements OnInit {
 
     this._UserUsuarioMenuService.searchMenus({ 'identificacion': this.numeroIdentificacion }, token).subscribe(
       response => {
-        this.activo = response.data.activo;
-        if(this.activo){
-          this.calassActivo = 'btn-warning';
-          this.txtActivo = 'Inhabilitar';
-        }else{
-          this.calassActivo = 'btn-success';
-          this.txtActivo = 'Habilitar';
-        }
         if (response.code == 200) {
+          this.activo = response.data.activo;
+          if (this.activo) {
+            this.calassActivo = 'btn-warning';
+            this.txtActivo = 'Inhabilitar';
+          } else {
+            this.calassActivo = 'btn-success';
+            this.txtActivo = 'Habilitar';
+          }
+
           this.usuarioMenus = response.data.usuarioMenus;
           this.formIndex = true;
           
           swal({
-            title: 'Perfecto!',
+            title: response.title,
             text: response.message,
-            type: 'success',
+            type: response.status,
             confirmButtonText: 'Aceptar'
           });
 
@@ -77,9 +78,9 @@ export class UserUsuarioMenuComponent implements OnInit {
           this.formIndex = false;
           
           swal({
-            title: 'Atención!',
+            title: response.title,
             text: response.message,
-            type: 'warning',
+            type: response.status,
             confirmButtonText: 'Aceptar'
           });
         }

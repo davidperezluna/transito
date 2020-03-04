@@ -16,7 +16,7 @@ export class NewComponent implements OnInit {
 
 constructor(
   private _OrganismoTransitoService: CfgOrganismoTransitoService,
-  private _loginService: LoginService,
+  private _LoginService: LoginService,
   ){}
 
   ngOnInit() {
@@ -28,7 +28,7 @@ constructor(
   }
   
   onEnviar(){
-    let token = this._loginService.getToken();
+    let token = this._LoginService.getToken();
     
 		this._OrganismoTransitoService.register(this.organismo, token).subscribe(
 			response => {

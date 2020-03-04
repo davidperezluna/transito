@@ -14,7 +14,7 @@ declare var $: any;
 export class VhloRnaPreregistroComponent implements OnInit, AfterViewInit {
   public errorMessage;
 
-	public vehiculoEncontrado;
+	public vehiculos: any;
   
   public formSearch : any;
   public formIndex : any;
@@ -87,7 +87,7 @@ export class VhloRnaPreregistroComponent implements OnInit, AfterViewInit {
     this._RnaPreregistroService.searhByFilter({ 'filtro': this.filtro }, token).subscribe(
       response => {
         if (response.code == 200) {
-          this.vehiculoEncontrado = response.data[0];
+          this.vehiculos = response.data;
 
           swal({
             title: response.title,

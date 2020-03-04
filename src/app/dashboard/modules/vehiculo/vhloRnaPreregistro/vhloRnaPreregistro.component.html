@@ -38,7 +38,8 @@
           </div>
         </div>
       </div>
-      <div class="col-xs-12 col-lg-8" *ngIf='formIndex'>
+
+      <div class="col-xs-12 col-lg-8" *ngIf='formIndex && vehiculos'>
         <div class="card">
           <div class="card-header">
             <b class="text-uppercase">Vehículo registrado</b>
@@ -61,45 +62,45 @@
                 </tr>
               </thead>
               <tbody>
-                <tr class="odd">
+                <tr class="odd" *ngFor="let vehiculo of vehiculos; let i = index">
                   <td>
                     <div class="btn-group">
-                      <button (click)="onEdit(vehiculoEncontrado)" class="btn btn-xs btn-primary" type="button">
+                      <button (click)="onEdit(vehiculo)" class="btn btn-xs btn-primary" type="button">
                         <i class="fa fa-pencil"></i>
                       </button>
-                      <button (click)="onDelete(vehiculoEncontrado.id)" class="btn btn-xs btn-danger" type="button">
+                      <button (click)="onDelete(vehiculo.id)" class="btn btn-xs btn-danger" type="button">
                         <i class="fa fa-trash"></i>
                       </button>
                     </div>
                   </td>
                   <td>
-                    <span *ngIf="vehiculoEncontrado.activo" class="text-success">Activo</span>
-                    <span *ngIf="!vehiculoEncontrado.activo" class="text-danger">Inactivo</span>
+                    <span *ngIf="vehiculo.activo" class="text-success">Activo</span>
+                    <span *ngIf="!vehiculo.activo" class="text-danger">Inactivo</span>
                   </td>
                   <td>
-                    <span *ngIf="vehiculoEncontrado.placa">
-                      {{ vehiculoEncontrado.placa.numero }}
+                    <span *ngIf="vehiculo.placa">
+                      {{  vehiculo.placa.numero }}
                     </span>
-                    <span *ngIf="!vehiculoEncontrado.placa">
+                    <span *ngIf="!vehiculo.placa">
                       Sin Asignar
                     </span>
                   </td>
-                  <td>{{ vehiculoEncontrado.motor }}</td>
-                  <td>{{ vehiculoEncontrado.clase?.nombre }}</td>
-                  <td>{{ vehiculoEncontrado.cilindraje }}</td>
-                  <td>{{ vehiculoEncontrado.modelo }}</td>
+                  <td>{{  vehiculo.motor }}</td>
+                  <td>{{  vehiculo.clase?.nombre }}</td>
+                  <td>{{  vehiculo.cilindraje }}</td>
+                  <td>{{  vehiculo.modelo }}</td>
                   <td>
-                    <span *ngIf="vehiculoEncontrado.linea">
-                        {{vehiculoEncontrado.linea?.marca.nombre}}
+                    <span *ngIf="vehiculo.linea">
+                        {{ vehiculo.linea?.marca.nombre}}
                     </span>
                   </td>
                   <td>
-                    <span *ngIf="vehiculoEncontrado.linea">
-                        {{vehiculoEncontrado.linea?.nombre}}
+                    <span *ngIf="vehiculo.linea">
+                        {{ vehiculo.linea?.nombre}}
                     </span>
                   </td>
-                  <td>{{vehiculoEncontrado.valor}}</td> 
-                  <td>{{vehiculoEncontrado.chasis}}</td> 
+                  <td>{{ vehiculo.valor}}</td> 
+                  <td>{{ vehiculo.chasis}}</td> 
                 </tr>
               </tbody>
             </table> 
