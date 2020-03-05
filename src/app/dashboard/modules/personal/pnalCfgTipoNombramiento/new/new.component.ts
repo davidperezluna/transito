@@ -12,7 +12,7 @@ export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
 public tipoNombramiento: PnalCfgTipoNombramiento;
 public errorMessage;
-public respuesta;
+public excel;
 
 constructor(
   private _TipoNombramientoService: PnalCfgTipoNombramientoService,
@@ -20,7 +20,7 @@ constructor(
   ){}
 
   ngOnInit() {
-    this.tipoNombramiento = new PnalCfgTipoNombramiento(null, true, true, true, true, null);
+    this.tipoNombramiento = new PnalCfgTipoNombramiento(null, false, false, false, false, null);
   }
   
   onCancelar(){
