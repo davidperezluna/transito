@@ -13,10 +13,10 @@ export const FroTrteSolicitudRoutes: Route[] = [
       component: FroTrteSolicitudComponent
     }, */
 
-    {
+    /* {
       path: 'tramitesolicitud/rnc',
       component: NewRncComponent
-    },
+    }, */
 
     /* {
       path: 'tramitesolicitud/rna',
