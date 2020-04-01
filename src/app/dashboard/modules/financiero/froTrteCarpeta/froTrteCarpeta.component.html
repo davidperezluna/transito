@@ -1,39 +1,55 @@
-<div class="container row">
-    <div class="col-xs-12 col-lg-4">
-        <div class="card">
-            <div class="card-header">
-                <b class="text-uppercase">Cargar tramites carpeta</b>
-                <br>
-                <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
-            </div>
-            <div class="card-body">
-                <form #formFiltros="ngForm">
-                    <div class="col-xs-12 col-lg-12">
-                        <label>Seleccionar organismo tránsito <b class="text-danger">*</b></label>
-                        <ng-select [multiple]="false" [options]="organismosTransito"
-                            [(ngModel)]="datos.idOrganismoTransito" name="idOrganismoTransito" required>
-                        </ng-select>
-                    </div>
-                    <div class="col-xs-12 col-lg-12" *ngIf="datos.idOrganismoTransito">
-                        <label>Módulo</label>
-                        <ng-select [multiple]="false" [options]="modulos" [(ngModel)]="datos.idModulo" required
-                            name="idModulo">
-                        </ng-select>
-                    </div>
-                </form>
-            </div>
-            <div class="card-footer">
-                <div class="btn-group row">
-                    <div class="col-xs-12 col-lg-12">
-                        <button (click)="onEnviar()" [disabled]="formFiltros.invalid" class="btn btn-primary"
-                            type="button">
-                            <i class="fa fa-cogs"></i>
-                            Generar
-                        </button>
-                    </div>
-                    <hr>
+<div class="container">
+    <hr>
+    <div class="row" *ngIf='formIndex'>
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">
+                        <strong class="text-uppercase">Trámites por carpeta</strong>
+                        <small>Lista de tramites por carpeta</small>
+                        <div class="btn-group pull-right">
+                            <button (click)="onNew()" class="btn btn-default">
+                                <i class="fa fa-plus"></i>
+                                <span class="text">Nuevo</span>
+                            </button>
+                        </div>
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <table class="table" id="dataTables">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Vehiculo</th>
+                                <th>Tramite</th>
+                                <th>O.T</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="odd" *ngFor="let tramiteCarpeta of tramitesCarpeta; let i = index">
+                                <td>{{ i + 1 }}</td>
+                                <td>{{ tramiteCarpeta.vehiculo.placa.numero }}</td>
+                                <td>{{ tramiteCarpeta.tramite.nombre }}</td>
+                                <td>{{ tramiteCarpeta.organismoTransito.nombre }}</td>
+                                <td>
+                                    <div class="btn-group">
+                                        <button (click)="onEdit(tramiteCarpeta)" class="btn btn-xs btn-primary" type="button">
+                                            <i class="fa fa-edit"></i>
+                                        </button>
+                                        <button (click)="onDelete(tramiteCarpeta.id)" class="btn btn-xs btn-danger" type="button">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- /.table-responsive -->
                 </div>
             </div>
         </div>
     </div>
+    <app-edit-frotrtecarpeta *ngIf='formEdit' [tramiteCarpeta]="tramiteCarpeta" (ready)="ready($event)"></app-edit-frotrtecarpeta>
+    <app-new-frotrtecarpeta *ngIf='formNew' (ready)="ready($event)"></app-new-frotrtecarpeta>
 </div>

@@ -5,16 +5,16 @@ import { SelectModule } from 'angular2-select';
 import { PopoverModule } from "ngx-popover";
 import { TooltipModule } from "ngx-tooltip";
 
-/* import { FroTrteCarpetaService } from '../../../../services/froTrteCarpeta.service';
+import { FroTrteCarpetaService } from '../../../../services/froTrteCarpeta.service';
 
 import { NewComponent } from './new/new.component';
-import { EditComponent } from './edit/edit.component'; */
+import { EditComponent } from './edit/edit.component';
 
 @NgModule({
     imports: [CommonModule, Ng2BootstrapModule.forRoot(), SelectModule, PopoverModule, TooltipModule],
-    declarations: [/* NewComponent, EditComponent */],
-    exports: [/* NewComponent, EditComponent */],
-    providers: [/* FroTrteCarpetaService */]
+    declarations: [NewComponent, EditComponent],
+    exports: [NewComponent, EditComponent],
+    providers: [FroTrteCarpetaService]
 })
 
 export class FroTrteCarpetaModule { }

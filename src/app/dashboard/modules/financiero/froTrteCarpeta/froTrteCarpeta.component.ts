@@ -1,9 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { FroTrteSolicitudService } from '../../../../services/froTrteSolicitud.service';
-import { CfgOrganismoTransitoService } from '../../../../services/cfgOrganismoTransito.service';
-import { CfgModuloService } from '../../../../services/cfgModulo.service';
+import { FroTrteCarpetaService } from '../../../../services/froTrteCarpeta.service';
+import { FroTrteCarpeta } from './froTrteCarpeta.modelo';
 import { LoginService } from '../../../../services/login.service';
-import { environment } from 'environments/environment';
 import swal from 'sweetalert2';
 declare var $: any;
 
@@ -14,53 +12,45 @@ declare var $: any;
 
 export class FroTrteCarpetaComponent implements OnInit, AfterViewInit {
   public errorMessage;
+
+  public tramitesCarpeta;
+
+  public formIndex: any;
+  public formNew: any;
+  public formEdit: any;
   
-  public docsUrl = environment.docsUrl;
-  public organismosTransito;
-  public modulos; 
-
-  public archivos: any = null;
-
-  public tiposReporte = [
-    { value: '1', label: 'INFORMACIÓN DE VEHICULOS' },
-    { value: '2', label: 'PROPIETARIOS ACTUALES' },
-    { value: '3', label: 'TRAMITES' },
-    { value: '4', label: 'MEDIDA CAUTELAR' },
-    { value: '5', label: 'CANCELACIÓN MATRICULA' },
-    { value: '6', label: 'PRENDAS' },
-    { value: '7', label: 'RADICADOS DE CUENTA' },
-  ];
-
-  public datos = {
-    'idOrganismoTransito': null,
-    'idModulo': null,
-    'fechaInicial': null,
-    'fechaFinal': null,
-  }
+  public tramiteCarpeta: FroTrteCarpeta;
+  public table: any = null;
 
   constructor(
-    private _FroTrteSolicitudService: FroTrteSolicitudService,
-    private _OrganismoTransitoService: CfgOrganismoTransitoService,
-    private _ModuloService: CfgModuloService,
+    private _FroTrteCarpetaService: FroTrteCarpetaService,
     private _LoginService: LoginService,
-  ) {}
+  ) { }
 
   ngOnInit() {
-    this._OrganismoTransitoService.selectSedes().subscribe(
-      response => {
-        this.organismosTransito = response;
-      },
-      error => {
-        this.errorMessage = <any>error;
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
+    this.onInitForms();
+    this.formIndex = true;
+    
+    swal({
+      title: 'Cargando Tabla!',
+      text: 'Solo tardará unos segundos, por favor espere.',
+      timer: 1500,
+      onOpen: () => {
+        swal.showLoading();
       }
-    );
-    this._ModuloService.select().subscribe(
+    }).then((result) => {
+      if (
+        // Read more about handling dismissals
+        result.dismiss === swal.DismissReason.timer
+      ) {
+      }
+    });
+    this._FroTrteCarpetaService.index().subscribe(
       response => {
-        this.modulos = response;
+        this.tramitesCarpeta = response.data;
+        let timeoutId = setTimeout(() => {
+          this.onInitTable();
+        }, 100);
       },
       error => {
         this.errorMessage = <any>error;
@@ -71,45 +61,87 @@ export class FroTrteCarpetaComponent implements OnInit, AfterViewInit {
         }
       }
     );
+  }
+
+  onInitForms() {
+    this.formIndex = false;
+    this.formNew = false;
+    this.formEdit = false;
+  }
+
+  onInitTable() {
+    this.table = $('#dataTables').DataTable({
+      destroy: true,
+      responsive: true,
+      pageLength: 8,
+      sPaginationType: 'full_numbers',
+      oLanguage: {
+        oPaginate: {
+          sFirst: '<i class="fa fa-step-backward"></i>',
+          sPrevious: '<i class="fa fa-chevron-left"></i>',
+          sNext: '<i class="fa fa-chevron-right"></i>',
+          sLast: '<i class="fa fa-step-forward"></i>'
+        }
+      }
+    });
   }
 
   ngAfterViewInit() {
     swal.close();
   }
 
-  onEnviar() {
-    let token = this._LoginService.getToken();
-    let identity = this._LoginService.getIdentity();
+  onNew() {
+    this.onInitForms();
+    this.formNew = true;
+  }
 
-    this._FroTrteSolicitudService.createFile(this.datos, token).subscribe(
-      response => {
-        if(response.code == 200) {
-          console.log(response.data);
-          this.archivos = response.data; 
+  ready() {
+    this.ngOnInit();
+  }
 
-          swal({
-            title: response.title,
-            text: response.message,
-            type: response.status,
-            confirmButtonText: 'Aceptar'
-          });
-        } else {
-          swal({
-            title: response.title,
-            text: response.message,
-            type: response.status,
-            confirmButtonText: 'Aceptar'
-          });
-        }
-      },
-      error => {
-        this.errorMessage = <any>error;
+  onDelete(id: any) {
+    swal({
+      title: '¿Estás seguro?',
+      text: "¡Se eliminará este registro!",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#15d4be',
+      cancelButtonColor: '#ff6262',
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.value) {
+        let token = this._LoginService.getToken();
 
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
+        this._FroTrteCarpetaService.delete({ 'id': id }, token).subscribe(
+          response => {
+            swal({
+              title: 'Eliminado!',
+              text: response.message,
+              type: 'success',
+              confirmButtonColor: '#15d4be',
+            })
+
+            this.table.destroy();
+            this.ngOnInit();
+          },
+          error => {
+            this.errorMessage = <any>error;
+
+            if (this.errorMessage != null) {
+              console.log(this.errorMessage);
+              alert("Error en la petición");
+            }
+          }
+        );
       }
-    );
+    });
+  }
+
+  onEdit(tramiteCarpeta: any) {
+    this.tramiteCarpeta = tramiteCarpeta;
+    this.formEdit = true;
+    this.formIndex = false;
+
   }
 }
