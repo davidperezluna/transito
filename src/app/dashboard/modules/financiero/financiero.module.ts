@@ -37,6 +37,7 @@ import { FroTrtePrecioModule } from './froTrtePrecio/froTrtePrecio.module';
 import { FroTrteSolicitudModule } from './froTrteSolicitud/froTrteSolicitud.module';
 import { FroTrteArchivoPlanoModule } from './froTrteArchivoPlano/froTrteArchivoPlano.module';
 import { FroTrteHojaControlModule } from './froTrteHojaControl/froTrteHojaControl.module';
+import { FroTrteCarpetaModule } from './froTrteCarpeta/froTrteCarpeta.module';
 import { UserCiudadanoModule } from '../usuario/userCiudadano/userCiudadano.module';
 
 import { FroTrteArchivoPlanoComponent } from './froTrteArchivoPlano/froTrteArchivoPlano.component';
@@ -88,6 +89,7 @@ import { NewRnetDesvinculacionCambioServicioComponent } from './froTrteSolicitud
 import { NewRnetConceptoFavorableComponent } from './froTrteSolicitud/tramites/tramiteConceptoFavorable/newConceptoFavorable.component';
 import { NewRnetDesvinculacionComunAcuerdoComponent } from './froTrteSolicitud/tramites/tramiteDesvinculacionComunAcuerdo/newDesvinculacionComunAcuerdo.component';
 import { FroTrteHojaControlComponent } from './froTrteHojaControl/froTrteHojaControl.component';
+import { FroTrteCarpetaComponent } from './froTrteCarpeta/froTrteCarpeta.component';
 
 @NgModule({
   imports: [
@@ -111,6 +113,7 @@ import { FroTrteHojaControlComponent } from './froTrteHojaControl/froTrteHojaCon
     FroTrtePrecioModule,
     FroTrteArchivoPlanoModule,
     FroTrteHojaControlModule,
+    FroTrteCarpetaModule,
   ],
   declarations: [
     FroCfgTipoRecaudoComponent,
@@ -177,6 +180,7 @@ import { FroTrteHojaControlComponent } from './froTrteHojaControl/froTrteHojaCon
     NewRnetConceptoFavorableComponent,
     NewRnetDesvinculacionComunAcuerdoComponent,
     FroTrteHojaControlComponent,
+    FroTrteCarpetaComponent,
   ]
 })
 export class FinancieroModule { }

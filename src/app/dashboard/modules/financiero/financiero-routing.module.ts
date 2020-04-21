@@ -20,9 +20,11 @@ import { NewRnaComponent } from './froTrteSolicitud/newRna/newRna.component';
 import { NewRnmaComponent } from './froTrteSolicitud/newRnma/newRnma.component';
 import { NewRnrsComponent } from './froTrteSolicitud/newRnrs/newRnrs.component';
 import { NewRnetComponent } from './froTrteSolicitud/newRnet/newRnet.component';
+/* import { ReportesRnetComponent } from './froTrteSolicitud/newRnet/reportes/reportesRnet.component'; */
 import { FroTrtePrecioComponent } from './froTrtePrecio/froTrtePrecio.component';
 import { FroTrteArchivoPlanoComponent } from './froTrteArchivoPlano/froTrteArchivoPlano.component';
 import { FroTrteHojaControlComponent } from './froTrteHojaControl/froTrteHojaControl.component';
+import { FroTrteCarpetaComponent } from './froTrteCarpeta/froTrteCarpeta.component';
 
 const routes: Routes = [
   {
@@ -101,6 +103,10 @@ const routes: Routes = [
     path: 'tramitesolicitud/rnet',
     component: NewRnetComponent
   },
+  /* {
+    path: 'tramitesolicitud/rnet/reportes',
+    component: ReportesRnetComponent
+  }, */
   {
     path: 'froTrtePrecio',
     component: FroTrtePrecioComponent
@@ -112,6 +118,10 @@ const routes: Routes = [
   {
     path: 'froTrteHojaControl',
     component: FroTrteHojaControlComponent
+  },
+  {
+    path: 'froTrteCarpeta',
+    component: FroTrteCarpetaComponent
   },
 ]; 
 

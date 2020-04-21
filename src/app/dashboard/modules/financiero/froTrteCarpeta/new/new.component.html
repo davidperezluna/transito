@@ -1,0 +1,152 @@
+<div class="container row">
+    <div class="col-xs-12 col-lg-8">
+        <div class="card">
+            <div class="card-header">
+                <b class="text-uppercase">NUEVO REGISTRO</b>
+                <br>
+                <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
+            </div>
+            <div class="card-body">
+                <form #formNew="ngForm">
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Organismo tránsito <b class="text-danger">*</b></label>
+                            <ng-select [multiple]="false" [options]="organismosTransito"
+                                [(ngModel)]="tramiteCarpeta.idOrganismoTransito" name="idOrganismoTransito" required>
+                            </ng-select>
+                        </div>
+                        <div class="col-xs-12 col-lg-6" *ngIf="tramiteCarpeta.idOrganismoTransito">
+                            <label>Módulo</label>
+                            <ng-select [multiple]="false" [options]="modulos" [(ngModel)]="tramiteCarpeta.idModulo" (ngModelChange)="onChangedModulo($event)" required
+                                name="idModulo">
+                            </ng-select>
+                        </div>
+                        <div class="col-xs-16 col-lg-12" *ngIf="tramiteCarpeta.idModulo">
+                            <label>Vehiculo <strong class="text-danger">*</strong></label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" [(ngModel)]="placa" placeholder="placa vehículo" required name="placa" />
+                                <span class="input-group-btn">
+                                    <button (click)="onSearchVehiculo()" class="btn btn-default btn-primary" [disabled]="!placa" style="margin-top: 7%;" type="button">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <div class="row">
+                                <!-- .row -->
+                                <div class="col-xs-12 col-lg-12" *ngIf='vehiculo'>
+                                    <table class="table table-bordered table-striped">
+                                        <tbody>
+                                            <tr class="odd">
+                                                <td>
+                                                    <b>Placa</b>
+                                                    <br> {{ vehiculo.placa.numero }}
+                                                </td>
+                                                <td>
+                                                    <b>Tipo Vehículo</b>
+                                                    <br> {{ vehiculo.placa.tipoVehiculo.nombre }}
+                                                </td>
+                                                <td>
+                                                    <b>Clase</b>
+                                                    <br> {{ vehiculo?.clase.nombre }}
+                                                </td>
+                                                <td>
+                                                    <b>Modelo</b>
+                                                    <br> {{ vehiculo.modelo }}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-lg-6" *ngIf="vehiculo">
+                            <label>Tipo identificación</label>
+                            <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionSelected" name="idTipoIdentificacion" required></ng-select>
+                        </div>
+                        <div class="col-xs-12 col-lg-6" *ngIf="vehiculo">
+                            <label>Solicitante <strong class="text-danger">*</strong></label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" [(ngModel)]="identificacion" placeholder="identificacíon del solicitante" required name="solicitante" />
+                                <span class="input-group-btn">
+                                    <button (click)="onSearchSolicitante()" class="btn btn-default btn-primary" [disabled]="!identificacion || !tipoIdentificacionSelected" style="margin-top: 7%;" type="button">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-lg-12" *ngIf="vehiculo">
+                            <div class="row">
+                                <!-- .row -->
+                                <div class="col-xs-12 col-lg-12" *ngIf='ciudadano'>
+                                    <table class="table table-bordered table-striped">
+                                        <tbody>
+                                            <tr class="odd">
+                                                <td>
+                                                    <b>Tipo de identificación</b>
+                                                    <br> {{ ciudadano.tipoIdentificacion?.nombre }}
+                                                </td>
+                                                <td>
+                                                    <b>Numero de identificación</b>
+                                                    <br> {{ ciudadano.identificacion }}
+                                                </td>
+                                                <td>
+                                                    <b>Ciudadano</b>
+                                                    <br> {{ ciudadano.primerNombre }} {{ ciudadano.primerApellido }}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col-xs-12 col-lg-12" *ngIf='empresa'>
+                                    <table class="table table-bordered table-striped">
+                                        <tbody>
+                                            <tr class="odd">
+                                                <td>
+                                                    <b>Tipo de identificación</b>
+                                                    <br> {{ empresa.tipoIdentificacion?.nombre }}
+                                                </td>
+                                                <td>
+                                                    <b>NIT</b>
+                                                    <br> {{ empresa.nit }}
+                                                </td>
+                                                <td>
+                                                    <b>Nombre Empresa</b>
+                                                    <br> {{ empresa.nombre }}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-lg-12" *ngIf="tramiteCarpeta.idModulo && ciudadano || empresa">
+                            <label>Trámites</label>
+                            <ng-select [multiple]="false" [options]="tramitesPrecio" [(ngModel)]="tramiteCarpeta.idTramitePrecio" name="idTramitePrecio" required>
+                            </ng-select>
+                        </div>
+                        <div class="col-xs-12 col-lg-6" *ngIf="ciudadano || empresa">
+                            <label>Valor Trámite <b class="text-danger">*</b></label>
+                            <input class="form-control" type="number" [(ngModel)]="tramiteCarpeta.valorTramite" name="valorTramite" required>
+                        </div>
+                        <div class="col-xs-12 col-lg-6" *ngIf="ciudadano || empresa">
+                            <label>Fecha realización <b class="text-danger">*</b></label>
+                            <input class="form-control" type="date" [(ngModel)]="tramiteCarpeta.fechaRealizacion" name="fechaRealizacion" required>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <div class="btn-group row">
+                    <div class="col-xs-12 col-lg-12">
+                        <button (click)="onEnviar()" [disabled]="formNew.invalid && !ciudadano || !empresa" class="btn btn-primary" type="button">
+                            Guardar
+                        </button>
+                        <button (click)="onCancelar()" class="btn btn-default">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
