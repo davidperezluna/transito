@@ -5,8 +5,17 @@
 
 export const environment = {
   production: false,
-  apiUrl : 'http://localhost/GitHub/colossus-sit/web/app_dev.php/',
-  docsUrl : 'http://localhost/GitHub/colossus-sit/web/docs/', 
-  uploadUrl : 'http://localhost/GitHub/colossus-sit/web/uploads/', 
-  imgUrl : 'http://localhost/GitHub/colossus-sit/web/img', 
+  apiUrl : 'http://sttdn.narino.gov.co/prod/colossus-sit/web/app.php/',
+  docsUrl : 'http://sttdn.narino.gov.co/prod/colossus-sit/web/app.php/docs/', 
+  uploadUrl : 'http://sttdn.narino.gov.co/prod/colossus-sit/web/app.php/uploads/', 
+  imgUrl : 'http://sttdn.narino.gov.co/prod/colossus-sit/web/app.php/img', 
+
+  // apiUrl : 'http://localhost/GitHub/colossus-sit/web/app_dev.php/',
+  // docsUrl : 'http://localhost/GitHub/colossus-sit/web/docs/', 
+  // uploadUrl : 'http://localhost/GitHub/colossus-sit/web/uploads/', 
+  // imgUrl : 'http://localhost/GitHub/colossus-sit/web/img', 
+  
 };
+
+
+
