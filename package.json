@@ -42,7 +42,7 @@
     "fullcalendar": "3.6.2",
     "highcharts": "4.2.7",
     "jasmine-spec-reporter": "3.2.0",
-    "jquery": "2.1.1",
+    "jquery": "3.5.0",
     "jquery-circle-progress": "1.2.2",
     "jstree": "3.3.4",
     "jvectormap": "1.2.2",
