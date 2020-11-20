@@ -142,63 +142,64 @@
                     </div>
                 </div>
 
-                <div class="row" *ngIf='formApoderado && !apoderado'>
-                    <div class="col-xs-12 col-lg-12">
-                        <div class="input-group">
-                            <input type="number" class="form-control" placeholder="Identificacion apoderado" [(ngModel)]="identificacionApoderado" name="identificacionApoderado" required />
-                            <span class="input-group-btn">
-                                <button (click)="onSearchApoderado()" class="btn" type="button">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                                <button (click)="onCloseApoderado()" class="btn btn-danger" type="button">
-                                    <i class="fa fa-close"></i>
-                                </button>
-                            </span>
+                <!-- 
+                    <div class="row" *ngIf='formApoderado && !apoderado'>
+                        <div class="col-xs-12 col-lg-12">
+                            <div class="input-group">
+                                <input type="number" class="form-control" placeholder="Identificacion apoderado" [(ngModel)]="identificacionApoderado" name="identificacionApoderado" required />
+                                <span class="input-group-btn">
+                                    <button (click)="onSearchApoderado()" class="btn" type="button">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                    <button (click)="onCloseApoderado()" class="btn btn-danger" type="button">
+                                        <i class="fa fa-close"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+    
+                        <div class="col-xs-12 col-lg-12">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <th colspan="3" class="text-center text-uppercase">
+                                        <b>Datos de apoderado</b>
+                                    </th>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <b>Tipo de identificación</b>
+                                            <br>
+                                            {{ apoderado.tipoIdentificacion.nombre }}
+                                            <br>
+                                            <b>Numero de identificación</b>
+                                            {{ apoderado.identificacion }}
+                                        </td>
+                                        <td>
+                                            <b>Nombres</b>
+                                            <br> {{ apoderado.primerNombre }} {{ apoderado.segundoNombre }}
+                                            <br>
+                                            <b>Apellidos</b>
+                                            {{ apoderado.primerApellido }} {{apoderado.segundoApellido }}
+                                        </td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <button *ngIf="!tramiteSolicitud.idSolicitante" (click)="onAddApoderado()" class="btn btn-primary">
+                                                    <i class="fa fa-save"></i>
+                                                    Agregar
+                                                </button>
+                                                <button *ngIf='!confirmarSolicitante' class="btn btn-default" (click)="onCloseApoderado()">
+                                                    <i class="fa fa-times"></i>
+                                                    Cancelar
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-
-                    <!-- <div class="col-xs-12 col-lg-12" *ngIf="apoderado"> -->
-                    <div class="col-xs-12 col-lg-12">
-                        <table class="table table-bordered table-striped">
-                            <thead>
-                                <th colspan="3" class="text-center text-uppercase">
-                                    <b>Datos de apoderado</b>
-                                </th>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <b>Tipo de identificación</b>
-                                        <br>
-                                        {{ apoderado.tipoIdentificacion.nombre }}
-                                        <br>
-                                        <b>Numero de identificación</b>
-                                        {{ apoderado.identificacion }}
-                                    </td>
-                                    <td>
-                                        <b>Nombres</b>
-                                        <br> {{ apoderado.primerNombre }} {{ apoderado.segundoNombre }}
-                                        <br>
-                                        <b>Apellidos</b>
-                                        {{ apoderado.primerApellido }} {{apoderado.segundoApellido }}
-                                    </td>
-                                    <td>
-                                        <div class="btn-group">
-                                            <button *ngIf="!tramiteSolicitud.idSolicitante" (click)="onAddApoderado()" class="btn btn-primary">
-                                                <i class="fa fa-save"></i>
-                                                Agregar
-                                            </button>
-                                            <button *ngIf='!confirmarSolicitante' class="btn btn-default" (click)="onCloseApoderado()">
-                                                <i class="fa fa-times"></i>
-                                                Cancelar
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                -->
 
                 <div class="row" *ngIf="documentacionPendiente.length > 0 && tramitesFactura">
                     <div class="col-xs-12 col-lg-12">

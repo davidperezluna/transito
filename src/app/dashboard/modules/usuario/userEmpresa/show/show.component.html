@@ -124,11 +124,11 @@
                                             </td>
                                             <td>
                                                 <b>Fecha Inicial: </b>
-                                                {{ representante.fechaInicial }}
+                                                {{ (representante.fechaInicial.timestamp * 1000) | date: 'dd/MM/yyyy' }}
                                                 <br>
                                                 <ng-container *ngIf="representante.fechaFinal">
                                                     <b>Fecha Final:</b>
-                                                    {{ representante.fechaFinal }}
+                                                    {{ (representante.fechaFinal.timestamp * 1000) | date: 'dd/MM/yyyy' }}
                                                 </ng-container>
                                             </td>
                                             <td>

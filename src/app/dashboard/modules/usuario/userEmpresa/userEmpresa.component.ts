@@ -39,6 +39,8 @@ export class UserEmpresaComponent implements OnInit {
     ){}
     
   ngOnInit() {
+    swal.close();
+    
     this.onInitForms();
 
     this.formSearch = true;
