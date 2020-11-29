@@ -221,7 +221,7 @@ const routes: Routes = [
     component: VhloRnmaPreregistroComponent
   },
   {
-    path: 'vhloRnrsPreAsignacionPlaca',
+    path: 'vhloRnrsPreasignacionPlaca',
     component: VhloRnrsPreasignacionPlacaComponent
   },
   {

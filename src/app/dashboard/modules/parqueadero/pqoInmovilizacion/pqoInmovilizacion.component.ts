@@ -41,6 +41,8 @@ export class PqoInmovilizacionComponent implements OnInit {
     this.onInitForms();
 
     this.formSearch = true;
+
+    swal.close();
   }
 
   onSearch(){
@@ -67,6 +69,8 @@ export class PqoInmovilizacionComponent implements OnInit {
           this.onInitForms();
 
           this.formIndex = true;
+
+          swal.close();
         } else {
           this.inmovilizaciones = null;
 
