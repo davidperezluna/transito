@@ -430,6 +430,7 @@ export class NewRnetComponent implements OnInit {
                     'foraneas': datos.foraneas,
                     'resumen': datos.resumen,
                     'idTramiteFactura': datos.idTramiteFactura,
+                    'documentacion': datos.documentacion,
                 }
             );
         } else {
