@@ -76,9 +76,9 @@
               <tr class="odd" *ngFor="let factura of facturas; let i = index">
                 <td>{{ i + 1 }}</td>
                 <td>{{ factura.numero }}</td>
-                <td>{{ factura.fecha }}</td>
+                <td>{{ (factura.fechaCreacion.timestamp * 1000) | date: 'dd/MM/yyyy' }}</td>
                 <td>{{ factura.tipoRecaudo.nombre }}</td>
-                <td>{{ factura.valor }}</td>
+                <td>$ {{ factura.valorNeto | currency: 'COP' }}</td>
                 <td>
                   <div class="btn-group">
                     <a href="{{ apiUrl }}financiero/frofactura/1/{{ factura.id }}/pdf" class="btn btn-success" target="_blank">

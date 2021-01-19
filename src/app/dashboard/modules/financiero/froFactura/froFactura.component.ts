@@ -57,7 +57,9 @@ export class FroFacturaComponent implements OnInit {
     private _LoginService: LoginService,
   ){}
     
-  ngOnInit() {  }
+  ngOnInit() { 
+    swal.close();
+  }
 
   onSearch() {
     swal({
