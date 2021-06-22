@@ -72,7 +72,7 @@
             <tbody>
               <tr *ngFor="let documento of documentosPendientes; let i = index">
                 <td>
-                  <ng-container *ngIf="documento.peticionarioNombres">
+                  <ng-container >
                     <b>Estado:</b> 
                     <span class="badge badge-danger" *ngIf="documento.estado == 'PENDIENTE'">{{ documento.estado }}</span>
                     <span class="badge badge-danger" *ngIf="documento.estado == 'RECHAZADO'">{{ documento.estado }}</span>
@@ -82,7 +82,9 @@
                     <span class="btn btn-success" *ngIf="documento.estado == 'ENVIADA'">{{ i + 1 }}</span>
                     <br>
                     <b>Peticionario</b>
-                    {{ documento.peticionarioNombres }} {{ documento.peticionarioApellidos }}
+                    <span *ngIf="documento.peticionarioNombres">
+                      {{ documento.peticionarioNombres }} {{ documento.peticionarioApellidos }}
+                    </span>
                     <br>
                     <span *ngIf="documento.identificacion">
                       {{ documento.identificacion }}

@@ -200,17 +200,16 @@ constructor(
 
       let token = this._LoginService.getToken();
  
-      this._DocumentoService.update(this.file, this.datos, token).subscribe(
-        response => {
+      this._DocumentoService.update(this.file, this.datos, token).subscribe(response => {
           if (response.code == 200) {
+            this.ready.emit(true);
+
             swal({
               title: 'Perfecto!',
               text: response.message,
               type: 'success',
               confirmButtonText: 'Aceptar'
             });
-
-            this.ready.emit(true);
           } else {
             swal({
               title: 'Error!',
