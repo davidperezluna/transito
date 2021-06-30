@@ -30,7 +30,7 @@ constructor(
 
 		this._tipoCorrespondenciaService.edit(this.tipoCorrespondencia,token).subscribe(response => {
         if(response.status == 'success'){
-          this.ready.emit(true);
+          //this.ready.emit(true);
 
           swal({
             title: 'Perfecto!',

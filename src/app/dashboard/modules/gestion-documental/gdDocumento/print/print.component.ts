@@ -90,7 +90,7 @@ constructor(
   }
 
   onCancelar(){
-    this.ready.emit(true);
+    //this.ready.emit(true);
   }
 
   onEnviar(){
@@ -101,7 +101,7 @@ constructor(
 		this._DocumentoService.print(this.datos, token).subscribe(
 			response => {
         if(response.code == 200){
-          this.ready.emit(true);
+          //this.ready.emit(true);
           swal({
             title: 'Perfecto!',
             text: response.message,

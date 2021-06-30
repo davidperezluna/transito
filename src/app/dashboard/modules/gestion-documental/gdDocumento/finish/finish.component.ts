@@ -53,7 +53,7 @@ export class FinishComponent implements OnInit {
               confirmButtonText: 'Aceptar'
             });
 
-            this.ready.emit(true);
+            //this.ready.emit(true);
           } else {
             swal({
               title: 'Error!',
